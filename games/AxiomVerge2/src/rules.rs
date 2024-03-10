@@ -1409,6 +1409,71 @@ pub fn access_giguna_northeast_gate(ctx: &Context, world: &graph::World) -> bool
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
 }
+pub fn access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and $hover and ^_upper_gatestone
+    ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
+        && ctx.glacier__vertical_room__ctx__upper_gatestone())
+}
+pub fn access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_lower_gatestones
+    ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Water_Movement and $hook and ^_lower_gatestones
+    ((ctx.has(Item::Water_Movement) && helper__hook!(ctx, world))
+        && ctx.glacier__vertical_room__ctx__lower_gatestones())
+}
+pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_lower_gatestones
+    ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_lower_gatestones
+    ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Water_Movement and ^_lower_gatestones
+    (ctx.has(Item::Water_Movement) && ctx.glacier__vertical_room__ctx__lower_gatestones())
+}
+pub fn access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_upper_gatestone
+    ctx.glacier__vertical_room__ctx__upper_gatestone()
+}
+pub fn access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_upper_gatestone
+    ctx.glacier__vertical_room__ctx__upper_gatestone()
+}
+pub fn access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_upper_gatestone
+    ctx.glacier__vertical_room__ctx__upper_gatestone()
+}
 pub fn access_glacier_big_drop_rock(ctx: &Context, world: &graph::World) -> bool {
     // Glacier_Big_Drop_Rock
     ctx.has(Item::Glacier_Big_Drop_Rock)
@@ -2122,6 +2187,10 @@ pub fn access_water_movement(ctx: &Context, world: &graph::World) -> bool {
     // Water_Movement
     ctx.has(Item::Water_Movement)
 }
+pub fn access_water_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
+    // Water_Movement and $hook
+    (ctx.has(Item::Water_Movement) && helper__hook!(ctx, world))
+}
 pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Antarctica`
     (match get_region(ctx.position()) {
@@ -2564,6 +2633,13 @@ pub fn action_giguna_breach__sw_save__west_11__open_door__do(
 ) {
     // ^_door_opened = true
     ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
+}
+pub fn action_glacier__vertical_room__upper_switch__open_gate__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_upper_gatestone = true
+    ctx.set_glacier__vertical_room__ctx__upper_gatestone(true);
 }
 pub fn action_indra_set_default(ctx: &mut Context, world: &graph::World) {
     // ^indra = $default
@@ -7405,6 +7481,209 @@ pub fn explain_giguna_northeast_gate(
         (h, vec!["Giguna_Northeast_Gate"])
     }
 }
+pub fn explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and ^_upper_gatestone
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.glacier__vertical_room__ctx__upper_gatestone();
+                edict.insert(
+                    "^glacier__vertical_room__ctx__upper_gatestone",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^glacier__vertical_room__ctx__upper_gatestone"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__lower_gatestone__ex__south_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones
+    {
+        let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+        edict.insert(
+            "^glacier__vertical_room__ctx__lower_gatestones",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Water_Movement and $hook and ^_lower_gatestones
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Water_Movement);
+                edict.insert("Water_Movement", format!("{}", h));
+                (h, vec!["Water_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+                edict.insert(
+                    "^glacier__vertical_room__ctx__lower_gatestones",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones
+    {
+        let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+        edict.insert(
+            "^glacier__vertical_room__ctx__lower_gatestones",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones
+    {
+        let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+        edict.insert(
+            "^glacier__vertical_room__ctx__lower_gatestones",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Water_Movement and ^_lower_gatestones
+    {
+        let mut left = {
+            let h = ctx.has(Item::Water_Movement);
+            edict.insert("Water_Movement", format!("{}", h));
+            (h, vec!["Water_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+                edict.insert(
+                    "^glacier__vertical_room__ctx__lower_gatestones",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_upper_gatestone
+    {
+        let r = ctx.glacier__vertical_room__ctx__upper_gatestone();
+        edict.insert(
+            "^glacier__vertical_room__ctx__upper_gatestone",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__upper_gatestone"])
+    }
+}
+pub fn explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_upper_gatestone
+    {
+        let r = ctx.glacier__vertical_room__ctx__upper_gatestone();
+        edict.insert(
+            "^glacier__vertical_room__ctx__upper_gatestone",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__upper_gatestone"])
+    }
+}
+pub fn explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_upper_gatestone
+    {
+        let r = ctx.glacier__vertical_room__ctx__upper_gatestone();
+        edict.insert(
+            "^glacier__vertical_room__ctx__upper_gatestone",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__upper_gatestone"])
+    }
+}
 pub fn explain_glacier_big_drop_rock(
     ctx: &Context,
     world: &graph::World,
@@ -10668,6 +10947,32 @@ pub fn explain_water_movement(
         (h, vec!["Water_Movement"])
     }
 }
+pub fn explain_water_movement_and_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Water_Movement and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Water_Movement);
+            edict.insert("Water_Movement", format!("{}", h));
+            (h, vec!["Water_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_within_antarctica(
     ctx: &Context,
     world: &graph::World,
@@ -13222,6 +13527,113 @@ pub fn observe_access_giguna_northeast_gate(
         ctx.has(Item::Giguna_Northeast_Gate)
     }
 }
+pub fn observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and ^_upper_gatestone
+    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
+            ctx.glacier__vertical_room__ctx__upper_gatestone()
+        }))
+}
+pub fn observe_access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones
+    {
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }
+}
+pub fn observe_access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Water_Movement and $hook and ^_lower_gatestones
+    (({
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+            ctx.glacier__vertical_room__ctx__lower_gatestones()
+        }))
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones
+    {
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones
+    {
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }
+}
+pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Water_Movement and ^_lower_gatestones
+    ({
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    } && ({
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }))
+}
+pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_upper_gatestone
+    {
+        full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
+        ctx.glacier__vertical_room__ctx__upper_gatestone()
+    }
+}
+pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_upper_gatestone
+    {
+        full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
+        ctx.glacier__vertical_room__ctx__upper_gatestone()
+    }
+}
+pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_upper_gatestone
+    {
+        full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
+        ctx.glacier__vertical_room__ctx__upper_gatestone()
+    }
+}
 pub fn observe_access_glacier_big_drop_rock(
     ctx: &Context,
     world: &graph::World,
@@ -14998,6 +15410,17 @@ pub fn observe_access_water_movement(
         ctx.has(Item::Water_Movement)
     }
 }
+pub fn observe_access_water_movement_and_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Water_Movement and $hook
+    ({
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
 pub fn observe_access_within_antarctica(
     ctx: &Context,
     world: &graph::World,
@@ -15587,6 +16010,13 @@ pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+}
+pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_upper_gatestone = true
 }
 pub fn observe_action_indra_set_default(
     ctx: &Context,

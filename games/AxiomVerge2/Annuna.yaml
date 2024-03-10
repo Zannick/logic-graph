@@ -2179,7 +2179,7 @@ areas:
       local:
         - to: Portal Stand
       exits:
-        - to: Crystals > East
+        - to: Glacier > Crystals > East
           tags: [xshift]
     - name: Upper Brick Ledge
       coord: [38.75, 14.2]
@@ -2219,12 +2219,6 @@ areas:
       coord: [37.4, 16.7]
     - name: West
       coord: [37.1, 16.75]
-
-- name: Crystals
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: East
-      coord: [37.95, 14.6]
 
 - name: Udug Gate
   on_entry: $reset_old_area(^newpos)

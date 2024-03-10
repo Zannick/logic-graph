@@ -298,7 +298,7 @@ helpers:
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]
   # To be added: 4 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 1 Health_Fragment, The_Student, Heretics_Granddaughter,
+  # 2 Health_Fragment, The_Student, Heretics_Granddaughter, Dr_Gloria
 
   $save:action: ^save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy

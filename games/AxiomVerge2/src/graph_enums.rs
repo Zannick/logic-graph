@@ -93,6 +93,7 @@ impl std::str::FromStr for RegionId {
 )]
 #[repr(u8)]
 pub enum AreaId {
+    Amagi__East_Lake,
     Amagi__Grid_31_19,
     Amagi__Liru_Room,
     Amagi__Main_Area,
@@ -101,7 +102,6 @@ pub enum AreaId {
     Annuna__Apocalypse_Hallway,
     Annuna__Center_Climb,
     Annuna__Center_Save,
-    Annuna__Crystals,
     Annuna__East_Bridge,
     Annuna__East_Climb,
     Annuna__East_Hideout,
@@ -198,6 +198,7 @@ pub enum AreaId {
     Glacier__Boomerang_Antechamber,
     Glacier__Boomerang_Room,
     Glacier__Compass_Room,
+    Glacier__Crystals,
     Glacier__Dock_Outside,
     Glacier__Grid_31_9_12,
     Glacier__Grid_32_7_10,
@@ -260,6 +261,7 @@ pub enum AreaId {
 impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            AreaId::Amagi__East_Lake => write!(f, "{}", "Amagi > East Lake"),
             AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
@@ -268,7 +270,6 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__Apocalypse_Hallway => write!(f, "{}", "Annuna > Apocalypse Hallway"),
             AreaId::Annuna__Center_Climb => write!(f, "{}", "Annuna > Center Climb"),
             AreaId::Annuna__Center_Save => write!(f, "{}", "Annuna > Center Save"),
-            AreaId::Annuna__Crystals => write!(f, "{}", "Annuna > Crystals"),
             AreaId::Annuna__East_Bridge => write!(f, "{}", "Annuna > East Bridge"),
             AreaId::Annuna__East_Climb => write!(f, "{}", "Annuna > East Climb"),
             AreaId::Annuna__East_Hideout => write!(f, "{}", "Annuna > East Hideout"),
@@ -377,6 +378,7 @@ impl fmt::Display for AreaId {
             }
             AreaId::Glacier__Boomerang_Room => write!(f, "{}", "Glacier > Boomerang Room"),
             AreaId::Glacier__Compass_Room => write!(f, "{}", "Glacier > Compass Room"),
+            AreaId::Glacier__Crystals => write!(f, "{}", "Glacier > Crystals"),
             AreaId::Glacier__Dock_Outside => write!(f, "{}", "Glacier > Dock Outside"),
             AreaId::Glacier__Grid_31_9_12 => write!(f, "{}", "Glacier > Grid 31,9-12"),
             AreaId::Glacier__Grid_32_7_10 => write!(f, "{}", "Glacier > Grid 32,7-10"),
@@ -454,6 +456,7 @@ impl std::str::FromStr for AreaId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake" => Ok(AreaId::Amagi__East_Lake),
             "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
@@ -462,7 +465,6 @@ impl std::str::FromStr for AreaId {
             "Annuna > Apocalypse Hallway" => Ok(AreaId::Annuna__Apocalypse_Hallway),
             "Annuna > Center Climb" => Ok(AreaId::Annuna__Center_Climb),
             "Annuna > Center Save" => Ok(AreaId::Annuna__Center_Save),
-            "Annuna > Crystals" => Ok(AreaId::Annuna__Crystals),
             "Annuna > East Bridge" => Ok(AreaId::Annuna__East_Bridge),
             "Annuna > East Climb" => Ok(AreaId::Annuna__East_Climb),
             "Annuna > East Hideout" => Ok(AreaId::Annuna__East_Hideout),
@@ -559,6 +561,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Boomerang Antechamber" => Ok(AreaId::Glacier__Boomerang_Antechamber),
             "Glacier > Boomerang Room" => Ok(AreaId::Glacier__Boomerang_Room),
             "Glacier > Compass Room" => Ok(AreaId::Glacier__Compass_Room),
+            "Glacier > Crystals" => Ok(AreaId::Glacier__Crystals),
             "Glacier > Dock Outside" => Ok(AreaId::Glacier__Dock_Outside),
             "Glacier > Grid 31,9-12" => Ok(AreaId::Glacier__Grid_31_9_12),
             "Glacier > Grid 32,7-10" => Ok(AreaId::Glacier__Grid_32_7_10),
@@ -640,6 +643,9 @@ impl std::str::FromStr for AreaId {
 pub enum SpotId {
     #[default]
     None,
+    Amagi__East_Lake__East_15_Flat,
+    Amagi__East_Lake__East_15_Lower,
+    Amagi__East_Lake__Save_Point,
     Amagi__Grid_31_19__East,
     Amagi__Grid_31_19__West,
     Amagi__Liru_Room__Bottom,
@@ -756,7 +762,6 @@ pub enum SpotId {
     Annuna__Center_Save__Save_Point,
     Annuna__Center_Save__West_Catwalk,
     Annuna__Center_Save__West_Floor,
-    Annuna__Crystals__East,
     Annuna__East_Bridge__Below_Cavern,
     Annuna__East_Bridge__Below_Gate_Button,
     Annuna__East_Bridge__Bridge_Top_East,
@@ -1678,6 +1683,8 @@ pub enum SpotId {
     Glacier__Compass_Room__Center,
     Glacier__Compass_Room__East,
     Glacier__Compass_Room__West,
+    Glacier__Crystals__East,
+    Glacier__Crystals__West,
     Glacier__Dock_Outside__Do_Not_Enter,
     Glacier__Dock_Outside__Entry,
     Glacier__Grid_31_9_12__East_10,
@@ -1759,17 +1766,30 @@ pub enum SpotId {
     Glacier__The_Big_Drop__Small_Path,
     Glacier__The_Big_Drop__Water_Surface,
     Glacier__The_Big_Drop__West_14,
+    Glacier__Vertical_Room__Above_Switch,
+    Glacier__Vertical_Room__Below_Upper_Switch,
     Glacier__Vertical_Room__East_12,
     Glacier__Vertical_Room__East_13,
+    Glacier__Vertical_Room__East_14,
+    Glacier__Vertical_Room__East_17,
     Glacier__Vertical_Room__East_9,
     Glacier__Vertical_Room__East_Corner,
+    Glacier__Vertical_Room__Flat_Platform,
+    Glacier__Vertical_Room__Lower_Gatestone,
+    Glacier__Vertical_Room__Lower_Switch,
     Glacier__Vertical_Room__Lower_West_Corner,
     Glacier__Vertical_Room__Mid_11,
     Glacier__Vertical_Room__Mid_9,
+    Glacier__Vertical_Room__Middle_Gatestone,
     Glacier__Vertical_Room__Past_Gate,
     Glacier__Vertical_Room__Peak,
     Glacier__Vertical_Room__South,
     Glacier__Vertical_Room__Under_Switch,
+    Glacier__Vertical_Room__Upper_Gatestone,
+    Glacier__Vertical_Room__Upper_Switch,
+    Glacier__Vertical_Room__Waters_Ledge,
+    Glacier__Vertical_Room__West_15_Flat,
+    Glacier__Vertical_Room__West_15_Lower,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
     Interior__Building_Interior__Corner,
@@ -2112,6 +2132,15 @@ impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             SpotId::None => write!(f, "{}", "None"),
+            SpotId::Amagi__East_Lake__East_15_Flat => {
+                write!(f, "{}", "Amagi > East Lake > East 15 Flat")
+            }
+            SpotId::Amagi__East_Lake__East_15_Lower => {
+                write!(f, "{}", "Amagi > East Lake > East 15 Lower")
+            }
+            SpotId::Amagi__East_Lake__Save_Point => {
+                write!(f, "{}", "Amagi > East Lake > Save Point")
+            }
             SpotId::Amagi__Grid_31_19__East => write!(f, "{}", "Amagi > Grid 31,19 > East"),
             SpotId::Amagi__Grid_31_19__West => write!(f, "{}", "Amagi > Grid 31,19 > West"),
             SpotId::Amagi__Liru_Room__Bottom => write!(f, "{}", "Amagi > Liru Room > Bottom"),
@@ -2402,7 +2431,6 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Center_Save__West_Floor => {
                 write!(f, "{}", "Annuna > Center Save > West Floor")
             }
-            SpotId::Annuna__Crystals__East => write!(f, "{}", "Annuna > Crystals > East"),
             SpotId::Annuna__East_Bridge__Below_Cavern => {
                 write!(f, "{}", "Annuna > East Bridge > Below Cavern")
             }
@@ -4680,6 +4708,8 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Compass_Room__East => write!(f, "{}", "Glacier > Compass Room > East"),
             SpotId::Glacier__Compass_Room__West => write!(f, "{}", "Glacier > Compass Room > West"),
+            SpotId::Glacier__Crystals__East => write!(f, "{}", "Glacier > Crystals > East"),
+            SpotId::Glacier__Crystals__West => write!(f, "{}", "Glacier > Crystals > West"),
             SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
                 write!(f, "{}", "Glacier > Dock Outside > Do Not Enter")
             }
@@ -4895,17 +4925,38 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__The_Big_Drop__West_14 => {
                 write!(f, "{}", "Glacier > The Big Drop > West 14")
             }
+            SpotId::Glacier__Vertical_Room__Above_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Above Switch")
+            }
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch")
+            }
             SpotId::Glacier__Vertical_Room__East_12 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 12")
             }
             SpotId::Glacier__Vertical_Room__East_13 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 13")
             }
+            SpotId::Glacier__Vertical_Room__East_14 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 14")
+            }
+            SpotId::Glacier__Vertical_Room__East_17 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 17")
+            }
             SpotId::Glacier__Vertical_Room__East_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 9")
             }
             SpotId::Glacier__Vertical_Room__East_Corner => {
                 write!(f, "{}", "Glacier > Vertical Room > East Corner")
+            }
+            SpotId::Glacier__Vertical_Room__Flat_Platform => {
+                write!(f, "{}", "Glacier > Vertical Room > Flat Platform")
+            }
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone => {
+                write!(f, "{}", "Glacier > Vertical Room > Lower Gatestone")
+            }
+            SpotId::Glacier__Vertical_Room__Lower_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Lower Switch")
             }
             SpotId::Glacier__Vertical_Room__Lower_West_Corner => {
                 write!(f, "{}", "Glacier > Vertical Room > Lower West Corner")
@@ -4915,6 +4966,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Vertical_Room__Mid_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > Mid 9")
+            }
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone => {
+                write!(f, "{}", "Glacier > Vertical Room > Middle Gatestone")
             }
             SpotId::Glacier__Vertical_Room__Past_Gate => {
                 write!(f, "{}", "Glacier > Vertical Room > Past Gate")
@@ -4927,6 +4981,21 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Vertical_Room__Under_Switch => {
                 write!(f, "{}", "Glacier > Vertical Room > Under Switch")
+            }
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone => {
+                write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone")
+            }
+            SpotId::Glacier__Vertical_Room__Upper_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Upper Switch")
+            }
+            SpotId::Glacier__Vertical_Room__Waters_Ledge => {
+                write!(f, "{}", "Glacier > Vertical Room > Water's Ledge")
+            }
+            SpotId::Glacier__Vertical_Room__West_15_Flat => {
+                write!(f, "{}", "Glacier > Vertical Room > West 15 Flat")
+            }
+            SpotId::Glacier__Vertical_Room__West_15_Lower => {
+                write!(f, "{}", "Glacier > Vertical Room > West 15 Lower")
             }
             SpotId::Glacier__Vertical_Room__West_8 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 8")
@@ -5854,6 +5923,9 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake > East 15 Flat" => Ok(SpotId::Amagi__East_Lake__East_15_Flat),
+            "Amagi > East Lake > East 15 Lower" => Ok(SpotId::Amagi__East_Lake__East_15_Lower),
+            "Amagi > East Lake > Save Point" => Ok(SpotId::Amagi__East_Lake__Save_Point),
             "Amagi > Grid 31,19 > East" => Ok(SpotId::Amagi__Grid_31_19__East),
             "Amagi > Grid 31,19 > West" => Ok(SpotId::Amagi__Grid_31_19__West),
             "Amagi > Liru Room > Bottom" => Ok(SpotId::Amagi__Liru_Room__Bottom),
@@ -6058,7 +6130,6 @@ impl std::str::FromStr for SpotId {
             "Annuna > Center Save > Save Point" => Ok(SpotId::Annuna__Center_Save__Save_Point),
             "Annuna > Center Save > West Catwalk" => Ok(SpotId::Annuna__Center_Save__West_Catwalk),
             "Annuna > Center Save > West Floor" => Ok(SpotId::Annuna__Center_Save__West_Floor),
-            "Annuna > Crystals > East" => Ok(SpotId::Annuna__Crystals__East),
             "Annuna > East Bridge > Below Cavern" => Ok(SpotId::Annuna__East_Bridge__Below_Cavern),
             "Annuna > East Bridge > Below Gate Button" => {
                 Ok(SpotId::Annuna__East_Bridge__Below_Gate_Button)
@@ -7620,6 +7691,8 @@ impl std::str::FromStr for SpotId {
             "Glacier > Compass Room > Center" => Ok(SpotId::Glacier__Compass_Room__Center),
             "Glacier > Compass Room > East" => Ok(SpotId::Glacier__Compass_Room__East),
             "Glacier > Compass Room > West" => Ok(SpotId::Glacier__Compass_Room__West),
+            "Glacier > Crystals > East" => Ok(SpotId::Glacier__Crystals__East),
+            "Glacier > Crystals > West" => Ok(SpotId::Glacier__Crystals__West),
             "Glacier > Dock Outside > Do Not Enter" => {
                 Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
             }
@@ -7759,22 +7832,57 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Glacier__The_Big_Drop__Water_Surface)
             }
             "Glacier > The Big Drop > West 14" => Ok(SpotId::Glacier__The_Big_Drop__West_14),
+            "Glacier > Vertical Room > Above Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Above_Switch)
+            }
+            "Glacier > Vertical Room > Below Upper Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Below_Upper_Switch)
+            }
             "Glacier > Vertical Room > East 12" => Ok(SpotId::Glacier__Vertical_Room__East_12),
             "Glacier > Vertical Room > East 13" => Ok(SpotId::Glacier__Vertical_Room__East_13),
+            "Glacier > Vertical Room > East 14" => Ok(SpotId::Glacier__Vertical_Room__East_14),
+            "Glacier > Vertical Room > East 17" => Ok(SpotId::Glacier__Vertical_Room__East_17),
             "Glacier > Vertical Room > East 9" => Ok(SpotId::Glacier__Vertical_Room__East_9),
             "Glacier > Vertical Room > East Corner" => {
                 Ok(SpotId::Glacier__Vertical_Room__East_Corner)
+            }
+            "Glacier > Vertical Room > Flat Platform" => {
+                Ok(SpotId::Glacier__Vertical_Room__Flat_Platform)
+            }
+            "Glacier > Vertical Room > Lower Gatestone" => {
+                Ok(SpotId::Glacier__Vertical_Room__Lower_Gatestone)
+            }
+            "Glacier > Vertical Room > Lower Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Lower_Switch)
             }
             "Glacier > Vertical Room > Lower West Corner" => {
                 Ok(SpotId::Glacier__Vertical_Room__Lower_West_Corner)
             }
             "Glacier > Vertical Room > Mid 11" => Ok(SpotId::Glacier__Vertical_Room__Mid_11),
             "Glacier > Vertical Room > Mid 9" => Ok(SpotId::Glacier__Vertical_Room__Mid_9),
+            "Glacier > Vertical Room > Middle Gatestone" => {
+                Ok(SpotId::Glacier__Vertical_Room__Middle_Gatestone)
+            }
             "Glacier > Vertical Room > Past Gate" => Ok(SpotId::Glacier__Vertical_Room__Past_Gate),
             "Glacier > Vertical Room > Peak" => Ok(SpotId::Glacier__Vertical_Room__Peak),
             "Glacier > Vertical Room > South" => Ok(SpotId::Glacier__Vertical_Room__South),
             "Glacier > Vertical Room > Under Switch" => {
                 Ok(SpotId::Glacier__Vertical_Room__Under_Switch)
+            }
+            "Glacier > Vertical Room > Upper Gatestone" => {
+                Ok(SpotId::Glacier__Vertical_Room__Upper_Gatestone)
+            }
+            "Glacier > Vertical Room > Upper Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Upper_Switch)
+            }
+            "Glacier > Vertical Room > Water's Ledge" => {
+                Ok(SpotId::Glacier__Vertical_Room__Waters_Ledge)
+            }
+            "Glacier > Vertical Room > West 15 Flat" => {
+                Ok(SpotId::Glacier__Vertical_Room__West_15_Flat)
+            }
+            "Glacier > Vertical Room > West 15 Lower" => {
+                Ok(SpotId::Glacier__Vertical_Room__West_15_Lower)
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
@@ -10740,7 +10848,7 @@ pub enum ExitId {
     Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1,
     Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1,
     Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2,
-    Annuna__Lamassu__West_15__ex__Crystals__East_1,
+    Annuna__Lamassu__West_15__ex__Glacier__Crystals__East_1,
     Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1,
     Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1,
     Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1,
@@ -11603,21 +11711,41 @@ pub enum ExitId {
     Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1,
     Glacier__The_Big_Drop__West_14__Mist_Through,
     Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
+    Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1,
+    Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1,
+    Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1,
     Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,
     Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,
+    Glacier__Vertical_Room__East_14__ex__Above_Switch_1,
+    Glacier__Vertical_Room__East_14__ex__Crystals__West_1,
+    Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1,
     Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
     Glacier__Vertical_Room__East_9__ex__Peak_1,
     Glacier__Vertical_Room__East_9__ex__Peak_2,
     Glacier__Vertical_Room__East_Corner__ex__East_12_1,
+    Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1,
+    Glacier__Vertical_Room__Lower_Gatestone__ex__South_1,
+    Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1,
     Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,
     Glacier__Vertical_Room__Mid_9__ex__Peak_1,
     Glacier__Vertical_Room__Mid_9__ex__Peak_2,
+    Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1,
+    Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1,
+    Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1,
     Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
     Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1,
     Glacier__Vertical_Room__Peak__ex__West_8_1,
     Glacier__Vertical_Room__Peak__ex__West_8_2,
+    Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1,
+    Glacier__Vertical_Room__South__ex__Lower_Gatestone_1,
     Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,
     Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
+    Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1,
+    Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1,
+    Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1,
+    Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1,
+    Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1,
+    Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
     Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,
@@ -12180,7 +12308,7 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Portal Stand ==> Upper Brick Ledge (1)"),
             ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => write!(f, "{}", "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (1)"),
             ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2 => write!(f, "{}", "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (2)"),
-            ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1 => write!(f, "{}", "Annuna > Lamassu > West 15 ==> Crystals > East (1)"),
+            ExitId::Annuna__Lamassu__West_15__ex__Glacier__Crystals__East_1 => write!(f, "{}", "Annuna > Lamassu > West 15 ==> Glacier > Crystals > East (1)"),
             ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1 => write!(f, "{}", "Annuna > Lamassu > West 17 ==> Hidden Portal > East (1)"),
             ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1 => write!(f, "{}", "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)"),
             ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1 => write!(f, "{}", "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)"),
@@ -13043,21 +13171,41 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => write!(f, "{}", "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)"),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through"),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through Faster"),
+            ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > Above Switch ==> Upper Gatestone (1)"),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> East 14 (1)"),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> Upper Switch (1)"),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),
+            ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > East 14 ==> Above Switch (1)"),
+            ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 14 ==> Crystals > West (1)"),
+            ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 17 ==> Annuna > Hidden Portal > West (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (2)"),
             ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => write!(f, "{}", "Glacier > Vertical Room > East Corner ==> East 12 (1)"),
+            ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Lower Gatestone ==> Lower Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => write!(f, "{}", "Glacier > Vertical Room > Lower Gatestone ==> South (1)"),
+            ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > Lower Switch ==> Middle Gatestone (1)"),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)"),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 9 ==> Peak (1)"),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => write!(f, "{}", "Glacier > Vertical Room > Mid 9 ==> Peak (2)"),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > Middle Gatestone ==> Lower Gatestone (1)"),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Middle Gatestone ==> Lower Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 => write!(f, "{}", "Glacier > Vertical Room > Middle Gatestone ==> Water's Ledge (1)"),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)"),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Under Switch (1)"),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room > Peak ==> West 8 (1)"),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => write!(f, "{}", "Glacier > Vertical Room > Peak ==> West 8 (2)"),
+            ExitId::Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1 => write!(f, "{}", "Glacier > Vertical Room > South ==> Annuna > West Climb > North (1)"),
+            ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > South ==> Lower Gatestone (1)"),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)"),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),
+            ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone ==> Above Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone ==> Below Upper Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone ==> Upper Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Switch ==> Above Switch (1)"),
+            ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Flat ==> Amagi > East Lake > East 15 Flat (1)"),
+            ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => write!(f, "{}", "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)"),
@@ -13625,7 +13773,7 @@ impl std::str::FromStr for ExitId {
             "Annuna > Lamassu > Portal Stand ==> Upper Brick Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Portal_Stand__ex__Upper_Brick_Ledge_1),
             "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (1)" => Ok(ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1),
             "Annuna > Lamassu > Upper Brick Ledge ==> East 14 (2)" => Ok(ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_2),
-            "Annuna > Lamassu > West 15 ==> Crystals > East (1)" => Ok(ExitId::Annuna__Lamassu__West_15__ex__Crystals__East_1),
+            "Annuna > Lamassu > West 15 ==> Glacier > Crystals > East (1)" => Ok(ExitId::Annuna__Lamassu__West_15__ex__Glacier__Crystals__East_1),
             "Annuna > Lamassu > West 17 ==> Hidden Portal > East (1)" => Ok(ExitId::Annuna__Lamassu__West_17__ex__Hidden_Portal__East_1),
             "Annuna > Lower Hallway > East ==> Factory Access > West 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__East__ex__Factory_Access__West_22_1),
             "Annuna > Lower Hallway > West ==> Vertical Room > East 22 (1)" => Ok(ExitId::Annuna__Lower_Hallway__West__ex__Vertical_Room__East_22_1),
@@ -14488,21 +14636,41 @@ impl std::str::FromStr for ExitId {
             "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1),
             "Glacier > The Big Drop > West 14 > Mist Through" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
             "Glacier > The Big Drop > West 14 > Mist Through Faster" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
+            "Glacier > Vertical Room > Above Switch ==> Upper Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1),
+            "Glacier > Vertical Room > Below Upper Switch ==> East 14 (1)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1),
+            "Glacier > Vertical Room > Below Upper Switch ==> Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1),
             "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1),
             "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1),
+            "Glacier > Vertical Room > East 14 ==> Above Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1),
+            "Glacier > Vertical Room > East 14 ==> Crystals > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1),
+            "Glacier > Vertical Room > East 17 ==> Annuna > Hidden Portal > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1),
             "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1),
             "Glacier > Vertical Room > East 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1),
             "Glacier > Vertical Room > East 9 ==> Peak (2)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2),
             "Glacier > Vertical Room > East Corner ==> East 12 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1),
+            "Glacier > Vertical Room > Lower Gatestone ==> Lower Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1),
+            "Glacier > Vertical Room > Lower Gatestone ==> South (1)" => Ok(ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1),
+            "Glacier > Vertical Room > Lower Switch ==> Middle Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1),
             "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1),
             "Glacier > Vertical Room > Mid 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1),
             "Glacier > Vertical Room > Mid 9 ==> Peak (2)" => Ok(ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2),
+            "Glacier > Vertical Room > Middle Gatestone ==> Lower Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1),
+            "Glacier > Vertical Room > Middle Gatestone ==> Lower Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1),
+            "Glacier > Vertical Room > Middle Gatestone ==> Water's Ledge (1)" => Ok(ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1),
             "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)" => Ok(ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1),
             "Glacier > Vertical Room > Past Gate ==> Under Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1),
             "Glacier > Vertical Room > Peak ==> West 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1),
             "Glacier > Vertical Room > Peak ==> West 8 (2)" => Ok(ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2),
+            "Glacier > Vertical Room > South ==> Annuna > West Climb > North (1)" => Ok(ExitId::Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1),
+            "Glacier > Vertical Room > South ==> Lower Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1),
             "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1),
             "Glacier > Vertical Room > Under Switch ==> Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1),
+            "Glacier > Vertical Room > Upper Gatestone ==> Above Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1),
+            "Glacier > Vertical Room > Upper Gatestone ==> Below Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1),
+            "Glacier > Vertical Room > Upper Gatestone ==> Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1),
+            "Glacier > Vertical Room > Upper Switch ==> Above Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1),
+            "Glacier > Vertical Room > West 15 Flat ==> Amagi > East Lake > East 15 Flat (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1),
+            "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
             "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)" => Ok(ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1),
@@ -14945,6 +15113,7 @@ pub enum ActionId {
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
     Glacier__Revival__Save_Point__Save,
+    Glacier__Vertical_Room__Upper_Switch__Open_Gate,
     Global__Become_Drone,
     Global__Become_Indra,
     Global__Deploy_Drone,
@@ -15295,6 +15464,11 @@ impl fmt::Display for ActionId {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
+            ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => write!(
+                f,
+                "{}",
+                "Glacier > Vertical Room > Upper Switch > Open Gate"
+            ),
             ActionId::Global__Become_Drone => write!(f, "{}", "Become Drone"),
             ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
@@ -15633,6 +15807,9 @@ impl std::str::FromStr for ActionId {
             }
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
+            }
+            "Glacier > Vertical Room > Upper Switch > Open Gate" => {
+                Ok(ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate)
             }
             "Become Drone" => Ok(ActionId::Global__Become_Drone),
             "Become Indra" => Ok(ActionId::Global__Become_Indra),

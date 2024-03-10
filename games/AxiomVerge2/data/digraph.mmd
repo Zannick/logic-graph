@@ -101,6 +101,11 @@ subgraph Amagi
         Amagi__West_Lake__Surface_Wall_Left(Surface Wall Left);
         Amagi__West_Lake__West_15(West 15);
     end
+    subgraph Amagi__East_Lake[East Lake]
+        Amagi__East_Lake__East_15_Flat(East 15 Flat);
+        Amagi__East_Lake__East_15_Lower(East 15 Lower);
+        Amagi__East_Lake__Save_Point(Save Point);
+    end
 end
 subgraph Annuna
     subgraph Annuna__Mirror_Match[Mirror Match]
@@ -328,9 +333,6 @@ subgraph Annuna
         Annuna__Hidden_Portal__Plinth_Right(Plinth Right);
         Annuna__Hidden_Portal__Plinth_Left(Plinth Left);
         Annuna__Hidden_Portal__West(West);
-    end
-    subgraph Annuna__Crystals[Crystals]
-        Annuna__Crystals__East(East);
     end
     subgraph Annuna__Udug_Gate[Udug Gate]
         Annuna__Udug_Gate__East(East);
@@ -1304,6 +1306,19 @@ subgraph Glacier
         Glacier__Vertical_Room__East_12(East 12);
         Glacier__Vertical_Room__Lower_West_Corner(Lower West Corner);
         Glacier__Vertical_Room__East_13(East 13);
+        Glacier__Vertical_Room__Upper_Gatestone(Upper Gatestone);
+        Glacier__Vertical_Room__Above_Switch(Above Switch);
+        Glacier__Vertical_Room__East_14(East 14);
+        Glacier__Vertical_Room__Upper_Switch(Upper Switch);
+        Glacier__Vertical_Room__Below_Upper_Switch(Below Upper Switch);
+        Glacier__Vertical_Room__Flat_Platform(Flat Platform);
+        Glacier__Vertical_Room__West_15_Flat(West 15 Flat);
+        Glacier__Vertical_Room__West_15_Lower(West 15 Lower);
+        Glacier__Vertical_Room__Waters_Ledge(Water's Ledge);
+        Glacier__Vertical_Room__Middle_Gatestone(Middle Gatestone);
+        Glacier__Vertical_Room__Lower_Switch(Lower Switch);
+        Glacier__Vertical_Room__East_17(East 17);
+        Glacier__Vertical_Room__Lower_Gatestone(Lower Gatestone);
         Glacier__Vertical_Room__South(South);
     end
     subgraph Glacier__Boomerang_Antechamber[Boomerang Antechamber]
@@ -1385,6 +1400,10 @@ subgraph Glacier
         Glacier__Apocalypse_Entry__Lowest_Stair(Lowest Stair);
         Glacier__Apocalypse_Entry__West_15_Lower(West 15 Lower);
         Glacier__Apocalypse_Entry__West_15_Upper(West 15 Upper);
+    end
+    subgraph Glacier__Crystals[Crystals]
+        Glacier__Crystals__East(East);
+        Glacier__Crystals__West(West);
     end
 end
 subgraph Interior
@@ -1984,7 +2003,7 @@ Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Portal_Stand
 Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Upper_Brick_Ledge
 Annuna__Lamassu__Portal_Stand --> Annuna__Lamassu__Upper_Brick_Ledge
 Annuna__Lamassu__Upper_Brick_Ledge --> Annuna__Lamassu__East_14
-Annuna__Lamassu__West_15 --> Annuna__Crystals__East
+Annuna__Lamassu__West_15 --> Glacier__Crystals__East
 Annuna__Lamassu__West_17 --> Annuna__Hidden_Portal__East
 Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
 Annuna__Middle_Hallway__West <--> Annuna__Vertical_Room__East_21
@@ -2062,7 +2081,7 @@ Annuna__West_Bridge__Tunnel_Wall --> Annuna__West_Bridge__Mid_Tunnel
 Annuna__West_Climb__Cache <--> Annuna__West_Climb__Switch_Ledge
 Annuna__West_Climb__East_19 --> Annuna__West_Climb__Platform_3
 Annuna__West_Climb__North --> Annuna__West_Climb__East_19
-Annuna__West_Climb__North --> Glacier__Vertical_Room__South
+Annuna__West_Climb__North <--> Glacier__Vertical_Room__South
 Annuna__West_Climb__Platform_1 --> Annuna__West_Climb__Switch_Ledge
 Annuna__West_Climb__Platform_2 --> Annuna__West_Climb__East_19
 Annuna__West_Climb__South --> Annuna__West_Climb__Platform_1
@@ -2533,13 +2552,29 @@ Glacier__Sea_Burial__West_Basin --> Glacier__Sea_Burial__Left_Center_Rock
 Glacier__The_Big_Drop__Breakable_Rock_Right <--> Glacier__The_Big_Drop__West_14
 Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Sea_Burial__Collapsing_Ceiling
+Glacier__Vertical_Room__Above_Switch <--> Glacier__Vertical_Room__Upper_Gatestone
+Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__East_14
+Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__Upper_Switch
+Glacier__Vertical_Room__East_14 --> Glacier__Crystals__West
+Glacier__Vertical_Room__East_14 --> Glacier__Vertical_Room__Above_Switch
+Glacier__Vertical_Room__East_17 --> Annuna__Hidden_Portal__West
 Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__East_Corner --> Glacier__Vertical_Room__East_12
+Glacier__Vertical_Room__Lower_Gatestone --> Glacier__Vertical_Room__Lower_Switch
+Glacier__Vertical_Room__Lower_Gatestone <--> Glacier__Vertical_Room__South
+Glacier__Vertical_Room__Lower_Switch <--> Glacier__Vertical_Room__Middle_Gatestone
 Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
+Glacier__Vertical_Room__Middle_Gatestone --> Glacier__Vertical_Room__Lower_Gatestone
+Glacier__Vertical_Room__Middle_Gatestone --> Glacier__Vertical_Room__Waters_Ledge
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
+Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Below_Upper_Switch
+Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Upper_Switch
+Glacier__Vertical_Room__Upper_Switch --> Glacier__Vertical_Room__Above_Switch
+Glacier__Vertical_Room__West_15_Flat --> Amagi__East_Lake__East_15_Flat
+Glacier__Vertical_Room__West_15_Lower --> Amagi__East_Lake__East_15_Lower
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Middle
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top

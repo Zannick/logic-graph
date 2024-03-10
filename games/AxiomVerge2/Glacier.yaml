@@ -513,6 +513,9 @@ areas:
 
 - name: Vertical Room
   on_entry: $reset_old_area(^newpos)
+  start:
+    _upper_gatestone: false
+    _lower_gatestones: false
   spots:
     #region Upper
     - name: East 9
@@ -639,7 +642,7 @@ areas:
           jumps: 2
         - to: Lower West Corner
         - to: East 13
-          thru: [36.5, 12.2]
+          thru: [36.5, 12.0]
       exits:
         - to: East 12
           req: $grab
@@ -662,20 +665,188 @@ areas:
           thru: [36.3, 11.7]
           jumps: [5, 3]
         - to: East 13
+        - to: Upper Gatestone
     - name: East 13
       coord: [36.95, 12.8]
       local:
         - to: Lower West Corner
           jumps: 3
+        - to: Upper Gatestone
+          jumps: 2
       exits:
         - to: Boomerang Antechamber > West 13
           tags: [xshift]
+    - name: Upper Gatestone
+      coord: [36.5, 12.7]
+      local:
+        - to: Lower West Corner
+          jumps: 2
+        - to: East 13
+          jumps: 2
+      exits:
+        - to: Above Switch
+          req: ^_upper_gatestone
+          movement: base
+        - to: Upper Switch
+          req: ^_upper_gatestone
+          movement: base
+        - to: Below Upper Switch
+          req: ^_upper_gatestone
+          movement: base
     #endregion
-    # TODO: bottom spot and exit
 
     #region Lower
+    - name: Above Switch
+      coord: [36.65, 13.4]
+      local:
+        - to: East 14
+        - to: Upper Switch
+      exits:
+        - to: Upper Gatestone
+          req: $hook and $hover and ^_upper_gatestone
+
+    - name: East 14
+      coord: [36.95, 13.8]
+      local:
+        - to: Upper Switch
+        - to: Below Upper Switch
+          thru: [36.75, 13.85]
+      exits:
+        - to: Crystals > West
+          tags: [xshift]
+        - to: Above Switch
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Upper Switch
+      coord: [36.5, 13.8]
+      local:
+        - to: Below Upper Switch
+        - to: East 14
+      exits:
+        - to: Above Switch
+          req: $hook
+          movement: base
+          jumps: 1
+      actions:
+        - name: Open Gate
+          req: $open
+          do: ^_upper_gatestone = true
+          tags: [hack]
+    - name: Below Upper Switch
+      coord: [36.65, 14.15]
+      local:
+        - to: Flat Platform
+        - to: Middle Gatestone
+      exits:
+        - to: Upper Switch
+          req: $grab or $hook
+          movement: base
+          jumps: 1
+        - to: East 14
+          req: $grab
+          movement: base
+          jumps: 2
+        # TODO: fast_hover into East Lake
+    - name: Flat Platform
+      coord: [36.45, 14.55]
+      local:
+        - to: West 15 Flat
+        - to: West 15 Lower
+          jumps_down: 1
+        - to: Middle Gatestone
+    - name: West 15 Flat
+      coord: [36.05, 14.55]
+      local:
+        - to: Flat Platform
+        - to: Water's Ledge
+          jumps_down: 1
+      exits:
+        - to: Amagi > East Lake > East 15 Flat
+          tags: [xshift]
+    - name: West 15 Lower
+      coord: [36.05, 14.7]
+      local:
+        - to: Flat Platform
+          jumps: 1
+        - to: Water's Ledge
+      exits:
+        - to: Amagi > East Lake > East 15 Lower
+          tags: [xshift]
+    - name: Water's Ledge
+      coord: [36.5, 14.8]
+      local:
+        - to: Middle Gatestone
+        - to: West 15 Lower
+          jumps: 1
+        - to: West 15 Flat
+          jumps: 1
+        - to: Flat Platform
+          jumps: 1
+    - name: Middle Gatestone
+      coord: [36.6, 15.75]
+      data:
+        water: true
+      exits:
+        - to: Water's Ledge
+          req: Water_Movement and $hook
+          movement: base
+          jumps: 3
+        - to: Lower Switch
+          req: ^_lower_gatestones
+          movement: base
+        - to: Lower Gatestone
+          req: ^_lower_gatestones
+          movement: base
+    - name: Lower Switch
+      coord: [36.5, 16.5]
+      data:
+        water: true
+      local:
+        - to: Lower Gatestone
+        - to: East 17
+      exits:
+        - to: Middle Gatestone
+          req: Water_Movement and $hook and ^_lower_gatestones
+          movement: base
+          jumps: 2
+    - name: East 17
+      coord: [36.9, 16.75]
+      data:
+        water: true
+      local:
+        - to: Lower Switch
+          jumps: 1  # Not that doable without Water Movement but we can reach the switch with the hack radius
+        - to: Lower Gatestone
+      exits:
+        - to: Annuna > Hidden Portal > West
+          tags: [xdoor]
+    - name: Lower Gatestone
+      coord: [36.6, 17.0]
+      data:
+        water: true
+      local:
+        - to: East 17
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Lower Switch
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: South
+          req: ^_lower_gatestones
+          movement: base
     - name: South
       coord: [36.5, 17.8]
+      exits:
+        - to: Lower Gatestone
+          req: Water_Movement and ^_lower_gatestones
+          movement: base
+          jumps: 2
+        # There are probably other options without water movement (hook etc)
+        - to: Annuna > West Climb > North
+          tags: [ydoor]
     #endregion
 
 - name: Boomerang Antechamber
@@ -1374,3 +1545,10 @@ areas:
         - to: Annuna > Apocalypse Hallway > Upper East
           tags: [xshift]
 
+- name: Crystals
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [37.95, 14.6]
+    - name: West
+      coord: [37.05, 13.8]

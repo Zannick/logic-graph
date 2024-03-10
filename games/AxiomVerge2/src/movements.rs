@@ -7302,6 +7302,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 3157,
         (
             [false],
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 1599,
+        (
+            [false],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__East_Corner,
         ) => 350,
@@ -7310,6 +7330,32 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 2280,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => 1578,
+        // [0.701754, 0.350877]
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 1351,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+        ) => 1801,
         (
             [false],
             SpotId::Glacier__Vertical_Room__East_9,
@@ -7343,6 +7389,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1228,
         (
             [false],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 1199,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 1351,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 500,
+        (
+            [false],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => 2280,
@@ -7357,6 +7433,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 4800,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => 701,
         (
             [false],
             SpotId::Glacier__Vertical_Room__Mid_11,
@@ -7428,6 +7509,66 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 8400,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 949,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => 1578,
         ([false], SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
             1228
         }
@@ -21645,6 +21786,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 3157,
         (
             [true],
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 1599,
+        (
+            [true],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__East_Corner,
         ) => 350,
@@ -21653,6 +21814,32 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 2280,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => 1578,
+        // [0.701754, 0.350877]
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+        ) => 1403,
         (
             [true],
             SpotId::Glacier__Vertical_Room__East_9,
@@ -21684,6 +21871,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1228,
         (
             [true],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 1199,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 500,
+        (
+            [true],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => 2280,
@@ -21698,6 +21915,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 4800,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => 701,
         (
             [true],
             SpotId::Glacier__Vertical_Room__Mid_11,
@@ -21761,6 +21983,66 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 8400,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => 949,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => 1578,
         ([true], SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
             1228
         }
@@ -32597,8 +32879,115 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Vertical_Room__East_13,
         ) => true,
         (
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => true,
+        (
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room__Above_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room__East_14, SpotId::Glacier__Vertical_Room__Upper_Switch) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room__Upper_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room__Lower_Switch, SpotId::Glacier__Vertical_Room__East_17) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room__East_17, SpotId::Glacier__Vertical_Room__Lower_Switch) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
         ) => true,
         (
             SpotId::Glacier__Boomerang_Antechamber__West_13,
@@ -37449,6 +37838,21 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
 pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
         (
+            SpotId::Amagi__East_Lake__East_15_Flat,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi__East_Lake__East_15_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi__East_Lake__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Amagi__Grid_31_19__East,
             SpotId::Amagi__Grid_31_19__West,
             3157,
@@ -39470,11 +39874,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Center_Save__West_Floor,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            1000,
-        ),
-        (
-            SpotId::Annuna__Crystals__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41570,13 +41969,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Lamassu__West_15,
-            SpotId::Annuna__Crystals__East,
-            1350,
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            1491,
         ),
         (
             SpotId::Annuna__Lamassu__West_15,
-            SpotId::Annuna__Lamassu__Portal_Stand,
-            1491,
+            SpotId::Glacier__Crystals__East,
+            1350,
         ),
         (
             SpotId::Annuna__Lamassu__West_15,
@@ -55369,6 +55768,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Crystals__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
             5000,
@@ -56849,6 +57258,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            526,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            701,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            1599,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            600,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             1350,
@@ -56875,6 +57329,56 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Crystals__West,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Annuna__Hidden_Portal__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -56934,6 +57438,66 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            1199,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            2000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__South,
+            800,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__East_17,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            500,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            2000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
             2280,
@@ -56947,6 +57511,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
             4800,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            701,
         ),
         (
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
@@ -57019,6 +57588,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            1250,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            750,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            3000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Vertical_Room__Past_Gate,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             1350,
@@ -57055,6 +57644,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__South,
+            SpotId::Annuna__West_Climb__North,
+            1600,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__South,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57080,6 +57679,121 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__Under_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            700,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            1450,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            1100,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            600,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            526,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__East_14,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            600,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+            949,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Amagi__East_Lake__East_15_Flat,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Amagi__East_Lake__East_15_Lower,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -72544,6 +73258,21 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => {
             Some(3157)
         }
+        (SpotId::Glacier__Vertical_Room__Above_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            Some(1052)
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => Some(526),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => Some(1599),
         (SpotId::Glacier__Vertical_Room__East_12, SpotId::Glacier__Vertical_Room__East_Corner) => {
             Some(350)
         }
@@ -72551,6 +73280,24 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => Some(2280),
+        (
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => Some(1578),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => Some(1052),
+        (SpotId::Glacier__Vertical_Room__East_14, SpotId::Glacier__Vertical_Room__Upper_Switch) => {
+            Some(1578)
+        }
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => Some(1351),
+        (SpotId::Glacier__Vertical_Room__East_17, SpotId::Glacier__Vertical_Room__Lower_Switch) => {
+            Some(1801)
+        }
         (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_11) => {
             Some(2650)
         }
@@ -72571,6 +73318,29 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1228)
         }
         (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => Some(1199),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => Some(1403),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => Some(1403),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => Some(1351),
+        (SpotId::Glacier__Vertical_Room__Lower_Switch, SpotId::Glacier__Vertical_Room__East_17) => {
+            Some(1801)
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => Some(500),
+        (
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => Some(2280),
@@ -72582,6 +73352,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => Some(4800),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => Some(701),
         (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__East_13) => {
             Some(1700)
         }
@@ -72626,6 +73400,53 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Glacier__Vertical_Room__West_9) => {
             Some(8400)
         }
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+        ) => Some(1578),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => Some(1200),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => Some(526),
+        (SpotId::Glacier__Vertical_Room__Upper_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            Some(1578)
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => Some(600),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => Some(949),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => Some(1578),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => Some(1578),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => Some(1403),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => Some(1578),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => Some(1403),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => Some(1578),
         (SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
             Some(1228)
         }
@@ -83684,6 +84505,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => {
             (Some(3157), vec![])
         }
+        (SpotId::Glacier__Vertical_Room__Above_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Above_Switch,
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => (Some(1599), vec![]),
         (SpotId::Glacier__Vertical_Room__East_12, SpotId::Glacier__Vertical_Room__East_Corner) => {
             (Some(350), vec![])
         }
@@ -83691,6 +84527,24 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => (Some(2280), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__East_13,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__East_14,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => (Some(1052), vec![]),
+        (SpotId::Glacier__Vertical_Room__East_14, SpotId::Glacier__Vertical_Room__Upper_Switch) => {
+            (Some(1578), vec![])
+        }
+        (
+            SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => (Some(1351), vec![([true], 1052)]),
+        (SpotId::Glacier__Vertical_Room__East_17, SpotId::Glacier__Vertical_Room__Lower_Switch) => {
+            (Some(1801), vec![([true], 1403)])
+        }
         (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_11) => {
             (Some(2650), vec![])
         }
@@ -83711,6 +84565,29 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1228), vec![])
         }
         (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => (Some(1199), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => (Some(1351), vec![([true], 1052)]),
+        (SpotId::Glacier__Vertical_Room__Lower_Switch, SpotId::Glacier__Vertical_Room__East_17) => {
+            (Some(1801), vec![([true], 1403)])
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => (Some(500), vec![]),
+        (
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => (Some(2280), vec![]),
@@ -83722,6 +84599,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => (Some(4800), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+        ) => (Some(701), vec![]),
         (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__East_13) => {
             (Some(1700), vec![])
         }
@@ -83768,6 +84649,53 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Glacier__Vertical_Room__West_9) => {
             (Some(8400), vec![])
         }
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__East_13,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Gatestone,
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Upper_Switch,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ) => (Some(526), vec![]),
+        (SpotId::Glacier__Vertical_Room__Upper_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
+            (Some(1578), vec![])
+        }
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ) => (Some(949), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Flat,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__West_15_Lower,
+            SpotId::Glacier__Vertical_Room__Waters_Ledge,
+        ) => (Some(1578), vec![]),
         (SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
             (Some(1228), vec![])
         }

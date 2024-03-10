@@ -976,3 +976,16 @@ areas:
 
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between
+
+- name: East Lake
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [34, 18, 35, 19]
+  spots:
+    - name: East 15 Flat
+      coord: [35.95, 14.55]
+    - name: East 15 Lower
+      coord: [35.95, 14.7]
+
+    - name: Save Point
+      coord: [34.5, 17.6]
