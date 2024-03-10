@@ -1409,6 +1409,14 @@ pub fn access_giguna_northeast_gate(ctx: &Context, world: &graph::World) -> bool
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
 }
+pub fn access_glacier_big_drop_rock(ctx: &Context, world: &graph::World) -> bool {
+    // Glacier_Big_Drop_Rock
+    ctx.has(Item::Glacier_Big_Drop_Rock)
+}
+pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &graph::World) -> bool {
+    // Glacier_Sea_Burial_Rock
+    ctx.has(Item::Glacier_Sea_Burial_Rock)
+}
 pub fn access_grab(ctx: &Context, world: &graph::World) -> bool {
     // $grab
     helper__grab!(ctx, world)
@@ -1728,6 +1736,10 @@ pub fn access_map__uhrum__save_room__save(ctx: &Context, world: &graph::World) -
 pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__uhrum__west_entrance__save
     ctx.map__uhrum__west_entrance__save()
+}
+pub fn access_melee(ctx: &Context, world: &graph::World) -> bool {
+    // $melee
+    helper__melee!(ctx, world)
 }
 pub fn access_melee_damage(ctx: &Context, world: &graph::World) -> bool {
     // Melee_Damage
@@ -2105,6 +2117,10 @@ pub fn access_underwater_movement_and_grab(ctx: &Context, world: &graph::World) 
 pub fn access_underwater_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
+}
+pub fn access_water_movement(ctx: &Context, world: &graph::World) -> bool {
+    // Water_Movement
+    ctx.has(Item::Water_Movement)
 }
 pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Antarctica`
@@ -7389,6 +7405,30 @@ pub fn explain_giguna_northeast_gate(
         (h, vec!["Giguna_Northeast_Gate"])
     }
 }
+pub fn explain_glacier_big_drop_rock(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Big_Drop_Rock
+    {
+        let h = ctx.has(Item::Glacier_Big_Drop_Rock);
+        edict.insert("Glacier_Big_Drop_Rock", format!("{}", h));
+        (h, vec!["Glacier_Big_Drop_Rock"])
+    }
+}
+pub fn explain_glacier_sea_burial_rock(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Sea_Burial_Rock
+    {
+        let h = ctx.has(Item::Glacier_Sea_Burial_Rock);
+        edict.insert("Glacier_Sea_Burial_Rock", format!("{}", h));
+        (h, vec!["Glacier_Sea_Burial_Rock"])
+    }
+}
 pub fn explain_grab(
     ctx: &Context,
     world: &graph::World,
@@ -8845,6 +8885,19 @@ pub fn explain_map__uhrum__west_entrance__save(
         let r = ctx.map__uhrum__west_entrance__save();
         edict.insert("^map__uhrum__west_entrance__save", format!("{:?}", r));
         (r, vec!["^map__uhrum__west_entrance__save"])
+    }
+}
+pub fn explain_melee(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee
+    {
+        let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+        edict.insert("$melee", format!("{:?}", res));
+        refs.push("$melee");
+        (res, refs)
     }
 }
 pub fn explain_melee_damage(
@@ -10601,6 +10654,18 @@ pub fn explain_underwater_movement_and_hook(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_water_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Water_Movement
+    {
+        let h = ctx.has(Item::Water_Movement);
+        edict.insert("Water_Movement", format!("{}", h));
+        (h, vec!["Water_Movement"])
     }
 }
 pub fn explain_within_antarctica(
@@ -13157,6 +13222,28 @@ pub fn observe_access_giguna_northeast_gate(
         ctx.has(Item::Giguna_Northeast_Gate)
     }
 }
+pub fn observe_access_glacier_big_drop_rock(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Big_Drop_Rock
+    {
+        full_obs.observe_glacier_big_drop_rock();
+        ctx.has(Item::Glacier_Big_Drop_Rock)
+    }
+}
+pub fn observe_access_glacier_sea_burial_rock(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Sea_Burial_Rock
+    {
+        full_obs.observe_glacier_sea_burial_rock();
+        ctx.has(Item::Glacier_Sea_Burial_Rock)
+    }
+}
 pub fn observe_access_grab(
     ctx: &Context,
     world: &graph::World,
@@ -13969,6 +14056,14 @@ pub fn observe_access_map__uhrum__west_entrance__save(
         full_obs.observe_map__uhrum__west_entrance__save();
         ctx.map__uhrum__west_entrance__save()
     }
+}
+pub fn observe_access_melee(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee
+    hobserve__melee!(ctx, world, full_obs)
 }
 pub fn observe_access_melee_damage(
     ctx: &Context,
@@ -14891,6 +14986,17 @@ pub fn observe_access_underwater_movement_and_hook(
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_water_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Water_Movement
+    {
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    }
 }
 pub fn observe_access_within_antarctica(
     ctx: &Context,

@@ -1664,6 +1664,7 @@ pub enum SpotId {
     Glacier__Apocalypse_Entry__West_15_Lower,
     Glacier__Apocalypse_Entry__West_15_Upper,
     Glacier__Boomerang_Antechamber__East_12,
+    Glacier__Boomerang_Antechamber__East_13,
     Glacier__Boomerang_Antechamber__Upper_East,
     Glacier__Boomerang_Antechamber__West_12,
     Glacier__Boomerang_Antechamber__West_13,
@@ -1737,11 +1738,27 @@ pub enum SpotId {
     Glacier__Revival__Overhang,
     Glacier__Revival__Save_Point,
     Glacier__Revival__West_8,
+    Glacier__Sea_Burial__Breakable_Rock_Left,
+    Glacier__Sea_Burial__Breakable_Rock_Right,
+    Glacier__Sea_Burial__Collapsing_Ceiling,
+    Glacier__Sea_Burial__Deep_Cache,
+    Glacier__Sea_Burial__East_14,
+    Glacier__Sea_Burial__Grate_Ledge,
+    Glacier__Sea_Burial__Grate_Left,
+    Glacier__Sea_Burial__Grate_Right,
+    Glacier__Sea_Burial__Inside_the_Grate,
+    Glacier__Sea_Burial__Left_Center_Rock,
+    Glacier__Sea_Burial__Right_Center_Rock,
+    Glacier__Sea_Burial__Underwater_Passage_Center,
     Glacier__Sea_Burial__West_13,
     Glacier__Sea_Burial__West_14,
+    Glacier__Sea_Burial__West_Basin,
+    Glacier__Sea_Burial__West_Water_Surface,
+    Glacier__The_Big_Drop__Breakable_Rock_Right,
     Glacier__The_Big_Drop__East,
     Glacier__The_Big_Drop__Small_Path,
     Glacier__The_Big_Drop__Water_Surface,
+    Glacier__The_Big_Drop__West_14,
     Glacier__Vertical_Room__East_12,
     Glacier__Vertical_Room__East_13,
     Glacier__Vertical_Room__East_9,
@@ -4625,6 +4642,9 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Boomerang_Antechamber__East_12 => {
                 write!(f, "{}", "Glacier > Boomerang Antechamber > East 12")
             }
+            SpotId::Glacier__Boomerang_Antechamber__East_13 => {
+                write!(f, "{}", "Glacier > Boomerang Antechamber > East 13")
+            }
             SpotId::Glacier__Boomerang_Antechamber__Upper_East => {
                 write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East")
             }
@@ -4814,11 +4834,56 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
             SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => {
+                write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left")
+            }
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => {
+                write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right")
+            }
+            SpotId::Glacier__Sea_Burial__Collapsing_Ceiling => {
+                write!(f, "{}", "Glacier > Sea Burial > Collapsing Ceiling")
+            }
+            SpotId::Glacier__Sea_Burial__Deep_Cache => {
+                write!(f, "{}", "Glacier > Sea Burial > Deep Cache")
+            }
+            SpotId::Glacier__Sea_Burial__East_14 => {
+                write!(f, "{}", "Glacier > Sea Burial > East 14")
+            }
+            SpotId::Glacier__Sea_Burial__Grate_Ledge => {
+                write!(f, "{}", "Glacier > Sea Burial > Grate Ledge")
+            }
+            SpotId::Glacier__Sea_Burial__Grate_Left => {
+                write!(f, "{}", "Glacier > Sea Burial > Grate Left")
+            }
+            SpotId::Glacier__Sea_Burial__Grate_Right => {
+                write!(f, "{}", "Glacier > Sea Burial > Grate Right")
+            }
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate => {
+                write!(f, "{}", "Glacier > Sea Burial > Inside the Grate")
+            }
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock => {
+                write!(f, "{}", "Glacier > Sea Burial > Left Center Rock")
+            }
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock => {
+                write!(f, "{}", "Glacier > Sea Burial > Right Center Rock")
+            }
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center => {
+                write!(f, "{}", "Glacier > Sea Burial > Underwater Passage Center")
+            }
             SpotId::Glacier__Sea_Burial__West_13 => {
                 write!(f, "{}", "Glacier > Sea Burial > West 13")
             }
             SpotId::Glacier__Sea_Burial__West_14 => {
                 write!(f, "{}", "Glacier > Sea Burial > West 14")
+            }
+            SpotId::Glacier__Sea_Burial__West_Basin => {
+                write!(f, "{}", "Glacier > Sea Burial > West Basin")
+            }
+            SpotId::Glacier__Sea_Burial__West_Water_Surface => {
+                write!(f, "{}", "Glacier > Sea Burial > West Water Surface")
+            }
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => {
+                write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right")
             }
             SpotId::Glacier__The_Big_Drop__East => write!(f, "{}", "Glacier > The Big Drop > East"),
             SpotId::Glacier__The_Big_Drop__Small_Path => {
@@ -4826,6 +4891,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__The_Big_Drop__Water_Surface => {
                 write!(f, "{}", "Glacier > The Big Drop > Water Surface")
+            }
+            SpotId::Glacier__The_Big_Drop__West_14 => {
+                write!(f, "{}", "Glacier > The Big Drop > West 14")
             }
             SpotId::Glacier__Vertical_Room__East_12 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 12")
@@ -7522,6 +7590,9 @@ impl std::str::FromStr for SpotId {
             "Glacier > Boomerang Antechamber > East 12" => {
                 Ok(SpotId::Glacier__Boomerang_Antechamber__East_12)
             }
+            "Glacier > Boomerang Antechamber > East 13" => {
+                Ok(SpotId::Glacier__Boomerang_Antechamber__East_13)
+            }
             "Glacier > Boomerang Antechamber > Upper East" => {
                 Ok(SpotId::Glacier__Boomerang_Antechamber__Upper_East)
             }
@@ -7647,13 +7718,47 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > Overhang" => Ok(SpotId::Glacier__Revival__Overhang),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
+            "Glacier > Sea Burial > Breakable Rock Left" => {
+                Ok(SpotId::Glacier__Sea_Burial__Breakable_Rock_Left)
+            }
+            "Glacier > Sea Burial > Breakable Rock Right" => {
+                Ok(SpotId::Glacier__Sea_Burial__Breakable_Rock_Right)
+            }
+            "Glacier > Sea Burial > Collapsing Ceiling" => {
+                Ok(SpotId::Glacier__Sea_Burial__Collapsing_Ceiling)
+            }
+            "Glacier > Sea Burial > Deep Cache" => Ok(SpotId::Glacier__Sea_Burial__Deep_Cache),
+            "Glacier > Sea Burial > East 14" => Ok(SpotId::Glacier__Sea_Burial__East_14),
+            "Glacier > Sea Burial > Grate Ledge" => Ok(SpotId::Glacier__Sea_Burial__Grate_Ledge),
+            "Glacier > Sea Burial > Grate Left" => Ok(SpotId::Glacier__Sea_Burial__Grate_Left),
+            "Glacier > Sea Burial > Grate Right" => Ok(SpotId::Glacier__Sea_Burial__Grate_Right),
+            "Glacier > Sea Burial > Inside the Grate" => {
+                Ok(SpotId::Glacier__Sea_Burial__Inside_the_Grate)
+            }
+            "Glacier > Sea Burial > Left Center Rock" => {
+                Ok(SpotId::Glacier__Sea_Burial__Left_Center_Rock)
+            }
+            "Glacier > Sea Burial > Right Center Rock" => {
+                Ok(SpotId::Glacier__Sea_Burial__Right_Center_Rock)
+            }
+            "Glacier > Sea Burial > Underwater Passage Center" => {
+                Ok(SpotId::Glacier__Sea_Burial__Underwater_Passage_Center)
+            }
             "Glacier > Sea Burial > West 13" => Ok(SpotId::Glacier__Sea_Burial__West_13),
             "Glacier > Sea Burial > West 14" => Ok(SpotId::Glacier__Sea_Burial__West_14),
+            "Glacier > Sea Burial > West Basin" => Ok(SpotId::Glacier__Sea_Burial__West_Basin),
+            "Glacier > Sea Burial > West Water Surface" => {
+                Ok(SpotId::Glacier__Sea_Burial__West_Water_Surface)
+            }
+            "Glacier > The Big Drop > Breakable Rock Right" => {
+                Ok(SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right)
+            }
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
             "Glacier > The Big Drop > Water Surface" => {
                 Ok(SpotId::Glacier__The_Big_Drop__Water_Surface)
             }
+            "Glacier > The Big Drop > West 14" => Ok(SpotId::Glacier__The_Big_Drop__West_14),
             "Glacier > Vertical Room > East 12" => Ok(SpotId::Glacier__Vertical_Room__East_12),
             "Glacier > Vertical Room > East 13" => Ok(SpotId::Glacier__Vertical_Room__East_13),
             "Glacier > Vertical Room > East 9" => Ok(SpotId::Glacier__Vertical_Room__East_9),
@@ -8360,7 +8465,7 @@ impl std::str::FromStr for SpotId {
     serde_repr::Serialize_repr,
     serde_repr::Deserialize_repr,
 )]
-#[repr(u8)]
+#[repr(u16)]
 pub enum LocationId {
     Amagi__Liru_Room__Shrine__Item,
     Amagi__Main_Area__Way_Off_To_The_Side__Item,
@@ -8506,7 +8611,21 @@ pub enum LocationId {
     Glacier__Compass_Room__Center__Table,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
-    Glacier__The_Big_Drop__Water_Surface__Drown,
+    Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
+    Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+    Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+    Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
+    Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+    Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+    Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
+    Glacier__Sea_Burial__Deep_Cache__Health,
+    Glacier__Sea_Burial__Inside_the_Grate__Notes,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+    Glacier__The_Big_Drop__West_14__Break_Rock,
+    Glacier__The_Big_Drop__West_14__Mist_Through,
+    Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
     Glacier__Vertical_Room__Peak__Flask,
     Glacier__Vertical_Room__Under_Switch__Switch,
     Interior__Building_Interior__Corner__Urn,
@@ -9161,9 +9280,73 @@ impl fmt::Display for LocationId {
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item")
             }
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
-                write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown")
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => write!(
+                f,
+                "{}",
+                "Glacier > Sea Burial > Breakable Rock Left > Break Rock"
+            ),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => write!(
+                f,
+                "{}",
+                "Glacier > Sea Burial > Breakable Rock Left > Mist Through"
+            ),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => write!(
+                f,
+                "{}",
+                "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster"
+            ),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
+                write!(
+                    f,
+                    "{}",
+                    "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping"
+                )
             }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => write!(
+                f,
+                "{}",
+                "Glacier > Sea Burial > Breakable Rock Right > Mist Through"
+            ),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => write!(
+                f,
+                "{}",
+                "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster"
+            ),
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
+                write!(f, "{}", "Glacier > Sea Burial > Collapsing Ceiling > Drown")
+            }
+            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => {
+                write!(f, "{}", "Glacier > Sea Burial > Deep Cache > Health")
+            }
+            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
+                write!(f, "{}", "Glacier > Sea Burial > Inside the Grate > Notes")
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => write!(
+                f,
+                "{}",
+                "Glacier > The Big Drop > Breakable Rock Right > Break Rock"
+            ),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => write!(
+                f,
+                "{}",
+                "Glacier > The Big Drop > Breakable Rock Right > Mist Through"
+            ),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => write!(
+                f,
+                "{}",
+                "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster"
+            ),
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
+                write!(f, "{}", "Glacier > The Big Drop > West 14 > Break Rock")
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through")
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(
+                f,
+                "{}",
+                "Glacier > The Big Drop > West 14 > Mist Through Faster"
+            ),
             LocationId::Glacier__Vertical_Room__Peak__Flask => {
                 write!(f, "{}", "Glacier > Vertical Room > Peak > Flask")
             }
@@ -9969,8 +10152,50 @@ impl std::str::FromStr for LocationId {
             "Glacier > Ledge Grab Room > Pedestal > Item" => {
                 Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item)
             }
-            "Glacier > The Big Drop > Water Surface > Drown" => {
-                Ok(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown)
+            "Glacier > Sea Burial > Breakable Rock Left > Break Rock" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock)
+            }
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through)
+            }
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster)
+            }
+            "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping)
+            }
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through)
+            }
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster" => {
+                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster)
+            }
+            "Glacier > Sea Burial > Collapsing Ceiling > Drown" => {
+                Ok(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown)
+            }
+            "Glacier > Sea Burial > Deep Cache > Health" => {
+                Ok(LocationId::Glacier__Sea_Burial__Deep_Cache__Health)
+            }
+            "Glacier > Sea Burial > Inside the Grate > Notes" => {
+                Ok(LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes)
+            }
+            "Glacier > The Big Drop > Breakable Rock Right > Break Rock" => {
+                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock)
+            }
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through" => {
+                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through)
+            }
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster" => {
+                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster)
+            }
+            "Glacier > The Big Drop > West 14 > Break Rock" => {
+                Ok(LocationId::Glacier__The_Big_Drop__West_14__Break_Rock)
+            }
+            "Glacier > The Big Drop > West 14 > Mist Through" => {
+                Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through)
+            }
+            "Glacier > The Big Drop > West 14 > Mist Through Faster" => {
+                Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster)
             }
             "Glacier > Vertical Room > Peak > Flask" => {
                 Ok(LocationId::Glacier__Vertical_Room__Peak__Flask)
@@ -11270,6 +11495,8 @@ pub enum ExitId {
     Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1,
     Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1,
     Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,
+    Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1,
+    Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1,
     Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1,
     Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
     Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1,
@@ -11346,9 +11573,36 @@ pub enum ExitId {
     Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
     Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
     Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
+    Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1,
+    Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+    Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+    Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1,
+    Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+    Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+    Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
+    Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1,
+    Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1,
+    Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1,
+    Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1,
+    Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1,
+    Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2,
+    Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1,
+    Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1,
+    Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1,
+    Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1,
+    Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1,
+    Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2,
+    Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+    Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
     Glacier__The_Big_Drop__East__ex__Compass_Room__West_1,
     Glacier__The_Big_Drop__Small_Path__ex__East_1,
-    Glacier__The_Big_Drop__Water_Surface__Drown,
+    Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1,
+    Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1,
+    Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1,
+    Glacier__The_Big_Drop__West_14__Mist_Through,
+    Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
     Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,
     Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,
     Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
@@ -12681,6 +12935,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)"),
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Upper ==> Annuna > Apocalypse Hallway > Upper East (1)"),
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 13 ==> Sea Burial > West 13 (1)"),
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 13 ==> Sea Burial > West 14 (1)"),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room > Upper West (1)"),
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)"),
             ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)"),
@@ -12757,9 +13013,36 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left ==> Breakable Rock Right (1)"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right ==> Breakable Rock Left (1)"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right > Mist Through"),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster"),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => write!(f, "{}", "Glacier > Sea Burial > Collapsing Ceiling > Drown"),
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => write!(f, "{}", "Glacier > Sea Burial > Deep Cache ==> Right Center Rock (1)"),
+            ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => write!(f, "{}", "Glacier > Sea Burial > East 14 ==> The Big Drop > West 14 (1)"),
+            ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => write!(f, "{}", "Glacier > Sea Burial > Grate Ledge ==> Left Center Rock (1)"),
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => write!(f, "{}", "Glacier > Sea Burial > Grate Left ==> Grate Right (1)"),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => write!(f, "{}", "Glacier > Sea Burial > Grate Right ==> Grate Ledge (1)"),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => write!(f, "{}", "Glacier > Sea Burial > Grate Right ==> Grate Ledge (2)"),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => write!(f, "{}", "Glacier > Sea Burial > Grate Right ==> Grate Left (1)"),
+            ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => write!(f, "{}", "Glacier > Sea Burial > Left Center Rock ==> Grate Ledge (1)"),
+            ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => write!(f, "{}", "Glacier > Sea Burial > West 13 ==> Boomerang Antechamber > East 13 (1)"),
+            ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => write!(f, "{}", "Glacier > Sea Burial > West 14 ==> Annuna > Lamassu > East 14 (1)"),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => write!(f, "{}", "Glacier > Sea Burial > West Basin ==> Grate Ledge (1)"),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => write!(f, "{}", "Glacier > Sea Burial > West Basin ==> Grate Ledge (2)"),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => write!(f, "{}", "Glacier > Sea Burial > West Basin ==> Left Center Rock (1)"),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right ==> West 14 (1)"),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right > Mist Through"),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster"),
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => write!(f, "{}", "Glacier > The Big Drop > Small Path ==> East (1)"),
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown"),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => write!(f, "{}", "Glacier > The Big Drop > Water Surface ==> Sea Burial > Collapsing Ceiling (1)"),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => write!(f, "{}", "Glacier > The Big Drop > West 14 ==> Breakable Rock Right (1)"),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => write!(f, "{}", "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)"),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through"),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through Faster"),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),
@@ -14097,6 +14380,8 @@ impl std::str::FromStr for ExitId {
             "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1),
             "Glacier > Apocalypse Entry > West 15 Upper ==> Annuna > Apocalypse Hallway > Upper East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1),
             "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1),
+            "Glacier > Boomerang Antechamber > East 13 ==> Sea Burial > West 13 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1),
+            "Glacier > Boomerang Antechamber > East 13 ==> Sea Burial > West 14 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1),
             "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room > Upper West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1),
             "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1),
             "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1),
@@ -14173,9 +14458,36 @@ impl std::str::FromStr for ExitId {
             "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1),
             "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1),
             "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)" => Ok(ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1),
+            "Glacier > Sea Burial > Breakable Rock Left ==> Breakable Rock Right (1)" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1),
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+            "Glacier > Sea Burial > Breakable Rock Right ==> Breakable Rock Left (1)" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1),
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+            "Glacier > Sea Burial > Collapsing Ceiling > Drown" => Ok(ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
+            "Glacier > Sea Burial > Deep Cache ==> Right Center Rock (1)" => Ok(ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1),
+            "Glacier > Sea Burial > East 14 ==> The Big Drop > West 14 (1)" => Ok(ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1),
+            "Glacier > Sea Burial > Grate Ledge ==> Left Center Rock (1)" => Ok(ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1),
+            "Glacier > Sea Burial > Grate Left ==> Grate Right (1)" => Ok(ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1),
+            "Glacier > Sea Burial > Grate Right ==> Grate Ledge (1)" => Ok(ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1),
+            "Glacier > Sea Burial > Grate Right ==> Grate Ledge (2)" => Ok(ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2),
+            "Glacier > Sea Burial > Grate Right ==> Grate Left (1)" => Ok(ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1),
+            "Glacier > Sea Burial > Left Center Rock ==> Grate Ledge (1)" => Ok(ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1),
+            "Glacier > Sea Burial > West 13 ==> Boomerang Antechamber > East 13 (1)" => Ok(ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1),
+            "Glacier > Sea Burial > West 14 ==> Annuna > Lamassu > East 14 (1)" => Ok(ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1),
+            "Glacier > Sea Burial > West Basin ==> Grate Ledge (1)" => Ok(ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1),
+            "Glacier > Sea Burial > West Basin ==> Grate Ledge (2)" => Ok(ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2),
+            "Glacier > Sea Burial > West Basin ==> Left Center Rock (1)" => Ok(ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1),
+            "Glacier > The Big Drop > Breakable Rock Right ==> West 14 (1)" => Ok(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1),
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through" => Ok(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster" => Ok(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
             "Glacier > The Big Drop > East ==> Compass Room > West (1)" => Ok(ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1),
             "Glacier > The Big Drop > Small Path ==> East (1)" => Ok(ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1),
-            "Glacier > The Big Drop > Water Surface > Drown" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
+            "Glacier > The Big Drop > Water Surface ==> Sea Burial > Collapsing Ceiling (1)" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1),
+            "Glacier > The Big Drop > West 14 ==> Breakable Rock Right (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1),
+            "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1),
+            "Glacier > The Big Drop > West 14 > Mist Through" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
+            "Glacier > The Big Drop > West 14 > Mist Through Faster" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
             "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1),
             "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1),
             "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1),
@@ -15423,6 +15735,8 @@ pub enum CanonId {
     Giguna_Boulder,
     Giguna_Gateway_Block,
     Giguna_Gubi,
+    Glacier_Big_Drop_Rock,
+    Glacier_Sea_Burial_Rock,
     Ledge_Grab,
     Melee_Charge,
     Irikar_Royal_Storage_Wall,
@@ -15476,6 +15790,8 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
+            CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
+            CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
@@ -15535,6 +15851,8 @@ impl std::str::FromStr for CanonId {
             "Giguna_Boulder" => Ok(CanonId::Giguna_Boulder),
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Giguna_Gubi" => Ok(CanonId::Giguna_Gubi),
+            "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
+            "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),

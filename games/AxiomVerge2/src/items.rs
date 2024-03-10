@@ -56,6 +56,7 @@ pub enum Item {
     Defeat_MUS_A_M20,
     Destruction_Pogrom,
     Double_Axe,
+    Dr_Gloria,
     Drone_Hover,
     Drone_Melee_Damage,
     Drone_Melee_Damage_2,
@@ -86,6 +87,8 @@ pub enum Item {
     Giguna_Gateway_Gate,
     Giguna_Gubi,
     Giguna_Northeast_Gate,
+    Glacier_Big_Drop_Rock,
+    Glacier_Sea_Burial_Rock,
     Hammond_Auth,
     Health_Fragment,
     Health_Node,
@@ -213,6 +216,7 @@ impl fmt::Display for Item {
             Item::Defeat_MUS_A_M20 => write!(f, "{}", "Defeat_MUS_A_M20"),
             Item::Destruction_Pogrom => write!(f, "{}", "Destruction_Pogrom"),
             Item::Double_Axe => write!(f, "{}", "Double_Axe"),
+            Item::Dr_Gloria => write!(f, "{}", "Dr_Gloria"),
             Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
             Item::Drone_Melee_Damage => write!(f, "{}", "Drone_Melee_Damage"),
             Item::Drone_Melee_Damage_2 => write!(f, "{}", "Drone_Melee_Damage_2"),
@@ -243,6 +247,8 @@ impl fmt::Display for Item {
             Item::Giguna_Gateway_Gate => write!(f, "{}", "Giguna_Gateway_Gate"),
             Item::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
             Item::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
+            Item::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
+            Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Hammond_Auth => write!(f, "{}", "Hammond_Auth"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Node => write!(f, "{}", "Health_Node"),
@@ -374,6 +380,7 @@ impl std::str::FromStr for Item {
             "Defeat_MUS_A_M20" => Ok(Item::Defeat_MUS_A_M20),
             "Destruction_Pogrom" => Ok(Item::Destruction_Pogrom),
             "Double_Axe" => Ok(Item::Double_Axe),
+            "Dr_Gloria" => Ok(Item::Dr_Gloria),
             "Drone_Hover" => Ok(Item::Drone_Hover),
             "Drone_Melee_Damage" => Ok(Item::Drone_Melee_Damage),
             "Drone_Melee_Damage_2" => Ok(Item::Drone_Melee_Damage_2),
@@ -404,6 +411,8 @@ impl std::str::FromStr for Item {
             "Giguna_Gateway_Gate" => Ok(Item::Giguna_Gateway_Gate),
             "Giguna_Gubi" => Ok(Item::Giguna_Gubi),
             "Giguna_Northeast_Gate" => Ok(Item::Giguna_Northeast_Gate),
+            "Glacier_Big_Drop_Rock" => Ok(Item::Glacier_Big_Drop_Rock),
+            "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Hammond_Auth" => Ok(Item::Hammond_Auth),
             "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Node" => Ok(Item::Health_Node),
@@ -501,6 +510,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Amagi_Stronghold_Left_Wall
             | Item::Carnelian_Ring
             | Item::Double_Axe
+            | Item::Dr_Gloria
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5

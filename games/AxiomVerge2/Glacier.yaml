@@ -162,6 +162,11 @@ areas:
 
 - name: The Big Drop
   on_entry: $reset_old_area(^newpos)
+  map:
+    bottom: [41, 13, 42, 14]
+  data_map:
+    water:
+      bottom: true
   spots:
     - name: East
       coord: [41.95, 10.8]
@@ -179,23 +184,292 @@ areas:
           price: 150  # ?
           movement: mist2
     - name: Water Surface
-      coord: [41.05, 12.8]
+      coord: [41.05, 12.9]
+      exits:
+        - to: Sea Burial > Collapsing Ceiling
+          req: NOT Amashilama
+          tags: [xshift]
       # other access is dependent on Amashilama, so leave isolated for now.
+
+    - name: West 14
+      coord: [41.05, 13.7]
+      locations:
+        - name: Break Rock
+          req: $melee
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          time: 2
+      exits:
+        - to: Sea Burial > East 14
+          tags: [xshift]
+        - to: Breakable Rock Right
+          req: Glacier_Big_Drop_Rock
+          movement: base
+      hybrid:
+        - name: Mist Through
+          to: Breakable Rock Right
+          req: Nanite_Mist
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          item_time: 0
+          movement: mist1
+        - name: Mist Through Faster
+          to: Breakable Rock Right
+          req: $mist2
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          item_time: 0
+          movement: mist2
+    - name: Breakable Rock Right
+      coord: [41.2, 13.7]
+      locations:
+        - name: Break Rock
+          req: $melee
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          time: 2
+      exits:
+        - to: West 14
+          req: Glacier_Big_Drop_Rock
+          movement: base
+      hybrid:
+        - name: Mist Through
+          to: West 14
+          req: Nanite_Mist
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          item_time: 0
+          movement: mist1
+        - name: Mist Through Faster 
+          to: West 14
+          req: $mist2
+          canon: Glacier_Big_Drop_Rock
+          item: Glacier_Big_Drop_Rock
+          item_time: 0
+          movement: mist2
+
+- name: Sea Burial
+  on_entry: $reset_old_area(^newpos)
+  data:
+    water: true
+  spots:
+    - name: Collapsing Ceiling
+      coord: [40.95, 12.9]
       hybrid:
         - name: Drown  # This is technically the next grid over, but it's a cutscene really
           to: Glacier > Revival > Save Point
           req: NOT Amashilama
           item: Amashilama
-          time: 48.5
+          time: 47.15
           item_time: 0
-
-- name: Sea Burial
-  on_entry: $reset_old_area(^newpos)
-  spots:
     - name: West 13
-      coord: [39.05, 13.75]
+      coord: [39.05, 12.75]
+      data:
+        water: false
+      local:
+        - to: West Water Surface
+      exits:
+        - to: Boomerang Antechamber > East 13
+          tags: [xshift]
+    - name: West Water Surface
+      coord: [39.2, 13.0]
+      local:
+        - to: West 13
+          jumps: 1
+          jump_mvmt: water
+        - to: Grate Ledge
+    - name: Grate Ledge
+      coord: [39.6, 13.15]
+      local:
+        - to: West Water Surface
+          jumps: 1
+        - to: Grate Right
+        - to: West Basin
+      exits:
+        - to: Left Center Rock
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Grate Right
+      coord: [39.65, 13.4]
+      local:
+        - to: West Basin
+        - to: Grate Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Grate Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Grate Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Grate Left
+          req: Nanite_Mist
+          price: 40
+          movement: base
+    - name: West Basin
+      coord: [39.8, 13.4]
+      local:
+        - to: Grate Ledge
+          jumps: 1
+          jump_mvmt: water
+        - to: Grate Right
+        - to: Left Center Rock
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Grate Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Grate Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Left Center Rock
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Left Center Rock
+      coord: [40.0, 13.1]
+      local:
+        - to: Right Center Rock
+          jumps: 1
+        - to: Grate Right
+        - to: West Basin
+      exits:
+        - to: Grate Ledge
+          req: $hover
+          movement: base
+    - name: Right Center Rock
+      coord: [40.2, 13.0]
+      local:
+        - to: Left Center Rock
+        - to: Deep Cache
+        - to: Breakable Rock Left
+    - name: Deep Cache
+      coord: [40.5, 13.75]
+      local:
+        - to: Right Center Rock
+          jumps: 4
+        - to: Breakable Rock Left
+          jumps: 2
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Right Center Rock
+          req: Water_Movement
+          movement: base
+          jumps: 3
+    - name: Breakable Rock Left
+      coord: [40.6, 13.4]
+      local:
+        - to: Deep Cache
+        - to: Right Center Rock
+          jumps: 3
+      locations:
+        - name: Break Rock
+          req: $melee
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          time: 2
+      exits:
+        - to: Breakable Rock Right
+          req: Glacier_Sea_Burial_Rock
+          movement: base
+      hybrid:
+        - name: Mist Through
+          to: Breakable Rock Right
+          req: Nanite_Mist
+          price: 40
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          movement: mist1
+        - name: Mist Through Faster
+          to: Breakable Rock Right
+          req: Nanite_Mist
+          price: 40
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          movement: mist2
+    - name: Breakable Rock Right
+      coord: [40.725, 13.4]
+      local:
+        - to: Underwater Passage Center
+      locations:
+        - name: Break Rock while Jumping
+          req: $melee
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          time: 4
+      exits:
+        - to: Breakable Rock Left
+          req: Glacier_Sea_Burial_Rock
+          movement: base
+      hybrid:
+        - name: Mist Through
+          to: Breakable Rock Left
+          req: Nanite_Mist
+          price: 40
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          movement: mist1
+        - name: Mist Through Faster
+          to: Breakable Rock Left
+          req: Nanite_Mist
+          price: 40
+          canon: Glacier_Sea_Burial_Rock
+          item: Glacier_Sea_Burial_Rock
+          movement: mist2
+    - name: Underwater Passage Center
+      coord: [40.8, 13.55]
+      local:
+        - to: Breakable Rock Right
+          jumps: 1
+        - to: East 14
+    - name: East 14
+      coord: [40.95, 13.7]
+      local:
+        - to: Underwater Passage Center
+          jumps: 1
+      exits:
+        - to: The Big Drop > West 14
+          tags: [xshift]
+
     - name: West 14
-      coord: [39.05, 14.65]
+      coord: [39.1, 13.65]
+      local:
+        - to: Inside the Grate
+        - to: Grate Left
+          jumps: 1
+      exits:
+        - to: Annuna > Lamassu > East 14
+          tags: [xdoor]
+    - name: Inside the Grate
+      coord: [39.5, 13.65]
+      local:
+        - to: West 14
+        - to: Grate Left
+          jumps: 1
+      locations:
+        - name: Notes
+          item: Dr_Gloria
+          tags: [standing]
+    - name: Grate Left
+      coord: [39.55, 13.4]
+      local:
+        - to: Inside the Grate
+        - to: West 14
+      exits:
+        - to: Grate Right
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
 
 - name: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
@@ -412,6 +686,8 @@ areas:
       local:
         - to: East 12
           jumps: 9
+        - to: East 13
+          jumps: 4
         # technically others are feasible but omitted for uselessness
       exits:
         - to: Vertical Room > East 13
@@ -425,6 +701,8 @@ areas:
         - to: West 12
           jumps: 2
         - to: West 13
+        - to: East 13
+          thru: [38.55, 12.0]
       exits:
         - to: Boomerang Room > West
           tags: [xshift]
@@ -436,6 +714,9 @@ areas:
           jumps: 2
         - to: East 12
           thru: [38.6, 11.4]
+        - to: East 13
+          thru: [[38.6, 11.4], [38.55, 12.0]]
+          jumps_down: [0, 1, 0]
       exits:
         - to: Boomerang Room > Upper West
           req: Switch_40_12
@@ -448,9 +729,25 @@ areas:
         - to: Upper East
           jumps: 1
         - to: East 12
+        - to: East 13
       exits:
         - to: Vertical Room > East 12
           tags: [xshift]
+    - name: East 13
+      coord: [38.95, 12.75]
+      local:
+        - to: West 13
+          jumps: 4
+        - to: East 12
+          thru: [38.15, 12.6]
+          jumps: [1, 5]
+      exits:
+        - to: Sea Burial > West 13
+          tags: [xshift]
+        - to: Sea Burial > West 14
+          req: $offset
+          time: 50
+          tags: [xshift, offset]
 
 - name: Boomerang Room
   on_entry: $reset_old_area(^newpos)

@@ -1062,10 +1062,25 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Compass_Room__West => AreaId::Glacier__Compass_Room,
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
-        | SpotId::Glacier__The_Big_Drop__Water_Surface => AreaId::Glacier__The_Big_Drop,
-        SpotId::Glacier__Sea_Burial__West_13 | SpotId::Glacier__Sea_Burial__West_14 => {
-            AreaId::Glacier__Sea_Burial
-        }
+        | SpotId::Glacier__The_Big_Drop__Water_Surface
+        | SpotId::Glacier__The_Big_Drop__West_14
+        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => AreaId::Glacier__The_Big_Drop,
+        SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
+        | SpotId::Glacier__Sea_Burial__West_13
+        | SpotId::Glacier__Sea_Burial__West_Water_Surface
+        | SpotId::Glacier__Sea_Burial__Grate_Ledge
+        | SpotId::Glacier__Sea_Burial__Grate_Right
+        | SpotId::Glacier__Sea_Burial__West_Basin
+        | SpotId::Glacier__Sea_Burial__Left_Center_Rock
+        | SpotId::Glacier__Sea_Burial__Right_Center_Rock
+        | SpotId::Glacier__Sea_Burial__Deep_Cache
+        | SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
+        | SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
+        | SpotId::Glacier__Sea_Burial__Underwater_Passage_Center
+        | SpotId::Glacier__Sea_Burial__East_14
+        | SpotId::Glacier__Sea_Burial__West_14
+        | SpotId::Glacier__Sea_Burial__Inside_the_Grate
+        | SpotId::Glacier__Sea_Burial__Grate_Left => AreaId::Glacier__Sea_Burial,
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             AreaId::Glacier__Grid_39_40_7_9
         }
@@ -1088,7 +1103,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
-        | SpotId::Glacier__Boomerang_Antechamber__West_12 => AreaId::Glacier__Boomerang_Antechamber,
+        | SpotId::Glacier__Boomerang_Antechamber__West_12
+        | SpotId::Glacier__Boomerang_Antechamber__East_13 => AreaId::Glacier__Boomerang_Antechamber,
         SpotId::Glacier__Boomerang_Room__West
         | SpotId::Glacier__Boomerang_Room__Platform
         | SpotId::Glacier__Boomerang_Room__Center_ish
@@ -2531,10 +2547,25 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Compass_Room__West => RegionId::Glacier,
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
-        | SpotId::Glacier__The_Big_Drop__Water_Surface => RegionId::Glacier,
-        SpotId::Glacier__Sea_Burial__West_13 | SpotId::Glacier__Sea_Burial__West_14 => {
-            RegionId::Glacier
-        }
+        | SpotId::Glacier__The_Big_Drop__Water_Surface
+        | SpotId::Glacier__The_Big_Drop__West_14
+        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => RegionId::Glacier,
+        SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
+        | SpotId::Glacier__Sea_Burial__West_13
+        | SpotId::Glacier__Sea_Burial__West_Water_Surface
+        | SpotId::Glacier__Sea_Burial__Grate_Ledge
+        | SpotId::Glacier__Sea_Burial__Grate_Right
+        | SpotId::Glacier__Sea_Burial__West_Basin
+        | SpotId::Glacier__Sea_Burial__Left_Center_Rock
+        | SpotId::Glacier__Sea_Burial__Right_Center_Rock
+        | SpotId::Glacier__Sea_Burial__Deep_Cache
+        | SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
+        | SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
+        | SpotId::Glacier__Sea_Burial__Underwater_Passage_Center
+        | SpotId::Glacier__Sea_Burial__East_14
+        | SpotId::Glacier__Sea_Burial__West_14
+        | SpotId::Glacier__Sea_Burial__Inside_the_Grate
+        | SpotId::Glacier__Sea_Burial__Grate_Left => RegionId::Glacier,
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             RegionId::Glacier
         }
@@ -2557,7 +2588,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
-        | SpotId::Glacier__Boomerang_Antechamber__West_12 => RegionId::Glacier,
+        | SpotId::Glacier__Boomerang_Antechamber__West_12
+        | SpotId::Glacier__Boomerang_Antechamber__East_13 => RegionId::Glacier,
         SpotId::Glacier__Boomerang_Room__West
         | SpotId::Glacier__Boomerang_Room__Platform
         | SpotId::Glacier__Boomerang_Room__Center_ish
@@ -3265,8 +3297,46 @@ impl world::Accessible for Location {
                 rules::access_boomerang5(ctx, world)
             }
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => true,
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
+                rules::access_melee(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
+                rules::access_melee(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
                 rules::access_not_amashilama(ctx, world)
+            }
+            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => true,
+            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => true,
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
+                rules::access_melee(ctx, world)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::access_mist2(ctx, world)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
+                rules::access_melee(ctx, world)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                rules::access_nanite_mist(ctx, world)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
+                rules::access_mist2(ctx, world)
             }
             LocationId::Glacier__Vertical_Room__Peak__Flask => true,
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
@@ -3745,8 +3815,44 @@ impl world::Accessible for Location {
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::observe_access_boomerang5(ctx, world, full_obs)
             }
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
+                rules::observe_access_melee(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
+                rules::observe_access_melee(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
                 rules::observe_access_not_amashilama(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
+                rules::observe_access_melee(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::observe_access_mist2(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
+                rules::observe_access_melee(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                rules::observe_access_nanite_mist(ctx, world, full_obs)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
+                rules::observe_access_mist2(ctx, world, full_obs)
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::observe_access_boomerang3(ctx, world, full_obs)
@@ -4209,8 +4315,44 @@ impl world::Accessible for Location {
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::explain_boomerang5(ctx, world, edict)
             }
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
+                rules::explain_melee(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
+                rules::explain_melee(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
                 rules::explain_not_amashilama(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
+                rules::explain_melee(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+                rules::explain_mist2(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
+                rules::explain_melee(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                rules::explain_nanite_mist(ctx, world, edict)
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
+                rules::explain_mist2(ctx, world, edict)
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::explain_boomerang3(ctx, world, edict)
@@ -5416,6 +5558,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::access_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => true,
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::access_offset(ctx, world),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::access_switch_40_12(ctx, world),
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => true,
@@ -5492,9 +5636,36 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::access_glacier_sea_burial_rock(ctx, world),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::access_glacier_sea_burial_rock(ctx, world),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::access_not_amashilama(ctx, world),
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::access_water_movement(ctx, world),
+            ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
+            ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::access_grab(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
+            ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::access_grab(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::access_glacier_big_drop_rock(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::access_mist2(ctx, world),
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => true,
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::access_mist2(ctx, world),
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => rules::access_not_amashilama(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::access_not_amashilama(ctx, world),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::access_glacier_big_drop_rock(ctx, world),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => true,
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::access_mist2(ctx, world),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::access_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
@@ -6544,6 +6715,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::observe_access_offset(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => rules::observe_access_grab_and_switch_40_12(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
@@ -6587,8 +6759,31 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::observe_access_not_amashilama(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::observe_access_water_movement(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::observe_access_glacier_big_drop_rock(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_mist2(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::observe_access_mist2(ctx, world, full_obs),
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => rules::observe_access_not_amashilama(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::observe_access_not_amashilama(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_big_drop_rock(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::observe_access_mist2(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::observe_access_hook(ctx, world, full_obs),
@@ -7705,6 +7900,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::explain_offset(ctx, world, edict),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => rules::explain_grab_and_switch_40_12(ctx, world, edict),
             ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1 => rules::explain_switch_40_12(ctx, world, edict),
@@ -7748,8 +7944,31 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::explain_not_amashilama(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::explain_water_movement(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::explain_glacier_big_drop_rock(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_mist2(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::explain_mist2(ctx, world, edict),
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => rules::explain_not_amashilama(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::explain_not_amashilama(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::explain_glacier_big_drop_rock(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::explain_mist2(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::explain_hook(ctx, world, edict),
@@ -8316,6 +8535,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => true,
             ExitId::Glacier__Boomerang_Room__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => true,
@@ -8349,7 +8569,11 @@ impl world::Exit for Exit {
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
+            ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
+            ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
+            ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => true,
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => true,
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
@@ -9632,7 +9856,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1451] = [
+static RAW_SPOTS: [SpotId; 1468] = [
     SpotId::None,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
@@ -10658,6 +10882,7 @@ static RAW_SPOTS: [SpotId; 1451] = [
     SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
     SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
     SpotId::Glacier__Boomerang_Antechamber__East_12,
+    SpotId::Glacier__Boomerang_Antechamber__East_13,
     SpotId::Glacier__Boomerang_Antechamber__Upper_East,
     SpotId::Glacier__Boomerang_Antechamber__West_12,
     SpotId::Glacier__Boomerang_Antechamber__West_13,
@@ -10731,11 +10956,27 @@ static RAW_SPOTS: [SpotId; 1451] = [
     SpotId::Glacier__Revival__Overhang,
     SpotId::Glacier__Revival__Save_Point,
     SpotId::Glacier__Revival__West_8,
+    SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+    SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+    SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+    SpotId::Glacier__Sea_Burial__Deep_Cache,
+    SpotId::Glacier__Sea_Burial__East_14,
+    SpotId::Glacier__Sea_Burial__Grate_Ledge,
+    SpotId::Glacier__Sea_Burial__Grate_Left,
+    SpotId::Glacier__Sea_Burial__Grate_Right,
+    SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+    SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+    SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+    SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
     SpotId::Glacier__Sea_Burial__West_13,
     SpotId::Glacier__Sea_Burial__West_14,
+    SpotId::Glacier__Sea_Burial__West_Basin,
+    SpotId::Glacier__Sea_Burial__West_Water_Surface,
+    SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
     SpotId::Glacier__The_Big_Drop__East,
     SpotId::Glacier__The_Big_Drop__Small_Path,
     SpotId::Glacier__The_Big_Drop__Water_Surface,
+    SpotId::Glacier__The_Big_Drop__West_14,
     SpotId::Glacier__Vertical_Room__East_12,
     SpotId::Glacier__Vertical_Room__East_13,
     SpotId::Glacier__Vertical_Room__East_9,
@@ -11554,12 +11795,12 @@ lazy_static! {
             end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
         },
         AreaId::Glacier__Sea_Burial => Range {
-            start: SpotId::Glacier__Sea_Burial__West_13.into_usize(),
-            end: SpotId::Glacier__Sea_Burial__West_14.into_usize() + 1,
+            start: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left.into_usize(),
+            end: SpotId::Glacier__Sea_Burial__West_Water_Surface.into_usize() + 1,
         },
         AreaId::Glacier__The_Big_Drop => Range {
-            start: SpotId::Glacier__The_Big_Drop__East.into_usize(),
-            end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
+            start: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right.into_usize(),
+            end: SpotId::Glacier__The_Big_Drop__West_14.into_usize() + 1,
         },
         AreaId::Glacier__Vertical_Room => Range {
             start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
@@ -11775,7 +12016,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 245;
+    const NUM_LOCATIONS: u32 = 259;
 
     fn ruleset(&self) -> String {
         format!(
@@ -11958,6 +12199,22 @@ impl world::World for World {
             CanonId::Giguna_Gubi => vec![
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
+            ],
+            CanonId::Glacier_Big_Drop_Rock => vec![
+                LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+            ],
+            CanonId::Glacier_Sea_Burial_Rock => vec![
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
             ],
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
@@ -12160,6 +12417,7 @@ impl world::World for World {
                 LocationId::Giguna_Breach__Cubby__Rocks__Health,
                 LocationId::Giguna__Wasteland__Door_Right__Health,
                 LocationId::Giguna__Dual_Path__Wall_Secret__Health,
+                LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
                 LocationId::Interior__Ebih_Cave__Entry__Health,
                 LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
                 LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
@@ -12257,7 +12515,24 @@ impl world::World for World {
             ],
             Item::Double_Axe => vec![LocationId::Giguna__Gubi_Lair__Pedestal__Axe],
             Item::Compass => vec![LocationId::Glacier__Compass_Room__Center__Table],
-            Item::Amashilama => vec![LocationId::Glacier__The_Big_Drop__Water_Surface__Drown],
+            Item::Glacier_Big_Drop_Rock => vec![
+                LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+            ],
+            Item::Amashilama => vec![LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown],
+            Item::Glacier_Sea_Burial_Rock => vec![
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+            ],
+            Item::Dr_Gloria => vec![LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes],
             Item::Switch_36_11 => vec![LocationId::Glacier__Vertical_Room__Under_Switch__Switch],
             Item::Boomerang => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Item],
             Item::Switch_40_12 => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Switch],
@@ -12770,8 +13045,42 @@ impl world::World for World {
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
-            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
-                SpotId::Glacier__The_Big_Drop__Water_Surface
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
+                SpotId::Glacier__The_Big_Drop__West_14
+            }
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through
+            | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
+                SpotId::Glacier__The_Big_Drop__West_14
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
+                SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
+            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through
+            | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+                SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
+            }
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
+                SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
+            }
+            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => {
+                SpotId::Glacier__Sea_Burial__Deep_Cache
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through
+            | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
+            }
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through
+            | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
+            }
+            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
+                SpotId::Glacier__Sea_Burial__Inside_the_Grate
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 SpotId::Glacier__Vertical_Room__Under_Switch
@@ -13894,7 +14203,25 @@ impl world::World for World {
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => SpotId::Glacier__Compass_Room__West,
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => SpotId::Glacier__The_Big_Drop__East,
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => SpotId::Glacier__The_Big_Drop__Small_Path,
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => SpotId::Glacier__The_Big_Drop__Water_Surface,
+            ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => SpotId::Glacier__The_Big_Drop__Water_Surface,
+            ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 | ExitId:: Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => SpotId::Glacier__The_Big_Drop__West_14,
+            ExitId::Glacier__The_Big_Drop__West_14__Mist_Through | ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__West_14,
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => SpotId::Glacier__Sea_Burial__West_13,
+            ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => SpotId::Glacier__Sea_Burial__Grate_Right,
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 | ExitId:: Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__West_Basin,
+            ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Deep_Cache,
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through | ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => SpotId::Glacier__Sea_Burial__East_14,
+            ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => SpotId::Glacier__Sea_Burial__West_14,
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => SpotId::Glacier__Sea_Burial__Grate_Left,
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => SpotId::Glacier__Grid_39_40_7_9__West,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => SpotId::Glacier__Grid_37_38_9__East,
@@ -13914,6 +14241,7 @@ impl world::World for World {
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => SpotId::Glacier__Boomerang_Antechamber__East_12,
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => SpotId::Glacier__Boomerang_Antechamber__West_12,
+            ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 | ExitId:: Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => SpotId::Glacier__Boomerang_Antechamber__East_13,
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => SpotId::Glacier__Boomerang_Room__West,
             ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1 => SpotId::Glacier__Boomerang_Room__Platform,
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => SpotId::Glacier__Boomerang_Room__Center_ish,
@@ -15472,6 +15800,7 @@ impl world::World for World {
             | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
             | SpotId::Glacier__Apocalypse_Entry__West_15_Upper
             | SpotId::Glacier__Boomerang_Antechamber__East_12
+            | SpotId::Glacier__Boomerang_Antechamber__East_13
             | SpotId::Glacier__Boomerang_Antechamber__Upper_East
             | SpotId::Glacier__Boomerang_Antechamber__West_12
             | SpotId::Glacier__Boomerang_Antechamber__West_13
@@ -15511,8 +15840,18 @@ impl world::World for World {
             | SpotId::Glacier__Revival__Lower_East
             | SpotId::Glacier__Revival__Save_Point
             | SpotId::Glacier__Revival__West_8
+            | SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
+            | SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
+            | SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
+            | SpotId::Glacier__Sea_Burial__Deep_Cache
+            | SpotId::Glacier__Sea_Burial__East_14
+            | SpotId::Glacier__Sea_Burial__Inside_the_Grate
+            | SpotId::Glacier__Sea_Burial__West_13
+            | SpotId::Glacier__Sea_Burial__West_14
+            | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
             | SpotId::Glacier__The_Big_Drop__East
             | SpotId::Glacier__The_Big_Drop__Water_Surface
+            | SpotId::Glacier__The_Big_Drop__West_14
             | SpotId::Glacier__Vertical_Room__East_12
             | SpotId::Glacier__Vertical_Room__East_13
             | SpotId::Glacier__Vertical_Room__East_9
@@ -15749,6 +16088,7 @@ impl World {
                             | Item::Dear_Ernest
                             | Item::Destruction_Pogrom
                             | Item::Double_Axe
+                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Eye_Ring
@@ -15791,6 +16131,7 @@ impl World {
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
+                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Health_Upgrade_5
@@ -15827,6 +16168,7 @@ impl World {
                             | Item::Dear_Ernest
                             | Item::Destruction_Pogrom
                             | Item::Double_Axe
+                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
@@ -15870,6 +16212,7 @@ impl World {
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
+                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
@@ -15906,6 +16249,7 @@ impl World {
                         | Item::Dear_Ernest
                         | Item::Destruction_Pogrom
                         | Item::Double_Axe
+                        | Item::Dr_Gloria
                         | Item::Drone_Melee_Damage_3
                         | Item::Drone_Melee_Speed_3
                         | Item::Escape
@@ -17060,13 +17404,125 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: None,
         },
-        LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => Location {
-            id: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown,
+        LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => Location {
+            id: LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 2000,
+            exit_id: None,
+        },
+        LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => Location {
+            id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
+        },
+        LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => Location {
+            id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
+        },
+        LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => Location {
+            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 2000,
+            exit_id: None,
+        },
+        LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => Location {
+            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+        },
+        LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => Location {
+            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+            canonical: CanonId::Glacier_Big_Drop_Rock,
+            item: Item::Glacier_Big_Drop_Rock,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+        },
+        LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => Location {
+            id: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
             canonical: CanonId::None,
             item: Item::Amashilama,
             price: Currency::Free,
             time: 0,
-            exit_id: Some(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
+            exit_id: Some(ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
+        },
+        LocationId::Glacier__Sea_Burial__Deep_Cache__Health => Location {
+            id: LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Free,
+            time: 2000,
+            exit_id: None,
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Energy(40),
+            time: 1000,
+            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Energy(40),
+            time: 1000,
+            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Free,
+            time: 4000,
+            exit_id: None,
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Energy(40),
+            time: 1000,
+            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+        },
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => Location {
+            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+            canonical: CanonId::Glacier_Sea_Burial_Rock,
+            item: Item::Glacier_Sea_Burial_Rock,
+            price: Currency::Energy(40),
+            time: 1000,
+            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+        },
+        LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => Location {
+            id: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes,
+            canonical: CanonId::None,
+            item: Item::Dr_Gloria,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
         },
         LocationId::Glacier__Vertical_Room__Under_Switch__Switch => Location {
             id: LocationId::Glacier__Vertical_Room__Under_Switch__Switch,
@@ -24815,12 +25271,201 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Energy(150),
             loc_id: None,
         },
-        ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => Exit {
-            id: ExitId::Glacier__The_Big_Drop__Water_Surface__Drown,
-            time: 48500,
+        ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1,
+            time: 1350,
+            dest: SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1,
+            time: 1350,
+            dest: SpotId::Glacier__Sea_Burial__East_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_14__Mist_Through,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through),
+        },
+        ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
+        },
+        ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__West_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => Exit {
+            id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__West_14,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+        },
+        ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => Exit {
+            id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+            time: 526,
+            dest: SpotId::Glacier__The_Big_Drop__West_14,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+        },
+        ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => Exit {
+            id: ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
+            time: 47150,
             dest: SpotId::Glacier__Revival__Save_Point,
             price: Currency::Free,
-            loc_id: Some(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown),
+            loc_id: Some(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
+        },
+        ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1,
+            time: 1350,
+            dest: SpotId::Glacier__Boomerang_Antechamber__East_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1,
+            time: 1801,
+            dest: SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1,
+            time: 2000,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2,
+            time: 1000,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1,
+            time: 450,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1,
+            time: 2000,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => Exit {
+            id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2,
+            time: 1000,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1,
+            time: 2000,
+            dest: SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1,
+            time: 1801,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1,
+            time: 3000,
+            dest: SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1,
+            time: 563,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+            time: 563,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+            time: 438,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1,
+            time: 563,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+            time: 563,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+        },
+        ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => Exit {
+            id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+            time: 438,
+            dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+        },
+        ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1,
+            time: 1350,
+            dest: SpotId::Glacier__The_Big_Drop__West_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1,
+            time: 1600,
+            dest: SpotId::Annuna__Lamassu__East_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => Exit {
+            id: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1,
+            time: 450,
+            dest: SpotId::Glacier__Sea_Burial__Grate_Right,
+            price: Currency::Energy(40),
+            loc_id: None,
         },
         ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => Exit {
             id: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,
@@ -24994,6 +25639,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
             time: 1350,
             dest: SpotId::Glacier__Vertical_Room__East_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => Exit {
+            id: ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1,
+            time: 1350,
+            dest: SpotId::Glacier__Sea_Burial__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => Exit {
+            id: ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1,
+            time: 50000,
+            dest: SpotId::Glacier__Sea_Burial__West_14,
             price: Currency::Free,
             loc_id: None,
         },
@@ -41534,8 +42193,49 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Glacier__The_Big_Drop__Water_Surface => Spot {
             id: SpotId::Glacier__The_Big_Drop__Water_Surface,
             locations: Range {
-                start: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
-                end: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize() + 1,
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1.into_usize(),
+                end: ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__The_Big_Drop__West_14 => Spot {
+            id: SpotId::Glacier__The_Big_Drop__West_14,
+            locations: Range {
+                start: LocationId::Glacier__The_Big_Drop__West_14__Break_Rock.into_usize(),
+                end: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1.into_usize(),
+                end: ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => Spot {
+            id: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            locations: Range {
+                start: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock.into_usize(),
+                end: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1.into_usize(),
+                end: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Collapsing_Ceiling => Spot {
+            id: SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            locations: Range {
+                start: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown.into_usize(),
+                end: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -41550,7 +42250,151 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__West_Water_Surface => Spot {
+            id: SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Grate_Ledge => Spot {
+            id: SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Grate_Right => Spot {
+            id: SpotId::Glacier__Sea_Burial__Grate_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__West_Basin => Spot {
+            id: SpotId::Glacier__Sea_Burial__West_Basin,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Left_Center_Rock => Spot {
+            id: SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Right_Center_Rock => Spot {
+            id: SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Deep_Cache => Spot {
+            id: SpotId::Glacier__Sea_Burial__Deep_Cache,
+            locations: Range {
+                start: LocationId::Glacier__Sea_Burial__Deep_Cache__Health.into_usize(),
+                end: LocationId::Glacier__Sea_Burial__Deep_Cache__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => Spot {
+            id: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            locations: Range {
+                start: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock.into_usize(),
+                end: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => Spot {
+            id: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            locations: Range {
+                start: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping.into_usize(),
+                end: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Underwater_Passage_Center => Spot {
+            id: SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__East_14 => Spot {
+            id: SpotId::Glacier__Sea_Burial__East_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -41562,7 +42406,34 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate => Spot {
+            id: SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            locations: Range {
+                start: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes.into_usize(),
+                end: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Sea_Burial__Grate_Left => Spot {
+            id: SpotId::Glacier__Sea_Burial__Grate_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1.into_usize(),
+                end: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -41836,6 +42707,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize(),
                 end: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Boomerang_Antechamber__East_13 => Spot {
+            id: SpotId::Glacier__Boomerang_Antechamber__East_13,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

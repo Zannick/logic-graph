@@ -1262,10 +1262,26 @@ subgraph Glacier
         Glacier__The_Big_Drop__East(East);
         Glacier__The_Big_Drop__Small_Path(Small Path);
         Glacier__The_Big_Drop__Water_Surface(Water Surface);
+        Glacier__The_Big_Drop__West_14(West 14);
+        Glacier__The_Big_Drop__Breakable_Rock_Right(Breakable Rock Right);
     end
     subgraph Glacier__Sea_Burial[Sea Burial]
+        Glacier__Sea_Burial__Collapsing_Ceiling(Collapsing Ceiling);
         Glacier__Sea_Burial__West_13(West 13);
+        Glacier__Sea_Burial__West_Water_Surface(West Water Surface);
+        Glacier__Sea_Burial__Grate_Ledge(Grate Ledge);
+        Glacier__Sea_Burial__Grate_Right(Grate Right);
+        Glacier__Sea_Burial__West_Basin(West Basin);
+        Glacier__Sea_Burial__Left_Center_Rock(Left Center Rock);
+        Glacier__Sea_Burial__Right_Center_Rock(Right Center Rock);
+        Glacier__Sea_Burial__Deep_Cache(Deep Cache);
+        Glacier__Sea_Burial__Breakable_Rock_Left(Breakable Rock Left);
+        Glacier__Sea_Burial__Breakable_Rock_Right(Breakable Rock Right);
+        Glacier__Sea_Burial__Underwater_Passage_Center(Underwater Passage Center);
+        Glacier__Sea_Burial__East_14(East 14);
         Glacier__Sea_Burial__West_14(West 14);
+        Glacier__Sea_Burial__Inside_the_Grate(Inside the Grate);
+        Glacier__Sea_Burial__Grate_Left(Grate Left);
     end
     subgraph Glacier__Grid_39_40_7_9[Grid 39-40,7-9]
         Glacier__Grid_39_40_7_9__Upper_East(Upper East);
@@ -1295,6 +1311,7 @@ subgraph Glacier
         Glacier__Boomerang_Antechamber__East_12(East 12);
         Glacier__Boomerang_Antechamber__Upper_East(Upper East);
         Glacier__Boomerang_Antechamber__West_12(West 12);
+        Glacier__Boomerang_Antechamber__East_13(East 13);
     end
     subgraph Glacier__Boomerang_Room[Boomerang Room]
         Glacier__Boomerang_Room__West(West);
@@ -1956,7 +1973,7 @@ Annuna__Lamassu__Bottom_Hill_East --> Annuna__Lamassu__Bottom_East_Ledge
 Annuna__Lamassu__Bottom_Hill_West --> Annuna__Hidden_Portal__Plinth_Right
 Annuna__Lamassu__Bottom_Middle_Ledge --> Annuna__Lamassu__Bottom_West_Ledge
 Annuna__Lamassu__Bottom_West_Ledge --> Annuna__Lamassu__Above_Flat_Ground
-Annuna__Lamassu__East_14 --> Glacier__Sea_Burial__West_14
+Annuna__Lamassu__East_14 <--> Glacier__Sea_Burial__West_14
 Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Flat_Ground
 Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Ledge_By_Grate
 Annuna__Lamassu__East_16 --> Annuna__Siuna_Storage__West
@@ -2456,6 +2473,8 @@ Glacier__Apocalypse_Entry__West_15_Lower --> Annuna__Apocalypse_Hallway__Lower_E
 Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Entry__Lowest_Stair
 Glacier__Apocalypse_Entry__West_15_Upper --> Annuna__Apocalypse_Hallway__Upper_East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
+Glacier__Boomerang_Antechamber__East_13 <--> Glacier__Sea_Burial__West_13
+Glacier__Boomerang_Antechamber__East_13 --> Glacier__Sea_Burial__West_14
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Boomerang_Antechamber__West_12 <--> Glacier__Vertical_Room__East_12
 Glacier__Boomerang_Antechamber__West_13 <--> Glacier__Vertical_Room__East_13
@@ -2502,8 +2521,18 @@ Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Top_Rock --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
+Glacier__Sea_Burial__Breakable_Rock_Left <--> Glacier__Sea_Burial__Breakable_Rock_Right
+Glacier__Sea_Burial__Collapsing_Ceiling --> Glacier__Revival__Save_Point
+Glacier__Sea_Burial__Deep_Cache --> Glacier__Sea_Burial__Right_Center_Rock
+Glacier__Sea_Burial__East_14 <--> Glacier__The_Big_Drop__West_14
+Glacier__Sea_Burial__Grate_Ledge <--> Glacier__Sea_Burial__Left_Center_Rock
+Glacier__Sea_Burial__Grate_Left <--> Glacier__Sea_Burial__Grate_Right
+Glacier__Sea_Burial__Grate_Right --> Glacier__Sea_Burial__Grate_Ledge
+Glacier__Sea_Burial__West_Basin --> Glacier__Sea_Burial__Grate_Ledge
+Glacier__Sea_Burial__West_Basin --> Glacier__Sea_Burial__Left_Center_Rock
+Glacier__The_Big_Drop__Breakable_Rock_Right <--> Glacier__The_Big_Drop__West_14
 Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
-Glacier__The_Big_Drop__Water_Surface --> Glacier__Revival__Save_Point
+Glacier__The_Big_Drop__Water_Surface --> Glacier__Sea_Burial__Collapsing_Ceiling
 Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__East_Corner --> Glacier__Vertical_Room__East_12
 Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Mid_9

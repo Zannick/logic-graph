@@ -6509,6 +6509,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => 526,
+        // [1.403509, 1.403509]
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => 2807,
         // [2.105263, 2.105263]
         (
             [false],
@@ -6525,12 +6531,29 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
+        // [2.807018, 3.0]
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 5807,
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => 6666,
         // [1.22807, 1.22807]
         (
             [false],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 2456,
+        // [1.22807, 0.7, 1.403509]
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => 3331,
         (
             [false],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -6545,6 +6568,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 6666,
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => 6666,
         (
             [false],
@@ -6561,6 +6589,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [false],
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 6666,
+        (
+            [false],
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => 6666,
         (
             [false],
@@ -7102,6 +7135,161 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => 1399,
         ([false], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => 1578,
         ([false], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => 1578,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => 450,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 3000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => 337,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 4000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 250,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => 250,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__West_14,
+        ) => 2027,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 675,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__West_14,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 1576,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => 1351,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+        ) => 675,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_13,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => 2027,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 675,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__West_13,
+        ) => 1000,
         (
             [false],
             SpotId::Glacier__The_Big_Drop__East,
@@ -20684,6 +20872,12 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => 526,
+        // [1.403509, 1.403509]
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => 2807,
         // [2.105263, 2.105263]
         (
             [true],
@@ -20700,12 +20894,29 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
+        // [2.807018, 3.0]
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 5807,
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => 6666,
         // [1.22807, 1.22807]
         (
             [true],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 2456,
+        // [1.22807, 0.7, 1.403509]
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => 3331,
         (
             [true],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -20720,6 +20931,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 6666,
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => 6666,
         (
             [true],
@@ -20736,6 +20952,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             [true],
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => 6666,
+        (
+            [true],
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => 6666,
         (
             [true],
@@ -21261,6 +21482,157 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => 1399,
         ([true], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => 1578,
         ([true], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => 1578,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => 263,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 4000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 250,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => 250,
+        ([true], SpotId::Glacier__Sea_Burial__Grate_Left, SpotId::Glacier__Sea_Burial__West_14) => {
+            1578
+        }
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__West_14,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_13,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => 526,
+        ([true], SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Grate_Left) => {
+            1578
+        }
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__West_13,
+        ) => 1000,
         (
             [true],
             SpotId::Glacier__The_Big_Drop__East,
@@ -32052,6 +32424,106 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => true,
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => true,
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => true,
+        (SpotId::Glacier__Sea_Burial__West_13, SpotId::Glacier__Sea_Burial__West_Water_Surface) => {
+            true
+        }
+        (SpotId::Glacier__Sea_Burial__West_Water_Surface, SpotId::Glacier__Sea_Burial__West_13) => {
+            true
+        }
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => true,
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__Grate_Right) => {
+            true
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__West_Basin) => true,
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__West_Basin) => true,
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__Grate_Ledge) => {
+            true
+        }
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Ledge) => true,
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Right) => true,
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => true,
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Inside_the_Grate) => {
+            true
+        }
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Grate_Left) => true,
+        (SpotId::Glacier__Sea_Burial__Inside_the_Grate, SpotId::Glacier__Sea_Burial__West_14) => {
+            true
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => true,
+        (SpotId::Glacier__Sea_Burial__Grate_Left, SpotId::Glacier__Sea_Burial__West_14) => true,
         (SpotId::Glacier__Grid_39_40_7_9__Upper_East, SpotId::Glacier__Grid_39_40_7_9__West) => {
             true
         }
@@ -32133,6 +32605,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => true,
         (
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => true,
+        (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => true,
@@ -32145,6 +32621,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => true,
         (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => true,
+        (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => true,
@@ -32157,6 +32637,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => true,
         (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => true,
+        (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => true,
@@ -32166,6 +32650,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => true,
         (SpotId::Glacier__Boomerang_Room__West, SpotId::Glacier__Boomerang_Room__Platform) => true,
@@ -54574,6 +55070,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            2807,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             4210,
         ),
@@ -54598,9 +55099,39 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            5807,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            6666,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Sea_Burial__West_13,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Sea_Burial__West_14,
+            50000,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             2456,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            3331,
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
@@ -54629,6 +55160,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            6666,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             6666,
         ),
@@ -54650,6 +55186,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+            6666,
+        ),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
             6666,
         ),
         (
@@ -55958,12 +56499,297 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            438,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            350,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            3000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            438,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            263,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            SpotId::Glacier__Revival__Save_Point,
+            47150,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            2000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            3000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__The_Big_Drop__West_14,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            250,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            1801,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            701,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            450,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            250,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__West_14,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            450,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            526,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__West_14,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            1801,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            1228,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            701,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            701,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+            526,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_13,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            526,
+        ),
+        (
             SpotId::Glacier__Sea_Burial__West_13,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Annuna__Lamassu__East_14,
+            1600,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+            526,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__West_13,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            SpotId::Glacier__The_Big_Drop__West_14,
+            526,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -55999,11 +56825,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__Water_Surface,
-            SpotId::Glacier__Revival__Save_Point,
-            48500,
+            SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            1350,
         ),
         (
             SpotId::Glacier__The_Big_Drop__Water_Surface,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_14,
+            SpotId::Glacier__Sea_Burial__East_14,
+            1350,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_14,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            526,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_14,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -71147,6 +71988,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(526),
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => Some(2807),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => Some(4210),
         (
@@ -71158,9 +72003,21 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => Some(6666),
         (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => Some(5807),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => Some(6666),
+        (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => Some(2456),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => Some(3331),
         (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
@@ -71172,6 +72029,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => Some(6666),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => Some(6666),
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
@@ -71184,6 +72045,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => Some(6666),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => Some(6666),
         (
             SpotId::Glacier__Boomerang_Room__Center_Ledge,
@@ -71561,6 +72426,118 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => Some(1399),
         (SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => Some(1578),
         (SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => Some(1578),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => Some(450),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => Some(3000),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => Some(337),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => Some(2000),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => Some(4000),
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => Some(1000),
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__Grate_Right) => {
+            Some(250)
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__West_Basin) => {
+            Some(900)
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => Some(1801),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => Some(250),
+        (SpotId::Glacier__Sea_Burial__Grate_Left, SpotId::Glacier__Sea_Burial__West_14) => {
+            Some(2027)
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__Grate_Ledge) => {
+            Some(1000)
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__West_Basin) => {
+            Some(675)
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => Some(1000),
+        (SpotId::Glacier__Sea_Burial__Inside_the_Grate, SpotId::Glacier__Sea_Burial__West_14) => {
+            Some(1801)
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => Some(1576),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => Some(1000),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => Some(900),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => Some(1801),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => Some(1351),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => Some(900),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        ) => Some(1000),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+        ) => Some(675),
+        (SpotId::Glacier__Sea_Burial__West_13, SpotId::Glacier__Sea_Burial__West_Water_Surface) => {
+            Some(526)
+        }
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Grate_Left) => {
+            Some(2027)
+        }
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Inside_the_Grate) => {
+            Some(1801)
+        }
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Ledge) => {
+            Some(1000)
+        }
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Right) => {
+            Some(675)
+        }
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => Some(1000),
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => Some(1801),
+        (SpotId::Glacier__Sea_Burial__West_Water_Surface, SpotId::Glacier__Sea_Burial__West_13) => {
+            Some(1000)
+        }
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
             Some(2000)
         }
@@ -82085,6 +83062,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(526), vec![]),
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => (Some(2807), vec![]),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => (Some(4210), vec![]),
         (
@@ -82096,9 +83077,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => (Some(6666), vec![]),
         (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => (Some(5807), vec![]),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => (Some(6666), vec![]),
+        (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => (Some(2456), vec![]),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
+        ) => (Some(3331), vec![]),
         (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
@@ -82110,6 +83103,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => (Some(6666), vec![]),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => (Some(6666), vec![]),
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
@@ -82122,6 +83119,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => (Some(6666), vec![]),
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_13,
         ) => (Some(6666), vec![]),
         (
             SpotId::Glacier__Boomerang_Room__Center_Ledge,
@@ -82564,6 +83565,118 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => {
             (Some(1578), vec![])
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => (Some(450), vec![([true], 350)]),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => (Some(3000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => (Some(337), vec![([true], 263)]),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => (Some(4000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__East_14,
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+        ) => (Some(1000), vec![]),
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__Grate_Right) => {
+            (Some(250), vec![])
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Ledge, SpotId::Glacier__Sea_Burial__West_Basin) => {
+            (Some(900), vec![([true], 701)])
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+        ) => (Some(1801), vec![([true], 1403)]),
+        (
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+        ) => (Some(250), vec![]),
+        (SpotId::Glacier__Sea_Burial__Grate_Left, SpotId::Glacier__Sea_Burial__West_14) => {
+            (Some(2027), vec![([true], 1578)])
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__Grate_Ledge) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Glacier__Sea_Burial__Grate_Right, SpotId::Glacier__Sea_Burial__West_Basin) => {
+            (Some(675), vec![([true], 526)])
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            SpotId::Glacier__Sea_Burial__Grate_Left,
+        ) => (Some(1000), vec![]),
+        (SpotId::Glacier__Sea_Burial__Inside_the_Grate, SpotId::Glacier__Sea_Burial__West_14) => {
+            (Some(1801), vec![([true], 1403)])
+        }
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Grate_Right,
+        ) => (Some(1576), vec![([true], 1228)]),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+            SpotId::Glacier__Sea_Burial__West_Basin,
+        ) => (Some(900), vec![([true], 701)]),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        ) => (Some(1801), vec![([true], 1403)]),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Deep_Cache,
+        ) => (Some(1351), vec![([true], 1052)]),
+        (
+            SpotId::Glacier__Sea_Burial__Right_Center_Rock,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => (Some(900), vec![([true], 701)]),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__Underwater_Passage_Center,
+            SpotId::Glacier__Sea_Burial__East_14,
+        ) => (Some(675), vec![([true], 526)]),
+        (SpotId::Glacier__Sea_Burial__West_13, SpotId::Glacier__Sea_Burial__West_Water_Surface) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Grate_Left) => {
+            (Some(2027), vec![([true], 1578)])
+        }
+        (SpotId::Glacier__Sea_Burial__West_14, SpotId::Glacier__Sea_Burial__Inside_the_Grate) => {
+            (Some(1801), vec![([true], 1403)])
+        }
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Ledge) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Glacier__Sea_Burial__West_Basin, SpotId::Glacier__Sea_Burial__Grate_Right) => {
+            (Some(675), vec![([true], 526)])
+        }
+        (
+            SpotId::Glacier__Sea_Burial__West_Basin,
+            SpotId::Glacier__Sea_Burial__Left_Center_Rock,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Glacier__Sea_Burial__West_Water_Surface,
+            SpotId::Glacier__Sea_Burial__Grate_Ledge,
+        ) => (Some(1801), vec![([true], 1403)]),
+        (SpotId::Glacier__Sea_Burial__West_Water_Surface, SpotId::Glacier__Sea_Burial__West_13) => {
+            (Some(1000), vec![])
         }
         (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
             (Some(2000), vec![])
