@@ -12,7 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
 use analyzer::matchertrie::IntegerObservation;
-use analyzer::world::World;
+use analyzer::world::{Exit, World};
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -281,6 +281,22 @@ impl context::Ctx for Context {
         }
     }
 
+    fn take_exit(&mut self, exit: &graph::Exit, world: &graph::World) {
+        self.set_position(exit.dest(), world);
+        match exit.id() {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.tiles
+            ExitId::{{ ex.id }} => {
+%% for tile in ex.tiles
+                self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endfor
+            }
+%% endif
+%% endfor
+            _ => (),
+        }
+    }
+
     fn position(&self) -> SpotId {
         self.position
     }
@@ -441,7 +457,12 @@ impl context::Ctx for Context {
         match loc_id {
 %% for loc in gl.locations()
 %% set visit = 'VISITED_' + loc.id
-            LocationId::{{ loc.id }} => self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }}),
+            LocationId::{{ loc.id }} => {
+                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
+%% for tile in loc.tiles
+                self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endfor
+            }
 %% endfor
         }
     }

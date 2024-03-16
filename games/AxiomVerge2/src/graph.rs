@@ -9207,12 +9207,14 @@ impl world::Action for Action {
             ctx.set_position(dest, world);
         }
         match self.id {
-            ActionId::Global__Recall_Drone => rules::action_indra_set_default(ctx, world),
+            ActionId::Global__Recall_Drone => {
+                rules::action_indra_set_default(ctx, world);
+            }
             ActionId::Global__Recall_Fast_Travel => {
-                rules::action_indra_set_default_refill_energy(ctx, world)
+                rules::action_indra_set_default_refill_energy(ctx, world);
             }
             ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                rules::action_clear_breach_save(ctx, world)
+                rules::action_clear_breach_save(ctx, world);
             }
             _ => (),
         };

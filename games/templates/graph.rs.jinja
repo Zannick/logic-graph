@@ -279,8 +279,15 @@ impl world::Action for Action {
         }
         match self.id {
 %% for act in gl.actions()
+%% if act.act_post or act.tiles
+            ActionId::{{ act.id }} => {
 %% if act.act_post
-            ActionId::{{ act.id }} => rules::action_{{ act.after_id }}(ctx, world),
+                rules::action_{{ act.after_id }}(ctx, world);
+%% endif
+%% for tile in act.tiles
+                ctx.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endfor
+            }
 %% endif
 %% endfor
             _ => (),

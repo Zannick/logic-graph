@@ -95,6 +95,7 @@ pub trait Ctx:
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn skip(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn reset(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
+    fn take_exit(&mut self, exit: &<Self::World as World>::Exit, world: &Self::World);
     fn todo(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
     fn visited(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
     fn skipped(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;

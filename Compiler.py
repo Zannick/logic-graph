@@ -151,6 +151,9 @@ def get_spot_reference_names(target, source):
 def get_spot_reference(target, source):
     return construct_id(*get_spot_reference_names(target, source))
 
+def get_map_reference(tilename, source):
+    return construct_id('map', *get_spot_reference_names(tilename, source))
+
 def get_exit_target(ex):
     return get_spot_reference(ex['to'], ex)
 
@@ -336,6 +339,8 @@ class GameLogic(object):
                             loc['access_id'] = self.make_funcid(loc)
                         if 'penalties' in loc:
                             self._handle_penalties(loc, spot['fullname'])
+                        if 'maps' in loc:
+                            loc['tiles'] = [get_map_reference(tilename, loc) for tilename in loc['maps']]
                     # We need a counter for exits in case of alternates
                     ec = Counter()
                     for eh in spot.get('exits', []):
@@ -366,6 +371,8 @@ class GameLogic(object):
                             eh['access_id'] = self.make_funcid(eh)
                         if 'penalties' in eh:
                             self._handle_penalties(eh, spot['fullname'])
+                        if 'maps' in eh:
+                            eh['tiles'] = [get_map_reference(tilename, eh) for tilename in eh['maps']]
                         eh['to'] = dest
                     for act in spot.get('actions', ()):
                         act['spot'] = sname
@@ -381,6 +388,8 @@ class GameLogic(object):
                             act['access_id'] = self.make_funcid(act)
                         if 'penalties' in act:
                             self._handle_penalties(act, spot['fullname'])
+                        if 'maps' in act:
+                            act['tiles'] = [get_map_reference(tilename, act) for tilename in act['maps']]
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
                         act['action_id'] = self.make_funcid(act, 'act', 'do')
