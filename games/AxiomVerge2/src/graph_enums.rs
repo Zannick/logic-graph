@@ -1684,6 +1684,15 @@ pub enum SpotId {
     Glacier__Compass_Room__East,
     Glacier__Compass_Room__West,
     Glacier__Crystals__East,
+    Glacier__Crystals__Grate_Left,
+    Glacier__Crystals__Lower_Corner,
+    Glacier__Crystals__Lower_Slope,
+    Glacier__Crystals__Middle_Ledge,
+    Glacier__Crystals__Midwest_Slope,
+    Glacier__Crystals__Portal_Cage,
+    Glacier__Crystals__Portal_Stand,
+    Glacier__Crystals__Top_Corner,
+    Glacier__Crystals__Upper_Ledge,
     Glacier__Crystals__West,
     Glacier__Dock_Outside__Do_Not_Enter,
     Glacier__Dock_Outside__Entry,
@@ -4709,6 +4718,33 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Compass_Room__East => write!(f, "{}", "Glacier > Compass Room > East"),
             SpotId::Glacier__Compass_Room__West => write!(f, "{}", "Glacier > Compass Room > West"),
             SpotId::Glacier__Crystals__East => write!(f, "{}", "Glacier > Crystals > East"),
+            SpotId::Glacier__Crystals__Grate_Left => {
+                write!(f, "{}", "Glacier > Crystals > Grate Left")
+            }
+            SpotId::Glacier__Crystals__Lower_Corner => {
+                write!(f, "{}", "Glacier > Crystals > Lower Corner")
+            }
+            SpotId::Glacier__Crystals__Lower_Slope => {
+                write!(f, "{}", "Glacier > Crystals > Lower Slope")
+            }
+            SpotId::Glacier__Crystals__Middle_Ledge => {
+                write!(f, "{}", "Glacier > Crystals > Middle Ledge")
+            }
+            SpotId::Glacier__Crystals__Midwest_Slope => {
+                write!(f, "{}", "Glacier > Crystals > Midwest Slope")
+            }
+            SpotId::Glacier__Crystals__Portal_Cage => {
+                write!(f, "{}", "Glacier > Crystals > Portal Cage")
+            }
+            SpotId::Glacier__Crystals__Portal_Stand => {
+                write!(f, "{}", "Glacier > Crystals > Portal Stand")
+            }
+            SpotId::Glacier__Crystals__Top_Corner => {
+                write!(f, "{}", "Glacier > Crystals > Top Corner")
+            }
+            SpotId::Glacier__Crystals__Upper_Ledge => {
+                write!(f, "{}", "Glacier > Crystals > Upper Ledge")
+            }
             SpotId::Glacier__Crystals__West => write!(f, "{}", "Glacier > Crystals > West"),
             SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
                 write!(f, "{}", "Glacier > Dock Outside > Do Not Enter")
@@ -7692,6 +7728,15 @@ impl std::str::FromStr for SpotId {
             "Glacier > Compass Room > East" => Ok(SpotId::Glacier__Compass_Room__East),
             "Glacier > Compass Room > West" => Ok(SpotId::Glacier__Compass_Room__West),
             "Glacier > Crystals > East" => Ok(SpotId::Glacier__Crystals__East),
+            "Glacier > Crystals > Grate Left" => Ok(SpotId::Glacier__Crystals__Grate_Left),
+            "Glacier > Crystals > Lower Corner" => Ok(SpotId::Glacier__Crystals__Lower_Corner),
+            "Glacier > Crystals > Lower Slope" => Ok(SpotId::Glacier__Crystals__Lower_Slope),
+            "Glacier > Crystals > Middle Ledge" => Ok(SpotId::Glacier__Crystals__Middle_Ledge),
+            "Glacier > Crystals > Midwest Slope" => Ok(SpotId::Glacier__Crystals__Midwest_Slope),
+            "Glacier > Crystals > Portal Cage" => Ok(SpotId::Glacier__Crystals__Portal_Cage),
+            "Glacier > Crystals > Portal Stand" => Ok(SpotId::Glacier__Crystals__Portal_Stand),
+            "Glacier > Crystals > Top Corner" => Ok(SpotId::Glacier__Crystals__Top_Corner),
+            "Glacier > Crystals > Upper Ledge" => Ok(SpotId::Glacier__Crystals__Upper_Ledge),
             "Glacier > Crystals > West" => Ok(SpotId::Glacier__Crystals__West),
             "Glacier > Dock Outside > Do Not Enter" => {
                 Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
@@ -8717,6 +8762,8 @@ pub enum LocationId {
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
     Glacier__Compass_Room__Center__Table,
+    Glacier__Crystals__Lower_Corner__Item,
+    Glacier__Crystals__Top_Corner__Tablet,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
     Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
@@ -9379,6 +9426,12 @@ impl fmt::Display for LocationId {
             }
             LocationId::Glacier__Compass_Room__Center__Table => {
                 write!(f, "{}", "Glacier > Compass Room > Center > Table")
+            }
+            LocationId::Glacier__Crystals__Lower_Corner__Item => {
+                write!(f, "{}", "Glacier > Crystals > Lower Corner > Item")
+            }
+            LocationId::Glacier__Crystals__Top_Corner__Tablet => {
+                write!(f, "{}", "Glacier > Crystals > Top Corner > Tablet")
             }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(
                 f,
@@ -10253,6 +10306,12 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Compass Room > Center > Table" => {
                 Ok(LocationId::Glacier__Compass_Room__Center__Table)
+            }
+            "Glacier > Crystals > Lower Corner > Item" => {
+                Ok(LocationId::Glacier__Crystals__Lower_Corner__Item)
+            }
+            "Glacier > Crystals > Top Corner > Tablet" => {
+                Ok(LocationId::Glacier__Crystals__Top_Corner__Tablet)
             }
             "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => {
                 Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab)
@@ -11618,6 +11677,20 @@ pub enum ExitId {
     Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1,
     Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1,
     Glacier__Compass_Room__West__ex__The_Big_Drop__East_1,
+    Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1,
+    Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1,
+    Glacier__Crystals__Grate_Left__ex__Portal_Cage_1,
+    Glacier__Crystals__Grate_Left__ex__Portal_Cage_2,
+    Glacier__Crystals__Lower_Slope__ex__Grate_Left_1,
+    Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1,
+    Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1,
+    Glacier__Crystals__Midwest_Slope__ex__West_1,
+    Glacier__Crystals__Portal_Cage__ex__Grate_Left_1,
+    Glacier__Crystals__Portal_Cage__ex__Grate_Left_2,
+    Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1,
+    Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1,
+    Glacier__Crystals__Upper_Ledge__ex__West_1,
+    Glacier__Crystals__West__ex__Upper_Ledge_1,
     Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
     Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
     Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
@@ -13078,6 +13151,20 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),
+            ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => write!(f, "{}", "Glacier > Crystals > East ==> Annuna > Lamassu > West 15 (1)"),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => write!(f, "{}", "Glacier > Crystals > Grate Left ==> Middle Ledge (1)"),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => write!(f, "{}", "Glacier > Crystals > Grate Left ==> Portal Cage (1)"),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => write!(f, "{}", "Glacier > Crystals > Grate Left ==> Portal Cage (2)"),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => write!(f, "{}", "Glacier > Crystals > Lower Slope ==> Grate Left (1)"),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => write!(f, "{}", "Glacier > Crystals > Lower Slope ==> Middle Ledge (1)"),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => write!(f, "{}", "Glacier > Crystals > Midwest Slope ==> Upper Ledge (1)"),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => write!(f, "{}", "Glacier > Crystals > Midwest Slope ==> West (1)"),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => write!(f, "{}", "Glacier > Crystals > Portal Cage ==> Grate Left (1)"),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => write!(f, "{}", "Glacier > Crystals > Portal Cage ==> Grate Left (2)"),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => write!(f, "{}", "Glacier > Crystals > Portal Stand ==> Lower Slope (1)"),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => write!(f, "{}", "Glacier > Crystals > Upper Ledge ==> Top Corner (1)"),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => write!(f, "{}", "Glacier > Crystals > Upper Ledge ==> West (1)"),
+            ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => write!(f, "{}", "Glacier > Crystals > West ==> Upper Ledge (1)"),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)"),
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),
@@ -14543,6 +14630,20 @@ impl std::str::FromStr for ExitId {
             "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1),
             "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)" => Ok(ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1),
             "Glacier > Compass Room > West ==> The Big Drop > East (1)" => Ok(ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1),
+            "Glacier > Crystals > East ==> Annuna > Lamassu > West 15 (1)" => Ok(ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1),
+            "Glacier > Crystals > Grate Left ==> Middle Ledge (1)" => Ok(ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1),
+            "Glacier > Crystals > Grate Left ==> Portal Cage (1)" => Ok(ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1),
+            "Glacier > Crystals > Grate Left ==> Portal Cage (2)" => Ok(ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2),
+            "Glacier > Crystals > Lower Slope ==> Grate Left (1)" => Ok(ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1),
+            "Glacier > Crystals > Lower Slope ==> Middle Ledge (1)" => Ok(ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1),
+            "Glacier > Crystals > Midwest Slope ==> Upper Ledge (1)" => Ok(ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1),
+            "Glacier > Crystals > Midwest Slope ==> West (1)" => Ok(ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1),
+            "Glacier > Crystals > Portal Cage ==> Grate Left (1)" => Ok(ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1),
+            "Glacier > Crystals > Portal Cage ==> Grate Left (2)" => Ok(ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2),
+            "Glacier > Crystals > Portal Stand ==> Lower Slope (1)" => Ok(ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1),
+            "Glacier > Crystals > Upper Ledge ==> Top Corner (1)" => Ok(ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1),
+            "Glacier > Crystals > Upper Ledge ==> West (1)" => Ok(ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1),
+            "Glacier > Crystals > West ==> Upper Ledge (1)" => Ok(ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1),
             "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1),
             "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1),
             "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1),

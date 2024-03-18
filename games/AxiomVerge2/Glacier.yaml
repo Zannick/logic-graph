@@ -1548,7 +1548,133 @@ areas:
 - name: Crystals
   on_entry: $reset_old_area(^newpos)
   spots:
-    - name: East
-      coord: [37.95, 14.6]
     - name: West
       coord: [37.05, 13.8]
+      local:
+        - to: Middle Ledge
+      exits:
+        - to: Upper Ledge
+          req: $hover or $hook
+          movement: base
+          jumps: 1
+    - name: Upper Ledge
+      coord: [37.5, 13.7]
+      local:
+        - to: Top Corner
+        - to: Middle Ledge
+        - to: Grate Left
+        - to: Portal Stand
+        - to: Lower Corner
+        - to: Midwest Slope
+      exits:
+        - to: West
+          req: $hover
+          movement: base
+        - to: Top Corner
+          req: $hook and $hover
+          movement: fast_hover
+    - name: Top Corner
+      coord: [37.8, 13.7]
+      local:
+        - to: Upper Ledge
+      locations:
+        - name: Tablet
+          item: Bounty_List
+          tags: [standing]
+
+    - name: Midwest Slope
+      coord: [37.15, 14.25]
+      local:
+        - to: Middle Ledge
+      exits:
+        - to: West
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: Upper Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+
+    - name: Middle Ledge
+      coord: [37.35, 14.6]
+      local:
+        - to: Grate Left
+        - to: Portal Stand
+        - to: Lower Corner
+        - to: Midwest Slope
+          jumps: 2
+    - name: Grate Left
+      coord: [37.75, 14.7]
+      local:
+        - to: Portal Stand
+        - to: Lower Corner
+      exits:
+        - to: Middle Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Portal Cage
+          req: Nanite_Mist
+          movement: mist1
+          price: 40
+        - to: Portal Cage
+          req: $mist2
+          movement: mist2
+          price: 40
+
+    - name: Lower Slope
+      coord: [37.8, 15.3]
+      local:
+        - to: Lower Corner
+        - to: Portal Stand
+      exits:
+        - to: Middle Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+        - to: Grate Left
+          req: $mist2
+          movement: mist2
+          price: 50
+    - name: Lower Corner
+      coord: [37.7, 15.6]
+      local:
+        - to: Lower Slope
+          jumps: 1
+        - to: Portal Stand
+      locations:
+        - name: Item
+          item: Breach_Attractor
+          tags: [standing]
+    - name: Portal Stand
+      coord: [37.475, 15.6]
+      local:
+        - to: Lower Corner
+      exits:
+        - to: Lower Slope
+          req: $hover
+          movement: base
+          jumps: 1
+
+    - name: East
+      coord: [37.95, 14.6]
+      local:
+        - to: Portal Cage
+      exits:
+        - to: Annuna > Lamassu > West 15
+          tags: [xshift]
+    - name: Portal Cage
+      coord: [37.85, 14.7]
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: Grate Left
+          req: Nanite_Mist
+          movement: mist1
+          price: 40
+        - to: Grate Left
+          req: $mist2
+          movement: mist2
+          price: 40

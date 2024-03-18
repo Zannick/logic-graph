@@ -42,6 +42,7 @@ pub enum Item {
     Big_Flask,
     Boomerang,
     Boomerang_Upgrade,
+    Bounty_List,
     Breach_Attractor,
     Breach_Sight,
     Bronze_Axe,
@@ -202,6 +203,7 @@ impl fmt::Display for Item {
             Item::Big_Flask => write!(f, "{}", "Big_Flask"),
             Item::Boomerang => write!(f, "{}", "Boomerang"),
             Item::Boomerang_Upgrade => write!(f, "{}", "Boomerang_Upgrade"),
+            Item::Bounty_List => write!(f, "{}", "Bounty_List"),
             Item::Breach_Attractor => write!(f, "{}", "Breach_Attractor"),
             Item::Breach_Sight => write!(f, "{}", "Breach_Sight"),
             Item::Bronze_Axe => write!(f, "{}", "Bronze_Axe"),
@@ -366,6 +368,7 @@ impl std::str::FromStr for Item {
             "Big_Flask" => Ok(Item::Big_Flask),
             "Boomerang" => Ok(Item::Boomerang),
             "Boomerang_Upgrade" => Ok(Item::Boomerang_Upgrade),
+            "Bounty_List" => Ok(Item::Bounty_List),
             "Breach_Attractor" => Ok(Item::Breach_Attractor),
             "Breach_Sight" => Ok(Item::Breach_Sight),
             "Bronze_Axe" => Ok(Item::Bronze_Axe),
@@ -508,6 +511,7 @@ pub fn unused_item(id: Item) -> bool {
         Item::None
             | Item::Aansur
             | Item::Amagi_Stronghold_Left_Wall
+            | Item::Bounty_List
             | Item::Carnelian_Ring
             | Item::Double_Axe
             | Item::Dr_Gloria

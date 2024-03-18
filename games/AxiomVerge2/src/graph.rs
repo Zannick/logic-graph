@@ -1179,9 +1179,17 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Apocalypse_Entry__Lowest_Stair
         | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
         | SpotId::Glacier__Apocalypse_Entry__West_15_Upper => AreaId::Glacier__Apocalypse_Entry,
-        SpotId::Glacier__Crystals__East | SpotId::Glacier__Crystals__West => {
-            AreaId::Glacier__Crystals
-        }
+        SpotId::Glacier__Crystals__West
+        | SpotId::Glacier__Crystals__Upper_Ledge
+        | SpotId::Glacier__Crystals__Top_Corner
+        | SpotId::Glacier__Crystals__Midwest_Slope
+        | SpotId::Glacier__Crystals__Middle_Ledge
+        | SpotId::Glacier__Crystals__Grate_Left
+        | SpotId::Glacier__Crystals__Lower_Slope
+        | SpotId::Glacier__Crystals__Lower_Corner
+        | SpotId::Glacier__Crystals__Portal_Stand
+        | SpotId::Glacier__Crystals__East
+        | SpotId::Glacier__Crystals__Portal_Cage => AreaId::Glacier__Crystals,
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             AreaId::Interior__Dock_Elevator
         }
@@ -2682,7 +2690,17 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Apocalypse_Entry__Lowest_Stair
         | SpotId::Glacier__Apocalypse_Entry__West_15_Lower
         | SpotId::Glacier__Apocalypse_Entry__West_15_Upper => RegionId::Glacier,
-        SpotId::Glacier__Crystals__East | SpotId::Glacier__Crystals__West => RegionId::Glacier,
+        SpotId::Glacier__Crystals__West
+        | SpotId::Glacier__Crystals__Upper_Ledge
+        | SpotId::Glacier__Crystals__Top_Corner
+        | SpotId::Glacier__Crystals__Midwest_Slope
+        | SpotId::Glacier__Crystals__Middle_Ledge
+        | SpotId::Glacier__Crystals__Grate_Left
+        | SpotId::Glacier__Crystals__Lower_Slope
+        | SpotId::Glacier__Crystals__Lower_Corner
+        | SpotId::Glacier__Crystals__Portal_Stand
+        | SpotId::Glacier__Crystals__East
+        | SpotId::Glacier__Crystals__Portal_Cage => RegionId::Glacier,
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             RegionId::Interior
         }
@@ -3327,6 +3345,8 @@ impl world::Accessible for Location {
                 rules::access_boomerang4(ctx, world)
             }
             LocationId::Glacier__Compass_Room__Center__Table => true,
+            LocationId::Glacier__Crystals__Lower_Corner__Item => true,
+            LocationId::Glacier__Crystals__Top_Corner__Tablet => true,
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::access_boomerang5(ctx, world)
             }
@@ -5607,6 +5627,20 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => true,
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => true,
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
+            ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => true,
+            ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::access_hover_or_hook(ctx, world),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
@@ -6777,6 +6811,19 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Room__Upper_West__ex__Platform_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::observe_access_hover_or_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
@@ -7977,6 +8024,19 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Boomerang_Room__Platform__ex__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
             ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1 => rules::explain_switch_40_12(ctx, world, edict),
             ExitId::Glacier__Boomerang_Room__Upper_West__ex__Platform_1 => rules::explain_switch_40_12(ctx, world, edict),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::explain_hover_or_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::explain_grab_or_climb(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_grab_or_climb(ctx, world, edict),
@@ -8626,6 +8686,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => true,
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => true,
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
+            ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
@@ -9956,7 +10017,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1485] = [
+static RAW_SPOTS: [SpotId; 1494] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -10999,6 +11060,15 @@ static RAW_SPOTS: [SpotId; 1485] = [
     SpotId::Glacier__Compass_Room__East,
     SpotId::Glacier__Compass_Room__West,
     SpotId::Glacier__Crystals__East,
+    SpotId::Glacier__Crystals__Grate_Left,
+    SpotId::Glacier__Crystals__Lower_Corner,
+    SpotId::Glacier__Crystals__Lower_Slope,
+    SpotId::Glacier__Crystals__Middle_Ledge,
+    SpotId::Glacier__Crystals__Midwest_Slope,
+    SpotId::Glacier__Crystals__Portal_Cage,
+    SpotId::Glacier__Crystals__Portal_Stand,
+    SpotId::Glacier__Crystals__Top_Corner,
+    SpotId::Glacier__Crystals__Upper_Ledge,
     SpotId::Glacier__Crystals__West,
     SpotId::Glacier__Dock_Outside__Do_Not_Enter,
     SpotId::Glacier__Dock_Outside__Entry,
@@ -12137,7 +12207,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 259;
+    const NUM_LOCATIONS: u32 = 261;
 
     fn ruleset(&self) -> String {
         format!(
@@ -12662,6 +12732,8 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
             Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape],
+            Item::Bounty_List => vec![LocationId::Glacier__Crystals__Top_Corner__Tablet],
+            Item::Breach_Attractor => vec![LocationId::Glacier__Crystals__Lower_Corner__Item],
             Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
@@ -13219,6 +13291,12 @@ impl world::World for World {
             }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Grate_Ledge
+            }
+            LocationId::Glacier__Crystals__Top_Corner__Tablet => {
+                SpotId::Glacier__Crystals__Top_Corner
+            }
+            LocationId::Glacier__Crystals__Lower_Corner__Item => {
+                SpotId::Glacier__Crystals__Lower_Corner
             }
             LocationId::Interior__Bunker_Interior__Desk__Note => {
                 SpotId::Interior__Bunker_Interior__Desk
@@ -14422,6 +14500,14 @@ impl world::World for World {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 | ExitId:: Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
+            ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => SpotId::Glacier__Crystals__West,
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 | ExitId:: Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => SpotId::Glacier__Crystals__Upper_Ledge,
+            ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 | ExitId:: Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => SpotId::Glacier__Crystals__Midwest_Slope,
+            ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 | ExitId:: Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 | ExitId:: Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => SpotId::Glacier__Crystals__Grate_Left,
+            ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 | ExitId:: Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => SpotId::Glacier__Crystals__Lower_Slope,
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => SpotId::Glacier__Crystals__Portal_Stand,
+            ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => SpotId::Glacier__Crystals__East,
+            ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 | ExitId:: Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => SpotId::Glacier__Crystals__Portal_Cage,
             ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Interior__Dock_Elevator__Connector,
             ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Interior__Dock_Interior__Connector,
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => SpotId::Interior__Dock_Interior__Entry,
@@ -15946,6 +16032,9 @@ impl world::World for World {
             | SpotId::Glacier__Compass_Room__Center
             | SpotId::Glacier__Compass_Room__East
             | SpotId::Glacier__Compass_Room__West
+            | SpotId::Glacier__Crystals__East
+            | SpotId::Glacier__Crystals__Lower_Corner
+            | SpotId::Glacier__Crystals__Top_Corner
             | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
             | SpotId::Glacier__Grid_31_9_12__East_10
@@ -16220,6 +16309,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bounty_List
                             | Item::Bronze_Axe
                             | Item::Building_of_the_School
                             | Item::Carnelian_Ring
@@ -16271,6 +16361,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bounty_List
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
                             | Item::Dr_Gloria
@@ -16300,6 +16391,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bounty_List
                             | Item::Bronze_Axe
                             | Item::Building_of_the_School
                             | Item::Carnelian_Ring
@@ -16352,6 +16444,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Bounty_List
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
                             | Item::Dr_Gloria
@@ -16381,6 +16474,7 @@ impl World {
                     item,
                     Item::Aansur
                         | Item::Amagi_Stronghold_Left_Wall
+                        | Item::Bounty_List
                         | Item::Bronze_Axe
                         | Item::Building_of_the_School
                         | Item::Carnelian_Ring
@@ -17721,6 +17815,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+        },
+        LocationId::Glacier__Crystals__Top_Corner__Tablet => Location {
+            id: LocationId::Glacier__Crystals__Top_Corner__Tablet,
+            canonical: CanonId::None,
+            item: Item::Bounty_List,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Glacier__Crystals__Lower_Corner__Item => Location {
+            id: LocationId::Glacier__Crystals__Lower_Corner__Item,
+            canonical: CanonId::None,
+            item: Item::Breach_Attractor,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
         },
         LocationId::Interior__Bunker_Interior__Desk__Note => Location {
             id: LocationId::Interior__Bunker_Interior__Desk__Note,
@@ -26384,6 +26494,104 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             time: 1350,
             dest: SpotId::Annuna__Apocalypse_Hallway__Upper_East,
             price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1,
+            time: 1578,
+            dest: SpotId::Glacier__Crystals__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => Exit {
+            id: ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1,
+            time: 1578,
+            dest: SpotId::Glacier__Crystals__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => Exit {
+            id: ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1,
+            time: 749,
+            dest: SpotId::Glacier__Crystals__Top_Corner,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => Exit {
+            id: ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1,
+            time: 1799,
+            dest: SpotId::Glacier__Crystals__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1,
+            time: 1799,
+            dest: SpotId::Glacier__Crystals__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1,
+            time: 1403,
+            dest: SpotId::Glacier__Crystals__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => Exit {
+            id: ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1,
+            time: 350,
+            dest: SpotId::Glacier__Crystals__Portal_Cage,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => Exit {
+            id: ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2,
+            time: 350,
+            dest: SpotId::Glacier__Crystals__Portal_Cage,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1,
+            time: 1799,
+            dest: SpotId::Glacier__Crystals__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => Exit {
+            id: ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1,
+            time: 1200,
+            dest: SpotId::Glacier__Crystals__Grate_Left,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => Exit {
+            id: ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1,
+            time: 1140,
+            dest: SpotId::Glacier__Crystals__Lower_Slope,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => Exit {
+            id: ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1,
+            time: 1350,
+            dest: SpotId::Annuna__Lamassu__West_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => Exit {
+            id: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1,
+            time: 350,
+            dest: SpotId::Glacier__Crystals__Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => Exit {
+            id: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2,
+            time: 350,
+            dest: SpotId::Glacier__Crystals__Grate_Left,
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
@@ -43960,8 +44168,60 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Glacier__Crystals__East => Spot {
-            id: SpotId::Glacier__Crystals__East,
+        SpotId::Glacier__Crystals__West => Spot {
+            id: SpotId::Glacier__Crystals__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Upper_Ledge => Spot {
+            id: SpotId::Glacier__Crystals__Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Top_Corner => Spot {
+            id: SpotId::Glacier__Crystals__Top_Corner,
+            locations: Range {
+                start: LocationId::Glacier__Crystals__Top_Corner__Tablet.into_usize(),
+                end: LocationId::Glacier__Crystals__Top_Corner__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Midwest_Slope => Spot {
+            id: SpotId::Glacier__Crystals__Midwest_Slope,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Middle_Ledge => Spot {
+            id: SpotId::Glacier__Crystals__Middle_Ledge,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -43972,13 +44232,79 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Glacier__Crystals__West => Spot {
-            id: SpotId::Glacier__Crystals__West,
+        SpotId::Glacier__Crystals__Grate_Left => Spot {
+            id: SpotId::Glacier__Crystals__Grate_Left,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Lower_Slope => Spot {
+            id: SpotId::Glacier__Crystals__Lower_Slope,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Lower_Corner => Spot {
+            id: SpotId::Glacier__Crystals__Lower_Corner,
+            locations: Range {
+                start: LocationId::Glacier__Crystals__Lower_Corner__Item.into_usize(),
+                end: LocationId::Glacier__Crystals__Lower_Corner__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Portal_Stand => Spot {
+            id: SpotId::Glacier__Crystals__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__East => Spot {
+            id: SpotId::Glacier__Crystals__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1.into_usize(),
+                end: ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Crystals__Portal_Cage => Spot {
+            id: SpotId::Glacier__Crystals__Portal_Cage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1.into_usize(),
+                end: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

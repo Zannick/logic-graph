@@ -1402,8 +1402,17 @@ subgraph Glacier
         Glacier__Apocalypse_Entry__West_15_Upper(West 15 Upper);
     end
     subgraph Glacier__Crystals[Crystals]
-        Glacier__Crystals__East(East);
         Glacier__Crystals__West(West);
+        Glacier__Crystals__Upper_Ledge(Upper Ledge);
+        Glacier__Crystals__Top_Corner(Top Corner);
+        Glacier__Crystals__Midwest_Slope(Midwest Slope);
+        Glacier__Crystals__Middle_Ledge(Middle Ledge);
+        Glacier__Crystals__Grate_Left(Grate Left);
+        Glacier__Crystals__Lower_Slope(Lower Slope);
+        Glacier__Crystals__Lower_Corner(Lower Corner);
+        Glacier__Crystals__Portal_Stand(Portal Stand);
+        Glacier__Crystals__East(East);
+        Glacier__Crystals__Portal_Cage(Portal Cage);
     end
 end
 subgraph Interior
@@ -2003,7 +2012,7 @@ Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Portal_Stand
 Annuna__Lamassu__Lower_Brick_Ledge --> Annuna__Lamassu__Upper_Brick_Ledge
 Annuna__Lamassu__Portal_Stand --> Annuna__Lamassu__Upper_Brick_Ledge
 Annuna__Lamassu__Upper_Brick_Ledge --> Annuna__Lamassu__East_14
-Annuna__Lamassu__West_15 --> Glacier__Crystals__East
+Annuna__Lamassu__West_15 <--> Glacier__Crystals__East
 Annuna__Lamassu__West_17 --> Annuna__Hidden_Portal__East
 Annuna__Lower_Hallway__West <--> Annuna__Vertical_Room__East_22
 Annuna__Middle_Hallway__West <--> Annuna__Vertical_Room__East_21
@@ -2503,6 +2512,15 @@ Glacier__Boomerang_Room__Pedestal --> Glacier__Boomerang_Room__Upper_Gate_East
 Glacier__Boomerang_Room__Platform <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Compass_Room__East <--> Glacier__Grid_43_10_11__Lower
 Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
+Glacier__Crystals__Grate_Left --> Glacier__Crystals__Middle_Ledge
+Glacier__Crystals__Grate_Left <--> Glacier__Crystals__Portal_Cage
+Glacier__Crystals__Lower_Slope --> Glacier__Crystals__Grate_Left
+Glacier__Crystals__Lower_Slope --> Glacier__Crystals__Middle_Ledge
+Glacier__Crystals__Midwest_Slope --> Glacier__Crystals__Upper_Ledge
+Glacier__Crystals__Midwest_Slope --> Glacier__Crystals__West
+Glacier__Crystals__Portal_Stand --> Glacier__Crystals__Lower_Slope
+Glacier__Crystals__Upper_Ledge --> Glacier__Crystals__Top_Corner
+Glacier__Crystals__Upper_Ledge <--> Glacier__Crystals__West
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Revival__East_9
 Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10

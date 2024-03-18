@@ -6652,6 +6652,104 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
             1578
         }
+        ([false], SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => 350,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 964,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Lower_Slope,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1140,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Grate_Left,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+        ) => 701,
+        ([false], SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => 600,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Top_Corner,
+            SpotId::Glacier__Crystals__Upper_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Grate_Left,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1900,
+        (
+            [false],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Top_Corner,
+        ) => 1052,
+        ([false], SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => 1052,
         (
             [false],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
@@ -21156,6 +21254,98 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
             1578
         }
+        ([true], SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => 350,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 900,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 964,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Lower_Slope,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1140,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Grate_Left,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+        ) => 701,
+        ([true], SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => 600,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 789,
+        ([true], SpotId::Glacier__Crystals__Top_Corner, SpotId::Glacier__Crystals__Upper_Ledge) => {
+            1052
+        }
+        ([true], SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Grate_Left) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+        ) => 1900,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+        ) => 900,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+        ) => 1900,
+        ([true], SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Top_Corner) => {
+            1052
+        }
+        ([true], SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => 1052,
         (
             [true],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
@@ -33402,6 +33592,28 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ) => true,
+        (SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Top_Corner) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Middle_Ledge) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Grate_Left) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => true,
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => true,
+        (SpotId::Glacier__Crystals__Top_Corner, SpotId::Glacier__Crystals__Upper_Ledge) => true,
+        (SpotId::Glacier__Crystals__Midwest_Slope, SpotId::Glacier__Crystals__Middle_Ledge) => true,
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Grate_Left) => true,
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => true,
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => true,
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => true,
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Portal_Stand) => true,
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Lower_Corner) => true,
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Lower_Corner) => true,
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Portal_Stand) => true,
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Lower_Slope) => true,
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Portal_Stand) => true,
+        (SpotId::Glacier__Crystals__Portal_Stand, SpotId::Glacier__Crystals__Lower_Corner) => true,
+        (SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => true,
+        (SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => true,
         (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
             true
         }
@@ -55769,8 +55981,218 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Crystals__East,
+            SpotId::Annuna__Lamassu__West_15,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Crystals__East,
+            SpotId::Glacier__Crystals__Portal_Cage,
+            350,
+        ),
+        (
+            SpotId::Glacier__Crystals__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Lower_Corner,
+            900,
+        ),
+        (
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Portal_Cage,
+            350,
+        ),
+        (
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Glacier__Crystals__Portal_Stand,
+            964,
+        ),
+        (
+            SpotId::Glacier__Crystals__Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Lower_Slope,
+            600,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Glacier__Crystals__Portal_Stand,
+            789,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Grate_Left,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Lower_Corner,
+            350,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Glacier__Crystals__Portal_Stand,
+            1140,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Grate_Left,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+            1228,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            701,
+        ),
+        (
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Glacier__Crystals__West,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Cage,
+            SpotId::Glacier__Crystals__East,
+            600,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Cage,
+            SpotId::Glacier__Crystals__Grate_Left,
+            350,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Cage,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Glacier__Crystals__Lower_Corner,
+            789,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Glacier__Crystals__Lower_Slope,
+            1140,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Top_Corner,
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Crystals__Top_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Grate_Left,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Lower_Corner,
+            1900,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            900,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Midwest_Slope,
+            1228,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Portal_Stand,
+            1900,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__Top_Corner,
+            749,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Glacier__Crystals__West,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__West,
+            SpotId::Glacier__Crystals__Middle_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Crystals__West,
+            SpotId::Glacier__Crystals__Upper_Ledge,
+            1578,
         ),
         (
             SpotId::Glacier__Crystals__West,
@@ -72802,6 +73224,66 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => Some(1578),
         (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => Some(1578),
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => Some(1578),
+        (SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => Some(350),
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Lower_Corner) => {
+            Some(900)
+        }
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Portal_Stand) => {
+            Some(964)
+        }
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Lower_Slope) => {
+            Some(600)
+        }
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Portal_Stand) => {
+            Some(789)
+        }
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Lower_Corner) => {
+            Some(350)
+        }
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Portal_Stand) => {
+            Some(1140)
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Grate_Left) => {
+            Some(1403)
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => {
+            Some(1228)
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => {
+            Some(1200)
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => {
+            Some(1000)
+        }
+        (SpotId::Glacier__Crystals__Midwest_Slope, SpotId::Glacier__Crystals__Middle_Ledge) => {
+            Some(701)
+        }
+        (SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => Some(600),
+        (SpotId::Glacier__Crystals__Portal_Stand, SpotId::Glacier__Crystals__Lower_Corner) => {
+            Some(789)
+        }
+        (SpotId::Glacier__Crystals__Top_Corner, SpotId::Glacier__Crystals__Upper_Ledge) => {
+            Some(1052)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Grate_Left) => {
+            Some(1000)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => {
+            Some(1900)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Middle_Ledge) => {
+            Some(900)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => {
+            Some(1228)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => {
+            Some(1900)
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Top_Corner) => {
+            Some(1052)
+        }
+        (SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => Some(1052),
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             Some(5000)
         }
@@ -83990,6 +84472,72 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
             (Some(1578), vec![])
+        }
+        (SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Lower_Corner) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Glacier__Crystals__Grate_Left, SpotId::Glacier__Crystals__Portal_Stand) => {
+            (Some(964), vec![])
+        }
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Lower_Slope) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Glacier__Crystals__Lower_Corner, SpotId::Glacier__Crystals__Portal_Stand) => {
+            (Some(789), vec![])
+        }
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Lower_Corner) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Glacier__Crystals__Lower_Slope, SpotId::Glacier__Crystals__Portal_Stand) => {
+            (Some(1140), vec![])
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Grate_Left) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Glacier__Crystals__Middle_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Glacier__Crystals__Midwest_Slope, SpotId::Glacier__Crystals__Middle_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Glacier__Crystals__Portal_Stand, SpotId::Glacier__Crystals__Lower_Corner) => {
+            (Some(789), vec![])
+        }
+        (SpotId::Glacier__Crystals__Top_Corner, SpotId::Glacier__Crystals__Upper_Ledge) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Grate_Left) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Lower_Corner) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Middle_Ledge) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Midwest_Slope) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Portal_Stand) => {
+            (Some(1900), vec![])
+        }
+        (SpotId::Glacier__Crystals__Upper_Ledge, SpotId::Glacier__Crystals__Top_Corner) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => {
+            (Some(1052), vec![])
         }
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             (Some(5000), vec![])
