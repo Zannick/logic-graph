@@ -6,7 +6,54 @@ data:
 areas:
 - name: South Save
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [38, 14, 39, 15]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GlB South
   spots:
     - name: West
       coord: [38.1, 14.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Amagi Breach > East Entrance > East
+          tags: [xdoor]
+    - name: Save Point
+      coord: [38.475, 14.6]
+      local:
+        - to: West
+      exits:
+        - to: Brick Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Brick Ledge
+      coord: [38.75, 14.2]
+      local:
+        - to: Save Point
+      exits:
+        - to: East
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: East
+      coord: [38.9, 13.65]
+      local:
+        - to: Save Point
+        - to: West
+      exits:
+        - to: Great Work > West 14
+          tags: [xdoor]
+
+- name: Great Work
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 14
+      coord: [39.1, 13.65]
 

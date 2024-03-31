@@ -1782,6 +1782,10 @@ pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -
     // ^map__glacier__revival__save
     ctx.map__glacier__revival__save()
 }
+pub fn access_map__glacier_breach__south_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__glacier_breach__south_save__save
+    ctx.map__glacier_breach__south_save__save()
+}
 pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar__hub__save
     ctx.map__irikar__hub__save()
@@ -9117,6 +9121,18 @@ pub fn explain_map__glacier__revival__save(
         (r, vec!["^map__glacier__revival__save"])
     }
 }
+pub fn explain_map__glacier_breach__south_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__glacier_breach__south_save__save
+    {
+        let r = ctx.map__glacier_breach__south_save__save();
+        edict.insert("^map__glacier_breach__south_save__save", format!("{:?}", r));
+        (r, vec!["^map__glacier_breach__south_save__save"])
+    }
+}
 pub fn explain_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
@@ -14475,6 +14491,17 @@ pub fn observe_access_map__glacier__revival__save(
     {
         full_obs.observe_map__glacier__revival__save();
         ctx.map__glacier__revival__save()
+    }
+}
+pub fn observe_access_map__glacier_breach__south_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__glacier_breach__south_save__save
+    {
+        full_obs.observe_map__glacier_breach__south_save__save();
+        ctx.map__glacier_breach__south_save__save()
     }
 }
 pub fn observe_access_map__irikar__hub__save(

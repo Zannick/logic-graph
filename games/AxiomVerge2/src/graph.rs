@@ -1053,7 +1053,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Separator__West_Mid_air
         | SpotId::Giguna__Separator__West_25
         | SpotId::Giguna__Separator__East_25 => AreaId::Giguna__Separator,
-        SpotId::Glacier_Breach__South_Save__West => AreaId::Glacier_Breach__South_Save,
+        SpotId::Glacier_Breach__South_Save__West
+        | SpotId::Glacier_Breach__South_Save__Save_Point
+        | SpotId::Glacier_Breach__South_Save__Brick_Ledge
+        | SpotId::Glacier_Breach__South_Save__East => AreaId::Glacier_Breach__South_Save,
+        SpotId::Glacier_Breach__Great_Work__West_14 => AreaId::Glacier_Breach__Great_Work,
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             AreaId::Glacier__Dock_Outside
         }
@@ -1428,7 +1432,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Breach_Map__IB_Basement
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
-        | SpotId::Menu__Breach_Map__AB_East => AreaId::Menu__Breach_Map,
+        | SpotId::Menu__Breach_Map__AB_East
+        | SpotId::Menu__Breach_Map__GlB_South => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2578,7 +2583,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Separator__West_Mid_air
         | SpotId::Giguna__Separator__West_25
         | SpotId::Giguna__Separator__East_25 => RegionId::Giguna,
-        SpotId::Glacier_Breach__South_Save__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__South_Save__West
+        | SpotId::Glacier_Breach__South_Save__Save_Point
+        | SpotId::Glacier_Breach__South_Save__Brick_Ledge
+        | SpotId::Glacier_Breach__South_Save__East => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Great_Work__West_14 => RegionId::Glacier_Breach,
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             RegionId::Glacier
         }
@@ -2943,7 +2952,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Breach_Map__IB_Basement
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
-        | SpotId::Menu__Breach_Map__AB_East => RegionId::Menu,
+        | SpotId::Menu__Breach_Map__AB_East
+        | SpotId::Menu__Breach_Map__GlB_South => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -5810,6 +5820,10 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => true,
+            ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::access_boomerang(ctx, world),
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
@@ -5942,6 +5956,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
+            ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
@@ -6962,6 +6977,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_boomerang(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::observe_access_hook(ctx, world, full_obs),
@@ -7037,6 +7054,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
@@ -8186,6 +8204,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_boomerang(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::explain_grab_or_climb(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::explain_hook(ctx, world, edict),
@@ -8261,6 +8281,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
@@ -8795,6 +8816,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => true,
+            ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => true,
@@ -8989,6 +9012,7 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_open(ctx, world),
+            ActionId::Glacier_Breach__South_Save__Save_Point__Save => true,
             ActionId::Global__Become_Drone => rules::access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world),
             ActionId::Global__Become_Indra => rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world),
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_can_deploy(ctx, world),
@@ -9314,6 +9338,7 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__lower_susar__caught__do(ctx, world),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
+            ActionId::Glacier_Breach__South_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
@@ -9858,6 +9883,9 @@ impl world::Action for Action {
                     ctx, world, full_obs,
                 );
             }
+            ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
@@ -10088,7 +10116,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1505] = [
+static RAW_SPOTS: [SpotId; 1510] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -11257,6 +11285,10 @@ static RAW_SPOTS: [SpotId; 1505] = [
     SpotId::Glacier__Vertical_Room__West_15_Lower,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
+    SpotId::Glacier_Breach__Great_Work__West_14,
+    SpotId::Glacier_Breach__South_Save__Brick_Ledge,
+    SpotId::Glacier_Breach__South_Save__East,
+    SpotId::Glacier_Breach__South_Save__Save_Point,
     SpotId::Glacier_Breach__South_Save__West,
     SpotId::Interior__Building_Interior__Corner,
     SpotId::Interior__Building_Interior__Entry,
@@ -11433,6 +11465,7 @@ static RAW_SPOTS: [SpotId; 1505] = [
     SpotId::Menu__Breach_Map__AB_East,
     SpotId::Menu__Breach_Map__GB_Peak,
     SpotId::Menu__Breach_Map__GB_SW_Save,
+    SpotId::Menu__Breach_Map__GlB_South,
     SpotId::Menu__Breach_Map__IB_Basement,
     SpotId::Menu__Breach_Map__IB_Gauntlet,
     SpotId::Menu__Breach_Map__IB_Save_Room,
@@ -12011,8 +12044,12 @@ lazy_static! {
             start: SpotId::Giguna__West_Tower__East_7.into_usize(),
             end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
         },
+        AreaId::Glacier_Breach__Great_Work => Range {
+            start: SpotId::Glacier_Breach__Great_Work__West_14.into_usize(),
+            end: SpotId::Glacier_Breach__Great_Work__West_14.into_usize() + 1,
+        },
         AreaId::Glacier_Breach__South_Save => Range {
-            start: SpotId::Glacier_Breach__South_Save__West.into_usize(),
+            start: SpotId::Glacier_Breach__South_Save__Brick_Ledge.into_usize(),
             end: SpotId::Glacier_Breach__South_Save__West.into_usize() + 1,
         },
         AreaId::Glacier__Apocalypse_Entry => Range {
@@ -13808,6 +13845,9 @@ impl world::World for World {
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
                 SpotId::Giguna__Gateway__Flask_Ledge
             }
+            ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
+                SpotId::Glacier_Breach__South_Save__Save_Point
+            }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 SpotId::Glacier__Vertical_Room__Upper_Switch
@@ -14500,6 +14540,10 @@ impl world::World for World {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3 => SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => SpotId::Giguna__Breachable_Wall__West_Mid_air,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
+            ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => SpotId::Glacier_Breach__South_Save__West,
+            ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => SpotId::Glacier_Breach__South_Save__Save_Point,
+            ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => SpotId::Glacier_Breach__South_Save__Brick_Ledge,
+            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => SpotId::Glacier_Breach__South_Save__East,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
@@ -14742,6 +14786,7 @@ impl world::World for World {
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Gauntlet,
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Save_Room,
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => SpotId::Menu__Breach_Map__AB_East,
+            ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_South,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -16210,6 +16255,9 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__West_15_Lower
             | SpotId::Glacier__Vertical_Room__West_8
             | SpotId::Glacier__Vertical_Room__West_9
+            | SpotId::Glacier_Breach__South_Save__East
+            | SpotId::Glacier_Breach__South_Save__Save_Point
+            | SpotId::Glacier_Breach__South_Save__West
             | SpotId::Interior__Building_Interior__Corner
             | SpotId::Interior__Building_Interior__Entry
             | SpotId::Interior__Bunker_Interior__Desk
@@ -16296,6 +16344,7 @@ impl world::World for World {
             | SpotId::Menu__Breach_Map__AB_East
             | SpotId::Menu__Breach_Map__GB_Peak
             | SpotId::Menu__Breach_Map__GB_SW_Save
+            | SpotId::Menu__Breach_Map__GlB_South
             | SpotId::Menu__Breach_Map__IB_Gauntlet
             | SpotId::Menu__Breach_Map__IB_Save_Room
             | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
@@ -25630,6 +25679,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => Exit {
+            id: ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1,
+            time: 1600,
+            dest: SpotId::Amagi_Breach__East_Entrance__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__South_Save__Brick_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => Exit {
+            id: ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__South_Save__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => Exit {
+            id: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Great_Work__West_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
             time: 750,
@@ -27975,6 +28052,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__South_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => Exit {
             id: ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
             time: 1350,
@@ -29617,6 +29701,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => Action {
             id: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door,
             time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier_Breach__South_Save__Save_Point__Save => Action {
+            id: ActionId::Glacier_Breach__South_Save__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
         },
         ActionId::Glacier__Revival__Save_Point__Save => Action {
@@ -42827,6 +42916,59 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__South_Save__Save_Point => Spot {
+            id: SpotId::Glacier_Breach__South_Save__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier_Breach__South_Save__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier_Breach__South_Save__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier_Breach__South_Save__Brick_Ledge => Spot {
+            id: SpotId::Glacier_Breach__South_Save__Brick_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__South_Save__East => Spot {
+            id: SpotId::Glacier_Breach__South_Save__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1.into_usize(),
+                end: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Great_Work__West_14 => Spot {
+            id: SpotId::Glacier_Breach__Great_Work__West_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -47444,6 +47586,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_South => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

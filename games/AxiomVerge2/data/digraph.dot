@@ -1038,7 +1038,11 @@ digraph AxiomVerge2 {
         Giguna__West_Tower__Top [label = "", pos = "37.8,-12.0!"];
         Giguna__West_Tower__Southwest [label = "", pos = "36.6,-14.833333!"];
         node[fillcolor="2"];
+        Glacier_Breach__Great_Work__West_14 [label = "", pos = "117.3,-72.75!"];
         Glacier_Breach__South_Save__West [label = "", pos = "114.3,-74.583333!"];
+        Glacier_Breach__South_Save__Save_Point [label = "", pos = "115.425,-74.333333!"];
+        Glacier_Breach__South_Save__Brick_Ledge [label = "", pos = "116.25,-73.666667!"];
+        Glacier_Breach__South_Save__East [label = "", pos = "116.7,-72.75!"];
         node[fillcolor="3"];
         Glacier__Apocalypse_Entry__West_10 [label = "", pos = "132.15,-16.666667!"];
         Glacier__Apocalypse_Entry__Terminal [label = "", pos = "133.8,-16.666667!"];
@@ -2610,6 +2614,10 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room__Lower_Gatestone -> Glacier__Vertical_Room__South;
     Glacier__Vertical_Room__South -> Annuna__West_Climb__North;
     Glacier__Vertical_Room__South -> Glacier__Vertical_Room__Lower_Gatestone;
+    Glacier_Breach__South_Save__West -> Amagi_Breach__East_Entrance__East;
+    Glacier_Breach__South_Save__Save_Point -> Glacier_Breach__South_Save__Brick_Ledge;
+    Glacier_Breach__South_Save__Brick_Ledge -> Glacier_Breach__South_Save__East;
+    Glacier_Breach__South_Save__East -> Glacier_Breach__Great_Work__West_14;
     Interior__Cave_Behind_Waterfall__Bottom -> Interior__Cave_Behind_Waterfall__Middle;
     Interior__Cave_Behind_Waterfall__Bottom -> Interior__Cave_Behind_Waterfall__Top;
     Interior__Cave_Behind_Waterfall__Middle -> Interior__Cave_Behind_Waterfall__Top;
@@ -4583,6 +4591,11 @@ digraph AxiomVerge2 {
     Giguna__Gubi_Lair__Shaft_Bottom -> Giguna__Gubi_Lair__West_Brickwork;
     Giguna__Gubi_Lair__Pedestal -> Giguna__Gubi_Lair__Shaft_Bottom;
     Giguna__Breachable_Wall__West_Mid_air -> Giguna__Breachable_Wall__Above_West_Catwalk;
+    Glacier_Breach__South_Save__West -> Glacier_Breach__South_Save__Save_Point;
+    Glacier_Breach__South_Save__Save_Point -> Glacier_Breach__South_Save__West;
+    Glacier_Breach__South_Save__Brick_Ledge -> Glacier_Breach__South_Save__Save_Point;
+    Glacier_Breach__South_Save__East -> Glacier_Breach__South_Save__West;
+    Glacier_Breach__South_Save__East -> Glacier_Breach__South_Save__Save_Point;
     Glacier__Dock_Outside__Entry -> Glacier__Dock_Outside__Do_Not_Enter;
     Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Dock_Outside__Entry;
     Glacier__Revival__East_9 -> Glacier__Revival__Overhang;

@@ -221,6 +221,7 @@ pub enum AreaId {
     Glacier__Sea_Burial,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
+    Glacier_Breach__Great_Work,
     Glacier_Breach__South_Save,
     Interior__Building_Interior,
     Interior__Bunker_Interior,
@@ -406,6 +407,7 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Sea_Burial => write!(f, "{}", "Glacier > Sea Burial"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
+            AreaId::Glacier_Breach__Great_Work => write!(f, "{}", "Glacier Breach > Great Work"),
             AreaId::Glacier_Breach__South_Save => write!(f, "{}", "Glacier Breach > South Save"),
             AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
             AreaId::Interior__Bunker_Interior => write!(f, "{}", "Interior > Bunker Interior"),
@@ -592,6 +594,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Sea Burial" => Ok(AreaId::Glacier__Sea_Burial),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
+            "Glacier Breach > Great Work" => Ok(AreaId::Glacier_Breach__Great_Work),
             "Glacier Breach > South Save" => Ok(AreaId::Glacier_Breach__South_Save),
             "Interior > Building Interior" => Ok(AreaId::Interior__Building_Interior),
             "Interior > Bunker Interior" => Ok(AreaId::Interior__Bunker_Interior),
@@ -1827,6 +1830,10 @@ pub enum SpotId {
     Glacier__Vertical_Room__West_15_Lower,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
+    Glacier_Breach__Great_Work__West_14,
+    Glacier_Breach__South_Save__Brick_Ledge,
+    Glacier_Breach__South_Save__East,
+    Glacier_Breach__South_Save__Save_Point,
     Glacier_Breach__South_Save__West,
     Interior__Building_Interior__Corner,
     Interior__Building_Interior__Entry,
@@ -2003,6 +2010,7 @@ pub enum SpotId {
     Menu__Breach_Map__AB_East,
     Menu__Breach_Map__GB_Peak,
     Menu__Breach_Map__GB_SW_Save,
+    Menu__Breach_Map__GlB_South,
     Menu__Breach_Map__IB_Basement,
     Menu__Breach_Map__IB_Gauntlet,
     Menu__Breach_Map__IB_Save_Room,
@@ -5094,6 +5102,18 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room__West_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 9")
             }
+            SpotId::Glacier_Breach__Great_Work__West_14 => {
+                write!(f, "{}", "Glacier Breach > Great Work > West 14")
+            }
+            SpotId::Glacier_Breach__South_Save__Brick_Ledge => {
+                write!(f, "{}", "Glacier Breach > South Save > Brick Ledge")
+            }
+            SpotId::Glacier_Breach__South_Save__East => {
+                write!(f, "{}", "Glacier Breach > South Save > East")
+            }
+            SpotId::Glacier_Breach__South_Save__Save_Point => {
+                write!(f, "{}", "Glacier Breach > South Save > Save Point")
+            }
             SpotId::Glacier_Breach__South_Save__West => {
                 write!(f, "{}", "Glacier Breach > South Save > West")
             }
@@ -5566,6 +5586,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Breach_Map__GB_SW_Save => {
                 write!(f, "{}", "Menu > Breach Map > GB SW Save")
             }
+            SpotId::Menu__Breach_Map__GlB_South => write!(f, "{}", "Menu > Breach Map > GlB South"),
             SpotId::Menu__Breach_Map__IB_Basement => {
                 write!(f, "{}", "Menu > Breach Map > IB Basement")
             }
@@ -8013,6 +8034,16 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
+            "Glacier Breach > Great Work > West 14" => {
+                Ok(SpotId::Glacier_Breach__Great_Work__West_14)
+            }
+            "Glacier Breach > South Save > Brick Ledge" => {
+                Ok(SpotId::Glacier_Breach__South_Save__Brick_Ledge)
+            }
+            "Glacier Breach > South Save > East" => Ok(SpotId::Glacier_Breach__South_Save__East),
+            "Glacier Breach > South Save > Save Point" => {
+                Ok(SpotId::Glacier_Breach__South_Save__Save_Point)
+            }
             "Glacier Breach > South Save > West" => Ok(SpotId::Glacier_Breach__South_Save__West),
             "Interior > Building Interior > Corner" => {
                 Ok(SpotId::Interior__Building_Interior__Corner)
@@ -8355,6 +8386,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Breach Map > AB East" => Ok(SpotId::Menu__Breach_Map__AB_East),
             "Menu > Breach Map > GB Peak" => Ok(SpotId::Menu__Breach_Map__GB_Peak),
             "Menu > Breach Map > GB SW Save" => Ok(SpotId::Menu__Breach_Map__GB_SW_Save),
+            "Menu > Breach Map > GlB South" => Ok(SpotId::Menu__Breach_Map__GlB_South),
             "Menu > Breach Map > IB Basement" => Ok(SpotId::Menu__Breach_Map__IB_Basement),
             "Menu > Breach Map > IB Gauntlet" => Ok(SpotId::Menu__Breach_Map__IB_Gauntlet),
             "Menu > Breach Map > IB Save Room" => Ok(SpotId::Menu__Breach_Map__IB_Save_Room),
@@ -11926,6 +11958,10 @@ pub enum ExitId {
     Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Glacier_Breach__South_Save__Brick_Ledge__ex__East_1,
+    Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1,
+    Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1,
+    Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1,
     Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1,
     Interior__Building_Interior__Entry__Urn_Collection_Skip,
     Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1,
@@ -12058,6 +12094,7 @@ pub enum ExitId {
     Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
     Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
     Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
+    Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1,
     Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
     Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1,
     Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
@@ -13415,6 +13452,10 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
+            ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => write!(f, "{}", "Glacier Breach > South Save > Brick Ledge ==> East (1)"),
+            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => write!(f, "{}", "Glacier Breach > South Save > East ==> Great Work > West 14 (1)"),
+            ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => write!(f, "{}", "Glacier Breach > South Save > Save Point ==> Brick Ledge (1)"),
+            ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => write!(f, "{}", "Glacier Breach > South Save > West ==> Amagi Breach > East Entrance > East (1)"),
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => write!(f, "{}", "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)"),
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => write!(f, "{}", "Interior > Building Interior > Entry > Urn Collection Skip"),
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Interior > Bunker Interior > Entry ==> Ebih > Base Camp > Bunker Entry (1)"),
@@ -13547,6 +13588,7 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > AB East ==> Amagi Breach > East Entrance > Save Point (1)"),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)"),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)"),
+            ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB South ==> Glacier Breach > South Save > Save Point (1)"),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)"),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)"),
@@ -14909,6 +14951,10 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
+            "Glacier Breach > South Save > Brick Ledge ==> East (1)" => Ok(ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1),
+            "Glacier Breach > South Save > East ==> Great Work > West 14 (1)" => Ok(ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1),
+            "Glacier Breach > South Save > Save Point ==> Brick Ledge (1)" => Ok(ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1),
+            "Glacier Breach > South Save > West ==> Amagi Breach > East Entrance > East (1)" => Ok(ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1),
             "Interior > Building Interior > Entry ==> Ebih > Base Camp > Building Entry (1)" => Ok(ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1),
             "Interior > Building Interior > Entry > Urn Collection Skip" => Ok(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
             "Interior > Bunker Interior > Entry ==> Ebih > Base Camp > Bunker Entry (1)" => Ok(ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1),
@@ -15041,6 +15087,7 @@ impl std::str::FromStr for ExitId {
             "Menu > Breach Map > AB East ==> Amagi Breach > East Entrance > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1),
             "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1),
             "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1),
+            "Menu > Breach Map > GlB South ==> Glacier Breach > South Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1),
             "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1),
             "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1),
             "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1),
@@ -15352,6 +15399,7 @@ pub enum ActionId {
     Giguna_Breach__SW_Save__West_11__Open_Door,
     Glacier__Revival__Save_Point__Save,
     Glacier__Vertical_Room__Upper_Switch__Open_Gate,
+    Glacier_Breach__South_Save__Save_Point__Save,
     Global__Become_Drone,
     Global__Become_Indra,
     Global__Deploy_Drone,
@@ -15710,6 +15758,9 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Glacier > Vertical Room > Upper Switch > Open Gate"
             ),
+            ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
+                write!(f, "{}", "Glacier Breach > South Save > Save Point > Save")
+            }
             ActionId::Global__Become_Drone => write!(f, "{}", "Become Drone"),
             ActionId::Global__Become_Indra => write!(f, "{}", "Become Indra"),
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
@@ -16054,6 +16105,9 @@ impl std::str::FromStr for ActionId {
             }
             "Glacier > Vertical Room > Upper Switch > Open Gate" => {
                 Ok(ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate)
+            }
+            "Glacier Breach > South Save > Save Point > Save" => {
+                Ok(ActionId::Glacier_Breach__South_Save__Save_Point__Save)
             }
             "Become Drone" => Ok(ActionId::Global__Become_Drone),
             "Become Indra" => Ok(ActionId::Global__Become_Indra),

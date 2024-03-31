@@ -1250,6 +1250,12 @@ end
 subgraph Glacier_Breach
     subgraph Glacier_Breach__South_Save[South Save]
         Glacier_Breach__South_Save__West(West);
+        Glacier_Breach__South_Save__Save_Point(Save Point);
+        Glacier_Breach__South_Save__Brick_Ledge(Brick Ledge);
+        Glacier_Breach__South_Save__East(East);
+    end
+    subgraph Glacier_Breach__Great_Work[Great Work]
+        Glacier_Breach__Great_Work__West_14(West 14);
     end
 end
 subgraph Glacier
@@ -1729,6 +1735,7 @@ subgraph Menu
         Menu__Breach_Map__IB_Gauntlet(IB Gauntlet);
         Menu__Breach_Map__IB_Save_Room(IB Save Room);
         Menu__Breach_Map__AB_East(AB East);
+        Menu__Breach_Map__GlB_South(GlB South);
     end
 end
 subgraph Uhrum
@@ -1869,7 +1876,7 @@ subgraph Uhrum
         Uhrum__Artillery_Practice__East_24(East 24);
     end
 end
-Amagi_Breach__East_Entrance__East --> Glacier_Breach__South_Save__West
+Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
 Amagi_Breach__East_Entrance__Grate_Left --> Amagi_Breach__East_Entrance__Upper_Slope
 Amagi_Breach__East_Entrance__West --> Amagi_Breach__East_Connector__East
@@ -2521,6 +2528,9 @@ Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__West_13 --> Giguna__Far_Corner__East_13
 Giguna__West_Tower__Southwest --> Giguna__West_Caverns__Northwest
+Glacier_Breach__South_Save__Brick_Ledge --> Glacier_Breach__South_Save__East
+Glacier_Breach__South_Save__East --> Glacier_Breach__Great_Work__West_14
+Glacier_Breach__South_Save__Save_Point --> Glacier_Breach__South_Save__Brick_Ledge
 Glacier__Apocalypse_Entry__Above_Grate --> Glacier__Apocalypse_Entry__Below_Grate
 Glacier__Apocalypse_Entry__Below_Grate --> Glacier__Apocalypse_Entry__Grate_Ledge
 Glacier__Apocalypse_Entry__Grate_Ledge --> Glacier__Apocalypse_Entry__Terminal
@@ -2713,6 +2723,7 @@ Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir
 Menu__Breach_Map__AB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__GB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
+Menu__Breach_Map__GlB_South --> Glacier_Breach__South_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point

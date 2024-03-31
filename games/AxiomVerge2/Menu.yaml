@@ -543,3 +543,11 @@ areas:
           req: ^map__amagi_breach__east_entrance__save
           time: 12
           tags: [warp]
+
+    - name: GlB South
+      coord: [38, 15]
+      exits:
+        - to: Glacier Breach > South Save > Save Point
+          req: ^map__glacier_breach__south_save__save
+          time: 12
+          tags: [warp]

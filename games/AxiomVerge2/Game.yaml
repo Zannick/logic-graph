@@ -301,7 +301,10 @@ helpers:
   # To be added: 4 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 3 Health_Fragment, The_Student, Heretics_Granddaughter, Dr_Gloria
 
+  # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
+  # Otherwise we can hardcode for a small performance improvement to avoid the branch
+  $breach_save:action: ^breach_save = ^position; $refill_energy
   $refill_energy:action: ^energy = $max_energy
   $deploy_drone:action: >
     ^mode = 'drone'; ^indra = ^position;

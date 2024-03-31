@@ -2489,6 +2489,22 @@ macro_rules! hobserve__save {
     }};
 }
 
+/// $breach_save (  )
+/// ^breach_save = ^position; $refill_energy
+#[macro_export]
+macro_rules! helper__breach_save {
+    ($ctx:expr, $world:expr) => {{
+        $ctx.set_breach_save($ctx.position());
+        helper__refill_energy!($ctx, $world);
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__breach_save {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        hobserve__refill_energy!($ctx, $world, $full_obs);
+    }};
+}
+
 /// $refill_energy (  )
 /// ^energy = $max_energy
 #[macro_export]

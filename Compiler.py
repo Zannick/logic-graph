@@ -305,7 +305,7 @@ class GameLogic(object):
                     spot['action_ids'] = []
                     spot['all_data'] = dict(area['all_data'])
                     spot['all_data'].update(spot.get('data', {}))
-                    spot['base_movement'] = self.spot_base_movement(tuple(spot['all_data'].items()))
+                    spot['base_movement'] = self.spot_base_movement(spot['all_data'])
                     if 'on_entry' in spot:
                         spot['act'] = parseAction(
                                 spot['on_entry'], name=f'{spot["fullname"]}:on_entry')
@@ -689,11 +689,11 @@ class GameLogic(object):
                 return any(x in exc for x in tags)
         return False
 
-    @cache
     def spot_base_movement(self, spot_data):
         d = dict(self.base_movements[0])
         for md in self.base_movements[1:]:
-            if 'data' in md and md['data'].items() <= set(spot_data):
+            if 'data' in md and all(d in spot_data and spot_data[d] == v for d, v in md['data'].items()):
+                # Later movements override previous ones
                 d.update(md)
         if 'data' in d:
             del d['data']
