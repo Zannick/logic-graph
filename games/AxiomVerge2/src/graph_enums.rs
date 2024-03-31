@@ -22,6 +22,7 @@ use std::fmt;
 #[repr(u8)]
 pub enum RegionId {
     Amagi,
+    Amagi_Breach,
     Annuna,
     Antarctica,
     Ebih,
@@ -29,6 +30,7 @@ pub enum RegionId {
     Giguna,
     Giguna_Breach,
     Glacier,
+    Glacier_Breach,
     Interior,
     Irikar,
     Irikar_Breach,
@@ -39,6 +41,7 @@ impl fmt::Display for RegionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             RegionId::Amagi => write!(f, "{}", "Lake Amagi"),
+            RegionId::Amagi_Breach => write!(f, "{}", "Amagi Breach"),
             RegionId::Annuna => write!(f, "{}", "Annuna Gorge"),
             RegionId::Antarctica => write!(f, "{}", "Antarctica"),
             RegionId::Ebih => write!(f, "{}", "Mt Ebih"),
@@ -46,6 +49,7 @@ impl fmt::Display for RegionId {
             RegionId::Giguna => write!(f, "{}", "Giguna Steppes"),
             RegionId::Giguna_Breach => write!(f, "{}", "Giguna Breach"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
+            RegionId::Glacier_Breach => write!(f, "{}", "Glacier Breach"),
             RegionId::Interior => write!(f, "{}", "Interior"),
             RegionId::Irikar => write!(f, "{}", "Irikar"),
             RegionId::Irikar_Breach => write!(f, "{}", "Irikar Breach"),
@@ -61,6 +65,7 @@ impl std::str::FromStr for RegionId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Lake Amagi" => Ok(RegionId::Amagi),
+            "Amagi Breach" => Ok(RegionId::Amagi_Breach),
             "Annuna Gorge" => Ok(RegionId::Annuna),
             "Antarctica" => Ok(RegionId::Antarctica),
             "Mt Ebih" => Ok(RegionId::Ebih),
@@ -68,6 +73,7 @@ impl std::str::FromStr for RegionId {
             "Giguna Steppes" => Ok(RegionId::Giguna),
             "Giguna Breach" => Ok(RegionId::Giguna_Breach),
             "Glacier" => Ok(RegionId::Glacier),
+            "Glacier Breach" => Ok(RegionId::Glacier_Breach),
             "Interior" => Ok(RegionId::Interior),
             "Irikar" => Ok(RegionId::Irikar),
             "Irikar Breach" => Ok(RegionId::Irikar_Breach),
@@ -98,6 +104,8 @@ pub enum AreaId {
     Amagi__Liru_Room,
     Amagi__Main_Area,
     Amagi__West_Lake,
+    Amagi_Breach__East_Connector,
+    Amagi_Breach__East_Entrance,
     Annuna__Apocalypse,
     Annuna__Apocalypse_Hallway,
     Annuna__Center_Climb,
@@ -213,6 +221,7 @@ pub enum AreaId {
     Glacier__Sea_Burial,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
+    Glacier_Breach__South_Save,
     Interior__Building_Interior,
     Interior__Bunker_Interior,
     Interior__Cave_Behind_Waterfall,
@@ -266,6 +275,10 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
+            AreaId::Amagi_Breach__East_Connector => {
+                write!(f, "{}", "Amagi Breach > East Connector")
+            }
+            AreaId::Amagi_Breach__East_Entrance => write!(f, "{}", "Amagi Breach > East Entrance"),
             AreaId::Annuna__Apocalypse => write!(f, "{}", "Annuna > Apocalypse"),
             AreaId::Annuna__Apocalypse_Hallway => write!(f, "{}", "Annuna > Apocalypse Hallway"),
             AreaId::Annuna__Center_Climb => write!(f, "{}", "Annuna > Center Climb"),
@@ -393,6 +406,7 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Sea_Burial => write!(f, "{}", "Glacier > Sea Burial"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
+            AreaId::Glacier_Breach__South_Save => write!(f, "{}", "Glacier Breach > South Save"),
             AreaId::Interior__Building_Interior => write!(f, "{}", "Interior > Building Interior"),
             AreaId::Interior__Bunker_Interior => write!(f, "{}", "Interior > Bunker Interior"),
             AreaId::Interior__Cave_Behind_Waterfall => {
@@ -461,6 +475,8 @@ impl std::str::FromStr for AreaId {
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
+            "Amagi Breach > East Connector" => Ok(AreaId::Amagi_Breach__East_Connector),
+            "Amagi Breach > East Entrance" => Ok(AreaId::Amagi_Breach__East_Entrance),
             "Annuna > Apocalypse" => Ok(AreaId::Annuna__Apocalypse),
             "Annuna > Apocalypse Hallway" => Ok(AreaId::Annuna__Apocalypse_Hallway),
             "Annuna > Center Climb" => Ok(AreaId::Annuna__Center_Climb),
@@ -576,6 +592,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Sea Burial" => Ok(AreaId::Glacier__Sea_Burial),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
+            "Glacier Breach > South Save" => Ok(AreaId::Glacier_Breach__South_Save),
             "Interior > Building Interior" => Ok(AreaId::Interior__Building_Interior),
             "Interior > Bunker Interior" => Ok(AreaId::Interior__Bunker_Interior),
             "Interior > Cave Behind Waterfall" => Ok(AreaId::Interior__Cave_Behind_Waterfall),
@@ -737,6 +754,14 @@ pub enum SpotId {
     Amagi__West_Lake__West_Cliff,
     Amagi__West_Lake__West_Platform,
     Amagi__West_Lake__West_Shore,
+    Amagi_Breach__East_Connector__East,
+    Amagi_Breach__East_Connector__West,
+    Amagi_Breach__East_Entrance__East,
+    Amagi_Breach__East_Entrance__Grate_Left,
+    Amagi_Breach__East_Entrance__Grate_Right,
+    Amagi_Breach__East_Entrance__Save_Point,
+    Amagi_Breach__East_Entrance__Upper_Slope,
+    Amagi_Breach__East_Entrance__West,
     Annuna__Apocalypse__Bomb,
     Annuna__Apocalypse__Bomb_East,
     Annuna__Apocalypse__Bomb_Northwest,
@@ -1781,6 +1806,7 @@ pub enum SpotId {
     Glacier__Vertical_Room__East_13,
     Glacier__Vertical_Room__East_14,
     Glacier__Vertical_Room__East_17,
+    Glacier__Vertical_Room__East_17_while_hovering,
     Glacier__Vertical_Room__East_9,
     Glacier__Vertical_Room__East_Corner,
     Glacier__Vertical_Room__Flat_Platform,
@@ -1801,6 +1827,7 @@ pub enum SpotId {
     Glacier__Vertical_Room__West_15_Lower,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
+    Glacier_Breach__South_Save__West,
     Interior__Building_Interior__Corner,
     Interior__Building_Interior__Entry,
     Interior__Bunker_Interior__Desk,
@@ -1973,6 +2000,7 @@ pub enum SpotId {
     Irikar_Breach__Worm_Rave__Corner,
     Irikar_Breach__Worm_Rave__East,
     Irikar_Breach__Worm_Rave__South,
+    Menu__Breach_Map__AB_East,
     Menu__Breach_Map__GB_Peak,
     Menu__Breach_Map__GB_SW_Save,
     Menu__Breach_Map__IB_Basement,
@@ -2374,6 +2402,30 @@ impl fmt::Display for SpotId {
             }
             SpotId::Amagi__West_Lake__West_Shore => {
                 write!(f, "{}", "Amagi > West Lake > West Shore")
+            }
+            SpotId::Amagi_Breach__East_Connector__East => {
+                write!(f, "{}", "Amagi Breach > East Connector > East")
+            }
+            SpotId::Amagi_Breach__East_Connector__West => {
+                write!(f, "{}", "Amagi Breach > East Connector > West")
+            }
+            SpotId::Amagi_Breach__East_Entrance__East => {
+                write!(f, "{}", "Amagi Breach > East Entrance > East")
+            }
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Grate Left")
+            }
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Grate Right")
+            }
+            SpotId::Amagi_Breach__East_Entrance__Save_Point => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Save Point")
+            }
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Upper Slope")
+            }
+            SpotId::Amagi_Breach__East_Entrance__West => {
+                write!(f, "{}", "Amagi Breach > East Entrance > West")
             }
             SpotId::Annuna__Apocalypse__Bomb => write!(f, "{}", "Annuna > Apocalypse > Bomb"),
             SpotId::Annuna__Apocalypse__Bomb_East => {
@@ -4979,6 +5031,9 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room__East_17 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 17")
             }
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering => {
+                write!(f, "{}", "Glacier > Vertical Room > East 17 while hovering")
+            }
             SpotId::Glacier__Vertical_Room__East_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > East 9")
             }
@@ -5038,6 +5093,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Vertical_Room__West_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 9")
+            }
+            SpotId::Glacier_Breach__South_Save__West => {
+                write!(f, "{}", "Glacier Breach > South Save > West")
             }
             SpotId::Interior__Building_Interior__Corner => {
                 write!(f, "{}", "Interior > Building Interior > Corner")
@@ -5503,6 +5561,7 @@ impl fmt::Display for SpotId {
             SpotId::Irikar_Breach__Worm_Rave__South => {
                 write!(f, "{}", "Irikar Breach > Worm Rave > South")
             }
+            SpotId::Menu__Breach_Map__AB_East => write!(f, "{}", "Menu > Breach Map > AB East"),
             SpotId::Menu__Breach_Map__GB_Peak => write!(f, "{}", "Menu > Breach Map > GB Peak"),
             SpotId::Menu__Breach_Map__GB_SW_Save => {
                 write!(f, "{}", "Menu > Breach Map > GB SW Save")
@@ -6111,6 +6170,26 @@ impl std::str::FromStr for SpotId {
             "Amagi > West Lake > West Cliff" => Ok(SpotId::Amagi__West_Lake__West_Cliff),
             "Amagi > West Lake > West Platform" => Ok(SpotId::Amagi__West_Lake__West_Platform),
             "Amagi > West Lake > West Shore" => Ok(SpotId::Amagi__West_Lake__West_Shore),
+            "Amagi Breach > East Connector > East" => {
+                Ok(SpotId::Amagi_Breach__East_Connector__East)
+            }
+            "Amagi Breach > East Connector > West" => {
+                Ok(SpotId::Amagi_Breach__East_Connector__West)
+            }
+            "Amagi Breach > East Entrance > East" => Ok(SpotId::Amagi_Breach__East_Entrance__East),
+            "Amagi Breach > East Entrance > Grate Left" => {
+                Ok(SpotId::Amagi_Breach__East_Entrance__Grate_Left)
+            }
+            "Amagi Breach > East Entrance > Grate Right" => {
+                Ok(SpotId::Amagi_Breach__East_Entrance__Grate_Right)
+            }
+            "Amagi Breach > East Entrance > Save Point" => {
+                Ok(SpotId::Amagi_Breach__East_Entrance__Save_Point)
+            }
+            "Amagi Breach > East Entrance > Upper Slope" => {
+                Ok(SpotId::Amagi_Breach__East_Entrance__Upper_Slope)
+            }
+            "Amagi Breach > East Entrance > West" => Ok(SpotId::Amagi_Breach__East_Entrance__West),
             "Annuna > Apocalypse > Bomb" => Ok(SpotId::Annuna__Apocalypse__Bomb),
             "Annuna > Apocalypse > Bomb East" => Ok(SpotId::Annuna__Apocalypse__Bomb_East),
             "Annuna > Apocalypse > Bomb Northwest" => {
@@ -7887,6 +7966,9 @@ impl std::str::FromStr for SpotId {
             "Glacier > Vertical Room > East 13" => Ok(SpotId::Glacier__Vertical_Room__East_13),
             "Glacier > Vertical Room > East 14" => Ok(SpotId::Glacier__Vertical_Room__East_14),
             "Glacier > Vertical Room > East 17" => Ok(SpotId::Glacier__Vertical_Room__East_17),
+            "Glacier > Vertical Room > East 17 while hovering" => {
+                Ok(SpotId::Glacier__Vertical_Room__East_17_while_hovering)
+            }
             "Glacier > Vertical Room > East 9" => Ok(SpotId::Glacier__Vertical_Room__East_9),
             "Glacier > Vertical Room > East Corner" => {
                 Ok(SpotId::Glacier__Vertical_Room__East_Corner)
@@ -7931,6 +8013,7 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
+            "Glacier Breach > South Save > West" => Ok(SpotId::Glacier_Breach__South_Save__West),
             "Interior > Building Interior > Corner" => {
                 Ok(SpotId::Interior__Building_Interior__Corner)
             }
@@ -8269,6 +8352,7 @@ impl std::str::FromStr for SpotId {
             "Irikar Breach > Worm Rave > Corner" => Ok(SpotId::Irikar_Breach__Worm_Rave__Corner),
             "Irikar Breach > Worm Rave > East" => Ok(SpotId::Irikar_Breach__Worm_Rave__East),
             "Irikar Breach > Worm Rave > South" => Ok(SpotId::Irikar_Breach__Worm_Rave__South),
+            "Menu > Breach Map > AB East" => Ok(SpotId::Menu__Breach_Map__AB_East),
             "Menu > Breach Map > GB Peak" => Ok(SpotId::Menu__Breach_Map__GB_Peak),
             "Menu > Breach Map > GB SW Save" => Ok(SpotId::Menu__Breach_Map__GB_SW_Save),
             "Menu > Breach Map > IB Basement" => Ok(SpotId::Menu__Breach_Map__IB_Basement),
@@ -8638,6 +8722,7 @@ pub enum LocationId {
     Amagi__West_Lake__Stronghold_Top__Remote_Urn,
     Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
     Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
+    Amagi_Breach__East_Entrance__Upper_Slope__Item,
     Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
     Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
     Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
@@ -8967,6 +9052,9 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Amagi > West Lake > Surface Wall Right > Break Wall"
             ),
+            LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Upper Slope > Item")
+            }
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(
                 f,
                 "{}",
@@ -9961,6 +10049,9 @@ impl std::str::FromStr for LocationId {
             "Amagi > West Lake > Surface Wall Right > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall)
             }
+            "Amagi Breach > East Entrance > Upper Slope > Item" => {
+                Ok(LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item)
+            }
             "Annuna > Apocalypse > Center Scaffold West > Boss Fight" => {
                 Ok(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight)
             }
@@ -10725,6 +10816,13 @@ pub enum ExitId {
     Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
     Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
     Amagi__West_Lake__West_Bank__ex__West_Shore_1,
+    Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1,
+    Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1,
+    Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2,
+    Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1,
+    Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1,
+    Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2,
+    Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1,
     Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
     Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
     Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1,
@@ -10879,6 +10977,10 @@ pub enum ExitId {
     Annuna__Final_Save__Save_Point__ex__Pillar_2,
     Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1,
     Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
+    Annuna__Hidden_Portal__East__ex__Lamassu__West_17_1,
+    Annuna__Hidden_Portal__Plinth_Left__ex__Lamassu__Bottom_Hill_West_1,
+    Annuna__Hidden_Portal__Plinth_Right__ex__Glacier__Vertical_Room__East_17_while_hovering_1,
+    Annuna__Hidden_Portal__West__ex__Glacier__Vertical_Room__East_17_1,
     Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1,
     Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1,
     Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1,
@@ -11792,6 +11894,9 @@ pub enum ExitId {
     Glacier__Vertical_Room__East_14__ex__Above_Switch_1,
     Glacier__Vertical_Room__East_14__ex__Crystals__West_1,
     Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1,
+    Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1,
+    Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1,
+    Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2,
     Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
     Glacier__Vertical_Room__East_9__ex__Peak_1,
     Glacier__Vertical_Room__East_9__ex__Peak_2,
@@ -11950,6 +12055,7 @@ pub enum ExitId {
     Irikar_Breach__Worm_Rave__South__ex__Corner_1,
     Irikar_Breach__Worm_Rave__South__ex__East_1,
     Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1,
+    Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
     Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
     Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
     Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
@@ -12199,6 +12305,13 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)"),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => write!(f, "{}", "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)"),
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => write!(f, "{}", "Amagi > West Lake > West Bank ==> West Shore (1)"),
+            ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => write!(f, "{}", "Amagi Breach > East Entrance > East ==> Glacier Breach > South Save > West (1)"),
+            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => write!(f, "{}", "Amagi Breach > East Entrance > Grate Left ==> Grate Right (1)"),
+            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => write!(f, "{}", "Amagi Breach > East Entrance > Grate Left ==> Grate Right (2)"),
+            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => write!(f, "{}", "Amagi Breach > East Entrance > Grate Left ==> Upper Slope (1)"),
+            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => write!(f, "{}", "Amagi Breach > East Entrance > Grate Right ==> Grate Left (1)"),
+            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => write!(f, "{}", "Amagi Breach > East Entrance > Grate Right ==> Grate Left (2)"),
+            ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => write!(f, "{}", "Amagi Breach > East Entrance > West ==> East Connector > East (1)"),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(f, "{}", "Annuna > Apocalypse > Center Scaffold West > Boss Fight"),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => write!(f, "{}", "Annuna > Apocalypse > Center Scaffold West > Fill It Up"),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => write!(f, "{}", "Annuna > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (1)"),
@@ -12353,6 +12466,10 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2 => write!(f, "{}", "Annuna > Final Save > Save Point ==> Pillar (2)"),
             ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => write!(f, "{}", "Annuna > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)"),
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => write!(f, "{}", "Annuna > Final Save > Upper West ==> Seals > East 17 Upper (1)"),
+            ExitId::Annuna__Hidden_Portal__East__ex__Lamassu__West_17_1 => write!(f, "{}", "Annuna > Hidden Portal > East ==> Lamassu > West 17 (1)"),
+            ExitId::Annuna__Hidden_Portal__Plinth_Left__ex__Lamassu__Bottom_Hill_West_1 => write!(f, "{}", "Annuna > Hidden Portal > Plinth Left ==> Lamassu > Bottom Hill West (1)"),
+            ExitId::Annuna__Hidden_Portal__Plinth_Right__ex__Glacier__Vertical_Room__East_17_while_hovering_1 => write!(f, "{}", "Annuna > Hidden Portal > Plinth Right ==> Glacier > Vertical Room > East 17 while hovering (1)"),
+            ExitId::Annuna__Hidden_Portal__West__ex__Glacier__Vertical_Room__East_17_1 => write!(f, "{}", "Annuna > Hidden Portal > West ==> Glacier > Vertical Room > East 17 (1)"),
             ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => write!(f, "{}", "Annuna > Lamassu > Above Flat Ground ==> East 16 (1)"),
             ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1 => write!(f, "{}", "Annuna > Lamassu > Above Flat Ground ==> Ledge By Grate (1)"),
             ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => write!(f, "{}", "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (1)"),
@@ -13266,6 +13383,9 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > East 14 ==> Above Switch (1)"),
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 14 ==> Crystals > West (1)"),
             ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 17 ==> Annuna > Hidden Portal > West (1)"),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > East 17 while hovering ==> Lower Gatestone (1)"),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > East 17 while hovering ==> Lower Switch (1)"),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => write!(f, "{}", "Glacier > Vertical Room > East 17 while hovering ==> Lower Switch (2)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (2)"),
@@ -13424,6 +13544,7 @@ impl fmt::Display for ExitId {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Corner (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> East (1)"),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => write!(f, "{}", "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)"),
+            ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > AB East ==> Amagi Breach > East Entrance > Save Point (1)"),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)"),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)"),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)"),
@@ -13678,6 +13799,13 @@ impl std::str::FromStr for ExitId {
             "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1),
             "Amagi > West Lake > West 15 ==> Ebih > Vertical Interchange > East 15 (1)" => Ok(ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1),
             "Amagi > West Lake > West Bank ==> West Shore (1)" => Ok(ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1),
+            "Amagi Breach > East Entrance > East ==> Glacier Breach > South Save > West (1)" => Ok(ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1),
+            "Amagi Breach > East Entrance > Grate Left ==> Grate Right (1)" => Ok(ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1),
+            "Amagi Breach > East Entrance > Grate Left ==> Grate Right (2)" => Ok(ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2),
+            "Amagi Breach > East Entrance > Grate Left ==> Upper Slope (1)" => Ok(ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1),
+            "Amagi Breach > East Entrance > Grate Right ==> Grate Left (1)" => Ok(ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1),
+            "Amagi Breach > East Entrance > Grate Right ==> Grate Left (2)" => Ok(ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2),
+            "Amagi Breach > East Entrance > West ==> East Connector > East (1)" => Ok(ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1),
             "Annuna > Apocalypse > Center Scaffold West > Boss Fight" => Ok(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
             "Annuna > Apocalypse > Center Scaffold West > Fill It Up" => Ok(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
             "Annuna > Apocalypse > Northwest Mid-air ==> Northwest Scaffold 2 West (1)" => Ok(ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1),
@@ -13832,6 +13960,10 @@ impl std::str::FromStr for ExitId {
             "Annuna > Final Save > Save Point ==> Pillar (2)" => Ok(ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_2),
             "Annuna > Final Save > Upper West ==> Apocalypse > Northwest Mid-air (1)" => Ok(ExitId::Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1),
             "Annuna > Final Save > Upper West ==> Seals > East 17 Upper (1)" => Ok(ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1),
+            "Annuna > Hidden Portal > East ==> Lamassu > West 17 (1)" => Ok(ExitId::Annuna__Hidden_Portal__East__ex__Lamassu__West_17_1),
+            "Annuna > Hidden Portal > Plinth Left ==> Lamassu > Bottom Hill West (1)" => Ok(ExitId::Annuna__Hidden_Portal__Plinth_Left__ex__Lamassu__Bottom_Hill_West_1),
+            "Annuna > Hidden Portal > Plinth Right ==> Glacier > Vertical Room > East 17 while hovering (1)" => Ok(ExitId::Annuna__Hidden_Portal__Plinth_Right__ex__Glacier__Vertical_Room__East_17_while_hovering_1),
+            "Annuna > Hidden Portal > West ==> Glacier > Vertical Room > East 17 (1)" => Ok(ExitId::Annuna__Hidden_Portal__West__ex__Glacier__Vertical_Room__East_17_1),
             "Annuna > Lamassu > Above Flat Ground ==> East 16 (1)" => Ok(ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1),
             "Annuna > Lamassu > Above Flat Ground ==> Ledge By Grate (1)" => Ok(ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__Ledge_By_Grate_1),
             "Annuna > Lamassu > Bottom East Ledge ==> Bottom Middle Ledge (1)" => Ok(ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1),
@@ -14745,6 +14877,9 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > East 14 ==> Above Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1),
             "Glacier > Vertical Room > East 14 ==> Crystals > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1),
             "Glacier > Vertical Room > East 17 ==> Annuna > Hidden Portal > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1),
+            "Glacier > Vertical Room > East 17 while hovering ==> Lower Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1),
+            "Glacier > Vertical Room > East 17 while hovering ==> Lower Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1),
+            "Glacier > Vertical Room > East 17 while hovering ==> Lower Switch (2)" => Ok(ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2),
             "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1),
             "Glacier > Vertical Room > East 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1),
             "Glacier > Vertical Room > East 9 ==> Peak (2)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2),
@@ -14903,6 +15038,7 @@ impl std::str::FromStr for ExitId {
             "Irikar Breach > Worm Rave > South ==> Corner (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1),
             "Irikar Breach > Worm Rave > South ==> East (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1),
             "Irikar Breach > Worm Rave > South ==> Exit Corridor > North 12 (1)" => Ok(ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1),
+            "Menu > Breach Map > AB East ==> Amagi Breach > East Entrance > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1),
             "Menu > Breach Map > GB Peak ==> Giguna Breach > Peak > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1),
             "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1),
             "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1),
@@ -15127,6 +15263,7 @@ impl std::str::FromStr for ExitId {
 pub enum ActionId {
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
+    Amagi_Breach__East_Entrance__Save_Point__Save,
     Annuna__Center_Save__Save_Point__Save,
     Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower,
     Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
@@ -15243,6 +15380,9 @@ impl fmt::Display for ActionId {
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 write!(f, "{}", "Amagi > Main Area > Save Point > Save")
+            }
+            ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => {
+                write!(f, "{}", "Amagi Breach > East Entrance > Save Point > Save")
             }
             ActionId::Annuna__Center_Save__Save_Point__Save => {
                 write!(f, "{}", "Annuna > Center Save > Save Point > Save")
@@ -15649,6 +15789,9 @@ impl std::str::FromStr for ActionId {
             }
             "Amagi > Main Area > Save Point > Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
+            "Amagi Breach > East Entrance > Save Point > Save" => {
+                Ok(ActionId::Amagi_Breach__East_Entrance__Save_Point__Save)
             }
             "Annuna > Center Save > Save Point > Save" => {
                 Ok(ActionId::Annuna__Center_Save__Save_Point__Save)

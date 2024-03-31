@@ -536,3 +536,10 @@ areas:
           req: ^map__irikar_breach__save_room__save
           time: 12
           tags: [warp]
+    - name: AB East
+      coord: [37, 16]
+      exits:
+        - to: Amagi Breach > East Entrance > Save Point
+          req: ^map__amagi_breach__east_entrance__save
+          time: 12
+          tags: [warp]

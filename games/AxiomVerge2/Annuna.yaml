@@ -2211,14 +2211,52 @@ areas:
   spots:
     - name: East
       coord: [37.95, 16.75]
+      local:
+        - to: Plinth Right
+          jumps: 1
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Lamassu > West 17
+          tags: [xshift]
     - name: Portal Stand
       coord: [37.475, 16.7]
+      local:
+        - to: Plinth Left
+        - to: Plinth Right
     - name: Plinth Right
       coord: [37.55, 16.7]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: East
+      exits:
+        - to: Glacier > Vertical Room > East 17 while hovering
+          req: $hook and $hover
+          jumps: 1
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
     - name: Plinth Left
       coord: [37.4, 16.7]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: West
+      exits:
+        - to: Lamassu > Bottom Hill West
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: West
       coord: [37.1, 16.75]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Plinth Left
+          jumps: 1
+      exits:
+        - to: Glacier > Vertical Room > East 17
+          tags: [xdoor]
 
 - name: Udug Gate
   on_entry: $reset_old_area(^newpos)

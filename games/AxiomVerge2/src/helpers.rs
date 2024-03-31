@@ -2468,17 +2468,23 @@ macro_rules! hobserve__all_urns {
 }
 
 /// $save (  )
-/// ^save = ^position; $refill_energy
+/// IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
 #[macro_export]
 macro_rules! helper__save {
     ($ctx:expr, $world:expr) => {{
-        $ctx.set_save($ctx.position());
+        if data::realm($ctx.position()) == enums::Realm::Breach {
+            $ctx.set_breach_save($ctx.position());
+        }
         helper__refill_energy!($ctx, $world);
     }};
 }
 #[macro_export]
 macro_rules! hobserve__save {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        if {
+            let v = data::realm($ctx.position());
+            v == enums::Realm::Breach
+        } {}
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
 }

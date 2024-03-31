@@ -1,0 +1,12 @@
+name: Glacier Breach
+graph_offset: [0, 30]
+data:
+  realm: breach
+
+areas:
+- name: South Save
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [38.1, 14.75]
+

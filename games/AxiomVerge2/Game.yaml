@@ -79,6 +79,7 @@ exit_movements:
     x: .4
   fling:
     x: .75
+  # TODO: does water affect this?
   mist1:
     x: .1425  # ?
     y: .25
@@ -298,9 +299,9 @@ helpers:
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]
   # To be added: 4 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 2 Health_Fragment, The_Student, Heretics_Granddaughter, Dr_Gloria
+  # 3 Health_Fragment, The_Student, Heretics_Granddaughter, Dr_Gloria
 
-  $save:action: ^save = ^position; $refill_energy
+  $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
   $refill_energy:action: ^energy = $max_energy
   $deploy_drone:action: >
     ^mode = 'drone'; ^indra = ^position;
@@ -339,6 +340,7 @@ helpers:
   # and the Enter action should include $portal_save_update in the `do` effect
   # (since it needs to happen on the old position).
   # TODO: Is this true of portals leaving the breach? Of portals leaving the breach that aren't attached to save points?
+  # TODO: To be tested: off-screen breach portals use a) the portal's intended default, or b) the entered breach room's default
   $main_portal_save_update:action: ^save = ^portal_default
   $breach_portal_save_update:action: ^breach_save = ^portal_default
   $clear_breach_save:action: ^breach_save = $default

@@ -1,0 +1,91 @@
+name: Amagi Breach
+graph_offset: [0, 30]
+data:
+  realm: breach
+  water: true
+
+areas:
+- name: East Entrance
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [37, 15, 38, 16]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > AB East
+  spots:
+    - name: East
+      coord: [37.9, 14.75]
+      local:
+        - to: Grate Right
+          jumps: 1
+      exits:
+        - to: Glacier Breach > South Save > West
+          tags: [xdoor]
+    - name: Grate Right
+      coord: [37.85, 14.7]
+      local:
+        - to: East
+      exits:
+        - to: Grate Left
+          req: Nanite_Mist
+          movement: mist1
+          price: 40
+        - to: Grate Left
+          req: $mist2
+          movement: mist2
+          price: 40
+    - name: Grate Left
+      coord: [37.75, 14.7]
+      local:
+        - to: Save Point
+        - to: West
+      exits:
+        - to: Upper Slope
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Grate Right
+          req: Nanite_Mist
+          movement: mist1
+          price: 40
+        - to: Grate Right
+          req: $mist2
+          movement: mist2
+          price: 40
+    - name: Upper Slope
+      coord: [37.3, 14.6]
+      local:
+        - to: Save Point
+        - to: West
+          thru: [37.4, 14.7]
+        - to: Grate Left
+          req: $hover
+          movement: base
+      locations:
+        - name: Item
+          item: Health_Fragment
+          tags: [standing]
+    - name: Save Point
+      coord: [37.475, 15.6]
+      local:
+        - to: West
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: West
+      coord: [37.1, 15.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: East Connector > East
+          tags: [xdoor]
+
+- name: East Connector
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [36.9, 14.75]
+    - name: West
+      coord: [36.1, 14.75]

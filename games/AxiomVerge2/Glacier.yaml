@@ -821,6 +821,25 @@ areas:
       exits:
         - to: Annuna > Hidden Portal > West
           tags: [xdoor]
+    - name: East 17 while hovering
+      coord: [36.9, 16.65]
+      data:
+        water: true
+      local:
+        - to: Lower Gatestone
+        - to: East 17
+      exits:
+        - to: Lower Switch
+          req: Water_Movement and $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Lower Switch
+          req: $hook and $hover
+          movement: base  # I think we get slowed down?
+          jumps: 1
+        - to: Lower Gatestone
+          req: Water_Movement
+          movement: fast_hover
     - name: Lower Gatestone
       coord: [36.6, 17.0]
       data:
@@ -1547,6 +1566,8 @@ areas:
 
 - name: Crystals
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_default: Amagi Breach > East Entrance > Save Point
   spots:
     - name: West
       coord: [37.05, 13.8]
@@ -1598,6 +1619,8 @@ areas:
 
     - name: Middle Ledge
       coord: [37.35, 14.6]
+      data:
+        flipside: Amagi Breach > East Entrance > Upper Slope
       local:
         - to: Grate Left
         - to: Portal Stand
@@ -1649,6 +1672,8 @@ areas:
           tags: [standing]
     - name: Portal Stand
       coord: [37.475, 15.6]
+      data:
+        flipside: Amagi Breach > East Entrance > Save Point
       local:
         - to: Lower Corner
       exits:
@@ -1666,6 +1691,8 @@ areas:
           tags: [xshift]
     - name: Portal Cage
       coord: [37.85, 14.7]
+      data:
+        flipside: Amagi Breach > East Entrance > Grate Right
       local:
         - to: East
           jumps: 1

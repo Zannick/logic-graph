@@ -1714,6 +1714,10 @@ pub fn access_map__amagi__main_area__save(ctx: &Context, world: &graph::World) -
     // ^map__amagi__main_area__save
     ctx.map__amagi__main_area__save()
 }
+pub fn access_map__amagi_breach__east_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__amagi_breach__east_entrance__save
+    ctx.map__amagi_breach__east_entrance__save()
+}
 pub fn access_map__annuna__center_save__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__annuna__center_save__save
     ctx.map__annuna__center_save__save()
@@ -2190,6 +2194,10 @@ pub fn access_water_movement(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_water_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
     // Water_Movement and $hook
     (ctx.has(Item::Water_Movement) && helper__hook!(ctx, world))
+}
+pub fn access_water_movement_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
+    // Water_Movement and $hook and $hover
+    ((ctx.has(Item::Water_Movement) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
 }
 pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Antarctica`
@@ -8902,6 +8910,21 @@ pub fn explain_map__amagi__main_area__save(
         (r, vec!["^map__amagi__main_area__save"])
     }
 }
+pub fn explain_map__amagi_breach__east_entrance__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__amagi_breach__east_entrance__save
+    {
+        let r = ctx.map__amagi_breach__east_entrance__save();
+        edict.insert(
+            "^map__amagi_breach__east_entrance__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__amagi_breach__east_entrance__save"])
+    }
+}
 pub fn explain_map__annuna__center_save__save(
     ctx: &Context,
     world: &graph::World,
@@ -10966,6 +10989,46 @@ pub fn explain_water_movement_and_hook(
                 let (res, mut refs) = hexplain__hook!(ctx, world, edict);
                 edict.insert("$hook", format!("{:?}", res));
                 refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_water_movement_and_hook_and_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Water_Movement and $hook and $hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Water_Movement);
+                edict.insert("Water_Movement", format!("{}", h));
+                (h, vec!["Water_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -14227,6 +14290,17 @@ pub fn observe_access_map__amagi__main_area__save(
         ctx.map__amagi__main_area__save()
     }
 }
+pub fn observe_access_map__amagi_breach__east_entrance__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__amagi_breach__east_entrance__save
+    {
+        full_obs.observe_map__amagi_breach__east_entrance__save();
+        ctx.map__amagi_breach__east_entrance__save()
+    }
+}
 pub fn observe_access_map__annuna__center_save__save(
     ctx: &Context,
     world: &graph::World,
@@ -15420,6 +15494,18 @@ pub fn observe_access_water_movement_and_hook(
         full_obs.observe_water_movement();
         ctx.has(Item::Water_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_water_movement_and_hook_and_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Water_Movement and $hook and $hover
+    (({
+        full_obs.observe_water_movement();
+        ctx.has(Item::Water_Movement)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+        && (hobserve__hover!(ctx, world, full_obs)))
 }
 pub fn observe_access_within_antarctica(
     ctx: &Context,

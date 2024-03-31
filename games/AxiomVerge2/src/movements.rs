@@ -43,6 +43,52 @@ pub fn observe_movement_state(
 
 pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
     match (movement_state, src, dest) {
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 1238,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 2927,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+        ) => 225,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 1689,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ) => 2027,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 1000,
+        // [0.45045, 1.351351]
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 1801,
+        (
+            [false],
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 1689,
         ([false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 4054,
         ([false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 4054,
         ([false], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 2252,
@@ -1459,6 +1505,56 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             526
         }
         ([false], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__East,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => 263,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 1315,
         (
             [false],
             SpotId::Annuna__Lamassu__Above_Flat_Ground,
@@ -7456,6 +7552,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1801,
         (
             [false],
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 100,
+        (
+            [false],
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 1351,
+        (
+            [false],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 2650,
@@ -8801,6 +8907,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([false], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([false], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([false], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
         ([false], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
@@ -14700,6 +14807,52 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Uhrum__West_Entrance__West_of_Gate,
             SpotId::Uhrum__West_Entrance__Portal_Stand,
         ) => 438,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 964,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+        ) => 175,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 1000,
+        // [0.350877, 1.052632]
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => 1315,
         ([true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
         ([true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
         ([true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => {
@@ -16265,6 +16418,56 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         ([true], SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => 526,
         ([true], SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => 1578,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__East,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => 263,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => 1315,
         (
             [true],
             SpotId::Annuna__Lamassu__Above_Flat_Ground,
@@ -22032,6 +22235,16 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1403,
         (
             [true],
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => 100,
+        (
+            [true],
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => 1052,
+        (
+            [true],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 2650,
@@ -23321,6 +23534,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             701
         }
+        ([true], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([true], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([true], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
         ([true], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
@@ -29154,6 +29368,42 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
 
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => true,
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => true,
         (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => true,
         (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => true,
         (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => true,
@@ -30562,6 +30812,28 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Upper_Brick_Ledge) => true,
         (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__Portal_Stand) => true,
         (SpotId::Annuna__Lamassu__East_14, SpotId::Annuna__Lamassu__West_15) => true,
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Plinth_Right) => true,
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Portal_Stand) => true,
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => true,
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => true,
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => true,
+        (SpotId::Annuna__Hidden_Portal__Plinth_Right, SpotId::Annuna__Hidden_Portal__East) => true,
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => true,
+        (SpotId::Annuna__Hidden_Portal__Plinth_Left, SpotId::Annuna__Hidden_Portal__West) => true,
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Portal_Stand) => true,
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Plinth_Left) => true,
         (SpotId::Annuna__Center_Save__East, SpotId::Annuna__Center_Save__Save_Point) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__West_Floor) => true,
         (SpotId::Annuna__Center_Save__Save_Point, SpotId::Annuna__Center_Save__East) => true,
@@ -33174,6 +33446,14 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Glacier__Vertical_Room__East_17,
             SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
         ) => true,
         (
             SpotId::Glacier__Vertical_Room__Lower_Gatestone,
@@ -37339,6 +37619,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -38049,6 +38330,116 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
 
 pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
+        (
+            SpotId::Amagi_Breach__East_Connector__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Connector__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Glacier_Breach__South_Save__West,
+            1600,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            350,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            964,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            2027,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+            2280,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+            175,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            350,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+            1315,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            1578,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+            1403,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Connector__East,
+            1600,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            1315,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
         (
             SpotId::Amagi__East_Lake__East_15_Flat,
             SpotId::Menu__Upgrade_Menu__Physiology,
@@ -41831,8 +42222,38 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            1666,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__East,
+            SpotId::Annuna__Lamassu__West_17,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            263,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__West,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Lamassu__Bottom_Hill_West,
+            3225,
         ),
         (
             SpotId::Annuna__Hidden_Portal__Plinth_Left,
@@ -41841,13 +42262,53 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__East,
+            1403,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            263,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            2724,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            263,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            263,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            1315,
+        ),
+        (
+            SpotId::Annuna__Hidden_Portal__West,
+            SpotId::Glacier__Vertical_Room__East_17,
+            1600,
         ),
         (
             SpotId::Annuna__Hidden_Portal__West,
@@ -55550,6 +56011,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier_Breach__South_Save__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Apocalypse_Entry__Above_Grate,
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
             300,
@@ -57801,6 +58267,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
+            100,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+            749,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Switch,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -60971,6 +61457,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Sight_Room__West_24,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__AB_East,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__AB_East,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1466,
+        ),
+        (
+            SpotId::Menu__Breach_Map__AB_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -68614,6 +69115,42 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 
 pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
     match (sp1, sp2) {
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ) => Some(1000),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => Some(1238),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => Some(2927),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+        ) => Some(225),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => Some(1689),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ) => Some(2027),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => Some(1000),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => Some(1801),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => Some(1689),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => Some(4054),
         (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => Some(4054),
         (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => None,
@@ -69698,6 +70235,40 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => Some(1052),
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => Some(526),
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => Some(1578),
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Plinth_Right) => {
+            Some(1403)
+        }
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Portal_Stand) => {
+            Some(1666)
+        }
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => Some(263),
+        (SpotId::Annuna__Hidden_Portal__Plinth_Left, SpotId::Annuna__Hidden_Portal__West) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Hidden_Portal__Plinth_Right, SpotId::Annuna__Hidden_Portal__East) => {
+            Some(1403)
+        }
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => Some(263),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => Some(263),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => Some(263),
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Plinth_Left) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Portal_Stand) => {
+            Some(1315)
+        }
         (
             SpotId::Annuna__Lamassu__Above_Flat_Ground,
             SpotId::Annuna__Lamassu__Bottom_West_Ledge,
@@ -73780,6 +74351,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Vertical_Room__East_17, SpotId::Glacier__Vertical_Room__Lower_Switch) => {
             Some(1801)
         }
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => Some(100),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => Some(1351),
         (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_11) => {
             Some(2650)
         }
@@ -74726,6 +75305,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(964)
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
+        (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => Some(1466),
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => Some(500),
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => Some(2100),
         (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => Some(1500),
@@ -78859,6 +79439,42 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
 
 pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (sp1, sp2) {
+        (
+            SpotId::Amagi_Breach__East_Entrance__East,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => (Some(1238), vec![([true], 964)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => (Some(2927), vec![([true], 2280)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            SpotId::Amagi_Breach__East_Entrance__East,
+        ) => (Some(225), vec![([true], 175)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => (Some(1689), vec![([true], 1315)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ) => (Some(2027), vec![([true], 1578)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            SpotId::Amagi_Breach__East_Entrance__West,
+        ) => (Some(1801), vec![([true], 1403)]),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ) => (Some(1689), vec![([true], 1315)]),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
             (Some(4054), vec![([true], 3157)])
         }
@@ -80142,6 +80758,40 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => {
             (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Plinth_Right) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Annuna__Hidden_Portal__East, SpotId::Annuna__Hidden_Portal__Portal_Stand) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => (Some(263), vec![]),
+        (SpotId::Annuna__Hidden_Portal__Plinth_Left, SpotId::Annuna__Hidden_Portal__West) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Hidden_Portal__Plinth_Right, SpotId::Annuna__Hidden_Portal__East) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+        ) => (Some(263), vec![]),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Left,
+        ) => (Some(263), vec![]),
+        (
+            SpotId::Annuna__Hidden_Portal__Portal_Stand,
+            SpotId::Annuna__Hidden_Portal__Plinth_Right,
+        ) => (Some(263), vec![]),
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Plinth_Left) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Hidden_Portal__West, SpotId::Annuna__Hidden_Portal__Portal_Stand) => {
+            (Some(1315), vec![])
         }
         (
             SpotId::Annuna__Lamassu__Above_Flat_Ground,
@@ -85093,6 +85743,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Vertical_Room__East_17, SpotId::Glacier__Vertical_Room__Lower_Switch) => {
             (Some(1801), vec![([true], 1403)])
         }
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__East_17,
+        ) => (Some(100), vec![]),
+        (
+            SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+            SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        ) => (Some(1351), vec![([true], 1052)]),
         (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_11) => {
             (Some(2650), vec![])
         }
@@ -86116,6 +86774,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => {
             (Some(701), vec![])
+        }
+        (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1466), vec![])
         }
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(500), vec![])
