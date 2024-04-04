@@ -6588,6 +6588,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__East,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Upper_Corner,
             SpotId::Glacier_Breach__Control__Upper_Gap,
         ) => 350,
         (
@@ -21502,6 +21507,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__East,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Upper_Corner,
             SpotId::Glacier_Breach__Control__Upper_Gap,
         ) => 350,
         (
@@ -33656,6 +33666,9 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier_Breach__Control__Upper_Corner,
             SpotId::Glacier_Breach__Control__Upper_Gap,
         ) => true,
+        (SpotId::Glacier_Breach__Control__Upper_Corner, SpotId::Glacier_Breach__Control__East) => {
+            true
+        }
         (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
             true
         }
@@ -56619,6 +56632,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__East,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
             SpotId::Glacier_Breach__Control__Lower_Corner,
             1049,
         ),
@@ -74879,6 +74897,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
             Some(1052)
         }
+        (SpotId::Glacier_Breach__Control__Upper_Corner, SpotId::Glacier_Breach__Control__East) => {
+            Some(1754)
+        }
         (
             SpotId::Glacier_Breach__Control__Upper_Corner,
             SpotId::Glacier_Breach__Control__Upper_Gap,
@@ -86350,6 +86371,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1052), vec![]),
         (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
             (Some(1052), vec![])
+        }
+        (SpotId::Glacier_Breach__Control__Upper_Corner, SpotId::Glacier_Breach__Control__East) => {
+            (Some(1754), vec![])
         }
         (
             SpotId::Glacier_Breach__Control__Upper_Corner,

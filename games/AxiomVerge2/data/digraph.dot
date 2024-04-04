@@ -4709,6 +4709,7 @@ digraph AxiomVerge2 {
     Glacier_Breach__Control__Further_In -> Glacier_Breach__Control__Upper_Gap;
     Glacier_Breach__Control__Further_In -> Glacier_Breach__Control__Upper_Corner;
     Glacier_Breach__Control__Upper_Gap -> Glacier_Breach__Control__Lower_Corner;
+    Glacier_Breach__Control__Upper_Corner -> Glacier_Breach__Control__East;
     Glacier_Breach__Control__Upper_Corner -> Glacier_Breach__Control__Upper_Gap;
     Glacier_Breach__Control__Lower_Corner -> Glacier_Breach__Control__West;
     Glacier_Breach__Floaters__East -> Glacier_Breach__Floaters__West;

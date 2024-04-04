@@ -9158,6 +9158,7 @@ pub enum LocationId {
     Glacier__Vertical_Room__Peak__Flask,
     Glacier__Vertical_Room__Under_Switch__Switch,
     Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+    Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
     Glacier_Breach__Grate_Work__Grate_Interior__Item,
     Interior__Building_Interior__Corner__Urn,
     Interior__Building_Interior__Entry__Remote_Urn,
@@ -9897,6 +9898,11 @@ impl fmt::Display for LocationId {
                 f,
                 "{}",
                 "Glacier Breach > Control > Upper Corner > Control Enemy"
+            ),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => write!(
+                f,
+                "{}",
+                "Glacier Breach > Control > Upper Corner > Control Enemy And Jump"
             ),
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => write!(
                 f,
@@ -10764,6 +10770,9 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier Breach > Control > Upper Corner > Control Enemy" => {
                 Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy)
+            }
+            "Glacier Breach > Control > Upper Corner > Control Enemy And Jump" => {
+                Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump)
             }
             "Glacier Breach > Grate Work > Grate Interior > Item" => {
                 Ok(LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item)
@@ -12233,7 +12242,7 @@ pub enum ExitId {
     Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
-    Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+    Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
     Glacier_Breach__Control__West__ex__Crystals__East_1,
     Glacier_Breach__Crystals__East__ex__Control__East_1,
     Glacier_Breach__Crystals__East__ex__West_1,
@@ -13783,7 +13792,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
-            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => write!(f, "{}", "Glacier Breach > Control > Upper Corner > Control Enemy"),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => write!(f, "{}", "Glacier Breach > Control > Upper Corner > Control Enemy And Jump"),
             ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => write!(f, "{}", "Glacier Breach > Control > West ==> Crystals > East (1)"),
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => write!(f, "{}", "Glacier Breach > Crystals > East ==> Control > East (1)"),
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => write!(f, "{}", "Glacier Breach > Crystals > East ==> West (1)"),
@@ -15338,7 +15347,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
-            "Glacier Breach > Control > Upper Corner > Control Enemy" => Ok(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
+            "Glacier Breach > Control > Upper Corner > Control Enemy And Jump" => Ok(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
             "Glacier Breach > Control > West ==> Crystals > East (1)" => Ok(ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1),
             "Glacier Breach > Crystals > East ==> Control > East (1)" => Ok(ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1),
             "Glacier Breach > Crystals > East ==> West (1)" => Ok(ExitId::Glacier_Breach__Crystals__East__ex__West_1),
@@ -16660,6 +16669,7 @@ pub enum CanonId {
     Giguna_Boulder,
     Giguna_Gateway_Block,
     Giguna_Gubi,
+    Sync_Flask,
     Glacier_Big_Drop_Rock,
     Glacier_Sea_Burial_Rock,
     Ledge_Grab,
@@ -16715,6 +16725,7 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
+            CanonId::Sync_Flask => write!(f, "{}", "Sync_Flask"),
             CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
@@ -16776,6 +16787,7 @@ impl std::str::FromStr for CanonId {
             "Giguna_Boulder" => Ok(CanonId::Giguna_Boulder),
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Giguna_Gubi" => Ok(CanonId::Giguna_Gubi),
+            "Sync_Flask" => Ok(CanonId::Sync_Flask),
             "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),

@@ -318,10 +318,21 @@ areas:
       coord: [36.4, 12.55]
       local:
         - to: Upper Gap
-      hybrid:
+        - to: East
+          jumps: 1
+      locations:
         - name: Control Enemy
+          item: Big_Flask
+          canon: Sync_Flask
+          req: $sync
+          price: 50
+          tags: [flask]
+          time: 6.0
+      hybrid:
+        - name: Control Enemy And Jump
           to: Lower Corner
           item: Big_Flask
+          canon: Sync_Flask
           req: $sync
           price: 50
           movement: base

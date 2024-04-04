@@ -3512,6 +3512,9 @@ impl world::Accessible for Location {
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
                 rules::access_sync(ctx, world)
             }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
+                rules::access_sync(ctx, world)
+            }
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => true,
             LocationId::Interior__Building_Interior__Corner__Urn => true,
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
@@ -4031,6 +4034,9 @@ impl world::Accessible for Location {
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
                 rules::observe_access_sync(ctx, world, full_obs)
             }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
+                rules::observe_access_sync(ctx, world, full_obs)
+            }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
                 rules::observe_access_boomerang(ctx, world, full_obs)
             }
@@ -4532,6 +4538,9 @@ impl world::Accessible for Location {
                 rules::explain_boomerang3(ctx, world, edict)
             }
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                rules::explain_sync(ctx, world, edict)
+            }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
                 rules::explain_sync(ctx, world, edict)
             }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
@@ -5908,7 +5917,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
-            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::access_sync(ctx, world),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::access_sync(ctx, world),
             ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => true,
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => true,
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::access_hook(ctx, world),
@@ -7121,7 +7130,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::observe_access_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::observe_access_sync(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_sync(ctx, world, full_obs),
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::observe_access_hover(ctx, world, full_obs),
@@ -8390,7 +8399,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::explain_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::explain_sync(ctx, world, edict),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_sync(ctx, world, edict),
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::explain_hover(ctx, world, edict),
@@ -12657,7 +12666,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 264;
+    const NUM_LOCATIONS: u32 = 265;
 
     fn ruleset(&self) -> String {
         format!(
@@ -12841,6 +12850,10 @@ impl world::World for World {
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
             ],
+            CanonId::Sync_Flask => vec![
+                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
+            ],
             CanonId::Glacier_Big_Drop_Rock => vec![
                 LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
                 LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
@@ -13022,6 +13035,7 @@ impl world::World for World {
                 LocationId::Giguna__Clouds__Cache__Item,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
                 LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
@@ -13695,6 +13709,9 @@ impl world::World for World {
                 SpotId::Glacier_Breach__Grate_Work__Grate_Interior
             }
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                SpotId::Glacier_Breach__Control__Upper_Corner
+            }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
                 SpotId::Glacier_Breach__Control__Upper_Corner
             }
             LocationId::Glacier__Compass_Room__Center__Table => {
@@ -14890,7 +14907,7 @@ impl world::World for World {
             ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 | ExitId:: Glacier_Breach__Zappers__Hill_East__ex__Trough_1 | ExitId:: Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => SpotId::Glacier_Breach__Zappers__Hill_East,
             ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 | ExitId:: Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => SpotId::Glacier_Breach__Zappers__Trough,
             ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => SpotId::Glacier_Breach__Zappers__West,
-            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => SpotId::Glacier_Breach__Control__Upper_Corner,
             ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => SpotId::Glacier_Breach__Control__West,
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 | ExitId:: Glacier_Breach__Crystals__East__ex__West_1 => SpotId::Glacier_Breach__Crystals__East,
             ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => SpotId::Glacier_Breach__Crystals__West,
@@ -18196,11 +18213,19 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => Location {
             id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
-            canonical: CanonId::None,
+            canonical: CanonId::Sync_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Energy(50),
+            time: 6000,
+            exit_id: None,
+        },
+        LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => Location {
+            id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
+            canonical: CanonId::Sync_Flask,
             item: Item::Big_Flask,
             price: Currency::Energy(50),
             time: 5500,
-            exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
+            exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
             id: LocationId::Glacier__Compass_Room__Center__Table,
@@ -26380,12 +26405,12 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => Exit {
-            id: ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+        ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => Exit {
+            id: ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
             time: 1049,
             dest: SpotId::Glacier_Breach__Control__Lower_Corner,
             price: Currency::Free,
-            loc_id: Some(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
+            loc_id: Some(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
         },
         ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => Exit {
             id: ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1,
@@ -44002,7 +44027,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Glacier_Breach__Control__Upper_Corner,
             locations: Range {
                 start: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy.into_usize(),
-                end: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy.into_usize() + 1,
+                end: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
