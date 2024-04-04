@@ -1057,7 +1057,46 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier_Breach__South_Save__Save_Point
         | SpotId::Glacier_Breach__South_Save__Brick_Ledge
         | SpotId::Glacier_Breach__South_Save__East => AreaId::Glacier_Breach__South_Save,
-        SpotId::Glacier_Breach__Great_Work__West_14 => AreaId::Glacier_Breach__Great_Work,
+        SpotId::Glacier_Breach__Grate_Work__West_14
+        | SpotId::Glacier_Breach__Grate_Work__West_Ledge
+        | SpotId::Glacier_Breach__Grate_Work__West_13
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Corner
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Interior
+        | SpotId::Glacier_Breach__Grate_Work__Below_Grate
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Southeast
+        | SpotId::Glacier_Breach__Grate_Work__Grate_West
+        | SpotId::Glacier_Breach__Grate_Work__Grate_East
+        | SpotId::Glacier_Breach__Grate_Work__East_Hill
+        | SpotId::Glacier_Breach__Grate_Work__East
+        | SpotId::Glacier_Breach__Grate_Work__Southeast => AreaId::Glacier_Breach__Grate_Work,
+        SpotId::Glacier_Breach__Zappers__East
+        | SpotId::Glacier_Breach__Zappers__Hill_East
+        | SpotId::Glacier_Breach__Zappers__Trough
+        | SpotId::Glacier_Breach__Zappers__West => AreaId::Glacier_Breach__Zappers,
+        SpotId::Glacier_Breach__Control__East
+        | SpotId::Glacier_Breach__Control__Further_In
+        | SpotId::Glacier_Breach__Control__Upper_Gap
+        | SpotId::Glacier_Breach__Control__Upper_Corner
+        | SpotId::Glacier_Breach__Control__Lower_Corner
+        | SpotId::Glacier_Breach__Control__West => AreaId::Glacier_Breach__Control,
+        SpotId::Glacier_Breach__Crystals__East | SpotId::Glacier_Breach__Crystals__West => {
+            AreaId::Glacier_Breach__Crystals
+        }
+        SpotId::Glacier_Breach__Floaters__East | SpotId::Glacier_Breach__Floaters__West => {
+            AreaId::Glacier_Breach__Floaters
+        }
+        SpotId::Glacier_Breach__West_Save__East_12
+        | SpotId::Glacier_Breach__West_Save__Save_Point
+        | SpotId::Glacier_Breach__West_Save__West_Nub
+        | SpotId::Glacier_Breach__West_Save__West_Ledge
+        | SpotId::Glacier_Breach__West_Save__East_11
+        | SpotId::Glacier_Breach__West_Save__West_11 => AreaId::Glacier_Breach__West_Save,
+        SpotId::Glacier_Breach__Guarded_Corridor__West => AreaId::Glacier_Breach__Guarded_Corridor,
+        SpotId::Glacier_Breach__Empty_Space__West => AreaId::Glacier_Breach__Empty_Space,
+        SpotId::Glacier_Breach__Angry_Lions__North => AreaId::Glacier_Breach__Angry_Lions,
+        SpotId::Glacier_Breach__Spidery_Connector__East => {
+            AreaId::Glacier_Breach__Spidery_Connector
+        }
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             AreaId::Glacier__Dock_Outside
         }
@@ -1433,7 +1472,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
         | SpotId::Menu__Breach_Map__AB_East
-        | SpotId::Menu__Breach_Map__GlB_South => AreaId::Menu__Breach_Map,
+        | SpotId::Menu__Breach_Map__GlB_South
+        | SpotId::Menu__Breach_Map__GlB_West => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2587,7 +2627,44 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier_Breach__South_Save__Save_Point
         | SpotId::Glacier_Breach__South_Save__Brick_Ledge
         | SpotId::Glacier_Breach__South_Save__East => RegionId::Glacier_Breach,
-        SpotId::Glacier_Breach__Great_Work__West_14 => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Grate_Work__West_14
+        | SpotId::Glacier_Breach__Grate_Work__West_Ledge
+        | SpotId::Glacier_Breach__Grate_Work__West_13
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Corner
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Interior
+        | SpotId::Glacier_Breach__Grate_Work__Below_Grate
+        | SpotId::Glacier_Breach__Grate_Work__Grate_Southeast
+        | SpotId::Glacier_Breach__Grate_Work__Grate_West
+        | SpotId::Glacier_Breach__Grate_Work__Grate_East
+        | SpotId::Glacier_Breach__Grate_Work__East_Hill
+        | SpotId::Glacier_Breach__Grate_Work__East
+        | SpotId::Glacier_Breach__Grate_Work__Southeast => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Zappers__East
+        | SpotId::Glacier_Breach__Zappers__Hill_East
+        | SpotId::Glacier_Breach__Zappers__Trough
+        | SpotId::Glacier_Breach__Zappers__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Control__East
+        | SpotId::Glacier_Breach__Control__Further_In
+        | SpotId::Glacier_Breach__Control__Upper_Gap
+        | SpotId::Glacier_Breach__Control__Upper_Corner
+        | SpotId::Glacier_Breach__Control__Lower_Corner
+        | SpotId::Glacier_Breach__Control__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Crystals__East | SpotId::Glacier_Breach__Crystals__West => {
+            RegionId::Glacier_Breach
+        }
+        SpotId::Glacier_Breach__Floaters__East | SpotId::Glacier_Breach__Floaters__West => {
+            RegionId::Glacier_Breach
+        }
+        SpotId::Glacier_Breach__West_Save__East_12
+        | SpotId::Glacier_Breach__West_Save__Save_Point
+        | SpotId::Glacier_Breach__West_Save__West_Nub
+        | SpotId::Glacier_Breach__West_Save__West_Ledge
+        | SpotId::Glacier_Breach__West_Save__East_11
+        | SpotId::Glacier_Breach__West_Save__West_11 => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Guarded_Corridor__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Empty_Space__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Angry_Lions__North => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Spidery_Connector__East => RegionId::Glacier_Breach,
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             RegionId::Glacier
         }
@@ -2953,7 +3030,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
         | SpotId::Menu__Breach_Map__AB_East
-        | SpotId::Menu__Breach_Map__GlB_South => RegionId::Menu,
+        | SpotId::Menu__Breach_Map__GlB_South
+        | SpotId::Menu__Breach_Map__GlB_West => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -3431,6 +3509,10 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::access_boomerang3(ctx, world)
             }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                rules::access_sync(ctx, world)
+            }
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => true,
             LocationId::Interior__Building_Interior__Corner__Urn => true,
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
                 rules::access_boomerang(ctx, world)
@@ -3946,6 +4028,9 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::observe_access_boomerang3(ctx, world, full_obs)
             }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                rules::observe_access_sync(ctx, world, full_obs)
+            }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
                 rules::observe_access_boomerang(ctx, world, full_obs)
             }
@@ -4445,6 +4530,9 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 rules::explain_boomerang3(ctx, world, edict)
+            }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                rules::explain_sync(ctx, world, edict)
             }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
                 rules::explain_boomerang(ctx, world, edict)
@@ -5820,10 +5908,65 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::access_sync(ctx, world),
+            ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => true,
+            ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => true,
+            ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => true,
+            ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => true,
+            ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::access_hook(ctx, world),
-            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => true,
+            ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => true,
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
+            ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => true,
+            ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => true,
+            ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => true,
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 => true,
+            ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => rules::access_sync(ctx, world),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 => rules::access_sync(ctx, world),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => rules::access_sync(ctx, world),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => rules::access_sync_and_hook(ctx, world),
+            ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::access_boomerang(ctx, world),
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
@@ -5957,6 +6100,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
+            ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::access_map__glacier_breach__west_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
@@ -6977,8 +7121,49 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::observe_access_sync(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => rules::observe_access_sync(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 => rules::observe_access_sync(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => rules::observe_access_sync(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => rules::observe_access_sync_and_hook(ctx, world, full_obs),
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_boomerang(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::observe_access_hook(ctx, world, full_obs),
@@ -7055,6 +7240,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__west_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
@@ -8204,8 +8390,49 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::explain_sync(ctx, world, edict),
+            ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => rules::explain_sync(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 => rules::explain_sync(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => rules::explain_sync(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => rules::explain_sync_and_hook(ctx, world, edict),
             ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_boomerang(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::explain_grab_or_climb(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::explain_hook(ctx, world, edict),
@@ -8282,6 +8509,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::explain_map__glacier_breach__west_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
@@ -8816,8 +9044,22 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
-            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => true,
+            ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => true,
+            ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => true,
+            ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => true,
+            ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => true,
+            ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => true,
+            ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => true,
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
+            ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => true,
+            ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => true,
+            ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => true,
+            ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 => true,
+            ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
             ExitId::Interior__Bunker_Interior__Entry__ex__Ebih__Base_Camp__Bunker_Entry_1 => true,
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 => true,
@@ -9013,6 +9255,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Revival__Save_Point__Save => true,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_open(ctx, world),
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => true,
+            ActionId::Glacier_Breach__West_Save__Save_Point__Save => true,
             ActionId::Global__Become_Drone => rules::access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world),
             ActionId::Global__Become_Indra => rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world),
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_can_deploy(ctx, world),
@@ -9339,6 +9582,7 @@ impl world::Action for Action {
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Glacier_Breach__West_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
@@ -9886,6 +10130,9 @@ impl world::Action for Action {
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
+            ActionId::Glacier_Breach__West_Save__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
@@ -10116,7 +10363,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1510] = [
+static RAW_SPOTS: [SpotId; 1546] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -11285,11 +11532,46 @@ static RAW_SPOTS: [SpotId; 1510] = [
     SpotId::Glacier__Vertical_Room__West_15_Lower,
     SpotId::Glacier__Vertical_Room__West_8,
     SpotId::Glacier__Vertical_Room__West_9,
-    SpotId::Glacier_Breach__Great_Work__West_14,
+    SpotId::Glacier_Breach__Angry_Lions__North,
+    SpotId::Glacier_Breach__Control__East,
+    SpotId::Glacier_Breach__Control__Further_In,
+    SpotId::Glacier_Breach__Control__Lower_Corner,
+    SpotId::Glacier_Breach__Control__Upper_Corner,
+    SpotId::Glacier_Breach__Control__Upper_Gap,
+    SpotId::Glacier_Breach__Control__West,
+    SpotId::Glacier_Breach__Crystals__East,
+    SpotId::Glacier_Breach__Crystals__West,
+    SpotId::Glacier_Breach__Empty_Space__West,
+    SpotId::Glacier_Breach__Floaters__East,
+    SpotId::Glacier_Breach__Floaters__West,
+    SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+    SpotId::Glacier_Breach__Grate_Work__East,
+    SpotId::Glacier_Breach__Grate_Work__East_Hill,
+    SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+    SpotId::Glacier_Breach__Grate_Work__Grate_East,
+    SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+    SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+    SpotId::Glacier_Breach__Grate_Work__Grate_West,
+    SpotId::Glacier_Breach__Grate_Work__Southeast,
+    SpotId::Glacier_Breach__Grate_Work__West_13,
+    SpotId::Glacier_Breach__Grate_Work__West_14,
+    SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+    SpotId::Glacier_Breach__Guarded_Corridor__West,
     SpotId::Glacier_Breach__South_Save__Brick_Ledge,
     SpotId::Glacier_Breach__South_Save__East,
     SpotId::Glacier_Breach__South_Save__Save_Point,
     SpotId::Glacier_Breach__South_Save__West,
+    SpotId::Glacier_Breach__Spidery_Connector__East,
+    SpotId::Glacier_Breach__West_Save__East_11,
+    SpotId::Glacier_Breach__West_Save__East_12,
+    SpotId::Glacier_Breach__West_Save__Save_Point,
+    SpotId::Glacier_Breach__West_Save__West_11,
+    SpotId::Glacier_Breach__West_Save__West_Ledge,
+    SpotId::Glacier_Breach__West_Save__West_Nub,
+    SpotId::Glacier_Breach__Zappers__East,
+    SpotId::Glacier_Breach__Zappers__Hill_East,
+    SpotId::Glacier_Breach__Zappers__Trough,
+    SpotId::Glacier_Breach__Zappers__West,
     SpotId::Interior__Building_Interior__Corner,
     SpotId::Interior__Building_Interior__Entry,
     SpotId::Interior__Bunker_Interior__Desk,
@@ -11466,6 +11748,7 @@ static RAW_SPOTS: [SpotId; 1510] = [
     SpotId::Menu__Breach_Map__GB_Peak,
     SpotId::Menu__Breach_Map__GB_SW_Save,
     SpotId::Menu__Breach_Map__GlB_South,
+    SpotId::Menu__Breach_Map__GlB_West,
     SpotId::Menu__Breach_Map__IB_Basement,
     SpotId::Menu__Breach_Map__IB_Gauntlet,
     SpotId::Menu__Breach_Map__IB_Save_Room,
@@ -12044,13 +12327,49 @@ lazy_static! {
             start: SpotId::Giguna__West_Tower__East_7.into_usize(),
             end: SpotId::Giguna__West_Tower__Top.into_usize() + 1,
         },
-        AreaId::Glacier_Breach__Great_Work => Range {
-            start: SpotId::Glacier_Breach__Great_Work__West_14.into_usize(),
-            end: SpotId::Glacier_Breach__Great_Work__West_14.into_usize() + 1,
+        AreaId::Glacier_Breach__Angry_Lions => Range {
+            start: SpotId::Glacier_Breach__Angry_Lions__North.into_usize(),
+            end: SpotId::Glacier_Breach__Angry_Lions__North.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Control => Range {
+            start: SpotId::Glacier_Breach__Control__East.into_usize(),
+            end: SpotId::Glacier_Breach__Control__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Crystals => Range {
+            start: SpotId::Glacier_Breach__Crystals__East.into_usize(),
+            end: SpotId::Glacier_Breach__Crystals__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Empty_Space => Range {
+            start: SpotId::Glacier_Breach__Empty_Space__West.into_usize(),
+            end: SpotId::Glacier_Breach__Empty_Space__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Floaters => Range {
+            start: SpotId::Glacier_Breach__Floaters__East.into_usize(),
+            end: SpotId::Glacier_Breach__Floaters__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Grate_Work => Range {
+            start: SpotId::Glacier_Breach__Grate_Work__Below_Grate.into_usize(),
+            end: SpotId::Glacier_Breach__Grate_Work__West_Ledge.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Guarded_Corridor => Range {
+            start: SpotId::Glacier_Breach__Guarded_Corridor__West.into_usize(),
+            end: SpotId::Glacier_Breach__Guarded_Corridor__West.into_usize() + 1,
         },
         AreaId::Glacier_Breach__South_Save => Range {
             start: SpotId::Glacier_Breach__South_Save__Brick_Ledge.into_usize(),
             end: SpotId::Glacier_Breach__South_Save__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Spidery_Connector => Range {
+            start: SpotId::Glacier_Breach__Spidery_Connector__East.into_usize(),
+            end: SpotId::Glacier_Breach__Spidery_Connector__East.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__West_Save => Range {
+            start: SpotId::Glacier_Breach__West_Save__East_11.into_usize(),
+            end: SpotId::Glacier_Breach__West_Save__West_Nub.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Zappers => Range {
+            start: SpotId::Glacier_Breach__Zappers__East.into_usize(),
+            end: SpotId::Glacier_Breach__Zappers__West.into_usize() + 1,
         },
         AreaId::Glacier__Apocalypse_Entry => Range {
             start: SpotId::Glacier__Apocalypse_Entry__Above_Grate.into_usize(),
@@ -12338,7 +12657,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 262;
+    const NUM_LOCATIONS: u32 = 264;
 
     fn ruleset(&self) -> String {
         format!(
@@ -12641,6 +12960,7 @@ impl world::World for World {
                 LocationId::Giguna__Lamassu__Deposit__Flask,
                 LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
                 LocationId::Giguna__Gateway__Flask_Ledge__Item,
+                LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
                 LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
                 LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
@@ -12701,6 +13021,7 @@ impl world::World for World {
                 LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
                 LocationId::Giguna__Clouds__Cache__Item,
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
+                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
@@ -13370,6 +13691,12 @@ impl world::World for World {
                 SpotId::Giguna__Gubi_Lair__Center_Platform
             }
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => SpotId::Giguna__Gubi_Lair__Pedestal,
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => {
+                SpotId::Glacier_Breach__Grate_Work__Grate_Interior
+            }
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
+                SpotId::Glacier_Breach__Control__Upper_Corner
+            }
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
@@ -13847,6 +14174,9 @@ impl world::World for World {
             }
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
                 SpotId::Glacier_Breach__South_Save__Save_Point
+            }
+            ActionId::Glacier_Breach__West_Save__Save_Point__Save => {
+                SpotId::Glacier_Breach__West_Save__Save_Point
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
@@ -14543,7 +14873,34 @@ impl world::World for World {
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => SpotId::Glacier_Breach__South_Save__West,
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => SpotId::Glacier_Breach__South_Save__Save_Point,
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => SpotId::Glacier_Breach__South_Save__Brick_Ledge,
-            ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => SpotId::Glacier_Breach__South_Save__East,
+            ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => SpotId::Glacier_Breach__South_Save__East,
+            ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 | ExitId:: Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => SpotId::Glacier_Breach__Grate_Work__West_14,
+            ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 | ExitId:: Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => SpotId::Glacier_Breach__Grate_Work__West_13,
+            ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2 => SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2 | ExitId:: Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 | ExitId:: Glacier_Breach__Grate_Work__East_Hill__ex__East_1 | ExitId:: Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => SpotId::Glacier_Breach__Grate_Work__East,
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 | ExitId:: Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 | ExitId:: Glacier_Breach__Grate_Work__Southeast__ex__East_1 => SpotId::Glacier_Breach__Grate_Work__Southeast,
+            ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 | ExitId:: Glacier_Breach__Zappers__East__ex__Hill_East_1 => SpotId::Glacier_Breach__Zappers__East,
+            ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 | ExitId:: Glacier_Breach__Zappers__Hill_East__ex__Trough_1 | ExitId:: Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => SpotId::Glacier_Breach__Zappers__Hill_East,
+            ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 | ExitId:: Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => SpotId::Glacier_Breach__Zappers__Trough,
+            ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => SpotId::Glacier_Breach__Zappers__West,
+            ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
+            ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => SpotId::Glacier_Breach__Control__West,
+            ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 | ExitId:: Glacier_Breach__Crystals__East__ex__West_1 => SpotId::Glacier_Breach__Crystals__East,
+            ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => SpotId::Glacier_Breach__Crystals__West,
+            ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => SpotId::Glacier_Breach__Floaters__East,
+            ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => SpotId::Glacier_Breach__Floaters__West,
+            ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => SpotId::Glacier_Breach__West_Save__East_12,
+            ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 | ExitId:: Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => SpotId::Glacier_Breach__West_Save__West_Nub,
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 | ExitId:: Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => SpotId::Glacier_Breach__West_Save__West_Ledge,
+            ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 | ExitId:: Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => SpotId::Glacier_Breach__West_Save__East_11,
+            ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => SpotId::Glacier_Breach__West_Save__West_11,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
@@ -14787,6 +15144,7 @@ impl world::World for World {
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Save_Room,
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => SpotId::Menu__Breach_Map__AB_East,
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_South,
+            ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_West,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -16255,9 +16613,27 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__West_15_Lower
             | SpotId::Glacier__Vertical_Room__West_8
             | SpotId::Glacier__Vertical_Room__West_9
+            | SpotId::Glacier_Breach__Control__Upper_Corner
+            | SpotId::Glacier_Breach__Control__West
+            | SpotId::Glacier_Breach__Crystals__East
+            | SpotId::Glacier_Breach__Crystals__West
+            | SpotId::Glacier_Breach__Floaters__East
+            | SpotId::Glacier_Breach__Floaters__West
+            | SpotId::Glacier_Breach__Grate_Work__East
+            | SpotId::Glacier_Breach__Grate_Work__Grate_Interior
+            | SpotId::Glacier_Breach__Grate_Work__Southeast
+            | SpotId::Glacier_Breach__Grate_Work__West_13
+            | SpotId::Glacier_Breach__Grate_Work__West_14
             | SpotId::Glacier_Breach__South_Save__East
             | SpotId::Glacier_Breach__South_Save__Save_Point
             | SpotId::Glacier_Breach__South_Save__West
+            | SpotId::Glacier_Breach__West_Save__East_11
+            | SpotId::Glacier_Breach__West_Save__East_12
+            | SpotId::Glacier_Breach__West_Save__Save_Point
+            | SpotId::Glacier_Breach__West_Save__West_11
+            | SpotId::Glacier_Breach__Zappers__East
+            | SpotId::Glacier_Breach__Zappers__Trough
+            | SpotId::Glacier_Breach__Zappers__West
             | SpotId::Interior__Building_Interior__Corner
             | SpotId::Interior__Building_Interior__Entry
             | SpotId::Interior__Bunker_Interior__Desk
@@ -16345,6 +16721,7 @@ impl world::World for World {
             | SpotId::Menu__Breach_Map__GB_Peak
             | SpotId::Menu__Breach_Map__GB_SW_Save
             | SpotId::Menu__Breach_Map__GlB_South
+            | SpotId::Menu__Breach_Map__GlB_West
             | SpotId::Menu__Breach_Map__IB_Gauntlet
             | SpotId::Menu__Breach_Map__IB_Save_Room
             | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
@@ -17808,6 +18185,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: None,
+        },
+        LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => Location {
+            id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => Location {
+            id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+            canonical: CanonId::None,
+            item: Item::Big_Flask,
+            price: Currency::Energy(50),
+            time: 5500,
+            exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
             id: LocationId::Glacier__Compass_Room__Center__Table,
@@ -25700,10 +26093,395 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1 => Exit {
-            id: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1,
+        ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => Exit {
+            id: ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1,
             time: 1600,
-            dest: SpotId::Glacier_Breach__Great_Work__West_14,
+            dest: SpotId::Glacier_Breach__Grate_Work__West_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__South_Save__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1,
+            time: 600,
+            dest: SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1,
+            time: 600,
+            dest: SpotId::Glacier_Breach__Grate_Work__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Zappers__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2,
+            time: 800,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1,
+            time: 877,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2,
+            time: 877,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1,
+            time: 701,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2,
+            time: 701,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1,
+            time: 1799,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2,
+            time: 899,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1,
+            time: 1754,
+            dest: SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1,
+            time: 0,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1,
+            time: 877,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2,
+            time: 877,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1,
+            time: 1754,
+            dest: SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2,
+            time: 526,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1,
+            time: 1754,
+            dest: SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1,
+            time: 2456,
+            dest: SpotId::Glacier_Breach__Grate_Work__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2,
+            time: 2456,
+            dest: SpotId::Glacier_Breach__Grate_Work__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Empty_Space__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Angry_Lions__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1,
+            time: 1799,
+            dest: SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1,
+            time: 2400,
+            dest: SpotId::Glacier_Breach__Grate_Work__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Grate_Work__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1,
+            time: 2807,
+            dest: SpotId::Glacier_Breach__Zappers__Hill_East,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1,
+            time: 2807,
+            dest: SpotId::Glacier_Breach__Zappers__East,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_1,
+            time: 1500,
+            dest: SpotId::Glacier_Breach__Zappers__Trough,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2,
+            time: 2105,
+            dest: SpotId::Glacier_Breach__Zappers__Trough,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1,
+            time: 2850,
+            dest: SpotId::Glacier_Breach__Control__Further_In,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1,
+            time: 2105,
+            dest: SpotId::Glacier_Breach__Zappers__Hill_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Control__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => Exit {
+            id: ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
+            time: 1049,
+            dest: SpotId::Glacier_Breach__Control__Lower_Corner,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
+        },
+        ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Crystals__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Control__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Crystals__East__ex__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Crystals__East__ex__West_1,
+            time: 11000,
+            dest: SpotId::Glacier_Breach__Crystals__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Floaters__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Crystals__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => Exit {
+            id: ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__West_Save__East_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Floaters__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__West_Save__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1,
+            time: 2105,
+            dest: SpotId::Glacier_Breach__West_Save__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1,
+            time: 1200,
+            dest: SpotId::Glacier_Breach__West_Save__West_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1,
+            time: 1754,
+            dest: SpotId::Glacier_Breach__West_Save__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1,
+            time: 1754,
+            dest: SpotId::Glacier_Breach__West_Save__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => Exit {
+            id: ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Spidery_Connector__East,
             price: Currency::Free,
             loc_id: None,
         },
@@ -28059,6 +28837,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__West_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => Exit {
             id: ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
             time: 1350,
@@ -29705,6 +30490,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Glacier_Breach__South_Save__Save_Point__Save => Action {
             id: ActionId::Glacier_Breach__South_Save__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Glacier_Breach__West_Save__Save_Point__Save => Action {
+            id: ActionId::Glacier_Breach__West_Save__Save_Point__Save,
             time: 1300,
             price: Currency::Free,
         },
@@ -42956,15 +43746,464 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1.into_usize(),
-                end: ExitId::Glacier_Breach__South_Save__East__ex__Great_Work__West_14_1.into_usize() + 1,
+                start: ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1.into_usize(),
+                end: ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Glacier_Breach__Great_Work__West_14 => Spot {
-            id: SpotId::Glacier_Breach__Great_Work__West_14,
+        SpotId::Glacier_Breach__Grate_Work__West_14 => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__West_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__West_Ledge => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__West_13 => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__West_13,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Grate_Corner => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Grate_Interior => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            locations: Range {
+                start: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item.into_usize(),
+                end: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Below_Grate => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Grate_Southeast => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Grate_West => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Grate_East => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__East_Hill => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__East => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Grate_Work__Southeast => Spot {
+            id: SpotId::Glacier_Breach__Grate_Work__Southeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1.into_usize(),
+                end: ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Zappers__East => Spot {
+            id: SpotId::Glacier_Breach__Zappers__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1.into_usize(),
+                end: ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Zappers__Hill_East => Spot {
+            id: SpotId::Glacier_Breach__Zappers__Hill_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Zappers__Hill_East__ex__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Zappers__Hill_East__ex__Trough_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Zappers__Trough => Spot {
+            id: SpotId::Glacier_Breach__Zappers__Trough,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Zappers__Trough__ex__Control__Further_In_1.into_usize(),
+                end: ExitId::Glacier_Breach__Zappers__Trough__ex__Hill_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Zappers__West => Spot {
+            id: SpotId::Glacier_Breach__Zappers__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__East => Spot {
+            id: SpotId::Glacier_Breach__Control__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__Further_In => Spot {
+            id: SpotId::Glacier_Breach__Control__Further_In,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__Upper_Gap => Spot {
+            id: SpotId::Glacier_Breach__Control__Upper_Gap,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__Upper_Corner => Spot {
+            id: SpotId::Glacier_Breach__Control__Upper_Corner,
+            locations: Range {
+                start: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy.into_usize(),
+                end: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__Lower_Corner => Spot {
+            id: SpotId::Glacier_Breach__Control__Lower_Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Control__West => Spot {
+            id: SpotId::Glacier_Breach__Control__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Crystals__East => Spot {
+            id: SpotId::Glacier_Breach__Crystals__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Crystals__East__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Crystals__West => Spot {
+            id: SpotId::Glacier_Breach__Crystals__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Floaters__East => Spot {
+            id: SpotId::Glacier_Breach__Floaters__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Floaters__West => Spot {
+            id: SpotId::Glacier_Breach__Floaters__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1.into_usize(),
+                end: ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__East_12 => Spot {
+            id: SpotId::Glacier_Breach__West_Save__East_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__Save_Point => Spot {
+            id: SpotId::Glacier_Breach__West_Save__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier_Breach__West_Save__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier_Breach__West_Save__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__West_Nub => Spot {
+            id: SpotId::Glacier_Breach__West_Save__West_Nub,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1.into_usize(),
+                end: ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__West_Ledge => Spot {
+            id: SpotId::Glacier_Breach__West_Save__West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1.into_usize(),
+                end: ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__East_11 => Spot {
+            id: SpotId::Glacier_Breach__West_Save__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__West_Save__West_11 => Spot {
+            id: SpotId::Glacier_Breach__West_Save__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Guarded_Corridor__West => Spot {
+            id: SpotId::Glacier_Breach__Guarded_Corridor__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Empty_Space__West => Spot {
+            id: SpotId::Glacier_Breach__Empty_Space__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Angry_Lions__North => Spot {
+            id: SpotId::Glacier_Breach__Angry_Lions__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Spidery_Connector__East => Spot {
+            id: SpotId::Glacier_Breach__Spidery_Connector__East,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -47599,6 +48838,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_West => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

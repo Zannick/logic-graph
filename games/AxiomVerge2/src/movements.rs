@@ -6552,6 +6552,132 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
         (
             [false],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Further_In,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__East,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            SpotId::Glacier_Breach__Control__West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+        ) => 949,
+        (
+            [false],
+            SpotId::Glacier_Breach__Floaters__East,
+            SpotId::Glacier_Breach__Floaters__West,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Glacier_Breach__Floaters__West,
+            SpotId::Glacier_Breach__Floaters__East,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 1403,
+        // [1.052632, 0.75]
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => 1802,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 877,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 849,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => 399,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ) => 3000,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+        ) => 877,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => 449,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 450,
+        (
+            [false],
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 964,
@@ -6575,6 +6701,58 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 1315,
+        // [0.877193, 0.877193]
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => 1754,
+        // [0.877193, 0.65]
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 1527,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 1315,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => 1315,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Glacier_Breach__Zappers__West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Zappers__West,
+            SpotId::Glacier_Breach__Zappers__Trough,
+        ) => 1403,
         (
             [false],
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
@@ -8935,6 +9113,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([false], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([false], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
+        ([false], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([false], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
         ([false], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
         ([false], SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => {
@@ -21287,6 +21466,132 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
         (
             [true],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Further_In,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__East,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            SpotId::Glacier_Breach__Control__West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+        ) => 949,
+        (
+            [true],
+            SpotId::Glacier_Breach__Floaters__East,
+            SpotId::Glacier_Breach__Floaters__West,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Glacier_Breach__Floaters__West,
+            SpotId::Glacier_Breach__Floaters__East,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 1403,
+        // [1.052632, 0.75]
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => 1802,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 877,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 849,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => 399,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+        ) => 877,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => 449,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => 450,
+        (
+            [true],
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 964,
@@ -21310,6 +21615,58 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 1315,
+        // [0.877193, 0.877193]
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => 1754,
+        // [0.877193, 0.65]
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 1527,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Glacier_Breach__Zappers__West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Zappers__West,
+            SpotId::Glacier_Breach__Zappers__Trough,
+        ) => 1403,
         (
             [true],
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
@@ -23588,6 +23945,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([true], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([true], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
+        ([true], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([true], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
         ([true], SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => 1500,
         ([true], SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => 1900,
@@ -33214,6 +33572,127 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier_Breach__South_Save__East, SpotId::Glacier_Breach__South_Save__West) => {
             true
         }
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ) => true,
+        (SpotId::Glacier_Breach__Zappers__Trough, SpotId::Glacier_Breach__Zappers__West) => true,
+        (SpotId::Glacier_Breach__Zappers__West, SpotId::Glacier_Breach__Zappers__Trough) => true,
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Further_In) => {
+            true
+        }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Gap) => true,
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Corner) => {
+            true
+        }
+        (SpotId::Glacier_Breach__Control__Further_In, SpotId::Glacier_Breach__Control__East) => {
+            true
+        }
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => true,
+        (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
+            true
+        }
+        (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => true,
+        (SpotId::Glacier_Breach__Floaters__West, SpotId::Glacier_Breach__Floaters__East) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+        ) => true,
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
@@ -37692,6 +38171,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -56083,7 +56563,392 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Glacier_Breach__Great_Work__West_14,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Further_In,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__East,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            SpotId::Glacier_Breach__Control__West,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            1049,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+            949,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__West,
+            SpotId::Glacier_Breach__Crystals__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Control__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Crystals__East,
+            SpotId::Glacier_Breach__Control__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Crystals__East,
+            SpotId::Glacier_Breach__Crystals__West,
+            11000,
+        ),
+        (
+            SpotId::Glacier_Breach__Crystals__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Crystals__West,
+            SpotId::Glacier_Breach__Floaters__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Crystals__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__East,
+            SpotId::Glacier_Breach__Crystals__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__East,
+            SpotId::Glacier_Breach__Floaters__West,
+            2807,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__West,
+            SpotId::Glacier_Breach__Floaters__East,
+            2807,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__West,
+            SpotId::Glacier_Breach__West_Save__East_12,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Floaters__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Empty_Space__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            1802,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__East,
+            2456,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            800,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            877,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            701,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            SpotId::Glacier_Breach__Grate_Work__Grate_East,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            877,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            899,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            877,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            849,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            399,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East,
+            2400,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            1799,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            877,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            701,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            449,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Zappers__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__South_Save__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            1200,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            450,
+        ),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -56104,7 +56969,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__South_Save__East,
-            SpotId::Glacier_Breach__Great_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
             1600,
         ),
         (
@@ -56149,6 +57014,181 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__South_Save__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Spidery_Connector__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            1527,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__Floaters__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            1315,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+            1315,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            1200,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__Spidery_Connector__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__East_11,
+            1754,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+            1200,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__East_11,
+            2105,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            789,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__East,
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__East,
+            SpotId::Glacier_Breach__Zappers__Hill_East,
+            2807,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Hill_East,
+            SpotId::Glacier_Breach__Zappers__East,
+            2807,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Hill_East,
+            SpotId::Glacier_Breach__Zappers__Trough,
+            1500,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Hill_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Glacier_Breach__Control__Further_In,
+            2850,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Glacier_Breach__Zappers__Hill_East,
+            2105,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Glacier_Breach__Zappers__West,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__Trough,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__West,
+            SpotId::Glacier_Breach__Control__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__West,
+            SpotId::Glacier_Breach__Zappers__Trough,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Zappers__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61649,6 +62689,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Breach_Map__GlB_South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_West,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_West,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1133,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -73801,6 +74856,99 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => Some(1228),
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => Some(2351),
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Further_In) => {
+            Some(600)
+        }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Corner) => {
+            Some(1754)
+        }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Gap) => {
+            Some(1403)
+        }
+        (SpotId::Glacier_Breach__Control__Further_In, SpotId::Glacier_Breach__Control__East) => {
+            Some(350)
+        }
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => Some(1403),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => Some(1052),
+        (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
+            Some(1052)
+        }
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+        ) => Some(949),
+        (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
+            Some(2807)
+        }
+        (SpotId::Glacier_Breach__Floaters__West, SpotId::Glacier_Breach__Floaters__East) => {
+            Some(2807)
+        }
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => Some(1403),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => Some(1802),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+        ) => Some(1754),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => Some(1052),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => Some(526),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => Some(877),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => Some(849),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => Some(399),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ) => Some(3000),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+        ) => Some(877),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+        ) => Some(701),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => Some(449),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => Some(1403),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => Some(450),
         (
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
@@ -73820,6 +74968,44 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => Some(1315),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => Some(1754),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => Some(1527),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => Some(1315),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => Some(1315),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+        ) => Some(1200),
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+        ) => Some(1052),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+        ) => Some(1200),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => Some(789),
+        (SpotId::Glacier_Breach__Zappers__Trough, SpotId::Glacier_Breach__Zappers__West) => {
+            Some(1403)
+        }
+        (SpotId::Glacier_Breach__Zappers__West, SpotId::Glacier_Breach__Zappers__Trough) => {
+            Some(1403)
+        }
         (
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
             SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
@@ -75479,6 +76665,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => Some(1466),
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => Some(500),
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => Some(1533),
+        (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => Some(1133),
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => Some(2100),
         (SpotId::Menu__Breach_Map__IB_Gauntlet, SpotId::Menu__Breach_Map__GB_Peak) => Some(1500),
         (SpotId::Menu__Breach_Map__IB_Save_Room, SpotId::Menu__Breach_Map__GB_Peak) => Some(1900),
@@ -85141,6 +86328,99 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => {
             (Some(2351), vec![])
         }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Further_In) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Corner) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Upper_Gap) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Glacier_Breach__Control__Further_In, SpotId::Glacier_Breach__Control__East) => {
+            (Some(350), vec![])
+        }
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier_Breach__Control__Further_In,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => (Some(1052), vec![]),
+        (SpotId::Glacier_Breach__Control__Lower_Corner, SpotId::Glacier_Breach__Control__West) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Glacier_Breach__Control__Upper_Corner,
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Control__Upper_Gap,
+            SpotId::Glacier_Breach__Control__Lower_Corner,
+        ) => (Some(949), vec![]),
+        (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Glacier_Breach__Floaters__West, SpotId::Glacier_Breach__Floaters__East) => {
+            (Some(2807), vec![])
+        }
+        (
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => (Some(1802), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => (Some(849), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => (Some(399), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ) => (Some(3000), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__Grate_West,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_13,
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+        ) => (Some(449), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+            SpotId::Glacier_Breach__Grate_Work__Below_Grate,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+            SpotId::Glacier_Breach__Grate_Work__West_14,
+        ) => (Some(450), vec![]),
         (
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
@@ -85160,6 +86440,44 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => (Some(1315), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__East_11,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => (Some(1527), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => (Some(1315), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__East_12,
+        ) => (Some(1315), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__West_11,
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Glacier_Breach__West_Save__West_11,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+        ) => (Some(789), vec![]),
+        (SpotId::Glacier_Breach__Zappers__Trough, SpotId::Glacier_Breach__Zappers__West) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Glacier_Breach__Zappers__West, SpotId::Glacier_Breach__Zappers__Trough) => {
+            (Some(1403), vec![])
+        }
         (
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
             SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
@@ -86974,6 +88292,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(1533), vec![])
+        }
+        (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1133), vec![])
         }
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(2100), vec![])

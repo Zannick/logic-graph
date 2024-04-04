@@ -48,12 +48,426 @@ areas:
         - to: Save Point
         - to: West
       exits:
-        - to: Great Work > West 14
+        - to: Grate Work > West 14
           tags: [xdoor]
 
-- name: Great Work
+- name: Grate Work
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 14
       coord: [39.1, 13.65]
+      local:
+        - to: Below Grate
+      exits:
+        - to: South Save > East
+          tags: [xdoor]
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West Ledge
+      coord: [39.2, 13.2]
+      local:
+        - to: West 14
+      exits:
+        - to: West 13
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Grate West
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West 13
+      coord: [39.1, 12.75]
+      local:
+        - to: West Ledge
+        - to: Grate West
+        - to: Grate Corner
+      exits:
+        - to: Zappers > East
+          tags: [xdoor]
 
+    - name: Grate Corner
+      coord: [39.35, 13.3]
+      local:
+        - to: West 14
+        - to: Below Grate
+      exits:
+        - to: Grate Interior
+          req: Nanite_Mist
+          price: 50
+          movement: mist1
+        - to: Grate Interior
+          req: $mist2
+          price: 50
+          movement: mist2
+    - name: Grate Interior
+      coord: [39.55, 12.9]
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: Grate West
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Grate West
+          req: $mist2
+          price: 40
+          movement: mist2
+        - to: Grate Corner
+          req: Nanite_Mist
+          price: 50
+          movement: mist1
+        - to: Grate Corner
+          req: $mist2
+          price: 50
+          movement: mist2
+        - to: Grate Southeast
+          req: Nanite_Mist
+          price: 50
+          movement: mist1
+        - to: Grate Southeast
+          req: $mist2
+          price: 50
+          movement: mist2
+        - to: Grate East
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Grate East
+          req: $mist2
+          price: 40
+          movement: mist2
+    - name: Below Grate
+      coord: [39.5, 13.65]
+      local:
+        - to: West 14
+      exits:
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Grate Southeast
+      coord: [39.7, 13.35]
+      exits:
+        - to: Grate Interior
+          req: Nanite_Mist
+          price: 50
+          movement: mist1
+        - to: Grate Interior
+          req: $mist2
+          price: 50
+          movement: mist2
+        - to: East Hill
+          req: $hook or $hover
+          movement: base
+          jumps: 2
+    - name: Grate West
+      coord: [39.3, 12.8]
+      local:
+        - to: West Ledge
+        - to: West 14
+      exits:
+        - to: Grate West
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+        - to: Grate Interior
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Grate Interior
+          req: $mist2
+          price: 40
+          movement: mist2
+    - name: Grate East
+      coord: [39.7, 12.9]
+      exits:
+        - to: East Hill
+          req: $hook or $hover
+          movement: base
+        - to: Grate Interior
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Grate Interior
+          req: $mist2
+          price: 40
+          movement: mist2
+
+    - name: East Hill
+      coord: [40.2, 13.0]
+      local:
+        - to: Grate Southeast
+        - to: Southeast
+      exits:
+        - to: Grate East
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: East
+      coord: [40.9, 12.8]
+      local:
+        - to: Southeast
+          thru: [40.6, 13.05]
+      exits:
+        - to: Empty Space > West
+          tags: [xdoor]
+    - name: Southeast
+      coord: [40.5, 13.8]
+      local:
+        - to: East Hill
+          jumps: 5
+      exits:
+        - to: Angry Lions > North
+          tags: [ydoor]
+        - to: East Hill
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: East
+          req: $hook
+          movement: base
+          jumps: 4
+
+- name: Zappers
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [38.9, 12.75]
+      exits:
+        - to: Grate Work > West 13
+          tags: [xdoor]
+        - to: Hill East
+          req: $sync
+          price: 50
+          movement: base
+          jumps: 1
+    - name: Hill East
+      coord: [38.1, 12.5]
+      exits:
+        - to: East
+          req: $sync
+          price: 50
+          movement: base
+        - to: Trough
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Trough
+          req: $sync
+          price: 50
+          movement: base
+    - name: Trough
+      coord: [37.5, 12.7]
+      local:
+        - to: West
+      exits:
+        - to: Control > Further In
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: Hill East
+          req: $sync and $hook
+          movement: base
+          jumps: 2
+    - name: West
+      coord: [37.1, 12.75]
+      local:
+        - to: Trough
+          jumps: 1
+      exits:
+        - to: Control > East
+          tags: [xdoor]
+
+- name: Control
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [36.9, 12.75]
+      local:
+        - to: Further In
+          jumps: 1
+        - to: Upper Gap
+          jumps: 1
+        - to: Upper Corner
+          jumps: 2
+    - name: Further In
+      coord: [36.8, 12.7]
+      local:
+        - to: East
+        - to: Upper Gap
+          jumps: 1
+        - to: Upper Corner
+          jumps: 2
+    - name: Upper Gap
+      coord: [36.5, 12.65]
+      local:
+        - to: Lower Corner
+    - name: Upper Corner
+      coord: [36.4, 12.55]
+      local:
+        - to: Upper Gap
+      hybrid:
+        - name: Control Enemy
+          to: Lower Corner
+          item: Big_Flask
+          req: $sync
+          price: 50
+          movement: base
+          item_time: 5.5
+          item_tags: [flask]
+    - name: Lower Corner
+      coord: [36.4, 13.6]
+      local:
+        - to: West
+    - name: West
+      coord: [36.1, 13.75]
+      exits:
+        - to: Crystals > East
+          tags: [xdoor]
+
+- name: Crystals
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [35.9, 13.75]
+      exits:
+        - to: Control > East
+          tags: [xdoor]
+        - to: West
+          req: $hook
+          time: 11
+    - name: West
+      coord: [34.1, 11.7]
+      exits:
+        - to: Floaters > East
+          tags: [xdoor]
+
+- name: Floaters
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [33.9, 11.7]
+      local:
+        - to: West
+      exits:
+        - to: Crystals > West
+          tags: [xdoor]
+    - name: West
+      coord: [33.1, 11.7]
+      local:
+        - to: East
+      exits:
+        - to: West Save > East 12
+          tags: [xdoor]
+
+- name: West Save
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [32, 11, 33, 12]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GlB West
+  spots:
+    - name: East 12
+      coord: [32.9, 11.7]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Floaters > West
+          tags: [xdoor]
+    - name: Save Point
+      coord: [32.525, 11.6]
+      local:
+        - to: East 12
+        - to: West Nub
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: West Nub
+      coord: [32.3, 11.45]
+      local:
+        - to: Save Point
+      exits:
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East 11
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: West Ledge
+      coord: [32.4, 11.0]
+      local:
+        - to: West 11
+          jumps: 2
+      exits:
+        - to: West 11
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: East 11
+          req: $hook or $hover
+          movement: base
+          jumps: 2
+    - name: East 11
+      coord: [32.9, 10.75]
+      local:
+        - to: Save Point
+          thru: [32.65, 10.95]
+        - to: East 12
+          thru: [32.65, 10.95]
+      exits:
+        - to: West Ledge
+          req: $hook or $hover
+          movement: base
+        - to: Guarded Corridor > West
+          tags: [xdoor]
+    - name: West 11
+      coord: [32.1, 10.75]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Spidery Connector > East
+          tags: [xdoor]
+
+- name: Guarded Corridor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [33.1, 10.75]
+
+
+- name: Empty Space
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.1, 12.8]
+
+- name: Angry Lions
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [40.5, 14.2]
+
+
+- name: Spidery Connector
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [31.9, 10.75]

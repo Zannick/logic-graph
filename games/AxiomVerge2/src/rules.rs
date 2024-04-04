@@ -1786,6 +1786,10 @@ pub fn access_map__glacier_breach__south_save__save(ctx: &Context, world: &graph
     // ^map__glacier_breach__south_save__save
     ctx.map__glacier_breach__south_save__save()
 }
+pub fn access_map__glacier_breach__west_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__glacier_breach__west_save__save
+    ctx.map__glacier_breach__west_save__save()
+}
 pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar__hub__save
     ctx.map__irikar__hub__save()
@@ -2137,6 +2141,14 @@ pub fn access_switch_36_11(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
+}
+pub fn access_sync(ctx: &Context, world: &graph::World) -> bool {
+    // $sync
+    helper__sync!(ctx, world)
+}
+pub fn access_sync_and_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $sync and $hook
+    (helper__sync!(ctx, world) && helper__hook!(ctx, world))
 }
 pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &graph::World) -> bool {
     // Uhrum_Annuna_Corridor_Block
@@ -9133,6 +9145,18 @@ pub fn explain_map__glacier_breach__south_save__save(
         (r, vec!["^map__glacier_breach__south_save__save"])
     }
 }
+pub fn explain_map__glacier_breach__west_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__glacier_breach__west_save__save
+    {
+        let r = ctx.map__glacier_breach__west_save__save();
+        edict.insert("^map__glacier_breach__west_save__save", format!("{:?}", r));
+        (r, vec!["^map__glacier_breach__west_save__save"])
+    }
+}
 pub fn explain_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
@@ -10718,6 +10742,46 @@ pub fn explain_switch_40_12(
         let h = ctx.has(Item::Switch_40_12);
         edict.insert("Switch_40_12", format!("{}", h));
         (h, vec!["Switch_40_12"])
+    }
+}
+pub fn explain_sync(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $sync
+    {
+        let (res, mut refs) = hexplain__sync!(ctx, world, edict);
+        edict.insert("$sync", format!("{:?}", res));
+        refs.push("$sync");
+        (res, refs)
+    }
+}
+pub fn explain_sync_and_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $sync and $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__sync!(ctx, world, edict);
+            edict.insert("$sync", format!("{:?}", res));
+            refs.push("$sync");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_uhrum_annuna_corridor_block(
@@ -14504,6 +14568,17 @@ pub fn observe_access_map__glacier_breach__south_save__save(
         ctx.map__glacier_breach__south_save__save()
     }
 }
+pub fn observe_access_map__glacier_breach__west_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__glacier_breach__west_save__save
+    {
+        full_obs.observe_map__glacier_breach__west_save__save();
+        ctx.map__glacier_breach__west_save__save()
+    }
+}
 pub fn observe_access_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
@@ -15356,6 +15431,22 @@ pub fn observe_access_switch_40_12(
         full_obs.observe_switch_40_12();
         ctx.has(Item::Switch_40_12)
     }
+}
+pub fn observe_access_sync(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $sync
+    hobserve__sync!(ctx, world, full_obs)
+}
+pub fn observe_access_sync_and_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $sync and $hook
+    (hobserve__sync!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_annuna_corridor_block(
     ctx: &Context,

@@ -551,3 +551,10 @@ areas:
           req: ^map__glacier_breach__south_save__save
           time: 12
           tags: [warp]
+    - name: GlB West
+      coord: [32, 12]
+      exits:
+        - to: Glacier Breach > West Save > Save Point
+          req: ^map__glacier_breach__west_save__save
+          time: 12
+          tags: [warp]
