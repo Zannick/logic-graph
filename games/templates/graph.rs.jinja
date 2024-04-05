@@ -759,7 +759,7 @@ impl World {
             rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }}::default(),
 %% endfor
 %% for s, info in settings.items()
-            {{ s }}: Default::default(),
+            {{ s }}: {% if info.default %}{{ info.default|str_to_rusttype(info.type) }}{% else %}Default::default(){% endif %},
 %% endfor
             locations: build_locations(),
             exits: build_exits(),

@@ -40,6 +40,9 @@ fn read_key_value(world: &mut World, key: &Yaml, val: &Yaml) -> Result<(), Strin
         Some("minor_glitches") => {
             world.minor_glitches = parse_bool(key, val)?;
         }
+        Some("allow_warps") => {
+            world.allow_warps = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }

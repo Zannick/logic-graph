@@ -152,12 +152,12 @@ time:
 warps:
   earth_save:
     time: 5  # initial savewarp pre-amashi
-    req: WITHIN `Antarctica`
+    req: allow_warps and WITHIN `Antarctica`
     to: ^save
     loads: true
   main_save:
     time: 10.5  # IGT goes backward due to the fadeout not counting
-    req: ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    req: allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
     to: ^save
     after: $refill_energy
     loads: true
@@ -166,7 +166,7 @@ warps:
         add: 2.5
   breach_save:
     time: 10.5
-    req: ^realm == 'breach'
+    req: allow_warps and ^realm == 'breach'
     to: ^breach_save
     after: $refill_energy
     loads: true
@@ -194,7 +194,12 @@ warps:
   # TODO: fast travel collection skip... should these only be possible from a Menu > Map area?
   fast_travel_kiengir:
     time: 0.1
-    req: $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    req: allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    to: ^map_spot
+    after: $refill_energy
+  fast_travel_breach:
+    time: 0.1
+    req: allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
     to: ^map_spot
     after: $refill_energy
 
@@ -207,7 +212,7 @@ actions:
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
   - name: Recall Fast Travel
-    req: NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
     do: ^mode = 'Indra'; ^last = ^indra
     to: ^map_spot  # Starts map movement in a different place
     after: ^indra = $default; $refill_energy
@@ -384,6 +389,9 @@ settings:
     type: bool
   minor_glitches:
     type: bool
+  allow_warps:
+    type: bool
+    default: true
 
 special:
   # For World.png,

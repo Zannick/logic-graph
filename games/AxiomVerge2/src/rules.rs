@@ -53,6 +53,62 @@ pub fn access_activate(ctx: &Context, world: &graph::World) -> bool {
     // $activate
     helper__activate!(ctx, world)
 }
+pub fn access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
+    ((world.allow_warps && helper__ft_breach!(ctx, world))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
+}
+pub fn access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    ((world.allow_warps && helper__ft_main!(ctx, world))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+}
+pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    ((((world.allow_warps
+        && (match get_region(ctx.position()) {
+            RegionId::Menu => false,
+            _ => true,
+        }))
+        && helper__ft_main!(ctx, world))
+        && helper__can_recall!(ctx, world))
+        && (data::map_spot(ctx.position()) != Default::default()))
+}
+pub fn access_allow_warps_and_realm_eq_breach(ctx: &Context, world: &graph::World) -> bool {
+    // allow_warps and ^realm == 'breach'
+    (world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
+}
+pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    ((world.allow_warps
+        && matches!(
+            data::realm(ctx.position()),
+            enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
+        ))
+        && ctx.has(Item::Amashilama))
+}
+pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
+    // allow_warps and WITHIN `Antarctica`
+    (world.allow_warps
+        && (match get_region(ctx.position()) {
+            RegionId::Antarctica => true,
+            _ => false,
+        }))
+}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -733,15 +789,6 @@ pub fn access_ebih_west_block(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_fast_travel(ctx: &Context, world: &graph::World) -> bool {
     // Fast_Travel
     ctx.has(Item::Fast_Travel)
-}
-pub fn access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    (helper__ft_main!(ctx, world)
-        && (data::map_spot(ctx.position()) != SpotId::None
-            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -1986,18 +2033,6 @@ pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::Worl
         _ => true,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
-    ((((match get_region(ctx.position()) {
-        RegionId::Menu => false,
-        _ => true,
-    }) && helper__ft_main!(ctx, world))
-        && helper__can_recall!(ctx, world))
-        && (data::map_spot(ctx.position()) != Default::default()))
-}
 pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
@@ -2069,10 +2104,6 @@ pub fn access_ranged_speed_2(ctx: &Context, world: &graph::World) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
 }
-pub fn access_realm_eq_breach(ctx: &Context, world: &graph::World) -> bool {
-    // ^realm == 'breach'
-    data::realm(ctx.position()) == enums::Realm::Breach
-}
 pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &graph::World,
@@ -2080,16 +2111,6 @@ pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
         && (data::flipside(ctx.position()) != Default::default()))
-}
-pub fn access_realm_in___main_interior_emergence_and_amashilama(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    (matches!(
-        data::realm(ctx.position()),
-        enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
-    ) && ctx.has(Item::Amashilama))
 }
 pub fn access_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
     // $remote_boomerang
@@ -2214,13 +2235,6 @@ pub fn access_water_movement_and_hook(ctx: &Context, world: &graph::World) -> bo
 pub fn access_water_movement_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
     // Water_Movement and $hook and $hover
     ((ctx.has(Item::Water_Movement) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
-}
-pub fn access_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
-    // WITHIN `Antarctica`
-    (match get_region(ctx.position()) {
-        RegionId::Antarctica => true,
-        _ => false,
-    })
 }
 pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -2913,6 +2927,267 @@ pub fn explain_activate(
         edict.insert("$activate", format!("{:?}", res));
         refs.push("$activate");
         (res, refs)
+    }
+}
+pub fn explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
+    {
+        let mut left = {
+            let mut left = {
+                let s = world.allow_warps;
+                edict.insert("allow_warps", format!("{}", s));
+                (s, vec!["allow_warps"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__ft_breach!(ctx, world, edict);
+                    edict.insert("$ft_breach", format!("{:?}", res));
+                    refs.push("$ft_breach");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let r = data::map_spot(ctx.position());
+                edict.insert("^map_spot", format!("{:?}", r));
+                (get_area(r) == AreaId::Menu__Breach_Map, vec!["^map_spot"])
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    {
+        let mut left = {
+            let mut left = {
+                let s = world.allow_warps;
+                edict.insert("allow_warps", format!("{}", s));
+                (s, vec!["allow_warps"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                    edict.insert("$ft_main", format!("{:?}", res));
+                    refs.push("$ft_main");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let r = data::map_spot(ctx.position());
+                edict.insert("^map_spot", format!("{:?}", r));
+                (get_area(r) == AreaId::Menu__Kiengir_Map, vec!["^map_spot"])
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let s = world.allow_warps;
+                        edict.insert("allow_warps", format!("{}", s));
+                        (s, vec!["allow_warps"])
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let r = ctx.position();
+                            edict.insert("^position", format!("{:?}", r));
+                            (
+                                match get_region(r) {
+                                    RegionId::Menu => false,
+                                    _ => true,
+                                },
+                                vec!["^position"],
+                            )
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                        edict.insert("$ft_main", format!("{:?}", res));
+                        refs.push("$ft_main");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
+                    edict.insert("$can_recall", format!("{:?}", res));
+                    refs.push("$can_recall");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut refs = vec!["^map_spot"];
+                let r = data::map_spot(ctx.position());
+                let mut f = (Default::default(), vec![]);
+                edict.insert("$default", format!("{}", f.0));
+                refs.append(&mut f.1);
+                edict.insert("^map_spot", format!("{:?}", r));
+                (r != f.0, refs)
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_allow_warps_and_realm_eq_breach(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and ^realm == 'breach'
+    {
+        let mut left = {
+            let s = world.allow_warps;
+            edict.insert("allow_warps", format!("{}", s));
+            (s, vec!["allow_warps"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut refs = vec!["^realm"];
+                let mut left = {
+                    let r = data::realm(ctx.position());
+                    edict.insert("^realm", format!("{:?}", r));
+                    (r, vec!["^realm"])
+                };
+                let right = enums::Realm::Breach;
+                edict.insert("^realm", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    {
+        let mut left = {
+            let mut left = {
+                let s = world.allow_warps;
+                edict.insert("allow_warps", format!("{}", s));
+                (s, vec!["allow_warps"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let r = data::realm(ctx.position());
+                    edict.insert("^realm", format!("{:?}", r));
+                    (
+                        matches!(
+                            r,
+                            enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
+                        ),
+                        vec!["^realm"],
+                    )
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amashilama);
+                edict.insert("Amashilama", format!("{}", h));
+                (h, vec!["Amashilama"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_allow_warps_and_within_antarctica(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // allow_warps and WITHIN `Antarctica`
+    {
+        let mut left = {
+            let s = world.allow_warps;
+            edict.insert("allow_warps", format!("{}", s));
+            (s, vec!["allow_warps"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.position();
+                edict.insert("^position", format!("{:?}", r));
+                (
+                    match get_region(r) {
+                        RegionId::Antarctica => true,
+                        _ => false,
+                    },
+                    vec!["^position"],
+                )
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
@@ -5254,32 +5529,6 @@ pub fn explain_fast_travel(
         let h = ctx.has(Item::Fast_Travel);
         edict.insert("Fast_Travel", format!("{}", h));
         (h, vec!["Fast_Travel"])
-    }
-}
-pub fn explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
-            edict.insert("$ft_main", format!("{:?}", res));
-            refs.push("$ft_main");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = ({
-                let r = data::map_spot(ctx.position());
-                edict.insert("^map_spot", format!("{:?}", r));
-                (get_area(r) == AreaId::Menu__Kiengir_Map, vec!["^map_spot"])
-            });
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_giguna__carnelian__door__ex__switch_1__req(
@@ -10034,69 +10283,6 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
         }
     }
 }
-pub fn explain_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
-    {
-        let mut left = {
-            let mut left = {
-                let mut left = {
-                    let r = ctx.position();
-                    edict.insert("^position", format!("{:?}", r));
-                    (
-                        match get_region(r) {
-                            RegionId::Menu => false,
-                            _ => true,
-                        },
-                        vec!["^position"],
-                    )
-                };
-                if !left.0 {
-                    left
-                } else {
-                    let mut right = {
-                        let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
-                        edict.insert("$ft_main", format!("{:?}", res));
-                        refs.push("$ft_main");
-                        (res, refs)
-                    };
-                    left.1.append(&mut right.1);
-                    (right.0, left.1)
-                }
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
-                    edict.insert("$can_recall", format!("{:?}", res));
-                    refs.push("$can_recall");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = ({
-                let mut refs = vec!["^map_spot"];
-                let r = data::map_spot(ctx.position());
-                let mut f = (Default::default(), vec![]);
-                edict.insert("$default", format!("{}", f.0));
-                refs.append(&mut f.1);
-                edict.insert("^map_spot", format!("{:?}", r));
-                (r != f.0, refs)
-            });
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
@@ -10456,25 +10642,6 @@ pub fn explain_ranged_speed_2(
         (h, vec!["Ranged_Speed_2"])
     }
 }
-pub fn explain_realm_eq_breach(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^realm == 'breach'
-    {
-        let mut refs = vec!["^realm"];
-        let mut left = {
-            let r = data::realm(ctx.position());
-            edict.insert("^realm", format!("{:?}", r));
-            (r, vec!["^realm"])
-        };
-        let right = enums::Realm::Breach;
-        edict.insert("^realm", format!("{}", left.0));
-        refs.append(&mut left.1);
-        (left.0 == right, refs)
-    }
-}
 pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &graph::World,
@@ -10519,37 +10686,6 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
                 edict.insert("^flipside", format!("{:?}", r));
                 (r != f.0, refs)
             });
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_realm_in___main_interior_emergence_and_amashilama(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    {
-        let mut left = {
-            let r = data::realm(ctx.position());
-            edict.insert("^realm", format!("{:?}", r));
-            (
-                matches!(
-                    r,
-                    enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
-                ),
-                vec!["^realm"],
-            )
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Amashilama);
-                edict.insert("Amashilama", format!("{}", h));
-                (h, vec!["Amashilama"])
-            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -11116,24 +11252,6 @@ pub fn explain_water_movement_and_hook_and_hover(
         }
     }
 }
-pub fn explain_within_antarctica(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // WITHIN `Antarctica`
-    {
-        let r = ctx.position();
-        edict.insert("^position", format!("{:?}", r));
-        (
-            match get_region(r) {
-                RegionId::Antarctica => true,
-                _ => false,
-            },
-            vec!["^position"],
-        )
-    }
-}
 pub fn explain_within_menu_gt_upgrade_menu(
     ctx: &Context,
     world: &graph::World,
@@ -11219,6 +11337,81 @@ pub fn observe_access_activate(
 ) -> bool {
     // $activate
     hobserve__activate!(ctx, world, full_obs)
+}
+pub fn observe_access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
+    ((world.allow_warps && (hobserve__ft_breach!(ctx, world, full_obs)))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
+}
+pub fn observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    ((world.allow_warps && (hobserve__ft_main!(ctx, world, full_obs)))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+}
+pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    ((((world.allow_warps
+        && (match get_region(ctx.position()) {
+            RegionId::Menu => false,
+            _ => true,
+        }))
+        && (hobserve__ft_main!(ctx, world, full_obs)))
+        && (hobserve__can_recall!(ctx, world, full_obs)))
+        && (data::map_spot(ctx.position()) != Default::default()))
+}
+pub fn observe_access_allow_warps_and_realm_eq_breach(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and ^realm == 'breach'
+    (world.allow_warps
+        && ({
+            let v = data::realm(ctx.position());
+            v == enums::Realm::Breach
+        }))
+}
+pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    ((world.allow_warps
+        && (matches!(
+            data::realm(ctx.position()),
+            enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
+        )))
+        && ({
+            full_obs.observe_amashilama();
+            ctx.has(Item::Amashilama)
+        }))
+}
+pub fn observe_access_allow_warps_and_within_antarctica(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // allow_warps and WITHIN `Antarctica`
+    (world.allow_warps
+        && (match get_region(ctx.position()) {
+            RegionId::Antarctica => true,
+            _ => false,
+        }))
 }
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
@@ -12526,16 +12719,6 @@ pub fn observe_access_fast_travel(
         full_obs.observe_fast_travel();
         ctx.has(Item::Fast_Travel)
     }
-}
-pub fn observe_access_ft_main_and___map_spot_within_menu_gt_kiengir_map(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    (hobserve__ft_main!(ctx, world, full_obs)
-        && (data::map_spot(ctx.position()) != SpotId::None
-            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -15110,19 +15293,6 @@ pub fn observe_access_not_within_menu_and_flasks_gt_0(
         i32::from(ctx.flasks()) > n
     }))
 }
-pub fn observe_access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
-    ((((match get_region(ctx.position()) {
-        RegionId::Menu => false,
-        _ => true,
-    }) && (hobserve__ft_main!(ctx, world, full_obs)))
-        && (hobserve__can_recall!(ctx, world, full_obs)))
-        && (data::map_spot(ctx.position()) != Default::default()))
-}
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
     world: &graph::World,
@@ -15269,17 +15439,6 @@ pub fn observe_access_ranged_speed_2(
         ctx.has(Item::Ranged_Speed_2)
     }
 }
-pub fn observe_access_realm_eq_breach(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^realm == 'breach'
-    {
-        let v = data::realm(ctx.position());
-        v == enums::Realm::Breach
-    }
-}
 pub fn observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
     ctx: &Context,
     world: &graph::World,
@@ -15293,20 +15452,6 @@ pub fn observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_
         full_obs.observe_exit_breach();
         ctx.has(Item::Exit_Breach)
     })) && (data::flipside(ctx.position()) != Default::default()))
-}
-pub fn observe_access_realm_in___main_interior_emergence_and_amashilama(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    (matches!(
-        data::realm(ctx.position()),
-        enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
-    ) && ({
-        full_obs.observe_amashilama();
-        ctx.has(Item::Amashilama)
-    }))
 }
 pub fn observe_access_remote_boomerang(
     ctx: &Context,
@@ -15624,17 +15769,6 @@ pub fn observe_access_water_movement_and_hook_and_hover(
         ctx.has(Item::Water_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
         && (hobserve__hover!(ctx, world, full_obs)))
-}
-pub fn observe_access_within_antarctica(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // WITHIN `Antarctica`
-    (match get_region(ctx.position()) {
-        RegionId::Antarctica => true,
-        _ => false,
-    })
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,

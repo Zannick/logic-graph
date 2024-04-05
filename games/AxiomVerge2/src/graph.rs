@@ -9269,7 +9269,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Indra => rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world),
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_can_deploy(ctx, world),
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world),
-            ActionId::Global__Recall_Fast_Travel => rules::access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world),
+            ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_can_deploy(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_activate(ctx, world),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::access_mode_eq_drone_and_breach_sight(ctx, world),
@@ -9365,7 +9365,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Indra => rules::observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, full_obs),
             ActionId::Global__Deploy_Drone => rules::observe_access_not_within_menu_and_can_deploy(ctx, world, full_obs),
             ActionId::Global__Recall_Drone => rules::observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world, full_obs),
-            ActionId::Global__Recall_Fast_Travel => rules::observe_access_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, full_obs),
+            ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_activate(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::observe_access_mode_eq_drone_and_breach_sight(ctx, world, full_obs),
@@ -9474,7 +9474,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Indra => rules::explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, edict),
             ActionId::Global__Deploy_Drone => rules::explain_not_within_menu_and_can_deploy(ctx, world, edict),
             ActionId::Global__Recall_Drone => rules::explain_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world, edict),
-            ActionId::Global__Recall_Fast_Travel => rules::explain_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, edict),
+            ActionId::Global__Recall_Fast_Travel => rules::explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, edict),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::explain_activate(ctx, world, edict),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict),
@@ -10211,19 +10211,28 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::BreachSave => rules::access_realm_eq_breach(ctx, world),
-                WarpId::EarthSave => rules::access_within_antarctica(ctx, world),
+                WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach(ctx, world),
+                WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
                     rules::access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
                         ctx, world,
                     )
                 }
                 WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
+                WarpId::FastTravelBreach => {
+                    rules::access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+                        ctx, world,
+                    )
+                }
                 WarpId::FastTravelKiengir => {
-                    rules::access_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world)
+                    rules::access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+                        ctx, world,
+                    )
                 }
                 WarpId::MainSave => {
-                    rules::access_realm_in___main_interior_emergence_and_amashilama(ctx, world)
+                    rules::access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+                        ctx, world,
+                    )
                 }
                 WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
             }
@@ -10231,12 +10240,13 @@ impl world::Accessible for Warp {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            WarpId::BreachSave => rules::observe_access_realm_eq_breach(ctx, world, full_obs),
-            WarpId::EarthSave => rules::observe_access_within_antarctica(ctx, world, full_obs),
+            WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach(ctx, world, full_obs),
+            WarpId::EarthSave => rules::observe_access_allow_warps_and_within_antarctica(ctx, world, full_obs),
             WarpId::ExitBreach => rules::observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(ctx, world, full_obs),
             WarpId::ExitMenu => rules::observe_access_within_menu_gt_upgrade_menu(ctx, world, full_obs),
-            WarpId::FastTravelKiengir => rules::observe_access_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, full_obs),
-            WarpId::MainSave => rules::observe_access_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
+            WarpId::FastTravelBreach => rules::observe_access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world, full_obs),
+            WarpId::FastTravelKiengir => rules::observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, full_obs),
+            WarpId::MainSave => rules::observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
             WarpId::Menu => rules::observe_access_not_within_menu_and_flasks_gt_0(ctx, world, full_obs),
             _ => true,
         }
@@ -10268,19 +10278,30 @@ impl world::Accessible for Warp {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            WarpId::BreachSave => rules::explain_realm_eq_breach(ctx, world, edict),
-            WarpId::EarthSave => rules::explain_within_antarctica(ctx, world, edict),
+            WarpId::BreachSave => rules::explain_allow_warps_and_realm_eq_breach(ctx, world, edict),
+            WarpId::EarthSave => {
+                rules::explain_allow_warps_and_within_antarctica(ctx, world, edict)
+            }
             WarpId::ExitBreach => {
                 rules::explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
                     ctx, world, edict,
                 )
             }
             WarpId::ExitMenu => rules::explain_within_menu_gt_upgrade_menu(ctx, world, edict),
+            WarpId::FastTravelBreach => {
+                rules::explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+                    ctx, world, edict,
+                )
+            }
             WarpId::FastTravelKiengir => {
-                rules::explain_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, edict)
+                rules::explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+                    ctx, world, edict,
+                )
             }
             WarpId::MainSave => {
-                rules::explain_realm_in___main_interior_emergence_and_amashilama(ctx, world, edict)
+                rules::explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+                    ctx, world, edict,
+                )
             }
             WarpId::Menu => rules::explain_not_within_menu_and_flasks_gt_0(ctx, world, edict),
             _ => (true, vec![]),
@@ -10301,6 +10322,7 @@ impl world::Warp for Warp {
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
+                WarpId::FastTravelBreach => data::map_spot(ctx.position()),
                 WarpId::FastTravelKiengir => data::map_spot(ctx.position()),
                 WarpId::MainSave => ctx.save(),
                 WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
@@ -10323,6 +10345,7 @@ impl world::Warp for Warp {
             WarpId::BreachSave => rules::action_refill_energy(ctx, world),
             WarpId::ExitBreach => rules::action_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_default(ctx, world),
+            WarpId::FastTravelBreach => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelKiengir => rules::action_refill_energy(ctx, world),
             WarpId::MainSave => rules::action_refill_energy(ctx, world),
             _ => (),
@@ -10334,6 +10357,7 @@ impl world::Warp for Warp {
             WarpId::EarthSave => true,
             WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
+            WarpId::FastTravelBreach => false,
             WarpId::FastTravelKiengir => false,
             WarpId::MainSave => true,
             WarpId::Menu => false,
@@ -10350,6 +10374,9 @@ impl world::Warp for Warp {
             }
             WarpId::ExitMenu => {
                 rules::observe_action_last_set_default(ctx, world, full_obs);
+            }
+            WarpId::FastTravelBreach => {
+                rules::observe_action_refill_energy(ctx, world, full_obs);
             }
             WarpId::FastTravelKiengir => {
                 rules::observe_action_refill_energy(ctx, world, full_obs);
@@ -12643,6 +12670,7 @@ pub struct World {
     pub boomerang_steering: bool,
     pub major_glitches: bool,
     pub minor_glitches: bool,
+    pub allow_warps: bool,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -16850,6 +16878,7 @@ impl World {
             boomerang_steering: Default::default(),
             major_glitches: Default::default(),
             minor_glitches: Default::default(),
+            allow_warps: true,
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
@@ -50432,6 +50461,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             id: WarpId::ExitMenu,
             dest: SpotId::None,
             time: 200,
+            price: Currency::Free,
+        },
+        WarpId::FastTravelBreach => Warp {
+            id: WarpId::FastTravelBreach,
+            dest: SpotId::None,
+            time: 100,
             price: Currency::Free,
         },
         WarpId::FastTravelKiengir => Warp {
