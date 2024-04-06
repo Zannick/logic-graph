@@ -344,7 +344,11 @@ class RustVisitor(RustBaseVisitor):
         return self.visit(ctx.invoke()) + ';'
         
     def visitCondAction(self, ctx):
-        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+        if len(ctx.boolExpr()) == len(ctx.actions()):
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+        else:
+            # explicit else case
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=False)
 
 
 
@@ -1245,4 +1249,8 @@ class RustObservationVisitor(RustBaseVisitor):
         return self.visit(ctx.invoke()) + ';'
         
     def visitCondAction(self, ctx):
-        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+        if len(ctx.boolExpr()) == len(ctx.actions()):
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+        else:
+            # explicit else case
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=False)
