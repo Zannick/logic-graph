@@ -907,15 +907,15 @@ class RustObservationVisitor(RustBaseVisitor):
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
         elif ctx.REF():
-            args.append(self._getRefGetter(str(ctx.REF())[1:]))
+            args.extend(self._getRefGetter(str(ref)[1:]) for ref in ctx.REF())
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
                 args.append(arg)
         if ofunc := self._getObserverFunc(str(ctx.FUNC())):
             lines = []
-            if ctx.REF():
-                if obs := self._getRefObserver(str(ctx.REF())):
+            for ref in ctx.REF():
+                if obs := self._getRefObserver(str(ref)):
                     lines.append(obs)
             lines.append(f'{ofunc}({", ".join(args)}, full_obs)')
         elif func == 'ctx.count':
@@ -927,8 +927,8 @@ class RustObservationVisitor(RustBaseVisitor):
             lines.append(f'{func}({", ".join(args)})')
         else:
             lines = []
-            if ctx.REF():
-                if obs := self._getRefObserver(str(ctx.REF())):
+            for ref in ctx.REF():
+                if obs := self._getRefObserver(str(ref)):
                     lines.append(obs)
             if func.startswith('rules::'):
                 lines.append(f'{func}({", ".join(args)}, full_obs)')
