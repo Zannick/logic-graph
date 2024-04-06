@@ -275,9 +275,10 @@ A **str** primitive is either a string literal or a **value** expression.
 
 (These are usually called *statements* in some programming languages.)
 
-There are only two main **action** primitives:
+There are only three main **action** primitives:
 *  Assignment: You may overwrite the value saved in a **context variable** with `^var = expr`. The expression on the right side is allowed to use `^var` to read the value of the variable before the assignment.
 *  Alteration: For numerical types, you can adjust the value in a **context variable** with e.g. `^var += expr`. Allowed operations are `+`, `-`, `*`, and `/`. Division on integral types is always integer division.
+*  Exchange: For any two context variables of the same type, you can write `SWAP ^var1, ^var2` to swap their values.
 
 The other types of **action** expressions are **function invocations** and **conditionals**.
 

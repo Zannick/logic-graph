@@ -258,6 +258,27 @@ impl FullObservation {
     }
 %% endif
 %% endfor
+
+%% for c1, c2 in swap_pairs
+    pub fn swap_{{ c1 }}__{{ c2 }}(&mut self) {
+%% if c1 in bfp.varmap or c2 in bfp.varmap
+        let c1 = self.{% if c1 in bfp.varmap %}cbits{{ bfp.varmap[c1] }}.contains(flags::ContextBits{{ bfp.varmap[c1] }}::{{ c1|upper }}){% else %}{{ c1 }}{% endif %};
+        let c2 = self.{% if c2 in bfp.varmap %}cbits{{ bfp.varmap[c2] }}.contains(flags::ContextBits{{ bfp.varmap[c2] }}::{{ c2|upper }}){% else %}{{ c2 }}{% endif %};
+%% if c1 in bfp.varmap
+        self.cbits{{ bfp.varmap[c1] }}.set(flags::ContextBits{{ bfp.varmap[c1] }}::{{ c1|upper }}, c2);
+%% else
+        self.{{ c1 }} = c2;
+%% endif
+%% if c2 in bfp.varmap
+        self.cbits{{ bfp.varmap[c2] }}.set(flags::ContextBits{{ bfp.varmap[c2] }}::{{ c2|upper }}, c1);
+%% else
+        self.{{ c2 }} = c1;
+%% endif
+%% else
+        std::mem::swap(&mut self.{{ c1 }}, &mut self.{{ c2 }});
+%% endif
+    }
+%% endfor
 }
 
 #[derive(Debug)]

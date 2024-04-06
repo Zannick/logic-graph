@@ -19,6 +19,7 @@ class ContextVisitor(RulesVisitor):
             for ctx, t in self.data_types.items()
             if t.startswith('enums::')
         }
+        self.swap_pairs = set()
         self.ref = ''
 
     def visit(self, tree, name:str ='', ctxdict=None, local_types=None):
@@ -143,3 +144,4 @@ class ContextVisitor(RulesVisitor):
         self._checkRef(ref1)
         self._checkRef(ref2)
         self._checkTypes(ref1, ref2)
+        self.swap_pairs.add((ref1, ref2) if ref1 <= ref2 else (ref2, ref1))

@@ -339,6 +339,9 @@ class RustVisitor(RustBaseVisitor):
 
     def visitAlter(self, ctx):
         return f'ctx.{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+    
+    def visitSwap(self, ctx):
+        return f'std::mem::swap(&mut ctx.{self._getRefRaw(str(ctx.REF(0))[1:])}, &mut ctx.{self._getRefRaw(str(ctx.REF(1))[1:])});'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'
@@ -1244,6 +1247,14 @@ class RustObservationVisitor(RustBaseVisitor):
         if 'full_obs' not in val:
             return ''
         return f'{{ let _alter = {val}; }}'
+    
+    def visitSwap(self, ctx):
+        ref1 = str(ctx.REF(0))[1:]
+        ref2 = str(ctx.REF(1))[1:]
+        if ref2 < ref1:
+            ref1, ref2 = ref2, ref1
+        val = self.code_writer.visit(ctx)
+        return f'full_obs.swap_{ref1}__{ref2}()'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'

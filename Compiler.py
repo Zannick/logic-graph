@@ -240,7 +240,7 @@ class GameLogic(object):
 
         self.process_exit_movements()
         self.process_times()
-        self.process_settings()
+        self.process_parsed_code()
         self.process_items()
         self.process_bitflags()
         self.process_special()
@@ -590,7 +590,7 @@ class GameLogic(object):
                     spot['tilenames'] = sorted(short_names)
 
 
-    def process_settings(self):
+    def process_parsed_code(self):
         # Check settings
         def _visit(visitor, reverse=False):
             if not reverse:
@@ -624,6 +624,7 @@ class GameLogic(object):
                             self.data_types, self.data_values, self.data_defaults)
         _visit(cv)
         self.context_str_values = cv.values
+        self.swap_pairs = cv.swap_pairs
 
     def process_bitflags(self):
         self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, list(self.locations()))
