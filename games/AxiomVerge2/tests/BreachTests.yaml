@@ -57,3 +57,10 @@ tests:
         Move... to Giguna Breach > Pink Clouds > Corner
         ExitBreachWarp to Giguna > Clouds > Cache
       * Collect Big_Flask from Giguna > Clouds > Cache > Item
+
+  - name: Glacier Breach
+    start: Glacier Breach > South Save > Save Point
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+    can_reach: Glacier Breach > Save and Exit > Save Point

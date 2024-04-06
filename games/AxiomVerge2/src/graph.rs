@@ -1091,7 +1091,30 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier_Breach__West_Save__West_Ledge
         | SpotId::Glacier_Breach__West_Save__East_11
         | SpotId::Glacier_Breach__West_Save__West_11 => AreaId::Glacier_Breach__West_Save,
-        SpotId::Glacier_Breach__Guarded_Corridor__West => AreaId::Glacier_Breach__Guarded_Corridor,
+        SpotId::Glacier_Breach__Guarded_Corridor__West
+        | SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards
+        | SpotId::Glacier_Breach__Guarded_Corridor__Save_Point
+        | SpotId::Glacier_Breach__Guarded_Corridor__East => {
+            AreaId::Glacier_Breach__Guarded_Corridor
+        }
+        SpotId::Glacier_Breach__Piano_Roll__West
+        | SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__East_10
+        | SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__East_9 => AreaId::Glacier_Breach__Piano_Roll,
+        SpotId::Glacier_Breach__Electric_Arena__West
+        | SpotId::Glacier_Breach__Electric_Arena__West_Platforms
+        | SpotId::Glacier_Breach__Electric_Arena__East_Platforms
+        | SpotId::Glacier_Breach__Electric_Arena__East_Ledge
+        | SpotId::Glacier_Breach__Electric_Arena__East => AreaId::Glacier_Breach__Electric_Arena,
+        SpotId::Glacier_Breach__Save_and_Exit__West
+        | SpotId::Glacier_Breach__Save_and_Exit__Save_Point
+        | SpotId::Glacier_Breach__Save_and_Exit__Halfway
+        | SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => {
+            AreaId::Glacier_Breach__Save_and_Exit
+        }
+        SpotId::Glacier_Breach__Stacked_Enemies__West => AreaId::Glacier_Breach__Stacked_Enemies,
         SpotId::Glacier_Breach__Empty_Space__West => AreaId::Glacier_Breach__Empty_Space,
         SpotId::Glacier_Breach__Angry_Lions__North => AreaId::Glacier_Breach__Angry_Lions,
         SpotId::Glacier_Breach__Spidery_Connector__East => {
@@ -1473,7 +1496,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Breach_Map__IB_Save_Room
         | SpotId::Menu__Breach_Map__AB_East
         | SpotId::Menu__Breach_Map__GlB_South
-        | SpotId::Menu__Breach_Map__GlB_West => AreaId::Menu__Breach_Map,
+        | SpotId::Menu__Breach_Map__GlB_West
+        | SpotId::Menu__Breach_Map__GlB_Center
+        | SpotId::Menu__Breach_Map__GlB_Arena => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -2661,7 +2686,26 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier_Breach__West_Save__West_Ledge
         | SpotId::Glacier_Breach__West_Save__East_11
         | SpotId::Glacier_Breach__West_Save__West_11 => RegionId::Glacier_Breach,
-        SpotId::Glacier_Breach__Guarded_Corridor__West => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Guarded_Corridor__West
+        | SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards
+        | SpotId::Glacier_Breach__Guarded_Corridor__Save_Point
+        | SpotId::Glacier_Breach__Guarded_Corridor__East => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Piano_Roll__West
+        | SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__East_10
+        | SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge
+        | SpotId::Glacier_Breach__Piano_Roll__East_9 => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Electric_Arena__West
+        | SpotId::Glacier_Breach__Electric_Arena__West_Platforms
+        | SpotId::Glacier_Breach__Electric_Arena__East_Platforms
+        | SpotId::Glacier_Breach__Electric_Arena__East_Ledge
+        | SpotId::Glacier_Breach__Electric_Arena__East => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Save_and_Exit__West
+        | SpotId::Glacier_Breach__Save_and_Exit__Save_Point
+        | SpotId::Glacier_Breach__Save_and_Exit__Halfway
+        | SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Stacked_Enemies__West => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Empty_Space__West => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Angry_Lions__North => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Spidery_Connector__East => RegionId::Glacier_Breach,
@@ -3031,7 +3075,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Breach_Map__IB_Save_Room
         | SpotId::Menu__Breach_Map__AB_East
         | SpotId::Menu__Breach_Map__GlB_South
-        | SpotId::Menu__Breach_Map__GlB_West => RegionId::Menu,
+        | SpotId::Menu__Breach_Map__GlB_West
+        | SpotId::Menu__Breach_Map__GlB_Center
+        | SpotId::Menu__Breach_Map__GlB_Arena => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -5922,6 +5968,11 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => true,
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => true,
+            ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1 => true,
+            ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1 => true,
+            ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => rules::access_hook_and_hover(ctx, world),
             ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => true,
             ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::access_hook(ctx, world),
@@ -5956,6 +6007,19 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1 => true,
+            ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1 => true,
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1 => true,
+            ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1 => true,
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::access_hook(ctx, world),
             ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => true,
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::access_hook(ctx, world),
@@ -6108,6 +6172,8 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
+            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::access_map__glacier_breach__save_and_exit__save(ctx, world),
+            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::access_map__glacier_breach__guarded_corridor__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::access_map__glacier_breach__west_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
@@ -7132,6 +7198,9 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_sync(ctx, world, full_obs),
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::observe_access_hook(ctx, world, full_obs),
@@ -7160,6 +7229,12 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
@@ -7248,6 +7323,8 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::observe_access_map__glacier_breach__save_and_exit__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::observe_access_map__glacier_breach__guarded_corridor__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__west_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
@@ -8401,6 +8478,9 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_sync(ctx, world, edict),
             ExitId::Glacier_Breach__Crystals__East__ex__West_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::explain_hook(ctx, world, edict),
@@ -8429,6 +8509,12 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::explain_hook_or_hover(ctx, world, edict),
@@ -8517,6 +8603,8 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::explain_map__glacier_breach__save_and_exit__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::explain_map__glacier_breach__guarded_corridor__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::explain_map__glacier_breach__west_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
@@ -9056,12 +9144,21 @@ impl world::Exit for Exit {
             ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => true,
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => true,
             ExitId::Glacier_Breach__Crystals__West__ex__Floaters__East_1 => true,
+            ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1 => true,
+            ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1 => true,
             ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => true,
             ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
             ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => true,
+            ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1 => true,
+            ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1 => true,
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1 => true,
+            ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1 => true,
+            ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1 => true,
             ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => true,
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
             ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => true,
@@ -9263,6 +9360,8 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_open(ctx, world),
+            ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => true,
+            ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => true,
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => true,
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => true,
             ActionId::Global__Become_Drone => rules::access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world),
@@ -9398,93 +9497,959 @@ impl world::Accessible for Action {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::explain_climb_and_can_deploy_and_hover_and_slingshot_hook(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::explain_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world, edict),
-            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world, edict),
-            ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict),
-            ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::explain_not_separation_or_defeat_indra(ctx, world, edict),
-            ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::explain_annuna__west_climb__switch_ledge__open_door__req(ctx, world, edict),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::explain_ebih__base_camp__left_platform__move_left_platform__req(ctx, world, edict),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world, edict),
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::explain_ebih__drone_room__pit_left__activate_lift__req(ctx, world, edict),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world, edict),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::explain_ebih__drone_room__portal_exit__activate_platform__req(ctx, world, edict),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::explain_ebih__ebih_east__dispenser__activate_lift__req(ctx, world, edict),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(ctx, world, edict),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(ctx, world, edict),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::explain_ebih__ebih_east__moving_platform__activate_ride__req(ctx, world, edict),
-            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::explain_infect(ctx, world, edict),
-            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::explain_ebih__vertical_interchange__west_13__open_door__req(ctx, world, edict),
-            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Ebih__Waterfall__West_8__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::explain_giguna__carnelian__lower_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::explain_giguna__carnelian__lower_susar__hack__req(ctx, world, edict),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::explain_giguna__carnelian__switch__open_door__req(ctx, world, edict),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::explain_giguna__carnelian__upper_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::explain_giguna__carnelian__upper_susar__hack__req(ctx, world, edict),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::explain_giguna__clouds__platform_start__hack_and_get_off_early__req(ctx, world, edict),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world, edict),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::explain_giguna__east_caverns__lower_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::explain_giguna__east_caverns__lower_susar__hack__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::explain_giguna__east_caverns__mid_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::explain_giguna__east_caverns__mid_susar__hack__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::explain_giguna__east_caverns__statues_ledge__open_door__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::explain_giguna__east_caverns__switch__open_door__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::explain_giguna__east_caverns__upper_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::explain_giguna__east_caverns__west_14__enter_combo__req(ctx, world, edict),
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::explain_giguna__east_caverns__west_16__open_door__req(ctx, world, edict),
-            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::explain_open_and_range2(ctx, world, edict),
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::explain_open(ctx, world, edict),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::explain_open_and_range1(ctx, world, edict),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::explain_open_and_range2(ctx, world, edict),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::explain_open_and_range3(ctx, world, edict),
-            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world, edict),
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::explain_giguna__giguna_northeast__switch__open_door__req(ctx, world, edict),
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::explain_mode_eq_drone(ctx, world, edict),
-            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::explain_open(ctx, world, edict),
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::explain_grab_and_can_deploy(ctx, world, edict),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, edict),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::explain_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world, edict),
-            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::explain_giguna__west_caverns__east_susar__caught__req(ctx, world, edict),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::explain_giguna__west_caverns__east_susar__hack__req(ctx, world, edict),
-            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::explain_giguna_breach__sw_save__west_11__open_door__req(ctx, world, edict),
-            ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::explain_open(ctx, world, edict),
-            ActionId::Global__Become_Drone => rules::explain_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world, edict),
-            ActionId::Global__Become_Indra => rules::explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, edict),
-            ActionId::Global__Deploy_Drone => rules::explain_not_within_menu_and_can_deploy(ctx, world, edict),
-            ActionId::Global__Recall_Drone => rules::explain_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world, edict),
-            ActionId::Global__Recall_Fast_Travel => rules::explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, edict),
-            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::explain_activate(ctx, world, edict),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::explain_not_irikar_royal_storage_wall_and_shockwave(ctx, world, edict),
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict),
-            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::explain_can_deploy(ctx, world, edict),
-            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::explain_can_deploy_and_drone_hover(ctx, world, edict),
-            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict),
-            _ => (true, vec![])
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                let (ret, mut tags) =
+                    rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Tower Core"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Tower Core"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
+                let (ret, mut tags) =
+                    rules::explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_climb_and_can_deploy_and_hover_and_slingshot_hook(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Tower East Ledge"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
+                let (ret, mut tags) =
+                    rules::explain_annuna__east_bridge__tower_secret__enter_combo__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
+                let (ret, mut tags) =
+                    rules::explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Northeast Cubby"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "West 19 Mid-flight"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Mirror_Match__Save_Point__Save => {
+                let (ret, mut tags) =
+                    rules::explain_not_separation_or_defeat_indra(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_annuna__west_climb__switch_ledge__open_door__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__base_camp__left_platform__move_left_platform__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Base Camp > Left Platform Moved"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Base Camp > Left Platform"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Drone Room > East 4"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                let (ret, mut tags) = rules::explain_ebih__drone_room__pit_left__activate_lift__req(
+                    ctx, world, edict,
+                );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Drone Room > Moving Platform"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Drone Room > West 6"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__drone_room__portal_exit__activate_platform__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                let (ret, mut tags) = rules::explain_ebih__ebih_east__dispenser__activate_lift__req(
+                    ctx, world, edict,
+                );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Ebih East > Ledge End"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Ebih East > Ledge End"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Ebih East > Dispenser"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__ebih_east__moving_platform__activate_ride__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Ebih East > Middle Platform"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_infect(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna > Giguna Northeast > Inner Wall"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__vertical_interchange__west_13__open_door__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Ebih > Waterfall > Below Left Switch"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__carnelian__lower_susar__caught__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__carnelian__lower_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__carnelian__switch__open_door__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__carnelian__upper_susar__caught__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__carnelian__upper_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Platform Early"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Platform Stop"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Platform Stop"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
+                let (ret, mut tags) = rules::explain_giguna__east_caverns__lower_susar__caught__req(
+                    ctx, world, edict,
+                );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__lower_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__mid_susar__caught__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__mid_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__statues_ledge__open_door__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__switch__open_door__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
+                let (ret, mut tags) = rules::explain_giguna__east_caverns__upper_susar__caught__req(
+                    ctx, world, edict,
+                );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__west_14__enter_combo__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__east_caverns__west_16__open_door__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                let (ret, mut tags) = rules::explain_open_and_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Upper Cliff"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                let (ret, mut tags) = rules::explain_open_and_range1(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                let (ret, mut tags) = rules::explain_open_and_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                let (ret, mut tags) = rules::explain_open_and_range3(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna > Giguna Northeast > Gate Vent"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__giguna_northeast__switch__open_door__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                let (ret, mut tags) = rules::explain_mode_eq_drone(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna Breach > Peak > Save Point"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
+                let (ret, mut tags) = rules::explain_grab_and_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna > Ruins West > Rooftop East Edge"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__ruins_west__lower_ledge__hack_kishib__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna > Wasteland > West 12"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__west_caverns__east_susar__caught__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                let (ret, mut tags) =
+                    rules::explain_giguna__west_caverns__east_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Giguna > West Caverns > Higher Ledge"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_giguna_breach__sw_save__west_11__open_door__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Global__Become_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Global__Become_Indra => {
+                let (ret, mut tags) =
+                    rules::explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Global__Deploy_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_not_within_menu_and_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Global__Recall_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_not_within_menu_and_realm_ne_breach_and_can_recall(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "^indra"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Global__Recall_Fast_Travel => {
+                let (ret, mut tags) = rules::explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "^map_spot"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Top"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
+                let (ret, mut tags) = rules::explain_activate(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Moving Platform End"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
+                let (ret, mut tags) =
+                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!(
+                            "{} ({})",
+                            dest, "Irikar Breach > Basement Save > Save Point"
+                        ),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
+                let (ret, mut tags) =
+                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Irikar Breach > Gauntlet > Save Point"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
+                let (ret, mut tags) =
+                    rules::explain_not_irikar_royal_storage_wall_and_shockwave(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
+                let (ret, mut tags) =
+                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Irikar Breach > Save Room > Save Point"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
+                let (ret, mut tags) = rules::explain_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Lower Platform"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
+                let (ret, mut tags) = rules::explain_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Middle Platform"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
+                let (ret, mut tags) =
+                    rules::explain_can_deploy_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Medium Rock"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            _ => (true, vec![]),
         }
     }
 }
@@ -9592,6 +10557,8 @@ impl world::Action for Action {
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
@@ -10142,6 +11109,12 @@ impl world::Action for Action {
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
+            ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
+            ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => {
+                rules::observe_action_save(ctx, world, full_obs);
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
@@ -10278,32 +11251,93 @@ impl world::Accessible for Warp {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            WarpId::BreachSave => rules::explain_allow_warps_and_realm_eq_breach(ctx, world, edict),
+            WarpId::BreachSave => {
+                let (ret, mut tags) =
+                    rules::explain_allow_warps_and_realm_eq_breach(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "ctx.breach_save()"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             WarpId::EarthSave => {
-                rules::explain_allow_warps_and_within_antarctica(ctx, world, edict)
+                let (ret, mut tags) =
+                    rules::explain_allow_warps_and_within_antarctica(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "ctx.save()"));
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
             WarpId::ExitBreach => {
-                rules::explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
-                    ctx, world, edict,
-                )
+                let (ret, mut tags) = rules::explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "data::flipside(ctx.position())"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
-            WarpId::ExitMenu => rules::explain_within_menu_gt_upgrade_menu(ctx, world, edict),
+            WarpId::ExitMenu => {
+                let (ret, mut tags) = rules::explain_within_menu_gt_upgrade_menu(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "ctx.last()"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             WarpId::FastTravelBreach => {
-                rules::explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
-                    ctx, world, edict,
-                )
+                let (ret, mut tags) = rules::explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "data::map_spot(ctx.position())"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
             WarpId::FastTravelKiengir => {
-                rules::explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
-                    ctx, world, edict,
-                )
+                let (ret, mut tags) = rules::explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "data::map_spot(ctx.position())"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
             WarpId::MainSave => {
-                rules::explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
-                    ctx, world, edict,
-                )
+                let (ret, mut tags) = rules::explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "ctx.save()"));
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
-            WarpId::Menu => rules::explain_not_within_menu_and_flasks_gt_0(ctx, world, edict),
+            WarpId::Menu => {
+                let (ret, mut tags) =
+                    rules::explain_not_within_menu_and_flasks_gt_0(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "SpotId::Menu__Upgrade_Menu__Physiology"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             _ => (true, vec![]),
         }
     }
@@ -10399,7 +11433,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1546] = [
+static RAW_SPOTS: [SpotId; 1567] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -11577,6 +12611,11 @@ static RAW_SPOTS: [SpotId; 1546] = [
     SpotId::Glacier_Breach__Control__West,
     SpotId::Glacier_Breach__Crystals__East,
     SpotId::Glacier_Breach__Crystals__West,
+    SpotId::Glacier_Breach__Electric_Arena__East,
+    SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+    SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+    SpotId::Glacier_Breach__Electric_Arena__West,
+    SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
     SpotId::Glacier_Breach__Empty_Space__West,
     SpotId::Glacier_Breach__Floaters__East,
     SpotId::Glacier_Breach__Floaters__West,
@@ -11592,12 +12631,26 @@ static RAW_SPOTS: [SpotId; 1546] = [
     SpotId::Glacier_Breach__Grate_Work__West_13,
     SpotId::Glacier_Breach__Grate_Work__West_14,
     SpotId::Glacier_Breach__Grate_Work__West_Ledge,
+    SpotId::Glacier_Breach__Guarded_Corridor__East,
+    SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+    SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
     SpotId::Glacier_Breach__Guarded_Corridor__West,
+    SpotId::Glacier_Breach__Piano_Roll__East_10,
+    SpotId::Glacier_Breach__Piano_Roll__East_9,
+    SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+    SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+    SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+    SpotId::Glacier_Breach__Piano_Roll__West,
+    SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+    SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+    SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+    SpotId::Glacier_Breach__Save_and_Exit__West,
     SpotId::Glacier_Breach__South_Save__Brick_Ledge,
     SpotId::Glacier_Breach__South_Save__East,
     SpotId::Glacier_Breach__South_Save__Save_Point,
     SpotId::Glacier_Breach__South_Save__West,
     SpotId::Glacier_Breach__Spidery_Connector__East,
+    SpotId::Glacier_Breach__Stacked_Enemies__West,
     SpotId::Glacier_Breach__West_Save__East_11,
     SpotId::Glacier_Breach__West_Save__East_12,
     SpotId::Glacier_Breach__West_Save__Save_Point,
@@ -11783,6 +12836,8 @@ static RAW_SPOTS: [SpotId; 1546] = [
     SpotId::Menu__Breach_Map__AB_East,
     SpotId::Menu__Breach_Map__GB_Peak,
     SpotId::Menu__Breach_Map__GB_SW_Save,
+    SpotId::Menu__Breach_Map__GlB_Arena,
+    SpotId::Menu__Breach_Map__GlB_Center,
     SpotId::Menu__Breach_Map__GlB_South,
     SpotId::Menu__Breach_Map__GlB_West,
     SpotId::Menu__Breach_Map__IB_Basement,
@@ -12375,6 +13430,10 @@ lazy_static! {
             start: SpotId::Glacier_Breach__Crystals__East.into_usize(),
             end: SpotId::Glacier_Breach__Crystals__West.into_usize() + 1,
         },
+        AreaId::Glacier_Breach__Electric_Arena => Range {
+            start: SpotId::Glacier_Breach__Electric_Arena__East.into_usize(),
+            end: SpotId::Glacier_Breach__Electric_Arena__West_Platforms.into_usize() + 1,
+        },
         AreaId::Glacier_Breach__Empty_Space => Range {
             start: SpotId::Glacier_Breach__Empty_Space__West.into_usize(),
             end: SpotId::Glacier_Breach__Empty_Space__West.into_usize() + 1,
@@ -12388,8 +13447,16 @@ lazy_static! {
             end: SpotId::Glacier_Breach__Grate_Work__West_Ledge.into_usize() + 1,
         },
         AreaId::Glacier_Breach__Guarded_Corridor => Range {
-            start: SpotId::Glacier_Breach__Guarded_Corridor__West.into_usize(),
+            start: SpotId::Glacier_Breach__Guarded_Corridor__East.into_usize(),
             end: SpotId::Glacier_Breach__Guarded_Corridor__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Piano_Roll => Range {
+            start: SpotId::Glacier_Breach__Piano_Roll__East_10.into_usize(),
+            end: SpotId::Glacier_Breach__Piano_Roll__West.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Save_and_Exit => Range {
+            start: SpotId::Glacier_Breach__Save_and_Exit__Halfway.into_usize(),
+            end: SpotId::Glacier_Breach__Save_and_Exit__West.into_usize() + 1,
         },
         AreaId::Glacier_Breach__South_Save => Range {
             start: SpotId::Glacier_Breach__South_Save__Brick_Ledge.into_usize(),
@@ -12398,6 +13465,10 @@ lazy_static! {
         AreaId::Glacier_Breach__Spidery_Connector => Range {
             start: SpotId::Glacier_Breach__Spidery_Connector__East.into_usize(),
             end: SpotId::Glacier_Breach__Spidery_Connector__East.into_usize() + 1,
+        },
+        AreaId::Glacier_Breach__Stacked_Enemies => Range {
+            start: SpotId::Glacier_Breach__Stacked_Enemies__West.into_usize(),
+            end: SpotId::Glacier_Breach__Stacked_Enemies__West.into_usize() + 1,
         },
         AreaId::Glacier_Breach__West_Save => Range {
             start: SpotId::Glacier_Breach__West_Save__East_11.into_usize(),
@@ -14223,6 +15294,12 @@ impl world::World for World {
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => {
                 SpotId::Glacier_Breach__West_Save__Save_Point
             }
+            ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => {
+                SpotId::Glacier_Breach__Guarded_Corridor__Save_Point
+            }
+            ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => {
+                SpotId::Glacier_Breach__Save_and_Exit__Save_Point
+            }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 SpotId::Glacier__Vertical_Room__Upper_Switch
@@ -14946,6 +16023,21 @@ impl world::World for World {
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 | ExitId:: Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => SpotId::Glacier_Breach__West_Save__West_Ledge,
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 | ExitId:: Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => SpotId::Glacier_Breach__West_Save__East_11,
             ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => SpotId::Glacier_Breach__West_Save__West_11,
+            ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1 | ExitId:: Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 | ExitId:: Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => SpotId::Glacier_Breach__Guarded_Corridor__West,
+            ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1 => SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1 => SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1 => SpotId::Glacier_Breach__Guarded_Corridor__East,
+            ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1 => SpotId::Glacier_Breach__Piano_Roll__West,
+            ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1 => SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1 => SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 | ExitId:: Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1 => SpotId::Glacier_Breach__Piano_Roll__East_10,
+            ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1 => SpotId::Glacier_Breach__Piano_Roll__East_9,
+            ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1 => SpotId::Glacier_Breach__Electric_Arena__West,
+            ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1 => SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1 => SpotId::Glacier_Breach__Electric_Arena__East,
+            ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1 => SpotId::Glacier_Breach__Save_and_Exit__West,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
@@ -15190,6 +16282,8 @@ impl world::World for World {
             ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => SpotId::Menu__Breach_Map__AB_East,
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_South,
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_West,
+            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Center,
+            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Arena,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -16662,6 +17756,8 @@ impl world::World for World {
             | SpotId::Glacier_Breach__Control__West
             | SpotId::Glacier_Breach__Crystals__East
             | SpotId::Glacier_Breach__Crystals__West
+            | SpotId::Glacier_Breach__Electric_Arena__East
+            | SpotId::Glacier_Breach__Electric_Arena__West
             | SpotId::Glacier_Breach__Floaters__East
             | SpotId::Glacier_Breach__Floaters__West
             | SpotId::Glacier_Breach__Grate_Work__East
@@ -16669,6 +17765,15 @@ impl world::World for World {
             | SpotId::Glacier_Breach__Grate_Work__Southeast
             | SpotId::Glacier_Breach__Grate_Work__West_13
             | SpotId::Glacier_Breach__Grate_Work__West_14
+            | SpotId::Glacier_Breach__Guarded_Corridor__East
+            | SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards
+            | SpotId::Glacier_Breach__Guarded_Corridor__Save_Point
+            | SpotId::Glacier_Breach__Guarded_Corridor__West
+            | SpotId::Glacier_Breach__Piano_Roll__East_10
+            | SpotId::Glacier_Breach__Piano_Roll__East_9
+            | SpotId::Glacier_Breach__Piano_Roll__West
+            | SpotId::Glacier_Breach__Save_and_Exit__Save_Point
+            | SpotId::Glacier_Breach__Save_and_Exit__West
             | SpotId::Glacier_Breach__South_Save__East
             | SpotId::Glacier_Breach__South_Save__Save_Point
             | SpotId::Glacier_Breach__South_Save__West
@@ -16765,6 +17870,8 @@ impl world::World for World {
             | SpotId::Menu__Breach_Map__AB_East
             | SpotId::Menu__Breach_Map__GB_Peak
             | SpotId::Menu__Breach_Map__GB_SW_Save
+            | SpotId::Menu__Breach_Map__GlB_Arena
+            | SpotId::Menu__Breach_Map__GlB_Center
             | SpotId::Menu__Breach_Map__GlB_South
             | SpotId::Menu__Breach_Map__GlB_West
             | SpotId::Menu__Breach_Map__IB_Gauntlet
@@ -26539,6 +27646,132 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__West_Save__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1,
+            time: 8000,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1,
+            time: 10000,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1,
+            time: 3100,
+            dest: SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1,
+            time: 11000,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Piano_Roll__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1,
+            time: 2105,
+            dest: SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1,
+            time: 2400,
+            dest: SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1,
+            time: 2400,
+            dest: SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Electric_Arena__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Stacked_Enemies__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1 => Exit {
+            id: ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Piano_Roll__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => Exit {
+            id: ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1,
+            time: 3750,
+            dest: SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1,
+            time: 3499,
+            dest: SpotId::Glacier_Breach__Electric_Arena__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1 => Exit {
+            id: ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1,
+            time: 1052,
+            dest: SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1 => Exit {
+            id: ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Save_and_Exit__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1 => Exit {
+            id: ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1,
+            time: 1600,
+            dest: SpotId::Glacier_Breach__Electric_Arena__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
             time: 750,
@@ -28898,6 +30131,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => Exit {
             id: ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1,
             time: 1350,
@@ -30549,6 +31796,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Glacier_Breach__West_Save__Save_Point__Save => Action {
             id: ActionId::Glacier_Breach__West_Save__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => Action {
+            id: ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save,
+            time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => Action {
+            id: ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save,
             time: 1300,
             price: Currency::Free,
         },
@@ -44226,6 +45483,251 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1.into_usize(),
+                end: ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards => Spot {
+            id: SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__Guarded_Corridor__Past_the_Guards__ex__Piano_Roll__Lower_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Guarded_Corridor__Save_Point => Spot {
+            id: SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Guarded_Corridor__Save_Point__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier_Breach__Guarded_Corridor__East => Spot {
+            id: SpotId::Glacier_Breach__Guarded_Corridor__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__West => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Piano_Roll__West__ex__Guarded_Corridor__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__Piano_Roll__Lower_Ledge__ex__Middle_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__Piano_Roll__Middle_Ledge__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__East_10 => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__East_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Piano_Roll__East_9 => Spot {
+            id: SpotId::Glacier_Breach__Piano_Roll__East_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Electric_Arena__West => Spot {
+            id: SpotId::Glacier_Breach__Electric_Arena__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1.into_usize(),
+                end: ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Electric_Arena__West_Platforms => Spot {
+            id: SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1.into_usize(),
+                end: ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Electric_Arena__East_Platforms => Spot {
+            id: SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Electric_Arena__East_Ledge => Spot {
+            id: SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1.into_usize(),
+                end: ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Electric_Arena__East => Spot {
+            id: SpotId::Glacier_Breach__Electric_Arena__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1.into_usize(),
+                end: ExitId::Glacier_Breach__Electric_Arena__East__ex__Save_and_Exit__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Save_and_Exit__West => Spot {
+            id: SpotId::Glacier_Breach__Save_and_Exit__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1.into_usize(),
+                end: ExitId::Glacier_Breach__Save_and_Exit__West__ex__Electric_Arena__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Save_and_Exit__Save_Point => Spot {
+            id: SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier_Breach__Save_and_Exit__Halfway => Spot {
+            id: SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => Spot {
+            id: SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Stacked_Enemies__West => Spot {
+            id: SpotId::Glacier_Breach__Stacked_Enemies__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -48905,6 +50407,32 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_Center => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_Arena => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_Arena,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

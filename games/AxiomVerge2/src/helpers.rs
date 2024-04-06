@@ -2502,6 +2502,8 @@ macro_rules! helper__save {
     ($ctx:expr, $world:expr) => {{
         if data::realm($ctx.position()) == enums::Realm::Breach {
             $ctx.set_breach_save($ctx.position());
+        } else {
+            $ctx.set_save($ctx.position());
         }
         helper__refill_energy!($ctx, $world);
     }};
@@ -2512,7 +2514,9 @@ macro_rules! hobserve__save {
         if {
             let v = data::realm($ctx.position());
             v == enums::Realm::Breach
-        } {}
+        } {
+        } else {
+        }
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
 }

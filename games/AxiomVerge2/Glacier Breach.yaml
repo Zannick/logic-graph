@@ -459,10 +459,204 @@ areas:
 
 - name: Guarded Corridor
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [35, 10, 36, 11]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GlB Center
   spots:
     - name: West
       coord: [33.1, 10.75]
+      exits:
+        - to: West Save > East 11
+          tags: [xdoor]
+        - to: Past the Guards
+          req: $hook and $hover
+          time: 8
+        - to: Save Point
+          req: $hook
+          jumps: 6
+          time: 10  # ?
+    - name: Past the Guards
+      coord: [35.4, 10.45]
+      local:
+        - to: Save Point
+      exits:
+        - to: Piano Roll > Lower Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Save Point
+      coord: [35.475, 10.6]
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: West
+          time: 11  # ?
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [35.9, 10.7]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Piano Roll > West
+          tags: [xdoor]
 
+- name: Piano Roll
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [36.1, 10.7]
+      local:
+        - to: Lower Ledge
+          jumps: 1
+      exits:
+        - to: Guarded Corridor > East
+          tags: [xdoor]
+    - name: Lower Ledge
+      coord: [36.2, 10.65]
+      local:
+        - to: West
+        - to: East 10
+          thru: [[36.25, 9.9], [36.75, 9.5]]
+          jumps: [6, 3, 0]
+        - to: Upper Ledge
+          thru: [[36.25, 9.9], [36.25, 9.1]]
+          jumps: [6, 6, 3]
+      exits:
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Middle Ledge
+      coord: [36.8, 9.75]
+      local:
+        - to: Lower Ledge
+        - to: East 10
+        - to: Upper Ledge
+          thru: [[36.25, 9.9], [36.25, 9.1]]
+          jumps: [2, 6, 3]
+      exits:
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 4
+    - name: East 10
+      coord: [36.9, 9.75]
+      local:
+        - to: Middle Ledge
+      exits:
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 4
+        - to: Electric Arena > West
+          tags: [xdoor]
+    - name: Upper Ledge
+      coord: [36.8, 8.75]
+      local:
+        - to: Middle Ledge
+          thru: [36.75, 9.3]
+        - to: East 10
+          thru: [36.75, 9.3]
+        - to: East 9
+        - to: Lower Ledge
+    - name: East 9
+      coord: [36.9, 8.75]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Stacked Enemies > West
+          tags: [xdoor]
+
+- name: Electric Arena
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [37.1, 9.75]
+      local:
+        - to: West Platforms
+          jumps: 1
+      exits:
+        - to: Piano Roll > East 10
+          tags: [xdoor]
+    - name: West Platforms
+      coord: [37.3, 9.7]
+      local:
+        - to: West
+      exits:
+        - to: East Ledge
+          req: $hook and $hover
+          movement: fast_hover
+    - name: East Platforms
+      coord: [38.5, 9.7]
+      exits:
+        - to: West
+          req: $hook and $hover
+          movement: fast_hover
+    - name: East Ledge
+      coord: [38.8, 9.75]
+      local:
+        - to: East
+      exits:
+        - to: East Platforms
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: East
+      coord: [38.9, 9.75]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Save and Exit > West
+          tags: [xdoor]
+
+- name: Save and Exit
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [39, 9, 40, 10]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GlB Arena
+  spots:
+    - name: West
+      coord: [39.1, 9.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Electric Arena > East
+          tags: [xdoor]
+    - name: Save Point
+      coord: [39.475, 9.6]
+      local:
+        - to: West
+        - to: Halfway
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Halfway
+      coord: [40.05, 9.6]
+      local:
+        - to: Save Point
+        - to: Portal Stand
+    - name: Portal Stand
+      coord: [40.475, 9.6]
+      local:
+        - to: Halfway
+
+
+- name: Stacked Enemies
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [37.1, 8.75]
 
 - name: Empty Space
   on_entry: $reset_old_area(^newpos)

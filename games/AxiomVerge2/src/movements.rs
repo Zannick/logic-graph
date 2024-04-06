@@ -6602,6 +6602,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 949,
         (
             [false],
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+        ) => 701,
+        (
+            [false],
             SpotId::Glacier_Breach__Floaters__East,
             SpotId::Glacier_Breach__Floaters__West,
         ) => 2807,
@@ -6681,6 +6701,121 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__Grate_Work__West_Ledge,
             SpotId::Glacier_Breach__Grate_Work__West_14,
         ) => 450,
+        (
+            [false],
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => 263,
+        (
+            [false],
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 350,
+        // [3.6, 1.8, 0.526316]
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 5926,
+        // [3.6, 3.6, 1.929825]
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 9129,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 2105,
+        // [1.929825, 3.6, 1.929825]
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 7459,
+        // [0.55, 0.526316]
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 1076,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 2105,
+        // [0.55, 0.45]
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => 2017,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => 2017,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+        ) => 1315,
+        (
+            [false],
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => 1315,
         (
             [false],
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
@@ -9117,6 +9252,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         ([false], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([false], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
+        ([false], SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => 1600,
+        ([false], SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => 1333,
         ([false], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
         ([false], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([false], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
@@ -21521,6 +21658,26 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 949,
         (
             [true],
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+        ) => 701,
+        (
+            [true],
             SpotId::Glacier_Breach__Floaters__East,
             SpotId::Glacier_Breach__Floaters__West,
         ) => 2807,
@@ -21600,6 +21757,121 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__Grate_Work__West_Ledge,
             SpotId::Glacier_Breach__Grate_Work__West_14,
         ) => 450,
+        (
+            [true],
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => 263,
+        (
+            [true],
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 350,
+        // [3.6, 1.8, 0.526316]
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 5926,
+        // [3.6, 3.6, 1.929825]
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 9129,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 2105,
+        // [1.929825, 3.6, 1.929825]
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => 7459,
+        // [0.55, 0.526316]
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => 1076,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 2105,
+        // [0.55, 0.45]
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => 2017,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => 2017,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => 1315,
         (
             [true],
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
@@ -23954,6 +24226,8 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         ([true], SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1466,
         ([true], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
+        ([true], SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => 1600,
+        ([true], SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => 1333,
         ([true], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
         ([true], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([true], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
@@ -33706,6 +33980,110 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier_Breach__West_Save__West_11,
             SpotId::Glacier_Breach__West_Save__West_Ledge,
         ) => true,
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => true,
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
@@ -38185,6 +38563,8 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -56696,6 +57076,76 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            3499,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            701,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            3750,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            701,
+        ),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier_Breach__Empty_Space__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -56966,7 +57416,242 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            1491,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            263,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            3100,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            1491,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__West,
+            11000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            8000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            10000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
+            SpotId::Glacier_Breach__West_Save__East_11,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            2400,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Stacked_Enemies__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            5926,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            2105,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            9129,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            2105,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            2400,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            1076,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            2105,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            2017,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            1491,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            2017,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            1315,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            1315,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57037,6 +57722,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Spidery_Connector__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stacked_Enemies__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62692,6 +63382,36 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Breach_Map__GB_SW_Save,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Arena,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Arena,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1600,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Arena,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Center,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Center,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1333,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_Center,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -74908,6 +75628,22 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__Control__Upper_Gap,
             SpotId::Glacier_Breach__Control__Lower_Corner,
         ) => Some(949),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+        ) => Some(701),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+        ) => Some(701),
         (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
             Some(2807)
         }
@@ -74970,6 +75706,94 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__Grate_Work__West_Ledge,
             SpotId::Glacier_Breach__Grate_Work__West_14,
         ) => Some(450),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => Some(1491),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => Some(263),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+        ) => Some(1491),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => Some(5926),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => Some(9129),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => Some(2105),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => Some(7459),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => Some(1076),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => Some(2105),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => Some(1000),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+        ) => Some(1491),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => Some(2017),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => Some(1491),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => Some(2017),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+        ) => Some(1315),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => Some(1315),
         (
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
@@ -76685,6 +77509,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Irikar__Sight_Room__West_24, SpotId::Irikar__Sight_Room__Lower_Ledge) => Some(701),
         (SpotId::Menu__Breach_Map__AB_East, SpotId::Menu__Breach_Map__GB_Peak) => Some(1466),
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => Some(500),
+        (SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => Some(1600),
+        (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => Some(1333),
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => Some(1533),
         (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => Some(1133),
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => Some(2100),
@@ -86383,6 +87209,22 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__Control__Upper_Gap,
             SpotId::Glacier_Breach__Control__Lower_Corner,
         ) => (Some(949), vec![]),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East,
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
+            SpotId::Glacier_Breach__Electric_Arena__East,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West,
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
+            SpotId::Glacier_Breach__Electric_Arena__West,
+        ) => (Some(701), vec![]),
         (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
             (Some(2807), vec![])
         }
@@ -86445,6 +87287,94 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__Grate_Work__West_Ledge,
             SpotId::Glacier_Breach__Grate_Work__West_14,
         ) => (Some(450), vec![]),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ) => (Some(263), vec![]),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => (Some(5926), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => (Some(9129), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__West,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+        ) => (Some(7459), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_10,
+        ) => (Some(1076), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__East_9,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__Upper_Ledge,
+            SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Glacier_Breach__Piano_Roll__West,
+            SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => (Some(2017), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+        ) => (Some(2017), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+        ) => (Some(1315), vec![]),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ) => (Some(1315), vec![]),
         (
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
@@ -88313,6 +89243,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(500), vec![])
+        }
+        (SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1333), vec![])
         }
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(1533), vec![])

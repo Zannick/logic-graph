@@ -68,7 +68,7 @@ fn test_obtain() {
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
-    ctx.set_major_glitches(true);
+    world.major_glitches = true;
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_obtainable!(
@@ -90,18 +90,18 @@ fn test_require() {
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
-    let mut ctx2 = ctx.clone();
-    ctx2.set_major_glitches(true);
     expect_not_obtainable!(
         &*world,
-        ctx,
+        ctx.clone(),
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
+
+    world.major_glitches = true;
     expect_obtainable!(
         &*world,
-        ctx2,
+        ctx,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
@@ -118,7 +118,7 @@ fn search() {
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
-    ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
+    ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
     ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
     let verify = |c: &Context| {
         if c.has(Item::Boomerang) {
@@ -155,13 +155,13 @@ fn asserde_true() {
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
-    ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
+    ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
     ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
 
     let mut ctx = ContextWrapper::new(ctx);
     ctx.append_history(History::G(
         Item::Amashilama,
-        LocationId::Glacier__The_Big_Drop__Water_Surface__Drown,
+        LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
     ), 20);
 
     let buf = serde_pass(&ctx);
@@ -199,11 +199,11 @@ fn asserde_true() {
     assert!(ctx == ctx3);
     assert!(ctx
         .get()
-        .visited(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown));
+        .visited(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown));
     assert!(ctx2
         .get()
-        .visited(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown));
+        .visited(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown));
     assert!(ctx3
         .get()
-        .visited(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown));
+        .visited(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown));
 }

@@ -3,7 +3,7 @@
 * Collect Station_Power from Antarctica > Power Room > Switch > Flip
   EarthSavewarp to Antarctica > East > Save Point
 * Collect Compass from Glacier > Compass Room > Center > Table
-* Take hybrid exit Glacier > The Big Drop > Water Surface > Drown, collecting Amashilama
+* Take hybrid exit Glacier > Sea Burial > Collapsing Ceiling > Drown, collecting Amashilama
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab

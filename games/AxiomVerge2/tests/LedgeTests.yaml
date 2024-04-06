@@ -7,7 +7,7 @@ all:
   context:
     save: Glacier > Revival > Save Point
   visited:
-    - Glacier > The Big Drop > Water Surface > Drown
+    - Glacier > Sea Burial > Collapsing Ceiling > Drown
   skipped:
     - Glacier > Compass Room > Center > Table
   start: Glacier > Vertical Room > East 9

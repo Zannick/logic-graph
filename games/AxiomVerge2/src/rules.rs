@@ -1829,6 +1829,20 @@ pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -
     // ^map__glacier__revival__save
     ctx.map__glacier__revival__save()
 }
+pub fn access_map__glacier_breach__guarded_corridor__save(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^map__glacier_breach__guarded_corridor__save
+    ctx.map__glacier_breach__guarded_corridor__save()
+}
+pub fn access_map__glacier_breach__save_and_exit__save(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^map__glacier_breach__save_and_exit__save
+    ctx.map__glacier_breach__save_and_exit__save()
+}
 pub fn access_map__glacier_breach__south_save__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__glacier_breach__south_save__save
     ctx.map__glacier_breach__south_save__save()
@@ -9382,6 +9396,36 @@ pub fn explain_map__glacier__revival__save(
         (r, vec!["^map__glacier__revival__save"])
     }
 }
+pub fn explain_map__glacier_breach__guarded_corridor__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__glacier_breach__guarded_corridor__save
+    {
+        let r = ctx.map__glacier_breach__guarded_corridor__save();
+        edict.insert(
+            "^map__glacier_breach__guarded_corridor__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__glacier_breach__guarded_corridor__save"])
+    }
+}
+pub fn explain_map__glacier_breach__save_and_exit__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__glacier_breach__save_and_exit__save
+    {
+        let r = ctx.map__glacier_breach__save_and_exit__save();
+        edict.insert(
+            "^map__glacier_breach__save_and_exit__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__glacier_breach__save_and_exit__save"])
+    }
+}
 pub fn explain_map__glacier_breach__south_save__save(
     ctx: &Context,
     world: &graph::World,
@@ -14738,6 +14782,28 @@ pub fn observe_access_map__glacier__revival__save(
     {
         full_obs.observe_map__glacier__revival__save();
         ctx.map__glacier__revival__save()
+    }
+}
+pub fn observe_access_map__glacier_breach__guarded_corridor__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__glacier_breach__guarded_corridor__save
+    {
+        full_obs.observe_map__glacier_breach__guarded_corridor__save();
+        ctx.map__glacier_breach__guarded_corridor__save()
+    }
+}
+pub fn observe_access_map__glacier_breach__save_and_exit__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__glacier_breach__save_and_exit__save
+    {
+        full_obs.observe_map__glacier_breach__save_and_exit__save();
+        ctx.map__glacier_breach__save_and_exit__save()
     }
 }
 pub fn observe_access_map__glacier_breach__south_save__save(
