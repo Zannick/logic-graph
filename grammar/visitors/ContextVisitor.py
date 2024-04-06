@@ -6,6 +6,7 @@ class ContextVisitor(RulesVisitor):
     def __init__(self, context_types, context_values, data_types, data_values, data_defaults):
         self.ctxdict = {}
         self.context_types = context_types
+        self.local_types = {}
         self.data_types = data_types
         self.name = ''
         self.errors = []
@@ -20,22 +21,44 @@ class ContextVisitor(RulesVisitor):
         }
         self.ref = ''
 
-    def visit(self, tree, name:str ='', ctxdict=None):
+    def visit(self, tree, name:str ='', ctxdict=None, local_types=None):
         if self.name:
             # For recursive cases
             return super().visit(tree)
 
         self.name = name
         self.ctxdict = ctxdict or {}
+        self.local_types = local_types or {}
         try:
             return super().visit(tree)
         finally:
             self.name = ''
             self.ctxdict = {}
+            self.local_types = {}
 
     def _checkRef(self, ref):
-        if ref not in self.ctxdict and not self.name.startswith('helpers'):
-            self.errors.append(f'Undefined ctx property ^{ref} in non-helper {self.name}')
+        if ref not in self.ctxdict and ref not in self.local_types:
+            self.errors.append(f'Undefined ctx property ^{ref} in {self.name}')
+
+    def _getType(self, ref):
+        if ref not in self.context_types and ref not in self.data_types and ref not in self.local_types:
+            self.errors.append(f'Unknown type for ctx property ^{ref} in {self.name}')
+            return None
+        if ref in self.local_types:
+            return self.local_types[ref]
+        if ref in self.context_types:
+            return self.context_types[ref]
+        return self.data_types[ref]
+
+    def _checkTypes(self, ref1, ref2):
+        t1 = self._getType(ref1)
+        t2 = self._getType(ref2)
+        if not t1 or not t2:
+            return
+
+        if t1 != t2:
+            self.errors.append(f'Type mismatch between ctx properties ^{ref1} ({t1}), '
+                               f'^{ref2} ({t2}) in {self.name}')
 
     def _visitAnyRef(self, ctx):
         if ctx.REF():
@@ -104,7 +127,7 @@ class ContextVisitor(RulesVisitor):
         elif len(ctx.REF()) > 1:
             ref2 = str(ctx.REF(1))[1:]
             self._checkRef(ref2)
-            # TODO: check that the types match
+            self._checkTypes(ref, ref2)
         else:
             self.visitChildren(ctx)
 
@@ -119,5 +142,4 @@ class ContextVisitor(RulesVisitor):
         ref2 = str(ctx.REF(1))[1:]
         self._checkRef(ref1)
         self._checkRef(ref2)
-        self.visitChildren()
-        # TODO: check that the types match
+        self._checkTypes(ref1, ref2)

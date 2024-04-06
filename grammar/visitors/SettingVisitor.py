@@ -24,7 +24,7 @@ class SettingVisitor(RulesVisitor):
         if s not in self.settings:
             self.errors.append(f'Unrecognized setting in rule {self.name}: {s}')
 
-    def visit(self, tree, name:str ='', ctxdict=None):
+    def visit(self, tree, name:str ='', ctxdict=None, *args):
         self.name = name
         self.ctxdict = ctxdict or {}
         try:

@@ -13,18 +13,21 @@ class HelperVisitor(RulesVisitor):
         self.context_types = context_types
         self.data_types = data_types
         self.settings = settings
+        self.local_types = {}
         self.ctxdict = {}
         self.name = ''
         self.errors = []
 
-    def visit(self, ctx, name='', ctxdict=None):
+    def visit(self, ctx, name='', ctxdict=None, local_types=None):
         self.name = name
         self.ctxdict = ctxdict or {}
+        self.local_types = local_types or {}
         try:
             ret = super().visit(ctx)
         finally:
             self.name = ''
             self.ctxdict = {}
+            self.local_types = {}
         return ret
 
     def _getFullRef(self, ref):
@@ -41,13 +44,11 @@ class HelperVisitor(RulesVisitor):
                 return self.context_types[ref]
             elif ref in self.data_types:
                 return self.data_types[ref]
+            elif ref in self.local_types:
+                if self.local_types[ref] == '':
+                    logging.warning(f"Rule {self.name} provides ref ^{ref} to functions but we don't know its type yet")
+                return self.local_types[ref]
             else:
-                # might be an arg
-                if self.name.startswith('helpers:'):
-                    args = self.helpers[self.name.split(':', 1)[1]]['args']
-                    if args[0].type == '':
-                        logging.warning(f"Rule {self.name} provides ref ^{ref} to functions but we don't know its type yet")
-                    return args[0].type
                 self.errors.append(f'Unrecognized ctxvar in rule {self.name}: ^{ref}')
                 return ''
         

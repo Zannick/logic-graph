@@ -594,6 +594,8 @@ class GameLogic(object):
         # Check settings
         def _visit(visitor, reverse=False):
             if not reverse:
+                for info in self.helpers.values():
+                    visitor.visit(info['pr'].tree, info['pr'].name, self.get_default_ctx(), dict(info['args']))
                 for pr in self.nonpoint_parse_results():
                     visitor.visit(pr.tree, pr.name, self.get_default_ctx())
             for pt in self.all_points():
@@ -602,6 +604,8 @@ class GameLogic(object):
                 if 'act' in pt:
                     visitor.visit(pt['act'].tree, pt['act'].name, self.get_local_ctx(pt))
             if reverse:
+                for info in self.helpers.values():
+                    visitor.visit(info['pr'].tree, info['pr'].name, self.get_default_ctx(), dict(info['args']))
                 for pr in self.nonpoint_parse_results():
                     visitor.visit(pr.tree, pr.name, self.get_default_ctx())
             self._errors.extend(visitor.errors)
@@ -1081,7 +1085,6 @@ class GameLogic(object):
 
 
     def nonpoint_parse_results(self):
-        yield from (info['pr'] for info in self.helpers.values())
         yield from (info['pr'] for rule in self.rules.values() for info in rule.variants.values())
         yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
@@ -1093,6 +1096,7 @@ class GameLogic(object):
 
 
     def all_parse_results(self):
+        yield from (info['pr'] for info in self.helpers.values())
         yield from self.nonpoint_parse_results()
         for pt in self.all_points():
             if 'pr' in pt:
