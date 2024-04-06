@@ -65,7 +65,7 @@ It is not meant to be an accurate representation; several liberties have been ta
 
 ## Requirements
 
-Python 3.10, Rust, Cargo.
+Python 3.12, Rust, Cargo. Optional: Java (for rebuilding the grammar).
 
 Run `pip install requirements.txt` to install necessary python libraries, including ANTLR4's Python3 runtime, which will also install ANTLR4 for you.
 

@@ -113,3 +113,11 @@ class ContextVisitor(RulesVisitor):
         self._checkRef(ref)
         self.visitChildren(ctx)
         # TODO: check that the var is an int type
+
+    def visitSwap(self, ctx):
+        ref1 = str(ctx.REF(0))[1:]
+        ref2 = str(ctx.REF(1))[1:]
+        self._checkRef(ref1)
+        self._checkRef(ref2)
+        self.visitChildren()
+        # TODO: check that the types match

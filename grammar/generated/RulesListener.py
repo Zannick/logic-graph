@@ -62,6 +62,15 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#Swap.
+    def enterSwap(self, ctx:RulesParser.SwapContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#Swap.
+    def exitSwap(self, ctx:RulesParser.SwapContext):
+        pass
+
+
     # Enter a parse tree produced by RulesParser#meta.
     def enterMeta(self, ctx:RulesParser.MetaContext):
         pass

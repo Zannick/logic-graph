@@ -33,6 +33,7 @@ action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
         | IF '(' boolExpr ')' '{' actions '}'
           ( ELSE IF '(' boolExpr ')' '{' actions '}' )*
           ( ELSE '{' actions '}' )?                             # CondAction
+        | SWAP REF ',' REF                                      # Swap
         ;
 
 // might remove this as those rules need to be separate for a traversal graph anyway
@@ -162,6 +163,7 @@ ELSE    : 'ELSE' | 'else' ;
 IN      : 'IN' | 'in' ;
 PER     : 'PER' | 'per' | 'MATCH' | 'match' ;
 WITHIN  : 'WITHIN' | 'within' ;
+SWAP    : 'SWAP' | 'swap' ;
 
 ITEM    : [A-Z][a-z][a-zA-Z_0-9]+ ;
 SETTING : [a-z][a-zA-Z_0-9]+ ;

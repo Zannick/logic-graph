@@ -39,6 +39,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#Swap.
+    def visitSwap(self, ctx:RulesParser.SwapContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#meta.
     def visitMeta(self, ctx:RulesParser.MetaContext):
         return self.visitChildren(ctx)
