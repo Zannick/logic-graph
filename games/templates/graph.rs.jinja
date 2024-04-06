@@ -256,7 +256,15 @@ impl world::Accessible for Action {
         match self.id {
 %% for act in gl.actions()|sort(attribute='id')
 %% if act.access_id
-            ActionId::{{ act.id }} => rules::explain_{{ act.access_id }}(ctx, world, edict),
+            ActionId::{{ act.id }} => {
+                let (ret, mut tags) = rules::explain_{{ act.access_id }}(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "{{ act.to }}"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
 %% endif
 %% endfor
             _ => (true, vec![])
@@ -376,7 +384,15 @@ impl world::Accessible for Warp {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
 %% if w.access_id
-            WarpId::{{ w.id }} => rules::explain_{{ w.access_id }}(ctx, world, edict),
+            WarpId::{{ w.id }} => {
+                let (ret, mut tags) = rules::explain_{{ w.access_id }}(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "{{ w.target_id }}"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
 %% endif
 %% endfor
             _ => (true, vec![])
