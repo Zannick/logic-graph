@@ -183,8 +183,12 @@ class RustVisitor(RustBaseVisitor):
         return self.visit(ctx.ref())
 
     def visitRef(self, ctx):
-        # TODO: other cases
-        return self._getRefGetter(str(ctx.REF()[-1])[1:])
+        ref = str(ctx.REF()[-1])[1:]
+        if len(ctx.REF()) == 2:
+            return f'data::{ref}({self._getRefGetter(str(ctx.REF(0))[1:])})'
+        if ctx.PLACE():
+            return f'data::{ref}({construct_place_id(str(ctx.PLACE()))[1:-1]})'
+        return self._getRefGetter(ref)
 
     def visitItemCount(self, ctx):
         if ctx.INT():
@@ -567,8 +571,27 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRef(self, ctx):
-        # TODO: Handle other cases
         ref = str(ctx.REF()[-1])
+        if len(ctx.REF()) == 2:
+            ref0 = str(ctx.REF(0))
+            getter = self._getRefGetter(ref0[1:])
+            exp, tag = self._getRefExplainerAndTag(ref0, getter)
+            lines = [
+                f'let r = {getter}',
+                f'let d = data::{ref[1:]}(r)',
+                exp,
+                f'edict.insert("{ctx.getText()}", format!("{{}}", d))',
+                f'(d, vec!["{ref0}", "{ctx.getText()}"])',
+            ]
+            return f'{{ {"; ".join(lines)} }}'
+        if ctx.PLACE():
+            lines = [
+                f'let d = data::{ref[1:]}({construct_place_id(str(ctx.PLACE()))[1:-1]})',
+                f'edict.insert("{ctx.getText()}", format!("{{}}", d))',
+                f'(d, vec!["{ctx.getText()}"])',
+            ]
+            return f'{{ {"; ".join(lines)} }}'
+
         getter = self._getRefGetter(ref[1:])
         exp, tag = self._getRefExplainerAndTag(ref, getter)
         if exp:
@@ -983,7 +1006,17 @@ class RustObservationVisitor(RustBaseVisitor):
         return f'world.{ctx.SETTING()}'
 
     def visitRef(self, ctx):
-        # TODO: other cases
+        if len(ctx.REF()) == 2:
+            # Reading data based on ref0, so the only obs is ref0
+            ref0 = str(ctx.REF(0))
+            getter = self._getRefGetter(ref0[1:])
+            if obs := self._getRefObserver(ref0):
+                return f'{{ {obs} {self.code_writer.visit(ctx)} }}'
+            return self.code_writer.visit(ctx)
+        if ctx.PLACE():
+            # No observations here, this is a constant
+            return self.code_writer.visit(ctx)
+
         ref = str(ctx.REF()[-1])
         getter = self._getRefGetter(ref[1:])
         if obs := self._getRefObserver(ref):
