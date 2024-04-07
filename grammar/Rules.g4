@@ -27,7 +27,7 @@ actions : action (';' action)* ';'?;
 
 // TODO? a "^here" builtin ref for the spot it's defined in, but is that just position?
 // TODO: a "cycle" action for ints/enums
-action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
+action  : REF '=' ( TRUE | FALSE | PLACE | ref | str | num )    # Set
         | REF BINOP '=' num                                     # Alter
         | invoke                                                # ActionHelper
         | IF '(' boolExpr ')' '{' actions '}'
@@ -47,7 +47,7 @@ invoke  : NOT? FUNC '(' ITEM (',' ITEM)* ')'   // must be 1+ items, 0 handled be
         | NOT? FUNC '(' INT ')'
         | NOT? FUNC '(' FLOAT ')'
         | NOT? FUNC '(' PLACE (',' PLACE)* ')'
-        | NOT? FUNC '(' REF (',' REF)* ')'
+        | NOT? FUNC '(' ref (',' ref)* ')'
         | NOT? FUNC ('(' ')')? // essentially a call with no arguments
         ;
 
@@ -74,14 +74,14 @@ switchBool
             ( ( INT '=>' boolExpr ',' )+
             | ( LIT '=>' boolExpr ',' )+ )
             '_' '=>' boolExpr ','? '}'                  # PerSettingBool
-        | PER REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ',' )+
+        | PER ref '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ',' )+
                         '_' '=>' boolExpr ','? '}'      # MatchRefBool
         // simpler match expression where all results are true/false
-        | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
-        | REF IN '[' LIT ( ',' LIT )+ ']'               # RefStrInList
+        | ref IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
+        | ref IN '[' LIT ( ',' LIT )+ ']'               # RefStrInList
         ;
 switchNum   : PER ITEM '{' ( INT '=>' num ',' )+ '_' '=>' num ','? '}'  # PerItemInt
-            | PER REF '{'
+            | PER ref '{'
                 ( ( INT '=>' num ',' )+
                 | ( LIT '=>' num ',' )+ )
                 '_' '=>' num ','? '}'                                   # PerRefInt
@@ -91,7 +91,7 @@ switchNum   : PER ITEM '{' ( INT '=>' num ',' )+ '_' '=>' num ','? '}'  # PerIte
                 '_' '=>' num ','? '}'                                   # PerSettingInt
             ;
 switchStr   : PER ITEM '{' ( INT '=>' str ',' )+ '_' '=>' str ','? '}'  # PerItemStr
-            | PER REF '{'
+            | PER ref '{'
                 ( ( INT '=>' str ',' )+
                 | ( LIT '=>' str ',' )+ )
                 '_' '=>' str ','? '}'                                   # PerRefStr
@@ -114,7 +114,7 @@ cmpStr  : value '==' LIT
         ;
 
 flagMatch : value '&' num ;
-refEq : REF '==' ( ITEM | SETTING ) ;
+refEq : ref '==' ( ITEM | SETTING ) ;
 
 // Specifically where a function is expected to return an integer
 funcNum : FUNC '(' ITEM ')'
@@ -126,10 +126,10 @@ mathNum : baseNum BINOP num ;
 
 num : baseNum | mathNum ;
 
-baseNum : INT | CONST | SETTING | REF | value | switchNum | funcNum | condNum ;
+baseNum : INT | CONST | SETTING | ref | value | switchNum | funcNum | condNum ;
 
 value   : SETTING ('[' ( LIT | ITEM ) ']')?     # Setting
-        | REF                                   # Argument
+        | ref                                   # Argument
         ;
 
 itemList : '[' (FUNC | item) (',' (FUNC | item))* ']';
@@ -139,7 +139,7 @@ item    : ( ITEM '{' ( INT | SETTING ) '}'
           )             # ItemCount
         | NOT? ITEM     # OneItem
         | LIT           # OneLitItem  // I don't like it and I introduced it
-        | REF           # OneArgument
+        | ref           # OneArgument
         ;
 
 str : LIT | value | condStr | switchStr ;
@@ -147,10 +147,15 @@ str : LIT | value | condStr | switchStr ;
 somewhere : NOT? WITHIN PLACE
           | NOT? WITHIN '(' PLACE (',' PLACE)* ')';
 
-refSomewhere : REF NOT? WITHIN REF      # RefInPlaceRef
-             | REF NOT? WITHIN PLACE    # RefInPlaceName
-             | REF NOT? WITHIN invoke   # RefInFunc
+refSomewhere : ref NOT? WITHIN ref      # RefInPlaceRef
+             | ref NOT? WITHIN PLACE    # RefInPlaceName
+             | ref NOT? WITHIN invoke   # RefInFunc
              ;
+
+ref : REF
+    | '@' REF REF
+    | '@' PLACE REF
+    ;
 
 /** Lexer rules (tokens) */
 AND     : 'AND' | 'and' | '&&' ;

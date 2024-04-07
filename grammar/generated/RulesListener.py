@@ -404,5 +404,14 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#ref.
+    def enterRef(self, ctx:RulesParser.RefContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#ref.
+    def exitRef(self, ctx:RulesParser.RefContext):
+        pass
+
+
 
 del RulesParser

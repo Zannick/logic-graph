@@ -229,5 +229,10 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#ref.
+    def visitRef(self, ctx:RulesParser.RefContext):
+        return self.visitChildren(ctx)
+
+
 
 del RulesParser
