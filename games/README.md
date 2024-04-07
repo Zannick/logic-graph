@@ -98,7 +98,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 **Areas** are defined only within **Regions**. They may have the following fields:
 
 * **name**: The name of the area. Area names must be unique within a Region. **Required**.
-* **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots** or in **datamap**.
+* **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots** or in **datamap**. If a data value is a **Spot** in the same **Region**, you can omit the Region part of the name; if it's a **Spot** in this **Area** you can omit both the **Region** and **Area**.
 * **enter**, **load**, **reset**, **on_entry**, **graph_offset**, **graph_attrs**: Same as in **Region** but applying to this **Area** instead.
 * **map**: Map tile definitions for the Area. This is usually a dictionary of a short-form tile name (string) with values that are bounding boxes&mdash;any Spots in the bounding box (including on the edges) mark that tile as seen when reached.
     * The bounding box is a sequence of 4 numbers (floats allowed). The first two are the corner with the smallest coordinates, and the other two are the opposite corner. For example, the unit circle's bounding box would be `[-1, -1, 1, 1]`.
@@ -121,7 +121,7 @@ These take precedence over the **data** definitions in the Area but are overridd
 Spots are only defined within **Areas**. They may have the following fields:
 
 * **name**: The name of the spot. Spot names must be unique within an Area. **Required**.
-* **data**, **graph_offset**, **graph_attrs**: Same as in **Areas** but applying/overriding at this **Spot** instead.
+* **data**, **graph_offset**, **graph_attrs**: Same as in **Areas** but applying/overriding at this **Spot** instead. 
 * **coord**: A list of coordinates, relative to other Spots in the same **Area**. Only two dimensions are presently supported. Floats are allowed.
 * **local**: A list of [Local connections](#local-connections) from this Spot.
 * **locations**: A list of [Locations](#locations) accessible from this Spot.

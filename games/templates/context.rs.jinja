@@ -600,7 +600,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    // accessors
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
 %% if ctx in bfp.varmap
@@ -609,7 +608,6 @@ impl Context {
         self.{{ ctx }}
 %% endif
     }
-    // setters
 %% if ctx != 'position'
     pub fn set_{{ ctx }}(&mut self, val: {{ t }}) {
 %% if ctx in bfp.varmap

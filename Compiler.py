@@ -141,7 +141,7 @@ def treeToString(tree: antlr4.ParserRuleContext):
 
 
 def get_spot_reference_names(target, source):
-    local = [source['region'], source['area'],
+    local = [source['region'], source.get('area') or source.get('name'),
              source.get('spot') or source.get('name')]
     targ = target.split('>')
     # targ length = 1 (just spot) => leave 2 (reg/area), 2 (spot+area) => leave 1 (region)
@@ -1309,9 +1309,9 @@ class GameLogic(object):
             t1 = typenameof(v1)
             t2 = typenameof(v2)
             if local:
-                if t1 == 'SpotId' and t2 in ('AreaId', 'RegionId'):
+                if t1 == 'SpotId' and t2 in ('AreaId', 'ENUM'):
                     return
-                if len(names) == 1 and t1 == 'AreaId' and t2 == 'RegionId':
+                if len(names) == 1 and t1 == 'AreaId' and t2 == 'ENUM':
                     return
             if t1 != t2:
                 self._errors.append(
@@ -1478,21 +1478,30 @@ class GameLogic(object):
             for tile in tilenames:
                 if tile in datamap:
                     return datamap[tile]
-            
+
+        def handle_place(c, source, val):
+            if self.data_types[c] == 'SpotId':
+                names = get_spot_reference_names(val, source)
+                return ' > '.join(names)
+            if self.data_types[c] == 'AreaId':
+                names = get_spot_reference_names(val + '>', source)
+                return ' > '.join(names[:2])
+            return val
+
         for r in self.regions:
             for a in r['areas']:
                 for s in a['spots']:
                     for c, cdict in d.items():
                         if c in s.get('data', {}):
-                            cdict[s['id']] = s['data'][c]
+                            cdict[s['id']] = handle_place(c, s, s['data'][c])
                             continue
                         elif c in a.get('datamap', {}) and 'tilenames' in s:
                             val = get_first(a['datamap'][c], s['tilenames'])
                             if val is not None:
-                                cdict[s['id']] = val
+                                cdict[s['id']] = handle_place(c, s, val)
                                 continue
                         if c in a.get('data', {}):
-                            cdict[s['id']] = a['data'][c]
+                            cdict[s['id']] = handle_place(c, a, a['data'][c])
                         elif c in r.get('data', {}):
                             cdict[s['id']] = r['data'][c]
         return d
