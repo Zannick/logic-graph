@@ -2973,9 +2973,12 @@ pub fn explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_ma
             left
         } else {
             let mut right = ({
-                let r = data::map_spot(ctx.position());
-                edict.insert("^map_spot", format!("{:?}", r));
-                (get_area(r) == AreaId::Menu__Breach_Map, vec!["^map_spot"])
+                let r = {
+                    let r = data::map_spot(ctx.position());
+                    edict.insert("^map_spot", format!("{:?}", r));
+                    (r, vec!["^map_spot"])
+                };
+                (get_area(r.0) == AreaId::Menu__Breach_Map, r.1)
             });
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -3012,9 +3015,12 @@ pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map
             left
         } else {
             let mut right = ({
-                let r = data::map_spot(ctx.position());
-                edict.insert("^map_spot", format!("{:?}", r));
-                (get_area(r) == AreaId::Menu__Kiengir_Map, vec!["^map_spot"])
+                let r = {
+                    let r = data::map_spot(ctx.position());
+                    edict.insert("^map_spot", format!("{:?}", r));
+                    (r, vec!["^map_spot"])
+                };
+                (get_area(r.0) == AreaId::Menu__Kiengir_Map, r.1)
             });
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -3084,13 +3090,16 @@ pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___
             left
         } else {
             let mut right = ({
-                let mut refs = vec!["^map_spot"];
-                let r = data::map_spot(ctx.position());
+                let mut r = {
+                    let r = data::map_spot(ctx.position());
+                    edict.insert("^map_spot", format!("{:?}", r));
+                    (r, vec!["^map_spot"])
+                };
+                let res = r.0;
                 let mut f = (Default::default(), vec![]);
                 edict.insert("$default", format!("{}", f.0));
-                refs.append(&mut f.1);
-                edict.insert("^map_spot", format!("{:?}", r));
-                (r != f.0, refs)
+                r.1.append(&mut f.1);
+                (res != f.0, r.1)
             });
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -3146,14 +3155,17 @@ pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama
                 left
             } else {
                 let mut right = {
-                    let r = data::realm(ctx.position());
-                    edict.insert("^realm", format!("{:?}", r));
+                    let r = {
+                        let r = data::realm(ctx.position());
+                        edict.insert("^realm", format!("{:?}", r));
+                        (r, vec!["^realm"])
+                    };
                     (
                         matches!(
-                            r,
+                            r.0,
                             enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
                         ),
-                        vec!["^realm"],
+                        r.1,
                     )
                 };
                 left.1.append(&mut right.1);
@@ -10722,13 +10734,16 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
             left
         } else {
             let mut right = ({
-                let mut refs = vec!["^flipside"];
-                let r = data::flipside(ctx.position());
+                let mut r = {
+                    let r = data::flipside(ctx.position());
+                    edict.insert("^flipside", format!("{:?}", r));
+                    (r, vec!["^flipside"])
+                };
+                let res = r.0;
                 let mut f = (Default::default(), vec![]);
                 edict.insert("$default", format!("{}", f.0));
-                refs.append(&mut f.1);
-                edict.insert("^flipside", format!("{:?}", r));
-                (r != f.0, refs)
+                r.1.append(&mut f.1);
+                (res != f.0, r.1)
             });
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16098,8 +16113,9 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     full_obs.strict = true;
     if {
         full_obs.observe_indra();
-        ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    } {};
+        ctx.indra()
+    } == SpotId::Ebih__Ebih_West__Above_Door
+    {};
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
@@ -16112,8 +16128,9 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     full_obs.strict = true;
     if {
         full_obs.observe_indra();
-        ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door
-    } {};
+        ctx.indra()
+    } == SpotId::Ebih__Ebih_West__Above_Door
+    {};
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
@@ -16217,8 +16234,10 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     full_obs.strict = true;
     if {
         full_obs.observe_indra();
+        ctx.indra()
+    } == {
         full_obs.observe_position();
-        ctx.indra() == ctx.position()
+        ctx.position()
     } {};
     full_obs.strict = old_strict;
 }

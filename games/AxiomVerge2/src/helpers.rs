@@ -1794,11 +1794,18 @@ macro_rules! hexplain__attract {
                         left
                     } else {
                         let mut right = {
-                            let r0 = $ctx.indra();
-                            $edict.insert("^indra", format!("{:?}", r0));
-                            let r1 = $ctx.position();
-                            $edict.insert("^position", format!("{:?}", r1));
-                            (r0 == r1, vec!["^indra", "^position"])
+                            let mut r0 = {
+                                let r = $ctx.indra();
+                                $edict.insert("^indra", format!("{:?}", r));
+                                (r, vec!["^indra"])
+                            };
+                            let mut r1 = {
+                                let r = $ctx.position();
+                                $edict.insert("^position", format!("{:?}", r));
+                                (r, vec!["^position"])
+                            };
+                            r0.1.append(&mut r1.1);
+                            (r0.0 == r1.0, r0.1)
                         };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
@@ -1827,8 +1834,10 @@ macro_rules! hobserve__attract {
             v != enums::Mode::Drone
         }) || {
             $full_obs.observe_indra();
+            $ctx.indra()
+        } == {
             $full_obs.observe_position();
-            $ctx.indra() == $ctx.position()
+            $ctx.position()
         }))
     }};
 }
@@ -2593,8 +2602,9 @@ macro_rules! hobserve__save_last {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         if {
             $full_obs.observe_last();
-            $ctx.last() == Default::default()
-        } {}
+            $ctx.last()
+        } == Default::default()
+        {}
     }};
 }
 
@@ -2632,16 +2642,28 @@ macro_rules! hobserve__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
         if (({
             $full_obs.observe_position();
-            $ctx.position() != SpotId::None && get_region($ctx.position()) != RegionId::Menu
-        } && ({
-            $full_obs.observe_position();
-            $full_obs.observe_prev_area();
-            $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()
-        })) && (get_area($newpos) != get_area($ctx.position())))
+            $ctx.position()
+        } != SpotId::None
+            && get_region({
+                $full_obs.observe_position();
+                $ctx.position()
+            }) != RegionId::Menu
+            && ({
+                $full_obs.observe_position();
+                $ctx.position()
+            } != SpotId::None
+                && get_area({
+                    $full_obs.observe_position();
+                    $ctx.position()
+                }) != {
+                    $full_obs.observe_prev_area();
+                    $ctx.prev_area()
+                }))
+            && (get_area($newpos) != get_area($ctx.position())))
         {
-            if {
+            if get_area($newpos) != {
                 $full_obs.observe_prev_area();
-                get_area($newpos) != $ctx.prev_area()
+                $ctx.prev_area()
             } {}
             {
                 let _set = get_area({
@@ -2651,16 +2673,28 @@ macro_rules! hobserve__reset_old_area {
             }
         } else if (({
             $full_obs.observe_position();
-            $ctx.position() != SpotId::None && get_area($ctx.position()) == AreaId::Menu__Warp_Only
-        } && ({
-            $full_obs.observe_last();
-            $full_obs.observe_prev_area();
-            $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area()
-        })) && (get_area($newpos) != get_area($ctx.last())))
+            $ctx.position()
+        } != SpotId::None
+            && get_area({
+                $full_obs.observe_position();
+                $ctx.position()
+            }) == AreaId::Menu__Warp_Only
+            && ({
+                $full_obs.observe_last();
+                $ctx.last()
+            } != SpotId::None
+                && get_area({
+                    $full_obs.observe_last();
+                    $ctx.last()
+                }) != {
+                    $full_obs.observe_prev_area();
+                    $ctx.prev_area()
+                }))
+            && (get_area($newpos) != get_area($ctx.last())))
         {
-            if {
+            if get_area($newpos) != {
                 $full_obs.observe_prev_area();
-                get_area($newpos) != $ctx.prev_area()
+                $ctx.prev_area()
             } {}
             {
                 let _set = get_area({

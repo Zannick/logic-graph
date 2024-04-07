@@ -126,8 +126,8 @@ class RustVisitor(RustBaseVisitor):
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
-        elif ctx.REF():
-            args.append(self._getRefGetter(str(ctx.REF())[1:]))
+        elif ctx.ref():
+            args.append(self.visit(ctx.ref()))
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
@@ -160,7 +160,9 @@ class RustVisitor(RustBaseVisitor):
     # otherwise we have to get the appropriate ref/setting enum
     def visitCmpStr(self, ctx):
         getter = self.visit(ctx.value())
-        rtype = inflection.camelize(REF_GETTER_TYPE.match(getter).group(1))
+        m = REF_GETTER_TYPE.match(getter)
+        assert m, f'rendered getter does not match pattern: {getter}, {ctx.value().toStringTree(ruleNames = RulesParser.ruleNames)}'
+        rtype = inflection.camelize(m.group(1))
         return f'{getter} {ctx.getChild(1)} enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
 
     def visitFlagMatch(self, ctx):
@@ -168,7 +170,7 @@ class RustVisitor(RustBaseVisitor):
         return f'({self.visit(ctx.value())} & {num}) == {num}'
 
     def visitRefEq(self, ctx):
-        ref = self._getRefGetter(str(ctx.REF())[1:])
+        ref = self.visit(ctx.ref())
         if ctx.ITEM():
             return f'{ref} == Item::{ctx.ITEM()}'
         return f'{ref} == ctx.{ctx.SETTING()}()'
@@ -178,7 +180,11 @@ class RustVisitor(RustBaseVisitor):
         return f'world.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
-        return self._getRefGetter(str(ctx.REF())[1:])
+        return self.visit(ctx.ref())
+
+    def visitRef(self, ctx):
+        # TODO: other cases
+        return self._getRefGetter(str(ctx.REF()[-1])[1:])
 
     def visitItemCount(self, ctx):
         if ctx.INT():
@@ -191,7 +197,7 @@ class RustVisitor(RustBaseVisitor):
         return ('!' if ctx.NOT() else '') + f'ctx.has(Item::{ctx.ITEM()})'
 
     def visitOneArgument(self, ctx):
-        ref = self._getRefGetter(str(ctx.REF())[1:])
+        ref = self.visit(ctx.ref())
         if ref.startswith('ctx.') or ref.startswith('data::'):
             return ref
         return f'ctx.has({ref})'
@@ -206,8 +212,8 @@ class RustVisitor(RustBaseVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
-        if ctx.REF():
-            return self._getRefGetter(str(ctx.REF())[1:])
+        if ctx.ref():
+            return self.visit(ctx.ref())
         if ctx.SETTING():
             return f'ctx.{ctx::SETTING()}()'
         # TODO: constants
@@ -224,14 +230,14 @@ class RustVisitor(RustBaseVisitor):
                 + '}')
 
     def visitRefInList(self, ctx):
-        getter = self._getRefGetter(str(ctx.REF())[1:])
+        getter = self.visit(ctx.ref())
         values = [f'Item::{i}' for i in ctx.ITEM()]
         return f'matches!({getter}, {" | ".join(values)})'
     
     def visitRefStrInList(self, ctx):
-        ref = str(ctx.REF())[1:]
-        getter = self._getRefGetter(ref)
-        rtype = self._getRefEnum(ref)
+        ref = str(ctx.ref().REF()[-1])
+        rtype = self._getRefEnum(ref[1:])
+        getter = self.visit(ctx.ref())
         values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
         return f'matches!({getter}, {" | ".join(values)})'
     
@@ -243,11 +249,11 @@ class RustVisitor(RustBaseVisitor):
         return super().visitStr(ctx)
 
     def visitPerRefStr(self, ctx):
-        ref = str(ctx.REF())[1:]
-        enum = self._getRefEnum(ref)
+        ref = str(ctx.ref().REF()[-1])
+        enum = self._getRefEnum(ref[1:])
         cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
         results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
-        return (f'match {self._getRefGetter(ref)} {{ '
+        return (f'match {self.visit(ctx.ref())} {{ '
                 + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
                 + '}')
 
@@ -266,23 +272,23 @@ class RustVisitor(RustBaseVisitor):
         return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
-        ptype = self._getRefType(str(ctx.REF(1))[1:])
+        ptype = self._getRefType(str(ctx.ref(1).REF()[-1])[1:])
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF(0))[1:]
-        get = f'{self._getRefGetter(ref)}'
+        ref = str(ctx.ref(0).REF()[-1])[1:]
+        get = self.visit(ctx.ref(0))
         if ptype != 'SpotId':
             if self._isRefSpotId(ref):
                 get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
-        return f'{get} {eq}= {self._getRefGetter(str(ctx.REF(1))[1:])}'
+        return f'{get} {eq}= {self.visit(ctx.ref(1))}'
     
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())[1:]
-        get = f'{self._getRefGetter(ref)}'
+        ref = str(ctx.ref().REF()[-1])[1:]
+        get = self.visit(ctx.ref())
         if ptype == 'SpotId':
             val = construct_spot_id(*place_to_names(pl))
         else:
@@ -297,8 +303,8 @@ class RustVisitor(RustBaseVisitor):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())[1:]
-        get = self._getRefGetter(ref)
+        ref = str(ctx.ref().REF()[-1])[1:]
+        get = self.visit(ctx.ref())
         if func == 'default':
             return f'{get} {eq}= {self.visit(ctx.invoke())}'
         if self._isRefSpotId(ref):
@@ -321,13 +327,13 @@ class RustVisitor(RustBaseVisitor):
         return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
 
     def visitSet(self, ctx):
-        var = str(ctx.REF(0))[1:]
+        var = str(ctx.REF())[1:]
         if ctx.TRUE():
             val = 'true'
         elif ctx.FALSE():
             val = 'false'
-        elif len(ctx.REF()) > 1:
-            val = self._getRefGetter(str(ctx.REF(1))[1:])
+        elif ctx.ref():
+            val = self.visit(ctx.ref())
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
             val = construct_place_id(pl)
@@ -428,12 +434,13 @@ class RustExplainerVisitor(RustBaseVisitor):
         if items:
             args.extend(f'Item::{item}' for item in items)
         elif ctx.value():
+            # TODO: only visit once and include the explanation
             args.append(str(self.code_writer.visit(ctx.value())))
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
-        elif ctx.REF():
-            args.append(self._getRefGetter(str(ctx.REF())[1:]))
+        elif ctx.ref():
+            args.append(self.code_writer.visit(ctx.ref()))
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
@@ -445,16 +452,12 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'refs.push("{ctx.getText()}")',
                 f'({"!" if ctx.NOT() else ""}res, refs)',
             ]
-            if ctx.REF():
-                ref = str(ctx.REF())
-                exp, tag = self._getRefExplainerAndTag(ref)
-                if exp:
-                    # Insert before the last element
-                    lines[-1:-1] = [
-                        f'let r = {self._getRefGetter(ref[1:])}',
-                        exp,
-                        f'refs.push("{tag}")',
-                    ]
+            if ctx.ref():
+                # Insert before the last element
+                lines[-1:-1] = [
+                    f'let mut r = {self.visit(ctx.ref())}',
+                    'refs.append(&mut r.1)',
+                ]
         elif func == 'Default::default':
             return '(Default::default(), vec![])'
         else:
@@ -463,16 +466,14 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'edict.insert("{ctx.getText()}", format!("{{:?}}", res))',
                 f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}"])',
             ]
-            if ctx.REF():
-                ref = str(ctx.REF())
-                exp, tag = self._getRefExplainerAndTag(ref)
-                if exp:
-                    # Replace the last element
-                    lines[-1:] = [
-                        f'let r = {self._getRefGetter(ref[1:])}',
-                        exp,
-                        f'({"!" if ctx.NOT() else ""}res, vec!["{ctx.getText()}", "{tag}"])'
-                    ]
+            if ctx.ref():
+                # Replace the last element
+                lines[-1:] = [
+                    f'let mut r = {self.visit(ctx.ref())}',
+                    f'let mut refs = vec!["{ctx.getText()}"]',
+                    'refs.append(&mut r.1)',
+                    f'({"!" if ctx.NOT() else ""}res, refs)'
+                ]
         return f'{{ {"; ".join(lines)} }}'
 
     def _visitConditional(self, *args):
@@ -548,13 +549,10 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRefEq(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
         rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else f'ctx.{ctx.SETTING()}()'
         lines = [
-            f'let left = {getter}',
-            f'edict.insert("{ref}", format!("{{}}", left))',
-            f'(left == {rval}, vec!["{ref}"])',
+            f'let left = {self.visit(ctx.ref())}',
+            f'(left.0 == {rval}, left.1)',
         ]
         return f'{{ {"; ".join(lines)} }}'
 
@@ -568,8 +566,9 @@ class RustExplainerVisitor(RustBaseVisitor):
         ]
         return f'{{ {"; ".join(lines)} }}'
 
-    def visitArgument(self, ctx):
-        ref = str(ctx.REF())
+    def visitRef(self, ctx):
+        # TODO: Handle other cases
+        ref = str(ctx.REF()[-1])
         getter = self._getRefGetter(ref[1:])
         exp, tag = self._getRefExplainerAndTag(ref, getter)
         if exp:
@@ -602,13 +601,13 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitOneArgument(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
-        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        getter = self.code_writer.visit(ctx.ref())
+        if getter[0] != '$':
+            return self.visit(ctx.ref())
+        
         lines = [
-            f'let r = {getter}' if getter[0] != '$' else f'let r = ctx.has({getter})',
-            exp,
-            f'(r, vec!["{tag}"])',
+            f'let r = {self.visit(ctx.ref())}',
+            '(ctx.has(r.0), r.1)',
         ]
         return f'{{ {"; ".join(lines)} }}'
     
@@ -632,25 +631,14 @@ class RustExplainerVisitor(RustBaseVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return f'({ctx.INT()}, vec![])'
-        if ctx.REF():
-            ref = str(ctx.REF())
-            getter = self._getRefGetter(ref[1:])
-            exp, tag = self._getRefExplainerAndTag(ref, getter)
-            if exp:
-                lines = [
-                    f'let r = {getter}',
-                    exp,
-                    f'(r, vec!["{tag}"])'
-                ]
-                return f'{{ {"; ".join(lines)} }}'
-            return f'({getter}, vec![])'
         if ctx.SETTING():
             sstr = str(ctx.SETTING())
-            lines.extend([
+            lines = [
                 f'let s = ctx.{ctx.SETTING()}()',
                 f'edict.insert("{sstr}", format!("{{}}", s))',
                 f'(s, vec!["{sstr}"])',
-            ])
+            ]
+            return f'{{ {"; ".join(lines)} }}'
         # TODO: constants
         return self.visitChildren(ctx)
 
@@ -680,28 +668,20 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRefInList(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
         values = [f'Item::{i}' for i in ctx.ITEM()]
-        exp, tag = self._getRefExplainerAndTag(ref, getter)
+        getter = self.visit(ctx.ref())
         lines = [
             f'let r = {getter}',
-            f'(matches!(r, {" | ".join(values)}), vec!["{tag}"])'
+            f'(matches!(r.0, {" | ".join(values)}), r.1)'
         ]
-        if exp:
-            # Insert before last line
-            lines[-1:-1] = [exp]
         return f'{{ {"; ".join(lines)} }}'
     
     def visitRefStrInList(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
+        ref = str(ctx.ref().REF()[-1])
+        getter = self.visit(ctx.ref())
         rtype = self._getRefEnum(ref[1:])
         values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
-        exp, tag = self._getRefExplainerAndTag(ref, getter)
-        if exp:
-            return f'{{ let r = {getter}; {exp}; (matches!(r, {" | ".join(values)}), vec!["{tag}"]) }}'
-        return f'(matches!({getter}, {" | ".join(values)}), vec!["{tag}"])'
+        return f'{{ let r = {getter}; (matches!(r.0, {" | ".join(values)}), r.1) }}'
     
     # TODO: other REF/SETTING rules
 
@@ -711,19 +691,15 @@ class RustExplainerVisitor(RustBaseVisitor):
         return super().visitStr(ctx)
 
     def visitPerRefStr(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
+        ref = str(ctx.ref().REF()[-1])
+        getter = self.visit(ctx.ref())
         enum = self._getRefEnum(ref[1:])
         cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
         results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
-        exp, tag = self._getRefExplainerAndTag(ref, getter)
         lines = [
             f'let r = {getter}',
-            f'(match r {{ {", ".join(f"{c} => {r}" for c, r in zip(cases, results))} }}, vec!["{tag}"]',
+            f'(match r.0 {{ {", ".join(f"{c} => {r}" for c, r in zip(cases, results))} }}, r1)',
         ]
-        if exp:
-            # Insert before the last line
-            lines[-1:-1] = exp
         return f'{{ {"; ".join(lines)} }}'
 
     def visitSomewhere(self, ctx):
@@ -741,71 +717,60 @@ class RustExplainerVisitor(RustBaseVisitor):
         exp, tag = self._getRefExplainerAndTag("^position", 'ctx.position()')
         return f'{{ let r = ctx.position(); {exp}; ({" || ".join(per_type)}, vec!["{tag}"]) }}'
 
-    def visitRefInPlaceRef(self, ctx):
-        ref0 = str(ctx.REF(0))
-        ref1 = str(ctx.REF(1))
+    def visitRefInPlaceRef(self, ctx):    
+        ref0 = str(ctx.ref(0).REF()[-1])
+        ref1 = str(ctx.ref(1).REF()[-1])
         ptype = self._getRefType(ref1[1:])
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF(0))[1:]
-        get0 = self._getRefGetter(ref0[1:])
-        get1 = self._getRefGetter(ref1[1:])
-        exp0, tag0 = self._getRefExplainerAndTag(ref0, get0, 'r0')
-        exp1, tag1 = self._getRefExplainerAndTag(ref1, get1, 'r1')
         lines = [
-            f'let r0 = {get0}{"; " + exp0 if exp0 else ""}',
-            f'let r1 = {get1}{"; " + exp1 if exp1 else ""}',
+            f'let mut r0 = {self.visit(ctx.ref(0))}',
+            f'let mut r1 = {self.visit(ctx.ref(1))}',
+            'r0.1.append(&mut r1.1)',
         ]
         if ptype == 'SpotId':
-            lines.append(f'(r0 {eq}= r1, vec!["{tag0}", "{tag1}"])')
+            lines.append(f'(r0.0 {eq}= r1.0, r0.1)')
         elif self._isRefSpotId(ref0[1:]):
-            lines.append(f'(r0 != SpotId::None && get_{ptype[:-2].lower()}(r0) {eq}= r1, vec!["{tag0}", "{tag1}"])')
+            lines.append(f'(r0.0 != SpotId::None && get_{ptype[:-2].lower()}(r0.0) {eq}= r1.0, r0.1)')
         else:
-            lines.append(f'(get_{ptype[:-2].lower()}(r0) {eq}= r1, vec!["{tag0}", "{tag1}"])')
+            lines.append(f'(get_{ptype[:-2].lower()}(r0.0) {eq}= r1.0, r0.1)')
         return f'{{ {"; ".join(lines)} }}'
     
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())
-        get = self._getRefGetter(ref[1:])
-        exp, tag = self._getRefExplainerAndTag(ref, get)
+        ref = str(ctx.ref().REF()[-1])
         lines = [
-            f'let r = {get}',
+            f'let r = {self.visit(ctx.ref())}',
         ]
-        if exp:
-            lines.append(exp)
         if ptype == 'SpotId':
-            lines.append(f'(r {eq}= {construct_spot_id(*place_to_names(pl))}, vec!["{tag}"])')
+            lines.append(f'(r.0 {eq}= {construct_spot_id(*place_to_names(pl))}, r.1)')
         else:
             val = f'{ptype}::{construct_id(pl)}'
             if self._isRefSpotId(ref):
-                lines.append(f'(r != SpotId::None && get_{ptype[:-2].lower()}(r) {eq}= {val}, vec!["{tag}"])')
+                lines.append(f'(r.0 != SpotId::None && get_{ptype[:-2].lower()}(r.0) {eq}= {val}, r.1)')
             else:
-                lines.append(f'(get_{ptype[:-2].lower()}(r) {eq}= {val}, vec!["{tag}"])')
+                lines.append(f'(get_{ptype[:-2].lower()}(r.0) {eq}= {val}, r.1)')
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())
-        get = self._getRefGetter(ref[1:])
-        exp, tag = self._getRefExplainerAndTag(ref, get)
+        ref = str(ctx.ref().REF()[-1])
+        get = self.visit(ctx.ref())
         ftag = ctx.invoke().getText()
         lines = [
-            f'let mut refs = vec!["{tag}"]',
-            f'let r = {get if func == "default" else f"{func}({get})"}',
+            f'let mut r = {get}',
+            f'let res = {"r.0" if func == "default" else f"{func}(r.0)"}',
             f'let mut f = {self.visit(ctx.invoke())}',
             f'edict.insert("{ftag}", format!("{{}}", f.0))',
-            'refs.append(&mut f.1)',
+            'r.1.append(&mut f.1)',
         ]
-        if exp:
-            lines.append(exp)
 
         if func != 'default' and self._isRefSpotId(ref):
-            return f'{{ {"; ".join(lines)}; (r != SpotId::None && r {eq}= f.0, refs) }}'
-        return f'{{ {"; ".join(lines)}; (r {eq}= f.0, refs) }}'
+            return f'{{ {"; ".join(lines)}; (res != SpotId::None && res {eq}= f.0, r.1) }}'
+        return f'{{ {"; ".join(lines)}; (res {eq}= f.0, r.1) }}'
 
     def visitFuncNum(self, ctx):
         func, args = self._getFuncAndArgs(str(ctx.FUNC()))
@@ -906,18 +871,14 @@ class RustObservationVisitor(RustBaseVisitor):
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
-        elif ctx.REF():
-            args.extend(self._getRefGetter(str(ref)[1:]) for ref in ctx.REF())
+        elif ctx.ref():
+            args.extend(self.visit(ref) for ref in ctx.ref())
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
                 args.append(arg)
         if ofunc := self._getObserverFunc(str(ctx.FUNC())):
-            lines = []
-            for ref in ctx.REF():
-                if obs := self._getRefObserver(str(ref)):
-                    lines.append(obs)
-            lines.append(f'{ofunc}({", ".join(args)}, full_obs)')
+            return f'{ofunc}({", ".join(args)}, full_obs)'
         elif func == 'ctx.count':
             lines = [
                 f'full_obs.observe_{item.lower()}(IntegerObservation::Exact);'
@@ -925,18 +886,11 @@ class RustObservationVisitor(RustBaseVisitor):
             ]
             lines.append('/* TODO: handle count() at the comparison layer */')
             lines.append(f'{func}({", ".join(args)})')
+            return f'{{ {" ".join(lines)} }}'
+        elif func.startswith('rules::'):
+            return f'{func}({", ".join(args)}, full_obs)'
         else:
-            lines = []
-            for ref in ctx.REF():
-                if obs := self._getRefObserver(str(ref)):
-                    lines.append(obs)
-            if func.startswith('rules::'):
-                lines.append(f'{func}({", ".join(args)}, full_obs)')
-            else:
-                lines.append(f'{func}({", ".join(args)})')
-        if len(lines) == 1:
-            return lines[0]
-        return f'{{ {" ".join(lines)} }}'
+            return f'{func}({", ".join(args)})'
 
     def _visitConditional(self, *args, else_case=True):
         lines = []
@@ -956,9 +910,9 @@ class RustObservationVisitor(RustBaseVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
-        if ctx.value().REF():
+        if ctx.value().ref():
             op = str(ctx.getChild(1))
-            ref = str(ctx.value().REF())
+            ref = str(ctx.value().ref().REF()[-1])
             if obs := self._getRefObserver(ref, op=op, var='n'):
                 lines = [
                     f'let n: i32 = {self.visit(ctx.num())}.into();',
@@ -1018,25 +972,19 @@ class RustObservationVisitor(RustBaseVisitor):
         return f'{{ let n = {self.visit(ctx.num())}; ({self.visit(ctx.value())} & n) == n }}'
 
     def visitRefEq(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
-        lines = []
-        if obs := self._getRefObserver(ref):
-            lines.append(obs)
+        getter = self.visit(ctx.ref())
         if ctx.ITEM():
-            lines.append(f'{getter} == Item::{ctx.ITEM()}')
+            return f'{getter} == Item::{ctx.ITEM()}'
         else:
-            lines.append(f'{getter} == ctx.{ctx.SETTING()}()')
-        if len(lines) == 1:
-            return lines[0]
-        return f'{{ {" ".join(lines)} }}'
+            return f'{getter} == ctx.{ctx.SETTING()}()'
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
         return f'world.{ctx.SETTING()}'
 
-    def visitArgument(self, ctx):
-        ref = str(ctx.REF())
+    def visitRef(self, ctx):
+        # TODO: other cases
+        ref = str(ctx.REF()[-1])
         getter = self._getRefGetter(ref[1:])
         if obs := self._getRefObserver(ref):
             return f'{{ {obs} {getter} }}'
@@ -1063,13 +1011,10 @@ class RustObservationVisitor(RustBaseVisitor):
         return f'{{ {obs}; {'!' if ctx.NOT() else ''}ctx.has(Item::{ctx.ITEM()}) }}'
 
     def visitOneArgument(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
-        if obs := self._getRefObserver(ref):
-            return f'{{ {obs} {getter} }}'
-        elif getter.startswith('data::'):
-            return getter
-        return f'/* TODO: runtime observe_item */ ctx.has({getter})'
+        getter = self.code_writer.visit(ctx.ref())
+        if getter[0] != '$':
+            return self.visit(ctx.ref())
+        return f'/* TODO: runtime observe_item */ ctx.has({self.visit(ctx.ref())})'
 
     # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
     def visitItemList(self, ctx):
@@ -1081,12 +1026,6 @@ class RustObservationVisitor(RustBaseVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
-        if ctx.REF():
-            ref = str(ctx.REF())
-            getter = self._getRefGetter(ref[1:])
-            if obs := self._getRefObserver(ref):
-                return f'{{ {obs} {getter} }}'
-            return getter
         if ctx.SETTING():
             return f'ctx.{ctx::SETTING()}()'
         # TODO: constants
@@ -1105,22 +1044,15 @@ class RustObservationVisitor(RustBaseVisitor):
                 + f'}} }}')
 
     def visitRefInList(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
         values = [f'Item::{i}' for i in ctx.ITEM()]
-        match = f'matches!({getter}, {" | ".join(values)})'
-        if obs := self._getRefObserver(ref):
-            return f'{{ {obs} {match} }}'
+        match = f'matches!({self.visit(ctx.ref())}, {" | ".join(values)})'
         return match
     
     def visitRefStrInList(self, ctx):
-        ref = str(ctx.REF())
-        getter = self._getRefGetter(ref[1:])
+        ref = str(ctx.ref().REF()[-1])
         rtype = self._getRefEnum(ref[1:])
         values = [f'{rtype}::{inflection.camelize(str(lit)[1:-1])}' for lit in ctx.LIT()]
-        match = f'matches!({getter}, {" | ".join(values)})'
-        if obs := self._getRefObserver(ref):
-            return f'{{ {obs} {match} }}'
+        match = f'matches!({self.visit(ctx.ref())}, {" | ".join(values)})'
         return match
     
     # TODO: other REF/SETTING rules
@@ -1133,15 +1065,13 @@ class RustObservationVisitor(RustBaseVisitor):
         return super().visitStr(ctx)
 
     def visitPerRefStr(self, ctx):
-        ref = str(ctx.REF())
+        ref = str(ctx.ref().REF()[-1])
         enum = self._getRefEnum(ref[1:])
         cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
         results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
-        match = (f'match {self._getRefGetter(ref[1:])} {{ '
+        match = (f'match {self.visit(ctx.ref())} {{ '
                  + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
                  + f' }}')
-        if obs := self._getRefObserver(ref):
-            return f'{{ {obs} {match} }}'
         return match
 
     # unchanged
@@ -1160,29 +1090,25 @@ class RustObservationVisitor(RustBaseVisitor):
         return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
-        ref1 = str(ctx.REF(0))
-        ref2 = str(ctx.REF(1))
+        ref1 = str(ctx.ref(0).REF()[-1])
+        ref2 = str(ctx.ref(1).REF()[-1])
         ptype = self._getRefType(ref2[1:])
         eq = '!' if ctx.NOT() else '='
-        get1 = self._getRefGetter(ref1[1:])
-        get2 = self._getRefGetter(ref2[1:])
+        get1 = self.visit(ctx.ref(0))
+        get2 = self.visit(ctx.ref(1))
         if ptype != 'SpotId':
             if self._isRefSpotId(ref1[1:]):
                 get1 = f'{get1} != SpotId::None && get_{ptype[:-2].lower()}({get1})'
             else:
                 get1 = f'get_{ptype[:-2].lower()}({get1})'
-        obs1 = self._getRefObserver(ref1)
-        obs2 = self._getRefObserver(ref2)
-        if obs1 or obs2:
-            return f'{{ {obs1 or ''} {obs2 or ''} {get1} {eq}= {get2} }}'
         return f'{get1} {eq}= {get2}'
 
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())
-        get = f'{self._getRefGetter(ref[1:])}'
+        ref = str(ctx.ref().REF()[-1])
+        get = self.visit(ctx.ref())
         if ptype == 'SpotId':
             val = construct_spot_id(*place_to_names(pl))
         else:
@@ -1191,29 +1117,22 @@ class RustObservationVisitor(RustBaseVisitor):
                 get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
-        if obs := self._getRefObserver(ref):
-            return f'{{ {obs} {get} {eq}= {val} }}'
         return f'{get} {eq}= {val}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.REF())
-        get = self._getRefGetter(ref[1:])
-        obs = self._getRefObserver(ref)
+        ref = str(ctx.ref().REF()[-1])
+        get = self.visit(ctx.ref())
         if func == 'default':
             res = f'{get} {eq}= {self.visit(ctx.invoke())}'
-            if obs:
-                return f'{{ {obs} {res} }}'
             return res
         if self._isRefSpotId(ref[1:]):
             check = f'{get} != SpotId::None && '
         else:
             check = ''
         inv = f'{check}{func}({get}) {eq}= {self.visit(ctx.invoke())}'
-        if obs:
-            return f'{{ {obs} {inv} }}'
         return inv
 
     # unchanged
@@ -1231,7 +1150,7 @@ class RustObservationVisitor(RustBaseVisitor):
         return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
 
     def visitSet(self, ctx):
-        var = str(ctx.REF(0))[1:]
+        var = str(ctx.REF())[1:]
         if ctx.num():
             val = self.visit(ctx.num())
         elif ctx.str_():

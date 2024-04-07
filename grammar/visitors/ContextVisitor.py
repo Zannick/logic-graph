@@ -62,8 +62,8 @@ class ContextVisitor(RulesVisitor):
                                f'^{ref2} ({t2}) in {self.name}')
 
     def _visitAnyRef(self, ctx):
-        if ctx.REF():
-            self._checkRef(str(ctx.REF())[1:])
+        if ctx.ref():
+            self._checkRef(str(ctx.ref().REF()[-1])[1:])
             self.visitChildren(ctx)
     visitMatchRefBool = visitRefInList = visitPerSettingInt = visitRefEq = visitBaseNum = visitArgument = visitOneArgument = _visitAnyRef
 
@@ -76,10 +76,10 @@ class ContextVisitor(RulesVisitor):
         return super().visitStr(ctx)
 
     def visitCmpStr(self, ctx: RulesParser.CmpStrContext):
-        if not ctx.value().REF():
+        if not ctx.value().ref():
             return super().visitCmpStr(ctx)
         
-        ref = str(ctx.value().REF())[1:]
+        ref = str(ctx.value().ref().REF()[-1])[1:]
         self._checkRef(ref)
         self.values[ref].add(str(ctx.LIT())[1:-1])
 
@@ -107,7 +107,7 @@ class ContextVisitor(RulesVisitor):
     
     def visitPerRefStr(self, ctx: RulesParser.PerRefStrContext):
         if ctx.LIT():
-            ref = str(ctx.REF())[1:]
+            ref = str(ctx.ref().REF()[-1])[1:]
             self._checkRef(ref)
             self.values[ref].update(str(s)[1:-1] for s in ctx.LIT())
         return self._getAllStrReturns(ctx)
@@ -116,17 +116,17 @@ class ContextVisitor(RulesVisitor):
         return self._getAllStrReturns(ctx)
     
     def visitRefStrInList(self, ctx: RulesParser.RefStrInListContext):
-        ref = str(ctx.REF())[1:]
+        ref = str(ctx.ref().REF()[-1])[1:]
         self._checkRef(ref)
         self.values[ref].update(self._getAllLitReturns(ctx))
 
     def visitSet(self, ctx):
-        ref = str(ctx.REF(0))[1:]
+        ref = str(ctx.REF())[1:]
         self._checkRef(ref)
         if ctx.str_():
             self.values[ref].update(self.visit(ctx.str_()))
-        elif len(ctx.REF()) > 1:
-            ref2 = str(ctx.REF(1))[1:]
+        elif ctx.ref():
+            ref2 = str(ctx.ref().REF()[-1])[1:]
             self._checkRef(ref2)
             self._checkTypes(ref, ref2)
         else:
