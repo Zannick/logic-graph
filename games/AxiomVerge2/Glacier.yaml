@@ -1568,6 +1568,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Amagi Breach > East Entrance > Save Point
+    portal_start: Portal Cage
   spots:
     - name: West
       coord: [37.05, 13.8]

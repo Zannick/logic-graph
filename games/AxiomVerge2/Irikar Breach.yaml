@@ -316,6 +316,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Irikar > Abandoned Room > Empty Pedestal
+    portal_start: Portal Stand
   spots:
     - name: North 12
       coord: [12.5, 26.2]

@@ -2609,7 +2609,7 @@ macro_rules! hobserve__save_last {
 }
 
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {                IF (^newpos NOT WITHIN ^prev_area) {                    $reset_area(^prev_area);                };                ^prev_area = $get_area(^last);                ^last = $default; }
+/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);             ^prev_portal = ^portal;             ^portal = @^newpos^portal_start;         } ELSE {             SWAP ^portal, ^prev_portal;         };         ^prev_area = $get_area(^position); } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {               IF (^newpos NOT WITHIN ^prev_area) {                   $reset_area(^prev_area);                   ^prev_portal = ^portal;                   ^portal = @^newpos^portal_start;               } ELSE {                   SWAP ^portal, ^prev_portal;               };               ^prev_area = $get_area(^last);               ^last = $default; }
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
@@ -2621,6 +2621,10 @@ macro_rules! helper__reset_old_area {
         {
             if get_area($newpos) != $ctx.prev_area() {
                 $ctx.reset_area($ctx.prev_area(), $world);
+                $ctx.set_prev_portal($ctx.portal());
+                $ctx.set_portal(data::portal_start($newpos));
+            } else {
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
         } else if (($ctx.position() != SpotId::None
@@ -2631,6 +2635,10 @@ macro_rules! helper__reset_old_area {
         {
             if get_area($newpos) != $ctx.prev_area() {
                 $ctx.reset_area($ctx.prev_area(), $world);
+                $ctx.set_prev_portal($ctx.portal());
+                $ctx.set_portal(data::portal_start($newpos));
+            } else {
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             }
             $ctx.set_prev_area(get_area($ctx.last()));
             $ctx.set_last(Default::default());
@@ -2664,7 +2672,10 @@ macro_rules! hobserve__reset_old_area {
             if get_area($newpos) != {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
-            } {}
+            } {
+            } else {
+                $full_obs.swap_portal__prev_portal()
+            }
             {
                 let _set = get_area({
                     $full_obs.observe_position();
@@ -2695,7 +2706,10 @@ macro_rules! hobserve__reset_old_area {
             if get_area($newpos) != {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
-            } {}
+            } {
+            } else {
+                $full_obs.swap_portal__prev_portal()
+            }
             {
                 let _set = get_area({
                     $full_obs.observe_last();

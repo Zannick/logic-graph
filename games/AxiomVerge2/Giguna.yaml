@@ -1384,6 +1384,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Giguna Breach > Peak > Save Point
+    portal_start: Portal
   map:
     save: [14, 5, 15, 6]
   datamap:

@@ -38,6 +38,8 @@ pub enum OneObservation {
     BreachSave(SpotId),
     Indra(SpotId),
     Last(SpotId),
+    Portal(SpotId),
+    PrevPortal(SpotId),
     PrevArea(AreaId),
     // items
     FlaskExact(i8),
@@ -114,6 +116,8 @@ pub struct FullObservation {
     breach_save: bool,
     indra: bool,
     last: bool,
+    portal: bool,
+    prev_portal: bool,
     prev_area: bool,
     // items
     flask: IntegerObservation<i8>,
@@ -2776,6 +2780,12 @@ impl Observer for FullObservation {
         if self.last {
             vec.push(OneObservation::Last(ctx.last));
         }
+        if self.portal {
+            vec.push(OneObservation::Portal(ctx.portal));
+        }
+        if self.prev_portal {
+            vec.push(OneObservation::PrevPortal(ctx.prev_portal));
+        }
         if self.prev_area {
             vec.push(OneObservation::PrevArea(ctx.prev_area));
         }
@@ -2920,6 +2930,12 @@ impl FullObservation {
         if self.last {
             fields += 1;
         }
+        if self.portal {
+            fields += 1;
+        }
+        if self.prev_portal {
+            fields += 1;
+        }
         if self.prev_area {
             fields += 1;
         }
@@ -3006,6 +3022,12 @@ impl FullObservation {
     }
     pub fn observe_last(&mut self) {
         self.last = true;
+    }
+    pub fn observe_portal(&mut self) {
+        self.portal = true;
+    }
+    pub fn observe_prev_portal(&mut self) {
+        self.prev_portal = true;
     }
     pub fn observe_prev_area(&mut self) {
         self.prev_area = true;
@@ -3708,6 +3730,9 @@ impl FullObservation {
     pub fn observe_water_movement(&mut self) {
         self.cbits4.insert(flags::ContextBits4::WATER_MOVEMENT);
     }
+    pub fn swap_portal__prev_portal(&mut self) {
+        std::mem::swap(&mut self.portal, &mut self.prev_portal);
+    }
 }
 
 #[derive(Debug)]
@@ -3772,6 +3797,8 @@ pub enum ObservationMatcher {
     BreachSaveLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     IndraLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     LastLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    PortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    PrevPortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
     // items
     FlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
@@ -3957,6 +3984,14 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::LastLookup(m))
             }
+            &OneObservation::Portal(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (node, ObservationMatcher::PortalLookup(m))
+            }
+            &OneObservation::PrevPortal(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (node, ObservationMatcher::PrevPortalLookup(m))
+            }
             &OneObservation::PrevArea(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::PrevAreaLookup(m))
@@ -4078,6 +4113,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::BreachSaveLookup(m) => m.clear(),
             Self::IndraLookup(m) => m.clear(),
             Self::LastLookup(m) => m.clear(),
+            Self::PortalLookup(m) => m.clear(),
+            Self::PrevPortalLookup(m) => m.clear(),
             Self::PrevAreaLookup(m) => m.clear(),
             Self::FlaskLookup(m) => m.clear(),
             Self::FlaskEq { matcher, .. } => matcher.clear(),
@@ -4133,6 +4170,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::BreachSaveLookup(m) => m.lookup(val.breach_save),
             Self::IndraLookup(m) => m.lookup(val.indra),
             Self::LastLookup(m) => m.lookup(val.last),
+            Self::PortalLookup(m) => m.lookup(val.portal),
+            Self::PrevPortalLookup(m) => m.lookup(val.prev_portal),
             Self::PrevAreaLookup(m) => m.lookup(val.prev_area),
             Self::FlaskLookup(m) => m.lookup(val.flask),
             Self::FlaskEq { eq, matcher } => matcher.lookup(val.flask == *eq),
@@ -4216,6 +4255,8 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::BreachSaveLookup(m), OneObservation::BreachSave(v)) => Some(m.insert(*v)),
             (Self::IndraLookup(m), OneObservation::Indra(v)) => Some(m.insert(*v)),
             (Self::LastLookup(m), OneObservation::Last(v)) => Some(m.insert(*v)),
+            (Self::PortalLookup(m), OneObservation::Portal(v)) => Some(m.insert(*v)),
+            (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => Some(m.insert(*v)),
             (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => Some(m.insert(*v)),
             (Self::FlaskLookup(m), OneObservation::FlaskExact(v)) => Some(m.insert(*v)),
             (Self::FlaskEq { eq, matcher }, OneObservation::FlaskEq(eq2, v)) if eq2 == eq => {
@@ -4395,6 +4436,8 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::BreachSaveLookup(m), OneObservation::BreachSave(v)) => m.add_value(*v, value),
             (Self::IndraLookup(m), OneObservation::Indra(v)) => m.add_value(*v, value),
             (Self::LastLookup(m), OneObservation::Last(v)) => m.add_value(*v, value),
+            (Self::PortalLookup(m), OneObservation::Portal(v)) => m.add_value(*v, value),
+            (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => m.add_value(*v, value),
             (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.add_value(*v, value),
             (Self::FlaskLookup(m), OneObservation::FlaskExact(v)) => m.add_value(*v, value),
             (Self::FlaskEq { eq, matcher }, OneObservation::FlaskEq(eq2, v)) if eq2 == eq => {
@@ -4544,6 +4587,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::BreachSaveLookup(m) => m.nodes(),
             Self::IndraLookup(m) => m.nodes(),
             Self::LastLookup(m) => m.nodes(),
+            Self::PortalLookup(m) => m.nodes(),
+            Self::PrevPortalLookup(m) => m.nodes(),
             Self::PrevAreaLookup(m) => m.nodes(),
             Self::FlaskLookup(m) => m.nodes(),
             Self::FlaskEq { matcher, .. } => matcher.nodes(),
@@ -4593,6 +4638,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::BreachSaveLookup(m) => m.num_values(),
             Self::IndraLookup(m) => m.num_values(),
             Self::LastLookup(m) => m.num_values(),
+            Self::PortalLookup(m) => m.num_values(),
+            Self::PrevPortalLookup(m) => m.num_values(),
             Self::PrevAreaLookup(m) => m.num_values(),
             Self::FlaskLookup(m) => m.num_values(),
             Self::FlaskEq { matcher, .. } => matcher.num_values(),

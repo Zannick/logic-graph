@@ -8,6 +8,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Giguna > Ruins Top > Save Point
+    portal_start: Portal
   map:
     save: [15, 6, 16, 7]
   datamap:

@@ -103,6 +103,8 @@ pub enum Expectation {
     BreachSave(SpotId),
     Indra(SpotId),
     Last(SpotId),
+    Portal(SpotId),
+    PrevPortal(SpotId),
     PrevArea(AreaId),
     MapAmagiBreachEastEntranceSave(bool),
     MapAmagiMainAreaSave(bool),
@@ -863,6 +865,127 @@ pub fn portal_default(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Sight_Room__Lower_Ledge => SpotId::Irikar_Breach__Save_Room__Save_Point,
         SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar_Breach__Save_Room__Save_Point,
         SpotId::Irikar__Sight_Room__West_24 => SpotId::Irikar_Breach__Save_Room__Save_Point,
+        _ => SpotId::None
+    }
+}
+pub fn portal_start(spot_id: SpotId) -> SpotId {
+    match spot_id {
+        SpotId::Annuna__Lamassu__Above_Flat_Ground => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_East_Ledge => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_Hill => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_Hill_East => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_Hill_West => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_Middle_Ledge => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Bottom_West_Ledge => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__East_14 => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__East_16 => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__East_17 => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Flat_Ground => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Ledge_By_Grate => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Lower_Brick_Ledge => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Portal_Stand => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__Upper_Brick_Ledge => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__West_15 => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Annuna__Lamassu__West_17 => SpotId::Annuna__Lamassu__Portal_Stand,
+        SpotId::Giguna_Breach__Peak__Column => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__East_6 => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__East_Passage => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__Portal => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__Upper_East => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__Upper_West => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna_Breach__Peak__West_7 => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Giguna__Ruins_Top__East_7 => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__East_Door => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Entryway => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Flask => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Interior_Ledge => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Portal_Left => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Rooftop_East => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Rooftop_Gutter => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Switch => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Turret_Balcony_East => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Turret_Balcony_West => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Upper_Tunnel => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__West_7 => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__West_Door => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__West_Pillar => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Glacier__Crystals__East => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Grate_Left => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Lower_Corner => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Lower_Slope => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Middle_Ledge => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Midwest_Slope => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Portal_Cage => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Portal_Stand => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Top_Corner => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__Upper_Ledge => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Glacier__Crystals__West => SpotId::Glacier__Crystals__Portal_Cage,
+        SpotId::Irikar_Breach__Exit_Corridor__East => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__North_12 => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__North_13 => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__Passage => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__Pillar => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__West => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar_Breach__Exit_Corridor__West_of_Pillar => SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Bottom_Middle => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__East_27 => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__East_28 => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__East_Platform => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Ledge => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Middle_Platform => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Moving_Platform_End => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Moving_Platform_Start => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__North => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Portal_Stand => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__West_28 => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Basement_Portal__Westmost_Platform => SpotId::Irikar__Basement_Portal__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Hole => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Middle_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Middle_Platform_West => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Platform_3 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Bowl_Top_Platform => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Dagger_Altar => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__East_Rim => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__NW_Bowl_Edifice => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__NW_Middle_Building_Corner => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__NW_Roof => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__NW_Staircase_Upper => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__North_Above_Portal => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Northeast_Above_Bowl => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Northwest => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Northwest_Above_Bowl => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Portal_Stand => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Royal_Storage_By_Wall => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Royal_Storage_South => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Royal_Storage_in_Wall => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Bottom => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_East_24 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Floating_Platform => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Lower_Right_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Middle_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Northeast => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Roof_East => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Roof_West => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rim => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Sight_Room__Above_Room_East => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Irikar__Sight_Room__Above_Room_North => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Irikar__Sight_Room__Item_Pedestal => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Irikar__Sight_Room__Lower_Ledge => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Irikar__Sight_Room__West_24 => SpotId::Irikar__Sight_Room__Portal,
         _ => SpotId::None
     }
 }
@@ -1798,6 +1921,8 @@ pub struct Context {
     pub breach_save: SpotId,
     pub indra: SpotId,
     pub last: SpotId,
+    pub portal: SpotId,
+    pub prev_portal: SpotId,
     pub prev_area: AreaId,
     // items
     pub flask: i8,
@@ -1825,6 +1950,8 @@ impl Default for Context {
             breach_save: SpotId::None,
             indra: SpotId::None,
             last: SpotId::None,
+            portal: SpotId::None,
+            prev_portal: SpotId::None,
             prev_area: AreaId::Antarctica__West,
             energy: 0,
             flasks: 0,
@@ -2922,6 +3049,10 @@ impl context::Ctx for Context {
             ("indra", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("last", Yaml::String(s)) => self.set_last(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
             ("last", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("portal", Yaml::String(s)) => self.set_portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("prev_portal", Yaml::String(s)) => self.set_prev_portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("prev_area", Yaml::String(s)) => self.set_prev_area(AreaId::from_str(s).map_err(|e| format!("{}", e))?),
             ("prev_area", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__east_entrance__save", Yaml::Boolean(b)) => self.set_map__amagi_breach__east_entrance__save(*b),
@@ -3089,6 +3220,10 @@ impl context::Ctx for Context {
             ("indra", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("last", Yaml::String(s)) => Expectation::Last(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
             ("last", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("portal", Yaml::String(s)) => Expectation::Portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("prev_portal", Yaml::String(s)) => Expectation::PrevPortal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("prev_area", Yaml::String(s)) => Expectation::PrevArea(AreaId::from_str(s).map_err(|e| format!("{}", e))?),
             ("prev_area", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__east_entrance__save", Yaml::Boolean(b)) => Expectation::MapAmagiBreachEastEntranceSave(*b),
@@ -3664,6 +3799,18 @@ impl context::Ctx for Context {
                     let v = self.last();
                     if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "last", e, v));
+                    }
+                }
+                Expectation::Portal(e) => {
+                    let v = self.portal();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "portal", e, v));
+                    }
+                }
+                Expectation::PrevPortal(e) => {
+                    let v = self.prev_portal();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "prev_portal", e, v));
                     }
                 }
                 Expectation::PrevArea(e) => {
@@ -12168,6 +12315,12 @@ impl context::Ctx for Context {
         if old.last != self.last {
             list.push(format!("last: {:?} → {:?}", old.last, self.last));
         }
+        if old.portal != self.portal {
+            list.push(format!("portal: {:?} → {:?}", old.portal, self.portal));
+        }
+        if old.prev_portal != self.prev_portal {
+            list.push(format!("prev_portal: {:?} → {:?}", old.prev_portal, self.prev_portal));
+        }
         if old.prev_area != self.prev_area {
             list.push(format!("prev_area: {:?} → {:?}", old.prev_area, self.prev_area));
         }
@@ -15802,561 +15955,492 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    // accessors
     pub fn position(&self) -> SpotId {
         self.position
     }
-    // setters
     pub fn energy(&self) -> i16 {
         self.energy
     }
-    // setters
     pub fn set_energy(&mut self, val: i16) {
         self.energy = val;
     }
     pub fn flasks(&self) -> i8 {
         self.flasks
     }
-    // setters
     pub fn set_flasks(&mut self, val: i8) {
         self.flasks = val;
     }
     pub fn refills(&self) -> i8 {
         self.refills
     }
-    // setters
     pub fn set_refills(&mut self, val: i8) {
         self.refills = val;
     }
     pub fn mode(&self) -> enums::Mode {
         self.mode
     }
-    // setters
     pub fn set_mode(&mut self, val: enums::Mode) {
         self.mode = val;
     }
     pub fn save(&self) -> SpotId {
         self.save
     }
-    // setters
     pub fn set_save(&mut self, val: SpotId) {
         self.save = val;
     }
     pub fn breach_save(&self) -> SpotId {
         self.breach_save
     }
-    // setters
     pub fn set_breach_save(&mut self, val: SpotId) {
         self.breach_save = val;
     }
     pub fn indra(&self) -> SpotId {
         self.indra
     }
-    // setters
     pub fn set_indra(&mut self, val: SpotId) {
         self.indra = val;
     }
     pub fn last(&self) -> SpotId {
         self.last
     }
-    // setters
     pub fn set_last(&mut self, val: SpotId) {
         self.last = val;
+    }
+    pub fn portal(&self) -> SpotId {
+        self.portal
+    }
+    pub fn set_portal(&mut self, val: SpotId) {
+        self.portal = val;
+    }
+    pub fn prev_portal(&self) -> SpotId {
+        self.prev_portal
+    }
+    pub fn set_prev_portal(&mut self, val: SpotId) {
+        self.prev_portal = val;
     }
     pub fn prev_area(&self) -> AreaId {
         self.prev_area
     }
-    // setters
     pub fn set_prev_area(&mut self, val: AreaId) {
         self.prev_area = val;
     }
     pub fn map__amagi_breach__east_entrance__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE)
     }
-    // setters
     pub fn set_map__amagi_breach__east_entrance__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE, val);
     }
     pub fn map__amagi__main_area__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE)
     }
-    // setters
     pub fn set_map__amagi__main_area__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE, val);
     }
     pub fn map__amagi__west_lake__urn(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__WEST_LAKE__URN)
     }
-    // setters
     pub fn set_map__amagi__west_lake__urn(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI__WEST_LAKE__URN, val);
     }
     pub fn map__amagi__east_lake__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE)
     }
-    // setters
     pub fn set_map__amagi__east_lake__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE, val);
     }
     pub fn map__annuna__mirror_match__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE)
     }
-    // setters
     pub fn set_map__annuna__mirror_match__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE, val);
     }
     pub fn map__annuna__west_bridge__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__WEST_BRIDGE__SAVE)
     }
-    // setters
     pub fn set_map__annuna__west_bridge__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__WEST_BRIDGE__SAVE, val);
     }
     pub fn map__annuna__vertical_room__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE)
     }
-    // setters
     pub fn set_map__annuna__vertical_room__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE, val);
     }
     pub fn map__annuna__factory_entrance__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE)
     }
-    // setters
     pub fn set_map__annuna__factory_entrance__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE, val);
     }
     pub fn map__annuna__upper_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__annuna__upper_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE, val);
     }
     pub fn map__annuna__center_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__annuna__center_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE, val);
     }
     pub fn map__annuna__final_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__FINAL_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__annuna__final_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__FINAL_SAVE__SAVE, val);
     }
     pub fn map__ebih__base_camp__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE)
     }
-    // setters
     pub fn set_map__ebih__base_camp__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE, val);
     }
     pub fn map__ebih__waterfall__axe(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__WATERFALL__AXE)
     }
-    // setters
     pub fn set_map__ebih__waterfall__axe(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__WATERFALL__AXE, val);
     }
     pub fn map__ebih__ebih_west__mid_save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE)
     }
-    // setters
     pub fn set_map__ebih__ebih_west__mid_save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE, val);
     }
     pub fn map__ebih__ebih_west__upper_save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE)
     }
-    // setters
     pub fn set_map__ebih__ebih_west__upper_save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE, val);
     }
     pub fn map__ebih__ebih_west__lower_save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE)
     }
-    // setters
     pub fn set_map__ebih__ebih_west__lower_save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE, val);
     }
     pub fn map__ebih__drone_room__urn(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__DRONE_ROOM__URN)
     }
-    // setters
     pub fn set_map__ebih__drone_room__urn(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__DRONE_ROOM__URN, val);
     }
     pub fn map__giguna_breach__peak__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE)
     }
-    // setters
     pub fn set_map__giguna_breach__peak__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE, val);
     }
     pub fn map__giguna_breach__sw_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__giguna_breach__sw_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE, val);
     }
     pub fn map__giguna__giguna_northeast__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE)
     }
-    // setters
     pub fn set_map__giguna__giguna_northeast__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE, val);
     }
     pub fn map__giguna__giguna_base__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE)
     }
-    // setters
     pub fn set_map__giguna__giguna_base__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE, val);
     }
     pub fn map__giguna__ruins_west__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE)
     }
-    // setters
     pub fn set_map__giguna__ruins_west__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE, val);
     }
     pub fn map__giguna__ruins_top__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE)
     }
-    // setters
     pub fn set_map__giguna__ruins_top__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE, val);
     }
     pub fn map__glacier_breach__south_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__glacier_breach__south_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE, val);
     }
     pub fn map__glacier_breach__west_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER_BREACH__WEST_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__glacier_breach__west_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER_BREACH__WEST_SAVE__SAVE, val);
     }
     pub fn map__glacier_breach__guarded_corridor__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE)
     }
-    // setters
     pub fn set_map__glacier_breach__guarded_corridor__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE, val);
     }
     pub fn map__glacier_breach__save_and_exit__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE)
     }
-    // setters
     pub fn set_map__glacier_breach__save_and_exit__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE, val);
     }
     pub fn map__glacier__revival__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE)
     }
-    // setters
     pub fn set_map__glacier__revival__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE, val);
     }
     pub fn map__glacier__the_big_drop__bottom(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GLACIER__THE_BIG_DROP__BOTTOM)
     }
-    // setters
     pub fn set_map__glacier__the_big_drop__bottom(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER__THE_BIG_DROP__BOTTOM, val);
     }
     pub fn map__irikar_breach__save_room__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE)
     }
-    // setters
     pub fn set_map__irikar_breach__save_room__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE, val);
     }
     pub fn map__irikar_breach__gauntlet__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE)
     }
-    // setters
     pub fn set_map__irikar_breach__gauntlet__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE, val);
     }
     pub fn map__irikar_breach__basement_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE)
     }
-    // setters
     pub fn set_map__irikar_breach__basement_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE, val);
     }
     pub fn map__irikar__hub__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE)
     }
-    // setters
     pub fn set_map__irikar__hub__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE, val);
     }
     pub fn map__irikar__sight_room__urn(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR__SIGHT_ROOM__URN)
     }
-    // setters
     pub fn set_map__irikar__sight_room__urn(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR__SIGHT_ROOM__URN, val);
     }
     pub fn map__uhrum__west_entrance__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE)
     }
-    // setters
     pub fn set_map__uhrum__west_entrance__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE, val);
     }
     pub fn map__uhrum__save_room__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE)
     }
-    // setters
     pub fn set_map__uhrum__save_room__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE, val);
     }
     pub fn map__uhrum__annuna_corridor__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE)
     }
-    // setters
     pub fn set_map__uhrum__annuna_corridor__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE, val);
     }
     pub fn map__uhrum__annuna_corridor__urn(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__URN)
     }
-    // setters
     pub fn set_map__uhrum__annuna_corridor__urn(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__URN, val);
     }
     pub fn amagi__main_area__ctx__combo(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO)
     }
-    // setters
     pub fn set_amagi__main_area__ctx__combo(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO, val);
     }
     pub fn annuna__west_bridge__ctx__doors_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED)
     }
-    // setters
     pub fn set_annuna__west_bridge__ctx__doors_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED, val);
     }
     pub fn annuna__east_bridge__ctx__combo(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO)
     }
-    // setters
     pub fn set_annuna__east_bridge__ctx__combo(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO, val);
     }
     pub fn annuna__vertical_room__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_annuna__vertical_room__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED, val);
     }
     pub fn annuna__west_climb__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_annuna__west_climb__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED, val);
     }
     pub fn ebih__base_camp__ctx__left_platform_moved(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED)
     }
-    // setters
     pub fn set_ebih__base_camp__ctx__left_platform_moved(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED, val);
     }
     pub fn ebih__grid_25_10_12__ctx__door_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN)
     }
-    // setters
     pub fn set_ebih__grid_25_10_12__ctx__door_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN, val);
     }
     pub fn ebih__waterfall__ctx__west_door_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN)
     }
-    // setters
     pub fn set_ebih__waterfall__ctx__west_door_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN, val);
     }
     pub fn ebih__ebih_west__ctx__door_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN)
     }
-    // setters
     pub fn set_ebih__ebih_west__ctx__door_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN, val);
     }
     pub fn ebih__ebih_east__ctx__platform1_moved(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED)
     }
-    // setters
     pub fn set_ebih__ebih_east__ctx__platform1_moved(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED, val);
     }
     pub fn ebih__ebih_east__ctx__platform2_moved(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED)
     }
-    // setters
     pub fn set_ebih__ebih_east__ctx__platform2_moved(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED, val);
     }
     pub fn ebih__drone_room__ctx__platform_moved(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED)
     }
-    // setters
     pub fn set_ebih__drone_room__ctx__platform_moved(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED, val);
     }
     pub fn ebih__vertical_interchange__ctx__door_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN)
     }
-    // setters
     pub fn set_ebih__vertical_interchange__ctx__door_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN, val);
     }
     pub fn giguna_breach__sw_save__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_giguna_breach__sw_save__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED, val);
     }
     pub fn giguna__giguna_northeast__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_giguna__giguna_northeast__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED, val);
     }
     pub fn giguna__carnelian__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_giguna__carnelian__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED, val);
     }
     pub fn giguna__carnelian__ctx__upper_susar(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR)
     }
-    // setters
     pub fn set_giguna__carnelian__ctx__upper_susar(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR, val);
     }
     pub fn giguna__carnelian__ctx__lower_susar(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR)
     }
-    // setters
     pub fn set_giguna__carnelian__ctx__lower_susar(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR, val);
     }
     pub fn giguna__west_caverns__ctx__east_susar(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR)
     }
-    // setters
     pub fn set_giguna__west_caverns__ctx__east_susar(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR, val);
     }
     pub fn giguna__giguna_base__ctx__door_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN)
     }
-    // setters
     pub fn set_giguna__giguna_base__ctx__door_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN, val);
     }
     pub fn giguna__ruins_west__ctx__kishib_handled(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED)
     }
-    // setters
     pub fn set_giguna__ruins_west__ctx__kishib_handled(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED, val);
     }
     pub fn giguna__ruins_top__ctx__doors_open(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN)
     }
-    // setters
     pub fn set_giguna__ruins_top__ctx__doors_open(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN, val);
     }
     pub fn giguna__clouds__ctx__platform_and_portal(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_AND_PORTAL)
     }
-    // setters
     pub fn set_giguna__clouds__ctx__platform_and_portal(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_AND_PORTAL, val);
     }
     pub fn giguna__east_caverns__ctx__door_opened(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_giguna__east_caverns__ctx__door_opened(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED, val);
     }
     pub fn giguna__east_caverns__ctx__combo_entered(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED)
     }
-    // setters
     pub fn set_giguna__east_caverns__ctx__combo_entered(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED, val);
     }
     pub fn giguna__east_caverns__ctx__upper_susar(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR)
     }
-    // setters
     pub fn set_giguna__east_caverns__ctx__upper_susar(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR, val);
     }
     pub fn giguna__east_caverns__ctx__mid_susar(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR)
     }
-    // setters
     pub fn set_giguna__east_caverns__ctx__mid_susar(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR, val);
     }
     pub fn giguna__east_caverns__ctx__lower_susar(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR)
     }
-    // setters
     pub fn set_giguna__east_caverns__ctx__lower_susar(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR, val);
     }
     pub fn giguna__gateway__ctx__door_opened(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::GIGUNA__GATEWAY__CTX__DOOR_OPENED)
     }
-    // setters
     pub fn set_giguna__gateway__ctx__door_opened(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::GIGUNA__GATEWAY__CTX__DOOR_OPENED, val);
     }
     pub fn glacier__vertical_room__ctx__upper_gatestone(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE)
     }
-    // setters
     pub fn set_glacier__vertical_room__ctx__upper_gatestone(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE, val);
     }
     pub fn glacier__vertical_room__ctx__lower_gatestones(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES)
     }
-    // setters
     pub fn set_glacier__vertical_room__ctx__lower_gatestones(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES, val);
     }
     pub fn irikar__basement_portal__ctx__platform_moved(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED)
     }
-    // setters
     pub fn set_irikar__basement_portal__ctx__platform_moved(&mut self, val: bool) {
         self.cbits2.set(flags::ContextBits2::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED, val);
     }

@@ -5,6 +5,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Irikar Breach > Gauntlet > Save Point
+    portal_start: Portal Stand
   map:
     save: [12, 22, 13, 23]
   datamap:
@@ -335,6 +336,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Irikar Breach > Save Room > Save Point
+    portal_start: Portal
   map:
     urn: [14, 25, 15, 26]
   datamap:
@@ -430,6 +432,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Irikar Breach > Basement Save > Save Point
+    portal_start: Portal Stand
   reset:
     _platform_moved: false
   spots:

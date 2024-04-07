@@ -19,6 +19,8 @@ start:
   # which becomes its own independent per-variable enum type.
   indra: SpotId::None
   last: SpotId::None
+  portal: SpotId::None
+  prev_portal: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
   # TODO: Destination spot for glitches
@@ -28,6 +30,7 @@ data:
   water: false
   flipside: SpotId::None
   portal_default: SpotId::None
+  portal_start: SpotId::None  # TODO: replace portal_default
   map_spot: SpotId::None
   # fallthrough: SpotId::None  # Where Indra will fall to if the room is reset
 
@@ -333,16 +336,24 @@ helpers:
         AND ^newpos NOT WITHIN $get_area(^position)) {
             IF (^newpos NOT WITHIN ^prev_area) {
                 $reset_area(^prev_area);
+                ^prev_portal = ^portal;
+                ^portal = @^newpos^portal_start;
+            } ELSE {
+                SWAP ^portal, ^prev_portal;
             };
             ^prev_area = $get_area(^position);
     } ELSE IF (^position WITHIN `Menu > Warp Only`
                AND ^last NOT WITHIN ^prev_area
                AND ^newpos NOT WITHIN $get_area(^last)) {
-                   IF (^newpos NOT WITHIN ^prev_area) {
-                       $reset_area(^prev_area);
-                   };
-                   ^prev_area = $get_area(^last);
-                   ^last = $default;
+                  IF (^newpos NOT WITHIN ^prev_area) {
+                      $reset_area(^prev_area);
+                      ^prev_portal = ^portal;
+                      ^portal = @^newpos^portal_start;
+                  } ELSE {
+                      SWAP ^portal, ^prev_portal;
+                  };
+                  ^prev_area = $get_area(^last);
+                  ^last = $default;
     }
   # Breach portals are tied to particular save points in the breach
   # The area with the portal should define the data portal_default to be that point,

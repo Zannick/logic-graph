@@ -1986,6 +1986,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_default: Glacier Breach > South Save > Save Point
+    portal_start: Portal Stand
   spots:
     - name: East 17
       coord: [38.95, 16.75]
