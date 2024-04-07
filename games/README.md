@@ -299,7 +299,7 @@ Comparisons are always **boolExpr**. You can compare:
 * a **value** expression of numerical type can be compared `==`, `!=`, `>=`, `>`, `<=`, or `<` with a **num** expression.
 * a **value** expression of numerical type can be tested as a bitflag containing all the set bits in a **num** expression, by writing `value & num`. This is a comparison rather than a binary operation.
 * a **value** expression of string type can be compared `==` or `!=` with a **str** expression.
-* a **reference** can be compared `==` or `!=` with an **Item** primitive, a **setting** value (by name), another variable, or the result of a function. The types must match if non-integral; integer types will be coerced to a common type first.
+* a **reference** can be compared `==` or `!=` with an **Item** primitive, a **setting** value (by name), another reference, or the result of a function. The types must match if non-integral; integer types will be coerced to a common type first.
 * a **reference** of type **Item** can be tested for inclusion in a literal list of **Item** names, by writing `^item_var IN [Item1, Item2, ...]`. The list must contain at least two Items, otherwise you should use the `==` comparison.
 
 #### Conditionals
