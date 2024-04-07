@@ -265,6 +265,7 @@ helpers:
 
   $ft_main: Fast_Travel and ^realm == 'main'
   $ft_breach: Fast_Travel and ^realm == 'breach'
+  $can_portal: ^portal == ^position and ^flipside != $default
 
   # shockwave range: ~.2 in width (.35 height)
   # boomerang range: ~.325 in width? .25 in .5s, .325 in ~.8s

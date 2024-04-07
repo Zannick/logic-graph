@@ -50,8 +50,8 @@ class SettingVisitor(RulesVisitor):
         return self.visitChildren(ctx)
     visitPerSettingInt = visitPerSettingStr = visitPerSettingBool = _perSetting
 
-    def visitRefEq(self, ctx):
-        ref = self._getFullRef(str(ctx.REF())[1:])
+    def visitRefEqSimple(self, ctx):
+        ref = self._getFullRef(str(ctx.ref().REF()[-1])[1:])
         s = str(ctx.SETTING())
         self._checkSetting(s)
         self.setting_options[s].add('^' + ref)

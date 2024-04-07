@@ -41,6 +41,8 @@ class RustBaseVisitor(RulesVisitor):
         return f'enums::{self.ctxdict[ref].capitalize()}'
 
     def _getRefType(self, ref):
+        if isinstance(ref, RulesParser.RefContext):
+            ref = str(ref.REF()[-1])[1:]
         if ref in self.context_types:
             return self.context_types[ref]
         if ref in self.data_types:
@@ -169,11 +171,28 @@ class RustVisitor(RustBaseVisitor):
         num = f'{self.visit(ctx.num())}'
         return f'({self.visit(ctx.value())} & {num}) == {num}'
 
-    def visitRefEq(self, ctx):
+    def visitRefEqSimple(self, ctx):
         ref = self.visit(ctx.ref())
         if ctx.ITEM():
-            return f'{ref} == Item::{ctx.ITEM()}'
-        return f'{ref} == ctx.{ctx.SETTING()}()'
+            return f'{ref} {ctx.getChild(1)} Item::{ctx.ITEM()}'
+        return f'{ref} {ctx.getChild(1)} ctx.{ctx.SETTING()}()'
+
+    def _refEq(self, val1, val2, op, coerce=False):
+        if coerce:
+            return f'Into::<i32>::into({val1}) {op} {val2}.into()'
+        return f'{val1} {op} {val2}'
+
+    def visitRefEqRef(self, ctx):
+        t = self._getRefType(ctx.ref(0))
+        val1 = self.visit(ctx.ref(0))
+        val2 = self.visit(ctx.ref(1))
+        return self._refEq(val1, val2, ctx.getChild(1), coerce=t in int_types)
+
+    def visitRefEqInvoke(self, ctx):
+        t = self._getRefType(ctx.ref())
+        val1 = self.visit(ctx.ref())
+        val2 = self.visit(ctx.invoke())
+        return self._refEq(val1, val2, ctx.getChild(1), coerce=t in int_types)
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
@@ -276,12 +295,11 @@ class RustVisitor(RustBaseVisitor):
         return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
-        ptype = self._getRefType(str(ctx.ref(1).REF()[-1])[1:])
+        ptype = self._getRefType(ctx.ref(1))
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref(0).REF()[-1])[1:]
         get = self.visit(ctx.ref(0))
         if ptype != 'SpotId':
-            if self._isRefSpotId(ref):
+            if self._isRefSpotId(ctx.ref(0)):
                 get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
@@ -291,13 +309,12 @@ class RustVisitor(RustBaseVisitor):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])[1:]
         get = self.visit(ctx.ref())
         if ptype == 'SpotId':
             val = construct_spot_id(*place_to_names(pl))
         else:
             val = f'{ptype}::{construct_id(pl)}'
-            if self._isRefSpotId(ref):
+            if self._isRefSpotId(ctx.ref()):
                 get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
@@ -307,11 +324,10 @@ class RustVisitor(RustBaseVisitor):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])[1:]
         get = self.visit(ctx.ref())
         if func == 'default':
             return f'{get} {eq}= {self.visit(ctx.invoke())}'
-        if self._isRefSpotId(ref):
+        if self._isRefSpotId(ctx.ref()):
             check = f'{get} != SpotId::None && '
         else:
             check = ''
@@ -552,13 +568,37 @@ class RustExplainerVisitor(RustBaseVisitor):
         ]
         return f'{{ {"; ".join(lines)} }}'
 
-    def visitRefEq(self, ctx):
+    def visitRefEqSimple(self, ctx):
         rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else f'ctx.{ctx.SETTING()}()'
         lines = [
             f'let left = {self.visit(ctx.ref())}',
-            f'(left.0 == {rval}, left.1)',
+            f'(left.0 {ctx.getChild(1)} {rval}, left.1)',
         ]
         return f'{{ {"; ".join(lines)} }}'
+
+    def _refEq(self, val1, val2, op, coerce=False):
+        lines = [
+            f'let mut left = {val1}',
+            f'let mut right = {val2}',
+            'left.1.append(&mut right.1)',
+        ]
+        if coerce:
+            lines.append(f'(Into::<i32>::into(left.0) {op} right.0.into(), left.1)')
+        else:
+            lines.append(f'(left.0 {op} right.0, left.1)')
+        return f'{{ {"; ".join(lines)} }}'
+
+    def visitRefEqRef(self, ctx):
+        t = self._getRefType(ctx.ref(0))
+        val1 = self.visit(ctx.ref(0))
+        val2 = self.visit(ctx.ref(1))
+        return self._refEq(val1, val2, ctx.getChild(1), coerce=t in int_types)
+
+    def visitRefEqInvoke(self, ctx):
+        t = self._getRefType(ctx.ref())
+        val1 = self.visit(ctx.ref())
+        val2 = self.visit(ctx.invoke())
+        return self._refEq(val1, val2, ctx.getChild(1), coerce=t in int_types)
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
@@ -741,9 +781,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ let r = ctx.position(); {exp}; ({" || ".join(per_type)}, vec!["{tag}"]) }}'
 
     def visitRefInPlaceRef(self, ctx):    
-        ref0 = str(ctx.ref(0).REF()[-1])
-        ref1 = str(ctx.ref(1).REF()[-1])
-        ptype = self._getRefType(ref1[1:])
+        ptype = self._getRefType(ctx.ref(1))
         eq = '!' if ctx.NOT() else '='
         lines = [
             f'let mut r0 = {self.visit(ctx.ref(0))}',
@@ -752,7 +790,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         ]
         if ptype == 'SpotId':
             lines.append(f'(r0.0 {eq}= r1.0, r0.1)')
-        elif self._isRefSpotId(ref0[1:]):
+        elif self._isRefSpotId(ctx.ref(0)):
             lines.append(f'(r0.0 != SpotId::None && get_{ptype[:-2].lower()}(r0.0) {eq}= r1.0, r0.1)')
         else:
             lines.append(f'(get_{ptype[:-2].lower()}(r0.0) {eq}= r1.0, r0.1)')
@@ -762,7 +800,6 @@ class RustExplainerVisitor(RustBaseVisitor):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])
         lines = [
             f'let r = {self.visit(ctx.ref())}',
         ]
@@ -770,7 +807,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             lines.append(f'(r.0 {eq}= {construct_spot_id(*place_to_names(pl))}, r.1)')
         else:
             val = f'{ptype}::{construct_id(pl)}'
-            if self._isRefSpotId(ref):
+            if self._isRefSpotId(ctx.ref()):
                 lines.append(f'(r.0 != SpotId::None && get_{ptype[:-2].lower()}(r.0) {eq}= {val}, r.1)')
             else:
                 lines.append(f'(get_{ptype[:-2].lower()}(r.0) {eq}= {val}, r.1)')
@@ -780,7 +817,6 @@ class RustExplainerVisitor(RustBaseVisitor):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])
         get = self.visit(ctx.ref())
         ftag = ctx.invoke().getText()
         lines = [
@@ -791,7 +827,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             'r.1.append(&mut f.1)',
         ]
 
-        if func != 'default' and self._isRefSpotId(ref):
+        if func != 'default' and self._isRefSpotId(ctx.ref()):
             return f'{{ {"; ".join(lines)}; (res != SpotId::None && res {eq}= f.0, r.1) }}'
         return f'{{ {"; ".join(lines)}; (res {eq}= f.0, r.1) }}'
 
@@ -994,12 +1030,18 @@ class RustObservationVisitor(RustBaseVisitor):
     def visitFlagMatch(self, ctx):
         return f'{{ let n = {self.visit(ctx.num())}; ({self.visit(ctx.value())} & n) == n }}'
 
-    def visitRefEq(self, ctx):
+    def visitRefEqSimple(self, ctx):
         getter = self.visit(ctx.ref())
         if ctx.ITEM():
-            return f'{getter} == Item::{ctx.ITEM()}'
+            return f'{getter} {ctx.getChild(1)} Item::{ctx.ITEM()}'
         else:
-            return f'{getter} == ctx.{ctx.SETTING()}()'
+            return f'{getter} {ctx.getChild(1)} ctx.{ctx.SETTING()}()'
+
+    def visitRefEqRef(self, ctx):
+        return f'{self.visit(ctx.ref(0))} {ctx.getChild(1)} {self.visit(ctx.ref(1))}'
+
+    def visitRefEqInvoke(self, ctx):
+        return f'{self.visit(ctx.ref())} {ctx.getChild(1)} {self.visit(ctx.invoke())}'
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
@@ -1123,14 +1165,12 @@ class RustObservationVisitor(RustBaseVisitor):
         return ' || '.join(per_type)
 
     def visitRefInPlaceRef(self, ctx):
-        ref1 = str(ctx.ref(0).REF()[-1])
-        ref2 = str(ctx.ref(1).REF()[-1])
-        ptype = self._getRefType(ref2[1:])
+        ptype = self._getRefType(ctx.ref(1))
         eq = '!' if ctx.NOT() else '='
         get1 = self.visit(ctx.ref(0))
         get2 = self.visit(ctx.ref(1))
         if ptype != 'SpotId':
-            if self._isRefSpotId(ref1[1:]):
+            if self._isRefSpotId(ctx.ref(0)):
                 get1 = f'{get1} != SpotId::None && get_{ptype[:-2].lower()}({get1})'
             else:
                 get1 = f'get_{ptype[:-2].lower()}({get1})'
@@ -1140,13 +1180,12 @@ class RustObservationVisitor(RustBaseVisitor):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])
         get = self.visit(ctx.ref())
         if ptype == 'SpotId':
             val = construct_spot_id(*place_to_names(pl))
         else:
             val = f'{ptype}::{construct_id(pl)}'
-            if self._isRefSpotId(ref[1:]):
+            if self._isRefSpotId(ctx.ref()):
                 get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
@@ -1156,12 +1195,11 @@ class RustObservationVisitor(RustBaseVisitor):
         func = str(ctx.invoke().FUNC())[1:]
         assert func in ('default', 'get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
-        ref = str(ctx.ref().REF()[-1])
         get = self.visit(ctx.ref())
         if func == 'default':
             res = f'{get} {eq}= {self.visit(ctx.invoke())}'
             return res
-        if self._isRefSpotId(ref[1:]):
+        if self._isRefSpotId(ctx.ref()):
             check = f'{get} != SpotId::None && '
         else:
             check = ''

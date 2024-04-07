@@ -238,7 +238,7 @@ The logic rules are intended to read like a subset or variant of Python. Each fi
 * floats
 * an **Item**, written the same as you would find it in [Locations](#locations). Must begin with a capital letter and contains only alphanumerics and underscores.
 * a **setting**. Must begin with a lowercase letter and contains only alphanumerics and underscores.
-* a **context variable** or helper **argument**. Indicated with a `^`, then must begin with a lowercase letter or underscore, and contains only alphanumerics and underscores.
+* a **context variable**, **data value**, or helper **argument**. Indicated with a `^`, then must begin with a lowercase letter or underscore, and contains only alphanumerics, underscores, and dots `.`.
 * a **Place**. Must be enclosed in backticks and fully specified, e.g. `` `Amagi > Main Area > Save Point` ``.
 
 ### Expressions
@@ -250,12 +250,22 @@ Anywhere that expects a **boolExpr** can check whether an item has been collecte
 * the Item id, to check for at least one of the item.
 * the Item id followed by a number in braces, e.g. `Infect{2}` to check that at least that number copies of that item have been collected. The number must either be a integer literal or a **setting** name.
 * 'NOT' followed by the Item id, to check that the item has not ever been collected.
-* a **context variable** or helper **argument** of type Item, to check for at least one of that referenced item.
+* a **reference** of type Item, to check for at least one of that referenced item.
 * **itemList**, which checks that all of the possessions in the list are true. Viable options for entries in the list include: any of the above 4 options, a **helper** function of type **itemList** that takes no arguments, or a **rule** of type **itemList**.
+
+#### reference
+
+A **reference** expression is either a **context variable**, **data value** (reading from the current position), **helper argument**, or an **indirect reference** reading a data value from a place other than the current position.
+
+An indirect reference reads the data value for another **Place** given by name or by reference. The reference can be a data value, but not a nested indirect reference. The form is always `@<place><data>`, including the appropriate carets and backticks. Eg:
+*  `` @ `Amagi > Main Area > Save Point` ^portal_start ``
+*  ` @ ^prev_area ^portal_start `
+
+You can optionally put spaces between the `@`, place, and data, as presented in the examples above.
 
 #### value
 
-A **value** expression is either a **setting**, a **context variable**, or a **helper argument**.
+A **value** expression is either a **setting**, a **reference**, or a **helper argument**.
 
 #### num
 
@@ -289,8 +299,8 @@ Comparisons are always **boolExpr**. You can compare:
 * a **value** expression of numerical type can be compared `==`, `!=`, `>=`, `>`, `<=`, or `<` with a **num** expression.
 * a **value** expression of numerical type can be tested as a bitflag containing all the set bits in a **num** expression, by writing `value & num`. This is a comparison rather than a binary operation.
 * a **value** expression of string type can be compared `==` or `!=` with a **str** expression.
-* a **context variable** or **helper argument** can be compared `==` with an **Item** primitive or a **setting** value (by name). The types should match.
-* a **context variable** or **helper argument** of type **Item** can be tested for inclusion in a literal list of **Item** names, by writing `^item_var in [Item1, Item2, ...]`. The list must contain at least two Items, otherwise you should use the `==` comparison.
+* a **reference** can be compared `==` or `!=` with an **Item** primitive, a **setting** value (by name), another variable, or the result of a function. The types must match if non-integral; integer types will be coerced to a common type first.
+* a **reference** of type **Item** can be tested for inclusion in a literal list of **Item** names, by writing `^item_var IN [Item1, Item2, ...]`. The list must contain at least two Items, otherwise you should use the `==` comparison.
 
 #### Conditionals
 
@@ -316,21 +326,21 @@ Switch statements (despite the name) all begin with either `MATCH` or `PER`; it 
 
 * If `thing` is an **Item** name, the cases must all be integer literals; the case that will be chosen is the number of that Item that have been collected so far. These numbers will influence the upper bound on the number of this Item tracked, even if impossible to collect that many. The return type may be any of **boolExpr**, **num**, or **str**.
 * If `thing` is a **setting** name, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the setting. The return type may be any of **boolExpr**, **num**, or **str**.
-* If `thing` is a **context variable** or **helper argument**, *and* the return type is **boolExpr**, the cases must all be **Item**s, though each case may have multiple Items separated by `|` to indicate that any such Item matches that case. You can also write this in an `IN` shorthand&mdash;see below.
-* If `thing` is a **context variable** or **helper argument**, and the return type is either **num** or **str**, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the variable or argument.
+* If `thing` is a **reference**, *and* the return type is **boolExpr**, the cases must all be **Item**s, though each case may have multiple Items separated by `|` to indicate that any such Item matches that case. You can also write this in an `IN` shorthand&mdash;see below.
+* If `thing` is a **reference**, and the return type is either **num** or **str**, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the variable or argument.
 
 These could be changed in the future to make settings and variables work the same way.
 
 ##### In
 
-If you simply want to check whether a **context variable** or **helper argument** is one of several options, and that `thing` is an Item or string (i.e. enumeration type), then you can write `thing IN [case1, case2]`. The cases must all be Item names (if the variable is an Item) or string literals (corresponding to options of the same enum type as the variable), and there must be at least two.
+If you simply want to check whether a **reference** is one of several options, and that `thing` is an Item or string (i.e. enumeration type), then you can write `thing IN [case1, case2]`. The cases must all be Item names (if the variable is an Item) or string literals (corresponding to options of the same enum type as the variable), and there must be at least two.
 
 #### Function invocations
 
 Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** and **rules** defined in `Game.yaml`, and the following built-in functions:
 * **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
 * **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
-* **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to `SpotId::None` which is not otherwise recognized in this grammar.
+* **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to or comparing against `SpotId::None` which is not otherwise recognized in this grammar.
 <!-- * **all_spot_checks**, **all_area_checks**, **all_region_checks**: Type **boolExpr**. Accepts one **Place** argument that must be a **Spot**, **Area**, or **Region**, respectively, and returns whether all **Locations** in that **Place** have been either visited or skipped. -->
 * **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
 * **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
@@ -344,7 +354,7 @@ Functions of type **boolExpr**, **action**, or **Place** may accept any one of t
 * Any number of **Place**s.
 * Any number of **value** expressions.
 * Any one integer, float, or string literal.
-* Any one **context variable** or **helper argument**.
+* Any one **reference**.
 * Nothing.
 
 Function invocations of type **boolExpr** may additionally be negated.
@@ -362,9 +372,8 @@ These restrictions on arguments are possible to change if needed; this is just t
 
 You can check whether a certain **Place** variable is inside of another **Place** via `p1 WITHIN p2` or `p1 NOT WITHIN p2`:
 
-* `p1` must be a **context variable** or **function argument**, or it may be omitted, in which case the current position is used.
+* `p1` must be a **reference**, or it may be omitted, in which case the current position is used.
 * If `p1` is omitted, `p2` may be either a **Place** literal in backticks, or a tuple (surrounded with `()`) of **Place** literals separated by commas.
-* If `p1` is a variable or argument, `p2` may be a **Place** literal, another variable or argument, or a **function invocation** of type **Place**.
-* Checking whether a **Spot** is the same as another is done with `spot1 WITHIN spot2` due to current limitations.
+* If `p1` is a reference, `p2` may be a **Place** literal, another reference, or a **function invocation** of type **Place**.
 
 These cases could be changed in the future if needs arise.

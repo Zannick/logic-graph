@@ -61,11 +61,21 @@ class ContextVisitor(RulesVisitor):
             self.errors.append(f'Type mismatch between ctx properties ^{ref1} ({t1}), '
                                f'^{ref2} ({t2}) in {self.name}')
 
-    def _visitAnyRef(self, ctx):
-        if ctx.ref():
-            self._checkRef(str(ctx.ref().REF()[-1])[1:])
-            self.visitChildren(ctx)
-    visitMatchRefBool = visitRefInList = visitPerSettingInt = visitRefEq = visitBaseNum = visitArgument = visitOneArgument = _visitAnyRef
+    def visitRef(self, ctx):
+        self._checkRef(str(ctx.REF()[-1])[1:])
+        if len(ctx.REF()) == 2:
+            ref0 = str(ctx.REF(0))[1:]
+            self._checkRef(ref0)
+            t = self._getType(ref0)
+            # TODO: Add data lookups for areas and regions
+            if t != 'SpotId':
+                self.errors.append(f'Indirect data reference {ctx.getText()} in {self.name} '
+                                   f'requires a SpotId but ^{ref0} is {t}')
+        if ctx.PLACE():
+            pl = str(ctx.PLACE())
+            if pl.count('>') != 2:
+                self.errors.append(f'Indirect data reference {ctx.getText()} in {self.name} '
+                                   f'requires a Spot name')
 
     # Anything that could return a str needs to be visited and return a collection of options
     # plus anything that compares a ref to a str should update that ref
@@ -80,7 +90,7 @@ class ContextVisitor(RulesVisitor):
             return super().visitCmpStr(ctx)
         
         ref = str(ctx.value().ref().REF()[-1])[1:]
-        self._checkRef(ref)
+        self.visit(ctx.value().ref())
         self.values[ref].add(str(ctx.LIT())[1:-1])
 
     # value is SETTING or REF -- TODO: multiple REFs or SETTING+REF with the same enum type
@@ -108,7 +118,7 @@ class ContextVisitor(RulesVisitor):
     def visitPerRefStr(self, ctx: RulesParser.PerRefStrContext):
         if ctx.LIT():
             ref = str(ctx.ref().REF()[-1])[1:]
-            self._checkRef(ref)
+            self.visit(ctx.ref())
             self.values[ref].update(str(s)[1:-1] for s in ctx.LIT())
         return self._getAllStrReturns(ctx)
 
@@ -117,7 +127,7 @@ class ContextVisitor(RulesVisitor):
     
     def visitRefStrInList(self, ctx: RulesParser.RefStrInListContext):
         ref = str(ctx.ref().REF()[-1])[1:]
-        self._checkRef(ref)
+        self.visit(ctx.ref())
         self.values[ref].update(self._getAllLitReturns(ctx))
 
     def visitSet(self, ctx):
@@ -127,7 +137,7 @@ class ContextVisitor(RulesVisitor):
             self.values[ref].update(self.visit(ctx.str_()))
         elif ctx.ref():
             ref2 = str(ctx.ref().REF()[-1])[1:]
-            self._checkRef(ref2)
+            self.visit(ctx.ref())
             self._checkTypes(ref, ref2)
         else:
             self.visitChildren(ctx)

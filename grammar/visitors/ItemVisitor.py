@@ -84,7 +84,7 @@ class ItemVisitor(RulesVisitor):
             self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
-    visitRefEq = visitFuncNum = visitValue = visitOneItem = _count_one
+    visitRefEqSimple = visitFuncNum = visitValue = visitOneItem = _count_one
 
     def visitItemCount(self, ctx):
         it = str(ctx.ITEM())

@@ -66,10 +66,16 @@ class StringVisitor(RulesVisitor):
         num = f'{self.visit(ctx.num())}'
         return f'({self.visit(ctx.value())} & {num}) == {num}'
 
-    def visitRefEq(self, ctx):
+    def visitRefEqSimple(self, ctx):
         if ctx.ITEM():
-            return f'Arg:{str(ctx.REF())[1:]} == Item:{ctx.ITEM()}'
-        return f'Arg:{str(ctx.REF())[1:]} == Setting:{ctx.SETTING()}'
+            return f'Arg:{self.visit(ctx.ref())} {ctx.getChild(1)} Item:{ctx.ITEM()}'
+        return f'Arg:{self.visit(ctx.ref())} {ctx.getChild(1)} Setting:{ctx.SETTING()}'
+
+    def visitRefEqRef(self, ctx):
+        return f'Arg:{self.visit(ctx.ref(0))} {ctx.getChild(1)} Arg:{self.visit(ctx.ref(1))}'
+
+    def visitRefEqInvoke(self, ctx):
+        return f'Arg:{self.visit(ctx.ref())} {ctx.getChild(1)} {self.visit(ctx.invoke())}'
 
     def visitSetting(self, ctx):
         s = f'Setting:{ctx.SETTING()}'
@@ -80,10 +86,18 @@ class StringVisitor(RulesVisitor):
         return s
 
     def visitArgument(self, ctx):
-        arg = f'Arg:{str(ctx.REF())[1:]}'
+        arg = f'Arg:{self.visit(ctx.ref())}'
         if ctx.NOT():
             return f'NOT[ {arg} ]'
         return arg
+
+    def visitRef(self, ctx):
+        ref = str(ctx.REF()[-1])[1:]
+        if len(ctx.REF()) == 2:
+            return f'[Ref:{ref} At Ref:{str(ctx.REF(0))[1:]}]'
+        if ctx.PLACE():
+            return f'[Ref:{ref} At:{str(ctx.PLACE())[1:-1]}]'
+        return ref
 
     def visitItemCount(self, ctx):
         if ctx.INT():
@@ -97,15 +111,15 @@ class StringVisitor(RulesVisitor):
         return f'Item:{str(ctx.LIT())[1:-1].replace(" ", "_")}'
 
     def visitOneArgument(self, ctx):
-        return f'OneArg:{str(ctx.REF())[1:]}'
+        return f'OneArg:{self.visit(ctx.ref())}'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
         if ctx.CONST():
             return f'Const:{ctx.CONST()}'
-        if ctx.REF():
-            return f'Arg:{str(ctx.REF())[1:]}'
+        if ctx.ref():
+            return f'Arg:{self.visit(ctx.ref())}'
         if ctx.SETTING():
             return f'Setting:{ctx.SETTING()}'
         return super().visitBaseNum(ctx)
@@ -116,7 +130,7 @@ class StringVisitor(RulesVisitor):
         return f'Item:{ctx.ITEM()}{{' + '; '.join(f'{i} => {r}' for i,r in zip(cases, results)) + '}'
 
     def visitRefInList(self, ctx):
-        return f'(Arg:{str(ctx.REF())[1:]} IN [{"|".join(map(str, ctx.ITEM()))}])'
+        return f'(Arg:{self.visit(ctx.ref())} IN [{"|".join(map(str, ctx.ITEM()))}])'
 
     def visitItemList(self, ctx):
         els = list(map(str, ctx.FUNC())) + [self.visit(item) for item in ctx.item()]

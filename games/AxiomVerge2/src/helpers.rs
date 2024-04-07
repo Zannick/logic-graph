@@ -1229,6 +1229,64 @@ macro_rules! hobserve__ft_breach {
     }};
 }
 
+/// $can_portal (  )
+/// ^portal == ^position and ^flipside != $default
+#[macro_export]
+macro_rules! helper__can_portal {
+    ($ctx:expr, $world:expr) => {{
+        ($ctx.portal() == $ctx.position() && data::flipside($ctx.position()) != Default::default())
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__can_portal {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut left = {
+                    let r = $ctx.portal();
+                    $edict.insert("^portal", format!("{:?}", r));
+                    (r, vec!["^portal"])
+                };
+                let mut right = {
+                    let r = $ctx.position();
+                    $edict.insert("^position", format!("{:?}", r));
+                    (r, vec!["^position"])
+                };
+                left.1.append(&mut right.1);
+                (left.0 == right.0, left.1)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut left = {
+                        let r = data::flipside($ctx.position());
+                        $edict.insert("^flipside", format!("{:?}", r));
+                        (r, vec!["^flipside"])
+                    };
+                    let mut right = (Default::default(), vec![]);
+                    left.1.append(&mut right.1);
+                    (left.0 != right.0, left.1)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__can_portal {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ({
+            $full_obs.observe_portal();
+            $ctx.portal()
+        } == {
+            $full_obs.observe_position();
+            $ctx.position()
+        } && (data::flipside($ctx.position()) != Default::default()))
+    }};
+}
+
 /// $range1 (  )
 /// Infection_Range_2 or (Infection_Range and ^mode != 'drone')
 #[macro_export]

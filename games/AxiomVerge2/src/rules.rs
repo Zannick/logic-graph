@@ -2978,7 +2978,10 @@ pub fn explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_ma
                     edict.insert("^map_spot", format!("{:?}", r));
                     (r, vec!["^map_spot"])
                 };
-                (get_area(r.0) == AreaId::Menu__Breach_Map, r.1)
+                (
+                    r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Breach_Map,
+                    r.1,
+                )
             });
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -3020,7 +3023,10 @@ pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map
                     edict.insert("^map_spot", format!("{:?}", r));
                     (r, vec!["^map_spot"])
                 };
-                (get_area(r.0) == AreaId::Menu__Kiengir_Map, r.1)
+                (
+                    r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Kiengir_Map,
+                    r.1,
+                )
             });
             left.1.append(&mut right.1);
             (right.0, left.1)

@@ -251,12 +251,30 @@ class RulesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by RulesParser#refEq.
-    def enterRefEq(self, ctx:RulesParser.RefEqContext):
+    # Enter a parse tree produced by RulesParser#RefEqSimple.
+    def enterRefEqSimple(self, ctx:RulesParser.RefEqSimpleContext):
         pass
 
-    # Exit a parse tree produced by RulesParser#refEq.
-    def exitRefEq(self, ctx:RulesParser.RefEqContext):
+    # Exit a parse tree produced by RulesParser#RefEqSimple.
+    def exitRefEqSimple(self, ctx:RulesParser.RefEqSimpleContext):
+        pass
+
+
+    # Enter a parse tree produced by RulesParser#RefEqRef.
+    def enterRefEqRef(self, ctx:RulesParser.RefEqRefContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefEqRef.
+    def exitRefEqRef(self, ctx:RulesParser.RefEqRefContext):
+        pass
+
+
+    # Enter a parse tree produced by RulesParser#RefEqInvoke.
+    def enterRefEqInvoke(self, ctx:RulesParser.RefEqInvokeContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefEqInvoke.
+    def exitRefEqInvoke(self, ctx:RulesParser.RefEqInvokeContext):
         pass
 
 

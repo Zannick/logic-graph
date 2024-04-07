@@ -144,8 +144,18 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RulesParser#refEq.
-    def visitRefEq(self, ctx:RulesParser.RefEqContext):
+    # Visit a parse tree produced by RulesParser#RefEqSimple.
+    def visitRefEqSimple(self, ctx:RulesParser.RefEqSimpleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#RefEqRef.
+    def visitRefEqRef(self, ctx:RulesParser.RefEqRefContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#RefEqInvoke.
+    def visitRefEqInvoke(self, ctx:RulesParser.RefEqInvokeContext):
         return self.visitChildren(ctx)
 
 

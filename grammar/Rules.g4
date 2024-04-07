@@ -10,10 +10,10 @@ boolExpr
     | meta  // a FUNC on an boolExpr
     | switchBool
     | cond
+    | refEq
     | cmp
     | cmpStr
     | flagMatch
-    | refEq
     | itemList
     | item
     | NOT? value
@@ -114,7 +114,16 @@ cmpStr  : value '==' LIT
         ;
 
 flagMatch : value '&' num ;
-refEq : ref '==' ( ITEM | SETTING ) ;
+refEq   : ( ref '==' ( ITEM | SETTING )
+          | ref '!=' ( ITEM | SETTING )
+          )                             # RefEqSimple
+        | ( ref '==' ref
+          | ref '!=' ref
+          )                             # RefEqRef
+        | ( ref '==' invoke
+          | ref '!=' invoke
+          )                             # RefEqInvoke
+        ;
 
 // Specifically where a function is expected to return an integer
 funcNum : FUNC '(' ITEM ')'
