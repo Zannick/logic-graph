@@ -153,3 +153,6 @@
 ! Do Deploy Drone
 * Collect The_Eternal_Arm from Annuna > Filter Teleporter > Northeast Cubby > Tablet
 * Collect Hammond_Auth from Filter > Core > Terminal East > Authorize Hammond
+! Do Recall Drone
+! Do Deploy Drone
+* Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn
