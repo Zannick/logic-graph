@@ -73,3 +73,5 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 
 # TODO: rest of route
 * Collect Destruction_Pogrom from Annuna > Twisty Passages > Top > Tablet
+* Collect The_Eternal_Arm from Annuna > Filter Teleporter > Northeast Cubby > Tablet
+* Collect Hammond_Auth from Filter > Core > Terminal East > Authorize Hammond

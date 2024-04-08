@@ -688,5 +688,10 @@ where
             }
         }
     }
+    if vec.len() > 20 {
+        let excess = vec.len() - 20;
+        vec.truncate(20);
+        vec.push(format!("...and {} more", excess));
+    }
     vec.join("\n")
 }
