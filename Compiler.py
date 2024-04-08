@@ -980,10 +980,19 @@ class GameLogic(object):
         # every exit
         # every warp with base_movement: true
         # every action with a "to" field
+        # every warp/global action with a "to" field to a data value that's a valid spot
         warp_dests = []
+        data_dests = []
+        examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
+                                   self.data_types, self.data_defaults, self.data_values)
         for w in self.warps.values():
             if w.get('base_movement') and w['to'][0] != '^':
                 warp_dests.append((construct_id(w['to']), w['time']))
+            elif w['to'][0] == '^' and w['to'][1:] in self.data_values:
+                data_dests.append((w['to'][1:], w))
+        for act in self.global_actions:
+            if 'to' in act and act['to'][0] == '^' and act['to'][1:] in self.data_values:
+                data_dests.append((act['to'][1:], act))
         for s in self.spots():
             table[(s['id'], s['id'])] = 0
             for ex in s.get('exits', []) + s.get('hybrid', []):
@@ -992,14 +1001,27 @@ class GameLogic(object):
                     raise Exception(f'"time" not defined for exit {ex["fullname"]}')
                 _update(key, float(ex['time']))
             for act in s.get('actions', []):
-                if 'to' in act and not act['to'].startswith('^'):
-                    key = (s['id'], get_exit_target(act))
-                    _update(key, act['time'])
+                if 'to' in act:
+                    if not act['to'].startswith('^'):
+                        key = (s['id'], get_exit_target(act))
+                        _update(key, act['time'])
+                    elif act['to'][1:] in self.data_values:
+                        if dest := self.data_values[act['to'][1:]].get(s['id']):
+                            if dest != 'SpotId::None' and dest != s['fullname']:
+                                key = (s['id'], construct_id(dest))
+                                _update(key, act['time'])
             for w, t in warp_dests:
                 if s['id'] == w:
                     continue
-                key = (s['id'], w)
-                _update(key, t)
+                if 'pr' not in w or examiner.examine(w['pr'].tree, s['id'], w['name']):
+                    key = (s['id'], w)
+                    _update(key, t)
+            for d, info in data_dests:
+                if dest := self.data_values[d].get(s['id']):
+                    if (dest != 'SpotId::None' and dest != s['fullname'] and
+                            ('pr' not in info or examiner.examine(info['pr'].tree, s['id'], info['name']))):
+                        key = (s['id'], construct_id(dest))
+                        _update(key, info['time'])
 
         return table
 
@@ -1473,6 +1495,7 @@ class GameLogic(object):
 
     @cached_property
     def data_values(self):
+        # data name -> spot id -> value
         d = {c: {} for c in self.data_defaults}
         def get_first(datamap, tilenames):
             for tile in tilenames:
@@ -1694,6 +1717,7 @@ class GameLogic(object):
 if __name__ == '__main__':
     cmd = argparse.ArgumentParser()
     cmd.add_argument('game', help='Which game to build the graph for')
+    cmd.add_argument('--noparse', action='store_true')
     args = cmd.parse_args()
 
     gl = GameLogic(args.game)
@@ -1702,10 +1726,13 @@ if __name__ == '__main__':
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
 
-    logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
-                 f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
-                 f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
-                 f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
-                 f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')
-    gl.render()
-    logging.info(f'Render complete.')
+    if not args.noparse:
+        logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
+                    f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
+                    f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
+                    f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
+                    f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')
+        gl.render()
+        logging.info(f'Render complete.')
+    else:
+        logging.info(f'Constructed {gl.game} graph in variable `gl`')

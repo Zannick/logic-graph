@@ -39347,6 +39347,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            SpotId::Menu__Breach_Map__AB_East,
+            100,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39379,6 +39384,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi_Breach__East_Entrance__West,
             SpotId::Amagi_Breach__East_Entrance__Save_Point,
             1315,
+        ),
+        (
+            SpotId::Amagi_Breach__East_Entrance__West,
+            SpotId::Menu__Breach_Map__AB_East,
+            100,
         ),
         (
             SpotId::Amagi_Breach__East_Entrance__West,
@@ -39947,6 +39957,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            100,
+        ),
+        (
+            SpotId::Amagi__Main_Area__Enemy_Side,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40064,6 +40079,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Save_Point,
             SpotId::Amagi__Main_Area__Enemy_Side,
             964,
+        ),
+        (
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            100,
         ),
         (
             SpotId::Amagi__Main_Area__Save_Point,
@@ -40822,6 +40842,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            100,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40887,6 +40912,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            100,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Item,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40902,6 +40932,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            100,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40909,6 +40944,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
             SpotId::Amagi__West_Lake__Stronghold_Item,
             1052,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            100,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
@@ -40924,6 +40964,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Stronghold_Item,
             649,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Menu__Kiengir_Map__Shockwave,
+            100,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
@@ -41372,6 +41417,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Center_Save__East,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            100,
+        ),
+        (
+            SpotId::Annuna__Center_Save__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41392,6 +41442,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Center_Save__Save_Point,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            100,
+        ),
+        (
+            SpotId::Annuna__Center_Save__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41407,6 +41462,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Center_Save__West_Catwalk,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            100,
+        ),
+        (
+            SpotId::Annuna__Center_Save__West_Catwalk,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41419,6 +41479,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Center_Save__West_Floor,
             SpotId::Annuna__Twisty_Passages__East_Floor,
             1350,
+        ),
+        (
+            SpotId::Annuna__Center_Save__West_Floor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            100,
         ),
         (
             SpotId::Annuna__Center_Save__West_Floor,
@@ -42792,6 +42857,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Factory_Entrance__East,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            100,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42807,6 +42877,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Factory_Entrance__Save_Point,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            100,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42819,6 +42894,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Factory_Entrance__West,
             SpotId::Annuna__Sniper_Valley__East,
             1350,
+        ),
+        (
+            SpotId::Annuna__Factory_Entrance__West,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            100,
         ),
         (
             SpotId::Annuna__Factory_Entrance__West,
@@ -43092,6 +43172,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Final_Save__East,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
+        ),
+        (
+            SpotId::Annuna__Final_Save__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43104,6 +43189,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Final_Save__Lower_West,
             SpotId::Annuna__Seals__East_17_Lower,
             1350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Lower_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
         ),
         (
             SpotId::Annuna__Final_Save__Lower_West,
@@ -43127,6 +43217,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Final_Save__Pillar,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43147,6 +43242,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Final_Save__Save_Point,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43159,6 +43259,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Final_Save__Upper_West,
             SpotId::Annuna__Seals__East_17_Upper,
             1350,
+        ),
+        (
+            SpotId::Annuna__Final_Save__Upper_West,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
         ),
         (
             SpotId::Annuna__Final_Save__Upper_West,
@@ -44792,6 +44897,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Upper_Save__East,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            100,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -44807,6 +44917,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Upper_Save__Save_Point,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            100,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -44819,6 +44934,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Upper_Save__West,
             SpotId::Annuna__Upper_Save__Save_Point,
             1578,
+        ),
+        (
+            SpotId::Annuna__Upper_Save__West,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            100,
         ),
         (
             SpotId::Annuna__Upper_Save__West,
@@ -44909,6 +45029,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__East_20,
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             877,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__East_20,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
         ),
         (
             SpotId::Annuna__Vertical_Room__East_20,
@@ -45177,6 +45302,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Middle_Ministair,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_Ministair,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -45262,6 +45392,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -45322,6 +45457,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -45357,6 +45497,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point_Left,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -45389,6 +45534,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
             SpotId::Annuna__Vertical_Room__Save_Point,
             701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Save_Point_Right,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
         ),
         (
             SpotId::Annuna__Vertical_Room__Save_Point_Right,
@@ -45499,6 +45649,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__West_20,
             SpotId::Annuna__Vertical_Room__Save_Point_Left,
             877,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_20,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            100,
         ),
         (
             SpotId::Annuna__Vertical_Room__West_20,
@@ -46422,6 +46577,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Save_Point,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            100,
+        ),
+        (
+            SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -47167,6 +47327,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Middle_Platform,
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            100,
+        ),
+        (
+            SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -47227,6 +47392,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Pit_Left,
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            100,
+        ),
+        (
+            SpotId::Ebih__Drone_Room__Pit_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -47244,6 +47414,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Portal_Exit,
             300000,
+        ),
+        (
+            SpotId::Ebih__Drone_Room__Portal,
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            100,
         ),
         (
             SpotId::Ebih__Drone_Room__Portal,
@@ -47334,6 +47509,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Pit_Left,
             526,
+        ),
+        (
+            SpotId::Ebih__Drone_Room__West_6,
+            SpotId::Menu__Kiengir_Map__Remote_Drone,
+            100,
         ),
         (
             SpotId::Ebih__Drone_Room__West_6,
@@ -47627,6 +47807,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Chute,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            100,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -47757,6 +47942,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__East_10,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            100,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -47824,6 +48014,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__East_7,
             SpotId::Ebih__Waterfall__West_7,
             1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_7,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            100,
         ),
         (
             SpotId::Ebih__Ebih_West__East_7,
@@ -48012,6 +48207,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            100,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -48029,6 +48229,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Lower_Save,
             SpotId::Ebih__Ebih_West__West_13,
             1578,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            100,
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Save,
@@ -48062,6 +48267,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            100,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -48089,6 +48299,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__East_9,
             2400,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Mid_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            100,
         ),
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
@@ -48207,6 +48422,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            100,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -48249,6 +48469,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__West_13,
             SpotId::Giguna__Wasteland__East_13,
             1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_13,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            100,
         ),
         (
             SpotId::Ebih__Ebih_West__West_13,
@@ -49312,6 +49537,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Alcove,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Alcove,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -49329,6 +49559,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             600,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Alcove_Left,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Left,
@@ -49692,6 +49927,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Under_Waterfall,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Under_Waterfall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -49742,6 +49982,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -49769,6 +50014,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             1754,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -49814,6 +50064,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             1754,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            100,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -51113,7 +51368,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__Peak__Portal,
             SpotId::Giguna__Ruins_Top__Save_Point,
-            3600,
+            3000,
         ),
         (
             SpotId::Giguna_Breach__Peak__Portal,
@@ -51124,6 +51379,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna_Breach__Peak__East_Passage,
             3421,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna__Ruins_Top__Portal,
+            3000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            100,
         ),
         (
             SpotId::Giguna_Breach__Peak__Save_Point,
@@ -51177,6 +51442,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna__Clouds__Cache,
+            3000,
+        ),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -51184,6 +51454,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
             SpotId::Giguna_Breach__Pink_Clouds__Corner,
             1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna__Clouds__Platform_Stop,
+            3000,
         ),
         (
             SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
@@ -51257,6 +51532,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            100,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -51274,6 +51554,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            100,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
@@ -51319,6 +51604,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__Save_Point,
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Menu__Breach_Map__GB_SW_Save,
+            100,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -51829,6 +52119,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__West_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Cache,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            3600,
         ),
         (
             SpotId::Giguna__Clouds__Cache,
@@ -53647,6 +53942,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Save_Point,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            100,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -53669,6 +53969,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__West_16,
             526,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            100,
         ),
         (
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
@@ -53802,6 +54107,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Table,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            100,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Table,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -53859,6 +54169,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Helipad__East_16,
             1350,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_16,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            100,
         ),
         (
             SpotId::Giguna__Giguna_Base__West_16,
@@ -53972,6 +54287,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            100,
+        ),
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -53999,6 +54319,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             1754,
+        ),
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            100,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
@@ -54057,6 +54382,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            100,
+        ),
+        (
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -54097,6 +54427,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            100,
+        ),
+        (
+            SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -54134,6 +54469,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__West_10,
             SpotId::Giguna__Giguna_Northeast__Step,
             877,
+        ),
+        (
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            100,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__West_10,
@@ -55597,8 +55937,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna_Breach__Peak__Portal,
+            3600,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Save_Point,
             SpotId::Giguna__Ruins_Top__Switch,
             600,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
@@ -55642,6 +55992,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            100,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -55659,6 +56014,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             1578,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
@@ -55684,6 +56044,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
             3800,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -55752,6 +56117,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Pillar,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            100,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -55784,6 +56154,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__East_9,
             SpotId::Giguna__Ruins_West__Save_Point,
             1578,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__East_9,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_West__East_9,
@@ -55822,6 +56197,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__Nook,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            100,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Nook,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -55839,6 +56219,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__Platform,
             SpotId::Giguna__Ruins_West__Save_Point,
             549,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Platform,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_West__Platform,
@@ -55874,6 +56259,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__Save_Point,
             SpotId::Giguna__Ruins_West__Platform,
             1200,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Save_Point,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            100,
         ),
         (
             SpotId::Giguna__Ruins_West__Save_Point,
@@ -57427,6 +57817,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Guarded_Corridor__East,
+            SpotId::Menu__Breach_Map__GlB_Center,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57442,6 +57837,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
+            SpotId::Menu__Breach_Map__GlB_Center,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57454,6 +57854,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__West,
             11000,
+        ),
+        (
+            SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            SpotId::Menu__Breach_Map__GlB_Center,
+            100,
         ),
         (
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
@@ -57637,6 +58042,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Menu__Breach_Map__GlB_Arena,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57652,6 +58062,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Save_and_Exit__West,
+            SpotId::Menu__Breach_Map__GlB_Arena,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57664,6 +58079,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
             SpotId::Glacier_Breach__South_Save__Save_Point,
             964,
+        ),
+        (
+            SpotId::Glacier_Breach__South_Save__Brick_Ledge,
+            SpotId::Menu__Breach_Map__GlB_South,
+            100,
         ),
         (
             SpotId::Glacier_Breach__South_Save__Brick_Ledge,
@@ -57702,6 +58122,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__South_Save__Save_Point,
+            SpotId::Menu__Breach_Map__GlB_South,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__South_Save__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57714,6 +58139,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
             1315,
+        ),
+        (
+            SpotId::Glacier_Breach__South_Save__West,
+            SpotId::Menu__Breach_Map__GlB_South,
+            100,
         ),
         (
             SpotId::Glacier_Breach__South_Save__West,
@@ -57767,6 +58197,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__West_Save__East_12,
+            SpotId::Menu__Breach_Map__GlB_West,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57779,6 +58214,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__West_Save__Save_Point,
             SpotId::Glacier_Breach__West_Save__West_Nub,
             1200,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__Save_Point,
+            SpotId::Menu__Breach_Map__GlB_West,
+            100,
         ),
         (
             SpotId::Glacier_Breach__West_Save__Save_Point,
@@ -57812,6 +58252,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__West_Save__West_Ledge,
+            SpotId::Menu__Breach_Map__GlB_West,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -57829,6 +58274,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__West_Save__West_Nub,
             SpotId::Glacier_Breach__West_Save__West_Ledge,
             1200,
+        ),
+        (
+            SpotId::Glacier_Breach__West_Save__West_Nub,
+            SpotId::Menu__Breach_Map__GlB_West,
+            100,
         ),
         (
             SpotId::Glacier_Breach__West_Save__West_Nub,
@@ -58412,6 +58862,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Crystals__Middle_Ledge,
+            SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Crystals__Middle_Ledge,
             SpotId::Glacier__Crystals__Grate_Left,
             1403,
         ),
@@ -58457,6 +58912,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Crystals__Portal_Cage,
+            SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Cage,
             SpotId::Glacier__Crystals__East,
             600,
         ),
@@ -58469,6 +58929,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Crystals__Portal_Cage,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Amagi_Breach__East_Entrance__Save_Point,
+            3600,
         ),
         (
             SpotId::Glacier__Crystals__Portal_Stand,
@@ -59662,6 +60127,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__Save_Point,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            100,
+        ),
+        (
+            SpotId::Glacier__Revival__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -59674,6 +60144,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Revival__West_8,
             SpotId::Glacier__Revival__Save_Point,
             1578,
+        ),
+        (
+            SpotId::Glacier__Revival__West_8,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            100,
         ),
         (
             SpotId::Glacier__Revival__West_8,
@@ -60978,7 +61453,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
             SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
-            3600,
+            3000,
         ),
         (
             SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand,
@@ -61307,6 +61782,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Gauntlet__East_22,
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            100,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__East_22,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61362,6 +61842,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            100,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61392,6 +61877,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            100,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61404,6 +61894,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Irikar_Breach__Gauntlet__Save_Point,
             SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
             850,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Irikar__Hub__Portal_Stand,
+            3000,
+        ),
+        (
+            SpotId::Irikar_Breach__Gauntlet__Save_Point,
+            SpotId::Menu__Breach_Map__IB_Gauntlet,
+            100,
         ),
         (
             SpotId::Irikar_Breach__Gauntlet__Save_Point,
@@ -61542,6 +62042,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Irikar__Sight_Room__Portal,
+            3000,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            100,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61557,6 +62067,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar_Breach__Save_Room__Upper_Area,
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            100,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__Upper_Area,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61569,6 +62084,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Irikar_Breach__Save_Room__West,
             SpotId::Irikar_Breach__Save_Room__Save_Point,
             1491,
+        ),
+        (
+            SpotId::Irikar_Breach__Save_Room__West,
+            SpotId::Menu__Breach_Map__IB_Save_Room,
+            100,
         ),
         (
             SpotId::Irikar_Breach__Save_Room__West,
@@ -62532,6 +63052,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Bowl_Hole,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            100,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Hole,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62562,6 +63087,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            100,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62582,6 +63112,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            100,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Middle_Platform_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62594,6 +63129,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Irikar__Hub__Bowl_Platform_3,
             SpotId::Irikar__Hub__Save_Point,
             701,
+        ),
+        (
+            SpotId::Irikar__Hub__Bowl_Platform_3,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            100,
         ),
         (
             SpotId::Irikar__Hub__Bowl_Platform_3,
@@ -63032,6 +63572,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Irikar__Hub__Save_Point,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            100,
+        ),
+        (
+            SpotId::Irikar__Hub__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -63324,6 +63869,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Irikar__Sight_Room__Portal,
             SpotId::Irikar__Sight_Room__Item_Pedestal,
             964,
+        ),
+        (
+            SpotId::Irikar__Sight_Room__Portal,
+            SpotId::Menu__Kiengir_Map__Breach_Sight,
+            100,
         ),
         (
             SpotId::Irikar__Sight_Room__Portal,
@@ -68792,6 +69342,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Block_West,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            100,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Block_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -68897,6 +69452,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Save_Point,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            100,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -68972,6 +69532,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            SpotId::Menu__Kiengir_Map__Anuman,
+            100,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -69014,6 +69579,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__Annuna_Corridor__West_25,
             SpotId::Uhrum__Waterfalls__East_25,
             1350,
+        ),
+        (
+            SpotId::Uhrum__Annuna_Corridor__West_26,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            100,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__West_26,
@@ -69062,6 +69632,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Save_Room__East,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            100,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -69077,6 +69652,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__Save_Room__Save_Point,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            100,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -69089,6 +69669,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__Save_Room__Save_Point,
             SpotId::Uhrum__Save_Room__West,
             1578,
+        ),
+        (
+            SpotId::Uhrum__Save_Room__West,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            100,
         ),
         (
             SpotId::Uhrum__Save_Room__West,
@@ -70807,6 +71392,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Uhrum__West_Entrance__Sand,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            100,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Sand,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -70819,6 +71409,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__West_Entrance__Sand,
             SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
             1929,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Save_Point,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            100,
         ),
         (
             SpotId::Uhrum__West_Entrance__Save_Point,
@@ -70869,6 +71464,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Uhrum__West_Entrance__South_Platform,
             SpotId::Uhrum__West_Entrance__West_27,
             1403,
+        ),
+        (
+            SpotId::Uhrum__West_Entrance__Southeast_Tree,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            100,
         ),
         (
             SpotId::Uhrum__West_Entrance__Southeast_Tree,

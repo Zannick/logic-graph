@@ -71,11 +71,11 @@ pub fn access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
-pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     ((((world.allow_warps
         && (match get_region(ctx.position()) {
             RegionId::Menu => false,
@@ -83,7 +83,7 @@ pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___m
         }))
         && helper__ft_main!(ctx, world))
         && helper__can_recall!(ctx, world))
-        && (data::map_spot(ctx.position()) != Default::default()))
+        && data::map_spot(ctx.position()) != Default::default())
 }
 pub fn access_allow_warps_and_realm_eq_breach(ctx: &Context, world: &graph::World) -> bool {
     // allow_warps and ^realm == 'breach'
@@ -1948,6 +1948,14 @@ pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &graph::World
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
 }
+pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    ((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
+        && data::flipside(ctx.position()) != Default::default())
+}
 pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Sniper_Valley_Rock_2))
@@ -2118,13 +2126,13 @@ pub fn access_ranged_speed_2(ctx: &Context, world: &graph::World) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
 }
-pub fn access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
+pub fn access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
+    // ^realm == 'breach' and Exit_Breach and ^flipside != $default
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
-        && (data::flipside(ctx.position()) != Default::default()))
+        && data::flipside(ctx.position()) != Default::default())
 }
 pub fn access_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
     // $remote_boomerang
@@ -3033,12 +3041,12 @@ pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map
         }
     }
 }
-pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     {
         let mut left = {
             let mut left = {
@@ -3095,18 +3103,16 @@ pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___
         if !left.0 {
             left
         } else {
-            let mut right = ({
-                let mut r = {
+            let mut right = {
+                let mut left = {
                     let r = data::map_spot(ctx.position());
                     edict.insert("^map_spot", format!("{:?}", r));
                     (r, vec!["^map_spot"])
                 };
-                let res = r.0;
-                let mut f = (Default::default(), vec![]);
-                edict.insert("$default", format!("{}", f.0));
-                r.1.append(&mut f.1);
-                (res != f.0, r.1)
-            });
+                let mut right = (Default::default(), vec![]);
+                left.1.append(&mut right.1);
+                (left.0 != right.0, left.1)
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -9903,6 +9909,65 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
         }
     }
 }
+pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    {
+        let mut left = {
+            let mut left = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut left = {
+                        let r = ctx.portal();
+                        edict.insert("^portal", format!("{:?}", r));
+                        (r, vec!["^portal"])
+                    };
+                    let mut right = {
+                        let r = ctx.position();
+                        edict.insert("^position", format!("{:?}", r));
+                        (r, vec!["^position"])
+                    };
+                    left.1.append(&mut right.1);
+                    (left.0 == right.0, left.1)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut left = {
+                    let r = data::flipside(ctx.position());
+                    edict.insert("^flipside", format!("{:?}", r));
+                    (r, vec!["^flipside"])
+                };
+                let mut right = (Default::default(), vec![]);
+                left.1.append(&mut right.1);
+                (left.0 != right.0, left.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
     world: &graph::World,
@@ -10704,12 +10769,12 @@ pub fn explain_ranged_speed_2(
         (h, vec!["Ranged_Speed_2"])
     }
 }
-pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
+pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
+    // ^realm == 'breach' and Exit_Breach and ^flipside != $default
     {
         let mut left = {
             let mut left = {
@@ -10739,18 +10804,16 @@ pub fn explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default
         if !left.0 {
             left
         } else {
-            let mut right = ({
-                let mut r = {
+            let mut right = {
+                let mut left = {
                     let r = data::flipside(ctx.position());
                     edict.insert("^flipside", format!("{:?}", r));
                     (r, vec!["^flipside"])
                 };
-                let res = r.0;
-                let mut f = (Default::default(), vec![]);
-                edict.insert("$default", format!("{}", f.0));
-                r.1.append(&mut f.1);
-                (res != f.0, r.1)
-            });
+                let mut right = (Default::default(), vec![]);
+                left.1.append(&mut right.1);
+                (left.0 != right.0, left.1)
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -11423,12 +11486,12 @@ pub fn observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kien
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
-pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(
+pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     ((((world.allow_warps
         && (match get_region(ctx.position()) {
             RegionId::Menu => false,
@@ -15131,6 +15194,26 @@ pub fn observe_access_mode_eq_drone_and_mist_upgrade(
         ctx.has(Item::Mist_Upgrade)
     }))
 }
+pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    (({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_portal();
+        ctx.portal()
+    } == {
+        full_obs.observe_position();
+        ctx.position()
+    })) && (data::flipside(ctx.position()) != Default::default()))
+}
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
     world: &graph::World,
@@ -15526,12 +15609,12 @@ pub fn observe_access_ranged_speed_2(
         ctx.has(Item::Ranged_Speed_2)
     }
 }
-pub fn observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
+pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
+    // ^realm == 'breach' and Exit_Breach and ^flipside != $default
     (({
         let v = data::realm(ctx.position());
         v == enums::Realm::Breach

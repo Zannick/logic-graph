@@ -75,6 +75,12 @@ def place_to_names(pl: str) -> list[str]:
     names = pl.split('>')
     return [n.strip() for n in names]
 
+def get_area(pl: str) -> str:
+    return ' > '.join(place_to_names(pl)[:2])
+
+def get_region(pl: str) -> str:
+    return place_to_names(pl)[0]
+
 def construct_place_id(pl: str) -> str:
     pt = getPlaceType(pl)
     if pt == 'SpotId':

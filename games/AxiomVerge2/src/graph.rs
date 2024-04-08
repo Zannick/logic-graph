@@ -9368,7 +9368,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Indra => rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world),
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_can_deploy(ctx, world),
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world),
-            ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world),
+            ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_can_deploy(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_activate(ctx, world),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::access_mode_eq_drone_and_breach_sight(ctx, world),
@@ -9464,7 +9464,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Indra => rules::observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, full_obs),
             ActionId::Global__Deploy_Drone => rules::observe_access_not_within_menu_and_can_deploy(ctx, world, full_obs),
             ActionId::Global__Recall_Drone => rules::observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(ctx, world, full_obs),
-            ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, full_obs),
+            ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_activate(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::observe_access_mode_eq_drone_and_breach_sight(ctx, world, full_obs),
@@ -10343,7 +10343,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Global__Recall_Fast_Travel => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and___map_spot_not_within_default(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "^map_spot"));
@@ -11187,7 +11187,7 @@ impl world::Accessible for Warp {
                 WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach(ctx, world),
                 WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
-                    rules::access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(
+                    rules::access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
                         ctx, world,
                     )
                 }
@@ -11208,6 +11208,11 @@ impl world::Accessible for Warp {
                     )
                 }
                 WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
+                WarpId::Portal => {
+                    rules::access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+                        ctx, world,
+                    )
+                }
             }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
@@ -11215,12 +11220,13 @@ impl world::Accessible for Warp {
         match self.id {
             WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach(ctx, world, full_obs),
             WarpId::EarthSave => rules::observe_access_allow_warps_and_within_antarctica(ctx, world, full_obs),
-            WarpId::ExitBreach => rules::observe_access_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(ctx, world, full_obs),
+            WarpId::ExitBreach => rules::observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(ctx, world, full_obs),
             WarpId::ExitMenu => rules::observe_access_within_menu_gt_upgrade_menu(ctx, world, full_obs),
             WarpId::FastTravelBreach => rules::observe_access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world, full_obs),
             WarpId::FastTravelKiengir => rules::observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, full_obs),
             WarpId::MainSave => rules::observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
             WarpId::Menu => rules::observe_access_not_within_menu_and_flasks_gt_0(ctx, world, full_obs),
+            WarpId::Portal => rules::observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -11272,7 +11278,10 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::ExitBreach => {
-                let (ret, mut tags) = rules::explain_realm_eq_breach_and_exit_breach_and___flipside_not_within_default(ctx, world, edict);
+                let (ret, mut tags) =
+                    rules::explain_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
+                        ctx, world, edict,
+                    );
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert(
@@ -11338,6 +11347,21 @@ impl world::Accessible for Warp {
                 }
                 (ret, tags)
             }
+            WarpId::Portal => {
+                let (ret, mut tags) =
+                    rules::explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+                        ctx, world, edict,
+                    );
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "data::flipside(ctx.position())"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             _ => (true, vec![]),
         }
     }
@@ -11360,6 +11384,7 @@ impl world::Warp for Warp {
                 WarpId::FastTravelKiengir => data::map_spot(ctx.position()),
                 WarpId::MainSave => ctx.save(),
                 WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
+                WarpId::Portal => data::flipside(ctx.position()),
             }
         } else {
             self.dest
@@ -11382,6 +11407,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelBreach => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelKiengir => rules::action_refill_energy(ctx, world),
             WarpId::MainSave => rules::action_refill_energy(ctx, world),
+            WarpId::Portal => rules::action_breach_portal_save_update(ctx, world),
             _ => (),
         }
     }
@@ -11395,6 +11421,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelKiengir => false,
             WarpId::MainSave => true,
             WarpId::Menu => false,
+            WarpId::Portal => false,
         }
     }
     fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
@@ -11420,6 +11447,9 @@ impl world::Warp for Warp {
             }
             WarpId::Menu => {
                 rules::observe_action_last_set_position(ctx, world, full_obs);
+            }
+            WarpId::Portal => {
+                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
             }
         }
     }
@@ -52013,6 +52043,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             id: WarpId::Menu,
             dest: SpotId::None,
             time: 1000,
+            price: Currency::Free,
+        },
+        WarpId::Portal => Warp {
+            id: WarpId::Portal,
+            dest: SpotId::None,
+            time: 3600,
             price: Currency::Free,
         },
     }

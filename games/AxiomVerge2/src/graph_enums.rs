@@ -17068,6 +17068,7 @@ pub enum WarpId {
     FastTravelKiengir,
     MainSave,
     Menu,
+    Portal,
 }
 impl fmt::Display for WarpId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -17080,6 +17081,7 @@ impl fmt::Display for WarpId {
             WarpId::FastTravelKiengir => write!(f, "{}", "FastTravelKiengir"),
             WarpId::MainSave => write!(f, "{}", "MainSave"),
             WarpId::Menu => write!(f, "{}", "Menu"),
+            WarpId::Portal => write!(f, "{}", "Portal"),
         }
     }
 }
@@ -17097,6 +17099,7 @@ impl std::str::FromStr for WarpId {
             "FastTravelKiengir" => Ok(WarpId::FastTravelKiengir),
             "MainSave" => Ok(WarpId::MainSave),
             "Menu" => Ok(WarpId::Menu),
+            "Portal" => Ok(WarpId::Portal),
             _ => Err(format!("Could not recognize as a WarpId: {}", s)),
         }
     }

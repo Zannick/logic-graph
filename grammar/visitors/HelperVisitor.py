@@ -1,6 +1,6 @@
 import logging
 
-from Utils import BUILTINS, PLACE_TYPES, config_type, getPlaceType
+from Utils import BUILTINS, PLACE_TYPES, config_type
 
 from grammar import RulesParser, RulesVisitor
 

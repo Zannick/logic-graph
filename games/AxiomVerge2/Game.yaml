@@ -186,7 +186,7 @@ warps:
     after: ^last = $default
   exit_breach:
     time: 3
-    req: ^realm == 'breach' and Exit_Breach and (^flipside NOT WITHIN $default)
+    req: ^realm == 'breach' and Exit_Breach and ^flipside != $default
     to: ^flipside
     after: $clear_breach_save
     # Instead of making this base movement, anywhere it's strictly required needs a real Exit
@@ -205,6 +205,12 @@ warps:
     req: allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
     to: ^map_spot
     after: $refill_energy
+  portal:
+    req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    to: ^flipside
+    after: $breach_portal_save_update
+    time: 3.6
+    tags: [portal]
 
 actions:
   - name: Recall Drone
@@ -215,7 +221,7 @@ actions:
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
   - name: Recall Fast Travel
-    req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot NOT WITHIN $default)
+    req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     do: ^mode = 'Indra'; ^last = ^indra
     to: ^map_spot  # Starts map movement in a different place
     after: ^indra = $default; $refill_energy
@@ -265,7 +271,6 @@ helpers:
 
   $ft_main: Fast_Travel and ^realm == 'main'
   $ft_breach: Fast_Travel and ^realm == 'breach'
-  $can_portal: ^portal == ^position and ^flipside != $default
 
   # shockwave range: ~.2 in width (.35 height)
   # boomerang range: ~.325 in width? .25 in .5s, .325 in ~.8s
@@ -289,7 +294,7 @@ helpers:
   $infinite_climb: Anuman and Wall_Climb and Drone_Hover
 
   # TODO: this is a temporary hack around the attract issue #131
-  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
+  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
