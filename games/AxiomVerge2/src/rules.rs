@@ -85,9 +85,13 @@ pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map
         && helper__can_recall!(ctx, world))
         && data::map_spot(ctx.position()) != Default::default())
 }
-pub fn access_allow_warps_and_realm_eq_breach(ctx: &Context, world: &graph::World) -> bool {
-    // allow_warps and ^realm == 'breach'
-    (world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
+pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default
+    ((world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
+        && ctx.breach_save() != Default::default())
 }
 pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
@@ -3118,32 +3122,50 @@ pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_ma
         }
     }
 }
-pub fn explain_allow_warps_and_realm_eq_breach(
+pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and ^realm == 'breach'
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default
     {
         let mut left = {
-            let s = world.allow_warps;
-            edict.insert("allow_warps", format!("{}", s));
-            (s, vec!["allow_warps"])
+            let mut left = {
+                let s = world.allow_warps;
+                edict.insert("allow_warps", format!("{}", s));
+                (s, vec!["allow_warps"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut refs = vec!["^realm"];
+                    let mut left = {
+                        let r = data::realm(ctx.position());
+                        edict.insert("^realm", format!("{:?}", r));
+                        (r, vec!["^realm"])
+                    };
+                    let right = enums::Realm::Breach;
+                    edict.insert("^realm", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
         };
         if !left.0 {
             left
         } else {
             let mut right = {
-                let mut refs = vec!["^realm"];
                 let mut left = {
-                    let r = data::realm(ctx.position());
-                    edict.insert("^realm", format!("{:?}", r));
-                    (r, vec!["^realm"])
+                    let r = ctx.breach_save();
+                    edict.insert("^breach_save", format!("{:?}", r));
+                    (r, vec!["^breach_save"])
                 };
-                let right = enums::Realm::Breach;
-                edict.insert("^realm", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                let mut right = (Default::default(), vec![]);
+                left.1.append(&mut right.1);
+                (left.0 != right.0, left.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -11501,17 +11523,21 @@ pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall
         && (hobserve__can_recall!(ctx, world, full_obs)))
         && (data::map_spot(ctx.position()) != Default::default()))
 }
-pub fn observe_access_allow_warps_and_realm_eq_breach(
+pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and ^realm == 'breach'
-    (world.allow_warps
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default
+    ((world.allow_warps
         && ({
             let v = data::realm(ctx.position());
             v == enums::Realm::Breach
         }))
+        && ({
+            full_obs.observe_breach_save();
+            ctx.breach_save()
+        } != Default::default()))
 }
 pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,

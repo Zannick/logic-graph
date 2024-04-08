@@ -11184,7 +11184,11 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach(ctx, world),
+                WarpId::BreachSave => {
+                    rules::access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+                        ctx, world,
+                    )
+                }
                 WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
                 WarpId::ExitBreach => {
                     rules::access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
@@ -11218,7 +11222,7 @@ impl world::Accessible for Warp {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach(ctx, world, full_obs),
+            WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(ctx, world, full_obs),
             WarpId::EarthSave => rules::observe_access_allow_warps_and_within_antarctica(ctx, world, full_obs),
             WarpId::ExitBreach => rules::observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(ctx, world, full_obs),
             WarpId::ExitMenu => rules::observe_access_within_menu_gt_upgrade_menu(ctx, world, full_obs),
@@ -11259,7 +11263,9 @@ impl world::Accessible for Warp {
         match self.id {
             WarpId::BreachSave => {
                 let (ret, mut tags) =
-                    rules::explain_allow_warps_and_realm_eq_breach(ctx, world, edict);
+                    rules::explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+                        ctx, world, edict,
+                    );
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "ctx.breach_save()"));

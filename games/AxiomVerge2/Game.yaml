@@ -169,7 +169,7 @@ warps:
         add: 2.5
   breach_save:
     time: 10.5
-    req: allow_warps and ^realm == 'breach'
+    req: allow_warps and ^realm == 'breach' and ^breach_save != $default
     to: ^breach_save
     after: $refill_energy
     loads: true
