@@ -1,6 +1,5 @@
 use crate::access::*;
 use crate::context::*;
-use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::trie_minimize;
@@ -263,61 +262,6 @@ where
     L: Location<Context = T>,
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
-    fn find_greedy_win(
-        world: &W,
-        startctx: &ContextWrapper<T>,
-        others: &[ContextWrapper<T>],
-    ) -> ContextWrapper<T> {
-        let start = Instant::now();
-        if !others.is_empty() {
-            let mut vec = vec![startctx];
-            vec.extend(others.iter());
-            let others: Vec<_> = vec.into_iter().enumerate().collect();
-            if let Some((oi, wonctx)) = others.into_par_iter().find_map_any(|(oi, octx)| {
-                greedy_search(world, octx, u32::MAX, 9)
-                    .ok()
-                    .map(|gr| (oi, gr))
-            }) {
-                log::info!(
-                    "Finished greedy search in {:?} with a result of {}ms, {}",
-                    start.elapsed(),
-                    wonctx.elapsed(),
-                    if oi > 0 {
-                        format!("on partial route #{}", oi)
-                    } else {
-                        String::from("from scratch")
-                    }
-                );
-                wonctx
-            } else {
-                panic!(
-                    "Found no greedy solution from routes or from scratch after {:?}!",
-                    start.elapsed()
-                );
-            }
-        } else {
-            match greedy_search(world, startctx, u32::MAX, 9) {
-                Ok(wonctx) => {
-                    log::info!(
-                        "Finished greedy search in {:?} with a result of {}ms",
-                        start.elapsed(),
-                        wonctx.elapsed()
-                    );
-                    wonctx
-                }
-                Err(ctx) => {
-                    panic!(
-                        "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}\nMissing: {:?}",
-                        ctx.elapsed(),
-                        history_summary::<T, _>(ctx.recent_history().iter().copied()),
-                        ctx.get(),
-                        world.items_needed(ctx.get())
-                    );
-                }
-            }
-        }
-    }
-
     pub fn new<P>(
         world: &'a W,
         mut ctx: T,
@@ -363,54 +307,56 @@ where
             );
         } else if !others.is_empty() {
             log::info!(
-                "Provided {} non-winning routes, performing greedy search...",
+                "Provided {} non-winning routes...",
                 others.len()
             );
         } else {
-            log::info!("No routes provided, performing greedy search...");
+            log::info!("No routes provided...");
         }
-        let wonctx = wins
-            .pop()
-            .unwrap_or_else(|| Self::find_greedy_win(world, &startctx, &others));
 
-        let max_time = wonctx.elapsed();
-        let sol = wonctx.to_solution();
-        if solutions.insert_solution(sol.clone()).accepted() {
-            record_observations(
-                startctx.get(),
-                world,
-                sol,
-                1,
-                Some(&progress_locations),
-                &solve_trie,
-            );
-        }
-        for w in &wins {
-            let sol = w.to_solution();
+        let initial_max_time = if let Some(wonctx) = wins.last() {
+            let max_time = wonctx.elapsed();
+            let sol = wonctx.to_solution();
             if solutions.insert_solution(sol.clone()).accepted() {
                 record_observations(
                     startctx.get(),
                     world,
-                    sol.clone(),
+                    sol,
                     1,
                     Some(&progress_locations),
                     &solve_trie,
                 );
             }
-            if let Some(better) = trie_minimize(world, startctx.get(), sol, &solve_trie) {
-                let solution = better.to_solution();
-                if solutions.insert_solution(solution.clone()).accepted() {
+            for w in &wins {
+                let sol = w.to_solution();
+                if solutions.insert_solution(sol.clone()).accepted() {
                     record_observations(
                         startctx.get(),
                         world,
-                        solution,
+                        sol.clone(),
                         1,
                         Some(&progress_locations),
                         &solve_trie,
                     );
                 }
+                if let Some(better) = trie_minimize(world, startctx.get(), sol, &solve_trie) {
+                    let solution = better.to_solution();
+                    if solutions.insert_solution(solution.clone()).accepted() {
+                        record_observations(
+                            startctx.get(),
+                            world,
+                            solution,
+                            1,
+                            Some(&progress_locations),
+                            &solve_trie,
+                        );
+                    }
+                }
             }
-        }
+            max_time + max_time / 128
+        } else {
+            u32::MAX
+        };
 
         let solutions = Arc::new(Mutex::new(solutions));
 
@@ -418,7 +364,7 @@ where
             db_path,
             world,
             &startctx,
-            max_time + max_time / 128,
+            initial_max_time,
             2_097_152,
             262_144,
             524_288,
@@ -446,8 +392,6 @@ where
             organic_level: 0.into(),
             progress_locations,
         };
-        s.recreate_store(&s.startctx, wonctx.recent_history(), SearchMode::Start)
-            .unwrap();
         for w in wins {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
                 .unwrap();
