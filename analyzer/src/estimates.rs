@@ -11,6 +11,8 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::time::Instant;
 
+pub const UNREASONABLE_TIME: u32 = 1 << 30;
+
 // What we basically need is a helper that contains the necessary cache elements
 // for scoring, that the DB can fall back to. Probably better than bloating the
 // DB struct and functionality.
@@ -236,7 +238,7 @@ where
                 cost + warp_cost
             } else {
                 // A sufficiently large number.
-                1 << 30
+                UNREASONABLE_TIME.into()
             };
             {
                 let mut locked_map = self.known_costs.lock().unwrap();

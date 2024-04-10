@@ -1,5 +1,6 @@
 use crate::access::*;
 use crate::context::*;
+use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::trie_minimize;
@@ -307,11 +308,11 @@ where
             );
         } else if !others.is_empty() {
             log::info!(
-                "Provided {} non-winning routes...",
+                "Provided {} non-winning routes.",
                 others.len()
             );
         } else {
-            log::info!("No routes provided...");
+            log::info!("No routes provided, starting from scratch.");
         }
 
         let initial_max_time = if let Some(wonctx) = wins.last() {
@@ -355,7 +356,7 @@ where
             }
             max_time + max_time / 128
         } else {
-            u32::MAX
+            estimates::UNREASONABLE_TIME
         };
 
         let solutions = Arc::new(Mutex::new(solutions));
