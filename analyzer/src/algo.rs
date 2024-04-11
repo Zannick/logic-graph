@@ -252,6 +252,7 @@ where
     solves_since_clean: AtomicUsize,
     last_solve: AtomicUsize,
     organic_solution: AtomicBool,
+    any_solution: AtomicBool,
     organic_level: AtomicUsize,
     progress_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
 }
@@ -307,10 +308,7 @@ where
                 wins.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
             );
         } else if !others.is_empty() {
-            log::info!(
-                "Provided {} non-winning routes.",
-                others.len()
-            );
+            log::info!("Provided {} non-winning routes.", others.len());
         } else {
             log::info!("No routes provided, starting from scratch.");
         }
@@ -390,6 +388,7 @@ where
             solves_since_clean: 0.into(),
             last_solve: 0.into(),
             organic_solution: false.into(),
+            any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
             progress_locations,
         };
@@ -456,6 +455,7 @@ where
         if !matches!(mode, SearchMode::Similar | SearchMode::Minimized) {
             self.organic_solution.store(true, Ordering::Release);
         }
+        self.any_solution.store(true, Ordering::Release);
 
         let mut old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
@@ -591,15 +591,19 @@ where
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
-        match iters % 8 {
-            0 => SearchMode::SomeProgress((iters / 8) % 32),
-            1 => SearchMode::MaxProgress(2),
-            2 => SearchMode::LocalMinima,
-            3 => SearchMode::SomeProgress(5),
-            4 => SearchMode::HalfProgress,
-            5 => SearchMode::Mode(4),
+        if !self.any_solution.load(Ordering::Acquire) {
+            SearchMode::MaxProgress(4)
+        } else {
+            match iters % 8 {
+                0 => SearchMode::SomeProgress((iters / 8) % 32),
+                1 => SearchMode::MaxProgress(2),
+                2 => SearchMode::LocalMinima,
+                3 => SearchMode::SomeProgress(5),
+                4 => SearchMode::HalfProgress,
+                5 => SearchMode::Mode(4),
 
-            _ => SearchMode::Standard,
+                _ => SearchMode::Standard,
+            }
         }
     }
 
