@@ -30,6 +30,7 @@ enum SearchMode {
     Dependent,
     LocalMinima,
     Greedy,
+    GreedyMax,
     Start,
     Minimized,
     Mode(usize),
@@ -708,6 +709,8 @@ where
                     SearchMode::Standard
                 } else if mode == SearchMode::Dependent {
                     self.choose_mode(iters)
+                } else if i % 2 == 0 && !self.any_solution.load(Ordering::Acquire) {
+                    SearchMode::GreedyMax
                 } else {
                     mode
                 };
@@ -720,6 +723,7 @@ where
                     SearchMode::Greedy => self
                         .queue
                         .pop_round_robin(self.organic_level.load(Ordering::Acquire) / 2),
+                    SearchMode::GreedyMax => self.queue.pop_max_progress(2),
                     SearchMode::Mode(n) => self.queue.pop_mode(n),
                     _ => self.queue.pop_round_robin(0),
                 };
@@ -743,7 +747,7 @@ where
 
                         // This is probably where we lookup in the solve trie and attempt to recreate if we find something.
 
-                        if current_mode == SearchMode::Greedy {
+                        if current_mode == SearchMode::Greedy || current_mode == SearchMode::GreedyMax {
                             for ctx in items {
                                 self.held.fetch_sub(1, Ordering::Release);
                                 if self.queue.db().remember_processed(ctx.get()).unwrap() {
