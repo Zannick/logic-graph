@@ -747,7 +747,9 @@ where
 
                         // This is probably where we lookup in the solve trie and attempt to recreate if we find something.
 
-                        if current_mode == SearchMode::Greedy || current_mode == SearchMode::GreedyMax {
+                        if current_mode == SearchMode::Greedy
+                            || current_mode == SearchMode::GreedyMax
+                        {
                             for ctx in items {
                                 self.held.fetch_sub(1, Ordering::Release);
                                 if self.queue.db().remember_processed(ctx.get()).unwrap() {
@@ -781,7 +783,11 @@ where
                                             ctx.clone(),
                                             loc_id,
                                             max_time,
-                                            2,
+                                            if current_mode == SearchMode::GreedyMax {
+                                                5
+                                            } else {
+                                                2
+                                            },
                                             self.queue.db().scorer().get_algo(),
                                         )
                                         .ok()
