@@ -407,7 +407,7 @@ pub fn access_location_after_actions<W, T, E, L>(
     max_time: u32,
     max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Result<ContextWrapper<T>, String>
+) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -420,7 +420,7 @@ where
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
     } else if ctx.get().skipped(loc_id) {
-        return Err(format!("Location already skipped: {}", loc_id));
+        return Err((None, format!("Location already skipped: {}", loc_id)));
     }
 
     let goal = loc_to_graph_node(world, loc_id);
@@ -504,15 +504,18 @@ where
         }
 
         if states_seen.len() > world.get_all_spots().len() * (max_depth + 1) {
-            return Err(format!(
-                "Excessive A* search stopping at {} states explored, {} left in queue",
-                states_seen.len(),
-                spot_heap.len()
+            return Err((
+                spot_heap.pop().map(|rel| rel.0.el),
+                format!(
+                    "Excessive A* search stopping at {} states explored, {} left in queue",
+                    states_seen.len(),
+                    spot_heap.len()
+                ),
             ));
         }
     }
 
-    Err(explain_unused_links(world, &states_seen))
+    Err((None, explain_unused_links(world, &states_seen)))
 }
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>

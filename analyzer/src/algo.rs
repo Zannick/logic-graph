@@ -790,7 +790,7 @@ where
                                             },
                                             self.queue.db().scorer().get_algo(),
                                         )
-                                        .ok()
+                                        .map_or_else(|(c, _)| c, |c| Some(c))
                                     })
                                     .collect();
 
@@ -809,9 +809,7 @@ where
                                         continue;
                                     }
 
-                                    if let Err(e) =
-                                        self.recreate_store(&ctx, &hist, SearchMode::Greedy)
-                                    {
+                                    if let Err(e) = self.recreate_store(&ctx, &hist, current_mode) {
                                         log::error!("Thread greedy exiting due to error: {:?}", e);
                                         let mut r = res.lock().unwrap();
                                         if r.is_ok() {
