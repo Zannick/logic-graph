@@ -283,7 +283,7 @@ pub fn find_nearest_location_with_actions<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
-    max_depth: i8,
+    max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
@@ -405,7 +405,7 @@ pub fn access_location_after_actions<W, T, E, L>(
     ctx: ContextWrapper<T>,
     loc_id: L,
     max_time: u32,
-    max_depth: i8,
+    max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
@@ -425,7 +425,11 @@ where
 
     let goal = loc_to_graph_node(world, loc_id);
     let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
-        if !shortest_paths.graph().node_index_map.contains_key(&ExternalNodeId::Spot(ctx.get().position())) {
+        if !shortest_paths
+            .graph()
+            .node_index_map
+            .contains_key(&ExternalNodeId::Spot(ctx.get().position()))
+        {
             panic!("SP Graph missing position: {}", ctx.get().position());
         }
         if !shortest_paths.graph().node_index_map.contains_key(&goal) {
@@ -499,7 +503,7 @@ where
             );
         }
 
-        if states_seen.len() > world.get_all_spots().len() * 3 {
+        if states_seen.len() > world.get_all_spots().len() * (max_depth + 1) {
             return Err(format!(
                 "Excessive A* search stopping at {} states explored, {} left in queue",
                 states_seen.len(),

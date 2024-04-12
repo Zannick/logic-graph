@@ -723,7 +723,7 @@ where
                     SearchMode::Greedy => self
                         .queue
                         .pop_round_robin(self.organic_level.load(Ordering::Acquire) / 2),
-                    SearchMode::GreedyMax => self.queue.pop_max_progress(2),
+                    SearchMode::GreedyMax => self.queue.pop_max_progress(1),
                     SearchMode::Mode(n) => self.queue.pop_mode(n),
                     _ => self.queue.pop_round_robin(0),
                 };
@@ -784,9 +784,9 @@ where
                                             loc_id,
                                             max_time,
                                             if current_mode == SearchMode::GreedyMax {
-                                                5
+                                                9
                                             } else {
-                                                2
+                                                4
                                             },
                                             self.queue.db().scorer().get_algo(),
                                         )
@@ -997,6 +997,7 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
+        // TODO: heap+db range [min bucket, max bucket]
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
