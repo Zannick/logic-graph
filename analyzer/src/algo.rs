@@ -996,13 +996,15 @@ where
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
         // TODO: heap+db range [min bucket, max bucket]
+        let heap_bests = self.queue.heap_bests();
+        let db_bests = self.queue.db().db_bests();
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
-            heap min: {}\n\
-            db bests: {}\n\
+            heap: [{}..={}] mins: {}\n\
+            db: [{}..={}] mins: {}\n\
             {}",
             iters,
             sols.len(),
@@ -1030,8 +1032,9 @@ where
             pskips,
             dpskips,
             self.queue.background_deletes(),
-            self.queue
-                .heap_bests()
+            heap_bests.iter().position(|x| *x != None).unwrap_or(0),
+            heap_bests.len(),
+            heap_bests
                 .into_iter()
                 .map(|n| match n {
                     Some(n) => n.to_string(),
@@ -1039,9 +1042,9 @@ where
                 })
                 .collect::<Vec<_>>()
                 .join(", "),
-            self.queue
-                .db()
-                .db_bests()
+            db_bests.iter().position(|x| *x != u32::MAX).unwrap_or(0),
+            db_bests.len(),
+            db_bests
                 .into_iter()
                 .map(|n| if n < u32::MAX {
                     n.to_string()
