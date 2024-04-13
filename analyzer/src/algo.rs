@@ -1043,7 +1043,7 @@ where
                 .collect::<Vec<_>>()
                 .join(", "),
             db_bests.iter().position(|x| *x != u32::MAX).unwrap_or(0),
-            db_bests.len(),
+            db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0),
             db_bests
                 .into_iter()
                 .map(|n| if n < u32::MAX {
