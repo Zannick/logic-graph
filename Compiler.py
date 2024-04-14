@@ -1505,10 +1505,13 @@ class GameLogic(object):
                 if tile in datamap:
                     return datamap[tile]
 
+        errors = set()
         def handle_place(c, source, val):
             if self.data_types[c] == 'SpotId':
                 names = get_spot_reference_names(val, source)
                 sp = ' > '.join(names)
+                if construct_id(sp) not in self.id_lookup:
+                    errors.add(f'Unknown spot {sp!r} in {source["fullname"]} data {c!r}')
                 self.named_spots.add(sp)
                 return sp
             if self.data_types[c] == 'AreaId':
@@ -1532,6 +1535,7 @@ class GameLogic(object):
                             cdict[s['id']] = handle_place(c, a, a['data'][c])
                         elif c in r.get('data', {}):
                             cdict[s['id']] = r['data'][c]
+        self._errors.extend(sorted(errors))
         return d
 
     @cached_property
