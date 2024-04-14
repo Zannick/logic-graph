@@ -73,3 +73,10 @@ tests:
       - Slingshot_Hook
       - Drone_Hover
     can_reach: Glacier Breach > Save and Exit > Save Point
+
+  - name: Filter to Breach
+    start: Annuna > Upper Save > Save Point
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+    can_reach: Glacier Breach > Save and Exit > Save Point

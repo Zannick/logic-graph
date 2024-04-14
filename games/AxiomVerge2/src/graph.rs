@@ -1489,7 +1489,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Breach_Sight
         | SpotId::Menu__Kiengir_Map__Shockwave
         | SpotId::Menu__Kiengir_Map__Anuman
-        | SpotId::Menu__Kiengir_Map__Bronze_Axe => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Bronze_Axe
+        | SpotId::Menu__Kiengir_Map__Filter_Flask
+        | SpotId::Menu__Kiengir_Map__Filter_Tablet
+        | SpotId::Menu__Kiengir_Map__Filter_Spiders => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -3069,7 +3072,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Breach_Sight
         | SpotId::Menu__Kiengir_Map__Shockwave
         | SpotId::Menu__Kiengir_Map__Anuman
-        | SpotId::Menu__Kiengir_Map__Bronze_Axe => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Bronze_Axe
+        | SpotId::Menu__Kiengir_Map__Filter_Flask
+        | SpotId::Menu__Kiengir_Map__Filter_Tablet
+        | SpotId::Menu__Kiengir_Map__Filter_Spiders => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -11332,7 +11338,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1568] = [
+static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -12761,6 +12767,9 @@ static RAW_SPOTS: [SpotId; 1568] = [
     SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
     SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
     SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+    SpotId::Menu__Kiengir_Map__Filter_Flask,
+    SpotId::Menu__Kiengir_Map__Filter_Spiders,
+    SpotId::Menu__Kiengir_Map__Filter_Tablet,
     SpotId::Menu__Kiengir_Map__Giguna_Base,
     SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
     SpotId::Menu__Kiengir_Map__Giguna_Northeast,
@@ -16306,9 +16315,11 @@ impl world::World for World {
                                 map.insert(Item::Anuman, 1);
                             }
                         }
-                        if !ctx.has(Item::Big_Flask) {
-                            if !map.contains_key(&Item::Big_Flask) {
-                                map.insert(Item::Big_Flask, 1);
+                        if ctx.count(Item::Big_Flask) < 2 {
+                            if let Some(val) = map.get_mut(&Item::Big_Flask) {
+                                *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
+                            } else {
+                                map.insert(Item::Big_Flask, 2 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -16359,6 +16370,11 @@ impl world::World for World {
                         if !ctx.has(Item::Destruction_Pogrom) {
                             if !map.contains_key(&Item::Destruction_Pogrom) {
                                 map.insert(Item::Destruction_Pogrom, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Dr_Gloria) {
+                            if !map.contains_key(&Item::Dr_Gloria) {
+                                map.insert(Item::Dr_Gloria, 1);
                             }
                         }
                         if !ctx.has(Item::Drone_Hover) {
@@ -16540,9 +16556,11 @@ impl world::World for World {
                             map.insert(Item::Anuman, 1);
                         }
                     }
-                    if !ctx.has(Item::Big_Flask) {
-                        if !map.contains_key(&Item::Big_Flask) {
-                            map.insert(Item::Big_Flask, 1);
+                    if ctx.count(Item::Big_Flask) < 2 {
+                        if let Some(val) = map.get_mut(&Item::Big_Flask) {
+                            *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
+                        } else {
+                            map.insert(Item::Big_Flask, 2 - ctx.count(Item::Big_Flask));
                         }
                     }
                     if !ctx.has(Item::Boomerang) {
@@ -16593,6 +16611,11 @@ impl world::World for World {
                     if !ctx.has(Item::Destruction_Pogrom) {
                         if !map.contains_key(&Item::Destruction_Pogrom) {
                             map.insert(Item::Destruction_Pogrom, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Dr_Gloria) {
+                        if !map.contains_key(&Item::Dr_Gloria) {
+                            map.insert(Item::Dr_Gloria, 1);
                         }
                     }
                     if !ctx.has(Item::Drone_Hover) {
@@ -16783,8 +16806,10 @@ impl world::World for World {
                         if !map.contains_key(&Item::Anuman) {
                             map.insert(Item::Anuman, 1);
                         }
-                        if !map.contains_key(&Item::Big_Flask) {
-                            map.insert(Item::Big_Flask, 1);
+                        if let Some(val) = map.get_mut(&Item::Big_Flask) {
+                            *val = std::cmp::max(*val, 2);
+                        } else {
+                            map.insert(Item::Big_Flask, 2);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -16815,6 +16840,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Destruction_Pogrom) {
                             map.insert(Item::Destruction_Pogrom, 1);
+                        }
+                        if !map.contains_key(&Item::Dr_Gloria) {
+                            map.insert(Item::Dr_Gloria, 1);
                         }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
@@ -16926,8 +16954,10 @@ impl world::World for World {
                     if !map.contains_key(&Item::Anuman) {
                         map.insert(Item::Anuman, 1);
                     }
-                    if !map.contains_key(&Item::Big_Flask) {
-                        map.insert(Item::Big_Flask, 1);
+                    if let Some(val) = map.get_mut(&Item::Big_Flask) {
+                        *val = std::cmp::max(*val, 2);
+                    } else {
+                        map.insert(Item::Big_Flask, 2);
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
@@ -16958,6 +16988,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Destruction_Pogrom) {
                         map.insert(Item::Destruction_Pogrom, 1);
+                    }
+                    if !map.contains_key(&Item::Dr_Gloria) {
+                        map.insert(Item::Dr_Gloria, 1);
                     }
                     if !map.contains_key(&Item::Drone_Hover) {
                         map.insert(Item::Drone_Hover, 1);
@@ -17667,6 +17700,7 @@ impl world::World for World {
             | SpotId::Glacier_Breach__Piano_Roll__East_10
             | SpotId::Glacier_Breach__Piano_Roll__East_9
             | SpotId::Glacier_Breach__Piano_Roll__West
+            | SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand
             | SpotId::Glacier_Breach__Save_and_Exit__Save_Point
             | SpotId::Glacier_Breach__Save_and_Exit__West
             | SpotId::Glacier_Breach__South_Save__East
@@ -17790,6 +17824,9 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
             | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
             | SpotId::Menu__Kiengir_Map__Ebih_West_Upper
+            | SpotId::Menu__Kiengir_Map__Filter_Flask
+            | SpotId::Menu__Kiengir_Map__Filter_Spiders
+            | SpotId::Menu__Kiengir_Map__Filter_Tablet
             | SpotId::Menu__Kiengir_Map__Giguna_Base
             | SpotId::Menu__Kiengir_Map__Giguna_Northeast
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
@@ -17969,7 +18006,6 @@ impl World {
                             | Item::Bounty_List
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
-                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Health_Upgrade_5
@@ -18052,7 +18088,6 @@ impl World {
                             | Item::Bounty_List
                             | Item::Carnelian_Ring
                             | Item::Double_Axe
-                            | Item::Dr_Gloria
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
@@ -50173,6 +50208,42 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Bronze_Axe => Spot {
             id: SpotId::Menu__Kiengir_Map__Bronze_Axe,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Filter_Flask => Spot {
+            id: SpotId::Menu__Kiengir_Map__Filter_Flask,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Filter_Tablet => Spot {
+            id: SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Filter_Spiders => Spot {
+            id: SpotId::Menu__Kiengir_Map__Filter_Spiders,
             locations: Range {
                 start: 0, end: 0,
             },

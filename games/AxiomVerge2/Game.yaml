@@ -302,9 +302,9 @@ helpers:
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
-     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm]
+     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Dr_Gloria]
   $all_flasks:itemList: >
-    [Flask{14}, Big_Flask]
+    [Flask{14}, Big_Flask{2}]
   $all_health:itemList: >
     [Health_Node, Health_Fragment{6}]
   $all_weapons:itemList: >
@@ -314,8 +314,8 @@ helpers:
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]
-  # To be added: 5 Flask, 5 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 3 Health_Fragment, The_Student, Heretics_Granddaughter, Dr_Gloria
+  # To be added: 5 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
+  # 3 Health_Fragment, The_Student, Heretics_Granddaughter
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy

@@ -11756,6 +11756,441 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2100,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1666,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 1400,
@@ -26704,6 +27139,441 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2100,
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1666,
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 1400,
@@ -38555,6 +39425,251 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
         (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
         (SpotId::Menu__Kiengir_Map__Bronze_Axe, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -42927,6 +44042,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Door_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42987,6 +44107,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Egg,
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Egg,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -42999,6 +44124,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
             SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
             449,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            100,
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
@@ -43022,6 +44152,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43034,6 +44169,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
             SpotId::Annuna__Filter_Teleporter__Shaft_Upper_Platform,
             1799,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            100,
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
@@ -43059,6 +44199,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Filter_Teleporter__Shaft_Top,
             SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
             500,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            100,
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Shaft_Top,
@@ -43102,6 +44247,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__Stair_Top,
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__Stair_Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43114,6 +44264,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Filter_Teleporter__West_19,
             SpotId::Annuna__Spider_Room__East,
             1350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19,
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            100,
         ),
         (
             SpotId::Annuna__Filter_Teleporter__West_19,
@@ -43137,6 +44292,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            100,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -43149,6 +44309,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Filter_Teleporter__West_21,
             SpotId::Annuna__Middle_Hallway__East,
             1350,
+        ),
+        (
+            SpotId::Annuna__Filter_Teleporter__West_21,
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            100,
         ),
         (
             SpotId::Annuna__Filter_Teleporter__West_21,
@@ -43659,6 +44824,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Lamassu__Portal_Stand,
             SpotId::Annuna__Lamassu__West_15,
             1491,
+        ),
+        (
+            SpotId::Annuna__Lamassu__Portal_Stand,
+            SpotId::Glacier_Breach__South_Save__Save_Point,
+            3600,
         ),
         (
             SpotId::Annuna__Lamassu__Portal_Stand,
@@ -66721,6 +67891,456 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Giguna_Base,
             SpotId::Giguna__Giguna_Base__Save_Point,
             12000,
@@ -79898,6 +81518,291 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(2100)
         }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(400)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(200),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(400)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(933)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1933)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1300)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2533)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2066)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2266)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(733),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(266)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(200),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1666),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1100)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2533),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2066)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2266)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(333),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(600),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(266),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(800),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(2066)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(2066),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(1100)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2600),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2133)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2333)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1666)
+        }
         (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(1400)
         }
@@ -91664,6 +93569,291 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1500), vec![]),
         (SpotId::Menu__Kiengir_Map__Ebih_West_Upper, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(2100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(400), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1933), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(733), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(266), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1666), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1100), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Spiders,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2533), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(2066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(2066), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(1100), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Filter_Tablet,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Filter_Tablet, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1666), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Giguna_Base, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(1400), vec![])

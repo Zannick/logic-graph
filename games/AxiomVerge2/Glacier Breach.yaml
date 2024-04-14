@@ -627,6 +627,7 @@ areas:
   map:
     save: [39, 9, 40, 10]
   data:
+    portal_start: Portal Stand
     save_point: Save Point
   datamap:
     map_spot:

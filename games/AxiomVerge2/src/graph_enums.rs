@@ -2139,6 +2139,9 @@ pub enum SpotId {
     Menu__Kiengir_Map__Ebih_West_Lower,
     Menu__Kiengir_Map__Ebih_West_Mid,
     Menu__Kiengir_Map__Ebih_West_Upper,
+    Menu__Kiengir_Map__Filter_Flask,
+    Menu__Kiengir_Map__Filter_Spiders,
+    Menu__Kiengir_Map__Filter_Tablet,
     Menu__Kiengir_Map__Giguna_Base,
     Menu__Kiengir_Map__Giguna_Labyrinth,
     Menu__Kiengir_Map__Giguna_Northeast,
@@ -5927,6 +5930,15 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Ebih_West_Upper => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih West Upper")
             }
+            SpotId::Menu__Kiengir_Map__Filter_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Filter Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Filter_Spiders => {
+                write!(f, "{}", "Menu > Kiengir Map > Filter Spiders")
+            }
+            SpotId::Menu__Kiengir_Map__Filter_Tablet => {
+                write!(f, "{}", "Menu > Kiengir Map > Filter Tablet")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Base => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
             }
@@ -8851,6 +8863,9 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Ebih West Upper" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Upper)
             }
+            "Menu > Kiengir Map > Filter Flask" => Ok(SpotId::Menu__Kiengir_Map__Filter_Flask),
+            "Menu > Kiengir Map > Filter Spiders" => Ok(SpotId::Menu__Kiengir_Map__Filter_Spiders),
+            "Menu > Kiengir Map > Filter Tablet" => Ok(SpotId::Menu__Kiengir_Map__Filter_Tablet),
             "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
             "Menu > Kiengir Map > Giguna Labyrinth" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Labyrinth)

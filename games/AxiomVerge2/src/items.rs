@@ -514,7 +514,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Bounty_List
             | Item::Carnelian_Ring
             | Item::Double_Axe
-            | Item::Dr_Gloria
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5
