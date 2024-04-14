@@ -63,7 +63,7 @@ where
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
-    let spot_map = accessible_spots(world, ctx, max_time);
+    let spot_map = accessible_spots(world, ctx, max_time, false);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
 
     vec.par_sort_unstable_by_key(|el| el.elapsed());

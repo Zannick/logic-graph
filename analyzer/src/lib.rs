@@ -60,6 +60,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             if let Some(ctx) = &spot_map.get(&$end) {
                 panic!(
@@ -81,13 +82,17 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
+            let mut seen_spots: Vec<String> = spot_map.keys().into_iter().map(|s| format!("{}", s)).collect();
+            seen_spots.sort();
             assert!(
                 spot_map.contains_key(&$end),
-                "Found no route from {} to {}:\n{}\n",
+                "Found no route from {} to {}:\n{}\nReached: {}\n",
                 $start,
                 $end,
                 $crate::access::find_unused_links($world, &spot_map),
+                seen_spots.join(", "),
             );
         }};
     }
@@ -183,6 +188,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             let mut errors = Vec::new();
             let mut done = false;
@@ -240,6 +246,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
@@ -265,6 +272,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map.get(&spot) {
@@ -289,6 +297,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map.get(&spot) {
@@ -321,6 +330,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map.get(&spot) {
@@ -354,6 +364,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
                 u32::MAX,
+                true,
             );
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map.get(&spot) {

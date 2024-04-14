@@ -57,6 +57,7 @@ fn expand<W, T, E, Wp>(
     spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+    allow_local: bool,
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
@@ -79,6 +80,9 @@ fn expand<W, T, E, Wp>(
                     }));
                 }
             }
+        }
+        if allow_local {
+            expand_local(world, ctx, movement_state, spot_map, max_time, spot_heap);
         }
     } else {
         expand_local(world, ctx, movement_state, spot_map, max_time, spot_heap);
@@ -165,6 +169,7 @@ pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
+    allow_local: bool,
 ) -> HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>
 where
     W: World<Exit = E>,
@@ -186,6 +191,7 @@ where
         &spot_enum_map,
         max_time,
         &mut spot_heap,
+        allow_local,
     );
     while let Some(Reverse(el)) = spot_heap.pop() {
         let spot_found = el.el;
@@ -198,6 +204,7 @@ where
                 &spot_enum_map,
                 max_time,
                 &mut spot_heap,
+                allow_local,
             );
         }
     }
