@@ -1033,15 +1033,15 @@ class RustObservationVisitor(RustBaseVisitor):
     def visitRefEqSimple(self, ctx):
         getter = self.visit(ctx.ref())
         if ctx.ITEM():
-            return f'{getter} {ctx.getChild(1)} Item::{ctx.ITEM()}'
+            return f'{{ let left = {getter}; left {ctx.getChild(1)} Item::{ctx.ITEM()} }}'
         else:
-            return f'{getter} {ctx.getChild(1)} ctx.{ctx.SETTING()}()'
+            return f'{{ let left = {getter}; left {ctx.getChild(1)} ctx.{ctx.SETTING()}() }}'
 
     def visitRefEqRef(self, ctx):
-        return f'{self.visit(ctx.ref(0))} {ctx.getChild(1)} {self.visit(ctx.ref(1))}'
+        return f'{{ let left = {self.visit(ctx.ref(0))}; let right = {self.visit(ctx.ref(1))}; left {ctx.getChild(1)} right }}'
 
     def visitRefEqInvoke(self, ctx):
-        return f'{self.visit(ctx.ref())} {ctx.getChild(1)} {self.visit(ctx.invoke())}'
+        return f'{{ let left = {self.visit(ctx.ref())}; let right = {self.visit(ctx.invoke())}; left {ctx.getChild(1)} right }}'
 
     def visitSetting(self, ctx):
         # TODO: dict settings?

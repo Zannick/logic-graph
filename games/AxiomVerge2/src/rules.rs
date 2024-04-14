@@ -405,6 +405,18 @@ pub fn access_boomerang5(ctx: &Context, world: &graph::World) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
+pub fn access_breach_attractor_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // Breach_Attractor and Anuman
+    (ctx.has(Item::Breach_Attractor) && ctx.has(Item::Anuman))
+}
+pub fn access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
+    ((ctx.has(Item::Breach_Attractor) && ctx.mode() == enums::Mode::Drone)
+        && ctx.indra() == SpotId::Annuna__Filter_Teleporter__Shaft_Top)
+}
 pub fn access_bs(ctx: &Context, world: &graph::World) -> bool {
     // $bs
     helper__bs!(ctx, world)
@@ -1453,6 +1465,55 @@ pub fn access_giguna_northeast_gate(ctx: &Context, world: &graph::World) -> bool
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
 }
+pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
 pub fn access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -1833,6 +1894,13 @@ pub fn access_map__glacier_breach__guarded_corridor__save(
     // ^map__glacier_breach__guarded_corridor__save
     ctx.map__glacier_breach__guarded_corridor__save()
 }
+pub fn access_map__glacier_breach__hammonds_breach__save(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^map__glacier_breach__hammonds_breach__save
+    ctx.map__glacier_breach__hammonds_breach__save()
+}
 pub fn access_map__glacier_breach__save_and_exit__save(
     ctx: &Context,
     world: &graph::World,
@@ -2103,6 +2171,10 @@ pub fn access_overheat_and_can_damage(ctx: &Context, world: &graph::World) -> bo
 pub fn access_platform_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
     // $platform and $hook and $hover
     ((helper__platform!(ctx, world) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
+}
+pub fn access_portal_eq_position(ctx: &Context, world: &graph::World) -> bool {
+    // ^portal == ^position
+    ctx.portal() == ctx.position()
 }
 pub fn access_ranged_damage(ctx: &Context, world: &graph::World) -> bool {
     // Ranged_Damage
@@ -2686,6 +2758,41 @@ pub fn action_giguna_breach__sw_save__west_11__open_door__do(
     // ^_door_opened = true
     ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
 }
+pub fn action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_hammonds_doors = true
+    ctx.set_glacier__ctx__hammonds_doors(true);
+}
+pub fn action_glacier__hammonds_end__switch_near__open_doors__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_hammonds_doors = true
+    ctx.set_glacier__ctx__hammonds_doors(true);
+}
+pub fn action_glacier__hammonds_end__west_11__open_doors__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_hammonds_doors = true
+    ctx.set_glacier__ctx__hammonds_doors(true);
+}
+pub fn action_glacier__the_big_drop__solid_rock__careful_break__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_bridge_open = true
+    ctx.set_glacier__the_big_drop__ctx__bridge_open(true);
+}
+pub fn action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_lower_gatestones = true
+    ctx.set_glacier__vertical_room__ctx__lower_gatestones(true);
+}
 pub fn action_glacier__vertical_room__upper_switch__open_gate__do(
     ctx: &mut Context,
     world: &graph::World,
@@ -2734,6 +2841,27 @@ pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::Wo
     // ^mode = 'Indra'; ^last = ^indra
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
+}
+pub fn action_portal_set_glacier_gt_hammonds_end_gt_corner(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^portal = `Glacier > Hammond's End > Corner`
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Corner);
+}
+pub fn action_portal_set_glacier_gt_hammonds_end_gt_hammond(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^portal = `Glacier > Hammond's End > Hammond`
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Hammond);
+}
+pub fn action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Lower_Pedestal_West);
 }
 pub fn action_post_portal_save_update(ctx: &mut Context, world: &graph::World) {
     // $post_portal_save_update
@@ -4104,6 +4232,79 @@ pub fn explain_boomerang5(
         let h = ctx.has(Item::Boomerang);
         edict.insert("Boomerang", format!("{}", h));
         (h, vec!["Boomerang"])
+    }
+}
+pub fn explain_breach_attractor_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Breach_Attractor and Anuman
+    {
+        let mut left = {
+            let h = ctx.has(Item::Breach_Attractor);
+            edict.insert("Breach_Attractor", format!("{}", h));
+            (h, vec!["Breach_Attractor"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Breach_Attractor);
+                edict.insert("Breach_Attractor", format!("{}", h));
+                (h, vec!["Breach_Attractor"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = ctx.mode();
+                        edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = {
+                    let r = ctx.indra();
+                    edict.insert("^indra", format!("{:?}", r));
+                    (r, vec!["^indra"])
+                };
+                (r.0 == SpotId::Annuna__Filter_Teleporter__Shaft_Top, r.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_bs(
@@ -7754,6 +7955,90 @@ pub fn explain_giguna_northeast_gate(
         (h, vec!["Giguna_Northeast_Gate"])
     }
 }
+pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
 pub fn explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -9397,6 +9682,21 @@ pub fn explain_map__glacier_breach__guarded_corridor__save(
         (r, vec!["^map__glacier_breach__guarded_corridor__save"])
     }
 }
+pub fn explain_map__glacier_breach__hammonds_breach__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__glacier_breach__hammonds_breach__save
+    {
+        let r = ctx.map__glacier_breach__hammonds_breach__save();
+        edict.insert(
+            "^map__glacier_breach__hammonds_breach__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__glacier_breach__hammonds_breach__save"])
+    }
+}
 pub fn explain_map__glacier_breach__save_and_exit__save(
     ctx: &Context,
     world: &graph::World,
@@ -10680,6 +10980,27 @@ pub fn explain_platform_and_hook_and_hover(
         }
     }
 }
+pub fn explain_portal_eq_position(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^portal == ^position
+    {
+        let mut left = {
+            let r = ctx.portal();
+            edict.insert("^portal", format!("{:?}", r));
+            (r, vec!["^portal"])
+        };
+        let mut right = {
+            let r = ctx.position();
+            edict.insert("^position", format!("{:?}", r));
+            (r, vec!["^position"])
+        };
+        left.1.append(&mut right.1);
+        (left.0 == right.0, left.1)
+    }
+}
 pub fn explain_ranged_damage(
     ctx: &Context,
     world: &graph::World,
@@ -11458,7 +11779,11 @@ pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall
         }))
         && (hobserve__ft_main!(ctx, world, full_obs)))
         && (hobserve__can_recall!(ctx, world, full_obs)))
-        && (data::map_spot(ctx.position()) != Default::default()))
+        && ({
+            let left = data::map_spot(ctx.position());
+            let right = Default::default();
+            left != right
+        }))
 }
 pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
     ctx: &Context,
@@ -11472,9 +11797,13 @@ pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default
             v == enums::Realm::Breach
         }))
         && ({
-            full_obs.observe_breach_save();
-            ctx.breach_save()
-        } != Default::default()))
+            let left = {
+                full_obs.observe_breach_save();
+                ctx.breach_save()
+            };
+            let right = Default::default();
+            left != right
+        }))
 }
 pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
@@ -12064,6 +12393,40 @@ pub fn observe_access_boomerang5(
         full_obs.observe_boomerang();
         ctx.has(Item::Boomerang)
     }
+}
+pub fn observe_access_breach_attractor_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Breach_Attractor and Anuman
+    ({
+        full_obs.observe_breach_attractor();
+        ctx.has(Item::Breach_Attractor)
+    } && ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }))
+}
+pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
+    (({
+        full_obs.observe_breach_attractor();
+        ctx.has(Item::Breach_Attractor)
+    } && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    })) && ({
+        full_obs.observe_indra();
+        ctx.indra()
+    } == SpotId::Annuna__Filter_Teleporter__Shaft_Top))
 }
 pub fn observe_access_bs(
     ctx: &Context,
@@ -13927,6 +14290,83 @@ pub fn observe_access_giguna_northeast_gate(
         ctx.has(Item::Giguna_Northeast_Gate)
     }
 }
+pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
 pub fn observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -14825,6 +15265,17 @@ pub fn observe_access_map__glacier_breach__guarded_corridor__save(
         ctx.map__glacier_breach__guarded_corridor__save()
     }
 }
+pub fn observe_access_map__glacier_breach__hammonds_breach__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__glacier_breach__hammonds_breach__save
+    {
+        full_obs.observe_map__glacier_breach__hammonds_breach__save();
+        ctx.map__glacier_breach__hammonds_breach__save()
+    }
+}
 pub fn observe_access_map__glacier_breach__save_and_exit__save(
     ctx: &Context,
     world: &graph::World,
@@ -15136,16 +15587,23 @@ pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_defau
         };
         v == enums::Mode::Drone
     } && ({
-        full_obs.observe_portal();
-        ctx.portal()
-    } == {
-        full_obs.observe_position();
-        ctx.position()
-    })) && (data::flipside(ctx.position()) != Default::default()))
-        && (!(data::portal_hidden(ctx.position())) || {
-            full_obs.observe_breach_sight();
-            ctx.has(Item::Breach_Sight)
-        }))
+        let left = {
+            full_obs.observe_portal();
+            ctx.portal()
+        };
+        let right = {
+            full_obs.observe_position();
+            ctx.position()
+        };
+        left == right
+    })) && ({
+        let left = data::flipside(ctx.position());
+        let right = Default::default();
+        left != right
+    })) && (!(data::portal_hidden(ctx.position())) || {
+        full_obs.observe_breach_sight();
+        ctx.has(Item::Breach_Sight)
+    }))
 }
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
@@ -15498,6 +15956,24 @@ pub fn observe_access_platform_and_hook_and_hover(
     ((hobserve__platform!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
         && (hobserve__hover!(ctx, world, full_obs)))
 }
+pub fn observe_access_portal_eq_position(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^portal == ^position
+    {
+        let left = {
+            full_obs.observe_portal();
+            ctx.portal()
+        };
+        let right = {
+            full_obs.observe_position();
+            ctx.position()
+        };
+        left == right
+    }
+}
 pub fn observe_access_ranged_damage(
     ctx: &Context,
     world: &graph::World,
@@ -15554,7 +16030,11 @@ pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
     } && ({
         full_obs.observe_exit_breach();
         ctx.has(Item::Exit_Breach)
-    })) && (data::flipside(ctx.position()) != Default::default()))
+    })) && ({
+        let left = data::flipside(ctx.position());
+        let right = Default::default();
+        left != right
+    }))
 }
 pub fn observe_access_remote_boomerang(
     ctx: &Context,
@@ -16445,6 +16925,41 @@ pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
 ) {
     // ^_door_opened = true
 }
+pub fn observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_hammonds_doors = true
+}
+pub fn observe_action_glacier__hammonds_end__switch_near__open_doors__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_hammonds_doors = true
+}
+pub fn observe_action_glacier__hammonds_end__west_11__open_doors__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_hammonds_doors = true
+}
+pub fn observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_bridge_open = true
+}
+pub fn observe_action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_lower_gatestones = true
+}
 pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
     ctx: &Context,
     world: &graph::World,
@@ -16518,6 +17033,27 @@ pub fn observe_action_mode_set_indra_last_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
+}
+pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Glacier > Hammond's End > Corner`
+}
+pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Glacier > Hammond's End > Hammond`
+}
+pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
 }
 pub fn observe_action_post_portal_save_update(
     ctx: &Context,

@@ -243,6 +243,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Vertical_Room__Middle_Platform_2
         | SpotId::Annuna__Vertical_Room__East_18
         | SpotId::Annuna__Vertical_Room__Upper_Platform
+        | SpotId::Annuna__Vertical_Room__Upper_Cache
         | SpotId::Annuna__Vertical_Room__Upper_Doorway
         | SpotId::Annuna__Vertical_Room__Door_Switch
         | SpotId::Annuna__Vertical_Room__Near_Upper_Ledge
@@ -1115,6 +1116,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => {
             AreaId::Glacier_Breach__Save_and_Exit
         }
+        SpotId::Glacier_Breach__Hammonds_Breach__Save_Point
+        | SpotId::Glacier_Breach__Hammonds_Breach__West_Side
+        | SpotId::Glacier_Breach__Hammonds_Breach__East_Side
+        | SpotId::Glacier_Breach__Hammonds_Breach__First_Step
+        | SpotId::Glacier_Breach__Hammonds_Breach__East => AreaId::Glacier_Breach__Hammonds_Breach,
         SpotId::Glacier_Breach__Stacked_Enemies__West => AreaId::Glacier_Breach__Stacked_Enemies,
         SpotId::Glacier_Breach__Empty_Space__West => AreaId::Glacier_Breach__Empty_Space,
         SpotId::Glacier_Breach__Angry_Lions__North => AreaId::Glacier_Breach__Angry_Lions,
@@ -1140,10 +1146,14 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Compass_Room__Center
         | SpotId::Glacier__Compass_Room__West => AreaId::Glacier__Compass_Room,
         SpotId::Glacier__The_Big_Drop__East
+        | SpotId::Glacier__The_Big_Drop__Solid_Rock
+        | SpotId::Glacier__The_Big_Drop__Unstable_Footing
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface
         | SpotId::Glacier__The_Big_Drop__West_14
-        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => AreaId::Glacier__The_Big_Drop,
+        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
+        | SpotId::Glacier__The_Big_Drop__West_11_Door
+        | SpotId::Glacier__The_Big_Drop__West_Unstable_Footing => AreaId::Glacier__The_Big_Drop,
         SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
         | SpotId::Glacier__Sea_Burial__West_13
         | SpotId::Glacier__Sea_Burial__West_Water_Surface
@@ -1268,6 +1278,30 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Crystals__Portal_Stand
         | SpotId::Glacier__Crystals__East
         | SpotId::Glacier__Crystals__Portal_Cage => AreaId::Glacier__Crystals,
+        SpotId::Glacier__Hammonds_End__Upper_Grate_Left
+        | SpotId::Glacier__Hammonds_End__Upper_Grate_Right
+        | SpotId::Glacier__Hammonds_End__Upper_Floor
+        | SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal
+        | SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+        | SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal
+        | SpotId::Glacier__Hammonds_End__Hammond
+        | SpotId::Glacier__Hammonds_End__Corner
+        | SpotId::Glacier__Hammonds_End__Lower_Pedestal_West
+        | SpotId::Glacier__Hammonds_End__East_11_Door
+        | SpotId::Glacier__Hammonds_End__Upper_Portal_Stand
+        | SpotId::Glacier__Hammonds_End__West_10
+        | SpotId::Glacier__Hammonds_End__Upper_Stair
+        | SpotId::Glacier__Hammonds_End__Lower_Grate_Right
+        | SpotId::Glacier__Hammonds_End__Lower_Grate_Left
+        | SpotId::Glacier__Hammonds_End__Switch_from_Ledge
+        | SpotId::Glacier__Hammonds_End__Switch_Near
+        | SpotId::Glacier__Hammonds_End__West_11
+        | SpotId::Glacier__Hammonds_End__Center_Door_Left
+        | SpotId::Glacier__Hammonds_End__Between_Center_Doors
+        | SpotId::Glacier__Hammonds_End__Center_Door_Right => AreaId::Glacier__Hammonds_End,
+        SpotId::Glacier__Secret_Chamber__East_10 | SpotId::Glacier__Secret_Chamber__East_11 => {
+            AreaId::Glacier__Secret_Chamber
+        }
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             AreaId::Interior__Dock_Elevator
         }
@@ -1492,7 +1526,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Bronze_Axe
         | SpotId::Menu__Kiengir_Map__Filter_Flask
         | SpotId::Menu__Kiengir_Map__Filter_Tablet
-        | SpotId::Menu__Kiengir_Map__Filter_Spiders => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Filter_Spiders
+        | SpotId::Menu__Kiengir_Map__Breach_Attractor => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -1502,7 +1537,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Breach_Map__GlB_South
         | SpotId::Menu__Breach_Map__GlB_West
         | SpotId::Menu__Breach_Map__GlB_Center
-        | SpotId::Menu__Breach_Map__GlB_Arena => AreaId::Menu__Breach_Map,
+        | SpotId::Menu__Breach_Map__GlB_Arena
+        | SpotId::Menu__Breach_Map__GlB_East => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -1846,6 +1882,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Vertical_Room__Middle_Platform_2
         | SpotId::Annuna__Vertical_Room__East_18
         | SpotId::Annuna__Vertical_Room__Upper_Platform
+        | SpotId::Annuna__Vertical_Room__Upper_Cache
         | SpotId::Annuna__Vertical_Room__Upper_Doorway
         | SpotId::Annuna__Vertical_Room__Door_Switch
         | SpotId::Annuna__Vertical_Room__Near_Upper_Ledge
@@ -2710,6 +2747,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier_Breach__Save_and_Exit__Save_Point
         | SpotId::Glacier_Breach__Save_and_Exit__Halfway
         | SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => RegionId::Glacier_Breach,
+        SpotId::Glacier_Breach__Hammonds_Breach__Save_Point
+        | SpotId::Glacier_Breach__Hammonds_Breach__West_Side
+        | SpotId::Glacier_Breach__Hammonds_Breach__East_Side
+        | SpotId::Glacier_Breach__Hammonds_Breach__First_Step
+        | SpotId::Glacier_Breach__Hammonds_Breach__East => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Stacked_Enemies__West => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Empty_Space__West => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Angry_Lions__North => RegionId::Glacier_Breach,
@@ -2731,10 +2773,14 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Compass_Room__Center
         | SpotId::Glacier__Compass_Room__West => RegionId::Glacier,
         SpotId::Glacier__The_Big_Drop__East
+        | SpotId::Glacier__The_Big_Drop__Solid_Rock
+        | SpotId::Glacier__The_Big_Drop__Unstable_Footing
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface
         | SpotId::Glacier__The_Big_Drop__West_14
-        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => RegionId::Glacier,
+        | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
+        | SpotId::Glacier__The_Big_Drop__West_11_Door
+        | SpotId::Glacier__The_Big_Drop__West_Unstable_Footing => RegionId::Glacier,
         SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
         | SpotId::Glacier__Sea_Burial__West_13
         | SpotId::Glacier__Sea_Burial__West_Water_Surface
@@ -2859,6 +2905,30 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Crystals__Portal_Stand
         | SpotId::Glacier__Crystals__East
         | SpotId::Glacier__Crystals__Portal_Cage => RegionId::Glacier,
+        SpotId::Glacier__Hammonds_End__Upper_Grate_Left
+        | SpotId::Glacier__Hammonds_End__Upper_Grate_Right
+        | SpotId::Glacier__Hammonds_End__Upper_Floor
+        | SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal
+        | SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+        | SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal
+        | SpotId::Glacier__Hammonds_End__Hammond
+        | SpotId::Glacier__Hammonds_End__Corner
+        | SpotId::Glacier__Hammonds_End__Lower_Pedestal_West
+        | SpotId::Glacier__Hammonds_End__East_11_Door
+        | SpotId::Glacier__Hammonds_End__Upper_Portal_Stand
+        | SpotId::Glacier__Hammonds_End__West_10
+        | SpotId::Glacier__Hammonds_End__Upper_Stair
+        | SpotId::Glacier__Hammonds_End__Lower_Grate_Right
+        | SpotId::Glacier__Hammonds_End__Lower_Grate_Left
+        | SpotId::Glacier__Hammonds_End__Switch_from_Ledge
+        | SpotId::Glacier__Hammonds_End__Switch_Near
+        | SpotId::Glacier__Hammonds_End__West_11
+        | SpotId::Glacier__Hammonds_End__Center_Door_Left
+        | SpotId::Glacier__Hammonds_End__Between_Center_Doors
+        | SpotId::Glacier__Hammonds_End__Center_Door_Right => RegionId::Glacier,
+        SpotId::Glacier__Secret_Chamber__East_10 | SpotId::Glacier__Secret_Chamber__East_11 => {
+            RegionId::Glacier
+        }
         SpotId::Interior__Dock_Elevator__Elevator | SpotId::Interior__Dock_Elevator__Connector => {
             RegionId::Interior
         }
@@ -3075,7 +3145,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Bronze_Axe
         | SpotId::Menu__Kiengir_Map__Filter_Flask
         | SpotId::Menu__Kiengir_Map__Filter_Tablet
-        | SpotId::Menu__Kiengir_Map__Filter_Spiders => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Filter_Spiders
+        | SpotId::Menu__Kiengir_Map__Breach_Attractor => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -3085,7 +3156,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Breach_Map__GlB_South
         | SpotId::Menu__Breach_Map__GlB_West
         | SpotId::Menu__Breach_Map__GlB_Center
-        | SpotId::Menu__Breach_Map__GlB_Arena => RegionId::Menu,
+        | SpotId::Menu__Breach_Map__GlB_Arena
+        | SpotId::Menu__Breach_Map__GlB_East => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -3347,6 +3419,7 @@ impl world::Accessible for Location {
                 rules::access_can_damage(ctx, world)
             }
             LocationId::Annuna__Vertical_Room__Plinth__Item => true,
+            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
             LocationId::Annuna__West_Climb__Cache__Item => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
@@ -3514,6 +3587,11 @@ impl world::Accessible for Location {
             LocationId::Glacier__Compass_Room__Center__Table => true,
             LocationId::Glacier__Crystals__Lower_Corner__Item => true,
             LocationId::Glacier__Crystals__Top_Corner__Tablet => true,
+            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => true,
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
+                rules::access_portal_eq_position(ctx, world)
+            }
+            LocationId::Glacier__Hammonds_End__Hammond__Note => true,
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::access_boomerang5(ctx, world)
             }
@@ -4040,6 +4118,9 @@ impl world::Accessible for Location {
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::observe_access_boomerang4(ctx, world, full_obs)
             }
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
+                rules::observe_access_portal_eq_position(ctx, world, full_obs)
+            }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::observe_access_boomerang5(ctx, world, full_obs)
             }
@@ -4545,6 +4626,9 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::explain_boomerang4(ctx, world, edict)
+            }
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
+                rules::explain_portal_eq_position(ctx, world, edict)
             }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
                 rules::explain_boomerang5(ctx, world, edict)
@@ -5146,6 +5230,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1 => rules::access_annuna_vertical_room_gate(ctx, world),
             ExitId::Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1 => rules::access_hook(ctx, world),
             ExitId::Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => rules::access_hover(ctx, world),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1 => rules::access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(ctx, world),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1 => rules::access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(ctx, world),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 => rules::access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(ctx, world),
@@ -5153,6 +5238,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1 => rules::access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(ctx, world),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1 => rules::access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(ctx, world),
             ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 => rules::access_hover(ctx, world),
+            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => rules::access_hook(ctx, world),
+            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 => rules::access_hover(ctx, world),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 => rules::access_hover(ctx, world),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1 => true,
             ExitId::Annuna__Vertical_Room__West_20__ex__Center_Climb__East_1 => true,
@@ -5858,6 +5945,29 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => true,
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => true,
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => true,
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => rules::access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => rules::access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => rules::access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => rules::access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => rules::access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => rules::access_grab(ctx, world),
+            ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => rules::access_hook_or_hover(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => rules::access_hook_and_hover(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => rules::access_mist2(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::access_grab(ctx, world),
+            ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => true,
+            ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 => true,
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::access_hook(ctx, world),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::access_grab(ctx, world),
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::access_climb_and_grab(ctx, world),
@@ -5926,6 +6036,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => true,
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::access_mist2(ctx, world),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::access_not_amashilama(ctx, world),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::access_hover(ctx, world),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(ctx, world),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::access_glacier_big_drop_rock(ctx, world),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => true,
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::access_nanite_mist(ctx, world),
@@ -6181,6 +6293,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::access_map__glacier_breach__save_and_exit__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::access_map__glacier_breach__guarded_corridor__save(ctx, world),
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::access_map__glacier_breach__hammonds_breach__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::access_map__glacier_breach__west_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
@@ -6635,6 +6748,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1 => rules::observe_access_annuna_vertical_room_gate(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1 => rules::observe_access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1 => rules::observe_access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 => rules::observe_access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(ctx, world, full_obs),
@@ -6642,6 +6756,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1 => rules::observe_access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1 => rules::observe_access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 => rules::observe_access_hover(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => rules::observe_access_grab_and_anuman(ctx, world, full_obs),
@@ -7115,6 +7231,27 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_grab_or_climb(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => rules::observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => rules::observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => rules::observe_access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => rules::observe_access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => rules::observe_access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => rules::observe_access_hook_or_hover(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => rules::observe_access_hook_and_hover(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => rules::observe_access_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::observe_access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::observe_access_grab(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::observe_access_hook(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::observe_access_climb_and_grab(ctx, world, full_obs),
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::observe_access_grab(ctx, world, full_obs),
@@ -7169,6 +7306,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_mist2(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::observe_access_mist2(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::observe_access_not_amashilama(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::observe_access_hover(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::observe_access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_big_drop_rock(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::observe_access_mist2(ctx, world, full_obs),
@@ -7331,6 +7470,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::observe_access_map__glacier_breach__save_and_exit__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::observe_access_map__glacier_breach__guarded_corridor__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::observe_access_map__glacier_breach__hammonds_breach__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__west_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
@@ -7914,6 +8054,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1 => rules::explain_annuna_vertical_room_gate(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1 => rules::explain_annuna__vertical_room__upper_doorway__ex__east_20_1__req(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1 => rules::explain_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 => rules::explain_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(ctx, world, edict),
@@ -7921,6 +8062,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1 => rules::explain_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1 => rules::explain_annuna__vertical_room__upper_doorway__ex__west_20_1__req(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 => rules::explain_hover(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__West_22__ex__Lower_Ledge_2 => rules::explain_grab_and_anuman(ctx, world, edict),
@@ -8394,6 +8537,27 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_grab_or_climb(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => rules::explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => rules::explain_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => rules::explain_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => rules::explain_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => rules::explain_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => rules::explain_hook_or_hover(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => rules::explain_hook_and_hover(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => rules::explain_mist2(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::explain_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::explain_grab(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::explain_hook(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::explain_grab(ctx, world, edict),
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::explain_climb_and_grab(ctx, world, edict),
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::explain_hook(ctx, world, edict),
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::explain_grab(ctx, world, edict),
@@ -8448,6 +8612,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_mist2(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => rules::explain_mist2(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::explain_not_amashilama(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::explain_hover(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::explain_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::explain_glacier_big_drop_rock(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::explain_mist2(ctx, world, edict),
@@ -8610,6 +8776,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::explain_map__glacier_breach__save_and_exit__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::explain_map__glacier_breach__guarded_corridor__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::explain_map__glacier_breach__hammonds_breach__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::explain_map__glacier_breach__west_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
@@ -9121,6 +9288,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => true,
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => true,
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => true,
+            ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => true,
+            ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => true,
@@ -9361,7 +9530,17 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::access_open_and_range2(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::access_open(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::access_breach_attractor_and_anuman(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => rules::access_breach_attractor_and_anuman(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => rules::access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::access_breach_attractor_and_anuman(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::access_breach_attractor_and_anuman(ctx, world),
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::access_open(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => true,
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::access_open(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_open(ctx, world),
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => true,
             ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => true,
@@ -9457,6 +9636,15 @@ impl world::Accessible for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_giguna__west_caverns__east_susar__hack__req(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::observe_access_can_deploy(ctx, world, full_obs),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::observe_access_giguna_breach__sw_save__west_11__open_door__req(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::observe_access_open_and_range2(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::observe_access_open(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => rules::observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::observe_access_open(ctx, world, full_obs),
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::observe_access_open(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::observe_access_open(ctx, world, full_obs),
             ActionId::Global__Become_Drone => rules::observe_access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world, full_obs),
             ActionId::Global__Become_Indra => rules::observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, full_obs),
@@ -10272,6 +10460,87 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
+                let (ret, mut tags) = rules::explain_open_and_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_anuman(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Upper Right Mid-air"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_anuman(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Hammond"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_anuman(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Upper Right Mid-air"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_anuman(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Hammond"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
+                let (ret, mut tags) = rules::explain_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 let (ret, mut tags) = rules::explain_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -10499,7 +10768,17 @@ impl world::Action for Action {
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__solid_rock__careful_break__do(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => rules::action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => rules::action_portal_set_glacier_gt_hammonds_end_gt_corner(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::action_glacier__hammonds_end__switch_from_ledge__open_doors__do(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world),
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world),
@@ -10600,6 +10879,18 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
                 SpotId::Giguna__Clouds__Platform_Early
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
+                SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => {
+                SpotId::Glacier__Hammonds_End__Hammond
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => {
+                SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
+                SpotId::Glacier__Hammonds_End__Hammond
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Top
@@ -11028,8 +11319,56 @@ impl world::Action for Action {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
+                rules::observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
+                    ctx, world, full_obs,
+                );
+            }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 rules::observe_action_glacier__vertical_room__upper_switch__open_gate__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
+                rules::observe_action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(ctx, world, full_obs);
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
+                rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => {
+                rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => {
+                rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
+                rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => {
+                rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
+                rules::observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => {
+                rules::observe_action_glacier__hammonds_end__switch_near__open_doors__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
+                rules::observe_action_glacier__hammonds_end__west_11__open_doors__do(
                     ctx, world, full_obs,
                 );
             }
@@ -11338,7 +11677,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1571] = [
+static RAW_SPOTS: [SpotId; 1606] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -11683,6 +12022,7 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Annuna__Vertical_Room__Save_Point,
     SpotId::Annuna__Vertical_Room__Save_Point_Left,
     SpotId::Annuna__Vertical_Room__Save_Point_Right,
+    SpotId::Annuna__Vertical_Room__Upper_Cache,
     SpotId::Annuna__Vertical_Room__Upper_Doorway,
     SpotId::Annuna__Vertical_Room__Upper_Platform,
     SpotId::Annuna__Vertical_Room__West_17,
@@ -12423,6 +12763,27 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Glacier__Grid_43_10_11__East,
     SpotId::Glacier__Grid_43_10_11__Lower,
     SpotId::Glacier__Grid_43_10_11__Top,
+    SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+    SpotId::Glacier__Hammonds_End__Center_Door_Left,
+    SpotId::Glacier__Hammonds_End__Center_Door_Right,
+    SpotId::Glacier__Hammonds_End__Corner,
+    SpotId::Glacier__Hammonds_End__East_11_Door,
+    SpotId::Glacier__Hammonds_End__Hammond,
+    SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+    SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+    SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+    SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+    SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+    SpotId::Glacier__Hammonds_End__Switch_Near,
+    SpotId::Glacier__Hammonds_End__Upper_Floor,
+    SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+    SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+    SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+    SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+    SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+    SpotId::Glacier__Hammonds_End__Upper_Stair,
+    SpotId::Glacier__Hammonds_End__West_10,
+    SpotId::Glacier__Hammonds_End__West_11,
     SpotId::Glacier__Lake_Main_Entrance__Bottom,
     SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
     SpotId::Glacier__Lake_Main_Entrance__Hill,
@@ -12476,11 +12837,17 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Glacier__Sea_Burial__West_14,
     SpotId::Glacier__Sea_Burial__West_Basin,
     SpotId::Glacier__Sea_Burial__West_Water_Surface,
+    SpotId::Glacier__Secret_Chamber__East_10,
+    SpotId::Glacier__Secret_Chamber__East_11,
     SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
     SpotId::Glacier__The_Big_Drop__East,
     SpotId::Glacier__The_Big_Drop__Small_Path,
+    SpotId::Glacier__The_Big_Drop__Solid_Rock,
+    SpotId::Glacier__The_Big_Drop__Unstable_Footing,
     SpotId::Glacier__The_Big_Drop__Water_Surface,
+    SpotId::Glacier__The_Big_Drop__West_11_Door,
     SpotId::Glacier__The_Big_Drop__West_14,
+    SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
     SpotId::Glacier__Vertical_Room__Above_Switch,
     SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
     SpotId::Glacier__Vertical_Room__East_12,
@@ -12541,6 +12908,11 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards,
     SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
     SpotId::Glacier_Breach__Guarded_Corridor__West,
+    SpotId::Glacier_Breach__Hammonds_Breach__East,
+    SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+    SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+    SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+    SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
     SpotId::Glacier_Breach__Piano_Roll__East_10,
     SpotId::Glacier_Breach__Piano_Roll__East_9,
     SpotId::Glacier_Breach__Piano_Roll__Lower_Ledge,
@@ -12744,6 +13116,7 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Menu__Breach_Map__GB_SW_Save,
     SpotId::Menu__Breach_Map__GlB_Arena,
     SpotId::Menu__Breach_Map__GlB_Center,
+    SpotId::Menu__Breach_Map__GlB_East,
     SpotId::Menu__Breach_Map__GlB_South,
     SpotId::Menu__Breach_Map__GlB_West,
     SpotId::Menu__Breach_Map__IB_Basement,
@@ -12760,6 +13133,7 @@ static RAW_SPOTS: [SpotId; 1571] = [
     SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
     SpotId::Menu__Kiengir_Map__Anuman,
     SpotId::Menu__Kiengir_Map__Apocalypse,
+    SpotId::Menu__Kiengir_Map__Breach_Attractor,
     SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Bronze_Axe,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
@@ -13359,6 +13733,10 @@ lazy_static! {
             start: SpotId::Glacier_Breach__Guarded_Corridor__East.into_usize(),
             end: SpotId::Glacier_Breach__Guarded_Corridor__West.into_usize() + 1,
         },
+        AreaId::Glacier_Breach__Hammonds_Breach => Range {
+            start: SpotId::Glacier_Breach__Hammonds_Breach__East.into_usize(),
+            end: SpotId::Glacier_Breach__Hammonds_Breach__West_Side.into_usize() + 1,
+        },
         AreaId::Glacier_Breach__Piano_Roll => Range {
             start: SpotId::Glacier_Breach__Piano_Roll__East_10.into_usize(),
             end: SpotId::Glacier_Breach__Piano_Roll__West.into_usize() + 1,
@@ -13435,6 +13813,10 @@ lazy_static! {
             start: SpotId::Glacier__Grid_43_10_11__East.into_usize(),
             end: SpotId::Glacier__Grid_43_10_11__Top.into_usize() + 1,
         },
+        AreaId::Glacier__Hammonds_End => Range {
+            start: SpotId::Glacier__Hammonds_End__Between_Center_Doors.into_usize(),
+            end: SpotId::Glacier__Hammonds_End__West_11.into_usize() + 1,
+        },
         AreaId::Glacier__Lake_Main_Entrance => Range {
             start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
             end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
@@ -13455,9 +13837,13 @@ lazy_static! {
             start: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left.into_usize(),
             end: SpotId::Glacier__Sea_Burial__West_Water_Surface.into_usize() + 1,
         },
+        AreaId::Glacier__Secret_Chamber => Range {
+            start: SpotId::Glacier__Secret_Chamber__East_10.into_usize(),
+            end: SpotId::Glacier__Secret_Chamber__East_11.into_usize() + 1,
+        },
         AreaId::Glacier__The_Big_Drop => Range {
             start: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right.into_usize(),
-            end: SpotId::Glacier__The_Big_Drop__West_14.into_usize() + 1,
+            end: SpotId::Glacier__The_Big_Drop__West_Unstable_Footing.into_usize() + 1,
         },
         AreaId::Glacier__Vertical_Room => Range {
             start: SpotId::Glacier__Vertical_Room__Above_Switch.into_usize(),
@@ -13674,7 +14060,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 265;
+    const NUM_LOCATIONS: u32 = 269;
 
     fn ruleset(&self) -> String {
         format!(
@@ -13882,6 +14268,10 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
+            CanonId::Hammonds_Note => vec![
+                LocationId::Glacier__Hammonds_End__Hammond__Note,
+                LocationId::Glacier__Hammonds_End__Corner__Quick_Note,
+            ],
             CanonId::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
                 LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
@@ -13956,6 +14346,7 @@ impl world::World for World {
                 LocationId::Giguna__Wasteland__Door_Right__Health,
                 LocationId::Giguna__Dual_Path__Wall_Secret__Health,
                 LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
+                LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health,
                 LocationId::Interior__Ebih_Cave__Entry__Health,
                 LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
                 LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
@@ -14075,6 +14466,9 @@ impl world::World for World {
             Item::Boomerang_Upgrade => vec![LocationId::Annuna__Vertical_Room__Plinth__Item],
             Item::Annuna_Vertical_Room_Gate => {
                 vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button]
+            }
+            Item::Beware_the_Patternmind => {
+                vec![LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet]
             }
             Item::The_Eternal_Arm => {
                 vec![LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet]
@@ -14209,6 +14603,10 @@ impl world::World for World {
             Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape],
             Item::Bounty_List => vec![LocationId::Glacier__Crystals__Top_Corner__Tablet],
             Item::Breach_Attractor => vec![LocationId::Glacier__Crystals__Lower_Corner__Item],
+            Item::Goodbye => vec![
+                LocationId::Glacier__Hammonds_End__Hammond__Note,
+                LocationId::Glacier__Hammonds_End__Corner__Quick_Note,
+            ],
             Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
                 LocationId::Interior__Building_Interior__Entry__Remote_Urn,
@@ -14490,6 +14888,9 @@ impl world::World for World {
             }
             LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
                 SpotId::Annuna__Vertical_Room__Gate_Button
+            }
+            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => {
+                SpotId::Annuna__Vertical_Room__Upper_Cache
             }
             LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
                 SpotId::Annuna__Upper_Hallway__Behind_Pedestal
@@ -14784,6 +15185,15 @@ impl world::World for World {
             }
             LocationId::Glacier__Crystals__Lower_Corner__Item => {
                 SpotId::Glacier__Crystals__Lower_Corner
+            }
+            LocationId::Glacier__Hammonds_End__Hammond__Note => {
+                SpotId::Glacier__Hammonds_End__Hammond
+            }
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
+                SpotId::Glacier__Hammonds_End__Corner
+            }
+            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => {
+                SpotId::Glacier__Hammonds_End__Between_Center_Doors
             }
             LocationId::Interior__Bunker_Interior__Desk__Note => {
                 SpotId::Interior__Bunker_Interior__Desk
@@ -15208,8 +15618,34 @@ impl world::World for World {
                 SpotId::Glacier_Breach__Save_and_Exit__Save_Point
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
+                SpotId::Glacier__The_Big_Drop__Solid_Rock
+            }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 SpotId::Glacier__Vertical_Room__Upper_Switch
+            }
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
+                SpotId::Glacier__Vertical_Room__Lower_Switch
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West
+            | ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => {
+                SpotId::Glacier__Hammonds_End__Upper_Floor
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West
+            | ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
+                SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => {
+                SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+            }
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
+                SpotId::Glacier__Hammonds_End__Switch_from_Ledge
+            }
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => {
+                SpotId::Glacier__Hammonds_End__Switch_Near
+            }
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
+                SpotId::Glacier__Hammonds_End__West_11
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Middle
@@ -15361,10 +15797,11 @@ impl world::World for World {
             ExitId::Annuna__Vertical_Room__Above_Plinth__ex__Save_Point_Right_1 => SpotId::Annuna__Vertical_Room__Above_Plinth,
             ExitId::Annuna__Vertical_Room__Middle_West_Shaft__ex__Middle_Ministair_1 | ExitId:: Annuna__Vertical_Room__Middle_West_Shaft__ex__Save_Point_Left_1 => SpotId::Annuna__Vertical_Room__Middle_West_Shaft,
             ExitId::Annuna__Vertical_Room__Middle_Platform_2__ex__Upper_Doorway_1 => SpotId::Annuna__Vertical_Room__Middle_Platform_2,
-            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 => SpotId::Annuna__Vertical_Room__Upper_Platform,
+            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 | ExitId:: Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => SpotId::Annuna__Vertical_Room__Upper_Platform,
+            ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => SpotId::Annuna__Vertical_Room__Upper_Cache,
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 | ExitId:: Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Left_1 | ExitId:: Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1 | ExitId:: Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1 | ExitId:: Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1 | ExitId:: Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1 => SpotId::Annuna__Vertical_Room__Upper_Doorway,
             ExitId::Annuna__Vertical_Room__Near_Upper_Ledge__ex__West_17_1 => SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
-            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 | ExitId:: Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1 => SpotId::Annuna__Vertical_Room__West_17,
+            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 | ExitId:: Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 | ExitId:: Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1 => SpotId::Annuna__Vertical_Room__West_17,
             ExitId::Annuna__Upper_Hallway__West__ex__Vertical_Room__East_20_1 => SpotId::Annuna__Upper_Hallway__West,
             ExitId::Annuna__Middle_Hallway__West__ex__Vertical_Room__East_21_1 => SpotId::Annuna__Middle_Hallway__West,
             ExitId::Annuna__Middle_Hallway__East__ex__Filter_Teleporter__West_21_1 => SpotId::Annuna__Middle_Hallway__East,
@@ -15953,6 +16390,7 @@ impl world::World for World {
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through | ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__West_14,
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 | ExitId:: Glacier__The_Big_Drop__West_11_Door__ex__East_1 => SpotId::Glacier__The_Big_Drop__West_11_Door,
             ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => SpotId::Glacier__Sea_Burial__West_13,
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Grate_Ledge,
@@ -16052,6 +16490,19 @@ impl world::World for World {
             ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => SpotId::Glacier__Crystals__Portal_Stand,
             ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => SpotId::Glacier__Crystals__East,
             ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 | ExitId:: Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => SpotId::Glacier__Crystals__Portal_Cage,
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 | ExitId:: Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => SpotId::Glacier__Hammonds_End__Upper_Floor,
+            ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => SpotId::Glacier__Hammonds_End__East_11_Door,
+            ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => SpotId::Glacier__Hammonds_End__West_10,
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 | ExitId:: Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => SpotId::Glacier__Hammonds_End__Upper_Stair,
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => SpotId::Glacier__Hammonds_End__Switch_Near,
+            ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 | ExitId:: Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 | ExitId:: Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => SpotId::Glacier__Hammonds_End__West_11,
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 | ExitId:: Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 | ExitId:: Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Center_Door_Right,
             ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Interior__Dock_Elevator__Connector,
             ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Interior__Dock_Interior__Connector,
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => SpotId::Interior__Dock_Interior__Entry,
@@ -16180,6 +16631,7 @@ impl world::World for World {
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_West,
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Center,
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Arena,
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_East,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -16315,6 +16767,11 @@ impl world::World for World {
                                 map.insert(Item::Anuman, 1);
                             }
                         }
+                        if !ctx.has(Item::Beware_the_Patternmind) {
+                            if !map.contains_key(&Item::Beware_the_Patternmind) {
+                                map.insert(Item::Beware_the_Patternmind, 1);
+                            }
+                        }
                         if ctx.count(Item::Big_Flask) < 2 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
                                 *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
@@ -16325,6 +16782,11 @@ impl world::World for World {
                         if !ctx.has(Item::Boomerang) {
                             if !map.contains_key(&Item::Boomerang) {
                                 map.insert(Item::Boomerang, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Breach_Attractor) {
+                            if !map.contains_key(&Item::Breach_Attractor) {
+                                map.insert(Item::Breach_Attractor, 1);
                             }
                         }
                         if !ctx.has(Item::Breach_Sight) {
@@ -16402,6 +16864,11 @@ impl world::World for World {
                                 *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
                             } else {
                                 map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                            }
+                        }
+                        if !ctx.has(Item::Goodbye) {
+                            if !map.contains_key(&Item::Goodbye) {
+                                map.insert(Item::Goodbye, 1);
                             }
                         }
                         if !ctx.has(Item::Hammond_Auth) {
@@ -16556,6 +17023,11 @@ impl world::World for World {
                             map.insert(Item::Anuman, 1);
                         }
                     }
+                    if !ctx.has(Item::Beware_the_Patternmind) {
+                        if !map.contains_key(&Item::Beware_the_Patternmind) {
+                            map.insert(Item::Beware_the_Patternmind, 1);
+                        }
+                    }
                     if ctx.count(Item::Big_Flask) < 2 {
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
                             *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
@@ -16566,6 +17038,11 @@ impl world::World for World {
                     if !ctx.has(Item::Boomerang) {
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Breach_Attractor) {
+                        if !map.contains_key(&Item::Breach_Attractor) {
+                            map.insert(Item::Breach_Attractor, 1);
                         }
                     }
                     if !ctx.has(Item::Breach_Sight) {
@@ -16643,6 +17120,11 @@ impl world::World for World {
                             *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
                         } else {
                             map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                        }
+                    }
+                    if !ctx.has(Item::Goodbye) {
+                        if !map.contains_key(&Item::Goodbye) {
+                            map.insert(Item::Goodbye, 1);
                         }
                     }
                     if !ctx.has(Item::Hammond_Auth) {
@@ -16806,6 +17288,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Anuman) {
                             map.insert(Item::Anuman, 1);
                         }
+                        if !map.contains_key(&Item::Beware_the_Patternmind) {
+                            map.insert(Item::Beware_the_Patternmind, 1);
+                        }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
                             *val = std::cmp::max(*val, 2);
                         } else {
@@ -16813,6 +17298,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
+                        }
+                        if !map.contains_key(&Item::Breach_Attractor) {
+                            map.insert(Item::Breach_Attractor, 1);
                         }
                         if !map.contains_key(&Item::Breach_Sight) {
                             map.insert(Item::Breach_Sight, 1);
@@ -16860,6 +17348,9 @@ impl world::World for World {
                             *val = std::cmp::max(*val, 14);
                         } else {
                             map.insert(Item::Flask, 14);
+                        }
+                        if !map.contains_key(&Item::Goodbye) {
+                            map.insert(Item::Goodbye, 1);
                         }
                         if !map.contains_key(&Item::Hammond_Auth) {
                             map.insert(Item::Hammond_Auth, 1);
@@ -16954,6 +17445,9 @@ impl world::World for World {
                     if !map.contains_key(&Item::Anuman) {
                         map.insert(Item::Anuman, 1);
                     }
+                    if !map.contains_key(&Item::Beware_the_Patternmind) {
+                        map.insert(Item::Beware_the_Patternmind, 1);
+                    }
                     if let Some(val) = map.get_mut(&Item::Big_Flask) {
                         *val = std::cmp::max(*val, 2);
                     } else {
@@ -16961,6 +17455,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
+                    }
+                    if !map.contains_key(&Item::Breach_Attractor) {
+                        map.insert(Item::Breach_Attractor, 1);
                     }
                     if !map.contains_key(&Item::Breach_Sight) {
                         map.insert(Item::Breach_Sight, 1);
@@ -17008,6 +17505,9 @@ impl world::World for World {
                         *val = std::cmp::max(*val, 14);
                     } else {
                         map.insert(Item::Flask, 14);
+                    }
+                    if !map.contains_key(&Item::Goodbye) {
+                        map.insert(Item::Goodbye, 1);
                     }
                     if !map.contains_key(&Item::Hammond_Auth) {
                         map.insert(Item::Hammond_Auth, 1);
@@ -17278,6 +17778,7 @@ impl world::World for World {
             | SpotId::Annuna__Vertical_Room__Middle_Overhang
             | SpotId::Annuna__Vertical_Room__Plinth
             | SpotId::Annuna__Vertical_Room__Save_Point
+            | SpotId::Annuna__Vertical_Room__Upper_Cache
             | SpotId::Annuna__Vertical_Room__West_17
             | SpotId::Annuna__Vertical_Room__West_20
             | SpotId::Annuna__Vertical_Room__West_21
@@ -17641,6 +18142,20 @@ impl world::World for World {
             | SpotId::Glacier__Grid_43_10_11__East
             | SpotId::Glacier__Grid_43_10_11__Lower
             | SpotId::Glacier__Grid_43_10_11__Top
+            | SpotId::Glacier__Hammonds_End__Between_Center_Doors
+            | SpotId::Glacier__Hammonds_End__Corner
+            | SpotId::Glacier__Hammonds_End__East_11_Door
+            | SpotId::Glacier__Hammonds_End__Hammond
+            | SpotId::Glacier__Hammonds_End__Lower_Pedestal_West
+            | SpotId::Glacier__Hammonds_End__Switch_from_Ledge
+            | SpotId::Glacier__Hammonds_End__Switch_Near
+            | SpotId::Glacier__Hammonds_End__Upper_Floor
+            | SpotId::Glacier__Hammonds_End__Upper_Grate_Right
+            | SpotId::Glacier__Hammonds_End__Upper_Portal_Stand
+            | SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
+            | SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal
+            | SpotId::Glacier__Hammonds_End__West_10
+            | SpotId::Glacier__Hammonds_End__West_11
             | SpotId::Glacier__Lake_Main_Entrance__Ebih_Access
             | SpotId::Glacier__Lake_Main_Entrance__Lake_Access
             | SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom
@@ -17664,13 +18179,16 @@ impl world::World for World {
             | SpotId::Glacier__Sea_Burial__West_14
             | SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
             | SpotId::Glacier__The_Big_Drop__East
+            | SpotId::Glacier__The_Big_Drop__Solid_Rock
             | SpotId::Glacier__The_Big_Drop__Water_Surface
+            | SpotId::Glacier__The_Big_Drop__West_11_Door
             | SpotId::Glacier__The_Big_Drop__West_14
             | SpotId::Glacier__Vertical_Room__East_12
             | SpotId::Glacier__Vertical_Room__East_13
             | SpotId::Glacier__Vertical_Room__East_14
             | SpotId::Glacier__Vertical_Room__East_17
             | SpotId::Glacier__Vertical_Room__East_9
+            | SpotId::Glacier__Vertical_Room__Lower_Switch
             | SpotId::Glacier__Vertical_Room__Past_Gate
             | SpotId::Glacier__Vertical_Room__Peak
             | SpotId::Glacier__Vertical_Room__South
@@ -17697,6 +18215,10 @@ impl world::World for World {
             | SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards
             | SpotId::Glacier_Breach__Guarded_Corridor__Save_Point
             | SpotId::Glacier_Breach__Guarded_Corridor__West
+            | SpotId::Glacier_Breach__Hammonds_Breach__East_Side
+            | SpotId::Glacier_Breach__Hammonds_Breach__First_Step
+            | SpotId::Glacier_Breach__Hammonds_Breach__Save_Point
+            | SpotId::Glacier_Breach__Hammonds_Breach__West_Side
             | SpotId::Glacier_Breach__Piano_Roll__East_10
             | SpotId::Glacier_Breach__Piano_Roll__East_9
             | SpotId::Glacier_Breach__Piano_Roll__West
@@ -17805,6 +18327,7 @@ impl world::World for World {
             | SpotId::Menu__Breach_Map__GB_SW_Save
             | SpotId::Menu__Breach_Map__GlB_Arena
             | SpotId::Menu__Breach_Map__GlB_Center
+            | SpotId::Menu__Breach_Map__GlB_East
             | SpotId::Menu__Breach_Map__GlB_South
             | SpotId::Menu__Breach_Map__GlB_West
             | SpotId::Menu__Breach_Map__IB_Gauntlet
@@ -17818,6 +18341,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Annuna_West_Bridge
             | SpotId::Menu__Kiengir_Map__Anuman
             | SpotId::Menu__Kiengir_Map__Apocalypse
+            | SpotId::Menu__Kiengir_Map__Breach_Attractor
             | SpotId::Menu__Kiengir_Map__Breach_Sight
             | SpotId::Menu__Kiengir_Map__Bronze_Axe
             | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
@@ -17951,6 +18475,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
                             | Item::Bounty_List
                             | Item::Bronze_Axe
                             | Item::Building_of_the_School
@@ -17967,6 +18492,7 @@ impl World {
                             | Item::Drone_Melee_Speed_3
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Heretics_Tablet
@@ -18032,6 +18558,7 @@ impl World {
                         item,
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
                             | Item::Bounty_List
                             | Item::Bronze_Axe
                             | Item::Building_of_the_School
@@ -18049,6 +18576,7 @@ impl World {
                             | Item::Escape
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
                             | Item::Heretics_Tablet
@@ -18114,6 +18642,7 @@ impl World {
                     item,
                     Item::Aansur
                         | Item::Amagi_Stronghold_Left_Wall
+                        | Item::Beware_the_Patternmind
                         | Item::Bounty_List
                         | Item::Bronze_Axe
                         | Item::Building_of_the_School
@@ -18131,6 +18660,7 @@ impl World {
                         | Item::Escape
                         | Item::Eye_Ring
                         | Item::Family_Tragedy
+                        | Item::Goodbye
                         | Item::Health_Upgrade_5
                         | Item::Heretics_Granddaughter
                         | Item::Heretics_Tablet
@@ -18478,6 +19008,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Annuna_Vertical_Room_Gate,
             price: Currency::Free,
             time: 100,
+            exit_id: None,
+        },
+        LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => Location {
+            id: LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet,
+            canonical: CanonId::None,
+            item: Item::Beware_the_Patternmind,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
         LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => Location {
@@ -19500,6 +20038,30 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Glacier__Crystals__Lower_Corner__Item,
             canonical: CanonId::None,
             item: Item::Breach_Attractor,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Glacier__Hammonds_End__Hammond__Note => Location {
+            id: LocationId::Glacier__Hammonds_End__Hammond__Note,
+            canonical: CanonId::Hammonds_Note,
+            item: Item::Goodbye,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Glacier__Hammonds_End__Corner__Quick_Note => Location {
+            id: LocationId::Glacier__Hammonds_End__Corner__Quick_Note,
+            canonical: CanonId::Hammonds_Note,
+            item: Item::Goodbye,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => Location {
+            id: LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -21581,6 +22143,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => Exit {
+            id: ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1,
+            time: 1200,
+            dest: SpotId::Annuna__Vertical_Room__Upper_Cache,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => Exit {
+            id: ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1,
+            time: 2631,
+            dest: SpotId::Annuna__Vertical_Room__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 => Exit {
             id: ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1,
             time: 575,
@@ -21627,6 +22203,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Annuna__Vertical_Room__Near_Upper_Ledge__ex__West_17_1,
             time: 600,
             dest: SpotId::Annuna__Vertical_Room__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 => Exit {
+            id: ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1,
+            time: 2631,
+            dest: SpotId::Annuna__Vertical_Room__Upper_Cache,
             price: Currency::Free,
             loc_id: None,
         },
@@ -27799,7 +28382,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => Exit {
             id: ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1,
-            time: 4000,
+            time: 4100,
             dest: SpotId::Glacier__The_Big_Drop__East,
             price: Currency::Energy(150),
             loc_id: None,
@@ -27859,6 +28442,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Glacier__The_Big_Drop__West_14,
             price: Currency::Free,
             loc_id: Some(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+        },
+        ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1,
+            time: 2052,
+            dest: SpotId::Glacier__Hammonds_End__East_11_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => Exit {
+            id: ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1,
+            time: 2807,
+            dest: SpotId::Glacier__The_Big_Drop__East,
+            price: Currency::Free,
+            loc_id: None,
         },
         ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => Exit {
             id: ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
@@ -28894,6 +29491,167 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             time: 350,
             dest: SpotId::Glacier__Crystals__Grate_Left,
             price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1,
+            time: 526,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2,
+            time: 526,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1,
+            time: 1125,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1,
+            time: 3000,
+            dest: SpotId::Glacier__The_Big_Drop__West_11_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1,
+            time: 1315,
+            dest: SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1,
+            time: 1350,
+            dest: SpotId::Glacier__Secret_Chamber__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1,
+            time: 1200,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2,
+            time: 1799,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1,
+            time: 1799,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1,
+            time: 1799,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Stair,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1,
+            time: 350,
+            dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2,
+            time: 350,
+            dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1,
+            time: 350,
+            dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2,
+            time: 350,
+            dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            price: Currency::Energy(40),
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1,
+            time: 600,
+            dest: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1,
+            time: 1350,
+            dest: SpotId::Glacier__Secret_Chamber__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1,
+            time: 877,
+            dest: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => Exit {
+            id: ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2,
+            time: 1200,
+            dest: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1,
+            time: 1200,
+            dest: SpotId::Glacier__Hammonds_End__Upper_Stair,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1,
+            time: 701,
+            dest: SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1,
+            time: 701,
+            dest: SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1,
+            time: 526,
+            dest: SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => Exit {
+            id: ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1,
+            time: 526,
+            dest: SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            price: Currency::Free,
             loc_id: None,
         },
         ExitId::Interior__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
@@ -30076,6 +30834,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
             time: 12000,
             dest: SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -31738,8 +32503,58 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1200,
             price: Currency::Free,
         },
+        ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => Action {
+            id: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
+            time: 1000,
+            price: Currency::Free,
+        },
         ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => Action {
             id: ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => Action {
+            id: ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
+            time: 1000,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => Action {
+            id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
+            time: 2500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => Action {
+            id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note,
+            time: 5000,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => Action {
+            id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
+            time: 3000,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => Action {
+            id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
+            time: 5500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => Action {
+            id: ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner,
+            time: 4000,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => Action {
+            id: ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => Action {
+            id: ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Hammonds_End__West_11__Open_Doors => Action {
+            id: ActionId::Glacier__Hammonds_End__West_11__Open_Doors,
             time: 500,
             price: Currency::Free,
         },
@@ -34571,7 +35386,21 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1.into_usize(),
-                end: ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1.into_usize() + 1,
+                end: ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Vertical_Room__Upper_Cache => Spot {
+            id: SpotId::Annuna__Vertical_Room__Upper_Cache,
+            locations: Range {
+                start: LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet.into_usize(),
+                end: LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1.into_usize(),
+                end: ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -34622,7 +35451,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1.into_usize(),
+                start: ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1.into_usize(),
                 end: ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1.into_usize() + 1,
             },
             actions: Range {
@@ -45635,6 +46464,66 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Glacier_Breach__Hammonds_Breach__Save_Point => Spot {
+            id: SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Hammonds_Breach__West_Side => Spot {
+            id: SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Hammonds_Breach__East_Side => Spot {
+            id: SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Hammonds_Breach__First_Step => Spot {
+            id: SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier_Breach__Hammonds_Breach__East => Spot {
+            id: SpotId::Glacier_Breach__Hammonds_Breach__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier_Breach__Stacked_Enemies__West => Spot {
             id: SpotId::Glacier_Breach__Stacked_Enemies__West,
             locations: Range {
@@ -45902,6 +46791,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Glacier__The_Big_Drop__Solid_Rock => Spot {
+            id: SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break.into_usize(),
+                end: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__The_Big_Drop__Unstable_Footing => Spot {
+            id: SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier__The_Big_Drop__Small_Path => Spot {
             id: SpotId::Glacier__The_Big_Drop__Small_Path,
             locations: Range {
@@ -45951,6 +46865,31 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1.into_usize(),
                 end: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__The_Big_Drop__West_11_Door => Spot {
+            id: SpotId::Glacier__The_Big_Drop__West_11_Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1.into_usize(),
+                end: ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__The_Big_Drop__West_Unstable_Footing => Spot {
+            id: SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -46512,7 +47451,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones.into_usize(),
+                end: ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones.into_usize() + 1,
             },
         },
         SpotId::Glacier__Vertical_Room__East_17 => Spot {
@@ -47524,6 +48464,304 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1.into_usize(),
                 end: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Grate_Left => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Grate_Right => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Floor => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Floor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal => Spot {
+            id: SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Hammond => Spot {
+            id: SpotId::Glacier__Hammonds_End__Hammond,
+            locations: Range {
+                start: LocationId::Glacier__Hammonds_End__Hammond__Note.into_usize(),
+                end: LocationId::Glacier__Hammonds_End__Hammond__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Corner => Spot {
+            id: SpotId::Glacier__Hammonds_End__Corner,
+            locations: Range {
+                start: LocationId::Glacier__Hammonds_End__Corner__Quick_Note.into_usize(),
+                end: LocationId::Glacier__Hammonds_End__Corner__Quick_Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Lower_Pedestal_West => Spot {
+            id: SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__East_11_Door => Spot {
+            id: SpotId::Glacier__Hammonds_End__East_11_Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Portal_Stand => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__West_10 => Spot {
+            id: SpotId::Glacier__Hammonds_End__West_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Upper_Stair => Spot {
+            id: SpotId::Glacier__Hammonds_End__Upper_Stair,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Lower_Grate_Right => Spot {
+            id: SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Lower_Grate_Left => Spot {
+            id: SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Switch_from_Ledge => Spot {
+            id: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Switch_Near => Spot {
+            id: SpotId::Glacier__Hammonds_End__Switch_Near,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__West_11 => Spot {
+            id: SpotId::Glacier__Hammonds_End__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Hammonds_End__West_11__Open_Doors.into_usize(),
+                end: ActionId::Glacier__Hammonds_End__West_11__Open_Doors.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Center_Door_Left => Spot {
+            id: SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Between_Center_Doors => Spot {
+            id: SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            locations: Range {
+                start: LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health.into_usize(),
+                end: LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Hammonds_End__Center_Door_Right => Spot {
+            id: SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1.into_usize(),
+                end: ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Secret_Chamber__East_10 => Spot {
+            id: SpotId::Glacier__Secret_Chamber__East_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Secret_Chamber__East_11 => Spot {
+            id: SpotId::Glacier__Secret_Chamber__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -50254,6 +51492,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Menu__Kiengir_Map__Breach_Attractor => Spot {
+            id: SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Menu__Breach_Map__GB_Peak => Spot {
             id: SpotId::Menu__Breach_Map__GB_Peak,
             locations: Range {
@@ -50378,6 +51628,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize(),
                 end: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_East => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

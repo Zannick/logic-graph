@@ -302,7 +302,8 @@ helpers:
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
-     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Dr_Gloria]
+     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
+     Goodbye]
   $all_flasks:itemList: >
     [Flask{14}, Big_Flask{2}]
   $all_health:itemList: >
@@ -310,7 +311,7 @@ helpers:
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe]
   $other_items:itemList: >
-    [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring]
+    [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring, Breach_Attractor]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]

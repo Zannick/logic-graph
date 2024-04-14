@@ -1833,17 +1833,21 @@ macro_rules! hobserve__attract {
             };
             v != enums::Mode::Drone
         }) || {
-            $full_obs.observe_indra();
-            $ctx.indra()
-        } == {
-            $full_obs.observe_position();
-            $ctx.position()
+            let left = {
+                $full_obs.observe_indra();
+                $ctx.indra()
+            };
+            let right = {
+                $full_obs.observe_position();
+                $ctx.position()
+            };
+            left == right
         }))
     }};
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Dr_Gloria]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -1867,7 +1871,9 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Family_Tragedy)
             && $ctx.has(Item::Destruction_Pogrom)
             && $ctx.has(Item::The_Eternal_Arm)
+            && $ctx.has(Item::Beware_the_Patternmind)
             && $ctx.has(Item::Dr_Gloria)
+            && $ctx.has(Item::Goodbye)
     }};
 }
 #[macro_export]
@@ -2056,9 +2062,27 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
+                let h = $ctx.has(Item::Beware_the_Patternmind);
+                $edict.insert("Beware_the_Patternmind", format!("{}", h));
+                (h, vec!["Beware_the_Patternmind"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
                 let h = $ctx.has(Item::Dr_Gloria);
                 $edict.insert("Dr_Gloria", format!("{}", h));
                 (h, vec!["Dr_Gloria"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Goodbye);
+                $edict.insert("Goodbye", format!("{}", h));
+                (h, vec!["Goodbye"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2129,8 +2153,14 @@ macro_rules! hobserve__all_notes {
             $full_obs.observe_the_eternal_arm();
             $ctx.has(Item::The_Eternal_Arm)
         }) && ({
+            $full_obs.observe_beware_the_patternmind();
+            $ctx.has(Item::Beware_the_Patternmind)
+        }) && ({
             $full_obs.observe_dr_gloria();
             $ctx.has(Item::Dr_Gloria)
+        }) && ({
+            $full_obs.observe_goodbye();
+            $ctx.has(Item::Goodbye)
         })
     }};
 }
@@ -2283,7 +2313,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring]
+/// [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring, Breach_Attractor]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -2291,6 +2321,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Power_Matrix)
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.has(Item::Eye_Ring)
+            && $ctx.has(Item::Breach_Attractor)
     }};
 }
 #[macro_export]
@@ -2331,6 +2362,15 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Eye_Ring"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Breach_Attractor);
+                $edict.insert("Breach_Attractor", format!("{}", h));
+                (h, vec!["Breach_Attractor"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2350,6 +2390,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_eye_ring();
             $ctx.has(Item::Eye_Ring)
+        }) && ({
+            $full_obs.observe_breach_attractor();
+            $ctx.has(Item::Breach_Attractor)
         })
     }};
 }
@@ -2750,7 +2793,11 @@ macro_rules! helper__post_portal_save_update {
 #[macro_export]
 macro_rules! hobserve__post_portal_save_update {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        if data::save_point($ctx.position()) != Default::default() {
+        if {
+            let left = data::save_point($ctx.position());
+            let right = Default::default();
+            left != right
+        } {
             if {
                 let v = data::realm($ctx.position());
                 v == enums::Realm::Breach

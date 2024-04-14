@@ -2561,6 +2561,22 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 701,
         (
             [false],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 2280,
+        // [0.45, 0.350877]
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 800,
+        (
+            [false],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => 701,
+        (
+            [false],
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
         ) => 1200,
@@ -7366,6 +7382,191 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [false],
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 877,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 877,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 199,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 614,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 438,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => 614,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            SpotId::Glacier__Hammonds_End__West_11,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 700,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => 1140,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => 650,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 500,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => 1491,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 550,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        ) => 1491,
+        (
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 2400,
@@ -7830,13 +8031,43 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-        ) => 2000,
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+        ) => 350,
         (
             [false],
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
             SpotId::Glacier__The_Big_Drop__East,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => 2050,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
-        ) => 3157,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ) => 2949,
+        (
+            [false],
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => 2280,
         (
             [false],
             SpotId::Glacier__Vertical_Room__Above_Switch,
@@ -9254,6 +9485,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([false], SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => 1600,
         ([false], SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => 1333,
+        ([false], SpotId::Menu__Breach_Map__GlB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1666,
         ([false], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
         ([false], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([false], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
@@ -10772,6 +11004,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             1533
         }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1200,
         (
             [false],
             SpotId::Menu__Kiengir_Map__Breach_Sight,
@@ -18240,6 +18617,22 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 701,
         (
             [true],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => 2280,
+        // [0.45, 0.350877]
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__East_18,
+        ) => 800,
+        (
+            [true],
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => 701,
+        (
+            [true],
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
         ) => 1200,
@@ -22841,6 +23234,187 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         }
         (
             [true],
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 600,
+        ([true], SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__Hammond) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 877,
+        ([true], SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__Corner) => {
+            526
+        }
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 877,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 199,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 614,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 438,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => 614,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            SpotId::Glacier__Hammonds_End__West_11,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 900,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 700,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => 1140,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => 650,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => 500,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => 1491,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => 550,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        ) => 1491,
+        (
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 2400,
@@ -23295,13 +23869,43 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-        ) => 2000,
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+        ) => 350,
         (
             [true],
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
             SpotId::Glacier__The_Big_Drop__East,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => 2050,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
-        ) => 3157,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ) => 2949,
+        (
+            [true],
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => 2280,
         (
             [true],
             SpotId::Glacier__Vertical_Room__Above_Switch,
@@ -24663,6 +25267,7 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => 500,
         ([true], SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => 1600,
         ([true], SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => 1333,
+        ([true], SpotId::Menu__Breach_Map__GlB_East, SpotId::Menu__Breach_Map__GB_Peak) => 1666,
         ([true], SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => 1533,
         ([true], SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => 1133,
         ([true], SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => 2100,
@@ -26157,6 +26762,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             1533
         }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1200,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Breach_Sight,
@@ -32094,6 +32844,17 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Annuna__Vertical_Room__Upper_Platform, SpotId::Annuna__Vertical_Room__East_18) => {
             true
         }
+        (SpotId::Annuna__Vertical_Room__Upper_Cache, SpotId::Annuna__Vertical_Room__East_18) => {
+            true
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => true,
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => true,
         (
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
@@ -34977,8 +35738,32 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => true,
         (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => true,
         (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => true,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => true,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => true,
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Solid_Rock) => true,
+        (SpotId::Glacier__The_Big_Drop__Solid_Rock, SpotId::Glacier__The_Big_Drop__East) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+        ) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+        ) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+        ) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => true,
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ) => true,
         (SpotId::Glacier__Sea_Burial__West_13, SpotId::Glacier__Sea_Burial__West_Water_Surface) => {
             true
         }
@@ -35705,6 +36490,143 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Crystals__Portal_Stand, SpotId::Glacier__Crystals__Lower_Corner) => true,
         (SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => true,
         (SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => true,
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__Corner) => true,
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            true
+        }
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__Hammond) => true,
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            true
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+        ) => true,
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Hammond) => {
+            true
+        }
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Corner) => {
+            true
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+        ) => true,
+        (SpotId::Glacier__Hammonds_End__Switch_Near, SpotId::Glacier__Hammonds_End__West_11) => {
+            true
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => true,
         (SpotId::Interior__Dock_Elevator__Elevator, SpotId::Interior__Dock_Elevator__Connector) => {
             true
         }
@@ -39670,6 +40592,114 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Menu__Kiengir_Map__Filter_Spiders, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -39680,6 +40710,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => true,
+        (SpotId::Menu__Breach_Map__GlB_East, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Uhrum__West_Entrance__West_27, SpotId::Uhrum__West_Entrance__Southeast_Tree) => {
             true
         }
@@ -46716,6 +47747,31 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+            2280,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__East_18,
+            800,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+            701,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__West_17,
+            2631,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
             1200,
@@ -46777,6 +47833,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Vertical_Room__Upper_Platform,
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -46789,6 +47850,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Annuna__Vertical_Room__West_17,
             SpotId::Annuna__Vertical_Room__Near_Upper_Ledge,
             399,
+        ),
+        (
+            SpotId::Annuna__Vertical_Room__West_17,
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            2631,
         ),
         (
             SpotId::Annuna__Vertical_Room__West_17,
@@ -59066,6 +60132,56 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Menu__Breach_Map__GlB_East,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Menu__Breach_Map__GlB_East,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Menu__Breach_Map__GlB_East,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Menu__Breach_Map__GlB_East,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Menu__Breach_Map__GlB_East,
+            100,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier_Breach__Piano_Roll__East_10,
             SpotId::Glacier_Breach__Electric_Arena__West,
             1600,
@@ -59197,6 +60313,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Save_and_Exit__Halfway,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Halfway,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -59204,6 +60325,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
             SpotId::Glacier_Breach__Save_and_Exit__Halfway,
             1491,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            3000,
         ),
         (
             SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
@@ -59219,6 +60345,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
             SpotId::Glacier_Breach__Save_and_Exit__West,
             1315,
+        ),
+        (
+            SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            3000,
         ),
         (
             SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
@@ -60012,6 +61143,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Crystals__Lower_Corner,
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            100,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -60034,6 +61170,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Crystals__Lower_Slope,
             SpotId::Glacier__Crystals__Portal_Stand,
             1140,
+        ),
+        (
+            SpotId::Glacier__Crystals__Lower_Slope,
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            100,
         ),
         (
             SpotId::Glacier__Crystals__Lower_Slope,
@@ -60124,6 +61265,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Crystals__Portal_Stand,
             SpotId::Glacier__Crystals__Lower_Slope,
             1140,
+        ),
+        (
+            SpotId::Glacier__Crystals__Portal_Stand,
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            100,
         ),
         (
             SpotId::Glacier__Crystals__Portal_Stand,
@@ -60607,6 +61753,421 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_43_10_11__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Corner,
+            350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            877,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            3000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Corner,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            877,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            199,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            1052,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            614,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            438,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            614,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            SpotId::Glacier__Hammonds_End__West_11,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+            350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            5000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            1125,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            789,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            1491,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            1315,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            900,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            700,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            1140,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+            1491,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+            650,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            526,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            500,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            789,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
+            3600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            5500,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            789,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            1491,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            789,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            550,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            701,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Secret_Chamber__East_10,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_11,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            877,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_11,
+            SpotId::Glacier__Secret_Chamber__East_11,
+            1350,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61621,6 +63182,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Secret_Chamber__East_10,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Secret_Chamber__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
             SpotId::Glacier__The_Big_Drop__West_14,
             526,
@@ -61637,13 +63208,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-            2000,
-        ),
-        (
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-            3157,
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            350,
         ),
         (
             SpotId::Glacier__The_Big_Drop__East,
@@ -61653,10 +63219,40 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__The_Big_Drop__Small_Path,
             SpotId::Glacier__The_Big_Drop__East,
-            4000,
+            4100,
         ),
         (
             SpotId::Glacier__The_Big_Drop__Small_Path,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__East,
+            350,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            350,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+            2050,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+            2456,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61667,6 +63263,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__Water_Surface,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            2052,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__East,
+            2807,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            526,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -61682,6 +63298,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            2949,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+            2280,
+        ),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -65146,6 +66777,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Breach_Map__GlB_East,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            12000,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_East,
+            SpotId::Menu__Breach_Map__GB_Peak,
+            1666,
+        ),
+        (
+            SpotId::Menu__Breach_Map__GlB_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Breach_Map__GlB_South,
             SpotId::Glacier_Breach__South_Save__Save_Point,
             12000,
@@ -66842,6 +68488,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -75155,6 +76951,17 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => Some(701),
         (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => Some(2280),
+        (SpotId::Annuna__Vertical_Room__Upper_Cache, SpotId::Annuna__Vertical_Room__East_18) => {
+            Some(800)
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => Some(701),
+        (
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
         ) => Some(1200),
@@ -78404,6 +80211,147 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => Some(3157),
         (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => Some(1754),
         (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => Some(600),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => Some(1052),
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            Some(600)
+        }
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__Hammond) => {
+            Some(600)
+        }
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Corner) => {
+            Some(350)
+        }
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Hammond) => {
+            Some(877)
+        }
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__Corner) => {
+            Some(526)
+        }
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            Some(877)
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => Some(600),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => Some(199),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+        ) => Some(1052),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => Some(614),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => Some(438),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => Some(614),
+        (SpotId::Glacier__Hammonds_End__Switch_Near, SpotId::Glacier__Hammonds_End__West_11) => {
+            Some(526)
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+        ) => Some(350),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => Some(789),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => Some(1491),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => Some(900),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => Some(700),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => Some(1140),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+        ) => Some(1491),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => Some(650),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => Some(526),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => Some(500),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => Some(789),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => Some(789),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => Some(1491),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ) => Some(789),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => Some(550),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+        ) => Some(1200),
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        ) => Some(1491),
+        (
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => Some(2400),
@@ -78737,12 +80685,36 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Glacier__Sea_Burial__West_Water_Surface, SpotId::Glacier__Sea_Burial__West_13) => {
             Some(1000)
         }
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
-            Some(2000)
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Solid_Rock) => {
+            Some(350)
         }
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => {
-            Some(3157)
+        (SpotId::Glacier__The_Big_Drop__Solid_Rock, SpotId::Glacier__The_Big_Drop__East) => {
+            Some(350)
         }
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+        ) => Some(350),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => Some(2050),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+        ) => Some(2456),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+        ) => Some(526),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ) => Some(2949),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => Some(2280),
         (SpotId::Glacier__Vertical_Room__Above_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
             Some(1052)
         }
@@ -79741,6 +81713,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => Some(500),
         (SpotId::Menu__Breach_Map__GlB_Arena, SpotId::Menu__Breach_Map__GB_Peak) => Some(1600),
         (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => Some(1333),
+        (SpotId::Menu__Breach_Map__GlB_East, SpotId::Menu__Breach_Map__GB_Peak) => Some(1666),
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => Some(1533),
         (SpotId::Menu__Breach_Map__GlB_West, SpotId::Menu__Breach_Map__GB_Peak) => Some(1133),
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => Some(2100),
@@ -80841,6 +82814,114 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(1533)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(200),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(533),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1100),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(333)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(533),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1300),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1200),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1133),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1333),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1266),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2133),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1666)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(1866),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(933),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1200)
         }
         (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(1333)
@@ -86265,6 +88346,17 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Annuna__Vertical_Room__Save_Point,
         ) => (Some(701), vec![]),
         (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Door_Switch,
+        ) => (Some(2280), vec![]),
+        (SpotId::Annuna__Vertical_Room__Upper_Cache, SpotId::Annuna__Vertical_Room__East_18) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Annuna__Vertical_Room__Upper_Cache,
+            SpotId::Annuna__Vertical_Room__Upper_Platform,
+        ) => (Some(701), vec![]),
+        (
             SpotId::Annuna__Vertical_Room__Upper_Doorway,
             SpotId::Annuna__Vertical_Room__Door_Switch,
         ) => (Some(1200), vec![]),
@@ -90304,6 +92396,147 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1754), vec![])
         }
         (
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => (Some(1052), vec![]),
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Glacier__Hammonds_End__Corner, SpotId::Glacier__Hammonds_End__Hammond) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Corner) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Glacier__Hammonds_End__East_11_Door, SpotId::Glacier__Hammonds_End__Hammond) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__Corner) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Glacier__Hammonds_End__Hammond, SpotId::Glacier__Hammonds_End__East_11_Door) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => (Some(199), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => (Some(614), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => (Some(438), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+        ) => (Some(614), vec![]),
+        (SpotId::Glacier__Hammonds_End__Switch_Near, SpotId::Glacier__Hammonds_End__West_11) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+            SpotId::Glacier__Hammonds_End__Switch_Near,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => (Some(789), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => (Some(700), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => (Some(1140), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            SpotId::Glacier__Hammonds_End__West_10,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Corner,
+        ) => (Some(650), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Hammond,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        ) => (Some(789), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ) => (Some(789), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
+        ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ) => (Some(789), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Center_Door_Left,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__West_10,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        ) => (Some(1491), vec![]),
+        (
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => (Some(2400), vec![]),
@@ -90675,12 +92908,36 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Sea_Burial__West_Water_Surface, SpotId::Glacier__Sea_Burial__West_13) => {
             (Some(1000), vec![])
         }
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
-            (Some(2000), vec![])
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Solid_Rock) => {
+            (Some(350), vec![])
         }
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => {
-            (Some(3157), vec![])
+        (SpotId::Glacier__The_Big_Drop__Solid_Rock, SpotId::Glacier__The_Big_Drop__East) => {
+            (Some(350), vec![])
         }
+        (
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => (Some(2050), vec![]),
+        (
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Glacier__The_Big_Drop__West_11_Door,
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ) => (Some(2949), vec![]),
+        (
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => (Some(2280), vec![]),
         (SpotId::Glacier__Vertical_Room__Above_Switch, SpotId::Glacier__Vertical_Room__East_14) => {
             (Some(1052), vec![])
         }
@@ -91764,6 +94021,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Breach_Map__GlB_Center, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(1333), vec![])
+        }
+        (SpotId::Menu__Breach_Map__GlB_East, SpotId::Menu__Breach_Map__GB_Peak) => {
+            (Some(1666), vec![])
         }
         (SpotId::Menu__Breach_Map__GlB_South, SpotId::Menu__Breach_Map__GB_Peak) => {
             (Some(1533), vec![])
@@ -92893,6 +95153,114 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(1533), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(333), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1300), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1133), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1266), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2133), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(1866), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(933), vec![]),
+        (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1200), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Breach_Sight, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(1333), vec![])

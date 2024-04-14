@@ -643,6 +643,8 @@ areas:
           tags: [xdoor]
     - name: Save Point
       coord: [39.475, 9.6]
+      data:
+        flipside: Glacier > Hammond's End > Upper Portal Stand
       local:
         - to: West
         - to: Halfway
@@ -652,14 +654,35 @@ areas:
           tags: [save]
     - name: Halfway
       coord: [40.05, 9.6]
+      data:
+        flipside: Glacier > Hammond's End > Upper Grate Right
       local:
         - to: Save Point
         - to: Portal Stand
     - name: Portal Stand
       coord: [40.475, 9.6]
+      data:
+        flipside: Glacier > Hammond's End > Upper Right Pedestal
       local:
         - to: Halfway
 
+- name: Hammond's Breach
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Breach Map > GlB East
+    save_point: Save Point
+  spots:
+    - name: Save Point
+      coord: [40.475, 10.5]
+    - name: West Side
+      coord: [40.3, 10.7]
+    - name: East Side
+      coord: [40.75, 10.75]
+    - name: First Step
+      coord: [40.6, 10.6]
+    - name: East
+      coord: [40.9, 10.75]
 
 - name: Stacked Enemies
   on_entry: $reset_old_area(^newpos)

@@ -1325,7 +1325,6 @@ areas:
     #endregion
 
     #region Upper
-    # TODO: Add tablet Beware_the_Patternmind
     - name: East 18
       coord: [40.95, 17.6]
       local:
@@ -1342,6 +1341,26 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Upper Cache
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Upper Cache
+      coord: [40.85, 16.95]
+      local:
+        - to: East 18
+          thru: [40.85, 17.4]
+        - to: Upper Platform
+        - to: Door Switch
+      locations:
+        - name: Tablet
+          item: Beware_the_Patternmind
+          tags: [standing]
+      exits:
+        - to: West 17
+          req: $hover
+          movement: base
+          jumps: 2
     - name: Upper Doorway
       coord: [40.5, 17.9]
       local:
@@ -1393,6 +1412,9 @@ areas:
         - to: Near Upper Ledge
         - to: Upper Doorway
       exits:
+        - to: Upper Cache
+          req: $hover
+          movement: base
         - to: Upper Platform
           req: $hover
           movement: base

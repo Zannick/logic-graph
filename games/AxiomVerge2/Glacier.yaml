@@ -1,4 +1,6 @@
 name: Glacier
+start:
+  _hammonds_doors: false
 
 areas:
 - name: Dock Outside
@@ -142,28 +144,33 @@ areas:
       coord: [42.95, 10.8]
       local:
         - to: Center
+          jumps: 1
       exits:
         - to: Grid 43,10-11 > Lower
           tags: [xshift]
     - name: Center
-      coord: [42.5, 10.8]
+      coord: [42.5, 10.7]
       local:
         - to: East
         - to: West
+          jumps: 1
       locations:
         - name: Table
           item: Compass
           tags: [standing]
     - name: West  # This is also an autosave location in the early game, also irrelevant.
-      coord: [42.05, 10.8]
+      coord: [42.05, 10.75]
       local:
         - to: Center
+          jumps: 1
       exits:
         - to: The Big Drop > East
           tags: [xshift]
 
 - name: The Big Drop
   on_entry: $reset_old_area(^newpos)
+  reset:
+    _bridge_open: false
   map:
     bottom: [41, 13, 42, 14]
   data_map:
@@ -171,13 +178,28 @@ areas:
       bottom: true
   spots:
     - name: East
-      coord: [41.95, 10.8]
+      coord: [41.95, 10.75]
       local:
-        - to: Small Path
-        - to: Water Surface
+        - to: Solid Rock
       exits:
         - to: Compass Room > West
           tags: [xshift]
+    - name: Solid Rock
+      coord: [41.85, 10.75]
+      local:
+        - to: East
+        - to: Unstable Footing
+      actions:
+        - name: Careful Break
+          do: ^_bridge_open = true
+          time: 1
+    - name: Unstable Footing
+      coord: [41.75, 10.75]
+      enter:
+        _bridge_open: true
+      local:
+        - to: Small Path
+        - to: Water Surface
     - name: Small Path
       coord: [41.95, 12.8]
       exits:
@@ -249,6 +271,26 @@ areas:
           item: Glacier_Big_Drop_Rock
           item_time: 0
           movement: mist2
+
+    - name: West 11 Door
+      coord: [41.15, 10.55]
+      local:
+        - to: West Unstable Footing
+      exits:
+        - to: Hammond's End > East 11 Door
+          req: ^_hammonds_doors
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: East
+          req: $hover
+          movement: base
+    - name: West Unstable Footing
+      coord: [41.3, 10.75]
+      enter:
+        _bridge_open: true
+      local:
+        - to: Small Path
+        - to: Breakable Rock Right
 
 - name: Sea Burial
   on_entry: $reset_old_area(^newpos)
@@ -812,6 +854,11 @@ areas:
           req: Water_Movement and $hook and ^_lower_gatestones
           movement: base
           jumps: 2
+      actions:
+        - name: Open Lower Gatestones
+          req: $open
+          do: ^_lower_gatestones = true
+          tags: [open]
     - name: East 17
       coord: [36.9, 16.75]
       data:
@@ -1570,6 +1617,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Cage
+  map:
+    lower: [37, 15, 38, 16]
+  datamap:
+    map_spot:
+      lower: Menu > Kiengir Map > Breach Attractor
   spots:
     - name: West
       coord: [37.05, 13.8]
@@ -1707,3 +1759,302 @@ areas:
           req: $mist2
           movement: mist2
           price: 40
+
+- name: Hammond's End
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Upper Portal Stand
+  spots:
+    - name: Upper Grate Left
+      coord: [39.9, 9.6]
+      local:
+        - to: Upper Stair
+      exits:
+        - to: Upper Portal Stand
+          req: $hover
+          movement: base
+    - name: Upper Grate Right
+      coord: [40.05, 9.6]
+      local:
+        - to: Upper Floor
+        - to: Upper Right Pedestal
+      exits:
+        - to: Upper Grate Left
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Upper Grate Left
+          req: $mist2
+          price: 40
+          movement: mist2
+    - name: Upper Floor
+      coord: [40.25, 9.8]
+      local:
+        - to: Upper Grate Right
+          jumps: 1
+        - to: Upper Right Pedestal
+          jumps: 1
+      actions:
+        - name: Move Portal to Lower West
+          req: Breach_Attractor and Anuman
+          do: ^portal = `Glacier > Hammond's End > Lower Pedestal West`
+          to: Upper Right Mid-air
+          time: 2.5
+        - name: Move Portal to Note
+          req: Breach_Attractor and Anuman
+          do: ^portal = `Glacier > Hammond's End > Hammond`
+          to: Hammond
+          time: 5
+      exits:
+        - to: Upper Right Mid-air
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Right Pedestal
+      coord: [40.475, 9.6]
+      data:
+        flipside: Glacier Breach > Save and Exit > Portal Stand
+      local:
+        - to: Upper Right Mid-air
+        - to: Upper Floor
+        - to: Upper Grate Right
+      actions:
+        - name: Move Portal to Lower West
+          req: Breach_Attractor and Anuman
+          do: ^portal = `Glacier > Hammond's End > Lower Pedestal West`
+          to: Upper Right Mid-air
+          time: 3
+        - name: Move Portal to Note
+          req: Breach_Attractor and Anuman
+          do: ^portal = `Glacier > Hammond's End > Hammond`
+          to: Hammond
+          time: 5.5
+
+    - name: Upper Right Mid-air
+      coord: [40.7, 10.1]
+      local:
+        - to: Corner
+        - to: Hammond
+        - to: Lower Right Pedestal
+        - to: East 11 Door
+      actions:
+        - name: Move Portal to Corner
+          do: ^portal = `Glacier > Hammond's End > Corner`
+          req: Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
+          time: 4
+
+    - name: Lower Right Pedestal
+      coord: [40.475, 10.5]
+      data:
+        flipside: Glacier Breach > Hammond's Breach > Save Point
+      local:
+        - to: Hammond
+        - to: Lower Pedestal West
+    - name: Hammond
+      coord: [40.6, 10.6]
+      data:
+        flipside: Glacier Breach > Hammond's Breach > First Step
+      local:
+        - to: Lower Right Pedestal
+          jumps: 1
+        - to: Corner
+        - to: East 11 Door
+          jumps: 1
+      locations:
+        - name: Note
+          canon: Hammonds_Note
+          item: Goodbye
+          tags: [standing]
+    - name: Corner
+      coord: [40.75, 10.75]
+      data:
+        flipside: Glacier Breach > Hammond's Breach > East Side
+      local:
+        - to: Hammond
+          jumps: 1
+        - to: East 11 Door
+          jumps: 1
+      locations:
+        - name: Quick Note
+          canon: Hammonds_Note
+          item: Goodbye
+          req: ^portal == ^position
+          tags: [standing]
+    - name: Lower Pedestal West
+      coord: [40.3, 10.7]
+      data:
+        flipside: Glacier Breach > Hammond's Breach > West Side
+      local:
+        - to: Lower Right Pedestal
+          jumps: 1
+        - to: Center Door Right
+          jumps: 1
+
+    - name: East 11 Door
+      coord: [40.85, 10.55]
+      local:
+        - to: Hammond
+        - to: Corner
+      exits:
+        - to: The Big Drop > West 11 Door
+          req: ^_hammonds_doors
+          time: 3
+
+    - name: Upper Portal Stand
+      coord: [39.475, 9.6]
+      local:
+        - to: West 10
+        - to: Upper Stair
+        - to: Lower Grate Right
+        - to: Center Door Left
+      exits:
+        - to: Between Center Doors
+          req: ^_hammonds_doors
+          movement: base
+    - name: West 10
+      coord: [39.05, 9.75]
+      local:
+        - to: Upper Portal Stand
+          jumps: 1
+      exits:
+        - to: Secret Chamber > East 10
+          tags: [xshift]
+    - name: Upper Stair
+      coord: [39.8, 9.95]
+      local:
+        - to: Upper Grate Left
+          jumps: 2
+        - to: Lower Grate Right
+        - to: Center Door Left
+      exits:
+        - to: Upper Portal Stand
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Portal Stand
+          req: $grab
+          movement: base
+          jumps: 3
+
+    - name: Lower Grate Right
+      coord: [39.6, 10.3]
+      local:
+        - to: Center Door Left
+      exits:
+        - to: Upper Portal Stand
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Upper Stair
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Lower Grate Left
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Lower Grate Left
+          req: $mist2
+          price: 40
+          movement: mist2
+
+    - name: Lower Grate Left
+      coord: [39.5, 10.3]
+      local:
+        - to: Switch from Ledge
+      exits:
+        - to: Lower Grate Right
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Lower Grate Right
+          req: $mist2
+          price: 40
+          movement: mist2
+
+    - name: Switch from Ledge
+      coord: [39.3, 10.4]
+      local:
+        - to: Lower Grate Left
+          jumps: 1
+        - to: Switch Near
+      actions:
+        - name: Open Doors
+          req: $open and $range2
+          do: ^_hammonds_doors = true
+          tags: [hack]
+    - name: Switch Near
+      coord: [39.2, 10.5]
+      local:
+        - to: West 11
+      exits:
+        - to: Switch from Ledge
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+      actions:
+        - name: Open Doors
+          req: $open
+          do: ^_hammonds_doors = true
+          tags: [hack]
+    - name: West 11
+      coord: [39.05, 10.7]
+      exits:
+        - to: Secret Chamber > East 11
+          tags: [xshift]
+        - to: Switch from Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Switch from Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+      actions:
+        - name: Open Doors
+          req: $open
+          do: ^_hammonds_doors = true
+          tags: [hack]
+
+    - name: Center Door Left
+      coord: [39.65, 10.5]
+      local:
+        - to: Lower Grate Right
+          jumps: 1
+      exits:
+        - to: Upper Stair
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Between Center Doors
+          req: ^_hammonds_doors
+          movement: base
+    - name: Between Center Doors
+      coord: [39.85, 10.5]
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Center Door Left
+          req: ^_hammonds_doors
+          movement: base
+        - to: Center Door Right
+          req: ^_hammonds_doors
+          movement: base
+    - name: Center Door Right
+      coord: [40.0, 10.5]
+      local:
+        - to: Lower Pedestal West
+      exits:
+        - to: Between Center Doors
+          req: ^_hammonds_doors
+          movement: base
+
+- name: Secret Chamber
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 10
+      coord: [38.95, 9.75]
+    - name: East 11
+      coord: [38.95, 10.7]

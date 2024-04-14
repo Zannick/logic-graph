@@ -502,6 +502,8 @@ areas:
       coord: [44, 19]
     - name: Filter Spiders
       coord: [43, 19]
+    - name: Breach Attractor
+      coord: [37, 16]
     #endregion
 
 - name: Breach Map
@@ -577,5 +579,12 @@ areas:
       exits:
         - to: Glacier Breach > Save and Exit > Save Point
           req: ^map__glacier_breach__save_and_exit__save
+          time: 12
+          tags: [warp]
+    - name: GlB East
+      coord: [40, 11]
+      exits:
+        - to: Glacier Breach > Hammond's Breach > Save Point
+          req: ^map__glacier_breach__hammonds_breach__save
           time: 12
           tags: [warp]

@@ -214,11 +214,13 @@ pub enum AreaId {
     Glacier__Grid_39_40_7_9,
     Glacier__Grid_42_10,
     Glacier__Grid_43_10_11,
+    Glacier__Hammonds_End,
     Glacier__Lake_Main_Entrance,
     Glacier__Ledge_Grab_Room,
     Glacier__Peak,
     Glacier__Revival,
     Glacier__Sea_Burial,
+    Glacier__Secret_Chamber,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
     Glacier_Breach__Angry_Lions,
@@ -229,6 +231,7 @@ pub enum AreaId {
     Glacier_Breach__Floaters,
     Glacier_Breach__Grate_Work,
     Glacier_Breach__Guarded_Corridor,
+    Glacier_Breach__Hammonds_Breach,
     Glacier_Breach__Piano_Roll,
     Glacier_Breach__Save_and_Exit,
     Glacier_Breach__South_Save,
@@ -413,11 +416,13 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Grid_39_40_7_9 => write!(f, "{}", "Glacier > Grid 39-40,7-9"),
             AreaId::Glacier__Grid_42_10 => write!(f, "{}", "Glacier > Grid 42,10"),
             AreaId::Glacier__Grid_43_10_11 => write!(f, "{}", "Glacier > Grid 43,10-11"),
+            AreaId::Glacier__Hammonds_End => write!(f, "{}", "Glacier > Hammond's End"),
             AreaId::Glacier__Lake_Main_Entrance => write!(f, "{}", "Glacier > Lake Main Entrance"),
             AreaId::Glacier__Ledge_Grab_Room => write!(f, "{}", "Glacier > Ledge Grab Room"),
             AreaId::Glacier__Peak => write!(f, "{}", "Glacier > Peak"),
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
             AreaId::Glacier__Sea_Burial => write!(f, "{}", "Glacier > Sea Burial"),
+            AreaId::Glacier__Secret_Chamber => write!(f, "{}", "Glacier > Secret Chamber"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Glacier_Breach__Angry_Lions => write!(f, "{}", "Glacier Breach > Angry Lions"),
@@ -431,6 +436,9 @@ impl fmt::Display for AreaId {
             AreaId::Glacier_Breach__Grate_Work => write!(f, "{}", "Glacier Breach > Grate Work"),
             AreaId::Glacier_Breach__Guarded_Corridor => {
                 write!(f, "{}", "Glacier Breach > Guarded Corridor")
+            }
+            AreaId::Glacier_Breach__Hammonds_Breach => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach")
             }
             AreaId::Glacier_Breach__Piano_Roll => write!(f, "{}", "Glacier Breach > Piano Roll"),
             AreaId::Glacier_Breach__Save_and_Exit => {
@@ -623,11 +631,13 @@ impl std::str::FromStr for AreaId {
             "Glacier > Grid 39-40,7-9" => Ok(AreaId::Glacier__Grid_39_40_7_9),
             "Glacier > Grid 42,10" => Ok(AreaId::Glacier__Grid_42_10),
             "Glacier > Grid 43,10-11" => Ok(AreaId::Glacier__Grid_43_10_11),
+            "Glacier > Hammond's End" => Ok(AreaId::Glacier__Hammonds_End),
             "Glacier > Lake Main Entrance" => Ok(AreaId::Glacier__Lake_Main_Entrance),
             "Glacier > Ledge Grab Room" => Ok(AreaId::Glacier__Ledge_Grab_Room),
             "Glacier > Peak" => Ok(AreaId::Glacier__Peak),
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
             "Glacier > Sea Burial" => Ok(AreaId::Glacier__Sea_Burial),
+            "Glacier > Secret Chamber" => Ok(AreaId::Glacier__Secret_Chamber),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Glacier Breach > Angry Lions" => Ok(AreaId::Glacier_Breach__Angry_Lions),
@@ -638,6 +648,7 @@ impl std::str::FromStr for AreaId {
             "Glacier Breach > Floaters" => Ok(AreaId::Glacier_Breach__Floaters),
             "Glacier Breach > Grate Work" => Ok(AreaId::Glacier_Breach__Grate_Work),
             "Glacier Breach > Guarded Corridor" => Ok(AreaId::Glacier_Breach__Guarded_Corridor),
+            "Glacier Breach > Hammond's Breach" => Ok(AreaId::Glacier_Breach__Hammonds_Breach),
             "Glacier Breach > Piano Roll" => Ok(AreaId::Glacier_Breach__Piano_Roll),
             "Glacier Breach > Save and Exit" => Ok(AreaId::Glacier_Breach__Save_and_Exit),
             "Glacier Breach > South Save" => Ok(AreaId::Glacier_Breach__South_Save),
@@ -1055,6 +1066,7 @@ pub enum SpotId {
     Annuna__Vertical_Room__Save_Point,
     Annuna__Vertical_Room__Save_Point_Left,
     Annuna__Vertical_Room__Save_Point_Right,
+    Annuna__Vertical_Room__Upper_Cache,
     Annuna__Vertical_Room__Upper_Doorway,
     Annuna__Vertical_Room__Upper_Platform,
     Annuna__Vertical_Room__West_17,
@@ -1795,6 +1807,27 @@ pub enum SpotId {
     Glacier__Grid_43_10_11__East,
     Glacier__Grid_43_10_11__Lower,
     Glacier__Grid_43_10_11__Top,
+    Glacier__Hammonds_End__Between_Center_Doors,
+    Glacier__Hammonds_End__Center_Door_Left,
+    Glacier__Hammonds_End__Center_Door_Right,
+    Glacier__Hammonds_End__Corner,
+    Glacier__Hammonds_End__East_11_Door,
+    Glacier__Hammonds_End__Hammond,
+    Glacier__Hammonds_End__Lower_Grate_Left,
+    Glacier__Hammonds_End__Lower_Grate_Right,
+    Glacier__Hammonds_End__Lower_Pedestal_West,
+    Glacier__Hammonds_End__Lower_Right_Pedestal,
+    Glacier__Hammonds_End__Switch_from_Ledge,
+    Glacier__Hammonds_End__Switch_Near,
+    Glacier__Hammonds_End__Upper_Floor,
+    Glacier__Hammonds_End__Upper_Grate_Left,
+    Glacier__Hammonds_End__Upper_Grate_Right,
+    Glacier__Hammonds_End__Upper_Portal_Stand,
+    Glacier__Hammonds_End__Upper_Right_Mid_air,
+    Glacier__Hammonds_End__Upper_Right_Pedestal,
+    Glacier__Hammonds_End__Upper_Stair,
+    Glacier__Hammonds_End__West_10,
+    Glacier__Hammonds_End__West_11,
     Glacier__Lake_Main_Entrance__Bottom,
     Glacier__Lake_Main_Entrance__Ebih_Access,
     Glacier__Lake_Main_Entrance__Hill,
@@ -1848,11 +1881,17 @@ pub enum SpotId {
     Glacier__Sea_Burial__West_14,
     Glacier__Sea_Burial__West_Basin,
     Glacier__Sea_Burial__West_Water_Surface,
+    Glacier__Secret_Chamber__East_10,
+    Glacier__Secret_Chamber__East_11,
     Glacier__The_Big_Drop__Breakable_Rock_Right,
     Glacier__The_Big_Drop__East,
     Glacier__The_Big_Drop__Small_Path,
+    Glacier__The_Big_Drop__Solid_Rock,
+    Glacier__The_Big_Drop__Unstable_Footing,
     Glacier__The_Big_Drop__Water_Surface,
+    Glacier__The_Big_Drop__West_11_Door,
     Glacier__The_Big_Drop__West_14,
+    Glacier__The_Big_Drop__West_Unstable_Footing,
     Glacier__Vertical_Room__Above_Switch,
     Glacier__Vertical_Room__Below_Upper_Switch,
     Glacier__Vertical_Room__East_12,
@@ -1913,6 +1952,11 @@ pub enum SpotId {
     Glacier_Breach__Guarded_Corridor__Past_the_Guards,
     Glacier_Breach__Guarded_Corridor__Save_Point,
     Glacier_Breach__Guarded_Corridor__West,
+    Glacier_Breach__Hammonds_Breach__East,
+    Glacier_Breach__Hammonds_Breach__East_Side,
+    Glacier_Breach__Hammonds_Breach__First_Step,
+    Glacier_Breach__Hammonds_Breach__Save_Point,
+    Glacier_Breach__Hammonds_Breach__West_Side,
     Glacier_Breach__Piano_Roll__East_10,
     Glacier_Breach__Piano_Roll__East_9,
     Glacier_Breach__Piano_Roll__Lower_Ledge,
@@ -2116,6 +2160,7 @@ pub enum SpotId {
     Menu__Breach_Map__GB_SW_Save,
     Menu__Breach_Map__GlB_Arena,
     Menu__Breach_Map__GlB_Center,
+    Menu__Breach_Map__GlB_East,
     Menu__Breach_Map__GlB_South,
     Menu__Breach_Map__GlB_West,
     Menu__Breach_Map__IB_Basement,
@@ -2132,6 +2177,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Annuna_West_Bridge,
     Menu__Kiengir_Map__Anuman,
     Menu__Kiengir_Map__Apocalypse,
+    Menu__Kiengir_Map__Breach_Attractor,
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Bronze_Axe,
     Menu__Kiengir_Map__Ebih_Base_Camp,
@@ -3187,6 +3233,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Annuna__Vertical_Room__Save_Point_Right => {
                 write!(f, "{}", "Annuna > Vertical Room > Save Point Right")
+            }
+            SpotId::Annuna__Vertical_Room__Upper_Cache => {
+                write!(f, "{}", "Annuna > Vertical Room > Upper Cache")
             }
             SpotId::Annuna__Vertical_Room__Upper_Doorway => {
                 write!(f, "{}", "Annuna > Vertical Room > Upper Doorway")
@@ -4978,6 +5027,69 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Grid 43,10-11 > Lower")
             }
             SpotId::Glacier__Grid_43_10_11__Top => write!(f, "{}", "Glacier > Grid 43,10-11 > Top"),
+            SpotId::Glacier__Hammonds_End__Between_Center_Doors => {
+                write!(f, "{}", "Glacier > Hammond's End > Between Center Doors")
+            }
+            SpotId::Glacier__Hammonds_End__Center_Door_Left => {
+                write!(f, "{}", "Glacier > Hammond's End > Center Door Left")
+            }
+            SpotId::Glacier__Hammonds_End__Center_Door_Right => {
+                write!(f, "{}", "Glacier > Hammond's End > Center Door Right")
+            }
+            SpotId::Glacier__Hammonds_End__Corner => {
+                write!(f, "{}", "Glacier > Hammond's End > Corner")
+            }
+            SpotId::Glacier__Hammonds_End__East_11_Door => {
+                write!(f, "{}", "Glacier > Hammond's End > East 11 Door")
+            }
+            SpotId::Glacier__Hammonds_End__Hammond => {
+                write!(f, "{}", "Glacier > Hammond's End > Hammond")
+            }
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Left => {
+                write!(f, "{}", "Glacier > Hammond's End > Lower Grate Left")
+            }
+            SpotId::Glacier__Hammonds_End__Lower_Grate_Right => {
+                write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right")
+            }
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West => {
+                write!(f, "{}", "Glacier > Hammond's End > Lower Pedestal West")
+            }
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal => {
+                write!(f, "{}", "Glacier > Hammond's End > Lower Right Pedestal")
+            }
+            SpotId::Glacier__Hammonds_End__Switch_from_Ledge => {
+                write!(f, "{}", "Glacier > Hammond's End > Switch from Ledge")
+            }
+            SpotId::Glacier__Hammonds_End__Switch_Near => {
+                write!(f, "{}", "Glacier > Hammond's End > Switch Near")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Floor => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Floor")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Grate Left")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Right => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Grate Right")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Portal Stand")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Right Mid-air")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Right Pedestal")
+            }
+            SpotId::Glacier__Hammonds_End__Upper_Stair => {
+                write!(f, "{}", "Glacier > Hammond's End > Upper Stair")
+            }
+            SpotId::Glacier__Hammonds_End__West_10 => {
+                write!(f, "{}", "Glacier > Hammond's End > West 10")
+            }
+            SpotId::Glacier__Hammonds_End__West_11 => {
+                write!(f, "{}", "Glacier > Hammond's End > West 11")
+            }
             SpotId::Glacier__Lake_Main_Entrance__Bottom => {
                 write!(f, "{}", "Glacier > Lake Main Entrance > Bottom")
             }
@@ -5121,6 +5233,12 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Sea_Burial__West_Water_Surface => {
                 write!(f, "{}", "Glacier > Sea Burial > West Water Surface")
             }
+            SpotId::Glacier__Secret_Chamber__East_10 => {
+                write!(f, "{}", "Glacier > Secret Chamber > East 10")
+            }
+            SpotId::Glacier__Secret_Chamber__East_11 => {
+                write!(f, "{}", "Glacier > Secret Chamber > East 11")
+            }
             SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => {
                 write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right")
             }
@@ -5128,11 +5246,23 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__The_Big_Drop__Small_Path => {
                 write!(f, "{}", "Glacier > The Big Drop > Small Path")
             }
+            SpotId::Glacier__The_Big_Drop__Solid_Rock => {
+                write!(f, "{}", "Glacier > The Big Drop > Solid Rock")
+            }
+            SpotId::Glacier__The_Big_Drop__Unstable_Footing => {
+                write!(f, "{}", "Glacier > The Big Drop > Unstable Footing")
+            }
             SpotId::Glacier__The_Big_Drop__Water_Surface => {
                 write!(f, "{}", "Glacier > The Big Drop > Water Surface")
             }
+            SpotId::Glacier__The_Big_Drop__West_11_Door => {
+                write!(f, "{}", "Glacier > The Big Drop > West 11 Door")
+            }
             SpotId::Glacier__The_Big_Drop__West_14 => {
                 write!(f, "{}", "Glacier > The Big Drop > West 14")
+            }
+            SpotId::Glacier__The_Big_Drop__West_Unstable_Footing => {
+                write!(f, "{}", "Glacier > The Big Drop > West Unstable Footing")
             }
             SpotId::Glacier__Vertical_Room__Above_Switch => {
                 write!(f, "{}", "Glacier > Vertical Room > Above Switch")
@@ -5315,6 +5445,21 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier_Breach__Guarded_Corridor__West => {
                 write!(f, "{}", "Glacier Breach > Guarded Corridor > West")
+            }
+            SpotId::Glacier_Breach__Hammonds_Breach__East => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach > East")
+            }
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach > East Side")
+            }
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach > First Step")
+            }
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach > Save Point")
+            }
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side => {
+                write!(f, "{}", "Glacier Breach > Hammond's Breach > West Side")
             }
             SpotId::Glacier_Breach__Piano_Roll__East_10 => {
                 write!(f, "{}", "Glacier Breach > Piano Roll > East 10")
@@ -5867,6 +6012,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Breach_Map__GlB_Center => {
                 write!(f, "{}", "Menu > Breach Map > GlB Center")
             }
+            SpotId::Menu__Breach_Map__GlB_East => write!(f, "{}", "Menu > Breach Map > GlB East"),
             SpotId::Menu__Breach_Map__GlB_South => write!(f, "{}", "Menu > Breach Map > GlB South"),
             SpotId::Menu__Breach_Map__GlB_West => write!(f, "{}", "Menu > Breach Map > GlB West"),
             SpotId::Menu__Breach_Map__IB_Basement => {
@@ -5908,6 +6054,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Anuman => write!(f, "{}", "Menu > Kiengir Map > Anuman"),
             SpotId::Menu__Kiengir_Map__Apocalypse => {
                 write!(f, "{}", "Menu > Kiengir Map > Apocalypse")
+            }
+            SpotId::Menu__Kiengir_Map__Breach_Attractor => {
+                write!(f, "{}", "Menu > Kiengir Map > Breach Attractor")
             }
             SpotId::Menu__Kiengir_Map__Breach_Sight => {
                 write!(f, "{}", "Menu > Kiengir Map > Breach Sight")
@@ -6998,6 +7147,9 @@ impl std::str::FromStr for SpotId {
             }
             "Annuna > Vertical Room > Save Point Right" => {
                 Ok(SpotId::Annuna__Vertical_Room__Save_Point_Right)
+            }
+            "Annuna > Vertical Room > Upper Cache" => {
+                Ok(SpotId::Annuna__Vertical_Room__Upper_Cache)
             }
             "Annuna > Vertical Room > Upper Doorway" => {
                 Ok(SpotId::Annuna__Vertical_Room__Upper_Doorway)
@@ -8163,6 +8315,61 @@ impl std::str::FromStr for SpotId {
             "Glacier > Grid 43,10-11 > East" => Ok(SpotId::Glacier__Grid_43_10_11__East),
             "Glacier > Grid 43,10-11 > Lower" => Ok(SpotId::Glacier__Grid_43_10_11__Lower),
             "Glacier > Grid 43,10-11 > Top" => Ok(SpotId::Glacier__Grid_43_10_11__Top),
+            "Glacier > Hammond's End > Between Center Doors" => {
+                Ok(SpotId::Glacier__Hammonds_End__Between_Center_Doors)
+            }
+            "Glacier > Hammond's End > Center Door Left" => {
+                Ok(SpotId::Glacier__Hammonds_End__Center_Door_Left)
+            }
+            "Glacier > Hammond's End > Center Door Right" => {
+                Ok(SpotId::Glacier__Hammonds_End__Center_Door_Right)
+            }
+            "Glacier > Hammond's End > Corner" => Ok(SpotId::Glacier__Hammonds_End__Corner),
+            "Glacier > Hammond's End > East 11 Door" => {
+                Ok(SpotId::Glacier__Hammonds_End__East_11_Door)
+            }
+            "Glacier > Hammond's End > Hammond" => Ok(SpotId::Glacier__Hammonds_End__Hammond),
+            "Glacier > Hammond's End > Lower Grate Left" => {
+                Ok(SpotId::Glacier__Hammonds_End__Lower_Grate_Left)
+            }
+            "Glacier > Hammond's End > Lower Grate Right" => {
+                Ok(SpotId::Glacier__Hammonds_End__Lower_Grate_Right)
+            }
+            "Glacier > Hammond's End > Lower Pedestal West" => {
+                Ok(SpotId::Glacier__Hammonds_End__Lower_Pedestal_West)
+            }
+            "Glacier > Hammond's End > Lower Right Pedestal" => {
+                Ok(SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal)
+            }
+            "Glacier > Hammond's End > Switch from Ledge" => {
+                Ok(SpotId::Glacier__Hammonds_End__Switch_from_Ledge)
+            }
+            "Glacier > Hammond's End > Switch Near" => {
+                Ok(SpotId::Glacier__Hammonds_End__Switch_Near)
+            }
+            "Glacier > Hammond's End > Upper Floor" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Floor)
+            }
+            "Glacier > Hammond's End > Upper Grate Left" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Grate_Left)
+            }
+            "Glacier > Hammond's End > Upper Grate Right" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Grate_Right)
+            }
+            "Glacier > Hammond's End > Upper Portal Stand" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Portal_Stand)
+            }
+            "Glacier > Hammond's End > Upper Right Mid-air" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air)
+            }
+            "Glacier > Hammond's End > Upper Right Pedestal" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal)
+            }
+            "Glacier > Hammond's End > Upper Stair" => {
+                Ok(SpotId::Glacier__Hammonds_End__Upper_Stair)
+            }
+            "Glacier > Hammond's End > West 10" => Ok(SpotId::Glacier__Hammonds_End__West_10),
+            "Glacier > Hammond's End > West 11" => Ok(SpotId::Glacier__Hammonds_End__West_11),
             "Glacier > Lake Main Entrance > Bottom" => {
                 Ok(SpotId::Glacier__Lake_Main_Entrance__Bottom)
             }
@@ -8260,15 +8467,27 @@ impl std::str::FromStr for SpotId {
             "Glacier > Sea Burial > West Water Surface" => {
                 Ok(SpotId::Glacier__Sea_Burial__West_Water_Surface)
             }
+            "Glacier > Secret Chamber > East 10" => Ok(SpotId::Glacier__Secret_Chamber__East_10),
+            "Glacier > Secret Chamber > East 11" => Ok(SpotId::Glacier__Secret_Chamber__East_11),
             "Glacier > The Big Drop > Breakable Rock Right" => {
                 Ok(SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right)
             }
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
+            "Glacier > The Big Drop > Solid Rock" => Ok(SpotId::Glacier__The_Big_Drop__Solid_Rock),
+            "Glacier > The Big Drop > Unstable Footing" => {
+                Ok(SpotId::Glacier__The_Big_Drop__Unstable_Footing)
+            }
             "Glacier > The Big Drop > Water Surface" => {
                 Ok(SpotId::Glacier__The_Big_Drop__Water_Surface)
             }
+            "Glacier > The Big Drop > West 11 Door" => {
+                Ok(SpotId::Glacier__The_Big_Drop__West_11_Door)
+            }
             "Glacier > The Big Drop > West 14" => Ok(SpotId::Glacier__The_Big_Drop__West_14),
+            "Glacier > The Big Drop > West Unstable Footing" => {
+                Ok(SpotId::Glacier__The_Big_Drop__West_Unstable_Footing)
+            }
             "Glacier > Vertical Room > Above Switch" => {
                 Ok(SpotId::Glacier__Vertical_Room__Above_Switch)
             }
@@ -8408,6 +8627,21 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier Breach > Guarded Corridor > West" => {
                 Ok(SpotId::Glacier_Breach__Guarded_Corridor__West)
+            }
+            "Glacier Breach > Hammond's Breach > East" => {
+                Ok(SpotId::Glacier_Breach__Hammonds_Breach__East)
+            }
+            "Glacier Breach > Hammond's Breach > East Side" => {
+                Ok(SpotId::Glacier_Breach__Hammonds_Breach__East_Side)
+            }
+            "Glacier Breach > Hammond's Breach > First Step" => {
+                Ok(SpotId::Glacier_Breach__Hammonds_Breach__First_Step)
+            }
+            "Glacier Breach > Hammond's Breach > Save Point" => {
+                Ok(SpotId::Glacier_Breach__Hammonds_Breach__Save_Point)
+            }
+            "Glacier Breach > Hammond's Breach > West Side" => {
+                Ok(SpotId::Glacier_Breach__Hammonds_Breach__West_Side)
             }
             "Glacier Breach > Piano Roll > East 10" => {
                 Ok(SpotId::Glacier_Breach__Piano_Roll__East_10)
@@ -8818,6 +9052,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Breach Map > GB SW Save" => Ok(SpotId::Menu__Breach_Map__GB_SW_Save),
             "Menu > Breach Map > GlB Arena" => Ok(SpotId::Menu__Breach_Map__GlB_Arena),
             "Menu > Breach Map > GlB Center" => Ok(SpotId::Menu__Breach_Map__GlB_Center),
+            "Menu > Breach Map > GlB East" => Ok(SpotId::Menu__Breach_Map__GlB_East),
             "Menu > Breach Map > GlB South" => Ok(SpotId::Menu__Breach_Map__GlB_South),
             "Menu > Breach Map > GlB West" => Ok(SpotId::Menu__Breach_Map__GlB_West),
             "Menu > Breach Map > IB Basement" => Ok(SpotId::Menu__Breach_Map__IB_Basement),
@@ -8850,6 +9085,9 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Anuman" => Ok(SpotId::Menu__Kiengir_Map__Anuman),
             "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
+            "Menu > Kiengir Map > Breach Attractor" => {
+                Ok(SpotId::Menu__Kiengir_Map__Breach_Attractor)
+            }
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Bronze Axe" => Ok(SpotId::Menu__Kiengir_Map__Bronze_Axe),
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
@@ -9224,6 +9462,7 @@ pub enum LocationId {
     Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
     Annuna__Vertical_Room__Gate_Button__Hit_Button,
     Annuna__Vertical_Room__Plinth__Item,
+    Annuna__Vertical_Room__Upper_Cache__Tablet,
     Annuna__West_Bridge__Plinth__Item,
     Annuna__West_Climb__Cache__Item,
     Antarctica__Building_2__Behind_Boxes__Note,
@@ -9317,6 +9556,9 @@ pub enum LocationId {
     Glacier__Compass_Room__Center__Table,
     Glacier__Crystals__Lower_Corner__Item,
     Glacier__Crystals__Top_Corner__Tablet,
+    Glacier__Hammonds_End__Between_Center_Doors__Health,
+    Glacier__Hammonds_End__Corner__Quick_Note,
+    Glacier__Hammonds_End__Hammond__Note,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
     Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
@@ -9663,6 +9905,9 @@ impl fmt::Display for LocationId {
             LocationId::Annuna__Vertical_Room__Plinth__Item => {
                 write!(f, "{}", "Annuna > Vertical Room > Plinth > Item")
             }
+            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => {
+                write!(f, "{}", "Annuna > Vertical Room > Upper Cache > Tablet")
+            }
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
             }
@@ -9991,6 +10236,17 @@ impl fmt::Display for LocationId {
             }
             LocationId::Glacier__Crystals__Top_Corner__Tablet => {
                 write!(f, "{}", "Glacier > Crystals > Top Corner > Tablet")
+            }
+            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Between Center Doors > Health"
+            ),
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
+                write!(f, "{}", "Glacier > Hammond's End > Corner > Quick Note")
+            }
+            LocationId::Glacier__Hammonds_End__Hammond__Note => {
+                write!(f, "{}", "Glacier > Hammond's End > Hammond > Note")
             }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(
                 f,
@@ -10635,6 +10891,9 @@ impl std::str::FromStr for LocationId {
             "Annuna > Vertical Room > Plinth > Item" => {
                 Ok(LocationId::Annuna__Vertical_Room__Plinth__Item)
             }
+            "Annuna > Vertical Room > Upper Cache > Tablet" => {
+                Ok(LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet)
+            }
             "Annuna > West Bridge > Plinth > Item" => {
                 Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
             }
@@ -10889,6 +11148,15 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Crystals > Top Corner > Tablet" => {
                 Ok(LocationId::Glacier__Crystals__Top_Corner__Tablet)
+            }
+            "Glacier > Hammond's End > Between Center Doors > Health" => {
+                Ok(LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health)
+            }
+            "Glacier > Hammond's End > Corner > Quick Note" => {
+                Ok(LocationId::Glacier__Hammonds_End__Corner__Quick_Note)
+            }
+            "Glacier > Hammond's End > Hammond > Note" => {
+                Ok(LocationId::Glacier__Hammonds_End__Hammond__Note)
             }
             "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => {
                 Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab)
@@ -11596,6 +11864,7 @@ pub enum ExitId {
     Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1,
     Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1,
     Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1,
+    Annuna__Vertical_Room__Upper_Cache__ex__West_17_1,
     Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1,
     Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1,
     Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1,
@@ -11603,6 +11872,8 @@ pub enum ExitId {
     Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1,
     Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1,
     Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1,
+    Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1,
+    Annuna__Vertical_Room__West_17__ex__Upper_Cache_1,
     Annuna__Vertical_Room__West_17__ex__Upper_Platform_1,
     Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1,
     Annuna__Vertical_Room__West_20__ex__Center_Climb__East_1,
@@ -12308,6 +12579,29 @@ pub enum ExitId {
     Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1,
     Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,
     Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,
+    Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1,
+    Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1,
+    Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1,
+    Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1,
+    Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1,
+    Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1,
+    Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1,
+    Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2,
+    Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1,
+    Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2,
+    Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1,
+    Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1,
+    Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1,
+    Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1,
+    Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1,
+    Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2,
+    Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1,
+    Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1,
+    Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2,
+    Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1,
+    Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1,
+    Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1,
+    Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2,
     Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
     Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1,
     Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
@@ -12376,6 +12670,8 @@ pub enum ExitId {
     Glacier__The_Big_Drop__East__ex__Compass_Room__West_1,
     Glacier__The_Big_Drop__Small_Path__ex__East_1,
     Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1,
+    Glacier__The_Big_Drop__West_11_Door__ex__East_1,
+    Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1,
     Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1,
     Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1,
     Glacier__The_Big_Drop__West_14__Mist_Through,
@@ -12631,6 +12927,7 @@ pub enum ExitId {
     Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
     Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
     Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1,
+    Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1,
     Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1,
     Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1,
     Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
@@ -13165,6 +13462,7 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1 => write!(f, "{}", "Annuna > Vertical Room > Plinth ==> Gate Ledge (1)"),
             ExitId::Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1 => write!(f, "{}", "Annuna > Vertical Room > Save Point ==> Middle Platform 2 (1)"),
             ExitId::Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1 => write!(f, "{}", "Annuna > Vertical Room > Save Point Left ==> Middle Platform 1 (1)"),
+            ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Cache ==> West 17 (1)"),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Doorway ==> East 20 (1)"),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Doorway ==> Middle Ministair (1)"),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Doorway ==> Middle Platform 2 (1)"),
@@ -13172,6 +13470,8 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Doorway ==> Save Point Right (1)"),
             ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Doorway ==> West 20 (1)"),
             ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Platform ==> Near Upper Ledge (1)"),
+            ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1 => write!(f, "{}", "Annuna > Vertical Room > Upper Platform ==> Upper Cache (1)"),
+            ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1 => write!(f, "{}", "Annuna > Vertical Room > West 17 ==> Upper Cache (1)"),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1 => write!(f, "{}", "Annuna > Vertical Room > West 17 ==> Upper Platform (1)"),
             ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1 => write!(f, "{}", "Annuna > Vertical Room > West 17 ==> Upper Save > East (1)"),
             ExitId::Annuna__Vertical_Room__West_20__ex__Center_Climb__East_1 => write!(f, "{}", "Annuna > Vertical Room > West 20 ==> Center Climb > East (1)"),
@@ -13877,6 +14177,29 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West 10 (1)"),
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => write!(f, "{}", "Glacier > Hammond's End > Between Center Doors ==> Center Door Left (1)"),
+            ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => write!(f, "{}", "Glacier > Hammond's End > Between Center Doors ==> Center Door Right (1)"),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => write!(f, "{}", "Glacier > Hammond's End > Center Door Left ==> Between Center Doors (1)"),
+            ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 => write!(f, "{}", "Glacier > Hammond's End > Center Door Left ==> Upper Stair (1)"),
+            ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => write!(f, "{}", "Glacier > Hammond's End > Center Door Right ==> Between Center Doors (1)"),
+            ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => write!(f, "{}", "Glacier > Hammond's End > East 11 Door ==> The Big Drop > West 11 Door (1)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Left ==> Lower Grate Right (1)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Left ==> Lower Grate Right (2)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right ==> Lower Grate Left (1)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right ==> Lower Grate Left (2)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right ==> Upper Portal Stand (1)"),
+            ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right ==> Upper Stair (1)"),
+            ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => write!(f, "{}", "Glacier > Hammond's End > Switch Near ==> Switch from Ledge (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Floor ==> Upper Right Mid-air (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => write!(f, "{}", "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (2)"),
+            ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Portal Stand ==> Between Center Doors (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Stair ==> Upper Portal Stand (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => write!(f, "{}", "Glacier > Hammond's End > Upper Stair ==> Upper Portal Stand (2)"),
+            ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => write!(f, "{}", "Glacier > Hammond's End > West 10 ==> Secret Chamber > East 10 (1)"),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 => write!(f, "{}", "Glacier > Hammond's End > West 11 ==> Secret Chamber > East 11 (1)"),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => write!(f, "{}", "Glacier > Hammond's End > West 11 ==> Switch from Ledge (1)"),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => write!(f, "{}", "Glacier > Hammond's End > West 11 ==> Switch from Ledge (2)"),
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)"),
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Lake Access ==> Amagi > Main Area > East 15 (1)"),
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ledge ==> Upper (1)"),
@@ -13945,6 +14268,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1 => write!(f, "{}", "Glacier > The Big Drop > Small Path ==> East (1)"),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => write!(f, "{}", "Glacier > The Big Drop > Water Surface ==> Sea Burial > Collapsing Ceiling (1)"),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => write!(f, "{}", "Glacier > The Big Drop > West 11 Door ==> East (1)"),
+            ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => write!(f, "{}", "Glacier > The Big Drop > West 11 Door ==> Hammond's End > East 11 Door (1)"),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => write!(f, "{}", "Glacier > The Big Drop > West 14 ==> Breakable Rock Right (1)"),
             ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => write!(f, "{}", "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)"),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through"),
@@ -14200,6 +14525,7 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)"),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB Arena ==> Glacier Breach > Save and Exit > Save Point (1)"),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB Center ==> Glacier Breach > Guarded Corridor > Save Point (1)"),
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB East ==> Glacier Breach > Hammond's Breach > Save Point (1)"),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB South ==> Glacier Breach > South Save > Save Point (1)"),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > GlB West ==> Glacier Breach > West Save > Save Point (1)"),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)"),
@@ -14739,6 +15065,7 @@ impl std::str::FromStr for ExitId {
             "Annuna > Vertical Room > Plinth ==> Gate Ledge (1)" => Ok(ExitId::Annuna__Vertical_Room__Plinth__ex__Gate_Ledge_1),
             "Annuna > Vertical Room > Save Point ==> Middle Platform 2 (1)" => Ok(ExitId::Annuna__Vertical_Room__Save_Point__ex__Middle_Platform_2_1),
             "Annuna > Vertical Room > Save Point Left ==> Middle Platform 1 (1)" => Ok(ExitId::Annuna__Vertical_Room__Save_Point_Left__ex__Middle_Platform_1_1),
+            "Annuna > Vertical Room > Upper Cache ==> West 17 (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Cache__ex__West_17_1),
             "Annuna > Vertical Room > Upper Doorway ==> East 20 (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__East_20_1),
             "Annuna > Vertical Room > Upper Doorway ==> Middle Ministair (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Ministair_1),
             "Annuna > Vertical Room > Upper Doorway ==> Middle Platform 2 (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Middle_Platform_2_1),
@@ -14746,6 +15073,8 @@ impl std::str::FromStr for ExitId {
             "Annuna > Vertical Room > Upper Doorway ==> Save Point Right (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__Save_Point_Right_1),
             "Annuna > Vertical Room > Upper Doorway ==> West 20 (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Doorway__ex__West_20_1),
             "Annuna > Vertical Room > Upper Platform ==> Near Upper Ledge (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Near_Upper_Ledge_1),
+            "Annuna > Vertical Room > Upper Platform ==> Upper Cache (1)" => Ok(ExitId::Annuna__Vertical_Room__Upper_Platform__ex__Upper_Cache_1),
+            "Annuna > Vertical Room > West 17 ==> Upper Cache (1)" => Ok(ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Cache_1),
             "Annuna > Vertical Room > West 17 ==> Upper Platform (1)" => Ok(ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Platform_1),
             "Annuna > Vertical Room > West 17 ==> Upper Save > East (1)" => Ok(ExitId::Annuna__Vertical_Room__West_17__ex__Upper_Save__East_1),
             "Annuna > Vertical Room > West 20 ==> Center Climb > East (1)" => Ok(ExitId::Annuna__Vertical_Room__West_20__ex__Center_Climb__East_1),
@@ -15451,6 +15780,29 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West 10 (1)" => Ok(ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1),
             "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1),
             "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1),
+            "Glacier > Hammond's End > Between Center Doors ==> Center Door Left (1)" => Ok(ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1),
+            "Glacier > Hammond's End > Between Center Doors ==> Center Door Right (1)" => Ok(ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1),
+            "Glacier > Hammond's End > Center Door Left ==> Between Center Doors (1)" => Ok(ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1),
+            "Glacier > Hammond's End > Center Door Left ==> Upper Stair (1)" => Ok(ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1),
+            "Glacier > Hammond's End > Center Door Right ==> Between Center Doors (1)" => Ok(ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1),
+            "Glacier > Hammond's End > East 11 Door ==> The Big Drop > West 11 Door (1)" => Ok(ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1),
+            "Glacier > Hammond's End > Lower Grate Left ==> Lower Grate Right (1)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1),
+            "Glacier > Hammond's End > Lower Grate Left ==> Lower Grate Right (2)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2),
+            "Glacier > Hammond's End > Lower Grate Right ==> Lower Grate Left (1)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1),
+            "Glacier > Hammond's End > Lower Grate Right ==> Lower Grate Left (2)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2),
+            "Glacier > Hammond's End > Lower Grate Right ==> Upper Portal Stand (1)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1),
+            "Glacier > Hammond's End > Lower Grate Right ==> Upper Stair (1)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1),
+            "Glacier > Hammond's End > Switch Near ==> Switch from Ledge (1)" => Ok(ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1),
+            "Glacier > Hammond's End > Upper Floor ==> Upper Right Mid-air (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1),
+            "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1),
+            "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (2)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2),
+            "Glacier > Hammond's End > Upper Portal Stand ==> Between Center Doors (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1),
+            "Glacier > Hammond's End > Upper Stair ==> Upper Portal Stand (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1),
+            "Glacier > Hammond's End > Upper Stair ==> Upper Portal Stand (2)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2),
+            "Glacier > Hammond's End > West 10 ==> Secret Chamber > East 10 (1)" => Ok(ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1),
+            "Glacier > Hammond's End > West 11 ==> Secret Chamber > East 11 (1)" => Ok(ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1),
+            "Glacier > Hammond's End > West 11 ==> Switch from Ledge (1)" => Ok(ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1),
+            "Glacier > Hammond's End > West 11 ==> Switch from Ledge (2)" => Ok(ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2),
             "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1),
             "Glacier > Lake Main Entrance > Lake Access ==> Amagi > Main Area > East 15 (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1),
             "Glacier > Lake Main Entrance > Ledge ==> Upper (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1),
@@ -15519,6 +15871,8 @@ impl std::str::FromStr for ExitId {
             "Glacier > The Big Drop > East ==> Compass Room > West (1)" => Ok(ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1),
             "Glacier > The Big Drop > Small Path ==> East (1)" => Ok(ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1),
             "Glacier > The Big Drop > Water Surface ==> Sea Burial > Collapsing Ceiling (1)" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1),
+            "Glacier > The Big Drop > West 11 Door ==> East (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1),
+            "Glacier > The Big Drop > West 11 Door ==> Hammond's End > East 11 Door (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1),
             "Glacier > The Big Drop > West 14 ==> Breakable Rock Right (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1),
             "Glacier > The Big Drop > West 14 ==> Sea Burial > East 14 (1)" => Ok(ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1),
             "Glacier > The Big Drop > West 14 > Mist Through" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
@@ -15774,6 +16128,7 @@ impl std::str::FromStr for ExitId {
             "Menu > Breach Map > GB SW Save ==> Giguna Breach > SW Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1),
             "Menu > Breach Map > GlB Arena ==> Glacier Breach > Save and Exit > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1),
             "Menu > Breach Map > GlB Center ==> Glacier Breach > Guarded Corridor > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1),
+            "Menu > Breach Map > GlB East ==> Glacier Breach > Hammond's Breach > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1),
             "Menu > Breach Map > GlB South ==> Glacier Breach > South Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1),
             "Menu > Breach Map > GlB West ==> Glacier Breach > West Save > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1),
             "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1),
@@ -16083,7 +16438,17 @@ pub enum ActionId {
     Giguna_Breach__Peak__Save_Point__Save,
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
+    Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors,
+    Glacier__Hammonds_End__Switch_Near__Open_Doors,
+    Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
+    Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note,
+    Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner,
+    Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
+    Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
+    Glacier__Hammonds_End__West_11__Open_Doors,
     Glacier__Revival__Save_Point__Save,
+    Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
+    Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
     Glacier__Vertical_Room__Upper_Switch__Open_Gate,
     Glacier_Breach__Guarded_Corridor__Save_Point__Save,
     Glacier_Breach__Save_and_Exit__Save_Point__Save,
@@ -16429,9 +16794,59 @@ impl fmt::Display for ActionId {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door")
             }
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Switch from Ledge > Open Doors"
+            ),
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Switch Near > Open Doors"
+            ),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Upper Floor > Move Portal to Lower West"
+            ),
+            ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Upper Floor > Move Portal to Note"
+            ),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Upper Right Mid-air > Move Portal to Corner"
+            ),
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => {
+                write!(
+                    f,
+                    "{}",
+                    "Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West"
+                )
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => write!(
+                f,
+                "{}",
+                "Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Note"
+            ),
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
+                write!(f, "{}", "Glacier > Hammond's End > West 11 > Open Doors")
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => write!(
+                f,
+                "{}",
+                "Glacier > The Big Drop > Solid Rock > Careful Break"
+            ),
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => write!(
+                f,
+                "{}",
+                "Glacier > Vertical Room > Lower Switch > Open Lower Gatestones"
+            ),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => write!(
                 f,
                 "{}",
@@ -16770,8 +17185,38 @@ impl std::str::FromStr for ActionId {
             "Giguna Breach > SW Save > West 11 > Open Door" => {
                 Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door)
             }
+            "Glacier > Hammond's End > Switch from Ledge > Open Doors" => {
+                Ok(ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors)
+            }
+            "Glacier > Hammond's End > Switch Near > Open Doors" => {
+                Ok(ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors)
+            }
+            "Glacier > Hammond's End > Upper Floor > Move Portal to Lower West" => {
+                Ok(ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West)
+            }
+            "Glacier > Hammond's End > Upper Floor > Move Portal to Note" => {
+                Ok(ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note)
+            }
+            "Glacier > Hammond's End > Upper Right Mid-air > Move Portal to Corner" => {
+                Ok(ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner)
+            }
+            "Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West" => Ok(
+                ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
+            ),
+            "Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Note" => {
+                Ok(ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note)
+            }
+            "Glacier > Hammond's End > West 11 > Open Doors" => {
+                Ok(ActionId::Glacier__Hammonds_End__West_11__Open_Doors)
+            }
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
+            }
+            "Glacier > The Big Drop > Solid Rock > Careful Break" => {
+                Ok(ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break)
+            }
+            "Glacier > Vertical Room > Lower Switch > Open Lower Gatestones" => {
+                Ok(ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones)
             }
             "Glacier > Vertical Room > Upper Switch > Open Gate" => {
                 Ok(ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate)
@@ -16881,6 +17326,7 @@ pub enum CanonId {
     Glacier_Big_Drop_Rock,
     Glacier_Sea_Burial_Rock,
     Ledge_Grab,
+    Hammonds_Note,
     Melee_Charge,
     Irikar_Royal_Storage_Wall,
     Irikar_Royal_Storage_Flask,
@@ -16937,6 +17383,7 @@ impl fmt::Display for CanonId {
             CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Hammonds_Note => write!(f, "{}", "Hammonds_Note"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
@@ -16999,6 +17446,7 @@ impl std::str::FromStr for CanonId {
             "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Hammonds_Note" => Ok(CanonId::Hammonds_Note),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
