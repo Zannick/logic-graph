@@ -20,6 +20,7 @@ class ContextVisitor(RulesVisitor):
             if t.startswith('enums::')
         }
         self.swap_pairs = set()
+        self.named_spots = set()
         self.ref = ''
 
     def visit(self, tree, name:str ='', ctxdict=None, local_types=None):
@@ -61,6 +62,13 @@ class ContextVisitor(RulesVisitor):
             self.errors.append(f'Type mismatch between ctx properties ^{ref1} ({t1}), '
                                f'^{ref2} ({t2}) in {self.name}')
 
+    def visitInvoke(self, ctx):
+        if ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            if pl.count('>') == 2:
+                self.named_spots.add(pl)
+        self.visitChildren(ctx)
+
     def visitRef(self, ctx):
         self._checkRef(str(ctx.REF()[-1])[1:])
         if len(ctx.REF()) == 2:
@@ -76,6 +84,7 @@ class ContextVisitor(RulesVisitor):
             if pl.count('>') != 2:
                 self.errors.append(f'Indirect data reference {ctx.getText()} in {self.name} '
                                    f'requires a Spot name')
+            # we don't need to mark this spot as not-to-be-condensed
 
     # Anything that could return a str needs to be visited and return a collection of options
     # plus anything that compares a ref to a str should update that ref
@@ -130,6 +139,15 @@ class ContextVisitor(RulesVisitor):
         self.visit(ctx.ref())
         self.values[ref].update(self._getAllLitReturns(ctx))
 
+    def visitSomewhere(self, ctx):
+        if ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            if pl.count('>') == 2:
+                self.named_spots.add(pl)
+        self.visitChildren(ctx)
+
+    visitRefSomewhere = visitSomewhere
+
     def visitSet(self, ctx):
         ref = str(ctx.REF())[1:]
         self._checkRef(ref)
@@ -139,6 +157,11 @@ class ContextVisitor(RulesVisitor):
             ref2 = str(ctx.ref().REF()[-1])[1:]
             self.visit(ctx.ref())
             self._checkTypes(ref, ref2)
+        elif ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            if pl.count('>') == 2:
+                self.named_spots.add(pl)
+            self.visitChildren(ctx)
         else:
             self.visitChildren(ctx)
 

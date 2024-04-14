@@ -231,6 +231,7 @@ class GameLogic(object):
         self.data = self._info.get('data', {})
         self.data_defaults = self._info.get('data', {})
         self.map_defs = self._info.get('map', {})
+        self.named_spots = set()
         self.process_regions()
         self.process_context()
         self.process_area_maps()
@@ -625,6 +626,7 @@ class GameLogic(object):
         _visit(cv)
         self.context_str_values = cv.values
         self.swap_pairs = cv.swap_pairs
+        self.named_spots.update(cv.named_spots)
 
     def process_bitflags(self):
         self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, list(self.locations()))
@@ -1072,6 +1074,7 @@ class GameLogic(object):
     def interesting_spots(self):
         return filter(
             lambda s: s.get('keep') or 'locations' in s or 'actions' in s or 'hybrid' in s
+                or s['fullname'] in self.named_spots
                 or any(e['keep'] for e in s.get('exits', ())),
             self.spots())
 
@@ -1505,7 +1508,9 @@ class GameLogic(object):
         def handle_place(c, source, val):
             if self.data_types[c] == 'SpotId':
                 names = get_spot_reference_names(val, source)
-                return ' > '.join(names)
+                sp = ' > '.join(names)
+                self.named_spots.add(sp)
+                return sp
             if self.data_types[c] == 'AreaId':
                 names = get_spot_reference_names(val + '>', source)
                 return ' > '.join(names[:2])
