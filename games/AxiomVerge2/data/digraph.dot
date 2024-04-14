@@ -365,6 +365,7 @@ digraph AxiomVerge2 {
         Annuna__West_Bridge__East_25_Upper [label = "", pos = "110.85,-40.5!"];
         Annuna__West_Bridge__West_26_Lower [label = "", pos = "102.15,-43.0!"];
         Annuna__West_Bridge__West_26_Upper [label = "", pos = "102.15,-42.5!"];
+        Annuna__West_Bridge__Save_Point [label = "", pos = "109.5,-44.5!"];
         Annuna__West_Bridge__East_24 [label = "", pos = "110.85,-39.25!"];
         Annuna__West_Bridge__East_22 [label = "", pos = "110.85,-36.5!"];
         Annuna__West_Bridge__Below_Tunnel [label = "", pos = "110.25,-36.5!"];

@@ -903,15 +903,15 @@ pub fn access_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // not ^_platform_and_portal and $activate
-    (!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
+    // not ^_platform and $activate
+    (!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
 }
 pub fn access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
-    ((((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
+    // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
+    ((((!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
         && helper__attract!(ctx, world))
         && ctx.has(Item::Breach_Sight))
         && ctx.has(Item::Remote_Drone))
@@ -920,18 +920,11 @@ pub fn access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
-    ((((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx, world))
+    // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
+    ((((!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
         && helper__can_deploy!(ctx, world))
         && helper__attract!(ctx, world))
         && ctx.has(Item::Breach_Sight))
-}
-pub fn access_giguna__clouds__platform_stop__ex__flipside_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // ^_platform_and_portal and ^mode == 'drone'
-    (ctx.giguna__clouds__ctx__platform_and_portal() && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
@@ -1915,10 +1908,6 @@ pub fn access_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
-pub fn access_mode_eq_drone_and_breach_sight(ctx: &Context, world: &graph::World) -> bool {
-    // ^mode == 'drone' and Breach_Sight
-    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Breach_Sight))
-}
 pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -1952,13 +1941,14 @@ pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &graph::World
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
 }
-pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
-    ((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
+    (((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
         && data::flipside(ctx.position()) != Default::default())
+        && (!data::portal_hidden(ctx.position()) || ctx.has(Item::Breach_Sight)))
 }
 pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
@@ -2308,10 +2298,6 @@ pub fn action_annuna__west_climb__switch_ledge__open_door__do(
     // ^_door_opened = true
     ctx.set_annuna__west_climb__ctx__door_opened(true);
 }
-pub fn action_breach_portal_save_update(ctx: &mut Context, world: &graph::World) {
-    // $breach_portal_save_update
-    helper__breach_portal_save_update!(ctx, world);
-}
 pub fn action_clear_breach_save(ctx: &mut Context, world: &graph::World) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
@@ -2519,25 +2505,27 @@ pub fn action_giguna__clouds__platform_start__hack_and_get_off_early__do(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // ^_platform_and_portal = true
-    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
+    // ^_platform = true
+    ctx.set_giguna__clouds__ctx__platform(true);
 }
 pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
-    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
+    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
+    ctx.set_giguna__clouds__ctx__platform(true);
     if ctx.indra() == ctx.position() {
         ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
+        ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     }
 }
 pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
-    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
+    // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+    ctx.set_giguna__clouds__ctx__platform(true);
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop);
 }
 pub fn action_giguna__east_caverns__lower_susar__caught__do(
@@ -2729,10 +2717,6 @@ pub fn action_last_set_position(ctx: &mut Context, world: &graph::World) {
     // ^last = ^position
     ctx.set_last(ctx.position());
 }
-pub fn action_main_portal_save_update(ctx: &mut Context, world: &graph::World) {
-    // $main_portal_save_update
-    helper__main_portal_save_update!(ctx, world);
-}
 pub fn action_mode_set_drone(ctx: &mut Context, world: &graph::World) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);
@@ -2751,9 +2735,9 @@ pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::Wo
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
 }
-pub fn action_pass(ctx: &mut Context, world: &graph::World) {
-    // $pass
-    ();
+pub fn action_post_portal_save_update(ctx: &mut Context, world: &graph::World) {
+    // $post_portal_save_update
+    helper__post_portal_save_update!(ctx, world);
 }
 pub fn action_refill_energy(ctx: &mut Context, world: &graph::World) {
     // $refill_energy
@@ -5861,16 +5845,13 @@ pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // not ^_platform_and_portal and $activate
+    // not ^_platform and $activate
     {
         let mut left = {
             let val = {
-                let r = ctx.giguna__clouds__ctx__platform_and_portal();
-                edict.insert(
-                    "^giguna__clouds__ctx__platform_and_portal",
-                    format!("{:?}", r),
-                );
-                (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
+                let r = ctx.giguna__clouds__ctx__platform();
+                edict.insert("^giguna__clouds__ctx__platform", format!("{:?}", r));
+                (r, vec!["^giguna__clouds__ctx__platform"])
             };
             (!val.0, val.1)
         };
@@ -5893,19 +5874,16 @@ pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
+    // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
     {
         let mut left = {
             let mut left = {
                 let mut left = {
                     let mut left = {
                         let val = {
-                            let r = ctx.giguna__clouds__ctx__platform_and_portal();
-                            edict.insert(
-                                "^giguna__clouds__ctx__platform_and_portal",
-                                format!("{:?}", r),
-                            );
-                            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
+                            let r = ctx.giguna__clouds__ctx__platform();
+                            edict.insert("^giguna__clouds__ctx__platform", format!("{:?}", r));
+                            (r, vec!["^giguna__clouds__ctx__platform"])
                         };
                         (!val.0, val.1)
                     };
@@ -5965,19 +5943,16 @@ pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
+    // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
     {
         let mut left = {
             let mut left = {
                 let mut left = {
                     let mut left = {
                         let val = {
-                            let r = ctx.giguna__clouds__ctx__platform_and_portal();
-                            edict.insert(
-                                "^giguna__clouds__ctx__platform_and_portal",
-                                format!("{:?}", r),
-                            );
-                            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
+                            let r = ctx.giguna__clouds__ctx__platform();
+                            edict.insert("^giguna__clouds__ctx__platform", format!("{:?}", r));
+                            (r, vec!["^giguna__clouds__ctx__platform"])
                         };
                         (!val.0, val.1)
                     };
@@ -6027,41 +6002,6 @@ pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
                 let h = ctx.has(Item::Breach_Sight);
                 edict.insert("Breach_Sight", format!("{}", h));
                 (h, vec!["Breach_Sight"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_giguna__clouds__platform_stop__ex__flipside_1__req(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^_platform_and_portal and ^mode == 'drone'
-    {
-        let mut left = {
-            let r = ctx.giguna__clouds__ctx__platform_and_portal();
-            edict.insert(
-                "^giguna__clouds__ctx__platform_and_portal",
-                format!("{:?}", r),
-            );
-            (r, vec!["^giguna__clouds__ctx__platform_and_portal"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let mut refs = vec!["^mode"];
-                let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
-                };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -9706,38 +9646,6 @@ pub fn explain_mode_eq_drone(
         (left.0 == right, refs)
     }
 }
-pub fn explain_mode_eq_drone_and_breach_sight(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and Breach_Sight
-    {
-        let mut left = {
-            let mut refs = vec!["^mode"];
-            let mut left = {
-                let r = ctx.mode();
-                edict.insert("^mode", format!("{:?}", r));
-                (r, vec!["^mode"])
-            };
-            let right = enums::Mode::Drone;
-            edict.insert("^mode", format!("{}", left.0));
-            refs.append(&mut left.1);
-            (left.0 == right, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Breach_Sight);
-                edict.insert("Breach_Sight", format!("{}", h));
-                (h, vec!["Breach_Sight"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -9931,42 +9839,60 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
     {
         let mut left = {
             let mut left = {
-                let mut refs = vec!["^mode"];
                 let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = ctx.mode();
+                        edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let mut left = {
+                            let r = ctx.portal();
+                            edict.insert("^portal", format!("{:?}", r));
+                            (r, vec!["^portal"])
+                        };
+                        let mut right = {
+                            let r = ctx.position();
+                            edict.insert("^position", format!("{:?}", r));
+                            (r, vec!["^position"])
+                        };
+                        left.1.append(&mut right.1);
+                        (left.0 == right.0, left.1)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
                 let mut right = {
                     let mut left = {
-                        let r = ctx.portal();
-                        edict.insert("^portal", format!("{:?}", r));
-                        (r, vec!["^portal"])
+                        let r = data::flipside(ctx.position());
+                        edict.insert("^flipside", format!("{:?}", r));
+                        (r, vec!["^flipside"])
                     };
-                    let mut right = {
-                        let r = ctx.position();
-                        edict.insert("^position", format!("{:?}", r));
-                        (r, vec!["^position"])
-                    };
+                    let mut right = (Default::default(), vec![]);
                     left.1.append(&mut right.1);
-                    (left.0 == right.0, left.1)
+                    (left.0 != right.0, left.1)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -9975,16 +9901,27 @@ pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
         if !left.0 {
             left
         } else {
-            let mut right = {
+            let mut right = ({
                 let mut left = {
-                    let r = data::flipside(ctx.position());
-                    edict.insert("^flipside", format!("{:?}", r));
-                    (r, vec!["^flipside"])
+                    let val = {
+                        let r = data::portal_hidden(ctx.position());
+                        edict.insert("^portal_hidden", format!("{:?}", r));
+                        (r, vec!["^portal_hidden"])
+                    };
+                    (!val.0, val.1)
                 };
-                let mut right = (Default::default(), vec![]);
-                left.1.append(&mut right.1);
-                (left.0 != right.0, left.1)
-            };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Breach_Sight);
+                        edict.insert("Breach_Sight", format!("{}", h));
+                        (h, vec!["Breach_Sight"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -13045,10 +12982,10 @@ pub fn observe_access_giguna__clouds__platform_start__hack_and_get_off_early__re
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // not ^_platform_and_portal and $activate
+    // not ^_platform and $activate
     (!({
-        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
-        ctx.giguna__clouds__ctx__platform_and_portal()
+        full_obs.observe_giguna__clouds__ctx__platform();
+        ctx.giguna__clouds__ctx__platform()
     }) && (hobserve__activate!(ctx, world, full_obs)))
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
@@ -13056,10 +12993,10 @@ pub fn observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__r
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
+    // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
     ((((!({
-        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
-        ctx.giguna__clouds__ctx__platform_and_portal()
+        full_obs.observe_giguna__clouds__ctx__platform();
+        ctx.giguna__clouds__ctx__platform()
     }) && (hobserve__activate!(ctx, world, full_obs)))
         && (hobserve__attract!(ctx, world, full_obs)))
         && ({
@@ -13076,10 +13013,10 @@ pub fn observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
+    // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
     ((((!({
-        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
-        ctx.giguna__clouds__ctx__platform_and_portal()
+        full_obs.observe_giguna__clouds__ctx__platform();
+        ctx.giguna__clouds__ctx__platform()
     }) && (hobserve__activate!(ctx, world, full_obs)))
         && (hobserve__can_deploy!(ctx, world, full_obs)))
         && (hobserve__attract!(ctx, world, full_obs)))
@@ -13087,23 +13024,6 @@ pub fn observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal
             full_obs.observe_breach_sight();
             ctx.has(Item::Breach_Sight)
         }))
-}
-pub fn observe_access_giguna__clouds__platform_stop__ex__flipside_1__req(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^_platform_and_portal and ^mode == 'drone'
-    ({
-        full_obs.observe_giguna__clouds__ctx__platform_and_portal();
-        ctx.giguna__clouds__ctx__platform_and_portal()
-    } && ({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
-    }))
 }
 pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
@@ -15104,23 +15024,6 @@ pub fn observe_access_mode_eq_drone(
         v == enums::Mode::Drone
     }
 }
-pub fn observe_access_mode_eq_drone_and_breach_sight(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^mode == 'drone' and Breach_Sight
-    ({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
-    } && ({
-        full_obs.observe_breach_sight();
-        ctx.has(Item::Breach_Sight)
-    }))
-}
 pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -15220,13 +15123,13 @@ pub fn observe_access_mode_eq_drone_and_mist_upgrade(
         ctx.has(Item::Mist_Upgrade)
     }))
 }
-pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
+pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default
-    (({
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
+    ((({
         let v = {
             full_obs.observe_mode();
             ctx.mode()
@@ -15239,6 +15142,10 @@ pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_defau
         full_obs.observe_position();
         ctx.position()
     })) && (data::flipside(ctx.position()) != Default::default()))
+        && (!(data::portal_hidden(ctx.position())) || {
+            full_obs.observe_breach_sight();
+            ctx.has(Item::Breach_Sight)
+        }))
 }
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
@@ -16019,17 +15926,6 @@ pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
 ) {
     // ^_door_opened = true
 }
-pub fn observe_action_breach_portal_save_update(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $breach_portal_save_update
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__breach_portal_save_update!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_clear_breach_save(
     ctx: &Context,
     world: &graph::World,
@@ -16337,14 +16233,14 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // ^_platform_and_portal = true
+    // ^_platform = true
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     if {
@@ -16361,7 +16257,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+    // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
@@ -16595,17 +16491,6 @@ pub fn observe_action_last_set_position(
 ) {
     // ^last = ^position
 }
-pub fn observe_action_main_portal_save_update(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $main_portal_save_update
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__main_portal_save_update!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_mode_set_drone(
     ctx: &Context,
     world: &graph::World,
@@ -16634,11 +16519,15 @@ pub fn observe_action_mode_set_indra_last_set_indra(
 ) {
     // ^mode = 'Indra'; ^last = ^indra
 }
-pub fn observe_action_pass(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $pass
+pub fn observe_action_post_portal_save_update(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $post_portal_save_update
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    ();
+    hobserve__post_portal_save_update!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_refill_energy(

@@ -6,6 +6,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 25, 33, 26]
+  data:
+    save_point: Save Point
   spots:
     #region Main area
     - name: West 25
@@ -170,7 +172,9 @@ areas:
   start:
     _doors_opened: false
   map:
-    save: [36, 26, 27, 27]
+    save: [36, 26, 37, 27]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna West Bridge
@@ -218,6 +222,9 @@ areas:
       coord: [34.05, 25.8]
     - name: West 26 Upper
       coord: [34.05, 25.5]
+
+    - name: Save Point
+      coord: [36.5, 26.7]
     #endregion
 
     #region Tower
@@ -995,6 +1002,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [40, 19, 41, 20]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna Vertical Room
@@ -1477,6 +1486,7 @@ areas:
   map: save
   data:
     map_spot: Menu > Kiengir Map > Annuna Factory Entrance
+    save_point: Save Point
   spots:
     - name: West
       coord: [43.05, 24.6]
@@ -1955,6 +1965,7 @@ areas:
   map: save
   data:
     map_spot: Menu > Kiengir Map > Annuna Upper
+    save_point: Save Point
   spots:
     - name: East
       coord: [39.95, 16.75]
@@ -1985,7 +1996,6 @@ areas:
 - name: Lamassu
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Glacier Breach > South Save > Save Point
     portal_start: Portal Stand
   spots:
     - name: East 17
@@ -2211,6 +2221,9 @@ areas:
 
 - name: Hidden Portal
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    portal_hidden: true
   spots:
     - name: East
       coord: [37.95, 16.75]
@@ -2278,6 +2291,7 @@ areas:
   map: save
   data:
     map_spot: Menu > Kiengir Map > Annuna Center Save
+    save_point: Save Point
   spots:
     - name: East
       coord: [39.95, 20.6]
@@ -2890,6 +2904,7 @@ areas:
   map: save
   data:
     map_spot: Menu > Kiengir Map > Apocalypse
+    save_point: Save Point
   spots:
     - name: Upper West
       coord: [42.05, 16.4]

@@ -27,14 +27,22 @@ tests:
     with:
       - Slingshot_Hook
     start: Giguna Breach > Slingshot > Ravine
-    can_activate: Giguna Breach > Peak > Portal > Portal
+    can_reach: Giguna > Ruins Top > Save Point
+  - name: Path to Exit GB
+    with:
+      - Slingshot_Hook
+    start: Giguna Breach > Slingshot > Ravine
+    route: |
+      Move... to Giguna Breach > Peak > Portal
+      Portalwarp to Giguna > Ruins Top > Save Point
 
   - name: Portal and go back for more stuff
     start: Giguna Breach > Chimney > Cache
     with:
       - Slingshot_Hook
     route: |
-      ! Do Giguna Breach > Peak > Portal > Portal
+      Move... to Giguna Breach > Peak > Portal
+      Portalwarp to Giguna > Ruins Top > Save Point
       ! Do Recall Drone
         MainSaveWarp to Giguna > Ruins Top > Save Point
       ! Do Giguna > Carnelian > Upper Susar > Caught
@@ -50,6 +58,7 @@ tests:
       - Breach_Sight
       - Exit_Breach
     context:
+      portal: Giguna > Clouds > Cache
       mode: Indra
       indra: None
     route: |

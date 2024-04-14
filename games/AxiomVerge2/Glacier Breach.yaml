@@ -8,6 +8,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [38, 14, 39, 15]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > GlB South
@@ -387,6 +389,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 11, 33, 12]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > GlB West
@@ -461,6 +465,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [35, 10, 36, 11]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > GlB Center
@@ -620,6 +626,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [39, 9, 40, 10]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > GlB Arena

@@ -4,6 +4,8 @@ short: Uhrum
 areas:
 - name: West Entrance
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
   map:
     save: [19, 27, 20, 28]
   datamap:
@@ -1321,6 +1323,8 @@ areas:
 
 - name: Save Room
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
   map: save
   data:
     map_spot: Menu > Kiengir Map > Uhrum Center
@@ -1369,6 +1373,8 @@ areas:
 
 - name: Annuna Corridor
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
   map:
     save: [28, 25, 29, 26]
     urn: [29, 24, 30, 25]

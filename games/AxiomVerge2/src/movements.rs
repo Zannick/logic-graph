@@ -45786,6 +45786,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__West_Bridge__Save_Point,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            100,
+        ),
+        (
+            SpotId::Annuna__West_Bridge__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__West_Bridge__Tunnel_Wall,
             SpotId::Annuna__West_Bridge__Mid_Tunnel,
             600,

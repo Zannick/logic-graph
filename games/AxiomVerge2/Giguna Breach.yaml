@@ -7,8 +7,8 @@ areas:
 - name: Peak
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Giguna > Ruins Top > Save Point
     portal_start: Portal
+    save_point: Save Point
   map:
     save: [15, 6, 16, 7]
   datamap:
@@ -74,11 +74,6 @@ areas:
         - to: Upper West
           req: $hook
           time: 1  # ?
-      actions:
-        - name: Portal
-          do: $main_portal_save_update
-          to: ^flipside
-          tags: [portal]
 
 - name: Chimney
   on_entry: $reset_old_area(^newpos)
@@ -214,6 +209,8 @@ areas:
     _door_opened: false
   map:
     save: [12, 11, 13, 12]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > GB SW Save

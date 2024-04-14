@@ -3272,9 +3272,9 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
     }
-    pub fn observe_giguna__clouds__ctx__platform_and_portal(&mut self) {
+    pub fn observe_giguna__clouds__ctx__platform(&mut self) {
         self.cbits1
-            .insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_AND_PORTAL);
+            .insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM);
     }
     pub fn observe_giguna__east_caverns__ctx__door_opened(&mut self) {
         self.cbits1

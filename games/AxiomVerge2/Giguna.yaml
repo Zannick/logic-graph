@@ -8,6 +8,8 @@ areas:
     _door_opened: false
   map:
     save: [17, 9, 18, 10]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Northeast
@@ -834,6 +836,8 @@ areas:
     _door_open: false
   map:
     save: [13, 15, 14, 16]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Base
@@ -1289,6 +1293,8 @@ areas:
     _kishib_handled: false
   map:
     save: [13, 8, 14, 9]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Ruins West
@@ -1383,8 +1389,8 @@ areas:
 - name: Ruins Top
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Giguna Breach > Peak > Save Point
     portal_start: Portal
+    save_point: Save Point
   map:
     save: [14, 5, 15, 6]
   datamap:
@@ -1469,12 +1475,6 @@ areas:
         - to: East Door
           req: ^_doors_open
           movement: base
-      actions:
-        - name: Enter Portal
-          req: ^mode == 'drone'
-          do: $breach_portal_save_update
-          to: ^flipside
-          tags: [portal]
     - name: Interior Ledge
       coord: [15.65, 6.2]
       exits:
@@ -1764,9 +1764,11 @@ areas:
 
 - name: Clouds
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Cache
+    portal_hidden: true
   reset:
-    # We'll only move these together
-    _platform_and_portal: false
+    _platform: false
   spots:
     - name: North Left
       coord: [11.1, 18.1]
@@ -1789,20 +1791,20 @@ areas:
         - to: Straight Down
       actions:
         - name: Hack and Ride to Portal
-          req: not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
-          do: ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+          req: not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
+          do: ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
           to: Platform Stop
           time: 12  # estimate includes changing active item twice
         - name: Hack, Deploy, Ride to Portal
-          req: not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
-          do: ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+          req: not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
+          do: ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
           to: Platform Stop
           time: 12  # it's not really additional time
         # Early portal gives us about .5s savings, is that worth modeling?
         # TODO: early platform exit to jump to the Irikar Hub Sat Tower
         - name: Hack and Get Off Early
-          req: not ^_platform_and_portal and $activate
-          do: ^_platform_and_portal = true  # technically not the portal though
+          req: not ^_platform and $activate
+          do: ^_platform = true
           to: Platform Early
           time: 9
 
@@ -1817,11 +1819,6 @@ areas:
       local:
         - to: Pull Right
         - to: Southeast
-      exits:
-        - name: Enter Portal
-          req: ^_platform_and_portal and ^mode == 'drone'
-          to: ^flipside
-          tags: [portal]
       
     - name: Cache
       coord: [12.9, 18.3]

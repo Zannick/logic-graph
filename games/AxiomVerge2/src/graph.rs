@@ -148,6 +148,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__West_Bridge__East_25_Upper
         | SpotId::Annuna__West_Bridge__West_26_Lower
         | SpotId::Annuna__West_Bridge__West_26_Upper
+        | SpotId::Annuna__West_Bridge__Save_Point
         | SpotId::Annuna__West_Bridge__East_24
         | SpotId::Annuna__West_Bridge__East_22
         | SpotId::Annuna__West_Bridge__Below_Tunnel
@@ -1747,6 +1748,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__West_Bridge__East_25_Upper
         | SpotId::Annuna__West_Bridge__West_26_Lower
         | SpotId::Annuna__West_Bridge__West_26_Upper
+        | SpotId::Annuna__West_Bridge__Save_Point
         | SpotId::Annuna__West_Bridge__East_24
         | SpotId::Annuna__West_Bridge__East_22
         | SpotId::Annuna__West_Bridge__Below_Tunnel
@@ -5467,7 +5469,6 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1 => rules::access_hook(ctx, world),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => rules::access_grab(ctx, world),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2 => rules::access_hook(ctx, world),
-            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => rules::access_giguna__clouds__platform_stop__ex__flipside_1__req(ctx, world),
             ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1 => true,
             ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1 => true,
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => true,
@@ -6851,7 +6852,6 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1 => rules::observe_access_hook(ctx, world, full_obs),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => rules::observe_access_grab(ctx, world, full_obs),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2 => rules::observe_access_hook(ctx, world, full_obs),
-            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => rules::observe_access_giguna__clouds__platform_stop__ex__flipside_1__req(ctx, world, full_obs),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::observe_access_mode_eq_drone_and_giguna_dual_path_wall(ctx, world, full_obs),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => rules::observe_access_grab_and_climb(ctx, world, full_obs),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => rules::observe_access_hook(ctx, world, full_obs),
@@ -8131,7 +8131,6 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1 => rules::explain_hook(ctx, world, edict),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => rules::explain_grab(ctx, world, edict),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2 => rules::explain_hook(ctx, world, edict),
-            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => rules::explain_giguna__clouds__platform_stop__ex__flipside_1__req(ctx, world, edict),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1 => rules::explain_mode_eq_drone_and_giguna_dual_path_wall(ctx, world, edict),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => rules::explain_grab_and_climb(ctx, world, edict),
             ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2 => rules::explain_hook(ctx, world, edict),
@@ -9343,7 +9342,6 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => true,
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::access_giguna__giguna_northeast__switch__open_door__req(ctx, world),
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::access_mode_eq_drone(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_grab_and_can_deploy(ctx, world),
@@ -9354,7 +9352,6 @@ impl world::Accessible for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::access_giguna__west_caverns__east_susar__caught__req(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::access_giguna__west_caverns__east_susar__hack__req(ctx, world),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::access_can_deploy(ctx, world),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => true,
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
@@ -9371,12 +9368,8 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_can_deploy(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_activate(ctx, world),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::access_mode_eq_drone_and_breach_sight(ctx, world),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::access_mode_eq_drone_and_breach_sight(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_shockwave(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => true,
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::access_mode_eq_drone_and_breach_sight(ctx, world),
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => true,
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::access_can_deploy(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::access_can_deploy_and_drone_hover(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
@@ -9449,7 +9442,6 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::observe_access_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::observe_access_giguna__giguna_northeast__switch__open_door__req(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::observe_access_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_grab_and_can_deploy(ctx, world, full_obs),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, full_obs),
@@ -9467,10 +9459,7 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_activate(ctx, world, full_obs),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::observe_access_mode_eq_drone_and_breach_sight(ctx, world, full_obs),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::observe_access_mode_eq_drone_and_breach_sight(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_shockwave(ctx, world, full_obs),
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::observe_access_mode_eq_drone_and_breach_sight(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::observe_access_can_deploy(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::observe_access_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::observe_access_can_deploy_and_slingshot_hook(ctx, world, full_obs),
@@ -10175,18 +10164,6 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                let (ret, mut tags) = rules::explain_mode_eq_drone(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert(
-                        "dest",
-                        format!("{} ({})", dest, "Giguna Breach > Peak > Save Point"),
-                    );
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
                 let (ret, mut tags) = rules::explain_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -10369,54 +10346,12 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
-                let (ret, mut tags) =
-                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert(
-                        "dest",
-                        format!(
-                            "{} ({})",
-                            dest, "Irikar Breach > Basement Save > Save Point"
-                        ),
-                    );
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                let (ret, mut tags) =
-                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert(
-                        "dest",
-                        format!("{} ({})", dest, "Irikar Breach > Gauntlet > Save Point"),
-                    );
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                 let (ret, mut tags) =
                     rules::explain_not_irikar_royal_storage_wall_and_shockwave(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                let (ret, mut tags) =
-                    rules::explain_mode_eq_drone_and_breach_sight(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert(
-                        "dest",
-                        format!("{} ({})", dest, "Irikar Breach > Save Room > Save Point"),
-                    );
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -10509,7 +10444,6 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_save(ctx, world),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => rules::action_main_portal_save_update(ctx, world),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx, world),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_save(ctx, world),
@@ -10534,7 +10468,6 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_West__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx, world),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx, world),
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__switch__open_doors__do(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world),
@@ -10562,13 +10495,9 @@ impl world::Action for Action {
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone(ctx, world),
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => rules::action_pass(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_save(ctx, world),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world),
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => rules::action_breach_portal_save_update(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_save(ctx, world),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::action_deploy_drone(ctx, world),
             ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_save(ctx, world),
@@ -10586,9 +10515,6 @@ impl world::Action for Action {
             }
             ActionId::Global__Recall_Fast_Travel => {
                 rules::action_indra_set_default_refill_energy(ctx, world);
-            }
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                rules::action_clear_breach_save(ctx, world);
             }
             _ => (),
         };
@@ -10645,7 +10571,6 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 SpotId::Ebih__Drone_Room__East_4
             }
-            ActionId::Giguna_Breach__Peak__Portal__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Vent
             }
@@ -10657,9 +10582,6 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 SpotId::Giguna__Giguna_Base__Upper_Cliff
-            }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                SpotId::Giguna_Breach__Peak__Save_Point
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_West__Rooftop_East_Edge
@@ -10676,20 +10598,8 @@ impl world::Action for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Top
             }
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                SpotId::Irikar__Abandoned_Room__Empty_Pedestal
-            }
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                SpotId::Irikar_Breach__Gauntlet__Save_Point
-            }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                SpotId::Irikar_Breach__Save_Room__Save_Point
-            }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 SpotId::Irikar__Basement_Portal__Moving_Platform_End
-            }
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
-                SpotId::Irikar_Breach__Basement_Save__Save_Point
             }
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
                 SpotId::Uhrum__Waterfalls__Medium_Rock
@@ -10895,9 +10805,6 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
             }
-            ActionId::Giguna_Breach__Peak__Portal__Portal => {
-                rules::observe_action_main_portal_save_update(ctx, world, full_obs);
-            }
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 rules::observe_action_giguna_breach__sw_save__west_11__open_door__do(
                     ctx, world, full_obs,
@@ -11003,9 +10910,6 @@ impl world::Action for Action {
                 rules::observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
                     ctx, world, full_obs,
                 );
-            }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
@@ -11126,27 +11030,14 @@ impl world::Action for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 rules::observe_action_deploy_drone(ctx, world, full_obs);
             }
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                rules::observe_action_pass(ctx, world, full_obs);
-                rules::observe_action_clear_breach_save(ctx, world, full_obs);
-            }
             ActionId::Irikar__Hub__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
-            }
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                 rules::observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world, full_obs);
             }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
-            }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
-            }
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
-                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
             }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 rules::observe_action_save(ctx, world, full_obs);
@@ -11182,42 +11073,17 @@ impl world::Accessible for Warp {
     type Currency = Currency;
 
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
-        ctx.can_afford(&self.price)
-            && match self.id {
-                WarpId::BreachSave => {
-                    rules::access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
-                        ctx, world,
-                    )
-                }
-                WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
-                WarpId::ExitBreach => {
-                    rules::access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
-                        ctx, world,
-                    )
-                }
-                WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
-                WarpId::FastTravelBreach => {
-                    rules::access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
-                        ctx, world,
-                    )
-                }
-                WarpId::FastTravelKiengir => {
-                    rules::access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
-                        ctx, world,
-                    )
-                }
-                WarpId::MainSave => {
-                    rules::access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
-                        ctx, world,
-                    )
-                }
-                WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
-                WarpId::Portal => {
-                    rules::access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
-                        ctx, world,
-                    )
-                }
-            }
+        ctx.can_afford(&self.price) && match self.id {
+            WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(ctx, world),
+            WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
+            WarpId::ExitBreach => rules::access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(ctx, world),
+            WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
+            WarpId::FastTravelBreach => rules::access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world),
+            WarpId::FastTravelKiengir => rules::access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world),
+            WarpId::MainSave => rules::access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world),
+            WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
+            WarpId::Portal => rules::access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(ctx, world),
+        }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
@@ -11230,7 +11096,7 @@ impl world::Accessible for Warp {
             WarpId::FastTravelKiengir => rules::observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, full_obs),
             WarpId::MainSave => rules::observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
             WarpId::Menu => rules::observe_access_not_within_menu_and_flasks_gt_0(ctx, world, full_obs),
-            WarpId::Portal => rules::observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(ctx, world, full_obs),
+            WarpId::Portal => rules::observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -11354,10 +11220,7 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::Portal => {
-                let (ret, mut tags) =
-                    rules::explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default(
-                        ctx, world, edict,
-                    );
+                let (ret, mut tags) = rules::explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert(
@@ -11413,7 +11276,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelBreach => rules::action_refill_energy(ctx, world),
             WarpId::FastTravelKiengir => rules::action_refill_energy(ctx, world),
             WarpId::MainSave => rules::action_refill_energy(ctx, world),
-            WarpId::Portal => rules::action_breach_portal_save_update(ctx, world),
+            WarpId::Portal => rules::action_post_portal_save_update(ctx, world),
             _ => (),
         }
     }
@@ -11455,7 +11318,7 @@ impl world::Warp for Warp {
                 rules::observe_action_last_set_position(ctx, world, full_obs);
             }
             WarpId::Portal => {
-                rules::observe_action_breach_portal_save_update(ctx, world, full_obs);
+                rules::observe_action_post_portal_save_update(ctx, world, full_obs);
             }
         }
     }
@@ -11469,7 +11332,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1567] = [
+static RAW_SPOTS: [SpotId; 1568] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -11828,6 +11691,7 @@ static RAW_SPOTS: [SpotId; 1567] = [
     SpotId::Annuna__West_Bridge__Mid_Tunnel,
     SpotId::Annuna__West_Bridge__North,
     SpotId::Annuna__West_Bridge__Plinth,
+    SpotId::Annuna__West_Bridge__Save_Point,
     SpotId::Annuna__West_Bridge__Tunnel_Wall,
     SpotId::Annuna__West_Bridge__West_25_Lower,
     SpotId::Annuna__West_Bridge__West_25_Upper,
@@ -15216,7 +15080,6 @@ impl world::World for World {
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 SpotId::Giguna_Breach__Peak__Save_Point
             }
-            ActionId::Giguna_Breach__Peak__Portal__Portal => SpotId::Giguna_Breach__Peak__Portal,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 SpotId::Giguna_Breach__SW_Save__West_11
             }
@@ -15279,7 +15142,6 @@ impl world::World for World {
             | ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
                 SpotId::Giguna__Ruins_West__Lower_Ledge
             }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => SpotId::Giguna__Ruins_Top__Portal,
             ActionId::Giguna__Ruins_Top__Save_Point__Save => SpotId::Giguna__Ruins_Top__Save_Point,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
@@ -15343,22 +15205,12 @@ impl world::World for World {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Middle
             }
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => {
-                SpotId::Irikar_Breach__Exit_Corridor__Portal_Stand
-            }
             ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => SpotId::Irikar__Hub__Portal_Stand,
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                 SpotId::Irikar__Hub__Royal_Storage_By_Wall
             }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                SpotId::Irikar__Sight_Room__Portal
-            }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 SpotId::Irikar__Basement_Portal__Moving_Platform_Start
-            }
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => {
-                SpotId::Irikar__Basement_Portal__Portal_Stand
             }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 SpotId::Uhrum__West_Entrance__Save_Point
@@ -15932,7 +15784,6 @@ impl world::World for World {
             ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => SpotId::Giguna__Helipad__South_Middle,
             ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => SpotId::Giguna__Helipad__South_Right,
             ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => SpotId::Giguna__Helipad__Lowest_Ledge,
-            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => SpotId::Giguna__Clouds__Platform_Stop,
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => SpotId::Giguna__Clouds__Southwest,
             ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => SpotId::Giguna__Clouds__Straight_Down,
             ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1 => SpotId::Giguna__Clouds__Pull_Right,
@@ -17238,7 +17089,8 @@ impl world::World for World {
 
     fn spot_of_interest(&self, sp: SpotId) -> bool {
         match sp {
-            SpotId::Amagi__Grid_31_19__East
+            SpotId::Amagi__East_Lake__Save_Point
+            | SpotId::Amagi__Grid_31_19__East
             | SpotId::Amagi__Grid_31_19__West
             | SpotId::Amagi__Liru_Room__Shrine
             | SpotId::Amagi__Liru_Room__West_19
@@ -17276,6 +17128,7 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
             | SpotId::Amagi__West_Lake__West_15
             | SpotId::Amagi_Breach__East_Entrance__East
+            | SpotId::Amagi_Breach__East_Entrance__Grate_Right
             | SpotId::Amagi_Breach__East_Entrance__Save_Point
             | SpotId::Amagi_Breach__East_Entrance__Upper_Slope
             | SpotId::Amagi_Breach__East_Entrance__West
@@ -17337,11 +17190,13 @@ impl world::World for World {
             | SpotId::Annuna__Hidden_Portal__East
             | SpotId::Annuna__Hidden_Portal__Plinth_Left
             | SpotId::Annuna__Hidden_Portal__Plinth_Right
+            | SpotId::Annuna__Hidden_Portal__Portal_Stand
             | SpotId::Annuna__Hidden_Portal__West
             | SpotId::Annuna__Lamassu__Bottom_Hill_West
             | SpotId::Annuna__Lamassu__East_14
             | SpotId::Annuna__Lamassu__East_16
             | SpotId::Annuna__Lamassu__East_17
+            | SpotId::Annuna__Lamassu__Portal_Stand
             | SpotId::Annuna__Lamassu__West_15
             | SpotId::Annuna__Lamassu__West_17
             | SpotId::Annuna__Lower_Hallway__East
@@ -17397,6 +17252,7 @@ impl world::World for World {
             | SpotId::Annuna__West_Bridge__East_25_Lower
             | SpotId::Annuna__West_Bridge__North
             | SpotId::Annuna__West_Bridge__Plinth
+            | SpotId::Annuna__West_Bridge__Save_Point
             | SpotId::Annuna__West_Bridge__West_25_Lower
             | SpotId::Annuna__West_Climb__Cache
             | SpotId::Annuna__West_Climb__East_19
@@ -17706,6 +17562,8 @@ impl world::World for World {
             | SpotId::Giguna_Breach__Peak__Portal
             | SpotId::Giguna_Breach__Peak__Save_Point
             | SpotId::Giguna_Breach__Peak__West_7
+            | SpotId::Giguna_Breach__Pink_Clouds__Corner
+            | SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry
             | SpotId::Giguna_Breach__Robopede__North
             | SpotId::Giguna_Breach__Robopede__West
             | SpotId::Giguna_Breach__Slingshot__Ravine
@@ -17731,6 +17589,7 @@ impl world::World for World {
             | SpotId::Glacier__Compass_Room__West
             | SpotId::Glacier__Crystals__East
             | SpotId::Glacier__Crystals__Lower_Corner
+            | SpotId::Glacier__Crystals__Portal_Cage
             | SpotId::Glacier__Crystals__Top_Corner
             | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
@@ -17838,6 +17697,7 @@ impl world::World for World {
             | SpotId::Interior__Tent_Interior__Desk
             | SpotId::Interior__Tent_Interior__Entry
             | SpotId::Irikar__Abandoned_Room__Corner_Core
+            | SpotId::Irikar__Abandoned_Room__Empty_Pedestal
             | SpotId::Irikar__Abandoned_Room__West
             | SpotId::Irikar__Airy__Middle_South
             | SpotId::Irikar__Basement_Pipes__East_28
@@ -17881,6 +17741,7 @@ impl world::World for World {
             | SpotId::Irikar__Sight_Room__Item_Pedestal
             | SpotId::Irikar__Sight_Room__Portal
             | SpotId::Irikar__Sight_Room__West_24
+            | SpotId::Irikar_Breach__Basement_Save__Save_Point
             | SpotId::Irikar_Breach__Exit_Corridor__East
             | SpotId::Irikar_Breach__Exit_Corridor__North_12
             | SpotId::Irikar_Breach__Exit_Corridor__North_13
@@ -17894,11 +17755,13 @@ impl world::World for World {
             | SpotId::Irikar_Breach__Four_way__West
             | SpotId::Irikar_Breach__Gauntlet__East_22
             | SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward
+            | SpotId::Irikar_Breach__Gauntlet__Save_Point
             | SpotId::Irikar_Breach__Hover_Room__Bottom
             | SpotId::Irikar_Breach__Hover_Room__East
             | SpotId::Irikar_Breach__Hover_Room__West
             | SpotId::Irikar_Breach__Neon_Corridor__East
             | SpotId::Irikar_Breach__Neon_Corridor__West
+            | SpotId::Irikar_Breach__Save_Room__Save_Point
             | SpotId::Irikar_Breach__Save_Room__West
             | SpotId::Irikar_Breach__Worm_Rave__Corner
             | SpotId::Irikar_Breach__Worm_Rave__East
@@ -17918,6 +17781,11 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
             | SpotId::Menu__Kiengir_Map__Annuna_Upper
             | SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room
+            | SpotId::Menu__Kiengir_Map__Annuna_West_Bridge
+            | SpotId::Menu__Kiengir_Map__Anuman
+            | SpotId::Menu__Kiengir_Map__Apocalypse
+            | SpotId::Menu__Kiengir_Map__Breach_Sight
+            | SpotId::Menu__Kiengir_Map__Bronze_Axe
             | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
             | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
             | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
@@ -17928,6 +17796,8 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
+            | SpotId::Menu__Kiengir_Map__Remote_Drone
+            | SpotId::Menu__Kiengir_Map__Shockwave
             | SpotId::Menu__Kiengir_Map__Uhrum_Center
             | SpotId::Menu__Kiengir_Map__Uhrum_East
             | SpotId::Menu__Kiengir_Map__Uhrum_West
@@ -26177,13 +26047,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => Exit {
-            id: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1,
-            time: 3600,
-            dest: SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
         ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => Exit {
             id: ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,
             time: 1000,
@@ -31595,11 +31458,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1300,
             price: Currency::Free,
         },
-        ActionId::Giguna_Breach__Peak__Portal__Portal => Action {
-            id: ActionId::Giguna_Breach__Peak__Portal__Portal,
-            time: 3600,
-            price: Currency::Free,
-        },
         ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => Action {
             id: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door,
             time: 250,
@@ -31719,11 +31577,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,
             time: 3500,
             price: Currency::Energy(100),
-        },
-        ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => Action {
-            id: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal,
-            time: 3600,
-            price: Currency::Free,
         },
         ActionId::Giguna__Ruins_Top__Save_Point__Save => Action {
             id: ActionId::Giguna__Ruins_Top__Save_Point__Save,
@@ -31860,19 +31713,9 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1100,
             price: Currency::Free,
         },
-        ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => Action {
-            id: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
-            time: 3600,
-            price: Currency::Free,
-        },
         ActionId::Irikar__Hub__Save_Point__Save => Action {
             id: ActionId::Irikar__Hub__Save_Point__Save,
             time: 1300,
-            price: Currency::Free,
-        },
-        ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => Action {
-            id: ActionId::Irikar__Hub__Portal_Stand__Enter_Portal,
-            time: 3600,
             price: Currency::Free,
         },
         ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => Action {
@@ -31880,19 +31723,9 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 3500,
             price: Currency::Energy(100),
         },
-        ActionId::Irikar__Sight_Room__Portal__Enter_Portal => Action {
-            id: ActionId::Irikar__Sight_Room__Portal__Enter_Portal,
-            time: 3600,
-            price: Currency::Free,
-        },
         ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => Action {
             id: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
             time: 8000,
-            price: Currency::Free,
-        },
-        ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => Action {
-            id: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
-            time: 3600,
             price: Currency::Free,
         },
         ActionId::Uhrum__West_Entrance__Save_Point__Save => Action {
@@ -33475,6 +33308,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__West_Bridge__West_26_Upper => Spot {
             id: SpotId::Annuna__West_Bridge__West_26_Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__West_Bridge__Save_Point => Spot {
+            id: SpotId::Annuna__West_Bridge__Save_Point,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -39832,8 +39677,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1.into_usize() + 1,
             },
             actions: Range {
-                start: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize(),
-                end: ActionId::Giguna_Breach__Peak__Portal__Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Giguna_Breach__Chimney__East_7 => Spot {
@@ -42446,8 +42290,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1.into_usize() + 1,
             },
             actions: Range {
-                start: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize(),
-                end: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Giguna__Ruins_Top__Interior_Ledge => Spot {
@@ -42962,8 +42805,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1.into_usize(),
-                end: ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -48392,8 +48234,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal.into_usize(),
-                end: ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Irikar_Breach__Exit_Corridor__East => Spot {
@@ -48868,8 +48709,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: ActionId::Irikar__Hub__Portal_Stand__Enter_Portal.into_usize(),
-                end: ActionId::Irikar__Hub__Portal_Stand__Enter_Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Irikar__Hub__NW_Middle_Building_Corner => Spot {
@@ -49009,8 +48849,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize(),
-                end: ActionId::Irikar__Sight_Room__Portal__Enter_Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Irikar__Sight_Room__Item_Pedestal => Spot {
@@ -49202,8 +49041,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1.into_usize() + 1,
             },
             actions: Range {
-                start: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal.into_usize(),
-                end: ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal.into_usize() + 1,
+                start: 0, end: 0,
             },
         },
         SpotId::Irikar__Basement_Portal__West_28 => Spot {

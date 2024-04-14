@@ -11,6 +11,8 @@ areas:
     _combo: false
   map:
     save: [29, 18, 30, 19]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Amagi Main Area
@@ -981,6 +983,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [34, 18, 35, 19]
+  data:
+    save_point: Save Point
   spots:
     - name: East 15 Flat
       coord: [35.95, 14.55]

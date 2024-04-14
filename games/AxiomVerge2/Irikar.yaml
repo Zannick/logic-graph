@@ -4,8 +4,9 @@ areas:
 - name: Hub
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Irikar Breach > Gauntlet > Save Point
     portal_start: Portal Stand
+    portal_hidden: true
+    save_point: Save Point
   map:
     save: [12, 22, 13, 23]
   datamap:
@@ -242,12 +243,6 @@ areas:
         - to: NW Staircase Upper
           jumps: 4
         - to: NW Middle Building Corner
-      actions:
-        - name: Enter Portal
-          req: ^mode == 'drone' and Breach_Sight
-          do: $breach_portal_save_update
-          to: ^flipside
-          tags: [portal]
     - name: NW Middle Building Corner
       coord: [11.0, 22.2]
       local:
@@ -335,8 +330,8 @@ areas:
 - name: Sight Room
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Irikar Breach > Save Room > Save Point
     portal_start: Portal
+    portal_hidden: true
   map:
     urn: [14, 25, 15, 26]
   datamap:
@@ -363,12 +358,6 @@ areas:
         flipside: Irikar Breach > Save Room > Save Point
       local:
         - to: Item Pedestal
-      actions:
-        - name: Enter Portal
-          req: ^mode == 'drone' and Breach_Sight
-          do: $breach_portal_save_update
-          to: ^flipside
-          tags: [portal]
     - name: Item Pedestal
       coord: [14.8, 25.6]
       local:
@@ -431,8 +420,8 @@ areas:
 - name: Basement Portal
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Irikar Breach > Basement Save > Save Point
     portal_start: Portal Stand
+    portal_hidden: true
   reset:
     _platform_moved: false
   spots:
@@ -547,12 +536,6 @@ areas:
         - to: Ledge
           req: $hover and $hook
           time: 1  # ?
-      actions:
-        - name: Enter Portal
-          req: ^mode == 'drone' and Breach_Sight
-          do: $breach_portal_save_update
-          to: ^flipside
-          tags: [portal]
     - name: West 28
       coord: [12.05, 27.55]
       local:

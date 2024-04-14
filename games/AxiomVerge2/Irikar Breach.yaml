@@ -8,6 +8,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [14, 25, 15, 26]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > IB Save Room
@@ -37,6 +39,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [11, 21, 12, 22]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > IB Gauntlet
@@ -315,7 +319,6 @@ areas:
 - name: Exit Corridor
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Irikar > Abandoned Room > Empty Pedestal
     portal_start: Portal Stand
   spots:
     - name: North 12
@@ -374,12 +377,6 @@ areas:
         - to: Passage
         - to: East
           jumps: 3
-      actions:
-        - name: Enter Portal
-          do: $pass
-          to: ^flipside
-          after: $clear_breach_save
-          tags: [portal]
     - name: East
       coord: [14.9, 26.3]
       local:
@@ -444,6 +441,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [12, 27, 13, 28]
+  data:
+    save_point: Save Point
   spots:
     - name: Save Point
       coord: [12.525, 27.5]

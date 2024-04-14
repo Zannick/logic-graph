@@ -8,6 +8,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [29, 12, 30, 13]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Ebih Base Camp

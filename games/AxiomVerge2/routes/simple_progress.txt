@@ -71,11 +71,13 @@
 * Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone
-! Do Giguna > Ruins Top > Portal > Enter Portal
+  Move... to Giguna > Ruins Top > Portal
+  Portalwarp to Giguna Breach > Peak > Save Point
 * Collect Health_Fragment from Giguna Breach > Cubby > Rocks > Health
 * Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
 * Collect Flask from Giguna Breach > Chimney > Cache > Flask
-! Do Giguna Breach > Peak > Portal > Portal
+  Move... to Giguna Breach > Peak > Portal
+  Portalwarp to Giguna > Ruins Top > Save Point
 
 ! Do Recall Drone
   MainSavewarp to Giguna > Ruins Top > Save Point
@@ -88,11 +90,13 @@
 * Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
 
   MainSavewarp to Irikar > Hub > Save Point
-! Do Irikar > Hub > Portal Stand > Enter Portal
+  Move... to Irikar > Hub > Portal Stand
+  Portalwarp to Irikar Breach > Gauntlet > Save Point
 * Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
   Move... to Irikar Breach > Save Room > West
 * Collect Flask from Irikar Breach > Worm Rave > Corner > Item
-! Do Irikar Breach > Exit Corridor > Portal Stand > Enter Portal
+  Move... to Irikar Breach > Exit Corridor > Portal Stand
+  Portalwarp to Irikar > Abandoned Room > Empty Pedestal
 * Collect Irikar_Gudam from Irikar > Boss Room > Bull's Feet > Defeat Gudam
 * Collect Big_Flask from Irikar > Boss Room > Bull's Feet > Boss Reward
 * Collect Terminal_Breakthrough_2 from Irikar > Lamassu > Desk > Item

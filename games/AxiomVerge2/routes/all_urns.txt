@@ -29,9 +29,11 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 ! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone
-! Do Giguna > Ruins Top > Portal > Enter Portal
+  Move... to Giguna > Ruins Top > Portal
+  Portalwarp to Giguna Breach > Peak > Save Point
 * Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
-! Do Giguna Breach > Peak > Portal > Portal
+  Move... to Giguna Breach > Peak > Portal
+  Portalwarp to Giguna > Ruins Top > Save Point
 ! Do Recall Drone
   MainSavewarp to Giguna > Ruins Top > Save Point
 
@@ -39,9 +41,11 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 ! Do Irikar > Hub > Save Point > Save
 * Take hybrid exit Irikar > Sight Room > Item Pedestal > Urn Collection Skip, collecting Breach_Sight
   MainSavewarp to Irikar > Hub > Save Point
-! Do Irikar > Hub > Portal Stand > Enter Portal
+  Move... to Irikar > Hub > Portal Stand
+  Portalwarp to Irikar Breach > Gauntlet > Save Point
 * Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
-! Do Irikar Breach > Exit Corridor > Portal Stand > Enter Portal
+  Move... to Irikar Breach > Exit Corridor > Portal Stand
+  Portalwarp to Irikar > Abandoned Room > Empty Pedestal
 
 # TODO: This is where we would peek the separator save point
   Move... to Uhrum > West Entrance > West 25

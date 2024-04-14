@@ -2720,30 +2720,32 @@ macro_rules! hobserve__reset_old_area {
     }};
 }
 
-/// $main_portal_save_update (  )
-/// ^save = ^portal_default
+/// $post_portal_save_update (  )
+/// IF (^save_point != $default) {     IF (^realm == 'breach') {         ^breach_save = ^save_point;     } ELSE {         ^save = ^save_point;     } }
 #[macro_export]
-macro_rules! helper__main_portal_save_update {
+macro_rules! helper__post_portal_save_update {
     ($ctx:expr, $world:expr) => {{
-        $ctx.set_save(data::portal_default($ctx.position()));
+        if data::save_point($ctx.position()) != Default::default() {
+            if data::realm($ctx.position()) == enums::Realm::Breach {
+                $ctx.set_breach_save(data::save_point($ctx.position()));
+            } else {
+                $ctx.set_save(data::save_point($ctx.position()));
+            }
+        }
     }};
 }
 #[macro_export]
-macro_rules! hobserve__main_portal_save_update {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
-}
-
-/// $breach_portal_save_update (  )
-/// ^breach_save = ^portal_default
-#[macro_export]
-macro_rules! helper__breach_portal_save_update {
-    ($ctx:expr, $world:expr) => {{
-        $ctx.set_breach_save(data::portal_default($ctx.position()));
+macro_rules! hobserve__post_portal_save_update {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        if data::save_point($ctx.position()) != Default::default() {
+            if {
+                let v = data::realm($ctx.position());
+                v == enums::Realm::Breach
+            } {
+            } else {
+            }
+        }
     }};
-}
-#[macro_export]
-macro_rules! hobserve__breach_portal_save_update {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $clear_breach_save (  )

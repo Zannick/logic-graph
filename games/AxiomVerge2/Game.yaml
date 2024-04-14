@@ -29,8 +29,9 @@ data:
   realm: main
   water: false
   flipside: SpotId::None
-  portal_default: SpotId::None
-  portal_start: SpotId::None  # TODO: replace portal_default
+  portal_start: SpotId::None
+  portal_hidden: false
+  save_point: SpotId::None
   map_spot: SpotId::None
   # fallthrough: SpotId::None  # Where Indra will fall to if the room is reset
 
@@ -206,9 +207,9 @@ warps:
     to: ^map_spot
     after: $refill_energy
   portal:
-    req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default
+    req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
     to: ^flipside
-    after: $breach_portal_save_update
+    after: $post_portal_save_update
     time: 3.6
     tags: [portal]
 
@@ -361,14 +362,19 @@ helpers:
                   ^prev_area = $get_area(^last);
                   ^last = $default;
     }
-  # Breach portals are tied to particular save points in the breach
-  # The area with the portal should define the data portal_default to be that point,
-  # and the Enter action should include $portal_save_update in the `do` effect
-  # (since it needs to happen on the old position).
+  # Breach portals are tied to particular save points in the breach,
+  # basically whenever you portal into a room, you get assigned that room's save point.
   # TODO: Is this true of portals leaving the breach? Of portals leaving the breach that aren't attached to save points?
-  # TODO: To be tested: off-screen breach portals use a) the portal's intended default, or b) the entered breach room's default
-  $main_portal_save_update:action: ^save = ^portal_default
-  $breach_portal_save_update:action: ^breach_save = ^portal_default
+  # TODO: To be tested: off-screen breach portals use a) the portal's intended default, b) the entered breach room's default,
+  # c) neither (last breach save point?)
+  $post_portal_save_update:action: >
+    IF (^save_point != $default) {
+        IF (^realm == 'breach') {
+            ^breach_save = ^save_point;
+        } ELSE {
+            ^save = ^save_point;
+        }
+    }
   $clear_breach_save:action: ^breach_save = $default
 
 collect:

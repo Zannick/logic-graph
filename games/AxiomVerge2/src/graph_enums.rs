@@ -1069,6 +1069,7 @@ pub enum SpotId {
     Annuna__West_Bridge__Mid_Tunnel,
     Annuna__West_Bridge__North,
     Annuna__West_Bridge__Plinth,
+    Annuna__West_Bridge__Save_Point,
     Annuna__West_Bridge__Tunnel_Wall,
     Annuna__West_Bridge__West_25_Lower,
     Annuna__West_Bridge__West_25_Upper,
@@ -3222,6 +3223,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Annuna__West_Bridge__North => write!(f, "{}", "Annuna > West Bridge > North"),
             SpotId::Annuna__West_Bridge__Plinth => write!(f, "{}", "Annuna > West Bridge > Plinth"),
+            SpotId::Annuna__West_Bridge__Save_Point => {
+                write!(f, "{}", "Annuna > West Bridge > Save Point")
+            }
             SpotId::Annuna__West_Bridge__Tunnel_Wall => {
                 write!(f, "{}", "Annuna > West Bridge > Tunnel Wall")
             }
@@ -7005,6 +7009,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > West Bridge > Mid Tunnel" => Ok(SpotId::Annuna__West_Bridge__Mid_Tunnel),
             "Annuna > West Bridge > North" => Ok(SpotId::Annuna__West_Bridge__North),
             "Annuna > West Bridge > Plinth" => Ok(SpotId::Annuna__West_Bridge__Plinth),
+            "Annuna > West Bridge > Save Point" => Ok(SpotId::Annuna__West_Bridge__Save_Point),
             "Annuna > West Bridge > Tunnel Wall" => Ok(SpotId::Annuna__West_Bridge__Tunnel_Wall),
             "Annuna > West Bridge > West 25 Lower" => {
                 Ok(SpotId::Annuna__West_Bridge__West_25_Lower)
@@ -11905,7 +11910,6 @@ pub enum ExitId {
     Giguna__Carnelian__West_Ledge__ex__Upper_Path_1,
     Giguna__Carnelian__West_Ledge__ex__West_10_1,
     Giguna__Carnelian__West_Ledge__ex__West_10_2,
-    Giguna__Clouds__Platform_Stop__ex__flipside_1,
     Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1,
     Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1,
     Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,
@@ -13475,7 +13479,6 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1 => write!(f, "{}", "Giguna > Carnelian > West Ledge ==> Upper Path (1)"),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => write!(f, "{}", "Giguna > Carnelian > West Ledge ==> West 10 (1)"),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2 => write!(f, "{}", "Giguna > Carnelian > West Ledge ==> West 10 (2)"),
-            ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1 => write!(f, "{}", "Giguna > Clouds > Platform Stop ==> ^flipside (1)"),
             ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1 => write!(f, "{}", "Giguna > Clouds > Pull Right ==> Irikar > Hub > Northwest Above Bowl (1)"),
             ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1 => write!(f, "{}", "Giguna > Clouds > Southeast ==> Irikar > Hub > Northeast Above Bowl (1)"),
             ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => write!(f, "{}", "Giguna > Clouds > Southwest ==> Irikar > Hub > Northwest (1)"),
@@ -15050,7 +15053,6 @@ impl std::str::FromStr for ExitId {
             "Giguna > Carnelian > West Ledge ==> Upper Path (1)" => Ok(ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1),
             "Giguna > Carnelian > West Ledge ==> West 10 (1)" => Ok(ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1),
             "Giguna > Carnelian > West Ledge ==> West 10 (2)" => Ok(ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2),
-            "Giguna > Clouds > Platform Stop ==> ^flipside (1)" => Ok(ExitId::Giguna__Clouds__Platform_Stop__ex__flipside_1),
             "Giguna > Clouds > Pull Right ==> Irikar > Hub > Northwest Above Bowl (1)" => Ok(ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1),
             "Giguna > Clouds > Southeast ==> Irikar > Hub > Northeast Above Bowl (1)" => Ok(ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1),
             "Giguna > Clouds > Southwest ==> Irikar > Hub > Northwest (1)" => Ok(ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1),
@@ -16053,7 +16055,6 @@ pub enum ActionId {
     Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
     Giguna__Giguna_Northeast__Save_Point__Save,
     Giguna__Giguna_Northeast__Switch__Open_Door,
-    Giguna__Ruins_Top__Portal__Enter_Portal,
     Giguna__Ruins_Top__Save_Point__Save,
     Giguna__Ruins_Top__Switch__Open_Doors,
     Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
@@ -16064,7 +16065,6 @@ pub enum ActionId {
     Giguna__West_Caverns__East_Susar__Caught,
     Giguna__West_Caverns__East_Susar__Hack,
     Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
-    Giguna_Breach__Peak__Portal__Portal,
     Giguna_Breach__Peak__Save_Point__Save,
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
@@ -16081,12 +16081,8 @@ pub enum ActionId {
     Global__Recall_Fast_Travel,
     Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
-    Irikar__Basement_Portal__Portal_Stand__Enter_Portal,
-    Irikar__Hub__Portal_Stand__Enter_Portal,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
-    Irikar__Sight_Room__Portal__Enter_Portal,
-    Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal,
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
     Uhrum__Annuna_Corridor__Save_Point__Save,
@@ -16373,9 +16369,6 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door")
             }
-            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
-                write!(f, "{}", "Giguna > Ruins Top > Portal > Enter Portal")
-            }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
                 write!(f, "{}", "Giguna > Ruins Top > Save Point > Save")
             }
@@ -16412,9 +16405,6 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Giguna > West Caverns > Small Platform > Throw Drone Up"
             ),
-            ActionId::Giguna_Breach__Peak__Portal__Portal => {
-                write!(f, "{}", "Giguna Breach > Peak > Portal > Portal")
-            }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 write!(f, "{}", "Giguna Breach > Peak > Save Point > Save")
             }
@@ -16463,14 +16453,6 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar > Basement Portal > Moving Platform Start > Activate Platform"
             ),
-            ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal => write!(
-                f,
-                "{}",
-                "Irikar > Basement Portal > Portal Stand > Enter Portal"
-            ),
-            ActionId::Irikar__Hub__Portal_Stand__Enter_Portal => {
-                write!(f, "{}", "Irikar > Hub > Portal Stand > Enter Portal")
-            }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
                 f,
                 "{}",
@@ -16479,14 +16461,6 @@ impl fmt::Display for ActionId {
             ActionId::Irikar__Hub__Save_Point__Save => {
                 write!(f, "{}", "Irikar > Hub > Save Point > Save")
             }
-            ActionId::Irikar__Sight_Room__Portal__Enter_Portal => {
-                write!(f, "{}", "Irikar > Sight Room > Portal > Enter Portal")
-            }
-            ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal => write!(
-                f,
-                "{}",
-                "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal"
-            ),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
                 write!(
                     f,
@@ -16742,9 +16716,6 @@ impl std::str::FromStr for ActionId {
             "Giguna > Giguna Northeast > Switch > Open Door" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door)
             }
-            "Giguna > Ruins Top > Portal > Enter Portal" => {
-                Ok(ActionId::Giguna__Ruins_Top__Portal__Enter_Portal)
-            }
             "Giguna > Ruins Top > Save Point > Save" => {
                 Ok(ActionId::Giguna__Ruins_Top__Save_Point__Save)
             }
@@ -16774,9 +16745,6 @@ impl std::str::FromStr for ActionId {
             }
             "Giguna > West Caverns > Small Platform > Throw Drone Up" => {
                 Ok(ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up)
-            }
-            "Giguna Breach > Peak > Portal > Portal" => {
-                Ok(ActionId::Giguna_Breach__Peak__Portal__Portal)
             }
             "Giguna Breach > Peak > Save Point > Save" => {
                 Ok(ActionId::Giguna_Breach__Peak__Save_Point__Save)
@@ -16816,22 +16784,10 @@ impl std::str::FromStr for ActionId {
             "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
                 Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
             }
-            "Irikar > Basement Portal > Portal Stand > Enter Portal" => {
-                Ok(ActionId::Irikar__Basement_Portal__Portal_Stand__Enter_Portal)
-            }
-            "Irikar > Hub > Portal Stand > Enter Portal" => {
-                Ok(ActionId::Irikar__Hub__Portal_Stand__Enter_Portal)
-            }
             "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
                 Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
             }
             "Irikar > Hub > Save Point > Save" => Ok(ActionId::Irikar__Hub__Save_Point__Save),
-            "Irikar > Sight Room > Portal > Enter Portal" => {
-                Ok(ActionId::Irikar__Sight_Room__Portal__Enter_Portal)
-            }
-            "Irikar Breach > Exit Corridor > Portal Stand > Enter Portal" => {
-                Ok(ActionId::Irikar_Breach__Exit_Corridor__Portal_Stand__Enter_Portal)
-            }
             "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High" => {
                 Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High)
             }

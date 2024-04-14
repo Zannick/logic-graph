@@ -29,6 +29,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [41, 7, 42, 8]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Glacier Revival
@@ -1567,7 +1569,6 @@ areas:
 - name: Crystals
   on_entry: $reset_old_area(^newpos)
   data:
-    portal_default: Amagi Breach > East Entrance > Save Point
     portal_start: Portal Cage
   spots:
     - name: West
