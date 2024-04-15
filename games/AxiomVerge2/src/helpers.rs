@@ -2644,7 +2644,7 @@ macro_rules! hobserve__deploy_drone_and_move {
 }
 
 /// $save_last (  )
-/// IF (^last WITHIN $default) { ^last = ^position }
+/// IF (^last == $default) { ^last = ^position }
 #[macro_export]
 macro_rules! helper__save_last {
     ($ctx:expr, $world:expr) => {{
@@ -2657,15 +2657,18 @@ macro_rules! helper__save_last {
 macro_rules! hobserve__save_last {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         if {
-            $full_obs.observe_last();
-            $ctx.last()
-        } == Default::default()
-        {}
+            let left = {
+                $full_obs.observe_last();
+                $ctx.last()
+            };
+            let right = Default::default();
+            left == right
+        } {}
     }};
 }
 
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);             ^prev_portal = ^portal;             ^portal = @^newpos^portal_start;         } ELSE {             SWAP ^portal, ^prev_portal;         };         ^prev_area = $get_area(^position); } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {               IF (^newpos NOT WITHIN ^prev_area) {                   $reset_area(^prev_area);                   ^prev_portal = ^portal;                   ^portal = @^newpos^portal_start;               } ELSE {                   SWAP ^portal, ^prev_portal;               };               ^prev_area = $get_area(^last);               ^last = $default; }
+/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);             ^prev_portal = ^portal;             ^portal = @^newpos^portal_start;         } ELSE {             SWAP ^portal, ^prev_portal;         };         ^prev_area = $get_area(^position);         ^last = $default; } ELSE IF (^position WITHIN `Menu > Warp Only`            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {               IF (^newpos NOT WITHIN ^prev_area) {                   $reset_area(^prev_area);                   ^prev_portal = ^portal;                   ^portal = @^newpos^portal_start;               } ELSE {                   SWAP ^portal, ^prev_portal;               };               ^prev_area = $get_area(^last);               ^last = $default; }
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
@@ -2683,6 +2686,7 @@ macro_rules! helper__reset_old_area {
                 std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
+            $ctx.set_last(Default::default());
         } else if (($ctx.position() != SpotId::None
             && get_area($ctx.position()) == AreaId::Menu__Warp_Only
             && $ctx.last() != SpotId::None
