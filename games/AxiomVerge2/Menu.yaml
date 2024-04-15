@@ -504,6 +504,8 @@ areas:
       coord: [43, 19]
     - name: Breach Attractor
       coord: [37, 16]
+    - name: Hammond
+      coord: [40, 11]
     #endregion
 
 - name: Breach Map

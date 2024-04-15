@@ -2206,6 +2206,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Giguna_Ruins_West,
     Menu__Kiengir_Map__Giguna_Separator,
     Menu__Kiengir_Map__Glacier_Revival,
+    Menu__Kiengir_Map__Hammond,
     Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Hub,
@@ -6138,6 +6139,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
             }
+            SpotId::Menu__Kiengir_Map__Hammond => write!(f, "{}", "Menu > Kiengir Map > Hammond"),
             SpotId::Menu__Kiengir_Map__Infect => write!(f, "{}", "Menu > Kiengir Map > Infect"),
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save")
@@ -9170,6 +9172,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
+            "Menu > Kiengir Map > Hammond" => Ok(SpotId::Menu__Kiengir_Map__Hammond),
             "Menu > Kiengir Map > Infect" => Ok(SpotId::Menu__Kiengir_Map__Infect),
             "Menu > Kiengir Map > Irikar Beach Save" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Save)

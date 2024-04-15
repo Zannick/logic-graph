@@ -1773,6 +1773,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Upper Portal Stand
+  map:
+    hammond: [40, 10, 41, 11]
+  datamap:
+    map_spot:
+      hammond: Menu > Kiengir Map > Hammond
   spots:
     - name: Upper Grate Left
       coord: [39.9, 9.6]

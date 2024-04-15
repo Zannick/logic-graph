@@ -13648,6 +13648,133 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 2000,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1500,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            600
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1600,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Apocalypse) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            1333
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1333,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1800
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2333,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1866
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2066,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            1600
+        }
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1500
+        }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1133,
+        ([false], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1700
+        }
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Infect,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 900,
@@ -29494,6 +29621,123 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1500,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            600
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1600,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Apocalypse) => 600,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            733
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1400,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            1333
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1333,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            1800
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2333,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Hub) => 1866,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            2066
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            1600
+        }
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => 1500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1133,
+        ([true], SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => 1700,
         ([true], SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             900
         }
@@ -40978,6 +41222,42 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Breach_Attractor, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             true
         }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Separator) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Glacier_Revival) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -62261,6 +62541,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Hammonds_End__Center_Door_Right,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Center_Door_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62281,6 +62566,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Hammonds_End__Corner,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62298,6 +62588,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Hammonds_End__East_11_Door,
             SpotId::Glacier__The_Big_Drop__West_11_Door,
             3000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__East_11_Door,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
         ),
         (
             SpotId::Glacier__Hammonds_End__East_11_Door,
@@ -62323,6 +62618,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Hammonds_End__Hammond,
             SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
             600,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Hammond,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
         ),
         (
             SpotId::Glacier__Hammonds_End__Hammond,
@@ -62386,6 +62686,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62403,6 +62708,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
             SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
             614,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
         ),
         (
             SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
@@ -62548,6 +62858,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
             SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
             789,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+            SpotId::Menu__Kiengir_Map__Hammond,
+            100,
         ),
         (
             SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
@@ -71646,6 +71961,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            300,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -85145,6 +85610,80 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(2000)
         }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(1000)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(800)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            Some(1500)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Upper) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            Some(900)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1600)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Apocalypse) => Some(600),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(733)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Base) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1533)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(300)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2333)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Hub) => Some(1866),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2066)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Center) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => Some(1500),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => Some(1700),
         (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(900)
         }
@@ -97561,6 +98100,94 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1400), vec![]),
         (SpotId::Menu__Kiengir_Map__Glacier_Revival, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Hammond,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room) => {
+            (Some(900), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1533), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(300), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1866), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1700), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Infect, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(900), vec![])

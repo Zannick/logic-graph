@@ -1533,7 +1533,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Filter_Flask
         | SpotId::Menu__Kiengir_Map__Filter_Tablet
         | SpotId::Menu__Kiengir_Map__Filter_Spiders
-        | SpotId::Menu__Kiengir_Map__Breach_Attractor => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Breach_Attractor
+        | SpotId::Menu__Kiengir_Map__Hammond => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -3158,7 +3159,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Filter_Flask
         | SpotId::Menu__Kiengir_Map__Filter_Tablet
         | SpotId::Menu__Kiengir_Map__Filter_Spiders
-        | SpotId::Menu__Kiengir_Map__Breach_Attractor => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Breach_Attractor
+        | SpotId::Menu__Kiengir_Map__Hammond => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -11717,7 +11719,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1612] = [
+static RAW_SPOTS: [SpotId; 1613] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -13197,6 +13199,7 @@ static RAW_SPOTS: [SpotId; 1612] = [
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
     SpotId::Menu__Kiengir_Map__Giguna_Separator,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
+    SpotId::Menu__Kiengir_Map__Hammond,
     SpotId::Menu__Kiengir_Map__Infect,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
@@ -18422,6 +18425,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
+            | SpotId::Menu__Kiengir_Map__Hammond
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
             | SpotId::Menu__Kiengir_Map__Remote_Drone
             | SpotId::Menu__Kiengir_Map__Shockwave
@@ -51709,6 +51713,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Breach_Attractor => Spot {
             id: SpotId::Menu__Kiengir_Map__Breach_Attractor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Hammond => Spot {
+            id: SpotId::Menu__Kiengir_Map__Hammond,
             locations: Range {
                 start: 0, end: 0,
             },
