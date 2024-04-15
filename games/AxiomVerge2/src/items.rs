@@ -175,7 +175,6 @@ pub enum Item {
     Under_Siege,
     Underwater_Movement,
     Wall_Climb,
-    Water_Movement,
 }
 impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -342,7 +341,6 @@ impl fmt::Display for Item {
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
-            Item::Water_Movement => write!(f, "{}", "Water_Movement"),
         }
     }
 }
@@ -505,7 +503,6 @@ impl std::str::FromStr for Item {
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
             "Wall_Climb" => Ok(Item::Wall_Climb),
-            "Water_Movement" => Ok(Item::Water_Movement),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }
     }

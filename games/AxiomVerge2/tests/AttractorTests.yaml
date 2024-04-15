@@ -1,0 +1,29 @@
+name: AttractorTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Ledge_Grab
+    - Wall_Climb
+    - Infect
+    - Infect_L1
+    - Remote_Drone
+    - Shockwave
+    - Underwater_Movement
+    - Hammond_Auth
+    - Slingshot_Hook
+    - Drone_Hover
+    - Fast_Travel
+  context:
+    energy: 300
+    mode: drone
+    save: Annuna > Upper Save > Save Point
+    indra: Annuna > Filter Teleporter > Shaft Top
+  start: Glacier > Vertical Room > Lower Switch
+
+tests:
+  - name: Attractor
+    context:
+      glacier__vertical_room__ctx__lower_gatestones: true
+    can_reach: Glacier > Crystals > Lower Corner

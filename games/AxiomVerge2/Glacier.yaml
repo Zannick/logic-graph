@@ -407,7 +407,7 @@ areas:
           tags: [standing]
       exits:
         - to: Right Center Rock
-          req: Water_Movement
+          req: Underwater_Movement
           movement: base
           jumps: 3
     - name: Breakable Rock Left
@@ -791,6 +791,10 @@ areas:
           req: $grab
           movement: base
           jumps: 2
+        - to: East 14
+          req: $hook
+          movement: base
+          jumps: 1
         # TODO: fast_hover into East Lake
     - name: Flat Platform
       coord: [36.45, 14.55]
@@ -799,6 +803,11 @@ areas:
         - to: West 15 Lower
           jumps_down: 1
         - to: Middle Gatestone
+      exits:
+        - to: Below Upper Switch
+          req: $hook and $hover
+          movement: base
+          jumps: 2
     - name: West 15 Flat
       coord: [36.05, 14.55]
       local:
@@ -833,7 +842,7 @@ areas:
         water: true
       exits:
         - to: Water's Ledge
-          req: Water_Movement and $hook
+          req: Underwater_Movement and $hook
           movement: base
           jumps: 3
         - to: Lower Switch
@@ -851,7 +860,7 @@ areas:
         - to: East 17
       exits:
         - to: Middle Gatestone
-          req: Water_Movement and $hook and ^_lower_gatestones
+          req: Underwater_Movement and $hook and ^_lower_gatestones
           movement: base
           jumps: 2
       actions:
@@ -879,7 +888,7 @@ areas:
         - to: East 17
       exits:
         - to: Lower Switch
-          req: Water_Movement and $hook and $hover
+          req: Underwater_Movement and $hook and $hover
           movement: fast_hover
           jumps: 1
         - to: Lower Switch
@@ -887,7 +896,7 @@ areas:
           movement: base  # I think we get slowed down?
           jumps: 1
         - to: Lower Gatestone
-          req: Water_Movement
+          req: Underwater_Movement
           movement: fast_hover
     - name: Lower Gatestone
       coord: [36.6, 17.0]
@@ -909,7 +918,7 @@ areas:
       coord: [36.5, 17.8]
       exits:
         - to: Lower Gatestone
-          req: Water_Movement and ^_lower_gatestones
+          req: Underwater_Movement and ^_lower_gatestones
           movement: base
           jumps: 2
         # There are probably other options without water movement (hook etc)

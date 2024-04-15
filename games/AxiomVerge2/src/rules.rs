@@ -1533,8 +1533,8 @@ pub fn access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // Water_Movement and $hook and ^_lower_gatestones
-    ((ctx.has(Item::Water_Movement) && helper__hook!(ctx, world))
+    // Underwater_Movement and $hook and ^_lower_gatestones
+    ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && ctx.glacier__vertical_room__ctx__lower_gatestones())
 }
 pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
@@ -1555,8 +1555,8 @@ pub fn access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // Water_Movement and ^_lower_gatestones
-    (ctx.has(Item::Water_Movement) && ctx.glacier__vertical_room__ctx__lower_gatestones())
+    // Underwater_Movement and ^_lower_gatestones
+    (ctx.has(Item::Underwater_Movement) && ctx.glacier__vertical_room__ctx__lower_gatestones())
 }
 pub fn access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
@@ -1615,9 +1615,9 @@ pub fn access_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool
     // $grab and Switch_40_12
     (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
 }
-pub fn access_grab_and_water_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Water_Movement
-    (helper__grab!(ctx, world) && ctx.has(Item::Water_Movement))
+pub fn access_grab_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Underwater_Movement
+    (helper__grab!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
 pub fn access_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
     // $grab or Anuman
@@ -1691,10 +1691,6 @@ pub fn access_hook_and_not_ebih_waterfall_block_right(ctx: &Context, world: &gra
 pub fn access_hook_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
-}
-pub fn access_hook_and_water_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and Water_Movement
-    (helper__hook!(ctx, world) && ctx.has(Item::Water_Movement))
 }
 pub fn access_hook_or_hover(ctx: &Context, world: &graph::World) -> bool {
     // $hook or $hover
@@ -2312,17 +2308,10 @@ pub fn access_underwater_movement_and_hook(ctx: &Context, world: &graph::World) 
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
 }
-pub fn access_water_movement(ctx: &Context, world: &graph::World) -> bool {
-    // Water_Movement
-    ctx.has(Item::Water_Movement)
-}
-pub fn access_water_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
-    // Water_Movement and $hook
-    (ctx.has(Item::Water_Movement) && helper__hook!(ctx, world))
-}
-pub fn access_water_movement_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
-    // Water_Movement and $hook and $hover
-    ((ctx.has(Item::Water_Movement) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
+pub fn access_underwater_movement_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
+    // Underwater_Movement and $hook and $hover
+    ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
+        && helper__hover!(ctx, world))
 }
 pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &graph::World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -8102,13 +8091,13 @@ pub fn explain_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Water_Movement and $hook and ^_lower_gatestones
+    // Underwater_Movement and $hook and ^_lower_gatestones
     {
         let mut left = {
             let mut left = {
-                let h = ctx.has(Item::Water_Movement);
-                edict.insert("Water_Movement", format!("{}", h));
-                (h, vec!["Water_Movement"])
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
             };
             if !left.0 {
                 left
@@ -8174,12 +8163,12 @@ pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Water_Movement and ^_lower_gatestones
+    // Underwater_Movement and ^_lower_gatestones
     {
         let mut left = {
-            let h = ctx.has(Item::Water_Movement);
-            edict.insert("Water_Movement", format!("{}", h));
-            (h, vec!["Water_Movement"])
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
         };
         if !left.0 {
             left
@@ -8437,12 +8426,12 @@ pub fn explain_grab_and_switch_40_12(
         }
     }
 }
-pub fn explain_grab_and_water_movement(
+pub fn explain_grab_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $grab and Water_Movement
+    // $grab and Underwater_Movement
     {
         let mut left = {
             let (res, mut refs) = hexplain__grab!(ctx, world, edict);
@@ -8454,9 +8443,9 @@ pub fn explain_grab_and_water_movement(
             left
         } else {
             let mut right = {
-                let h = ctx.has(Item::Water_Movement);
-                edict.insert("Water_Movement", format!("{}", h));
-                (h, vec!["Water_Movement"])
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -8874,32 +8863,6 @@ pub fn explain_hook_and_underwater_movement(
                 let h = ctx.has(Item::Underwater_Movement);
                 edict.insert("Underwater_Movement", format!("{}", h));
                 (h, vec!["Underwater_Movement"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_water_movement(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and Water_Movement
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Water_Movement);
-                edict.insert("Water_Movement", format!("{}", h));
-                (h, vec!["Water_Movement"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -11582,56 +11545,18 @@ pub fn explain_underwater_movement_and_hook(
         }
     }
 }
-pub fn explain_water_movement(
+pub fn explain_underwater_movement_and_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Water_Movement
-    {
-        let h = ctx.has(Item::Water_Movement);
-        edict.insert("Water_Movement", format!("{}", h));
-        (h, vec!["Water_Movement"])
-    }
-}
-pub fn explain_water_movement_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Water_Movement and $hook
-    {
-        let mut left = {
-            let h = ctx.has(Item::Water_Movement);
-            edict.insert("Water_Movement", format!("{}", h));
-            (h, vec!["Water_Movement"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_water_movement_and_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Water_Movement and $hook and $hover
+    // Underwater_Movement and $hook and $hover
     {
         let mut left = {
             let mut left = {
-                let h = ctx.has(Item::Water_Movement);
-                edict.insert("Water_Movement", format!("{}", h));
-                (h, vec!["Water_Movement"])
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
             };
             if !left.0 {
                 left
@@ -14395,10 +14320,10 @@ pub fn observe_access_glacier__vertical_room__lower_switch__ex__middle_gatestone
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Water_Movement and $hook and ^_lower_gatestones
+    // Underwater_Movement and $hook and ^_lower_gatestones
     (({
-        full_obs.observe_water_movement();
-        ctx.has(Item::Water_Movement)
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
         && ({
             full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
@@ -14432,10 +14357,10 @@ pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Water_Movement and ^_lower_gatestones
+    // Underwater_Movement and ^_lower_gatestones
     ({
-        full_obs.observe_water_movement();
-        ctx.has(Item::Water_Movement)
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
     } && ({
         full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
         ctx.glacier__vertical_room__ctx__lower_gatestones()
@@ -14568,16 +14493,16 @@ pub fn observe_access_grab_and_switch_40_12(
             ctx.has(Item::Switch_40_12)
         }))
 }
-pub fn observe_access_grab_and_water_movement(
+pub fn observe_access_grab_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $grab and Water_Movement
+    // $grab and Underwater_Movement
     (hobserve__grab!(ctx, world, full_obs)
         && ({
-            full_obs.observe_water_movement();
-            ctx.has(Item::Water_Movement)
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
         }))
 }
 pub fn observe_access_grab_or_anuman(
@@ -14768,18 +14693,6 @@ pub fn observe_access_hook_and_underwater_movement(
         && ({
             full_obs.observe_underwater_movement();
             ctx.has(Item::Underwater_Movement)
-        }))
-}
-pub fn observe_access_hook_and_water_movement(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and Water_Movement
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_water_movement();
-            ctx.has(Item::Water_Movement)
         }))
 }
 pub fn observe_access_hook_or_hover(
@@ -16319,37 +16232,15 @@ pub fn observe_access_underwater_movement_and_hook(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_water_movement(
+pub fn observe_access_underwater_movement_and_hook_and_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Water_Movement
-    {
-        full_obs.observe_water_movement();
-        ctx.has(Item::Water_Movement)
-    }
-}
-pub fn observe_access_water_movement_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Water_Movement and $hook
-    ({
-        full_obs.observe_water_movement();
-        ctx.has(Item::Water_Movement)
-    } && (hobserve__hook!(ctx, world, full_obs)))
-}
-pub fn observe_access_water_movement_and_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Water_Movement and $hook and $hover
+    // Underwater_Movement and $hook and $hover
     (({
-        full_obs.observe_water_movement();
-        ctx.has(Item::Water_Movement)
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
         && (hobserve__hover!(ctx, world, full_obs)))
 }

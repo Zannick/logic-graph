@@ -1168,11 +1168,11 @@ areas:
         - to: West Water Ledge
       exits:
         - to: Center Island West
-          req: $grab and Water_Movement
+          req: $grab and Underwater_Movement
           movement: base
           jumps: 2
         - to: Center Island West
-          req: $hook and Water_Movement
+          req: $hook and Underwater_Movement
           movement: base
           jumps: 1
     - name: Center Island West

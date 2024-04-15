@@ -637,13 +637,7 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if !spot_map.contains_key(&exit.dest())
-                && (!W::same_area(ctx.get().position(), exit.dest())
-                    || world
-                        .get_condensed_edges_from(ctx.get().position())
-                        .into_iter()
-                        .any(|ce| ce.dst == exit.dest()))
-            {
+            if !spot_map.contains_key(&exit.dest()) {
                 vec.push(format!(
                     "{}: exit not usable:\n{}",
                     exit.id(),
@@ -687,13 +681,7 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.position()) {
-            if !known_spots.contains(&exit.dest())
-                && (!W::same_area(ctx.position(), exit.dest())
-                    || world
-                        .get_condensed_edges_from(ctx.position())
-                        .into_iter()
-                        .any(|ce| ce.dst == exit.dest()))
-            {
+            if !known_spots.contains(&exit.dest()) {
                 vec.push(format!(
                     "{}: exit not usable:\n{}",
                     exit.id(),

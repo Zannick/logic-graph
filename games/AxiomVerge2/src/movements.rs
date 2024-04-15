@@ -63807,7 +63807,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
             SpotId::Glacier__Vertical_Room__East_14,
-            1200,
+            1052,
         ),
         (
             SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
@@ -63983,6 +63983,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__East_Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Vertical_Room__Flat_Platform,
+            SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            1200,
         ),
         (
             SpotId::Glacier__Vertical_Room__Flat_Platform,

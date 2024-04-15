@@ -2722,7 +2722,9 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room__East_14 -> Glacier__Crystals__West;
     Glacier__Vertical_Room__Upper_Switch -> Glacier__Vertical_Room__Above_Switch;
     Glacier__Vertical_Room__Below_Upper_Switch -> Glacier__Vertical_Room__East_14;
+    Glacier__Vertical_Room__Below_Upper_Switch -> Glacier__Vertical_Room__East_14;
     Glacier__Vertical_Room__Below_Upper_Switch -> Glacier__Vertical_Room__Upper_Switch;
+    Glacier__Vertical_Room__Flat_Platform -> Glacier__Vertical_Room__Below_Upper_Switch;
     Glacier__Vertical_Room__West_15_Flat -> Amagi__East_Lake__East_15_Flat;
     Glacier__Vertical_Room__West_15_Lower -> Amagi__East_Lake__East_15_Lower;
     Glacier__Vertical_Room__Middle_Gatestone -> Glacier__Vertical_Room__Lower_Gatestone;
