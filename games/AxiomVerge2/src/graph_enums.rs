@@ -236,6 +236,7 @@ pub enum AreaId {
     Glacier_Breach__Save_and_Exit,
     Glacier_Breach__South_Save,
     Glacier_Breach__Spidery_Connector,
+    Glacier_Breach__Stable_Floor,
     Glacier_Breach__Stacked_Enemies,
     Glacier_Breach__West_Save,
     Glacier_Breach__Zappers,
@@ -448,6 +449,9 @@ impl fmt::Display for AreaId {
             AreaId::Glacier_Breach__Spidery_Connector => {
                 write!(f, "{}", "Glacier Breach > Spidery Connector")
             }
+            AreaId::Glacier_Breach__Stable_Floor => {
+                write!(f, "{}", "Glacier Breach > Stable Floor")
+            }
             AreaId::Glacier_Breach__Stacked_Enemies => {
                 write!(f, "{}", "Glacier Breach > Stacked Enemies")
             }
@@ -653,6 +657,7 @@ impl std::str::FromStr for AreaId {
             "Glacier Breach > Save and Exit" => Ok(AreaId::Glacier_Breach__Save_and_Exit),
             "Glacier Breach > South Save" => Ok(AreaId::Glacier_Breach__South_Save),
             "Glacier Breach > Spidery Connector" => Ok(AreaId::Glacier_Breach__Spidery_Connector),
+            "Glacier Breach > Stable Floor" => Ok(AreaId::Glacier_Breach__Stable_Floor),
             "Glacier Breach > Stacked Enemies" => Ok(AreaId::Glacier_Breach__Stacked_Enemies),
             "Glacier Breach > West Save" => Ok(AreaId::Glacier_Breach__West_Save),
             "Glacier Breach > Zappers" => Ok(AreaId::Glacier_Breach__Zappers),
@@ -1933,6 +1938,8 @@ pub enum SpotId {
     Glacier_Breach__Electric_Arena__East_Platforms,
     Glacier_Breach__Electric_Arena__West,
     Glacier_Breach__Electric_Arena__West_Platforms,
+    Glacier_Breach__Empty_Space__Lower,
+    Glacier_Breach__Empty_Space__North,
     Glacier_Breach__Empty_Space__West,
     Glacier_Breach__Floaters__East,
     Glacier_Breach__Floaters__West,
@@ -1972,6 +1979,10 @@ pub enum SpotId {
     Glacier_Breach__South_Save__Save_Point,
     Glacier_Breach__South_Save__West,
     Glacier_Breach__Spidery_Connector__East,
+    Glacier_Breach__Stable_Floor__Center,
+    Glacier_Breach__Stable_Floor__East,
+    Glacier_Breach__Stable_Floor__South,
+    Glacier_Breach__Stable_Floor__West,
     Glacier_Breach__Stacked_Enemies__West,
     Glacier_Breach__West_Save__East_11,
     Glacier_Breach__West_Save__East_12,
@@ -5387,6 +5398,12 @@ impl fmt::Display for SpotId {
             SpotId::Glacier_Breach__Electric_Arena__West_Platforms => {
                 write!(f, "{}", "Glacier Breach > Electric Arena > West Platforms")
             }
+            SpotId::Glacier_Breach__Empty_Space__Lower => {
+                write!(f, "{}", "Glacier Breach > Empty Space > Lower")
+            }
+            SpotId::Glacier_Breach__Empty_Space__North => {
+                write!(f, "{}", "Glacier Breach > Empty Space > North")
+            }
             SpotId::Glacier_Breach__Empty_Space__West => {
                 write!(f, "{}", "Glacier Breach > Empty Space > West")
             }
@@ -5505,6 +5522,18 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier_Breach__Spidery_Connector__East => {
                 write!(f, "{}", "Glacier Breach > Spidery Connector > East")
+            }
+            SpotId::Glacier_Breach__Stable_Floor__Center => {
+                write!(f, "{}", "Glacier Breach > Stable Floor > Center")
+            }
+            SpotId::Glacier_Breach__Stable_Floor__East => {
+                write!(f, "{}", "Glacier Breach > Stable Floor > East")
+            }
+            SpotId::Glacier_Breach__Stable_Floor__South => {
+                write!(f, "{}", "Glacier Breach > Stable Floor > South")
+            }
+            SpotId::Glacier_Breach__Stable_Floor__West => {
+                write!(f, "{}", "Glacier Breach > Stable Floor > West")
             }
             SpotId::Glacier_Breach__Stacked_Enemies__West => {
                 write!(f, "{}", "Glacier Breach > Stacked Enemies > West")
@@ -8579,6 +8608,12 @@ impl std::str::FromStr for SpotId {
             "Glacier Breach > Electric Arena > West Platforms" => {
                 Ok(SpotId::Glacier_Breach__Electric_Arena__West_Platforms)
             }
+            "Glacier Breach > Empty Space > Lower" => {
+                Ok(SpotId::Glacier_Breach__Empty_Space__Lower)
+            }
+            "Glacier Breach > Empty Space > North" => {
+                Ok(SpotId::Glacier_Breach__Empty_Space__North)
+            }
             "Glacier Breach > Empty Space > West" => Ok(SpotId::Glacier_Breach__Empty_Space__West),
             "Glacier Breach > Floaters > East" => Ok(SpotId::Glacier_Breach__Floaters__East),
             "Glacier Breach > Floaters > West" => Ok(SpotId::Glacier_Breach__Floaters__West),
@@ -8681,6 +8716,18 @@ impl std::str::FromStr for SpotId {
             "Glacier Breach > South Save > West" => Ok(SpotId::Glacier_Breach__South_Save__West),
             "Glacier Breach > Spidery Connector > East" => {
                 Ok(SpotId::Glacier_Breach__Spidery_Connector__East)
+            }
+            "Glacier Breach > Stable Floor > Center" => {
+                Ok(SpotId::Glacier_Breach__Stable_Floor__Center)
+            }
+            "Glacier Breach > Stable Floor > East" => {
+                Ok(SpotId::Glacier_Breach__Stable_Floor__East)
+            }
+            "Glacier Breach > Stable Floor > South" => {
+                Ok(SpotId::Glacier_Breach__Stable_Floor__South)
+            }
+            "Glacier Breach > Stable Floor > West" => {
+                Ok(SpotId::Glacier_Breach__Stable_Floor__West)
             }
             "Glacier Breach > Stacked Enemies > West" => {
                 Ok(SpotId::Glacier_Breach__Stacked_Enemies__West)
@@ -12593,6 +12640,7 @@ pub enum ExitId {
     Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1,
     Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1,
     Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1,
+    Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1,
     Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1,
     Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2,
     Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1,
@@ -12726,6 +12774,8 @@ pub enum ExitId {
     Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1,
     Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1,
     Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1,
+    Glacier_Breach__Empty_Space__Lower__ex__West_1,
+    Glacier_Breach__Empty_Space__West__ex__Grate_Work__East_1,
     Glacier_Breach__Floaters__East__ex__Crystals__West_1,
     Glacier_Breach__Floaters__West__ex__West_Save__East_12_1,
     Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1,
@@ -12766,6 +12816,8 @@ pub enum ExitId {
     Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1,
     Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1,
     Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1,
+    Glacier_Breach__Hammonds_Breach__East__ex__Stable_Floor__West_1,
+    Glacier_Breach__Hammonds_Breach__West_Side__ex__Stable_Floor__Center_1,
     Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1,
     Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1,
     Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1,
@@ -12777,6 +12829,8 @@ pub enum ExitId {
     Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1,
     Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1,
     Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1,
+    Glacier_Breach__Stable_Floor__South__ex__Empty_Space__North_1,
+    Glacier_Breach__Stable_Floor__West__ex__Hammonds_Breach__East_1,
     Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1,
     Glacier_Breach__West_Save__East_11__ex__West_Ledge_1,
     Glacier_Breach__West_Save__East_12__ex__Floaters__West_1,
@@ -14191,6 +14245,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 => write!(f, "{}", "Glacier > Hammond's End > Lower Grate Right ==> Upper Stair (1)"),
             ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => write!(f, "{}", "Glacier > Hammond's End > Switch Near ==> Switch from Ledge (1)"),
             ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Floor ==> Upper Right Mid-air (1)"),
+            ExitId::Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Grate Left ==> Upper Portal Stand (1)"),
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (1)"),
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => write!(f, "{}", "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (2)"),
             ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => write!(f, "{}", "Glacier > Hammond's End > Upper Portal Stand ==> Between Center Doors (1)"),
@@ -14324,6 +14379,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1 => write!(f, "{}", "Glacier Breach > Electric Arena > East Platforms ==> West (1)"),
             ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1 => write!(f, "{}", "Glacier Breach > Electric Arena > West ==> Piano Roll > East 10 (1)"),
             ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => write!(f, "{}", "Glacier Breach > Electric Arena > West Platforms ==> East Ledge (1)"),
+            ExitId::Glacier_Breach__Empty_Space__Lower__ex__West_1 => write!(f, "{}", "Glacier Breach > Empty Space > Lower ==> West (1)"),
+            ExitId::Glacier_Breach__Empty_Space__West__ex__Grate_Work__East_1 => write!(f, "{}", "Glacier Breach > Empty Space > West ==> Grate Work > East (1)"),
             ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => write!(f, "{}", "Glacier Breach > Floaters > East ==> Crystals > West (1)"),
             ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => write!(f, "{}", "Glacier Breach > Floaters > West ==> West Save > East 12 (1)"),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => write!(f, "{}", "Glacier Breach > Grate Work > Below Grate ==> West Ledge (1)"),
@@ -14364,6 +14421,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1 => write!(f, "{}", "Glacier Breach > Guarded Corridor > West ==> Past the Guards (1)"),
             ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1 => write!(f, "{}", "Glacier Breach > Guarded Corridor > West ==> Save Point (1)"),
             ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1 => write!(f, "{}", "Glacier Breach > Guarded Corridor > West ==> West Save > East 11 (1)"),
+            ExitId::Glacier_Breach__Hammonds_Breach__East__ex__Stable_Floor__West_1 => write!(f, "{}", "Glacier Breach > Hammond's Breach > East ==> Stable Floor > West (1)"),
+            ExitId::Glacier_Breach__Hammonds_Breach__West_Side__ex__Stable_Floor__Center_1 => write!(f, "{}", "Glacier Breach > Hammond's Breach > West Side ==> Stable Floor > Center (1)"),
             ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1 => write!(f, "{}", "Glacier Breach > Piano Roll > East 10 ==> Electric Arena > West (1)"),
             ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1 => write!(f, "{}", "Glacier Breach > Piano Roll > East 10 ==> Upper Ledge (1)"),
             ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1 => write!(f, "{}", "Glacier Breach > Piano Roll > East 9 ==> Stacked Enemies > West (1)"),
@@ -14375,6 +14434,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1 => write!(f, "{}", "Glacier Breach > South Save > East ==> Grate Work > West 14 (1)"),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => write!(f, "{}", "Glacier Breach > South Save > Save Point ==> Brick Ledge (1)"),
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => write!(f, "{}", "Glacier Breach > South Save > West ==> Amagi Breach > East Entrance > East (1)"),
+            ExitId::Glacier_Breach__Stable_Floor__South__ex__Empty_Space__North_1 => write!(f, "{}", "Glacier Breach > Stable Floor > South ==> Empty Space > North (1)"),
+            ExitId::Glacier_Breach__Stable_Floor__West__ex__Hammonds_Breach__East_1 => write!(f, "{}", "Glacier Breach > Stable Floor > West ==> Hammond's Breach > East (1)"),
             ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => write!(f, "{}", "Glacier Breach > West Save > East 11 ==> Guarded Corridor > West (1)"),
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => write!(f, "{}", "Glacier Breach > West Save > East 11 ==> West Ledge (1)"),
             ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => write!(f, "{}", "Glacier Breach > West Save > East 12 ==> Floaters > West (1)"),
@@ -15794,6 +15855,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Hammond's End > Lower Grate Right ==> Upper Stair (1)" => Ok(ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1),
             "Glacier > Hammond's End > Switch Near ==> Switch from Ledge (1)" => Ok(ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1),
             "Glacier > Hammond's End > Upper Floor ==> Upper Right Mid-air (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Floor__ex__Upper_Right_Mid_air_1),
+            "Glacier > Hammond's End > Upper Grate Left ==> Upper Portal Stand (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1),
             "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1),
             "Glacier > Hammond's End > Upper Grate Right ==> Upper Grate Left (2)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2),
             "Glacier > Hammond's End > Upper Portal Stand ==> Between Center Doors (1)" => Ok(ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1),
@@ -15927,6 +15989,8 @@ impl std::str::FromStr for ExitId {
             "Glacier Breach > Electric Arena > East Platforms ==> West (1)" => Ok(ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1),
             "Glacier Breach > Electric Arena > West ==> Piano Roll > East 10 (1)" => Ok(ExitId::Glacier_Breach__Electric_Arena__West__ex__Piano_Roll__East_10_1),
             "Glacier Breach > Electric Arena > West Platforms ==> East Ledge (1)" => Ok(ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1),
+            "Glacier Breach > Empty Space > Lower ==> West (1)" => Ok(ExitId::Glacier_Breach__Empty_Space__Lower__ex__West_1),
+            "Glacier Breach > Empty Space > West ==> Grate Work > East (1)" => Ok(ExitId::Glacier_Breach__Empty_Space__West__ex__Grate_Work__East_1),
             "Glacier Breach > Floaters > East ==> Crystals > West (1)" => Ok(ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1),
             "Glacier Breach > Floaters > West ==> West Save > East 12 (1)" => Ok(ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1),
             "Glacier Breach > Grate Work > Below Grate ==> West Ledge (1)" => Ok(ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1),
@@ -15967,6 +16031,8 @@ impl std::str::FromStr for ExitId {
             "Glacier Breach > Guarded Corridor > West ==> Past the Guards (1)" => Ok(ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Past_the_Guards_1),
             "Glacier Breach > Guarded Corridor > West ==> Save Point (1)" => Ok(ExitId::Glacier_Breach__Guarded_Corridor__West__ex__Save_Point_1),
             "Glacier Breach > Guarded Corridor > West ==> West Save > East 11 (1)" => Ok(ExitId::Glacier_Breach__Guarded_Corridor__West__ex__West_Save__East_11_1),
+            "Glacier Breach > Hammond's Breach > East ==> Stable Floor > West (1)" => Ok(ExitId::Glacier_Breach__Hammonds_Breach__East__ex__Stable_Floor__West_1),
+            "Glacier Breach > Hammond's Breach > West Side ==> Stable Floor > Center (1)" => Ok(ExitId::Glacier_Breach__Hammonds_Breach__West_Side__ex__Stable_Floor__Center_1),
             "Glacier Breach > Piano Roll > East 10 ==> Electric Arena > West (1)" => Ok(ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Electric_Arena__West_1),
             "Glacier Breach > Piano Roll > East 10 ==> Upper Ledge (1)" => Ok(ExitId::Glacier_Breach__Piano_Roll__East_10__ex__Upper_Ledge_1),
             "Glacier Breach > Piano Roll > East 9 ==> Stacked Enemies > West (1)" => Ok(ExitId::Glacier_Breach__Piano_Roll__East_9__ex__Stacked_Enemies__West_1),
@@ -15978,6 +16044,8 @@ impl std::str::FromStr for ExitId {
             "Glacier Breach > South Save > East ==> Grate Work > West 14 (1)" => Ok(ExitId::Glacier_Breach__South_Save__East__ex__Grate_Work__West_14_1),
             "Glacier Breach > South Save > Save Point ==> Brick Ledge (1)" => Ok(ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1),
             "Glacier Breach > South Save > West ==> Amagi Breach > East Entrance > East (1)" => Ok(ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1),
+            "Glacier Breach > Stable Floor > South ==> Empty Space > North (1)" => Ok(ExitId::Glacier_Breach__Stable_Floor__South__ex__Empty_Space__North_1),
+            "Glacier Breach > Stable Floor > West ==> Hammond's Breach > East (1)" => Ok(ExitId::Glacier_Breach__Stable_Floor__West__ex__Hammonds_Breach__East_1),
             "Glacier Breach > West Save > East 11 ==> Guarded Corridor > West (1)" => Ok(ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1),
             "Glacier Breach > West Save > East 11 ==> West Ledge (1)" => Ok(ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1),
             "Glacier Breach > West Save > East 12 ==> Floaters > West (1)" => Ok(ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1),
@@ -16451,6 +16519,7 @@ pub enum ActionId {
     Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
     Glacier__Vertical_Room__Upper_Switch__Open_Gate,
     Glacier_Breach__Guarded_Corridor__Save_Point__Save,
+    Glacier_Breach__Hammonds_Breach__Save_Point__Save,
     Glacier_Breach__Save_and_Exit__Save_Point__Save,
     Glacier_Breach__South_Save__Save_Point__Save,
     Glacier_Breach__West_Save__Save_Point__Save,
@@ -16857,6 +16926,11 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Glacier Breach > Guarded Corridor > Save Point > Save"
             ),
+            ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save => write!(
+                f,
+                "{}",
+                "Glacier Breach > Hammond's Breach > Save Point > Save"
+            ),
             ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => write!(
                 f,
                 "{}",
@@ -17223,6 +17297,9 @@ impl std::str::FromStr for ActionId {
             }
             "Glacier Breach > Guarded Corridor > Save Point > Save" => {
                 Ok(ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save)
+            }
+            "Glacier Breach > Hammond's Breach > Save Point > Save" => {
+                Ok(ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save)
             }
             "Glacier Breach > Save and Exit > Save Point > Save" => {
                 Ok(ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save)

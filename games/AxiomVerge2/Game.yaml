@@ -316,7 +316,7 @@ helpers:
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman]
   # To be added: 5 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 3 Health_Fragment, The_Student, Heretics_Granddaughter
+  # 4 Health_Fragment, The_Student, Heretics_Granddaughter
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy

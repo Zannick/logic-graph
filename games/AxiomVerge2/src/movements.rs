@@ -6638,6 +6638,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 701,
         (
             [false],
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__West,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Empty_Space__West,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => 350,
+        (
+            [false],
             SpotId::Glacier_Breach__Floaters__East,
             SpotId::Glacier_Breach__Floaters__West,
         ) => 2807,
@@ -6732,6 +6747,46 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__East,
         ) => 1491,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => 438,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+        ) => 614,
+        (
+            [false],
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => 614,
         (
             [false],
             SpotId::Glacier_Breach__Piano_Roll__East_10,
@@ -6857,6 +6912,46 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 1315,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 1052,
         // [0.877193, 0.877193]
         (
             [false],
@@ -7480,6 +7575,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
         ) => 789,
+        (
+            [false],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => 350,
         (
             [false],
             SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
@@ -22506,6 +22606,21 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 701,
         (
             [true],
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__West,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Empty_Space__West,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => 350,
+        (
+            [true],
             SpotId::Glacier_Breach__Floaters__East,
             SpotId::Glacier_Breach__Floaters__West,
         ) => 2807,
@@ -22600,6 +22715,46 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__East,
         ) => 1491,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => 438,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+        ) => 614,
+        (
+            [true],
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => 614,
         (
             [true],
             SpotId::Glacier_Breach__Piano_Roll__East_10,
@@ -22725,6 +22880,46 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => 1315,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => 1052,
         // [0.877193, 0.877193]
         (
             [true],
@@ -23328,6 +23523,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
         ) => 789,
+        (
+            [true],
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => 350,
         (
             [true],
             SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
@@ -35715,6 +35915,80 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand,
             SpotId::Glacier_Breach__Save_and_Exit__Halfway,
         ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => true,
+        (SpotId::Glacier_Breach__Empty_Space__North, SpotId::Glacier_Breach__Empty_Space__West) => {
+            true
+        }
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => true,
+        (SpotId::Glacier_Breach__Empty_Space__West, SpotId::Glacier_Breach__Empty_Space__Lower) => {
+            true
+        }
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
@@ -36490,6 +36764,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier__Crystals__Portal_Stand, SpotId::Glacier__Crystals__Lower_Corner) => true,
         (SpotId::Glacier__Crystals__East, SpotId::Glacier__Crystals__Portal_Cage) => true,
         (SpotId::Glacier__Crystals__Portal_Cage, SpotId::Glacier__Crystals__East) => true,
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => true,
         (
             SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
             SpotId::Glacier__Hammonds_End__Upper_Floor,
@@ -59782,6 +60060,41 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+            SpotId::Glacier_Breach__Empty_Space__West,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+            1800,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__West,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Empty_Space__West,
+            SpotId::Glacier_Breach__Grate_Work__East,
+            1600,
+        ),
+        (
             SpotId::Glacier_Breach__Empty_Space__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
@@ -60133,6 +60446,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
             SpotId::Menu__Breach_Map__GlB_East,
             100,
         ),
@@ -60143,6 +60466,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier__Hammonds_End__Corner,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
             SpotId::Menu__Breach_Map__GlB_East,
             100,
         ),
@@ -60153,6 +60491,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            526,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier__Hammonds_End__Hammond,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
             SpotId::Menu__Breach_Map__GlB_East,
             100,
         ),
@@ -60163,6 +60516,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            438,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            614,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
             SpotId::Menu__Breach_Map__GlB_East,
             100,
         ),
@@ -60170,6 +60538,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            614,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            3850,
+        ),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
+            3000,
         ),
         (
             SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
@@ -60463,6 +60846,81 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Spidery_Connector__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            1403,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier__The_Big_Drop__Solid_Rock,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Empty_Space__North,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            1052,
+        ),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -62005,6 +62463,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+            1491,
+        ),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+            350,
         ),
         (
             SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
@@ -79681,6 +80149,16 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
             SpotId::Glacier_Breach__Electric_Arena__West,
         ) => Some(701),
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => Some(1800),
+        (SpotId::Glacier_Breach__Empty_Space__North, SpotId::Glacier_Breach__Empty_Space__West) => {
+            Some(1600)
+        }
+        (SpotId::Glacier_Breach__Empty_Space__West, SpotId::Glacier_Breach__Empty_Space__Lower) => {
+            Some(350)
+        }
         (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
             Some(2807)
         }
@@ -79755,6 +80233,38 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__East,
         ) => Some(1491),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => Some(526),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+        ) => Some(526),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => Some(526),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => Some(438),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+        ) => Some(614),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => Some(614),
         (
             SpotId::Glacier_Breach__Piano_Roll__East_10,
             SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
@@ -79850,6 +80360,38 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => Some(1315),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => Some(1403),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+        ) => Some(1052),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => Some(1403),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => Some(1052),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => Some(1052),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => Some(1052),
         (
             SpotId::Glacier_Breach__West_Save__East_11,
             SpotId::Glacier_Breach__West_Save__East_12,
@@ -80283,6 +80825,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
         ) => Some(789),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => Some(350),
         (
             SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
             SpotId::Glacier__Hammonds_End__Upper_Floor,
@@ -91832,6 +92378,16 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
             SpotId::Glacier_Breach__Electric_Arena__West,
         ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier_Breach__Empty_Space__North,
+            SpotId::Glacier_Breach__Empty_Space__Lower,
+        ) => (Some(1800), vec![]),
+        (SpotId::Glacier_Breach__Empty_Space__North, SpotId::Glacier_Breach__Empty_Space__West) => {
+            (Some(1600), vec![])
+        }
+        (SpotId::Glacier_Breach__Empty_Space__West, SpotId::Glacier_Breach__Empty_Space__Lower) => {
+            (Some(350), vec![])
+        }
         (SpotId::Glacier_Breach__Floaters__East, SpotId::Glacier_Breach__Floaters__West) => {
             (Some(2807), vec![])
         }
@@ -91906,6 +92462,38 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
             SpotId::Glacier_Breach__Guarded_Corridor__East,
         ) => (Some(1491), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__East,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__East_Side,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__First_Step,
+        ) => (Some(438), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+        ) => (Some(614), vec![]),
+        (
+            SpotId::Glacier_Breach__Hammonds_Breach__West_Side,
+            SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ) => (Some(614), vec![]),
         (
             SpotId::Glacier_Breach__Piano_Roll__East_10,
             SpotId::Glacier_Breach__Piano_Roll__Middle_Ledge,
@@ -92001,6 +92589,38 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier_Breach__South_Save__West,
             SpotId::Glacier_Breach__South_Save__Save_Point,
         ) => (Some(1315), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+            SpotId::Glacier_Breach__Stable_Floor__West,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__East,
+            SpotId::Glacier_Breach__Stable_Floor__South,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__South,
+            SpotId::Glacier_Breach__Stable_Floor__East,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Glacier_Breach__Stable_Floor__West,
+            SpotId::Glacier_Breach__Stable_Floor__Center,
+        ) => (Some(1052), vec![]),
         (
             SpotId::Glacier_Breach__West_Save__East_11,
             SpotId::Glacier_Breach__West_Save__East_12,
@@ -92468,6 +93088,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
         ) => (Some(789), vec![]),
+        (
+            SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
+            SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ) => (Some(350), vec![]),
         (
             SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
             SpotId::Glacier__Hammonds_End__Upper_Floor,

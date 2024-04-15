@@ -675,14 +675,85 @@ areas:
   spots:
     - name: Save Point
       coord: [40.475, 10.5]
+      data:
+        flipside: Glacier > Hammond's End > Lower Right Pedestal
+      local:
+        - to: West Side
+        - to: First Step
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: West Side
       coord: [40.3, 10.7]
-    - name: East Side
-      coord: [40.75, 10.75]
+      data:
+        flipside: Glacier > Hammond's End > Lower Pedestal West
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Stable Floor > Center
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
     - name: First Step
       coord: [40.6, 10.6]
+      data:
+        flipside: Glacier > Hammond's End > Hammond
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: East Side
+    - name: East Side
+      coord: [40.75, 10.75]
+      data:
+        flipside: Glacier > Hammond's End > Corner
+      local:
+        - to: First Step
+          jumps: 1
+        - to: East
     - name: East
       coord: [40.9, 10.75]
+      local:
+        - to: East Side
+          jumps: 1
+      exits:
+        - to: Stable Floor > West
+          tags: [xdoor]
+
+- name: Stable Floor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.1, 10.75]
+      local:
+        - to: Center
+      exits:
+        - to: Hammond's Breach > East
+          tags: [xdoor]
+    - name: Center
+      coord: [41.4, 10.75]
+      local:
+        - to: West
+        - to: South
+        - to: East
+    - name: South
+      coord: [41.5, 10.8]
+      local:
+        - to: Center
+          jumps: 1
+        - to: East
+          jumps: 1
+      exits:
+        - to: Empty Space > North
+          tags: [ydoor]
+    - name: East
+      coord: [41.8, 10.75]
+      data:
+        flipside: Glacier > The Big Drop > Solid Rock
+      local:
+        - to: Center
+        - to: South
 
 - name: Stacked Enemies
   on_entry: $reset_old_area(^newpos)
@@ -693,8 +764,25 @@ areas:
 - name: Empty Space
   on_entry: $reset_old_area(^newpos)
   spots:
+    - name: North
+      coord: [41.5, 11.2]
+      local:
+        - to: West
+        - to: Lower
     - name: West
       coord: [41.1, 12.8]
+      local:
+        - to: Lower
+      exits:
+        - to: Grate Work > East
+          tags: [xdoor]
+    - name: Lower
+      coord: [41.2, 13.0]
+      exits:
+        - to: West
+          req: $hook
+          movement: base
+          jumps: 1
 
 - name: Angry Lions
   on_entry: $reset_old_area(^newpos)

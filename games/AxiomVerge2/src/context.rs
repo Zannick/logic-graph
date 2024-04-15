@@ -429,6 +429,8 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Glacier_Breach__Electric_Arena__East_Platforms => enums::Realm::Breach,
         SpotId::Glacier_Breach__Electric_Arena__West => enums::Realm::Breach,
         SpotId::Glacier_Breach__Electric_Arena__West_Platforms => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Empty_Space__Lower => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Empty_Space__North => enums::Realm::Breach,
         SpotId::Glacier_Breach__Empty_Space__West => enums::Realm::Breach,
         SpotId::Glacier_Breach__Floaters__East => enums::Realm::Breach,
         SpotId::Glacier_Breach__Floaters__West => enums::Realm::Breach,
@@ -468,6 +470,10 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Glacier_Breach__South_Save__Save_Point => enums::Realm::Breach,
         SpotId::Glacier_Breach__South_Save__West => enums::Realm::Breach,
         SpotId::Glacier_Breach__Spidery_Connector__East => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Stable_Floor__Center => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Stable_Floor__East => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Stable_Floor__South => enums::Realm::Breach,
+        SpotId::Glacier_Breach__Stable_Floor__West => enums::Realm::Breach,
         SpotId::Glacier_Breach__Stacked_Enemies__West => enums::Realm::Breach,
         SpotId::Glacier_Breach__West_Save__East_11 => enums::Realm::Breach,
         SpotId::Glacier_Breach__West_Save__East_12 => enums::Realm::Breach,
@@ -756,9 +762,14 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Clouds__Platform_Stop => SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
         SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
+        SpotId::Glacier_Breach__Hammonds_Breach__East_Side => SpotId::Glacier__Hammonds_End__Corner,
+        SpotId::Glacier_Breach__Hammonds_Breach__First_Step => SpotId::Glacier__Hammonds_End__Hammond,
+        SpotId::Glacier_Breach__Hammonds_Breach__Save_Point => SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal,
+        SpotId::Glacier_Breach__Hammonds_Breach__West_Side => SpotId::Glacier__Hammonds_End__Lower_Pedestal_West,
         SpotId::Glacier_Breach__Save_and_Exit__Halfway => SpotId::Glacier__Hammonds_End__Upper_Grate_Right,
         SpotId::Glacier_Breach__Save_and_Exit__Portal_Stand => SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
         SpotId::Glacier_Breach__Save_and_Exit__Save_Point => SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
+        SpotId::Glacier_Breach__Stable_Floor__East => SpotId::Glacier__The_Big_Drop__Solid_Rock,
         SpotId::Glacier__Crystals__Middle_Ledge => SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
         SpotId::Glacier__Crystals__Portal_Cage => SpotId::Amagi_Breach__East_Entrance__Grate_Right,
         SpotId::Glacier__Crystals__Portal_Stand => SpotId::Amagi_Breach__East_Entrance__Save_Point,
@@ -6183,6 +6194,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Glacier_Breach__Spidery_Connector => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Glacier_Breach__Stable_Floor => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, world, pos);
                 }
