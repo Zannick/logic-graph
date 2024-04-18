@@ -152,7 +152,7 @@ impl world::Accessible for Exit {
         self.time
             + match self.id {
 %% for ex in gl.exits()|sort(attribute='id')
-%% if ex.penalties
+%% if ex.penalties and not ex.item
                 ExitId::{{ ex.id }} => {
 %% for pen in ex.penalties
                     {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {

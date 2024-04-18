@@ -467,7 +467,7 @@ class GameLogic(object):
                 continue
             if 'item' in point and 'to' in point and 'item_time' not in point:
                 point['item_time'] = max(
-                        (self.time[k] for k in point.get('tags', []) if k in self.time),
+                        (self.time[k] for k in point.get('item_tags', []) if k in self.time),
                         default=self.time.get('hybrid_item_default', self.time['default']))
             if tags := point.get('penalty_tags'):
                 penalty = 0
