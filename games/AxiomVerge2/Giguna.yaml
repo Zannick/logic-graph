@@ -754,14 +754,12 @@ areas:
           canon: Ebih_Wasteland_Passage_H
           req: ^mode == 'drone'
           time: 15  # ?
-          item_time: 0
         - name: Mist through Horizontal Passage
           to: Passage Cache
           item: Ebih_Wasteland_Passage_H
           canon: Ebih_Wasteland_Passage_H
           req: ^mode == 'drone' and Mist_Upgrade
           movement: mist2
-          item_time: 0
 
     - name: Passage Cache
       coord: [15.4, 13.6]
@@ -784,14 +782,12 @@ areas:
           canon: Ebih_Wasteland_Passage_H
           req: ^mode == 'drone'
           time: 15  # ?
-          item_time: 0
         - name: Mist through Horizontal Passage
           to: Passage East
           item: Ebih_Wasteland_Passage_H
           canon: Ebih_Wasteland_Passage_H
           req: ^mode == 'drone' and Mist_Upgrade
           movement: mist2
-          item_time: 0
     - name: Westward Hill
       coord: [16.45, 13.4]
       local:

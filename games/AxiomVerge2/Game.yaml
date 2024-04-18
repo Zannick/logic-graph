@@ -100,6 +100,7 @@ exit_movements:
 
 time:
   default: 1
+  hybrid_item_default: 0
   ## Pickups
   urn: 5.5
   flask: 5.5
@@ -315,7 +316,7 @@ helpers:
     [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring, Breach_Attractor]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
-     Drone_Hover, Fast_Travel, Anuman]
+     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
   # To be added: 5 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
   # 4 Health_Fragment, The_Student, Heretics_Granddaughter
 

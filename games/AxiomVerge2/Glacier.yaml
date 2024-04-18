@@ -235,14 +235,12 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          item_time: 0
           movement: mist1
         - name: Mist Through Faster
           to: Breakable Rock Right
           req: $mist2
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          item_time: 0
           movement: mist2
     - name: Breakable Rock Right
       coord: [41.2, 13.7]
@@ -262,14 +260,12 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          item_time: 0
           movement: mist1
         - name: Mist Through Faster 
           to: West 14
           req: $mist2
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          item_time: 0
           movement: mist2
 
     - name: West 11 Door
@@ -305,7 +301,6 @@ areas:
           req: NOT Amashilama
           item: Amashilama
           time: 47.15
-          item_time: 0
     - name: West 13
       coord: [39.05, 12.75]
       data:

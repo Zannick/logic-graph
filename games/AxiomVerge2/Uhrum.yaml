@@ -875,21 +875,18 @@ areas:
           req: $charge
           to: Barrier East
           time: 1  # ?
-          item_time: 0
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
           req: $spin
           to: Barrier East
           time: 1  # ?
-          item_time: 0
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
           req: $mist2
           to: Barrier East
           time: 1  # ?
-          item_time: 0
           price: 20
     - name: Barrier East
       coord: [27.7, 23.4]
@@ -909,21 +906,18 @@ areas:
           req: $charge
           to: Barrier West
           time: 1  # ?
-          item_time: 0
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
           req: $spin
           to: Barrier West
           time: 1  # ?
-          item_time: 0
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
           req: $mist2
           to: Barrier West
           time: 1  # ?
-          item_time: 0
           price: 20
     - name: East 24
       coord: [27.95, 23.8]

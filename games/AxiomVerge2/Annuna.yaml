@@ -161,7 +161,6 @@ areas:
           req: $boomerang
           to: East 26 Lower
           tags: [remote_flask]
-          item_time: 0
     #endregion
 
     #region Lamassu
@@ -919,7 +918,6 @@ areas:
           req: $mist2
           movement: mist2
           price: 130
-          item_time: 0
     - name: Cavern Outer Rock East
       coord: [41.3, 22.25]
       exits:
@@ -941,7 +939,6 @@ areas:
           req: $mist2
           movement: mist2
           price: 130
-          item_time: 0
     - name: Cavern Inner Rock West
       coord: [41.65, 22.225]
       exits:
@@ -956,7 +953,6 @@ areas:
           req: ^mode == 'drone' and $mist2
           movement: mist2
           price: 30
-          item_time: 0
     - name: Cavern Inner Rock East
       coord: [41.95, 22.225]
       local:
@@ -974,7 +970,6 @@ areas:
           req: ^mode == 'drone' and $mist2
           movement: mist2
           price: 30
-          item_time: 0
     - name: Cavern Tight Corner
       coord: [42.175, 22.55]
       local:
@@ -3002,6 +2997,9 @@ areas:
           canon: Nanite_Mist
           item: Nanite_Mist
           tags: [remote]
+          penalties:
+            - when: Anuman
+              add: 10.0
       exits:
         - to: Wall Right
           req: Siuna_Storage_Wall
@@ -3033,6 +3031,9 @@ areas:
           req: Fast_Travel and $boomerang2
           to: Menu > Kiengir Map > Nanite Mist
           tags: [cskip]
+          penalties:
+            - when: Anuman
+              add: 10.0
     - name: Within Range
       coord: [39.65, 14.4]
       local:
@@ -3044,6 +3045,9 @@ areas:
           canon: Nanite_Mist
           item: Nanite_Mist
           tags: [remote]
+          penalties:
+            - when: Anuman
+              add: 10.0
       hybrid:
         - name: Remote Urn Fast Travel
           item: Nanite_Mist
@@ -3051,6 +3055,9 @@ areas:
           req: Fast_Travel and $boomerang
           to: Menu > Kiengir Map > Nanite Mist
           tags: [cskip]
+          penalties:
+            - when: Anuman
+              add: 10.0
     - name: Cache
       coord: [39.35, 14.4]
       local:
@@ -3060,18 +3067,27 @@ areas:
           canon: Nanite_Mist
           item: Nanite_Mist
           tags: [urn]
+          penalties:
+            - when: Anuman
+              add: 10.0
       hybrid:
         - name: Urn Collection Skip
           item: Nanite_Mist
           canon: Nanite_Mist
           to: Menu > Warp Only > Kiengir
           tags: [cskip]
+          penalties:
+            - when: Anuman
+              add: 10.0
         - name: Urn Fast Travel
           item: Nanite_Mist
           canon: Nanite_Mist
           req: Fast_Travel
           to: Menu > Kiengir Map > Nanite Mist
           tags: [cskip]
+          penalties:
+            - when: Anuman
+              add: 10.0
 
 #region Apocalypse
 - name: Apocalypse Hallway
@@ -3227,14 +3243,12 @@ areas:
           to: Bomb Northwest
           req: Infect and Anuman
           time: 28
-          item_time: 0
         - name: Fill It Up
           item: Apocalypse_Bomb
           canon: Apocalypse_Bomb
           to: Bomb East
           req: Infect and not Anuman
           time: 15
-          item_time: 0
     
     - name: Southwest Switch
       coord: [43.2, 17.35]

@@ -4502,6 +4502,55 @@ impl world::Accessible for Location {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
+                LocationId::Annuna__Siuna_Storage__Cache__Urn => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
+                    if rules::access_anuman(ctx, world) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
                 _ => 0,
             }
     }
@@ -17351,6 +17400,11 @@ impl world::World for World {
                                 map.insert(Item::Letter_from_Trace, 1);
                             }
                         }
+                        if !ctx.has(Item::Nanite_Mist) {
+                            if !map.contains_key(&Item::Nanite_Mist) {
+                                map.insert(Item::Nanite_Mist, 1);
+                            }
+                        }
                         if !ctx.has(Item::Nano_Lattice_2) {
                             if !map.contains_key(&Item::Nano_Lattice_2) {
                                 map.insert(Item::Nano_Lattice_2, 1);
@@ -17604,6 +17658,11 @@ impl world::World for World {
                             map.insert(Item::Letter_from_Trace, 1);
                         }
                     }
+                    if !ctx.has(Item::Nanite_Mist) {
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
+                        }
+                    }
                     if !ctx.has(Item::Nano_Lattice_2) {
                         if !map.contains_key(&Item::Nano_Lattice_2) {
                             map.insert(Item::Nano_Lattice_2, 1);
@@ -17811,6 +17870,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Letter_from_Trace) {
                             map.insert(Item::Letter_from_Trace, 1);
                         }
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
+                        }
                         if !map.contains_key(&Item::Nano_Lattice_2) {
                             map.insert(Item::Nano_Lattice_2, 1);
                         }
@@ -17967,6 +18029,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Letter_from_Trace) {
                         map.insert(Item::Letter_from_Trace, 1);
+                    }
+                    if !map.contains_key(&Item::Nanite_Mist) {
+                        map.insert(Item::Nanite_Mist, 1);
                     }
                     if !map.contains_key(&Item::Nano_Lattice_2) {
                         map.insert(Item::Nano_Lattice_2, 1);
@@ -19183,7 +19248,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Defeat_MUS_A_M20,
             price: Currency::Energy(300),
-            time: 3500,
+            time: 0,
             exit_id: Some(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
         },
         LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => Location {
@@ -19583,7 +19648,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => Location {
@@ -19591,7 +19656,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => Location {
@@ -19599,7 +19664,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => Location {
@@ -19623,7 +19688,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => Location {
@@ -19631,7 +19696,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => Location {
@@ -19639,7 +19704,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Siuna_Storage_Wall,
             item: Item::Siuna_Storage_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
         },
         LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => Location {
@@ -20239,7 +20304,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Giguna_Dual_Path_Wall,
             item: Item::Giguna_Dual_Path_Wall,
             price: Currency::Energy(20),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
         },
         LocationId::Giguna__Dual_Path__Wall_Secret__Health => Location {
@@ -20279,7 +20344,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Giguna_Boulder,
             item: Item::Giguna_Boulder,
             price: Currency::Energy(30),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
         },
         LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => Location {
@@ -20303,7 +20368,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Giguna_Boulder,
             item: Item::Giguna_Boulder,
             price: Currency::Energy(30),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
         },
         LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => Location {
@@ -20495,7 +20560,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Glacier_Sea_Burial_Rock,
             item: Item::Glacier_Sea_Burial_Rock,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
         },
         LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => Location {
@@ -20503,7 +20568,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Glacier_Sea_Burial_Rock,
             item: Item::Glacier_Sea_Burial_Rock,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
         },
         LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => Location {
@@ -20519,7 +20584,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Glacier_Sea_Burial_Rock,
             item: Item::Glacier_Sea_Burial_Rock,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
         },
         LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => Location {
@@ -20527,7 +20592,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Glacier_Sea_Burial_Rock,
             item: Item::Glacier_Sea_Burial_Rock,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
         },
         LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => Location {
@@ -20591,7 +20656,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Escape,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
         },
         LocationId::Glacier__Crystals__Top_Corner__Tablet => Location {
@@ -20655,7 +20720,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Melee_Charge,
             item: Item::Melee_Charge,
             price: Currency::Free,
-            time: 750,
+            time: 0,
             exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
         },
         LocationId::Interior__Building_Interior__Corner__Urn => Location {
@@ -20751,7 +20816,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Irikar_Royal_Storage_Wall,
             price: Currency::Energy(20),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
         },
         LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => Location {
@@ -21151,7 +21216,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
             item: Item::Uhrum_West_Entrance_Upper_Wall,
             price: Currency::Energy(20),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => Location {
@@ -21159,7 +21224,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
             item: Item::Uhrum_West_Entrance_Upper_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => Location {
@@ -21167,7 +21232,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
             item: Item::Uhrum_West_Entrance_Upper_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => Location {
@@ -21175,7 +21240,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
             item: Item::Uhrum_West_Entrance_Upper_Wall,
             price: Currency::Energy(20),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => Location {
@@ -21183,7 +21248,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => Location {
@@ -21191,7 +21256,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => Location {
@@ -21199,7 +21264,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => Location {
@@ -21207,7 +21272,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => Location {
@@ -21215,7 +21280,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => Location {
@@ -21223,7 +21288,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
             item: Item::Uhrum_West_Entrance_Lower_Wall,
             price: Currency::Energy(40),
-            time: 1000,
+            time: 0,
             exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
         },
         LocationId::Uhrum__West_Entrance__Sand__Refill => Location {

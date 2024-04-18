@@ -2452,7 +2452,7 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -2467,6 +2467,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Drone_Hover)
             && $ctx.has(Item::Fast_Travel)
             && $ctx.has(Item::Anuman)
+            && $ctx.has(Item::Nanite_Mist)
     }};
 }
 #[macro_export]
@@ -2570,6 +2571,15 @@ macro_rules! hexplain__all_urns {
                 (h, vec!["Anuman"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nanite_Mist);
+                $edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2610,6 +2620,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_anuman();
             $ctx.has(Item::Anuman)
+        }) && ({
+            $full_obs.observe_nanite_mist();
+            $ctx.has(Item::Nanite_Mist)
         })
     }};
 }

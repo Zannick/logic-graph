@@ -684,7 +684,6 @@ areas:
           req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
-          item_time: 0
           movement: mist2
     - name: Wall Left
       coord: [21.2, 10.7]
@@ -707,7 +706,6 @@ areas:
           req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
-          item_time: 0
           movement: mist2
     - name: West 11
       coord: [21.05, 10.75]
