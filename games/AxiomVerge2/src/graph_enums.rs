@@ -9638,6 +9638,7 @@ pub enum LocationId {
     Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
     Ebih__Grid_25_2_6__Pit__Item,
     Ebih__Grid_26_10_11__Ledge__Note,
+    Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
     Ebih__Vertical_Interchange__Switch__Activate_Switch,
     Ebih__Waterfall__Alcove__Block_Left,
     Ebih__Waterfall__Alcove__Block_Right,
@@ -10214,6 +10215,11 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
                 write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note")
             }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(
+                f,
+                "{}",
+                "Ebih > Vertical Interchange > Block Cubby > Shockwave Block"
+            ),
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(
                 f,
                 "{}",
@@ -11226,6 +11232,9 @@ impl std::str::FromStr for LocationId {
             "Ebih > Grid 25,2-6 > Pit > Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
             "Ebih > Grid 26,10-11 > Ledge > Note" => {
                 Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
+            }
+            "Ebih > Vertical Interchange > Block Cubby > Shockwave Block" => {
+                Ok(LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block)
             }
             "Ebih > Vertical Interchange > Switch > Activate Switch" => {
                 Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch)

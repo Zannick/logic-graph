@@ -2173,6 +2173,12 @@ areas:
       coord: [21.75, 13.8]
       local:
         - to: Cubby Exit
+      locations:
+        - name: Shockwave Block
+          item: Ebih_Interchange_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
     - name: Cubby Exit
       coord: [21.85, 13.9]
       local:

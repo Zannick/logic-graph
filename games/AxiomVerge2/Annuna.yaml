@@ -481,7 +481,7 @@ areas:
         - to: Gate Button Gap
       actions:
         - name: Climb and Throw Drone
-          req: $climb and $can_deploy and Hover and Slingshot_Hook
+          req: $climb and $can_deploy and Drone_Hover and Slingshot_Hook
           do: $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
           to: Tower East Ledge
           time: 4
@@ -1126,7 +1126,7 @@ areas:
           thru: [40.3, 20.9]
       exits:
         - to: Plinth
-          req: Anunna_Vertical_Room_Gate
+          req: Annuna_Vertical_Room_Gate
           movement: base
           jumps: 1
     - name: Lower Ministair

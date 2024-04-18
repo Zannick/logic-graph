@@ -351,10 +351,6 @@ pub fn access_anuman_and_slingshot_hook_and_drone_hover(
     // Anuman and Slingshot_Hook and Drone_Hover
     ((ctx.has(Item::Anuman) && ctx.has(Item::Slingshot_Hook)) && ctx.has(Item::Drone_Hover))
 }
-pub fn access_anunna_vertical_room_gate(ctx: &Context, world: &graph::World) -> bool {
-    // Anunna_Vertical_Room_Gate
-    ctx.has(Item::Anunna_Vertical_Room_Gate)
-}
 pub fn access_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -1628,12 +1624,13 @@ pub fn access_invoke_climb_and_annuna_east_bridge_gate(
     // $climb and Annuna_East_Bridge_Gate
     (helper__climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+pub fn access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
-    (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world)) && ctx.has(Item::Hover))
+    // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
+    (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world))
+        && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_invoke_climb_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
@@ -4104,18 +4101,6 @@ pub fn explain_anuman_and_slingshot_hook_and_drone_hover(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
-    }
-}
-pub fn explain_anunna_vertical_room_gate(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Anunna_Vertical_Room_Gate
-    {
-        let h = ctx.has(Item::Anunna_Vertical_Room_Gate);
-        edict.insert("Anunna_Vertical_Room_Gate", format!("{}", h));
-        (h, vec!["Anunna_Vertical_Room_Gate"])
     }
 }
 pub fn explain_apocalypse_bomb(
@@ -8390,12 +8375,12 @@ pub fn explain_invoke_climb_and_annuna_east_bridge_gate(
         }
     }
 }
-pub fn explain_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+pub fn explain_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
+    // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
     {
         let mut left = {
             let mut left = {
@@ -8422,9 +8407,9 @@ pub fn explain_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
                 left
             } else {
                 let mut right = {
-                    let h = ctx.has(Item::Hover);
-                    edict.insert("Hover", format!("{}", h));
-                    (h, vec!["Hover"])
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -12334,17 +12319,6 @@ pub fn observe_access_anuman_and_slingshot_hook_and_drone_hover(
         ctx.has(Item::Drone_Hover)
     }))
 }
-pub fn observe_access_anunna_vertical_room_gate(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Anunna_Vertical_Room_Gate
-    {
-        full_obs.observe_anunna_vertical_room_gate();
-        ctx.has(Item::Anunna_Vertical_Room_Gate)
-    }
-}
 pub fn observe_access_apocalypse_bomb(
     ctx: &Context,
     world: &graph::World,
@@ -14667,16 +14641,16 @@ pub fn observe_access_invoke_climb_and_annuna_east_bridge_gate(
             ctx.has(Item::Annuna_East_Bridge_Gate)
         }))
 }
-pub fn observe_access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+pub fn observe_access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
+    // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
     (((hobserve__climb!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
         && ({
-            full_obs.observe_hover();
-            ctx.has(Item::Hover)
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
         }))
         && ({
             full_obs.observe_slingshot_hook();

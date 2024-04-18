@@ -351,8 +351,8 @@ impl Observer for FullObservation {
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
                 self.cbits4
                     .insert(flags::ContextBits4::VISITED_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
-                self.cbits9
-                    .insert(flags::ContextBits9::SKIPPED_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
+                self.cbits8
+                    .insert(flags::ContextBits8::SKIPPED_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
             }
             LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
                 self.cbits5.insert(
@@ -533,15 +533,15 @@ impl Observer for FullObservation {
                 self.cbits9.insert(flags::ContextBits9::SKIPPED_ANNUNA__SIUNA_STORAGE__WALL_LEFT__DISTANT_URN_FAST_TRAVEL);
             }
             LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
-                self.cbits5.insert(
-                    flags::ContextBits5::VISITED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN,
+                self.cbits4.insert(
+                    flags::ContextBits4::VISITED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN,
                 );
                 self.cbits9.insert(
                     flags::ContextBits9::SKIPPED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN,
                 );
             }
             LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN_FAST_TRAVEL);
+                self.cbits4.insert(flags::ContextBits4::VISITED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN_FAST_TRAVEL);
                 self.cbits9.insert(flags::ContextBits9::SKIPPED_ANNUNA__SIUNA_STORAGE__WITHIN_RANGE__REMOTE_URN_FAST_TRAVEL);
             }
             LocationId::Annuna__Siuna_Storage__Cache__Urn => {
@@ -692,8 +692,8 @@ impl Observer for FullObservation {
             LocationId::Ebih__Ebih_West__Alcove__Tablet => {
                 self.cbits5
                     .insert(flags::ContextBits5::VISITED_EBIH__EBIH_WEST__ALCOVE__TABLET);
-                self.cbits10
-                    .insert(flags::ContextBits10::SKIPPED_EBIH__EBIH_WEST__ALCOVE__TABLET);
+                self.cbits9
+                    .insert(flags::ContextBits9::SKIPPED_EBIH__EBIH_WEST__ALCOVE__TABLET);
             }
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
                 self.cbits5
@@ -797,6 +797,10 @@ impl Observer for FullObservation {
                     .insert(flags::ContextBits5::VISITED_EBIH__GRID_26_10_11__LEDGE__NOTE);
                 self.cbits10
                     .insert(flags::ContextBits10::SKIPPED_EBIH__GRID_26_10_11__LEDGE__NOTE);
+            }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
+                self.cbits10.insert(flags::ContextBits10::SKIPPED_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
             }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH);
@@ -1005,7 +1009,7 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA__DUAL_PATH__BELOW_RIGHT_SWITCH__REMOTE_SWITCH);
+                self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA__DUAL_PATH__BELOW_RIGHT_SWITCH__REMOTE_SWITCH);
                 self.cbits10.insert(flags::ContextBits10::SKIPPED_GIGUNA__DUAL_PATH__BELOW_RIGHT_SWITCH__REMOTE_SWITCH);
             }
             LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
@@ -1161,7 +1165,7 @@ impl Observer for FullObservation {
                 self.cbits11.insert(flags::ContextBits11::SKIPPED_GLACIER__THE_BIG_DROP__BREAKABLE_ROCK_RIGHT__MIST_THROUGH);
             }
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER__THE_BIG_DROP__BREAKABLE_ROCK_RIGHT__MIST_THROUGH_FASTER);
+                self.cbits6.insert(flags::ContextBits6::VISITED_GLACIER__THE_BIG_DROP__BREAKABLE_ROCK_RIGHT__MIST_THROUGH_FASTER);
                 self.cbits11.insert(flags::ContextBits11::SKIPPED_GLACIER__THE_BIG_DROP__BREAKABLE_ROCK_RIGHT__MIST_THROUGH_FASTER);
             }
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
@@ -1476,8 +1480,8 @@ impl Observer for FullObservation {
                 );
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                self.cbits8.insert(
-                    flags::ContextBits8::VISITED_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3,
+                self.cbits7.insert(
+                    flags::ContextBits7::VISITED_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3,
                 );
                 self.cbits12.insert(
                     flags::ContextBits12::SKIPPED_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3,
@@ -3559,10 +3563,6 @@ impl FullObservation {
     pub fn observe_anuman(&mut self) {
         self.cbits2.insert(flags::ContextBits2::ANUMAN);
     }
-    pub fn observe_anunna_vertical_room_gate(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::ANUNNA_VERTICAL_ROOM_GATE);
-    }
     pub fn observe_apocalypse_bomb(&mut self) {
         self.cbits2.insert(flags::ContextBits2::APOCALYPSE_BOMB);
     }
@@ -3698,8 +3698,8 @@ impl FullObservation {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
     }
     pub fn observe_giguna_dual_path_switch(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
+        self.cbits2
+            .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
     }
     pub fn observe_giguna_dual_path_wall(&mut self) {
         self.cbits3
@@ -3757,9 +3757,6 @@ impl FullObservation {
     }
     pub fn observe_heretics_tablet(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HERETICS_TABLET);
-    }
-    pub fn observe_hover(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::HOVER);
     }
     pub fn observe_ice_axe(&mut self) {
         self.cbits3.insert(flags::ContextBits3::ICE_AXE);
@@ -3907,11 +3904,11 @@ impl FullObservation {
             .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
     }
     pub fn observe_terminal_breakthrough_2(&mut self) {
-        self.cbits4
-            .insert(flags::ContextBits4::TERMINAL_BREAKTHROUGH_2);
+        self.cbits3
+            .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_2);
     }
     pub fn observe_the_eternal_arm(&mut self) {
-        self.cbits4.insert(flags::ContextBits4::THE_ETERNAL_ARM);
+        self.cbits3.insert(flags::ContextBits3::THE_ETERNAL_ARM);
     }
     pub fn observe_the_ideal_kiengir(&mut self) {
         self.cbits4.insert(flags::ContextBits4::THE_IDEAL_KIENGIR);

@@ -1329,6 +1329,11 @@ class GameLogic(object):
     @cached_property
     def unused_items(self):
         return self.all_items - self.item_max_counts.keys() - self.collect.keys()
+    
+
+    @cached_property
+    def undefined_items(self):
+        return self.all_items - self.item_locations.keys() - set(self.special.get('unplaced_items', ()))
 
 
     def process_context(self):
@@ -1736,6 +1741,9 @@ if __name__ == '__main__':
         print('\n'.join(gl.errors))
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
+
+    if gl.undefined_items:
+        logging.warning(f'Unplaced items: {", ".join(sorted(gl.undefined_items))}')
 
     if not args.noparse:
         logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '

@@ -430,3 +430,4 @@ special:
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
+  unplaced_items: [Exit_Breach, Remote_Boomerang, Separation, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]

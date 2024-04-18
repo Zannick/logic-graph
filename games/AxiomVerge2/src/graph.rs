@@ -3544,6 +3544,9 @@ impl world::Accessible for Location {
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
             LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                rules::access_invoke_shockwave(ctx, world)
+            }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 rules::access_invoke_can_damage(ctx, world)
             }
@@ -4145,6 +4148,9 @@ impl world::Accessible for Location {
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
                 rules::observe_access_invoke_bs(ctx, world, full_obs)
             }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
+            }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 rules::observe_access_invoke_can_damage(ctx, world, full_obs)
             }
@@ -4741,6 +4747,9 @@ impl world::Accessible for Location {
             }
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
                 rules::explain_invoke_bs(ctx, world, edict)
+            }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                rules::explain_invoke_shockwave(ctx, world, edict)
             }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 rules::explain_invoke_can_damage(ctx, world, edict)
@@ -5451,7 +5460,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Vertical_Room__East_20__ex__Upper_Hallway__West_1 => true,
             ExitId::Annuna__Vertical_Room__East_21__ex__Middle_Hallway__West_1 => true,
             ExitId::Annuna__Vertical_Room__East_22__ex__Lower_Hallway__West_1 => true,
-            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::access_anunna_vertical_room_gate(ctx, world),
+            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::access_annuna_vertical_room_gate(ctx, world),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => rules::access_invoke_grab(ctx, world),
@@ -6997,7 +7006,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Above_Plinth__ex__Save_Point_Right_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__East_20__ex__Middle_Platform_1_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::observe_access_anunna_vertical_room_gate(ctx, world, full_obs),
+            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::observe_access_annuna_vertical_room_gate(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -8326,7 +8335,7 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Twisty_Passages__West_Hill_Left__ex__Northwest_Alcove_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Above_Plinth__ex__Save_Point_Right_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__East_20__ex__Middle_Platform_1_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::explain_anunna_vertical_room_gate(ctx, world, edict),
+            ExitId::Annuna__Vertical_Room__Gate_Ledge__ex__Plinth_1 => rules::explain_annuna_vertical_room_gate(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_1_Right_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Lower_Mid__ex__Lower_Platform_2_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -9757,7 +9766,7 @@ impl world::Accessible for Action {
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::access_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::access_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world),
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => true,
@@ -9880,7 +9889,7 @@ impl world::Accessible for Action {
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, full_obs),
-            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::observe_access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(ctx, world, full_obs),
+            ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::observe_access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world, full_obs),
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
@@ -10039,10 +10048,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
-                let (ret, mut tags) =
-                    rules::explain_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
-                        ctx, world, edict,
-                    );
+                let (ret, mut tags) = rules::explain_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Tower East Ledge"));
@@ -14444,7 +14450,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 284;
+    const NUM_LOCATIONS: u32 = 285;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14944,6 +14950,9 @@ impl world::World for World {
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
+            Item::Ebih_Interchange_Block => {
+                vec![LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block]
+            }
             Item::Ebih_Interchange_Gate => {
                 vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
             }
@@ -15451,6 +15460,9 @@ impl world::World for World {
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => SpotId::Ebih__Grid_25_2_6__Pit,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                SpotId::Ebih__Vertical_Interchange__Block_Cubby
+            }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 SpotId::Ebih__Vertical_Interchange__Switch
             }
@@ -18394,6 +18406,7 @@ impl world::World for World {
             | SpotId::Ebih__Observation_Tower_Room__East_11
             | SpotId::Ebih__Observation_Tower_Room__West_10
             | SpotId::Ebih__Observation_Tower_Room__West_9
+            | SpotId::Ebih__Vertical_Interchange__Block_Cubby
             | SpotId::Ebih__Vertical_Interchange__East_13
             | SpotId::Ebih__Vertical_Interchange__East_15
             | SpotId::Ebih__Vertical_Interchange__Switch
@@ -20049,6 +20062,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Terminal_Breakthrough_1,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => Location {
+            id: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
+            canonical: CanonId::None,
+            item: Item::Ebih_Interchange_Block,
+            price: Currency::Energy(100),
+            time: 3500,
             exit_id: None,
         },
         LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => Location {
@@ -41038,7 +41059,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Vertical_Interchange__Block_Cubby => Spot {
             id: SpotId::Ebih__Vertical_Interchange__Block_Cubby,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block.into_usize(),
+                end: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
