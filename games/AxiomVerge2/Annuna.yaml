@@ -2892,9 +2892,186 @@ areas:
 
 - name: Siuna Storage
   on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [39, 14, 40, 15]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Nanite Mist
   spots:
     - name: West
       coord: [39.05, 15.8]
+      exits:
+        - to: Lamassu > East 16
+          tags: [xshift]
+        - to: Third Platform
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Portal Entry
+      coord: [40.525, 15.7]
+      local:
+        - to: West
+          jumps: 2
+      exits:
+        - to: Third Platform
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Third Platform
+      coord: [40.65, 15.2]
+      local:
+        - to: West
+      exits:
+        - to: Second Platform
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Second Platform
+      coord: [40.55, 14.8]
+      local:
+        - to: West
+        - to: Third Platform
+      exits:
+        - to: Top Platform
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Top Platform
+      coord: [40.4, 14.4]
+      local:
+        - to: West
+        - to: Upper Ledge
+        - to: Second Platform
+
+    - name: Upper Ledge
+      coord: [40.1, 14.4]
+      local:
+        - to: West
+        - to: Wall Right
+    - name: Wall Right
+      coord: [39.85, 14.4]
+      local:
+        - to: Upper Ledge
+      locations:
+        - name: Break Wall as Indra
+          req: ^mode != 'drone' and Ice_Axe
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          time: 0.9
+      exits:
+        - to: Wall Left
+          req: Siuna_Storage_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall as Drone
+          to: Wall Left
+          req: ^mode == 'drone'
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          time: 1.75
+        - name: Break Through Wall with Mist
+          to: Wall Left
+          req: Nanite_Mist
+          price: 40
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          movement: mist1
+        - name: Break Through Wall with Mist 2
+          to: Wall Left
+          req: $mist2
+          price: 40
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          movement: mist2
+    - name: Wall Left
+      coord: [39.75, 14.4]
+      local:
+        - to: Within Range
+      locations:
+        - name: Break Wall as Indra
+          req: ^mode != 'drone' and Ice_Axe
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          time: 0.9
+        - name: Distant Urn
+          req: $boomerang2
+          canon: Nanite_Mist
+          item: Nanite_Mist
+          tags: [remote]
+      exits:
+        - to: Wall Right
+          req: Siuna_Storage_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall as Drone
+          to: Wall Right
+          req: ^mode == 'drone'
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          time: 1.75
+        - name: Break Through Wall with Mist
+          to: Wall Right
+          req: Nanite_Mist
+          price: 40
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          movement: mist1
+        - name: Break Through Wall with Mist 2
+          to: Wall Right
+          req: $mist2
+          price: 40
+          canon: Siuna_Storage_Wall
+          item: Siuna_Storage_Wall
+          movement: mist2
+        - name: Distant Urn Fast Travel
+          item: Nanite_Mist
+          canon: Nanite_Mist
+          req: Fast_Travel and $boomerang2
+          to: Menu > Kiengir Map > Nanite Mist
+          tags: [cskip]
+    - name: Within Range
+      coord: [39.65, 14.4]
+      local:
+        - to: Cache
+        - to: Wall Left
+      locations:
+        - name: Remote Urn
+          req: $boomerang
+          canon: Nanite_Mist
+          item: Nanite_Mist
+          tags: [remote]
+      hybrid:
+        - name: Remote Urn Fast Travel
+          item: Nanite_Mist
+          canon: Nanite_Mist
+          req: Fast_Travel and $boomerang
+          to: Menu > Kiengir Map > Nanite Mist
+          tags: [cskip]
+    - name: Cache
+      coord: [39.35, 14.4]
+      local:
+        - to: Within Range
+      locations:
+        - name: Urn
+          canon: Nanite_Mist
+          item: Nanite_Mist
+          tags: [urn]
+      hybrid:
+        - name: Urn Collection Skip
+          item: Nanite_Mist
+          canon: Nanite_Mist
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Urn Fast Travel
+          item: Nanite_Mist
+          canon: Nanite_Mist
+          req: Fast_Travel
+          to: Menu > Kiengir Map > Nanite Mist
+          tags: [cskip]
 
 #region Apocalypse
 - name: Apocalypse Hallway

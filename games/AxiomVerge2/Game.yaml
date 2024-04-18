@@ -243,6 +243,7 @@ actions:
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
   $boomerang: ^mode != 'drone' and (Boomerang or Boomerang_Upgrade)
+  $boomerang2: ^mode != 'drone' and Boomerang_Upgrade
   $remote_boomerang: ^mode != 'drone' and Remote_Boomerang
   $can_damage: $melee or Boomerang or Boomerang_Upgrade
   $grab: ^mode != 'drone' and Ledge_Grab

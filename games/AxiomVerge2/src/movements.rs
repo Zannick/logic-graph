@@ -1808,6 +1808,76 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 1052,
         (
             [false],
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5175,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+        ) => 399,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5263,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5614,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+        ) => 526,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 4736,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 3684,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => 877,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Cache,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+        ) => 350,
+        (
+            [false],
             SpotId::Annuna__Sniper_Valley__Bridge_End,
             SpotId::Annuna__Sniper_Valley__Table,
         ) => 2105,
@@ -6566,6 +6636,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1228,
         // [0.701754, 1.65]
         ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 899,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 1299,
         (
             [false],
             SpotId::Glacier_Breach__Control__East,
@@ -14304,6 +14404,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 666,
         (
             [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1333,
+        (
+            [false],
             SpotId::Menu__Kiengir_Map__Remote_Drone,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 1200,
@@ -18099,6 +18344,76 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
         ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5175,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+        ) => 399,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5263,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 5614,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+        ) => 526,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 4736,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__West,
+        ) => 3684,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => 877,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Cache,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+        ) => 350,
         (
             [true],
             SpotId::Annuna__Sniper_Valley__Bridge_End,
@@ -22661,6 +22976,36 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1228,
         // [0.701754, 1.65]
         ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 899,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => 1299,
         (
             [true],
             SpotId::Glacier_Breach__Control__East,
@@ -30251,6 +30596,143 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ) => 666,
         (
             [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1200,
+        ([true], SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            200
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2266,
+        ([true], SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            1800
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1200,
+        ([true], SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            1100
+        }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1066,
+        ([true], SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            1333
+        }
+        (
+            [true],
             SpotId::Menu__Kiengir_Map__Remote_Drone,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         ) => 1200,
@@ -33822,6 +34304,41 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Annuna__Center_Climb__Lower_Platform,
         ) => true,
         (SpotId::Annuna__Center_Climb__Lower_Platform, SpotId::Annuna__Center_Climb__East) => true,
+        (SpotId::Annuna__Siuna_Storage__Portal_Entry, SpotId::Annuna__Siuna_Storage__West) => true,
+        (SpotId::Annuna__Siuna_Storage__Third_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            true
+        }
+        (SpotId::Annuna__Siuna_Storage__Second_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            true
+        }
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+        ) => true,
+        (SpotId::Annuna__Siuna_Storage__Top_Platform, SpotId::Annuna__Siuna_Storage__West) => true,
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+        ) => true,
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__West) => true,
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__Wall_Right) => {
+            true
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Right, SpotId::Annuna__Siuna_Storage__Upper_Ledge) => {
+            true
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Left, SpotId::Annuna__Siuna_Storage__Within_Range) => {
+            true
+        }
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Cache) => true,
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Wall_Left) => {
+            true
+        }
+        (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => true,
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => true,
@@ -36233,6 +36750,30 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Glacier_Breach__Empty_Space__West, SpotId::Glacier_Breach__Empty_Space__Lower) => {
             true
         }
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => true,
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => true,
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
@@ -41258,6 +41799,76 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
         (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => true,
         (SpotId::Menu__Kiengir_Map__Hammond, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Upper) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Apocalypse) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Base) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Hub) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Center) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_East) => true,
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -46840,7 +47451,187 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            0,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Cache,
+            SpotId::Menu__Warp_Only__Kiengir,
+            0,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
             SpotId::Annuna__Siuna_Storage__West,
+            5175,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            399,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            600,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+            5263,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            600,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+            5614,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            526,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__West,
+            4736,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            877,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Annuna__Siuna_Storage__West,
+            3684,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            350,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            350,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            0,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+            877,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            350,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            100,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Wall_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__West,
+            SpotId::Annuna__Lamassu__East_16,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__West,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+            5614,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Cache,
+            1052,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Annuna__Siuna_Storage__Wall_Left,
+            350,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Within_Range,
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            0,
+        ),
+        (
+            SpotId::Annuna__Siuna_Storage__Within_Range,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -60151,6 +60942,81 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            1500,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            350,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Grate_Work__Southeast,
+            1600,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            SpotId::Annuna__Siuna_Storage__Portal_Entry,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            1799,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            899,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            3000,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            600,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+            1299,
+        ),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -72705,6 +73571,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Remote_Drone,
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             1200,
@@ -77342,6 +78358,51 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             Some(1052)
         }
+        (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Siuna_Storage__Portal_Entry, SpotId::Annuna__Siuna_Storage__West) => {
+            Some(5175)
+        }
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+        ) => Some(399),
+        (SpotId::Annuna__Siuna_Storage__Second_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            Some(5263)
+        }
+        (SpotId::Annuna__Siuna_Storage__Third_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            Some(5614)
+        }
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+        ) => Some(526),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => Some(1052),
+        (SpotId::Annuna__Siuna_Storage__Top_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            Some(4736)
+        }
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__Wall_Right) => {
+            Some(877)
+        }
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__West) => {
+            Some(3684)
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Left, SpotId::Annuna__Siuna_Storage__Within_Range) => {
+            Some(350)
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Right, SpotId::Annuna__Siuna_Storage__Upper_Ledge) => {
+            Some(877)
+        }
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Cache) => {
+            Some(1052)
+        }
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Wall_Left) => {
+            Some(350)
+        }
         (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
             Some(2105)
         }
@@ -80569,6 +81630,30 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => Some(1228),
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => Some(2351),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => Some(1500),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+        ) => Some(350),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => Some(899),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+        ) => Some(600),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => Some(1299),
         (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Further_In) => {
             Some(600)
         }
@@ -86038,6 +87123,96 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(666)
         }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            Some(333)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            Some(600)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            Some(600)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1100),
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(500),
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(200)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            Some(666)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            Some(1333)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            Some(1266)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            Some(1466)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            Some(1666)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            Some(1733)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            Some(1400)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            Some(700)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            Some(2266)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(1800)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            Some(2000)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1200)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1100)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            Some(1066)
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1333)
+        }
         (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             Some(1200)
         }
@@ -88866,6 +90041,51 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Portal_Entry, SpotId::Annuna__Siuna_Storage__West) => {
+            (Some(5175), vec![])
+        }
+        (
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+            SpotId::Annuna__Siuna_Storage__Third_Platform,
+        ) => (Some(399), vec![]),
+        (SpotId::Annuna__Siuna_Storage__Second_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            (Some(5263), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Third_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            (Some(5614), vec![])
+        }
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Second_Platform,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Annuna__Siuna_Storage__Top_Platform,
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge,
+        ) => (Some(1052), vec![]),
+        (SpotId::Annuna__Siuna_Storage__Top_Platform, SpotId::Annuna__Siuna_Storage__West) => {
+            (Some(4736), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__Wall_Right) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Upper_Ledge, SpotId::Annuna__Siuna_Storage__West) => {
+            (Some(3684), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Left, SpotId::Annuna__Siuna_Storage__Within_Range) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Wall_Right, SpotId::Annuna__Siuna_Storage__Upper_Ledge) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Cache) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Siuna_Storage__Within_Range, SpotId::Annuna__Siuna_Storage__Wall_Left) => {
+            (Some(350), vec![])
         }
         (SpotId::Annuna__Sniper_Valley__Bridge_End, SpotId::Annuna__Sniper_Valley__Table) => {
             (Some(2105), vec![])
@@ -92872,6 +94092,30 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => {
             (Some(2351), vec![])
         }
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => (Some(1500), vec![]),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__North,
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => (Some(899), vec![]),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__North,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
+        ) => (Some(1299), vec![]),
         (SpotId::Glacier_Breach__Control__East, SpotId::Glacier_Breach__Control__Further_In) => {
             (Some(600), vec![])
         }
@@ -98562,6 +99806,96 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Menu__Kiengir_Map__Irikar_Midwest, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
+            (Some(333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Isolation) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Amagi_Main_Area) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Center_Save) => {
+            (Some(600), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(500), vec![]),
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Annuna_West_Bridge) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Base_Camp) => {
+            (Some(666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_Observatory) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Lower) => {
+            (Some(1333), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Ebih_West_Upper) => {
+            (Some(1266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Labyrinth) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Northeast) => {
+            (Some(1466), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top) => {
+            (Some(1666), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Ruins_West) => {
+            (Some(1733), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Giguna_Separator) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Glacier_Revival) => {
+            (Some(700), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Beach_Save) => {
+            (Some(2266), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(1800), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Irikar_Midwest) => {
+            (Some(2000), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1100), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_Emergence) => {
+            (Some(1066), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1333), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Remote_Drone, SpotId::Menu__Kiengir_Map__Amagi_East_Lake) => {
             (Some(1200), vec![])

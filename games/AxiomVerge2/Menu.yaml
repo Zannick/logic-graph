@@ -506,6 +506,8 @@ areas:
       coord: [37, 16]
     - name: Hammond
       coord: [40, 11]
+    - name: Nanite_Mist
+      coord: [39, 15]
     #endregion
 
 - name: Breach Map

@@ -412,6 +412,15 @@ subgraph Annuna
     end
     subgraph Annuna__Siuna_Storage[Siuna Storage]
         Annuna__Siuna_Storage__West(West);
+        Annuna__Siuna_Storage__Portal_Entry(Portal Entry);
+        Annuna__Siuna_Storage__Third_Platform(Third Platform);
+        Annuna__Siuna_Storage__Second_Platform(Second Platform);
+        Annuna__Siuna_Storage__Top_Platform(Top Platform);
+        Annuna__Siuna_Storage__Upper_Ledge(Upper Ledge);
+        Annuna__Siuna_Storage__Wall_Right(Wall Right);
+        Annuna__Siuna_Storage__Wall_Left(Wall Left);
+        Annuna__Siuna_Storage__Within_Range(Within Range);
+        Annuna__Siuna_Storage__Cache(Cache);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -1350,6 +1359,9 @@ subgraph Glacier_Breach
     end
     subgraph Glacier_Breach__Angry_Lions[Angry Lions]
         Glacier_Breach__Angry_Lions__North(North);
+        Glacier_Breach__Angry_Lions__Top_Platform(Top Platform);
+        Glacier_Breach__Angry_Lions__Second_Platform(Second Platform);
+        Glacier_Breach__Angry_Lions__Portal_Stand(Portal Stand);
     end
     subgraph Glacier_Breach__Spidery_Connector[Spidery Connector]
         Glacier_Breach__Spidery_Connector__East(East);
@@ -1860,6 +1872,7 @@ subgraph Menu
         Menu__Kiengir_Map__Filter_Spiders(Filter Spiders);
         Menu__Kiengir_Map__Breach_Attractor(Breach Attractor);
         Menu__Kiengir_Map__Hammond(Hammond);
+        Menu__Kiengir_Map__Nanite_Mist(Nanite_Mist);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__GB_Peak(GB Peak);
@@ -2177,7 +2190,7 @@ Annuna__Lamassu__Bottom_West_Ledge --> Annuna__Lamassu__Above_Flat_Ground
 Annuna__Lamassu__East_14 <--> Glacier__Sea_Burial__West_14
 Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Flat_Ground
 Annuna__Lamassu__East_16 <--> Annuna__Lamassu__Ledge_By_Grate
-Annuna__Lamassu__East_16 --> Annuna__Siuna_Storage__West
+Annuna__Lamassu__East_16 <--> Annuna__Siuna_Storage__West
 Annuna__Lamassu__East_17 <--> Annuna__Upper_Save__West
 Annuna__Lamassu__Flat_Ground --> Annuna__Lamassu__Ledge_By_Grate
 Annuna__Lamassu__Ledge_By_Grate --> Annuna__Lamassu__Lower_Brick_Ledge
@@ -2199,6 +2212,16 @@ Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
 Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
 Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
+Annuna__Siuna_Storage__Cache --> Menu__Kiengir_Map__Nanite_Mist
+Annuna__Siuna_Storage__Cache --> Menu__Warp_Only__Kiengir
+Annuna__Siuna_Storage__Portal_Entry --> Annuna__Siuna_Storage__Third_Platform
+Annuna__Siuna_Storage__Second_Platform --> Annuna__Siuna_Storage__Top_Platform
+Annuna__Siuna_Storage__Second_Platform --> Annuna__Siuna_Storage__Upper_Ledge
+Annuna__Siuna_Storage__Third_Platform --> Annuna__Siuna_Storage__Second_Platform
+Annuna__Siuna_Storage__Wall_Left <--> Annuna__Siuna_Storage__Wall_Right
+Annuna__Siuna_Storage__Wall_Left --> Menu__Kiengir_Map__Nanite_Mist
+Annuna__Siuna_Storage__West --> Annuna__Siuna_Storage__Third_Platform
+Annuna__Siuna_Storage__Within_Range --> Menu__Kiengir_Map__Nanite_Mist
 Annuna__Sniper_Valley__Bridge_End --> Annuna__Sniper_Valley__Bridge_Lower_Ledge
 Annuna__Sniper_Valley__Bridge_Upper_Middle --> Annuna__Sniper_Valley__West_24
 Annuna__Sniper_Valley__Cavern_Cache <--> Annuna__Sniper_Valley__Cavern_Tight_Corner
@@ -2666,6 +2689,9 @@ Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__West_13 --> Giguna__Far_Corner__East_13
 Giguna__West_Tower__Southwest --> Giguna__West_Caverns__Northwest
+Glacier_Breach__Angry_Lions__North <--> Glacier_Breach__Grate_Work__Southeast
+Glacier_Breach__Angry_Lions__Portal_Stand --> Glacier_Breach__Angry_Lions__Top_Platform
+Glacier_Breach__Angry_Lions__Second_Platform --> Glacier_Breach__Angry_Lions__Top_Platform
 Glacier_Breach__Control__Upper_Corner --> Glacier_Breach__Control__Lower_Corner
 Glacier_Breach__Control__West --> Glacier_Breach__Crystals__East
 Glacier_Breach__Crystals__East --> Glacier_Breach__Control__East
@@ -2687,7 +2713,6 @@ Glacier_Breach__Grate_Work__Grate_East <--> Glacier_Breach__Grate_Work__Grate_In
 Glacier_Breach__Grate_Work__Grate_Interior <--> Glacier_Breach__Grate_Work__Grate_Southeast
 Glacier_Breach__Grate_Work__Grate_Interior <--> Glacier_Breach__Grate_Work__Grate_West
 Glacier_Breach__Grate_Work__Grate_Southeast --> Glacier_Breach__Grate_Work__East_Hill
-Glacier_Breach__Grate_Work__Southeast --> Glacier_Breach__Angry_Lions__North
 Glacier_Breach__Grate_Work__Southeast --> Glacier_Breach__Grate_Work__East
 Glacier_Breach__Grate_Work__Southeast --> Glacier_Breach__Grate_Work__East_Hill
 Glacier_Breach__Grate_Work__West_13 <--> Glacier_Breach__Zappers__East

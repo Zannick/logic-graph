@@ -997,7 +997,16 @@ pub enum SpotId {
     Annuna__Seals__Middle_Ledge,
     Annuna__Seals__Upper_Ledge,
     Annuna__Seals__Upper_Seal,
+    Annuna__Siuna_Storage__Cache,
+    Annuna__Siuna_Storage__Portal_Entry,
+    Annuna__Siuna_Storage__Second_Platform,
+    Annuna__Siuna_Storage__Third_Platform,
+    Annuna__Siuna_Storage__Top_Platform,
+    Annuna__Siuna_Storage__Upper_Ledge,
+    Annuna__Siuna_Storage__Wall_Left,
+    Annuna__Siuna_Storage__Wall_Right,
     Annuna__Siuna_Storage__West,
+    Annuna__Siuna_Storage__Within_Range,
     Annuna__Sniper_Valley__Bridge_End,
     Annuna__Sniper_Valley__Bridge_Lower_Ledge,
     Annuna__Sniper_Valley__Bridge_Upper_Ledge,
@@ -1925,6 +1934,9 @@ pub enum SpotId {
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
     Glacier_Breach__Angry_Lions__North,
+    Glacier_Breach__Angry_Lions__Portal_Stand,
+    Glacier_Breach__Angry_Lions__Second_Platform,
+    Glacier_Breach__Angry_Lions__Top_Platform,
     Glacier_Breach__Control__East,
     Glacier_Breach__Control__Further_In,
     Glacier_Breach__Control__Lower_Corner,
@@ -2211,6 +2223,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Hub,
     Menu__Kiengir_Map__Irikar_Midwest,
+    Menu__Kiengir_Map__Nanite_Mist,
     Menu__Kiengir_Map__Remote_Drone,
     Menu__Kiengir_Map__Shockwave,
     Menu__Kiengir_Map__Uhrum_Center,
@@ -3042,7 +3055,34 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Seals__Middle_Ledge => write!(f, "{}", "Annuna > Seals > Middle Ledge"),
             SpotId::Annuna__Seals__Upper_Ledge => write!(f, "{}", "Annuna > Seals > Upper Ledge"),
             SpotId::Annuna__Seals__Upper_Seal => write!(f, "{}", "Annuna > Seals > Upper Seal"),
+            SpotId::Annuna__Siuna_Storage__Cache => {
+                write!(f, "{}", "Annuna > Siuna Storage > Cache")
+            }
+            SpotId::Annuna__Siuna_Storage__Portal_Entry => {
+                write!(f, "{}", "Annuna > Siuna Storage > Portal Entry")
+            }
+            SpotId::Annuna__Siuna_Storage__Second_Platform => {
+                write!(f, "{}", "Annuna > Siuna Storage > Second Platform")
+            }
+            SpotId::Annuna__Siuna_Storage__Third_Platform => {
+                write!(f, "{}", "Annuna > Siuna Storage > Third Platform")
+            }
+            SpotId::Annuna__Siuna_Storage__Top_Platform => {
+                write!(f, "{}", "Annuna > Siuna Storage > Top Platform")
+            }
+            SpotId::Annuna__Siuna_Storage__Upper_Ledge => {
+                write!(f, "{}", "Annuna > Siuna Storage > Upper Ledge")
+            }
+            SpotId::Annuna__Siuna_Storage__Wall_Left => {
+                write!(f, "{}", "Annuna > Siuna Storage > Wall Left")
+            }
+            SpotId::Annuna__Siuna_Storage__Wall_Right => {
+                write!(f, "{}", "Annuna > Siuna Storage > Wall Right")
+            }
             SpotId::Annuna__Siuna_Storage__West => write!(f, "{}", "Annuna > Siuna Storage > West"),
+            SpotId::Annuna__Siuna_Storage__Within_Range => {
+                write!(f, "{}", "Annuna > Siuna Storage > Within Range")
+            }
             SpotId::Annuna__Sniper_Valley__Bridge_End => {
                 write!(f, "{}", "Annuna > Sniper Valley > Bridge End")
             }
@@ -5360,6 +5400,15 @@ impl fmt::Display for SpotId {
             SpotId::Glacier_Breach__Angry_Lions__North => {
                 write!(f, "{}", "Glacier Breach > Angry Lions > North")
             }
+            SpotId::Glacier_Breach__Angry_Lions__Portal_Stand => {
+                write!(f, "{}", "Glacier Breach > Angry Lions > Portal Stand")
+            }
+            SpotId::Glacier_Breach__Angry_Lions__Second_Platform => {
+                write!(f, "{}", "Glacier Breach > Angry Lions > Second Platform")
+            }
+            SpotId::Glacier_Breach__Angry_Lions__Top_Platform => {
+                write!(f, "{}", "Glacier Breach > Angry Lions > Top Platform")
+            }
             SpotId::Glacier_Breach__Control__East => {
                 write!(f, "{}", "Glacier Breach > Control > East")
             }
@@ -6149,6 +6198,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Irikar_Midwest => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest")
+            }
+            SpotId::Menu__Kiengir_Map__Nanite_Mist => {
+                write!(f, "{}", "Menu > Kiengir Map > Nanite_Mist")
             }
             SpotId::Menu__Kiengir_Map__Remote_Drone => {
                 write!(f, "{}", "Menu > Kiengir Map > Remote Drone")
@@ -7015,7 +7067,28 @@ impl std::str::FromStr for SpotId {
             "Annuna > Seals > Middle Ledge" => Ok(SpotId::Annuna__Seals__Middle_Ledge),
             "Annuna > Seals > Upper Ledge" => Ok(SpotId::Annuna__Seals__Upper_Ledge),
             "Annuna > Seals > Upper Seal" => Ok(SpotId::Annuna__Seals__Upper_Seal),
+            "Annuna > Siuna Storage > Cache" => Ok(SpotId::Annuna__Siuna_Storage__Cache),
+            "Annuna > Siuna Storage > Portal Entry" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Portal_Entry)
+            }
+            "Annuna > Siuna Storage > Second Platform" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Second_Platform)
+            }
+            "Annuna > Siuna Storage > Third Platform" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Third_Platform)
+            }
+            "Annuna > Siuna Storage > Top Platform" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Top_Platform)
+            }
+            "Annuna > Siuna Storage > Upper Ledge" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Upper_Ledge)
+            }
+            "Annuna > Siuna Storage > Wall Left" => Ok(SpotId::Annuna__Siuna_Storage__Wall_Left),
+            "Annuna > Siuna Storage > Wall Right" => Ok(SpotId::Annuna__Siuna_Storage__Wall_Right),
             "Annuna > Siuna Storage > West" => Ok(SpotId::Annuna__Siuna_Storage__West),
+            "Annuna > Siuna Storage > Within Range" => {
+                Ok(SpotId::Annuna__Siuna_Storage__Within_Range)
+            }
             "Annuna > Sniper Valley > Bridge End" => Ok(SpotId::Annuna__Sniper_Valley__Bridge_End),
             "Annuna > Sniper Valley > Bridge Lower Ledge" => {
                 Ok(SpotId::Annuna__Sniper_Valley__Bridge_Lower_Ledge)
@@ -8579,6 +8652,15 @@ impl std::str::FromStr for SpotId {
             "Glacier Breach > Angry Lions > North" => {
                 Ok(SpotId::Glacier_Breach__Angry_Lions__North)
             }
+            "Glacier Breach > Angry Lions > Portal Stand" => {
+                Ok(SpotId::Glacier_Breach__Angry_Lions__Portal_Stand)
+            }
+            "Glacier Breach > Angry Lions > Second Platform" => {
+                Ok(SpotId::Glacier_Breach__Angry_Lions__Second_Platform)
+            }
+            "Glacier Breach > Angry Lions > Top Platform" => {
+                Ok(SpotId::Glacier_Breach__Angry_Lions__Top_Platform)
+            }
             "Glacier Breach > Control > East" => Ok(SpotId::Glacier_Breach__Control__East),
             "Glacier Breach > Control > Further In" => {
                 Ok(SpotId::Glacier_Breach__Control__Further_In)
@@ -9179,6 +9261,7 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
+            "Menu > Kiengir Map > Nanite_Mist" => Ok(SpotId::Menu__Kiengir_Map__Nanite_Mist),
             "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
             "Menu > Kiengir Map > Shockwave" => Ok(SpotId::Menu__Kiengir_Map__Shockwave),
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
@@ -9499,6 +9582,21 @@ pub enum LocationId {
     Annuna__Mirror_Match__Plinth__Item,
     Annuna__Mirror_Match__Save_Point__Fight,
     Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+    Annuna__Siuna_Storage__Cache__Urn,
+    Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
+    Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
+    Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra,
+    Annuna__Siuna_Storage__Wall_Left__Distant_Urn,
+    Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
+    Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra,
+    Annuna__Siuna_Storage__Within_Range__Remote_Urn,
+    Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
     Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
     Annuna__Sniper_Valley__Cavern_Cache__Item,
     Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
@@ -9899,6 +9997,77 @@ impl fmt::Display for LocationId {
                 f,
                 "{}",
                 "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
+            ),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn => {
+                write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn")
+            }
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Cache > Urn Collection Skip"
+            ),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
+                write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Fast Travel")
+            }
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Left > Break Wall as Indra"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
+                write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Distant Urn")
+            }
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist"
+            ),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
+                write!(
+                    f,
+                    "{}",
+                    "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2"
+                )
+            }
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Wall Right > Break Wall as Indra"
+            ),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Within Range > Remote Urn"
+            ),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => write!(
+                f,
+                "{}",
+                "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel"
             ),
             LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => write!(
                 f,
@@ -10902,6 +11071,51 @@ impl std::str::FromStr for LocationId {
             "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
                 Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
             }
+            "Annuna > Siuna Storage > Cache > Urn" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn)
+            }
+            "Annuna > Siuna Storage > Cache > Urn Collection Skip" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip)
+            }
+            "Annuna > Siuna Storage > Cache > Urn Fast Travel" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel)
+            }
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone)
+            }
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist)
+            }
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2)
+            }
+            "Annuna > Siuna Storage > Wall Left > Break Wall as Indra" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra)
+            }
+            "Annuna > Siuna Storage > Wall Left > Distant Urn" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn)
+            }
+            "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel)
+            }
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone)
+            }
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist)
+            }
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2)
+            }
+            "Annuna > Siuna Storage > Wall Right > Break Wall as Indra" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra)
+            }
+            "Annuna > Siuna Storage > Within Range > Remote Urn" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn)
+            }
+            "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel" => {
+                Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel)
+            }
             "Annuna > Sniper Valley > Bridge End > Health Pickup" => {
                 Ok(LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup)
             }
@@ -11843,6 +12057,24 @@ pub enum ExitId {
     Annuna__Mirror_Match__Staircase__ex__Eastward_1,
     Annuna__Mirror_Match__Staircase__ex__Eastward_2,
     Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+    Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
+    Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
+    Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1,
+    Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1,
+    Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1,
+    Annuna__Siuna_Storage__Third_Platform__ex__Second_Platform_1,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
+    Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
+    Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
+    Annuna__Siuna_Storage__Wall_Left__ex__Wall_Right_1,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
+    Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
+    Annuna__Siuna_Storage__Wall_Right__ex__Wall_Left_1,
+    Annuna__Siuna_Storage__West__ex__Lamassu__East_16_1,
+    Annuna__Siuna_Storage__West__ex__Third_Platform_1,
+    Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
     Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1,
     Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1,
     Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2,
@@ -12769,6 +13001,9 @@ pub enum ExitId {
     Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
     Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Glacier_Breach__Angry_Lions__North__ex__Grate_Work__Southeast_1,
+    Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1,
+    Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1,
     Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
     Glacier_Breach__Control__West__ex__Crystals__East_1,
     Glacier_Breach__Crystals__East__ex__Control__East_1,
@@ -13450,6 +13685,24 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (1)"),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (2)"),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => write!(f, "{}", "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)"),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Collection Skip"),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Fast Travel"),
+            ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => write!(f, "{}", "Annuna > Siuna Storage > Portal Entry ==> Third Platform (1)"),
+            ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => write!(f, "{}", "Annuna > Siuna Storage > Second Platform ==> Top Platform (1)"),
+            ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1 => write!(f, "{}", "Annuna > Siuna Storage > Second Platform ==> Upper Ledge (1)"),
+            ExitId::Annuna__Siuna_Storage__Third_Platform__ex__Second_Platform_1 => write!(f, "{}", "Annuna > Siuna Storage > Third Platform ==> Second Platform (1)"),
+            ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone"),
+            ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist"),
+            ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2"),
+            ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel"),
+            ExitId::Annuna__Siuna_Storage__Wall_Left__ex__Wall_Right_1 => write!(f, "{}", "Annuna > Siuna Storage > Wall Left ==> Wall Right (1)"),
+            ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone"),
+            ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist"),
+            ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2"),
+            ExitId::Annuna__Siuna_Storage__Wall_Right__ex__Wall_Left_1 => write!(f, "{}", "Annuna > Siuna Storage > Wall Right ==> Wall Left (1)"),
+            ExitId::Annuna__Siuna_Storage__West__ex__Lamassu__East_16_1 => write!(f, "{}", "Annuna > Siuna Storage > West ==> Lamassu > East 16 (1)"),
+            ExitId::Annuna__Siuna_Storage__West__ex__Third_Platform_1 => write!(f, "{}", "Annuna > Siuna Storage > West ==> Third Platform (1)"),
+            ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel"),
             ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1 => write!(f, "{}", "Annuna > Sniper Valley > Bridge End ==> Bridge Lower Ledge (1)"),
             ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (1)"),
             ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2 => write!(f, "{}", "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (2)"),
@@ -14376,6 +14629,9 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
             ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),
+            ExitId::Glacier_Breach__Angry_Lions__North__ex__Grate_Work__Southeast_1 => write!(f, "{}", "Glacier Breach > Angry Lions > North ==> Grate Work > Southeast (1)"),
+            ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1 => write!(f, "{}", "Glacier Breach > Angry Lions > Portal Stand ==> Top Platform (1)"),
+            ExitId::Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1 => write!(f, "{}", "Glacier Breach > Angry Lions > Second Platform ==> Top Platform (1)"),
             ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => write!(f, "{}", "Glacier Breach > Control > Upper Corner > Control Enemy And Jump"),
             ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1 => write!(f, "{}", "Glacier Breach > Control > West ==> Crystals > East (1)"),
             ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1 => write!(f, "{}", "Glacier Breach > Crystals > East ==> Control > East (1)"),
@@ -15062,6 +15318,24 @@ impl std::str::FromStr for ExitId {
             "Annuna > Mirror Match > Staircase ==> Eastward (1)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1),
             "Annuna > Mirror Match > Staircase ==> Eastward (2)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2),
             "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1),
+            "Annuna > Siuna Storage > Cache > Urn Collection Skip" => Ok(ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
+            "Annuna > Siuna Storage > Cache > Urn Fast Travel" => Ok(ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
+            "Annuna > Siuna Storage > Portal Entry ==> Third Platform (1)" => Ok(ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1),
+            "Annuna > Siuna Storage > Second Platform ==> Top Platform (1)" => Ok(ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1),
+            "Annuna > Siuna Storage > Second Platform ==> Upper Ledge (1)" => Ok(ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1),
+            "Annuna > Siuna Storage > Third Platform ==> Second Platform (1)" => Ok(ExitId::Annuna__Siuna_Storage__Third_Platform__ex__Second_Platform_1),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
+            "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
+            "Annuna > Siuna Storage > Wall Left ==> Wall Right (1)" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Left__ex__Wall_Right_1),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2),
+            "Annuna > Siuna Storage > Wall Right ==> Wall Left (1)" => Ok(ExitId::Annuna__Siuna_Storage__Wall_Right__ex__Wall_Left_1),
+            "Annuna > Siuna Storage > West ==> Lamassu > East 16 (1)" => Ok(ExitId::Annuna__Siuna_Storage__West__ex__Lamassu__East_16_1),
+            "Annuna > Siuna Storage > West ==> Third Platform (1)" => Ok(ExitId::Annuna__Siuna_Storage__West__ex__Third_Platform_1),
+            "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel" => Ok(ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
             "Annuna > Sniper Valley > Bridge End ==> Bridge Lower Ledge (1)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_End__ex__Bridge_Lower_Ledge_1),
             "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (1)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1),
             "Annuna > Sniper Valley > Bridge Upper Middle ==> West 24 (2)" => Ok(ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_2),
@@ -15988,6 +16262,9 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
             "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
+            "Glacier Breach > Angry Lions > North ==> Grate Work > Southeast (1)" => Ok(ExitId::Glacier_Breach__Angry_Lions__North__ex__Grate_Work__Southeast_1),
+            "Glacier Breach > Angry Lions > Portal Stand ==> Top Platform (1)" => Ok(ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1),
+            "Glacier Breach > Angry Lions > Second Platform ==> Top Platform (1)" => Ok(ExitId::Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1),
             "Glacier Breach > Control > Upper Corner > Control Enemy And Jump" => Ok(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
             "Glacier Breach > Control > West ==> Crystals > East (1)" => Ok(ExitId::Glacier_Breach__Control__West__ex__Crystals__East_1),
             "Glacier Breach > Crystals > East ==> Control > East (1)" => Ok(ExitId::Glacier_Breach__Crystals__East__ex__Control__East_1),
@@ -16527,6 +16804,8 @@ pub enum ActionId {
     Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
     Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
     Glacier__Vertical_Room__Upper_Switch__Open_Gate,
+    Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform,
+    Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform,
     Glacier_Breach__Guarded_Corridor__Save_Point__Save,
     Glacier_Breach__Hammonds_Breach__Save_Point__Save,
     Glacier_Breach__Save_and_Exit__Save_Point__Save,
@@ -16930,6 +17209,18 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Glacier > Vertical Room > Upper Switch > Open Gate"
             ),
+            ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => {
+                write!(
+                    f,
+                    "{}",
+                    "Glacier Breach > Angry Lions > North > Summon Portal to Second Platform"
+                )
+            }
+            ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => write!(
+                f,
+                "{}",
+                "Glacier Breach > Angry Lions > North > Summon Portal to Top Platform"
+            ),
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => write!(
                 f,
                 "{}",
@@ -17304,6 +17595,12 @@ impl std::str::FromStr for ActionId {
             "Glacier > Vertical Room > Upper Switch > Open Gate" => {
                 Ok(ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate)
             }
+            "Glacier Breach > Angry Lions > North > Summon Portal to Second Platform" => {
+                Ok(ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform)
+            }
+            "Glacier Breach > Angry Lions > North > Summon Portal to Top Platform" => {
+                Ok(ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform)
+            }
             "Glacier Breach > Guarded Corridor > Save Point > Save" => {
                 Ok(ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save)
             }
@@ -17388,6 +17685,8 @@ pub enum CanonId {
     Sniper_Valley_Rock_2,
     Filter_Teleporter_Flask,
     Egg_Room_Flask,
+    Siuna_Storage_Wall,
+    Nanite_Mist,
     Apocalypse_Bomb,
     Notes_2053_02_27,
     Ebih_Base_Camp_Fragment,
@@ -17445,6 +17744,8 @@ impl fmt::Display for CanonId {
             CanonId::Sniper_Valley_Rock_2 => write!(f, "{}", "Sniper_Valley_Rock_2"),
             CanonId::Filter_Teleporter_Flask => write!(f, "{}", "Filter_Teleporter_Flask"),
             CanonId::Egg_Room_Flask => write!(f, "{}", "Egg_Room_Flask"),
+            CanonId::Siuna_Storage_Wall => write!(f, "{}", "Siuna_Storage_Wall"),
+            CanonId::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
             CanonId::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
@@ -17508,6 +17809,8 @@ impl std::str::FromStr for CanonId {
             "Sniper_Valley_Rock_2" => Ok(CanonId::Sniper_Valley_Rock_2),
             "Filter_Teleporter_Flask" => Ok(CanonId::Filter_Teleporter_Flask),
             "Egg_Room_Flask" => Ok(CanonId::Egg_Room_Flask),
+            "Siuna_Storage_Wall" => Ok(CanonId::Siuna_Storage_Wall),
+            "Nanite_Mist" => Ok(CanonId::Nanite_Mist),
             "Apocalypse_Bomb" => Ok(CanonId::Apocalypse_Bomb),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),

@@ -88,6 +88,6 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
-      coord: [36.9, 14.75]
+      coord: [36.9, 15.75]
     - name: West
-      coord: [36.1, 14.75]
+      coord: [36.1, 15.75]

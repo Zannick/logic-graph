@@ -125,6 +125,60 @@ macro_rules! hobserve__boomerang {
     }};
 }
 
+/// $boomerang2 (  )
+/// ^mode != 'drone' and Boomerang_Upgrade
+#[macro_export]
+macro_rules! helper__boomerang2 {
+    ($ctx:expr, $world:expr) => {{
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Boomerang_Upgrade))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__boomerang2 {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = $ctx.mode();
+                    $edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                $edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 != right, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Boomerang_Upgrade);
+                    $edict.insert("Boomerang_Upgrade", format!("{}", h));
+                    (h, vec!["Boomerang_Upgrade"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__boomerang2 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v != enums::Mode::Drone
+        } && ({
+            $full_obs.observe_boomerang_upgrade();
+            $ctx.has(Item::Boomerang_Upgrade)
+        }))
+    }};
+}
+
 /// $remote_boomerang (  )
 /// ^mode != 'drone' and Remote_Boomerang
 #[macro_export]
@@ -2831,8 +2885,8 @@ macro_rules! rule__victory {
     ($ctx:expr, $world:expr) => {{
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::access___escape_objective($ctx, $world),
-            RuleVictory::JustObjective => rules::access___objective($ctx, $world),
+            RuleVictory::Default => rules::access___escape_invoke_objective($ctx, $world),
+            RuleVictory::JustObjective => rules::access___invoke_objective($ctx, $world),
             RuleVictory::Bench => rules::access___remote_drone_flask__6($ctx, $world),
         }
     }};
@@ -2842,8 +2896,8 @@ macro_rules! rexplain__victory {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::explain___escape_objective($ctx, $world, $edict),
-            RuleVictory::JustObjective => rules::explain___objective($ctx, $world, $edict),
+            RuleVictory::Default => rules::explain___escape_invoke_objective($ctx, $world, $edict),
+            RuleVictory::JustObjective => rules::explain___invoke_objective($ctx, $world, $edict),
             RuleVictory::Bench => rules::explain___remote_drone_flask__6($ctx, $world, $edict),
         }
     }};
@@ -2854,10 +2908,10 @@ macro_rules! robserve__victory {
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => {
-                rules::observe_access___escape_objective($ctx, $world, $full_obs)
+                rules::observe_access___escape_invoke_objective($ctx, $world, $full_obs)
             }
             RuleVictory::JustObjective => {
-                rules::observe_access___objective($ctx, $world, $full_obs)
+                rules::observe_access___invoke_objective($ctx, $world, $full_obs)
             }
             RuleVictory::Bench => {
                 rules::observe_access___remote_drone_flask__6($ctx, $world, $full_obs)
@@ -2876,7 +2930,7 @@ macro_rules! rule__objective {
                 rules::access___remote_drone($ctx, $world)
             }
             RuleObjective::AllItems => {
-                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world)
+                rules::access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world)
             }
         }
     }};
@@ -2890,7 +2944,7 @@ macro_rules! rexplain__objective {
                 rules::explain___remote_drone($ctx, $world, $edict)
             }
             RuleObjective::AllItems => {
-                rules::explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world, $edict)
+                rules::explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world, $edict)
             }
         }
     }};
@@ -2904,7 +2958,7 @@ macro_rules! robserve__objective {
                 rules::observe_access___remote_drone($ctx, $world, $full_obs)
             }
             RuleObjective::AllItems => {
-                rules::observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth($ctx, $world, $full_obs)
+                rules::observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world, $full_obs)
             }
         }
     }};

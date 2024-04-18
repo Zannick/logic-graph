@@ -41,6 +41,7 @@ OPS = {
     r'\+=': 'incr',
     '-': 'sub',
     '-=': 'decr',
+    r'\$': 'invoke_',
 }
 
 MIRROR_OPS = {

@@ -1055,8 +1055,10 @@ class GameLogic(object):
             raise Exception(f'func {id} missing {ruletype}: Is it redefined from {d[id].keys()}?')
 
         if d[id][ruletype].text != pr.text:
-            id = id + str(sum(1 for k in d if k.startswith(id)))
-            assert id not in d
+            logging.info(f'Rules with same id but different text: {id}({ruletype}) = {d[id][ruletype].text!r} but '
+                         f'this pr = {pr.text!r}')
+            id = id + '__' + str(sum(1 for k in d if k.startswith(id)))
+            assert id not in d, f'duplicate even after counting: {id}'
             d[id] = {ruletype: pr}
             if extra_fields:
                 d[id]['args'] = extra_fields

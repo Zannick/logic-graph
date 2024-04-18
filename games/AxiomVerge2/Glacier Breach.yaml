@@ -786,9 +786,57 @@ areas:
 
 - name: Angry Lions
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
   spots:
     - name: North
       coord: [40.5, 14.2]
+      local:
+        - to: Top Platform
+        - to: Second Platform
+        - to: Portal Stand
+      exits:
+        - to: Grate Work > Southeast
+          tags: [ydoor]
+      actions:
+        - name: Summon Portal to Top Platform
+          req: Breach_Attractor
+          to: Top Platform
+          do: ^portal = `Glacier Breach > Angry Lions > Top Platform`
+          time: 2.25
+        - name: Summon Portal to Second Platform
+          req: Breach_Attractor
+          to: Second Platform
+          do: ^portal = `Glacier Breach > Angry Lions > Second Platform`
+          time: 1.5
+    - name: Top Platform
+      coord: [40.4, 14.4]
+      data:
+        flipside: Annuna > Siuna Storage > Top Platform
+      local:
+        - to: North
+          jumps: 1
+        - to: Portal Stand
+    - name: Second Platform
+      coord: [40.55, 14.8]
+      data:
+        flipside: Annuna > Siuna Storage > Second Platform
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Top Platform
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Portal Stand
+      coord: [40.525, 15.7]
+      data:
+        flipside: Annuna > Siuna Storage > Portal Entry
+      exits:
+        - to: Top Platform
+          req: $hook
+          movement: base
+          jumps: 3
 
 
 - name: Spidery Connector

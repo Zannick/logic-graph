@@ -20,7 +20,11 @@ pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
     true
 }
 
-pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
+pub fn access___escape_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+    // [Escape, $objective]
+    ctx.has(Item::Escape) && rule__objective!(ctx, world)
+}
+pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -33,11 +37,7 @@ pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks
         && helper__all_health!(ctx, world)
         && helper__all_flasks!(ctx, world)
 }
-pub fn access___escape_objective(ctx: &Context, world: &graph::World) -> bool {
-    // [Escape, $objective]
-    ctx.has(Item::Escape) && rule__objective!(ctx, world)
-}
-pub fn access___objective(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___invoke_objective(ctx: &Context, world: &graph::World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
 }
@@ -49,11 +49,7 @@ pub fn access___remote_drone_flask__6(ctx: &Context, world: &graph::World) -> bo
     // [Remote_Drone, Flask{6}]
     ctx.has(Item::Remote_Drone) && ctx.count(Item::Flask) >= 6
 }
-pub fn access_activate(ctx: &Context, world: &graph::World) -> bool {
-    // $activate
-    helper__activate!(ctx, world)
-}
-pub fn access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -62,7 +58,7 @@ pub fn access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
 }
-pub fn access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -71,7 +67,7 @@ pub fn access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
-pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
+pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -85,7 +81,7 @@ pub fn access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map
         && helper__can_recall!(ctx, world))
         && data::map_spot(ctx.position()) != Default::default())
 }
-pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -143,7 +139,7 @@ pub fn access_amagi_stronghold_boulder_1(ctx: &Context, world: &graph::World) ->
     // Amagi_Stronghold_Boulder_1
     ctx.has(Item::Amagi_Stronghold_Boulder_1)
 }
-pub fn access_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
+pub fn access_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -155,7 +151,10 @@ pub fn access_amagi_stronghold_boulder_2(ctx: &Context, world: &graph::World) ->
     // Amagi_Stronghold_Boulder_2
     ctx.has(Item::Amagi_Stronghold_Boulder_2)
 }
-pub fn access_amagi_stronghold_boulder_2_and_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_stronghold_boulder_2_and_invoke_grab(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // Amagi_Stronghold_Boulder_2 and $grab
     (ctx.has(Item::Amagi_Stronghold_Boulder_2) && helper__grab!(ctx, world))
 }
@@ -341,7 +340,7 @@ pub fn access_anuman(ctx: &Context, world: &graph::World) -> bool {
     // Anuman
     ctx.has(Item::Anuman)
 }
-pub fn access_anuman_and_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
 }
@@ -360,50 +359,13 @@ pub fn access_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
 }
-pub fn access_block_clip_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $block_clip and not Ebih_Waterfall_Block_Left
-    (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
-}
-pub fn access_block_clip_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $block_clip and not Ebih_Waterfall_Block_Right
-    (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
-}
-pub fn access_block_clip_escape_and_not_uhrum_annuna_corridor_block(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-    (helper__block_clip_escape!(ctx, world) && !ctx.has(Item::Uhrum_Annuna_Corridor_Block))
-}
 pub fn access_boomerang(ctx: &Context, world: &graph::World) -> bool {
-    // $boomerang
-    helper__boomerang!(ctx, world)
-}
-pub fn access_boomerang1(ctx: &Context, world: &graph::World) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
-pub fn access_boomerang2(ctx: &Context, world: &graph::World) -> bool {
-    // Boomerang
-    ctx.has(Item::Boomerang)
-}
-pub fn access_boomerang3(ctx: &Context, world: &graph::World) -> bool {
-    // Boomerang
-    ctx.has(Item::Boomerang)
-}
-pub fn access_boomerang4(ctx: &Context, world: &graph::World) -> bool {
-    // Boomerang
-    ctx.has(Item::Boomerang)
-}
-pub fn access_boomerang5(ctx: &Context, world: &graph::World) -> bool {
-    // Boomerang
-    ctx.has(Item::Boomerang)
+pub fn access_breach_attractor(ctx: &Context, world: &graph::World) -> bool {
+    // Breach_Attractor
+    ctx.has(Item::Breach_Attractor)
 }
 pub fn access_breach_attractor_and_anuman(ctx: &Context, world: &graph::World) -> bool {
     // Breach_Attractor and Anuman
@@ -416,66 +378,6 @@ pub fn access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filt
     // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
     ((ctx.has(Item::Breach_Attractor) && ctx.mode() == enums::Mode::Drone)
         && ctx.indra() == SpotId::Annuna__Filter_Teleporter__Shaft_Top)
-}
-pub fn access_bs(ctx: &Context, world: &graph::World) -> bool {
-    // $bs
-    helper__bs!(ctx, world)
-}
-pub fn access_can_damage(ctx: &Context, world: &graph::World) -> bool {
-    // $can_damage
-    helper__can_damage!(ctx, world)
-}
-pub fn access_can_deploy(ctx: &Context, world: &graph::World) -> bool {
-    // $can_deploy
-    helper__can_deploy!(ctx, world)
-}
-pub fn access_can_deploy_and_drone_hover(ctx: &Context, world: &graph::World) -> bool {
-    // $can_deploy and Drone_Hover
-    (helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
-}
-pub fn access_can_deploy_and_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $can_deploy and Slingshot_Hook
-    (helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
-}
-pub fn access_can_deploy_and_slingshot_hook_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $can_deploy and Slingshot_Hook and Drone_Hover
-    ((helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
-        && ctx.has(Item::Drone_Hover))
-}
-pub fn access_charge(ctx: &Context, world: &graph::World) -> bool {
-    // $charge
-    helper__charge!(ctx, world)
-}
-pub fn access_climb(ctx: &Context, world: &graph::World) -> bool {
-    // $climb
-    helper__climb!(ctx, world)
-}
-pub fn access_climb_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
-    // $climb and Annuna_East_Bridge_Gate
-    (helper__climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
-}
-pub fn access_climb_and_can_deploy_and_hover_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
-    (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world)) && ctx.has(Item::Hover))
-        && ctx.has(Item::Slingshot_Hook))
-}
-pub fn access_climb_and_grab(ctx: &Context, world: &graph::World) -> bool {
-    // $climb and $grab
-    (helper__climb!(ctx, world) && helper__grab!(ctx, world))
-}
-pub fn access_climb_and_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // $climb and $grab and Anuman
-    ((helper__climb!(ctx, world) && helper__grab!(ctx, world)) && ctx.has(Item::Anuman))
-}
-pub fn access_climb_or_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $climb or $hook
-    (helper__climb!(ctx, world) || helper__hook!(ctx, world))
 }
 pub fn access_defeat_mus_a_m20(ctx: &Context, world: &graph::World) -> bool {
     // Defeat_MUS_A_M20
@@ -758,7 +660,7 @@ pub fn access_ebih_interchange_gate(ctx: &Context, world: &graph::World) -> bool
     // Ebih_Interchange_Gate
     ctx.has(Item::Ebih_Interchange_Gate)
 }
-pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
+pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -766,7 +668,7 @@ pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
     ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
         && helper__grab!(ctx, world))
 }
-pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
+pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -774,7 +676,7 @@ pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
     ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
         && helper__hook!(ctx, world))
 }
-pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
+pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -782,7 +684,7 @@ pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
     ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
         && helper__grab!(ctx, world))
 }
-pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
+pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -805,6 +707,14 @@ pub fn access_ebih_west_block(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_fast_travel(ctx: &Context, world: &graph::World) -> bool {
     // Fast_Travel
     ctx.has(Item::Fast_Travel)
+}
+pub fn access_fast_travel_and_invoke_boomerang(ctx: &Context, world: &graph::World) -> bool {
+    // Fast_Travel and $boomerang
+    (ctx.has(Item::Fast_Travel) && helper__boomerang!(ctx, world))
+}
+pub fn access_fast_travel_and_invoke_boomerang2(ctx: &Context, world: &graph::World) -> bool {
+    // Fast_Travel and $boomerang2
+    (ctx.has(Item::Fast_Travel) && helper__boomerang2!(ctx, world))
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -1433,7 +1343,7 @@ pub fn access_giguna_dual_path_switch(ctx: &Context, world: &graph::World) -> bo
     // Giguna_Dual_Path_Switch
     ctx.has(Item::Giguna_Dual_Path_Switch)
 }
-pub fn access_giguna_dual_path_switch_and___grab_or_climb(
+pub fn access_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -1441,11 +1351,14 @@ pub fn access_giguna_dual_path_switch_and___grab_or_climb(
     (ctx.has(Item::Giguna_Dual_Path_Switch)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
-pub fn access_giguna_dual_path_switch_and_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_dual_path_switch_and_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // Giguna_Dual_Path_Switch and $climb
     (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__climb!(ctx, world))
 }
-pub fn access_giguna_dual_path_switch_and_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_dual_path_switch_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // Giguna_Dual_Path_Switch and $hook
     (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__hook!(ctx, world))
 }
@@ -1587,58 +1500,6 @@ pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &graph::World) -> bo
     // Glacier_Sea_Burial_Rock
     ctx.has(Item::Glacier_Sea_Burial_Rock)
 }
-pub fn access_grab(ctx: &Context, world: &graph::World) -> bool {
-    // $grab
-    helper__grab!(ctx, world)
-}
-pub fn access_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Annuna_East_Bridge_Gate
-    (helper__grab!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
-}
-pub fn access_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Anuman
-    (helper__grab!(ctx, world) && ctx.has(Item::Anuman))
-}
-pub fn access_grab_and_can_deploy(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and $can_deploy
-    (helper__grab!(ctx, world) && helper__can_deploy!(ctx, world))
-}
-pub fn access_grab_and_climb(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and $climb
-    (helper__grab!(ctx, world) && helper__climb!(ctx, world))
-}
-pub fn access_grab_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Giguna_Gateway_Block
-    (helper__grab!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
-}
-pub fn access_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Switch_40_12
-    (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
-}
-pub fn access_grab_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $grab and Underwater_Movement
-    (helper__grab!(ctx, world) && ctx.has(Item::Underwater_Movement))
-}
-pub fn access_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // $grab or Anuman
-    (helper__grab!(ctx, world) || ctx.has(Item::Anuman))
-}
-pub fn access_grab_or_climb(ctx: &Context, world: &graph::World) -> bool {
-    // $grab or $climb
-    (helper__grab!(ctx, world) || helper__climb!(ctx, world))
-}
-pub fn access_grab_or_climb_or_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $grab or $climb or $hook
-    ((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
-}
-pub fn access_grab_or_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $grab or $hook
-    (helper__grab!(ctx, world) || helper__hook!(ctx, world))
-}
-pub fn access_grab_or_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $grab or Underwater_Movement
-    (helper__grab!(ctx, world) || ctx.has(Item::Underwater_Movement))
-}
 pub fn access_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
     // Hammond_Auth
     ctx.has(Item::Hammond_Auth)
@@ -1658,71 +1519,6 @@ pub fn access_health_upgrade_3(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_health_upgrade_4(ctx: &Context, world: &graph::World) -> bool {
     // Health_Upgrade_4
     ctx.has(Item::Health_Upgrade_4)
-}
-pub fn access_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $hook
-    helper__hook!(ctx, world)
-}
-pub fn access_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and Annuna_East_Bridge_Gate
-    (helper__hook!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
-}
-pub fn access_hook_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and Giguna_Gateway_Block
-    (helper__hook!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
-}
-pub fn access_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and $hover
-    (helper__hook!(ctx, world) && helper__hover!(ctx, world))
-}
-pub fn access_hook_and_hover_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and $hover and Underwater_Movement
-    ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
-        && ctx.has(Item::Underwater_Movement))
-}
-pub fn access_hook_and_not_ebih_waterfall_block_left(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and not Ebih_Waterfall_Block_Left
-    (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
-}
-pub fn access_hook_and_not_ebih_waterfall_block_right(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and not Ebih_Waterfall_Block_Right
-    (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
-}
-pub fn access_hook_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
-    // $hook and Underwater_Movement
-    (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
-}
-pub fn access_hook_or_hover(ctx: &Context, world: &graph::World) -> bool {
-    // $hook or $hover
-    (helper__hook!(ctx, world) || helper__hover!(ctx, world))
-}
-pub fn access_hover(ctx: &Context, world: &graph::World) -> bool {
-    // $hover
-    helper__hover!(ctx, world)
-}
-pub fn access_hover_and_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // $hover and Anuman
-    (helper__hover!(ctx, world) && ctx.has(Item::Anuman))
-}
-pub fn access_hover_and_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $hover and $hook
-    (helper__hover!(ctx, world) && helper__hook!(ctx, world))
-}
-pub fn access_hover_and_hook_and_mist2(ctx: &Context, world: &graph::World) -> bool {
-    // $hover and $hook and $mist2
-    ((helper__hover!(ctx, world) && helper__hook!(ctx, world)) && helper__mist2!(ctx, world))
-}
-pub fn access_hover_and_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
-    // $hover and Mist_Upgrade
-    (helper__hover!(ctx, world) && ctx.has(Item::Mist_Upgrade))
-}
-pub fn access_hover_or_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $hover or $hook
-    (helper__hover!(ctx, world) || helper__hook!(ctx, world))
-}
-pub fn access_hover_or_mist2(ctx: &Context, world: &graph::World) -> bool {
-    // $hover or $mist2
-    (helper__hover!(ctx, world) || helper__mist2!(ctx, world))
 }
 pub fn access_infect(ctx: &Context, world: &graph::World) -> bool {
     // Infect
@@ -1756,31 +1552,344 @@ pub fn access_infection_speed(ctx: &Context, world: &graph::World) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
 }
-pub fn access_infinite_climb_and_annuna_east_bridge_gate(
+pub fn access_invoke_activate(ctx: &Context, world: &graph::World) -> bool {
+    // $activate
+    helper__activate!(ctx, world)
+}
+pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Left
+    (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
+}
+pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Right
+    (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
+pub fn access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
+    (helper__block_clip_escape!(ctx, world) && !ctx.has(Item::Uhrum_Annuna_Corridor_Block))
+}
+pub fn access_invoke_boomerang(ctx: &Context, world: &graph::World) -> bool {
+    // $boomerang
+    helper__boomerang!(ctx, world)
+}
+pub fn access_invoke_boomerang2(ctx: &Context, world: &graph::World) -> bool {
+    // $boomerang2
+    helper__boomerang2!(ctx, world)
+}
+pub fn access_invoke_bs(ctx: &Context, world: &graph::World) -> bool {
+    // $bs
+    helper__bs!(ctx, world)
+}
+pub fn access_invoke_can_damage(ctx: &Context, world: &graph::World) -> bool {
+    // $can_damage
+    helper__can_damage!(ctx, world)
+}
+pub fn access_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+    // $can_deploy
+    helper__can_deploy!(ctx, world)
+}
+pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &graph::World) -> bool {
+    // $can_deploy and Drone_Hover
+    (helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
+}
+pub fn access_invoke_can_deploy_and_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $can_deploy and Slingshot_Hook
+    (helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $can_deploy and Slingshot_Hook and Drone_Hover
+    ((helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
+pub fn access_invoke_charge(ctx: &Context, world: &graph::World) -> bool {
+    // $charge
+    helper__charge!(ctx, world)
+}
+pub fn access_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+    // $climb
+    helper__climb!(ctx, world)
+}
+pub fn access_invoke_climb_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $climb and Annuna_East_Bridge_Gate
+    (helper__climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $climb and $can_deploy and Hover and Slingshot_Hook
+    (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world)) && ctx.has(Item::Hover))
+        && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_invoke_climb_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+    // $climb and $grab
+    (helper__climb!(ctx, world) && helper__grab!(ctx, world))
+}
+pub fn access_invoke_climb_and_invoke_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $climb and $grab and Anuman
+    ((helper__climb!(ctx, world) && helper__grab!(ctx, world)) && ctx.has(Item::Anuman))
+}
+pub fn access_invoke_climb_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $climb or $hook
+    (helper__climb!(ctx, world) || helper__hook!(ctx, world))
+}
+pub fn access_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+    // $grab
+    helper__grab!(ctx, world)
+}
+pub fn access_invoke_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Annuna_East_Bridge_Gate
+    (helper__grab!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_invoke_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Anuman
+    (helper__grab!(ctx, world) && ctx.has(Item::Anuman))
+}
+pub fn access_invoke_grab_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Giguna_Gateway_Block
+    (helper__grab!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
+}
+pub fn access_invoke_grab_and_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and $can_deploy
+    (helper__grab!(ctx, world) && helper__can_deploy!(ctx, world))
+}
+pub fn access_invoke_grab_and_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and $climb
+    (helper__grab!(ctx, world) && helper__climb!(ctx, world))
+}
+pub fn access_invoke_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Switch_40_12
+    (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
+}
+pub fn access_invoke_grab_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $grab and Underwater_Movement
+    (helper__grab!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $grab or Anuman
+    (helper__grab!(ctx, world) || ctx.has(Item::Anuman))
+}
+pub fn access_invoke_grab_or_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+    // $grab or $climb
+    (helper__grab!(ctx, world) || helper__climb!(ctx, world))
+}
+pub fn access_invoke_grab_or_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $grab or $climb or $hook
+    ((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
+}
+pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $grab or $hook
+    (helper__grab!(ctx, world) || helper__hook!(ctx, world))
+}
+pub fn access_invoke_grab_or_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $grab or Underwater_Movement
+    (helper__grab!(ctx, world) || ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $hook
+    helper__hook!(ctx, world)
+}
+pub fn access_invoke_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+    // $hook and Annuna_East_Bridge_Gate
+    (helper__hook!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
+    // $hook and Giguna_Gateway_Block
+    (helper__hook!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
+}
+pub fn access_invoke_hook_and_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+    // $hook and $hover
+    (helper__hook!(ctx, world) && helper__hover!(ctx, world))
+}
+pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and $hover and Underwater_Movement
+    ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
+        && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hook_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Left
+    (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
+}
+pub fn access_invoke_hook_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Right
+    (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
+pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $hook and Underwater_Movement
+    (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hook_or_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+    // $hook or $hover
+    (helper__hook!(ctx, world) || helper__hover!(ctx, world))
+}
+pub fn access_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+    // $hover
+    helper__hover!(ctx, world)
+}
+pub fn access_invoke_hover_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $hover and Anuman
+    (helper__hover!(ctx, world) && ctx.has(Item::Anuman))
+}
+pub fn access_invoke_hover_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $hover and $hook
+    (helper__hover!(ctx, world) && helper__hook!(ctx, world))
+}
+pub fn access_invoke_hover_and_invoke_hook_and_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hover and $hook and $mist2
+    ((helper__hover!(ctx, world) && helper__hook!(ctx, world)) && helper__mist2!(ctx, world))
+}
+pub fn access_invoke_hover_and_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
+    // $hover and Mist_Upgrade
+    (helper__hover!(ctx, world) && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $hover or $hook
+    (helper__hover!(ctx, world) || helper__hook!(ctx, world))
+}
+pub fn access_invoke_hover_or_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+    // $hover or $mist2
+    (helper__hover!(ctx, world) || helper__mist2!(ctx, world))
+}
+pub fn access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // $infinite_climb and Annuna_East_Bridge_Gate
     (helper__infinite_climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_infinite_climb_and_not_annuna_east_bridge_gate(
+pub fn access_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // $infinite_climb and not Annuna_East_Bridge_Gate
     (helper__infinite_climb!(ctx, world) && !ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_infinite_climb_and_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_infinite_climb_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // $infinite_climb and Slingshot_Hook
     (helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
 }
-pub fn access_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
+pub fn access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
     ((helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
         && !ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_invoke_melee(ctx: &Context, world: &graph::World) -> bool {
+    // $melee
+    helper__melee!(ctx, world)
+}
+pub fn access_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+    // $mist2
+    helper__mist2!(ctx, world)
+}
+pub fn access_invoke_mist2_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+    // $mist2 and ^mode == 'drone'
+    (helper__mist2!(ctx, world) && ctx.mode() == enums::Mode::Drone)
+}
+pub fn access_invoke_more_refills(ctx: &Context, world: &graph::World) -> bool {
+    // $more_refills
+    helper__more_refills!(ctx, world)
+}
+pub fn access_invoke_offset(ctx: &Context, world: &graph::World) -> bool {
+    // $offset
+    helper__offset!(ctx, world)
+}
+pub fn access_invoke_open(ctx: &Context, world: &graph::World) -> bool {
+    // $open
+    helper__open!(ctx, world)
+}
+pub fn access_invoke_open_and_invoke_range1(ctx: &Context, world: &graph::World) -> bool {
+    // $open and $range1
+    (helper__open!(ctx, world) && helper__range1!(ctx, world))
+}
+pub fn access_invoke_open_and_invoke_range2(ctx: &Context, world: &graph::World) -> bool {
+    // $open and $range2
+    (helper__open!(ctx, world) && helper__range2!(ctx, world))
+}
+pub fn access_invoke_open_and_invoke_range3(ctx: &Context, world: &graph::World) -> bool {
+    // $open and $range3
+    (helper__open!(ctx, world) && helper__range3!(ctx, world))
+}
+pub fn access_invoke_overheat(ctx: &Context, world: &graph::World) -> bool {
+    // $overheat
+    helper__overheat!(ctx, world)
+}
+pub fn access_invoke_overheat_and_invoke_can_damage(ctx: &Context, world: &graph::World) -> bool {
+    // $overheat and $can_damage
+    (helper__overheat!(ctx, world) && helper__can_damage!(ctx, world))
+}
+pub fn access_invoke_platform_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $platform and $hook and $hover
+    ((helper__platform!(ctx, world) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
+}
+pub fn access_invoke_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
+    // $remote_boomerang
+    helper__remote_boomerang!(ctx, world)
+}
+pub fn access_invoke_shockwave(ctx: &Context, world: &graph::World) -> bool {
+    // $shockwave
+    helper__shockwave!(ctx, world)
+}
+pub fn access_invoke_shockwave_and_not_defeat_mus_a_m20(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $shockwave and not Defeat_MUS_A_M20
+    (helper__shockwave!(ctx, world) && !ctx.has(Item::Defeat_MUS_A_M20))
+}
+pub fn access_invoke_slow(ctx: &Context, world: &graph::World) -> bool {
+    // $slow
+    helper__slow!(ctx, world)
+}
+pub fn access_invoke_spin(ctx: &Context, world: &graph::World) -> bool {
+    // $spin
+    helper__spin!(ctx, world)
+}
+pub fn access_invoke_sync(ctx: &Context, world: &graph::World) -> bool {
+    // $sync
+    helper__sync!(ctx, world)
+}
+pub fn access_invoke_sync_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // $sync and $hook
+    (helper__sync!(ctx, world) && helper__hook!(ctx, world))
 }
 pub fn access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
@@ -1936,10 +2045,6 @@ pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &graph::Worl
     // ^map__uhrum__west_entrance__save
     ctx.map__uhrum__west_entrance__save()
 }
-pub fn access_melee(ctx: &Context, world: &graph::World) -> bool {
-    // $melee
-    helper__melee!(ctx, world)
-}
 pub fn access_melee_damage(ctx: &Context, world: &graph::World) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
@@ -1955,14 +2060,6 @@ pub fn access_melee_speed(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_melee_speed_2(ctx: &Context, world: &graph::World) -> bool {
     // Melee_Speed_2
     ctx.has(Item::Melee_Speed_2)
-}
-pub fn access_mist2(ctx: &Context, world: &graph::World) -> bool {
-    // $mist2
-    helper__mist2!(ctx, world)
-}
-pub fn access_mist2_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
-    // $mist2 and ^mode == 'drone'
-    (helper__mist2!(ctx, world) && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
     // Mist_Upgrade
@@ -1997,7 +2094,7 @@ pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &gra
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
 }
-pub fn access_mode_eq_drone_and_mist2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone' and $mist2
     (ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
 }
@@ -2005,7 +2102,7 @@ pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &graph::World
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
 }
-pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
+pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -2022,9 +2119,9 @@ pub fn access_mode_ne_drone(ctx: &Context, world: &graph::World) -> bool {
     // ^mode != 'drone'
     ctx.mode() != enums::Mode::Drone
 }
-pub fn access_more_refills(ctx: &Context, world: &graph::World) -> bool {
-    // $more_refills
-    helper__more_refills!(ctx, world)
+pub fn access_mode_ne_drone_and_ice_axe(ctx: &Context, world: &graph::World) -> bool {
+    // ^mode != 'drone' and Ice_Axe
+    (ctx.mode() != enums::Mode::Drone && ctx.has(Item::Ice_Axe))
 }
 pub fn access_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
     // Nanite_Mist
@@ -2066,19 +2163,19 @@ pub fn access_not_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
     // not Hammond_Auth
     !ctx.has(Item::Hammond_Auth)
 }
+pub fn access_not_irikar_royal_storage_wall_and_invoke_shockwave(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not Irikar_Royal_Storage_Wall and $shockwave
+    (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx, world))
+}
 pub fn access_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // not Irikar_Royal_Storage_Wall and Mist_Upgrade
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && ctx.has(Item::Mist_Upgrade))
-}
-pub fn access_not_irikar_royal_storage_wall_and_shockwave(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // not Irikar_Royal_Storage_Wall and $shockwave
-    (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx, world))
 }
 pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &graph::World) -> bool {
     // NOT Separation or Defeat_Indra
@@ -2099,19 +2196,19 @@ pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(
     }) && ctx.has(Item::Anuman))
         && ctx.mode() != enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_can_deploy(ctx: &Context, world: &graph::World) -> bool {
-    // NOT WITHIN `Menu` and $can_deploy
-    ((match get_region(ctx.position()) {
-        RegionId::Menu => false,
-        _ => true,
-    }) && helper__can_deploy!(ctx, world))
-}
 pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::World) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     ((match get_region(ctx.position()) {
         RegionId::Menu => false,
         _ => true,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
+}
+pub fn access_not_within_menu_and_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+    // NOT WITHIN `Menu` and $can_deploy
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && helper__can_deploy!(ctx, world))
 }
 pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
@@ -2125,7 +2222,7 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
         && ctx.has(Item::Anuman))
         && ctx.mode() == enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_realm_ne_breach_and_can_recall(
+pub fn access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
@@ -2135,38 +2232,6 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_can_recall(
         _ => true,
     }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && helper__can_recall!(ctx, world))
-}
-pub fn access_offset(ctx: &Context, world: &graph::World) -> bool {
-    // $offset
-    helper__offset!(ctx, world)
-}
-pub fn access_open(ctx: &Context, world: &graph::World) -> bool {
-    // $open
-    helper__open!(ctx, world)
-}
-pub fn access_open_and_range1(ctx: &Context, world: &graph::World) -> bool {
-    // $open and $range1
-    (helper__open!(ctx, world) && helper__range1!(ctx, world))
-}
-pub fn access_open_and_range2(ctx: &Context, world: &graph::World) -> bool {
-    // $open and $range2
-    (helper__open!(ctx, world) && helper__range2!(ctx, world))
-}
-pub fn access_open_and_range3(ctx: &Context, world: &graph::World) -> bool {
-    // $open and $range3
-    (helper__open!(ctx, world) && helper__range3!(ctx, world))
-}
-pub fn access_overheat(ctx: &Context, world: &graph::World) -> bool {
-    // $overheat
-    helper__overheat!(ctx, world)
-}
-pub fn access_overheat_and_can_damage(ctx: &Context, world: &graph::World) -> bool {
-    // $overheat and $can_damage
-    (helper__overheat!(ctx, world) && helper__can_damage!(ctx, world))
-}
-pub fn access_platform_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
-    // $platform and $hook and $hover
-    ((helper__platform!(ctx, world) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
 }
 pub fn access_portal_eq_position(ctx: &Context, world: &graph::World) -> bool {
     // ^portal == ^position
@@ -2188,17 +2253,13 @@ pub fn access_ranged_speed_2(ctx: &Context, world: &graph::World) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
 }
-pub fn access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
+pub fn access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // ^realm == 'breach' and Exit_Breach and ^flipside != $default
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
         && data::flipside(ctx.position()) != Default::default())
-}
-pub fn access_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
-    // $remote_boomerang
-    helper__remote_boomerang!(ctx, world)
 }
 pub fn access_remote_drone(ctx: &Context, world: &graph::World) -> bool {
     // Remote_Drone
@@ -2208,32 +2269,20 @@ pub fn access_separation(ctx: &Context, world: &graph::World) -> bool {
     // Separation
     ctx.has(Item::Separation)
 }
-pub fn access_separation_and_not_defeat_indra_and_mist2(
+pub fn access_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
     // Separation and NOT Defeat_Indra and $mist2
     ((ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) && helper__mist2!(ctx, world))
 }
-pub fn access_shockwave(ctx: &Context, world: &graph::World) -> bool {
-    // $shockwave
-    helper__shockwave!(ctx, world)
-}
-pub fn access_shockwave_and_not_defeat_mus_a_m20(ctx: &Context, world: &graph::World) -> bool {
-    // $shockwave and not Defeat_MUS_A_M20
-    (helper__shockwave!(ctx, world) && !ctx.has(Item::Defeat_MUS_A_M20))
-}
-pub fn access_slow(ctx: &Context, world: &graph::World) -> bool {
-    // $slow
-    helper__slow!(ctx, world)
+pub fn access_siuna_storage_wall(ctx: &Context, world: &graph::World) -> bool {
+    // Siuna_Storage_Wall
+    ctx.has(Item::Siuna_Storage_Wall)
 }
 pub fn access_sniper_valley_rock_1(ctx: &Context, world: &graph::World) -> bool {
     // Sniper_Valley_Rock_1
     ctx.has(Item::Sniper_Valley_Rock_1)
-}
-pub fn access_spin(ctx: &Context, world: &graph::World) -> bool {
-    // $spin
-    helper__spin!(ctx, world)
 }
 pub fn access_station_power(ctx: &Context, world: &graph::World) -> bool {
     // Station_Power
@@ -2247,14 +2296,6 @@ pub fn access_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
 }
-pub fn access_sync(ctx: &Context, world: &graph::World) -> bool {
-    // $sync
-    helper__sync!(ctx, world)
-}
-pub fn access_sync_and_hook(ctx: &Context, world: &graph::World) -> bool {
-    // $sync and $hook
-    (helper__sync!(ctx, world) && helper__hook!(ctx, world))
-}
 pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &graph::World) -> bool {
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
@@ -2267,11 +2308,11 @@ pub fn access_uhrum_waterfalls_block(ctx: &Context, world: &graph::World) -> boo
     // Uhrum_Waterfalls_Block
     ctx.has(Item::Uhrum_Waterfalls_Block)
 }
-pub fn access_uhrum_waterfalls_block_and_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfalls_block_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
     // Uhrum_Waterfalls_Block and $grab
     (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__grab!(ctx, world))
 }
-pub fn access_uhrum_waterfalls_block_and_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfalls_block_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // Uhrum_Waterfalls_Block and $hook
     (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__hook!(ctx, world))
 }
@@ -2279,7 +2320,10 @@ pub fn access_uhrum_west_entrance_gate(ctx: &Context, world: &graph::World) -> b
     // Uhrum_West_Entrance_Gate
     ctx.has(Item::Uhrum_West_Entrance_Gate)
 }
-pub fn access_uhrum_west_entrance_gate_and_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_west_entrance_gate_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
     (ctx.has(Item::Uhrum_West_Entrance_Gate) && helper__hover!(ctx, world))
 }
@@ -2295,20 +2339,26 @@ pub fn access_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
     // Underwater_Movement
     ctx.has(Item::Underwater_Movement)
 }
-pub fn access_underwater_movement_and___grab_or_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and___invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // Underwater_Movement and ($grab or $climb)
     (ctx.has(Item::Underwater_Movement)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
-pub fn access_underwater_movement_and_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
     // Underwater_Movement and $grab
     (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
 }
-pub fn access_underwater_movement_and_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
 }
-pub fn access_underwater_movement_and_hook_and_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
     // Underwater_Movement and $hook and $hover
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && helper__hover!(ctx, world))
@@ -2358,72 +2408,6 @@ pub fn action_annuna__west_climb__switch_ledge__open_door__do(
 ) {
     // ^_door_opened = true
     ctx.set_annuna__west_climb__ctx__door_opened(true);
-}
-pub fn action_clear_breach_save(ctx: &mut Context, world: &graph::World) {
-    // $clear_breach_save
-    helper__clear_breach_save!(ctx, world);
-}
-pub fn action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-    ctx.collect(Item::Irikar_Royal_Storage_Wall, world);
-    ctx.collect(Item::Flask, world);
-    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
-}
-pub fn action_deploy_drone(ctx: &mut Context, world: &graph::World) {
-    // $deploy_drone
-    helper__deploy_drone!(ctx, world);
-}
-pub fn action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Center_Corridor);
-}
-pub fn action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Tower_Base_East);
-}
-pub fn action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree);
-}
-pub fn action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Ebih_West__Alcove_Entrance);
-}
-pub fn action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari);
-}
-pub fn action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7);
-}
-pub fn action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path);
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &mut Context,
@@ -2789,14 +2773,145 @@ pub fn action_glacier__vertical_room__upper_switch__open_gate__do(
     // ^_upper_gatestone = true
     ctx.set_glacier__vertical_room__ctx__upper_gatestone(true);
 }
-pub fn action_indra_set_default(ctx: &mut Context, world: &graph::World) {
+pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &graph::World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
-pub fn action_indra_set_default_refill_energy(ctx: &mut Context, world: &graph::World) {
+pub fn action_indra_set_invoke_default_invoke_refill_energy(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
     // ^indra = $default; $refill_energy
     ctx.set_indra(Default::default());
     helper__refill_energy!(ctx, world);
+}
+pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &graph::World) {
+    // $clear_breach_save
+    helper__clear_breach_save!(ctx, world);
+}
+pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    ctx.collect(Item::Irikar_Royal_Storage_Wall, world);
+    ctx.collect(Item::Flask, world);
+    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
+}
+pub fn action_invoke_deploy_drone(ctx: &mut Context, world: &graph::World) {
+    // $deploy_drone
+    helper__deploy_drone!(ctx, world);
+}
+pub fn action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Center_Corridor);
+}
+pub fn action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Tower_Base_East);
+}
+pub fn action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree);
+}
+pub fn action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Ebih_West__Alcove_Entrance);
+}
+pub fn action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari);
+}
+pub fn action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7);
+}
+pub fn action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path);
+}
+pub fn action_invoke_post_portal_save_update(ctx: &mut Context, world: &graph::World) {
+    // $post_portal_save_update
+    helper__post_portal_save_update!(ctx, world);
+}
+pub fn action_invoke_refill_energy(ctx: &mut Context, world: &graph::World) {
+    // $refill_energy
+    helper__refill_energy!(ctx, world);
+}
+pub fn action_invoke_reset_old_area__newpos(
+    ctx: &mut Context,
+    world: &graph::World,
+    newpos: SpotId,
+) {
+    // $reset_old_area(^newpos)
+    helper__reset_old_area!(ctx, world, newpos);
+}
+pub fn action_invoke_save(ctx: &mut Context, world: &graph::World) {
+    // $save
+    helper__save!(ctx, world);
+}
+pub fn action_invoke_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
+    // $save_last
+    helper__save_last!(ctx, world);
+}
+pub fn action_invoke_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+    ctx.skip(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
+    ctx.add_item(Item::Amagi_Dragon_Eye_Passage);
+}
+pub fn action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
+    ctx.add_item(Item::Amagi_Stronghold_Wall_1);
+    ctx.add_item(Item::Amagi_Stronghold_Boulder_1);
+}
+pub fn action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
+    ctx.add_item(Item::Amagi_Stronghold_Wall_2);
+    ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
+}
+pub fn action_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Right);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right);
+    ctx.add_item(Item::Ebih_Waterfall_Block_Right);
+    ctx.add_item(Item::Ebih_Waterfall_Block_Left);
 }
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
@@ -2805,7 +2920,7 @@ pub fn action_irikar__basement_portal__moving_platform_start__activate_platform_
     // ^_platform_moved = true
     ctx.set_irikar__basement_portal__ctx__platform_moved(true);
 }
-pub fn action_last_set_default(ctx: &mut Context, world: &graph::World) {
+pub fn action_last_set_invoke_default(ctx: &mut Context, world: &graph::World) {
     // ^last = $default
     ctx.set_last(Default::default());
 }
@@ -2831,6 +2946,20 @@ pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::Wo
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
 }
+pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^portal = `Glacier Breach > Angry Lions > Second Platform`
+    ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Second_Platform);
+}
+pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^portal = `Glacier Breach > Angry Lions > Top Platform`
+    ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Top_Platform);
+}
 pub fn action_portal_set_glacier_gt_hammonds_end_gt_corner(
     ctx: &mut Context,
     world: &graph::World,
@@ -2852,73 +2981,37 @@ pub fn action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
     ctx.set_portal(SpotId::Glacier__Hammonds_End__Lower_Pedestal_West);
 }
-pub fn action_post_portal_save_update(ctx: &mut Context, world: &graph::World) {
-    // $post_portal_save_update
-    helper__post_portal_save_update!(ctx, world);
-}
-pub fn action_refill_energy(ctx: &mut Context, world: &graph::World) {
-    // $refill_energy
-    helper__refill_energy!(ctx, world);
-}
 pub fn action_refills_incr_1(ctx: &mut Context, world: &graph::World) {
     // ^refills += 1
     ctx.refills += 1;
-}
-pub fn action_reset_old_area__newpos(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
-    // $reset_old_area(^newpos)
-    helper__reset_old_area!(ctx, world, newpos);
-}
-pub fn action_save(ctx: &mut Context, world: &graph::World) {
-    // $save
-    helper__save!(ctx, world);
-}
-pub fn action_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
-    // $save_last
-    helper__save_last!(ctx, world);
 }
 pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &graph::World) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
-pub fn action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(
-    ctx: &mut Context,
+pub fn explain___escape_invoke_objective(
+    ctx: &Context,
     world: &graph::World,
-) {
-    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
-    ctx.skip(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
-    ctx.add_item(Item::Amagi_Dragon_Eye_Passage);
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [Escape, $objective]
+    {
+        let mut refs = Vec::new();
+        let mut h = {
+            let h = ctx.has(Item::Escape);
+            edict.insert("Escape", format!("{}", h));
+            (h, vec!["Escape"])
+        };
+        refs.append(&mut h.1);
+        if !h.0 {
+            return (false, refs);
+        };
+        let mut h = rexplain__objective!(ctx, world, edict);
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
 }
-pub fn action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
-    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
-    ctx.add_item(Item::Amagi_Stronghold_Wall_1);
-    ctx.add_item(Item::Amagi_Stronghold_Boulder_1);
-}
-pub fn action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
-    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
-    ctx.add_item(Item::Amagi_Stronghold_Wall_2);
-    ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
-}
-pub fn action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
-    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Right);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right);
-    ctx.add_item(Item::Ebih_Waterfall_Block_Right);
-    ctx.add_item(Item::Ebih_Waterfall_Block_Left);
-}
-pub fn explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
+pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -2965,29 +3058,7 @@ pub fn explain___all_urns_all_weapons_other_items_all_notes_all_health_all_flask
         (h.0, refs)
     }
 }
-pub fn explain___escape_objective(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // [Escape, $objective]
-    {
-        let mut refs = Vec::new();
-        let mut h = {
-            let h = ctx.has(Item::Escape);
-            edict.insert("Escape", format!("{}", h));
-            (h, vec!["Escape"])
-        };
-        refs.append(&mut h.1);
-        if !h.0 {
-            return (false, refs);
-        };
-        let mut h = rexplain__objective!(ctx, world, edict);
-        refs.append(&mut h.1);
-        (h.0, refs)
-    }
-}
-pub fn explain___objective(
+pub fn explain___invoke_objective(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3043,20 +3114,7 @@ pub fn explain___remote_drone_flask__6(
         (h.0, refs)
     }
 }
-pub fn explain_activate(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $activate
-    {
-        let (res, mut refs) = hexplain__activate!(ctx, world, edict);
-        edict.insert("$activate", format!("{:?}", res));
-        refs.push("$activate");
-        (res, refs)
-    }
-}
-pub fn explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3101,7 +3159,7 @@ pub fn explain_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_ma
         }
     }
 }
-pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3146,7 +3204,7 @@ pub fn explain_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map
         }
     }
 }
-pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
+pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3223,7 +3281,7 @@ pub fn explain_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_ma
         }
     }
 }
-pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3456,7 +3514,7 @@ pub fn explain_amagi_stronghold_boulder_1(
         (h, vec!["Amagi_Stronghold_Boulder_1"])
     }
 }
-pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
+pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3521,7 +3579,7 @@ pub fn explain_amagi_stronghold_boulder_2(
         (h, vec!["Amagi_Stronghold_Boulder_2"])
     }
 }
-pub fn explain_amagi_stronghold_boulder_2_and_grab(
+pub fn explain_amagi_stronghold_boulder_2_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -3984,7 +4042,7 @@ pub fn explain_anuman(
         (h, vec!["Anuman"])
     }
 }
-pub fn explain_anuman_and_grab(
+pub fn explain_anuman_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -4072,102 +4130,11 @@ pub fn explain_apocalypse_bomb(
         (h, vec!["Apocalypse_Bomb"])
     }
 }
-pub fn explain_block_clip_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $block_clip and not Ebih_Waterfall_Block_Left
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
-            edict.insert("$block_clip", format!("{:?}", res));
-            refs.push("$block_clip");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
-                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
-                (!h, vec!["Ebih_Waterfall_Block_Left"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_block_clip_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $block_clip and not Ebih_Waterfall_Block_Right
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
-            edict.insert("$block_clip", format!("{:?}", res));
-            refs.push("$block_clip");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
-                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
-                (!h, vec!["Ebih_Waterfall_Block_Right"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_block_clip_escape_and_not_uhrum_annuna_corridor_block(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__block_clip_escape!(ctx, world, edict);
-            edict.insert("$block_clip_escape", format!("{:?}", res));
-            refs.push("$block_clip_escape");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
-                edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
-                (!h, vec!["Uhrum_Annuna_Corridor_Block"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_boomerang(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $boomerang
-    {
-        let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
-        edict.insert("$boomerang", format!("{:?}", res));
-        refs.push("$boomerang");
-        (res, refs)
-    }
-}
-pub fn explain_boomerang1(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
     // Boomerang
     {
         let h = ctx.has(Item::Boomerang);
@@ -4175,52 +4142,16 @@ pub fn explain_boomerang1(
         (h, vec!["Boomerang"])
     }
 }
-pub fn explain_boomerang2(
+pub fn explain_breach_attractor(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Boomerang
+    // Breach_Attractor
     {
-        let h = ctx.has(Item::Boomerang);
-        edict.insert("Boomerang", format!("{}", h));
-        (h, vec!["Boomerang"])
-    }
-}
-pub fn explain_boomerang3(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Boomerang
-    {
-        let h = ctx.has(Item::Boomerang);
-        edict.insert("Boomerang", format!("{}", h));
-        (h, vec!["Boomerang"])
-    }
-}
-pub fn explain_boomerang4(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Boomerang
-    {
-        let h = ctx.has(Item::Boomerang);
-        edict.insert("Boomerang", format!("{}", h));
-        (h, vec!["Boomerang"])
-    }
-}
-pub fn explain_boomerang5(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Boomerang
-    {
-        let h = ctx.has(Item::Boomerang);
-        edict.insert("Boomerang", format!("{}", h));
-        (h, vec!["Boomerang"])
+        let h = ctx.has(Item::Breach_Attractor);
+        edict.insert("Breach_Attractor", format!("{}", h));
+        (h, vec!["Breach_Attractor"])
     }
 }
 pub fn explain_breach_attractor_and_anuman(
@@ -4290,335 +4221,6 @@ pub fn explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_fil
                     (r, vec!["^indra"])
                 };
                 (r.0 == SpotId::Annuna__Filter_Teleporter__Shaft_Top, r.1)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_bs(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $bs
-    {
-        let (res, mut refs) = hexplain__bs!(ctx, world, edict);
-        edict.insert("$bs", format!("{:?}", res));
-        refs.push("$bs");
-        (res, refs)
-    }
-}
-pub fn explain_can_damage(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_damage
-    {
-        let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
-        edict.insert("$can_damage", format!("{:?}", res));
-        refs.push("$can_damage");
-        (res, refs)
-    }
-}
-pub fn explain_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_deploy
-    {
-        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-        edict.insert("$can_deploy", format!("{:?}", res));
-        refs.push("$can_deploy");
-        (res, refs)
-    }
-}
-pub fn explain_can_deploy_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_deploy and Drone_Hover
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-            edict.insert("$can_deploy", format!("{:?}", res));
-            refs.push("$can_deploy");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Drone_Hover);
-                edict.insert("Drone_Hover", format!("{}", h));
-                (h, vec!["Drone_Hover"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_can_deploy_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_deploy and Slingshot_Hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-            edict.insert("$can_deploy", format!("{:?}", res));
-            refs.push("$can_deploy");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Slingshot_Hook);
-                edict.insert("Slingshot_Hook", format!("{}", h));
-                (h, vec!["Slingshot_Hook"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_can_deploy_and_slingshot_hook_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_deploy and Slingshot_Hook and Drone_Hover
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-                edict.insert("$can_deploy", format!("{:?}", res));
-                refs.push("$can_deploy");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let h = ctx.has(Item::Slingshot_Hook);
-                    edict.insert("Slingshot_Hook", format!("{}", h));
-                    (h, vec!["Slingshot_Hook"])
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Drone_Hover);
-                edict.insert("Drone_Hover", format!("{}", h));
-                (h, vec!["Drone_Hover"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_charge(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $charge
-    {
-        let (res, mut refs) = hexplain__charge!(ctx, world, edict);
-        edict.insert("$charge", format!("{:?}", res));
-        refs.push("$charge");
-        (res, refs)
-    }
-}
-pub fn explain_climb(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb
-    {
-        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-        edict.insert("$climb", format!("{:?}", res));
-        refs.push("$climb");
-        (res, refs)
-    }
-}
-pub fn explain_climb_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb and Annuna_East_Bridge_Gate
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-            edict.insert("$climb", format!("{:?}", res));
-            refs.push("$climb");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
-                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
-                (h, vec!["Annuna_East_Bridge_Gate"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_climb_and_can_deploy_and_hover_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
-    {
-        let mut left = {
-            let mut left = {
-                let mut left = {
-                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-                    edict.insert("$climb", format!("{:?}", res));
-                    refs.push("$climb");
-                    (res, refs)
-                };
-                if !left.0 {
-                    left
-                } else {
-                    let mut right = {
-                        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-                        edict.insert("$can_deploy", format!("{:?}", res));
-                        refs.push("$can_deploy");
-                        (res, refs)
-                    };
-                    left.1.append(&mut right.1);
-                    (right.0, left.1)
-                }
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let h = ctx.has(Item::Hover);
-                    edict.insert("Hover", format!("{}", h));
-                    (h, vec!["Hover"])
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Slingshot_Hook);
-                edict.insert("Slingshot_Hook", format!("{}", h));
-                (h, vec!["Slingshot_Hook"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_climb_and_grab(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb and $grab
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-            edict.insert("$climb", format!("{:?}", res));
-            refs.push("$climb");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-                edict.insert("$grab", format!("{:?}", res));
-                refs.push("$grab");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_climb_and_grab_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb and $grab and Anuman
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-                edict.insert("$climb", format!("{:?}", res));
-                refs.push("$climb");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-                    edict.insert("$grab", format!("{:?}", res));
-                    refs.push("$grab");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_climb_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $climb or $hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-            edict.insert("$climb", format!("{:?}", res));
-            refs.push("$climb");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -5561,7 +5163,7 @@ pub fn explain_ebih_interchange_gate(
         (h, vec!["Ebih_Interchange_Gate"])
     }
 }
-pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
+pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -5600,7 +5202,7 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
         }
     }
 }
-pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
+pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -5639,7 +5241,7 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
         }
     }
 }
-pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
+pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -5678,7 +5280,7 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
         }
     }
 }
-pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
+pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -5763,6 +5365,58 @@ pub fn explain_fast_travel(
         let h = ctx.has(Item::Fast_Travel);
         edict.insert("Fast_Travel", format!("{}", h));
         (h, vec!["Fast_Travel"])
+    }
+}
+pub fn explain_fast_travel_and_invoke_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Fast_Travel and $boomerang
+    {
+        let mut left = {
+            let h = ctx.has(Item::Fast_Travel);
+            edict.insert("Fast_Travel", format!("{}", h));
+            (h, vec!["Fast_Travel"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+                edict.insert("$boomerang", format!("{:?}", res));
+                refs.push("$boomerang");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_fast_travel_and_invoke_boomerang2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Fast_Travel and $boomerang2
+    {
+        let mut left = {
+            let h = ctx.has(Item::Fast_Travel);
+            edict.insert("Fast_Travel", format!("{}", h));
+            (h, vec!["Fast_Travel"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__boomerang2!(ctx, world, edict);
+                edict.insert("$boomerang2", format!("{:?}", res));
+                refs.push("$boomerang2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_giguna__carnelian__door__ex__switch_1__req(
@@ -7804,7 +7458,7 @@ pub fn explain_giguna_dual_path_switch(
         (h, vec!["Giguna_Dual_Path_Switch"])
     }
 }
-pub fn explain_giguna_dual_path_switch_and___grab_or_climb(
+pub fn explain_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -7844,7 +7498,7 @@ pub fn explain_giguna_dual_path_switch_and___grab_or_climb(
         }
     }
 }
-pub fn explain_giguna_dual_path_switch_and_climb(
+pub fn explain_giguna_dual_path_switch_and_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -7870,7 +7524,7 @@ pub fn explain_giguna_dual_path_switch_and_climb(
         }
     }
 }
-pub fn explain_giguna_dual_path_switch_and_hook(
+pub fn explain_giguna_dual_path_switch_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -8255,350 +7909,6 @@ pub fn explain_glacier_sea_burial_rock(
         (h, vec!["Glacier_Sea_Burial_Rock"])
     }
 }
-pub fn explain_grab(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab
-    {
-        let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-        edict.insert("$grab", format!("{:?}", res));
-        refs.push("$grab");
-        (res, refs)
-    }
-}
-pub fn explain_grab_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and Annuna_East_Bridge_Gate
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
-                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
-                (h, vec!["Annuna_East_Bridge_Gate"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and Anuman
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and $can_deploy
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-                edict.insert("$can_deploy", format!("{:?}", res));
-                refs.push("$can_deploy");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_climb(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and $climb
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-                edict.insert("$climb", format!("{:?}", res));
-                refs.push("$climb");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_giguna_gateway_block(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and Giguna_Gateway_Block
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Giguna_Gateway_Block);
-                edict.insert("Giguna_Gateway_Block", format!("{}", h));
-                (h, vec!["Giguna_Gateway_Block"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_switch_40_12(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and Switch_40_12
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Switch_40_12);
-                edict.insert("Switch_40_12", format!("{}", h));
-                (h, vec!["Switch_40_12"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and Underwater_Movement
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Underwater_Movement);
-                edict.insert("Underwater_Movement", format!("{}", h));
-                (h, vec!["Underwater_Movement"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_or_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab or Anuman
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_or_climb(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab or $climb
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-                edict.insert("$climb", format!("{:?}", res));
-                refs.push("$climb");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_or_climb_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab or $climb or $hook
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-                edict.insert("$grab", format!("{:?}", res));
-                refs.push("$grab");
-                (res, refs)
-            };
-            if left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
-                    edict.insert("$climb", format!("{:?}", res));
-                    refs.push("$climb");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab or $hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_grab_or_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab or Underwater_Movement
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Underwater_Movement);
-                edict.insert("Underwater_Movement", format!("{}", h));
-                (h, vec!["Underwater_Movement"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_hammond_auth(
     ctx: &Context,
     world: &graph::World,
@@ -8657,430 +7967,6 @@ pub fn explain_health_upgrade_4(
         let h = ctx.has(Item::Health_Upgrade_4);
         edict.insert("Health_Upgrade_4", format!("{}", h));
         (h, vec!["Health_Upgrade_4"])
-    }
-}
-pub fn explain_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook
-    {
-        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-        edict.insert("$hook", format!("{:?}", res));
-        refs.push("$hook");
-        (res, refs)
-    }
-}
-pub fn explain_hook_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and Annuna_East_Bridge_Gate
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
-                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
-                (h, vec!["Annuna_East_Bridge_Gate"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_giguna_gateway_block(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and Giguna_Gateway_Block
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Giguna_Gateway_Block);
-                edict.insert("Giguna_Gateway_Block", format!("{}", h));
-                (h, vec!["Giguna_Gateway_Block"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and $hover
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_hover_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and $hover and Underwater_Movement
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                    edict.insert("$hover", format!("{:?}", res));
-                    refs.push("$hover");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Underwater_Movement);
-                edict.insert("Underwater_Movement", format!("{}", h));
-                (h, vec!["Underwater_Movement"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and not Ebih_Waterfall_Block_Left
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
-                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
-                (!h, vec!["Ebih_Waterfall_Block_Left"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and not Ebih_Waterfall_Block_Right
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
-                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
-                (!h, vec!["Ebih_Waterfall_Block_Right"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and Underwater_Movement
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Underwater_Movement);
-                edict.insert("Underwater_Movement", format!("{}", h));
-                (h, vec!["Underwater_Movement"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hook_or_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook or $hover
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover
-    {
-        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-        edict.insert("$hover", format!("{:?}", res));
-        refs.push("$hover");
-        (res, refs)
-    }
-}
-pub fn explain_hover_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover and Anuman
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover and $hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover_and_hook_and_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover and $hook and $mist2
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                    edict.insert("$hook", format!("{:?}", res));
-                    refs.push("$hook");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover_and_mist_upgrade(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover and Mist_Upgrade
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Mist_Upgrade);
-                edict.insert("Mist_Upgrade", format!("{}", h));
-                (h, vec!["Mist_Upgrade"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover or $hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_hover_or_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover or $mist2
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_infect(
@@ -9205,7 +8091,1221 @@ pub fn explain_infection_speed(
         (h, vec!["Infection_Speed"])
     }
 }
-pub fn explain_infinite_climb_and_annuna_east_bridge_gate(
+pub fn explain_invoke_activate(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $activate
+    {
+        let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+        edict.insert("$activate", format!("{:?}", res));
+        refs.push("$activate");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $block_clip and not Ebih_Waterfall_Block_Left
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
+            edict.insert("$block_clip", format!("{:?}", res));
+            refs.push("$block_clip");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
+                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Left"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $block_clip and not Ebih_Waterfall_Block_Right
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
+            edict.insert("$block_clip", format!("{:?}", res));
+            refs.push("$block_clip");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
+                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Right"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__block_clip_escape!(ctx, world, edict);
+            edict.insert("$block_clip_escape", format!("{:?}", res));
+            refs.push("$block_clip_escape");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
+                edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
+                (!h, vec!["Uhrum_Annuna_Corridor_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $boomerang
+    {
+        let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+        edict.insert("$boomerang", format!("{:?}", res));
+        refs.push("$boomerang");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_boomerang2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $boomerang2
+    {
+        let (res, mut refs) = hexplain__boomerang2!(ctx, world, edict);
+        edict.insert("$boomerang2", format!("{:?}", res));
+        refs.push("$boomerang2");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_bs(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $bs
+    {
+        let (res, mut refs) = hexplain__bs!(ctx, world, edict);
+        edict.insert("$bs", format!("{:?}", res));
+        refs.push("$bs");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_can_damage(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_damage
+    {
+        let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
+        edict.insert("$can_damage", format!("{:?}", res));
+        refs.push("$can_damage");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy
+    {
+        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+        edict.insert("$can_deploy", format!("{:?}", res));
+        refs.push("$can_deploy");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_can_deploy_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and Drone_Hover
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+            edict.insert("$can_deploy", format!("{:?}", res));
+            refs.push("$can_deploy");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_can_deploy_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and Slingshot_Hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+            edict.insert("$can_deploy", format!("{:?}", res));
+            refs.push("$can_deploy");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_charge(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $charge
+    {
+        let (res, mut refs) = hexplain__charge!(ctx, world, edict);
+        edict.insert("$charge", format!("{:?}", res));
+        refs.push("$charge");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb
+    {
+        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+        edict.insert("$climb", format!("{:?}", res));
+        refs.push("$climb");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_climb_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb and Annuna_East_Bridge_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb and $can_deploy and Hover and Slingshot_Hook
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                        edict.insert("$can_deploy", format!("{:?}", res));
+                        refs.push("$can_deploy");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Hover);
+                    edict.insert("Hover", format!("{}", h));
+                    (h, vec!["Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_climb_and_invoke_grab(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb and $grab
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_climb_and_invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb and $grab and Anuman
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb or $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab
+    {
+        let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+        edict.insert("$grab", format!("{:?}", res));
+        refs.push("$grab");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_grab_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Annuna_East_Bridge_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Anuman
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_giguna_gateway_block(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Giguna_Gateway_Block
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Gateway_Block);
+                edict.insert("Giguna_Gateway_Block", format!("{}", h));
+                (h, vec!["Giguna_Gateway_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and $can_deploy
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and $climb
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_switch_40_12(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Switch_40_12
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Switch_40_12);
+                edict.insert("Switch_40_12", format!("{}", h));
+                (h, vec!["Switch_40_12"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or Anuman
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $climb
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $climb or $hook
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook
+    {
+        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+        edict.insert("$hook", format!("{:?}", res));
+        refs.push("$hook");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_hook_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Annuna_East_Bridge_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_giguna_gateway_block(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Giguna_Gateway_Block
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Gateway_Block);
+                edict.insert("Giguna_Gateway_Block", format!("{}", h));
+                (h, vec!["Giguna_Gateway_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and Underwater_Movement
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and not Ebih_Waterfall_Block_Left
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Left);
+                edict.insert("Ebih_Waterfall_Block_Left", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Left"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and not Ebih_Waterfall_Block_Right
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Waterfall_Block_Right);
+                edict.insert("Ebih_Waterfall_Block_Right", format!("{}", h));
+                (!h, vec!["Ebih_Waterfall_Block_Right"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_or_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook or $hover
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover
+    {
+        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+        edict.insert("$hover", format!("{:?}", res));
+        refs.push("$hover");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_hover_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Anuman
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_invoke_hook_and_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and $hook and $mist2
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_mist_upgrade(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Mist_Upgrade
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover or $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_or_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover or $mist2
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -9231,7 +9331,7 @@ pub fn explain_infinite_climb_and_annuna_east_bridge_gate(
         }
     }
 }
-pub fn explain_infinite_climb_and_not_annuna_east_bridge_gate(
+pub fn explain_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -9257,7 +9357,7 @@ pub fn explain_infinite_climb_and_not_annuna_east_bridge_gate(
         }
     }
 }
-pub fn explain_infinite_climb_and_slingshot_hook(
+pub fn explain_invoke_infinite_climb_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -9283,7 +9383,7 @@ pub fn explain_infinite_climb_and_slingshot_hook(
         }
     }
 }
-pub fn explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
+pub fn explain_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -9316,6 +9416,384 @@ pub fn explain_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate
                 let h = ctx.has(Item::Annuna_East_Bridge_Gate);
                 edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
                 (!h, vec!["Annuna_East_Bridge_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_melee(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee
+    {
+        let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+        edict.insert("$melee", format!("{:?}", res));
+        refs.push("$melee");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2
+    {
+        let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+        edict.insert("$mist2", format!("{:?}", res));
+        refs.push("$mist2");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_mist2_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2 and ^mode == 'drone'
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+            edict.insert("$mist2", format!("{:?}", res));
+            refs.push("$mist2");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut refs = vec!["^mode"];
+                let mut left = {
+                    let r = ctx.mode();
+                    edict.insert("^mode", format!("{:?}", r));
+                    (r, vec!["^mode"])
+                };
+                let right = enums::Mode::Drone;
+                edict.insert("^mode", format!("{}", left.0));
+                refs.append(&mut left.1);
+                (left.0 == right, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_more_refills(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $more_refills
+    {
+        let (res, mut refs) = hexplain__more_refills!(ctx, world, edict);
+        edict.insert("$more_refills", format!("{:?}", res));
+        refs.push("$more_refills");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_offset(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $offset
+    {
+        let (res, mut refs) = hexplain__offset!(ctx, world, edict);
+        edict.insert("$offset", format!("{:?}", res));
+        refs.push("$offset");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_open(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open
+    {
+        let (res, mut refs) = hexplain__open!(ctx, world, edict);
+        edict.insert("$open", format!("{:?}", res));
+        refs.push("$open");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_open_and_invoke_range1(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and $range1
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range1!(ctx, world, edict);
+                edict.insert("$range1", format!("{:?}", res));
+                refs.push("$range1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_open_and_invoke_range2(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and $range2
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                edict.insert("$range2", format!("{:?}", res));
+                refs.push("$range2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_open_and_invoke_range3(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and $range3
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range3!(ctx, world, edict);
+                edict.insert("$range3", format!("{:?}", res));
+                refs.push("$range3");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_overheat(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $overheat
+    {
+        let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
+        edict.insert("$overheat", format!("{:?}", res));
+        refs.push("$overheat");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_overheat_and_invoke_can_damage(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $overheat and $can_damage
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
+            edict.insert("$overheat", format!("{:?}", res));
+            refs.push("$overheat");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
+                edict.insert("$can_damage", format!("{:?}", res));
+                refs.push("$can_damage");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_platform_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $platform and $hook and $hover
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__platform!(ctx, world, edict);
+                edict.insert("$platform", format!("{:?}", res));
+                refs.push("$platform");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_remote_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $remote_boomerang
+    {
+        let (res, mut refs) = hexplain__remote_boomerang!(ctx, world, edict);
+        edict.insert("$remote_boomerang", format!("{:?}", res));
+        refs.push("$remote_boomerang");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_shockwave(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $shockwave
+    {
+        let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+        edict.insert("$shockwave", format!("{:?}", res));
+        refs.push("$shockwave");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_shockwave_and_not_defeat_mus_a_m20(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $shockwave and not Defeat_MUS_A_M20
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+            edict.insert("$shockwave", format!("{:?}", res));
+            refs.push("$shockwave");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Defeat_MUS_A_M20);
+                edict.insert("Defeat_MUS_A_M20", format!("{}", h));
+                (!h, vec!["Defeat_MUS_A_M20"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_slow(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $slow
+    {
+        let (res, mut refs) = hexplain__slow!(ctx, world, edict);
+        edict.insert("$slow", format!("{:?}", res));
+        refs.push("$slow");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_spin(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $spin
+    {
+        let (res, mut refs) = hexplain__spin!(ctx, world, edict);
+        edict.insert("$spin", format!("{:?}", res));
+        refs.push("$spin");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_sync(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $sync
+    {
+        let (res, mut refs) = hexplain__sync!(ctx, world, edict);
+        edict.insert("$sync", format!("{:?}", res));
+        refs.push("$sync");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_sync_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $sync and $hook
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__sync!(ctx, world, edict);
+            edict.insert("$sync", format!("{:?}", res));
+            refs.push("$sync");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -9771,19 +10249,6 @@ pub fn explain_map__uhrum__west_entrance__save(
         (r, vec!["^map__uhrum__west_entrance__save"])
     }
 }
-pub fn explain_melee(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $melee
-    {
-        let (res, mut refs) = hexplain__melee!(ctx, world, edict);
-        edict.insert("$melee", format!("{:?}", res));
-        refs.push("$melee");
-        (res, refs)
-    }
-}
 pub fn explain_melee_damage(
     ctx: &Context,
     world: &graph::World,
@@ -9830,52 +10295,6 @@ pub fn explain_melee_speed_2(
         let h = ctx.has(Item::Melee_Speed_2);
         edict.insert("Melee_Speed_2", format!("{}", h));
         (h, vec!["Melee_Speed_2"])
-    }
-}
-pub fn explain_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2
-    {
-        let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-        edict.insert("$mist2", format!("{:?}", res));
-        refs.push("$mist2");
-        (res, refs)
-    }
-}
-pub fn explain_mist2_and_mode_eq_drone(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2 and ^mode == 'drone'
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-            edict.insert("$mist2", format!("{:?}", res));
-            refs.push("$mist2");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let mut refs = vec!["^mode"];
-                let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
-                };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_mist_upgrade(
@@ -10037,7 +10456,7 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_mist2(
+pub fn explain_mode_eq_drone_and_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -10102,7 +10521,7 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
+pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -10241,17 +10660,36 @@ pub fn explain_mode_ne_drone(
         (left.0 != right, refs)
     }
 }
-pub fn explain_more_refills(
+pub fn explain_mode_ne_drone_and_ice_axe(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $more_refills
+    // ^mode != 'drone' and Ice_Axe
     {
-        let (res, mut refs) = hexplain__more_refills!(ctx, world, edict);
-        edict.insert("$more_refills", format!("{:?}", res));
-        refs.push("$more_refills");
-        (res, refs)
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 != right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ice_Axe);
+                edict.insert("Ice_Axe", format!("{}", h));
+                (h, vec!["Ice_Axe"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_nanite_mist(
@@ -10421,32 +10859,7 @@ pub fn explain_not_hammond_auth(
         (!h, vec!["Hammond_Auth"])
     }
 }
-pub fn explain_not_irikar_royal_storage_wall_and_mist_upgrade(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not Irikar_Royal_Storage_Wall and Mist_Upgrade
-    {
-        let mut left = {
-            let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
-            edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
-            (!h, vec!["Irikar_Royal_Storage_Wall"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Mist_Upgrade);
-                edict.insert("Mist_Upgrade", format!("{}", h));
-                (h, vec!["Mist_Upgrade"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_not_irikar_royal_storage_wall_and_shockwave(
+pub fn explain_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -10466,6 +10879,31 @@ pub fn explain_not_irikar_royal_storage_wall_and_shockwave(
                 edict.insert("$shockwave", format!("{:?}", res));
                 refs.push("$shockwave");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_not_irikar_royal_storage_wall_and_mist_upgrade(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Irikar_Royal_Storage_Wall and Mist_Upgrade
+    {
+        let mut left = {
+            let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
+            edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
+            (!h, vec!["Irikar_Royal_Storage_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Mist_Upgrade);
+                edict.insert("Mist_Upgrade", format!("{}", h));
+                (h, vec!["Mist_Upgrade"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -10560,38 +10998,6 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
         }
     }
 }
-pub fn explain_not_within_menu_and_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // NOT WITHIN `Menu` and $can_deploy
-    {
-        let mut left = {
-            let r = ctx.position();
-            edict.insert("^position", format!("{:?}", r));
-            (
-                match get_region(r) {
-                    RegionId::Menu => false,
-                    _ => true,
-                },
-                vec!["^position"],
-            )
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-                edict.insert("$can_deploy", format!("{:?}", res));
-                refs.push("$can_deploy");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
     world: &graph::World,
@@ -10626,6 +11032,38 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
                 refs.append(&mut left.1);
                 refs.append(&mut right.1);
                 (Into::<i32>::into(left.0) > right.0.into(), refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_not_within_menu_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // NOT WITHIN `Menu` and $can_deploy
+    {
+        let mut left = {
+            let r = ctx.position();
+            edict.insert("^position", format!("{:?}", r));
+            (
+                match get_region(r) {
+                    RegionId::Menu => false,
+                    _ => true,
+                },
+                vec!["^position"],
+            )
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -10703,7 +11141,7 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
         }
     }
 }
-pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
+pub fn explain_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -10748,194 +11186,6 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_can_recall(
                 let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
                 edict.insert("$can_recall", format!("{:?}", res));
                 refs.push("$can_recall");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_offset(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $offset
-    {
-        let (res, mut refs) = hexplain__offset!(ctx, world, edict);
-        edict.insert("$offset", format!("{:?}", res));
-        refs.push("$offset");
-        (res, refs)
-    }
-}
-pub fn explain_open(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $open
-    {
-        let (res, mut refs) = hexplain__open!(ctx, world, edict);
-        edict.insert("$open", format!("{:?}", res));
-        refs.push("$open");
-        (res, refs)
-    }
-}
-pub fn explain_open_and_range1(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $open and $range1
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__open!(ctx, world, edict);
-            edict.insert("$open", format!("{:?}", res));
-            refs.push("$open");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__range1!(ctx, world, edict);
-                edict.insert("$range1", format!("{:?}", res));
-                refs.push("$range1");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_open_and_range2(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $open and $range2
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__open!(ctx, world, edict);
-            edict.insert("$open", format!("{:?}", res));
-            refs.push("$open");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
-                edict.insert("$range2", format!("{:?}", res));
-                refs.push("$range2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_open_and_range3(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $open and $range3
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__open!(ctx, world, edict);
-            edict.insert("$open", format!("{:?}", res));
-            refs.push("$open");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__range3!(ctx, world, edict);
-                edict.insert("$range3", format!("{:?}", res));
-                refs.push("$range3");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_overheat(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $overheat
-    {
-        let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
-        edict.insert("$overheat", format!("{:?}", res));
-        refs.push("$overheat");
-        (res, refs)
-    }
-}
-pub fn explain_overheat_and_can_damage(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $overheat and $can_damage
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__overheat!(ctx, world, edict);
-            edict.insert("$overheat", format!("{:?}", res));
-            refs.push("$overheat");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
-                edict.insert("$can_damage", format!("{:?}", res));
-                refs.push("$can_damage");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_platform_and_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $platform and $hook and $hover
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__platform!(ctx, world, edict);
-                edict.insert("$platform", format!("{:?}", res));
-                refs.push("$platform");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                    edict.insert("$hook", format!("{:?}", res));
-                    refs.push("$hook");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -11012,7 +11262,7 @@ pub fn explain_ranged_speed_2(
         (h, vec!["Ranged_Speed_2"])
     }
 }
-pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
+pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11062,19 +11312,6 @@ pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
         }
     }
 }
-pub fn explain_remote_boomerang(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $remote_boomerang
-    {
-        let (res, mut refs) = hexplain__remote_boomerang!(ctx, world, edict);
-        edict.insert("$remote_boomerang", format!("{:?}", res));
-        refs.push("$remote_boomerang");
-        (res, refs)
-    }
-}
 pub fn explain_remote_drone(
     ctx: &Context,
     world: &graph::World,
@@ -11099,7 +11336,7 @@ pub fn explain_separation(
         (h, vec!["Separation"])
     }
 }
-pub fn explain_separation_and_not_defeat_indra_and_mist2(
+pub fn explain_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11138,56 +11375,16 @@ pub fn explain_separation_and_not_defeat_indra_and_mist2(
         }
     }
 }
-pub fn explain_shockwave(
+pub fn explain_siuna_storage_wall(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $shockwave
+    // Siuna_Storage_Wall
     {
-        let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
-        edict.insert("$shockwave", format!("{:?}", res));
-        refs.push("$shockwave");
-        (res, refs)
-    }
-}
-pub fn explain_shockwave_and_not_defeat_mus_a_m20(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $shockwave and not Defeat_MUS_A_M20
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
-            edict.insert("$shockwave", format!("{:?}", res));
-            refs.push("$shockwave");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Defeat_MUS_A_M20);
-                edict.insert("Defeat_MUS_A_M20", format!("{}", h));
-                (!h, vec!["Defeat_MUS_A_M20"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_slow(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $slow
-    {
-        let (res, mut refs) = hexplain__slow!(ctx, world, edict);
-        edict.insert("$slow", format!("{:?}", res));
-        refs.push("$slow");
-        (res, refs)
+        let h = ctx.has(Item::Siuna_Storage_Wall);
+        edict.insert("Siuna_Storage_Wall", format!("{}", h));
+        (h, vec!["Siuna_Storage_Wall"])
     }
 }
 pub fn explain_sniper_valley_rock_1(
@@ -11200,19 +11397,6 @@ pub fn explain_sniper_valley_rock_1(
         let h = ctx.has(Item::Sniper_Valley_Rock_1);
         edict.insert("Sniper_Valley_Rock_1", format!("{}", h));
         (h, vec!["Sniper_Valley_Rock_1"])
-    }
-}
-pub fn explain_spin(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $spin
-    {
-        let (res, mut refs) = hexplain__spin!(ctx, world, edict);
-        edict.insert("$spin", format!("{:?}", res));
-        refs.push("$spin");
-        (res, refs)
     }
 }
 pub fn explain_station_power(
@@ -11251,46 +11435,6 @@ pub fn explain_switch_40_12(
         (h, vec!["Switch_40_12"])
     }
 }
-pub fn explain_sync(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $sync
-    {
-        let (res, mut refs) = hexplain__sync!(ctx, world, edict);
-        edict.insert("$sync", format!("{:?}", res));
-        refs.push("$sync");
-        (res, refs)
-    }
-}
-pub fn explain_sync_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $sync and $hook
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__sync!(ctx, world, edict);
-            edict.insert("$sync", format!("{:?}", res));
-            refs.push("$sync");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                edict.insert("$hook", format!("{:?}", res));
-                refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
@@ -11327,7 +11471,7 @@ pub fn explain_uhrum_waterfalls_block(
         (h, vec!["Uhrum_Waterfalls_Block"])
     }
 }
-pub fn explain_uhrum_waterfalls_block_and_grab(
+pub fn explain_uhrum_waterfalls_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11353,7 +11497,7 @@ pub fn explain_uhrum_waterfalls_block_and_grab(
         }
     }
 }
-pub fn explain_uhrum_waterfalls_block_and_hook(
+pub fn explain_uhrum_waterfalls_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11391,7 +11535,7 @@ pub fn explain_uhrum_west_entrance_gate(
         (h, vec!["Uhrum_West_Entrance_Gate"])
     }
 }
-pub fn explain_uhrum_west_entrance_gate_and_hover(
+pub fn explain_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11453,7 +11597,7 @@ pub fn explain_underwater_movement(
         (h, vec!["Underwater_Movement"])
     }
 }
-pub fn explain_underwater_movement_and___grab_or_climb(
+pub fn explain_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11493,7 +11637,7 @@ pub fn explain_underwater_movement_and___grab_or_climb(
         }
     }
 }
-pub fn explain_underwater_movement_and_grab(
+pub fn explain_underwater_movement_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11519,7 +11663,7 @@ pub fn explain_underwater_movement_and_grab(
         }
     }
 }
-pub fn explain_underwater_movement_and_hook(
+pub fn explain_underwater_movement_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11545,7 +11689,7 @@ pub fn explain_underwater_movement_and_hook(
         }
     }
 }
-pub fn explain_underwater_movement_and_hook_and_hover(
+pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -11603,7 +11747,18 @@ pub fn explain_within_menu_gt_upgrade_menu(
         )
     }
 }
-pub fn observe_access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks_hammond_auth(
+pub fn observe_access___escape_invoke_objective(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [Escape, $objective]
+    ({
+        full_obs.observe_escape();
+        ctx.has(Item::Escape)
+    }) && robserve__objective!(ctx, world, full_obs)
+}
+pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11619,18 +11774,7 @@ pub fn observe_access___all_urns_all_weapons_other_items_all_notes_all_health_al
         && hobserve__all_health!(ctx, world, full_obs)
         && hobserve__all_flasks!(ctx, world, full_obs)
 }
-pub fn observe_access___escape_objective(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // [Escape, $objective]
-    ({
-        full_obs.observe_escape();
-        ctx.has(Item::Escape)
-    }) && robserve__objective!(ctx, world, full_obs)
-}
-pub fn observe_access___objective(
+pub fn observe_access___invoke_objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11663,15 +11807,7 @@ pub fn observe_access___remote_drone_flask__6(
         ctx.count(Item::Flask) >= 6
     })
 }
-pub fn observe_access_activate(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $activate
-    hobserve__activate!(ctx, world, full_obs)
-}
-pub fn observe_access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11681,7 +11817,7 @@ pub fn observe_access_allow_warps_and_ft_breach_and___map_spot_within_menu_gt_br
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
 }
-pub fn observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11691,7 +11827,7 @@ pub fn observe_access_allow_warps_and_ft_main_and___map_spot_within_menu_gt_kien
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
 }
-pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall_and_map_spot_ne_default(
+pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11710,7 +11846,7 @@ pub fn observe_access_allow_warps_and_not_within_menu_and_ft_main_and_can_recall
             left != right
         }))
 }
-pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_default(
+pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11813,7 +11949,7 @@ pub fn observe_access_amagi_stronghold_boulder_1(
         ctx.has(Item::Amagi_Stronghold_Boulder_1)
     }
 }
-pub fn observe_access_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
+pub fn observe_access_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -11838,7 +11974,7 @@ pub fn observe_access_amagi_stronghold_boulder_2(
         ctx.has(Item::Amagi_Stronghold_Boulder_2)
     }
 }
-pub fn observe_access_amagi_stronghold_boulder_2_and_grab(
+pub fn observe_access_amagi_stronghold_boulder_2_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -12170,7 +12306,7 @@ pub fn observe_access_anuman(
         ctx.has(Item::Anuman)
     }
 }
-pub fn observe_access_anuman_and_grab(
+pub fn observe_access_anuman_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -12220,103 +12356,26 @@ pub fn observe_access_apocalypse_bomb(
         ctx.has(Item::Apocalypse_Bomb)
     }
 }
-pub fn observe_access_block_clip_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $block_clip and not Ebih_Waterfall_Block_Left
-    (hobserve__block_clip!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_ebih_waterfall_block_left();
-            !ctx.has(Item::Ebih_Waterfall_Block_Left)
-        }))
-}
-pub fn observe_access_block_clip_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $block_clip and not Ebih_Waterfall_Block_Right
-    (hobserve__block_clip!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_ebih_waterfall_block_right();
-            !ctx.has(Item::Ebih_Waterfall_Block_Right)
-        }))
-}
-pub fn observe_access_block_clip_escape_and_not_uhrum_annuna_corridor_block(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-    (hobserve__block_clip_escape!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_uhrum_annuna_corridor_block();
-            !ctx.has(Item::Uhrum_Annuna_Corridor_Block)
-        }))
-}
 pub fn observe_access_boomerang(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $boomerang
-    hobserve__boomerang!(ctx, world, full_obs)
-}
-pub fn observe_access_boomerang1(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
     // Boomerang
     {
         full_obs.observe_boomerang();
         ctx.has(Item::Boomerang)
     }
 }
-pub fn observe_access_boomerang2(
+pub fn observe_access_breach_attractor(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Boomerang
+    // Breach_Attractor
     {
-        full_obs.observe_boomerang();
-        ctx.has(Item::Boomerang)
-    }
-}
-pub fn observe_access_boomerang3(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Boomerang
-    {
-        full_obs.observe_boomerang();
-        ctx.has(Item::Boomerang)
-    }
-}
-pub fn observe_access_boomerang4(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Boomerang
-    {
-        full_obs.observe_boomerang();
-        ctx.has(Item::Boomerang)
-    }
-}
-pub fn observe_access_boomerang5(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Boomerang
-    {
-        full_obs.observe_boomerang();
-        ctx.has(Item::Boomerang)
+        full_obs.observe_breach_attractor();
+        ctx.has(Item::Breach_Attractor)
     }
 }
 pub fn observe_access_breach_attractor_and_anuman(
@@ -12352,142 +12411,6 @@ pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna
         full_obs.observe_indra();
         ctx.indra()
     } == SpotId::Annuna__Filter_Teleporter__Shaft_Top))
-}
-pub fn observe_access_bs(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $bs
-    hobserve__bs!(ctx, world, full_obs)
-}
-pub fn observe_access_can_damage(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_damage
-    hobserve__can_damage!(ctx, world, full_obs)
-}
-pub fn observe_access_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_deploy
-    hobserve__can_deploy!(ctx, world, full_obs)
-}
-pub fn observe_access_can_deploy_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_deploy and Drone_Hover
-    (hobserve__can_deploy!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_drone_hover();
-            ctx.has(Item::Drone_Hover)
-        }))
-}
-pub fn observe_access_can_deploy_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_deploy and Slingshot_Hook
-    (hobserve__can_deploy!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_slingshot_hook();
-            ctx.has(Item::Slingshot_Hook)
-        }))
-}
-pub fn observe_access_can_deploy_and_slingshot_hook_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_deploy and Slingshot_Hook and Drone_Hover
-    ((hobserve__can_deploy!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_slingshot_hook();
-            ctx.has(Item::Slingshot_Hook)
-        }))
-        && ({
-            full_obs.observe_drone_hover();
-            ctx.has(Item::Drone_Hover)
-        }))
-}
-pub fn observe_access_charge(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $charge
-    hobserve__charge!(ctx, world, full_obs)
-}
-pub fn observe_access_climb(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb
-    hobserve__climb!(ctx, world, full_obs)
-}
-pub fn observe_access_climb_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb and Annuna_East_Bridge_Gate
-    (hobserve__climb!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_annuna_east_bridge_gate();
-            ctx.has(Item::Annuna_East_Bridge_Gate)
-        }))
-}
-pub fn observe_access_climb_and_can_deploy_and_hover_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb and $can_deploy and Hover and Slingshot_Hook
-    (((hobserve__climb!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
-        && ({
-            full_obs.observe_hover();
-            ctx.has(Item::Hover)
-        }))
-        && ({
-            full_obs.observe_slingshot_hook();
-            ctx.has(Item::Slingshot_Hook)
-        }))
-}
-pub fn observe_access_climb_and_grab(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb and $grab
-    (hobserve__climb!(ctx, world, full_obs) && (hobserve__grab!(ctx, world, full_obs)))
-}
-pub fn observe_access_climb_and_grab_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb and $grab and Anuman
-    ((hobserve__climb!(ctx, world, full_obs) && (hobserve__grab!(ctx, world, full_obs)))
-        && ({
-            full_obs.observe_anuman();
-            ctx.has(Item::Anuman)
-        }))
-}
-pub fn observe_access_climb_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $climb or $hook
-    (hobserve__climb!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_defeat_mus_a_m20(
     ctx: &Context,
@@ -12999,7 +12922,7 @@ pub fn observe_access_ebih_interchange_gate(
         ctx.has(Item::Ebih_Interchange_Gate)
     }
 }
-pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
+pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -13013,7 +12936,7 @@ pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(
         ctx.has(Item::Ebih_Interchange_Block)
     })) && (hobserve__grab!(ctx, world, full_obs)))
 }
-pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
+pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -13027,7 +12950,7 @@ pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(
         ctx.has(Item::Ebih_Interchange_Block)
     })) && (hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(
+pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -13041,7 +12964,7 @@ pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_g
         !ctx.has(Item::Ebih_Interchange_Block)
     })) && (hobserve__grab!(ctx, world, full_obs)))
 }
-pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(
+pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -13098,6 +13021,28 @@ pub fn observe_access_fast_travel(
         full_obs.observe_fast_travel();
         ctx.has(Item::Fast_Travel)
     }
+}
+pub fn observe_access_fast_travel_and_invoke_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Fast_Travel and $boomerang
+    ({
+        full_obs.observe_fast_travel();
+        ctx.has(Item::Fast_Travel)
+    } && (hobserve__boomerang!(ctx, world, full_obs)))
+}
+pub fn observe_access_fast_travel_and_invoke_boomerang2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Fast_Travel and $boomerang2
+    ({
+        full_obs.observe_fast_travel();
+        ctx.has(Item::Fast_Travel)
+    } && (hobserve__boomerang2!(ctx, world, full_obs)))
 }
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
@@ -14138,7 +14083,7 @@ pub fn observe_access_giguna_dual_path_switch(
         ctx.has(Item::Giguna_Dual_Path_Switch)
     }
 }
-pub fn observe_access_giguna_dual_path_switch_and___grab_or_climb(
+pub fn observe_access_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14149,7 +14094,7 @@ pub fn observe_access_giguna_dual_path_switch_and___grab_or_climb(
         ctx.has(Item::Giguna_Dual_Path_Switch)
     } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
-pub fn observe_access_giguna_dual_path_switch_and_climb(
+pub fn observe_access_giguna_dual_path_switch_and_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14160,7 +14105,7 @@ pub fn observe_access_giguna_dual_path_switch_and_climb(
         ctx.has(Item::Giguna_Dual_Path_Switch)
     } && (hobserve__climb!(ctx, world, full_obs)))
 }
-pub fn observe_access_giguna_dual_path_switch_and_hook(
+pub fn observe_access_giguna_dual_path_switch_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14421,137 +14366,6 @@ pub fn observe_access_glacier_sea_burial_rock(
         ctx.has(Item::Glacier_Sea_Burial_Rock)
     }
 }
-pub fn observe_access_grab(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab
-    hobserve__grab!(ctx, world, full_obs)
-}
-pub fn observe_access_grab_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and Annuna_East_Bridge_Gate
-    (hobserve__grab!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_annuna_east_bridge_gate();
-            ctx.has(Item::Annuna_East_Bridge_Gate)
-        }))
-}
-pub fn observe_access_grab_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and Anuman
-    (hobserve__grab!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_anuman();
-            ctx.has(Item::Anuman)
-        }))
-}
-pub fn observe_access_grab_and_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and $can_deploy
-    (hobserve__grab!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
-}
-pub fn observe_access_grab_and_climb(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and $climb
-    (hobserve__grab!(ctx, world, full_obs) && (hobserve__climb!(ctx, world, full_obs)))
-}
-pub fn observe_access_grab_and_giguna_gateway_block(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and Giguna_Gateway_Block
-    (hobserve__grab!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_giguna_gateway_block();
-            ctx.has(Item::Giguna_Gateway_Block)
-        }))
-}
-pub fn observe_access_grab_and_switch_40_12(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and Switch_40_12
-    (hobserve__grab!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_switch_40_12();
-            ctx.has(Item::Switch_40_12)
-        }))
-}
-pub fn observe_access_grab_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and Underwater_Movement
-    (hobserve__grab!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_underwater_movement();
-            ctx.has(Item::Underwater_Movement)
-        }))
-}
-pub fn observe_access_grab_or_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab or Anuman
-    (hobserve__grab!(ctx, world, full_obs) || {
-        full_obs.observe_anuman();
-        ctx.has(Item::Anuman)
-    })
-}
-pub fn observe_access_grab_or_climb(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab or $climb
-    (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
-}
-pub fn observe_access_grab_or_climb_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab or $climb or $hook
-    ((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
-        || hobserve__hook!(ctx, world, full_obs))
-}
-pub fn observe_access_grab_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab or $hook
-    (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
-}
-pub fn observe_access_grab_or_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab or Underwater_Movement
-    (hobserve__grab!(ctx, world, full_obs) || {
-        full_obs.observe_underwater_movement();
-        ctx.has(Item::Underwater_Movement)
-    })
-}
 pub fn observe_access_hammond_auth(
     ctx: &Context,
     world: &graph::World,
@@ -14606,167 +14420,6 @@ pub fn observe_access_health_upgrade_4(
         full_obs.observe_health_upgrade_4();
         ctx.has(Item::Health_Upgrade_4)
     }
-}
-pub fn observe_access_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook
-    hobserve__hook!(ctx, world, full_obs)
-}
-pub fn observe_access_hook_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and Annuna_East_Bridge_Gate
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_annuna_east_bridge_gate();
-            ctx.has(Item::Annuna_East_Bridge_Gate)
-        }))
-}
-pub fn observe_access_hook_and_giguna_gateway_block(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and Giguna_Gateway_Block
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_giguna_gateway_block();
-            ctx.has(Item::Giguna_Gateway_Block)
-        }))
-}
-pub fn observe_access_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and $hover
-    (hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
-}
-pub fn observe_access_hook_and_hover_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and $hover and Underwater_Movement
-    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
-        && ({
-            full_obs.observe_underwater_movement();
-            ctx.has(Item::Underwater_Movement)
-        }))
-}
-pub fn observe_access_hook_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and not Ebih_Waterfall_Block_Left
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_ebih_waterfall_block_left();
-            !ctx.has(Item::Ebih_Waterfall_Block_Left)
-        }))
-}
-pub fn observe_access_hook_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and not Ebih_Waterfall_Block_Right
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_ebih_waterfall_block_right();
-            !ctx.has(Item::Ebih_Waterfall_Block_Right)
-        }))
-}
-pub fn observe_access_hook_and_underwater_movement(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and Underwater_Movement
-    (hobserve__hook!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_underwater_movement();
-            ctx.has(Item::Underwater_Movement)
-        }))
-}
-pub fn observe_access_hook_or_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook or $hover
-    (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
-}
-pub fn observe_access_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover
-    hobserve__hover!(ctx, world, full_obs)
-}
-pub fn observe_access_hover_and_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover and Anuman
-    (hobserve__hover!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_anuman();
-            ctx.has(Item::Anuman)
-        }))
-}
-pub fn observe_access_hover_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover and $hook
-    (hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
-}
-pub fn observe_access_hover_and_hook_and_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover and $hook and $mist2
-    ((hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
-        && (hobserve__mist2!(ctx, world, full_obs)))
-}
-pub fn observe_access_hover_and_mist_upgrade(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover and Mist_Upgrade
-    (hobserve__hover!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_mist_upgrade();
-            ctx.has(Item::Mist_Upgrade)
-        }))
-}
-pub fn observe_access_hover_or_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover or $hook
-    (hobserve__hover!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
-}
-pub fn observe_access_hover_or_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover or $mist2
-    (hobserve__hover!(ctx, world, full_obs) || hobserve__mist2!(ctx, world, full_obs))
 }
 pub fn observe_access_infect(
     ctx: &Context,
@@ -14862,7 +14515,495 @@ pub fn observe_access_infection_speed(
         ctx.has(Item::Infection_Speed)
     }
 }
-pub fn observe_access_infinite_climb_and_annuna_east_bridge_gate(
+pub fn observe_access_invoke_activate(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $activate
+    hobserve__activate!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Left
+    (hobserve__block_clip!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_waterfall_block_left();
+            !ctx.has(Item::Ebih_Waterfall_Block_Left)
+        }))
+}
+pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Right
+    (hobserve__block_clip!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_waterfall_block_right();
+            !ctx.has(Item::Ebih_Waterfall_Block_Right)
+        }))
+}
+pub fn observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
+    (hobserve__block_clip_escape!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_uhrum_annuna_corridor_block();
+            !ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+        }))
+}
+pub fn observe_access_invoke_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $boomerang
+    hobserve__boomerang!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_boomerang2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $boomerang2
+    hobserve__boomerang2!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_bs(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $bs
+    hobserve__bs!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_can_damage(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_damage
+    hobserve__can_damage!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy
+    hobserve__can_deploy!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_can_deploy_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and Drone_Hover
+    (hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        }))
+}
+pub fn observe_access_invoke_can_deploy_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and Slingshot_Hook
+    (hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
+}
+pub fn observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and Slingshot_Hook and Drone_Hover
+    ((hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
+        && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        }))
+}
+pub fn observe_access_invoke_charge(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $charge
+    hobserve__charge!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb
+    hobserve__climb!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_climb_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb and Annuna_East_Bridge_Gate
+    (hobserve__climb!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_annuna_east_bridge_gate();
+            ctx.has(Item::Annuna_East_Bridge_Gate)
+        }))
+}
+pub fn observe_access_invoke_climb_and_invoke_can_deploy_and_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb and $can_deploy and Hover and Slingshot_Hook
+    (((hobserve__climb!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_hover();
+            ctx.has(Item::Hover)
+        }))
+        && ({
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
+}
+pub fn observe_access_invoke_climb_and_invoke_grab(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb and $grab
+    (hobserve__climb!(ctx, world, full_obs) && (hobserve__grab!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_climb_and_invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb and $grab and Anuman
+    ((hobserve__climb!(ctx, world, full_obs) && (hobserve__grab!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+}
+pub fn observe_access_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb or $hook
+    (hobserve__climb!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab
+    hobserve__grab!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_grab_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Annuna_East_Bridge_Gate
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_annuna_east_bridge_gate();
+            ctx.has(Item::Annuna_East_Bridge_Gate)
+        }))
+}
+pub fn observe_access_invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Anuman
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+}
+pub fn observe_access_invoke_grab_and_giguna_gateway_block(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Giguna_Gateway_Block
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_giguna_gateway_block();
+            ctx.has(Item::Giguna_Gateway_Block)
+        }))
+}
+pub fn observe_access_invoke_grab_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and $can_deploy
+    (hobserve__grab!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_grab_and_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and $climb
+    (hobserve__grab!(ctx, world, full_obs) && (hobserve__climb!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_grab_and_switch_40_12(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Switch_40_12
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_switch_40_12();
+            ctx.has(Item::Switch_40_12)
+        }))
+}
+pub fn observe_access_invoke_grab_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Underwater_Movement
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_grab_or_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or Anuman
+    (hobserve__grab!(ctx, world, full_obs) || {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
+}
+pub fn observe_access_invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $climb
+    (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab_or_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $climb or $hook
+    ((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+        || hobserve__hook!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $hook
+    (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab_or_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or Underwater_Movement
+    (hobserve__grab!(ctx, world, full_obs) || {
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })
+}
+pub fn observe_access_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook
+    hobserve__hook!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_hook_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Annuna_East_Bridge_Gate
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_annuna_east_bridge_gate();
+            ctx.has(Item::Annuna_East_Bridge_Gate)
+        }))
+}
+pub fn observe_access_invoke_hook_and_giguna_gateway_block(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Giguna_Gateway_Block
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_giguna_gateway_block();
+            ctx.has(Item::Giguna_Gateway_Block)
+        }))
+}
+pub fn observe_access_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover
+    (hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and Underwater_Movement
+    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Left
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_waterfall_block_left();
+            !ctx.has(Item::Ebih_Waterfall_Block_Left)
+        }))
+}
+pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_right(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Right
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_waterfall_block_right();
+            !ctx.has(Item::Ebih_Waterfall_Block_Right)
+        }))
+}
+pub fn observe_access_invoke_hook_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Underwater_Movement
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_hook_or_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook or $hover
+    (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover
+    hobserve__hover!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_hover_and_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Anuman
+    (hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+}
+pub fn observe_access_invoke_hover_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and $hook
+    (hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_hover_and_invoke_hook_and_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and $hook and $mist2
+    ((hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
+        && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_hover_and_mist_upgrade(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Mist_Upgrade
+    (hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_mist_upgrade();
+            ctx.has(Item::Mist_Upgrade)
+        }))
+}
+pub fn observe_access_invoke_hover_or_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover or $hook
+    (hobserve__hover!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_hover_or_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover or $mist2
+    (hobserve__hover!(ctx, world, full_obs) || hobserve__mist2!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14874,7 +15015,7 @@ pub fn observe_access_infinite_climb_and_annuna_east_bridge_gate(
             ctx.has(Item::Annuna_East_Bridge_Gate)
         }))
 }
-pub fn observe_access_infinite_climb_and_not_annuna_east_bridge_gate(
+pub fn observe_access_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14886,7 +15027,7 @@ pub fn observe_access_infinite_climb_and_not_annuna_east_bridge_gate(
             !ctx.has(Item::Annuna_East_Bridge_Gate)
         }))
 }
-pub fn observe_access_infinite_climb_and_slingshot_hook(
+pub fn observe_access_invoke_infinite_climb_and_slingshot_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14898,7 +15039,7 @@ pub fn observe_access_infinite_climb_and_slingshot_hook(
             ctx.has(Item::Slingshot_Hook)
         }))
 }
-pub fn observe_access_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
+pub fn observe_access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -14913,6 +15054,170 @@ pub fn observe_access_infinite_climb_and_slingshot_hook_and_not_annuna_east_brid
             full_obs.observe_annuna_east_bridge_gate();
             !ctx.has(Item::Annuna_East_Bridge_Gate)
         }))
+}
+pub fn observe_access_invoke_melee(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee
+    hobserve__melee!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_mist2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2
+    hobserve__mist2!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_mist2_and_mode_eq_drone(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2 and ^mode == 'drone'
+    (hobserve__mist2!(ctx, world, full_obs)
+        && ({
+            let v = {
+                full_obs.observe_mode();
+                ctx.mode()
+            };
+            v == enums::Mode::Drone
+        }))
+}
+pub fn observe_access_invoke_more_refills(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $more_refills
+    hobserve__more_refills!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_offset(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $offset
+    hobserve__offset!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_open(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open
+    hobserve__open!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_open_and_invoke_range1(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and $range1
+    (hobserve__open!(ctx, world, full_obs) && (hobserve__range1!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_open_and_invoke_range2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and $range2
+    (hobserve__open!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_open_and_invoke_range3(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and $range3
+    (hobserve__open!(ctx, world, full_obs) && (hobserve__range3!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_overheat(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $overheat
+    hobserve__overheat!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_overheat_and_invoke_can_damage(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $overheat and $can_damage
+    (hobserve__overheat!(ctx, world, full_obs) && (hobserve__can_damage!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_platform_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $platform and $hook and $hover
+    ((hobserve__platform!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
+        && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_remote_boomerang(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $remote_boomerang
+    hobserve__remote_boomerang!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_shockwave(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $shockwave
+    hobserve__shockwave!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $shockwave and not Defeat_MUS_A_M20
+    (hobserve__shockwave!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_defeat_mus_a_m20();
+            !ctx.has(Item::Defeat_MUS_A_M20)
+        }))
+}
+pub fn observe_access_invoke_slow(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $slow
+    hobserve__slow!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_spin(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $spin
+    hobserve__spin!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_sync(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $sync
+    hobserve__sync!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_sync_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $sync and $hook
+    (hobserve__sync!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
@@ -15288,14 +15593,6 @@ pub fn observe_access_map__uhrum__west_entrance__save(
         ctx.map__uhrum__west_entrance__save()
     }
 }
-pub fn observe_access_melee(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $melee
-    hobserve__melee!(ctx, world, full_obs)
-}
 pub fn observe_access_melee_damage(
     ctx: &Context,
     world: &graph::World,
@@ -15339,29 +15636,6 @@ pub fn observe_access_melee_speed_2(
         full_obs.observe_melee_speed_2();
         ctx.has(Item::Melee_Speed_2)
     }
-}
-pub fn observe_access_mist2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2
-    hobserve__mist2!(ctx, world, full_obs)
-}
-pub fn observe_access_mist2_and_mode_eq_drone(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2 and ^mode == 'drone'
-    (hobserve__mist2!(ctx, world, full_obs)
-        && ({
-            let v = {
-                full_obs.observe_mode();
-                ctx.mode()
-            };
-            v == enums::Mode::Drone
-        }))
 }
 pub fn observe_access_mist_upgrade(
     ctx: &Context,
@@ -15456,7 +15730,7 @@ pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
         ctx.has(Item::Giguna_Dual_Path_Wall)
     }))
 }
-pub fn observe_access_mode_eq_drone_and_mist2(
+pub fn observe_access_mode_eq_drone_and_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -15487,7 +15761,7 @@ pub fn observe_access_mode_eq_drone_and_mist_upgrade(
         ctx.has(Item::Mist_Upgrade)
     }))
 }
-pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_default_and___not_portal_hidden_or_breach_sight(
+pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -15549,13 +15823,22 @@ pub fn observe_access_mode_ne_drone(
         v != enums::Mode::Drone
     }
 }
-pub fn observe_access_more_refills(
+pub fn observe_access_mode_ne_drone_and_ice_axe(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $more_refills
-    hobserve__more_refills!(ctx, world, full_obs)
+    // ^mode != 'drone' and Ice_Axe
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v != enums::Mode::Drone
+    } && ({
+        full_obs.observe_ice_axe();
+        ctx.has(Item::Ice_Axe)
+    }))
 }
 pub fn observe_access_nanite_mist(
     ctx: &Context,
@@ -15671,6 +15954,17 @@ pub fn observe_access_not_hammond_auth(
         !ctx.has(Item::Hammond_Auth)
     }
 }
+pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Irikar_Royal_Storage_Wall and $shockwave
+    ({
+        full_obs.observe_irikar_royal_storage_wall();
+        !ctx.has(Item::Irikar_Royal_Storage_Wall)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
+}
 pub fn observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(
     ctx: &Context,
     world: &graph::World,
@@ -15684,17 +15978,6 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(
         full_obs.observe_mist_upgrade();
         ctx.has(Item::Mist_Upgrade)
     }))
-}
-pub fn observe_access_not_irikar_royal_storage_wall_and_shockwave(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not Irikar_Royal_Storage_Wall and $shockwave
-    ({
-        full_obs.observe_irikar_royal_storage_wall();
-        !ctx.has(Item::Irikar_Royal_Storage_Wall)
-    } && (hobserve__shockwave!(ctx, world, full_obs)))
 }
 pub fn observe_access_not_separation_or_defeat_indra(
     ctx: &Context,
@@ -15741,17 +16024,6 @@ pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
         v != enums::Mode::Drone
     }))
 }
-pub fn observe_access_not_within_menu_and_can_deploy(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // NOT WITHIN `Menu` and $can_deploy
-    ((match get_region(ctx.position()) {
-        RegionId::Menu => false,
-        _ => true,
-    }) && (hobserve__can_deploy!(ctx, world, full_obs)))
-}
 pub fn observe_access_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
     world: &graph::World,
@@ -15766,6 +16038,17 @@ pub fn observe_access_not_within_menu_and_flasks_gt_0(
         full_obs.observe_flasks(IntegerObservation::Le(n as i8));
         i32::from(ctx.flasks()) > n
     }))
+}
+pub fn observe_access_not_within_menu_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // NOT WITHIN `Menu` and $can_deploy
+    ((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && (hobserve__can_deploy!(ctx, world, full_obs)))
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
@@ -15790,7 +16073,7 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq
         v == enums::Mode::Drone
     }))
 }
-pub fn observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(
+pub fn observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -15803,71 +16086,6 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_can_recall(
         let v = data::realm(ctx.position());
         v != enums::Realm::Breach
     })) && (hobserve__can_recall!(ctx, world, full_obs)))
-}
-pub fn observe_access_offset(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $offset
-    hobserve__offset!(ctx, world, full_obs)
-}
-pub fn observe_access_open(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $open
-    hobserve__open!(ctx, world, full_obs)
-}
-pub fn observe_access_open_and_range1(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $open and $range1
-    (hobserve__open!(ctx, world, full_obs) && (hobserve__range1!(ctx, world, full_obs)))
-}
-pub fn observe_access_open_and_range2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $open and $range2
-    (hobserve__open!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
-}
-pub fn observe_access_open_and_range3(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $open and $range3
-    (hobserve__open!(ctx, world, full_obs) && (hobserve__range3!(ctx, world, full_obs)))
-}
-pub fn observe_access_overheat(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $overheat
-    hobserve__overheat!(ctx, world, full_obs)
-}
-pub fn observe_access_overheat_and_can_damage(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $overheat and $can_damage
-    (hobserve__overheat!(ctx, world, full_obs) && (hobserve__can_damage!(ctx, world, full_obs)))
-}
-pub fn observe_access_platform_and_hook_and_hover(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $platform and $hook and $hover
-    ((hobserve__platform!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
-        && (hobserve__hover!(ctx, world, full_obs)))
 }
 pub fn observe_access_portal_eq_position(
     ctx: &Context,
@@ -15931,7 +16149,7 @@ pub fn observe_access_ranged_speed_2(
         ctx.has(Item::Ranged_Speed_2)
     }
 }
-pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
+pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -15948,14 +16166,6 @@ pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_default(
         let right = Default::default();
         left != right
     }))
-}
-pub fn observe_access_remote_boomerang(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $remote_boomerang
-    hobserve__remote_boomerang!(ctx, world, full_obs)
 }
 pub fn observe_access_remote_drone(
     ctx: &Context,
@@ -15979,7 +16189,7 @@ pub fn observe_access_separation(
         ctx.has(Item::Separation)
     }
 }
-pub fn observe_access_separation_and_not_defeat_indra_and_mist2(
+pub fn observe_access_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -15993,33 +16203,16 @@ pub fn observe_access_separation_and_not_defeat_indra_and_mist2(
         !ctx.has(Item::Defeat_Indra)
     })) && (hobserve__mist2!(ctx, world, full_obs)))
 }
-pub fn observe_access_shockwave(
+pub fn observe_access_siuna_storage_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $shockwave
-    hobserve__shockwave!(ctx, world, full_obs)
-}
-pub fn observe_access_shockwave_and_not_defeat_mus_a_m20(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $shockwave and not Defeat_MUS_A_M20
-    (hobserve__shockwave!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_defeat_mus_a_m20();
-            !ctx.has(Item::Defeat_MUS_A_M20)
-        }))
-}
-pub fn observe_access_slow(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $slow
-    hobserve__slow!(ctx, world, full_obs)
+    // Siuna_Storage_Wall
+    {
+        full_obs.observe_siuna_storage_wall();
+        ctx.has(Item::Siuna_Storage_Wall)
+    }
 }
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,
@@ -16031,14 +16224,6 @@ pub fn observe_access_sniper_valley_rock_1(
         full_obs.observe_sniper_valley_rock_1();
         ctx.has(Item::Sniper_Valley_Rock_1)
     }
-}
-pub fn observe_access_spin(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $spin
-    hobserve__spin!(ctx, world, full_obs)
 }
 pub fn observe_access_station_power(
     ctx: &Context,
@@ -16073,22 +16258,6 @@ pub fn observe_access_switch_40_12(
         ctx.has(Item::Switch_40_12)
     }
 }
-pub fn observe_access_sync(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $sync
-    hobserve__sync!(ctx, world, full_obs)
-}
-pub fn observe_access_sync_and_hook(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $sync and $hook
-    (hobserve__sync!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
-}
 pub fn observe_access_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &graph::World,
@@ -16122,7 +16291,7 @@ pub fn observe_access_uhrum_waterfalls_block(
         ctx.has(Item::Uhrum_Waterfalls_Block)
     }
 }
-pub fn observe_access_uhrum_waterfalls_block_and_grab(
+pub fn observe_access_uhrum_waterfalls_block_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16133,7 +16302,7 @@ pub fn observe_access_uhrum_waterfalls_block_and_grab(
         ctx.has(Item::Uhrum_Waterfalls_Block)
     } && (hobserve__grab!(ctx, world, full_obs)))
 }
-pub fn observe_access_uhrum_waterfalls_block_and_hook(
+pub fn observe_access_uhrum_waterfalls_block_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16155,7 +16324,7 @@ pub fn observe_access_uhrum_west_entrance_gate(
         ctx.has(Item::Uhrum_West_Entrance_Gate)
     }
 }
-pub fn observe_access_uhrum_west_entrance_gate_and_hover(
+pub fn observe_access_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16199,7 +16368,7 @@ pub fn observe_access_underwater_movement(
         ctx.has(Item::Underwater_Movement)
     }
 }
-pub fn observe_access_underwater_movement_and___grab_or_climb(
+pub fn observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16210,7 +16379,7 @@ pub fn observe_access_underwater_movement_and___grab_or_climb(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
-pub fn observe_access_underwater_movement_and_grab(
+pub fn observe_access_underwater_movement_and_invoke_grab(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16221,7 +16390,7 @@ pub fn observe_access_underwater_movement_and_grab(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__grab!(ctx, world, full_obs)))
 }
-pub fn observe_access_underwater_movement_and_hook(
+pub fn observe_access_underwater_movement_and_invoke_hook(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16232,7 +16401,7 @@ pub fn observe_access_underwater_movement_and_hook(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_underwater_movement_and_hook_and_hover(
+pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16296,131 +16465,6 @@ pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
-}
-pub fn observe_action_clear_breach_save(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $clear_breach_save
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__clear_breach_save!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_collect__irikar_royal_storage_wall_collect__flask_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    rules::observe_action_flasks_incr_1(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(
-        ctx,
-        world,
-        SpotId::Annuna__East_Bridge__Center_Corridor,
-        full_obs
-    );
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(
-        ctx,
-        world,
-        SpotId::Annuna__East_Bridge__Tower_Base_East,
-        full_obs
-    );
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(
-        ctx,
-        world,
-        SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        full_obs
-    );
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path, full_obs);
-    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &Context,
@@ -16858,14 +16902,14 @@ pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
 ) {
     // ^_upper_gatestone = true
 }
-pub fn observe_action_indra_set_default(
+pub fn observe_action_indra_set_invoke_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
 }
-pub fn observe_action_indra_set_default_refill_energy(
+pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16876,6 +16920,216 @@ pub fn observe_action_indra_set_default_refill_energy(
     hobserve__refill_energy!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
+pub fn observe_action_invoke_clear_breach_save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $clear_breach_save
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__clear_breach_save!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    rules::observe_action_flasks_incr_1(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Annuna__East_Bridge__Center_Corridor,
+        full_obs
+    );
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Annuna__East_Bridge__Tower_Base_East,
+        full_obs
+    );
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        full_obs
+    );
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_post_portal_save_update(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $post_portal_save_update
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__post_portal_save_update!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_refill_energy(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $refill_energy
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__refill_energy!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_reset_old_area__newpos(
+    ctx: &Context,
+    world: &graph::World,
+    newpos: SpotId,
+    full_obs: &mut FullObservation,
+) {
+    // $reset_old_area(^newpos)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__reset_old_area!(ctx, world, newpos, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $save
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__save!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_save_last(
+    ctx: &Context,
+    world: &graph::World,
+    newpos: SpotId,
+    full_obs: &mut FullObservation,
+) {
+    // $save_last
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__save_last!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+}
+pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+}
+pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+}
+pub fn observe_action_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+}
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,
     world: &graph::World,
@@ -16883,7 +17137,7 @@ pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_p
 ) {
     // ^_platform_moved = true
 }
-pub fn observe_action_last_set_default(
+pub fn observe_action_last_set_invoke_default(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
@@ -16925,6 +17179,20 @@ pub fn observe_action_mode_set_indra_last_set_indra(
 ) {
     // ^mode = 'Indra'; ^last = ^indra
 }
+pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Glacier Breach > Angry Lions > Second Platform`
+}
+pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Glacier Breach > Angry Lions > Top Platform`
+}
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
     ctx: &Context,
     world: &graph::World,
@@ -16946,28 +17214,6 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
 ) {
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
 }
-pub fn observe_action_post_portal_save_update(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $post_portal_save_update
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__post_portal_save_update!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_refill_energy(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $refill_energy
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__refill_energy!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_refills_incr_1(
     ctx: &Context,
     world: &graph::World,
@@ -16975,69 +17221,10 @@ pub fn observe_action_refills_incr_1(
 ) {
     // ^refills += 1
 }
-pub fn observe_action_reset_old_area__newpos(
-    ctx: &Context,
-    world: &graph::World,
-    newpos: SpotId,
-    full_obs: &mut FullObservation,
-) {
-    // $reset_old_area(^newpos)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__reset_old_area!(ctx, world, newpos, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_save(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) {
-    // $save
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__save!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_save_last(
-    ctx: &Context,
-    world: &graph::World,
-    newpos: SpotId,
-    full_obs: &mut FullObservation,
-) {
-    // $save_last
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__save_last!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
-}
-pub fn observe_action_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_add_item__amagi_dragon_eye_passage(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
-}
-pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
-}
-pub fn observe_action_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
-}
-pub fn observe_action_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
-    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
 }
