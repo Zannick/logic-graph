@@ -5750,6 +5750,7 @@ digraph AxiomVerge2 {
     Glacier__Hammonds_End__Upper_Floor -> Glacier__Hammonds_End__Hammond;
     Glacier__Hammonds_End__Upper_Right_Pedestal -> Glacier__Hammonds_End__Upper_Right_Mid_air;
     Glacier__Hammonds_End__Upper_Right_Pedestal -> Glacier__Hammonds_End__Hammond;
+    Glacier__Hammonds_End__Upper_Right_Mid_air -> Glacier__Hammonds_End__Corner;
     Glacier_Breach__Angry_Lions__North -> Glacier_Breach__Angry_Lions__Second_Platform;
     Glacier_Breach__Angry_Lions__North -> Glacier_Breach__Angry_Lions__Top_Platform;
     Interior__Cave_Behind_Waterfall__Middle -> Interior__Cave_Behind_Waterfall__Top;

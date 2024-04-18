@@ -1848,8 +1848,9 @@ areas:
         - to: East 11 Door
       actions:
         - name: Move Portal to Corner
-          do: ^portal = `Glacier > Hammond's End > Corner`
           req: Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
+          do: ^portal = `Glacier > Hammond's End > Corner`
+          to: Corner
           time: 4
 
     - name: Lower Right Pedestal

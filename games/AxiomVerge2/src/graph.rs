@@ -10828,7 +10828,7 @@ impl world::Accessible for Action {
                 let (ret, mut tags) = rules::explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    edict.insert("dest", format!("{} ({})", dest, "Corner"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -11249,6 +11249,9 @@ impl world::Action for Action {
             }
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
                 SpotId::Glacier__Hammonds_End__Hammond
+            }
+            ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => {
+                SpotId::Glacier__Hammonds_End__Corner
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Top
