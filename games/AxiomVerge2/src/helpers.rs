@@ -2943,7 +2943,13 @@ macro_rules! rule__objective {
                 rules::access___remote_drone($ctx, $world)
             }
             RuleObjective::AllItems => {
-                rules::access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world)
+                rules::access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks($ctx, $world)
+            }
+            RuleObjective::AllUrns => {
+                rules::access___invoke_all_urns($ctx, $world)
+            }
+            RuleObjective::Any => {
+                rules::access___infect_nanite_mist($ctx, $world)
             }
         }
     }};
@@ -2957,7 +2963,13 @@ macro_rules! rexplain__objective {
                 rules::explain___remote_drone($ctx, $world, $edict)
             }
             RuleObjective::AllItems => {
-                rules::explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world, $edict)
+                rules::explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks($ctx, $world, $edict)
+            }
+            RuleObjective::AllUrns => {
+                rules::explain___invoke_all_urns($ctx, $world, $edict)
+            }
+            RuleObjective::Any => {
+                rules::explain___infect_nanite_mist($ctx, $world, $edict)
             }
         }
     }};
@@ -2971,7 +2983,13 @@ macro_rules! robserve__objective {
                 rules::observe_access___remote_drone($ctx, $world, $full_obs)
             }
             RuleObjective::AllItems => {
-                rules::observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth($ctx, $world, $full_obs)
+                rules::observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks($ctx, $world, $full_obs)
+            }
+            RuleObjective::AllUrns => {
+                rules::observe_access___invoke_all_urns($ctx, $world, $full_obs)
+            }
+            RuleObjective::Any => {
+                rules::observe_access___infect_nanite_mist($ctx, $world, $full_obs)
             }
         }
     }};

@@ -744,6 +744,31 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             1754
         }
+        (
+            [false],
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+        ) => 350,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 600,
+        (
+            [false],
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 600,
         ([false], SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => 877,
         (
             [false],
@@ -1806,6 +1831,18 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
         ) => 1052,
+        ([false], SpotId::Annuna__Seals__Breakable_Rock, SpotId::Annuna__Seals__Middle_Ledge) => {
+            701
+        }
+        ([false], SpotId::Annuna__Seals__East_15, SpotId::Annuna__Seals__Upper_Ledge) => 1228,
+        ([false], SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__East_17_Lower) => 1578,
+        ([false], SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__Lower_Seal) => 600,
+        ([false], SpotId::Annuna__Seals__Lower_Seal, SpotId::Annuna__Seals__Lower_Ledge) => 200,
+        ([false], SpotId::Annuna__Seals__Middle_Ledge, SpotId::Annuna__Seals__Breakable_Rock) => {
+            701
+        }
+        ([false], SpotId::Annuna__Seals__Upper_Ledge, SpotId::Annuna__Seals__Upper_Seal) => 350,
+        ([false], SpotId::Annuna__Seals__Upper_Seal, SpotId::Annuna__Seals__Upper_Ledge) => 600,
         (
             [false],
             SpotId::Annuna__Siuna_Storage__Cache,
@@ -7117,6 +7154,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [false],
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
         ) => 526,
         (
@@ -11204,6 +11246,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             1533
         }
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1866,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1933,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2466,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1266,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1533,
         (
             [false],
             SpotId::Menu__Kiengir_Map__Breach_Attractor,
@@ -17296,6 +17483,31 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             1754
         }
         ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+        ) => 350,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 600,
+        (
+            [true],
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => 600,
         ([true], SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => 877,
         (
             [true],
@@ -18344,6 +18556,14 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Annuna__Mirror_Match__West_Gap,
             SpotId::Annuna__Mirror_Match__Save_Point,
         ) => 1052,
+        ([true], SpotId::Annuna__Seals__Breakable_Rock, SpotId::Annuna__Seals__Middle_Ledge) => 701,
+        ([true], SpotId::Annuna__Seals__East_15, SpotId::Annuna__Seals__Upper_Ledge) => 1228,
+        ([true], SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__East_17_Lower) => 1578,
+        ([true], SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__Lower_Seal) => 600,
+        ([true], SpotId::Annuna__Seals__Lower_Seal, SpotId::Annuna__Seals__Lower_Ledge) => 200,
+        ([true], SpotId::Annuna__Seals__Middle_Ledge, SpotId::Annuna__Seals__Breakable_Rock) => 701,
+        ([true], SpotId::Annuna__Seals__Upper_Ledge, SpotId::Annuna__Seals__Upper_Seal) => 350,
+        ([true], SpotId::Annuna__Seals__Upper_Seal, SpotId::Annuna__Seals__Upper_Ledge) => 600,
         (
             [true],
             SpotId::Annuna__Siuna_Storage__Cache,
@@ -23457,6 +23677,11 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         (
             [true],
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
         ) => 526,
         (
@@ -27434,6 +27659,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             1533
         }
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 500,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 1866,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 1933,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2466,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1266,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1533,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Breach_Attractor,
@@ -34339,6 +34709,34 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => true,
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+        ) => true,
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => true,
+        (SpotId::Annuna__Seals__East_15, SpotId::Annuna__Seals__Upper_Ledge) => true,
+        (SpotId::Annuna__Seals__Upper_Ledge, SpotId::Annuna__Seals__Upper_Seal) => true,
+        (SpotId::Annuna__Seals__Upper_Seal, SpotId::Annuna__Seals__Upper_Ledge) => true,
+        (SpotId::Annuna__Seals__Middle_Ledge, SpotId::Annuna__Seals__Breakable_Rock) => true,
+        (SpotId::Annuna__Seals__Breakable_Rock, SpotId::Annuna__Seals__Middle_Ledge) => true,
+        (SpotId::Annuna__Seals__Lower_Seal, SpotId::Annuna__Seals__Lower_Ledge) => true,
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__Lower_Seal) => true,
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__East_17_Lower) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Save_Point) => true,
         (SpotId::Annuna__Final_Save__Pillar, SpotId::Annuna__Final_Save__Lower_West) => true,
         (SpotId::Annuna__Final_Save__Save_Point, SpotId::Annuna__Final_Save__East) => true,
@@ -37518,6 +37916,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
+        ) => true,
+        (
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
         ) => true,
         (
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
@@ -41869,6 +42271,114 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Menu__Kiengir_Map__Nanite_Mist, SpotId::Menu__Kiengir_Map__Uhrum_West) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            true
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__GB_SW_Save, SpotId::Menu__Breach_Map__GB_Peak) => true,
         (SpotId::Menu__Breach_Map__IB_Basement, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -44482,8 +44992,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            3333,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            2982,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            350,
         ),
         (
             SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
@@ -44492,13 +45027,53 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            600,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            600,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            4750,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            3333,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            SpotId::Annuna__Seals__East_15,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            6475,
         ),
         (
             SpotId::Annuna__Apocalypse_Hallway__West,
@@ -46521,6 +47096,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Annuna__Final_Cache__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Annuna__Final_Save__East,
             SpotId::Annuna__Apocalypse__West,
             1350,
@@ -47407,8 +47987,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Seals__Breakable_Rock,
+            SpotId::Annuna__Seals__Inner_Wall,
+            350,
+        ),
+        (
+            SpotId::Annuna__Seals__Breakable_Rock,
+            SpotId::Annuna__Seals__Middle_Ledge,
+            701,
+        ),
+        (
+            SpotId::Annuna__Seals__Breakable_Rock,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Seals__East_15,
+            SpotId::Annuna__Apocalypse_Hallway__West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Seals__East_15,
+            SpotId::Annuna__Seals__Upper_Ledge,
+            1228,
         ),
         (
             SpotId::Annuna__Seals__East_15,
@@ -47417,13 +48017,63 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Seals__East_17_Lower,
+            SpotId::Annuna__Final_Save__Lower_West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Lower,
+            SpotId::Annuna__Seals__Lower_Ledge,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Lower,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Annuna__Seals__East_17_Upper,
+            SpotId::Annuna__Final_Save__Upper_West,
+            1350,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Upper,
+            SpotId::Annuna__Seals__Lower_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Annuna__Seals__East_17_Upper,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Inner_Wall,
+            SpotId::Annuna__Final_Cache__West,
+            1701,
+        ),
+        (
+            SpotId::Annuna__Seals__Inner_Wall,
+            SpotId::Annuna__Seals__Breakable_Rock,
+            350,
+        ),
+        (
+            SpotId::Annuna__Seals__Inner_Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Ledge,
+            SpotId::Annuna__Seals__East_17_Lower,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Ledge,
+            SpotId::Annuna__Seals__East_17_Upper,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Ledge,
+            SpotId::Annuna__Seals__Lower_Seal,
+            600,
         ),
         (
             SpotId::Annuna__Seals__Lower_Ledge,
@@ -47432,8 +48082,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Seals__Lower_Seal,
+            SpotId::Annuna__Seals__East_17_Upper,
+            1578,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Seal,
+            SpotId::Annuna__Seals__Lower_Ledge,
+            200,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Seal,
+            SpotId::Annuna__Seals__Middle_Ledge,
+            600,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Seal,
+            SpotId::Annuna__Seals__Upper_Seal,
+            1799,
+        ),
+        (
+            SpotId::Annuna__Seals__Lower_Seal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Middle_Ledge,
+            SpotId::Annuna__Seals__Breakable_Rock,
+            701,
+        ),
+        (
+            SpotId::Annuna__Seals__Middle_Ledge,
+            SpotId::Annuna__Seals__Lower_Seal,
+            350,
+        ),
+        (
+            SpotId::Annuna__Seals__Middle_Ledge,
+            SpotId::Annuna__Seals__Upper_Seal,
+            1200,
         ),
         (
             SpotId::Annuna__Seals__Middle_Ledge,
@@ -47442,8 +48127,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Annuna__Seals__Upper_Ledge,
+            SpotId::Annuna__Seals__East_15,
+            1228,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Ledge,
+            SpotId::Annuna__Seals__Upper_Seal,
+            350,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Seal,
+            SpotId::Annuna__Seals__Lower_Seal,
+            700,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Seal,
+            SpotId::Annuna__Seals__Middle_Ledge,
+            400,
+        ),
+        (
+            SpotId::Annuna__Seals__Upper_Seal,
+            SpotId::Annuna__Seals__Upper_Ledge,
+            600,
         ),
         (
             SpotId::Annuna__Seals__Upper_Seal,
@@ -62278,7 +62988,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
             SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
-            1200,
+            600,
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__Below_Grate,
@@ -62307,6 +63017,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+            625,
+        ),
+        (
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
             526,
         ),
@@ -62319,6 +63034,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+            SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+            6000,
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
@@ -63618,7 +64338,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Hammonds_End__Upper_Floor,
             SpotId::Glacier__Hammonds_End__Hammond,
-            5000,
+            5500,
         ),
         (
             SpotId::Glacier__Hammonds_End__Upper_Floor,
@@ -63743,7 +64463,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
             SpotId::Glacier__Hammonds_End__Hammond,
-            5500,
+            5000,
         ),
         (
             SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
@@ -70142,6 +70862,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Kiengir_Map__Apocalypse,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            500,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            1866,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            1933,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2466,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1266,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -77606,6 +78476,26 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1754)
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => Some(1754),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => Some(2982),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+        ) => Some(350),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => Some(600),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => Some(600),
         (SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => Some(877),
         (SpotId::Annuna__Apocalypse__Bomb_East, SpotId::Annuna__Apocalypse__Southwest_Capsule) => {
             Some(1228)
@@ -78358,6 +79248,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             Some(1052)
         }
+        (SpotId::Annuna__Seals__Breakable_Rock, SpotId::Annuna__Seals__Middle_Ledge) => Some(701),
+        (SpotId::Annuna__Seals__East_15, SpotId::Annuna__Seals__Upper_Ledge) => Some(1228),
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__East_17_Lower) => Some(1578),
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__Lower_Seal) => Some(600),
+        (SpotId::Annuna__Seals__Lower_Seal, SpotId::Annuna__Seals__Lower_Ledge) => Some(200),
+        (SpotId::Annuna__Seals__Middle_Ledge, SpotId::Annuna__Seals__Breakable_Rock) => Some(701),
+        (SpotId::Annuna__Seals__Upper_Ledge, SpotId::Annuna__Seals__Upper_Seal) => Some(350),
+        (SpotId::Annuna__Seals__Upper_Seal, SpotId::Annuna__Seals__Upper_Ledge) => Some(600),
         (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => {
             Some(1052)
         }
@@ -81995,6 +82893,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(350),
         (
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+        ) => Some(1200),
+        (
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
         ) => Some(526),
         (
@@ -84914,6 +85816,114 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1266)
         }
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1533)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(533),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(533),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(866),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(500),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1000),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            Some(200)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(400),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1100),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(100)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(866),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1400),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1533),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            Some(1466)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1466),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(1933)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(1866),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(1933),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2466),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2200),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            Some(1133)
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1000)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1266),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(1533)
         }
         (
@@ -89240,6 +90250,26 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             (Some(1754), vec![])
         }
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => (Some(2982), vec![]),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+        ) => (Some(600), vec![]),
         (SpotId::Annuna__Apocalypse__Bomb, SpotId::Annuna__Apocalypse__Bomb_East) => {
             (Some(877), vec![])
         }
@@ -90041,6 +91071,30 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Annuna__Mirror_Match__West_Gap, SpotId::Annuna__Mirror_Match__Save_Point) => {
             (Some(1052), vec![])
+        }
+        (SpotId::Annuna__Seals__Breakable_Rock, SpotId::Annuna__Seals__Middle_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Seals__East_15, SpotId::Annuna__Seals__Upper_Ledge) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__East_17_Lower) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Annuna__Seals__Lower_Ledge, SpotId::Annuna__Seals__Lower_Seal) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Annuna__Seals__Lower_Seal, SpotId::Annuna__Seals__Lower_Ledge) => {
+            (Some(200), vec![])
+        }
+        (SpotId::Annuna__Seals__Middle_Ledge, SpotId::Annuna__Seals__Breakable_Rock) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Annuna__Seals__Upper_Ledge, SpotId::Annuna__Seals__Upper_Seal) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Annuna__Seals__Upper_Seal, SpotId::Annuna__Seals__Upper_Ledge) => {
+            (Some(600), vec![])
         }
         (SpotId::Annuna__Siuna_Storage__Cache, SpotId::Annuna__Siuna_Storage__Within_Range) => {
             (Some(1052), vec![])
@@ -94457,6 +95511,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(350), vec![]),
         (
             SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
         ) => (Some(526), vec![]),
         (
@@ -97564,6 +98622,114 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1266), vec![])
         }
         (SpotId::Menu__Kiengir_Map__Apocalypse, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1533), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1000), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Annuna_Upper) => {
+            (Some(200), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1100), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(100), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1533), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Ebih_West_Mid) => {
+            (Some(1466), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(1933), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(1866), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(1933), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2466), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2200), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_Center) => {
+            (Some(1133), vec![])
+        }
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1000), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1266), vec![]),
+        (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(1533), vec![])
         }
         (

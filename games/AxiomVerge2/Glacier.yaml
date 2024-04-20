@@ -1567,10 +1567,18 @@ areas:
         - to: Above Grate
       hybrid:
         - name: Escape
+          canon: Escape
           item: Escape
           req: Apocalypse_Bomb
           to: Terminal
           movement: base
+          jumps: 1
+        - name: Hook Escape
+          canon: Escape
+          item: Escape
+          req: Apocalypse_Bomb and $hook
+          to: Terminal
+          movement: fast_hover
           jumps: 1
     - name: Above Grate
       coord: [44.55, 10.2]
@@ -1587,15 +1595,35 @@ areas:
           req: Apocalypse_Bomb
           movement: base  # TODO: slingshot movements etc
           jumps: 2
+        - to: Grate Ledge
+          req: Apocalypse_Bomb and $hook
+          movement: fast_hover
+          jumps: 1
     - name: Shaft Bottom
       coord: [44.45, 14.4]
       local:
         - to: Lowest Stair
+      exits:
+        - to: Below Grate
+          req: $grab
+          movement: base
+          jumps: 25
+        - to: Below Grate
+          req: $hook
+          movement: base
+          jumps: 10
     - name: Lowest Stair
       coord: [44.2, 14.7]
       local:
         - to: West 15 Lower
         - to: West 15 Upper
+          jumps: 1
+        - to: Shaft Bottom
+          jumps: 2
+      exits:
+        - to: Shaft Bottom
+          req: $hook
+          movement: fast_hover
           jumps: 1
     - name: West 15 Lower
       coord: [44.05, 14.75]
@@ -1808,12 +1836,12 @@ areas:
           req: Breach_Attractor and Anuman
           do: ^portal = `Glacier > Hammond's End > Lower Pedestal West`
           to: Upper Right Mid-air
-          time: 2.5
+          time: 3
         - name: Move Portal to Note
           req: Breach_Attractor and Anuman
           do: ^portal = `Glacier > Hammond's End > Hammond`
           to: Hammond
-          time: 5
+          time: 5.5
       exits:
         - to: Upper Right Mid-air
           req: $hook and $hover
@@ -1832,12 +1860,12 @@ areas:
           req: Breach_Attractor and Anuman
           do: ^portal = `Glacier > Hammond's End > Lower Pedestal West`
           to: Upper Right Mid-air
-          time: 3
+          time: 2.5
         - name: Move Portal to Note
           req: Breach_Attractor and Anuman
           do: ^portal = `Glacier > Hammond's End > Hammond`
           to: Hammond
-          time: 5.5
+          time: 5
 
     - name: Upper Right Mid-air
       coord: [40.7, 10.1]

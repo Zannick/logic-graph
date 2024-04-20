@@ -1747,7 +1747,8 @@ if __name__ == '__main__':
 
     if not args.noparse:
         logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
-                    f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
+                    f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations '
+                    f'({sum(len(p) for p in gl.canon_places.values())} => {len(gl.canon_places)} canon locations), '
                     f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                     f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
                     f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')

@@ -389,10 +389,12 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Annuna__Seals__Upper_Seal
         | SpotId::Annuna__Seals__Middle_Ledge
         | SpotId::Annuna__Seals__Breakable_Rock
+        | SpotId::Annuna__Seals__Inner_Wall
         | SpotId::Annuna__Seals__Lower_Seal
         | SpotId::Annuna__Seals__Lower_Ledge
         | SpotId::Annuna__Seals__East_17_Upper
         | SpotId::Annuna__Seals__East_17_Lower => AreaId::Annuna__Seals,
+        SpotId::Annuna__Final_Cache__West => AreaId::Annuna__Final_Cache,
         SpotId::Annuna__Final_Save__Upper_West
         | SpotId::Annuna__Final_Save__Lower_West
         | SpotId::Annuna__Final_Save__Pillar
@@ -1547,7 +1549,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Filter_Spiders
         | SpotId::Menu__Kiengir_Map__Breach_Attractor
         | SpotId::Menu__Kiengir_Map__Hammond
-        | SpotId::Menu__Kiengir_Map__Nanite_Mist => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Nanite_Mist
+        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2048,10 +2051,12 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Annuna__Seals__Upper_Seal
         | SpotId::Annuna__Seals__Middle_Ledge
         | SpotId::Annuna__Seals__Breakable_Rock
+        | SpotId::Annuna__Seals__Inner_Wall
         | SpotId::Annuna__Seals__Lower_Seal
         | SpotId::Annuna__Seals__Lower_Ledge
         | SpotId::Annuna__Seals__East_17_Upper
         | SpotId::Annuna__Seals__East_17_Lower => RegionId::Annuna,
+        SpotId::Annuna__Final_Cache__West => RegionId::Annuna,
         SpotId::Annuna__Final_Save__Upper_West
         | SpotId::Annuna__Final_Save__Lower_West
         | SpotId::Annuna__Final_Save__Pillar
@@ -3186,7 +3191,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Filter_Spiders
         | SpotId::Menu__Kiengir_Map__Breach_Attractor
         | SpotId::Menu__Kiengir_Map__Hammond
-        | SpotId::Menu__Kiengir_Map__Nanite_Mist => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Nanite_Mist
+        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -3428,6 +3434,15 @@ impl world::Accessible for Location {
                 rules::access_separation(ctx, world)
             }
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
+                rules::access_mode_eq_drone(ctx, world)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
+                rules::access_mode_eq_drone_and_invoke_mist2(ctx, world)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
+                rules::access_mode_eq_drone_and_nanite_mist(ctx, world)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn => true,
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
@@ -3675,6 +3690,9 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 rules::access_apocalypse_bomb(ctx, world)
+            }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
+                rules::access_apocalypse_bomb_and_invoke_hook(ctx, world)
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => true,
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
@@ -4052,6 +4070,15 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 rules::observe_access_separation(ctx, world, full_obs)
             }
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
+                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
+                rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
+                rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
                 rules::observe_access_fast_travel(ctx, world, full_obs)
             }
@@ -4256,6 +4283,9 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 rules::observe_access_apocalypse_bomb(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
+                rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs)
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::observe_access_boomerang(ctx, world, full_obs)
@@ -4652,6 +4682,15 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 rules::explain_separation(ctx, world, edict)
             }
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
+                rules::explain_mode_eq_drone(ctx, world, edict)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
+                rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict)
+            }
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
+                rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
                 rules::explain_fast_travel(ctx, world, edict)
             }
@@ -4856,6 +4895,9 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 rules::explain_apocalypse_bomb(ctx, world, edict)
+            }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
+                rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict)
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::explain_boomerang(ctx, world, edict)
@@ -5192,6 +5234,14 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1 => true,
             ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::access_anuman_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => true,
@@ -5392,6 +5442,31 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::access_not_separation_or_defeat_indra(ctx, world),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::access_separation_and_not_defeat_indra_and_invoke_mist2(ctx, world),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => rules::access_mode_eq_drone_and_apocalypse_seals_wall(ctx, world),
+            ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
+            ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1 => true,
+            ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 => true,
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 => true,
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => rules::access_mode_eq_drone_and_apocalypse_seals_wall(ctx, world),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 => true,
+            ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 => rules::access_not_apocalypse_bomb(ctx, world),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::access_not_apocalypse_bomb(ctx, world),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::access_not_apocalypse_bomb(ctx, world),
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::access_invoke_hook(ctx, world),
@@ -6140,7 +6215,12 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::access_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::access_apocalypse_bomb(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::access_invoke_hook(ctx, world),
@@ -6804,6 +6884,11 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::observe_access_anuman_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6956,6 +7041,27 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::observe_access_not_separation_or_defeat_indra(ctx, world, full_obs),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::observe_access_separation_and_not_defeat_indra_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => rules::observe_access_mode_eq_drone_and_apocalypse_seals_wall(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => rules::observe_access_mode_eq_drone_and_apocalypse_seals_wall(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -7483,7 +7589,12 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::observe_access_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::observe_access_invoke_offset(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
@@ -8133,6 +8244,11 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => rules::explain_anuman_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Annuna__Center_Climb__Lower_Platform__ex__Middle_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -8285,6 +8401,27 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => rules::explain_not_separation_or_defeat_indra(ctx, world, edict),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => rules::explain_separation_and_not_defeat_indra_and_invoke_mist2(ctx, world, edict),
+            ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => rules::explain_mode_eq_drone_and_apocalypse_seals_wall(ctx, world, edict),
+            ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => rules::explain_mode_eq_drone_and_apocalypse_seals_wall(ctx, world, edict),
+            ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -8812,7 +8949,12 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::explain_invoke_offset(ctx, world, edict),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
@@ -9301,6 +9443,9 @@ impl world::Exit for Exit {
             ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => true,
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 => true,
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1 => true,
             ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => true,
             ExitId::Annuna__Center_Climb__West__ex__Egg_Room__East_1 => true,
             ExitId::Annuna__Center_Save__East__ex__Vertical_Room__West_21_1 => true,
@@ -9349,6 +9494,10 @@ impl world::Exit for Exit {
             ExitId::Annuna__Mirror_Match__East_26_Lower__ex__West_Bridge__West_26_Lower_1 => true,
             ExitId::Annuna__Mirror_Match__East_26_Upper__ex__West_Bridge__West_26_Upper_1 => true,
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => true,
+            ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1 => true,
+            ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 => true,
+            ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 => true,
+            ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 => true,
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
             ExitId::Annuna__Siuna_Storage__West__ex__Lamassu__East_16_1 => true,
             ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => true,
@@ -12046,7 +12195,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1626] = [
+static RAW_SPOTS: [SpotId; 1629] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -12261,6 +12410,7 @@ static RAW_SPOTS: [SpotId; 1626] = [
     SpotId::Annuna__Filter_Teleporter__West_19,
     SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
     SpotId::Annuna__Filter_Teleporter__West_21,
+    SpotId::Annuna__Final_Cache__West,
     SpotId::Annuna__Final_Save__East,
     SpotId::Annuna__Final_Save__Lower_West,
     SpotId::Annuna__Final_Save__Pillar,
@@ -12312,6 +12462,7 @@ static RAW_SPOTS: [SpotId; 1626] = [
     SpotId::Annuna__Seals__East_15,
     SpotId::Annuna__Seals__East_17_Lower,
     SpotId::Annuna__Seals__East_17_Upper,
+    SpotId::Annuna__Seals__Inner_Wall,
     SpotId::Annuna__Seals__Lower_Ledge,
     SpotId::Annuna__Seals__Lower_Seal,
     SpotId::Annuna__Seals__Middle_Ledge,
@@ -13520,6 +13671,7 @@ static RAW_SPOTS: [SpotId; 1626] = [
     SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
     SpotId::Menu__Kiengir_Map__Anuman,
     SpotId::Menu__Kiengir_Map__Apocalypse,
+    SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
     SpotId::Menu__Kiengir_Map__Breach_Attractor,
     SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Bronze_Axe,
@@ -13749,6 +13901,10 @@ lazy_static! {
         AreaId::Annuna__Filter_Teleporter => Range {
             start: SpotId::Annuna__Filter_Teleporter__Door_Ledge.into_usize(),
             end: SpotId::Annuna__Filter_Teleporter__West_21.into_usize() + 1,
+        },
+        AreaId::Annuna__Final_Cache => Range {
+            start: SpotId::Annuna__Final_Cache__West.into_usize(),
+            end: SpotId::Annuna__Final_Cache__West.into_usize() + 1,
         },
         AreaId::Annuna__Final_Save => Range {
             start: SpotId::Annuna__Final_Save__East.into_usize(),
@@ -14453,7 +14609,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 285;
+    const NUM_LOCATIONS: u32 = 289;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14567,6 +14723,11 @@ impl world::World for World {
                 LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
                 LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
             ],
+            CanonId::Apocalypse_Seals_Wall => vec![
+                LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+                LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
+                LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+            ],
             CanonId::Apocalypse_Bomb => vec![
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
@@ -14679,6 +14840,10 @@ impl world::World for World {
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
+            ],
+            CanonId::Escape => vec![
+                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
             ],
             CanonId::Hammonds_Note => vec![
                 LocationId::Glacier__Hammonds_End__Hammond__Note,
@@ -14906,6 +15071,11 @@ impl world::World for World {
                 LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
                 LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
             ],
+            Item::Apocalypse_Seals_Wall => vec![
+                LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+                LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
+                LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+            ],
             Item::Apocalypse_Bomb => vec![
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
@@ -15034,7 +15204,10 @@ impl world::World for World {
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
             ],
-            Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape],
+            Item::Escape => vec![
+                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
+            ],
             Item::Bounty_List => vec![LocationId::Glacier__Crystals__Top_Corner__Tablet],
             Item::Breach_Attractor => vec![LocationId::Glacier__Crystals__Lower_Corner__Item],
             Item::Goodbye => vec![
@@ -15388,6 +15561,11 @@ impl world::World for World {
             | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
                 SpotId::Annuna__Siuna_Storage__Cache
             }
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall
+            | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall
+            | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
+                SpotId::Annuna__Seals__Breakable_Rock
+            }
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight
             | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
                 SpotId::Annuna__Apocalypse__Center_Scaffold_West
@@ -15643,7 +15821,8 @@ impl world::World for World {
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
                 SpotId::Glacier__Ledge_Grab_Room__Pedestal
             }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape
+            | LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Grate_Ledge
             }
             LocationId::Glacier__Crystals__Top_Corner__Tablet => {
@@ -16383,6 +16562,22 @@ impl world::World for World {
             ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist | ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 | ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Wall_Left,
             ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Within_Range,
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Cache,
+            ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => SpotId::Annuna__Apocalypse_Hallway__Lower_East,
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 | ExitId:: Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => SpotId::Annuna__Apocalypse_Hallway__Upper_East,
+            ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => SpotId::Annuna__Apocalypse_Hallway__East_Pillar,
+            ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 | ExitId:: Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 | ExitId:: Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1 => SpotId::Annuna__Apocalypse_Hallway__West,
+            ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1 => SpotId::Annuna__Seals__East_15,
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 | ExitId:: Annuna__Seals__Upper_Ledge__ex__East_15_2 => SpotId::Annuna__Seals__Upper_Ledge,
+            ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 | ExitId:: Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => SpotId::Annuna__Seals__Upper_Seal,
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 | ExitId:: Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 | ExitId:: Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => SpotId::Annuna__Seals__Middle_Ledge,
+            ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => SpotId::Annuna__Seals__Breakable_Rock,
+            ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall | ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => SpotId::Annuna__Seals__Breakable_Rock,
+            ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 | ExitId:: Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => SpotId::Annuna__Seals__Inner_Wall,
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 | ExitId:: Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 | ExitId:: Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 | ExitId:: Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => SpotId::Annuna__Seals__Lower_Seal,
+            ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => SpotId::Annuna__Seals__Lower_Ledge,
+            ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 | ExitId:: Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 | ExitId:: Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => SpotId::Annuna__Seals__East_17_Upper,
+            ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 | ExitId:: Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 | ExitId:: Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => SpotId::Annuna__Seals__East_17_Lower,
             ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 | ExitId:: Annuna__Final_Save__Upper_West__ex__Apocalypse__Northwest_Mid_air_1 => SpotId::Annuna__Final_Save__Upper_West,
             ExitId::Annuna__Final_Save__Lower_West__ex__Seals__East_17_Lower_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_1 | ExitId:: Annuna__Final_Save__Lower_West__ex__Pillar_2 => SpotId::Annuna__Final_Save__Lower_West,
             ExitId::Annuna__Final_Save__Pillar__ex__Upper_West_1 => SpotId::Annuna__Final_Save__Pillar,
@@ -16970,9 +17165,11 @@ impl world::World for World {
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 | ExitId:: Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => SpotId::Glacier__Apocalypse_Entry__West_10,
-            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape | ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => SpotId::Glacier__Apocalypse_Entry__Above_Grate,
-            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 | ExitId:: Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 | ExitId:: Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 | ExitId:: Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => SpotId::Glacier__Crystals__West,
@@ -17365,11 +17562,6 @@ impl world::World for World {
                                 map.insert(Item::Goodbye, 1);
                             }
                         }
-                        if !ctx.has(Item::Hammond_Auth) {
-                            if !map.contains_key(&Item::Hammond_Auth) {
-                                map.insert(Item::Hammond_Auth, 1);
-                            }
-                        }
                         if ctx.count(Item::Health_Fragment) < 6 {
                             if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                                 *val = std::cmp::max(*val, 6 - ctx.count(Item::Health_Fragment));
@@ -17501,6 +17693,80 @@ impl world::World for World {
                             }
                         }
                     }
+                    RuleObjective::AllUrns => {
+                        if !ctx.has(Item::Amashilama) {
+                            if !map.contains_key(&Item::Amashilama) {
+                                map.insert(Item::Amashilama, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Anuman) {
+                            if !map.contains_key(&Item::Anuman) {
+                                map.insert(Item::Anuman, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Breach_Sight) {
+                            if !map.contains_key(&Item::Breach_Sight) {
+                                map.insert(Item::Breach_Sight, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Drone_Hover) {
+                            if !map.contains_key(&Item::Drone_Hover) {
+                                map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Fast_Travel) {
+                            if !map.contains_key(&Item::Fast_Travel) {
+                                map.insert(Item::Fast_Travel, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Infect) {
+                            if !map.contains_key(&Item::Infect) {
+                                map.insert(Item::Infect, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Ledge_Grab) {
+                            if !map.contains_key(&Item::Ledge_Grab) {
+                                map.insert(Item::Ledge_Grab, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Nanite_Mist) {
+                            if !map.contains_key(&Item::Nanite_Mist) {
+                                map.insert(Item::Nanite_Mist, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Remote_Drone) {
+                            if !map.contains_key(&Item::Remote_Drone) {
+                                map.insert(Item::Remote_Drone, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Shockwave) {
+                            if !map.contains_key(&Item::Shockwave) {
+                                map.insert(Item::Shockwave, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Slingshot_Hook) {
+                            if !map.contains_key(&Item::Slingshot_Hook) {
+                                map.insert(Item::Slingshot_Hook, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Wall_Climb) {
+                            if !map.contains_key(&Item::Wall_Climb) {
+                                map.insert(Item::Wall_Climb, 1);
+                            }
+                        }
+                    }
+                    RuleObjective::Any => {
+                        if !ctx.has(Item::Infect) {
+                            if !map.contains_key(&Item::Infect) {
+                                map.insert(Item::Infect, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Nanite_Mist) {
+                            if !map.contains_key(&Item::Nanite_Mist) {
+                                map.insert(Item::Nanite_Mist, 1);
+                            }
+                        }
+                    }
                 }
             }
             RuleVictory::JustObjective => match self.rule_objective {
@@ -17624,11 +17890,6 @@ impl world::World for World {
                     if !ctx.has(Item::Goodbye) {
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
-                        }
-                    }
-                    if !ctx.has(Item::Hammond_Auth) {
-                        if !map.contains_key(&Item::Hammond_Auth) {
-                            map.insert(Item::Hammond_Auth, 1);
                         }
                     }
                     if ctx.count(Item::Health_Fragment) < 6 {
@@ -17759,6 +18020,80 @@ impl world::World for World {
                         }
                     }
                 }
+                RuleObjective::AllUrns => {
+                    if !ctx.has(Item::Amashilama) {
+                        if !map.contains_key(&Item::Amashilama) {
+                            map.insert(Item::Amashilama, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Anuman) {
+                        if !map.contains_key(&Item::Anuman) {
+                            map.insert(Item::Anuman, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Breach_Sight) {
+                        if !map.contains_key(&Item::Breach_Sight) {
+                            map.insert(Item::Breach_Sight, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Drone_Hover) {
+                        if !map.contains_key(&Item::Drone_Hover) {
+                            map.insert(Item::Drone_Hover, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Fast_Travel) {
+                        if !map.contains_key(&Item::Fast_Travel) {
+                            map.insert(Item::Fast_Travel, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Infect) {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Ledge_Grab) {
+                        if !map.contains_key(&Item::Ledge_Grab) {
+                            map.insert(Item::Ledge_Grab, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Nanite_Mist) {
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Remote_Drone) {
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Shockwave) {
+                        if !map.contains_key(&Item::Shockwave) {
+                            map.insert(Item::Shockwave, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Slingshot_Hook) {
+                        if !map.contains_key(&Item::Slingshot_Hook) {
+                            map.insert(Item::Slingshot_Hook, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Wall_Climb) {
+                        if !map.contains_key(&Item::Wall_Climb) {
+                            map.insert(Item::Wall_Climb, 1);
+                        }
+                    }
+                }
+                RuleObjective::Any => {
+                    if !ctx.has(Item::Infect) {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Nanite_Mist) {
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
+                        }
+                    }
+                }
             },
             RuleVictory::Bench => {
                 if ctx.count(Item::Flask) < 6 {
@@ -17856,9 +18191,6 @@ impl world::World for World {
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
                         }
-                        if !map.contains_key(&Item::Hammond_Auth) {
-                            map.insert(Item::Hammond_Auth, 1);
-                        }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                             *val = std::cmp::max(*val, 6);
                         } else {
@@ -17935,6 +18267,52 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Wall_Climb) {
                             map.insert(Item::Wall_Climb, 1);
+                        }
+                    }
+                    RuleObjective::AllUrns => {
+                        if !map.contains_key(&Item::Amashilama) {
+                            map.insert(Item::Amashilama, 1);
+                        }
+                        if !map.contains_key(&Item::Anuman) {
+                            map.insert(Item::Anuman, 1);
+                        }
+                        if !map.contains_key(&Item::Breach_Sight) {
+                            map.insert(Item::Breach_Sight, 1);
+                        }
+                        if !map.contains_key(&Item::Drone_Hover) {
+                            map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Fast_Travel) {
+                            map.insert(Item::Fast_Travel, 1);
+                        }
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                        if !map.contains_key(&Item::Ledge_Grab) {
+                            map.insert(Item::Ledge_Grab, 1);
+                        }
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
+                        }
+                        if !map.contains_key(&Item::Remote_Drone) {
+                            map.insert(Item::Remote_Drone, 1);
+                        }
+                        if !map.contains_key(&Item::Shockwave) {
+                            map.insert(Item::Shockwave, 1);
+                        }
+                        if !map.contains_key(&Item::Slingshot_Hook) {
+                            map.insert(Item::Slingshot_Hook, 1);
+                        }
+                        if !map.contains_key(&Item::Wall_Climb) {
+                            map.insert(Item::Wall_Climb, 1);
+                        }
+                    }
+                    RuleObjective::Any => {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
                         }
                     }
                 }
@@ -18016,9 +18394,6 @@ impl world::World for World {
                     if !map.contains_key(&Item::Goodbye) {
                         map.insert(Item::Goodbye, 1);
                     }
-                    if !map.contains_key(&Item::Hammond_Auth) {
-                        map.insert(Item::Hammond_Auth, 1);
-                    }
                     if let Some(val) = map.get_mut(&Item::Health_Fragment) {
                         *val = std::cmp::max(*val, 6);
                     } else {
@@ -18095,6 +18470,52 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Wall_Climb) {
                         map.insert(Item::Wall_Climb, 1);
+                    }
+                }
+                RuleObjective::AllUrns => {
+                    if !map.contains_key(&Item::Amashilama) {
+                        map.insert(Item::Amashilama, 1);
+                    }
+                    if !map.contains_key(&Item::Anuman) {
+                        map.insert(Item::Anuman, 1);
+                    }
+                    if !map.contains_key(&Item::Breach_Sight) {
+                        map.insert(Item::Breach_Sight, 1);
+                    }
+                    if !map.contains_key(&Item::Drone_Hover) {
+                        map.insert(Item::Drone_Hover, 1);
+                    }
+                    if !map.contains_key(&Item::Fast_Travel) {
+                        map.insert(Item::Fast_Travel, 1);
+                    }
+                    if !map.contains_key(&Item::Infect) {
+                        map.insert(Item::Infect, 1);
+                    }
+                    if !map.contains_key(&Item::Ledge_Grab) {
+                        map.insert(Item::Ledge_Grab, 1);
+                    }
+                    if !map.contains_key(&Item::Nanite_Mist) {
+                        map.insert(Item::Nanite_Mist, 1);
+                    }
+                    if !map.contains_key(&Item::Remote_Drone) {
+                        map.insert(Item::Remote_Drone, 1);
+                    }
+                    if !map.contains_key(&Item::Shockwave) {
+                        map.insert(Item::Shockwave, 1);
+                    }
+                    if !map.contains_key(&Item::Slingshot_Hook) {
+                        map.insert(Item::Slingshot_Hook, 1);
+                    }
+                    if !map.contains_key(&Item::Wall_Climb) {
+                        map.insert(Item::Wall_Climb, 1);
+                    }
+                }
+                RuleObjective::Any => {
+                    if !map.contains_key(&Item::Infect) {
+                        map.insert(Item::Infect, 1);
+                    }
+                    if !map.contains_key(&Item::Nanite_Mist) {
+                        map.insert(Item::Nanite_Mist, 1);
                     }
                 }
             },
@@ -18177,6 +18598,9 @@ impl world::World for World {
             | SpotId::Amagi_Breach__East_Entrance__West
             | SpotId::Annuna__Apocalypse__Center_Scaffold_West
             | SpotId::Annuna__Apocalypse__West
+            | SpotId::Annuna__Apocalypse_Hallway__Lower_East
+            | SpotId::Annuna__Apocalypse_Hallway__Upper_East
+            | SpotId::Annuna__Apocalypse_Hallway__West
             | SpotId::Annuna__Center_Climb__East
             | SpotId::Annuna__Center_Climb__West
             | SpotId::Annuna__Center_Save__East
@@ -18255,6 +18679,11 @@ impl world::World for World {
             | SpotId::Annuna__Mirror_Match__Save_Point
             | SpotId::Annuna__Mirror_Match__Waving_Distance
             | SpotId::Annuna__Mirror_Match__West_25
+            | SpotId::Annuna__Seals__Breakable_Rock
+            | SpotId::Annuna__Seals__East_15
+            | SpotId::Annuna__Seals__East_17_Lower
+            | SpotId::Annuna__Seals__East_17_Upper
+            | SpotId::Annuna__Seals__Inner_Wall
             | SpotId::Annuna__Siuna_Storage__Cache
             | SpotId::Annuna__Siuna_Storage__Portal_Entry
             | SpotId::Annuna__Siuna_Storage__Second_Platform
@@ -18886,6 +19315,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Hammond
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
+            | SpotId::Menu__Kiengir_Map__Nanite_Mist
             | SpotId::Menu__Kiengir_Map__Remote_Drone
             | SpotId::Menu__Kiengir_Map__Shockwave
             | SpotId::Menu__Kiengir_Map__Uhrum_Center
@@ -19080,6 +19510,114 @@ impl World {
                             | Item::Udusan
                     )
                 }
+                RuleObjective::AllUrns => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
+                            | Item::Bounty_List
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
+                            | Item::Double_Axe
+                            | Item::Dr_Gloria
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Eye_Ring
+                            | Item::Family_Tragedy
+                            | Item::Goodbye
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Eternal_Arm
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
+                    )
+                }
+                RuleObjective::Any => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
+                            | Item::Bounty_List
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
+                            | Item::Double_Axe
+                            | Item::Dr_Gloria
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Eye_Ring
+                            | Item::Family_Tragedy
+                            | Item::Goodbye
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Eternal_Arm
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
+                    )
+                }
             },
             RuleVictory::JustObjective => match self.rule_objective {
                 RuleObjective::Start => {
@@ -19163,6 +19701,116 @@ impl World {
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
                             | Item::Udusan
+                    )
+                }
+                RuleObjective::AllUrns => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
+                            | Item::Bounty_List
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
+                            | Item::Double_Axe
+                            | Item::Dr_Gloria
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Eye_Ring
+                            | Item::Family_Tragedy
+                            | Item::Goodbye
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Eternal_Arm
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
+                    )
+                }
+                RuleObjective::Any => {
+                    matches!(
+                        item,
+                        Item::Aansur
+                            | Item::Amagi_Stronghold_Left_Wall
+                            | Item::Beware_the_Patternmind
+                            | Item::Bounty_List
+                            | Item::Bronze_Axe
+                            | Item::Building_of_the_School
+                            | Item::Carnelian_Ring
+                            | Item::Commemorative_Speech
+                            | Item::Companies_Layoff
+                            | Item::Compass
+                            | Item::Dangerous_Ideas
+                            | Item::Dear_Ernest
+                            | Item::Destruction_Pogrom
+                            | Item::Double_Axe
+                            | Item::Dr_Gloria
+                            | Item::Drone_Melee_Damage_3
+                            | Item::Drone_Melee_Speed_3
+                            | Item::Escape
+                            | Item::Eye_Ring
+                            | Item::Family_Tragedy
+                            | Item::Goodbye
+                            | Item::Health_Upgrade_5
+                            | Item::Heretics_Granddaughter
+                            | Item::Heretics_Tablet
+                            | Item::Infection_Speed_2
+                            | Item::Journal_2049_10_29
+                            | Item::Lament_for_Fools
+                            | Item::Letter_from_Trace
+                            | Item::Melee_Charge
+                            | Item::Melee_Damage_3
+                            | Item::Melee_Speed_3
+                            | Item::Nano_Lattice_2
+                            | Item::Nano_Points_3
+                            | Item::Notes_2053_02_27
+                            | Item::Plague_of_Thoughts
+                            | Item::Ranged_Damage_3
+                            | Item::Ranged_Speed_3
+                            | Item::Record_Losses
+                            | Item::Refill
+                            | Item::Researchers_Missing
+                            | Item::Royal_Dagger
+                            | Item::Royal_Ring
+                            | Item::Storm_Bomb
+                            | Item::Suspension_Bridge
+                            | Item::Terminal_Breakthrough_1
+                            | Item::Terminal_Breakthrough_2
+                            | Item::The_Eternal_Arm
+                            | Item::The_Ideal_Kiengir
+                            | Item::Udusan
+                            | Item::Under_Siege
                     )
                 }
             },
@@ -19770,6 +20418,30 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
+        },
+        LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => Location {
+            id: LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+            canonical: CanonId::Apocalypse_Seals_Wall,
+            item: Item::Apocalypse_Seals_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
+        },
+        LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => Location {
+            id: LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
+            canonical: CanonId::Apocalypse_Seals_Wall,
+            item: Item::Apocalypse_Seals_Wall,
+            price: Currency::Energy(40),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
+        },
+        LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => Location {
+            id: LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+            canonical: CanonId::Apocalypse_Seals_Wall,
+            item: Item::Apocalypse_Seals_Wall,
+            price: Currency::Energy(30),
+            time: 0,
+            exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
         },
         LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => Location {
             id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
@@ -20677,11 +21349,19 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => Location {
             id: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
-            canonical: CanonId::None,
+            canonical: CanonId::Escape,
             item: Item::Escape,
             price: Currency::Free,
             time: 0,
             exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+        },
+        LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => Location {
+            id: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
+            canonical: CanonId::Escape,
+            item: Item::Escape,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
         },
         LocationId::Glacier__Crystals__Top_Corner__Tablet => Location {
             id: LocationId::Glacier__Crystals__Top_Corner__Tablet,
@@ -24087,6 +24767,237 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
+        },
+        ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1,
+            time: 1350,
+            dest: SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1,
+            time: 1350,
+            dest: SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1,
+            time: 4750,
+            dest: SpotId::Annuna__Apocalypse_Hallway__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1,
+            time: 2982,
+            dest: SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1,
+            time: 3333,
+            dest: SpotId::Annuna__Apocalypse_Hallway__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1,
+            time: 3333,
+            dest: SpotId::Annuna__Apocalypse_Hallway__Center_Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1,
+            time: 6475,
+            dest: SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1 => Exit {
+            id: ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1,
+            time: 1350,
+            dest: SpotId::Annuna__Seals__East_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1 => Exit {
+            id: ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Apocalypse_Hallway__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => Exit {
+            id: ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1,
+            time: 1799,
+            dest: SpotId::Annuna__Seals__East_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => Exit {
+            id: ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2,
+            time: 1228,
+            dest: SpotId::Annuna__Seals__East_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1,
+            time: 400,
+            dest: SpotId::Annuna__Seals__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => Exit {
+            id: ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1,
+            time: 700,
+            dest: SpotId::Annuna__Seals__Lower_Seal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 => Exit {
+            id: ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1,
+            time: 350,
+            dest: SpotId::Annuna__Seals__Lower_Seal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => Exit {
+            id: ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1,
+            time: 2400,
+            dest: SpotId::Annuna__Seals__Upper_Seal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => Exit {
+            id: ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2,
+            time: 1200,
+            dest: SpotId::Annuna__Seals__Upper_Seal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => Exit {
+            id: ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1,
+            time: 350,
+            dest: SpotId::Annuna__Seals__Inner_Wall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => Exit {
+            id: ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+            time: 2750,
+            dest: SpotId::Annuna__Seals__Inner_Wall,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
+        },
+        ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => Exit {
+            id: ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
+            time: 350,
+            dest: SpotId::Annuna__Seals__Inner_Wall,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
+        },
+        ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => Exit {
+            id: ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+            time: 350,
+            dest: SpotId::Annuna__Seals__Inner_Wall,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
+        },
+        ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 => Exit {
+            id: ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1,
+            time: 1701,
+            dest: SpotId::Annuna__Final_Cache__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => Exit {
+            id: ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1,
+            time: 350,
+            dest: SpotId::Annuna__Seals__Breakable_Rock,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1,
+            time: 1200,
+            dest: SpotId::Annuna__Seals__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 => Exit {
+            id: ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2,
+            time: 600,
+            dest: SpotId::Annuna__Seals__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 => Exit {
+            id: ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1,
+            time: 1799,
+            dest: SpotId::Annuna__Seals__Upper_Seal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => Exit {
+            id: ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1,
+            time: 1578,
+            dest: SpotId::Annuna__Seals__East_17_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => Exit {
+            id: ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1,
+            time: 1578,
+            dest: SpotId::Annuna__Seals__East_17_Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Final_Save__Upper_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1,
+            time: 1578,
+            dest: SpotId::Annuna__Seals__Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2,
+            time: 1200,
+            dest: SpotId::Annuna__Seals__Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1,
+            time: 1350,
+            dest: SpotId::Annuna__Final_Save__Lower_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1,
+            time: 2400,
+            dest: SpotId::Annuna__Seals__Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => Exit {
+            id: ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2,
+            time: 1578,
+            dest: SpotId::Annuna__Seals__Lower_Ledge,
+            price: Currency::Free,
+            loc_id: None,
         },
         ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1 => Exit {
             id: ExitId::Annuna__Final_Save__Upper_West__ex__Seals__East_17_Upper_1,
@@ -30220,6 +31131,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: Some(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
         },
+        ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
+            time: 600,
+            dest: SpotId::Glacier__Apocalypse_Entry__Terminal,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
+        },
         ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => Exit {
             id: ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1,
             time: 300,
@@ -30231,6 +31149,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1,
             time: 1200,
             dest: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2,
+            time: 600,
+            dest: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1,
+            time: 15000,
+            dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2,
+            time: 6000,
+            dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => Exit {
+            id: ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1,
+            time: 625,
+            dest: SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
             price: Currency::Free,
             loc_id: None,
         },
@@ -33402,22 +34348,22 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => Action {
             id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
-            time: 2500,
+            time: 3000,
             price: Currency::Free,
         },
         ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => Action {
             id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note,
-            time: 5000,
+            time: 5500,
             price: Currency::Free,
         },
         ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => Action {
             id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
-            time: 3000,
+            time: 2500,
             price: Currency::Free,
         },
         ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => Action {
             id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
-            time: 5500,
+            time: 5000,
             price: Currency::Free,
         },
         ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => Action {
@@ -38043,7 +38989,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38055,7 +39002,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38067,7 +39015,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38079,7 +39028,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38091,7 +39041,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1.into_usize(),
+                end: ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38103,7 +39054,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1.into_usize(),
+                end: ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38115,7 +39067,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1.into_usize(),
+                end: ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38127,7 +39080,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1.into_usize(),
+                end: ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38139,7 +39093,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1.into_usize(),
+                end: ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38148,10 +39103,25 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Annuna__Seals__Breakable_Rock => Spot {
             id: SpotId::Annuna__Seals__Breakable_Rock,
             locations: Range {
+                start: LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall.into_usize(),
+                end: LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1.into_usize(),
+                end: ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Seals__Inner_Wall => Spot {
+            id: SpotId::Annuna__Seals__Inner_Wall,
+            locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1.into_usize(),
+                end: ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38163,7 +39133,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1.into_usize(),
+                end: ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38175,7 +39146,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1.into_usize(),
+                end: ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38187,7 +39159,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1.into_usize(),
+                end: ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -38195,6 +39168,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Annuna__Seals__East_17_Lower => Spot {
             id: SpotId::Annuna__Seals__East_17_Lower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1.into_usize(),
+                end: ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Annuna__Final_Cache__West => Spot {
+            id: SpotId::Annuna__Final_Cache__West,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -49363,7 +50349,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
             locations: Range {
                 start: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape.into_usize(),
-                end: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape.into_usize() + 1,
+                end: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -49392,7 +50378,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1.into_usize(),
-                end: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1.into_usize() + 1,
+                end: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49404,7 +50390,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1.into_usize(),
+                end: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49416,7 +50403,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1.into_usize(),
+                end: ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -52640,6 +53628,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Nanite_Mist => Spot {
             id: SpotId::Menu__Kiengir_Map__Nanite_Mist,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Apocalypse_Cache => Spot {
+            id: SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
             locations: Range {
                 start: 0, end: 0,
             },

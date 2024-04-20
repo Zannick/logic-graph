@@ -435,10 +435,14 @@ subgraph Annuna
         Annuna__Seals__Upper_Seal(Upper Seal);
         Annuna__Seals__Middle_Ledge(Middle Ledge);
         Annuna__Seals__Breakable_Rock(Breakable Rock);
+        Annuna__Seals__Inner_Wall(Inner Wall);
         Annuna__Seals__Lower_Seal(Lower Seal);
         Annuna__Seals__Lower_Ledge(Lower Ledge);
         Annuna__Seals__East_17_Upper(East 17 Upper);
         Annuna__Seals__East_17_Lower(East 17 Lower);
+    end
+    subgraph Annuna__Final_Cache[Final Cache]
+        Annuna__Final_Cache__West(West);
     end
     subgraph Annuna__Final_Save[Final Save]
         Annuna__Final_Save__Upper_West(Upper West);
@@ -1872,7 +1876,8 @@ subgraph Menu
         Menu__Kiengir_Map__Filter_Spiders(Filter Spiders);
         Menu__Kiengir_Map__Breach_Attractor(Breach Attractor);
         Menu__Kiengir_Map__Hammond(Hammond);
-        Menu__Kiengir_Map__Nanite_Mist(Nanite_Mist);
+        Menu__Kiengir_Map__Nanite_Mist(Nanite Mist);
+        Menu__Kiengir_Map__Apocalypse_Cache(Apocalypse Cache);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__GB_Peak(GB Peak);
@@ -2059,6 +2064,13 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Annuna__Apocalypse_Hallway__Center_Pillar <--> Annuna__Apocalypse_Hallway__West
+Annuna__Apocalypse_Hallway__East_Pillar --> Annuna__Apocalypse_Hallway__Center_Pillar
+Annuna__Apocalypse_Hallway__Lower_East <--> Glacier__Apocalypse_Entry__West_15_Lower
+Annuna__Apocalypse_Hallway__Upper_East --> Annuna__Apocalypse_Hallway__West
+Annuna__Apocalypse_Hallway__Upper_East <--> Glacier__Apocalypse_Entry__West_15_Upper
+Annuna__Apocalypse_Hallway__West <--> Annuna__Seals__East_15
+Annuna__Apocalypse_Hallway__West --> Glacier__Apocalypse_Entry__Lowest_Stair
 Annuna__Apocalypse__Center_Scaffold_West --> Annuna__Apocalypse__Bomb_East
 Annuna__Apocalypse__Center_Scaffold_West --> Annuna__Apocalypse__Bomb_Northwest
 Annuna__Apocalypse__Northwest_Mid_air --> Annuna__Apocalypse__Northwest_Scaffold_2_West
@@ -2169,12 +2181,12 @@ Annuna__Filter_Teleporter__West_19_Mid_flight --> Annuna__Spider_Room__Southwest
 Annuna__Filter_Teleporter__West_21 <--> Annuna__Middle_Hallway__East
 Annuna__Final_Save__East --> Annuna__Final_Save__Upper_West
 Annuna__Final_Save__Lower_West --> Annuna__Final_Save__Pillar
-Annuna__Final_Save__Lower_West --> Annuna__Seals__East_17_Lower
+Annuna__Final_Save__Lower_West <--> Annuna__Seals__East_17_Lower
 Annuna__Final_Save__Pillar --> Annuna__Final_Save__Upper_West
 Annuna__Final_Save__Save_Point --> Annuna__Apocalypse__Northwest_Mid_air
 Annuna__Final_Save__Save_Point --> Annuna__Final_Save__Pillar
 Annuna__Final_Save__Upper_West --> Annuna__Apocalypse__Northwest_Mid_air
-Annuna__Final_Save__Upper_West --> Annuna__Seals__East_17_Upper
+Annuna__Final_Save__Upper_West <--> Annuna__Seals__East_17_Upper
 Annuna__Hidden_Portal__East <--> Annuna__Lamassu__West_17
 Annuna__Hidden_Portal__Plinth_Left --> Annuna__Lamassu__Bottom_Hill_West
 Annuna__Hidden_Portal__Plinth_Right --> Glacier__Vertical_Room__East_17_while_hovering
@@ -2212,6 +2224,15 @@ Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
 Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
 Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
+Annuna__Seals__Breakable_Rock <--> Annuna__Seals__Inner_Wall
+Annuna__Seals__East_17_Lower --> Annuna__Seals__Lower_Ledge
+Annuna__Seals__East_17_Upper <--> Annuna__Seals__Lower_Ledge
+Annuna__Seals__Inner_Wall --> Annuna__Final_Cache__West
+Annuna__Seals__Lower_Seal --> Annuna__Seals__East_17_Upper
+Annuna__Seals__Lower_Seal <--> Annuna__Seals__Middle_Ledge
+Annuna__Seals__Lower_Seal <--> Annuna__Seals__Upper_Seal
+Annuna__Seals__Middle_Ledge <--> Annuna__Seals__Upper_Seal
+Annuna__Seals__Upper_Ledge --> Annuna__Seals__East_15
 Annuna__Siuna_Storage__Cache --> Menu__Kiengir_Map__Nanite_Mist
 Annuna__Siuna_Storage__Cache --> Menu__Warp_Only__Kiengir
 Annuna__Siuna_Storage__Portal_Entry --> Annuna__Siuna_Storage__Third_Platform
@@ -2746,10 +2767,10 @@ Glacier_Breach__Zappers__West --> Glacier_Breach__Control__East
 Glacier__Apocalypse_Entry__Above_Grate --> Glacier__Apocalypse_Entry__Below_Grate
 Glacier__Apocalypse_Entry__Below_Grate --> Glacier__Apocalypse_Entry__Grate_Ledge
 Glacier__Apocalypse_Entry__Grate_Ledge --> Glacier__Apocalypse_Entry__Terminal
+Glacier__Apocalypse_Entry__Lowest_Stair --> Glacier__Apocalypse_Entry__Shaft_Bottom
+Glacier__Apocalypse_Entry__Shaft_Bottom --> Glacier__Apocalypse_Entry__Below_Grate
 Glacier__Apocalypse_Entry__West_10 <--> Glacier__Grid_43_10_11__East
-Glacier__Apocalypse_Entry__West_15_Lower --> Annuna__Apocalypse_Hallway__Lower_East
 Glacier__Apocalypse_Entry__West_15_Lower --> Glacier__Apocalypse_Entry__Lowest_Stair
-Glacier__Apocalypse_Entry__West_15_Upper --> Annuna__Apocalypse_Hallway__Upper_East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__East_13 <--> Glacier__Sea_Burial__West_13
 Glacier__Boomerang_Antechamber__East_13 --> Glacier__Sea_Burial__West_14

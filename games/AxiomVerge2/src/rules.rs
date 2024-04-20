@@ -24,13 +24,20 @@ pub fn access___escape_invoke_objective(ctx: &Context, world: &graph::World) -> 
     // [Escape, $objective]
     ctx.has(Item::Escape) && rule__objective!(ctx, world)
 }
-pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
+pub fn access___infect_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+    // [Infect, Nanite_Mist]
+    ctx.has(Item::Infect) && ctx.has(Item::Nanite_Mist)
+}
+pub fn access___invoke_all_urns(ctx: &Context, world: &graph::World) -> bool {
+    // [$all_urns]
+    helper__all_urns!(ctx, world)
+}
+pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
-    ctx.has(Item::Hammond_Auth)
-        && helper__all_urns!(ctx, world)
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    helper__all_urns!(ctx, world)
         && helper__all_weapons!(ctx, world)
         && helper__other_items!(ctx, world)
         && helper__all_notes!(ctx, world)
@@ -354,6 +361,10 @@ pub fn access_anuman_and_slingshot_hook_and_drone_hover(
 pub fn access_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
+}
+pub fn access_apocalypse_bomb_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+    // Apocalypse_Bomb and $hook
+    (ctx.has(Item::Apocalypse_Bomb) && helper__hook!(ctx, world))
 }
 pub fn access_boomerang(ctx: &Context, world: &graph::World) -> bool {
     // Boomerang
@@ -2066,6 +2077,10 @@ pub fn access_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_mode_eq_drone_and_apocalypse_seals_wall(ctx: &Context, world: &graph::World) -> bool {
+    // ^mode == 'drone' and Apocalypse_Seals_Wall
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Apocalypse_Seals_Wall))
+}
 pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -2098,6 +2113,10 @@ pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &graph::World
 pub fn access_mode_eq_drone_and_mist_upgrade(ctx: &Context, world: &graph::World) -> bool {
     // ^mode == 'drone' and Mist_Upgrade
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+}
+pub fn access_mode_eq_drone_and_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+    // ^mode == 'drone' and Nanite_Mist
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
@@ -2143,6 +2162,10 @@ pub fn access_nano_points_2(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_not_amashilama(ctx: &Context, world: &graph::World) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
+}
+pub fn access_not_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
+    // not Apocalypse_Bomb
+    !ctx.has(Item::Apocalypse_Bomb)
 }
 pub fn access_not_ebih_interchange_block(ctx: &Context, world: &graph::World) -> bool {
     // not Ebih_Interchange_Block
@@ -3008,23 +3031,53 @@ pub fn explain___escape_invoke_objective(
         (h.0, refs)
     }
 }
-pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
+pub fn explain___infect_nanite_mist(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
+    // [Infect, Nanite_Mist]
     {
         let mut refs = Vec::new();
         let mut h = {
-            let h = ctx.has(Item::Hammond_Auth);
-            edict.insert("Hammond_Auth", format!("{}", h));
-            (h, vec!["Hammond_Auth"])
+            let h = ctx.has(Item::Infect);
+            edict.insert("Infect", format!("{}", h));
+            (h, vec!["Infect"])
         };
         refs.append(&mut h.1);
         if !h.0 {
             return (false, refs);
         };
+        let mut h = {
+            let h = ctx.has(Item::Nanite_Mist);
+            edict.insert("Nanite_Mist", format!("{}", h));
+            (h, vec!["Nanite_Mist"])
+        };
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain___invoke_all_urns(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [$all_urns]
+    {
+        let mut refs = Vec::new();
+        let mut h = hexplain__all_urns!(ctx, world, edict);
+        refs.append(&mut h.1);
+        (h.0, refs)
+    }
+}
+pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    {
+        let mut refs = Vec::new();
         let mut h = hexplain__all_urns!(ctx, world, edict);
         refs.append(&mut h.1);
         if !h.0 {
@@ -4113,6 +4166,32 @@ pub fn explain_apocalypse_bomb(
         let h = ctx.has(Item::Apocalypse_Bomb);
         edict.insert("Apocalypse_Bomb", format!("{}", h));
         (h, vec!["Apocalypse_Bomb"])
+    }
+}
+pub fn explain_apocalypse_bomb_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Apocalypse_Bomb and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Apocalypse_Bomb);
+            edict.insert("Apocalypse_Bomb", format!("{}", h));
+            (h, vec!["Apocalypse_Bomb"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_boomerang(
@@ -10313,6 +10392,38 @@ pub fn explain_mode_eq_drone(
         (left.0 == right, refs)
     }
 }
+pub fn explain_mode_eq_drone_and_apocalypse_seals_wall(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Apocalypse_Seals_Wall
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Apocalypse_Seals_Wall);
+                edict.insert("Apocalypse_Seals_Wall", format!("{}", h));
+                (h, vec!["Apocalypse_Seals_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -10500,6 +10611,38 @@ pub fn explain_mode_eq_drone_and_mist_upgrade(
                 let h = ctx.has(Item::Mist_Upgrade);
                 edict.insert("Mist_Upgrade", format!("{}", h));
                 (h, vec!["Mist_Upgrade"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_nanite_mist(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Nanite_Mist
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -10780,6 +10923,18 @@ pub fn explain_not_amashilama(
         let h = ctx.has(Item::Amashilama);
         edict.insert("Amashilama", format!("{}", h));
         (!h, vec!["Amashilama"])
+    }
+}
+pub fn explain_not_apocalypse_bomb(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Apocalypse_Bomb
+    {
+        let h = ctx.has(Item::Apocalypse_Bomb);
+        edict.insert("Apocalypse_Bomb", format!("{}", h));
+        (!h, vec!["Apocalypse_Bomb"])
     }
 }
 pub fn explain_not_ebih_interchange_block(
@@ -11743,16 +11898,35 @@ pub fn observe_access___escape_invoke_objective(
         ctx.has(Item::Escape)
     }) && robserve__objective!(ctx, world, full_obs)
 }
-pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks_hammond_auth(
+pub fn observe_access___infect_nanite_mist(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
+    // [Infect, Nanite_Mist]
     ({
-        full_obs.observe_hammond_auth();
-        ctx.has(Item::Hammond_Auth)
-    }) && hobserve__all_urns!(ctx, world, full_obs)
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    })
+}
+pub fn observe_access___invoke_all_urns(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [$all_urns]
+    hobserve__all_urns!(ctx, world, full_obs)
+}
+pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    hobserve__all_urns!(ctx, world, full_obs)
         && hobserve__all_weapons!(ctx, world, full_obs)
         && hobserve__other_items!(ctx, world, full_obs)
         && hobserve__all_notes!(ctx, world, full_obs)
@@ -12329,6 +12503,17 @@ pub fn observe_access_apocalypse_bomb(
         full_obs.observe_apocalypse_bomb();
         ctx.has(Item::Apocalypse_Bomb)
     }
+}
+pub fn observe_access_apocalypse_bomb_and_invoke_hook(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Apocalypse_Bomb and $hook
+    ({
+        full_obs.observe_apocalypse_bomb();
+        ctx.has(Item::Apocalypse_Bomb)
+    } && (hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_boomerang(
     ctx: &Context,
@@ -15636,6 +15821,23 @@ pub fn observe_access_mode_eq_drone(
         v == enums::Mode::Drone
     }
 }
+pub fn observe_access_mode_eq_drone_and_apocalypse_seals_wall(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Apocalypse_Seals_Wall
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_apocalypse_seals_wall();
+        ctx.has(Item::Apocalypse_Seals_Wall)
+    }))
+}
 pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
     world: &graph::World,
@@ -15733,6 +15935,23 @@ pub fn observe_access_mode_eq_drone_and_mist_upgrade(
     } && ({
         full_obs.observe_mist_upgrade();
         ctx.has(Item::Mist_Upgrade)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_nanite_mist(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Nanite_Mist
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
     }))
 }
 pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
@@ -15887,6 +16106,17 @@ pub fn observe_access_not_amashilama(
     {
         full_obs.observe_amashilama();
         !ctx.has(Item::Amashilama)
+    }
+}
+pub fn observe_access_not_apocalypse_bomb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Apocalypse_Bomb
+    {
+        full_obs.observe_apocalypse_bomb();
+        !ctx.has(Item::Apocalypse_Bomb)
     }
 }
 pub fn observe_access_not_ebih_interchange_block(

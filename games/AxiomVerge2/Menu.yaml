@@ -269,7 +269,7 @@ areas:
       - to: Uhrum Emergence
       - to: Uhrum West
   spots:
-    #region fast travel points
+    #region Kiengir fast travel points
     - name: Amagi Main Area
       coord: [29, 19]
       exits:
@@ -482,7 +482,7 @@ areas:
           tags: [warp]
     #endregion
 
-    #region entry points (mostly items)
+    #region Kiengir entry points (mostly items)
     - name: Infect
       coord: [26, 9]
     - name: Remote Drone
@@ -506,8 +506,10 @@ areas:
       coord: [37, 16]
     - name: Hammond
       coord: [40, 11]
-    - name: Nanite_Mist
+    - name: Nanite Mist
       coord: [39, 15]
+    - name: Apocalypse Cache
+      coord: [42, 16]
     #endregion
 
 - name: Breach Map
@@ -519,6 +521,7 @@ areas:
     local:
       - to: GB Peak
   spots:
+    #region Breach fast travel points
     - name: GB Peak
       coord: [15, 7]
       exits:
@@ -592,3 +595,7 @@ areas:
           req: ^map__glacier_breach__hammonds_breach__save
           time: 12
           tags: [warp]
+    #endregion
+
+    #region Breach other entry points
+    #endregion

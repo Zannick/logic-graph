@@ -117,6 +117,7 @@ pub enum AreaId {
     Annuna__Factory_Access,
     Annuna__Factory_Entrance,
     Annuna__Filter_Teleporter,
+    Annuna__Final_Cache,
     Annuna__Final_Save,
     Annuna__Hidden_Portal,
     Annuna__Lamassu,
@@ -308,6 +309,7 @@ impl fmt::Display for AreaId {
             AreaId::Annuna__Factory_Access => write!(f, "{}", "Annuna > Factory Access"),
             AreaId::Annuna__Factory_Entrance => write!(f, "{}", "Annuna > Factory Entrance"),
             AreaId::Annuna__Filter_Teleporter => write!(f, "{}", "Annuna > Filter Teleporter"),
+            AreaId::Annuna__Final_Cache => write!(f, "{}", "Annuna > Final Cache"),
             AreaId::Annuna__Final_Save => write!(f, "{}", "Annuna > Final Save"),
             AreaId::Annuna__Hidden_Portal => write!(f, "{}", "Annuna > Hidden Portal"),
             AreaId::Annuna__Lamassu => write!(f, "{}", "Annuna > Lamassu"),
@@ -538,6 +540,7 @@ impl std::str::FromStr for AreaId {
             "Annuna > Factory Access" => Ok(AreaId::Annuna__Factory_Access),
             "Annuna > Factory Entrance" => Ok(AreaId::Annuna__Factory_Entrance),
             "Annuna > Filter Teleporter" => Ok(AreaId::Annuna__Filter_Teleporter),
+            "Annuna > Final Cache" => Ok(AreaId::Annuna__Final_Cache),
             "Annuna > Final Save" => Ok(AreaId::Annuna__Final_Save),
             "Annuna > Hidden Portal" => Ok(AreaId::Annuna__Hidden_Portal),
             "Annuna > Lamassu" => Ok(AreaId::Annuna__Lamassu),
@@ -941,6 +944,7 @@ pub enum SpotId {
     Annuna__Filter_Teleporter__West_19,
     Annuna__Filter_Teleporter__West_19_Mid_flight,
     Annuna__Filter_Teleporter__West_21,
+    Annuna__Final_Cache__West,
     Annuna__Final_Save__East,
     Annuna__Final_Save__Lower_West,
     Annuna__Final_Save__Pillar,
@@ -992,6 +996,7 @@ pub enum SpotId {
     Annuna__Seals__East_15,
     Annuna__Seals__East_17_Lower,
     Annuna__Seals__East_17_Upper,
+    Annuna__Seals__Inner_Wall,
     Annuna__Seals__Lower_Ledge,
     Annuna__Seals__Lower_Seal,
     Annuna__Seals__Middle_Ledge,
@@ -2200,6 +2205,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Annuna_West_Bridge,
     Menu__Kiengir_Map__Anuman,
     Menu__Kiengir_Map__Apocalypse,
+    Menu__Kiengir_Map__Apocalypse_Cache,
     Menu__Kiengir_Map__Breach_Attractor,
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Bronze_Axe,
@@ -2921,6 +2927,7 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Filter_Teleporter__West_21 => {
                 write!(f, "{}", "Annuna > Filter Teleporter > West 21")
             }
+            SpotId::Annuna__Final_Cache__West => write!(f, "{}", "Annuna > Final Cache > West"),
             SpotId::Annuna__Final_Save__East => write!(f, "{}", "Annuna > Final Save > East"),
             SpotId::Annuna__Final_Save__Lower_West => {
                 write!(f, "{}", "Annuna > Final Save > Lower West")
@@ -3050,6 +3057,7 @@ impl fmt::Display for SpotId {
             SpotId::Annuna__Seals__East_17_Upper => {
                 write!(f, "{}", "Annuna > Seals > East 17 Upper")
             }
+            SpotId::Annuna__Seals__Inner_Wall => write!(f, "{}", "Annuna > Seals > Inner Wall"),
             SpotId::Annuna__Seals__Lower_Ledge => write!(f, "{}", "Annuna > Seals > Lower Ledge"),
             SpotId::Annuna__Seals__Lower_Seal => write!(f, "{}", "Annuna > Seals > Lower Seal"),
             SpotId::Annuna__Seals__Middle_Ledge => write!(f, "{}", "Annuna > Seals > Middle Ledge"),
@@ -6134,6 +6142,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Apocalypse => {
                 write!(f, "{}", "Menu > Kiengir Map > Apocalypse")
             }
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache => {
+                write!(f, "{}", "Menu > Kiengir Map > Apocalypse Cache")
+            }
             SpotId::Menu__Kiengir_Map__Breach_Attractor => {
                 write!(f, "{}", "Menu > Kiengir Map > Breach Attractor")
             }
@@ -6200,7 +6211,7 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest")
             }
             SpotId::Menu__Kiengir_Map__Nanite_Mist => {
-                write!(f, "{}", "Menu > Kiengir Map > Nanite_Mist")
+                write!(f, "{}", "Menu > Kiengir Map > Nanite Mist")
             }
             SpotId::Menu__Kiengir_Map__Remote_Drone => {
                 write!(f, "{}", "Menu > Kiengir Map > Remote Drone")
@@ -6979,6 +6990,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > Filter Teleporter > West 21" => {
                 Ok(SpotId::Annuna__Filter_Teleporter__West_21)
             }
+            "Annuna > Final Cache > West" => Ok(SpotId::Annuna__Final_Cache__West),
             "Annuna > Final Save > East" => Ok(SpotId::Annuna__Final_Save__East),
             "Annuna > Final Save > Lower West" => Ok(SpotId::Annuna__Final_Save__Lower_West),
             "Annuna > Final Save > Pillar" => Ok(SpotId::Annuna__Final_Save__Pillar),
@@ -7062,6 +7074,7 @@ impl std::str::FromStr for SpotId {
             "Annuna > Seals > East 15" => Ok(SpotId::Annuna__Seals__East_15),
             "Annuna > Seals > East 17 Lower" => Ok(SpotId::Annuna__Seals__East_17_Lower),
             "Annuna > Seals > East 17 Upper" => Ok(SpotId::Annuna__Seals__East_17_Upper),
+            "Annuna > Seals > Inner Wall" => Ok(SpotId::Annuna__Seals__Inner_Wall),
             "Annuna > Seals > Lower Ledge" => Ok(SpotId::Annuna__Seals__Lower_Ledge),
             "Annuna > Seals > Lower Seal" => Ok(SpotId::Annuna__Seals__Lower_Seal),
             "Annuna > Seals > Middle Ledge" => Ok(SpotId::Annuna__Seals__Middle_Ledge),
@@ -9216,6 +9229,9 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Anuman" => Ok(SpotId::Menu__Kiengir_Map__Anuman),
             "Menu > Kiengir Map > Apocalypse" => Ok(SpotId::Menu__Kiengir_Map__Apocalypse),
+            "Menu > Kiengir Map > Apocalypse Cache" => {
+                Ok(SpotId::Menu__Kiengir_Map__Apocalypse_Cache)
+            }
             "Menu > Kiengir Map > Breach Attractor" => {
                 Ok(SpotId::Menu__Kiengir_Map__Breach_Attractor)
             }
@@ -9261,7 +9277,7 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
-            "Menu > Kiengir Map > Nanite_Mist" => Ok(SpotId::Menu__Kiengir_Map__Nanite_Mist),
+            "Menu > Kiengir Map > Nanite Mist" => Ok(SpotId::Menu__Kiengir_Map__Nanite_Mist),
             "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
             "Menu > Kiengir Map > Shockwave" => Ok(SpotId::Menu__Kiengir_Map__Shockwave),
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
@@ -9582,6 +9598,9 @@ pub enum LocationId {
     Annuna__Mirror_Match__Plinth__Item,
     Annuna__Mirror_Match__Save_Point__Fight,
     Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+    Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+    Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+    Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
     Annuna__Siuna_Storage__Cache__Urn,
     Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
     Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
@@ -9700,6 +9719,7 @@ pub enum LocationId {
     Giguna_Breach__Cubby__Rocks__Health,
     Giguna_Breach__Slingshot__Ravine__Urn,
     Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+    Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
     Glacier__Compass_Room__Center__Table,
@@ -9998,6 +10018,21 @@ impl fmt::Display for LocationId {
                 f,
                 "{}",
                 "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
+            ),
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Seals > Breakable Rock > Break Through Wall"
+            ),
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Seals > Breakable Rock > Faster Mist Through Wall"
+            ),
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => write!(
+                f,
+                "{}",
+                "Annuna > Seals > Breakable Rock > Mist Through Wall"
             ),
             LocationId::Annuna__Siuna_Storage__Cache__Urn => {
                 write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn")
@@ -10447,6 +10482,11 @@ impl fmt::Display for LocationId {
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape")
             }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => write!(
+                f,
+                "{}",
+                "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape"
+            ),
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
                 write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item")
             }
@@ -11077,6 +11117,15 @@ impl std::str::FromStr for LocationId {
             "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
                 Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
             }
+            "Annuna > Seals > Breakable Rock > Break Through Wall" => {
+                Ok(LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall)
+            }
+            "Annuna > Seals > Breakable Rock > Faster Mist Through Wall" => {
+                Ok(LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall)
+            }
+            "Annuna > Seals > Breakable Rock > Mist Through Wall" => {
+                Ok(LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall)
+            }
             "Annuna > Siuna Storage > Cache > Urn" => {
                 Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn)
             }
@@ -11406,6 +11455,9 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Apocalypse Entry > Grate Ledge > Escape" => {
                 Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape)
+            }
+            "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape" => {
+                Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape)
             }
             "Glacier > Boomerang Room > Pedestal > Item" => {
                 Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item)
@@ -11866,6 +11918,14 @@ pub enum ExitId {
     Annuna__Apocalypse__Southwest_Capsule__ex__West_1,
     Annuna__Apocalypse__Southwest_Capsule__ex__West_2,
     Annuna__Apocalypse__West__ex__Final_Save__East_1,
+    Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1,
+    Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1,
+    Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1,
+    Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1,
+    Annuna__Apocalypse_Hallway__Upper_East__ex__West_1,
+    Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1,
+    Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1,
+    Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1,
     Annuna__Center_Climb__East__ex__Lower_Platform_1,
     Annuna__Center_Climb__East__ex__Middle_Platform_1,
     Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1,
@@ -12066,6 +12126,31 @@ pub enum ExitId {
     Annuna__Mirror_Match__Staircase__ex__Eastward_1,
     Annuna__Mirror_Match__Staircase__ex__Eastward_2,
     Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1,
+    Annuna__Seals__Breakable_Rock__Break_Through_Wall,
+    Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1,
+    Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+    Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
+    Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1,
+    Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1,
+    Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1,
+    Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2,
+    Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1,
+    Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1,
+    Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2,
+    Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1,
+    Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1,
+    Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1,
+    Annuna__Seals__Lower_Seal__ex__East_17_Upper_1,
+    Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1,
+    Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2,
+    Annuna__Seals__Lower_Seal__ex__Upper_Seal_1,
+    Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1,
+    Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1,
+    Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2,
+    Annuna__Seals__Upper_Ledge__ex__East_15_1,
+    Annuna__Seals__Upper_Ledge__ex__East_15_2,
+    Annuna__Seals__Upper_Seal__ex__Lower_Seal_1,
+    Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1,
     Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
     Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
     Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1,
@@ -12814,7 +12899,12 @@ pub enum ExitId {
     Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,
     Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1,
     Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1,
+    Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2,
     Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+    Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
+    Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1,
+    Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1,
+    Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2,
     Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1,
     Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1,
     Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1,
@@ -13494,6 +13584,14 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => write!(f, "{}", "Annuna > Apocalypse > Southwest Capsule ==> West (1)"),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2 => write!(f, "{}", "Annuna > Apocalypse > Southwest Capsule ==> West (2)"),
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => write!(f, "{}", "Annuna > Apocalypse > West ==> Final Save > East (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > Center Pillar ==> West (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > East Pillar ==> Center Pillar (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > Lower East ==> Glacier > Apocalypse Entry > West 15 Lower (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > Upper East ==> Glacier > Apocalypse Entry > West 15 Upper (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > Upper East ==> West (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > West ==> Center Pillar (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > West ==> Glacier > Apocalypse Entry > Lowest Stair (1)"),
+            ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1 => write!(f, "{}", "Annuna > Apocalypse Hallway > West ==> Seals > East 15 (1)"),
             ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1 => write!(f, "{}", "Annuna > Center Climb > East ==> Lower Platform (1)"),
             ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1 => write!(f, "{}", "Annuna > Center Climb > East ==> Middle Platform (1)"),
             ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1 => write!(f, "{}", "Annuna > Center Climb > East ==> Vertical Room > West 20 (1)"),
@@ -13694,6 +13792,31 @@ impl fmt::Display for ExitId {
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (1)"),
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => write!(f, "{}", "Annuna > Mirror Match > Staircase ==> Eastward (2)"),
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => write!(f, "{}", "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)"),
+            ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Break Through Wall"),
+            ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1 => write!(f, "{}", "Annuna > Seals > Breakable Rock ==> Inner Wall (1)"),
+            ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Faster Mist Through Wall"),
+            ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Mist Through Wall"),
+            ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1 => write!(f, "{}", "Annuna > Seals > East 15 ==> Apocalypse Hallway > West (1)"),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 => write!(f, "{}", "Annuna > Seals > East 17 Lower ==> Final Save > Lower West (1)"),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => write!(f, "{}", "Annuna > Seals > East 17 Lower ==> Lower Ledge (1)"),
+            ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2 => write!(f, "{}", "Annuna > Seals > East 17 Lower ==> Lower Ledge (2)"),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 => write!(f, "{}", "Annuna > Seals > East 17 Upper ==> Final Save > Upper West (1)"),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => write!(f, "{}", "Annuna > Seals > East 17 Upper ==> Lower Ledge (1)"),
+            ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2 => write!(f, "{}", "Annuna > Seals > East 17 Upper ==> Lower Ledge (2)"),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1 => write!(f, "{}", "Annuna > Seals > Inner Wall ==> Breakable Rock (1)"),
+            ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 => write!(f, "{}", "Annuna > Seals > Inner Wall ==> Final Cache > West (1)"),
+            ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1 => write!(f, "{}", "Annuna > Seals > Lower Ledge ==> East 17 Upper (1)"),
+            ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1 => write!(f, "{}", "Annuna > Seals > Lower Seal ==> East 17 Upper (1)"),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => write!(f, "{}", "Annuna > Seals > Lower Seal ==> Middle Ledge (1)"),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2 => write!(f, "{}", "Annuna > Seals > Lower Seal ==> Middle Ledge (2)"),
+            ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1 => write!(f, "{}", "Annuna > Seals > Lower Seal ==> Upper Seal (1)"),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1 => write!(f, "{}", "Annuna > Seals > Middle Ledge ==> Lower Seal (1)"),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => write!(f, "{}", "Annuna > Seals > Middle Ledge ==> Upper Seal (1)"),
+            ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2 => write!(f, "{}", "Annuna > Seals > Middle Ledge ==> Upper Seal (2)"),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => write!(f, "{}", "Annuna > Seals > Upper Ledge ==> East 15 (1)"),
+            ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => write!(f, "{}", "Annuna > Seals > Upper Ledge ==> East 15 (2)"),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => write!(f, "{}", "Annuna > Seals > Upper Seal ==> Lower Seal (1)"),
+            ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => write!(f, "{}", "Annuna > Seals > Upper Seal ==> Middle Ledge (1)"),
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Collection Skip"),
             ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Fast Travel"),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => write!(f, "{}", "Annuna > Siuna Storage > Portal Entry ==> Third Platform (1)"),
@@ -14442,7 +14565,12 @@ impl fmt::Display for ExitId {
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => write!(f, "{}", "Giguna Breach > SW Save > West 11 ==> Side Door (1)"),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Above Grate ==> Below Grate (1)"),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => write!(f, "{}", "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (2)"),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape"),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape"),
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Lowest Stair ==> Shaft Bottom (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => write!(f, "{}", "Glacier > Apocalypse Entry > Shaft Bottom ==> Below Grate (1)"),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => write!(f, "{}", "Glacier > Apocalypse Entry > Shaft Bottom ==> Below Grate (2)"),
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 10 ==> Grid 43,10-11 > East (1)"),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower ==> Annuna > Apocalypse Hallway > Lower East (1)"),
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)"),
@@ -15127,6 +15255,14 @@ impl std::str::FromStr for ExitId {
             "Annuna > Apocalypse > Southwest Capsule ==> West (1)" => Ok(ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1),
             "Annuna > Apocalypse > Southwest Capsule ==> West (2)" => Ok(ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_2),
             "Annuna > Apocalypse > West ==> Final Save > East (1)" => Ok(ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1),
+            "Annuna > Apocalypse Hallway > Center Pillar ==> West (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__Center_Pillar__ex__West_1),
+            "Annuna > Apocalypse Hallway > East Pillar ==> Center Pillar (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__East_Pillar__ex__Center_Pillar_1),
+            "Annuna > Apocalypse Hallway > Lower East ==> Glacier > Apocalypse Entry > West 15 Lower (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1),
+            "Annuna > Apocalypse Hallway > Upper East ==> Glacier > Apocalypse Entry > West 15 Upper (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1),
+            "Annuna > Apocalypse Hallway > Upper East ==> West (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__West_1),
+            "Annuna > Apocalypse Hallway > West ==> Center Pillar (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__West__ex__Center_Pillar_1),
+            "Annuna > Apocalypse Hallway > West ==> Glacier > Apocalypse Entry > Lowest Stair (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__West__ex__Glacier__Apocalypse_Entry__Lowest_Stair_1),
+            "Annuna > Apocalypse Hallway > West ==> Seals > East 15 (1)" => Ok(ExitId::Annuna__Apocalypse_Hallway__West__ex__Seals__East_15_1),
             "Annuna > Center Climb > East ==> Lower Platform (1)" => Ok(ExitId::Annuna__Center_Climb__East__ex__Lower_Platform_1),
             "Annuna > Center Climb > East ==> Middle Platform (1)" => Ok(ExitId::Annuna__Center_Climb__East__ex__Middle_Platform_1),
             "Annuna > Center Climb > East ==> Vertical Room > West 20 (1)" => Ok(ExitId::Annuna__Center_Climb__East__ex__Vertical_Room__West_20_1),
@@ -15327,6 +15463,31 @@ impl std::str::FromStr for ExitId {
             "Annuna > Mirror Match > Staircase ==> Eastward (1)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1),
             "Annuna > Mirror Match > Staircase ==> Eastward (2)" => Ok(ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2),
             "Annuna > Mirror Match > West 25 ==> Uhrum > Annuna Corridor > East 25 (1)" => Ok(ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1),
+            "Annuna > Seals > Breakable Rock > Break Through Wall" => Ok(ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
+            "Annuna > Seals > Breakable Rock ==> Inner Wall (1)" => Ok(ExitId::Annuna__Seals__Breakable_Rock__ex__Inner_Wall_1),
+            "Annuna > Seals > Breakable Rock > Faster Mist Through Wall" => Ok(ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
+            "Annuna > Seals > Breakable Rock > Mist Through Wall" => Ok(ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
+            "Annuna > Seals > East 15 ==> Apocalypse Hallway > West (1)" => Ok(ExitId::Annuna__Seals__East_15__ex__Apocalypse_Hallway__West_1),
+            "Annuna > Seals > East 17 Lower ==> Final Save > Lower West (1)" => Ok(ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1),
+            "Annuna > Seals > East 17 Lower ==> Lower Ledge (1)" => Ok(ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1),
+            "Annuna > Seals > East 17 Lower ==> Lower Ledge (2)" => Ok(ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_2),
+            "Annuna > Seals > East 17 Upper ==> Final Save > Upper West (1)" => Ok(ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1),
+            "Annuna > Seals > East 17 Upper ==> Lower Ledge (1)" => Ok(ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1),
+            "Annuna > Seals > East 17 Upper ==> Lower Ledge (2)" => Ok(ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_2),
+            "Annuna > Seals > Inner Wall ==> Breakable Rock (1)" => Ok(ExitId::Annuna__Seals__Inner_Wall__ex__Breakable_Rock_1),
+            "Annuna > Seals > Inner Wall ==> Final Cache > West (1)" => Ok(ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1),
+            "Annuna > Seals > Lower Ledge ==> East 17 Upper (1)" => Ok(ExitId::Annuna__Seals__Lower_Ledge__ex__East_17_Upper_1),
+            "Annuna > Seals > Lower Seal ==> East 17 Upper (1)" => Ok(ExitId::Annuna__Seals__Lower_Seal__ex__East_17_Upper_1),
+            "Annuna > Seals > Lower Seal ==> Middle Ledge (1)" => Ok(ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1),
+            "Annuna > Seals > Lower Seal ==> Middle Ledge (2)" => Ok(ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_2),
+            "Annuna > Seals > Lower Seal ==> Upper Seal (1)" => Ok(ExitId::Annuna__Seals__Lower_Seal__ex__Upper_Seal_1),
+            "Annuna > Seals > Middle Ledge ==> Lower Seal (1)" => Ok(ExitId::Annuna__Seals__Middle_Ledge__ex__Lower_Seal_1),
+            "Annuna > Seals > Middle Ledge ==> Upper Seal (1)" => Ok(ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1),
+            "Annuna > Seals > Middle Ledge ==> Upper Seal (2)" => Ok(ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_2),
+            "Annuna > Seals > Upper Ledge ==> East 15 (1)" => Ok(ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1),
+            "Annuna > Seals > Upper Ledge ==> East 15 (2)" => Ok(ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2),
+            "Annuna > Seals > Upper Seal ==> Lower Seal (1)" => Ok(ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1),
+            "Annuna > Seals > Upper Seal ==> Middle Ledge (1)" => Ok(ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1),
             "Annuna > Siuna Storage > Cache > Urn Collection Skip" => Ok(ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
             "Annuna > Siuna Storage > Cache > Urn Fast Travel" => Ok(ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
             "Annuna > Siuna Storage > Portal Entry ==> Third Platform (1)" => Ok(ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1),
@@ -16075,7 +16236,12 @@ impl std::str::FromStr for ExitId {
             "Giguna Breach > SW Save > West 11 ==> Side Door (1)" => Ok(ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1),
             "Glacier > Apocalypse Entry > Above Grate ==> Below Grate (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1),
             "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1),
+            "Glacier > Apocalypse Entry > Below Grate ==> Grate Ledge (2)" => Ok(ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2),
             "Glacier > Apocalypse Entry > Grate Ledge > Escape" => Ok(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+            "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape" => Ok(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
+            "Glacier > Apocalypse Entry > Lowest Stair ==> Shaft Bottom (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1),
+            "Glacier > Apocalypse Entry > Shaft Bottom ==> Below Grate (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1),
+            "Glacier > Apocalypse Entry > Shaft Bottom ==> Below Grate (2)" => Ok(ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2),
             "Glacier > Apocalypse Entry > West 10 ==> Grid 43,10-11 > East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1),
             "Glacier > Apocalypse Entry > West 15 Lower ==> Annuna > Apocalypse Hallway > Lower East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1),
             "Glacier > Apocalypse Entry > West 15 Lower ==> Lowest Stair (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1),
@@ -17696,6 +17862,7 @@ pub enum CanonId {
     Egg_Room_Flask,
     Siuna_Storage_Wall,
     Nanite_Mist,
+    Apocalypse_Seals_Wall,
     Apocalypse_Bomb,
     Notes_2053_02_27,
     Ebih_Base_Camp_Fragment,
@@ -17720,6 +17887,7 @@ pub enum CanonId {
     Glacier_Big_Drop_Rock,
     Glacier_Sea_Burial_Rock,
     Ledge_Grab,
+    Escape,
     Hammonds_Note,
     Melee_Charge,
     Irikar_Royal_Storage_Wall,
@@ -17755,6 +17923,7 @@ impl fmt::Display for CanonId {
             CanonId::Egg_Room_Flask => write!(f, "{}", "Egg_Room_Flask"),
             CanonId::Siuna_Storage_Wall => write!(f, "{}", "Siuna_Storage_Wall"),
             CanonId::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
+            CanonId::Apocalypse_Seals_Wall => write!(f, "{}", "Apocalypse_Seals_Wall"),
             CanonId::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
@@ -17779,6 +17948,7 @@ impl fmt::Display for CanonId {
             CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Escape => write!(f, "{}", "Escape"),
             CanonId::Hammonds_Note => write!(f, "{}", "Hammonds_Note"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
@@ -17820,6 +17990,7 @@ impl std::str::FromStr for CanonId {
             "Egg_Room_Flask" => Ok(CanonId::Egg_Room_Flask),
             "Siuna_Storage_Wall" => Ok(CanonId::Siuna_Storage_Wall),
             "Nanite_Mist" => Ok(CanonId::Nanite_Mist),
+            "Apocalypse_Seals_Wall" => Ok(CanonId::Apocalypse_Seals_Wall),
             "Apocalypse_Bomb" => Ok(CanonId::Apocalypse_Bomb),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
@@ -17844,6 +18015,7 @@ impl std::str::FromStr for CanonId {
             "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Escape" => Ok(CanonId::Escape),
             "Hammonds_Note" => Ok(CanonId::Hammonds_Note),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
@@ -17982,12 +18154,16 @@ pub enum RuleObjective {
     #[default]
     Start,
     AllItems,
+    AllUrns,
+    Any,
 }
 impl fmt::Display for RuleObjective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             RuleObjective::Start => write!(f, "{}", "Start"),
             RuleObjective::AllItems => write!(f, "{}", "All Items"),
+            RuleObjective::AllUrns => write!(f, "{}", "All Urns"),
+            RuleObjective::Any => write!(f, "{}", "Any%"),
         }
     }
 }
@@ -17998,6 +18174,8 @@ impl std::str::FromStr for RuleObjective {
         match s {
             "Start" => Ok(RuleObjective::Start),
             "All Items" => Ok(RuleObjective::AllItems),
+            "All Urns" => Ok(RuleObjective::AllUrns),
+            "Any%" => Ok(RuleObjective::Any),
             _ => Err(format!("Could not recognize as a RuleObjective: {}", s)),
         }
     }

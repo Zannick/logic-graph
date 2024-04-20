@@ -3095,36 +3095,210 @@ areas:
   spots:
     - name: Lower East
       coord: [43.95, 14.75]
+      local:
+        - to: East Pillar
+          jumps: 1
+      exits:
+        - to: Glacier > Apocalypse Entry > West 15 Lower
+          tags: [xshift]
     - name: Upper East
       coord: [43.95, 14.6]
+      local:
+        - to: East Pillar
+          jumps: 1
+      exits:
+        - to: Glacier > Apocalypse Entry > West 15 Upper
+          tags: [xshift]
+        - to: West
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 2
     - name: East Pillar
       coord: [43.85, 14.55]
+      local:
+        - to: Upper East
+        - to: Lower East
+      exits:
+        - to: Center Pillar
+          req: $grab or $hook
+          movement: base
+          jumps: 4
     - name: Center Pillar
       coord: [43.0, 14.4]
+      local:
+        - to: East Pillar
+          jumps: 3
+      exits:
+        - to: West
+          req: $grab or $hook
+          movement: base
+          jumps: 2
     - name: West
       coord: [42.05, 14.55]
+      exits:
+        - to: Center Pillar
+          req: $grab or $hook
+          movement: base
+          jumps: 2
+        - to: Glacier > Apocalypse Entry > Lowest Stair
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Seals > East 15
+          tags: [xshift]
 
 - name: Seals
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
       coord: [41.95, 14.55]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Apocalypse Hallway > West
+          tags: [xshift]
     - name: Upper Ledge
       coord: [41.6, 15.0]
+      local:
+        - to: Upper Seal
+      exits:
+        - to: East 15
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: East 15
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Upper Seal
       coord: [41.5, 15.2]
+      local:
+        - to: Upper Ledge
+          jumps: 1
+      exits:
+        - to: Middle Ledge
+          req: not Apocalypse_Bomb
+          movement: base
+        - to: Lower Seal
+          req: not Apocalypse_Bomb
+          movement: base
     - name: Middle Ledge
       coord: [41.6, 15.6]
+      local:
+        - to: Breakable Rock
+      exits:
+        - to: Lower Seal
+          req: not Apocalypse_Bomb
+          movement: base
+        - to: Upper Seal
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Upper Seal
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Breakable Rock
       coord: [41.8, 15.6]
+      local:
+        - to: Middle Ledge
+      exits:
+        - to: Inner Wall
+          req: ^mode == 'drone' and Apocalypse_Seals_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          to: Inner Wall
+          req: ^mode == 'drone'
+          canon: Apocalypse_Seals_Wall
+          item: Apocalypse_Seals_Wall
+          time: 2.75  # ?
+        - name: Mist Through Wall
+          to: Inner Wall
+          req: ^mode == 'drone' and Nanite_Mist
+          canon: Apocalypse_Seals_Wall
+          item: Apocalypse_Seals_Wall
+          price: 40
+          movement: mist1
+        - name: Faster Mist Through Wall
+          to: Inner Wall
+          req: ^mode == 'drone' and $mist2
+          canon: Apocalypse_Seals_Wall
+          item: Apocalypse_Seals_Wall
+          price: 30
+          movement: mist2
+    - name: Inner Wall
+      coord: [41.9, 15.6]
+      exits:
+        - to: Final Cache > West
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Breakable Rock
+          req: ^mode == 'drone' and Apocalypse_Seals_Wall
+          movement: base
     - name: Lower Seal
       coord: [41.5, 15.9]
+      local:
+        - to: Lower Ledge
+      exits:
+        - to: Middle Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Seal
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: East 17 Upper
+          req: $hover
+          movement: base
     - name: Lower Ledge
       coord: [41.5, 16.1]
+      local:
+        - to: Lower Seal
+          jumps: 1
+        - to: East 17 Lower
+      exits:
+        - to: East 17 Upper
+          req: $hover
+          movement: base
     - name: East 17 Upper
       coord: [41.95, 16.4]
+      exits:
+        - to: Final Save > Upper West
+          tags: [xshift]
+        - to: Lower Ledge
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: Lower Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 2
     - name: East 17 Lower
       coord: [41.95, 16.75]
+      exits:
+        - to: Final Save > Lower West
+          tags: [xshift]
+        - to: Lower Ledge
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Lower Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+
+- name: Final Cache
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [42.1, 15.6]
 
 - name: Final Save
   on_entry: $reset_old_area(^newpos)

@@ -45,9 +45,10 @@ rules:
     # Greedy search will have a problem with purchases if there are insufficient funds;
     # it will never consider skipping what's available and may be unable to buy something
     # necessary.
-    # TODO: Remove testing items: Hammond_Auth
     All Items: >
-      [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks, Hammond_Auth]
+      [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    All Urns: "[$all_urns]"
+    Any%: "[Infect, Nanite_Mist]"
 
 base_movements:
   - # the slowest movement is in water
