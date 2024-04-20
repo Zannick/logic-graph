@@ -172,7 +172,7 @@ where
                 elapsed: ctx.elapsed(),
                 history: ctx.recent_history().to_vec(),
             });
-            record_observations(&startctx, world, solution.clone(), 0, None, &mut trie);
+            record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             println!(
                 "Initial solution of length {} produces trie of size {} depth {} and num values {}",
                 solution.history.len(),

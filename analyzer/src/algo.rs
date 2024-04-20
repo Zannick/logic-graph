@@ -8,11 +8,9 @@ use crate::minimize::trie_search;
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
-use crate::CommonHasher;
 use anyhow::Result;
 use log;
 use rayon::prelude::*;
-use std::collections::HashSet;
 use std::fmt::Debug;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
@@ -255,7 +253,6 @@ where
     organic_solution: AtomicBool,
     any_solution: AtomicBool,
     organic_level: AtomicUsize,
-    required_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -275,11 +272,6 @@ where
         P: AsRef<Path>,
     {
         let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
-        let required_locations: HashSet<_, CommonHasher> = world
-            .required_items()
-            .into_iter()
-            .flat_map(|(item, _)| world.get_item_locations(item))
-            .collect();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",
@@ -321,7 +313,6 @@ where
                     world,
                     sol,
                     1,
-                    Some(&required_locations),
                     &solve_trie,
                 );
             }
@@ -333,7 +324,6 @@ where
                         world,
                         sol.clone(),
                         1,
-                        Some(&required_locations),
                         &solve_trie,
                     );
                 }
@@ -345,7 +335,6 @@ where
                             world,
                             solution,
                             1,
-                            Some(&required_locations),
                             &solve_trie,
                         );
                     }
@@ -389,7 +378,6 @@ where
             organic_solution: false.into(),
             any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
-            required_locations,
         };
         for w in wins {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
@@ -405,7 +393,7 @@ where
 
     fn clean_solutions(&self) {
         let mut sols = self.solutions.lock().unwrap();
-        let min_progress = self.min_progress();
+        let min_visits = self.min_progress();
         let orig = sols.len();
         let start = Instant::now();
         sols.clean();
@@ -418,8 +406,8 @@ where
                     self.startctx.get(),
                     self.world,
                     solution,
-                    min_progress,
-                    Some(&self.required_locations),
+                    // normalize total visits to required visits
+                    min_visits,
                     &self.solve_trie,
                 );
             }
@@ -510,7 +498,6 @@ where
                 self.world,
                 solution,
                 min_progress,
-                Some(&self.required_locations),
                 &self.solve_trie,
             );
             self.solves_since_clean.fetch_add(1, Ordering::Release);
@@ -546,7 +533,6 @@ where
                     self.world,
                     solution.clone(),
                     min_progress,
-                    Some(&self.required_locations),
                     &self.solve_trie,
                 );
             }

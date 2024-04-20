@@ -2,8 +2,6 @@ use crate::context::{history_to_full_series, Ctx, History};
 use crate::matchertrie::*;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::world::*;
-use crate::CommonHasher;
-use std::collections::HashSet;
 use std::fmt::Debug;
 use std::sync::Arc;
 
@@ -57,14 +55,13 @@ pub trait Observer: Debug {
 // This is here to allow benchmarking without a SolutionCollector.
 /// Records a full solution's observations into the solve trie.
 ///
-/// Every state that has visited at least |min_relevant| of the required_locations is recorded in the trie,
+/// Every state that has visited at least |min_relevant| locations is recorded in the trie,
 /// except for the winning state.
 pub fn record_observations<W, T, L, E, Wp>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
     min_relevant: usize,
-    required_locations: Option<&HashSet<L::LocId, CommonHasher>>,
     solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
@@ -81,24 +78,13 @@ pub fn record_observations<W, T, L, E, Wp>(
     let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
     let mut pcount = 0;
-    let skippable = if let Some(plocs) = required_locations {
+    let skippable = if min_relevant > 1 {
         solution
             .history
             .iter()
             .position(|h| match h {
-                History::G(_, loc_id) => {
-                    if plocs.contains(&loc_id) {
-                        pcount += 1;
-                    }
-                    pcount == min_relevant
-                }
-                History::H(_, exit_id) => {
-                    let exit = world.get_exit(*exit_id);
-                    if let Some(loc_id) = exit.loc_id() {
-                        if plocs.contains(&loc_id) {
-                            pcount += 1;
-                        }
-                    }
+                History::G(..) | History::H(..) => {
+                    pcount += 1;
                     pcount == min_relevant
                 }
                 _ => false,

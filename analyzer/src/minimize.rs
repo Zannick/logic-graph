@@ -20,7 +20,7 @@ where
     E: Exit<Context = T>,
 {
     let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
-    record_observations(startctx, world, solution.clone(), 0, None, &mut trie);
+    record_observations(startctx, world, solution.clone(), 0, &mut trie);
     trie_minimize(world, startctx, solution, &trie)
 }
 
