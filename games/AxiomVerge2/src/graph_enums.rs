@@ -17839,14 +17839,11 @@ impl std::str::FromStr for ActionId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    Default,
     serde_repr::Serialize_repr,
     serde_repr::Deserialize_repr,
 )]
 #[repr(u8)]
 pub enum CanonId {
-    #[default]
-    None,
     Amagi_Dragon_Eye_Flask,
     Amagi_Stronghold_Boulder_2,
     Amagi_Stronghold_Left_Wall,
@@ -17887,6 +17884,144 @@ pub enum CanonId {
     Irikar_Royal_Storage_Flask,
     Irikar_Royal_Storage_Wall,
     Ledge_Grab,
+    Loc_Amagi__Liru_Room__Shrine__Item,
+    Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item,
+    Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
+    Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
+    Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
+    Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
+    Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
+    Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
+    Loc_Annuna__East_Bridge__Tower_Gate__Tablet,
+    Loc_Annuna__East_Bridge__Tower_Secret__Item,
+    Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
+    Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch,
+    Loc_Annuna__Mirror_Match__Save_Point__Fight,
+    Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
+    Loc_Annuna__Sniper_Valley__Cavern_Cache__Item,
+    Loc_Annuna__Sniper_Valley__Table__Item,
+    Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill,
+    Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill,
+    Loc_Annuna__Twisty_Passages__Top__Tablet,
+    Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
+    Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button,
+    Loc_Annuna__Vertical_Room__Plinth__Item,
+    Loc_Annuna__Vertical_Room__Upper_Cache__Tablet,
+    Loc_Annuna__West_Bridge__Plinth__Item,
+    Loc_Annuna__West_Climb__Cache__Item,
+    Loc_Antarctica__Power_Room__Switch__Flip,
+    Loc_Antarctica__Shed__Interior__Shelf,
+    Loc_Ebih__Boss_Room__Boss__Boss_Reward,
+    Loc_Ebih__Boss_Room__East_Ledge__Item,
+    Loc_Ebih__By_Garage__Crawlspace__Fragment,
+    Loc_Ebih__Ebih_East__Dispenser__Vend,
+    Loc_Ebih__Ebih_East__East_Ledge__Note,
+    Loc_Ebih__Ebih_West__Alcove__Tablet,
+    Loc_Ebih__Grid_25_2_6__Pit__Item,
+    Loc_Ebih__Grid_26_10_11__Ledge__Note,
+    Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
+    Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch,
+    Loc_Ebih__Waterfall__Alcove__Pedestal,
+    Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
+    Loc_Filter__Core__Terminal_East__Authorize_Hammond,
+    Loc_Giguna__Antechamber__Statue_Head__Tablet,
+    Loc_Giguna__Carnelian__Vault__Item,
+    Loc_Giguna__Clouds__Cache__Item,
+    Loc_Giguna__Dual_Path__Wall_Secret__Health,
+    Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
+    Loc_Giguna__Far_Corner__Grass__Obscured_Item,
+    Loc_Giguna__Gateway__Button__Hit_Switch,
+    Loc_Giguna__Gateway__Flask_Ledge__Item,
+    Loc_Giguna__Giguna_Base__Ruin__Item,
+    Loc_Giguna__Giguna_Base__Table__News,
+    Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
+    Loc_Giguna__Gubi_Lair__Pedestal__Axe,
+    Loc_Giguna__Hard_Rock__Rock_Center__Tablet,
+    Loc_Giguna__Helipad__Tablet_Ledge__Tablet,
+    Loc_Giguna__Lamassu__Deposit__Flask,
+    Loc_Giguna__Ruins_Center__Tablet__Item,
+    Loc_Giguna__Ruins_East__Way_Up_High__Item,
+    Loc_Giguna__Wasteland__Door_Right__Health,
+    Loc_Giguna__West_Caverns__Bush__Item,
+    Loc_Giguna__West_Caverns__Cache__Item,
+    Loc_Giguna__West_Tower__Top__Tablet,
+    Loc_Giguna_Breach__Chimney__Cache__Flask,
+    Loc_Giguna_Breach__Cubby__Rocks__Health,
+    Loc_Giguna_Breach__Slingshot__Ravine__Urn,
+    Loc_Glacier__Boomerang_Room__Pedestal__Item,
+    Loc_Glacier__Boomerang_Room__Pedestal__Switch,
+    Loc_Glacier__Compass_Room__Center__Table,
+    Loc_Glacier__Crystals__Lower_Corner__Item,
+    Loc_Glacier__Crystals__Top_Corner__Tablet,
+    Loc_Glacier__Hammonds_End__Between_Center_Doors__Health,
+    Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
+    Loc_Glacier__Sea_Burial__Deep_Cache__Health,
+    Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes,
+    Loc_Glacier__Vertical_Room__Peak__Flask,
+    Loc_Glacier__Vertical_Room__Under_Switch__Switch,
+    Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item,
+    Loc_Interior__Bunker_Interior__Desk__Note,
+    Loc_Interior__Ebih_Cave__Entry__Health,
+    Loc_Interior__Garage__Boxes__Under_Boxes,
+    Loc_Interior__Outpost_Interior__Bookshelf__Note,
+    Loc_Interior__Tent_Interior__Desk__Note,
+    Loc_Irikar__Abandoned_Room__Corner_Core__Core,
+    Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+    Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
+    Loc_Irikar__Boss_Room__Healthy_Rooftop__Health,
+    Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet,
+    Loc_Irikar__Hub__Dagger_Altar__Weapon,
+    Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
+    Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Loc_Irikar__Lamassu__Desk__Item,
+    Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
+    Loc_Irikar_Breach__Hover_Room__Bottom__Item,
+    Loc_Irikar_Breach__Worm_Rave__Corner__Item,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2,
+    Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
+    Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
+    Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1,
+    Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2,
+    Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1,
+    Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2,
+    Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3,
+    Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
+    Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
+    Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
+    Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
+    Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
+    Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+    Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet,
+    Loc_Uhrum__Annuna_Corridor__Statue__Item,
+    Loc_Uhrum__Siege_Corridor__Center_Box__Box,
+    Loc_Uhrum__Siege_Corridor__Pond__Item,
+    Loc_Uhrum__Siege_Corridor__Western_Cache__Core,
+    Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask,
+    Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet,
+    Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate,
+    Loc_Uhrum__West_Entrance__Inner_Dais__Item,
+    Loc_Uhrum__West_Entrance__Sand__Refill,
     Melee_Charge,
     Nanite_Mist,
     Notes_2053_02_27,
@@ -17905,7 +18040,6 @@ pub enum CanonId {
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            CanonId::None => write!(f, "{}", "None"),
             CanonId::Amagi_Dragon_Eye_Flask => write!(f, "{}", "Amagi Dragon Eye Flask"),
             CanonId::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi Stronghold Boulder 2"),
             CanonId::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi Stronghold Left Wall"),
@@ -17948,6 +18082,510 @@ impl fmt::Display for CanonId {
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Loc_Amagi__Liru_Room__Shrine__Item => {
+                write!(f, "{}", "Loc_Amagi__Liru_Room__Shrine__Item")
+            }
+            CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                write!(f, "{}", "Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item")
+            }
+            CanonId::Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(
+                f,
+                "{}",
+                "Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward"
+            ),
+            CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(
+                f,
+                "{}",
+                "Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall"
+            ),
+            CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(
+                f,
+                "{}",
+                "Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20"
+            ),
+            CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+                write!(
+                    f,
+                    "{}",
+                    "Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder"
+                )
+            }
+            CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item => write!(
+                f,
+                "{}",
+                "Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item"
+            ),
+            CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => write!(
+                f,
+                "{}",
+                "Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below"
+            ),
+            CanonId::Loc_Annuna__East_Bridge__Tower_Gate__Tablet => {
+                write!(f, "{}", "Loc_Annuna__East_Bridge__Tower_Gate__Tablet")
+            }
+            CanonId::Loc_Annuna__East_Bridge__Tower_Secret__Item => {
+                write!(f, "{}", "Loc_Annuna__East_Bridge__Tower_Secret__Item")
+            }
+            CanonId::Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet"
+            ),
+            CanonId::Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch"
+            ),
+            CanonId::Loc_Annuna__Mirror_Match__Save_Point__Fight => {
+                write!(f, "{}", "Loc_Annuna__Mirror_Match__Save_Point__Fight")
+            }
+            CanonId::Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup"
+            ),
+            CanonId::Loc_Annuna__Sniper_Valley__Cavern_Cache__Item => {
+                write!(f, "{}", "Loc_Annuna__Sniper_Valley__Cavern_Cache__Item")
+            }
+            CanonId::Loc_Annuna__Sniper_Valley__Table__Item => {
+                write!(f, "{}", "Loc_Annuna__Sniper_Valley__Table__Item")
+            }
+            CanonId::Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill"
+            ),
+            CanonId::Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill"
+            ),
+            CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet => {
+                write!(f, "{}", "Loc_Annuna__Twisty_Passages__Top__Tablet")
+            }
+            CanonId::Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup"
+            ),
+            CanonId::Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button => write!(
+                f,
+                "{}",
+                "Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button"
+            ),
+            CanonId::Loc_Annuna__Vertical_Room__Plinth__Item => {
+                write!(f, "{}", "Loc_Annuna__Vertical_Room__Plinth__Item")
+            }
+            CanonId::Loc_Annuna__Vertical_Room__Upper_Cache__Tablet => {
+                write!(f, "{}", "Loc_Annuna__Vertical_Room__Upper_Cache__Tablet")
+            }
+            CanonId::Loc_Annuna__West_Bridge__Plinth__Item => {
+                write!(f, "{}", "Loc_Annuna__West_Bridge__Plinth__Item")
+            }
+            CanonId::Loc_Annuna__West_Climb__Cache__Item => {
+                write!(f, "{}", "Loc_Annuna__West_Climb__Cache__Item")
+            }
+            CanonId::Loc_Antarctica__Power_Room__Switch__Flip => {
+                write!(f, "{}", "Loc_Antarctica__Power_Room__Switch__Flip")
+            }
+            CanonId::Loc_Antarctica__Shed__Interior__Shelf => {
+                write!(f, "{}", "Loc_Antarctica__Shed__Interior__Shelf")
+            }
+            CanonId::Loc_Ebih__Boss_Room__Boss__Boss_Reward => {
+                write!(f, "{}", "Loc_Ebih__Boss_Room__Boss__Boss_Reward")
+            }
+            CanonId::Loc_Ebih__Boss_Room__East_Ledge__Item => {
+                write!(f, "{}", "Loc_Ebih__Boss_Room__East_Ledge__Item")
+            }
+            CanonId::Loc_Ebih__By_Garage__Crawlspace__Fragment => {
+                write!(f, "{}", "Loc_Ebih__By_Garage__Crawlspace__Fragment")
+            }
+            CanonId::Loc_Ebih__Ebih_East__Dispenser__Vend => {
+                write!(f, "{}", "Loc_Ebih__Ebih_East__Dispenser__Vend")
+            }
+            CanonId::Loc_Ebih__Ebih_East__East_Ledge__Note => {
+                write!(f, "{}", "Loc_Ebih__Ebih_East__East_Ledge__Note")
+            }
+            CanonId::Loc_Ebih__Ebih_West__Alcove__Tablet => {
+                write!(f, "{}", "Loc_Ebih__Ebih_West__Alcove__Tablet")
+            }
+            CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item => {
+                write!(f, "{}", "Loc_Ebih__Grid_25_2_6__Pit__Item")
+            }
+            CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note => {
+                write!(f, "{}", "Loc_Ebih__Grid_26_10_11__Ledge__Note")
+            }
+            CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(
+                f,
+                "{}",
+                "Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block"
+            ),
+            CanonId::Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(
+                f,
+                "{}",
+                "Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch"
+            ),
+            CanonId::Loc_Ebih__Waterfall__Alcove__Pedestal => {
+                write!(f, "{}", "Loc_Ebih__Waterfall__Alcove__Pedestal")
+            }
+            CanonId::Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
+                f,
+                "{}",
+                "Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks"
+            ),
+            CanonId::Loc_Filter__Core__Terminal_East__Authorize_Hammond => write!(
+                f,
+                "{}",
+                "Loc_Filter__Core__Terminal_East__Authorize_Hammond"
+            ),
+            CanonId::Loc_Giguna__Antechamber__Statue_Head__Tablet => {
+                write!(f, "{}", "Loc_Giguna__Antechamber__Statue_Head__Tablet")
+            }
+            CanonId::Loc_Giguna__Carnelian__Vault__Item => {
+                write!(f, "{}", "Loc_Giguna__Carnelian__Vault__Item")
+            }
+            CanonId::Loc_Giguna__Clouds__Cache__Item => {
+                write!(f, "{}", "Loc_Giguna__Clouds__Cache__Item")
+            }
+            CanonId::Loc_Giguna__Dual_Path__Wall_Secret__Health => {
+                write!(f, "{}", "Loc_Giguna__Dual_Path__Wall_Secret__Health")
+            }
+            CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => write!(
+                f,
+                "{}",
+                "Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask"
+            ),
+            CanonId::Loc_Giguna__Far_Corner__Grass__Obscured_Item => {
+                write!(f, "{}", "Loc_Giguna__Far_Corner__Grass__Obscured_Item")
+            }
+            CanonId::Loc_Giguna__Gateway__Button__Hit_Switch => {
+                write!(f, "{}", "Loc_Giguna__Gateway__Button__Hit_Switch")
+            }
+            CanonId::Loc_Giguna__Gateway__Flask_Ledge__Item => {
+                write!(f, "{}", "Loc_Giguna__Gateway__Flask_Ledge__Item")
+            }
+            CanonId::Loc_Giguna__Giguna_Base__Ruin__Item => {
+                write!(f, "{}", "Loc_Giguna__Giguna_Base__Ruin__Item")
+            }
+            CanonId::Loc_Giguna__Giguna_Base__Table__News => {
+                write!(f, "{}", "Loc_Giguna__Giguna_Base__Table__News")
+            }
+            CanonId::Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward => write!(
+                f,
+                "{}",
+                "Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward"
+            ),
+            CanonId::Loc_Giguna__Gubi_Lair__Pedestal__Axe => {
+                write!(f, "{}", "Loc_Giguna__Gubi_Lair__Pedestal__Axe")
+            }
+            CanonId::Loc_Giguna__Hard_Rock__Rock_Center__Tablet => {
+                write!(f, "{}", "Loc_Giguna__Hard_Rock__Rock_Center__Tablet")
+            }
+            CanonId::Loc_Giguna__Helipad__Tablet_Ledge__Tablet => {
+                write!(f, "{}", "Loc_Giguna__Helipad__Tablet_Ledge__Tablet")
+            }
+            CanonId::Loc_Giguna__Lamassu__Deposit__Flask => {
+                write!(f, "{}", "Loc_Giguna__Lamassu__Deposit__Flask")
+            }
+            CanonId::Loc_Giguna__Ruins_Center__Tablet__Item => {
+                write!(f, "{}", "Loc_Giguna__Ruins_Center__Tablet__Item")
+            }
+            CanonId::Loc_Giguna__Ruins_East__Way_Up_High__Item => {
+                write!(f, "{}", "Loc_Giguna__Ruins_East__Way_Up_High__Item")
+            }
+            CanonId::Loc_Giguna__Wasteland__Door_Right__Health => {
+                write!(f, "{}", "Loc_Giguna__Wasteland__Door_Right__Health")
+            }
+            CanonId::Loc_Giguna__West_Caverns__Bush__Item => {
+                write!(f, "{}", "Loc_Giguna__West_Caverns__Bush__Item")
+            }
+            CanonId::Loc_Giguna__West_Caverns__Cache__Item => {
+                write!(f, "{}", "Loc_Giguna__West_Caverns__Cache__Item")
+            }
+            CanonId::Loc_Giguna__West_Tower__Top__Tablet => {
+                write!(f, "{}", "Loc_Giguna__West_Tower__Top__Tablet")
+            }
+            CanonId::Loc_Giguna_Breach__Chimney__Cache__Flask => {
+                write!(f, "{}", "Loc_Giguna_Breach__Chimney__Cache__Flask")
+            }
+            CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health => {
+                write!(f, "{}", "Loc_Giguna_Breach__Cubby__Rocks__Health")
+            }
+            CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn => {
+                write!(f, "{}", "Loc_Giguna_Breach__Slingshot__Ravine__Urn")
+            }
+            CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Item => {
+                write!(f, "{}", "Loc_Glacier__Boomerang_Room__Pedestal__Item")
+            }
+            CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Switch => {
+                write!(f, "{}", "Loc_Glacier__Boomerang_Room__Pedestal__Switch")
+            }
+            CanonId::Loc_Glacier__Compass_Room__Center__Table => {
+                write!(f, "{}", "Loc_Glacier__Compass_Room__Center__Table")
+            }
+            CanonId::Loc_Glacier__Crystals__Lower_Corner__Item => {
+                write!(f, "{}", "Loc_Glacier__Crystals__Lower_Corner__Item")
+            }
+            CanonId::Loc_Glacier__Crystals__Top_Corner__Tablet => {
+                write!(f, "{}", "Loc_Glacier__Crystals__Top_Corner__Tablet")
+            }
+            CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health => write!(
+                f,
+                "{}",
+                "Loc_Glacier__Hammonds_End__Between_Center_Doors__Health"
+            ),
+            CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown => write!(
+                f,
+                "{}",
+                "Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown"
+            ),
+            CanonId::Loc_Glacier__Sea_Burial__Deep_Cache__Health => {
+                write!(f, "{}", "Loc_Glacier__Sea_Burial__Deep_Cache__Health")
+            }
+            CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes => {
+                write!(f, "{}", "Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes")
+            }
+            CanonId::Loc_Glacier__Vertical_Room__Peak__Flask => {
+                write!(f, "{}", "Loc_Glacier__Vertical_Room__Peak__Flask")
+            }
+            CanonId::Loc_Glacier__Vertical_Room__Under_Switch__Switch => {
+                write!(f, "{}", "Loc_Glacier__Vertical_Room__Under_Switch__Switch")
+            }
+            CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item => write!(
+                f,
+                "{}",
+                "Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item"
+            ),
+            CanonId::Loc_Interior__Bunker_Interior__Desk__Note => {
+                write!(f, "{}", "Loc_Interior__Bunker_Interior__Desk__Note")
+            }
+            CanonId::Loc_Interior__Ebih_Cave__Entry__Health => {
+                write!(f, "{}", "Loc_Interior__Ebih_Cave__Entry__Health")
+            }
+            CanonId::Loc_Interior__Garage__Boxes__Under_Boxes => {
+                write!(f, "{}", "Loc_Interior__Garage__Boxes__Under_Boxes")
+            }
+            CanonId::Loc_Interior__Outpost_Interior__Bookshelf__Note => {
+                write!(f, "{}", "Loc_Interior__Outpost_Interior__Bookshelf__Note")
+            }
+            CanonId::Loc_Interior__Tent_Interior__Desk__Note => {
+                write!(f, "{}", "Loc_Interior__Tent_Interior__Desk__Note")
+            }
+            CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core => {
+                write!(f, "{}", "Loc_Irikar__Abandoned_Room__Corner_Core__Core")
+            }
+            CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(
+                f,
+                "{}",
+                "Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup"
+            ),
+            CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                write!(f, "{}", "Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward")
+            }
+            CanonId::Loc_Irikar__Boss_Room__Healthy_Rooftop__Health => {
+                write!(f, "{}", "Loc_Irikar__Boss_Room__Healthy_Rooftop__Health")
+            }
+            CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet => {
+                write!(f, "{}", "Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet")
+            }
+            CanonId::Loc_Irikar__Hub__Dagger_Altar__Weapon => {
+                write!(f, "{}", "Loc_Irikar__Hub__Dagger_Altar__Weapon")
+            }
+            CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(
+                f,
+                "{}",
+                "Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall"
+            ),
+            CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                write!(f, "{}", "Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet")
+            }
+            CanonId::Loc_Irikar__Lamassu__Desk__Item => {
+                write!(f, "{}", "Loc_Irikar__Lamassu__Desk__Item")
+            }
+            CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(
+                f,
+                "{}",
+                "Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item"
+            ),
+            CanonId::Loc_Irikar_Breach__Hover_Room__Bottom__Item => {
+                write!(f, "{}", "Loc_Irikar_Breach__Hover_Room__Bottom__Item")
+            }
+            CanonId::Loc_Irikar_Breach__Worm_Rave__Corner__Item => {
+                write!(f, "{}", "Loc_Irikar_Breach__Worm_Rave__Corner__Item")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3")
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
+                f,
+                "{}",
+                "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5"
+            ),
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                write!(f, "{}", "Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade")
+            }
+            CanonId::Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
+                write!(f, "{}", "Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet")
+            }
+            CanonId::Loc_Uhrum__Annuna_Corridor__Statue__Item => {
+                write!(f, "{}", "Loc_Uhrum__Annuna_Corridor__Statue__Item")
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Center_Box__Box => {
+                write!(f, "{}", "Loc_Uhrum__Siege_Corridor__Center_Box__Box")
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Pond__Item => {
+                write!(f, "{}", "Loc_Uhrum__Siege_Corridor__Pond__Item")
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Western_Cache__Core => {
+                write!(f, "{}", "Loc_Uhrum__Siege_Corridor__Western_Cache__Core")
+            }
+            CanonId::Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask => {
+                write!(f, "{}", "Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask")
+            }
+            CanonId::Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet => {
+                write!(f, "{}", "Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet")
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                write!(f, "{}", "Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate")
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Inner_Dais__Item => {
+                write!(f, "{}", "Loc_Uhrum__West_Entrance__Inner_Dais__Item")
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Sand__Refill => {
+                write!(f, "{}", "Loc_Uhrum__West_Entrance__Sand__Refill")
+            }
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
@@ -18015,6 +18653,410 @@ impl std::str::FromStr for CanonId {
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Loc_Amagi__Liru_Room__Shrine__Item" => Ok(CanonId::Loc_Amagi__Liru_Room__Shrine__Item),
+            "Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item" => {
+                Ok(CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item)
+            }
+            "Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward" => {
+                Ok(CanonId::Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward)
+            }
+            "Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall" => {
+                Ok(CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall)
+            }
+            "Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20" => {
+                Ok(CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20)
+            }
+            "Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder" => {
+                Ok(CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder)
+            }
+            "Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item" => {
+                Ok(CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item)
+            }
+            "Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below" => {
+                Ok(CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below)
+            }
+            "Loc_Annuna__East_Bridge__Tower_Gate__Tablet" => {
+                Ok(CanonId::Loc_Annuna__East_Bridge__Tower_Gate__Tablet)
+            }
+            "Loc_Annuna__East_Bridge__Tower_Secret__Item" => {
+                Ok(CanonId::Loc_Annuna__East_Bridge__Tower_Secret__Item)
+            }
+            "Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet" => {
+                Ok(CanonId::Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet)
+            }
+            "Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch" => {
+                Ok(CanonId::Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch)
+            }
+            "Loc_Annuna__Mirror_Match__Save_Point__Fight" => {
+                Ok(CanonId::Loc_Annuna__Mirror_Match__Save_Point__Fight)
+            }
+            "Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup" => {
+                Ok(CanonId::Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup)
+            }
+            "Loc_Annuna__Sniper_Valley__Cavern_Cache__Item" => {
+                Ok(CanonId::Loc_Annuna__Sniper_Valley__Cavern_Cache__Item)
+            }
+            "Loc_Annuna__Sniper_Valley__Table__Item" => {
+                Ok(CanonId::Loc_Annuna__Sniper_Valley__Table__Item)
+            }
+            "Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill" => {
+                Ok(CanonId::Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill)
+            }
+            "Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill" => {
+                Ok(CanonId::Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill)
+            }
+            "Loc_Annuna__Twisty_Passages__Top__Tablet" => {
+                Ok(CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet)
+            }
+            "Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup" => {
+                Ok(CanonId::Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup)
+            }
+            "Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button" => {
+                Ok(CanonId::Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button)
+            }
+            "Loc_Annuna__Vertical_Room__Plinth__Item" => {
+                Ok(CanonId::Loc_Annuna__Vertical_Room__Plinth__Item)
+            }
+            "Loc_Annuna__Vertical_Room__Upper_Cache__Tablet" => {
+                Ok(CanonId::Loc_Annuna__Vertical_Room__Upper_Cache__Tablet)
+            }
+            "Loc_Annuna__West_Bridge__Plinth__Item" => {
+                Ok(CanonId::Loc_Annuna__West_Bridge__Plinth__Item)
+            }
+            "Loc_Annuna__West_Climb__Cache__Item" => {
+                Ok(CanonId::Loc_Annuna__West_Climb__Cache__Item)
+            }
+            "Loc_Antarctica__Power_Room__Switch__Flip" => {
+                Ok(CanonId::Loc_Antarctica__Power_Room__Switch__Flip)
+            }
+            "Loc_Antarctica__Shed__Interior__Shelf" => {
+                Ok(CanonId::Loc_Antarctica__Shed__Interior__Shelf)
+            }
+            "Loc_Ebih__Boss_Room__Boss__Boss_Reward" => {
+                Ok(CanonId::Loc_Ebih__Boss_Room__Boss__Boss_Reward)
+            }
+            "Loc_Ebih__Boss_Room__East_Ledge__Item" => {
+                Ok(CanonId::Loc_Ebih__Boss_Room__East_Ledge__Item)
+            }
+            "Loc_Ebih__By_Garage__Crawlspace__Fragment" => {
+                Ok(CanonId::Loc_Ebih__By_Garage__Crawlspace__Fragment)
+            }
+            "Loc_Ebih__Ebih_East__Dispenser__Vend" => {
+                Ok(CanonId::Loc_Ebih__Ebih_East__Dispenser__Vend)
+            }
+            "Loc_Ebih__Ebih_East__East_Ledge__Note" => {
+                Ok(CanonId::Loc_Ebih__Ebih_East__East_Ledge__Note)
+            }
+            "Loc_Ebih__Ebih_West__Alcove__Tablet" => {
+                Ok(CanonId::Loc_Ebih__Ebih_West__Alcove__Tablet)
+            }
+            "Loc_Ebih__Grid_25_2_6__Pit__Item" => Ok(CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item),
+            "Loc_Ebih__Grid_26_10_11__Ledge__Note" => {
+                Ok(CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note)
+            }
+            "Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block" => {
+                Ok(CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block)
+            }
+            "Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch" => {
+                Ok(CanonId::Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch)
+            }
+            "Loc_Ebih__Waterfall__Alcove__Pedestal" => {
+                Ok(CanonId::Loc_Ebih__Waterfall__Alcove__Pedestal)
+            }
+            "Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks" => {
+                Ok(CanonId::Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
+            }
+            "Loc_Filter__Core__Terminal_East__Authorize_Hammond" => {
+                Ok(CanonId::Loc_Filter__Core__Terminal_East__Authorize_Hammond)
+            }
+            "Loc_Giguna__Antechamber__Statue_Head__Tablet" => {
+                Ok(CanonId::Loc_Giguna__Antechamber__Statue_Head__Tablet)
+            }
+            "Loc_Giguna__Carnelian__Vault__Item" => Ok(CanonId::Loc_Giguna__Carnelian__Vault__Item),
+            "Loc_Giguna__Clouds__Cache__Item" => Ok(CanonId::Loc_Giguna__Clouds__Cache__Item),
+            "Loc_Giguna__Dual_Path__Wall_Secret__Health" => {
+                Ok(CanonId::Loc_Giguna__Dual_Path__Wall_Secret__Health)
+            }
+            "Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask" => {
+                Ok(CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask)
+            }
+            "Loc_Giguna__Far_Corner__Grass__Obscured_Item" => {
+                Ok(CanonId::Loc_Giguna__Far_Corner__Grass__Obscured_Item)
+            }
+            "Loc_Giguna__Gateway__Button__Hit_Switch" => {
+                Ok(CanonId::Loc_Giguna__Gateway__Button__Hit_Switch)
+            }
+            "Loc_Giguna__Gateway__Flask_Ledge__Item" => {
+                Ok(CanonId::Loc_Giguna__Gateway__Flask_Ledge__Item)
+            }
+            "Loc_Giguna__Giguna_Base__Ruin__Item" => {
+                Ok(CanonId::Loc_Giguna__Giguna_Base__Ruin__Item)
+            }
+            "Loc_Giguna__Giguna_Base__Table__News" => {
+                Ok(CanonId::Loc_Giguna__Giguna_Base__Table__News)
+            }
+            "Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward" => {
+                Ok(CanonId::Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward)
+            }
+            "Loc_Giguna__Gubi_Lair__Pedestal__Axe" => {
+                Ok(CanonId::Loc_Giguna__Gubi_Lair__Pedestal__Axe)
+            }
+            "Loc_Giguna__Hard_Rock__Rock_Center__Tablet" => {
+                Ok(CanonId::Loc_Giguna__Hard_Rock__Rock_Center__Tablet)
+            }
+            "Loc_Giguna__Helipad__Tablet_Ledge__Tablet" => {
+                Ok(CanonId::Loc_Giguna__Helipad__Tablet_Ledge__Tablet)
+            }
+            "Loc_Giguna__Lamassu__Deposit__Flask" => {
+                Ok(CanonId::Loc_Giguna__Lamassu__Deposit__Flask)
+            }
+            "Loc_Giguna__Ruins_Center__Tablet__Item" => {
+                Ok(CanonId::Loc_Giguna__Ruins_Center__Tablet__Item)
+            }
+            "Loc_Giguna__Ruins_East__Way_Up_High__Item" => {
+                Ok(CanonId::Loc_Giguna__Ruins_East__Way_Up_High__Item)
+            }
+            "Loc_Giguna__Wasteland__Door_Right__Health" => {
+                Ok(CanonId::Loc_Giguna__Wasteland__Door_Right__Health)
+            }
+            "Loc_Giguna__West_Caverns__Bush__Item" => {
+                Ok(CanonId::Loc_Giguna__West_Caverns__Bush__Item)
+            }
+            "Loc_Giguna__West_Caverns__Cache__Item" => {
+                Ok(CanonId::Loc_Giguna__West_Caverns__Cache__Item)
+            }
+            "Loc_Giguna__West_Tower__Top__Tablet" => {
+                Ok(CanonId::Loc_Giguna__West_Tower__Top__Tablet)
+            }
+            "Loc_Giguna_Breach__Chimney__Cache__Flask" => {
+                Ok(CanonId::Loc_Giguna_Breach__Chimney__Cache__Flask)
+            }
+            "Loc_Giguna_Breach__Cubby__Rocks__Health" => {
+                Ok(CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health)
+            }
+            "Loc_Giguna_Breach__Slingshot__Ravine__Urn" => {
+                Ok(CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn)
+            }
+            "Loc_Glacier__Boomerang_Room__Pedestal__Item" => {
+                Ok(CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Item)
+            }
+            "Loc_Glacier__Boomerang_Room__Pedestal__Switch" => {
+                Ok(CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Switch)
+            }
+            "Loc_Glacier__Compass_Room__Center__Table" => {
+                Ok(CanonId::Loc_Glacier__Compass_Room__Center__Table)
+            }
+            "Loc_Glacier__Crystals__Lower_Corner__Item" => {
+                Ok(CanonId::Loc_Glacier__Crystals__Lower_Corner__Item)
+            }
+            "Loc_Glacier__Crystals__Top_Corner__Tablet" => {
+                Ok(CanonId::Loc_Glacier__Crystals__Top_Corner__Tablet)
+            }
+            "Loc_Glacier__Hammonds_End__Between_Center_Doors__Health" => {
+                Ok(CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health)
+            }
+            "Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown" => {
+                Ok(CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown)
+            }
+            "Loc_Glacier__Sea_Burial__Deep_Cache__Health" => {
+                Ok(CanonId::Loc_Glacier__Sea_Burial__Deep_Cache__Health)
+            }
+            "Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes" => {
+                Ok(CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes)
+            }
+            "Loc_Glacier__Vertical_Room__Peak__Flask" => {
+                Ok(CanonId::Loc_Glacier__Vertical_Room__Peak__Flask)
+            }
+            "Loc_Glacier__Vertical_Room__Under_Switch__Switch" => {
+                Ok(CanonId::Loc_Glacier__Vertical_Room__Under_Switch__Switch)
+            }
+            "Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item" => {
+                Ok(CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item)
+            }
+            "Loc_Interior__Bunker_Interior__Desk__Note" => {
+                Ok(CanonId::Loc_Interior__Bunker_Interior__Desk__Note)
+            }
+            "Loc_Interior__Ebih_Cave__Entry__Health" => {
+                Ok(CanonId::Loc_Interior__Ebih_Cave__Entry__Health)
+            }
+            "Loc_Interior__Garage__Boxes__Under_Boxes" => {
+                Ok(CanonId::Loc_Interior__Garage__Boxes__Under_Boxes)
+            }
+            "Loc_Interior__Outpost_Interior__Bookshelf__Note" => {
+                Ok(CanonId::Loc_Interior__Outpost_Interior__Bookshelf__Note)
+            }
+            "Loc_Interior__Tent_Interior__Desk__Note" => {
+                Ok(CanonId::Loc_Interior__Tent_Interior__Desk__Note)
+            }
+            "Loc_Irikar__Abandoned_Room__Corner_Core__Core" => {
+                Ok(CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core)
+            }
+            "Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup" => {
+                Ok(CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup)
+            }
+            "Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward" => {
+                Ok(CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
+            }
+            "Loc_Irikar__Boss_Room__Healthy_Rooftop__Health" => {
+                Ok(CanonId::Loc_Irikar__Boss_Room__Healthy_Rooftop__Health)
+            }
+            "Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet" => {
+                Ok(CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet)
+            }
+            "Loc_Irikar__Hub__Dagger_Altar__Weapon" => {
+                Ok(CanonId::Loc_Irikar__Hub__Dagger_Altar__Weapon)
+            }
+            "Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall" => {
+                Ok(CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall)
+            }
+            "Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet" => {
+                Ok(CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
+            }
+            "Loc_Irikar__Lamassu__Desk__Item" => Ok(CanonId::Loc_Irikar__Lamassu__Desk__Item),
+            "Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item" => {
+                Ok(CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)
+            }
+            "Loc_Irikar_Breach__Hover_Room__Bottom__Item" => {
+                Ok(CanonId::Loc_Irikar_Breach__Hover_Room__Bottom__Item)
+            }
+            "Loc_Irikar_Breach__Worm_Rave__Corner__Item" => {
+                Ok(CanonId::Loc_Irikar_Breach__Worm_Rave__Corner__Item)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
+            }
+            "Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade" => {
+                Ok(CanonId::Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
+            }
+            "Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet" => {
+                Ok(CanonId::Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet)
+            }
+            "Loc_Uhrum__Annuna_Corridor__Statue__Item" => {
+                Ok(CanonId::Loc_Uhrum__Annuna_Corridor__Statue__Item)
+            }
+            "Loc_Uhrum__Siege_Corridor__Center_Box__Box" => {
+                Ok(CanonId::Loc_Uhrum__Siege_Corridor__Center_Box__Box)
+            }
+            "Loc_Uhrum__Siege_Corridor__Pond__Item" => {
+                Ok(CanonId::Loc_Uhrum__Siege_Corridor__Pond__Item)
+            }
+            "Loc_Uhrum__Siege_Corridor__Western_Cache__Core" => {
+                Ok(CanonId::Loc_Uhrum__Siege_Corridor__Western_Cache__Core)
+            }
+            "Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask" => {
+                Ok(CanonId::Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask)
+            }
+            "Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet" => {
+                Ok(CanonId::Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet)
+            }
+            "Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate" => {
+                Ok(CanonId::Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate)
+            }
+            "Loc_Uhrum__West_Entrance__Inner_Dais__Item" => {
+                Ok(CanonId::Loc_Uhrum__West_Entrance__Inner_Dais__Item)
+            }
+            "Loc_Uhrum__West_Entrance__Sand__Refill" => {
+                Ok(CanonId::Loc_Uhrum__West_Entrance__Sand__Refill)
+            }
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Nanite_Mist" => Ok(CanonId::Nanite_Mist),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),

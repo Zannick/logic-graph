@@ -14649,7 +14649,6 @@ impl world::World for World {
     fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
         let loc = self.get_location(loc_id);
         match world::Location::canon_id(loc) {
-            CanonId::None => vec![],
             CanonId::Amagi_Dragon_Eye_Flask => vec![
                 LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
                 LocationId::Amagi__West_Lake__Cavern_Eye__Item,
@@ -14907,6 +14906,420 @@ impl world::World for World {
                 LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
                 LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
             ],
+            CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item => {
+                vec![LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item]
+            }
+            CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                vec![LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item]
+            }
+            CanonId::Loc_Amagi__Liru_Room__Shrine__Item => {
+                vec![LocationId::Amagi__Liru_Room__Shrine__Item]
+            }
+            CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
+                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall]
+            }
+            CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
+                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20]
+            }
+            CanonId::Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
+                vec![LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward]
+            }
+            CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder]
+            }
+            CanonId::Loc_Annuna__Mirror_Match__Save_Point__Fight => {
+                vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight]
+            }
+            CanonId::Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
+                vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch]
+            }
+            CanonId::Loc_Annuna__West_Bridge__Plinth__Item => {
+                vec![LocationId::Annuna__West_Bridge__Plinth__Item]
+            }
+            CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
+                vec![LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below]
+            }
+            CanonId::Loc_Annuna__East_Bridge__Tower_Gate__Tablet => {
+                vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet]
+            }
+            CanonId::Loc_Annuna__East_Bridge__Tower_Secret__Item => {
+                vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item]
+            }
+            CanonId::Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
+                vec![LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup]
+            }
+            CanonId::Loc_Annuna__Sniper_Valley__Table__Item => {
+                vec![LocationId::Annuna__Sniper_Valley__Table__Item]
+            }
+            CanonId::Loc_Annuna__Sniper_Valley__Cavern_Cache__Item => {
+                vec![LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item]
+            }
+            CanonId::Loc_Annuna__Vertical_Room__Plinth__Item => {
+                vec![LocationId::Annuna__Vertical_Room__Plinth__Item]
+            }
+            CanonId::Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button => {
+                vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button]
+            }
+            CanonId::Loc_Annuna__Vertical_Room__Upper_Cache__Tablet => {
+                vec![LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet]
+            }
+            CanonId::Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
+                vec![LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup]
+            }
+            CanonId::Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
+                vec![LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet]
+            }
+            CanonId::Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
+                vec![LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill]
+            }
+            CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet => {
+                vec![LocationId::Annuna__Twisty_Passages__Top__Tablet]
+            }
+            CanonId::Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
+                vec![LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill]
+            }
+            CanonId::Loc_Annuna__West_Climb__Cache__Item => {
+                vec![LocationId::Annuna__West_Climb__Cache__Item]
+            }
+            CanonId::Loc_Antarctica__Shed__Interior__Shelf => {
+                vec![LocationId::Antarctica__Shed__Interior__Shelf]
+            }
+            CanonId::Loc_Antarctica__Power_Room__Switch__Flip => {
+                vec![LocationId::Antarctica__Power_Room__Switch__Flip]
+            }
+            CanonId::Loc_Ebih__By_Garage__Crawlspace__Fragment => {
+                vec![LocationId::Ebih__By_Garage__Crawlspace__Fragment]
+            }
+            CanonId::Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
+                vec![LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks]
+            }
+            CanonId::Loc_Ebih__Waterfall__Alcove__Pedestal => {
+                vec![LocationId::Ebih__Waterfall__Alcove__Pedestal]
+            }
+            CanonId::Loc_Ebih__Ebih_West__Alcove__Tablet => {
+                vec![LocationId::Ebih__Ebih_West__Alcove__Tablet]
+            }
+            CanonId::Loc_Ebih__Ebih_East__Dispenser__Vend => {
+                vec![LocationId::Ebih__Ebih_East__Dispenser__Vend]
+            }
+            CanonId::Loc_Ebih__Ebih_East__East_Ledge__Note => {
+                vec![LocationId::Ebih__Ebih_East__East_Ledge__Note]
+            }
+            CanonId::Loc_Ebih__Boss_Room__Boss__Boss_Reward => {
+                vec![LocationId::Ebih__Boss_Room__Boss__Boss_Reward]
+            }
+            CanonId::Loc_Ebih__Boss_Room__East_Ledge__Item => {
+                vec![LocationId::Ebih__Boss_Room__East_Ledge__Item]
+            }
+            CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item => {
+                vec![LocationId::Ebih__Grid_25_2_6__Pit__Item]
+            }
+            CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note => {
+                vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note]
+            }
+            CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
+                vec![LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block]
+            }
+            CanonId::Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch => {
+                vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
+            }
+            CanonId::Loc_Filter__Core__Terminal_East__Authorize_Hammond => {
+                vec![LocationId::Filter__Core__Terminal_East__Authorize_Hammond]
+            }
+            CanonId::Loc_Giguna_Breach__Chimney__Cache__Flask => {
+                vec![LocationId::Giguna_Breach__Chimney__Cache__Flask]
+            }
+            CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health => {
+                vec![LocationId::Giguna_Breach__Cubby__Rocks__Health]
+            }
+            CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn => {
+                vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn]
+            }
+            CanonId::Loc_Giguna__Carnelian__Vault__Item => {
+                vec![LocationId::Giguna__Carnelian__Vault__Item]
+            }
+            CanonId::Loc_Giguna__West_Caverns__Cache__Item => {
+                vec![LocationId::Giguna__West_Caverns__Cache__Item]
+            }
+            CanonId::Loc_Giguna__West_Caverns__Bush__Item => {
+                vec![LocationId::Giguna__West_Caverns__Bush__Item]
+            }
+            CanonId::Loc_Giguna__Wasteland__Door_Right__Health => {
+                vec![LocationId::Giguna__Wasteland__Door_Right__Health]
+            }
+            CanonId::Loc_Giguna__Giguna_Base__Ruin__Item => {
+                vec![LocationId::Giguna__Giguna_Base__Ruin__Item]
+            }
+            CanonId::Loc_Giguna__Giguna_Base__Table__News => {
+                vec![LocationId::Giguna__Giguna_Base__Table__News]
+            }
+            CanonId::Loc_Giguna__Ruins_East__Way_Up_High__Item => {
+                vec![LocationId::Giguna__Ruins_East__Way_Up_High__Item]
+            }
+            CanonId::Loc_Giguna__Ruins_Center__Tablet__Item => {
+                vec![LocationId::Giguna__Ruins_Center__Tablet__Item]
+            }
+            CanonId::Loc_Giguna__West_Tower__Top__Tablet => {
+                vec![LocationId::Giguna__West_Tower__Top__Tablet]
+            }
+            CanonId::Loc_Giguna__Far_Corner__Grass__Obscured_Item => {
+                vec![LocationId::Giguna__Far_Corner__Grass__Obscured_Item]
+            }
+            CanonId::Loc_Giguna__Helipad__Tablet_Ledge__Tablet => {
+                vec![LocationId::Giguna__Helipad__Tablet_Ledge__Tablet]
+            }
+            CanonId::Loc_Giguna__Clouds__Cache__Item => {
+                vec![LocationId::Giguna__Clouds__Cache__Item]
+            }
+            CanonId::Loc_Giguna__Lamassu__Deposit__Flask => {
+                vec![LocationId::Giguna__Lamassu__Deposit__Flask]
+            }
+            CanonId::Loc_Giguna__Dual_Path__Wall_Secret__Health => {
+                vec![LocationId::Giguna__Dual_Path__Wall_Secret__Health]
+            }
+            CanonId::Loc_Giguna__Hard_Rock__Rock_Center__Tablet => {
+                vec![LocationId::Giguna__Hard_Rock__Rock_Center__Tablet]
+            }
+            CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => {
+                vec![LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask]
+            }
+            CanonId::Loc_Giguna__Gateway__Flask_Ledge__Item => {
+                vec![LocationId::Giguna__Gateway__Flask_Ledge__Item]
+            }
+            CanonId::Loc_Giguna__Gateway__Button__Hit_Switch => {
+                vec![LocationId::Giguna__Gateway__Button__Hit_Switch]
+            }
+            CanonId::Loc_Giguna__Antechamber__Statue_Head__Tablet => {
+                vec![LocationId::Giguna__Antechamber__Statue_Head__Tablet]
+            }
+            CanonId::Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
+                vec![LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward]
+            }
+            CanonId::Loc_Giguna__Gubi_Lair__Pedestal__Axe => {
+                vec![LocationId::Giguna__Gubi_Lair__Pedestal__Axe]
+            }
+            CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item => {
+                vec![LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item]
+            }
+            CanonId::Loc_Glacier__Compass_Room__Center__Table => {
+                vec![LocationId::Glacier__Compass_Room__Center__Table]
+            }
+            CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
+                vec![LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown]
+            }
+            CanonId::Loc_Glacier__Sea_Burial__Deep_Cache__Health => {
+                vec![LocationId::Glacier__Sea_Burial__Deep_Cache__Health]
+            }
+            CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes => {
+                vec![LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes]
+            }
+            CanonId::Loc_Glacier__Vertical_Room__Under_Switch__Switch => {
+                vec![LocationId::Glacier__Vertical_Room__Under_Switch__Switch]
+            }
+            CanonId::Loc_Glacier__Vertical_Room__Peak__Flask => {
+                vec![LocationId::Glacier__Vertical_Room__Peak__Flask]
+            }
+            CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Item => {
+                vec![LocationId::Glacier__Boomerang_Room__Pedestal__Item]
+            }
+            CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Switch => {
+                vec![LocationId::Glacier__Boomerang_Room__Pedestal__Switch]
+            }
+            CanonId::Loc_Glacier__Crystals__Top_Corner__Tablet => {
+                vec![LocationId::Glacier__Crystals__Top_Corner__Tablet]
+            }
+            CanonId::Loc_Glacier__Crystals__Lower_Corner__Item => {
+                vec![LocationId::Glacier__Crystals__Lower_Corner__Item]
+            }
+            CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health => {
+                vec![LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health]
+            }
+            CanonId::Loc_Interior__Bunker_Interior__Desk__Note => {
+                vec![LocationId::Interior__Bunker_Interior__Desk__Note]
+            }
+            CanonId::Loc_Interior__Tent_Interior__Desk__Note => {
+                vec![LocationId::Interior__Tent_Interior__Desk__Note]
+            }
+            CanonId::Loc_Interior__Garage__Boxes__Under_Boxes => {
+                vec![LocationId::Interior__Garage__Boxes__Under_Boxes]
+            }
+            CanonId::Loc_Interior__Ebih_Cave__Entry__Health => {
+                vec![LocationId::Interior__Ebih_Cave__Entry__Health]
+            }
+            CanonId::Loc_Interior__Outpost_Interior__Bookshelf__Note => {
+                vec![LocationId::Interior__Outpost_Interior__Bookshelf__Note]
+            }
+            CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => {
+                vec![LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item]
+            }
+            CanonId::Loc_Irikar_Breach__Hover_Room__Bottom__Item => {
+                vec![LocationId::Irikar_Breach__Hover_Room__Bottom__Item]
+            }
+            CanonId::Loc_Irikar_Breach__Worm_Rave__Corner__Item => {
+                vec![LocationId::Irikar_Breach__Worm_Rave__Corner__Item]
+            }
+            CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
+                vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet]
+            }
+            CanonId::Loc_Irikar__Hub__Dagger_Altar__Weapon => {
+                vec![LocationId::Irikar__Hub__Dagger_Altar__Weapon]
+            }
+            CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
+                vec![LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall]
+            }
+            CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core => {
+                vec![LocationId::Irikar__Abandoned_Room__Corner_Core__Core]
+            }
+            CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
+                vec![LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup]
+            }
+            CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
+                vec![LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward]
+            }
+            CanonId::Loc_Irikar__Boss_Room__Healthy_Rooftop__Health => {
+                vec![LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health]
+            }
+            CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet => {
+                vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet]
+            }
+            CanonId::Loc_Irikar__Lamassu__Desk__Item => {
+                vec![LocationId::Irikar__Lamassu__Desk__Item]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                vec![LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2]
+            }
+            CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3]
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Inner_Dais__Item => {
+                vec![LocationId::Uhrum__West_Entrance__Inner_Dais__Item]
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
+                vec![LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate]
+            }
+            CanonId::Loc_Uhrum__West_Entrance__Sand__Refill => {
+                vec![LocationId::Uhrum__West_Entrance__Sand__Refill]
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Western_Cache__Core => {
+                vec![LocationId::Uhrum__Siege_Corridor__Western_Cache__Core]
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Center_Box__Box => {
+                vec![LocationId::Uhrum__Siege_Corridor__Center_Box__Box]
+            }
+            CanonId::Loc_Uhrum__Siege_Corridor__Pond__Item => {
+                vec![LocationId::Uhrum__Siege_Corridor__Pond__Item]
+            }
+            CanonId::Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask => {
+                vec![LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask]
+            }
+            CanonId::Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet => {
+                vec![LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet]
+            }
+            CanonId::Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
+                vec![LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet]
+            }
+            CanonId::Loc_Uhrum__Annuna_Corridor__Statue__Item => {
+                vec![LocationId::Uhrum__Annuna_Corridor__Statue__Item]
+            }
         }
     }
 
@@ -19877,7 +20290,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
         LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => Location {
             id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -19885,7 +20298,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => Location {
             id: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -19893,7 +20306,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__Liru_Room__Shrine__Item => Location {
             id: LocationId::Amagi__Liru_Room__Shrine__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__Liru_Room__Shrine__Item,
             item: Item::Underwater_Movement,
             price: Currency::Free,
             time: 5500,
@@ -19901,7 +20314,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => Location {
             id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
             item: Item::Amagi_Dragon_Eye_Passage,
             price: Currency::Energy(100),
             time: 3500,
@@ -19909,7 +20322,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => Location {
             id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
             item: Item::Defeat_MUS_A_M20,
             price: Currency::Energy(300),
             time: 0,
@@ -19933,7 +20346,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => Location {
             id: LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -19981,7 +20394,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => Location {
             id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
             item: Item::Amagi_Stronghold_Boulder_1,
             price: Currency::Energy(100),
             time: 3500,
@@ -20029,7 +20442,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Mirror_Match__Save_Point__Fight => Location {
             id: LocationId::Annuna__Mirror_Match__Save_Point__Fight,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Mirror_Match__Save_Point__Fight,
             item: Item::Defeat_Indra,
             price: Currency::Free,
             time: 30000,
@@ -20037,7 +20450,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => Location {
             id: LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch,
             item: Item::Annuna_Mirror_Match_Switch,
             price: Currency::Free,
             time: 0,
@@ -20077,7 +20490,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__West_Bridge__Plinth__Item => Location {
             id: LocationId::Annuna__West_Bridge__Plinth__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__West_Bridge__Plinth__Item,
             item: Item::Nano_Lattice_2,
             price: Currency::Free,
             time: 0,
@@ -20093,7 +20506,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => Location {
             id: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
             item: Item::Annuna_East_Bridge_Gate,
             price: Currency::Free,
             time: 250,
@@ -20101,7 +20514,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => Location {
             id: LocationId::Annuna__East_Bridge__Tower_Gate__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__East_Bridge__Tower_Gate__Tablet,
             item: Item::Lament_for_Fools,
             price: Currency::Free,
             time: 0,
@@ -20109,7 +20522,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__East_Bridge__Tower_Secret__Item => Location {
             id: LocationId::Annuna__East_Bridge__Tower_Secret__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__East_Bridge__Tower_Secret__Item,
             item: Item::Royal_Ring,
             price: Currency::Free,
             time: 0,
@@ -20117,7 +20530,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => Location {
             id: LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -20125,7 +20538,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Sniper_Valley__Table__Item => Location {
             id: LocationId::Annuna__Sniper_Valley__Table__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Sniper_Valley__Table__Item,
             item: Item::Family_Tragedy,
             price: Currency::Free,
             time: 0,
@@ -20165,7 +20578,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => Location {
             id: LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Sniper_Valley__Cavern_Cache__Item,
             item: Item::Big_Flask,
             price: Currency::Free,
             time: 5500,
@@ -20173,7 +20586,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Vertical_Room__Plinth__Item => Location {
             id: LocationId::Annuna__Vertical_Room__Plinth__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Vertical_Room__Plinth__Item,
             item: Item::Boomerang_Upgrade,
             price: Currency::Free,
             time: 0,
@@ -20181,7 +20594,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => Location {
             id: LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button,
             item: Item::Annuna_Vertical_Room_Gate,
             price: Currency::Free,
             time: 100,
@@ -20189,7 +20602,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => Location {
             id: LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Vertical_Room__Upper_Cache__Tablet,
             item: Item::Beware_the_Patternmind,
             price: Currency::Free,
             time: 0,
@@ -20197,7 +20610,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => Location {
             id: LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -20221,7 +20634,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => Location {
             id: LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
             item: Item::The_Eternal_Arm,
             price: Currency::Free,
             time: 0,
@@ -20229,7 +20642,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => Location {
             id: LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -20237,7 +20650,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Twisty_Passages__Top__Tablet => Location {
             id: LocationId::Annuna__Twisty_Passages__Top__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet,
             item: Item::Destruction_Pogrom,
             price: Currency::Free,
             time: 0,
@@ -20245,7 +20658,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => Location {
             id: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -20253,7 +20666,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Annuna__West_Climb__Cache__Item => Location {
             id: LocationId::Annuna__West_Climb__Cache__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Annuna__West_Climb__Cache__Item,
             item: Item::Eye_Ring,
             price: Currency::Free,
             time: 0,
@@ -20461,7 +20874,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
             id: LocationId::Antarctica__Shed__Interior__Shelf,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Antarctica__Shed__Interior__Shelf,
             item: Item::Ice_Axe,
             price: Currency::Free,
             time: 500,
@@ -20477,7 +20890,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Antarctica__Power_Room__Switch__Flip => Location {
             id: LocationId::Antarctica__Power_Room__Switch__Flip,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Antarctica__Power_Room__Switch__Flip,
             item: Item::Station_Power,
             price: Currency::Free,
             time: 0,
@@ -20501,7 +20914,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__By_Garage__Crawlspace__Fragment => Location {
             id: LocationId::Ebih__By_Garage__Crawlspace__Fragment,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__By_Garage__Crawlspace__Fragment,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -20533,7 +20946,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => Location {
             id: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
             item: Item::Ebih_Waterfall_Both_Blocks,
             price: Currency::Energy(100),
             time: 3500,
@@ -20549,7 +20962,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Waterfall__Alcove__Pedestal => Location {
             id: LocationId::Ebih__Waterfall__Alcove__Pedestal,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Waterfall__Alcove__Pedestal,
             item: Item::Bronze_Axe,
             price: Currency::Free,
             time: 0,
@@ -20605,7 +21018,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Ebih_West__Alcove__Tablet => Location {
             id: LocationId::Ebih__Ebih_West__Alcove__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Ebih_West__Alcove__Tablet,
             item: Item::Heretics_Tablet,
             price: Currency::Free,
             time: 0,
@@ -20645,7 +21058,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Ebih_East__Dispenser__Vend => Location {
             id: LocationId::Ebih__Ebih_East__Dispenser__Vend,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Ebih_East__Dispenser__Vend,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 3500,
@@ -20653,7 +21066,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Ebih_East__East_Ledge__Note => Location {
             id: LocationId::Ebih__Ebih_East__East_Ledge__Note,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Ebih_East__East_Ledge__Note,
             item: Item::Under_Siege,
             price: Currency::Free,
             time: 0,
@@ -20677,7 +21090,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Boss_Room__Boss__Boss_Reward => Location {
             id: LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Boss_Room__Boss__Boss_Reward,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -20685,7 +21098,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Boss_Room__East_Ledge__Item => Location {
             id: LocationId::Ebih__Boss_Room__East_Ledge__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Boss_Room__East_Ledge__Item,
             item: Item::Health_Node,
             price: Currency::Free,
             time: 0,
@@ -20725,7 +21138,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Grid_25_2_6__Pit__Item => Location {
             id: LocationId::Ebih__Grid_25_2_6__Pit__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -20733,7 +21146,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Grid_26_10_11__Ledge__Note => Location {
             id: LocationId::Ebih__Grid_26_10_11__Ledge__Note,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note,
             item: Item::Terminal_Breakthrough_1,
             price: Currency::Free,
             time: 0,
@@ -20741,7 +21154,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => Location {
             id: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
             item: Item::Ebih_Interchange_Block,
             price: Currency::Energy(100),
             time: 3500,
@@ -20749,7 +21162,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => Location {
             id: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch,
             item: Item::Ebih_Interchange_Gate,
             price: Currency::Free,
             time: 250,
@@ -20757,7 +21170,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Filter__Core__Terminal_East__Authorize_Hammond => Location {
             id: LocationId::Filter__Core__Terminal_East__Authorize_Hammond,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Filter__Core__Terminal_East__Authorize_Hammond,
             item: Item::Hammond_Auth,
             price: Currency::Free,
             time: 500,
@@ -20765,7 +21178,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna_Breach__Chimney__Cache__Flask => Location {
             id: LocationId::Giguna_Breach__Chimney__Cache__Flask,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna_Breach__Chimney__Cache__Flask,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -20773,7 +21186,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna_Breach__Cubby__Rocks__Health => Location {
             id: LocationId::Giguna_Breach__Cubby__Rocks__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 600,
@@ -20781,7 +21194,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna_Breach__Slingshot__Ravine__Urn => Location {
             id: LocationId::Giguna_Breach__Slingshot__Ravine__Urn,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn,
             item: Item::Slingshot_Hook,
             price: Currency::Free,
             time: 5500,
@@ -20821,7 +21234,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Carnelian__Vault__Item => Location {
             id: LocationId::Giguna__Carnelian__Vault__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Carnelian__Vault__Item,
             item: Item::Carnelian_Ring,
             price: Currency::Free,
             time: 0,
@@ -20829,7 +21242,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__West_Caverns__Cache__Item => Location {
             id: LocationId::Giguna__West_Caverns__Cache__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__West_Caverns__Cache__Item,
             item: Item::Power_Matrix,
             price: Currency::Free,
             time: 0,
@@ -20837,7 +21250,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__West_Caverns__Bush__Item => Location {
             id: LocationId::Giguna__West_Caverns__Bush__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__West_Caverns__Bush__Item,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -20845,7 +21258,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Wasteland__Door_Right__Health => Location {
             id: LocationId::Giguna__Wasteland__Door_Right__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Wasteland__Door_Right__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -20885,7 +21298,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Giguna_Base__Ruin__Item => Location {
             id: LocationId::Giguna__Giguna_Base__Ruin__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Giguna_Base__Ruin__Item,
             item: Item::Wall_Climb,
             price: Currency::Free,
             time: 5500,
@@ -20893,7 +21306,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Giguna_Base__Table__News => Location {
             id: LocationId::Giguna__Giguna_Base__Table__News,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Giguna_Base__Table__News,
             item: Item::Researchers_Missing,
             price: Currency::Free,
             time: 0,
@@ -20901,7 +21314,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Ruins_East__Way_Up_High__Item => Location {
             id: LocationId::Giguna__Ruins_East__Way_Up_High__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Ruins_East__Way_Up_High__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -20909,7 +21322,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Ruins_Center__Tablet__Item => Location {
             id: LocationId::Giguna__Ruins_Center__Tablet__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Ruins_Center__Tablet__Item,
             item: Item::Aansur,
             price: Currency::Free,
             time: 0,
@@ -20933,7 +21346,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__West_Tower__Top__Tablet => Location {
             id: LocationId::Giguna__West_Tower__Top__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__West_Tower__Top__Tablet,
             item: Item::The_Ideal_Kiengir,
             price: Currency::Free,
             time: 0,
@@ -20941,7 +21354,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Far_Corner__Grass__Obscured_Item => Location {
             id: LocationId::Giguna__Far_Corner__Grass__Obscured_Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Far_Corner__Grass__Obscured_Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -20949,7 +21362,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => Location {
             id: LocationId::Giguna__Helipad__Tablet_Ledge__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Helipad__Tablet_Ledge__Tablet,
             item: Item::Journal_2049_10_29,
             price: Currency::Free,
             time: 0,
@@ -20957,7 +21370,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Clouds__Cache__Item => Location {
             id: LocationId::Giguna__Clouds__Cache__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Clouds__Cache__Item,
             item: Item::Big_Flask,
             price: Currency::Free,
             time: 5500,
@@ -20965,7 +21378,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Lamassu__Deposit__Flask => Location {
             id: LocationId::Giguna__Lamassu__Deposit__Flask,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Lamassu__Deposit__Flask,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21005,7 +21418,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Dual_Path__Wall_Secret__Health => Location {
             id: LocationId::Giguna__Dual_Path__Wall_Secret__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Dual_Path__Wall_Secret__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 1000,
@@ -21045,7 +21458,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => Location {
             id: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Hard_Rock__Rock_Center__Tablet,
             item: Item::Building_of_the_School,
             price: Currency::Free,
             time: 0,
@@ -21069,7 +21482,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => Location {
             id: LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21093,7 +21506,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Gateway__Flask_Ledge__Item => Location {
             id: LocationId::Giguna__Gateway__Flask_Ledge__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Gateway__Flask_Ledge__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21101,7 +21514,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Gateway__Button__Hit_Switch => Location {
             id: LocationId::Giguna__Gateway__Button__Hit_Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Gateway__Button__Hit_Switch,
             item: Item::Giguna_Gateway_Gate,
             price: Currency::Free,
             time: 0,
@@ -21109,7 +21522,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Antechamber__Statue_Head__Tablet => Location {
             id: LocationId::Giguna__Antechamber__Statue_Head__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Antechamber__Statue_Head__Tablet,
             item: Item::Dangerous_Ideas,
             price: Currency::Free,
             time: 0,
@@ -21133,7 +21546,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => Location {
             id: LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
             item: Item::Big_Flask,
             price: Currency::Free,
             time: 5500,
@@ -21141,7 +21554,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Giguna__Gubi_Lair__Pedestal__Axe => Location {
             id: LocationId::Giguna__Gubi_Lair__Pedestal__Axe,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Giguna__Gubi_Lair__Pedestal__Axe,
             item: Item::Double_Axe,
             price: Currency::Free,
             time: 0,
@@ -21149,7 +21562,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => Location {
             id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21173,7 +21586,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
             id: LocationId::Glacier__Compass_Room__Center__Table,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Compass_Room__Center__Table,
             item: Item::Compass,
             price: Currency::Free,
             time: 0,
@@ -21229,7 +21642,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => Location {
             id: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
             item: Item::Amashilama,
             price: Currency::Free,
             time: 0,
@@ -21237,7 +21650,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Sea_Burial__Deep_Cache__Health => Location {
             id: LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Sea_Burial__Deep_Cache__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -21293,7 +21706,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => Location {
             id: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes,
             item: Item::Dr_Gloria,
             price: Currency::Free,
             time: 0,
@@ -21301,7 +21714,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Vertical_Room__Under_Switch__Switch => Location {
             id: LocationId::Glacier__Vertical_Room__Under_Switch__Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Vertical_Room__Under_Switch__Switch,
             item: Item::Switch_36_11,
             price: Currency::Free,
             time: 1000,
@@ -21309,7 +21722,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Vertical_Room__Peak__Flask => Location {
             id: LocationId::Glacier__Vertical_Room__Peak__Flask,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Vertical_Room__Peak__Flask,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21317,7 +21730,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Boomerang_Room__Pedestal__Item => Location {
             id: LocationId::Glacier__Boomerang_Room__Pedestal__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Item,
             item: Item::Boomerang,
             price: Currency::Free,
             time: 0,
@@ -21325,7 +21738,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Boomerang_Room__Pedestal__Switch => Location {
             id: LocationId::Glacier__Boomerang_Room__Pedestal__Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Switch,
             item: Item::Switch_40_12,
             price: Currency::Free,
             time: 1000,
@@ -21365,7 +21778,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Crystals__Top_Corner__Tablet => Location {
             id: LocationId::Glacier__Crystals__Top_Corner__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Crystals__Top_Corner__Tablet,
             item: Item::Bounty_List,
             price: Currency::Free,
             time: 0,
@@ -21373,7 +21786,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Crystals__Lower_Corner__Item => Location {
             id: LocationId::Glacier__Crystals__Lower_Corner__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Crystals__Lower_Corner__Item,
             item: Item::Breach_Attractor,
             price: Currency::Free,
             time: 0,
@@ -21397,7 +21810,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => Location {
             id: LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -21405,7 +21818,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Interior__Bunker_Interior__Desk__Note => Location {
             id: LocationId::Interior__Bunker_Interior__Desk__Note,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Interior__Bunker_Interior__Desk__Note,
             item: Item::Dear_Ernest,
             price: Currency::Free,
             time: 0,
@@ -21437,7 +21850,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Interior__Tent_Interior__Desk__Note => Location {
             id: LocationId::Interior__Tent_Interior__Desk__Note,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Interior__Tent_Interior__Desk__Note,
             item: Item::Companies_Layoff,
             price: Currency::Free,
             time: 0,
@@ -21445,7 +21858,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Interior__Garage__Boxes__Under_Boxes => Location {
             id: LocationId::Interior__Garage__Boxes__Under_Boxes,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Interior__Garage__Boxes__Under_Boxes,
             item: Item::Record_Losses,
             price: Currency::Free,
             time: 2000,
@@ -21453,7 +21866,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Interior__Ebih_Cave__Entry__Health => Location {
             id: LocationId::Interior__Ebih_Cave__Entry__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Interior__Ebih_Cave__Entry__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 500,
@@ -21461,7 +21874,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Interior__Outpost_Interior__Bookshelf__Note => Location {
             id: LocationId::Interior__Outpost_Interior__Bookshelf__Note,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Interior__Outpost_Interior__Bookshelf__Note,
             item: Item::Letter_from_Trace,
             price: Currency::Free,
             time: 0,
@@ -21469,7 +21882,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => Location {
             id: LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21477,7 +21890,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar_Breach__Hover_Room__Bottom__Item => Location {
             id: LocationId::Irikar_Breach__Hover_Room__Bottom__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar_Breach__Hover_Room__Bottom__Item,
             item: Item::Drone_Hover,
             price: Currency::Free,
             time: 5500,
@@ -21485,7 +21898,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar_Breach__Worm_Rave__Corner__Item => Location {
             id: LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar_Breach__Worm_Rave__Corner__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -21493,7 +21906,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => Location {
             id: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
             item: Item::Commemorative_Speech,
             price: Currency::Free,
             time: 0,
@@ -21501,7 +21914,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Hub__Dagger_Altar__Weapon => Location {
             id: LocationId::Irikar__Hub__Dagger_Altar__Weapon,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Hub__Dagger_Altar__Weapon,
             item: Item::Royal_Dagger,
             price: Currency::Free,
             time: 0,
@@ -21517,7 +21930,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => Location {
             id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
             item: Item::Irikar_Royal_Storage_Wall,
             price: Currency::Energy(20),
             time: 0,
@@ -21557,7 +21970,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Abandoned_Room__Corner_Core__Core => Location {
             id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -21565,7 +21978,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => Location {
             id: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -21589,7 +22002,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => Location {
             id: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             item: Item::Big_Flask,
             price: Currency::Free,
             time: 5500,
@@ -21597,7 +22010,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => Location {
             id: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Boss_Room__Healthy_Rooftop__Health,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -21605,7 +22018,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => Location {
             id: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet,
             item: Item::Heretics_Granddaughter,
             price: Currency::Free,
             time: 0,
@@ -21613,7 +22026,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Irikar__Lamassu__Desk__Item => Location {
             id: LocationId::Irikar__Lamassu__Desk__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Irikar__Lamassu__Desk__Item,
             item: Item::Terminal_Breakthrough_2,
             price: Currency::Free,
             time: 0,
@@ -21621,7 +22034,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
             item: Item::Health_Upgrade,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21629,7 +22042,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
             item: Item::Health_Upgrade_2,
             price: Currency::Flasks(2),
             time: 1000,
@@ -21637,7 +22050,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
             item: Item::Health_Upgrade_3,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21645,7 +22058,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
             item: Item::Health_Upgrade_4,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21653,7 +22066,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
             item: Item::Health_Upgrade_5,
             price: Currency::Flasks(6),
             time: 1000,
@@ -21661,7 +22074,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => Location {
             id: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
             item: Item::Mist_Upgrade,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21669,7 +22082,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1,
             item: Item::Melee_Damage,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21677,7 +22090,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2,
             item: Item::Melee_Damage_2,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21685,7 +22098,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3,
             item: Item::Melee_Damage_3,
             price: Currency::Flasks(6),
             time: 1000,
@@ -21693,7 +22106,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1,
             item: Item::Melee_Speed,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21701,7 +22114,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2,
             item: Item::Melee_Speed_2,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21709,7 +22122,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3,
             item: Item::Melee_Speed_3,
             price: Currency::Flasks(6),
             time: 1000,
@@ -21717,7 +22130,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
             item: Item::Ranged_Damage,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21725,7 +22138,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
             item: Item::Ranged_Damage_2,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21733,7 +22146,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
             item: Item::Ranged_Damage_3,
             price: Currency::Flasks(6),
             time: 1000,
@@ -21741,7 +22154,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
             item: Item::Ranged_Speed,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21749,7 +22162,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
             item: Item::Ranged_Speed_2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21757,7 +22170,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
             item: Item::Ranged_Speed_3,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21765,7 +22178,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1,
             item: Item::Infect_L1,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21773,7 +22186,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2,
             item: Item::Infect_L2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21781,7 +22194,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3,
             item: Item::Infect_L3,
             price: Currency::Flasks(4),
             time: 1000,
@@ -21789,7 +22202,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1,
             item: Item::Nano_Points,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21797,7 +22210,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2,
             item: Item::Nano_Points_2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21805,7 +22218,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3,
             item: Item::Nano_Points_3,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21813,7 +22226,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1,
             item: Item::Infection_Speed,
             price: Currency::Flasks(2),
             time: 1000,
@@ -21821,7 +22234,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2,
             item: Item::Infection_Speed_2,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21829,7 +22242,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1,
             item: Item::Infection_Range,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21837,7 +22250,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2,
             item: Item::Infection_Range_2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21845,7 +22258,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3,
             item: Item::Infection_Range_3,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21853,7 +22266,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
             item: Item::Drone_Melee_Damage,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21861,7 +22274,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
             item: Item::Drone_Melee_Damage_2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21869,7 +22282,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
             item: Item::Drone_Melee_Damage_3,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21877,7 +22290,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
             item: Item::Drone_Melee_Speed,
             price: Currency::Flasks(1),
             time: 1000,
@@ -21885,7 +22298,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
             item: Item::Drone_Melee_Speed_2,
             price: Currency::Flasks(3),
             time: 1000,
@@ -21893,7 +22306,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => Location {
             id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
             item: Item::Drone_Melee_Speed_3,
             price: Currency::Flasks(5),
             time: 1000,
@@ -21901,7 +22314,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__West_Entrance__Inner_Dais__Item => Location {
             id: LocationId::Uhrum__West_Entrance__Inner_Dais__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__West_Entrance__Inner_Dais__Item,
             item: Item::Udusan,
             price: Currency::Free,
             time: 0,
@@ -21909,7 +22322,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => Location {
             id: LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate,
             item: Item::Uhrum_West_Entrance_Gate,
             price: Currency::Free,
             time: 250,
@@ -21997,7 +22410,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__West_Entrance__Sand__Refill => Location {
             id: LocationId::Uhrum__West_Entrance__Sand__Refill,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__West_Entrance__Sand__Refill,
             item: Item::Refill,
             price: Currency::Free,
             time: 0,
@@ -22005,7 +22418,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => Location {
             id: LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Siege_Corridor__Western_Cache__Core,
             item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
@@ -22013,7 +22426,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Siege_Corridor__Center_Box__Box => Location {
             id: LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Siege_Corridor__Center_Box__Box,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 1500,
@@ -22029,7 +22442,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Siege_Corridor__Pond__Item => Location {
             id: LocationId::Uhrum__Siege_Corridor__Pond__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Siege_Corridor__Pond__Item,
             item: Item::Storm_Bomb,
             price: Currency::Free,
             time: 0,
@@ -22037,7 +22450,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => Location {
             id: LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
@@ -22117,7 +22530,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => Location {
             id: LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet,
             item: Item::Suspension_Bridge,
             price: Currency::Free,
             time: 0,
@@ -22173,7 +22586,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => Location {
             id: LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet,
             item: Item::Plague_of_Thoughts,
             price: Currency::Free,
             time: 0,
@@ -22181,7 +22594,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Uhrum__Annuna_Corridor__Statue__Item => Location {
             id: LocationId::Uhrum__Annuna_Corridor__Statue__Item,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Uhrum__Annuna_Corridor__Statue__Item,
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,

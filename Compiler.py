@@ -233,6 +233,7 @@ class GameLogic(object):
         self.map_defs = self._info.get('map', {})
         self.named_spots = set()
         self.process_regions()
+        self.process_canon()
         self.process_context()
         self.process_area_maps()
         self.process_warps()
@@ -419,6 +420,16 @@ class GameLogic(object):
             pen['pr'] = _parseExpression(
                 pen['when'], f'{infoname} ({penaltyname})', category, ': ')
             pen['access_id'] = self.make_funcid_from(info, pen['pr'])
+
+
+    def process_canon(self):
+        for loc in self.locations():
+            if 'canon' not in loc:
+                cname = f'Loc_{loc["id"]}'
+                if cname in self.canon_places:
+                    self._errors.append(f'Cannot use canon name {cname!r} which collides with default canon name for {loc["fullname"]}')
+                else:
+                    self.canon_places[cname] = [loc]
 
 
     def process_exit_movements(self):

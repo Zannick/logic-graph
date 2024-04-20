@@ -54,28 +54,24 @@ pub struct SimpleGraph<V, E> {
 // analyzer-specific stuff
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-pub enum ExternalNodeId<S, L, C> {
+pub enum ExternalNodeId<S, C> {
     Spot(S),
-    Location(L),
     Canon(C),
 }
 pub type NodeId<W> = ExternalNodeId<
     <<W as World>::Exit as Exit>::SpotId,
-    <<W as World>::Location as Location>::LocId,
     <<W as World>::Location as Location>::CanonId,
 >;
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-pub enum ExternalEdgeId<S, L, C, Wp, A> {
+pub enum ExternalEdgeId<S, C, Wp, A> {
     Spots(S, S),
-    Loc(S, L),
     Canon(S, C),
     Warp(Wp),
     Action(A),
 }
 pub type EdgeId<W> = ExternalEdgeId<
     <<W as World>::Exit as Exit>::SpotId,
-    <<W as World>::Location as Location>::LocId,
     <<W as World>::Location as Location>::CanonId,
     <<W as World>::Warp as Warp>::WarpId,
     <<W as World>::Action as Action>::ActionId,
@@ -96,9 +92,7 @@ where
     let mut canon = new_hashset();
     nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
         if startctx.todo(loc.id()) {
-            if loc.canon_id() == <W::Location as Location>::CanonId::default() {
-                Some(ExternalNodeId::Location(loc.id()))
-            } else if !canon.contains(&loc.canon_id()) {
+            if !canon.contains(&loc.canon_id()) {
                 canon.insert(loc.canon_id());
                 Some(ExternalNodeId::Canon(loc.canon_id()))
             } else {
@@ -139,17 +133,8 @@ where
     for loc in world.get_all_locations() {
         if startctx.todo(loc.id()) {
             let s = world.get_location_spot(loc.id());
-            let (t, id) = if loc.canon_id() == <W::Location as Location>::CanonId::default() {
-                (
-                    ExternalNodeId::Location(loc.id()),
-                    ExternalEdgeId::Loc(s, loc.id()),
-                )
-            } else {
-                (
-                    ExternalNodeId::Canon(loc.canon_id()),
-                    ExternalEdgeId::Canon(s, loc.canon_id()),
-                )
-            };
+            let t = ExternalNodeId::Canon(loc.canon_id());
+            let id = ExternalEdgeId::Canon(s, loc.canon_id());
             let wt = loc.base_time().try_into().unwrap();
             nodes[node_index_map[&t]].queue.insert(
                 Edge {
@@ -183,9 +168,7 @@ where
     let mut canon = new_hashset();
     nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
         if startctx.todo(loc.id()) {
-            if loc.canon_id() == <W::Location as Location>::CanonId::default() {
-                Some(ExternalNodeId::Location(loc.id()))
-            } else if !canon.contains(&loc.canon_id()) {
+            if !canon.contains(&loc.canon_id()) {
                 canon.insert(loc.canon_id());
                 Some(ExternalNodeId::Canon(loc.canon_id()))
             } else {
@@ -217,17 +200,8 @@ where
     for loc in world.get_all_locations() {
         if startctx.todo(loc.id()) {
             let s = world.get_location_spot(loc.id());
-            let (t, id) = if loc.canon_id() == <W::Location as Location>::CanonId::default() {
-                (
-                    ExternalNodeId::Location(loc.id()),
-                    ExternalEdgeId::Loc(s, loc.id()),
-                )
-            } else {
-                (
-                    ExternalNodeId::Canon(loc.canon_id()),
-                    ExternalEdgeId::Canon(s, loc.canon_id()),
-                )
-            };
+            let t = ExternalNodeId::Canon(loc.canon_id());
+            let id = ExternalEdgeId::Canon(s, loc.canon_id());
             let wt = loc.base_time().try_into().unwrap();
             edges.push(Edge {
                 id,
@@ -278,9 +252,5 @@ where
     L: Location,
 {
     let loc = world.get_location(loc_id);
-    if loc.canon_id() == <W::Location as Location>::CanonId::default() {
-        ExternalNodeId::Location(loc.id())
-    } else {
-        ExternalNodeId::Canon(loc.canon_id())
-    }
+    ExternalNodeId::Canon(loc.canon_id())
 }

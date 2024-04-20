@@ -95,7 +95,7 @@ pub trait Id:
 
 pub trait Location: Accessible {
     type LocId: Id + enum_map::EnumArray<bool>;
-    type CanonId: Id + Default;
+    type CanonId: Id;
     type ExitId: Id;
 
     fn id(&self) -> Self::LocId;

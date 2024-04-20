@@ -543,7 +543,6 @@ impl world::World for World {
     fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
         let loc = self.get_location(loc_id);
         match world::Location::canon_id(loc) {
-            CanonId::None => vec![],
 %% for c, locs in canon_places.items()
             CanonId::{{ c|construct_id }} =>
                 vec![LocationId::{{ locs|map(attribute='id')|join(', LocationId::') }}],
@@ -834,7 +833,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 %% for loc in gl.locations()
         LocationId::{{ loc.id }} => Location {
             id: LocationId::{{ loc.id }},
-            canonical: CanonId::{{ (loc.canon or 'None')|construct_id }},
+            canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
             item: Item::{{ loc.item or 'None' }},
             {{ price(loc.price, loc.costs) }}
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
