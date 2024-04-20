@@ -936,7 +936,7 @@ where
     ) -> Option<Vec<ContextWrapper<T>>> {
         self.check_status_update(start, iters, &ctx);
 
-        if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
+        if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_CANON_LOCATIONS {
             if self.world.won(ctx.get()) {
                 self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
             } else {

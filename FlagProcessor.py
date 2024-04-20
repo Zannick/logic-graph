@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from Utils import typenameof
+from Utils import construct_id, typenameof
 
 BitFlagGroup = namedtuple("BitFlagGroup", ['size', 'vars', 'defaults'])
 GroupRange = namedtuple("GroupRange", ['start_group', 'start_index', 'end_group', 'end_index'])
@@ -9,11 +9,11 @@ MAX_GROUP_SIZE = 64
 
 class BitFlagProcessor(object):
 
-    def __init__(self, context_values, settings, item_max_counts, locations):
+    def __init__(self, context_values, settings, item_max_counts, canon_places):
         self.context_values = context_values
         self.settings = settings
         self.item_max_counts = item_max_counts
-        self.locations = locations
+        self.canon_places = canon_places
         self.flag_groups = []
         self.varmap = {}
         self.visit_groups = None
@@ -28,8 +28,8 @@ class BitFlagProcessor(object):
     def process(self):
         context_vars = [c for c, val in self.context_values.items() if typenameof(val) == 'bool']
         items = sorted(i for i, n in self.item_max_counts.items() if n == 1)
-        visits = sorted('VISITED_' + loc['id'] for loc in self.locations)
-        skips = sorted('SKIPPED_' + loc['id'] for loc in self.locations)
+        visits = sorted('VISITED_' + construct_id(canon) for canon in self.canon_places)
+        skips = sorted('SKIPPED_' + construct_id(canon) for canon in self.canon_places)
         basic = context_vars + items
         basic_len = len(basic)
         everything = basic + visits + skips
@@ -51,9 +51,9 @@ class BitFlagProcessor(object):
         # the group + index the first VISITED flag falls in
         vmin, vmindex = divmod(basic_len, MAX_GROUP_SIZE)
         # the group + index the last VISITED flag falls in
-        vmax, vmaxindex = divmod(basic_len + len(self.locations) - 1, MAX_GROUP_SIZE)
+        vmax, vmaxindex = divmod(basic_len + len(self.canon_places) - 1, MAX_GROUP_SIZE)
         # the group + index the first SKIPPED flag falls in
-        smin, smindex = divmod(basic_len + len(self.locations), MAX_GROUP_SIZE)
+        smin, smindex = divmod(basic_len + len(self.canon_places), MAX_GROUP_SIZE)
         # the group + index the last SKIPPED flag falls in
         smax = len(self.flag_groups) - 1
         smaxindex = (len(everything) - 1) % MAX_GROUP_SIZE
@@ -68,20 +68,3 @@ class BitFlagProcessor(object):
         gmax = self.varmap[end]
         gmaxindex = self.flag_groups[gmax - 1].vars.index(end)
         return GroupRange(gmin, gmindex, gmax, gmaxindex)
-
-    def process_place_groups(self, regions):
-        for region in regions:
-            if not region['loc_ids']:
-                continue
-            self.visit_region_groups[region['id']] = self.get_groups_for_place('VISITED_', region['loc_ids'])
-            self.skip_region_groups[region['id']] = self.get_groups_for_place('SKIPPED_', region['loc_ids'])
-            for area in region['areas']:
-                if not area['loc_ids']:
-                    continue
-                self.visit_area_groups[area['id']] = self.get_groups_for_place('VISITED_', area['loc_ids'])
-                self.skip_area_groups[area['id']] = self.get_groups_for_place('SKIPPED_', area['loc_ids'])
-                for spot in area['spots']:
-                    if not spot['loc_ids']:
-                        continue
-                    self.visit_spot_groups[spot['id']] = self.get_groups_for_place('VISITED_', spot['loc_ids'])
-                    self.skip_spot_groups[spot['id']] = self.get_groups_for_place('SKIPPED_', spot['loc_ids'])

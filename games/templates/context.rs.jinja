@@ -456,7 +456,7 @@ impl context::Ctx for Context {
     fn visit(&mut self, loc_id: LocationId) {
         match loc_id {
 %% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
+%% set visit = 'VISITED_' + loc.canon_id
             LocationId::{{ loc.id }} => {
                 self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
 %% for tile in loc.tiles
@@ -469,8 +469,8 @@ impl context::Ctx for Context {
     fn skip(&mut self, loc_id: LocationId) {
         match loc_id {
 %% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
-%% set skip = 'SKIPPED_' + loc.id
+%% set visit = 'VISITED_' + loc.canon_id
+%% set skip = 'SKIPPED_' + loc.canon_id
             LocationId::{{ loc.id }} =>  {
                 if !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }}) {
                     self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
@@ -482,8 +482,8 @@ impl context::Ctx for Context {
     fn reset(&mut self, loc_id: LocationId) {
         match loc_id {
 %% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
-%% set skip = 'SKIPPED_' + loc.id
+%% set visit = 'VISITED_' + loc.canon_id
+%% set skip = 'SKIPPED_' + loc.canon_id
             LocationId::{{ loc.id }} => {
                 self.cbits{{ bfp.varmap[visit] }}.remove(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
                 self.cbits{{ bfp.varmap[skip] }}.remove(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
@@ -495,8 +495,8 @@ impl context::Ctx for Context {
     fn todo(&self, loc_id: LocationId) -> bool {
         match loc_id {
 %% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
-%% set skip = 'SKIPPED_' + loc.id
+%% set visit = 'VISITED_' + loc.canon_id
+%% set skip = 'SKIPPED_' + loc.canon_id
             LocationId::{{ loc.id }} => {
                 !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
                 && !self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
@@ -507,7 +507,7 @@ impl context::Ctx for Context {
     fn visited(&self, loc_id: LocationId) -> bool {
         match loc_id {
 %% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.id
+%% set visit = 'VISITED_' + loc.canon_id
             LocationId::{{ loc.id }} => {
                 self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
             }
@@ -517,7 +517,7 @@ impl context::Ctx for Context {
     fn skipped(&self, loc_id: LocationId) -> bool {
         match loc_id {
 %% for loc in gl.locations()
-%% set skip = 'SKIPPED_' + loc.id
+%% set skip = 'SKIPPED_' + loc.canon_id
             LocationId::{{ loc.id }} => {
                 self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
             }
@@ -558,7 +558,7 @@ impl context::Ctx for Context {
         if visits <= 0 {
             0
         } else {
-            visits * 100 / (Self::World::NUM_LOCATIONS - self.count_skips())
+            visits * 100 / (Self::World::NUM_CANON_LOCATIONS - self.count_skips())
         }
     }
 

@@ -517,6 +517,7 @@ impl world::World for World {
     type Action = Action;
     type Warp = Warp;
     const NUM_LOCATIONS: u32 = {{ gl.num_locations }};
+    const NUM_CANON_LOCATIONS: u32 = {{ gl.canon_places|count }};
 
     fn ruleset(&self) -> String {
         format!(
@@ -539,16 +540,6 @@ impl world::World for World {
         &self.actions.as_slice()[self.global_actions.start..self.global_actions.end]
     }
     fn get_warp(&self, id: WarpId) -> &Warp { &self.warps[id] }
-
-    fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
-        let loc = self.get_location(loc_id);
-        match world::Location::canon_id(loc) {
-%% for c, locs in canon_places.items()
-            CanonId::{{ c|construct_id }} =>
-                vec![LocationId::{{ locs|map(attribute='id')|join(', LocationId::') }}],
-%% endfor
-        }
-    }
 
     // Hardcoded locations. To support a randomizer, this would be better as a cache.
     fn get_item_locations(&self, item: Item) -> Vec<LocationId> {

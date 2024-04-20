@@ -335,6 +335,7 @@ class GameLogic(object):
                         loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
                         if 'canon' in loc:
                             self.canon_places[loc['canon']].append(loc)
+                            loc['canon_id'] = construct_id(loc['canon'])
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(
                                     loc['req'], loc['name'], spot['fullname'], ': ')
@@ -430,6 +431,7 @@ class GameLogic(object):
                     self._errors.append(f'Cannot use canon name {cname!r} which collides with default canon name for {loc["fullname"]}')
                 else:
                     self.canon_places[cname] = [loc]
+                    loc['canon_id'] = cname
 
 
     def process_exit_movements(self):
@@ -640,9 +642,8 @@ class GameLogic(object):
         self.named_spots.update(cv.named_spots)
 
     def process_bitflags(self):
-        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, list(self.locations()))
+        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, self.canon_places)
         self.bfp.process()
-        self.bfp.process_place_groups(self.regions)
 
     def process_special(self):
         if sc := self.special.get('graph_scale'):
@@ -1759,7 +1760,7 @@ if __name__ == '__main__':
     if not args.noparse:
         logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
                     f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations '
-                    f'({sum(len(p) for p in gl.canon_places.values())} => {len(gl.canon_places)} canon locations), '
+                    f'({len(gl.canon_places)} canon locations), '
                     f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                     f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
                     f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')

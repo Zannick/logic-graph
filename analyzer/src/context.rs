@@ -569,9 +569,6 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item(), world);
         self.ctx.spend(loc.price());
-        for canon_loc_id in world.get_canon_locations(loc.id()) {
-            self.ctx.skip(canon_loc_id);
-        }
         self.elapse(dur);
         self.append_history(History::G(loc.item(), loc.id()), dur);
     }
@@ -660,9 +657,6 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(exit.dest(), world);
         self.elapse(exit_dur);
 
-        for canon_loc_id in world.get_canon_locations(loc.id()) {
-            self.ctx.skip(canon_loc_id);
-        }
         self.append_history(History::H(loc.item(), exit.id()), loc_dur + exit_dur);
     }
 
