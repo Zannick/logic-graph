@@ -82,7 +82,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
                         &world,
                         sol.clone(),
                         1,
-                        &progress_locations,
+                        Some(&progress_locations),
                         trie,
                     )
                 },
@@ -90,10 +90,6 @@ pub fn criterion_benchmark(c: &mut Criterion) {
             );
         });
     }
-
-    c.bench_function("minimal playthrough", |b| {
-        b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
-    });
 }
 
 criterion_group! {

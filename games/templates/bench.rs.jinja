@@ -69,15 +69,11 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
                 || MatcherTrie::<ObservationMatcher>::default(),
-                |trie| record_observations(ctx.get(), &world, sol.clone(), 1, &progress_locations, trie),
+                |trie| record_observations(ctx.get(), &world, sol.clone(), 1, Some(&progress_locations), trie),
                 BatchSize::SmallInput,
             );
         });
     }
-
-    c.bench_function("minimal playthrough", |b| {
-        b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
-    });
 }
 
 criterion_group! {

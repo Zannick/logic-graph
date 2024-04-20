@@ -1,6 +1,5 @@
 use crate::access::*;
 use crate::context::*;
-use crate::minimize::*;
 use crate::new_hashset;
 use crate::world::*;
 use std::collections::HashSet;
@@ -190,35 +189,4 @@ where
     E: Exit<Context = T>,
 {
     greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time, 2)
-}
-
-pub fn minimize_greedy<W, T, L, E>(
-    world: &W,
-    startctx: &T,
-    wonctx: &ContextWrapper<T>,
-    max_time: u32,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-{
-    let ctx = minimize(world, startctx, wonctx);
-    greedy_search(world, &ctx, max_time, 9).ok()
-}
-
-pub fn minimal_greedy_playthrough<W, T, L, E>(
-    world: &W,
-    ctx: &ContextWrapper<T>,
-    max_time: u32,
-) -> ContextWrapper<T>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-{
-    let wonctx = greedy_search(world, ctx, max_time, 9).expect("Didn't win with greedy search");
-    minimize_greedy(world, ctx.get(), &wonctx, max_time).unwrap_or(wonctx)
 }
