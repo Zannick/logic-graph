@@ -97,7 +97,6 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     deletes: AtomicUsize,
     delete: AtomicU64,
 
-    max_possible_progress: usize,
     min_db_estimates: Vec<AtomicU32>,
 
     bg_deletes: AtomicUsize,
@@ -263,7 +262,7 @@ where
         let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
         log::info!("Built scorer in {:?}", s.elapsed());
 
-        let max_possible_progress = scorer.remaining_visits(startctx);
+        let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
@@ -290,7 +289,6 @@ where
             dup_pskips: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
-            max_possible_progress,
             min_db_estimates,
             bg_deletes: 0.into(),
             retrieve_lock: Mutex::new(()),
@@ -658,7 +656,7 @@ where
         let mut dups = 0;
 
         let mut mins = Vec::new();
-        mins.resize(self.max_possible_progress, u32::MAX);
+        mins.resize(W::NUM_CANON_LOCATIONS, u32::MAX);
 
         for (el, score) in iter {
             let elapsed = self.get_best_elapsed(&el)?;
@@ -703,14 +701,14 @@ where
 
     /// Resets some min_db_estimates based on never finding more elements.
     fn reset_estimates_in_range_unbounded(&self, start_progress: usize) {
-        for p in start_progress..=self.max_possible_progress {
+        for p in start_progress..=W::NUM_CANON_LOCATIONS {
             self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
         }
     }
 
     /// Peeks in the db to reset min_db_estimates
     fn reset_estimates_actual(&self) {
-        for p in 0..=self.max_possible_progress {
+        for p in 0..=W::NUM_CANON_LOCATIONS {
             let progress: u32 = p.try_into().unwrap();
             let mut tail_opts = ReadOptions::default();
             tail_opts.set_tailing(true);

@@ -331,7 +331,6 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     max_evictions: usize,
     min_reshuffle: usize,
     max_reshuffle: usize,
-    pub max_possible_progress: usize,
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
     retrieving: AtomicBool,
@@ -364,7 +363,7 @@ where
         P: AsRef<Path>,
     {
         let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), solutions)?;
-        let max_possible_progress = db.scorer().remaining_visits(startctx.get());
+        let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());
         let q = RocksBackedQueue {
@@ -377,7 +376,6 @@ where
             max_evictions,
             min_reshuffle,
             max_reshuffle,
-            max_possible_progress,
             evictions: 0.into(),
             retrievals: 0.into(),
             retrieving: false.into(),
@@ -755,7 +753,7 @@ where
             self.min_reshuffle,
             std::cmp::min(
                 self.max_reshuffle,
-                (self.capacity - queue.len()) / self.max_possible_progress,
+                (self.capacity - queue.len()) / W::NUM_CANON_LOCATIONS,
             ),
         );
         drop(queue);
@@ -1112,7 +1110,7 @@ where
         if let Some((mi, _)) = vec
             .iter()
             .enumerate()
-            .min_by_key(|(_, (_, p, priority))| (self.max_possible_progress - p, priority))
+            .min_by_key(|(_, (_, p, priority))| (W::NUM_CANON_LOCATIONS - p, priority))
         {
             let (ctx, _, priority) = vec.swap_remove(mi);
             let elapsed = priority - self.db.estimated_remaining_time(&ctx);
@@ -1251,7 +1249,7 @@ where
 
         let h = Histogram::from_slice(
             progresses.as_slice(),
-            HistogramBins::Count(self.max_possible_progress),
+            HistogramBins::Count(W::NUM_CANON_LOCATIONS),
         );
         let v = ContinuousView::new().add(h).x_label("progress");
         let s: usize = queue_caps.iter().sum();
@@ -1268,7 +1266,7 @@ where
             .add(p)
             .x_label("progress")
             .y_label("score")
-            .x_range(-1., 1. + self.max_possible_progress as f64);
+            .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
         println!(
             "Heap scores by progress level:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
@@ -1276,7 +1274,7 @@ where
 
         let h = Histogram::from_slice(
             processed.as_slice(),
-            HistogramBins::Count(self.max_possible_progress),
+            HistogramBins::Count(W::NUM_CANON_LOCATIONS),
         );
         let v = ContinuousView::new().add(h).x_label("progress");
         println!(
