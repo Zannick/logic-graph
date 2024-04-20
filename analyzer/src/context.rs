@@ -690,7 +690,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 let loc = world.get_location(loc_id);
                 spot_id == self.ctx.position()
                     && loc.item() == item
-                    && self.ctx.todo(loc)
+                    && !self.ctx.visited(loc.id())
                     && loc.can_access(&self.ctx, world)
             }
             History::E(exit_id) => {
@@ -706,7 +706,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     spot_id == self.ctx.position()
                         && exit.can_access(&self.ctx, world)
                         && loc.item() == item
-                        && self.ctx.todo(loc)
+                        && !self.ctx.visited(loc.id())
                         && loc.can_access(&self.ctx, world)
                 } else {
                     false
