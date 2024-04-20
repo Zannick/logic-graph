@@ -1251,7 +1251,10 @@ where
             progresses.as_slice(),
             HistogramBins::Count(W::NUM_CANON_LOCATIONS),
         );
-        let v = ContinuousView::new().add(h).x_label("progress");
+        let v = ContinuousView::new()
+            .add(h)
+            .x_label("progress")
+            .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
         let s: usize = queue_caps.iter().sum();
         println!(
             "Current heap contents:\n{}\nS: {:?}\nC: {:?} = {:?}",
@@ -1276,7 +1279,10 @@ where
             processed.as_slice(),
             HistogramBins::Count(W::NUM_CANON_LOCATIONS),
         );
-        let v = ContinuousView::new().add(h).x_label("progress");
+        let v = ContinuousView::new()
+            .add(h)
+            .x_label("progress")
+            .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
         println!(
             "States checked since last time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
