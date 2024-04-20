@@ -409,7 +409,7 @@ where
 
     fn get_heap_key(&self, el: &T, elapsed: u32) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        let progress: u32 = self.progress(el).try_into().unwrap();
+        let progress: u32 = el.count_visits() as u32;
         let est = self.estimated_remaining_time(el);
         key[0..4].copy_from_slice(&progress.to_be_bytes());
         key[4..8].copy_from_slice(&(elapsed + est).to_be_bytes());
@@ -531,13 +531,6 @@ where
         self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
     }
 
-    /// Returns a number usable as a relative measure of progress.
-    /// The number isn't normalized so don't rely on it as fully-ordered,
-    /// e.g. two different routes may win at different progress measures.
-    pub fn progress(&self, ctx: &T) -> usize {
-        self.scorer.required_visits(ctx)
-    }
-
     pub fn estimate_time_to_get(
         &self,
         ctx: &T,
@@ -585,7 +578,7 @@ where
     }
 
     pub fn push_from_queue(&self, el: ContextWrapper<T>, score: u32) -> Result<(), Error> {
-        let progress = self.progress(el.get());
+        let progress = el.get().count_visits();
         let key = self.get_heap_key_from_wrapper(&el);
         let val = Self::serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
@@ -681,7 +674,7 @@ where
                 continue;
             }
 
-            let progress = self.progress(&el);
+            let progress = el.count_visits();
             mins[progress] = std::cmp::min(mins[progress], score);
             let key = self.get_heap_key(&el, elapsed);
             batch.put(key, val);
@@ -821,7 +814,7 @@ where
         );
 
         if let Some((el, elapsed, est)) = res.last() {
-            self.reset_estimates_in_range(start_progress, self.progress(el), elapsed + est);
+            self.reset_estimates_in_range(start_progress, el.count_visits(), elapsed + est);
         } else {
             self.reset_estimates_in_range_unbounded(start_progress);
         }

@@ -14619,8 +14619,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 289;
-    const NUM_CANON_LOCATIONS: u32 = 192;
+    const NUM_CANON_LOCATIONS: usize = 192;
 
     fn ruleset(&self) -> String {
         format!(

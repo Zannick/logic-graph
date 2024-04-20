@@ -255,7 +255,7 @@ where
     organic_solution: AtomicBool,
     any_solution: AtomicBool,
     organic_level: AtomicUsize,
-    progress_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
+    required_locations: HashSet<<W::Location as Location>::LocId, CommonHasher>,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -275,7 +275,7 @@ where
         P: AsRef<Path>,
     {
         let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
-        let progress_locations: HashSet<_, CommonHasher> = world
+        let required_locations: HashSet<_, CommonHasher> = world
             .required_items()
             .into_iter()
             .flat_map(|(item, _)| world.get_item_locations(item))
@@ -321,7 +321,7 @@ where
                     world,
                     sol,
                     1,
-                    Some(&progress_locations),
+                    Some(&required_locations),
                     &solve_trie,
                 );
             }
@@ -333,7 +333,7 @@ where
                         world,
                         sol.clone(),
                         1,
-                        Some(&progress_locations),
+                        Some(&required_locations),
                         &solve_trie,
                     );
                 }
@@ -345,7 +345,7 @@ where
                             world,
                             solution,
                             1,
-                            Some(&progress_locations),
+                            Some(&required_locations),
                             &solve_trie,
                         );
                     }
@@ -389,7 +389,7 @@ where
             organic_solution: false.into(),
             any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
-            progress_locations,
+            required_locations,
         };
         for w in wins {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
@@ -419,7 +419,7 @@ where
                     self.world,
                     solution,
                     min_progress,
-                    Some(&self.progress_locations),
+                    Some(&self.required_locations),
                     &self.solve_trie,
                 );
             }
@@ -510,7 +510,7 @@ where
                 self.world,
                 solution,
                 min_progress,
-                Some(&self.progress_locations),
+                Some(&self.required_locations),
                 &self.solve_trie,
             );
             self.solves_since_clean.fetch_add(1, Ordering::Release);
@@ -546,7 +546,7 @@ where
                     self.world,
                     solution.clone(),
                     min_progress,
-                    Some(&self.progress_locations),
+                    Some(&self.required_locations),
                     &self.solve_trie,
                 );
             }
@@ -755,7 +755,7 @@ where
                                 }
                                 let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
                                 self.check_status_update(&start, iters, &ctx);
-                                let progress = self.queue.db().progress(ctx.get());
+                                let progress = ctx.get().count_visits();
 
                                 // get remaining locations
                                 let remaining: Vec<_> = self
@@ -827,16 +827,16 @@ where
                                         return None;
                                     }
                                     let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-                                    let progress = self.queue.db().progress(ctx.get());
+                                    let visits = ctx.get().count_visits();
                                     let prev = Some(ctx.get().clone());
                                     if let Some(vec) = self.process_one(ctx, iters, &start) {
-                                        if progress == self.organic_level.load(Ordering::Acquire)
-                                            && vec.iter().any(|c| {
-                                                self.queue.db().progress(c.get()) == progress + 1
-                                            })
+                                        if visits == self.organic_level.load(Ordering::Acquire)
+                                            && vec
+                                                .iter()
+                                                .any(|c| c.get().count_visits() == visits + 1)
                                         {
                                             self.organic_level
-                                                .fetch_max(progress + 1, Ordering::Release);
+                                                .fetch_max(visits + 1, Ordering::Release);
                                         }
                                         Some((prev, vec))
                                     } else {
@@ -1053,7 +1053,6 @@ where
                 .join(", "),
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
-                self.queue.db().progress(ctx.get()),
                 self.queue.db().get_last_history_step(ctx).unwrap()
             )
         );

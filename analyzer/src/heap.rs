@@ -505,7 +505,7 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         };
-        let progress = self.db.progress(el.get());
+        let progress = el.get().count_visits();
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -589,7 +589,7 @@ where
             .retrieve(segment, num, score_limit)?
             .into_iter()
             .map(|(el, elapsed, est)| {
-                let progress = self.db.progress(&el);
+                let progress = el.count_visits();
                 (el, progress, elapsed + est)
             })
             .collect();
@@ -604,7 +604,7 @@ where
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &est_completion)) = queue.peek_min() {
-                let progress = self.db.progress(el);
+                let progress = el.count_visits();
                 let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
                 if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
@@ -641,7 +641,7 @@ where
                     self.retrieving.store(false, Ordering::Release);
                 } else {
                     return Ok(self.db.pop(0)?.map(|(el, elapsed)| {
-                        let progress = self.db.progress(&el);
+                        let progress = el.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         ContextWrapper::with_elapsed(el, elapsed)
                     }));
@@ -787,7 +787,7 @@ where
                     self.db.count_duplicate();
                     continue;
                 }
-                let progress = self.db.progress(&ctx);
+                let progress = ctx.count_visits();
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
 
                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
@@ -801,7 +801,7 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
-                    let progress = self.db.progress(&ctx);
+                    let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
                     vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 } else {
@@ -837,7 +837,7 @@ where
                         self.db.count_duplicate();
                         continue;
                     }
-                    let progress = self.db.progress(&ctx);
+                    let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
 
                     vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
@@ -852,7 +852,7 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
-                    let progress = self.db.progress(&ctx);
+                    let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
                     vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 } else {
@@ -921,7 +921,7 @@ where
                             self.db.count_duplicate();
                             continue;
                         }
-                        let progress = self.db.progress(&ctx);
+                        let progress = ctx.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                         continue 'next;
@@ -980,7 +980,7 @@ where
                                 continue;
                             }
 
-                            let progress = self.db.progress(&ctx);
+                            let progress = ctx.count_visits();
                             self.processed_counts[progress].fetch_add(1, Ordering::Release);
                             vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                             continue 'next;
@@ -1007,7 +1007,7 @@ where
                                     self.db.count_duplicate();
                                     continue;
                                 }
-                                let progress = self.db.progress(&ctx);
+                                let progress = ctx.count_visits();
                                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
                                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                                 continue 'next;
@@ -1035,7 +1035,7 @@ where
                         queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
                     } else if let Some((el, elapsed)) = self.db.pop(0)? {
-                        let progress = self.db.progress(&el);
+                        let progress = el.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         return Ok(vec![ContextWrapper::with_elapsed(el, elapsed)]);
                     }
@@ -1160,7 +1160,7 @@ where
                     None
                 } else if keep {
                     let priority = self.db.score(&el);
-                    let progress = self.db.progress(el.get());
+                    let progress = el.get().count_visits();
                     Some((el.into_inner(), progress, priority))
                 } else {
                     None

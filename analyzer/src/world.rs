@@ -167,8 +167,7 @@ pub trait World: Sync + Default {
         SpotId = <Self::Exit as Exit>::SpotId,
         Currency = <Self::Location as Accessible>::Currency,
     >;
-    const NUM_LOCATIONS: u32;
-    const NUM_CANON_LOCATIONS: u32;
+    const NUM_CANON_LOCATIONS: usize;
 
     fn ruleset(&self) -> String;
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;

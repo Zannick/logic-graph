@@ -501,9 +501,9 @@ impl context::Ctx for Context {
         movements::local_travel_time(movement_state, self.position, dest)
     }
 
-    fn count_visits(&self) -> u32 {
+    fn count_visits(&self) -> usize {
 %% for group in range(bfp.visit_groups.start_group, bfp.visit_groups.end_group + 1)
-        {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_VISIT_FLAGS).bits().count_ones()
+        {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_VISIT_FLAGS).bits().count_ones() as usize
 %% endfor
     }
     fn progress(&self) -> u32 {
@@ -511,7 +511,7 @@ impl context::Ctx for Context {
         if visits <= 0 {
             0
         } else {
-            visits * 100 / Self::World::NUM_CANON_LOCATIONS
+            (visits * 100 / Self::World::NUM_CANON_LOCATIONS).try_into().unwrap()
         }
     }
 

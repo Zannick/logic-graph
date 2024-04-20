@@ -116,7 +116,7 @@ pub trait Ctx:
         dest: <<Self::World as World>::Exit as Exit>::SpotId,
     ) -> u32;
 
-    fn count_visits(&self) -> u32;
+    fn count_visits(&self) -> usize;
     fn progress(&self) -> u32;
 
     fn diff(&self, old: &Self) -> String;
@@ -870,13 +870,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.replay(world, step);
     }
 
-    pub fn info(&self, est: u32, progress: usize, last: Option<HistoryAlias<T>>) -> String {
+    pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
-            "At {}ms (elapsed={} est. left={}), progress={}, visited={}\nNow: {} after {}",
+            "At {}ms (elapsed={} est. left={}), visited={}\nNow: {} after {}",
             self.elapsed + est,
             self.elapsed,
             est,
-            progress,
             self.get().count_visits(),
             self.ctx.position(),
             if let Some(val) = last {

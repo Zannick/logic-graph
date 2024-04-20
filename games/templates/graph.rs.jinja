@@ -524,8 +524,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = {{ gl.num_locations }};
-    const NUM_CANON_LOCATIONS: u32 = {{ gl.canon_places|count }};
+    const NUM_CANON_LOCATIONS: usize = {{ gl.canon_places|count }};
 
     fn ruleset(&self) -> String {
         format!(

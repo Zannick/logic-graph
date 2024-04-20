@@ -8753,18 +8753,18 @@ impl context::Ctx for Context {
         movements::local_travel_time(movement_state, self.position, dest)
     }
 
-    fn count_visits(&self) -> u32 {
-        self.cbits4.intersection(flags::ContextBits4::ALL_VISIT_FLAGS).bits().count_ones()
-            + self.cbits5.intersection(flags::ContextBits5::ALL_VISIT_FLAGS).bits().count_ones()
-            + self.cbits6.intersection(flags::ContextBits6::ALL_VISIT_FLAGS).bits().count_ones()
-            + self.cbits7.intersection(flags::ContextBits7::ALL_VISIT_FLAGS).bits().count_ones()
+    fn count_visits(&self) -> usize {
+        self.cbits4.intersection(flags::ContextBits4::ALL_VISIT_FLAGS).bits().count_ones() as usize
+            + self.cbits5.intersection(flags::ContextBits5::ALL_VISIT_FLAGS).bits().count_ones() as usize
+            + self.cbits6.intersection(flags::ContextBits6::ALL_VISIT_FLAGS).bits().count_ones() as usize
+            + self.cbits7.intersection(flags::ContextBits7::ALL_VISIT_FLAGS).bits().count_ones() as usize
     }
     fn progress(&self) -> u32 {
         let visits = self.count_visits();
         if visits <= 0 {
             0
         } else {
-            visits * 100 / Self::World::NUM_CANON_LOCATIONS
+            (visits * 100 / Self::World::NUM_CANON_LOCATIONS).try_into().unwrap()
         }
     }
 
