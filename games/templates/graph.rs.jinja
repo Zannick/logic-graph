@@ -16,7 +16,7 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 use std::ops::Range;
 use std::option::Option;
 
@@ -50,6 +50,7 @@ pub struct Location {
     time: u32,
     exit_id: Option<ExitId>,
     price: Currency,
+    skippable: bool,
 }
 
 impl world::Accessible for Location {
@@ -116,6 +117,13 @@ impl world::Location for Location {
     fn item(&self) -> Item { self.item }
     fn canon_id(&self) -> CanonId { self.canonical }
     fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
+    fn skippable(&self) -> bool { self.skippable }
+}
+
+impl Location {
+    pub fn set_skippable(&mut self, skippable: bool) {
+        self.skippable = skippable;
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -811,6 +819,44 @@ impl World {
 %% endfor
         }
     }
+
+    fn get_unused_items(&self) -> FxHashSet<Item> {
+        match self.rule_victory {
+%% for v, refs in victory_rule_refs.items()
+            RuleVictory::{{ v|construct_id|camelize }} => {
+%% for ref in refs
+                {% if loop.first %}let mut set = {% else %}set.intersection(&{% endif %}match self.rule_{{ ref|construct_id }} {
+%% for vref, items in unused_by_rule[ref].items()
+                    Rule{{ ref[1:]|camelize }}::{{ vref|construct_id|camelize }} => {
+                        let mut iset = FxHashSet::default();
+%% for item in items.intersection(unused_by_rule['$victory'][v])|sort
+                        iset.insert(Item::{{ item }});
+%% endfor
+                        iset
+                    }
+%% endfor
+                }{% if not loop.first %}){% endif %};
+                set
+%% else
+                let mut set = FxHashSet::default();
+%% for item in unused_by_rule['$victory'][v]|sort
+                set.insert(Item::{{ item }});
+%% endfor
+                set
+%% endfor
+            }
+%% endfor
+        }
+    }
+
+    pub fn update_skippable_locations(&mut self) {
+        let unused_items = self.get_unused_items();
+        for loc in self.locations.values_mut() {
+            let item = world::Location::item(loc);
+            let skippable = unused_item(item) || unused_items.contains(&item);
+            loc.set_skippable(skippable);
+        }
+    }
 }
 
 %% macro price(price, costs)
@@ -829,6 +875,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             {{ price(loc.price, loc.costs) }}
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
+            skippable: false,
         },
 %% endfor
     }

@@ -102,5 +102,6 @@ pub fn load_settings(
             );
         }
     }
+    world.update_skippable_locations();
     (world, ctx, vec)
 }

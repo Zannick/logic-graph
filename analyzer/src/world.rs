@@ -102,6 +102,7 @@ pub trait Location: Accessible {
     fn item(&self) -> <Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> Self::CanonId;
     fn exit_id(&self) -> &Option<Self::ExitId>;
+    fn skippable(&self) -> bool;
 }
 
 pub trait Exit: Accessible {

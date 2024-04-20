@@ -83,6 +83,7 @@ pub fn load_settings(filename: Option<&PathBuf>) -> (Box<World>, Context, Vec<Co
             panic!("Errors reading YAML file: {}\n{} total errors", errs.join("\n"), errs.len());
         }
     }
+    world.update_skippable_locations();
     (world, ctx, vec)
 }
 
