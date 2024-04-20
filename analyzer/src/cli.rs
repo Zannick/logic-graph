@@ -11,6 +11,7 @@ use crate::route::*;
 use crate::solutions::Solution;
 use crate::world::*;
 use clap::{Parser, Subcommand};
+use rustc_hash::FxHashSet;
 use similar::TextDiff;
 use std::fmt::Debug;
 use std::fs::File;
@@ -202,14 +203,33 @@ where
             Ok(())
         }
         Commands::Info => {
+            let items = world
+                .unused_items()
+                .into_iter()
+                .map(|item| format!("{}", item))
+                .collect::<Vec<_>>();
+            let unskipped: Vec<_> = world
+                .get_all_locations()
+                .into_iter()
+                .filter(|loc| !loc.skippable())
+                .collect();
+            let unskipped_len = unskipped.len();
+            let canons: FxHashSet<_> = unskipped.into_iter().map(|loc| loc.canon_id()).collect();
             println!(
-                "data sizes: Context={} ContextWrapper={} serialized={} World={}\nstart overrides: {}\nruleset: {}",
+                "data sizes: Context={} ContextWrapper={} serialized={} World={}\nstart overrides: {}\nruleset: {}\n\
+                unused items: ({}) {}\nLocations: total={}, unskipped={}, max visitable={}, max unskipped visitable={}\n",
                 size_of::<T>(),
                 size_of::<ContextWrapper<T>>(),
                 HeapDB::<W, T>::serialize_state(&startctx).len(),
                 size_of::<W>(),
                 startctx.diff(&T::default()),
-                world.ruleset()
+                world.ruleset(),
+                items.len(),
+                items.join(", "),
+                world.get_all_locations().len(),
+                unskipped_len,
+                W::NUM_CANON_LOCATIONS,
+                canons.len(),
             );
             Ok(())
         }

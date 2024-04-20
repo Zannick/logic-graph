@@ -220,6 +220,7 @@ pub trait World: Sync + Default {
         <<Self::Location as Accessible>::Context as Ctx>::ItemId,
         i16,
     )>;
+    fn unused_items(&self) -> Vec<<<Self::Location as Accessible>::Context as Ctx>::ItemId>;
 
     /// Edge connections for the purpose of Steiner graph.
     fn base_edges(
