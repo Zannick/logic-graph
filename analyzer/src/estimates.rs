@@ -102,7 +102,7 @@ where
             item_sets
                 .into_iter()
                 .flat_map(|(v, _)| v)
-                .filter(|&loc_id| ctx.todo(loc_id))
+                .filter(|&loc_id| !ctx.visited(loc_id))
                 .collect(),
             subsets,
         )
@@ -119,7 +119,7 @@ where
             .count()
     }
 
-    /// Number of objective locations left todo.
+    /// Number of objective locations left unvisited.
     /// aka the maximum additional progress count from this state.
     pub fn remaining_visits<T>(&self, ctx: &T) -> usize
     where
@@ -128,7 +128,7 @@ where
     {
         self.required_locations
             .iter()
-            .filter(|&loc_id| ctx.todo(*loc_id))
+            .filter(|&loc_id| !ctx.visited(*loc_id))
             .count()
     }
 
@@ -139,7 +139,7 @@ where
     {
         self.required_locations
             .iter()
-            .filter(|&loc_id| ctx.todo(*loc_id))
+            .filter(|&loc_id| !ctx.visited(*loc_id))
             .copied()
             .collect()
     }

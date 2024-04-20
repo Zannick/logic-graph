@@ -19,7 +19,6 @@ BUILTINS = {
     '$get_area': 'get_area',
     # TODO: Add a collect_from builtin. Note we need the world for this.
     # TODO: $todo as a spot func
-    '$skip': 'ctx.skip',
     '$visit': 'ctx.visit',
     '$pass': '',
     '$count': 'ctx.count',

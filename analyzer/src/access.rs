@@ -23,7 +23,7 @@ where
     world
         .get_spot_locations(ctx.position())
         .iter()
-        .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx, world))
+        .any(|loc| ctx.todo(loc) && loc.can_access(ctx, world))
 }
 
 /// Check whether there are available actions at this position, including global actions.
@@ -304,14 +304,14 @@ where
     if world
         .get_spot_locations(ctx.get().position())
         .into_iter()
-        .any(|loc| ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world))
+        .any(|loc| ctx.get().todo(loc) && loc.can_access(ctx.get(), world))
     {
         return Ok(ctx);
     }
 
     let mut todo_spots = new_hashmap();
     for loc in world.get_all_locations() {
-        if ctx.get().todo(loc.id()) {
+        if ctx.get().todo(loc) {
             let spot_id = ExternalNodeId::Spot(world.get_location_spot(loc.id()));
             if let Some(spot_min) = todo_spots.get_mut(&spot_id) {
                 *spot_min = std::cmp::min(*spot_min, loc.base_time());
@@ -375,7 +375,7 @@ where
         if world
             .get_spot_locations(ctx.get().position())
             .into_iter()
-            .any(|loc| ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world))
+            .any(|loc| ctx.get().todo(loc) && loc.can_access(ctx.get(), world))
         {
             return Ok(el.el);
         }
@@ -426,8 +426,6 @@ where
 {
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
-    } else if ctx.get().skipped(loc_id) {
-        return Err((None, format!("Location already skipped: {}", loc_id)));
     }
 
     let goal = loc_to_graph_node(world, loc_id);
@@ -536,7 +534,7 @@ where
         .get_spot_locations(ctx.position())
         .iter()
         .filter_map(|loc| {
-            if ctx.todo(loc.id()) && loc.can_access(ctx, world) {
+            if ctx.todo(loc) && loc.can_access(ctx, world) {
                 Some(loc.id())
             } else {
                 None
@@ -567,9 +565,8 @@ where
     E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();
-    world.skip_unused_items(&mut ctx);
     for loc in world.get_all_locations() {
-        if ctx.todo(loc.id()) {
+        if ctx.todo(loc) {
             ctx.visit(loc.id());
             ctx.collect(loc.item(), world);
         }
@@ -589,12 +586,11 @@ where
     E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();
-    world.skip_unused_items(&mut ctx);
     let mut found = true;
     while found {
         found = false;
         for loc in world.get_all_locations() {
-            if ctx.todo(loc.id()) && loc.can_access(&ctx, world) {
+            if ctx.todo(loc) && loc.can_access(&ctx, world) {
                 ctx.visit(loc.id());
                 ctx.collect(loc.item(), world);
                 found = true;

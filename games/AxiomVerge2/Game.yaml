@@ -392,22 +392,20 @@ collect:
   Health_Node: $refill_energy
   Power_Core: ^refills += 1
   Amagi_Stronghold_Wall_And_Boulder_1: >
-    $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);
+    $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);
     $add_item(Amagi_Stronghold_Wall_1);
     $add_item(Amagi_Stronghold_Boulder_1);
   Amagi_Stronghold_Boulder_And_Wall_2: >
-    $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`);
+    $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`);
     $add_item(Amagi_Stronghold_Wall_2);
     $add_item(Amagi_Stronghold_Boulder_2);
   Ebih_Waterfall_Both_Blocks: >
-    $skip(`Ebih > Waterfall > Alcove > Block Left`);
-    $skip(`Ebih > Waterfall > Alcove > Block Right`);
-    $skip(`Ebih > Waterfall > Alcove Left > Block Left`);
-    $skip(`Ebih > Waterfall > Alcove Right > Block Right`);
+    $visit(`Ebih > Waterfall > Alcove > Block Left`);
+    $visit(`Ebih > Waterfall > Alcove > Block Right`);
     $add_item(Ebih_Waterfall_Block_Right);
     $add_item(Ebih_Waterfall_Block_Left);
   Defeat_MUS_A_M20:
-    $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
+    $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
     $add_item(Amagi_Dragon_Eye_Passage);
 
 settings:

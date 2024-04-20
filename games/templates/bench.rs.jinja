@@ -29,8 +29,8 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     world.rule_victory = RuleVictory::Bench;
 %% endif
     analyzer::world::World::condense_graph(&mut world);
+    world.update_skippable_locations();
     let mut ctx = Context::default();
-    world.skip_unused_items(&mut ctx);
     c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&world, &ctx, u32::MAX)));
 
     let ctx = ContextWrapper::new(Context::default());

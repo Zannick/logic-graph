@@ -334,7 +334,7 @@ class GameLogic(object):
                         region['loc_ids'].append(loc['id'])
                         loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
                         if 'canon' in loc:
-                            self.canon_places[loc['canon']].append(loc)
+                            self.canon_places[construct_id(loc['canon'])].append(loc)
                             loc['canon_id'] = construct_id(loc['canon'])
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(

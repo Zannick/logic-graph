@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from Utils import construct_id, typenameof
+from Utils import typenameof
 
 BitFlagGroup = namedtuple("BitFlagGroup", ['size', 'vars', 'defaults'])
 GroupRange = namedtuple("GroupRange", ['start_group', 'start_index', 'end_group', 'end_index'])
@@ -28,11 +28,10 @@ class BitFlagProcessor(object):
     def process(self):
         context_vars = [c for c, val in self.context_values.items() if typenameof(val) == 'bool']
         items = sorted(i for i, n in self.item_max_counts.items() if n == 1)
-        visits = sorted('VISITED_' + construct_id(canon) for canon in self.canon_places)
-        skips = sorted('SKIPPED_' + construct_id(canon) for canon in self.canon_places)
+        visits = sorted('VISITED_' + canon for canon in self.canon_places)
         basic = context_vars + items
         basic_len = len(basic)
-        everything = basic + visits + skips
+        everything = basic + visits
         while len(everything) > MAX_GROUP_SIZE:
             sl, everything = everything[:MAX_GROUP_SIZE], everything[MAX_GROUP_SIZE:]
             self.flag_groups.append(BitFlagGroup(len(sl), sl, [
@@ -68,3 +67,6 @@ class BitFlagProcessor(object):
         gmax = self.varmap[end]
         gmaxindex = self.flag_groups[gmax - 1].vars.index(end)
         return GroupRange(gmin, gmindex, gmax, gmaxindex)
+    
+    # TODO: Checking visits for a region or area will need both the range of default canon names (if there is one)
+    # plus all canon names for locations in the region/area

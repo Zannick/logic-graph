@@ -17164,16 +17164,6 @@ impl world::World for World {
         RAW_SPOTS.as_slice()
     }
 
-    fn skip_unused_items(&self, ctx: &mut Context) {
-        for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc))
-                || self.unused_by_rules(world::Location::item(loc))
-            {
-                ctx.skip(id);
-            }
-        }
-    }
-
     fn won(&self, ctx: &Context) -> bool {
         crate::rule__victory!(ctx, self)
     }

@@ -17847,8 +17847,8 @@ pub enum CanonId {
     Amagi_Dragon_Eye_Flask,
     Amagi_Stronghold_Boulder_2,
     Amagi_Stronghold_Left_Wall,
-    Amagi_Stronghold_Wall_2,
     Amagi_Stronghold_Wall_1,
+    Amagi_Stronghold_Wall_2,
     Amagi_West_Lake_Surface_Wall,
     Annuna_East_Bridge_Gate,
     Annuna_Mirror_Match_Flask,
@@ -17856,9 +17856,9 @@ pub enum CanonId {
     Apocalypse_Bomb,
     Apocalypse_Seals_Wall,
     Breach_Sight,
-    Ebih_Bush_Flask,
     Ebih_Alu,
     Ebih_Base_Camp_Fragment,
+    Ebih_Bush_Flask,
     Ebih_Wasteland_Passage_H,
     Ebih_Waterfall_Block_Left,
     Ebih_Waterfall_Block_Right,
@@ -18040,11 +18040,11 @@ pub enum CanonId {
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            CanonId::Amagi_Dragon_Eye_Flask => write!(f, "{}", "Amagi Dragon Eye Flask"),
-            CanonId::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi Stronghold Boulder 2"),
-            CanonId::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi Stronghold Left Wall"),
-            CanonId::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi Stronghold Wall 2"),
+            CanonId::Amagi_Dragon_Eye_Flask => write!(f, "{}", "Amagi_Dragon_Eye_Flask"),
+            CanonId::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_2"),
+            CanonId::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi_Stronghold_Left_Wall"),
             CanonId::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi_Stronghold_Wall_1"),
+            CanonId::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi_Stronghold_Wall_2"),
             CanonId::Amagi_West_Lake_Surface_Wall => {
                 write!(f, "{}", "Amagi_West_Lake_Surface_Wall")
             }
@@ -18054,9 +18054,9 @@ impl fmt::Display for CanonId {
             CanonId::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             CanonId::Apocalypse_Seals_Wall => write!(f, "{}", "Apocalypse_Seals_Wall"),
             CanonId::Breach_Sight => write!(f, "{}", "Breach_Sight"),
-            CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Ebih_Alu => write!(f, "{}", "Ebih_Alu"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
+            CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih_Bush_Flask"),
             CanonId::Ebih_Wasteland_Passage_H => write!(f, "{}", "Ebih_Wasteland_Passage_H"),
             CanonId::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
             CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
@@ -18613,11 +18613,11 @@ impl std::str::FromStr for CanonId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi Dragon Eye Flask" => Ok(CanonId::Amagi_Dragon_Eye_Flask),
-            "Amagi Stronghold Boulder 2" => Ok(CanonId::Amagi_Stronghold_Boulder_2),
-            "Amagi Stronghold Left Wall" => Ok(CanonId::Amagi_Stronghold_Left_Wall),
-            "Amagi Stronghold Wall 2" => Ok(CanonId::Amagi_Stronghold_Wall_2),
+            "Amagi_Dragon_Eye_Flask" => Ok(CanonId::Amagi_Dragon_Eye_Flask),
+            "Amagi_Stronghold_Boulder_2" => Ok(CanonId::Amagi_Stronghold_Boulder_2),
+            "Amagi_Stronghold_Left_Wall" => Ok(CanonId::Amagi_Stronghold_Left_Wall),
             "Amagi_Stronghold_Wall_1" => Ok(CanonId::Amagi_Stronghold_Wall_1),
+            "Amagi_Stronghold_Wall_2" => Ok(CanonId::Amagi_Stronghold_Wall_2),
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
             "Annuna_East_Bridge_Gate" => Ok(CanonId::Annuna_East_Bridge_Gate),
             "Annuna_Mirror_Match_Flask" => Ok(CanonId::Annuna_Mirror_Match_Flask),
@@ -18625,9 +18625,9 @@ impl std::str::FromStr for CanonId {
             "Apocalypse_Bomb" => Ok(CanonId::Apocalypse_Bomb),
             "Apocalypse_Seals_Wall" => Ok(CanonId::Apocalypse_Seals_Wall),
             "Breach_Sight" => Ok(CanonId::Breach_Sight),
-            "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Ebih_Alu" => Ok(CanonId::Ebih_Alu),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
+            "Ebih_Bush_Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Ebih_Wasteland_Passage_H" => Ok(CanonId::Ebih_Wasteland_Passage_H),
             "Ebih_Waterfall_Block_Left" => Ok(CanonId::Ebih_Waterfall_Block_Left),
             "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),

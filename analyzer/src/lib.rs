@@ -172,7 +172,7 @@ pub mod testlib {
                 .get_all_locations()
                 .iter()
                 .filter_map(|loc| {
-                    if loc.item() == $item && $ctx.todo(loc.id()) {
+                    if loc.item() == $item && $ctx.todo(loc) {
                         Some(loc.id())
                     } else {
                         None
@@ -230,7 +230,7 @@ pub mod testlib {
                 .get_all_locations()
                 .iter()
                 .filter_map(|loc| {
-                    if loc.item() == $item && $ctx.todo(loc.id()) {
+                    if loc.item() == $item && $ctx.todo(loc) {
                         Some(loc.id())
                     } else {
                         None
@@ -452,30 +452,22 @@ pub mod testlib {
 
             if !$ctx.visited($loc_id) {
                 assert!(
-                    $ctx.todo($loc_id),
-                    "Expected {} to be unvisited and unskipped",
+                    !$ctx.visited($loc_id),
+                    "Expected {} to be unvisited",
                     $loc_id
                 );
 
                 let mut heap = $crate::heap::LimitedHeap::new();
                 heap.push($crate::context::ContextWrapper::new($ctx));
                 let mut count = 1000;
-                let mut done = false;
                 while let Some(ctx) = heap.pop() {
-                    if ctx.get().todo($loc_id) {
+                    if !ctx.get().visited($loc_id) {
                         if count == 0 {
                             panic!("Did not visit {} in the iteration limit", $loc_id);
                         }
                         heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                         count -= 1;
-                    } else if ctx.get().visited($loc_id) {
-                        done = true;
-                        break;
                     }
-                    // if we skipped the location, don't bother with expanding that line further
-                }
-                if !done {
-                    panic!("Dead-ended without visiting {}", $loc_id);
                 }
             }
         }};
@@ -650,8 +642,7 @@ pub mod testlib {
                         $crate::context::history_str::<$T, _>(ctx.recent_history().iter().copied()),
                     );
                     success = true;
-                }
-                if ctx.get().todo($loc_id) {
+                } else {
                     if count == 0 {
                         assert!(
                             success,

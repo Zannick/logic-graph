@@ -115,7 +115,7 @@ where
         if let Some(e) = loc.exit_id() {
             hybrids.push((loc, world.get_exit(*e)));
         } else {
-            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
+            if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
                 ctx.visit(world, loc);
             }
         }
@@ -124,7 +124,7 @@ where
     if let Some((loc, exit)) = hybrids
         .into_iter()
         .filter(|(loc, exit)| {
-            ctx.get().todo(loc.id())
+            ctx.get().todo(loc)
                 && loc.can_access(ctx.get(), world)
                 && exit.can_access(ctx.get(), world)
         })
@@ -146,7 +146,6 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    world.skip_unused_items(ctx.get_mut());
     while !world.won(ctx.get()) {
         if ctx.elapsed() > max_time {
             return Err(ctx);

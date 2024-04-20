@@ -82,7 +82,7 @@ where
         if let Some(e) = loc.exit_id() {
             // hybrid case
             let exit = world.get_exit(*e);
-            if ctx.get().todo(loc.id())
+            if ctx.get().todo(loc)
                 && loc.can_access(ctx.get(), world)
                 && exit.can_access(ctx.get(), world)
             {
@@ -92,7 +92,7 @@ where
                 result.push(newctx);
             }
         } else {
-            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get(), world) {
+            if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
                 // Get the item and mark the location visited.
                 let mut newctx = ctx.clone();
                 newctx.visit(world, loc);
@@ -267,15 +267,13 @@ where
 {
     pub fn new<P>(
         world: &'a W,
-        mut ctx: T,
+        ctx: T,
         routes: Vec<ContextWrapper<T>>,
         db_path: P,
     ) -> Result<Search<'a, W, T>, std::io::Error>
     where
         P: AsRef<Path>,
     {
-        world.skip_unused_items(&mut ctx);
-
         let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
         let progress_locations: HashSet<_, CommonHasher> = world
             .required_items()
@@ -765,7 +763,7 @@ where
                                     .get_all_locations()
                                     .into_iter()
                                     .filter_map(|loc| {
-                                        if ctx.get().todo(loc.id()) {
+                                        if ctx.get().todo(loc) {
                                             Some(loc.id())
                                         } else {
                                             None
@@ -936,7 +934,7 @@ where
     ) -> Option<Vec<ContextWrapper<T>>> {
         self.check_status_update(start, iters, &ctx);
 
-        if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_CANON_LOCATIONS {
+        if ctx.get().count_visits() >= W::NUM_CANON_LOCATIONS {
             if self.world.won(ctx.get()) {
                 self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
             } else {

@@ -88,12 +88,10 @@ impl Observer for FullObservation {
 
     fn observe_visit(&mut self, loc_id: LocationId) {
         match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.canon_id
-%% set skip = 'SKIPPED_' + loc.canon_id
-            LocationId::{{ loc.id }} =>  {
+%% for canon_id, locs in gl.canon_places.items()
+%% set visit = 'VISITED_' + canon_id
+            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
                 self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
-                self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
             }
 %% endfor
         }

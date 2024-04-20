@@ -22,7 +22,7 @@ pub trait Observer: Debug {
     /// Creates a new observation set from a winning state.
     fn from_victory_state(won: &Self::Ctx, world: &<Self::Ctx as Ctx>::World) -> Self;
 
-    /// Updates this observation set to mark that we know whether this location is visited or skipped.
+    /// Updates this observation set to mark that we know whether this location is visited.
     fn observe_visit(
         &mut self,
         loc_id: <<<Self::Ctx as Ctx>::World as World>::Location as Location>::LocId,

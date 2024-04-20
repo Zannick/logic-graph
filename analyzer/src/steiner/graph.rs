@@ -91,7 +91,7 @@ where
     );
     let mut canon = new_hashset();
     nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
-        if startctx.todo(loc.id()) {
+        if startctx.todo(loc) {
             if !canon.contains(&loc.canon_id()) {
                 canon.insert(loc.canon_id());
                 Some(ExternalNodeId::Canon(loc.canon_id()))
@@ -131,7 +131,7 @@ where
             );
     }
     for loc in world.get_all_locations() {
-        if startctx.todo(loc.id()) {
+        if startctx.todo(loc) {
             let s = world.get_location_spot(loc.id());
             let t = ExternalNodeId::Canon(loc.canon_id());
             let id = ExternalEdgeId::Canon(s, loc.canon_id());
@@ -167,7 +167,7 @@ where
     );
     let mut canon = new_hashset();
     nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
-        if startctx.todo(loc.id()) {
+        if startctx.todo(loc) {
             if !canon.contains(&loc.canon_id()) {
                 canon.insert(loc.canon_id());
                 Some(ExternalNodeId::Canon(loc.canon_id()))
@@ -198,7 +198,7 @@ where
     }
 
     for loc in world.get_all_locations() {
-        if startctx.todo(loc.id()) {
+        if startctx.todo(loc) {
             let s = world.get_location_spot(loc.id());
             let t = ExternalNodeId::Canon(loc.canon_id());
             let id = ExternalEdgeId::Canon(s, loc.canon_id());

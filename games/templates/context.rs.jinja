@@ -75,11 +75,6 @@ bitflags!{
 %% set max_index = bfp.visit_groups.end_index + 1 if outer.index == bfp.visit_groups.end_group else size
         const ALL_VISIT_FLAGS = {{ (2 ** max_index - 2 ** min_index) | hex }};
 %% endif
-%% if outer.index >= bfp.skip_groups.start_group and outer.index <= bfp.skip_groups.end_group
-%% set min_index = bfp.skip_groups.start_index if outer.index == bfp.skip_groups.start_group else 0
-%% set max_index = bfp.skip_groups.end_index + 1 if outer.index == bfp.skip_groups.end_group else size
-        const ALL_SKIP_FLAGS = {{ (2 ** max_index - 2 ** min_index) | hex }};
-%% endif
     }
 }
 %% if defaults
@@ -466,60 +461,23 @@ impl context::Ctx for Context {
 %% endfor
         }
     }
-    fn skip(&mut self, loc_id: LocationId) {
-        match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.canon_id
-%% set skip = 'SKIPPED_' + loc.canon_id
-            LocationId::{{ loc.id }} =>  {
-                if !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }}) {
-                    self.cbits{{ bfp.varmap[skip] }}.insert(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
-                }
-            }
-%% endfor
-        }
-    }
     fn reset(&mut self, loc_id: LocationId) {
         match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.canon_id
-%% set skip = 'SKIPPED_' + loc.canon_id
-            LocationId::{{ loc.id }} => {
+%% for canon_id, locs in gl.canon_places.items()
+%% set visit = 'VISITED_' + canon_id
+            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
                 self.cbits{{ bfp.varmap[visit] }}.remove(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
-                self.cbits{{ bfp.varmap[skip] }}.remove(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }});
             }
 %% endfor
         }
     }
     
-    fn todo(&self, loc_id: LocationId) -> bool {
-        match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.canon_id
-%% set skip = 'SKIPPED_' + loc.canon_id
-            LocationId::{{ loc.id }} => {
-                !self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
-                && !self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
-            }
-%% endfor
-        }
-    }
     fn visited(&self, loc_id: LocationId) -> bool {
         match loc_id {
-%% for loc in gl.locations()
-%% set visit = 'VISITED_' + loc.canon_id
-            LocationId::{{ loc.id }} => {
+%% for canon_id, locs in gl.canon_places.items()
+%% set visit = 'VISITED_' + canon_id
+            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
                 self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
-            }
-%% endfor
-        }
-    }
-    fn skipped(&self, loc_id: LocationId) -> bool {
-        match loc_id {
-%% for loc in gl.locations()
-%% set skip = 'SKIPPED_' + loc.canon_id
-            LocationId::{{ loc.id }} => {
-                self.cbits{{ bfp.varmap[skip] }}.contains(flags::ContextBits{{ bfp.varmap[skip] }}::{{ skip|upper }})
             }
 %% endfor
         }
@@ -548,17 +506,12 @@ impl context::Ctx for Context {
         {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_VISIT_FLAGS).bits().count_ones()
 %% endfor
     }
-    fn count_skips(&self) -> u32 {
-%% for group in range(bfp.skip_groups.start_group, bfp.skip_groups.end_group + 1)
-        {% if not loop.first %}    + {% endif %}self.cbits{{ group }}.intersection(flags::ContextBits{{ group }}::ALL_SKIP_FLAGS).bits().count_ones()
-%% endfor
-    }
     fn progress(&self) -> u32 {
         let visits = self.count_visits();
         if visits <= 0 {
             0
         } else {
-            visits * 100 / (Self::World::NUM_CANON_LOCATIONS - self.count_skips())
+            visits * 100 / Self::World::NUM_CANON_LOCATIONS
         }
     }
 

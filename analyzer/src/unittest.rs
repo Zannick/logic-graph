@@ -293,16 +293,6 @@ pub fn apply_test_setup<W, T>(
                     }
                 }
             }
-            Some("skipped") => {
-                if let Ok(locs) =
-                    get_locations::<<W::Location as Location>::LocId>(value, &name, errs)
-                {
-                    for loc in locs {
-                        ctx.reset(loc);
-                        ctx.skip(loc);
-                    }
-                }
-            }
             Some("start") => match obj_from_yaml::<<W::Exit as Exit>::SpotId>(value) {
                 Ok(sp) => ctx.set_position_raw(sp),
                 Err(e) => errs.push(format!("{}: {}", name, e)),

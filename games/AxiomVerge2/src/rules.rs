@@ -2895,41 +2895,39 @@ pub fn action_invoke_save_last(ctx: &mut Context, world: &graph::World, newpos: 
     // $save_last
     helper__save_last!(ctx, world);
 }
-pub fn action_invoke_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
+pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
-    ctx.skip(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
+    // $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+    ctx.visit(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
     ctx.add_item(Item::Amagi_Dragon_Eye_Passage);
 }
-pub fn action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
+pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
-    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
+    // $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+    ctx.visit(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
     ctx.add_item(Item::Amagi_Stronghold_Wall_1);
     ctx.add_item(Item::Amagi_Stronghold_Boulder_1);
 }
-pub fn action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
+pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
-    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
+    // $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+    ctx.visit(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
     ctx.add_item(Item::Amagi_Stronghold_Wall_2);
     ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
 }
-pub fn action_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
+pub fn action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Right);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left);
-    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right);
+    // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+    ctx.visit(LocationId::Ebih__Waterfall__Alcove__Block_Left);
+    ctx.visit(LocationId::Ebih__Waterfall__Alcove__Block_Right);
     ctx.add_item(Item::Ebih_Waterfall_Block_Right);
     ctx.add_item(Item::Ebih_Waterfall_Block_Left);
 }
@@ -17306,33 +17304,33 @@ pub fn observe_action_invoke_save_last(
     hobserve__save_last!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
+pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+    // $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
 }
-pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
+pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+    // $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
 }
-pub fn observe_action_invoke_skip__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
+pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+    // $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
 }
-pub fn observe_action_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_skip__ebih_gt_waterfall_gt_alcove_left_gt_block_left_invoke_skip__ebih_gt_waterfall_gt_alcove_right_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
+pub fn observe_action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+    // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,

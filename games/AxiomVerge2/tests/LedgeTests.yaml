@@ -8,13 +8,11 @@ all:
     save: Glacier > Revival > Save Point
   visited:
     - Glacier > Sea Burial > Collapsing Ceiling > Drown
-  skipped:
-    - Glacier > Compass Room > Center > Table
   start: Glacier > Vertical Room > East 9
 
 tests:
   # can/cannot_obtain:
-  #   Checks for immediate accessability of an unvisited, unskipped location with the given item
+  #   Checks for immediate accessability of an unvisited location with the given item
   #   "immediate" means: doable without performing actions or collecting items
   - cannot_obtain: Ledge_Grab
   - with:

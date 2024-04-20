@@ -93,12 +93,12 @@ pub trait Ctx:
     );
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
-    fn skip(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn reset(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn take_exit(&mut self, exit: &<Self::World as World>::Exit, world: &Self::World);
-    fn todo(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
+    fn todo(&self, loc: &<Self::World as World>::Location) -> bool {
+        !loc.skippable() && !self.visited(loc.id())
+    }
     fn visited(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
-    fn skipped(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
 
     fn all_spot_checks(&self, id: <<Self::World as World>::Exit as Exit>::SpotId) -> bool;
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
@@ -117,7 +117,6 @@ pub trait Ctx:
     ) -> u32;
 
     fn count_visits(&self) -> u32;
-    fn count_skips(&self) -> u32;
     fn progress(&self) -> u32;
 
     fn diff(&self, old: &Self) -> String;
@@ -691,7 +690,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 let loc = world.get_location(loc_id);
                 spot_id == self.ctx.position()
                     && loc.item() == item
-                    && self.ctx.todo(loc_id)
+                    && self.ctx.todo(loc)
                     && loc.can_access(&self.ctx, world)
             }
             History::E(exit_id) => {
@@ -707,7 +706,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     spot_id == self.ctx.position()
                         && exit.can_access(&self.ctx, world)
                         && loc.item() == item
-                        && self.ctx.todo(*loc_id)
+                        && self.ctx.todo(loc)
                         && loc.can_access(&self.ctx, world)
                 } else {
                     false
@@ -873,13 +872,12 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, est: u32, progress: usize, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
-            "At {}ms (elapsed={} est. left={}), progress={}, visited={}, skipped={}\nNow: {} after {}",
+            "At {}ms (elapsed={} est. left={}), progress={}, visited={}\nNow: {} after {}",
             self.elapsed + est,
             self.elapsed,
             est,
             progress,
             self.get().count_visits(),
-            self.get().count_skips(),
             self.ctx.position(),
             if let Some(val) = last {
                 val.to_string()

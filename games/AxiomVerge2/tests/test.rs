@@ -119,7 +119,6 @@ fn search() {
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
-    ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
     let verify = |c: &Context| {
         if c.has(Item::Boomerang) {
             Ok(())
@@ -156,7 +155,6 @@ fn asserde_true() {
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
-    ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
 
     let mut ctx = ContextWrapper::new(ctx);
     ctx.append_history(History::G(

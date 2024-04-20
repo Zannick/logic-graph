@@ -177,7 +177,7 @@ Locations are always defined in a **Spot**. They may have the following fields:
 
 * **name**: The name of the Location. Location names must be unique within a Spot. **Required**.
 * **item**: The id of the Item. This may only use alphanumeric characters and underscores and must start with a capital letter. **Required**.
-* **canon**: The canonical name of the Location. All Locations with the same canonical name are considered alternative ways to access the same logical item in the game; after visiting any of these, all the rest with the same canonical name will be skipped. All Locations with the same canonical name must have the same Item.
+* **canon**: The canonical name of the Location. All Locations with the same canonical name are considered alternative ways to access the same logical item in the game; after visiting any of these, all the rest with the same canonical name will be considered also visited. All Locations with the same canonical name must have the same Item.
 * **req**: The **requirements** to visit the Location, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **price**: The numerical value of the **Currency** required to be spent. If unset, accessing the Location is considered free.
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
@@ -341,11 +341,10 @@ Function invocations are written `$func(arg1, arg2, ...)`. Function invocations 
 * **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
 * **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
 * **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to or comparing against `SpotId::None` which is not otherwise recognized in this grammar.
-<!-- * **all_spot_checks**, **all_area_checks**, **all_region_checks**: Type **boolExpr**. Accepts one **Place** argument that must be a **Spot**, **Area**, or **Region**, respectively, and returns whether all **Locations** in that **Place** have been either visited or skipped. -->
+<!-- * **all_spot_checks**, **all_area_checks**, **all_region_checks**: Type **boolExpr**. Accepts one **Place** argument that must be a **Spot**, **Area**, or **Region**, respectively, and returns whether all **Locations** in that **Place** have been visited. -->
 * **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
 * **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
-* **skip**: Type **action**. Accepts one **Location** argument and skips it.
-* **visit**: Type **action**. Accepts one **Location** argument and visits it.
+* **visit**: Type **action**. Accepts one **Location** argument and visits it (without collecting the item). Note that all Locations with the same canonical name are marked visited this way.
 * **add_item**: Type **action**. Adds one of the given **Item** to the context without triggering **collect** rules.
 * **collect**: Type **action**. Adds one of the given **Item** to the context *and* triggers **collect** rules for that item. *Be careful not to create an infinite loop!*
 
