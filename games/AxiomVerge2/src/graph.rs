@@ -14775,6 +14775,7 @@ impl world::World for World {
                 LocationId::Giguna__West_Caverns__Bush__Item,
                 LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
                 LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+                LocationId::Uhrum__West_Entrance__Sand__Refill,
                 LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
             ],
             Item::Family_Tragedy => vec![LocationId::Annuna__Sniper_Valley__Table__Item],
@@ -15078,7 +15079,6 @@ impl world::World for World {
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
                 LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
             ],
-            Item::Refill => vec![LocationId::Uhrum__West_Entrance__Sand__Refill],
             Item::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
             Item::Storm_Bomb => vec![LocationId::Uhrum__Siege_Corridor__Pond__Item],
             Item::Uhrum_Waterfall_Wall => vec![
@@ -18264,6 +18264,12 @@ impl world::World for World {
         map.drain().collect()
     }
 
+    fn unused_items(&self) -> Vec<Item> {
+        let mut vec = Vec::from_iter(self.get_unused_items());
+        vec.sort();
+        vec
+    }
+
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }
@@ -19205,7 +19211,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19240,7 +19245,6 @@ impl World {
                             | Item::Notes_2053_02_27
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
-                            | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
                             | Item::Udusan
@@ -19286,7 +19290,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19340,7 +19343,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19397,7 +19399,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19433,7 +19434,6 @@ impl World {
                             | Item::Notes_2053_02_27
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
-                            | Item::Refill
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
                             | Item::Udusan
@@ -19480,7 +19480,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19535,7 +19534,6 @@ impl World {
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Record_Losses
-                            | Item::Refill
                             | Item::Researchers_Missing
                             | Item::Royal_Dagger
                             | Item::Royal_Ring
@@ -19591,7 +19589,6 @@ impl World {
                         | Item::Ranged_Damage_3
                         | Item::Ranged_Speed_3
                         | Item::Record_Losses
-                        | Item::Refill
                         | Item::Researchers_Missing
                         | Item::Royal_Dagger
                         | Item::Royal_Ring
@@ -19651,7 +19648,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -19685,7 +19681,6 @@ impl World {
                         iset.insert(Item::Notes_2053_02_27);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
                         iset.insert(Item::Udusan);
@@ -19730,7 +19725,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -19783,7 +19777,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -19842,7 +19835,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -19877,7 +19869,6 @@ impl World {
                         iset.insert(Item::Notes_2053_02_27);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
                         iset.insert(Item::Udusan);
@@ -19923,7 +19914,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -19977,7 +19967,6 @@ impl World {
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Refill);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
@@ -20034,7 +20023,6 @@ impl World {
                 set.insert(Item::Ranged_Damage_3);
                 set.insert(Item::Ranged_Speed_3);
                 set.insert(Item::Record_Losses);
-                set.insert(Item::Refill);
                 set.insert(Item::Researchers_Missing);
                 set.insert(Item::Royal_Dagger);
                 set.insert(Item::Royal_Ring);
@@ -22451,7 +22439,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Uhrum__West_Entrance__Sand__Refill => Location {
             id: LocationId::Uhrum__West_Entrance__Sand__Refill,
             canonical: CanonId::Loc_Uhrum__West_Entrance__Sand__Refill,
-            item: Item::Refill,
+            item: Item::Power_Core,
             price: Currency::Free,
             time: 0,
             exit_id: None,

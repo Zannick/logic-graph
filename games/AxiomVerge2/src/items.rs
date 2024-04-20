@@ -142,7 +142,6 @@ pub enum Item {
     Ranged_Speed_2,
     Ranged_Speed_3,
     Record_Losses,
-    Refill,
     Remote_Boomerang,
     Remote_Drone,
     Researchers_Missing,
@@ -304,7 +303,6 @@ impl fmt::Display for Item {
             Item::Ranged_Speed_2 => write!(f, "{}", "Ranged_Speed_2"),
             Item::Ranged_Speed_3 => write!(f, "{}", "Ranged_Speed_3"),
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
-            Item::Refill => write!(f, "{}", "Refill"),
             Item::Remote_Boomerang => write!(f, "{}", "Remote_Boomerang"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Researchers_Missing => write!(f, "{}", "Researchers_Missing"),
@@ -470,7 +468,6 @@ impl std::str::FromStr for Item {
             "Ranged_Speed_2" => Ok(Item::Ranged_Speed_2),
             "Ranged_Speed_3" => Ok(Item::Ranged_Speed_3),
             "Record_Losses" => Ok(Item::Record_Losses),
-            "Refill" => Ok(Item::Refill),
             "Remote_Boomerang" => Ok(Item::Remote_Boomerang),
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Researchers_Missing" => Ok(Item::Researchers_Missing),
@@ -530,7 +527,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Notes_2053_02_27
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
-            | Item::Refill
             | Item::Royal_Dagger
             | Item::Royal_Ring
             | Item::Udusan

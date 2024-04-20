@@ -403,7 +403,7 @@ areas:
       coord: [20.0, 27.75]
       locations:
         - name: Refill
-          item: Refill
+          item: Power_Core
           req: $more_refills
           tags: [standing]
       exits:
