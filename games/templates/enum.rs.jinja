@@ -6,7 +6,7 @@ pub enum {{ name }} {
     #[default]
     {{ default_value|construct_id|camelize if camelize else default_value }},
 %% endif
-%% for v in values|sort(attribute='id')
+%% for v in values
 %% if (v.id or v|construct_id) != default_value
     {{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }},
 %% endif
@@ -18,7 +18,7 @@ impl fmt::Display for {{ name }} {
 %% if default or default_value
             {{ name }}::{{ default_value|construct_id|camelize if camelize else default_value }} => write!(f, "{}", "{{ default_value }}"),
 %% endif
-%% for v in values|sort(attribute='id')
+%% for v in values
 %% if (v.id or v|construct_id) != default_value
             {{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
 %% endif
@@ -34,7 +34,7 @@ impl std::str::FromStr for {{ name }} {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-%% for v in values|sort(attribute='id')
+%% for v in values
             "{{ v.fullname or v.name or v }}"{% if allow_lower %} | "{{ (v.fullname or v.name or v)|lower }}"{% endif %} => Ok({{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }}),
 %% endfor
             _ => Err(format!("Could not recognize as a {{ name }}: {}", s)),
