@@ -982,6 +982,7 @@ where
         // TODO: heap+db range [min bucket, max bucket]
         let heap_bests = self.queue.heap_bests();
         let db_bests = self.queue.db().db_bests();
+        let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
@@ -1019,7 +1020,7 @@ where
             dpskips,
             self.queue.background_deletes(),
             heap_bests.iter().position(|x| *x != None).unwrap_or(0),
-            heap_bests.len(),
+            heap_bests.len().saturating_sub(1),
             heap_bests
                 .into_iter()
                 .map(|n| match n {
@@ -1029,10 +1030,10 @@ where
                 .collect::<Vec<_>>()
                 .join(", "),
             db_bests.iter().position(|x| *x != u32::MAX).unwrap_or(0),
-            db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0),
-            db_bests
+            db_best_max,
+            db_bests[..=db_best_max]
                 .into_iter()
-                .map(|n| if n < u32::MAX {
+                .map(|n| if *n < u32::MAX {
                     n.to_string()
                 } else {
                     String::from("-")
