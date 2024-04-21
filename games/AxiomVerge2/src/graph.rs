@@ -1525,9 +1525,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
         SpotId::Menu__Warp_Only__Kiengir => AreaId::Menu__Warp_Only,
-        SpotId::Menu__Kiengir_Map__Amagi_Main_Area
-        | SpotId::Menu__Kiengir_Map__Amagi_East_Lake
+        SpotId::Menu__Kiengir_Map__Amagi_East_Lake
         | SpotId::Menu__Kiengir_Map__Amagi_Isolation
+        | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
         | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
         | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
         | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
@@ -1568,17 +1568,40 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => AreaId::Menu__Kiengir_Map,
-        SpotId::Menu__Breach_Map__GB_Peak
-        | SpotId::Menu__Breach_Map__GB_SW_Save
+        SpotId::Menu__Breach_Map__AGB_Bridge_Lower
+        | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
+        | SpotId::Menu__Breach_Map__AGB_East
+        | SpotId::Menu__Breach_Map__AGB_Enclosed
+        | SpotId::Menu__Breach_Map__AGB_North
+        | SpotId::Menu__Breach_Map__AGB_South
+        | SpotId::Menu__Breach_Map__GlB_Arena
+        | SpotId::Menu__Breach_Map__GlB_Center
+        | SpotId::Menu__Breach_Map__GlB_East
+        | SpotId::Menu__Breach_Map__GlB_South
+        | SpotId::Menu__Breach_Map__GlB_West
+        | SpotId::Menu__Breach_Map__GSB_East
+        | SpotId::Menu__Breach_Map__GSB_Emergence
+        | SpotId::Menu__Breach_Map__GSB_Labyrinth
+        | SpotId::Menu__Breach_Map__GSB_Peak
+        | SpotId::Menu__Breach_Map__GSB_South
+        | SpotId::Menu__Breach_Map__GSB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
-        | SpotId::Menu__Breach_Map__AB_East
-        | SpotId::Menu__Breach_Map__GlB_South
-        | SpotId::Menu__Breach_Map__GlB_West
-        | SpotId::Menu__Breach_Map__GlB_Center
-        | SpotId::Menu__Breach_Map__GlB_Arena
-        | SpotId::Menu__Breach_Map__GlB_East => AreaId::Menu__Breach_Map,
+        | SpotId::Menu__Breach_Map__IB_West
+        | SpotId::Menu__Breach_Map__LAB_Center
+        | SpotId::Menu__Breach_Map__LAB_East
+        | SpotId::Menu__Breach_Map__LAB_Enclosed
+        | SpotId::Menu__Breach_Map__LAB_Southeast
+        | SpotId::Menu__Breach_Map__LAB_Southwest
+        | SpotId::Menu__Breach_Map__MEB_Drone
+        | SpotId::Menu__Breach_Map__MEB_Peak
+        | SpotId::Menu__Breach_Map__MEB_Southeast
+        | SpotId::Menu__Breach_Map__MEB_Southwest
+        | SpotId::Menu__Breach_Map__UVB_Center
+        | SpotId::Menu__Breach_Map__UVB_Dead_end
+        | SpotId::Menu__Breach_Map__UVB_East
+        | SpotId::Menu__Breach_Map__UVB_West => AreaId::Menu__Breach_Map,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -3184,9 +3207,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
         SpotId::Menu__Warp_Only__Kiengir => RegionId::Menu,
-        SpotId::Menu__Kiengir_Map__Amagi_Main_Area
-        | SpotId::Menu__Kiengir_Map__Amagi_East_Lake
+        SpotId::Menu__Kiengir_Map__Amagi_East_Lake
         | SpotId::Menu__Kiengir_Map__Amagi_Isolation
+        | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
         | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
         | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
         | SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match
@@ -3227,17 +3250,40 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => RegionId::Menu,
-        SpotId::Menu__Breach_Map__GB_Peak
-        | SpotId::Menu__Breach_Map__GB_SW_Save
+        SpotId::Menu__Breach_Map__AGB_Bridge_Lower
+        | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
+        | SpotId::Menu__Breach_Map__AGB_East
+        | SpotId::Menu__Breach_Map__AGB_Enclosed
+        | SpotId::Menu__Breach_Map__AGB_North
+        | SpotId::Menu__Breach_Map__AGB_South
+        | SpotId::Menu__Breach_Map__GlB_Arena
+        | SpotId::Menu__Breach_Map__GlB_Center
+        | SpotId::Menu__Breach_Map__GlB_East
+        | SpotId::Menu__Breach_Map__GlB_South
+        | SpotId::Menu__Breach_Map__GlB_West
+        | SpotId::Menu__Breach_Map__GSB_East
+        | SpotId::Menu__Breach_Map__GSB_Emergence
+        | SpotId::Menu__Breach_Map__GSB_Labyrinth
+        | SpotId::Menu__Breach_Map__GSB_Peak
+        | SpotId::Menu__Breach_Map__GSB_South
+        | SpotId::Menu__Breach_Map__GSB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
         | SpotId::Menu__Breach_Map__IB_Gauntlet
         | SpotId::Menu__Breach_Map__IB_Save_Room
-        | SpotId::Menu__Breach_Map__AB_East
-        | SpotId::Menu__Breach_Map__GlB_South
-        | SpotId::Menu__Breach_Map__GlB_West
-        | SpotId::Menu__Breach_Map__GlB_Center
-        | SpotId::Menu__Breach_Map__GlB_Arena
-        | SpotId::Menu__Breach_Map__GlB_East => RegionId::Menu,
+        | SpotId::Menu__Breach_Map__IB_West
+        | SpotId::Menu__Breach_Map__LAB_Center
+        | SpotId::Menu__Breach_Map__LAB_East
+        | SpotId::Menu__Breach_Map__LAB_Enclosed
+        | SpotId::Menu__Breach_Map__LAB_Southeast
+        | SpotId::Menu__Breach_Map__LAB_Southwest
+        | SpotId::Menu__Breach_Map__MEB_Drone
+        | SpotId::Menu__Breach_Map__MEB_Peak
+        | SpotId::Menu__Breach_Map__MEB_Southeast
+        | SpotId::Menu__Breach_Map__MEB_Southwest
+        | SpotId::Menu__Breach_Map__UVB_Center
+        | SpotId::Menu__Breach_Map__UVB_Dead_end
+        | SpotId::Menu__Breach_Map__UVB_East
+        | SpotId::Menu__Breach_Map__UVB_West => RegionId::Menu,
         SpotId::Uhrum__West_Entrance__West_27
         | SpotId::Uhrum__West_Entrance__West_26
         | SpotId::Uhrum__West_Entrance__Hidden_Passage_West
@@ -6721,16 +6767,16 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
-            ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
-            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
-            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::access_map__glacier_breach__save_and_exit__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::access_map__glacier_breach__guarded_corridor__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::access_map__glacier_breach__hammonds_breach__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::access_map__glacier_breach__west_save__save(ctx, world),
+            ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
+            ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
+            ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::access_map__annuna__factory_entrance__save(ctx, world),
@@ -7970,16 +8016,16 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
-            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
-            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::observe_access_map__glacier_breach__save_and_exit__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::observe_access_map__glacier_breach__guarded_corridor__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::observe_access_map__glacier_breach__hammonds_breach__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__west_save__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::observe_access_map__annuna__center_save__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::observe_access_map__annuna__factory_entrance__save(ctx, world, full_obs),
@@ -9348,16 +9394,16 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
-            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
-            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => rules::explain_map__glacier_breach__save_and_exit__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => rules::explain_map__glacier_breach__guarded_corridor__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::explain_map__glacier_breach__hammonds_breach__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::explain_map__glacier_breach__west_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::explain_map__annuna__factory_entrance__save(ctx, world, edict),
@@ -12359,7 +12405,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1647] = [
+static RAW_SPOTS: [SpotId; 1670] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -13830,17 +13876,40 @@ static RAW_SPOTS: [SpotId; 1647] = [
     SpotId::Irikar_Breach__Worm_Rave__Corner,
     SpotId::Irikar_Breach__Worm_Rave__East,
     SpotId::Irikar_Breach__Worm_Rave__South,
-    SpotId::Menu__Breach_Map__AB_East,
-    SpotId::Menu__Breach_Map__GB_Peak,
-    SpotId::Menu__Breach_Map__GB_SW_Save,
+    SpotId::Menu__Breach_Map__AGB_Bridge_Lower,
+    SpotId::Menu__Breach_Map__AGB_Bridge_Upper,
+    SpotId::Menu__Breach_Map__AGB_East,
+    SpotId::Menu__Breach_Map__AGB_Enclosed,
+    SpotId::Menu__Breach_Map__AGB_North,
+    SpotId::Menu__Breach_Map__AGB_South,
     SpotId::Menu__Breach_Map__GlB_Arena,
     SpotId::Menu__Breach_Map__GlB_Center,
     SpotId::Menu__Breach_Map__GlB_East,
     SpotId::Menu__Breach_Map__GlB_South,
     SpotId::Menu__Breach_Map__GlB_West,
+    SpotId::Menu__Breach_Map__GSB_East,
+    SpotId::Menu__Breach_Map__GSB_Emergence,
+    SpotId::Menu__Breach_Map__GSB_Labyrinth,
+    SpotId::Menu__Breach_Map__GSB_Peak,
+    SpotId::Menu__Breach_Map__GSB_South,
+    SpotId::Menu__Breach_Map__GSB_SW_Save,
     SpotId::Menu__Breach_Map__IB_Basement,
     SpotId::Menu__Breach_Map__IB_Gauntlet,
     SpotId::Menu__Breach_Map__IB_Save_Room,
+    SpotId::Menu__Breach_Map__IB_West,
+    SpotId::Menu__Breach_Map__LAB_Center,
+    SpotId::Menu__Breach_Map__LAB_East,
+    SpotId::Menu__Breach_Map__LAB_Enclosed,
+    SpotId::Menu__Breach_Map__LAB_Southeast,
+    SpotId::Menu__Breach_Map__LAB_Southwest,
+    SpotId::Menu__Breach_Map__MEB_Drone,
+    SpotId::Menu__Breach_Map__MEB_Peak,
+    SpotId::Menu__Breach_Map__MEB_Southeast,
+    SpotId::Menu__Breach_Map__MEB_Southwest,
+    SpotId::Menu__Breach_Map__UVB_Center,
+    SpotId::Menu__Breach_Map__UVB_Dead_end,
+    SpotId::Menu__Breach_Map__UVB_East,
+    SpotId::Menu__Breach_Map__UVB_West,
     SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
     SpotId::Menu__Kiengir_Map__Amagi_Isolation,
     SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
@@ -14705,8 +14774,8 @@ lazy_static! {
             end: SpotId::Irikar__Sight_Room__West_24.into_usize() + 1,
         },
         AreaId::Menu__Breach_Map => Range {
-            start: SpotId::Menu__Breach_Map__AB_East.into_usize(),
-            end: SpotId::Menu__Breach_Map__IB_Save_Room.into_usize() + 1,
+            start: SpotId::Menu__Breach_Map__AGB_Bridge_Lower.into_usize(),
+            end: SpotId::Menu__Breach_Map__UVB_West.into_usize() + 1,
         },
         AreaId::Menu__Kiengir_Map => Range {
             start: SpotId::Menu__Kiengir_Map__Amagi_East_Lake.into_usize(),
@@ -17263,16 +17332,16 @@ impl world::World for World {
             ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_Center,
             ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_East,
             ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_West,
-            ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => SpotId::Menu__Breach_Map__GB_Peak,
-            ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GB_SW_Save,
-            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Gauntlet,
-            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Save_Room,
-            ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => SpotId::Menu__Breach_Map__AB_East,
+            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Arena,
+            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Center,
+            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_East,
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_South,
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_West,
-            ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Center,
-            ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Arena,
-            ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_East,
+            ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => SpotId::Menu__Breach_Map__GSB_Peak,
+            ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => SpotId::Menu__Breach_Map__GSB_SW_Save,
+            ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Gauntlet,
+            ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => SpotId::Menu__Breach_Map__IB_Save_Room,
+            ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => SpotId::Menu__Breach_Map__LAB_East,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
@@ -19252,16 +19321,16 @@ impl world::World for World {
             | SpotId::Irikar_Breach__Worm_Rave__Corner
             | SpotId::Irikar_Breach__Worm_Rave__East
             | SpotId::Irikar_Breach__Worm_Rave__South
-            | SpotId::Menu__Breach_Map__AB_East
-            | SpotId::Menu__Breach_Map__GB_Peak
-            | SpotId::Menu__Breach_Map__GB_SW_Save
             | SpotId::Menu__Breach_Map__GlB_Arena
             | SpotId::Menu__Breach_Map__GlB_Center
             | SpotId::Menu__Breach_Map__GlB_East
             | SpotId::Menu__Breach_Map__GlB_South
             | SpotId::Menu__Breach_Map__GlB_West
+            | SpotId::Menu__Breach_Map__GSB_Peak
+            | SpotId::Menu__Breach_Map__GSB_SW_Save
             | SpotId::Menu__Breach_Map__IB_Gauntlet
             | SpotId::Menu__Breach_Map__IB_Save_Room
+            | SpotId::Menu__Breach_Map__LAB_East
             | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
             | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
             | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
@@ -33446,15 +33515,50 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
+        ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__South_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Glacier_Breach__West_Save__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1,
             time: 12000,
             dest: SpotId::Giguna_Breach__Peak__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
+        ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1,
             time: 12000,
             dest: SpotId::Giguna_Breach__SW_Save__Save_Point,
             price: Currency::Free,
@@ -33474,45 +33578,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
+        ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => Exit {
+            id: ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
             time: 12000,
             dest: SpotId::Amagi_Breach__East_Entrance__Save_Point,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1,
-            time: 12000,
-            dest: SpotId::Glacier_Breach__South_Save__Save_Point,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1,
-            time: 12000,
-            dest: SpotId::Glacier_Breach__West_Save__Save_Point,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1,
-            time: 12000,
-            dest: SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
-            time: 12000,
-            dest: SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => Exit {
-            id: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1,
-            time: 12000,
-            dest: SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -54212,19 +54281,6 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Kiengir_Map__Amagi_Main_Area => Spot {
-            id: SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-        },
         SpotId::Menu__Kiengir_Map__Amagi_East_Lake => Spot {
             id: SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             locations: Range {
@@ -54244,6 +54300,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area => Spot {
+            id: SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -54747,27 +54816,212 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GB_Peak => Spot {
-            id: SpotId::Menu__Breach_Map__GB_Peak,
+        SpotId::Menu__Breach_Map__AGB_Bridge_Lower => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_Bridge_Lower,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GB_SW_Save => Spot {
-            id: SpotId::Menu__Breach_Map__GB_SW_Save,
+        SpotId::Menu__Breach_Map__AGB_Bridge_Upper => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_Bridge_Upper,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__AGB_East => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__AGB_Enclosed => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_Enclosed,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__AGB_North => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__AGB_South => Spot {
+            id: SpotId::Menu__Breach_Map__AGB_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_Arena => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_Arena,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_Center => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_East => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_South => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GlB_West => Spot {
+            id: SpotId::Menu__Breach_Map__GlB_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_East => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_Emergence => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_Emergence,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_Labyrinth => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_Labyrinth,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_Peak => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_Peak,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_South => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__GSB_SW_Save => Spot {
+            id: SpotId::Menu__Breach_Map__GSB_SW_Save,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -54811,79 +55065,170 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__AB_East => Spot {
-            id: SpotId::Menu__Breach_Map__AB_East,
+        SpotId::Menu__Breach_Map__IB_West => Spot {
+            id: SpotId::Menu__Breach_Map__IB_West,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__AB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GlB_South => Spot {
-            id: SpotId::Menu__Breach_Map__GlB_South,
+        SpotId::Menu__Breach_Map__LAB_Center => Spot {
+            id: SpotId::Menu__Breach_Map__LAB_Center,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GlB_West => Spot {
-            id: SpotId::Menu__Breach_Map__GlB_West,
+        SpotId::Menu__Breach_Map__LAB_East => Spot {
+            id: SpotId::Menu__Breach_Map__LAB_East,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1.into_usize() + 1,
+                start: ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GlB_Center => Spot {
-            id: SpotId::Menu__Breach_Map__GlB_Center,
+        SpotId::Menu__Breach_Map__LAB_Enclosed => Spot {
+            id: SpotId::Menu__Breach_Map__LAB_Enclosed,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GlB_Arena => Spot {
-            id: SpotId::Menu__Breach_Map__GlB_Arena,
+        SpotId::Menu__Breach_Map__LAB_Southeast => Spot {
+            id: SpotId::Menu__Breach_Map__LAB_Southeast,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Menu__Breach_Map__GlB_East => Spot {
-            id: SpotId::Menu__Breach_Map__GlB_East,
+        SpotId::Menu__Breach_Map__LAB_Southwest => Spot {
+            id: SpotId::Menu__Breach_Map__LAB_Southwest,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize(),
-                end: ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1.into_usize() + 1,
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__MEB_Drone => Spot {
+            id: SpotId::Menu__Breach_Map__MEB_Drone,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__MEB_Peak => Spot {
+            id: SpotId::Menu__Breach_Map__MEB_Peak,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__MEB_Southeast => Spot {
+            id: SpotId::Menu__Breach_Map__MEB_Southeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__MEB_Southwest => Spot {
+            id: SpotId::Menu__Breach_Map__MEB_Southwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__UVB_Center => Spot {
+            id: SpotId::Menu__Breach_Map__UVB_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__UVB_Dead_end => Spot {
+            id: SpotId::Menu__Breach_Map__UVB_Dead_end,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__UVB_East => Spot {
+            id: SpotId::Menu__Breach_Map__UVB_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Breach_Map__UVB_West => Spot {
+            id: SpotId::Menu__Breach_Map__UVB_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,

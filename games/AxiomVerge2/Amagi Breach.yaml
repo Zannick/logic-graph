@@ -13,7 +13,7 @@ areas:
     save_point: Save Point
   datamap:
     map_spot:
-      save: Menu > Breach Map > AB East
+      save: Menu > Breach Map > LAB East
   spots:
     - name: East
       coord: [37.9, 14.75]

@@ -1853,9 +1853,9 @@ subgraph Menu
         Menu__Warp_Only__Kiengir(Kiengir);
     end
     subgraph Menu__Kiengir_Map[Kiengir Map]
-        Menu__Kiengir_Map__Amagi_Main_Area(Amagi Main Area);
         Menu__Kiengir_Map__Amagi_East_Lake(Amagi East Lake);
         Menu__Kiengir_Map__Amagi_Isolation(Amagi Isolation);
+        Menu__Kiengir_Map__Amagi_Main_Area(Amagi Main Area);
         Menu__Kiengir_Map__Annuna_Center_Save(Annuna Center Save);
         Menu__Kiengir_Map__Annuna_Factory_Entrance(Annuna Factory Entrance);
         Menu__Kiengir_Map__Annuna_Mirror_Match(Annuna Mirror Match);
@@ -1898,17 +1898,40 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
     end
     subgraph Menu__Breach_Map[Breach Map]
-        Menu__Breach_Map__GB_Peak(GB Peak);
-        Menu__Breach_Map__GB_SW_Save(GB SW Save);
+        Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
+        Menu__Breach_Map__AGB_Bridge_Upper(AGB Bridge Upper);
+        Menu__Breach_Map__AGB_East(AGB East);
+        Menu__Breach_Map__AGB_Enclosed(AGB Enclosed);
+        Menu__Breach_Map__AGB_North(AGB North);
+        Menu__Breach_Map__AGB_South(AGB South);
+        Menu__Breach_Map__GlB_Arena(GlB Arena);
+        Menu__Breach_Map__GlB_Center(GlB Center);
+        Menu__Breach_Map__GlB_East(GlB East);
+        Menu__Breach_Map__GlB_South(GlB South);
+        Menu__Breach_Map__GlB_West(GlB West);
+        Menu__Breach_Map__GSB_East(GSB East);
+        Menu__Breach_Map__GSB_Emergence(GSB Emergence);
+        Menu__Breach_Map__GSB_Labyrinth(GSB Labyrinth);
+        Menu__Breach_Map__GSB_Peak(GSB Peak);
+        Menu__Breach_Map__GSB_South(GSB South);
+        Menu__Breach_Map__GSB_SW_Save(GSB SW Save);
         Menu__Breach_Map__IB_Basement(IB Basement);
         Menu__Breach_Map__IB_Gauntlet(IB Gauntlet);
         Menu__Breach_Map__IB_Save_Room(IB Save Room);
-        Menu__Breach_Map__AB_East(AB East);
-        Menu__Breach_Map__GlB_South(GlB South);
-        Menu__Breach_Map__GlB_West(GlB West);
-        Menu__Breach_Map__GlB_Center(GlB Center);
-        Menu__Breach_Map__GlB_Arena(GlB Arena);
-        Menu__Breach_Map__GlB_East(GlB East);
+        Menu__Breach_Map__IB_West(IB West);
+        Menu__Breach_Map__LAB_Center(LAB Center);
+        Menu__Breach_Map__LAB_East(LAB East);
+        Menu__Breach_Map__LAB_Enclosed(LAB Enclosed);
+        Menu__Breach_Map__LAB_Southeast(LAB Southeast);
+        Menu__Breach_Map__LAB_Southwest(LAB Southwest);
+        Menu__Breach_Map__MEB_Drone(MEB Drone);
+        Menu__Breach_Map__MEB_Peak(MEB Peak);
+        Menu__Breach_Map__MEB_Southeast(MEB Southeast);
+        Menu__Breach_Map__MEB_Southwest(MEB Southwest);
+        Menu__Breach_Map__UVB_Center(UVB Center);
+        Menu__Breach_Map__UVB_Dead_end(UVB Dead-end);
+        Menu__Breach_Map__UVB_East(UVB East);
+        Menu__Breach_Map__UVB_West(UVB West);
     end
 end
 subgraph Uhrum
@@ -3000,9 +3023,8 @@ Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_W
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
 Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir
-Menu__Breach_Map__AB_East --> Amagi_Breach__East_Entrance__Save_Point
-Menu__Breach_Map__GB_Peak --> Giguna_Breach__Peak__Save_Point
-Menu__Breach_Map__GB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
+Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point
+Menu__Breach_Map__GSB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
 Menu__Breach_Map__GlB_Arena --> Glacier_Breach__Save_and_Exit__Save_Point
 Menu__Breach_Map__GlB_Center --> Glacier_Breach__Guarded_Corridor__Save_Point
 Menu__Breach_Map__GlB_East --> Glacier_Breach__Hammonds_Breach__Save_Point
@@ -3010,6 +3032,7 @@ Menu__Breach_Map__GlB_South --> Glacier_Breach__South_Save__Save_Point
 Menu__Breach_Map__GlB_West --> Glacier_Breach__West_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
+Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
 Menu__Kiengir_Map__Annuna_Factory_Entrance --> Annuna__Factory_Entrance__Save_Point

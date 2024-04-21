@@ -239,9 +239,9 @@ areas:
     # We only need the fast travel locations specified here. Note self-edges are ignored.
     # These would otherwise be repeated on all spots.
     local:
-      - to: Amagi Main Area
       - to: Amagi East Lake
       - to: Amagi Isolation
+      - to: Amagi Main Area
       - to: Annuna Center Save
       - to: Annuna Factory Entrance
       - to: Annuna Mirror Match
@@ -270,6 +270,10 @@ areas:
       - to: Uhrum West
   spots:
     #region Kiengir fast travel points
+    - name: Amagi East Lake
+      coord: [34, 18]
+    - name: Amagi Isolation
+      coord: [34, 21]
     - name: Amagi Main Area
       coord: [29, 19]
       exits:
@@ -280,10 +284,6 @@ areas:
             - when: ^mode != 'drone'
               add: 2.5
           tags: [warp]
-    - name: Amagi East Lake
-      coord: [34, 18]
-    - name: Amagi Isolation
-      coord: [34, 21]
     - name: Annuna Center Save
       coord: [39, 21]
       exits:
@@ -521,17 +521,105 @@ areas:
   tags: [map]
   all:
     local:
-      - to: GB Peak
+      - to: AGB Bridge Lower
+      - to: AGB Bridge Upper
+      - to: AGB East
+      - to: AGB Enclosed
+      - to: AGB North
+      - to: AGB South
+      - to: GlB Arena
+      - to: GlB Center
+      - to: GlB East
+      - to: GlB South
+      - to: GlB West
+      - to: GSB East
+      - to: GSB Emergence
+      - to: GSB Labyrinth
+      - to: GSB Peak
+      - to: GSB SW Save
+      - to: GSB South
+      - to: IB Basement
+      - to: IB Gauntlet
+      - to: IB Save Room
+      - to: IB West
+      - to: LAB Center
+      - to: LAB East
+      - to: LAB Enclosed
+      - to: LAB Southeast
+      - to: LAB Southwest
+      - to: MEB Drone
+      - to: MEB Peak
+      - to: MEB Southeast
+      - to: MEB Southwest
+      - to: UVB Center
+      - to: UVB Dead-end
+      - to: UVB East
+      - to: UVB West
   spots:
     #region Breach fast travel points
-    - name: GB Peak
+    - name: AGB Bridge Lower
+      coord: [35, 25]
+    - name: AGB Bridge Upper
+      coord: [34, 24]
+    - name: AGB East
+      coord: [42, 20]
+    - name: AGB Enclosed
+      coord: [42, 26]
+    - name: AGB North
+      coord: [37, 17]
+    - name: AGB South
+      coord: [41, 28]
+    - name: GlB Arena
+      coord: [39, 10]
+      exits:
+        - to: Glacier Breach > Save and Exit > Save Point
+          req: ^map__glacier_breach__save_and_exit__save
+          time: 12
+          tags: [warp]
+    - name: GlB Center
+      coord: [35, 11]
+      exits:
+        - to: Glacier Breach > Guarded Corridor > Save Point
+          req: ^map__glacier_breach__guarded_corridor__save
+          time: 12
+          tags: [warp]
+    - name: GlB East
+      coord: [40, 11]
+      exits:
+        - to: Glacier Breach > Hammond's Breach > Save Point
+          req: ^map__glacier_breach__hammonds_breach__save
+          time: 12
+          tags: [warp]
+    - name: GlB South
+      coord: [38, 15]
+      exits:
+        - to: Glacier Breach > South Save > Save Point
+          req: ^map__glacier_breach__south_save__save
+          time: 12
+          tags: [warp]
+    - name: GlB West
+      coord: [32, 12]
+      exits:
+        - to: Glacier Breach > West Save > Save Point
+          req: ^map__glacier_breach__west_save__save
+          time: 12
+          tags: [warp]
+    - name: GSB East
+      coord: [20, 20]
+    - name: GSB Emergence
+      coord: [10, 9]
+    - name: GSB Labyrinth
+      coord: [16, 21]
+    - name: GSB Peak
       coord: [15, 7]
       exits:
         - to: Giguna Breach > Peak > Save Point
           req: ^map__giguna_breach__peak__save
           time: 12
           tags: [warp]
-    - name: GB SW Save
+    - name: GSB South
+      coord: [19, 24]
+    - name: GSB SW Save
       coord: [12, 12]
       exits:
         - to: Giguna Breach > SW Save > Save Point
@@ -554,49 +642,41 @@ areas:
           req: ^map__irikar_breach__save_room__save
           time: 12
           tags: [warp]
-    - name: AB East
+    - name: IB West
+      coord: [9, 26]
+    - name: LAB Center
+      coord: [33, 17]
+    - name: LAB East
       coord: [37, 16]
       exits:
         - to: Amagi Breach > East Entrance > Save Point
           req: ^map__amagi_breach__east_entrance__save
           time: 12
           tags: [warp]
+    - name: LAB Enclosed
+      coord: [34, 15]
+    - name: LAB Southeast
+      coord: [35, 21]
+    - name: LAB Southwest
+      coord: [30, 23]
 
-    - name: GlB South
-      coord: [38, 15]
-      exits:
-        - to: Glacier Breach > South Save > Save Point
-          req: ^map__glacier_breach__south_save__save
-          time: 12
-          tags: [warp]
-    - name: GlB West
-      coord: [32, 12]
-      exits:
-        - to: Glacier Breach > West Save > Save Point
-          req: ^map__glacier_breach__west_save__save
-          time: 12
-          tags: [warp]
-    - name: GlB Center
-      coord: [35, 11]
-      exits:
-        - to: Glacier Breach > Guarded Corridor > Save Point
-          req: ^map__glacier_breach__guarded_corridor__save
-          time: 12
-          tags: [warp]
-    - name: GlB Arena
-      coord: [39, 10]
-      exits:
-        - to: Glacier Breach > Save and Exit > Save Point
-          req: ^map__glacier_breach__save_and_exit__save
-          time: 12
-          tags: [warp]
-    - name: GlB East
-      coord: [40, 11]
-      exits:
-        - to: Glacier Breach > Hammond's Breach > Save Point
-          req: ^map__glacier_breach__hammonds_breach__save
-          time: 12
-          tags: [warp]
+    - name: MEB Drone
+      coord: [24, 6]
+    - name: MEB Peak
+      coord: [24, 3]
+    - name: MEB Southeast
+      coord: [25, 13]
+    - name: MEB Southwest
+      coord: [19, 13]
+
+    - name: UVB Center
+      coord: [22, 28]
+    - name: UVB Dead-end
+      coord: [31, 26]
+    - name: UVB East
+      coord: [31, 27]
+    - name: UVB West
+      coord: [19, 26]
     #endregion
 
     #region Breach other entry points
