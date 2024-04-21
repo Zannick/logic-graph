@@ -20,9 +20,12 @@ pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
     true
 }
 
-pub fn access___escape_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
-    // [Escape, $objective]
-    ctx.has(Item::Escape) && rule__objective!(ctx, world)
+pub fn access___escape_apocalypse_bomb_invoke_objective(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // [Escape, Apocalypse_Bomb, $objective]
+    ctx.has(Item::Escape) && ctx.has(Item::Apocalypse_Bomb) && rule__objective!(ctx, world)
 }
 pub fn access___infect_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
     // [Infect, Nanite_Mist]
@@ -3007,18 +3010,27 @@ pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
-pub fn explain___escape_invoke_objective(
+pub fn explain___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // [Escape, $objective]
+    // [Escape, Apocalypse_Bomb, $objective]
     {
         let mut refs = Vec::new();
         let mut h = {
             let h = ctx.has(Item::Escape);
             edict.insert("Escape", format!("{}", h));
             (h, vec!["Escape"])
+        };
+        refs.append(&mut h.1);
+        if !h.0 {
+            return (false, refs);
+        };
+        let mut h = {
+            let h = ctx.has(Item::Apocalypse_Bomb);
+            edict.insert("Apocalypse_Bomb", format!("{}", h));
+            (h, vec!["Apocalypse_Bomb"])
         };
         refs.append(&mut h.1);
         if !h.0 {
@@ -11885,15 +11897,18 @@ pub fn explain_within_menu_gt_upgrade_menu(
         )
     }
 }
-pub fn observe_access___escape_invoke_objective(
+pub fn observe_access___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // [Escape, $objective]
+    // [Escape, Apocalypse_Bomb, $objective]
     ({
         full_obs.observe_escape();
         ctx.has(Item::Escape)
+    }) && ({
+        full_obs.observe_apocalypse_bomb();
+        ctx.has(Item::Apocalypse_Bomb)
     }) && robserve__objective!(ctx, world, full_obs)
 }
 pub fn observe_access___infect_nanite_mist(

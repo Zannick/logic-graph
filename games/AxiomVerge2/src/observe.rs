@@ -128,7 +128,11 @@ impl Observer for FullObservation {
         full_obs.position = true;
         match world.rule_victory {
             RuleVictory::Default => {
-                rules::observe_access___escape_invoke_objective(won, world, &mut full_obs);
+                rules::observe_access___escape_apocalypse_bomb_invoke_objective(
+                    won,
+                    world,
+                    &mut full_obs,
+                );
             }
             RuleVictory::JustObjective => {
                 rules::observe_access___invoke_objective(won, world, &mut full_obs);

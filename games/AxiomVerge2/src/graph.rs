@@ -17172,6 +17172,9 @@ impl world::World for World {
 
         match self.rule_victory {
             RuleVictory::Default => {
+                if !ctx.has(Item::Apocalypse_Bomb) {
+                    map.insert(Item::Apocalypse_Bomb, 1);
+                }
                 if !ctx.has(Item::Escape) {
                     map.insert(Item::Escape, 1);
                 }
@@ -17849,6 +17852,7 @@ impl world::World for World {
 
         match self.rule_victory {
             RuleVictory::Default => {
+                map.insert(Item::Apocalypse_Bomb, 1);
                 map.insert(Item::Escape, 1);
                 match self.rule_objective {
                     RuleObjective::Start => {

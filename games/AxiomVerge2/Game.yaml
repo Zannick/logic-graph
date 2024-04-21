@@ -37,7 +37,7 @@ data:
 
 rules:
   $victory:
-    default: "[Escape, $objective]"
+    default: "[Escape, Apocalypse_Bomb, $objective]"
     just_objective: "[$objective]"
     bench: "[Remote_Drone, Flask{6}]"
   $objective:

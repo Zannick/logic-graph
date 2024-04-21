@@ -2898,7 +2898,9 @@ macro_rules! rule__victory {
     ($ctx:expr, $world:expr) => {{
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::access___escape_invoke_objective($ctx, $world),
+            RuleVictory::Default => {
+                rules::access___escape_apocalypse_bomb_invoke_objective($ctx, $world)
+            }
             RuleVictory::JustObjective => rules::access___invoke_objective($ctx, $world),
             RuleVictory::Bench => rules::access___remote_drone_flask__6($ctx, $world),
         }
@@ -2909,7 +2911,9 @@ macro_rules! rexplain__victory {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         use $crate::rules;
         match $world.rule_victory {
-            RuleVictory::Default => rules::explain___escape_invoke_objective($ctx, $world, $edict),
+            RuleVictory::Default => {
+                rules::explain___escape_apocalypse_bomb_invoke_objective($ctx, $world, $edict)
+            }
             RuleVictory::JustObjective => rules::explain___invoke_objective($ctx, $world, $edict),
             RuleVictory::Bench => rules::explain___remote_drone_flask__6($ctx, $world, $edict),
         }
@@ -2921,7 +2925,9 @@ macro_rules! robserve__victory {
         use $crate::rules;
         match $world.rule_victory {
             RuleVictory::Default => {
-                rules::observe_access___escape_invoke_objective($ctx, $world, $full_obs)
+                rules::observe_access___escape_apocalypse_bomb_invoke_objective(
+                    $ctx, $world, $full_obs,
+                )
             }
             RuleVictory::JustObjective => {
                 rules::observe_access___invoke_objective($ctx, $world, $full_obs)
