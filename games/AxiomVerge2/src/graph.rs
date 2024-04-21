@@ -17168,7 +17168,7 @@ impl world::World for World {
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
-        let mut map = analyzer::new_hashmap();
+        let mut map = FxHashMap::default();
 
         match self.rule_victory {
             RuleVictory::Default => {
@@ -17845,7 +17845,7 @@ impl world::World for World {
     }
 
     fn required_items(&self) -> Vec<(Item, i16)> {
-        let mut map = analyzer::new_hashmap();
+        let mut map = FxHashMap::default();
 
         match self.rule_victory {
             RuleVictory::Default => {
@@ -18268,6 +18268,24 @@ impl world::World for World {
         let mut vec = Vec::from_iter(self.get_unused_items());
         vec.sort();
         vec
+    }
+
+    fn remaining_items(&self, ctx: &Context) -> Vec<(Item, i16)> {
+        let mut map = FxHashMap::default();
+        let mut canons_seen = FxHashSet::default();
+        for loc in self.locations.values() {
+            let cid = world::Location::canon_id(loc);
+            if ctx.todo(loc) && !canons_seen.contains(&cid) {
+                canons_seen.insert(cid);
+                let item = world::Location::item(loc);
+                if let Some(val) = map.get_mut(&item) {
+                    *val = *val + 1;
+                } else {
+                    map.insert(item, 1);
+                }
+            }
+        }
+        map.drain().collect()
     }
 
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {

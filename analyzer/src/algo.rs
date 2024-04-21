@@ -982,6 +982,7 @@ where
         // TODO: heap+db range [min bucket, max bucket]
         let heap_bests = self.queue.heap_bests();
         let db_bests = self.queue.db().db_bests();
+        let needed = self.world.items_needed(ctx.get());
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
@@ -989,7 +990,8 @@ where
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
-            {}",
+            {}\n\
+            Still needs: {:?}",
             iters,
             sols.len(),
             sols.unique(),
@@ -1040,7 +1042,12 @@ where
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
                 self.queue.db().get_last_history_step(ctx).unwrap()
-            )
+            ),
+            if needed.len() > 10 {
+                format!("{:?} + {} more types", needed[..10].to_vec(), needed.len() - 10)
+            } else {
+                format!("{:?}", needed)
+            },
         );
     }
 }
