@@ -1,6 +1,6 @@
 name: Axiom Verge 2
 
-context:
+context:  # MARK: context
   energy:
     max: 450
   flasks:
@@ -11,7 +11,7 @@ context:
     opts: [Indra, drone]
     default: Indra
 
-start:
+start:  # MARK: start
   position: Antarctica > West > Helipad
   save: Antarctica > West > Helipad
   breach_save: SpotId::None
@@ -25,7 +25,7 @@ start:
   prev_area: Antarctica > West
   # TODO: Destination spot for glitches
 
-data:
+data:  # MARK: data
   realm: main
   water: false
   flipside: SpotId::None
@@ -35,7 +35,7 @@ data:
   map_spot: SpotId::None
   # fallthrough: SpotId::None  # Where Indra will fall to if the room is reset
 
-rules:
+rules:  # MARK: rules
   $victory:
     default: "[Escape, Apocalypse_Bomb, $objective]"
     just_objective: "[$objective]"
@@ -50,7 +50,7 @@ rules:
     All Urns: "[$all_urns]"
     Any%: "[Infect, Nanite_Mist]"
 
-base_movements:
+base_movements:  # MARK: base_movements
   - # the slowest movement is in water
     # a grid line = 1 unit. each minimap pixel is about .1 unit
     x: .222  # about 4.5s per grid x-unit underwater if we don't have liru
@@ -69,7 +69,7 @@ base_movements:
     x: 15
     y: 10
 
-movements:
+movements:  # MARK: movements
   water:
     x: .285
     req: Underwater_Movement
@@ -79,7 +79,7 @@ movements:
   # aka ~.4-.416 speed in one direction for around 6s max
   # TODO: anuman "movement" of constantly changing form?
 
-exit_movements:
+exit_movements:  # MARK: exit_movements
   fast_hover:
     x: .4
   fling:
@@ -99,7 +99,7 @@ exit_movements:
     # y: .3  ?  TODO: Re-measure more accurately
     # technically uses xy (ortho) movement but x!=y
 
-time:
+time:  # MARK: time
   default: 1
   hybrid_item_default: 0
   ## Pickups
@@ -155,7 +155,7 @@ time:
   fast_hover.2: 0.50
   base.1: 0.35
 
-warps:
+warps:  # MARK: warps
   earth_save:
     time: 5  # initial savewarp pre-amashi
     req: allow_warps and WITHIN `Antarctica`
@@ -215,7 +215,7 @@ warps:
     time: 3.6
     tags: [portal]
 
-actions:
+actions:  # MARK: actions
   - name: Recall Drone
     req: NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     do: ^mode = 'Indra'
@@ -242,7 +242,7 @@ actions:
     do: ^mode = 'Indra'
     time: 0.1
 
-helpers:
+helpers:  # MARK: helpers
   $melee: Ice_Axe or ^mode == 'drone'
   $boomerang: ^mode != 'drone' and (Boomerang or Boomerang_Upgrade)
   $boomerang2: ^mode != 'drone' and Boomerang_Upgrade
@@ -382,7 +382,7 @@ helpers:
     }
   $clear_breach_save:action: ^breach_save = $default
 
-collect:
+collect:  # MARK: collect
   Amashilama: ^save = `Glacier > Revival > Save Point`
   Anuman: ^indra = $default
   Flask: ^flasks += 1
@@ -408,7 +408,7 @@ collect:
     $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
     $add_item(Amagi_Dragon_Eye_Passage);
 
-settings:
+settings:  # MARK: settings
   boomerang_steering:
     type: bool
   major_glitches:
@@ -419,7 +419,7 @@ settings:
     type: bool
     default: true
 
-special:
+special:  # MARK: special
   # For World.png,
   # a tile is 432x240, and split into 27x15 16x16 squares
   # scaled to 50%, it's 216x120. scaled to 10/24, it's 180x100

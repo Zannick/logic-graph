@@ -4,7 +4,7 @@ data:
   realm: breach
 
 areas:
-- name: Save Room
+- name: Save Room  # MARK: Save Room
   on_entry: $reset_old_area(^newpos)
   map:
     save: [14, 25, 15, 26]
@@ -35,7 +35,7 @@ areas:
         - to: Four-way > East
           tags: [xdoor]
 
-- name: Gauntlet
+- name: Gauntlet  # MARK: Gauntlet
   on_entry: $reset_old_area(^newpos)
   map:
     save: [11, 21, 12, 22]
@@ -108,7 +108,7 @@ areas:
     - name: Hidden Path Lower Entry
       coord: [10.25, 24.55]
 
-- name: Hover Room
+- name: Hover Room  # MARK: Hover Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -145,7 +145,7 @@ areas:
         - to: Flappy Drone > West Door
           tags: [xdoor]
 
-- name: Flappy Drone
+- name: Flappy Drone  # MARK: Flappy Drone
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West Door
@@ -223,7 +223,7 @@ areas:
         - to: Four-way > North
           tags: [ydoor]
 
-- name: Four-way
+- name: Four-way  # MARK: Four-way
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
@@ -282,7 +282,7 @@ areas:
         - to: Worm Rave > East
           tags: [xdoor]
 
-- name: Worm Rave
+- name: Worm Rave  # MARK: Worm Rave
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -316,7 +316,7 @@ areas:
           item: Flask
           tags: [flask]
 
-- name: Exit Corridor
+- name: Exit Corridor  # MARK: Exit Corridor
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -385,7 +385,7 @@ areas:
         - to: Uhrum Connector > West
           tags: [xdoor]
 
-- name: Neon Corridor
+- name: Neon Corridor  # MARK: Neon Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -422,7 +422,7 @@ areas:
         - to: Sandy Lair > East 27
           tags: [xdoor]
 
-- name: Sandy Lair
+- name: Sandy Lair  # MARK: Sandy Lair
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 27
@@ -431,13 +431,13 @@ areas:
     - name: East 28
       coord: [9.9, 27.6]
 
-- name: Uhrum Connector
+- name: Uhrum Connector  # MARK: Uhrum Connector
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [15.1, 26.3]
 
-- name: Basement Save
+- name: Basement Save  # MARK: Basement Save
   on_entry: $reset_old_area(^newpos)
   map:
     save: [12, 27, 13, 28]

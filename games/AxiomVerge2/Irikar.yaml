@@ -1,7 +1,7 @@
 name: Irikar
 
 areas:
-- name: Hub
+- name: Hub  # MARK: Hub
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -314,7 +314,7 @@ areas:
           tags: [flask]
     #endregion
 
-- name: Airy
+- name: Airy  # MARK: Airy
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Northwest
@@ -327,7 +327,7 @@ areas:
         - to: Sight Room > Above Room North
           tags: [yshift]
 
-- name: Sight Room
+- name: Sight Room  # MARK: Sight Room
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal
@@ -391,7 +391,7 @@ areas:
         - to: East Rooftops > Upper West
           tags: [xshift]
 
-- name: Abandoned Room
+- name: Abandoned Room  # MARK: Abandoned Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Empty Pedestal
@@ -417,7 +417,7 @@ areas:
         - to: Basement Portal > East 27
           tags: [xshift]
 
-- name: Basement Portal
+- name: Basement Portal  # MARK: Basement Portal
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -571,7 +571,7 @@ areas:
           req: $hover and $hook and $mist2
           time: 4.8  # ?
 
-- name: Basement Pipes
+- name: Basement Pipes  # MARK: Basement Pipes
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 28
@@ -688,7 +688,7 @@ areas:
           thru: [10.85, 27.25]
           jumps: [0, 1]
 
-- name: Empty Foyer
+- name: Empty Foyer  # MARK: Empty Foyer
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -706,7 +706,7 @@ areas:
         - to: Boss Room > West 28
           tags: [xshift]
 
-- name: Boss Room
+- name: Boss Room  # MARK: Boss Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 28
@@ -823,7 +823,7 @@ areas:
         - to: Healthy Rooftop
         - to: Sat Tower Roof West
 
-- name: East Rooftops
+- name: East Rooftops  # MARK: East Rooftops
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Upper West
@@ -876,7 +876,7 @@ areas:
         - to: Giguna > Breachable Wall > West Mid-air
           tags: [xshift]
 
-- name: Midwest
+- name: Midwest  # MARK: Midwest
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 23
@@ -894,7 +894,7 @@ areas:
     - name: East 28
       coord: [9.95, 27.6]
 
-- name: Lamassu
+- name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 28

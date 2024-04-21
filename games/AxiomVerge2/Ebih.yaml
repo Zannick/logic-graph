@@ -2,7 +2,7 @@ name: Mt Ebih
 short: Ebih
 
 areas:
-- name: Base Camp
+- name: Base Camp  # MARK: Base Camp
   reset:
     _left_platform_moved: false
   on_entry: $reset_old_area(^newpos)
@@ -197,7 +197,7 @@ areas:
         - to: Left Platform Moved
           req: ^_left_platform_moved
 
-- name: By Garage
+- name: By Garage  # MARK: By Garage
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 13
@@ -334,7 +334,7 @@ areas:
       local:
         - to: East Platform
 
-- name: Grid 25,10-12
+- name: Grid 25,10-12  # MARK: Grid 25,10-12
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
@@ -483,7 +483,7 @@ areas:
           req: $hook
           time: 0.9
 
-- name: Waterfall
+- name: Waterfall  # MARK: Waterfall
   on_entry: $reset_old_area(^newpos)
   start:
     _west_door_open: false
@@ -946,7 +946,7 @@ areas:
         - to: Ebih West > East 7
           tags: [xshift]
 
-- name: Ebih West
+- name: Ebih West  # MARK: Ebih West
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
@@ -1356,7 +1356,7 @@ areas:
         - to: Vertical Interchange > West 13
           tags: [xshift]
 
-- name: Ebih East
+- name: Ebih East  # MARK: Ebih East
   on_entry: $reset_old_area(^newpos)
   reset:
     _platform1_moved: false
@@ -1510,7 +1510,7 @@ areas:
         - to: Observation Tower Room > West 9
           tags: [xshift]
 
-- name: Grid 21,2-6
+- name: Grid 21,2-6  # MARK: Grid 21,2-6
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
@@ -1534,7 +1534,7 @@ areas:
         - to: Boss Room > West 6
           tags: [xshift]
 
-- name: Boss Room
+- name: Boss Room  # MARK: Boss Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
@@ -1657,7 +1657,7 @@ areas:
         - to: High Platform
           jumps: 2
 
-- name: Drone Room
+- name: Drone Room  # MARK: Drone Room
   on_entry: $reset_old_area(^newpos)
   reset:
     _platform_moved: false
@@ -1851,7 +1851,7 @@ areas:
           req: ^mode == 'drone'
           tags: [xshift]
 
-- name: Grid 25,2-6
+- name: Grid 25,2-6  # MARK: Grid 25,2-6
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 4
@@ -1871,7 +1871,7 @@ areas:
           tags: [flask]
       # Exit back up may be possible with slingshot?
 
-- name: Grid 26,10-11
+- name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 11
@@ -1972,7 +1972,7 @@ areas:
         - to: Observation Tower Room > West 10
           tags: [xshift]
 
-- name: Observation Tower Room
+- name: Observation Tower Room  # MARK: Observation Tower Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 9
@@ -2034,7 +2034,7 @@ areas:
         - to: Base Camp > West 11
           tags: [xshift]
 
-- name: Vertical Interchange
+- name: Vertical Interchange  # MARK: Vertical Interchange
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
@@ -2267,7 +2267,7 @@ areas:
           req: $hook
           time: 1  # ?
 
-- name: Gem Room
+- name: Gem Room  # MARK: Gem Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 13

@@ -3,7 +3,7 @@ data:
   realm: menu
 
 areas:
-- name: Upgrade Menu
+- name: Upgrade Menu  # MARK: Upgrade Menu
   spots:
     - name: Physiology
       locations:
@@ -214,7 +214,7 @@ areas:
           req: Infect
           time: 0.1
 
-- name: Warp Only
+- name: Warp Only  # MARK: Warp Only
   on_entry: $save_last
   # These spots allow savewarp only by tagging the appropriate realm and having no other way out
   tags: [cskip]
@@ -230,7 +230,7 @@ areas:
 # 7s. I think it's immediately after savewarping/fast travelling though, so not very useful.
 # there's a similar trick opening the map as you die, you can fast travel in the middle of your respawn
 # that's only useful for changing your active/passive room? bleh
-- name: Kiengir Map
+- name: Kiengir Map  # MARK: Kiengir Map
   on_entry: $save_last
   data:
     realm: map
@@ -512,7 +512,7 @@ areas:
       coord: [42, 16]
     #endregion
 
-- name: Breach Map
+- name: Breach Map  # MARK: Breach Map
   on_entry: $save_last
   data:
     realm: map

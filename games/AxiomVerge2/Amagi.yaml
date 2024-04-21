@@ -5,7 +5,7 @@ data:
 
 # TODO: Needs to be routed without Underwater_Movement to determine accessibility
 areas:
-- name: Main Area
+- name: Main Area  # MARK: Main Area
   on_entry: $reset_old_area(^newpos)
   load:
     _combo: false
@@ -292,7 +292,7 @@ areas:
           item: Flask
           tags: [flask]
 
-- name: Grid 31,19
+- name: Grid 31,19  # MARK: Grid 31,19
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -310,7 +310,7 @@ areas:
         - to: Liru Room > West 19
           tags: [xshift]
 
-- name: Liru Room
+- name: Liru Room  # MARK: Liru Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 19
@@ -458,7 +458,7 @@ areas:
 
 # TODO: most of this movement requires Underwater_Movement
 # but we can't (yet) restrict to that other than making exits
-- name: West Lake
+- name: West Lake  # MARK: West Lake
   on_entry: $reset_old_area(^newpos)
   map:
     urn: [23, 19, 24, 20]
@@ -979,7 +979,7 @@ areas:
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between
 
-- name: East Lake
+- name: East Lake  # MARK: East Lake
   on_entry: $reset_old_area(^newpos)
   map:
     save: [34, 18, 35, 19]

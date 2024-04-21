@@ -3,7 +3,7 @@ data:
   realm: filter
 
 areas:
-- name: Entrance
+- name: Entrance  # MARK: Entrance
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Egg
@@ -19,7 +19,7 @@ areas:
         - to: Lower Hallway > West
           tags: [xshift]
 
-- name: Lower Hallway
+- name: Lower Hallway  # MARK: Lower Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -42,7 +42,7 @@ areas:
         - to: Scaffolding > Lower West
           tags: [xshift]
 
-- name: Scaffolding
+- name: Scaffolding  # MARK: Scaffolding
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Lower West
@@ -87,7 +87,7 @@ areas:
         - to: Upper Hallway > East
           tags: [xshift]
 
-- name: Upper Hallway
+- name: Upper Hallway  # MARK: Upper Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -117,7 +117,7 @@ areas:
         - to: Core > East
           tags: [xshift]
 
-- name: Core
+- name: Core  # MARK: Core
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -176,7 +176,7 @@ areas:
         - to: Exit > East
           tags: [xshift]
 
-- name: Exit
+- name: Exit  # MARK: Exit
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East

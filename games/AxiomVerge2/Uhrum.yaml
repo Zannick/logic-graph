@@ -2,7 +2,7 @@ name: Uhrum Valley
 short: Uhrum
 
 areas:
-- name: West Entrance
+- name: West Entrance  # MARK: West Entrance
   on_entry: $reset_old_area(^newpos)
   data:
     save_point: Save Point
@@ -440,7 +440,7 @@ areas:
         - to: Glitchy Corridor > West 28
           tags: [xshift]
 
-- name: Siege Corridor
+- name: Siege Corridor  # MARK: Siege Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 26
@@ -727,7 +727,7 @@ areas:
         - to: Waterfalls > West 25
           tags: [xshift]
 
-- name: Glitchy Corridor
+- name: Glitchy Corridor  # MARK: Glitchy Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 28
@@ -738,7 +738,7 @@ areas:
     - name: East 28
       coord: [24.95, 27.75]
 
-- name: Waterfalls
+- name: Waterfalls  # MARK: Waterfalls
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 25
@@ -1315,7 +1315,7 @@ areas:
           tags: [xshift]
     #endregion
 
-- name: Save Room
+- name: Save Room  # MARK: Save Room
   on_entry: $reset_old_area(^newpos)
   data:
     save_point: Save Point
@@ -1347,7 +1347,7 @@ areas:
         - to: Glitchy Corridor > East 27
           tags: [xshift]
 
-- name: East Lake
+- name: East Lake  # MARK: East Lake
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 27
@@ -1357,7 +1357,7 @@ areas:
       data:
         water: true
 
-- name: Tulip Tower
+- name: Tulip Tower  # MARK: Tulip Tower
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 24
@@ -1365,7 +1365,7 @@ areas:
     - name: West 24 in Mid-air
       coord: [28.05, 23.4]
 
-- name: Annuna Corridor
+- name: Annuna Corridor  # MARK: Annuna Corridor
   on_entry: $reset_old_area(^newpos)
   data:
     save_point: Save Point
@@ -1586,7 +1586,7 @@ areas:
         - to: Annuna > Mirror Match > West 25
           tags: [xshift]
 
-- name: Artillery Practice
+- name: Artillery Practice  # MARK: Artillery Practice
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 24

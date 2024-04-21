@@ -5,7 +5,7 @@ data:
   water: true
 
 areas:
-- name: East Entrance
+- name: East Entrance  # MARK: East Entrance
   on_entry: $reset_old_area(^newpos)
   map:
     save: [37, 15, 38, 16]
@@ -84,7 +84,7 @@ areas:
         - to: East Connector > East
           tags: [xdoor]
 
-- name: East Connector
+- name: East Connector  # MARK: East Connector
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East

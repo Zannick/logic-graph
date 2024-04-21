@@ -5,7 +5,7 @@ data:
 
 areas:
 #region Glacier
-- name: Dock Elevator
+- name: Dock Elevator  # MARK: Dock Elevator
   spots:
     - name: Elevator
       coord: [44.5, 8.5]
@@ -20,7 +20,7 @@ areas:
         - to: Dock Interior > Connector
           tags: [xshift]
 
-- name: Dock Interior
+- name: Dock Interior  # MARK: Dock Interior
   spots:
     - name: Connector
       coord: [43.95, 8.35]
@@ -40,7 +40,7 @@ areas:
 #endregion
 
 #region Ebih
-- name: Bunker Interior
+- name: Bunker Interior  # MARK: Bunker Interior
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -59,7 +59,7 @@ areas:
           item: Dear_Ernest
           tags: [standing]
 
-- name: Building Interior
+- name: Building Interior  # MARK: Building Interior
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -94,7 +94,7 @@ areas:
           canon: Melee_Charge
           tags: [urn]
 
-- name: Tent Interior
+- name: Tent Interior  # MARK: Tent Interior
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -114,7 +114,7 @@ areas:
           item: Companies_Layoff
           tags: [standing]
 
-- name: Garage
+- name: Garage  # MARK: Garage
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -135,7 +135,7 @@ areas:
           time: 2
           tag: [standing]
 
-- name: Ebih Cave
+- name: Ebih Cave  # MARK: Ebih Cave
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -151,7 +151,7 @@ areas:
 #endregion
 
 #region Amagi
-- name: Cave Behind Waterfall
+- name: Cave Behind Waterfall  # MARK: Cave Behind Waterfall
   on_entry: $reset_old_area(^newpos)
   data:
     water: false
@@ -193,7 +193,7 @@ areas:
 #endregion
 
 #region Giguna
-- name: Outpost Interior
+- name: Outpost Interior  # MARK: Outpost Interior
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry

@@ -1,7 +1,7 @@
 name: Antarctica
 
 areas:
-- name: West
+- name: West  # MARK: West
   spots:
     - name: Helipad
       # start point is 38.5,2 on the AV2 map
@@ -32,7 +32,7 @@ areas:
           tags: [interior]
           time: 2 # or 3
 
-- name: Shed
+- name: Shed  # MARK: Shed
   graph_offset: [0, 60]
   spots:
     - name: Interior
@@ -46,7 +46,7 @@ areas:
         - to: West > Shed Entry
           tags: [exterior]
 
-- name: Building 1W
+- name: Building 1W  # MARK: Building 1W
   graph_offset: [0, 60]
   spots:
     - name: West Entry
@@ -66,7 +66,7 @@ areas:
         - to: Building 1E > Connector
           tags: [xshift]
 
-- name: Building 1E
+- name: Building 1E  # MARK: Building 1E
   graph_offset: [0, 60]
   spots:
     - name: Connector
@@ -86,7 +86,7 @@ areas:
         - to: East > Building 1 Entry
           tags: [exterior]
 
-- name: East
+- name: East  # MARK: East
   enter:
     save: Antarctica > East > Save Point
   spots:
@@ -132,7 +132,7 @@ areas:
           time: 3
           tags: [xshift]
 
-- name: Building 2
+- name: Building 2  # MARK: Building 2
   graph_offset: [0, 60]
   spots:
     - name: Entry
@@ -176,7 +176,7 @@ areas:
         - to: Entry
           jumps_down: 3
 
-- name: Top
+- name: Top  # MARK: Top
   spots:
     - name: Power Entry
       coord: [40.70, 0.7]
@@ -187,7 +187,7 @@ areas:
           time: 3.5
           tags: [xshift]
 
-- name: Power Room
+- name: Power Room  # MARK: Power Room
   graph_offset: [0, 60]
   spots:
     - name: Entry
@@ -207,7 +207,7 @@ areas:
           time: 0
           tags: [event]
 
-- name: Freight Elevator
+- name: Freight Elevator  # MARK: Freight Elevator
   graph_offset: [0, 60]
   spots:
     - name: Left

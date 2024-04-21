@@ -2,7 +2,7 @@ name: Annuna Gorge
 short: Annuna
 
 areas:
-- name: Mirror Match
+- name: Mirror Match  # MARK: Mirror Match
   on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 25, 33, 26]
@@ -166,7 +166,7 @@ areas:
     #region Lamassu
     #endregion
 
-- name: West Bridge
+- name: West Bridge  # MARK: West Bridge
   on_entry: $reset_old_area(^newpos)
   start:
     _doors_opened: false
@@ -263,7 +263,7 @@ areas:
           tags: [ydoor]
     #endregion
 
-- name: East Bridge
+- name: East Bridge  # MARK: East Bridge
   on_entry: $reset_old_area(^newpos)
   load:
     _combo: false
@@ -787,7 +787,7 @@ areas:
           tags: [xshift]
     #endregion
 
-- name: Sniper Valley
+- name: Sniper Valley  # MARK: Sniper Valley
   on_entry: $reset_old_area(^newpos)
   spots:
     #region Lower
@@ -993,7 +993,7 @@ areas:
           jumps: 2
     #endregion
 
-- name: Vertical Room
+- name: Vertical Room  # MARK: Vertical Room
   on_entry: $reset_old_area(^newpos)
   map:
     save: [40, 19, 41, 20]
@@ -1417,7 +1417,7 @@ areas:
           tags: [xdoor]
     #endregion
 
-- name: Upper Hallway
+- name: Upper Hallway  # MARK: Upper Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -1445,7 +1445,7 @@ areas:
           req: $more_refills
           tags: [standing]
 
-- name: Middle Hallway
+- name: Middle Hallway  # MARK: Middle Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -1469,7 +1469,7 @@ areas:
         - to: Filter Teleporter > West 21
           tags: [xshift]
 
-- name: Lower Hallway
+- name: Lower Hallway  # MARK: Lower Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -1499,7 +1499,7 @@ areas:
         - to: Factory Access > West 22
           tags: [xshift]
 
-- name: Factory Entrance
+- name: Factory Entrance  # MARK: Factory Entrance
   on_entry: $reset_old_area(^newpos)
   map: save
   data:
@@ -1533,7 +1533,7 @@ areas:
         - to: East Climb > West 25
           tags: [xdoor]
 
-- name: East Climb
+- name: East Climb  # MARK: East Climb
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 25
@@ -1622,7 +1622,7 @@ areas:
         - to: West 24
         - to: Platform 3 Left
 
-- name: Factory Access
+- name: Factory Access  # MARK: Factory Access
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 22
@@ -1720,7 +1720,7 @@ areas:
           price: 20
           movement: mist2
 
-- name: Filter Teleporter
+- name: Filter Teleporter  # MARK: Filter Teleporter
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [43, 20, 44, 21]
@@ -1920,7 +1920,7 @@ areas:
           item: The_Eternal_Arm
           tags: [standing]
 
-- name: Spider Room
+- name: Spider Room  # MARK: Spider Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 
@@ -1987,7 +1987,7 @@ areas:
         - to: Vertical Room > East 18
           tags: [xshift]
 
-- name: Upper Save
+- name: Upper Save  # MARK: Upper Save
   on_entry: $reset_old_area(^newpos)
   map: save
   data:
@@ -2020,7 +2020,7 @@ areas:
         - to: Lamassu > East 17
           tags: [xshift]
 
-- name: Lamassu
+- name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -2248,7 +2248,7 @@ areas:
         - to: Glacier > Sea Burial > West 14
           tags: [xdoor]
 
-- name: Hidden Portal
+- name: Hidden Portal  # MARK: Hidden Portal
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -2303,19 +2303,19 @@ areas:
         - to: Glacier > Vertical Room > East 17
           tags: [xdoor]
 
-- name: Udug Gate
+- name: Udug Gate  # MARK: Udug Gate
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
       coord: [43.9, 25.65]
 
-- name: East Hideout
+- name: East Hideout  # MARK: East Hideout
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [44.05, 21.75]
 
-- name: Center Save
+- name: Center Save  # MARK: Center Save
   on_entry: $reset_old_area(^newpos)
   map: save
   data:
@@ -2360,7 +2360,7 @@ areas:
         - to: Twisty Passages > East Catwalk
           tags: [xshift]
 
-- name: Twisty Passages
+- name: Twisty Passages  # MARK: Twisty Passages
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East Floor
@@ -2573,7 +2573,7 @@ areas:
           req: $more_refills
           tags: [standing]
 
-- name: West Climb
+- name: West Climb  # MARK: West Climb
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
@@ -2701,7 +2701,7 @@ areas:
           movement: base
           jumps: 1
 
-- name: Egg Room
+- name: Egg Room  # MARK: Egg Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -2831,7 +2831,7 @@ areas:
           jumps: 1
     # TODO: also the upper left quadrant for the map
 
-- name: Center Climb
+- name: Center Climb  # MARK: Center Climb
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -2885,7 +2885,7 @@ areas:
           movement: base
           jumps: 3
 
-- name: Siuna Storage
+- name: Siuna Storage  # MARK: Siuna Storage
   on_entry: $reset_old_area(^newpos)
   map:
     urn: [39, 14, 40, 15]
@@ -3090,7 +3090,7 @@ areas:
               add: 10.0
 
 #region Apocalypse
-- name: Apocalypse Hallway
+- name: Apocalypse Hallway  # MARK: Apocalypse Hallway
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Lower East
@@ -3148,7 +3148,7 @@ areas:
         - to: Seals > East 15
           tags: [xshift]
 
-- name: Seals
+- name: Seals  # MARK: Seals
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
@@ -3294,13 +3294,13 @@ areas:
           movement: base
           jumps: 2
 
-- name: Final Cache
+- name: Final Cache  # MARK: Final Cache
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [42.1, 15.6]
 
-- name: Final Save
+- name: Final Save  # MARK: Final Save
   on_entry: $reset_old_area(^newpos)
   map: save
   data:
@@ -3374,7 +3374,7 @@ areas:
           movement: fast_hover
           jumps: 2
 
-- name: Apocalypse
+- name: Apocalypse  # MARK: Apocalypse
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West

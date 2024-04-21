@@ -4,7 +4,7 @@ data:
   realm: breach
 
 areas:
-- name: Peak
+- name: Peak  # MARK: Peak
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal
@@ -75,7 +75,7 @@ areas:
           req: $hook
           time: 1  # ?
 
-- name: Chimney
+- name: Chimney  # MARK: Chimney
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 7
@@ -134,7 +134,7 @@ areas:
           item: Flask
           tags: [flask]
 
-- name: Below Chimney
+- name: Below Chimney  # MARK: Below Chimney
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
@@ -182,7 +182,7 @@ areas:
         - to: SW Save > North
           tags: [ydoor]
 
-- name: Cubby
+- name: Cubby  # MARK: Cubby
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entrance
@@ -203,7 +203,7 @@ areas:
           tags: [standing]
           time: 0.6
 
-- name: SW Save
+- name: SW Save  # MARK: SW Save
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
@@ -280,7 +280,7 @@ areas:
         - to: Robopede > West
           tags: [xdoor]
 
-- name: Robopede
+- name: Robopede  # MARK: Robopede
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -304,7 +304,7 @@ areas:
         - to: Grid 14,10-11 > South
           tags: [ydoor]
 
-- name: Grid 14,10-11
+- name: Grid 14,10-11  # MARK: Grid 14,10-11
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: South
@@ -345,7 +345,7 @@ areas:
         - to: Central > South
           tags: [ydoor]
 
-- name: Fire Room
+- name: Fire Room  # MARK: Fire Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 11
@@ -408,7 +408,7 @@ areas:
         - to: Grid 14,10-11 > East 10
           tags: [xdoor]
 
-- name: Slingshot
+- name: Slingshot  # MARK: Slingshot
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -434,7 +434,7 @@ areas:
         - to: Column
           req: $hook
 
-- name: Antechamber
+- name: Antechamber  # MARK: Antechamber
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
@@ -444,7 +444,7 @@ areas:
           tags: [ydoor]
     # TODO: Breach exit to Wasteland flask
 
-- name: Central
+- name: Central  # MARK: Central
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 9
@@ -530,7 +530,7 @@ areas:
         - to: Ascent > West 9
           tags: [xdoor]
 
-- name: Ascent
+- name: Ascent  # MARK: Ascent
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 9
@@ -562,7 +562,7 @@ areas:
         - to: Peak > East 6
           tags: [xdoor]
 
-- name: Pink Clouds
+- name: Pink Clouds  # MARK: Pink Clouds
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Normal Entry

@@ -3,7 +3,7 @@ start:
   _hammonds_doors: false
 
 areas:
-- name: Dock Outside
+- name: Dock Outside  # MARK: Dock Outside
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -27,7 +27,7 @@ areas:
         - to: Revival > East 9
           tags: [xshift]
 
-- name: Revival
+- name: Revival  # MARK: Revival
   on_entry: $reset_old_area(^newpos)
   map:
     save: [41, 7, 42, 8]
@@ -85,7 +85,7 @@ areas:
           tags: [xshift]
 
 # It sure is going to get difficult naming every room without generic names
-- name: Grid 42,10
+- name: Grid 42,10  # MARK: Grid 42,10
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -103,7 +103,7 @@ areas:
         - to: Grid 43,10-11 > Top
           tags: [xshift]
 
-- name: Grid 43,10-11
+- name: Grid 43,10-11  # MARK: Grid 43,10-11
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Top
@@ -137,7 +137,7 @@ areas:
         - to: Compass Room > East
           tags: [xshift]
 
-- name: Compass Room
+- name: Compass Room  # MARK: Compass Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -167,7 +167,7 @@ areas:
         - to: The Big Drop > East
           tags: [xshift]
 
-- name: The Big Drop
+- name: The Big Drop  # MARK: The Big Drop
   on_entry: $reset_old_area(^newpos)
   reset:
     _bridge_open: false
@@ -288,7 +288,7 @@ areas:
         - to: Small Path
         - to: Breakable Rock Right
 
-- name: Sea Burial
+- name: Sea Burial  # MARK: Sea Burial
   on_entry: $reset_old_area(^newpos)
   data:
     water: true
@@ -510,7 +510,7 @@ areas:
           price: 40
           movement: mist1
 
-- name: Grid 39-40,7-9
+- name: Grid 39-40,7-9  # MARK: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Upper East
@@ -530,7 +530,7 @@ areas:
         - to: Grid 37-38,9 > East
           tags: [xshift]
 
-- name: Grid 37-38,9
+- name: Grid 37-38,9  # MARK: Grid 37-38,9
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -550,7 +550,7 @@ areas:
         - to: Vertical Room > East 9
           tags: [xshift]
 
-- name: Vertical Room
+- name: Vertical Room  # MARK: Vertical Room
   on_entry: $reset_old_area(^newpos)
   start:
     _upper_gatestone: false
@@ -921,7 +921,7 @@ areas:
           tags: [ydoor]
     #endregion
 
-- name: Boomerang Antechamber
+- name: Boomerang Antechamber  # MARK: Boomerang Antechamber
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 13
@@ -992,7 +992,7 @@ areas:
           time: 50
           tags: [xshift, offset]
 
-- name: Boomerang Room
+- name: Boomerang Room  # MARK: Boomerang Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -1068,7 +1068,7 @@ areas:
         - to: Boomerang Antechamber > Upper East
           tags: [xshift]
 
-- name: Ledge Grab Room
+- name: Ledge Grab Room  # MARK: Ledge Grab Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 9
@@ -1259,7 +1259,7 @@ areas:
           movement: base
           jumps: 2
 
-- name: Peak
+- name: Peak  # MARK: Peak
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 8
@@ -1326,7 +1326,7 @@ areas:
         - to: Grid 32,7-10 > East 8
           tags: [xshift]
 
-- name: Grid 32,7-10
+- name: Grid 32,7-10  # MARK: Grid 32,7-10
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 8
@@ -1392,7 +1392,7 @@ areas:
           movement: base
           jumps: 2
 
-- name: Grid 31,9-12
+- name: Grid 31,9-12  # MARK: Grid 31,9-12
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 9
@@ -1445,7 +1445,7 @@ areas:
         - to: Ebih > Base Camp > East 11
           tags: [xshift]
 
-- name: Lake Main Entrance
+- name: Lake Main Entrance  # MARK: Lake Main Entrance
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Ebih Access
@@ -1545,7 +1545,7 @@ areas:
         - to: Amagi > Main Area > East 15
           tags: [xshift]
 
-- name: Apocalypse Entry
+- name: Apocalypse Entry  # MARK: Apocalypse Entry
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 10
@@ -1650,7 +1650,7 @@ areas:
         - to: Annuna > Apocalypse Hallway > Upper East
           tags: [xshift]
 
-- name: Crystals
+- name: Crystals  # MARK: Crystals
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Cage
@@ -1797,7 +1797,7 @@ areas:
           movement: mist2
           price: 40
 
-- name: Hammond's End
+- name: Hammond's End  # MARK: Hammond's End
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Upper Portal Stand
@@ -2094,7 +2094,7 @@ areas:
           req: ^_hammonds_doors
           movement: base
 
-- name: Secret Chamber
+- name: Secret Chamber  # MARK: Secret Chamber
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 10

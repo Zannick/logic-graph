@@ -4,7 +4,7 @@ data:
   realm: breach
 
 areas:
-- name: South Save
+- name: South Save  # MARK: South Save
   on_entry: $reset_old_area(^newpos)
   map:
     save: [38, 14, 39, 15]
@@ -53,7 +53,7 @@ areas:
         - to: Grate Work > West 14
           tags: [xdoor]
 
-- name: Grate Work
+- name: Grate Work  # MARK: Grate Work
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 14
@@ -243,7 +243,7 @@ areas:
           movement: base
           jumps: 4
 
-- name: Zappers
+- name: Zappers  # MARK: Zappers
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -292,7 +292,7 @@ areas:
         - to: Control > East
           tags: [xdoor]
 
-- name: Control
+- name: Control  # MARK: Control
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -350,7 +350,7 @@ areas:
         - to: Crystals > East
           tags: [xdoor]
 
-- name: Crystals
+- name: Crystals  # MARK: Crystals
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -367,7 +367,7 @@ areas:
         - to: Floaters > East
           tags: [xdoor]
 
-- name: Floaters
+- name: Floaters  # MARK: Floaters
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East
@@ -385,7 +385,7 @@ areas:
         - to: West Save > East 12
           tags: [xdoor]
 
-- name: West Save
+- name: West Save  # MARK: West Save
   on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 11, 33, 12]
@@ -461,7 +461,7 @@ areas:
         - to: Spidery Connector > East
           tags: [xdoor]
 
-- name: Guarded Corridor
+- name: Guarded Corridor  # MARK: Guarded Corridor
   on_entry: $reset_old_area(^newpos)
   map:
     save: [35, 10, 36, 11]
@@ -513,7 +513,7 @@ areas:
         - to: Piano Roll > West
           tags: [xdoor]
 
-- name: Piano Roll
+- name: Piano Roll  # MARK: Piano Roll
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -580,7 +580,7 @@ areas:
         - to: Stacked Enemies > West
           tags: [xdoor]
 
-- name: Electric Arena
+- name: Electric Arena  # MARK: Electric Arena
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -622,7 +622,7 @@ areas:
         - to: Save and Exit > West
           tags: [xdoor]
 
-- name: Save and Exit
+- name: Save and Exit  # MARK: Save and Exit
   on_entry: $reset_old_area(^newpos)
   map:
     save: [39, 9, 40, 10]
@@ -666,7 +666,7 @@ areas:
       local:
         - to: Halfway
 
-- name: Hammond's Breach
+- name: Hammond's Breach  # MARK: Hammond's Breach
   on_entry: $reset_old_area(^newpos)
   map: save
   data:
@@ -721,7 +721,7 @@ areas:
         - to: Stable Floor > West
           tags: [xdoor]
 
-- name: Stable Floor
+- name: Stable Floor  # MARK: Stable Floor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
@@ -755,13 +755,13 @@ areas:
         - to: Center
         - to: South
 
-- name: Stacked Enemies
+- name: Stacked Enemies  # MARK: Stacked Enemies
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [37.1, 8.75]
 
-- name: Empty Space
+- name: Empty Space  # MARK: Empty Space
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: North
@@ -784,7 +784,7 @@ areas:
           movement: base
           jumps: 1
 
-- name: Angry Lions
+- name: Angry Lions  # MARK: Angry Lions
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Stand
@@ -839,7 +839,7 @@ areas:
           jumps: 3
 
 
-- name: Spidery Connector
+- name: Spidery Connector  # MARK: Spidery Connector
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East

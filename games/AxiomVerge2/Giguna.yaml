@@ -2,7 +2,7 @@ name: Giguna Steppes
 short: Giguna
 
 areas:
-- name: Giguna Northeast
+- name: Giguna Northeast  # MARK: Giguna Northeast
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
@@ -196,7 +196,7 @@ areas:
           req: ^_door_opened and $hook
           time: 0.7
 
-- name: Carnelian
+- name: Carnelian  # MARK: Carnelian
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
@@ -345,7 +345,7 @@ areas:
         - to: West Caverns > East 10
           tags: [xshift]
 
-- name: West Caverns
+- name: West Caverns  # MARK: West Caverns
   on_entry: $reset_old_area(^newpos)
   reset:
     _east_susar: false
@@ -552,7 +552,7 @@ areas:
         - to: Far Corner > East 13
           tags: [xshift]
 
-- name: Wasteland
+- name: Wasteland  # MARK: Wasteland
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 12
@@ -826,7 +826,7 @@ areas:
     - name: Switch
       coord: [18.5, 11.5]
 
-- name: Giguna Base
+- name: Giguna Base  # MARK: Giguna Base
   on_entry: $reset_old_area(^newpos)
   start:
     _door_open: false
@@ -1115,7 +1115,7 @@ areas:
           do: ^_door_open = true
           tags: [hack]
 
-- name: Ruins East
+- name: Ruins East  # MARK: Ruins East
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 9
@@ -1215,7 +1215,7 @@ areas:
           tags: [flask]
       # TODO: exits toward Ruins Top?
 
-- name: Ruins Center
+- name: Ruins Center  # MARK: Ruins Center
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 8
@@ -1283,7 +1283,7 @@ areas:
         - to: Ruins West > East 9
           tags: [xshift]
 
-- name: Ruins West
+- name: Ruins West  # MARK: Ruins West
   on_entry: $reset_old_area(^newpos)
   reset:
     _kishib_handled: false
@@ -1382,7 +1382,7 @@ areas:
         - to: West Tower > East 7
           tags: [xshift]
 
-- name: Ruins Top
+- name: Ruins Top  # MARK: Ruins Top
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal
@@ -1594,7 +1594,7 @@ areas:
           time: 3.8
           tags: [xshift]
     
-- name: West Tower
+- name: West Tower  # MARK: West Tower
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 7
@@ -1616,7 +1616,7 @@ areas:
         - to: West Caverns > Northwest
           tags: [yshift]
 
-- name: Far Corner
+- name: Far Corner  # MARK: Far Corner
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 13
@@ -1637,7 +1637,7 @@ areas:
         - to: Helipad > North
           tags: [yshift]
 
-- name: Helipad
+- name: Helipad  # MARK: Helipad
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
@@ -1758,7 +1758,7 @@ areas:
         - to: Clouds > North Under Ledge
           tags: [yshift]
 
-- name: Clouds
+- name: Clouds  # MARK: Clouds
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Cache
@@ -1847,7 +1847,7 @@ areas:
         - to: Irikar > Hub > Northeast Above Bowl
           tags: [yshift]
 
-- name: Lamassu
+- name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 18
@@ -1960,7 +1960,7 @@ areas:
         - to: Dual Path > West 18
           tags: [xshift]
 
-- name: Dual Path
+- name: Dual Path  # MARK: Dual Path
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 18
@@ -2214,7 +2214,7 @@ areas:
         - to: East Caverns > West 17
           tags: [xshift]
 
-- name: Hard Rock
+- name: Hard Rock  # MARK: Hard Rock
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 17
@@ -2288,7 +2288,7 @@ areas:
         - to: Giguna Base > East 17
           tags: [xshift]
 
-- name: East Caverns
+- name: East Caverns  # MARK: East Caverns
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
@@ -2765,7 +2765,7 @@ areas:
       exits:
         - to: Vertical Interchange > West 17
 
-- name: Gateway
+- name: Gateway  # MARK: Gateway
   on_entry: $reset_old_area(^newpos)
   reset:
     _door_opened: false
@@ -2975,7 +2975,7 @@ areas:
         - to: Vertical Interchange > West 19
           tags: [xshift]
 
-- name: Labyrinth East
+- name: Labyrinth East  # MARK: Labyrinth East
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 19
@@ -3048,7 +3048,7 @@ areas:
         - to: Labyrinth > Lower East
           tags: [xshift]
 
-- name: Labyrinth
+- name: Labyrinth  # MARK: Labyrinth
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Top East
@@ -3063,7 +3063,7 @@ areas:
     - name: East 23
       coord: [17.95, 22.8]
 
-- name: Vertical Interchange
+- name: Vertical Interchange  # MARK: Vertical Interchange
   on_entry: $reset_old_area(^newpos)
   spots:
     #region Upper
@@ -3114,7 +3114,7 @@ areas:
       coord: [21.5, 23.8]
     #endregion
 
-- name: Antechamber
+- name: Antechamber  # MARK: Antechamber
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 16
@@ -3232,7 +3232,7 @@ areas:
         - to: Gubi Lair > East 15
           tags: [xshift]
 
-- name: Gubi Lair
+- name: Gubi Lair  # MARK: Gubi Lair
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
@@ -3363,7 +3363,7 @@ areas:
           item: Double_Axe
           tags: [standing]
 
-- name: Mural
+- name: Mural  # MARK: Mural
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 20
@@ -3371,7 +3371,7 @@ areas:
     - name: Northwest Item
       coord: [19.5, 19.7]
 
-- name: Breachable Wall
+- name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West Mid-air
@@ -3392,7 +3392,7 @@ areas:
     - name: Wall Interior
       coord: [16.9, 23.6]
 
-- name: Separator
+- name: Separator  # MARK: Separator
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 23
