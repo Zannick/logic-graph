@@ -510,6 +510,8 @@ areas:
       coord: [39, 15]
     - name: Apocalypse Cache
       coord: [42, 16]
+    - name: Glacier Dock Flask
+      coord: [44, 9]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

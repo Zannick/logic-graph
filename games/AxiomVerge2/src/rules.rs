@@ -726,6 +726,10 @@ pub fn access_fast_travel_and_invoke_boomerang2(ctx: &Context, world: &graph::Wo
     // Fast_Travel and $boomerang2
     (ctx.has(Item::Fast_Travel) && helper__boomerang2!(ctx, world))
 }
+pub fn access_fast_travel_and_invoke_melee_cskip(ctx: &Context, world: &graph::World) -> bool {
+    // Fast_Travel and $melee_cskip
+    (ctx.has(Item::Fast_Travel) && helper__melee_cskip!(ctx, world))
+}
 pub fn access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -1823,6 +1827,10 @@ pub fn access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridg
 pub fn access_invoke_melee(ctx: &Context, world: &graph::World) -> bool {
     // $melee
     helper__melee!(ctx, world)
+}
+pub fn access_invoke_melee_cskip(ctx: &Context, world: &graph::World) -> bool {
+    // $melee_cskip
+    helper__melee_cskip!(ctx, world)
 }
 pub fn access_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
     // $mist2
@@ -5486,6 +5494,32 @@ pub fn explain_fast_travel_and_invoke_boomerang2(
                 let (res, mut refs) = hexplain__boomerang2!(ctx, world, edict);
                 edict.insert("$boomerang2", format!("{:?}", res));
                 refs.push("$boomerang2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_fast_travel_and_invoke_melee_cskip(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Fast_Travel and $melee_cskip
+    {
+        let mut left = {
+            let h = ctx.has(Item::Fast_Travel);
+            edict.insert("Fast_Travel", format!("{}", h));
+            (h, vec!["Fast_Travel"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__melee_cskip!(ctx, world, edict);
+                edict.insert("$melee_cskip", format!("{:?}", res));
+                refs.push("$melee_cskip");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -9509,6 +9543,19 @@ pub fn explain_invoke_melee(
         (res, refs)
     }
 }
+pub fn explain_invoke_melee_cskip(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee_cskip
+    {
+        let (res, mut refs) = hexplain__melee_cskip!(ctx, world, edict);
+        edict.insert("$melee_cskip", format!("{:?}", res));
+        refs.push("$melee_cskip");
+        (res, refs)
+    }
+}
 pub fn explain_invoke_mist2(
     ctx: &Context,
     world: &graph::World,
@@ -13216,6 +13263,17 @@ pub fn observe_access_fast_travel_and_invoke_boomerang2(
         ctx.has(Item::Fast_Travel)
     } && (hobserve__boomerang2!(ctx, world, full_obs)))
 }
+pub fn observe_access_fast_travel_and_invoke_melee_cskip(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Fast_Travel and $melee_cskip
+    ({
+        full_obs.observe_fast_travel();
+        ctx.has(Item::Fast_Travel)
+    } && (hobserve__melee_cskip!(ctx, world, full_obs)))
+}
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -15234,6 +15292,14 @@ pub fn observe_access_invoke_melee(
 ) -> bool {
     // $melee
     hobserve__melee!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_melee_cskip(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee_cskip
+    hobserve__melee_cskip!(ctx, world, full_obs)
 }
 pub fn observe_access_invoke_mist2(
     ctx: &Context,

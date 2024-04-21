@@ -143,7 +143,7 @@ time:  # MARK: time
   exit: 3
 
   charge_time: 1
-  cskip: 0
+  cskip: 0.2
 
   ## Penalties
   # When movements are calculated ignoring transitions, we have to add the transition time
@@ -290,12 +290,15 @@ helpers:  # MARK: helpers
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
+  # glitches
   $bs: boomerang_steering and $boomerang
   $offset: major_glitches and $melee
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
 
+  # tricks
   $infinite_climb: Anuman and Wall_Climb and Drone_Hover
+  $melee_cskip: (Ice_Axe and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
   $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
@@ -418,6 +421,8 @@ settings:  # MARK: settings
   allow_warps:
     type: bool
     default: true
+  indra_cskip:
+    type: bool
 
 special:  # MARK: special
   # For World.png,

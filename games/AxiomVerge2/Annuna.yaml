@@ -3074,6 +3074,7 @@ areas:
         - name: Urn Collection Skip
           item: Nanite_Mist
           canon: Nanite_Mist
+          req: $melee_cskip
           to: Menu > Warp Only > Kiengir
           tags: [cskip]
           penalties:
@@ -3082,7 +3083,7 @@ areas:
         - name: Urn Fast Travel
           item: Nanite_Mist
           canon: Nanite_Mist
-          req: Fast_Travel
+          req: Fast_Travel and $melee_cskip
           to: Menu > Kiengir Map > Nanite Mist
           tags: [cskip]
           penalties:

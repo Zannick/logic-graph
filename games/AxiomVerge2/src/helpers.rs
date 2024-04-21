@@ -1796,6 +1796,74 @@ macro_rules! hobserve__infinite_climb {
     }};
 }
 
+/// $melee_cskip (  )
+/// (Ice_Axe and indra_cskip) or ^mode == 'drone'
+#[macro_export]
+macro_rules! helper__melee_cskip {
+    ($ctx:expr, $world:expr) => {{
+        (($ctx.has(Item::Ice_Axe) && $world.indra_cskip) || $ctx.mode() == enums::Mode::Drone)
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__melee_cskip {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = ({
+                let mut left = {
+                    let h = $ctx.has(Item::Ice_Axe);
+                    $edict.insert("Ice_Axe", format!("{}", h));
+                    (h, vec!["Ice_Axe"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let s = $world.indra_cskip;
+                        $edict.insert("indra_cskip", format!("{}", s));
+                        (s, vec!["indra_cskip"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__melee_cskip {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (({
+            $full_obs.observe_ice_axe();
+            $ctx.has(Item::Ice_Axe)
+        } && ($world.indra_cskip))
+            || {
+                let v = {
+                    $full_obs.observe_mode();
+                    $ctx.mode()
+                };
+                v == enums::Mode::Drone
+            })
+    }};
+}
+
 /// $attract (  )
 /// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
 #[macro_export]

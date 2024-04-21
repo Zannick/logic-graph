@@ -18,14 +18,201 @@ areas:
     # however, this doesn't ever seem relevant
     # and I'm not sure how to force it in the logic
     #- name: Save Point
-    #  coord: [43.0, 9]
+    #  coord: [43.0, 8.8]
     - name: Do Not Enter
       coord: [42.05, 8.5]
       local:
         - to: Entry
+        - to: Lower Platforms
+          jumps: 3
       exits:
         - to: Revival > East 9
           tags: [xshift]
+    - name: Lower Platforms
+      coord: [42.7, 8.4]
+      local:
+        - to: Do Not Enter
+          jumps: 2
+        - to: Entry
+          jumps: 2
+      exits:
+        - to: Lower Mid-air
+          req: $hover
+          movement: base
+          jumps: 2
+      actions:
+        - name: Throw Drone
+          req: $can_deploy and Drone_Hover
+          do: $deploy_drone
+          to: Lower Mid-air
+          time: 1.5  # ?
+    - name: Lower Mid-air
+      coord: [43.0, 8.15]
+      local:
+        - to: Do Not Enter
+        - to: Entry
+      exits:
+        - to: Lower Platforms
+          req: $hover
+        - to: Upper Ledge
+          req: Nanite_Mist
+          price: 60
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          price: 50
+          movement: mist2
+    - name: Upper Ledge
+      coord: [43.0, 7.8]
+      local:
+        - to: Lower Mid-air
+        - to: Entry
+        - to: Ruins Platform
+          jumps: 1
+        - to: Ruins Stairs
+    - name: Ruins Stairs
+      coord: [42.85, 7.8]
+      local:
+        - to: Ruins Platform
+          jumps: 1
+        - to: Upper West Hill
+          jumps: 1
+        - to: Upper Ledge
+      locations:
+        - name: Note
+          item: Notes_2053_02_27
+          canon: Notes_2053_02_27
+          tags: [standing]
+    - name: Ruins Platform
+      coord: [42.8, 7.7]
+      local:
+        - to: Ruins Stairs
+          jumps_down: 1
+        - to: Upper West Hill
+          jumps: 1
+        - to: Upper Ledge
+      exits:
+        - to: High Toward Cave
+          req: $hover
+          movement: base
+          jumps: 2
+      actions:
+        - name: Throw Drone Up
+          req: $can_deploy and Drone_Hover
+          do: $deploy_drone
+          to: Above Ruins
+    - name: Above Ruins
+      coord: [42.8, 7.3]
+      local:
+        - to: Ruins Platform
+        - to: Upper Ledge
+        - to: Upper West Hill
+      exits:
+        - to: Cave Mouth
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Upper West Hill
+      coord: [42.1, 7.7]
+      local:
+        - to: Ruins Stairs
+        - to: Ruins Platform
+          jumps: 1
+      exits:
+        - to: Revival > Pillar
+          req: $grab
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
+        - to: Revival > Pillar
+          req: $hook
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+        - to: Revival > Pillar Step
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+
+    - name: High Toward Cave
+      coord: [43.2, 7.45]
+      local:
+        - to: Entry
+        - to: Lower Mid-air
+      # TODO: auto-priced mist movements
+    - name: Mid Toward Cave
+      coord: [43.1, 7.6]
+      local:
+        - to: Entry
+        - to: Lower Mid-air
+    - name: Cave Mouth
+      coord: [43.3, 7.2]
+      local:
+        - to: Entry
+        - to: High Toward Cave
+        - to: Cave Throat
+      exits:
+        - to: Ruins Stairs
+          req: $hover
+          movement: base
+        - to: Above Ruins
+          req: $hover
+          movement: base
+    - name: Cave Throat
+      coord: [43.8, 7.2]
+      local:
+        - to: Cave Mouth
+        - to: Cave Gullet
+        - to: Cave Esophagus
+    - name: Cave Gullet
+      coord: [44.0, 7.55]
+      local:
+        - to: Cave Esophagus
+      exits:
+        - to: Cave Throat
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Cave Throat
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Cave Esophagus
+      coord: [44.6, 7.6]
+      local:
+        - to: Cave Treasure
+          thru: [44.55, 8.0]
+        - to: Cave Gullet
+          jumps: 1
+    - name: Cave Treasure
+      coord: [44.6, 8.5]
+      locations:
+        - name: Item
+          canon: Glacier_Dock_Flask
+          item: Big_Flask
+          tags: [flask]
+      exits:
+        - to: Cave Esophagus
+          req: $grab
+          movement: base
+          jumps: 6
+        - to: Cave Esophagus
+          req: $hook
+          movement: base
+          jumps: 3
+      hybrid:
+        - name: Flask Collection Skip
+          to: Menu > Warp Only > Kiengir
+          canon: Glacier_Dock_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          to: Menu > Kiengir Map > Glacier Dock Flask
+          canon: Glacier_Dock_Flask
+          item: Big_Flask
+          req: Fast_Travel and $melee_cskip
+          tags: [cskip]
 
 - name: Revival  # MARK: Revival
   on_entry: $reset_old_area(^newpos)
@@ -83,6 +270,12 @@ areas:
       exits:
         - to: Grid 39-40,7-9 > Upper East
           tags: [xshift]
+    - name: Pillar
+      coord: [41.8, 7.4]
+    - name: Pillar Step
+      coord: [41.9, 7.6]
+    - name: Mid-air
+      coord: [41.6, 7.5]
 
 # It sure is going to get difficult naming every room without generic names
 - name: Grid 42,10  # MARK: Grid 42,10

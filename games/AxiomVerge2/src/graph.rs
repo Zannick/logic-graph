@@ -1147,15 +1147,31 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier_Breach__Spidery_Connector__East => {
             AreaId::Glacier_Breach__Spidery_Connector
         }
-        SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
-            AreaId::Glacier__Dock_Outside
-        }
+        SpotId::Glacier__Dock_Outside__Entry
+        | SpotId::Glacier__Dock_Outside__Do_Not_Enter
+        | SpotId::Glacier__Dock_Outside__Lower_Platforms
+        | SpotId::Glacier__Dock_Outside__Lower_Mid_air
+        | SpotId::Glacier__Dock_Outside__Upper_Ledge
+        | SpotId::Glacier__Dock_Outside__Ruins_Stairs
+        | SpotId::Glacier__Dock_Outside__Ruins_Platform
+        | SpotId::Glacier__Dock_Outside__Above_Ruins
+        | SpotId::Glacier__Dock_Outside__Upper_West_Hill
+        | SpotId::Glacier__Dock_Outside__High_Toward_Cave
+        | SpotId::Glacier__Dock_Outside__Mid_Toward_Cave
+        | SpotId::Glacier__Dock_Outside__Cave_Mouth
+        | SpotId::Glacier__Dock_Outside__Cave_Throat
+        | SpotId::Glacier__Dock_Outside__Cave_Gullet
+        | SpotId::Glacier__Dock_Outside__Cave_Esophagus
+        | SpotId::Glacier__Dock_Outside__Cave_Treasure => AreaId::Glacier__Dock_Outside,
         SpotId::Glacier__Revival__East_9
         | SpotId::Glacier__Revival__Overhang
         | SpotId::Glacier__Revival__Ledge
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__Save_Point
-        | SpotId::Glacier__Revival__West_8 => AreaId::Glacier__Revival,
+        | SpotId::Glacier__Revival__West_8
+        | SpotId::Glacier__Revival__Pillar
+        | SpotId::Glacier__Revival__Pillar_Step
+        | SpotId::Glacier__Revival__Mid_air => AreaId::Glacier__Revival,
         SpotId::Glacier__Grid_42_10__West | SpotId::Glacier__Grid_42_10__East => {
             AreaId::Glacier__Grid_42_10
         }
@@ -1550,7 +1566,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Breach_Attractor
         | SpotId::Menu__Kiengir_Map__Hammond
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
-        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
+        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -2799,15 +2816,31 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier_Breach__Angry_Lions__Second_Platform
         | SpotId::Glacier_Breach__Angry_Lions__Portal_Stand => RegionId::Glacier_Breach,
         SpotId::Glacier_Breach__Spidery_Connector__East => RegionId::Glacier_Breach,
-        SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
-            RegionId::Glacier
-        }
+        SpotId::Glacier__Dock_Outside__Entry
+        | SpotId::Glacier__Dock_Outside__Do_Not_Enter
+        | SpotId::Glacier__Dock_Outside__Lower_Platforms
+        | SpotId::Glacier__Dock_Outside__Lower_Mid_air
+        | SpotId::Glacier__Dock_Outside__Upper_Ledge
+        | SpotId::Glacier__Dock_Outside__Ruins_Stairs
+        | SpotId::Glacier__Dock_Outside__Ruins_Platform
+        | SpotId::Glacier__Dock_Outside__Above_Ruins
+        | SpotId::Glacier__Dock_Outside__Upper_West_Hill
+        | SpotId::Glacier__Dock_Outside__High_Toward_Cave
+        | SpotId::Glacier__Dock_Outside__Mid_Toward_Cave
+        | SpotId::Glacier__Dock_Outside__Cave_Mouth
+        | SpotId::Glacier__Dock_Outside__Cave_Throat
+        | SpotId::Glacier__Dock_Outside__Cave_Gullet
+        | SpotId::Glacier__Dock_Outside__Cave_Esophagus
+        | SpotId::Glacier__Dock_Outside__Cave_Treasure => RegionId::Glacier,
         SpotId::Glacier__Revival__East_9
         | SpotId::Glacier__Revival__Overhang
         | SpotId::Glacier__Revival__Ledge
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__Save_Point
-        | SpotId::Glacier__Revival__West_8 => RegionId::Glacier,
+        | SpotId::Glacier__Revival__West_8
+        | SpotId::Glacier__Revival__Pillar
+        | SpotId::Glacier__Revival__Pillar_Step
+        | SpotId::Glacier__Revival__Mid_air => RegionId::Glacier,
         SpotId::Glacier__Grid_42_10__West | SpotId::Glacier__Grid_42_10__East => RegionId::Glacier,
         SpotId::Glacier__Grid_43_10_11__Top
         | SpotId::Glacier__Grid_43_10_11__East
@@ -3192,7 +3225,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Breach_Attractor
         | SpotId::Menu__Kiengir_Map__Hammond
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
-        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
+        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => RegionId::Menu,
         SpotId::Menu__Breach_Map__GB_Peak
         | SpotId::Menu__Breach_Map__GB_SW_Save
         | SpotId::Menu__Breach_Map__IB_Basement
@@ -3445,9 +3479,11 @@ impl world::Accessible for Location {
                 rules::access_mode_eq_drone_and_nanite_mist(ctx, world)
             }
             LocationId::Annuna__Siuna_Storage__Cache__Urn => true,
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
+                rules::access_invoke_melee_cskip(ctx, world)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::access_fast_travel(ctx, world)
+                rules::access_fast_travel_and_invoke_melee_cskip(ctx, world)
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
                 rules::access_mode_eq_drone(ctx, world)
@@ -3702,6 +3738,14 @@ impl world::Accessible for Location {
             LocationId::Glacier__Compass_Room__Center__Table => true,
             LocationId::Glacier__Crystals__Lower_Corner__Item => true,
             LocationId::Glacier__Crystals__Top_Corner__Tablet => true,
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
+                rules::access_invoke_melee_cskip(ctx, world)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
+                rules::access_fast_travel_and_invoke_melee_cskip(ctx, world)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => true,
+            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => true,
             LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => true,
             LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
                 rules::access_portal_eq_position(ctx, world)
@@ -4080,8 +4124,11 @@ impl world::Accessible for Location {
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
                 rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs)
             }
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
+                rules::observe_access_invoke_melee_cskip(ctx, world, full_obs)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::observe_access_fast_travel(ctx, world, full_obs)
+                rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs)
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
                 rules::observe_access_mode_eq_drone(ctx, world, full_obs)
@@ -4290,6 +4337,12 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::observe_access_boomerang(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
+                rules::observe_access_invoke_melee_cskip(ctx, world, full_obs)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
+                rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs)
             }
             LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
                 rules::observe_access_portal_eq_position(ctx, world, full_obs)
@@ -4692,8 +4745,11 @@ impl world::Accessible for Location {
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
                 rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict)
             }
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
+                rules::explain_invoke_melee_cskip(ctx, world, edict)
+            }
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::explain_fast_travel(ctx, world, edict)
+                rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict)
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
                 rules::explain_mode_eq_drone(ctx, world, edict)
@@ -4902,6 +4958,12 @@ impl world::Accessible for Location {
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 rules::explain_boomerang(ctx, world, edict)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
+                rules::explain_invoke_melee_cskip(ctx, world, edict)
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
+                rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict)
             }
             LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
                 rules::explain_portal_eq_position(ctx, world, edict)
@@ -5477,8 +5539,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::access_not_apocalypse_bomb(ctx, world),
             ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::access_not_apocalypse_bomb(ctx, world),
-            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
-            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -6266,8 +6328,25 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::access_invoke_hover_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -7073,7 +7152,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
-            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -7629,6 +7709,22 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
@@ -8434,7 +8530,8 @@ impl world::Accessible for Exit {
             ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
             ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
-            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Portal_Entry__ex__Third_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Top_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Annuna__Siuna_Storage__Second_Platform__ex__Upper_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -8990,6 +9087,22 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
@@ -9511,7 +9624,6 @@ impl world::Exit for Exit {
             ExitId::Annuna__Seals__East_17_Lower__ex__Final_Save__Lower_West_1 => true,
             ExitId::Annuna__Seals__East_17_Upper__ex__Final_Save__Upper_West_1 => true,
             ExitId::Annuna__Seals__Inner_Wall__ex__Final_Cache__West_1 => true,
-            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
             ExitId::Annuna__Siuna_Storage__West__ex__Lamassu__East_16_1 => true,
             ExitId::Annuna__Sniper_Valley__East__ex__Factory_Entrance__West_1 => true,
             ExitId::Annuna__Sniper_Valley__West_23__ex__East_Bridge__East_24_1 => true,
@@ -9746,6 +9858,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => true,
@@ -10008,6 +10121,8 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::access_breach_attractor_and_anuman(ctx, world),
@@ -10117,6 +10232,8 @@ impl world::Accessible for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_giguna__west_caverns__east_susar__hack__req(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::observe_access_giguna_breach__sw_save__west_11__open_door__req(ctx, world, full_obs),
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
@@ -10949,6 +11066,26 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Lower Mid-air"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Above Ruins"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
                 let (ret, mut tags) =
                     rules::explain_invoke_open_and_invoke_range2(ctx, world, edict);
@@ -11281,6 +11418,8 @@ impl world::Action for Action {
             ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => rules::action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(ctx, world),
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => rules::action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(ctx, world),
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__solid_rock__careful_break__do(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
@@ -11399,6 +11538,12 @@ impl world::Action for Action {
             }
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => {
                 SpotId::Glacier_Breach__Angry_Lions__Second_Platform
+            }
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
+                SpotId::Glacier__Dock_Outside__Lower_Mid_air
+            }
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
+                SpotId::Glacier__Dock_Outside__Above_Ruins
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
                 SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
@@ -11850,6 +11995,12 @@ impl world::Action for Action {
                     ctx, world, full_obs,
                 );
             }
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -12208,7 +12359,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1629] = [
+static RAW_SPOTS: [SpotId; 1647] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -13282,8 +13433,22 @@ static RAW_SPOTS: [SpotId; 1629] = [
     SpotId::Glacier__Crystals__Top_Corner,
     SpotId::Glacier__Crystals__Upper_Ledge,
     SpotId::Glacier__Crystals__West,
+    SpotId::Glacier__Dock_Outside__Above_Ruins,
+    SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+    SpotId::Glacier__Dock_Outside__Cave_Gullet,
+    SpotId::Glacier__Dock_Outside__Cave_Mouth,
+    SpotId::Glacier__Dock_Outside__Cave_Throat,
+    SpotId::Glacier__Dock_Outside__Cave_Treasure,
     SpotId::Glacier__Dock_Outside__Do_Not_Enter,
     SpotId::Glacier__Dock_Outside__Entry,
+    SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+    SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+    SpotId::Glacier__Dock_Outside__Lower_Platforms,
+    SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+    SpotId::Glacier__Dock_Outside__Ruins_Platform,
+    SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+    SpotId::Glacier__Dock_Outside__Upper_Ledge,
+    SpotId::Glacier__Dock_Outside__Upper_West_Hill,
     SpotId::Glacier__Grid_31_9_12__East_10,
     SpotId::Glacier__Grid_31_9_12__East_9,
     SpotId::Glacier__Grid_31_9_12__Midair,
@@ -13360,7 +13525,10 @@ static RAW_SPOTS: [SpotId; 1629] = [
     SpotId::Glacier__Revival__East_9,
     SpotId::Glacier__Revival__Ledge,
     SpotId::Glacier__Revival__Lower_East,
+    SpotId::Glacier__Revival__Mid_air,
     SpotId::Glacier__Revival__Overhang,
+    SpotId::Glacier__Revival__Pillar,
+    SpotId::Glacier__Revival__Pillar_Step,
     SpotId::Glacier__Revival__Save_Point,
     SpotId::Glacier__Revival__West_8,
     SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
@@ -13702,6 +13870,7 @@ static RAW_SPOTS: [SpotId; 1629] = [
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
     SpotId::Menu__Kiengir_Map__Giguna_Separator,
+    SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
     SpotId::Menu__Kiengir_Map__Hammond,
     SpotId::Menu__Kiengir_Map__Infect,
@@ -14348,8 +14517,8 @@ lazy_static! {
             end: SpotId::Glacier__Crystals__West.into_usize() + 1,
         },
         AreaId::Glacier__Dock_Outside => Range {
-            start: SpotId::Glacier__Dock_Outside__Do_Not_Enter.into_usize(),
-            end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
+            start: SpotId::Glacier__Dock_Outside__Above_Ruins.into_usize(),
+            end: SpotId::Glacier__Dock_Outside__Upper_West_Hill.into_usize() + 1,
         },
         AreaId::Glacier__Grid_31_9_12 => Range {
             start: SpotId::Glacier__Grid_31_9_12__East_10.into_usize(),
@@ -14599,6 +14768,7 @@ pub struct World {
     pub major_glitches: bool,
     pub minor_glitches: bool,
     pub allow_warps: bool,
+    pub indra_cskip: bool,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -14622,7 +14792,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 192;
+    const NUM_CANON_LOCATIONS: usize = 193;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14761,6 +14931,9 @@ impl world::World for World {
                 LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
                 LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
                 LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
+                LocationId::Glacier__Dock_Outside__Cave_Treasure__Item,
+                LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+                LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
                 LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
             ],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
@@ -14831,7 +15004,10 @@ impl world::World for World {
                 LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
             ],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
-            Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note],
+            Item::Notes_2053_02_27 => vec![
+                LocationId::Antarctica__Building_2__Behind_Boxes__Note,
+                LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note,
+            ],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
             Item::Ebih_Waterfall_Block_Right => vec![
                 LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
@@ -15516,6 +15692,16 @@ impl world::World for World {
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
                 SpotId::Glacier_Breach__Control__Upper_Corner
             }
+            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
+                SpotId::Glacier__Dock_Outside__Ruins_Stairs
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => {
+                SpotId::Glacier__Dock_Outside__Cave_Treasure
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip
+            | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
+                SpotId::Glacier__Dock_Outside__Cave_Treasure
+            }
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
@@ -16017,6 +16203,12 @@ impl world::World for World {
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform
             | ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => {
                 SpotId::Glacier_Breach__Angry_Lions__North
+            }
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
+                SpotId::Glacier__Dock_Outside__Lower_Platforms
+            }
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
+                SpotId::Glacier__Dock_Outside__Ruins_Platform
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
@@ -16809,6 +17001,15 @@ impl world::World for World {
             ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1 => SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => SpotId::Glacier__Dock_Outside__Above_Ruins,
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 | ExitId:: Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 | ExitId:: Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 | ExitId:: Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip | ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => SpotId::Glacier__Dock_Outside__Cave_Treasure,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => SpotId::Glacier__Revival__West_8,
@@ -18840,8 +19041,13 @@ impl world::World for World {
             | SpotId::Glacier__Crystals__Lower_Corner
             | SpotId::Glacier__Crystals__Portal_Cage
             | SpotId::Glacier__Crystals__Top_Corner
+            | SpotId::Glacier__Dock_Outside__Cave_Treasure
             | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
+            | SpotId::Glacier__Dock_Outside__Lower_Platforms
+            | SpotId::Glacier__Dock_Outside__Ruins_Platform
+            | SpotId::Glacier__Dock_Outside__Ruins_Stairs
+            | SpotId::Glacier__Dock_Outside__Upper_West_Hill
             | SpotId::Glacier__Grid_31_9_12__East_10
             | SpotId::Glacier__Grid_31_9_12__East_9
             | SpotId::Glacier__Grid_31_9_12__Midair
@@ -19179,6 +19385,7 @@ impl World {
             major_glitches: Default::default(),
             minor_glitches: Default::default(),
             allow_warps: true,
+            indra_cskip: Default::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
@@ -21532,6 +21739,42 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Energy(50),
             time: 5500,
             exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
+            skippable: false,
+        },
+        LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => Location {
+            id: LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note,
+            canonical: CanonId::Notes_2053_02_27,
+            item: Item::Notes_2053_02_27,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => Location {
+            id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Item,
+            canonical: CanonId::Glacier_Dock_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => Location {
+            id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+            canonical: CanonId::Glacier_Dock_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+            skippable: false,
+        },
+        LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => Location {
+            id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
+            canonical: CanonId::Glacier_Dock_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
             skippable: false,
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
@@ -25232,28 +25475,28 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => Exit {
             id: ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
         },
         ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => Exit {
             id: ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
         },
         ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => Exit {
             id: ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Warp_Only__Kiengir,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
         },
         ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => Exit {
             id: ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
             price: Currency::Free,
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
@@ -26863,14 +27106,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => Exit {
             id: ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Warp_Only__Kiengir,
             price: Currency::Free,
             loc_id: Some(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
         },
         ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => Exit {
             id: ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Remote_Drone,
             price: Currency::Free,
             loc_id: Some(LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
@@ -30550,6 +30793,125 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1,
+            time: 1200,
+            dest: SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1,
+            time: 1000,
+            dest: SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1,
+            time: 1400,
+            dest: SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            price: Currency::Energy(60),
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2,
+            time: 700,
+            dest: SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            price: Currency::Energy(50),
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1,
+            time: 1403,
+            dest: SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1,
+            time: 1754,
+            dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1,
+            time: 2200,
+            dest: SpotId::Glacier__Revival__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2,
+            time: 2052,
+            dest: SpotId::Glacier__Revival__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1,
+            time: 1701,
+            dest: SpotId::Glacier__Revival__Pillar_Step,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1,
+            time: 1578,
+            dest: SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1,
+            time: 1754,
+            dest: SpotId::Glacier__Dock_Outside__Above_Ruins,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1,
+            time: 1200,
+            dest: SpotId::Glacier__Dock_Outside__Cave_Throat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2,
+            time: 701,
+            dest: SpotId::Glacier__Dock_Outside__Cave_Throat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1,
+            time: 3599,
+            dest: SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2,
+            time: 1799,
+            dest: SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+            time: 200,
+            dest: SpotId::Menu__Warp_Only__Kiengir,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+        },
+        ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => Exit {
+            id: ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
+            time: 200,
+            dest: SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
+        },
         ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => Exit {
             id: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
             time: 1350,
@@ -32505,14 +32867,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => Exit {
             id: ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Warp_Only__Kiengir,
             price: Currency::Free,
             loc_id: Some(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
         },
         ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => Exit {
             id: ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Breach_Sight,
             price: Currency::Free,
             loc_id: Some(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
@@ -34199,14 +34561,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => Exit {
             id: ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Warp_Only__Kiengir,
             price: Currency::Free,
             loc_id: Some(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
         },
         ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => Exit {
             id: ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
-            time: 0,
+            time: 200,
             dest: SpotId::Menu__Kiengir_Map__Anuman,
             price: Currency::Free,
             loc_id: Some(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
@@ -34821,6 +35183,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => Action {
             id: ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform,
             time: 1500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => Action {
+            id: ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone,
+            time: 1500,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => Action {
+            id: ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up,
+            time: 1000,
             price: Currency::Free,
         },
         ActionId::Glacier__Revival__Save_Point__Save => Action {
@@ -49201,6 +49573,186 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Glacier__Dock_Outside__Lower_Platforms => Spot {
+            id: SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone.into_usize(),
+                end: ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Lower_Mid_air => Spot {
+            id: SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Upper_Ledge => Spot {
+            id: SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Ruins_Stairs => Spot {
+            id: SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            locations: Range {
+                start: LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note.into_usize(),
+                end: LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Ruins_Platform => Spot {
+            id: SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up.into_usize(),
+                end: ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Above_Ruins => Spot {
+            id: SpotId::Glacier__Dock_Outside__Above_Ruins,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Upper_West_Hill => Spot {
+            id: SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__High_Toward_Cave => Spot {
+            id: SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Mid_Toward_Cave => Spot {
+            id: SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Cave_Mouth => Spot {
+            id: SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Cave_Throat => Spot {
+            id: SpotId::Glacier__Dock_Outside__Cave_Throat,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Cave_Gullet => Spot {
+            id: SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Cave_Esophagus => Spot {
+            id: SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Dock_Outside__Cave_Treasure => Spot {
+            id: SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            locations: Range {
+                start: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip.into_usize(),
+                end: LocationId::Glacier__Dock_Outside__Cave_Treasure__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier__Revival__East_9 => Spot {
             id: SpotId::Glacier__Revival__East_9,
             locations: Range {
@@ -49272,6 +49824,42 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize(),
                 end: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Revival__Pillar => Spot {
+            id: SpotId::Glacier__Revival__Pillar,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Revival__Pillar_Step => Spot {
+            id: SpotId::Glacier__Revival__Pillar_Step,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Revival__Mid_air => Spot {
+            id: SpotId::Glacier__Revival__Mid_air,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -54137,6 +54725,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Apocalypse_Cache => Spot {
             id: SpotId::Menu__Kiengir_Map__Apocalypse_Cache,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => Spot {
+            id: SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
             locations: Range {
                 start: 0, end: 0,
             },

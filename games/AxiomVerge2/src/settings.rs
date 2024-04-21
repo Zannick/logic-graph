@@ -43,6 +43,9 @@ fn read_key_value(world: &mut World, key: &Yaml, val: &Yaml) -> Result<(), Strin
         Some("allow_warps") => {
             world.allow_warps = parse_bool(key, val)?;
         }
+        Some("indra_cskip") => {
+            world.indra_cskip = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }

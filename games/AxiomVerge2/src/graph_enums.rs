@@ -1803,8 +1803,22 @@ pub enum SpotId {
     Glacier__Crystals__Top_Corner,
     Glacier__Crystals__Upper_Ledge,
     Glacier__Crystals__West,
+    Glacier__Dock_Outside__Above_Ruins,
+    Glacier__Dock_Outside__Cave_Esophagus,
+    Glacier__Dock_Outside__Cave_Gullet,
+    Glacier__Dock_Outside__Cave_Mouth,
+    Glacier__Dock_Outside__Cave_Throat,
+    Glacier__Dock_Outside__Cave_Treasure,
     Glacier__Dock_Outside__Do_Not_Enter,
     Glacier__Dock_Outside__Entry,
+    Glacier__Dock_Outside__High_Toward_Cave,
+    Glacier__Dock_Outside__Lower_Mid_air,
+    Glacier__Dock_Outside__Lower_Platforms,
+    Glacier__Dock_Outside__Mid_Toward_Cave,
+    Glacier__Dock_Outside__Ruins_Platform,
+    Glacier__Dock_Outside__Ruins_Stairs,
+    Glacier__Dock_Outside__Upper_Ledge,
+    Glacier__Dock_Outside__Upper_West_Hill,
     Glacier__Grid_31_9_12__East_10,
     Glacier__Grid_31_9_12__East_9,
     Glacier__Grid_31_9_12__Midair,
@@ -1881,7 +1895,10 @@ pub enum SpotId {
     Glacier__Revival__East_9,
     Glacier__Revival__Ledge,
     Glacier__Revival__Lower_East,
+    Glacier__Revival__Mid_air,
     Glacier__Revival__Overhang,
+    Glacier__Revival__Pillar,
+    Glacier__Revival__Pillar_Step,
     Glacier__Revival__Save_Point,
     Glacier__Revival__West_8,
     Glacier__Sea_Burial__Breakable_Rock_Left,
@@ -2223,6 +2240,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Giguna_Ruins_Top,
     Menu__Kiengir_Map__Giguna_Ruins_West,
     Menu__Kiengir_Map__Giguna_Separator,
+    Menu__Kiengir_Map__Glacier_Dock_Flask,
     Menu__Kiengir_Map__Glacier_Revival,
     Menu__Kiengir_Map__Hammond,
     Menu__Kiengir_Map__Infect,
@@ -5028,11 +5046,53 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Crystals > Upper Ledge")
             }
             SpotId::Glacier__Crystals__West => write!(f, "{}", "Glacier > Crystals > West"),
+            SpotId::Glacier__Dock_Outside__Above_Ruins => {
+                write!(f, "{}", "Glacier > Dock Outside > Above Ruins")
+            }
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Esophagus")
+            }
+            SpotId::Glacier__Dock_Outside__Cave_Gullet => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Gullet")
+            }
+            SpotId::Glacier__Dock_Outside__Cave_Mouth => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Mouth")
+            }
+            SpotId::Glacier__Dock_Outside__Cave_Throat => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Throat")
+            }
+            SpotId::Glacier__Dock_Outside__Cave_Treasure => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Treasure")
+            }
             SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
                 write!(f, "{}", "Glacier > Dock Outside > Do Not Enter")
             }
             SpotId::Glacier__Dock_Outside__Entry => {
                 write!(f, "{}", "Glacier > Dock Outside > Entry")
+            }
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave => {
+                write!(f, "{}", "Glacier > Dock Outside > High Toward Cave")
+            }
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air => {
+                write!(f, "{}", "Glacier > Dock Outside > Lower Mid-air")
+            }
+            SpotId::Glacier__Dock_Outside__Lower_Platforms => {
+                write!(f, "{}", "Glacier > Dock Outside > Lower Platforms")
+            }
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave => {
+                write!(f, "{}", "Glacier > Dock Outside > Mid Toward Cave")
+            }
+            SpotId::Glacier__Dock_Outside__Ruins_Platform => {
+                write!(f, "{}", "Glacier > Dock Outside > Ruins Platform")
+            }
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs => {
+                write!(f, "{}", "Glacier > Dock Outside > Ruins Stairs")
+            }
+            SpotId::Glacier__Dock_Outside__Upper_Ledge => {
+                write!(f, "{}", "Glacier > Dock Outside > Upper Ledge")
+            }
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill => {
+                write!(f, "{}", "Glacier > Dock Outside > Upper West Hill")
             }
             SpotId::Glacier__Grid_31_9_12__East_10 => {
                 write!(f, "{}", "Glacier > Grid 31,9-12 > East 10")
@@ -5240,7 +5300,12 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Revival__Lower_East => {
                 write!(f, "{}", "Glacier > Revival > Lower East")
             }
+            SpotId::Glacier__Revival__Mid_air => write!(f, "{}", "Glacier > Revival > Mid-air"),
             SpotId::Glacier__Revival__Overhang => write!(f, "{}", "Glacier > Revival > Overhang"),
+            SpotId::Glacier__Revival__Pillar => write!(f, "{}", "Glacier > Revival > Pillar"),
+            SpotId::Glacier__Revival__Pillar_Step => {
+                write!(f, "{}", "Glacier > Revival > Pillar Step")
+            }
             SpotId::Glacier__Revival__Save_Point => {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
@@ -6195,6 +6260,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Giguna_Separator => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Separator")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier Dock Flask")
             }
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
@@ -8399,10 +8467,50 @@ impl std::str::FromStr for SpotId {
             "Glacier > Crystals > Top Corner" => Ok(SpotId::Glacier__Crystals__Top_Corner),
             "Glacier > Crystals > Upper Ledge" => Ok(SpotId::Glacier__Crystals__Upper_Ledge),
             "Glacier > Crystals > West" => Ok(SpotId::Glacier__Crystals__West),
+            "Glacier > Dock Outside > Above Ruins" => {
+                Ok(SpotId::Glacier__Dock_Outside__Above_Ruins)
+            }
+            "Glacier > Dock Outside > Cave Esophagus" => {
+                Ok(SpotId::Glacier__Dock_Outside__Cave_Esophagus)
+            }
+            "Glacier > Dock Outside > Cave Gullet" => {
+                Ok(SpotId::Glacier__Dock_Outside__Cave_Gullet)
+            }
+            "Glacier > Dock Outside > Cave Mouth" => Ok(SpotId::Glacier__Dock_Outside__Cave_Mouth),
+            "Glacier > Dock Outside > Cave Throat" => {
+                Ok(SpotId::Glacier__Dock_Outside__Cave_Throat)
+            }
+            "Glacier > Dock Outside > Cave Treasure" => {
+                Ok(SpotId::Glacier__Dock_Outside__Cave_Treasure)
+            }
             "Glacier > Dock Outside > Do Not Enter" => {
                 Ok(SpotId::Glacier__Dock_Outside__Do_Not_Enter)
             }
             "Glacier > Dock Outside > Entry" => Ok(SpotId::Glacier__Dock_Outside__Entry),
+            "Glacier > Dock Outside > High Toward Cave" => {
+                Ok(SpotId::Glacier__Dock_Outside__High_Toward_Cave)
+            }
+            "Glacier > Dock Outside > Lower Mid-air" => {
+                Ok(SpotId::Glacier__Dock_Outside__Lower_Mid_air)
+            }
+            "Glacier > Dock Outside > Lower Platforms" => {
+                Ok(SpotId::Glacier__Dock_Outside__Lower_Platforms)
+            }
+            "Glacier > Dock Outside > Mid Toward Cave" => {
+                Ok(SpotId::Glacier__Dock_Outside__Mid_Toward_Cave)
+            }
+            "Glacier > Dock Outside > Ruins Platform" => {
+                Ok(SpotId::Glacier__Dock_Outside__Ruins_Platform)
+            }
+            "Glacier > Dock Outside > Ruins Stairs" => {
+                Ok(SpotId::Glacier__Dock_Outside__Ruins_Stairs)
+            }
+            "Glacier > Dock Outside > Upper Ledge" => {
+                Ok(SpotId::Glacier__Dock_Outside__Upper_Ledge)
+            }
+            "Glacier > Dock Outside > Upper West Hill" => {
+                Ok(SpotId::Glacier__Dock_Outside__Upper_West_Hill)
+            }
             "Glacier > Grid 31,9-12 > East 10" => Ok(SpotId::Glacier__Grid_31_9_12__East_10),
             "Glacier > Grid 31,9-12 > East 9" => Ok(SpotId::Glacier__Grid_31_9_12__East_9),
             "Glacier > Grid 31,9-12 > Midair" => Ok(SpotId::Glacier__Grid_31_9_12__Midair),
@@ -8549,7 +8657,10 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > East 9" => Ok(SpotId::Glacier__Revival__East_9),
             "Glacier > Revival > Ledge" => Ok(SpotId::Glacier__Revival__Ledge),
             "Glacier > Revival > Lower East" => Ok(SpotId::Glacier__Revival__Lower_East),
+            "Glacier > Revival > Mid-air" => Ok(SpotId::Glacier__Revival__Mid_air),
             "Glacier > Revival > Overhang" => Ok(SpotId::Glacier__Revival__Overhang),
+            "Glacier > Revival > Pillar" => Ok(SpotId::Glacier__Revival__Pillar),
+            "Glacier > Revival > Pillar Step" => Ok(SpotId::Glacier__Revival__Pillar_Step),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
             "Glacier > Sea Burial > Breakable Rock Left" => {
@@ -9267,6 +9378,9 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Giguna Separator" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Separator)
             }
+            "Menu > Kiengir Map > Glacier Dock Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask)
+            }
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
@@ -9725,6 +9839,10 @@ pub enum LocationId {
     Glacier__Compass_Room__Center__Table,
     Glacier__Crystals__Lower_Corner__Item,
     Glacier__Crystals__Top_Corner__Tablet,
+    Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+    Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
+    Glacier__Dock_Outside__Cave_Treasure__Item,
+    Glacier__Dock_Outside__Ruins_Stairs__Note,
     Glacier__Hammonds_End__Between_Center_Doors__Health,
     Glacier__Hammonds_End__Corner__Quick_Note,
     Glacier__Hammonds_End__Hammond__Note,
@@ -10501,6 +10619,22 @@ impl fmt::Display for LocationId {
             }
             LocationId::Glacier__Crystals__Top_Corner__Tablet => {
                 write!(f, "{}", "Glacier > Crystals > Top Corner > Tablet")
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => write!(
+                f,
+                "{}",
+                "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip"
+            ),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => write!(
+                f,
+                "{}",
+                "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel"
+            ),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => {
+                write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Item")
+            }
+            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
+                write!(f, "{}", "Glacier > Dock Outside > Ruins Stairs > Note")
             }
             LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => write!(
                 f,
@@ -11473,6 +11607,18 @@ impl std::str::FromStr for LocationId {
             }
             "Glacier > Crystals > Top Corner > Tablet" => {
                 Ok(LocationId::Glacier__Crystals__Top_Corner__Tablet)
+            }
+            "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip" => {
+                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip)
+            }
+            "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel" => {
+                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel)
+            }
+            "Glacier > Dock Outside > Cave Treasure > Item" => {
+                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Item)
+            }
+            "Glacier > Dock Outside > Ruins Stairs > Note" => {
+                Ok(LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note)
             }
             "Glacier > Hammond's End > Between Center Doors > Health" => {
                 Ok(LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health)
@@ -12940,8 +13086,25 @@ pub enum ExitId {
     Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1,
     Glacier__Crystals__Upper_Ledge__ex__West_1,
     Glacier__Crystals__West__ex__Upper_Ledge_1,
+    Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1,
+    Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1,
+    Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2,
+    Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1,
+    Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1,
+    Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1,
+    Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2,
+    Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+    Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
     Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
     Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1,
+    Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1,
+    Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1,
+    Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2,
+    Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1,
+    Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1,
+    Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1,
+    Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2,
+    Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1,
     Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
     Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,
     Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
@@ -14607,8 +14770,25 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => write!(f, "{}", "Glacier > Crystals > Upper Ledge ==> Top Corner (1)"),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => write!(f, "{}", "Glacier > Crystals > Upper Ledge ==> West (1)"),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => write!(f, "{}", "Glacier > Crystals > West ==> Upper Ledge (1)"),
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => write!(f, "{}", "Glacier > Dock Outside > Above Ruins ==> Cave Mouth (1)"),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => write!(f, "{}", "Glacier > Dock Outside > Cave Gullet ==> Cave Throat (1)"),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => write!(f, "{}", "Glacier > Dock Outside > Cave Gullet ==> Cave Throat (2)"),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => write!(f, "{}", "Glacier > Dock Outside > Cave Mouth ==> Above Ruins (1)"),
+            ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => write!(f, "{}", "Glacier > Dock Outside > Cave Mouth ==> Ruins Stairs (1)"),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure ==> Cave Esophagus (1)"),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure ==> Cave Esophagus (2)"),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip"),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel"),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)"),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => write!(f, "{}", "Glacier > Dock Outside > Lower Mid-air ==> Lower Platforms (1)"),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => write!(f, "{}", "Glacier > Dock Outside > Lower Mid-air ==> Upper Ledge (1)"),
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => write!(f, "{}", "Glacier > Dock Outside > Lower Mid-air ==> Upper Ledge (2)"),
+            ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => write!(f, "{}", "Glacier > Dock Outside > Lower Platforms ==> Lower Mid-air (1)"),
+            ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => write!(f, "{}", "Glacier > Dock Outside > Ruins Platform ==> High Toward Cave (1)"),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => write!(f, "{}", "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar (1)"),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => write!(f, "{}", "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar (2)"),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => write!(f, "{}", "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar Step (1)"),
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),
@@ -16279,8 +16459,25 @@ impl std::str::FromStr for ExitId {
             "Glacier > Crystals > Upper Ledge ==> Top Corner (1)" => Ok(ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1),
             "Glacier > Crystals > Upper Ledge ==> West (1)" => Ok(ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1),
             "Glacier > Crystals > West ==> Upper Ledge (1)" => Ok(ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1),
+            "Glacier > Dock Outside > Above Ruins ==> Cave Mouth (1)" => Ok(ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1),
+            "Glacier > Dock Outside > Cave Gullet ==> Cave Throat (1)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1),
+            "Glacier > Dock Outside > Cave Gullet ==> Cave Throat (2)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2),
+            "Glacier > Dock Outside > Cave Mouth ==> Above Ruins (1)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1),
+            "Glacier > Dock Outside > Cave Mouth ==> Ruins Stairs (1)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1),
+            "Glacier > Dock Outside > Cave Treasure ==> Cave Esophagus (1)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1),
+            "Glacier > Dock Outside > Cave Treasure ==> Cave Esophagus (2)" => Ok(ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2),
+            "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip" => Ok(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+            "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel" => Ok(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
             "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1),
             "Glacier > Dock Outside > Entry ==> Interior > Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1),
+            "Glacier > Dock Outside > Lower Mid-air ==> Lower Platforms (1)" => Ok(ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1),
+            "Glacier > Dock Outside > Lower Mid-air ==> Upper Ledge (1)" => Ok(ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1),
+            "Glacier > Dock Outside > Lower Mid-air ==> Upper Ledge (2)" => Ok(ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2),
+            "Glacier > Dock Outside > Lower Platforms ==> Lower Mid-air (1)" => Ok(ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1),
+            "Glacier > Dock Outside > Ruins Platform ==> High Toward Cave (1)" => Ok(ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1),
+            "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar (1)" => Ok(ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1),
+            "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar (2)" => Ok(ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2),
+            "Glacier > Dock Outside > Upper West Hill ==> Revival > Pillar Step (1)" => Ok(ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1),
             "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1),
             "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1),
             "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1),
@@ -16970,6 +17167,8 @@ pub enum ActionId {
     Giguna_Breach__Peak__Save_Point__Save,
     Giguna_Breach__SW_Save__Save_Point__Save,
     Giguna_Breach__SW_Save__West_11__Open_Door,
+    Glacier__Dock_Outside__Lower_Platforms__Throw_Drone,
+    Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up,
     Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors,
     Glacier__Hammonds_End__Switch_Near__Open_Doors,
     Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
@@ -17329,6 +17528,16 @@ impl fmt::Display for ActionId {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door")
             }
+            ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => write!(
+                f,
+                "{}",
+                "Glacier > Dock Outside > Lower Platforms > Throw Drone"
+            ),
+            ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => write!(
+                f,
+                "{}",
+                "Glacier > Dock Outside > Ruins Platform > Throw Drone Up"
+            ),
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => write!(
                 f,
                 "{}",
@@ -17737,6 +17946,12 @@ impl std::str::FromStr for ActionId {
             "Giguna Breach > SW Save > West 11 > Open Door" => {
                 Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door)
             }
+            "Glacier > Dock Outside > Lower Platforms > Throw Drone" => {
+                Ok(ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone)
+            }
+            "Glacier > Dock Outside > Ruins Platform > Throw Drone Up" => {
+                Ok(ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up)
+            }
             "Glacier > Hammond's End > Switch from Ledge > Open Doors" => {
                 Ok(ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors)
             }
@@ -17880,6 +18095,7 @@ pub enum CanonId {
     Giguna_Northeast_Gate,
     Giguna_Top_Flask,
     Glacier_Big_Drop_Rock,
+    Glacier_Dock_Flask,
     Glacier_Sea_Burial_Rock,
     Hammonds_Note,
     Infect,
@@ -18078,6 +18294,7 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
             CanonId::Giguna_Top_Flask => write!(f, "{}", "Giguna_Top_Flask"),
             CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
+            CanonId::Glacier_Dock_Flask => write!(f, "{}", "Glacier_Dock_Flask"),
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Hammonds_Note => write!(f, "{}", "Hammonds_Note"),
             CanonId::Infect => write!(f, "{}", "Infect"),
@@ -18649,6 +18866,7 @@ impl std::str::FromStr for CanonId {
             "Giguna_Northeast_Gate" => Ok(CanonId::Giguna_Northeast_Gate),
             "Giguna_Top_Flask" => Ok(CanonId::Giguna_Top_Flask),
             "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
+            "Glacier_Dock_Flask" => Ok(CanonId::Glacier_Dock_Flask),
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Hammonds_Note" => Ok(CanonId::Hammonds_Note),
             "Infect" => Ok(CanonId::Infect),

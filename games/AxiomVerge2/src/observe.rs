@@ -243,9 +243,10 @@ impl Observer for FullObservation {
                 self.cbits4
                     .insert(flags::ContextBits4::VISITED_APOCALYPSE_BOMB);
             }
-            LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
-                self.cbits6
-                    .insert(flags::ContextBits6::VISITED_NOTES_2053_02_27);
+            LocationId::Antarctica__Building_2__Behind_Boxes__Note
+            | LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
+                self.cbits7
+                    .insert(flags::ContextBits7::VISITED_NOTES_2053_02_27);
             }
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side
             | LocationId::Ebih__Base_Camp__Top_Platform__Item => {
@@ -347,6 +348,12 @@ impl Observer for FullObservation {
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy
             | LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_SYNC_FLASK);
+            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item
+            | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip
+            | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
+                self.cbits4
+                    .insert(flags::ContextBits4::VISITED_GLACIER_DOCK_FLASK);
             }
             LocationId::Glacier__The_Big_Drop__West_14__Break_Rock
             | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through
@@ -476,8 +483,8 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER);
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                self.cbits4.insert(
-                    flags::ContextBits4::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT,
+                self.cbits5.insert(
+                    flags::ContextBits5::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT,
                 );
             }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
@@ -757,8 +764,8 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GLACIER__HAMMONDS_END__BETWEEN_CENTER_DOORS__HEALTH);
             }
             LocationId::Interior__Bunker_Interior__Desk__Note => {
-                self.cbits5
-                    .insert(flags::ContextBits5::VISITED_LOC_INTERIOR__BUNKER_INTERIOR__DESK__NOTE);
+                self.cbits6
+                    .insert(flags::ContextBits6::VISITED_LOC_INTERIOR__BUNKER_INTERIOR__DESK__NOTE);
             }
             LocationId::Interior__Tent_Interior__Desk__Note => {
                 self.cbits6

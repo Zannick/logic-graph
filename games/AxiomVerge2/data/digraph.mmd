@@ -1375,6 +1375,20 @@ subgraph Glacier
     subgraph Glacier__Dock_Outside[Dock Outside]
         Glacier__Dock_Outside__Entry(Entry);
         Glacier__Dock_Outside__Do_Not_Enter(Do Not Enter);
+        Glacier__Dock_Outside__Lower_Platforms(Lower Platforms);
+        Glacier__Dock_Outside__Lower_Mid_air(Lower Mid-air);
+        Glacier__Dock_Outside__Upper_Ledge(Upper Ledge);
+        Glacier__Dock_Outside__Ruins_Stairs(Ruins Stairs);
+        Glacier__Dock_Outside__Ruins_Platform(Ruins Platform);
+        Glacier__Dock_Outside__Above_Ruins(Above Ruins);
+        Glacier__Dock_Outside__Upper_West_Hill(Upper West Hill);
+        Glacier__Dock_Outside__High_Toward_Cave(High Toward Cave);
+        Glacier__Dock_Outside__Mid_Toward_Cave(Mid Toward Cave);
+        Glacier__Dock_Outside__Cave_Mouth(Cave Mouth);
+        Glacier__Dock_Outside__Cave_Throat(Cave Throat);
+        Glacier__Dock_Outside__Cave_Gullet(Cave Gullet);
+        Glacier__Dock_Outside__Cave_Esophagus(Cave Esophagus);
+        Glacier__Dock_Outside__Cave_Treasure(Cave Treasure);
     end
     subgraph Glacier__Revival[Revival]
         Glacier__Revival__East_9(East 9);
@@ -1383,6 +1397,9 @@ subgraph Glacier
         Glacier__Revival__Lower_East(Lower East);
         Glacier__Revival__Save_Point(Save Point);
         Glacier__Revival__West_8(West 8);
+        Glacier__Revival__Pillar(Pillar);
+        Glacier__Revival__Pillar_Step(Pillar Step);
+        Glacier__Revival__Mid_air(Mid-air);
     end
     subgraph Glacier__Grid_42_10[Grid 42,10]
         Glacier__Grid_42_10__West(West);
@@ -1878,6 +1895,7 @@ subgraph Menu
         Menu__Kiengir_Map__Hammond(Hammond);
         Menu__Kiengir_Map__Nanite_Mist(Nanite Mist);
         Menu__Kiengir_Map__Apocalypse_Cache(Apocalypse Cache);
+        Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__GB_Peak(GB Peak);
@@ -2792,8 +2810,19 @@ Glacier__Crystals__Midwest_Slope --> Glacier__Crystals__West
 Glacier__Crystals__Portal_Stand --> Glacier__Crystals__Lower_Slope
 Glacier__Crystals__Upper_Ledge --> Glacier__Crystals__Top_Corner
 Glacier__Crystals__Upper_Ledge <--> Glacier__Crystals__West
+Glacier__Dock_Outside__Above_Ruins <--> Glacier__Dock_Outside__Cave_Mouth
+Glacier__Dock_Outside__Cave_Gullet --> Glacier__Dock_Outside__Cave_Throat
+Glacier__Dock_Outside__Cave_Mouth --> Glacier__Dock_Outside__Ruins_Stairs
+Glacier__Dock_Outside__Cave_Treasure --> Glacier__Dock_Outside__Cave_Esophagus
+Glacier__Dock_Outside__Cave_Treasure --> Menu__Kiengir_Map__Glacier_Dock_Flask
+Glacier__Dock_Outside__Cave_Treasure --> Menu__Warp_Only__Kiengir
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Revival__East_9
 Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
+Glacier__Dock_Outside__Lower_Mid_air <--> Glacier__Dock_Outside__Lower_Platforms
+Glacier__Dock_Outside__Lower_Mid_air --> Glacier__Dock_Outside__Upper_Ledge
+Glacier__Dock_Outside__Ruins_Platform --> Glacier__Dock_Outside__High_Toward_Cave
+Glacier__Dock_Outside__Upper_West_Hill --> Glacier__Revival__Pillar
+Glacier__Dock_Outside__Upper_West_Hill --> Glacier__Revival__Pillar_Step
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8

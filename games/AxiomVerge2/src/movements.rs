@@ -7444,14 +7444,180 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([false], SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => 1052,
         (
             [false],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 400,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => 2105,
+        // [0.4, 0.5]
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ) => 900,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1299,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+        ) => 1754,
+        (
+            [false],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 5000,
         (
             [false],
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ) => 2280,
+        (
+            [false],
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1049,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => 3333,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 2719,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1315,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 550,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 199,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 600,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2631,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 350,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 701,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 526,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 2631,
         (
             [false],
             SpotId::Glacier__Grid_31_9_12__East_10,
@@ -13793,6 +13959,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Giguna_Separator,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 300,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1100,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1533,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1666,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2066,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1733,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 200,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2600,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2133,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2333,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1800,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1700,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1900,
         (
             [false],
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -23961,14 +24272,180 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         ([true], SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => 1052,
         (
             [true],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 400,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => 2105,
+        // [0.4, 0.5]
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ) => 900,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1299,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+        ) => 1754,
+        (
+            [true],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 5000,
         (
             [true],
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ) => 2280,
+        (
+            [true],
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 5000,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1049,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 2719,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1315,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 550,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 199,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 600,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Entry,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => 350,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 701,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 526,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => 2631,
         ([true], SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             3157
         }
@@ -30196,6 +30673,151 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
             SpotId::Menu__Kiengir_Map__Giguna_Separator,
             SpotId::Menu__Kiengir_Map__Uhrum_West,
         ) => 300,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => 900,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+        ) => 800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => 1533,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => 1666,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => 2066,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => 1733,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => 200,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => 2600,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        ) => 2133,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => 2333,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => 1800,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+        ) => 1700,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ) => 1900,
         (
             [true],
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -37174,6 +37796,126 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Lower_Platforms, SpotId::Glacier__Dock_Outside__Entry) => {
+            true
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Lower_Mid_air, SpotId::Glacier__Dock_Outside__Entry) => {
+            true
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Upper_Ledge, SpotId::Glacier__Dock_Outside__Entry) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__High_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            true
+        }
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Mid_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            true
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Entry) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ) => true,
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Cave_Throat) => {
+            true
+        }
+        (SpotId::Glacier__Dock_Outside__Cave_Throat, SpotId::Glacier__Dock_Outside__Cave_Mouth) => {
+            true
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ) => true,
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => true,
         (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => true,
         (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => true,
         (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => true,
@@ -42377,6 +43119,117 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
         ) => true,
         (SpotId::Menu__Kiengir_Map__Apocalypse_Cache, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => true,
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            true
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => true,
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             true
         }
         (SpotId::Menu__Breach_Map__GB_Peak, SpotId::Menu__Breach_Map__GB_Peak) => true,
@@ -48168,7 +49021,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Siuna_Storage__Cache,
             SpotId::Menu__Kiengir_Map__Nanite_Mist,
-            0,
+            100,
         ),
         (
             SpotId::Annuna__Siuna_Storage__Cache,
@@ -48178,7 +49031,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Siuna_Storage__Cache,
             SpotId::Menu__Warp_Only__Kiengir,
-            0,
+            200,
         ),
         (
             SpotId::Annuna__Siuna_Storage__Portal_Entry,
@@ -48283,7 +49136,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Siuna_Storage__Wall_Left,
             SpotId::Menu__Kiengir_Map__Nanite_Mist,
-            0,
+            100,
         ),
         (
             SpotId::Annuna__Siuna_Storage__Wall_Left,
@@ -48338,7 +49191,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Annuna__Siuna_Storage__Within_Range,
             SpotId::Menu__Kiengir_Map__Nanite_Mist,
-            0,
+            100,
         ),
         (
             SpotId::Annuna__Siuna_Storage__Within_Range,
@@ -51568,7 +52421,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Drone_Room__Item,
             SpotId::Menu__Kiengir_Map__Remote_Drone,
-            0,
+            100,
         ),
         (
             SpotId::Ebih__Drone_Room__Item,
@@ -51578,7 +52431,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Drone_Room__Item,
             SpotId::Menu__Warp_Only__Kiengir,
-            0,
+            200,
         ),
         (
             SpotId::Ebih__Drone_Room__Left_Platform,
@@ -63666,9 +64519,139 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            1754,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            400,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            2456,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            2105,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            900,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            2105,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            1754,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            1754,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Entry,
+            1299,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            350,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            1578,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            2807,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            1754,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            1799,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            200,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            SpotId::Menu__Warp_Only__Kiengir,
+            200,
+        ),
+        (
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
             5000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            2280,
         ),
         (
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
@@ -63692,6 +64675,181 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+            1049,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            3333,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Entry,
+            1666,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            700,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            2280,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Entry,
+            2719,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            1200,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Entry,
+            1315,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            550,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            1403,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            199,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            2456,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            600,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            526,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            2631,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Entry,
+            1666,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            350,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            526,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            2456,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            2631,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Revival__Pillar,
+            2052,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Revival__Pillar_Step,
+            1701,
+        ),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -65211,6 +66369,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Glacier__Revival__Mid_air,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            100,
+        ),
+        (
+            SpotId::Glacier__Revival__Mid_air,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Revival__Overhang,
             SpotId::Glacier__Revival__East_9,
             1228,
@@ -65227,6 +66395,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__Overhang,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Revival__Pillar,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            100,
+        ),
+        (
+            SpotId::Glacier__Revival__Pillar,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Glacier__Revival__Pillar_Step,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            100,
+        ),
+        (
+            SpotId::Glacier__Revival__Pillar_Step,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -69013,7 +70201,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Irikar__Sight_Room__Item_Pedestal,
             SpotId::Menu__Kiengir_Map__Breach_Sight,
-            0,
+            100,
         ),
         (
             SpotId::Irikar__Sight_Room__Item_Pedestal,
@@ -69023,7 +70211,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Irikar__Sight_Room__Item_Pedestal,
             SpotId::Menu__Warp_Only__Kiengir,
-            0,
+            200,
         ),
         (
             SpotId::Irikar__Sight_Room__Lower_Ledge,
@@ -73551,6 +74739,156 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+            900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+            1200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+            1100,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Apocalypse,
+            800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+            1000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+            1533,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+            1666,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+            1600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Base,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+            2000,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+            2066,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+            1733,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+            200,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+            2600,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub,
+            2133,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+            2333,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+            1800,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_East,
+            1700,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+            1400,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_West,
+            1900,
+        ),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
             SpotId::Glacier__Revival__Save_Point,
             12000,
@@ -75683,7 +77021,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
             SpotId::Menu__Kiengir_Map__Anuman,
-            0,
+            100,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
@@ -75693,7 +77031,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
             SpotId::Menu__Warp_Only__Kiengir,
-            0,
+            200,
         ),
         (
             SpotId::Uhrum__Annuna_Corridor__Pedestal,
@@ -83093,12 +84431,136 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1052)
         }
         (SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => Some(1052),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => Some(400),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => Some(2456),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => Some(2105),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ) => Some(900),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => Some(2105),
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Cave_Throat) => {
+            Some(1754)
+        }
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(1299)
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ) => Some(350),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => Some(2807),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => Some(701),
+        (SpotId::Glacier__Dock_Outside__Cave_Throat, SpotId::Glacier__Dock_Outside__Cave_Mouth) => {
+            Some(1754)
+        }
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             Some(5000)
         }
+        (
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ) => Some(2280),
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             Some(5000)
         }
+        (SpotId::Glacier__Dock_Outside__High_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(1049)
+        }
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => Some(3333),
+        (SpotId::Glacier__Dock_Outside__Lower_Mid_air, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(1666)
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => Some(2280),
+        (SpotId::Glacier__Dock_Outside__Lower_Platforms, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(2719)
+        }
+        (SpotId::Glacier__Dock_Outside__Mid_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(1315)
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => Some(550),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => Some(199),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => Some(2456),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => Some(600),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => Some(526),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => Some(2631),
+        (SpotId::Glacier__Dock_Outside__Upper_Ledge, SpotId::Glacier__Dock_Outside__Entry) => {
+            Some(1666)
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => Some(350),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => Some(701),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => Some(526),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => Some(2456),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => Some(2631),
         (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             Some(3157)
         }
@@ -87602,6 +89064,117 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(333),
         (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             Some(300)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => Some(900),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => Some(1200),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => Some(1700),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => Some(800),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => Some(1100),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            Some(800)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => Some(1000),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => Some(1533),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => Some(1666),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => Some(1600),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => Some(1600),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            Some(2066)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => Some(1800),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => Some(2000),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => Some(2066),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => Some(1733),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => Some(200),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => Some(2600),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            Some(2133)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => Some(2333),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => Some(1800),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            Some(1700)
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => Some(1400),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            Some(1900)
         }
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -95725,12 +97298,136 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Glacier__Crystals__West, SpotId::Glacier__Crystals__Middle_Ledge) => {
             (Some(1052), vec![])
         }
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Above_Ruins,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+            SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => (Some(2105), vec![]),
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Cave_Throat) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Glacier__Dock_Outside__Cave_Mouth, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(1299), vec![])
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Mouth,
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Esophagus,
+        ) => (Some(2807), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Cave_Throat,
+            SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ) => (Some(701), vec![]),
+        (SpotId::Glacier__Dock_Outside__Cave_Throat, SpotId::Glacier__Dock_Outside__Cave_Mouth) => {
+            (Some(1754), vec![])
+        }
         (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => {
             (Some(5000), vec![])
         }
+        (
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ) => (Some(2280), vec![]),
         (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => {
             (Some(5000), vec![])
         }
+        (SpotId::Glacier__Dock_Outside__High_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(1049), vec![])
+        }
+        (
+            SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => (Some(3333), vec![]),
+        (SpotId::Glacier__Dock_Outside__Lower_Mid_air, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Lower_Platforms,
+            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
+        ) => (Some(2280), vec![]),
+        (SpotId::Glacier__Dock_Outside__Lower_Platforms, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(2719), vec![])
+        }
+        (SpotId::Glacier__Dock_Outside__Mid_Toward_Cave, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(1315), vec![])
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => (Some(550), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => (Some(199), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ) => (Some(2631), vec![]),
+        (SpotId::Glacier__Dock_Outside__Upper_Ledge, SpotId::Glacier__Dock_Outside__Entry) => {
+            (Some(1666), vec![])
+        }
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_Ledge,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ) => (Some(2456), vec![]),
+        (
+            SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+        ) => (Some(2631), vec![]),
         (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
             (Some(3157), vec![])
         }
@@ -100408,6 +102105,117 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(333), vec![]),
         (SpotId::Menu__Kiengir_Map__Giguna_Separator, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
             (Some(300), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        ) => (Some(900), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        ) => (Some(1700), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        ) => (Some(800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        ) => (Some(1100), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Apocalypse) => {
+            (Some(800), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        ) => (Some(1000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+        ) => (Some(1533), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        ) => (Some(1666), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        ) => (Some(1600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Giguna_Base) => {
+            (Some(2066), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        ) => (Some(1800), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        ) => (Some(2000), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        ) => (Some(2066), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator,
+        ) => (Some(1733), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        ) => (Some(200), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+        ) => (Some(2600), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Irikar_Hub) => {
+            (Some(2133), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        ) => (Some(2333), vec![]),
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        ) => (Some(1800), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_East) => {
+            (Some(1700), vec![])
+        }
+        (
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
+        ) => (Some(1400), vec![]),
+        (SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask, SpotId::Menu__Kiengir_Map__Uhrum_West) => {
+            (Some(1900), vec![])
         }
         (
             SpotId::Menu__Kiengir_Map__Glacier_Revival,
