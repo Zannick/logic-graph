@@ -44,6 +44,7 @@ struct HeapDBOptions {
 
 const BEST: &str = "best";
 const NEXT: &str = "next";
+const TOO_MANY_STEPS: usize = 1024 << 3;
 
 type NextData = (u32, Vec<u8>);
 
@@ -873,7 +874,7 @@ where
         next_entries.push((dur, state_key.clone()));
 
         assert!(
-            hist.len() < 1024,
+            hist.len() < TOO_MANY_STEPS,
             "Generated a state with way too much history: {}. Last 24:\n{:?}",
             hist.len(),
             hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
@@ -1255,16 +1256,16 @@ where
             {
                 if !prev.is_empty() {
                     assert!(
-                        hist.len() < 1024,
+                        hist.len() < TOO_MANY_STEPS,
                         "History entry found in statedb way too long: {}. Last 24:\n{:?}",
                         hist.len(),
                         hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
                     );
-                    if vec.len() >= 1024 {
+                    if vec.len() >= TOO_MANY_STEPS {
                         assert!(self.detect_cycle(state_key).is_ok());
                     }
                     assert!(
-                        vec.len() < 1024,
+                        vec.len() < TOO_MANY_STEPS,
                         "Raw history found in statedb way too long ({}), possible loop. Last 24:\n{:?}",
                         vec.len(),
                         vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
