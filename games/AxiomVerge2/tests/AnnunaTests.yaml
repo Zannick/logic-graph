@@ -13,6 +13,7 @@ all:
   context:
     mode: Indra
     save: Annuna > Mirror Match > Save Point
+    energy: 300
 
 tests:
   - eventually_obtains: Annuna_East_Bridge_Gate
@@ -21,3 +22,12 @@ tests:
     can_obtain: Destruction_Pogrom
     context:
       mode: drone
+
+  - name: Final Boss
+    start: Glacier > Apocalypse Entry > Terminal
+    with:
+      - Nanite_Mist
+    context:
+      mode: drone
+      indra: Glacier > Apocalypse Entry > Terminal
+    can_obtain: Apocalypse_Bomb

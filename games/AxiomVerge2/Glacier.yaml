@@ -1584,7 +1584,12 @@ areas:
       coord: [44.55, 10.2]
       exits:
         - to: Below Grate
+          req: Nanite_Mist
+          price: 40
+          movement: mist1
+        - to: Below Grate
           req: $mist2
+          price: 30
           movement: mist2
     - name: Below Grate
       coord: [44.55, 10.5]

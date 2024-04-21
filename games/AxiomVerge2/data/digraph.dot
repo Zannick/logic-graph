@@ -2607,6 +2607,7 @@ digraph AxiomVerge2 {
     Glacier__Apocalypse_Entry__Grate_Ledge -> Glacier__Apocalypse_Entry__Terminal;
     Glacier__Apocalypse_Entry__Grate_Ledge -> Glacier__Apocalypse_Entry__Terminal;
     Glacier__Apocalypse_Entry__Above_Grate -> Glacier__Apocalypse_Entry__Below_Grate;
+    Glacier__Apocalypse_Entry__Above_Grate -> Glacier__Apocalypse_Entry__Below_Grate;
     Glacier__Apocalypse_Entry__Below_Grate -> Glacier__Apocalypse_Entry__Grate_Ledge;
     Glacier__Apocalypse_Entry__Below_Grate -> Glacier__Apocalypse_Entry__Grate_Ledge;
     Glacier__Apocalypse_Entry__Shaft_Bottom -> Glacier__Apocalypse_Entry__Below_Grate;
