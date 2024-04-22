@@ -309,11 +309,12 @@ helpers:  # MARK: helpers
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
-     Goodbye]
+     Goodbye, Notes_2053_02_27]
+  # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{14}, Big_Flask{2}]
+    [Flask{15}, Big_Flask{3}]
   $all_health:itemList: >
-    [Health_Node, Health_Fragment{6}]
+    [Health_Node{2}, Health_Fragment{6}]
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe]
   $other_items:itemList: >

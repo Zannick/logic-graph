@@ -1734,6 +1734,20 @@ pub fn access_invoke_hook_and_invoke_hover(ctx: &Context, world: &graph::World) 
     // $hook and $hover
     (helper__hook!(ctx, world) && helper__hover!(ctx, world))
 }
+pub fn access_invoke_hook_and_invoke_hover_and_slingshot_charge(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and $hover and Slingshot_Charge
+    ((helper__hook!(ctx, world) && helper__hover!(ctx, world)) && ctx.has(Item::Slingshot_Charge))
+}
+pub fn access_invoke_hook_and_invoke_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and $hover and Slingshot_Weapon
+    ((helper__hook!(ctx, world) && helper__hover!(ctx, world)) && ctx.has(Item::Slingshot_Weapon))
+}
 pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
@@ -9081,6 +9095,86 @@ pub fn explain_invoke_hook_and_invoke_hover(
         }
     }
 }
+pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_charge(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and Slingshot_Charge
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Charge);
+                edict.insert("Slingshot_Charge", format!("{}", h));
+                (h, vec!["Slingshot_Charge"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and Slingshot_Weapon
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Weapon);
+                edict.insert("Slingshot_Weapon", format!("{}", h));
+                (h, vec!["Slingshot_Weapon"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,
     world: &graph::World,
@@ -15111,6 +15205,30 @@ pub fn observe_access_invoke_hook_and_invoke_hover(
 ) -> bool {
     // $hook and $hover
     (hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and Slingshot_Charge
+    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_slingshot_charge();
+            ctx.has(Item::Slingshot_Charge)
+        }))
+}
+pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and Slingshot_Weapon
+    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_slingshot_weapon();
+            ctx.has(Item::Slingshot_Weapon)
+        }))
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,

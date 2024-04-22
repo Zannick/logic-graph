@@ -238,6 +238,11 @@ areas:
         - to: Ledge
         - to: Lower East
           jumps_down: 2
+      exits:
+        - to: West 9
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Ledge
       coord: [41.3, 8.8]
       local:
@@ -245,6 +250,15 @@ areas:
           jumps: 2
         - to: Lower East
           jumps_down: 3
+      exits:
+        - to: West 9
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West 9
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Lower East
       coord: [41.95, 9.7]
       local:
@@ -253,15 +267,38 @@ areas:
       exits:
         - to: Grid 42,10 > West
           tags: [xshift]
+    - name: West 9
+      coord: [41.05, 8.4]
+      local:
+        - to: Ledge
+      exits:
+        - to: Overhang
+          req: $hover
+          movement: base
+        - to: Grid 39-40,7-9 > East 9
+          tags: [xshift]
+
     # Upper portion
     - name: Save Point
       coord: [41.5, 7.5]
       local:
         - to: West 8
+        - to: Mid-air
+          jumps: 1
+      exits:
+        - to: Grid 39-40,7-9 > First Upper Platform
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+        - to: Pillar
+          req: $grab
+          movement: base
+          jumps: 2
       actions:
         - name: Save
           do: $save
-          time: 1.2
+          tags: [save]
     - name: West 8
       coord: [41.05, 7.95]
       local:
@@ -272,10 +309,55 @@ areas:
           tags: [xshift]
     - name: Pillar
       coord: [41.8, 7.4]
+      local:
+        - to: Save Point
+      locations:
+        - name: Health
+          canon: Revival Health Node
+          item: Health_Node
+          tags: [standing]
+      exits:
+        - to: Dock Outside > Upper West Hill
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Pillar Step
       coord: [41.9, 7.6]
+      local:
+        - to: Pillar
+          thru: [41.9, 7.4]
+          jumps: [1, 0]
+      exits:
+        - to: Dock Outside > Upper West Hill
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Mid-air
       coord: [41.6, 7.5]
+      local:
+        - to: Save Point
+      exits:
+        - to: Dock Outside > Ruins Platform
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Dock Outside > Ruins Stairs
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+      hybrid:
+        - name: Fly to the Platform and Grab
+          to: Dock Outside > Ruins Platform
+          req: $hook and $hover
+          canon: Revival Health Node
+          item: Health_Node
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - name: Fly to the Stairs and Grab
+          to: Dock Outside > Ruins Stairs
+          req: $hook and $hover
+          canon: Revival Health Node
+          item: Health_Node
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
 
 # It sure is going to get difficult naming every room without generic names
 - name: Grid 42,10  # MARK: Grid 42,10
@@ -705,23 +787,162 @@ areas:
 
 - name: Grid 39-40,7-9  # MARK: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [40, 7, 41, 8]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Glacier 40,8
   spots:
     - name: Upper East
       coord: [40.95, 7.95]
       local:
-        - to: West
+        - to: Upper Scaffolding
       exits:
         - to: Revival > West 8
           tags: [xshift]
+    - name: First Upper Platform
+      coord: [40.9, 7.5]
+      local:
+        - to: Upper Scaffolding
+        - to: Third Upper Platform
+          jumps: 2
+      exits:
+        - to: Revival > Save Point
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Third Upper Platform
+      coord: [40.6, 6.95]
+      local:
+        - to: Floating Rock
+          thru: [40.5, 6.7]
+          jumps: [1, 0]
+        - to: Upper Scaffolding
+        - to: West
+      exits:
+        - to: Fortress Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+      hybrid:
+        # in theory we can do these? maybe even without the upgrades
+        - name: Fly-by Flask Toward Fortress
+          to: Fortress Ledge
+          canon: Glacier 40,8 Flask
+          item: Flask
+          req: $hook and $hover and Slingshot_Weapon
+          movement: fast_hover
+          jumps: 1
+          item_tags: [flask]
+        - name: Charged Fly-by Flask Toward Fortress
+          to: Fortress Ledge
+          canon: Glacier 40,8 Flask
+          item: Flask
+          req: $hook and $hover and Slingshot_Charge
+          movement: fast_hover
+          jumps: 1
+          item_tags: [flask]
+          penalty_tags: [charge_time]
+    - name: Floating Rock
+      coord: [40.4, 6.7]
+      local:
+        - to: First Upper Platform
+        - to: West
+        - to: Upper Scaffolding
+          thru: [40.3, 6.7]
+      locations:
+        - name: Item
+          canon: Glacier 40,8 Flask
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: Fortress Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+      hybrid:
+        - name: Flask Collection Skip
+          to: Menu > Warp Only > Kiengir
+          canon: Glacier 40,8 Flask
+          item: Flask
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          to: Menu > Kiengir Map > Glacier 40,8
+          canon: Glacier 40,8 Flask
+          item: Flask
+          req: Fast_Travel and $melee_cskip
+          tags: [cskip]
+    - name: Fortress Ledge
+      coord: [40.05, 6.75]
+
+    - name: Upper Scaffolding
+      coord: [40.3, 7.95]
+      local:
+        - to: Upper East
+        - to: West
+        - to: Under Scaffolding
+          jumps_down: 1
+
     - name: West
       coord: [39.05, 8.65]
       local:
-        - to: Upper East
+        - to: Upper Scaffolding
           thru: [[40.0, 8.3], [40.0, 8.2]]
           jumps: [2, 1, 1]
       exits:
         - to: Grid 37-38,9 > East
           tags: [xshift]
+
+    # Southeast
+    - name: Under Scaffolding
+      coord: [40.3, 8.35]
+      local:
+        - to: West
+        - to: Lower Floor
+        - to: Upper Scaffolding
+          thru: [[40.1, 8.25], [40.1, 8.1]]
+          jumps: [1, 1, 1]
+      exits:
+        - to: East 9
+          req: $hover
+          movement: base
+        - to: Upper Scaffolding
+          req: $grab or $hook
+          movement: base
+          jumps: 2
+    - name: Lower Floor
+      coord: [40.65, 8.75]
+      local:
+        - to: West
+          jumps: 1
+      exits:
+        - to: East 9
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East 9
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Under Scaffolding
+          req: Anuman and $grab
+          movement: base
+          jumps: 2
+        - to: Under Scaffolding
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: East 9
+      coord: [40.95, 8.4]
+      local:
+        - to: Lower Floor
+      exits:
+        - to: Revival > West 9
+          tags: [xshift]
+        - to: Under Scaffolding
+          req: $hover
+          movement: base
+          jumps: 1
 
 - name: Grid 37-38,9  # MARK: Grid 37-38,9
   on_entry: $reset_old_area(^newpos)

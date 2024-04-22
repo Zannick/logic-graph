@@ -1167,6 +1167,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Revival__Overhang
         | SpotId::Glacier__Revival__Ledge
         | SpotId::Glacier__Revival__Lower_East
+        | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
@@ -1206,9 +1207,16 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Sea_Burial__West_14
         | SpotId::Glacier__Sea_Burial__Inside_the_Grate
         | SpotId::Glacier__Sea_Burial__Grate_Left => AreaId::Glacier__Sea_Burial,
-        SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
-            AreaId::Glacier__Grid_39_40_7_9
-        }
+        SpotId::Glacier__Grid_39_40_7_9__Upper_East
+        | SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform
+        | SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform
+        | SpotId::Glacier__Grid_39_40_7_9__Floating_Rock
+        | SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge
+        | SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding
+        | SpotId::Glacier__Grid_39_40_7_9__West
+        | SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding
+        | SpotId::Glacier__Grid_39_40_7_9__Lower_Floor
+        | SpotId::Glacier__Grid_39_40_7_9__East_9 => AreaId::Glacier__Grid_39_40_7_9,
         SpotId::Glacier__Grid_37_38_9__East | SpotId::Glacier__Grid_37_38_9__West => {
             AreaId::Glacier__Grid_37_38_9
         }
@@ -1567,7 +1575,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Hammond
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
-        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
+        | SpotId::Menu__Kiengir_Map__Glacier_40_8 => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -2859,6 +2868,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Revival__Overhang
         | SpotId::Glacier__Revival__Ledge
         | SpotId::Glacier__Revival__Lower_East
+        | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
@@ -2896,9 +2906,16 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Sea_Burial__West_14
         | SpotId::Glacier__Sea_Burial__Inside_the_Grate
         | SpotId::Glacier__Sea_Burial__Grate_Left => RegionId::Glacier,
-        SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
-            RegionId::Glacier
-        }
+        SpotId::Glacier__Grid_39_40_7_9__Upper_East
+        | SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform
+        | SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform
+        | SpotId::Glacier__Grid_39_40_7_9__Floating_Rock
+        | SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge
+        | SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding
+        | SpotId::Glacier__Grid_39_40_7_9__West
+        | SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding
+        | SpotId::Glacier__Grid_39_40_7_9__Lower_Floor
+        | SpotId::Glacier__Grid_39_40_7_9__East_9 => RegionId::Glacier,
         SpotId::Glacier__Grid_37_38_9__East | SpotId::Glacier__Grid_37_38_9__West => {
             RegionId::Glacier
         }
@@ -3249,7 +3266,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Hammond
         | SpotId::Menu__Kiengir_Map__Nanite_Mist
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
-        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
+        | SpotId::Menu__Kiengir_Map__Glacier_40_8 => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3425,178 +3443,72 @@ impl world::Accessible for Location {
             LocationId::Amagi__Liru_Room__Shrine__Item => true,
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => true,
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => true,
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
-                rules::access_defeat_mus_a_m20(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
-                rules::access_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::access_defeat_mus_a_m20(ctx, world),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::access_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world),
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi__West_Lake__Stronghold_Item__Item => true,
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => true,
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
-                rules::access_infect_and_anuman(ctx, world)
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                rules::access_infect_and_not_anuman(ctx, world)
-            }
-            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman(ctx, world),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman(ctx, world),
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::access_invoke_can_damage(ctx, world),
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => true,
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => true,
             LocationId::Annuna__Egg_Room__Cache__Flask => true,
-            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
-                rules::access_invoke_remote_boomerang(ctx, world)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
-                rules::access_invoke_remote_boomerang(ctx, world)
-            }
-            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => rules::access_invoke_remote_boomerang(ctx, world),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => rules::access_invoke_remote_boomerang(ctx, world),
+            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => true,
             LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => true,
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Annuna__Mirror_Match__Plinth__Item => true,
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                rules::access_separation(ctx, world)
-            }
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::access_separation(ctx, world),
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
-                rules::access_mode_eq_drone(ctx, world)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
-                rules::access_mode_eq_drone_and_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
-                rules::access_mode_eq_drone_and_nanite_mist(ctx, world)
-            }
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::access_mode_eq_drone(ctx, world),
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
             LocationId::Annuna__Siuna_Storage__Cache__Urn => true,
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
-                rules::access_invoke_melee_cskip(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::access_fast_travel_and_invoke_melee_cskip(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
-                rules::access_mode_eq_drone(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => {
-                rules::access_mode_ne_drone_and_ice_axe(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
-                rules::access_invoke_boomerang2(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
-                rules::access_fast_travel_and_invoke_boomerang2(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => {
-                rules::access_mode_eq_drone(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => {
-                rules::access_mode_ne_drone_and_ice_axe(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
-                rules::access_fast_travel_and_invoke_boomerang(ctx, world)
-            }
-            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::access_mode_eq_drone(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::access_nanite_mist(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::access_invoke_mist2(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => rules::access_mode_ne_drone_and_ice_axe(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => rules::access_invoke_boomerang2(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => rules::access_fast_travel_and_invoke_boomerang2(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => rules::access_mode_eq_drone(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => rules::access_nanite_mist(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => rules::access_invoke_mist2(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => rules::access_mode_ne_drone_and_ice_axe(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => rules::access_fast_travel_and_invoke_boomerang(ctx, world),
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => true,
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
-                rules::access_mode_eq_drone_and_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
-                rules::access_mode_eq_drone_and_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => rules::access_invoke_mist2(ctx, world),
             LocationId::Annuna__Sniper_Valley__Table__Item => true,
-            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
+            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => rules::access_invoke_more_refills(ctx, world),
             LocationId::Annuna__Twisty_Passages__Top__Tablet => true,
-            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => rules::access_invoke_can_damage(ctx, world),
             LocationId::Annuna__Vertical_Room__Plinth__Item => true,
             LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
@@ -3607,143 +3519,69 @@ impl world::Accessible for Location {
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => true,
             LocationId::Ebih__Base_Camp__Top_Platform__Item => true,
             LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::access_ebih_alu(ctx, world),
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                rules::access_invoke_overheat_and_invoke_can_damage(ctx, world)
-            }
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => rules::access_invoke_overheat_and_invoke_can_damage(ctx, world),
             LocationId::Ebih__Boss_Room__East_Ledge__Item => true,
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => true,
             LocationId::Ebih__Drone_Room__Item__Urn => true,
             LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
-            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
-                rules::access_fast_travel(ctx, world)
-            }
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                rules::access_boomerang(ctx, world)
-            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang(ctx, world),
             LocationId::Ebih__Ebih_East__Corner__Urn => true,
             LocationId::Ebih__Ebih_East__Dispenser__Vend => rules::access_infect(ctx, world),
             LocationId::Ebih__Ebih_East__East_Ledge__Note => true,
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
-                rules::access_boomerang(ctx, world)
-            }
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => rules::access_boomerang(ctx, world),
             LocationId::Ebih__Ebih_West__Alcove__Tablet => true,
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                rules::access_invoke_bs(ctx, world)
-            }
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::access_invoke_bs(ctx, world),
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
             LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
-            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                rules::access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
-                rules::access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
-                rules::access_invoke_activate(ctx, world)
-            }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => rules::access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => rules::access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::access_invoke_activate(ctx, world),
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => true,
             LocationId::Giguna__Carnelian__Vault__Item => true,
             LocationId::Giguna__Clouds__Cache__Item => true,
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
-                rules::access_mode_eq_drone_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::access_mode_eq_drone_and_mist_upgrade(ctx, world),
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => rules::access_invoke_can_damage(ctx, world),
             LocationId::Giguna__Dual_Path__Wall_Secret__Health => true,
             LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => true,
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => true,
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Giguna__Gateway__Button__Hit_Switch => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Giguna__Gateway__Button__Hit_Switch => rules::access_invoke_can_damage(ctx, world),
             LocationId::Giguna__Gateway__Flask_Ledge__Item => true,
             LocationId::Giguna__Giguna_Base__Ruin__Item => true,
             LocationId::Giguna__Giguna_Base__Table__News => true,
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => true,
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => rules::access_invoke_boomerang(ctx, world),
             LocationId::Giguna__Giguna_Northeast__Vault__Item => true,
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
-                rules::access_giguna_gubi(ctx, world)
-            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::access_giguna_gubi(ctx, world),
             LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => true,
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                rules::access_invoke_overheat(ctx, world)
-            }
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::access_invoke_overheat(ctx, world),
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => true,
             LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => true,
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
-                rules::access_nanite_mist_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
-                rules::access_nanite_mist_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(ctx, world),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(ctx, world),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => rules::access_invoke_shockwave(ctx, world),
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => true,
             LocationId::Giguna__Lamassu__Deposit__Flask => true,
             LocationId::Giguna__Ruins_Center__Tablet__Item => true,
@@ -3751,884 +3589,350 @@ impl world::Accessible for Location {
             LocationId::Giguna__Ruins_Top__Flask__Flask => true,
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => true,
             LocationId::Giguna__Wasteland__Door_Right__Health => true,
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
-                rules::access_mode_eq_drone(ctx, world)
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                rules::access_mode_eq_drone_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
-                rules::access_mode_eq_drone(ctx, world)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
-                rules::access_mode_eq_drone_and_mist_upgrade(ctx, world)
-            }
-            LocationId::Giguna__West_Caverns__Bush__Item => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(ctx, world),
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_mist_upgrade(ctx, world),
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(ctx, world),
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_mist_upgrade(ctx, world),
+            LocationId::Giguna__West_Caverns__Bush__Item => rules::access_invoke_more_refills(ctx, world),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
             LocationId::Giguna__West_Tower__Top__Tablet => true,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
-                rules::access_apocalypse_bomb(ctx, world)
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
-                rules::access_apocalypse_bomb_and_invoke_hook(ctx, world)
-            }
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => true,
-            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                rules::access_boomerang(ctx, world)
-            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::access_boomerang(ctx, world),
             LocationId::Glacier__Compass_Room__Center__Table => true,
             LocationId::Glacier__Crystals__Lower_Corner__Item => true,
             LocationId::Glacier__Crystals__Top_Corner__Tablet => true,
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
-                rules::access_invoke_melee_cskip(ctx, world)
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
-                rules::access_fast_travel_and_invoke_melee_cskip(ctx, world)
-            }
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
             LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => true,
             LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => true,
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item => true,
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::access_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::access_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world),
             LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => true,
-            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                rules::access_portal_eq_position(ctx, world)
-            }
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => rules::access_portal_eq_position(ctx, world),
             LocationId::Glacier__Hammonds_End__Hammond__Note => true,
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
-                rules::access_boomerang(ctx, world)
-            }
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => rules::access_boomerang(ctx, world),
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => true,
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
-                rules::access_invoke_melee(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
-                rules::access_invoke_melee(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                rules::access_not_amashilama(ctx, world)
-            }
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            LocationId::Glacier__Revival__Pillar__Health => true,
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::access_invoke_melee(ctx, world),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::access_invoke_melee(ctx, world),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::access_not_amashilama(ctx, world),
             LocationId::Glacier__Sea_Burial__Deep_Cache__Health => true,
             LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => true,
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
-                rules::access_invoke_melee(ctx, world)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
-                rules::access_invoke_melee(ctx, world)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
-                rules::access_invoke_mist2(ctx, world)
-            }
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::access_invoke_melee(ctx, world),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::access_invoke_melee(ctx, world),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::access_nanite_mist(ctx, world),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             LocationId::Glacier__Vertical_Room__Peak__Flask => true,
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                rules::access_boomerang(ctx, world)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
-                rules::access_invoke_sync(ctx, world)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
-                rules::access_invoke_sync(ctx, world)
-            }
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::access_boomerang(ctx, world),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::access_invoke_sync(ctx, world),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::access_invoke_sync(ctx, world),
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => true,
             LocationId::Interior__Building_Interior__Corner__Urn => true,
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::access_invoke_boomerang(ctx, world),
             LocationId::Interior__Bunker_Interior__Desk__Note => true,
             LocationId::Interior__Ebih_Cave__Entry__Health => true,
-            LocationId::Interior__Garage__Boxes__Under_Boxes => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Interior__Garage__Boxes__Under_Boxes => rules::access_invoke_can_damage(ctx, world),
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => true,
             LocationId::Interior__Tent_Interior__Desk__Note => true,
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
-                rules::access_irikar_gudam(ctx, world)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::access_irikar_gudam(ctx, world),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => rules::access_invoke_shockwave(ctx, world),
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => true,
             LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => true,
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => true,
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
-                rules::access_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world)
-            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => rules::access_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world),
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => true,
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => true,
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
             LocationId::Irikar__Lamassu__Desk__Item => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
-                rules::access_fast_travel(ctx, world)
-            }
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => true,
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => true,
             LocationId::Irikar_Breach__Worm_Rave__Corner__Item => true,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                rules::access_melee_damage(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                rules::access_melee_damage_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => rules::access_melee_damage(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => rules::access_melee_damage_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => true,
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                rules::access_melee_speed(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                rules::access_melee_speed_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => rules::access_melee_speed(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => rules::access_melee_speed_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => true,
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                rules::access_ranged_damage(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                rules::access_ranged_damage_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => rules::access_ranged_damage(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => rules::access_ranged_damage_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => true,
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                rules::access_ranged_speed(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                rules::access_ranged_speed_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => rules::access_ranged_speed(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => rules::access_ranged_speed_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => true,
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                rules::access_drone_melee_damage(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                rules::access_drone_melee_damage_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => rules::access_drone_melee_damage(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => rules::access_drone_melee_damage_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => true,
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                rules::access_drone_melee_speed(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                rules::access_drone_melee_speed_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => rules::access_drone_melee_speed(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => rules::access_drone_melee_speed_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => true,
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                rules::access_infect_l1(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                rules::access_infect_l2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => rules::access_infect_l1(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => rules::access_infect_l2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => true,
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                rules::access_infection_range(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                rules::access_infection_range_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => rules::access_infection_range(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => rules::access_infection_range_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => true,
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
-                rules::access_infection_speed(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => rules::access_infection_speed(ctx, world),
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => true,
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                rules::access_nano_points(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                rules::access_nano_points_2(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => rules::access_nano_points(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => rules::access_nano_points_2(ctx, world),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => true,
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                rules::access_health_upgrade(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                rules::access_health_upgrade_2(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
-                rules::access_health_upgrade_3(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
-                rules::access_health_upgrade_4(ctx, world)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                rules::access_nanite_mist(ctx, world)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => rules::access_health_upgrade(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => rules::access_health_upgrade_2(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => rules::access_health_upgrade_3(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => rules::access_health_upgrade_4(ctx, world),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => rules::access_nanite_mist(ctx, world),
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => rules::access_invoke_shockwave(ctx, world),
             LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => true,
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => true,
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => true,
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
-                rules::access_fast_travel(ctx, world)
-            }
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Uhrum__Annuna_Corridor__Statue__Item => true,
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
-                rules::access_invoke_boomerang(ctx, world)
-            }
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::access_invoke_can_damage(ctx, world),
             LocationId::Uhrum__Siege_Corridor__Pond__Item => true,
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
-                rules::access_invoke_charge(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
-                rules::access_invoke_spin(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
-                rules::access_invoke_charge(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
-                rules::access_invoke_spin(ctx, world)
-            }
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => rules::access_invoke_shockwave(ctx, world),
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => true,
-            LocationId::Uhrum__Waterfalls__East_26__Block => {
-                rules::access_invoke_shockwave(ctx, world)
-            }
+            LocationId::Uhrum__Waterfalls__East_26__Block => rules::access_invoke_shockwave(ctx, world),
             LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => true,
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
-                rules::access_invoke_can_damage(ctx, world)
-            }
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => rules::access_invoke_can_damage(ctx, world),
             LocationId::Uhrum__West_Entrance__Inner_Dais__Item => true,
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
-                rules::access_invoke_charge(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
-                rules::access_invoke_spin(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
-                rules::access_invoke_charge(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
-                rules::access_invoke_spin(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Sand__Refill => {
-                rules::access_invoke_more_refills(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
-                rules::access_invoke_charge(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
-                rules::access_invoke_spin(ctx, world)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
-                rules::access_invoke_mist2(ctx, world)
-            }
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Uhrum__West_Entrance__Sand__Refill => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
-                rules::observe_access_defeat_mus_a_m20(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
-                rules::observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(
-                    ctx, world, full_obs,
-                )
-            }
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
-                rules::observe_access_infect_and_anuman(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                rules::observe_access_infect_and_not_anuman(ctx, world, full_obs)
-            }
-            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
-                rules::observe_access_invoke_remote_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
-                rules::observe_access_invoke_remote_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                rules::observe_access_separation(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
-                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
-                rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
-                rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
-                rules::observe_access_invoke_melee_cskip(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
-                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => {
-                rules::observe_access_mode_ne_drone_and_ice_axe(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
-                rules::observe_access_invoke_boomerang2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
-                rules::observe_access_fast_travel_and_invoke_boomerang2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => {
-                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => {
-                rules::observe_access_mode_ne_drone_and_ice_axe(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
-                rules::observe_access_fast_travel_and_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
-                rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
-                rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
-                rules::observe_access_ebih_alu(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                rules::observe_access_invoke_overheat_and_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
-                rules::observe_access_fast_travel(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                rules::observe_access_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
-                rules::observe_access_infect(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
-                rules::observe_access_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                rules::observe_access_invoke_bs(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                rules::observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
-                    ctx, world, full_obs,
-                )
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
-                rules::observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
-                    ctx, world, full_obs,
-                )
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
-                rules::observe_access_invoke_activate(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
-                rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Gateway__Button__Hit_Switch => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
-                rules::observe_access_giguna_gubi(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                rules::observe_access_invoke_overheat(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
-                rules::observe_access_nanite_mist_and_mist_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
-                rules::observe_access_nanite_mist_and_mist_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
-                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
-                rules::observe_access_mode_eq_drone(ctx, world, full_obs)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
-                rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Giguna__West_Caverns__Bush__Item => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
-                rules::observe_access_apocalypse_bomb(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
-                rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                rules::observe_access_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
-                rules::observe_access_invoke_melee_cskip(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
-                rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                rules::observe_access_portal_eq_position(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
-                rules::observe_access_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
-                rules::observe_access_invoke_melee(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
-                rules::observe_access_invoke_melee(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                rules::observe_access_not_amashilama(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
-                rules::observe_access_invoke_melee(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
-                rules::observe_access_invoke_melee(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                rules::observe_access_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
-                rules::observe_access_invoke_sync(ctx, world, full_obs)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
-                rules::observe_access_invoke_sync(ctx, world, full_obs)
-            }
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Interior__Garage__Boxes__Under_Boxes => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
-                rules::observe_access_irikar_gudam(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
-                rules::observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(
-                    ctx, world, full_obs,
-                )
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
-                rules::observe_access_fast_travel(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                rules::observe_access_melee_damage(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                rules::observe_access_melee_damage_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                rules::observe_access_melee_speed(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                rules::observe_access_melee_speed_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                rules::observe_access_ranged_damage(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                rules::observe_access_ranged_damage_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                rules::observe_access_ranged_speed(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                rules::observe_access_ranged_speed_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                rules::observe_access_drone_melee_damage(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                rules::observe_access_drone_melee_damage_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                rules::observe_access_drone_melee_speed(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                rules::observe_access_drone_melee_speed_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                rules::observe_access_infect_l1(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                rules::observe_access_infect_l2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                rules::observe_access_infection_range(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                rules::observe_access_infection_range_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
-                rules::observe_access_infection_speed(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                rules::observe_access_nano_points(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                rules::observe_access_nano_points_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                rules::observe_access_health_upgrade(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                rules::observe_access_health_upgrade_2(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
-                rules::observe_access_health_upgrade_3(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
-                rules::observe_access_health_upgrade_4(ctx, world, full_obs)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                rules::observe_access_nanite_mist(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
-                rules::observe_access_fast_travel(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
-                rules::observe_access_invoke_boomerang(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
-                rules::observe_access_invoke_charge(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
-                rules::observe_access_invoke_spin(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
-                rules::observe_access_invoke_charge(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
-                rules::observe_access_invoke_spin(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__Waterfalls__East_26__Block => {
-                rules::observe_access_invoke_shockwave(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
-                rules::observe_access_invoke_can_damage(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
-                rules::observe_access_invoke_charge(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
-                rules::observe_access_invoke_spin(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
-                rules::observe_access_invoke_charge(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
-                rules::observe_access_invoke_spin(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Sand__Refill => {
-                rules::observe_access_invoke_more_refills(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
-                rules::observe_access_invoke_charge(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
-                rules::observe_access_invoke_spin(ctx, world, full_obs)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
-                rules::observe_access_invoke_mist2(ctx, world, full_obs)
-            }
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::observe_access_defeat_mus_a_m20(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman(ctx, world, full_obs),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman(ctx, world, full_obs),
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => rules::observe_access_invoke_remote_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => rules::observe_access_invoke_remote_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::observe_access_separation(ctx, world, full_obs),
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => rules::observe_access_mode_ne_drone_and_ice_axe(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => rules::observe_access_invoke_boomerang2(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => rules::observe_access_fast_travel_and_invoke_boomerang2(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => rules::observe_access_mode_ne_drone_and_ice_axe(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => rules::observe_access_fast_travel_and_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::observe_access_ebih_alu(ctx, world, full_obs),
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => rules::observe_access_invoke_overheat_and_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::observe_access_boomerang(ctx, world, full_obs),
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => rules::observe_access_infect(ctx, world, full_obs),
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => rules::observe_access_boomerang(ctx, world, full_obs),
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::observe_access_invoke_bs(ctx, world, full_obs),
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => rules::observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => rules::observe_access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::observe_access_invoke_activate(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Gateway__Button__Hit_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::observe_access_giguna_gubi(ctx, world, full_obs),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::observe_access_invoke_overheat(ctx, world, full_obs),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::observe_access_nanite_mist_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::observe_access_nanite_mist_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Giguna__West_Caverns__Bush__Item => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::observe_access_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => rules::observe_access_portal_eq_position(ctx, world, full_obs),
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => rules::observe_access_boomerang(ctx, world, full_obs),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::observe_access_not_amashilama(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::observe_access_invoke_sync(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_invoke_sync(ctx, world, full_obs),
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Interior__Garage__Boxes__Under_Boxes => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::observe_access_irikar_gudam(ctx, world, full_obs),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world, full_obs),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => rules::observe_access_melee_damage(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => rules::observe_access_melee_damage_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => rules::observe_access_melee_speed(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => rules::observe_access_melee_speed_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => rules::observe_access_ranged_damage(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => rules::observe_access_ranged_damage_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => rules::observe_access_ranged_speed(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => rules::observe_access_ranged_speed_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => rules::observe_access_drone_melee_damage(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => rules::observe_access_drone_melee_damage_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => rules::observe_access_drone_melee_speed(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => rules::observe_access_drone_melee_speed_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => rules::observe_access_infect_l1(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => rules::observe_access_infect_l2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => rules::observe_access_infection_range(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => rules::observe_access_infection_range_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => rules::observe_access_infection_speed(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => rules::observe_access_nano_points(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => rules::observe_access_nano_points_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => rules::observe_access_health_upgrade(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => rules::observe_access_health_upgrade_2(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => rules::observe_access_health_upgrade_3(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => rules::observe_access_health_upgrade_4(ctx, world, full_obs),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Uhrum__Waterfalls__East_26__Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Sand__Refill => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -4701,554 +4005,194 @@ impl world::Accessible for Location {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
-                rules::explain_defeat_mus_a_m20(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
-                rules::explain_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => {
-                rules::explain_infect_and_anuman(ctx, world, edict)
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                rules::explain_infect_and_not_anuman(ctx, world, edict)
-            }
-            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
-                rules::explain_invoke_remote_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
-                rules::explain_invoke_remote_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                rules::explain_separation(ctx, world, edict)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => {
-                rules::explain_mode_eq_drone(ctx, world, edict)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
-                rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
-                rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
-                rules::explain_invoke_melee_cskip(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => {
-                rules::explain_mode_eq_drone(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => {
-                rules::explain_mode_ne_drone_and_ice_axe(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
-                rules::explain_invoke_boomerang2(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
-                rules::explain_fast_travel_and_invoke_boomerang2(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => {
-                rules::explain_mode_eq_drone(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => {
-                rules::explain_mode_ne_drone_and_ice_axe(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
-                rules::explain_fast_travel_and_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
-                rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
-                rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
-                rules::explain_ebih_alu(ctx, world, edict)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                rules::explain_invoke_overheat_and_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
-                rules::explain_fast_travel(ctx, world, edict)
-            }
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                rules::explain_boomerang(ctx, world, edict)
-            }
-            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
-                rules::explain_infect(ctx, world, edict)
-            }
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
-                rules::explain_boomerang(ctx, world, edict)
-            }
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                rules::explain_invoke_bs(ctx, world, edict)
-            }
-            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
-                    ctx, world, edict,
-                )
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
-                rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(
-                    ctx, world, edict,
-                )
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
-                rules::explain_invoke_activate(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
-                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Giguna__Gateway__Button__Hit_Switch => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
-                rules::explain_giguna_gubi(ctx, world, edict)
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                rules::explain_invoke_overheat(ctx, world, edict)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
-                rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
-                rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
-                rules::explain_mode_eq_drone(ctx, world, edict)
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
-                rules::explain_mode_eq_drone(ctx, world, edict)
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
-                rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Giguna__West_Caverns__Bush__Item => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
-                rules::explain_apocalypse_bomb(ctx, world, edict)
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
-                rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict)
-            }
-            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                rules::explain_boomerang(ctx, world, edict)
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => {
-                rules::explain_invoke_melee_cskip(ctx, world, edict)
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
-                rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict)
-            }
-            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                rules::explain_portal_eq_position(ctx, world, edict)
-            }
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
-                rules::explain_boomerang(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
-                rules::explain_invoke_melee(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
-                rules::explain_invoke_melee(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                rules::explain_not_amashilama(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
-                rules::explain_invoke_melee(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
-                rules::explain_invoke_melee(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                rules::explain_boomerang(ctx, world, edict)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
-                rules::explain_invoke_sync(ctx, world, edict)
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
-                rules::explain_invoke_sync(ctx, world, edict)
-            }
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Interior__Garage__Boxes__Under_Boxes => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
-                rules::explain_irikar_gudam(ctx, world, edict)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
-                rules::explain_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world, edict)
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
-                rules::explain_fast_travel(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                rules::explain_melee_damage(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                rules::explain_melee_damage_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                rules::explain_melee_speed(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                rules::explain_melee_speed_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                rules::explain_ranged_damage(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                rules::explain_ranged_damage_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                rules::explain_ranged_speed(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                rules::explain_ranged_speed_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                rules::explain_drone_melee_damage(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                rules::explain_drone_melee_damage_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                rules::explain_drone_melee_speed(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                rules::explain_drone_melee_speed_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                rules::explain_infect_l1(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                rules::explain_infect_l2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                rules::explain_infection_range(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                rules::explain_infection_range_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
-                rules::explain_infection_speed(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                rules::explain_nano_points(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                rules::explain_nano_points_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                rules::explain_health_upgrade(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                rules::explain_health_upgrade_2(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
-                rules::explain_health_upgrade_3(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
-                rules::explain_health_upgrade_4(ctx, world, edict)
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                rules::explain_nanite_mist(ctx, world, edict)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
-                rules::explain_fast_travel(ctx, world, edict)
-            }
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
-                rules::explain_invoke_boomerang(ctx, world, edict)
-            }
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
-                rules::explain_invoke_charge(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
-                rules::explain_invoke_spin(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
-                rules::explain_invoke_charge(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
-                rules::explain_invoke_spin(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Uhrum__Waterfalls__East_26__Block => {
-                rules::explain_invoke_shockwave(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
-                rules::explain_invoke_can_damage(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
-                rules::explain_invoke_charge(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
-                rules::explain_invoke_spin(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
-                rules::explain_invoke_charge(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
-                rules::explain_invoke_spin(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Sand__Refill => {
-                rules::explain_invoke_more_refills(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
-                rules::explain_invoke_charge(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
-                rules::explain_invoke_spin(ctx, world, edict)
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
-                rules::explain_invoke_mist2(ctx, world, edict)
-            }
-            _ => (true, vec![]),
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::explain_defeat_mus_a_m20(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::explain_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman(ctx, world, edict),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman(ctx, world, edict),
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => rules::explain_invoke_remote_boomerang(ctx, world, edict),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => rules::explain_invoke_remote_boomerang(ctx, world, edict),
+            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::explain_separation(ctx, world, edict),
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::explain_mode_eq_drone(ctx, world, edict),
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::explain_mode_eq_drone(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => rules::explain_mode_ne_drone_and_ice_axe(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => rules::explain_invoke_boomerang2(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => rules::explain_fast_travel_and_invoke_boomerang2(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => rules::explain_mode_eq_drone(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => rules::explain_mode_ne_drone_and_ice_axe(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => rules::explain_fast_travel_and_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::explain_ebih_alu(ctx, world, edict),
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => rules::explain_invoke_overheat_and_invoke_can_damage(ctx, world, edict),
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::explain_boomerang(ctx, world, edict),
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => rules::explain_infect(ctx, world, edict),
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => rules::explain_boomerang(ctx, world, edict),
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::explain_invoke_bs(ctx, world, edict),
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => rules::explain_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::explain_invoke_activate(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Gateway__Button__Hit_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::explain_giguna_gubi(ctx, world, edict),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::explain_invoke_overheat(ctx, world, edict),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::explain_nanite_mist_and_mist_upgrade(ctx, world, edict),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_mist_upgrade(ctx, world, edict),
+            LocationId::Giguna__West_Caverns__Bush__Item => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::explain_boomerang(ctx, world, edict),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::explain_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world, edict),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::explain_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => rules::explain_portal_eq_position(ctx, world, edict),
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => rules::explain_boomerang(ctx, world, edict),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::explain_invoke_melee(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::explain_not_amashilama(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::explain_boomerang(ctx, world, edict),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::explain_invoke_sync(ctx, world, edict),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_invoke_sync(ctx, world, edict),
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Interior__Garage__Boxes__Under_Boxes => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::explain_irikar_gudam(ctx, world, edict),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => rules::explain_not_irikar_royal_storage_wall_and_mist_upgrade(ctx, world, edict),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => rules::explain_melee_damage(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => rules::explain_melee_damage_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => rules::explain_melee_speed(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => rules::explain_melee_speed_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => rules::explain_ranged_damage(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => rules::explain_ranged_damage_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => rules::explain_ranged_speed(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => rules::explain_ranged_speed_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => rules::explain_drone_melee_damage(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => rules::explain_drone_melee_damage_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => rules::explain_drone_melee_speed(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => rules::explain_drone_melee_speed_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => rules::explain_infect_l1(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => rules::explain_infect_l2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => rules::explain_infection_range(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => rules::explain_infection_range_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => rules::explain_infection_speed(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => rules::explain_nano_points(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => rules::explain_nano_points_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => rules::explain_health_upgrade(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => rules::explain_health_upgrade_2(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => rules::explain_health_upgrade_3(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => rules::explain_health_upgrade_4(ctx, world, edict),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Uhrum__Waterfalls__East_26__Block => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Sand__Refill => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            _ => (true, vec![])
         }
     }
 }
@@ -6405,6 +5349,21 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => true,
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::access_anuman_and_invoke_grab(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::access_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::access_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => true,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => true,
@@ -6476,8 +5435,21 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => true,
+            ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => true,
+            ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Glacier__Revival__Save_Point__ex__Pillar_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
+            ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => true,
+            ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::access_glacier_sea_burial_rock(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::access_nanite_mist(ctx, world),
@@ -7775,6 +6747,19 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::observe_access_anuman_and_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::observe_access_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => rules::observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(ctx, world, full_obs),
             ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => rules::observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(ctx, world, full_obs),
             ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => rules::observe_access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(ctx, world, full_obs),
@@ -7829,6 +6814,16 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Save_Point__ex__Pillar_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -9153,6 +8148,19 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::explain_anuman_and_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => rules::explain_invoke_hook_and_invoke_hover_and_slingshot_charge(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => rules::explain_invoke_hook_and_invoke_hover_and_slingshot_weapon(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 => rules::explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(ctx, world, edict),
             ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => rules::explain_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(ctx, world, edict),
             ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => rules::explain_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(ctx, world, edict),
@@ -9207,6 +8215,16 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Save_Point__ex__Pillar_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::explain_nanite_mist(ctx, world, edict),
@@ -9913,6 +8931,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => true,
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => true,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => true,
@@ -9931,7 +8951,10 @@ impl world::Exit for Exit {
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
+            ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => true,
+            ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => true,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
+            ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => true,
             ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
             ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
@@ -12405,7 +11428,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1670] = [
+static RAW_SPOTS: [SpotId; 1680] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -13509,7 +12532,15 @@ static RAW_SPOTS: [SpotId; 1670] = [
     SpotId::Glacier__Grid_32_7_10__West_9,
     SpotId::Glacier__Grid_37_38_9__East,
     SpotId::Glacier__Grid_37_38_9__West,
+    SpotId::Glacier__Grid_39_40_7_9__East_9,
+    SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
+    SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
+    SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+    SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
+    SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+    SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
     SpotId::Glacier__Grid_39_40_7_9__Upper_East,
+    SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
     SpotId::Glacier__Grid_39_40_7_9__West,
     SpotId::Glacier__Grid_42_10__East,
     SpotId::Glacier__Grid_42_10__West,
@@ -13577,6 +12608,7 @@ static RAW_SPOTS: [SpotId; 1670] = [
     SpotId::Glacier__Revival__Pillar_Step,
     SpotId::Glacier__Revival__Save_Point,
     SpotId::Glacier__Revival__West_8,
+    SpotId::Glacier__Revival__West_9,
     SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
     SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
     SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
@@ -13939,6 +12971,7 @@ static RAW_SPOTS: [SpotId; 1670] = [
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
     SpotId::Menu__Kiengir_Map__Giguna_Separator,
+    SpotId::Menu__Kiengir_Map__Glacier_40_8,
     SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
     SpotId::Menu__Kiengir_Map__Hammond,
@@ -14602,7 +13635,7 @@ lazy_static! {
             end: SpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
         },
         AreaId::Glacier__Grid_39_40_7_9 => Range {
-            start: SpotId::Glacier__Grid_39_40_7_9__Upper_East.into_usize(),
+            start: SpotId::Glacier__Grid_39_40_7_9__East_9.into_usize(),
             end: SpotId::Glacier__Grid_39_40_7_9__West.into_usize() + 1,
         },
         AreaId::Glacier__Grid_42_10 => Range {
@@ -14631,7 +13664,7 @@ lazy_static! {
         },
         AreaId::Glacier__Revival => Range {
             start: SpotId::Glacier__Revival__East_9.into_usize(),
-            end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
+            end: SpotId::Glacier__Revival__West_9.into_usize() + 1,
         },
         AreaId::Glacier__Sea_Burial => Range {
             start: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left.into_usize(),
@@ -14861,7 +13894,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 193;
+    const NUM_CANON_LOCATIONS: usize = 195;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14901,362 +13934,110 @@ impl world::World for World {
     // Hardcoded locations. To support a randomizer, this would be better as a cache.
     fn get_item_locations(&self, item: Item) -> Vec<LocationId> {
         match item {
-            Item::Health_Fragment => vec![
-                LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
-                LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
-                LocationId::Ebih__Base_Camp__Top_Platform__Item,
-                LocationId::Ebih__By_Garage__Crawlspace__Fragment,
-                LocationId::Ebih__Ebih_East__Dispenser__Vend,
-                LocationId::Giguna_Breach__Cubby__Rocks__Health,
-                LocationId::Giguna__Wasteland__Door_Right__Health,
-                LocationId::Giguna__Dual_Path__Wall_Secret__Health,
-                LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
-                LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health,
-                LocationId::Interior__Ebih_Cave__Entry__Health,
-                LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
-                LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
-            ],
-            Item::Flask => vec![
-                LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item,
-                LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
-                LocationId::Amagi__West_Lake__Cavern_Eye__Item,
-                LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
-                LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask,
-                LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask,
-                LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
-                LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
-                LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
-                LocationId::Ebih__Grid_25_2_6__Pit__Item,
-                LocationId::Giguna_Breach__Chimney__Cache__Flask,
-                LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
-                LocationId::Giguna__Giguna_Northeast__Vault__Item,
-                LocationId::Giguna__Ruins_East__Way_Up_High__Item,
-                LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
-                LocationId::Giguna__Ruins_Top__Flask__Flask,
-                LocationId::Giguna__Far_Corner__Grass__Obscured_Item,
-                LocationId::Giguna__Lamassu__Deposit__Flask,
-                LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
-                LocationId::Giguna__Gateway__Flask_Ledge__Item,
-                LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
-                LocationId::Glacier__Vertical_Room__Peak__Flask,
-                LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
-                LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
-                LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
-                LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
-                LocationId::Uhrum__Annuna_Corridor__Statue__Item,
-            ],
+            Item::Health_Fragment => vec![LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item, LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side, LocationId::Ebih__Base_Camp__Top_Platform__Item, LocationId::Ebih__By_Garage__Crawlspace__Fragment, LocationId::Ebih__Ebih_East__Dispenser__Vend, LocationId::Giguna_Breach__Cubby__Rocks__Health, LocationId::Giguna__Wasteland__Door_Right__Health, LocationId::Giguna__Dual_Path__Wall_Secret__Health, LocationId::Glacier__Sea_Burial__Deep_Cache__Health, LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health, LocationId::Interior__Ebih_Cave__Entry__Health, LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health, LocationId::Uhrum__Siege_Corridor__Center_Box__Box],
+            Item::Flask => vec![LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item, LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask, LocationId::Amagi__West_Lake__Cavern_Eye__Item, LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward, LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask, LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask, LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush, LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush, LocationId::Ebih__Boss_Room__Boss__Boss_Reward, LocationId::Ebih__Grid_25_2_6__Pit__Item, LocationId::Giguna_Breach__Chimney__Cache__Flask, LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask, LocationId::Giguna__Giguna_Northeast__Vault__Item, LocationId::Giguna__Ruins_East__Way_Up_High__Item, LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask, LocationId::Giguna__Ruins_Top__Flask__Flask, LocationId::Giguna__Far_Corner__Grass__Obscured_Item, LocationId::Giguna__Lamassu__Deposit__Flask, LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask, LocationId::Giguna__Gateway__Flask_Ledge__Item, LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item, LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress, LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel, LocationId::Glacier__Vertical_Room__Peak__Flask, LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item, LocationId::Irikar_Breach__Worm_Rave__Corner__Item, LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item, LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask, LocationId::Uhrum__Annuna_Corridor__Statue__Item],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
-            Item::Amagi_Dragon_Eye_Passage => {
-                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall]
-            }
-            Item::Defeat_MUS_A_M20 => {
-                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20]
-            }
-            Item::Shockwave => vec![
-                LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn,
-                LocationId::Amagi__West_Lake__Stronghold_Item__Item,
-            ],
-            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall]
-            }
-            Item::Amagi_Stronghold_Left_Wall => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall]
-            }
-            Item::Amagi_Stronghold_Wall_1 => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall]
-            }
-            Item::Amagi_Stronghold_Boulder_1 => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder]
-            }
-            Item::Amagi_Stronghold_Boulder_2 => vec![
-                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
-            ],
-            Item::Amagi_Stronghold_Wall_2 => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall]
-            }
-            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
-                vec![LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall]
-            }
-            Item::Amagi_West_Lake_Surface_Wall => vec![
-                LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
-                LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
-            ],
+            Item::Amagi_Dragon_Eye_Passage => vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall],
+            Item::Defeat_MUS_A_M20 => vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20],
+            Item::Shockwave => vec![LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn, LocationId::Amagi__West_Lake__Stronghold_Item__Item],
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => vec![LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall],
+            Item::Amagi_Stronghold_Left_Wall => vec![LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall],
+            Item::Amagi_Stronghold_Wall_1 => vec![LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall],
+            Item::Amagi_Stronghold_Boulder_1 => vec![LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder],
+            Item::Amagi_Stronghold_Boulder_2 => vec![LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder],
+            Item::Amagi_Stronghold_Wall_2 => vec![LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall],
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => vec![LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall],
+            Item::Amagi_West_Lake_Surface_Wall => vec![LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall, LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall],
             Item::Defeat_Indra => vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight],
-            Item::Annuna_Mirror_Match_Switch => {
-                vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch]
-            }
-            Item::Big_Flask => vec![
-                LocationId::Annuna__Mirror_Match__Plinth__Item,
-                LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
-                LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
-                LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
-                LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
-                LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
-                LocationId::Annuna__Egg_Room__Cache__Flask,
-                LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask,
-                LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
-                LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
-                LocationId::Giguna__Clouds__Cache__Item,
-                LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
-                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
-                LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
-                LocationId::Glacier__Dock_Outside__Cave_Treasure__Item,
-                LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
-                LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
-                LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
-            ],
+            Item::Annuna_Mirror_Match_Switch => vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch],
+            Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
-            Item::Annuna_East_Bridge_Gate => vec![
-                LocationId::Annuna__East_Bridge__Gate_Button__Switch,
-                LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
-            ],
+            Item::Annuna_East_Bridge_Gate => vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch, LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below],
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
             Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
-            Item::Power_Core => vec![
-                LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
-                LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
-                LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill,
-                LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
-                LocationId::Giguna__West_Caverns__Bush__Item,
-                LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
-                LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
-                LocationId::Uhrum__West_Entrance__Sand__Refill,
-                LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
-            ],
+            Item::Power_Core => vec![LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup, LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup, LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill, LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill, LocationId::Giguna__West_Caverns__Bush__Item, LocationId::Irikar__Abandoned_Room__Corner_Core__Core, LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup, LocationId::Uhrum__West_Entrance__Sand__Refill, LocationId::Uhrum__Siege_Corridor__Western_Cache__Core],
             Item::Family_Tragedy => vec![LocationId::Annuna__Sniper_Valley__Table__Item],
-            Item::Sniper_Valley_Rock_1 => vec![
-                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
-                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
-            ],
-            Item::Sniper_Valley_Rock_2 => vec![
-                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
-                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
-            ],
+            Item::Sniper_Valley_Rock_1 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall],
+            Item::Sniper_Valley_Rock_2 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall],
             Item::Boomerang_Upgrade => vec![LocationId::Annuna__Vertical_Room__Plinth__Item],
-            Item::Annuna_Vertical_Room_Gate => {
-                vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button]
-            }
-            Item::Beware_the_Patternmind => {
-                vec![LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet]
-            }
-            Item::The_Eternal_Arm => {
-                vec![LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet]
-            }
+            Item::Annuna_Vertical_Room_Gate => vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button],
+            Item::Beware_the_Patternmind => vec![LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet],
+            Item::The_Eternal_Arm => vec![LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet],
             Item::Destruction_Pogrom => vec![LocationId::Annuna__Twisty_Passages__Top__Tablet],
             Item::Eye_Ring => vec![LocationId::Annuna__West_Climb__Cache__Item],
-            Item::Siuna_Storage_Wall => vec![
-                LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra,
-                LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
-                LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
-                LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra,
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
-            ],
-            Item::Nanite_Mist => vec![
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn,
-                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
-                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn,
-                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
-                LocationId::Annuna__Siuna_Storage__Cache__Urn,
-                LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
-                LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
-            ],
-            Item::Apocalypse_Seals_Wall => vec![
-                LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
-                LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
-                LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
-            ],
-            Item::Apocalypse_Bomb => vec![
-                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
-                LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
-            ],
+            Item::Siuna_Storage_Wall => vec![LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra, LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone, LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist, LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2, LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra, LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone, LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist, LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2],
+            Item::Nanite_Mist => vec![LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn, LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel, LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn, LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel, LocationId::Annuna__Siuna_Storage__Cache__Urn, LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip, LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel],
+            Item::Apocalypse_Seals_Wall => vec![LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall, LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall, LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall],
+            Item::Apocalypse_Bomb => vec![LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight, LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up],
             Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
-            Item::Notes_2053_02_27 => vec![
-                LocationId::Antarctica__Building_2__Behind_Boxes__Note,
-                LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note,
-            ],
+            Item::Notes_2053_02_27 => vec![LocationId::Antarctica__Building_2__Behind_Boxes__Note, LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note],
             Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
-            Item::Ebih_Waterfall_Block_Right => vec![
-                LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
-                LocationId::Ebih__Waterfall__Alcove__Block_Right,
-            ],
-            Item::Ebih_Waterfall_Both_Blocks => {
-                vec![LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks]
-            }
-            Item::Ebih_Waterfall_Block_Left => vec![
-                LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
-                LocationId::Ebih__Waterfall__Alcove__Block_Left,
-            ],
+            Item::Ebih_Waterfall_Block_Right => vec![LocationId::Ebih__Waterfall__Alcove_Right__Block_Right, LocationId::Ebih__Waterfall__Alcove__Block_Right],
+            Item::Ebih_Waterfall_Both_Blocks => vec![LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks],
+            Item::Ebih_Waterfall_Block_Left => vec![LocationId::Ebih__Waterfall__Alcove_Left__Block_Left, LocationId::Ebih__Waterfall__Alcove__Block_Left],
             Item::Bronze_Axe => vec![LocationId::Ebih__Waterfall__Alcove__Pedestal],
-            Item::Ebih_Waterfall_Wall => vec![
-                LocationId::Ebih__Waterfall__Wall_Right__Break_Wall,
-                LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall,
-                LocationId::Ebih__Waterfall__Wall_Left__Break_Wall,
-                LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall,
-            ],
+            Item::Ebih_Waterfall_Wall => vec![LocationId::Ebih__Waterfall__Wall_Right__Break_Wall, LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall, LocationId::Ebih__Waterfall__Wall_Left__Break_Wall, LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall],
             Item::Heretics_Tablet => vec![LocationId::Ebih__Ebih_West__Alcove__Tablet],
-            Item::Ebih_West_Block => vec![
-                LocationId::Ebih__Ebih_West__Block_Left__Break_Block,
-                LocationId::Ebih__Ebih_West__Block_Right__Break_Block,
-            ],
-            Item::Infect => vec![
-                LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
-                LocationId::Ebih__Ebih_East__Corner__Urn,
-            ],
+            Item::Ebih_West_Block => vec![LocationId::Ebih__Ebih_West__Block_Left__Break_Block, LocationId::Ebih__Ebih_West__Block_Right__Break_Block],
+            Item::Infect => vec![LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn, LocationId::Ebih__Ebih_East__Corner__Urn],
             Item::Under_Siege => vec![LocationId::Ebih__Ebih_East__East_Ledge__Note],
-            Item::Ebih_Alu => vec![
-                LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
-                LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
-            ],
-            Item::Health_Node => vec![LocationId::Ebih__Boss_Room__East_Ledge__Item],
-            Item::Remote_Drone => vec![
-                LocationId::Ebih__Drone_Room__Item__Urn,
-                LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
-                LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
-                LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
-            ],
+            Item::Ebih_Alu => vec![LocationId::Ebih__Boss_Room__Boss__Hack_Alu, LocationId::Ebih__Boss_Room__Boss__Fight_Alu],
+            Item::Health_Node => vec![LocationId::Ebih__Boss_Room__East_Ledge__Item, LocationId::Glacier__Revival__Pillar__Health, LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab, LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab],
+            Item::Remote_Drone => vec![LocationId::Ebih__Drone_Room__Item__Urn, LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip, LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel, LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab],
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
-            Item::Ebih_Interchange_Block => {
-                vec![LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block]
-            }
-            Item::Ebih_Interchange_Gate => {
-                vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
-            }
+            Item::Ebih_Interchange_Block => vec![LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block],
+            Item::Ebih_Interchange_Gate => vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch],
             Item::Hammond_Auth => vec![LocationId::Filter__Core__Terminal_East__Authorize_Hammond],
             Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn],
-            Item::Giguna_Northeast_Gate => vec![
-                LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
-                LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
-            ],
+            Item::Giguna_Northeast_Gate => vec![LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate, LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button],
             Item::Carnelian_Ring => vec![LocationId::Giguna__Carnelian__Vault__Item],
             Item::Power_Matrix => vec![LocationId::Giguna__West_Caverns__Cache__Item],
-            Item::Ebih_Wasteland_Passage_H => vec![
-                LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
-                LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
-                LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
-                LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
-            ],
+            Item::Ebih_Wasteland_Passage_H => vec![LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually, LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage, LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually, LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage],
             Item::Wall_Climb => vec![LocationId::Giguna__Giguna_Base__Ruin__Item],
             Item::Researchers_Missing => vec![LocationId::Giguna__Giguna_Base__Table__News],
             Item::Aansur => vec![LocationId::Giguna__Ruins_Center__Tablet__Item],
             Item::The_Ideal_Kiengir => vec![LocationId::Giguna__West_Tower__Top__Tablet],
             Item::Journal_2049_10_29 => vec![LocationId::Giguna__Helipad__Tablet_Ledge__Tablet],
-            Item::Giguna_Dual_Path_Switch => vec![
-                LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
-                LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch,
-                LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
-                LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
-            ],
-            Item::Giguna_Dual_Path_Wall => vec![
-                LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall,
-                LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
-            ],
-            Item::Giguna_Boulder => vec![
-                LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
-                LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
-                LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
-                LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
-            ],
-            Item::Building_of_the_School => {
-                vec![LocationId::Giguna__Hard_Rock__Rock_Center__Tablet]
-            }
-            Item::Giguna_Gateway_Block => vec![
-                LocationId::Giguna__Gateway__Block_Left__Shockwave,
-                LocationId::Giguna__Gateway__Block_Right__Shockwave,
-            ],
+            Item::Giguna_Dual_Path_Switch => vec![LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch, LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch, LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch, LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch],
+            Item::Giguna_Dual_Path_Wall => vec![LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall, LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall],
+            Item::Giguna_Boulder => vec![LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder, LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist, LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder, LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist],
+            Item::Building_of_the_School => vec![LocationId::Giguna__Hard_Rock__Rock_Center__Tablet],
+            Item::Giguna_Gateway_Block => vec![LocationId::Giguna__Gateway__Block_Left__Shockwave, LocationId::Giguna__Gateway__Block_Right__Shockwave],
             Item::Giguna_Gateway_Gate => vec![LocationId::Giguna__Gateway__Button__Hit_Switch],
             Item::Dangerous_Ideas => vec![LocationId::Giguna__Antechamber__Statue_Head__Tablet],
-            Item::Giguna_Gubi => vec![
-                LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,
-                LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
-            ],
+            Item::Giguna_Gubi => vec![LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi, LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi],
             Item::Double_Axe => vec![LocationId::Giguna__Gubi_Lair__Pedestal__Axe],
             Item::Compass => vec![LocationId::Glacier__Compass_Room__Center__Table],
-            Item::Glacier_Big_Drop_Rock => vec![
-                LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
-                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
-                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
-                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
-                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
-                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
-            ],
+            Item::Glacier_Big_Drop_Rock => vec![LocationId::Glacier__The_Big_Drop__West_14__Break_Rock, LocationId::Glacier__The_Big_Drop__West_14__Mist_Through, LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster],
             Item::Amashilama => vec![LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown],
-            Item::Glacier_Sea_Burial_Rock => vec![
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
-                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
-            ],
+            Item::Glacier_Sea_Burial_Rock => vec![LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock, LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through, LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster, LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping, LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through, LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster],
             Item::Dr_Gloria => vec![LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes],
             Item::Switch_36_11 => vec![LocationId::Glacier__Vertical_Room__Under_Switch__Switch],
             Item::Boomerang => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Item],
             Item::Switch_40_12 => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Switch],
-            Item::Ledge_Grab => vec![
-                LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
-                LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
-            ],
-            Item::Escape => vec![
-                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
-                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
-            ],
+            Item::Ledge_Grab => vec![LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab, LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item],
+            Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape, LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape],
             Item::Bounty_List => vec![LocationId::Glacier__Crystals__Top_Corner__Tablet],
             Item::Breach_Attractor => vec![LocationId::Glacier__Crystals__Lower_Corner__Item],
-            Item::Goodbye => vec![
-                LocationId::Glacier__Hammonds_End__Hammond__Note,
-                LocationId::Glacier__Hammonds_End__Corner__Quick_Note,
-            ],
+            Item::Goodbye => vec![LocationId::Glacier__Hammonds_End__Hammond__Note, LocationId::Glacier__Hammonds_End__Corner__Quick_Note],
             Item::Dear_Ernest => vec![LocationId::Interior__Bunker_Interior__Desk__Note],
-            Item::Melee_Charge => vec![
-                LocationId::Interior__Building_Interior__Entry__Remote_Urn,
-                LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
-                LocationId::Interior__Building_Interior__Corner__Urn,
-            ],
+            Item::Melee_Charge => vec![LocationId::Interior__Building_Interior__Entry__Remote_Urn, LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip, LocationId::Interior__Building_Interior__Corner__Urn],
             Item::Companies_Layoff => vec![LocationId::Interior__Tent_Interior__Desk__Note],
             Item::Record_Losses => vec![LocationId::Interior__Garage__Boxes__Under_Boxes],
-            Item::Letter_from_Trace => {
-                vec![LocationId::Interior__Outpost_Interior__Bookshelf__Note]
-            }
+            Item::Letter_from_Trace => vec![LocationId::Interior__Outpost_Interior__Bookshelf__Note],
             Item::Drone_Hover => vec![LocationId::Irikar_Breach__Hover_Room__Bottom__Item],
-            Item::Commemorative_Speech => {
-                vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet]
-            }
+            Item::Commemorative_Speech => vec![LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet],
             Item::Royal_Dagger => vec![LocationId::Irikar__Hub__Dagger_Altar__Weapon],
-            Item::Irikar_Royal_Storage_Wall => vec![
-                LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
-                LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
-            ],
-            Item::Breach_Sight => vec![
-                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
-                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
-                LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
-            ],
-            Item::Irikar_Gudam => vec![
-                LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
-                LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
-            ],
-            Item::Heretics_Granddaughter => {
-                vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet]
-            }
+            Item::Irikar_Royal_Storage_Wall => vec![LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall, LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall],
+            Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn, LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip, LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel],
+            Item::Irikar_Gudam => vec![LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam, LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam],
+            Item::Heretics_Granddaughter => vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet],
             Item::Terminal_Breakthrough_2 => vec![LocationId::Irikar__Lamassu__Desk__Item],
-            Item::Health_Upgrade => {
-                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1]
-            }
-            Item::Health_Upgrade_2 => {
-                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2]
-            }
-            Item::Health_Upgrade_3 => {
-                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3]
-            }
-            Item::Health_Upgrade_4 => {
-                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4]
-            }
-            Item::Health_Upgrade_5 => {
-                vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5]
-            }
+            Item::Health_Upgrade => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1],
+            Item::Health_Upgrade_2 => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2],
+            Item::Health_Upgrade_3 => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3],
+            Item::Health_Upgrade_4 => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4],
+            Item::Health_Upgrade_5 => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5],
             Item::Mist_Upgrade => vec![LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade],
             Item::Melee_Damage => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1],
             Item::Melee_Damage_2 => vec![LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2],
@@ -15276,86 +14057,29 @@ impl world::World for World {
             Item::Nano_Points => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1],
             Item::Nano_Points_2 => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2],
             Item::Nano_Points_3 => vec![LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3],
-            Item::Infection_Speed => {
-                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1]
-            }
-            Item::Infection_Speed_2 => {
-                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2]
-            }
-            Item::Infection_Range => {
-                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1]
-            }
-            Item::Infection_Range_2 => {
-                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2]
-            }
-            Item::Infection_Range_3 => {
-                vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3]
-            }
-            Item::Drone_Melee_Damage => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1]
-            }
-            Item::Drone_Melee_Damage_2 => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2]
-            }
-            Item::Drone_Melee_Damage_3 => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3]
-            }
-            Item::Drone_Melee_Speed => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1]
-            }
-            Item::Drone_Melee_Speed_2 => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2]
-            }
-            Item::Drone_Melee_Speed_3 => {
-                vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3]
-            }
+            Item::Infection_Speed => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1],
+            Item::Infection_Speed_2 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2],
+            Item::Infection_Range => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1],
+            Item::Infection_Range_2 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2],
+            Item::Infection_Range_3 => vec![LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3],
+            Item::Drone_Melee_Damage => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1],
+            Item::Drone_Melee_Damage_2 => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2],
+            Item::Drone_Melee_Damage_3 => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3],
+            Item::Drone_Melee_Speed => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1],
+            Item::Drone_Melee_Speed_2 => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2],
+            Item::Drone_Melee_Speed_3 => vec![LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3],
             Item::Udusan => vec![LocationId::Uhrum__West_Entrance__Inner_Dais__Item],
-            Item::Uhrum_West_Entrance_Gate => {
-                vec![LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate]
-            }
-            Item::Uhrum_West_Entrance_Upper_Wall => vec![
-                LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
-                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
-                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
-                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
-            ],
-            Item::Uhrum_West_Entrance_Lower_Wall => vec![
-                LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
-                LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,
-                LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
-                LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
-                LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
-                LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
-            ],
+            Item::Uhrum_West_Entrance_Gate => vec![LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate],
+            Item::Uhrum_West_Entrance_Upper_Wall => vec![LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall, LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall, LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall, LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall],
+            Item::Uhrum_West_Entrance_Lower_Wall => vec![LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall, LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall, LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall, LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall, LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall, LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall],
             Item::Fast_Travel => vec![LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn],
             Item::Storm_Bomb => vec![LocationId::Uhrum__Siege_Corridor__Pond__Item],
-            Item::Uhrum_Waterfall_Wall => vec![
-                LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
-                LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
-                LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
-                LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
-                LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
-                LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
-            ],
-            Item::Uhrum_Waterfalls_Block => vec![
-                LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block,
-                LocationId::Uhrum__Waterfalls__Above_Block__Block,
-                LocationId::Uhrum__Waterfalls__East_26__Block,
-            ],
+            Item::Uhrum_Waterfall_Wall => vec![LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall],
+            Item::Uhrum_Waterfalls_Block => vec![LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block, LocationId::Uhrum__Waterfalls__Above_Block__Block, LocationId::Uhrum__Waterfalls__East_26__Block],
             Item::Suspension_Bridge => vec![LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet],
-            Item::Anuman => vec![
-                LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
-                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
-                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
-                LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
-            ],
-            Item::Uhrum_Annuna_Corridor_Block => vec![
-                LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
-                LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
-            ],
-            Item::Plague_of_Thoughts => {
-                vec![LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet]
-            }
+            Item::Anuman => vec![LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn, LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn, LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip, LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel],
+            Item::Uhrum_Annuna_Corridor_Block => vec![LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block, LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block],
+            Item::Plague_of_Thoughts => vec![LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet],
             _ => Vec::new(),
         }
     }
@@ -15385,655 +14109,230 @@ impl world::World for World {
 
     fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
         match loc_id {
-            LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => {
-                SpotId::Amagi_Breach__East_Entrance__Upper_Slope
-            }
-            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
-                SpotId::Amagi__Main_Area__Way_Off_To_The_Side
-            }
+            LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             LocationId::Amagi__Liru_Room__Shrine__Item => SpotId::Amagi__Liru_Room__Shrine,
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
-                SpotId::Amagi__West_Lake__Cavern_Refill_Station
-            }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
-                SpotId::Amagi__West_Lake__Cavern_Refill_Station
-            }
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
-                SpotId::Amagi__West_Lake__Cavern_Tear_Duct
-            }
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => SpotId::Amagi__West_Lake__Cavern_Eye,
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
-                SpotId::Amagi__West_Lake__Cavern_Rear_Pillar
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                SpotId::Amagi__West_Lake__Stronghold_Top
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall
-            | LocationId::Amagi__West_Lake__Stronghold_Item__Item => {
-                SpotId::Amagi__West_Lake__Stronghold_Item
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
-                SpotId::Amagi__West_Lake__Stronghold_Rear_Wall
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
-                SpotId::Amagi__West_Lake__Stronghold_Middle_Column
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
-                SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
-                SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
-                SpotId::Amagi__West_Lake__Stronghold_Front_Room
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
-                SpotId::Amagi__West_Lake__Stronghold_Front_Door
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => {
-                SpotId::Amagi__West_Lake__Surface_Wall_Right
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                SpotId::Amagi__West_Lake__Surface_Wall_Left
-            }
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                SpotId::Annuna__Mirror_Match__Save_Point
-            }
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                SpotId::Annuna__Mirror_Match__Below_Switch
-            }
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => SpotId::Amagi__West_Lake__Stronghold_Top,
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall | LocationId::Amagi__West_Lake__Stronghold_Item__Item => SpotId::Amagi__West_Lake__Stronghold_Item,
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => SpotId::Amagi__West_Lake__Stronghold_Front_Room,
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => SpotId::Amagi__West_Lake__Surface_Wall_Right,
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => SpotId::Amagi__West_Lake__Surface_Wall_Left,
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => SpotId::Annuna__Mirror_Match__Save_Point,
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => SpotId::Annuna__Mirror_Match__Below_Switch,
             LocationId::Annuna__Mirror_Match__Plinth__Item => SpotId::Annuna__Mirror_Match__Plinth,
-            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => {
-                SpotId::Annuna__Mirror_Match__Waving_Distance
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
-                SpotId::Annuna__Mirror_Match__East_26_Lower
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
-                SpotId::Annuna__Mirror_Match__East_26_Upper
-            }
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => SpotId::Annuna__Mirror_Match__Waving_Distance,
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Lower,
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
             LocationId::Annuna__West_Bridge__Plinth__Item => SpotId::Annuna__West_Bridge__Plinth,
-            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                SpotId::Annuna__East_Bridge__Gate_Button
-            }
-            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                SpotId::Annuna__East_Bridge__Below_Gate_Button
-            }
-            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                SpotId::Annuna__East_Bridge__Tower_Gate
-            }
-            LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
-                SpotId::Annuna__East_Bridge__Tower_Secret
-            }
-            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
-                SpotId::Annuna__Sniper_Valley__Bridge_End
-            }
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => SpotId::Annuna__East_Bridge__Gate_Button,
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => SpotId::Annuna__East_Bridge__Below_Gate_Button,
+            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => SpotId::Annuna__East_Bridge__Tower_Gate,
+            LocationId::Annuna__East_Bridge__Tower_Secret__Item => SpotId::Annuna__East_Bridge__Tower_Secret,
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => SpotId::Annuna__Sniper_Valley__Bridge_End,
             LocationId::Annuna__Sniper_Valley__Table__Item => SpotId::Annuna__Sniper_Valley__Table,
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
-                SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
-                SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
-                SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
-                SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
-                SpotId::Annuna__Sniper_Valley__Cavern_Cache
-            }
-            LocationId::Annuna__Vertical_Room__Plinth__Item => {
-                SpotId::Annuna__Vertical_Room__Plinth
-            }
-            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
-                SpotId::Annuna__Vertical_Room__Gate_Button
-            }
-            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => {
-                SpotId::Annuna__Vertical_Room__Upper_Cache
-            }
-            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
-                SpotId::Annuna__Upper_Hallway__Behind_Pedestal
-            }
-            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => {
-                SpotId::Annuna__Filter_Teleporter__Door_Ledge
-            }
-            LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => {
-                SpotId::Annuna__Filter_Teleporter__Shaft_Bottom
-            }
-            LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
-                SpotId::Annuna__Filter_Teleporter__Northeast_Cubby
-            }
-            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
-                SpotId::Annuna__Spider_Room__Healthy_Corner
-            }
-            LocationId::Annuna__Twisty_Passages__Top__Tablet => {
-                SpotId::Annuna__Twisty_Passages__Top
-            }
-            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => {
-                SpotId::Annuna__Twisty_Passages__Northwest_Alcove
-            }
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
+            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => SpotId::Annuna__Sniper_Valley__Cavern_Cache,
+            LocationId::Annuna__Vertical_Room__Plinth__Item => SpotId::Annuna__Vertical_Room__Plinth,
+            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => SpotId::Annuna__Vertical_Room__Gate_Button,
+            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => SpotId::Annuna__Vertical_Room__Upper_Cache,
+            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => SpotId::Annuna__Upper_Hallway__Behind_Pedestal,
+            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => SpotId::Annuna__Filter_Teleporter__Door_Ledge,
+            LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
+            LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => SpotId::Annuna__Spider_Room__Healthy_Corner,
+            LocationId::Annuna__Twisty_Passages__Top__Tablet => SpotId::Annuna__Twisty_Passages__Top,
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => SpotId::Annuna__Twisty_Passages__Northwest_Alcove,
             LocationId::Annuna__West_Climb__Cache__Item => SpotId::Annuna__West_Climb__Cache,
-            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => {
-                SpotId::Annuna__Egg_Room__Second_Egg
-            }
-            LocationId::Annuna__Egg_Room__Cache__Flask
-            | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
-                SpotId::Annuna__Egg_Room__Cache
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask
-            | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => {
-                SpotId::Annuna__Egg_Room__Corner_Platform
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => {
-                SpotId::Annuna__Siuna_Storage__Wall_Right
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone
-            | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist
-            | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                SpotId::Annuna__Siuna_Storage__Wall_Right
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra
-            | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
-                SpotId::Annuna__Siuna_Storage__Wall_Left
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone
-            | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist
-            | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2
-            | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
-                SpotId::Annuna__Siuna_Storage__Wall_Left
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
-                SpotId::Annuna__Siuna_Storage__Within_Range
-            }
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
-                SpotId::Annuna__Siuna_Storage__Within_Range
-            }
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => SpotId::Annuna__Egg_Room__Second_Egg,
+            LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => SpotId::Annuna__Egg_Room__Cache,
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => SpotId::Annuna__Egg_Room__Corner_Platform,
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => SpotId::Annuna__Siuna_Storage__Wall_Right,
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => SpotId::Annuna__Siuna_Storage__Wall_Right,
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => SpotId::Annuna__Siuna_Storage__Wall_Left,
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Wall_Left,
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => SpotId::Annuna__Siuna_Storage__Within_Range,
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Within_Range,
             LocationId::Annuna__Siuna_Storage__Cache__Urn => SpotId::Annuna__Siuna_Storage__Cache,
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip
-            | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                SpotId::Annuna__Siuna_Storage__Cache
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall
-            | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall
-            | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
-                SpotId::Annuna__Seals__Breakable_Rock
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight
-            | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => {
-                SpotId::Annuna__Apocalypse__Center_Scaffold_West
-            }
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Cache,
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => SpotId::Annuna__Seals__Breakable_Rock,
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => SpotId::Annuna__Apocalypse__Center_Scaffold_West,
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
-            LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
-                SpotId::Antarctica__Building_2__Behind_Boxes
-            }
-            LocationId::Antarctica__Power_Room__Switch__Flip => {
-                SpotId::Antarctica__Power_Room__Switch
-            }
-            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => {
-                SpotId::Ebih__Base_Camp__Left_Platform_Moved
-            }
-            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
-                SpotId::Ebih__Base_Camp__Top_Platform
-            }
-            LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
-                SpotId::Ebih__By_Garage__Crawlspace
-            }
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                SpotId::Ebih__Grid_25_10_12__East_10
-            }
-            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
-                SpotId::Ebih__Grid_25_10_12__Hidden_Bush
-            }
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                SpotId::Ebih__Waterfall__Alcove_Right
-            }
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
-                SpotId::Ebih__Waterfall__Waterfall_Center_Center
-            }
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                SpotId::Ebih__Waterfall__Alcove_Left
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Left
-            | LocationId::Ebih__Waterfall__Alcove__Block_Right
-            | LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
-                SpotId::Ebih__Waterfall__Wall_Right
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
-                SpotId::Ebih__Waterfall__Wall_Right
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
-                SpotId::Ebih__Waterfall__Wall_Left
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                SpotId::Ebih__Waterfall__Wall_Left
-            }
+            LocationId::Antarctica__Building_2__Behind_Boxes__Note => SpotId::Antarctica__Building_2__Behind_Boxes,
+            LocationId::Antarctica__Power_Room__Switch__Flip => SpotId::Antarctica__Power_Room__Switch,
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => SpotId::Ebih__Base_Camp__Top_Platform,
+            LocationId::Ebih__By_Garage__Crawlspace__Fragment => SpotId::Ebih__By_Garage__Crawlspace,
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => SpotId::Ebih__Grid_25_10_12__East_10,
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => SpotId::Ebih__Waterfall__Alcove_Right,
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => SpotId::Ebih__Waterfall__Alcove_Left,
+            LocationId::Ebih__Waterfall__Alcove__Block_Left | LocationId::Ebih__Waterfall__Alcove__Block_Right | LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => SpotId::Ebih__Waterfall__Wall_Right,
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => SpotId::Ebih__Waterfall__Wall_Right,
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => SpotId::Ebih__Waterfall__Wall_Left,
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => SpotId::Ebih__Waterfall__Wall_Left,
             LocationId::Ebih__Ebih_West__Alcove__Tablet => SpotId::Ebih__Ebih_West__Alcove,
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
-                SpotId::Ebih__Ebih_West__Block_Left
-            }
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
-                SpotId::Ebih__Ebih_West__Block_Right
-            }
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
-                SpotId::Ebih__Ebih_East__Lower_Moving_Platform
-            }
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => SpotId::Ebih__Ebih_West__Block_Left,
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => SpotId::Ebih__Ebih_West__Block_Right,
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
             LocationId::Ebih__Ebih_East__Corner__Urn => SpotId::Ebih__Ebih_East__Corner,
             LocationId::Ebih__Ebih_East__Dispenser__Vend => SpotId::Ebih__Ebih_East__Dispenser,
             LocationId::Ebih__Ebih_East__East_Ledge__Note => SpotId::Ebih__Ebih_East__East_Ledge,
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward
-            | LocationId::Ebih__Boss_Room__Boss__Fight_Alu
-            | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward | LocationId::Ebih__Boss_Room__Boss__Fight_Alu | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
             LocationId::Ebih__Boss_Room__East_Ledge__Item => SpotId::Ebih__Boss_Room__East_Ledge,
             LocationId::Ebih__Drone_Room__Item__Urn => SpotId::Ebih__Drone_Room__Item,
-            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip
-            | LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => SpotId::Ebih__Drone_Room__Item,
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                SpotId::Ebih__Drone_Room__Middle_Platform
-            }
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip | LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => SpotId::Ebih__Drone_Room__Item,
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => SpotId::Ebih__Drone_Room__Middle_Platform,
             LocationId::Ebih__Grid_25_2_6__Pit__Item => SpotId::Ebih__Grid_25_2_6__Pit,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
-            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                SpotId::Ebih__Vertical_Interchange__Block_Cubby
-            }
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
-                SpotId::Ebih__Vertical_Interchange__Switch
-            }
-            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
-                SpotId::Filter__Core__Terminal_East
-            }
-            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
-                SpotId::Giguna_Breach__Chimney__Cache
-            }
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => SpotId::Ebih__Vertical_Interchange__Switch,
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => SpotId::Filter__Core__Terminal_East,
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => SpotId::Giguna_Breach__Chimney__Cache,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
-            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
-                SpotId::Giguna_Breach__Slingshot__Ravine
-            }
-            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => {
-                SpotId::Giguna__Giguna_Northeast__Gate_Button
-            }
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
-                SpotId::Giguna__Giguna_Northeast__Gate_Right
-            }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                SpotId::Giguna__Giguna_Northeast__Door
-            }
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
-                SpotId::Giguna__Giguna_Northeast__Vault
-            }
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => SpotId::Giguna_Breach__Slingshot__Ravine,
+            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => SpotId::Giguna__Giguna_Northeast__Door,
+            LocationId::Giguna__Giguna_Northeast__Vault__Item => SpotId::Giguna__Giguna_Northeast__Vault,
             LocationId::Giguna__Carnelian__Vault__Item => SpotId::Giguna__Carnelian__Vault,
             LocationId::Giguna__West_Caverns__Cache__Item => SpotId::Giguna__West_Caverns__Cache,
             LocationId::Giguna__West_Caverns__Bush__Item => SpotId::Giguna__West_Caverns__Bush,
-            LocationId::Giguna__Wasteland__Door_Right__Health => {
-                SpotId::Giguna__Wasteland__Door_Right
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually
-            | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
-                SpotId::Giguna__Wasteland__Passage_East
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually
-            | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                SpotId::Giguna__Wasteland__Passage_Cache
-            }
+            LocationId::Giguna__Wasteland__Door_Right__Health => SpotId::Giguna__Wasteland__Door_Right,
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_East,
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_Cache,
             LocationId::Giguna__Giguna_Base__Ruin__Item => SpotId::Giguna__Giguna_Base__Ruin,
             LocationId::Giguna__Giguna_Base__Table__News => SpotId::Giguna__Giguna_Base__Table,
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
-                SpotId::Giguna__Ruins_East__Way_Up_High
-            }
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => SpotId::Giguna__Ruins_East__Way_Up_High,
             LocationId::Giguna__Ruins_Center__Tablet__Item => SpotId::Giguna__Ruins_Center__Tablet,
-            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => {
-                SpotId::Giguna__Ruins_Top__Small_Ledge
-            }
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => SpotId::Giguna__Ruins_Top__Small_Ledge,
             LocationId::Giguna__Ruins_Top__Flask__Flask => SpotId::Giguna__Ruins_Top__Flask,
             LocationId::Giguna__West_Tower__Top__Tablet => SpotId::Giguna__West_Tower__Top,
-            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
-                SpotId::Giguna__Far_Corner__Grass
-            }
-            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
-                SpotId::Giguna__Helipad__Tablet_Ledge
-            }
+            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => SpotId::Giguna__Far_Corner__Grass,
+            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => SpotId::Giguna__Helipad__Tablet_Ledge,
             LocationId::Giguna__Clouds__Cache__Item => SpotId::Giguna__Clouds__Cache,
             LocationId::Giguna__Lamassu__Deposit__Flask => SpotId::Giguna__Lamassu__Deposit,
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => {
-                SpotId::Giguna__Dual_Path__Below_Left_Switch
-            }
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
-                SpotId::Giguna__Dual_Path__Left_Switch
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
-                SpotId::Giguna__Dual_Path__Base_of_Wall
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
-                SpotId::Giguna__Dual_Path__Base_of_Wall
-            }
-            LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
-                SpotId::Giguna__Dual_Path__Wall_Secret
-            }
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
-                SpotId::Giguna__Dual_Path__Right_Switch
-            }
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                SpotId::Giguna__Dual_Path__Below_Right_Switch
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
-                SpotId::Giguna__Hard_Rock__Rock_Right
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
-                SpotId::Giguna__Hard_Rock__Rock_Right
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
-                SpotId::Giguna__Hard_Rock__Rock_Center
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
-                SpotId::Giguna__Hard_Rock__Rock_Left
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
-                SpotId::Giguna__Hard_Rock__Rock_Left
-            }
-            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => {
-                SpotId::Giguna__East_Caverns__Hidden_Passage_Center
-            }
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                SpotId::Giguna__Gateway__Block_Left
-            }
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                SpotId::Giguna__Gateway__Block_Right
-            }
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => SpotId::Giguna__Dual_Path__Left_Switch,
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => SpotId::Giguna__Dual_Path__Base_of_Wall,
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => SpotId::Giguna__Dual_Path__Base_of_Wall,
+            LocationId::Giguna__Dual_Path__Wall_Secret__Health => SpotId::Giguna__Dual_Path__Wall_Secret,
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => SpotId::Giguna__Dual_Path__Right_Switch,
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => SpotId::Giguna__Hard_Rock__Rock_Right,
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => SpotId::Giguna__Hard_Rock__Rock_Right,
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => SpotId::Giguna__Hard_Rock__Rock_Center,
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => SpotId::Giguna__Hard_Rock__Rock_Left,
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => SpotId::Giguna__Hard_Rock__Rock_Left,
+            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => SpotId::Giguna__Gateway__Block_Left,
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => SpotId::Giguna__Gateway__Block_Right,
             LocationId::Giguna__Gateway__Flask_Ledge__Item => SpotId::Giguna__Gateway__Flask_Ledge,
             LocationId::Giguna__Gateway__Button__Hit_Switch => SpotId::Giguna__Gateway__Button,
-            LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
-                SpotId::Giguna__Antechamber__Statue_Head
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward
-            | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi
-            | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                SpotId::Giguna__Gubi_Lair__Center_Platform
-            }
+            LocationId::Giguna__Antechamber__Statue_Head__Tablet => SpotId::Giguna__Antechamber__Statue_Head,
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => SpotId::Giguna__Gubi_Lair__Center_Platform,
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => SpotId::Giguna__Gubi_Lair__Pedestal,
-            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => {
-                SpotId::Glacier_Breach__Grate_Work__Grate_Interior
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => {
-                SpotId::Glacier_Breach__Control__Upper_Corner
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => {
-                SpotId::Glacier_Breach__Control__Upper_Corner
-            }
-            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
-                SpotId::Glacier__Dock_Outside__Ruins_Stairs
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => {
-                SpotId::Glacier__Dock_Outside__Cave_Treasure
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip
-            | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => {
-                SpotId::Glacier__Dock_Outside__Cave_Treasure
-            }
-            LocationId::Glacier__Compass_Room__Center__Table => {
-                SpotId::Glacier__Compass_Room__Center
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
-                SpotId::Glacier__The_Big_Drop__West_14
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through
-            | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
-                SpotId::Glacier__The_Big_Drop__West_14
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
-                SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through
-            | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
-                SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right
-            }
-            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
-            }
-            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => {
-                SpotId::Glacier__Sea_Burial__Deep_Cache
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => {
-                SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through
-            | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
-                SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
-                SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through
-            | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
-                SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
-            }
-            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
-                SpotId::Glacier__Sea_Burial__Inside_the_Grate
-            }
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                SpotId::Glacier__Vertical_Room__Under_Switch
-            }
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => SpotId::Glacier_Breach__Control__Upper_Corner,
+            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => SpotId::Glacier__Dock_Outside__Cave_Treasure,
+            LocationId::Glacier__Revival__Pillar__Health => SpotId::Glacier__Revival__Pillar,
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => SpotId::Glacier__Revival__Mid_air,
+            LocationId::Glacier__Compass_Room__Center__Table => SpotId::Glacier__Compass_Room__Center,
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => SpotId::Glacier__The_Big_Drop__West_14,
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__West_14,
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
+            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => SpotId::Glacier__Sea_Burial__Deep_Cache,
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => SpotId::Glacier__Sea_Burial__Inside_the_Grate,
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => SpotId::Glacier__Vertical_Room__Under_Switch,
             LocationId::Glacier__Vertical_Room__Peak__Flask => SpotId::Glacier__Vertical_Room__Peak,
-            LocationId::Glacier__Boomerang_Room__Pedestal__Item
-            | LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                SpotId::Glacier__Boomerang_Room__Pedestal
-            }
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => {
-                SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom
-            }
-            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
-                SpotId::Glacier__Ledge_Grab_Room__Pedestal
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape
-            | LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
-                SpotId::Glacier__Apocalypse_Entry__Grate_Ledge
-            }
-            LocationId::Glacier__Crystals__Top_Corner__Tablet => {
-                SpotId::Glacier__Crystals__Top_Corner
-            }
-            LocationId::Glacier__Crystals__Lower_Corner__Item => {
-                SpotId::Glacier__Crystals__Lower_Corner
-            }
-            LocationId::Glacier__Hammonds_End__Hammond__Note => {
-                SpotId::Glacier__Hammonds_End__Hammond
-            }
-            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                SpotId::Glacier__Hammonds_End__Corner
-            }
-            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => {
-                SpotId::Glacier__Hammonds_End__Between_Center_Doors
-            }
-            LocationId::Interior__Bunker_Interior__Desk__Note => {
-                SpotId::Interior__Bunker_Interior__Desk
-            }
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
-                SpotId::Interior__Building_Interior__Entry
-            }
-            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => {
-                SpotId::Interior__Building_Interior__Entry
-            }
-            LocationId::Interior__Building_Interior__Corner__Urn => {
-                SpotId::Interior__Building_Interior__Corner
-            }
-            LocationId::Interior__Tent_Interior__Desk__Note => {
-                SpotId::Interior__Tent_Interior__Desk
-            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Item | LocationId::Glacier__Boomerang_Room__Pedestal__Switch => SpotId::Glacier__Boomerang_Room__Pedestal,
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => SpotId::Glacier__Ledge_Grab_Room__Pedestal,
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape | LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
+            LocationId::Glacier__Crystals__Top_Corner__Tablet => SpotId::Glacier__Crystals__Top_Corner,
+            LocationId::Glacier__Crystals__Lower_Corner__Item => SpotId::Glacier__Crystals__Lower_Corner,
+            LocationId::Glacier__Hammonds_End__Hammond__Note => SpotId::Glacier__Hammonds_End__Hammond,
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => SpotId::Glacier__Hammonds_End__Corner,
+            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => SpotId::Glacier__Hammonds_End__Between_Center_Doors,
+            LocationId::Interior__Bunker_Interior__Desk__Note => SpotId::Interior__Bunker_Interior__Desk,
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => SpotId::Interior__Building_Interior__Entry,
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => SpotId::Interior__Building_Interior__Entry,
+            LocationId::Interior__Building_Interior__Corner__Urn => SpotId::Interior__Building_Interior__Corner,
+            LocationId::Interior__Tent_Interior__Desk__Note => SpotId::Interior__Tent_Interior__Desk,
             LocationId::Interior__Garage__Boxes__Under_Boxes => SpotId::Interior__Garage__Boxes,
             LocationId::Interior__Ebih_Cave__Entry__Health => SpotId::Interior__Ebih_Cave__Entry,
-            LocationId::Interior__Outpost_Interior__Bookshelf__Note => {
-                SpotId::Interior__Outpost_Interior__Bookshelf
-            }
-            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => {
-                SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward
-            }
-            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
-                SpotId::Irikar_Breach__Hover_Room__Bottom
-            }
-            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
-                SpotId::Irikar_Breach__Worm_Rave__Corner
-            }
-            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
-                SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
-            }
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => SpotId::Interior__Outpost_Interior__Bookshelf,
+            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
+            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => SpotId::Irikar_Breach__Hover_Room__Bottom,
+            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => SpotId::Irikar_Breach__Worm_Rave__Corner,
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => SpotId::Irikar__Hub__Dagger_Altar,
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
-                SpotId::Irikar__Hub__Royal_Storage_By_Wall
-            }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
-                SpotId::Irikar__Hub__Royal_Storage_By_Wall
-            }
-            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => {
-                SpotId::Irikar__Hub__Royal_Storage_in_Wall
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
-                SpotId::Irikar__Sight_Room__Item_Pedestal
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip
-            | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
-                SpotId::Irikar__Sight_Room__Item_Pedestal
-            }
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
-                SpotId::Irikar__Abandoned_Room__Corner_Core
-            }
-            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
-                SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward
-            | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam
-            | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
-                SpotId::Irikar__Boss_Room__Bulls_Feet
-            }
-            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
-                SpotId::Irikar__Boss_Room__Healthy_Rooftop
-            }
-            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
-                SpotId::Irikar__East_Rooftops__Top_Rooftop
-            }
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => SpotId::Irikar__Hub__Royal_Storage_in_Wall,
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => SpotId::Irikar__Sight_Room__Item_Pedestal,
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => SpotId::Irikar__Abandoned_Room__Corner_Core,
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => SpotId::Irikar__Boss_Room__Bulls_Feet,
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => SpotId::Irikar__Boss_Room__Healthy_Rooftop,
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => SpotId::Irikar__East_Rooftops__Top_Rooftop,
             LocationId::Irikar__Lamassu__Desk__Item => SpotId::Irikar__Lamassu__Desk,
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5
-            | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                SpotId::Menu__Upgrade_Menu__Physiology
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                SpotId::Menu__Upgrade_Menu__Combat
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                SpotId::Menu__Upgrade_Menu__Infection
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                SpotId::Menu__Upgrade_Menu__Drone
-            }
-            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => {
-                SpotId::Uhrum__West_Entrance__Inner_Dais
-            }
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
-                SpotId::Uhrum__West_Entrance__Gate_Switch
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
-                SpotId::Uhrum__West_Entrance__Upper_Wall_West
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall
-            | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall
-            | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
-                SpotId::Uhrum__West_Entrance__Upper_Wall_East
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall
-            | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall
-            | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
-                SpotId::Uhrum__West_Entrance__Lower_Wall_West
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall
-            | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall
-            | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
-                SpotId::Uhrum__West_Entrance__Lower_Wall_East
-            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => SpotId::Menu__Upgrade_Menu__Physiology,
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => SpotId::Menu__Upgrade_Menu__Combat,
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => SpotId::Menu__Upgrade_Menu__Infection,
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => SpotId::Menu__Upgrade_Menu__Drone,
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => SpotId::Uhrum__West_Entrance__Inner_Dais,
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => SpotId::Uhrum__West_Entrance__Gate_Switch,
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => SpotId::Uhrum__West_Entrance__Upper_Wall_East,
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => SpotId::Uhrum__West_Entrance__Lower_Wall_East,
             LocationId::Uhrum__West_Entrance__Sand__Refill => SpotId::Uhrum__West_Entrance__Sand,
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                SpotId::Uhrum__Siege_Corridor__Western_Cache
-            }
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                SpotId::Uhrum__Siege_Corridor__Center_Box
-            }
-            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
-                SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item
-            }
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => SpotId::Uhrum__Siege_Corridor__Western_Cache,
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => SpotId::Uhrum__Siege_Corridor__Center_Box,
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
             LocationId::Uhrum__Siege_Corridor__Pond__Item => SpotId::Uhrum__Siege_Corridor__Pond,
-            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
-                SpotId::Uhrum__Waterfalls__Ceiling_Cache
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall
-            | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall
-            | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
-                SpotId::Uhrum__Waterfalls__Barrier_West
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall
-            | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall
-            | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
-                SpotId::Uhrum__Waterfalls__Barrier_East
-            }
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
-                SpotId::Uhrum__Waterfalls__Below_Block
-            }
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                SpotId::Uhrum__Waterfalls__Above_Block
-            }
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => SpotId::Uhrum__Waterfalls__Ceiling_Cache,
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => SpotId::Uhrum__Waterfalls__Barrier_West,
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => SpotId::Uhrum__Waterfalls__Barrier_East,
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => SpotId::Uhrum__Waterfalls__Below_Block,
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => SpotId::Uhrum__Waterfalls__Above_Block,
             LocationId::Uhrum__Waterfalls__East_26__Block => SpotId::Uhrum__Waterfalls__East_26,
-            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
-                SpotId::Uhrum__Waterfalls__West_Water_Nook
-            }
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => {
-                SpotId::Uhrum__Annuna_Corridor__Upper_Trees
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
-                SpotId::Uhrum__Annuna_Corridor__Pedestal
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip
-            | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
-                SpotId::Uhrum__Annuna_Corridor__Pedestal
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => {
-                SpotId::Uhrum__Annuna_Corridor__Block_West
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
-                SpotId::Uhrum__Annuna_Corridor__Block_East
-            }
-            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
-                SpotId::Uhrum__Annuna_Corridor__East_Cubby
-            }
-            LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
-                SpotId::Uhrum__Annuna_Corridor__Statue
-            }
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => SpotId::Uhrum__Waterfalls__West_Water_Nook,
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => SpotId::Uhrum__Annuna_Corridor__Pedestal,
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => SpotId::Uhrum__Annuna_Corridor__Block_West,
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => SpotId::Uhrum__Annuna_Corridor__Block_East,
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => SpotId::Uhrum__Annuna_Corridor__East_Cubby,
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => SpotId::Uhrum__Annuna_Corridor__Statue,
         }
     }
 
@@ -17080,8 +15379,16 @@ impl world::World for World {
             ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 | ExitId:: Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => SpotId::Glacier__Dock_Outside__Cave_Treasure,
             ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip | ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => SpotId::Glacier__Dock_Outside__Cave_Treasure,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
+            ExitId::Glacier__Revival__Overhang__ex__West_9_1 => SpotId::Glacier__Revival__Overhang,
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 | ExitId:: Glacier__Revival__Ledge__ex__West_9_2 => SpotId::Glacier__Revival__Ledge,
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
+            ExitId::Glacier__Revival__West_9__ex__Overhang_1 | ExitId:: Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => SpotId::Glacier__Revival__West_9,
+            ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 | ExitId:: Glacier__Revival__Save_Point__ex__Pillar_1 => SpotId::Glacier__Revival__Save_Point,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => SpotId::Glacier__Revival__West_8,
+            ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar,
+            ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar_Step,
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 | ExitId:: Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => SpotId::Glacier__Revival__Mid_air,
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => SpotId::Glacier__Revival__Mid_air,
             ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => SpotId::Glacier__Grid_42_10__West,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => SpotId::Glacier__Grid_42_10__East,
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => SpotId::Glacier__Grid_43_10_11__Top,
@@ -17112,7 +15419,15 @@ impl world::World for World {
             ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => SpotId::Glacier__Sea_Burial__West_14,
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => SpotId::Glacier__Sea_Burial__Grate_Left,
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => SpotId::Glacier__Grid_39_40_7_9__Upper_East,
+            ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress | ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip | ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => SpotId::Glacier__Grid_39_40_7_9__West,
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 | ExitId:: Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__East_9,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => SpotId::Glacier__Grid_37_38_9__East,
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => SpotId::Glacier__Grid_37_38_9__West,
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_2 => SpotId::Glacier__Vertical_Room__East_9,
@@ -17475,11 +15790,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 2 {
+                        if ctx.count(Item::Big_Flask) < 3 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 3 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 2 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 3 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -17562,11 +15877,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 14 {
+                        if ctx.count(Item::Flask) < 15 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 15 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Goodbye) {
@@ -17584,9 +15899,11 @@ impl world::World for World {
                                 );
                             }
                         }
-                        if !ctx.has(Item::Health_Node) {
-                            if !map.contains_key(&Item::Health_Node) {
-                                map.insert(Item::Health_Node, 1);
+                        if ctx.count(Item::Health_Node) < 2 {
+                            if let Some(val) = map.get_mut(&Item::Health_Node) {
+                                *val = std::cmp::max(*val, 2 - ctx.count(Item::Health_Node));
+                            } else {
+                                map.insert(Item::Health_Node, 2 - ctx.count(Item::Health_Node));
                             }
                         }
                         if !ctx.has(Item::Heretics_Tablet) {
@@ -17627,6 +15944,11 @@ impl world::World for World {
                         if !ctx.has(Item::Nano_Lattice_2) {
                             if !map.contains_key(&Item::Nano_Lattice_2) {
                                 map.insert(Item::Nano_Lattice_2, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Notes_2053_02_27) {
+                            if !map.contains_key(&Item::Notes_2053_02_27) {
+                                map.insert(Item::Notes_2053_02_27, 1);
                             }
                         }
                         if !ctx.has(Item::Plague_of_Thoughts) {
@@ -17805,11 +16127,11 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                     }
-                    if ctx.count(Item::Big_Flask) < 2 {
+                    if ctx.count(Item::Big_Flask) < 3 {
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 2 - ctx.count(Item::Big_Flask));
+                            *val = std::cmp::max(*val, 3 - ctx.count(Item::Big_Flask));
                         } else {
-                            map.insert(Item::Big_Flask, 2 - ctx.count(Item::Big_Flask));
+                            map.insert(Item::Big_Flask, 3 - ctx.count(Item::Big_Flask));
                         }
                     }
                     if !ctx.has(Item::Boomerang) {
@@ -17892,11 +16214,11 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 14 {
+                    if ctx.count(Item::Flask) < 15 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 14 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 15 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 14 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
                         }
                     }
                     if !ctx.has(Item::Goodbye) {
@@ -17911,9 +16233,11 @@ impl world::World for World {
                             map.insert(Item::Health_Fragment, 6 - ctx.count(Item::Health_Fragment));
                         }
                     }
-                    if !ctx.has(Item::Health_Node) {
-                        if !map.contains_key(&Item::Health_Node) {
-                            map.insert(Item::Health_Node, 1);
+                    if ctx.count(Item::Health_Node) < 2 {
+                        if let Some(val) = map.get_mut(&Item::Health_Node) {
+                            *val = std::cmp::max(*val, 2 - ctx.count(Item::Health_Node));
+                        } else {
+                            map.insert(Item::Health_Node, 2 - ctx.count(Item::Health_Node));
                         }
                     }
                     if !ctx.has(Item::Heretics_Tablet) {
@@ -17954,6 +16278,11 @@ impl world::World for World {
                     if !ctx.has(Item::Nano_Lattice_2) {
                         if !map.contains_key(&Item::Nano_Lattice_2) {
                             map.insert(Item::Nano_Lattice_2, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Notes_2053_02_27) {
+                        if !map.contains_key(&Item::Notes_2053_02_27) {
+                            map.insert(Item::Notes_2053_02_27, 1);
                         }
                     }
                     if !ctx.has(Item::Plague_of_Thoughts) {
@@ -18144,9 +16473,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 2);
+                            *val = std::cmp::max(*val, 3);
                         } else {
-                            map.insert(Item::Big_Flask, 2);
+                            map.insert(Item::Big_Flask, 3);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -18197,9 +16526,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 14);
+                            *val = std::cmp::max(*val, 15);
                         } else {
-                            map.insert(Item::Flask, 14);
+                            map.insert(Item::Flask, 15);
                         }
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
@@ -18209,8 +16538,10 @@ impl world::World for World {
                         } else {
                             map.insert(Item::Health_Fragment, 6);
                         }
-                        if !map.contains_key(&Item::Health_Node) {
-                            map.insert(Item::Health_Node, 1);
+                        if let Some(val) = map.get_mut(&Item::Health_Node) {
+                            *val = std::cmp::max(*val, 2);
+                        } else {
+                            map.insert(Item::Health_Node, 2);
                         }
                         if !map.contains_key(&Item::Heretics_Tablet) {
                             map.insert(Item::Heretics_Tablet, 1);
@@ -18235,6 +16566,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Nano_Lattice_2) {
                             map.insert(Item::Nano_Lattice_2, 1);
+                        }
+                        if !map.contains_key(&Item::Notes_2053_02_27) {
+                            map.insert(Item::Notes_2053_02_27, 1);
                         }
                         if !map.contains_key(&Item::Plague_of_Thoughts) {
                             map.insert(Item::Plague_of_Thoughts, 1);
@@ -18347,9 +16681,9 @@ impl world::World for World {
                         map.insert(Item::Beware_the_Patternmind, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                        *val = std::cmp::max(*val, 2);
+                        *val = std::cmp::max(*val, 3);
                     } else {
-                        map.insert(Item::Big_Flask, 2);
+                        map.insert(Item::Big_Flask, 3);
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
@@ -18400,9 +16734,9 @@ impl world::World for World {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 14);
+                        *val = std::cmp::max(*val, 15);
                     } else {
-                        map.insert(Item::Flask, 14);
+                        map.insert(Item::Flask, 15);
                     }
                     if !map.contains_key(&Item::Goodbye) {
                         map.insert(Item::Goodbye, 1);
@@ -18412,8 +16746,10 @@ impl world::World for World {
                     } else {
                         map.insert(Item::Health_Fragment, 6);
                     }
-                    if !map.contains_key(&Item::Health_Node) {
-                        map.insert(Item::Health_Node, 1);
+                    if let Some(val) = map.get_mut(&Item::Health_Node) {
+                        *val = std::cmp::max(*val, 2);
+                    } else {
+                        map.insert(Item::Health_Node, 2);
                     }
                     if !map.contains_key(&Item::Heretics_Tablet) {
                         map.insert(Item::Heretics_Tablet, 1);
@@ -18438,6 +16774,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Nano_Lattice_2) {
                         map.insert(Item::Nano_Lattice_2, 1);
+                    }
+                    if !map.contains_key(&Item::Notes_2053_02_27) {
+                        map.insert(Item::Notes_2053_02_27, 1);
                     }
                     if !map.contains_key(&Item::Plague_of_Thoughts) {
                         map.insert(Item::Plague_of_Thoughts, 1);
@@ -19125,6 +17464,10 @@ impl world::World for World {
             | SpotId::Glacier__Grid_32_7_10__West_9
             | SpotId::Glacier__Grid_37_38_9__East
             | SpotId::Glacier__Grid_37_38_9__West
+            | SpotId::Glacier__Grid_39_40_7_9__East_9
+            | SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform
+            | SpotId::Glacier__Grid_39_40_7_9__Floating_Rock
+            | SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform
             | SpotId::Glacier__Grid_39_40_7_9__Upper_East
             | SpotId::Glacier__Grid_39_40_7_9__West
             | SpotId::Glacier__Grid_42_10__East
@@ -19158,8 +17501,12 @@ impl world::World for World {
             | SpotId::Glacier__Peak__West_8
             | SpotId::Glacier__Revival__East_9
             | SpotId::Glacier__Revival__Lower_East
+            | SpotId::Glacier__Revival__Mid_air
+            | SpotId::Glacier__Revival__Pillar
+            | SpotId::Glacier__Revival__Pillar_Step
             | SpotId::Glacier__Revival__Save_Point
             | SpotId::Glacier__Revival__West_8
+            | SpotId::Glacier__Revival__West_9
             | SpotId::Glacier__Sea_Burial__Breakable_Rock_Left
             | SpotId::Glacier__Sea_Burial__Breakable_Rock_Right
             | SpotId::Glacier__Sea_Burial__Collapsing_Ceiling
@@ -19354,6 +17701,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Giguna_Northeast
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
+            | SpotId::Menu__Kiengir_Map__Glacier_40_8
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Hammond
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
@@ -19543,7 +17891,6 @@ impl World {
                             | Item::Melee_Damage_3
                             | Item::Melee_Speed_3
                             | Item::Nano_Points_3
-                            | Item::Notes_2053_02_27
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Royal_Dagger
@@ -19732,7 +18079,6 @@ impl World {
                             | Item::Melee_Damage_3
                             | Item::Melee_Speed_3
                             | Item::Nano_Points_3
-                            | Item::Notes_2053_02_27
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
                             | Item::Royal_Dagger
@@ -19979,7 +18325,6 @@ impl World {
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Points_3);
-                        iset.insert(Item::Notes_2053_02_27);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Royal_Dagger);
@@ -20167,7 +18512,6 @@ impl World {
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Points_3);
-                        iset.insert(Item::Notes_2053_02_27);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
                         iset.insert(Item::Royal_Dagger);
@@ -21846,6 +20190,33 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
             skippable: false,
         },
+        LocationId::Glacier__Revival__Pillar__Health => Location {
+            id: LocationId::Glacier__Revival__Pillar__Health,
+            canonical: CanonId::Revival_Health_Node,
+            item: Item::Health_Node,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => Location {
+            id: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
+            canonical: CanonId::Revival_Health_Node,
+            item: Item::Health_Node,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+            skippable: false,
+        },
+        LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => Location {
+            id: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
+            canonical: CanonId::Revival_Health_Node,
+            item: Item::Health_Node,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
+            skippable: false,
+        },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
             id: LocationId::Glacier__Compass_Room__Center__Table,
             canonical: CanonId::Loc_Glacier__Compass_Room__Center__Table,
@@ -21988,6 +20359,51 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: None,
+            skippable: false,
+        },
+        LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => Location {
+            id: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress,
+            canonical: CanonId::Glacier_40_8_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
+            skippable: false,
+        },
+        LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => Location {
+            id: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress,
+            canonical: CanonId::Glacier_40_8_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
+            skippable: false,
+        },
+        LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item => Location {
+            id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item,
+            canonical: CanonId::Glacier_40_8_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => Location {
+            id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
+            canonical: CanonId::Glacier_40_8_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+            skippable: false,
+        },
+        LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => Location {
+            id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
+            canonical: CanonId::Glacier_40_8_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
             skippable: false,
         },
         LocationId::Glacier__Vertical_Room__Under_Switch__Switch => Location {
@@ -30988,10 +29404,59 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Revival__Overhang__ex__West_9_1 => Exit {
+            id: ExitId::Glacier__Revival__Overhang__ex__West_9_1,
+            time: 1929,
+            dest: SpotId::Glacier__Revival__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Ledge__ex__West_9_1 => Exit {
+            id: ExitId::Glacier__Revival__Ledge__ex__West_9_1,
+            time: 1200,
+            dest: SpotId::Glacier__Revival__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Ledge__ex__West_9_2 => Exit {
+            id: ExitId::Glacier__Revival__Ledge__ex__West_9_2,
+            time: 877,
+            dest: SpotId::Glacier__Revival__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => Exit {
             id: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_42_10__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__West_9__ex__Overhang_1 => Exit {
+            id: ExitId::Glacier__Revival__West_9__ex__Overhang_1,
+            time: 1929,
+            dest: SpotId::Glacier__Revival__Overhang,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => Exit {
+            id: ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1,
+            time: 1350,
+            dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => Exit {
+            id: ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
+            time: 3105,
+            dest: SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Save_Point__ex__Pillar_1 => Exit {
+            id: ExitId::Glacier__Revival__Save_Point__ex__Pillar_1,
+            time: 1200,
+            dest: SpotId::Glacier__Revival__Pillar,
             price: Currency::Free,
             loc_id: None,
         },
@@ -31001,6 +29466,48 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             dest: SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             price: Currency::Free,
             loc_id: None,
+        },
+        ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => Exit {
+            id: ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1,
+            time: 2052,
+            dest: SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => Exit {
+            id: ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1,
+            time: 1701,
+            dest: SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => Exit {
+            id: ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1,
+            time: 4099,
+            dest: SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => Exit {
+            id: ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1,
+            time: 4225,
+            dest: SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => Exit {
+            id: ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
+            time: 4099,
+            dest: SpotId::Glacier__Dock_Outside__Ruins_Platform,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+        },
+        ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => Exit {
+            id: ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
+            time: 4225,
+            dest: SpotId::Glacier__Dock_Outside__Ruins_Stairs,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
         },
         ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => Exit {
             id: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,
@@ -31282,10 +29789,115 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1,
+            time: 3105,
+            dest: SpotId::Glacier__Revival__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1,
+            time: 1375,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress,
+            time: 1375,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress,
+            time: 2375,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1,
+            time: 1228,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
+            time: 200,
+            dest: SpotId::Menu__Warp_Only__Kiengir,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
+            time: 200,
+            dest: SpotId::Menu__Kiengir_Map__Glacier_40_8,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
+        },
         ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => Exit {
             id: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_37_38_9__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1,
+            time: 2280,
+            dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1,
+            time: 1200,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1,
+            time: 1200,
+            dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2,
+            time: 1052,
+            dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1,
+            time: 1228,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2,
+            time: 1228,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1,
+            time: 1350,
+            dest: SpotId::Glacier__Revival__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1,
+            time: 2280,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
             price: Currency::Free,
             loc_id: None,
         },
@@ -35266,7 +33878,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
-            time: 1200,
+            time: 1300,
             price: Currency::Free,
         },
         ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => Action {
@@ -49841,7 +48453,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Overhang__ex__West_9_1.into_usize(),
+                end: ExitId::Glacier__Revival__Overhang__ex__West_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49853,7 +48466,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Ledge__ex__West_9_1.into_usize(),
+                end: ExitId::Glacier__Revival__Ledge__ex__West_9_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49872,13 +48486,27 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Glacier__Revival__West_9 => Spot {
+            id: SpotId::Glacier__Revival__West_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1.into_usize(),
+                end: ExitId::Glacier__Revival__West_9__ex__Overhang_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier__Revival__Save_Point => Spot {
             id: SpotId::Glacier__Revival__Save_Point,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize(),
+                end: ExitId::Glacier__Revival__Save_Point__ex__Pillar_1.into_usize() + 1,
             },
             actions: Range {
                 start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
@@ -49901,10 +48529,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Glacier__Revival__Pillar => Spot {
             id: SpotId::Glacier__Revival__Pillar,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Glacier__Revival__Pillar__Health.into_usize(),
+                end: LocationId::Glacier__Revival__Pillar__Health.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1.into_usize(),
+                end: ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49916,7 +48546,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1.into_usize(),
+                end: ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -49925,10 +48556,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Glacier__Revival__Mid_air => Spot {
             id: SpotId::Glacier__Revival__Mid_air,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab.into_usize(),
+                end: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1.into_usize(),
+                end: ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -50376,6 +49009,71 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+            locations: Range {
+                start: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress.into_usize(),
+                end: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Floating_Rock => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
+            locations: Range {
+                start: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip.into_usize(),
+                end: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Glacier__Grid_39_40_7_9__West => Spot {
             id: SpotId::Glacier__Grid_39_40_7_9__West,
             locations: Range {
@@ -50384,6 +49082,45 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1.into_usize(),
                 end: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__Lower_Floor => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Glacier__Grid_39_40_7_9__East_9 => Spot {
+            id: SpotId::Glacier__Grid_39_40_7_9__East_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -54806,6 +53543,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => Spot {
             id: SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Glacier_40_8 => Spot {
+            id: SpotId::Menu__Kiengir_Map__Glacier_40_8,
             locations: Range {
                 start: 0, end: 0,
             },

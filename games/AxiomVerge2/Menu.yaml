@@ -512,6 +512,8 @@ areas:
       coord: [42, 16]
     - name: Glacier Dock Flask
       coord: [44, 9]
+    - name: Glacier 40,8
+      coord: [40, 8]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

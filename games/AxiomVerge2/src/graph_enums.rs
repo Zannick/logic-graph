@@ -1833,7 +1833,15 @@ pub enum SpotId {
     Glacier__Grid_32_7_10__West_9,
     Glacier__Grid_37_38_9__East,
     Glacier__Grid_37_38_9__West,
+    Glacier__Grid_39_40_7_9__East_9,
+    Glacier__Grid_39_40_7_9__First_Upper_Platform,
+    Glacier__Grid_39_40_7_9__Floating_Rock,
+    Glacier__Grid_39_40_7_9__Fortress_Ledge,
+    Glacier__Grid_39_40_7_9__Lower_Floor,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform,
+    Glacier__Grid_39_40_7_9__Under_Scaffolding,
     Glacier__Grid_39_40_7_9__Upper_East,
+    Glacier__Grid_39_40_7_9__Upper_Scaffolding,
     Glacier__Grid_39_40_7_9__West,
     Glacier__Grid_42_10__East,
     Glacier__Grid_42_10__West,
@@ -1901,6 +1909,7 @@ pub enum SpotId {
     Glacier__Revival__Pillar_Step,
     Glacier__Revival__Save_Point,
     Glacier__Revival__West_8,
+    Glacier__Revival__West_9,
     Glacier__Sea_Burial__Breakable_Rock_Left,
     Glacier__Sea_Burial__Breakable_Rock_Right,
     Glacier__Sea_Burial__Collapsing_Ceiling,
@@ -2263,6 +2272,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Giguna_Ruins_Top,
     Menu__Kiengir_Map__Giguna_Ruins_West,
     Menu__Kiengir_Map__Giguna_Separator,
+    Menu__Kiengir_Map__Glacier_40_8,
     Menu__Kiengir_Map__Glacier_Dock_Flask,
     Menu__Kiengir_Map__Glacier_Revival,
     Menu__Kiengir_Map__Hammond,
@@ -5155,8 +5165,32 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Grid_37_38_9__East => write!(f, "{}", "Glacier > Grid 37-38,9 > East"),
             SpotId::Glacier__Grid_37_38_9__West => write!(f, "{}", "Glacier > Grid 37-38,9 > West"),
+            SpotId::Glacier__Grid_39_40_7_9__East_9 => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > East 9")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > First Upper Platform")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Floating_Rock => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Fortress Ledge")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Lower_Floor => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Lower Floor")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Under Scaffolding")
+            }
             SpotId::Glacier__Grid_39_40_7_9__Upper_East => {
                 write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East")
+            }
+            SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding => {
+                write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper Scaffolding")
             }
             SpotId::Glacier__Grid_39_40_7_9__West => {
                 write!(f, "{}", "Glacier > Grid 39-40,7-9 > West")
@@ -5333,6 +5367,7 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
             SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
+            SpotId::Glacier__Revival__West_9 => write!(f, "{}", "Glacier > Revival > West 9"),
             SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => {
                 write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left")
             }
@@ -6332,6 +6367,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Giguna_Separator => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Separator")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_40_8 => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier 40,8")
             }
             SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Dock Flask")
@@ -8603,8 +8641,30 @@ impl std::str::FromStr for SpotId {
             "Glacier > Grid 32,7-10 > West 9" => Ok(SpotId::Glacier__Grid_32_7_10__West_9),
             "Glacier > Grid 37-38,9 > East" => Ok(SpotId::Glacier__Grid_37_38_9__East),
             "Glacier > Grid 37-38,9 > West" => Ok(SpotId::Glacier__Grid_37_38_9__West),
+            "Glacier > Grid 39-40,7-9 > East 9" => Ok(SpotId::Glacier__Grid_39_40_7_9__East_9),
+            "Glacier > Grid 39-40,7-9 > First Upper Platform" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform)
+            }
+            "Glacier > Grid 39-40,7-9 > Floating Rock" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Floating_Rock)
+            }
+            "Glacier > Grid 39-40,7-9 > Fortress Ledge" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge)
+            }
+            "Glacier > Grid 39-40,7-9 > Lower Floor" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Lower_Floor)
+            }
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform)
+            }
+            "Glacier > Grid 39-40,7-9 > Under Scaffolding" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding)
+            }
             "Glacier > Grid 39-40,7-9 > Upper East" => {
                 Ok(SpotId::Glacier__Grid_39_40_7_9__Upper_East)
+            }
+            "Glacier > Grid 39-40,7-9 > Upper Scaffolding" => {
+                Ok(SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding)
             }
             "Glacier > Grid 39-40,7-9 > West" => Ok(SpotId::Glacier__Grid_39_40_7_9__West),
             "Glacier > Grid 42,10 > East" => Ok(SpotId::Glacier__Grid_42_10__East),
@@ -8735,6 +8795,7 @@ impl std::str::FromStr for SpotId {
             "Glacier > Revival > Pillar Step" => Ok(SpotId::Glacier__Revival__Pillar_Step),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
             "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
+            "Glacier > Revival > West 9" => Ok(SpotId::Glacier__Revival__West_9),
             "Glacier > Sea Burial > Breakable Rock Left" => {
                 Ok(SpotId::Glacier__Sea_Burial__Breakable_Rock_Left)
             }
@@ -9477,6 +9538,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Giguna Separator" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Separator)
             }
+            "Menu > Kiengir Map > Glacier 40,8" => Ok(SpotId::Menu__Kiengir_Map__Glacier_40_8),
             "Menu > Kiengir Map > Glacier Dock Flask" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask)
             }
@@ -9942,11 +10004,19 @@ pub enum LocationId {
     Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
     Glacier__Dock_Outside__Cave_Treasure__Item,
     Glacier__Dock_Outside__Ruins_Stairs__Note,
+    Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
+    Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
+    Glacier__Grid_39_40_7_9__Floating_Rock__Item,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress,
     Glacier__Hammonds_End__Between_Center_Doors__Health,
     Glacier__Hammonds_End__Corner__Quick_Note,
     Glacier__Hammonds_End__Hammond__Note,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
+    Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
+    Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
+    Glacier__Revival__Pillar__Health,
     Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
     Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
     Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
@@ -10069,1165 +10139,307 @@ pub enum LocationId {
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            LocationId::Amagi__Liru_Room__Shrine__Item => {
-                write!(f, "{}", "Amagi > Liru Room > Shrine > Item")
-            }
-            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
-                write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item")
-            }
-            LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
-                write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item")
-            }
-            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Cavern Rear Pillar > Boss Reward"
-            ),
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Cavern Refill Station > Break Wall"
-            ),
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"
-            ),
-            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Cavern Tear Duct > Remote Flask"
-            ),
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
-                write!(
-                    f,
-                    "{}",
-                    "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder"
-                )
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
-                write!(
-                    f,
-                    "{}",
-                    "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder"
-                )
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Front Door > Break Wall"
-            ),
-            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Front Room > Break Wall"
-            ),
-            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Break Wall")
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Item__Item => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Item")
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Middle Column > Break Wall"
-            ),
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall"
-            ),
-            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn")
-            }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Surface Wall Left > Break Wall"
-            ),
-            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Surface Wall Right > Break Wall"
-            ),
-            LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => {
-                write!(f, "{}", "Amagi Breach > East Entrance > Upper Slope > Item")
-            }
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(
-                f,
-                "{}",
-                "Annuna > Apocalypse > Center Scaffold West > Boss Fight"
-            ),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => write!(
-                f,
-                "{}",
-                "Annuna > Apocalypse > Center Scaffold West > Fill It Up"
-            ),
-            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => write!(
-                f,
-                "{}",
-                "Annuna > East Bridge > Below Gate Button > Switch from Below"
-            ),
-            LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                write!(f, "{}", "Annuna > East Bridge > Gate Button > Switch")
-            }
-            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                write!(f, "{}", "Annuna > East Bridge > Tower Gate > Tablet")
-            }
-            LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
-                write!(f, "{}", "Annuna > East Bridge > Tower Secret > Item")
-            }
-            LocationId::Annuna__Egg_Room__Cache__Flask => {
-                write!(f, "{}", "Annuna > Egg Room > Cache > Flask")
-            }
-            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => {
-                write!(f, "{}", "Annuna > Egg Room > Cache > Shockwave Flask")
-            }
-            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Egg Room > Corner Platform > Remote Boomerang Flask"
-            ),
-            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => write!(
-                f,
-                "{}",
-                "Annuna > Egg Room > Corner Platform > Shockwave from Outside"
-            ),
-            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Egg Room > Second Egg > Remote Boomerang Flask"
-            ),
-            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask"
-            ),
-            LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => write!(
-                f,
-                "{}",
-                "Annuna > Filter Teleporter > Northeast Cubby > Tablet"
-            ),
-            LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => {
-                write!(f, "{}", "Annuna > Filter Teleporter > Shaft Bottom > Flask")
-            }
-            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                write!(f, "{}", "Annuna > Mirror Match > Below Switch > Hit Switch")
-            }
-            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Mirror Match > East 26 Lower > Remote Flask"
-            ),
-            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Mirror Match > East 26 Upper > Remote Flask"
-            ),
-            LocationId::Annuna__Mirror_Match__Plinth__Item => {
-                write!(f, "{}", "Annuna > Mirror Match > Plinth > Item")
-            }
-            LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                write!(f, "{}", "Annuna > Mirror Match > Save Point > Fight")
-            }
-            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => write!(
-                f,
-                "{}",
-                "Annuna > Mirror Match > Waving Distance > Shockwave Flask"
-            ),
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Seals > Breakable Rock > Break Through Wall"
-            ),
-            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Seals > Breakable Rock > Faster Mist Through Wall"
-            ),
-            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Seals > Breakable Rock > Mist Through Wall"
-            ),
-            LocationId::Annuna__Siuna_Storage__Cache__Urn => {
-                write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn")
-            }
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Cache > Urn Collection Skip"
-            ),
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Fast Travel")
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Left > Break Wall as Indra"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
-                write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Distant Urn")
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist"
-            ),
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                write!(
-                    f,
-                    "{}",
-                    "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2"
-                )
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Wall Right > Break Wall as Indra"
-            ),
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Within Range > Remote Urn"
-            ),
-            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => write!(
-                f,
-                "{}",
-                "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel"
-            ),
-            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => write!(
-                f,
-                "{}",
-                "Annuna > Sniper Valley > Bridge End > Health Pickup"
-            ),
-            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
-                write!(f, "{}", "Annuna > Sniper Valley > Cavern Cache > Item")
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall"
-            ),
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall"
-            ),
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall"
-            ),
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => write!(
-                f,
-                "{}",
-                "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall"
-            ),
-            LocationId::Annuna__Sniper_Valley__Table__Item => {
-                write!(f, "{}", "Annuna > Sniper Valley > Table > Item")
-            }
-            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => write!(
-                f,
-                "{}",
-                "Annuna > Spider Room > Healthy Corner > Health Refill"
-            ),
-            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => write!(
-                f,
-                "{}",
-                "Annuna > Twisty Passages > Northwest Alcove > Refill"
-            ),
-            LocationId::Annuna__Twisty_Passages__Top__Tablet => {
-                write!(f, "{}", "Annuna > Twisty Passages > Top > Tablet")
-            }
-            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => write!(
-                f,
-                "{}",
-                "Annuna > Upper Hallway > Behind Pedestal > Health Pickup"
-            ),
-            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => {
-                write!(f, "{}", "Annuna > Vertical Room > Gate Button > Hit Button")
-            }
-            LocationId::Annuna__Vertical_Room__Plinth__Item => {
-                write!(f, "{}", "Annuna > Vertical Room > Plinth > Item")
-            }
-            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => {
-                write!(f, "{}", "Annuna > Vertical Room > Upper Cache > Tablet")
-            }
-            LocationId::Annuna__West_Bridge__Plinth__Item => {
-                write!(f, "{}", "Annuna > West Bridge > Plinth > Item")
-            }
-            LocationId::Annuna__West_Climb__Cache__Item => {
-                write!(f, "{}", "Annuna > West Climb > Cache > Item")
-            }
-            LocationId::Antarctica__Building_2__Behind_Boxes__Note => {
-                write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note")
-            }
-            LocationId::Antarctica__Power_Room__Switch__Flip => {
-                write!(f, "{}", "Antarctica > Power Room > Switch > Flip")
-            }
-            LocationId::Antarctica__Shed__Interior__Shelf => {
-                write!(f, "{}", "Antarctica > Shed > Interior > Shelf")
-            }
-            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(
-                f,
-                "{}",
-                "Ebih > Base Camp > Left Platform Moved > Item From The Side"
-            ),
-            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
-                write!(f, "{}", "Ebih > Base Camp > Top Platform > Item")
-            }
-            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
-                write!(f, "{}", "Ebih > Boss Room > Boss > Boss Reward")
-            }
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
-                write!(f, "{}", "Ebih > Boss Room > Boss > Fight Alu")
-            }
-            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                write!(f, "{}", "Ebih > Boss Room > Boss > Hack Alu")
-            }
-            LocationId::Ebih__Boss_Room__East_Ledge__Item => {
-                write!(f, "{}", "Ebih > Boss Room > East Ledge > Item")
-            }
-            LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
-                write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment")
-            }
-            LocationId::Ebih__Drone_Room__Item__Urn => {
-                write!(f, "{}", "Ebih > Drone Room > Item > Urn")
-            }
-            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => {
-                write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip")
-            }
-            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => {
-                write!(f, "{}", "Ebih > Drone Room > Item > Urn Fast Travel")
-            }
-            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(
-                f,
-                "{}",
-                "Ebih > Drone Room > Middle Platform > Urn Quick Grab"
-            ),
-            LocationId::Ebih__Ebih_East__Corner__Urn => {
-                write!(f, "{}", "Ebih > Ebih East > Corner > Urn")
-            }
-            LocationId::Ebih__Ebih_East__Dispenser__Vend => {
-                write!(f, "{}", "Ebih > Ebih East > Dispenser > Vend")
-            }
-            LocationId::Ebih__Ebih_East__East_Ledge__Note => {
-                write!(f, "{}", "Ebih > Ebih East > East Ledge > Note")
-            }
-            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(
-                f,
-                "{}",
-                "Ebih > Ebih East > Lower Moving Platform > Remote Urn"
-            ),
-            LocationId::Ebih__Ebih_West__Alcove__Tablet => {
-                write!(f, "{}", "Ebih > Ebih West > Alcove > Tablet")
-            }
-            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => {
-                write!(f, "{}", "Ebih > Ebih West > Block Left > Break Block")
-            }
-            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
-                write!(f, "{}", "Ebih > Ebih West > Block Right > Break Block")
-            }
-            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush")
-            }
-            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush")
-            }
-            LocationId::Ebih__Grid_25_2_6__Pit__Item => {
-                write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item")
-            }
-            LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
-                write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note")
-            }
-            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(
-                f,
-                "{}",
-                "Ebih > Vertical Interchange > Block Cubby > Shockwave Block"
-            ),
-            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(
-                f,
-                "{}",
-                "Ebih > Vertical Interchange > Switch > Activate Switch"
-            ),
-            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left")
-            }
-            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right")
-            }
-            LocationId::Ebih__Waterfall__Alcove__Pedestal => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal")
-            }
-            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove Left > Block Left")
-            }
-            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right")
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Through Wall")
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
-                write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Wall")
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => write!(
-                f,
-                "{}",
-                "Ebih > Waterfall > Wall Right > Break Through Wall"
-            ),
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
-                write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Wall")
-            }
-            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
-                f,
-                "{}",
-                "Ebih > Waterfall > Waterfall Center Center > Both Blocks"
-            ),
-            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => {
-                write!(f, "{}", "Filter > Core > Terminal East > Authorize Hammond")
-            }
-            LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
-                write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet")
-            }
-            LocationId::Giguna__Carnelian__Vault__Item => {
-                write!(f, "{}", "Giguna > Carnelian > Vault > Item")
-            }
-            LocationId::Giguna__Clouds__Cache__Item => {
-                write!(f, "{}", "Giguna > Clouds > Cache > Item")
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => {
-                write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall")
-            }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(
-                f,
-                "{}",
-                "Giguna > Dual Path > Base of Wall > Mist into Wall"
-            ),
-            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => write!(
-                f,
-                "{}",
-                "Giguna > Dual Path > Below Left Switch > Remote Switch"
-            ),
-            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => write!(
-                f,
-                "{}",
-                "Giguna > Dual Path > Below Right Switch > Remote Switch"
-            ),
-            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => {
-                write!(f, "{}", "Giguna > Dual Path > Left Switch > Hit Switch")
-            }
-            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => {
-                write!(f, "{}", "Giguna > Dual Path > Right Switch > Hit Switch")
-            }
-            LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
-                write!(f, "{}", "Giguna > Dual Path > Wall Secret > Health")
-            }
-            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => write!(
-                f,
-                "{}",
-                "Giguna > East Caverns > Hidden Passage Center > Hidden Flask"
-            ),
-            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
-                write!(f, "{}", "Giguna > Far Corner > Grass > Obscured Item")
-            }
-            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                write!(f, "{}", "Giguna > Gateway > Block Left > Shockwave")
-            }
-            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                write!(f, "{}", "Giguna > Gateway > Block Right > Shockwave")
-            }
-            LocationId::Giguna__Gateway__Button__Hit_Switch => {
-                write!(f, "{}", "Giguna > Gateway > Button > Hit Switch")
-            }
-            LocationId::Giguna__Gateway__Flask_Ledge__Item => {
-                write!(f, "{}", "Giguna > Gateway > Flask Ledge > Item")
-            }
-            LocationId::Giguna__Giguna_Base__Ruin__Item => {
-                write!(f, "{}", "Giguna > Giguna Base > Ruin > Item")
-            }
-            LocationId::Giguna__Giguna_Base__Table__News => {
-                write!(f, "{}", "Giguna > Giguna Base > Table > News")
-            }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Door > Remote Flask")
-            }
-            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(
-                f,
-                "{}",
-                "Giguna > Giguna Northeast > Gate Button > Open Gate"
-            ),
-            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => write!(
-                f,
-                "{}",
-                "Giguna > Giguna Northeast > Gate Right > Remote Button"
-            ),
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item")
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => write!(
-                f,
-                "{}",
-                "Giguna > Gubi Lair > Center Platform > Boss Reward"
-            ),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
-                write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Fight Gubi")
-            }
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Hack Gubi")
-            }
-            LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
-                write!(f, "{}", "Giguna > Gubi Lair > Pedestal > Axe")
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
-                write!(f, "{}", "Giguna > Hard Rock > Rock Center > Tablet")
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(
-                f,
-                "{}",
-                "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"
-            ),
-            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => write!(
-                f,
-                "{}",
-                "Giguna > Hard Rock > Rock Left > Shockwave Boulder"
-            ),
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(
-                f,
-                "{}",
-                "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"
-            ),
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => write!(
-                f,
-                "{}",
-                "Giguna > Hard Rock > Rock Right > Shockwave Boulder"
-            ),
-            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
-                write!(f, "{}", "Giguna > Helipad > Tablet Ledge > Tablet")
-            }
-            LocationId::Giguna__Lamassu__Deposit__Flask => {
-                write!(f, "{}", "Giguna > Lamassu > Deposit > Flask")
-            }
-            LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                write!(f, "{}", "Giguna > Ruins Center > Tablet > Item")
-            }
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
-                write!(f, "{}", "Giguna > Ruins East > Way Up High > Item")
-            }
-            LocationId::Giguna__Ruins_Top__Flask__Flask => {
-                write!(f, "{}", "Giguna > Ruins Top > Flask > Flask")
-            }
-            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => write!(
-                f,
-                "{}",
-                "Giguna > Ruins Top > Small Ledge > Shockwave Flask"
-            ),
-            LocationId::Giguna__Wasteland__Door_Right__Health => {
-                write!(f, "{}", "Giguna > Wasteland > Door Right > Health")
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
-                write!(
-                    f,
-                    "{}",
-                    "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually"
-                )
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                write!(
-                    f,
-                    "{}",
-                    "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage"
-                )
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
-                write!(
-                    f,
-                    "{}",
-                    "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually"
-                )
-            }
-            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => write!(
-                f,
-                "{}",
-                "Giguna > Wasteland > Passage East > Mist through Horizontal Passage"
-            ),
-            LocationId::Giguna__West_Caverns__Bush__Item => {
-                write!(f, "{}", "Giguna > West Caverns > Bush > Item")
-            }
-            LocationId::Giguna__West_Caverns__Cache__Item => {
-                write!(f, "{}", "Giguna > West Caverns > Cache > Item")
-            }
-            LocationId::Giguna__West_Tower__Top__Tablet => {
-                write!(f, "{}", "Giguna > West Tower > Top > Tablet")
-            }
-            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
-                write!(f, "{}", "Giguna Breach > Chimney > Cache > Flask")
-            }
-            LocationId::Giguna_Breach__Cubby__Rocks__Health => {
-                write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health")
-            }
-            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
-                write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn")
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
-                write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape")
-            }
-            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => write!(
-                f,
-                "{}",
-                "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape"
-            ),
-            LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
-                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item")
-            }
-            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Switch")
-            }
-            LocationId::Glacier__Compass_Room__Center__Table => {
-                write!(f, "{}", "Glacier > Compass Room > Center > Table")
-            }
-            LocationId::Glacier__Crystals__Lower_Corner__Item => {
-                write!(f, "{}", "Glacier > Crystals > Lower Corner > Item")
-            }
-            LocationId::Glacier__Crystals__Top_Corner__Tablet => {
-                write!(f, "{}", "Glacier > Crystals > Top Corner > Tablet")
-            }
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => write!(
-                f,
-                "{}",
-                "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip"
-            ),
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => write!(
-                f,
-                "{}",
-                "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel"
-            ),
-            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => {
-                write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Item")
-            }
-            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
-                write!(f, "{}", "Glacier > Dock Outside > Ruins Stairs > Note")
-            }
-            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => write!(
-                f,
-                "{}",
-                "Glacier > Hammond's End > Between Center Doors > Health"
-            ),
-            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                write!(f, "{}", "Glacier > Hammond's End > Corner > Quick Note")
-            }
-            LocationId::Glacier__Hammonds_End__Hammond__Note => {
-                write!(f, "{}", "Glacier > Hammond's End > Hammond > Note")
-            }
-            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(
-                f,
-                "{}",
-                "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"
-            ),
-            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
-                write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item")
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => write!(
-                f,
-                "{}",
-                "Glacier > Sea Burial > Breakable Rock Left > Break Rock"
-            ),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => write!(
-                f,
-                "{}",
-                "Glacier > Sea Burial > Breakable Rock Left > Mist Through"
-            ),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => write!(
-                f,
-                "{}",
-                "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster"
-            ),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
-                write!(
-                    f,
-                    "{}",
-                    "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping"
-                )
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => write!(
-                f,
-                "{}",
-                "Glacier > Sea Burial > Breakable Rock Right > Mist Through"
-            ),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => write!(
-                f,
-                "{}",
-                "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster"
-            ),
-            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                write!(f, "{}", "Glacier > Sea Burial > Collapsing Ceiling > Drown")
-            }
-            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => {
-                write!(f, "{}", "Glacier > Sea Burial > Deep Cache > Health")
-            }
-            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
-                write!(f, "{}", "Glacier > Sea Burial > Inside the Grate > Notes")
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => write!(
-                f,
-                "{}",
-                "Glacier > The Big Drop > Breakable Rock Right > Break Rock"
-            ),
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => write!(
-                f,
-                "{}",
-                "Glacier > The Big Drop > Breakable Rock Right > Mist Through"
-            ),
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => write!(
-                f,
-                "{}",
-                "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster"
-            ),
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => {
-                write!(f, "{}", "Glacier > The Big Drop > West 14 > Break Rock")
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
-                write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through")
-            }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(
-                f,
-                "{}",
-                "Glacier > The Big Drop > West 14 > Mist Through Faster"
-            ),
-            LocationId::Glacier__Vertical_Room__Peak__Flask => {
-                write!(f, "{}", "Glacier > Vertical Room > Peak > Flask")
-            }
-            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
-            }
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => write!(
-                f,
-                "{}",
-                "Glacier Breach > Control > Upper Corner > Control Enemy"
-            ),
-            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => write!(
-                f,
-                "{}",
-                "Glacier Breach > Control > Upper Corner > Control Enemy And Jump"
-            ),
-            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => write!(
-                f,
-                "{}",
-                "Glacier Breach > Grate Work > Grate Interior > Item"
-            ),
-            LocationId::Interior__Building_Interior__Corner__Urn => {
-                write!(f, "{}", "Interior > Building Interior > Corner > Urn")
-            }
-            LocationId::Interior__Building_Interior__Entry__Remote_Urn => {
-                write!(f, "{}", "Interior > Building Interior > Entry > Remote Urn")
-            }
-            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => write!(
-                f,
-                "{}",
-                "Interior > Building Interior > Entry > Urn Collection Skip"
-            ),
-            LocationId::Interior__Bunker_Interior__Desk__Note => {
-                write!(f, "{}", "Interior > Bunker Interior > Desk > Note")
-            }
-            LocationId::Interior__Ebih_Cave__Entry__Health => {
-                write!(f, "{}", "Interior > Ebih Cave > Entry > Health")
-            }
-            LocationId::Interior__Garage__Boxes__Under_Boxes => {
-                write!(f, "{}", "Interior > Garage > Boxes > Under Boxes")
-            }
-            LocationId::Interior__Outpost_Interior__Bookshelf__Note => {
-                write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note")
-            }
-            LocationId::Interior__Tent_Interior__Desk__Note => {
-                write!(f, "{}", "Interior > Tent Interior > Desk > Note")
-            }
-            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
-                write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core")
-            }
-            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(
-                f,
-                "{}",
-                "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"
-            ),
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
-                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward")
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
-                write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam")
-            }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(
-                f,
-                "{}",
-                "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"
-            ),
-            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
-                write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health")
-            }
-            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
-                write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet")
-            }
-            LocationId::Irikar__Hub__Dagger_Altar__Weapon => {
-                write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon")
-            }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(
-                f,
-                "{}",
-                "Irikar > Hub > Royal Storage By Wall > Mist into Wall"
-            ),
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
-                f,
-                "{}",
-                "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"
-            ),
-            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => {
-                write!(f, "{}", "Irikar > Hub > Royal Storage in Wall > Item")
-            }
-            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
-                write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet")
-            }
-            LocationId::Irikar__Lamassu__Desk__Item => {
-                write!(f, "{}", "Irikar > Lamassu > Desk > Item")
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => {
-                write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn")
-            }
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(
-                f,
-                "{}",
-                "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"
-            ),
-            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(
-                f,
-                "{}",
-                "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"
-            ),
-            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(
-                f,
-                "{}",
-                "Irikar Breach > Gauntlet > Hidden Path Reward > Item"
-            ),
-            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
-                write!(f, "{}", "Irikar Breach > Hover Room > Bottom > Item")
-            }
-            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
-                write!(f, "{}", "Irikar Breach > Worm Rave > Corner > Item")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Drone > Drone Melee Damage 1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Drone > Drone Melee Damage 2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Drone > Drone Melee Damage 3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Level 1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Level 2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Level 3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Range 1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Range 2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Range 3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Speed 1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection > Infection Speed 2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 1")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 2")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 3")
-            }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology > Health Upgrade 1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology > Health Upgrade 2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology > Health Upgrade 3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology > Health Upgrade 4"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology > Health Upgrade 5"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
-            }
-            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => write!(
-                f,
-                "{}",
-                "Uhrum > Annuna Corridor > Block East > Dislodge Block"
-            ),
-            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => write!(
-                f,
-                "{}",
-                "Uhrum > Annuna Corridor > Block West > Dislodge Block"
-            ),
-            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => {
-                write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby > Tablet")
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => {
-                write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn")
-            }
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => write!(
-                f,
-                "{}",
-                "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip"
-            ),
-            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => write!(
-                f,
-                "{}",
-                "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel"
-            ),
-            LocationId::Uhrum__Annuna_Corridor__Statue__Item => {
-                write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item")
-            }
-            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => write!(
-                f,
-                "{}",
-                "Uhrum > Annuna Corridor > Upper Trees > Remote Urn"
-            ),
-            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box")
-            }
-            LocationId::Uhrum__Siege_Corridor__Pond__Item => {
-                write!(f, "{}", "Uhrum > Siege Corridor > Pond > Item")
-            }
-            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
-                write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn")
-            }
-            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core")
-            }
-            LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                write!(f, "{}", "Uhrum > Waterfalls > Above Block > Block")
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier East > Charge through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier East > Mist through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier East > Spin through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier West > Charge through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier West > Mist through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Barrier West > Spin through Wall"
-            ),
-            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => write!(
-                f,
-                "{}",
-                "Uhrum > Waterfalls > Below Block > Shockwave Block"
-            ),
-            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
-                write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache > Flask")
-            }
-            LocationId::Uhrum__Waterfalls__East_26__Block => {
-                write!(f, "{}", "Uhrum > Waterfalls > East 26 > Block")
-            }
-            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
-                write!(f, "{}", "Uhrum > Waterfalls > West Water Nook > Tablet")
-            }
-            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => {
-                write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate")
-            }
-            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => {
-                write!(f, "{}", "Uhrum > West Entrance > Inner Dais > Item")
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall East > Charge through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall East > Mist through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall East > Spin through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall West > Charge through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall West > Mist through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Lower Wall West > Spin through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Sand__Refill => {
-                write!(f, "{}", "Uhrum > West Entrance > Sand > Refill")
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Upper Wall East > Charge through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Upper Wall East > Mist through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Upper Wall East > Spin through Wall"
-            ),
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(
-                f,
-                "{}",
-                "Uhrum > West Entrance > Upper Wall West > Mist through Wall"
-            ),
+            LocationId::Amagi__Liru_Room__Shrine__Item => write!(f, "{}", "Amagi > Liru Room > Shrine > Item"),
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item"),
+            LocationId::Amagi__West_Lake__Cavern_Eye__Item => write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item"),
+            LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(f, "{}", "Amagi > West Lake > Cavern Rear Pillar > Boss Reward"),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station > Break Wall"),
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"),
+            LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(f, "{}", "Amagi > West Lake > Cavern Tear Duct > Remote Flask"),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder"),
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => write!(f, "{}", "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder"),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Front Door > Break Wall"),
+            LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Front Room > Break Wall"),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Item > Break Wall"),
+            LocationId::Amagi__West_Lake__Stronghold_Item__Item => write!(f, "{}", "Amagi > West Lake > Stronghold Item > Item"),
+            LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column > Break Wall"),
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => write!(f, "{}", "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall"),
+            LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn"),
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => write!(f, "{}", "Amagi > West Lake > Surface Wall Left > Break Wall"),
+            LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => write!(f, "{}", "Amagi > West Lake > Surface Wall Right > Break Wall"),
+            LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => write!(f, "{}", "Amagi Breach > East Entrance > Upper Slope > Item"),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => write!(f, "{}", "Annuna > Apocalypse > Center Scaffold West > Boss Fight"),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => write!(f, "{}", "Annuna > Apocalypse > Center Scaffold West > Fill It Up"),
+            LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => write!(f, "{}", "Annuna > East Bridge > Below Gate Button > Switch from Below"),
+            LocationId::Annuna__East_Bridge__Gate_Button__Switch => write!(f, "{}", "Annuna > East Bridge > Gate Button > Switch"),
+            LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => write!(f, "{}", "Annuna > East Bridge > Tower Gate > Tablet"),
+            LocationId::Annuna__East_Bridge__Tower_Secret__Item => write!(f, "{}", "Annuna > East Bridge > Tower Secret > Item"),
+            LocationId::Annuna__Egg_Room__Cache__Flask => write!(f, "{}", "Annuna > Egg Room > Cache > Flask"),
+            LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => write!(f, "{}", "Annuna > Egg Room > Cache > Shockwave Flask"),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => write!(f, "{}", "Annuna > Egg Room > Corner Platform > Remote Boomerang Flask"),
+            LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => write!(f, "{}", "Annuna > Egg Room > Corner Platform > Shockwave from Outside"),
+            LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => write!(f, "{}", "Annuna > Egg Room > Second Egg > Remote Boomerang Flask"),
+            LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => write!(f, "{}", "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask"),
+            LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => write!(f, "{}", "Annuna > Filter Teleporter > Northeast Cubby > Tablet"),
+            LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => write!(f, "{}", "Annuna > Filter Teleporter > Shaft Bottom > Flask"),
+            LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => write!(f, "{}", "Annuna > Mirror Match > Below Switch > Hit Switch"),
+            LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => write!(f, "{}", "Annuna > Mirror Match > East 26 Lower > Remote Flask"),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => write!(f, "{}", "Annuna > Mirror Match > East 26 Upper > Remote Flask"),
+            LocationId::Annuna__Mirror_Match__Plinth__Item => write!(f, "{}", "Annuna > Mirror Match > Plinth > Item"),
+            LocationId::Annuna__Mirror_Match__Save_Point__Fight => write!(f, "{}", "Annuna > Mirror Match > Save Point > Fight"),
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => write!(f, "{}", "Annuna > Mirror Match > Waving Distance > Shockwave Flask"),
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Break Through Wall"),
+            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Faster Mist Through Wall"),
+            LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => write!(f, "{}", "Annuna > Seals > Breakable Rock > Mist Through Wall"),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn"),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Collection Skip"),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Cache > Urn Fast Travel"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Break Wall as Indra"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Distant Urn"),
+            LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel"),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone"),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist"),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2"),
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra => write!(f, "{}", "Annuna > Siuna Storage > Wall Right > Break Wall as Indra"),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => write!(f, "{}", "Annuna > Siuna Storage > Within Range > Remote Urn"),
+            LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => write!(f, "{}", "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel"),
+            LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => write!(f, "{}", "Annuna > Sniper Valley > Bridge End > Health Pickup"),
+            LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => write!(f, "{}", "Annuna > Sniper Valley > Cavern Cache > Item"),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall"),
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall"),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall"),
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => write!(f, "{}", "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall"),
+            LocationId::Annuna__Sniper_Valley__Table__Item => write!(f, "{}", "Annuna > Sniper Valley > Table > Item"),
+            LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => write!(f, "{}", "Annuna > Spider Room > Healthy Corner > Health Refill"),
+            LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => write!(f, "{}", "Annuna > Twisty Passages > Northwest Alcove > Refill"),
+            LocationId::Annuna__Twisty_Passages__Top__Tablet => write!(f, "{}", "Annuna > Twisty Passages > Top > Tablet"),
+            LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => write!(f, "{}", "Annuna > Upper Hallway > Behind Pedestal > Health Pickup"),
+            LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => write!(f, "{}", "Annuna > Vertical Room > Gate Button > Hit Button"),
+            LocationId::Annuna__Vertical_Room__Plinth__Item => write!(f, "{}", "Annuna > Vertical Room > Plinth > Item"),
+            LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => write!(f, "{}", "Annuna > Vertical Room > Upper Cache > Tablet"),
+            LocationId::Annuna__West_Bridge__Plinth__Item => write!(f, "{}", "Annuna > West Bridge > Plinth > Item"),
+            LocationId::Annuna__West_Climb__Cache__Item => write!(f, "{}", "Annuna > West Climb > Cache > Item"),
+            LocationId::Antarctica__Building_2__Behind_Boxes__Note => write!(f, "{}", "Antarctica > Building 2 > Behind Boxes > Note"),
+            LocationId::Antarctica__Power_Room__Switch__Flip => write!(f, "{}", "Antarctica > Power Room > Switch > Flip"),
+            LocationId::Antarctica__Shed__Interior__Shelf => write!(f, "{}", "Antarctica > Shed > Interior > Shelf"),
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved > Item From The Side"),
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => write!(f, "{}", "Ebih > Base Camp > Top Platform > Item"),
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => write!(f, "{}", "Ebih > Boss Room > Boss > Boss Reward"),
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => write!(f, "{}", "Ebih > Boss Room > Boss > Fight Alu"),
+            LocationId::Ebih__Boss_Room__Boss__Hack_Alu => write!(f, "{}", "Ebih > Boss Room > Boss > Hack Alu"),
+            LocationId::Ebih__Boss_Room__East_Ledge__Item => write!(f, "{}", "Ebih > Boss Room > East Ledge > Item"),
+            LocationId::Ebih__By_Garage__Crawlspace__Fragment => write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment"),
+            LocationId::Ebih__Drone_Room__Item__Urn => write!(f, "{}", "Ebih > Drone Room > Item > Urn"),
+            LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip => write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip"),
+            LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel => write!(f, "{}", "Ebih > Drone Room > Item > Urn Fast Travel"),
+            LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
+            LocationId::Ebih__Ebih_East__Corner__Urn => write!(f, "{}", "Ebih > Ebih East > Corner > Urn"),
+            LocationId::Ebih__Ebih_East__Dispenser__Vend => write!(f, "{}", "Ebih > Ebih East > Dispenser > Vend"),
+            LocationId::Ebih__Ebih_East__East_Ledge__Note => write!(f, "{}", "Ebih > Ebih East > East Ledge > Note"),
+            LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(f, "{}", "Ebih > Ebih East > Lower Moving Platform > Remote Urn"),
+            LocationId::Ebih__Ebih_West__Alcove__Tablet => write!(f, "{}", "Ebih > Ebih West > Alcove > Tablet"),
+            LocationId::Ebih__Ebih_West__Block_Left__Break_Block => write!(f, "{}", "Ebih > Ebih West > Block Left > Break Block"),
+            LocationId::Ebih__Ebih_West__Block_Right__Break_Block => write!(f, "{}", "Ebih > Ebih West > Block Right > Break Block"),
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush"),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush"),
+            LocationId::Ebih__Grid_25_2_6__Pit__Item => write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item"),
+            LocationId::Ebih__Grid_26_10_11__Ledge__Note => write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note"),
+            LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(f, "{}", "Ebih > Vertical Interchange > Block Cubby > Shockwave Block"),
+            LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(f, "{}", "Ebih > Vertical Interchange > Switch > Activate Switch"),
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left"),
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right"),
+            LocationId::Ebih__Waterfall__Alcove__Pedestal => write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal"),
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => write!(f, "{}", "Ebih > Waterfall > Alcove Left > Block Left"),
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right"),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Through Wall"),
+            LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Left > Break Wall"),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Through Wall"),
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => write!(f, "{}", "Ebih > Waterfall > Wall Right > Break Wall"),
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center > Both Blocks"),
+            LocationId::Filter__Core__Terminal_East__Authorize_Hammond => write!(f, "{}", "Filter > Core > Terminal East > Authorize Hammond"),
+            LocationId::Giguna__Antechamber__Statue_Head__Tablet => write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet"),
+            LocationId::Giguna__Carnelian__Vault__Item => write!(f, "{}", "Giguna > Carnelian > Vault > Item"),
+            LocationId::Giguna__Clouds__Cache__Item => write!(f, "{}", "Giguna > Clouds > Cache > Item"),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall"),
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Mist into Wall"),
+            LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch => write!(f, "{}", "Giguna > Dual Path > Below Left Switch > Remote Switch"),
+            LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => write!(f, "{}", "Giguna > Dual Path > Below Right Switch > Remote Switch"),
+            LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch => write!(f, "{}", "Giguna > Dual Path > Left Switch > Hit Switch"),
+            LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch => write!(f, "{}", "Giguna > Dual Path > Right Switch > Hit Switch"),
+            LocationId::Giguna__Dual_Path__Wall_Secret__Health => write!(f, "{}", "Giguna > Dual Path > Wall Secret > Health"),
+            LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => write!(f, "{}", "Giguna > East Caverns > Hidden Passage Center > Hidden Flask"),
+            LocationId::Giguna__Far_Corner__Grass__Obscured_Item => write!(f, "{}", "Giguna > Far Corner > Grass > Obscured Item"),
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => write!(f, "{}", "Giguna > Gateway > Block Left > Shockwave"),
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => write!(f, "{}", "Giguna > Gateway > Block Right > Shockwave"),
+            LocationId::Giguna__Gateway__Button__Hit_Switch => write!(f, "{}", "Giguna > Gateway > Button > Hit Switch"),
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => write!(f, "{}", "Giguna > Gateway > Flask Ledge > Item"),
+            LocationId::Giguna__Giguna_Base__Ruin__Item => write!(f, "{}", "Giguna > Giguna Base > Ruin > Item"),
+            LocationId::Giguna__Giguna_Base__Table__News => write!(f, "{}", "Giguna > Giguna Base > Table > News"),
+            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => write!(f, "{}", "Giguna > Giguna Northeast > Door > Remote Flask"),
+            LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(f, "{}", "Giguna > Giguna Northeast > Gate Button > Open Gate"),
+            LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => write!(f, "{}", "Giguna > Giguna Northeast > Gate Right > Remote Button"),
+            LocationId::Giguna__Giguna_Northeast__Vault__Item => write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item"),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Boss Reward"),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Fight Gubi"),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => write!(f, "{}", "Giguna > Gubi Lair > Center Platform > Hack Gubi"),
+            LocationId::Giguna__Gubi_Lair__Pedestal__Axe => write!(f, "{}", "Giguna > Gubi Lair > Pedestal > Axe"),
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => write!(f, "{}", "Giguna > Hard Rock > Rock Center > Tablet"),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Shockwave Boulder"),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Shockwave Boulder"),
+            LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => write!(f, "{}", "Giguna > Helipad > Tablet Ledge > Tablet"),
+            LocationId::Giguna__Lamassu__Deposit__Flask => write!(f, "{}", "Giguna > Lamassu > Deposit > Flask"),
+            LocationId::Giguna__Ruins_Center__Tablet__Item => write!(f, "{}", "Giguna > Ruins Center > Tablet > Item"),
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => write!(f, "{}", "Giguna > Ruins East > Way Up High > Item"),
+            LocationId::Giguna__Ruins_Top__Flask__Flask => write!(f, "{}", "Giguna > Ruins Top > Flask > Flask"),
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => write!(f, "{}", "Giguna > Ruins Top > Small Ledge > Shockwave Flask"),
+            LocationId::Giguna__Wasteland__Door_Right__Health => write!(f, "{}", "Giguna > Wasteland > Door Right > Health"),
+            LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => write!(f, "{}", "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually"),
+            LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => write!(f, "{}", "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage"),
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => write!(f, "{}", "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually"),
+            LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => write!(f, "{}", "Giguna > Wasteland > Passage East > Mist through Horizontal Passage"),
+            LocationId::Giguna__West_Caverns__Bush__Item => write!(f, "{}", "Giguna > West Caverns > Bush > Item"),
+            LocationId::Giguna__West_Caverns__Cache__Item => write!(f, "{}", "Giguna > West Caverns > Cache > Item"),
+            LocationId::Giguna__West_Tower__Top__Tablet => write!(f, "{}", "Giguna > West Tower > Top > Tablet"),
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => write!(f, "{}", "Giguna Breach > Chimney > Cache > Flask"),
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health"),
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn"),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Escape"),
+            LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => write!(f, "{}", "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape"),
+            LocationId::Glacier__Boomerang_Room__Pedestal__Item => write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item"),
+            LocationId::Glacier__Boomerang_Room__Pedestal__Switch => write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Switch"),
+            LocationId::Glacier__Compass_Room__Center__Table => write!(f, "{}", "Glacier > Compass Room > Center > Table"),
+            LocationId::Glacier__Crystals__Lower_Corner__Item => write!(f, "{}", "Glacier > Crystals > Lower Corner > Item"),
+            LocationId::Glacier__Crystals__Top_Corner__Tablet => write!(f, "{}", "Glacier > Crystals > Top Corner > Tablet"),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip"),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel"),
+            LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => write!(f, "{}", "Glacier > Dock Outside > Cave Treasure > Item"),
+            LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => write!(f, "{}", "Glacier > Dock Outside > Ruins Stairs > Note"),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Collection Skip"),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Fast Travel"),
+            LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock > Item"),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform > Charged Fly-by Flask Toward Fortress"),
+            LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform > Fly-by Flask Toward Fortress"),
+            LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health => write!(f, "{}", "Glacier > Hammond's End > Between Center Doors > Health"),
+            LocationId::Glacier__Hammonds_End__Corner__Quick_Note => write!(f, "{}", "Glacier > Hammond's End > Corner > Quick Note"),
+            LocationId::Glacier__Hammonds_End__Hammond__Note => write!(f, "{}", "Glacier > Hammond's End > Hammond > Note"),
+            LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"),
+            LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item"),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Platform and Grab"),
+            LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Stairs and Grab"),
+            LocationId::Glacier__Revival__Pillar__Health => write!(f, "{}", "Glacier > Revival > Pillar > Health"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Break Rock"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right > Mist Through"),
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster"),
+            LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => write!(f, "{}", "Glacier > Sea Burial > Collapsing Ceiling > Drown"),
+            LocationId::Glacier__Sea_Burial__Deep_Cache__Health => write!(f, "{}", "Glacier > Sea Burial > Deep Cache > Health"),
+            LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => write!(f, "{}", "Glacier > Sea Burial > Inside the Grate > Notes"),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right > Break Rock"),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right > Mist Through"),
+            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster"),
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => write!(f, "{}", "Glacier > The Big Drop > West 14 > Break Rock"),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through"),
+            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through Faster"),
+            LocationId::Glacier__Vertical_Room__Peak__Flask => write!(f, "{}", "Glacier > Vertical Room > Peak > Flask"),
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch"),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => write!(f, "{}", "Glacier Breach > Control > Upper Corner > Control Enemy"),
+            LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => write!(f, "{}", "Glacier Breach > Control > Upper Corner > Control Enemy And Jump"),
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => write!(f, "{}", "Glacier Breach > Grate Work > Grate Interior > Item"),
+            LocationId::Interior__Building_Interior__Corner__Urn => write!(f, "{}", "Interior > Building Interior > Corner > Urn"),
+            LocationId::Interior__Building_Interior__Entry__Remote_Urn => write!(f, "{}", "Interior > Building Interior > Entry > Remote Urn"),
+            LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => write!(f, "{}", "Interior > Building Interior > Entry > Urn Collection Skip"),
+            LocationId::Interior__Bunker_Interior__Desk__Note => write!(f, "{}", "Interior > Bunker Interior > Desk > Note"),
+            LocationId::Interior__Ebih_Cave__Entry__Health => write!(f, "{}", "Interior > Ebih Cave > Entry > Health"),
+            LocationId::Interior__Garage__Boxes__Under_Boxes => write!(f, "{}", "Interior > Garage > Boxes > Under Boxes"),
+            LocationId::Interior__Outpost_Interior__Bookshelf__Note => write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note"),
+            LocationId::Interior__Tent_Interior__Desk__Note => write!(f, "{}", "Interior > Tent Interior > Desk > Note"),
+            LocationId::Irikar__Abandoned_Room__Corner_Core__Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core"),
+            LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward"),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam"),
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"),
+            LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health"),
+            LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet"),
+            LocationId::Irikar__Hub__Dagger_Altar__Weapon => write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon"),
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Mist into Wall"),
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"),
+            LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => write!(f, "{}", "Irikar > Hub > Royal Storage in Wall > Item"),
+            LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet"),
+            LocationId::Irikar__Lamassu__Desk__Item => write!(f, "{}", "Irikar > Lamassu > Desk > Item"),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn"),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
+            LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"),
+            LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(f, "{}", "Irikar Breach > Gauntlet > Hidden Path Reward > Item"),
+            LocationId::Irikar_Breach__Hover_Room__Bottom__Item => write!(f, "{}", "Irikar Breach > Hover Room > Bottom > Item"),
+            LocationId::Irikar_Breach__Worm_Rave__Corner__Item => write!(f, "{}", "Irikar Breach > Worm Rave > Corner > Item"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 2"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 3"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 1"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 2"),
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 3"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 1"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 2"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 3"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 1"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 2"),
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 3"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 1"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 2"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Damage 3"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 1"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 2"),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 3"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 1"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 2"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Level 3"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 1"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 2"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Range 3"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Speed 1"),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Infection Speed 2"),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 1"),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 2"),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 3"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 1"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 2"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 3"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 4"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Health Upgrade 5"),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade"),
+            LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => write!(f, "{}", "Uhrum > Annuna Corridor > Block East > Dislodge Block"),
+            LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block => write!(f, "{}", "Uhrum > Annuna Corridor > Block West > Dislodge Block"),
+            LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => write!(f, "{}", "Uhrum > Annuna Corridor > East Cubby > Tablet"),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn"),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip"),
+            LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => write!(f, "{}", "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel"),
+            LocationId::Uhrum__Annuna_Corridor__Statue__Item => write!(f, "{}", "Uhrum > Annuna Corridor > Statue > Item"),
+            LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => write!(f, "{}", "Uhrum > Annuna Corridor > Upper Trees > Remote Urn"),
+            LocationId::Uhrum__Siege_Corridor__Center_Box__Box => write!(f, "{}", "Uhrum > Siege Corridor > Center Box > Box"),
+            LocationId::Uhrum__Siege_Corridor__Pond__Item => write!(f, "{}", "Uhrum > Siege Corridor > Pond > Item"),
+            LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => write!(f, "{}", "Uhrum > Siege Corridor > Upper Rock Item > Urn"),
+            LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => write!(f, "{}", "Uhrum > Siege Corridor > Western Cache > Core"),
+            LocationId::Uhrum__Waterfalls__Above_Block__Block => write!(f, "{}", "Uhrum > Waterfalls > Above Block > Block"),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Charge through Wall"),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Mist through Wall"),
+            LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier East > Spin through Wall"),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Charge through Wall"),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Mist through Wall"),
+            LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => write!(f, "{}", "Uhrum > Waterfalls > Barrier West > Spin through Wall"),
+            LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => write!(f, "{}", "Uhrum > Waterfalls > Below Block > Shockwave Block"),
+            LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => write!(f, "{}", "Uhrum > Waterfalls > Ceiling Cache > Flask"),
+            LocationId::Uhrum__Waterfalls__East_26__Block => write!(f, "{}", "Uhrum > Waterfalls > East 26 > Block"),
+            LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => write!(f, "{}", "Uhrum > Waterfalls > West Water Nook > Tablet"),
+            LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => write!(f, "{}", "Uhrum > West Entrance > Gate Switch > Open Gate"),
+            LocationId::Uhrum__West_Entrance__Inner_Dais__Item => write!(f, "{}", "Uhrum > West Entrance > Inner Dais > Item"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Charge through Wall"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Mist through Wall"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall East > Spin through Wall"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Charge through Wall"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Mist through Wall"),
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Lower Wall West > Spin through Wall"),
+            LocationId::Uhrum__West_Entrance__Sand__Refill => write!(f, "{}", "Uhrum > West Entrance > Sand > Refill"),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Charge through Wall"),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Mist through Wall"),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall East > Spin through Wall"),
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => write!(f, "{}", "Uhrum > West Entrance > Upper Wall West > Mist through Wall"),
         }
     }
 }
@@ -11238,854 +10450,306 @@ impl std::str::FromStr for LocationId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Amagi > Liru Room > Shrine > Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
-            "Amagi > Main Area > Way Off To The Side > Item" => {
-                Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item)
-            }
-            "Amagi > West Lake > Cavern Eye > Item" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item)
-            }
-            "Amagi > West Lake > Cavern Rear Pillar > Boss Reward" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward)
-            }
-            "Amagi > West Lake > Cavern Refill Station > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall)
-            }
-            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20)
-            }
-            "Amagi > West Lake > Cavern Tear Duct > Remote Flask" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask)
-            }
-            "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder)
-            }
-            "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder" => Ok(
-                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
-            ),
-            "Amagi > West Lake > Stronghold Front Door > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall)
-            }
-            "Amagi > West Lake > Stronghold Front Room > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall)
-            }
-            "Amagi > West Lake > Stronghold Item > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall)
-            }
-            "Amagi > West Lake > Stronghold Item > Item" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Item)
-            }
-            "Amagi > West Lake > Stronghold Middle Column > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall)
-            }
-            "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall)
-            }
-            "Amagi > West Lake > Stronghold Top > Remote Urn" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn)
-            }
-            "Amagi > West Lake > Surface Wall Left > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall)
-            }
-            "Amagi > West Lake > Surface Wall Right > Break Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall)
-            }
-            "Amagi Breach > East Entrance > Upper Slope > Item" => {
-                Ok(LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item)
-            }
-            "Annuna > Apocalypse > Center Scaffold West > Boss Fight" => {
-                Ok(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight)
-            }
-            "Annuna > Apocalypse > Center Scaffold West > Fill It Up" => {
-                Ok(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up)
-            }
-            "Annuna > East Bridge > Below Gate Button > Switch from Below" => {
-                Ok(LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below)
-            }
-            "Annuna > East Bridge > Gate Button > Switch" => {
-                Ok(LocationId::Annuna__East_Bridge__Gate_Button__Switch)
-            }
-            "Annuna > East Bridge > Tower Gate > Tablet" => {
-                Ok(LocationId::Annuna__East_Bridge__Tower_Gate__Tablet)
-            }
-            "Annuna > East Bridge > Tower Secret > Item" => {
-                Ok(LocationId::Annuna__East_Bridge__Tower_Secret__Item)
-            }
+            "Amagi > Main Area > Way Off To The Side > Item" => Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item),
+            "Amagi > West Lake > Cavern Eye > Item" => Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item),
+            "Amagi > West Lake > Cavern Rear Pillar > Boss Reward" => Ok(LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward),
+            "Amagi > West Lake > Cavern Refill Station > Break Wall" => Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall),
+            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
+            "Amagi > West Lake > Cavern Tear Duct > Remote Flask" => Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask),
+            "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder" => Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder),
+            "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder" => Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder),
+            "Amagi > West Lake > Stronghold Front Door > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall),
+            "Amagi > West Lake > Stronghold Front Room > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall),
+            "Amagi > West Lake > Stronghold Item > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall),
+            "Amagi > West Lake > Stronghold Item > Item" => Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Item),
+            "Amagi > West Lake > Stronghold Middle Column > Break Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall),
+            "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall" => Ok(LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall),
+            "Amagi > West Lake > Stronghold Top > Remote Urn" => Ok(LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
+            "Amagi > West Lake > Surface Wall Left > Break Wall" => Ok(LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall),
+            "Amagi > West Lake > Surface Wall Right > Break Wall" => Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall),
+            "Amagi Breach > East Entrance > Upper Slope > Item" => Ok(LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item),
+            "Annuna > Apocalypse > Center Scaffold West > Boss Fight" => Ok(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
+            "Annuna > Apocalypse > Center Scaffold West > Fill It Up" => Ok(LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
+            "Annuna > East Bridge > Below Gate Button > Switch from Below" => Ok(LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below),
+            "Annuna > East Bridge > Gate Button > Switch" => Ok(LocationId::Annuna__East_Bridge__Gate_Button__Switch),
+            "Annuna > East Bridge > Tower Gate > Tablet" => Ok(LocationId::Annuna__East_Bridge__Tower_Gate__Tablet),
+            "Annuna > East Bridge > Tower Secret > Item" => Ok(LocationId::Annuna__East_Bridge__Tower_Secret__Item),
             "Annuna > Egg Room > Cache > Flask" => Ok(LocationId::Annuna__Egg_Room__Cache__Flask),
-            "Annuna > Egg Room > Cache > Shockwave Flask" => {
-                Ok(LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask)
-            }
-            "Annuna > Egg Room > Corner Platform > Remote Boomerang Flask" => {
-                Ok(LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask)
-            }
-            "Annuna > Egg Room > Corner Platform > Shockwave from Outside" => {
-                Ok(LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside)
-            }
-            "Annuna > Egg Room > Second Egg > Remote Boomerang Flask" => {
-                Ok(LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask)
-            }
-            "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask" => {
-                Ok(LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask)
-            }
-            "Annuna > Filter Teleporter > Northeast Cubby > Tablet" => {
-                Ok(LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet)
-            }
-            "Annuna > Filter Teleporter > Shaft Bottom > Flask" => {
-                Ok(LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask)
-            }
-            "Annuna > Mirror Match > Below Switch > Hit Switch" => {
-                Ok(LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch)
-            }
-            "Annuna > Mirror Match > East 26 Lower > Remote Flask" => {
-                Ok(LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask)
-            }
-            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => {
-                Ok(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask)
-            }
-            "Annuna > Mirror Match > Plinth > Item" => {
-                Ok(LocationId::Annuna__Mirror_Match__Plinth__Item)
-            }
-            "Annuna > Mirror Match > Save Point > Fight" => {
-                Ok(LocationId::Annuna__Mirror_Match__Save_Point__Fight)
-            }
-            "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => {
-                Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)
-            }
-            "Annuna > Seals > Breakable Rock > Break Through Wall" => {
-                Ok(LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall)
-            }
-            "Annuna > Seals > Breakable Rock > Faster Mist Through Wall" => {
-                Ok(LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall)
-            }
-            "Annuna > Seals > Breakable Rock > Mist Through Wall" => {
-                Ok(LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall)
-            }
-            "Annuna > Siuna Storage > Cache > Urn" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn)
-            }
-            "Annuna > Siuna Storage > Cache > Urn Collection Skip" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip)
-            }
-            "Annuna > Siuna Storage > Cache > Urn Fast Travel" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel)
-            }
-            "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone)
-            }
-            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist)
-            }
-            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2)
-            }
-            "Annuna > Siuna Storage > Wall Left > Break Wall as Indra" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra)
-            }
-            "Annuna > Siuna Storage > Wall Left > Distant Urn" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn)
-            }
-            "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel)
-            }
-            "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone)
-            }
-            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist)
-            }
-            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2)
-            }
-            "Annuna > Siuna Storage > Wall Right > Break Wall as Indra" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra)
-            }
-            "Annuna > Siuna Storage > Within Range > Remote Urn" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn)
-            }
-            "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel" => {
-                Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel)
-            }
-            "Annuna > Sniper Valley > Bridge End > Health Pickup" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup)
-            }
-            "Annuna > Sniper Valley > Cavern Cache > Item" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item)
-            }
-            "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall)
-            }
-            "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall)
-            }
-            "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall)
-            }
-            "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall)
-            }
-            "Annuna > Sniper Valley > Table > Item" => {
-                Ok(LocationId::Annuna__Sniper_Valley__Table__Item)
-            }
-            "Annuna > Spider Room > Healthy Corner > Health Refill" => {
-                Ok(LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill)
-            }
-            "Annuna > Twisty Passages > Northwest Alcove > Refill" => {
-                Ok(LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill)
-            }
-            "Annuna > Twisty Passages > Top > Tablet" => {
-                Ok(LocationId::Annuna__Twisty_Passages__Top__Tablet)
-            }
-            "Annuna > Upper Hallway > Behind Pedestal > Health Pickup" => {
-                Ok(LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup)
-            }
-            "Annuna > Vertical Room > Gate Button > Hit Button" => {
-                Ok(LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button)
-            }
-            "Annuna > Vertical Room > Plinth > Item" => {
-                Ok(LocationId::Annuna__Vertical_Room__Plinth__Item)
-            }
-            "Annuna > Vertical Room > Upper Cache > Tablet" => {
-                Ok(LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet)
-            }
-            "Annuna > West Bridge > Plinth > Item" => {
-                Ok(LocationId::Annuna__West_Bridge__Plinth__Item)
-            }
+            "Annuna > Egg Room > Cache > Shockwave Flask" => Ok(LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask),
+            "Annuna > Egg Room > Corner Platform > Remote Boomerang Flask" => Ok(LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask),
+            "Annuna > Egg Room > Corner Platform > Shockwave from Outside" => Ok(LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside),
+            "Annuna > Egg Room > Second Egg > Remote Boomerang Flask" => Ok(LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask),
+            "Annuna > Filter Teleporter > Door Ledge > Shockwave Flask" => Ok(LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask),
+            "Annuna > Filter Teleporter > Northeast Cubby > Tablet" => Ok(LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet),
+            "Annuna > Filter Teleporter > Shaft Bottom > Flask" => Ok(LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask),
+            "Annuna > Mirror Match > Below Switch > Hit Switch" => Ok(LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch),
+            "Annuna > Mirror Match > East 26 Lower > Remote Flask" => Ok(LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask),
+            "Annuna > Mirror Match > East 26 Upper > Remote Flask" => Ok(LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
+            "Annuna > Mirror Match > Plinth > Item" => Ok(LocationId::Annuna__Mirror_Match__Plinth__Item),
+            "Annuna > Mirror Match > Save Point > Fight" => Ok(LocationId::Annuna__Mirror_Match__Save_Point__Fight),
+            "Annuna > Mirror Match > Waving Distance > Shockwave Flask" => Ok(LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask),
+            "Annuna > Seals > Breakable Rock > Break Through Wall" => Ok(LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
+            "Annuna > Seals > Breakable Rock > Faster Mist Through Wall" => Ok(LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
+            "Annuna > Seals > Breakable Rock > Mist Through Wall" => Ok(LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
+            "Annuna > Siuna Storage > Cache > Urn" => Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn),
+            "Annuna > Siuna Storage > Cache > Urn Collection Skip" => Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
+            "Annuna > Siuna Storage > Cache > Urn Fast Travel" => Ok(LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall as Drone" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
+            "Annuna > Siuna Storage > Wall Left > Break Through Wall with Mist 2" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
+            "Annuna > Siuna Storage > Wall Left > Break Wall as Indra" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra),
+            "Annuna > Siuna Storage > Wall Left > Distant Urn" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn),
+            "Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
+            "Annuna > Siuna Storage > Wall Right > Break Through Wall with Mist 2" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2),
+            "Annuna > Siuna Storage > Wall Right > Break Wall as Indra" => Ok(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra),
+            "Annuna > Siuna Storage > Within Range > Remote Urn" => Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn),
+            "Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel" => Ok(LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
+            "Annuna > Sniper Valley > Bridge End > Health Pickup" => Ok(LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup),
+            "Annuna > Sniper Valley > Cavern Cache > Item" => Ok(LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item),
+            "Annuna > Sniper Valley > Cavern Inner Rock East > Break Inner Wall" => Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+            "Annuna > Sniper Valley > Cavern Inner Rock West > Break Inner Wall" => Ok(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+            "Annuna > Sniper Valley > Cavern Outer Rock East > Break Outer Wall" => Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+            "Annuna > Sniper Valley > Cavern Outer Rock West > Break Outer Wall" => Ok(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+            "Annuna > Sniper Valley > Table > Item" => Ok(LocationId::Annuna__Sniper_Valley__Table__Item),
+            "Annuna > Spider Room > Healthy Corner > Health Refill" => Ok(LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill),
+            "Annuna > Twisty Passages > Northwest Alcove > Refill" => Ok(LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill),
+            "Annuna > Twisty Passages > Top > Tablet" => Ok(LocationId::Annuna__Twisty_Passages__Top__Tablet),
+            "Annuna > Upper Hallway > Behind Pedestal > Health Pickup" => Ok(LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup),
+            "Annuna > Vertical Room > Gate Button > Hit Button" => Ok(LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button),
+            "Annuna > Vertical Room > Plinth > Item" => Ok(LocationId::Annuna__Vertical_Room__Plinth__Item),
+            "Annuna > Vertical Room > Upper Cache > Tablet" => Ok(LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet),
+            "Annuna > West Bridge > Plinth > Item" => Ok(LocationId::Annuna__West_Bridge__Plinth__Item),
             "Annuna > West Climb > Cache > Item" => Ok(LocationId::Annuna__West_Climb__Cache__Item),
-            "Antarctica > Building 2 > Behind Boxes > Note" => {
-                Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note)
-            }
-            "Antarctica > Power Room > Switch > Flip" => {
-                Ok(LocationId::Antarctica__Power_Room__Switch__Flip)
-            }
-            "Antarctica > Shed > Interior > Shelf" => {
-                Ok(LocationId::Antarctica__Shed__Interior__Shelf)
-            }
-            "Ebih > Base Camp > Left Platform Moved > Item From The Side" => {
-                Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side)
-            }
-            "Ebih > Base Camp > Top Platform > Item" => {
-                Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item)
-            }
-            "Ebih > Boss Room > Boss > Boss Reward" => {
-                Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward)
-            }
-            "Ebih > Boss Room > Boss > Fight Alu" => {
-                Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu)
-            }
+            "Antarctica > Building 2 > Behind Boxes > Note" => Ok(LocationId::Antarctica__Building_2__Behind_Boxes__Note),
+            "Antarctica > Power Room > Switch > Flip" => Ok(LocationId::Antarctica__Power_Room__Switch__Flip),
+            "Antarctica > Shed > Interior > Shelf" => Ok(LocationId::Antarctica__Shed__Interior__Shelf),
+            "Ebih > Base Camp > Left Platform Moved > Item From The Side" => Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side),
+            "Ebih > Base Camp > Top Platform > Item" => Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item),
+            "Ebih > Boss Room > Boss > Boss Reward" => Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward),
+            "Ebih > Boss Room > Boss > Fight Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu),
             "Ebih > Boss Room > Boss > Hack Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Hack_Alu),
-            "Ebih > Boss Room > East Ledge > Item" => {
-                Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item)
-            }
-            "Ebih > By Garage > Crawlspace > Fragment" => {
-                Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment)
-            }
+            "Ebih > Boss Room > East Ledge > Item" => Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item),
+            "Ebih > By Garage > Crawlspace > Fragment" => Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment),
             "Ebih > Drone Room > Item > Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
-            "Ebih > Drone Room > Item > Urn Collection Skip" => {
-                Ok(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip)
-            }
-            "Ebih > Drone Room > Item > Urn Fast Travel" => {
-                Ok(LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel)
-            }
-            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
-                Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
-            }
+            "Ebih > Drone Room > Item > Urn Collection Skip" => Ok(LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
+            "Ebih > Drone Room > Item > Urn Fast Travel" => Ok(LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
+            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
             "Ebih > Ebih East > Corner > Urn" => Ok(LocationId::Ebih__Ebih_East__Corner__Urn),
-            "Ebih > Ebih East > Dispenser > Vend" => {
-                Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend)
-            }
-            "Ebih > Ebih East > East Ledge > Note" => {
-                Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note)
-            }
-            "Ebih > Ebih East > Lower Moving Platform > Remote Urn" => {
-                Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn)
-            }
+            "Ebih > Ebih East > Dispenser > Vend" => Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend),
+            "Ebih > Ebih East > East Ledge > Note" => Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note),
+            "Ebih > Ebih East > Lower Moving Platform > Remote Urn" => Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn),
             "Ebih > Ebih West > Alcove > Tablet" => Ok(LocationId::Ebih__Ebih_West__Alcove__Tablet),
-            "Ebih > Ebih West > Block Left > Break Block" => {
-                Ok(LocationId::Ebih__Ebih_West__Block_Left__Break_Block)
-            }
-            "Ebih > Ebih West > Block Right > Break Block" => {
-                Ok(LocationId::Ebih__Ebih_West__Block_Right__Break_Block)
-            }
-            "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => {
-                Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush)
-            }
-            "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => {
-                Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)
-            }
+            "Ebih > Ebih West > Block Left > Break Block" => Ok(LocationId::Ebih__Ebih_West__Block_Left__Break_Block),
+            "Ebih > Ebih West > Block Right > Break Block" => Ok(LocationId::Ebih__Ebih_West__Block_Right__Break_Block),
+            "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush),
+            "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush),
             "Ebih > Grid 25,2-6 > Pit > Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
-            "Ebih > Grid 26,10-11 > Ledge > Note" => {
-                Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
-            }
-            "Ebih > Vertical Interchange > Block Cubby > Shockwave Block" => {
-                Ok(LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block)
-            }
-            "Ebih > Vertical Interchange > Switch > Activate Switch" => {
-                Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch)
-            }
-            "Ebih > Waterfall > Alcove > Block Left" => {
-                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left)
-            }
-            "Ebih > Waterfall > Alcove > Block Right" => {
-                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right)
-            }
-            "Ebih > Waterfall > Alcove > Pedestal" => {
-                Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal)
-            }
-            "Ebih > Waterfall > Alcove Left > Block Left" => {
-                Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left)
-            }
-            "Ebih > Waterfall > Alcove Right > Block Right" => {
-                Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right)
-            }
-            "Ebih > Waterfall > Wall Left > Break Through Wall" => {
-                Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall)
-            }
-            "Ebih > Waterfall > Wall Left > Break Wall" => {
-                Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Wall)
-            }
-            "Ebih > Waterfall > Wall Right > Break Through Wall" => {
-                Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall)
-            }
-            "Ebih > Waterfall > Wall Right > Break Wall" => {
-                Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Wall)
-            }
-            "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => {
-                Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
-            }
-            "Filter > Core > Terminal East > Authorize Hammond" => {
-                Ok(LocationId::Filter__Core__Terminal_East__Authorize_Hammond)
-            }
-            "Giguna > Antechamber > Statue Head > Tablet" => {
-                Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet)
-            }
+            "Ebih > Grid 26,10-11 > Ledge > Note" => Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note),
+            "Ebih > Vertical Interchange > Block Cubby > Shockwave Block" => Ok(LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block),
+            "Ebih > Vertical Interchange > Switch > Activate Switch" => Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch),
+            "Ebih > Waterfall > Alcove > Block Left" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left),
+            "Ebih > Waterfall > Alcove > Block Right" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right),
+            "Ebih > Waterfall > Alcove > Pedestal" => Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal),
+            "Ebih > Waterfall > Alcove Left > Block Left" => Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left),
+            "Ebih > Waterfall > Alcove Right > Block Right" => Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right),
+            "Ebih > Waterfall > Wall Left > Break Through Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall),
+            "Ebih > Waterfall > Wall Left > Break Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Left__Break_Wall),
+            "Ebih > Waterfall > Wall Right > Break Through Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall),
+            "Ebih > Waterfall > Wall Right > Break Wall" => Ok(LocationId::Ebih__Waterfall__Wall_Right__Break_Wall),
+            "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks),
+            "Filter > Core > Terminal East > Authorize Hammond" => Ok(LocationId::Filter__Core__Terminal_East__Authorize_Hammond),
+            "Giguna > Antechamber > Statue Head > Tablet" => Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet),
             "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
             "Giguna > Clouds > Cache > Item" => Ok(LocationId::Giguna__Clouds__Cache__Item),
-            "Giguna > Dual Path > Base of Wall > Break Wall" => {
-                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall)
-            }
-            "Giguna > Dual Path > Base of Wall > Mist into Wall" => {
-                Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall)
-            }
-            "Giguna > Dual Path > Below Left Switch > Remote Switch" => {
-                Ok(LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch)
-            }
-            "Giguna > Dual Path > Below Right Switch > Remote Switch" => {
-                Ok(LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch)
-            }
-            "Giguna > Dual Path > Left Switch > Hit Switch" => {
-                Ok(LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch)
-            }
-            "Giguna > Dual Path > Right Switch > Hit Switch" => {
-                Ok(LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch)
-            }
-            "Giguna > Dual Path > Wall Secret > Health" => {
-                Ok(LocationId::Giguna__Dual_Path__Wall_Secret__Health)
-            }
-            "Giguna > East Caverns > Hidden Passage Center > Hidden Flask" => {
-                Ok(LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask)
-            }
-            "Giguna > Far Corner > Grass > Obscured Item" => {
-                Ok(LocationId::Giguna__Far_Corner__Grass__Obscured_Item)
-            }
-            "Giguna > Gateway > Block Left > Shockwave" => {
-                Ok(LocationId::Giguna__Gateway__Block_Left__Shockwave)
-            }
-            "Giguna > Gateway > Block Right > Shockwave" => {
-                Ok(LocationId::Giguna__Gateway__Block_Right__Shockwave)
-            }
-            "Giguna > Gateway > Button > Hit Switch" => {
-                Ok(LocationId::Giguna__Gateway__Button__Hit_Switch)
-            }
-            "Giguna > Gateway > Flask Ledge > Item" => {
-                Ok(LocationId::Giguna__Gateway__Flask_Ledge__Item)
-            }
+            "Giguna > Dual Path > Base of Wall > Break Wall" => Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall),
+            "Giguna > Dual Path > Base of Wall > Mist into Wall" => Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
+            "Giguna > Dual Path > Below Left Switch > Remote Switch" => Ok(LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch),
+            "Giguna > Dual Path > Below Right Switch > Remote Switch" => Ok(LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch),
+            "Giguna > Dual Path > Left Switch > Hit Switch" => Ok(LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch),
+            "Giguna > Dual Path > Right Switch > Hit Switch" => Ok(LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch),
+            "Giguna > Dual Path > Wall Secret > Health" => Ok(LocationId::Giguna__Dual_Path__Wall_Secret__Health),
+            "Giguna > East Caverns > Hidden Passage Center > Hidden Flask" => Ok(LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask),
+            "Giguna > Far Corner > Grass > Obscured Item" => Ok(LocationId::Giguna__Far_Corner__Grass__Obscured_Item),
+            "Giguna > Gateway > Block Left > Shockwave" => Ok(LocationId::Giguna__Gateway__Block_Left__Shockwave),
+            "Giguna > Gateway > Block Right > Shockwave" => Ok(LocationId::Giguna__Gateway__Block_Right__Shockwave),
+            "Giguna > Gateway > Button > Hit Switch" => Ok(LocationId::Giguna__Gateway__Button__Hit_Switch),
+            "Giguna > Gateway > Flask Ledge > Item" => Ok(LocationId::Giguna__Gateway__Flask_Ledge__Item),
             "Giguna > Giguna Base > Ruin > Item" => Ok(LocationId::Giguna__Giguna_Base__Ruin__Item),
-            "Giguna > Giguna Base > Table > News" => {
-                Ok(LocationId::Giguna__Giguna_Base__Table__News)
-            }
-            "Giguna > Giguna Northeast > Door > Remote Flask" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask)
-            }
-            "Giguna > Giguna Northeast > Gate Button > Open Gate" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate)
-            }
-            "Giguna > Giguna Northeast > Gate Right > Remote Button" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button)
-            }
-            "Giguna > Giguna Northeast > Vault > Item" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item)
-            }
-            "Giguna > Gubi Lair > Center Platform > Boss Reward" => {
-                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward)
-            }
-            "Giguna > Gubi Lair > Center Platform > Fight Gubi" => {
-                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi)
-            }
-            "Giguna > Gubi Lair > Center Platform > Hack Gubi" => {
-                Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi)
-            }
-            "Giguna > Gubi Lair > Pedestal > Axe" => {
-                Ok(LocationId::Giguna__Gubi_Lair__Pedestal__Axe)
-            }
-            "Giguna > Hard Rock > Rock Center > Tablet" => {
-                Ok(LocationId::Giguna__Hard_Rock__Rock_Center__Tablet)
-            }
-            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => {
-                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist)
-            }
-            "Giguna > Hard Rock > Rock Left > Shockwave Boulder" => {
-                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder)
-            }
-            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => {
-                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist)
-            }
-            "Giguna > Hard Rock > Rock Right > Shockwave Boulder" => {
-                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder)
-            }
-            "Giguna > Helipad > Tablet Ledge > Tablet" => {
-                Ok(LocationId::Giguna__Helipad__Tablet_Ledge__Tablet)
-            }
+            "Giguna > Giguna Base > Table > News" => Ok(LocationId::Giguna__Giguna_Base__Table__News),
+            "Giguna > Giguna Northeast > Door > Remote Flask" => Ok(LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask),
+            "Giguna > Giguna Northeast > Gate Button > Open Gate" => Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate),
+            "Giguna > Giguna Northeast > Gate Right > Remote Button" => Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button),
+            "Giguna > Giguna Northeast > Vault > Item" => Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item),
+            "Giguna > Gubi Lair > Center Platform > Boss Reward" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward),
+            "Giguna > Gubi Lair > Center Platform > Fight Gubi" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi),
+            "Giguna > Gubi Lair > Center Platform > Hack Gubi" => Ok(LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi),
+            "Giguna > Gubi Lair > Pedestal > Axe" => Ok(LocationId::Giguna__Gubi_Lair__Pedestal__Axe),
+            "Giguna > Hard Rock > Rock Center > Tablet" => Ok(LocationId::Giguna__Hard_Rock__Rock_Center__Tablet),
+            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
+            "Giguna > Hard Rock > Rock Left > Shockwave Boulder" => Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder),
+            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
+            "Giguna > Hard Rock > Rock Right > Shockwave Boulder" => Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder),
+            "Giguna > Helipad > Tablet Ledge > Tablet" => Ok(LocationId::Giguna__Helipad__Tablet_Ledge__Tablet),
             "Giguna > Lamassu > Deposit > Flask" => Ok(LocationId::Giguna__Lamassu__Deposit__Flask),
-            "Giguna > Ruins Center > Tablet > Item" => {
-                Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
-            }
-            "Giguna > Ruins East > Way Up High > Item" => {
-                Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item)
-            }
+            "Giguna > Ruins Center > Tablet > Item" => Ok(LocationId::Giguna__Ruins_Center__Tablet__Item),
+            "Giguna > Ruins East > Way Up High > Item" => Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item),
             "Giguna > Ruins Top > Flask > Flask" => Ok(LocationId::Giguna__Ruins_Top__Flask__Flask),
-            "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => {
-                Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask)
-            }
-            "Giguna > Wasteland > Door Right > Health" => {
-                Ok(LocationId::Giguna__Wasteland__Door_Right__Health)
-            }
-            "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually" => {
-                Ok(LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually)
-            }
-            "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage" => {
-                Ok(LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage)
-            }
-            "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually" => {
-                Ok(LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually)
-            }
-            "Giguna > Wasteland > Passage East > Mist through Horizontal Passage" => {
-                Ok(LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage)
-            }
-            "Giguna > West Caverns > Bush > Item" => {
-                Ok(LocationId::Giguna__West_Caverns__Bush__Item)
-            }
-            "Giguna > West Caverns > Cache > Item" => {
-                Ok(LocationId::Giguna__West_Caverns__Cache__Item)
-            }
+            "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask),
+            "Giguna > Wasteland > Door Right > Health" => Ok(LocationId::Giguna__Wasteland__Door_Right__Health),
+            "Giguna > Wasteland > Passage Cache > Clear Horizontal Passage Manually" => Ok(LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually),
+            "Giguna > Wasteland > Passage Cache > Mist through Horizontal Passage" => Ok(LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
+            "Giguna > Wasteland > Passage East > Clear Horizontal Passage Manually" => Ok(LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually),
+            "Giguna > Wasteland > Passage East > Mist through Horizontal Passage" => Ok(LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
+            "Giguna > West Caverns > Bush > Item" => Ok(LocationId::Giguna__West_Caverns__Bush__Item),
+            "Giguna > West Caverns > Cache > Item" => Ok(LocationId::Giguna__West_Caverns__Cache__Item),
             "Giguna > West Tower > Top > Tablet" => Ok(LocationId::Giguna__West_Tower__Top__Tablet),
-            "Giguna Breach > Chimney > Cache > Flask" => {
-                Ok(LocationId::Giguna_Breach__Chimney__Cache__Flask)
-            }
-            "Giguna Breach > Cubby > Rocks > Health" => {
-                Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health)
-            }
-            "Giguna Breach > Slingshot > Ravine > Urn" => {
-                Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn)
-            }
-            "Glacier > Apocalypse Entry > Grate Ledge > Escape" => {
-                Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape)
-            }
-            "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape" => {
-                Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape)
-            }
-            "Glacier > Boomerang Room > Pedestal > Item" => {
-                Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item)
-            }
-            "Glacier > Boomerang Room > Pedestal > Switch" => {
-                Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Switch)
-            }
-            "Glacier > Compass Room > Center > Table" => {
-                Ok(LocationId::Glacier__Compass_Room__Center__Table)
-            }
-            "Glacier > Crystals > Lower Corner > Item" => {
-                Ok(LocationId::Glacier__Crystals__Lower_Corner__Item)
-            }
-            "Glacier > Crystals > Top Corner > Tablet" => {
-                Ok(LocationId::Glacier__Crystals__Top_Corner__Tablet)
-            }
-            "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip" => {
-                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip)
-            }
-            "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel" => {
-                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel)
-            }
-            "Glacier > Dock Outside > Cave Treasure > Item" => {
-                Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Item)
-            }
-            "Glacier > Dock Outside > Ruins Stairs > Note" => {
-                Ok(LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note)
-            }
-            "Glacier > Hammond's End > Between Center Doors > Health" => {
-                Ok(LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health)
-            }
-            "Glacier > Hammond's End > Corner > Quick Note" => {
-                Ok(LocationId::Glacier__Hammonds_End__Corner__Quick_Note)
-            }
-            "Glacier > Hammond's End > Hammond > Note" => {
-                Ok(LocationId::Glacier__Hammonds_End__Hammond__Note)
-            }
-            "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => {
-                Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab)
-            }
-            "Glacier > Ledge Grab Room > Pedestal > Item" => {
-                Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item)
-            }
-            "Glacier > Sea Burial > Breakable Rock Left > Break Rock" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock)
-            }
-            "Glacier > Sea Burial > Breakable Rock Left > Mist Through" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through)
-            }
-            "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster)
-            }
-            "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping)
-            }
-            "Glacier > Sea Burial > Breakable Rock Right > Mist Through" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through)
-            }
-            "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster" => {
-                Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster)
-            }
-            "Glacier > Sea Burial > Collapsing Ceiling > Drown" => {
-                Ok(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown)
-            }
-            "Glacier > Sea Burial > Deep Cache > Health" => {
-                Ok(LocationId::Glacier__Sea_Burial__Deep_Cache__Health)
-            }
-            "Glacier > Sea Burial > Inside the Grate > Notes" => {
-                Ok(LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes)
-            }
-            "Glacier > The Big Drop > Breakable Rock Right > Break Rock" => {
-                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock)
-            }
-            "Glacier > The Big Drop > Breakable Rock Right > Mist Through" => {
-                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through)
-            }
-            "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster" => {
-                Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster)
-            }
-            "Glacier > The Big Drop > West 14 > Break Rock" => {
-                Ok(LocationId::Glacier__The_Big_Drop__West_14__Break_Rock)
-            }
-            "Glacier > The Big Drop > West 14 > Mist Through" => {
-                Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through)
-            }
-            "Glacier > The Big Drop > West 14 > Mist Through Faster" => {
-                Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster)
-            }
-            "Glacier > Vertical Room > Peak > Flask" => {
-                Ok(LocationId::Glacier__Vertical_Room__Peak__Flask)
-            }
-            "Glacier > Vertical Room > Under Switch > Switch" => {
-                Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
-            }
-            "Glacier Breach > Control > Upper Corner > Control Enemy" => {
-                Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy)
-            }
-            "Glacier Breach > Control > Upper Corner > Control Enemy And Jump" => {
-                Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump)
-            }
-            "Glacier Breach > Grate Work > Grate Interior > Item" => {
-                Ok(LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item)
-            }
-            "Interior > Building Interior > Corner > Urn" => {
-                Ok(LocationId::Interior__Building_Interior__Corner__Urn)
-            }
-            "Interior > Building Interior > Entry > Remote Urn" => {
-                Ok(LocationId::Interior__Building_Interior__Entry__Remote_Urn)
-            }
-            "Interior > Building Interior > Entry > Urn Collection Skip" => {
-                Ok(LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip)
-            }
-            "Interior > Bunker Interior > Desk > Note" => {
-                Ok(LocationId::Interior__Bunker_Interior__Desk__Note)
-            }
-            "Interior > Ebih Cave > Entry > Health" => {
-                Ok(LocationId::Interior__Ebih_Cave__Entry__Health)
-            }
-            "Interior > Garage > Boxes > Under Boxes" => {
-                Ok(LocationId::Interior__Garage__Boxes__Under_Boxes)
-            }
-            "Interior > Outpost Interior > Bookshelf > Note" => {
-                Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note)
-            }
-            "Interior > Tent Interior > Desk > Note" => {
-                Ok(LocationId::Interior__Tent_Interior__Desk__Note)
-            }
-            "Irikar > Abandoned Room > Corner Core > Core" => {
-                Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core)
-            }
-            "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => {
-                Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup)
-            }
-            "Irikar > Boss Room > Bull's Feet > Boss Reward" => {
-                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
-            }
-            "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => {
-                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam)
-            }
-            "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => {
-                Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam)
-            }
-            "Irikar > Boss Room > Healthy Rooftop > Health" => {
-                Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health)
-            }
-            "Irikar > East Rooftops > Top Rooftop > Tablet" => {
-                Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet)
-            }
-            "Irikar > Hub > Dagger Altar > Weapon" => {
-                Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon)
-            }
-            "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => {
-                Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall)
-            }
-            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
-                Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
-            }
-            "Irikar > Hub > Royal Storage in Wall > Item" => {
-                Ok(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item)
-            }
-            "Irikar > Hub > Sat Tower Top Ledge > Tablet" => {
-                Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
-            }
+            "Giguna Breach > Chimney > Cache > Flask" => Ok(LocationId::Giguna_Breach__Chimney__Cache__Flask),
+            "Giguna Breach > Cubby > Rocks > Health" => Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health),
+            "Giguna Breach > Slingshot > Ravine > Urn" => Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn),
+            "Glacier > Apocalypse Entry > Grate Ledge > Escape" => Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+            "Glacier > Apocalypse Entry > Grate Ledge > Hook Escape" => Ok(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
+            "Glacier > Boomerang Room > Pedestal > Item" => Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item),
+            "Glacier > Boomerang Room > Pedestal > Switch" => Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Switch),
+            "Glacier > Compass Room > Center > Table" => Ok(LocationId::Glacier__Compass_Room__Center__Table),
+            "Glacier > Crystals > Lower Corner > Item" => Ok(LocationId::Glacier__Crystals__Lower_Corner__Item),
+            "Glacier > Crystals > Top Corner > Tablet" => Ok(LocationId::Glacier__Crystals__Top_Corner__Tablet),
+            "Glacier > Dock Outside > Cave Treasure > Flask Collection Skip" => Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+            "Glacier > Dock Outside > Cave Treasure > Flask Fast Travel" => Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
+            "Glacier > Dock Outside > Cave Treasure > Item" => Ok(LocationId::Glacier__Dock_Outside__Cave_Treasure__Item),
+            "Glacier > Dock Outside > Ruins Stairs > Note" => Ok(LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note),
+            "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Collection Skip" => Ok(LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+            "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Fast Travel" => Ok(LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
+            "Glacier > Grid 39-40,7-9 > Floating Rock > Item" => Ok(LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item),
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform > Charged Fly-by Flask Toward Fortress" => Ok(LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform > Fly-by Flask Toward Fortress" => Ok(LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
+            "Glacier > Hammond's End > Between Center Doors > Health" => Ok(LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health),
+            "Glacier > Hammond's End > Corner > Quick Note" => Ok(LocationId::Glacier__Hammonds_End__Corner__Quick_Note),
+            "Glacier > Hammond's End > Hammond > Note" => Ok(LocationId::Glacier__Hammonds_End__Hammond__Note),
+            "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab),
+            "Glacier > Ledge Grab Room > Pedestal > Item" => Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item),
+            "Glacier > Revival > Mid-air > Fly to the Platform and Grab" => Ok(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+            "Glacier > Revival > Mid-air > Fly to the Stairs and Grab" => Ok(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
+            "Glacier > Revival > Pillar > Health" => Ok(LocationId::Glacier__Revival__Pillar__Health),
+            "Glacier > Sea Burial > Breakable Rock Left > Break Rock" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock),
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+            "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+            "Glacier > Sea Burial > Breakable Rock Right > Break Rock while Jumping" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping),
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+            "Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster" => Ok(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+            "Glacier > Sea Burial > Collapsing Ceiling > Drown" => Ok(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
+            "Glacier > Sea Burial > Deep Cache > Health" => Ok(LocationId::Glacier__Sea_Burial__Deep_Cache__Health),
+            "Glacier > Sea Burial > Inside the Grate > Notes" => Ok(LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes),
+            "Glacier > The Big Drop > Breakable Rock Right > Break Rock" => Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock),
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through" => Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+            "Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster" => Ok(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+            "Glacier > The Big Drop > West 14 > Break Rock" => Ok(LocationId::Glacier__The_Big_Drop__West_14__Break_Rock),
+            "Glacier > The Big Drop > West 14 > Mist Through" => Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through),
+            "Glacier > The Big Drop > West 14 > Mist Through Faster" => Ok(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
+            "Glacier > Vertical Room > Peak > Flask" => Ok(LocationId::Glacier__Vertical_Room__Peak__Flask),
+            "Glacier > Vertical Room > Under Switch > Switch" => Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch),
+            "Glacier Breach > Control > Upper Corner > Control Enemy" => Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy),
+            "Glacier Breach > Control > Upper Corner > Control Enemy And Jump" => Ok(LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
+            "Glacier Breach > Grate Work > Grate Interior > Item" => Ok(LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item),
+            "Interior > Building Interior > Corner > Urn" => Ok(LocationId::Interior__Building_Interior__Corner__Urn),
+            "Interior > Building Interior > Entry > Remote Urn" => Ok(LocationId::Interior__Building_Interior__Entry__Remote_Urn),
+            "Interior > Building Interior > Entry > Urn Collection Skip" => Ok(LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
+            "Interior > Bunker Interior > Desk > Note" => Ok(LocationId::Interior__Bunker_Interior__Desk__Note),
+            "Interior > Ebih Cave > Entry > Health" => Ok(LocationId::Interior__Ebih_Cave__Entry__Health),
+            "Interior > Garage > Boxes > Under Boxes" => Ok(LocationId::Interior__Garage__Boxes__Under_Boxes),
+            "Interior > Outpost Interior > Bookshelf > Note" => Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note),
+            "Interior > Tent Interior > Desk > Note" => Ok(LocationId::Interior__Tent_Interior__Desk__Note),
+            "Irikar > Abandoned Room > Corner Core > Core" => Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core),
+            "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup),
+            "Irikar > Boss Room > Bull's Feet > Boss Reward" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward),
+            "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam),
+            "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam),
+            "Irikar > Boss Room > Healthy Rooftop > Health" => Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health),
+            "Irikar > East Rooftops > Top Rooftop > Tablet" => Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet),
+            "Irikar > Hub > Dagger Altar > Weapon" => Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon),
+            "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
+            "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall),
+            "Irikar > Hub > Royal Storage in Wall > Item" => Ok(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item),
+            "Irikar > Hub > Sat Tower Top Ledge > Tablet" => Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet),
             "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
-            "Irikar > Sight Room > Item Pedestal > Urn" => {
-                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn)
-            }
-            "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => {
-                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip)
-            }
-            "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => {
-                Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel)
-            }
-            "Irikar Breach > Gauntlet > Hidden Path Reward > Item" => {
-                Ok(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)
-            }
-            "Irikar Breach > Hover Room > Bottom > Item" => {
-                Ok(LocationId::Irikar_Breach__Hover_Room__Bottom__Item)
-            }
-            "Irikar Breach > Worm Rave > Corner > Item" => {
-                Ok(LocationId::Irikar_Breach__Worm_Rave__Corner__Item)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Damage 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Damage 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Damage 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Speed 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Speed 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
-            }
-            "Menu > Upgrade Menu > Combat > Melee Speed 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Damage 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Damage 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Damage 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Speed 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Speed 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
-            }
-            "Menu > Upgrade Menu > Combat > Ranged Speed 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Damage 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
-            }
-            "Menu > Upgrade Menu > Drone > Drone Melee Speed 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Level 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Level 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Level 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Range 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Range 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Range 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Speed 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
-            }
-            "Menu > Upgrade Menu > Infection > Infection Speed 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
-            }
-            "Menu > Upgrade Menu > Infection > Nano Points 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
-            }
-            "Menu > Upgrade Menu > Infection > Nano Points 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
-            }
-            "Menu > Upgrade Menu > Infection > Nano Points 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
-            }
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
-            }
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
-            }
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
-            }
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 4" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
-            }
-            "Menu > Upgrade Menu > Physiology > Health Upgrade 5" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
-            }
-            "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
-            }
-            "Uhrum > Annuna Corridor > Block East > Dislodge Block" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block)
-            }
-            "Uhrum > Annuna Corridor > Block West > Dislodge Block" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block)
-            }
-            "Uhrum > Annuna Corridor > East Cubby > Tablet" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet)
-            }
-            "Uhrum > Annuna Corridor > Pedestal > Urn" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn)
-            }
-            "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip)
-            }
-            "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel)
-            }
-            "Uhrum > Annuna Corridor > Statue > Item" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item)
-            }
-            "Uhrum > Annuna Corridor > Upper Trees > Remote Urn" => {
-                Ok(LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn)
-            }
-            "Uhrum > Siege Corridor > Center Box > Box" => {
-                Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box)
-            }
-            "Uhrum > Siege Corridor > Pond > Item" => {
-                Ok(LocationId::Uhrum__Siege_Corridor__Pond__Item)
-            }
-            "Uhrum > Siege Corridor > Upper Rock Item > Urn" => {
-                Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn)
-            }
-            "Uhrum > Siege Corridor > Western Cache > Core" => {
-                Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core)
-            }
-            "Uhrum > Waterfalls > Above Block > Block" => {
-                Ok(LocationId::Uhrum__Waterfalls__Above_Block__Block)
-            }
-            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall)
-            }
-            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall)
-            }
-            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall)
-            }
-            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall)
-            }
-            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall)
-            }
-            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => {
-                Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall)
-            }
-            "Uhrum > Waterfalls > Below Block > Shockwave Block" => {
-                Ok(LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block)
-            }
-            "Uhrum > Waterfalls > Ceiling Cache > Flask" => {
-                Ok(LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask)
-            }
-            "Uhrum > Waterfalls > East 26 > Block" => {
-                Ok(LocationId::Uhrum__Waterfalls__East_26__Block)
-            }
-            "Uhrum > Waterfalls > West Water Nook > Tablet" => {
-                Ok(LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet)
-            }
-            "Uhrum > West Entrance > Gate Switch > Open Gate" => {
-                Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate)
-            }
-            "Uhrum > West Entrance > Inner Dais > Item" => {
-                Ok(LocationId::Uhrum__West_Entrance__Inner_Dais__Item)
-            }
-            "Uhrum > West Entrance > Lower Wall East > Charge through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall)
-            }
-            "Uhrum > West Entrance > Lower Wall East > Mist through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall)
-            }
-            "Uhrum > West Entrance > Lower Wall East > Spin through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall)
-            }
-            "Uhrum > West Entrance > Lower Wall West > Charge through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall)
-            }
-            "Uhrum > West Entrance > Lower Wall West > Mist through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall)
-            }
-            "Uhrum > West Entrance > Lower Wall West > Spin through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall)
-            }
-            "Uhrum > West Entrance > Sand > Refill" => {
-                Ok(LocationId::Uhrum__West_Entrance__Sand__Refill)
-            }
-            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall)
-            }
-            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall)
-            }
-            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall)
-            }
-            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => {
-                Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall)
-            }
+            "Irikar > Sight Room > Item Pedestal > Urn" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn),
+            "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+            "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
+            "Irikar Breach > Gauntlet > Hidden Path Reward > Item" => Ok(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item),
+            "Irikar Breach > Hover Room > Bottom > Item" => Ok(LocationId::Irikar_Breach__Hover_Room__Bottom__Item),
+            "Irikar Breach > Worm Rave > Corner > Item" => Ok(LocationId::Irikar_Breach__Worm_Rave__Corner__Item),
+            "Menu > Upgrade Menu > Combat > Melee Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1),
+            "Menu > Upgrade Menu > Combat > Melee Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2),
+            "Menu > Upgrade Menu > Combat > Melee Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3),
+            "Menu > Upgrade Menu > Combat > Melee Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1),
+            "Menu > Upgrade Menu > Combat > Melee Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2),
+            "Menu > Upgrade Menu > Combat > Melee Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3),
+            "Menu > Upgrade Menu > Combat > Ranged Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1),
+            "Menu > Upgrade Menu > Combat > Ranged Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2),
+            "Menu > Upgrade Menu > Combat > Ranged Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3),
+            "Menu > Upgrade Menu > Combat > Ranged Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1),
+            "Menu > Upgrade Menu > Combat > Ranged Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2),
+            "Menu > Upgrade Menu > Combat > Ranged Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3),
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 1" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1),
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 2" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2),
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 3" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3),
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1),
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2),
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 3" => Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3),
+            "Menu > Upgrade Menu > Infection > Infection Level 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1),
+            "Menu > Upgrade Menu > Infection > Infection Level 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2),
+            "Menu > Upgrade Menu > Infection > Infection Level 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3),
+            "Menu > Upgrade Menu > Infection > Infection Range 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1),
+            "Menu > Upgrade Menu > Infection > Infection Range 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2),
+            "Menu > Upgrade Menu > Infection > Infection Range 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3),
+            "Menu > Upgrade Menu > Infection > Infection Speed 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1),
+            "Menu > Upgrade Menu > Infection > Infection Speed 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2),
+            "Menu > Upgrade Menu > Infection > Nano Points 1" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1),
+            "Menu > Upgrade Menu > Infection > Nano Points 2" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2),
+            "Menu > Upgrade Menu > Infection > Nano Points 3" => Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3),
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 1" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1),
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 2" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2),
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 3" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3),
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 4" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4),
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 5" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5),
+            "Menu > Upgrade Menu > Physiology > Mist Upgrade" => Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade),
+            "Uhrum > Annuna Corridor > Block East > Dislodge Block" => Ok(LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block),
+            "Uhrum > Annuna Corridor > Block West > Dislodge Block" => Ok(LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block),
+            "Uhrum > Annuna Corridor > East Cubby > Tablet" => Ok(LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet),
+            "Uhrum > Annuna Corridor > Pedestal > Urn" => Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn),
+            "Uhrum > Annuna Corridor > Pedestal > Urn Collection Skip" => Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
+            "Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel" => Ok(LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
+            "Uhrum > Annuna Corridor > Statue > Item" => Ok(LocationId::Uhrum__Annuna_Corridor__Statue__Item),
+            "Uhrum > Annuna Corridor > Upper Trees > Remote Urn" => Ok(LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn),
+            "Uhrum > Siege Corridor > Center Box > Box" => Ok(LocationId::Uhrum__Siege_Corridor__Center_Box__Box),
+            "Uhrum > Siege Corridor > Pond > Item" => Ok(LocationId::Uhrum__Siege_Corridor__Pond__Item),
+            "Uhrum > Siege Corridor > Upper Rock Item > Urn" => Ok(LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn),
+            "Uhrum > Siege Corridor > Western Cache > Core" => Ok(LocationId::Uhrum__Siege_Corridor__Western_Cache__Core),
+            "Uhrum > Waterfalls > Above Block > Block" => Ok(LocationId::Uhrum__Waterfalls__Above_Block__Block),
+            "Uhrum > Waterfalls > Barrier East > Charge through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
+            "Uhrum > Waterfalls > Barrier East > Mist through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
+            "Uhrum > Waterfalls > Barrier East > Spin through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
+            "Uhrum > Waterfalls > Barrier West > Charge through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
+            "Uhrum > Waterfalls > Barrier West > Mist through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
+            "Uhrum > Waterfalls > Barrier West > Spin through Wall" => Ok(LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
+            "Uhrum > Waterfalls > Below Block > Shockwave Block" => Ok(LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block),
+            "Uhrum > Waterfalls > Ceiling Cache > Flask" => Ok(LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask),
+            "Uhrum > Waterfalls > East 26 > Block" => Ok(LocationId::Uhrum__Waterfalls__East_26__Block),
+            "Uhrum > Waterfalls > West Water Nook > Tablet" => Ok(LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet),
+            "Uhrum > West Entrance > Gate Switch > Open Gate" => Ok(LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate),
+            "Uhrum > West Entrance > Inner Dais > Item" => Ok(LocationId::Uhrum__West_Entrance__Inner_Dais__Item),
+            "Uhrum > West Entrance > Lower Wall East > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
+            "Uhrum > West Entrance > Lower Wall East > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
+            "Uhrum > West Entrance > Lower Wall East > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
+            "Uhrum > West Entrance > Lower Wall West > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
+            "Uhrum > West Entrance > Lower Wall West > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
+            "Uhrum > West Entrance > Lower Wall West > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
+            "Uhrum > West Entrance > Sand > Refill" => Ok(LocationId::Uhrum__West_Entrance__Sand__Refill),
+            "Uhrum > West Entrance > Upper Wall East > Charge through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+            "Uhrum > West Entrance > Upper Wall East > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
+            "Uhrum > West Entrance > Upper Wall East > Spin through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+            "Uhrum > West Entrance > Upper Wall West > Mist through Wall" => Ok(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
     }
@@ -13216,6 +11880,21 @@ pub enum ExitId {
     Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1,
     Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1,
     Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,
+    Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1,
+    Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1,
+    Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1,
+    Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1,
+    Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
+    Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
+    Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1,
+    Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2,
+    Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1,
+    Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1,
+    Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress,
+    Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1,
+    Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1,
     Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,
     Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
     Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1,
@@ -13287,8 +11966,21 @@ pub enum ExitId {
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,
     Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,
     Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
+    Glacier__Revival__Ledge__ex__West_9_1,
+    Glacier__Revival__Ledge__ex__West_9_2,
     Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
+    Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1,
+    Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1,
+    Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
+    Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
+    Glacier__Revival__Overhang__ex__West_9_1,
+    Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1,
+    Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1,
+    Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
+    Glacier__Revival__Save_Point__ex__Pillar_1,
     Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
+    Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1,
+    Glacier__Revival__West_9__ex__Overhang_1,
     Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1,
     Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
     Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
@@ -14900,6 +13592,21 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > East 9 ==> Revival > West 9 (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > East 9 ==> Under Scaffolding (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > First Upper Platform ==> Revival > Save Point (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock ==> Fortress Ledge (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Collection Skip"),
+            ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Fast Travel"),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Lower Floor ==> East 9 (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Lower Floor ==> East 9 (2)"),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Lower Floor ==> Under Scaffolding (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Lower Floor ==> Under Scaffolding (2)"),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform > Charged Fly-by Flask Toward Fortress"),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform ==> Fortress Ledge (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Third Upper Platform > Fly-by Flask Toward Fortress"),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Under Scaffolding ==> East 9 (1)"),
+            ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Under Scaffolding ==> Upper Scaffolding (1)"),
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)"),
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),
@@ -14971,8 +13678,21 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (2)"),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (1)"),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (2)"),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => write!(f, "{}", "Glacier > Revival > Mid-air ==> Dock Outside > Ruins Platform (1)"),
+            ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => write!(f, "{}", "Glacier > Revival > Mid-air ==> Dock Outside > Ruins Stairs (1)"),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Platform and Grab"),
+            ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Stairs and Grab"),
+            ExitId::Glacier__Revival__Overhang__ex__West_9_1 => write!(f, "{}", "Glacier > Revival > Overhang ==> West 9 (1)"),
+            ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => write!(f, "{}", "Glacier > Revival > Pillar ==> Dock Outside > Upper West Hill (1)"),
+            ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => write!(f, "{}", "Glacier > Revival > Pillar Step ==> Dock Outside > Upper West Hill (1)"),
+            ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => write!(f, "{}", "Glacier > Revival > Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)"),
+            ExitId::Glacier__Revival__Save_Point__ex__Pillar_1 => write!(f, "{}", "Glacier > Revival > Save Point ==> Pillar (1)"),
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),
+            ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => write!(f, "{}", "Glacier > Revival > West 9 ==> Grid 39-40,7-9 > East 9 (1)"),
+            ExitId::Glacier__Revival__West_9__ex__Overhang_1 => write!(f, "{}", "Glacier > Revival > West 9 ==> Overhang (1)"),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left ==> Breakable Rock Right (1)"),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through"),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => write!(f, "{}", "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster"),
@@ -16589,6 +15309,21 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1),
             "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)" => Ok(ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1),
             "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)" => Ok(ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1),
+            "Glacier > Grid 39-40,7-9 > East 9 ==> Revival > West 9 (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1),
+            "Glacier > Grid 39-40,7-9 > East 9 ==> Under Scaffolding (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1),
+            "Glacier > Grid 39-40,7-9 > First Upper Platform ==> Revival > Save Point (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1),
+            "Glacier > Grid 39-40,7-9 > Floating Rock ==> Fortress Ledge (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1),
+            "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Collection Skip" => Ok(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+            "Glacier > Grid 39-40,7-9 > Floating Rock > Flask Fast Travel" => Ok(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
+            "Glacier > Grid 39-40,7-9 > Lower Floor ==> East 9 (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1),
+            "Glacier > Grid 39-40,7-9 > Lower Floor ==> East 9 (2)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2),
+            "Glacier > Grid 39-40,7-9 > Lower Floor ==> Under Scaffolding (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1),
+            "Glacier > Grid 39-40,7-9 > Lower Floor ==> Under Scaffolding (2)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2),
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform > Charged Fly-by Flask Toward Fortress" => Ok(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform ==> Fortress Ledge (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1),
+            "Glacier > Grid 39-40,7-9 > Third Upper Platform > Fly-by Flask Toward Fortress" => Ok(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
+            "Glacier > Grid 39-40,7-9 > Under Scaffolding ==> East 9 (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1),
+            "Glacier > Grid 39-40,7-9 > Under Scaffolding ==> Upper Scaffolding (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1),
             "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1),
             "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1),
             "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)" => Ok(ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1),
@@ -16660,8 +15395,21 @@ impl std::str::FromStr for ExitId {
             "Glacier > Peak > Under West Cliff ==> West Cliff (2)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2),
             "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)" => Ok(ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1),
             "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1),
+            "Glacier > Revival > Ledge ==> West 9 (1)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_1),
+            "Glacier > Revival > Ledge ==> West 9 (2)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_2),
             "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1),
+            "Glacier > Revival > Mid-air ==> Dock Outside > Ruins Platform (1)" => Ok(ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1),
+            "Glacier > Revival > Mid-air ==> Dock Outside > Ruins Stairs (1)" => Ok(ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1),
+            "Glacier > Revival > Mid-air > Fly to the Platform and Grab" => Ok(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+            "Glacier > Revival > Mid-air > Fly to the Stairs and Grab" => Ok(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
+            "Glacier > Revival > Overhang ==> West 9 (1)" => Ok(ExitId::Glacier__Revival__Overhang__ex__West_9_1),
+            "Glacier > Revival > Pillar ==> Dock Outside > Upper West Hill (1)" => Ok(ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1),
+            "Glacier > Revival > Pillar Step ==> Dock Outside > Upper West Hill (1)" => Ok(ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1),
+            "Glacier > Revival > Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)" => Ok(ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1),
+            "Glacier > Revival > Save Point ==> Pillar (1)" => Ok(ExitId::Glacier__Revival__Save_Point__ex__Pillar_1),
             "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)" => Ok(ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1),
+            "Glacier > Revival > West 9 ==> Grid 39-40,7-9 > East 9 (1)" => Ok(ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1),
+            "Glacier > Revival > West 9 ==> Overhang (1)" => Ok(ExitId::Glacier__Revival__West_9__ex__Overhang_1),
             "Glacier > Sea Burial > Breakable Rock Left ==> Breakable Rock Right (1)" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1),
             "Glacier > Sea Burial > Breakable Rock Left > Mist Through" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
             "Glacier > Sea Burial > Breakable Rock Left > Mist Through Faster" => Ok(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
@@ -18193,6 +16941,7 @@ pub enum CanonId {
     Giguna_Northeast_Flask,
     Giguna_Northeast_Gate,
     Giguna_Top_Flask,
+    Glacier_40_8_Flask,
     Glacier_Big_Drop_Rock,
     Glacier_Dock_Flask,
     Glacier_Sea_Burial_Rock,
@@ -18344,6 +17093,7 @@ pub enum CanonId {
     Nanite_Mist,
     Notes_2053_02_27,
     Remote_Drone,
+    Revival_Health_Node,
     Shockwave,
     Siuna_Storage_Wall,
     Sniper_Valley_Rock_1,
@@ -18392,6 +17142,7 @@ impl fmt::Display for CanonId {
             CanonId::Giguna_Northeast_Flask => write!(f, "{}", "Giguna_Northeast_Flask"),
             CanonId::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
             CanonId::Giguna_Top_Flask => write!(f, "{}", "Giguna_Top_Flask"),
+            CanonId::Glacier_40_8_Flask => write!(f, "{}", "Glacier_40_8_Flask"),
             CanonId::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
             CanonId::Glacier_Dock_Flask => write!(f, "{}", "Glacier_Dock_Flask"),
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
@@ -18909,6 +17660,7 @@ impl fmt::Display for CanonId {
             CanonId::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
+            CanonId::Revival_Health_Node => write!(f, "{}", "Revival_Health_Node"),
             CanonId::Shockwave => write!(f, "{}", "Shockwave"),
             CanonId::Siuna_Storage_Wall => write!(f, "{}", "Siuna_Storage_Wall"),
             CanonId::Sniper_Valley_Rock_1 => write!(f, "{}", "Sniper_Valley_Rock_1"),
@@ -18964,6 +17716,7 @@ impl std::str::FromStr for CanonId {
             "Giguna_Northeast_Flask" => Ok(CanonId::Giguna_Northeast_Flask),
             "Giguna_Northeast_Gate" => Ok(CanonId::Giguna_Northeast_Gate),
             "Giguna_Top_Flask" => Ok(CanonId::Giguna_Top_Flask),
+            "Glacier_40_8_Flask" => Ok(CanonId::Glacier_40_8_Flask),
             "Glacier_Big_Drop_Rock" => Ok(CanonId::Glacier_Big_Drop_Rock),
             "Glacier_Dock_Flask" => Ok(CanonId::Glacier_Dock_Flask),
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
@@ -19381,6 +18134,7 @@ impl std::str::FromStr for CanonId {
             "Nanite_Mist" => Ok(CanonId::Nanite_Mist),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
+            "Revival_Health_Node" => Ok(CanonId::Revival_Health_Node),
             "Shockwave" => Ok(CanonId::Shockwave),
             "Siuna_Storage_Wall" => Ok(CanonId::Siuna_Storage_Wall),
             "Sniper_Valley_Rock_1" => Ok(CanonId::Sniper_Valley_Rock_1),

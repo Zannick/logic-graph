@@ -51,6 +51,7 @@ tests:
     path:
       - Glacier > Revival > West 8
       - Glacier > Grid 39-40,7-9 > Upper East
+      - Glacier > Grid 39-40,7-9 > Upper Scaffolding
       - Glacier > Grid 39-40,7-9 > West
       - Glacier > Grid 37-38,9 > East
       - Glacier > Grid 37-38,9 > West

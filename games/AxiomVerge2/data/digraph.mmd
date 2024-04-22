@@ -1395,6 +1395,7 @@ subgraph Glacier
         Glacier__Revival__Overhang(Overhang);
         Glacier__Revival__Ledge(Ledge);
         Glacier__Revival__Lower_East(Lower East);
+        Glacier__Revival__West_9(West 9);
         Glacier__Revival__Save_Point(Save Point);
         Glacier__Revival__West_8(West 8);
         Glacier__Revival__Pillar(Pillar);
@@ -1446,7 +1447,15 @@ subgraph Glacier
     end
     subgraph Glacier__Grid_39_40_7_9[Grid 39-40,7-9]
         Glacier__Grid_39_40_7_9__Upper_East(Upper East);
+        Glacier__Grid_39_40_7_9__First_Upper_Platform(First Upper Platform);
+        Glacier__Grid_39_40_7_9__Third_Upper_Platform(Third Upper Platform);
+        Glacier__Grid_39_40_7_9__Floating_Rock(Floating Rock);
+        Glacier__Grid_39_40_7_9__Fortress_Ledge(Fortress Ledge);
+        Glacier__Grid_39_40_7_9__Upper_Scaffolding(Upper Scaffolding);
         Glacier__Grid_39_40_7_9__West(West);
+        Glacier__Grid_39_40_7_9__Under_Scaffolding(Under Scaffolding);
+        Glacier__Grid_39_40_7_9__Lower_Floor(Lower Floor);
+        Glacier__Grid_39_40_7_9__East_9(East 9);
     end
     subgraph Glacier__Grid_37_38_9[Grid 37-38,9]
         Glacier__Grid_37_38_9__East(East);
@@ -1896,6 +1905,7 @@ subgraph Menu
         Menu__Kiengir_Map__Nanite_Mist(Nanite Mist);
         Menu__Kiengir_Map__Apocalypse_Cache(Apocalypse Cache);
         Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
+        Menu__Kiengir_Map__Glacier_40_8(Glacier 40,8);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2844,8 +2854,8 @@ Glacier__Dock_Outside__Entry <--> Interior__Dock_Interior__Entry
 Glacier__Dock_Outside__Lower_Mid_air <--> Glacier__Dock_Outside__Lower_Platforms
 Glacier__Dock_Outside__Lower_Mid_air --> Glacier__Dock_Outside__Upper_Ledge
 Glacier__Dock_Outside__Ruins_Platform --> Glacier__Dock_Outside__High_Toward_Cave
-Glacier__Dock_Outside__Upper_West_Hill --> Glacier__Revival__Pillar
-Glacier__Dock_Outside__Upper_West_Hill --> Glacier__Revival__Pillar_Step
+Glacier__Dock_Outside__Upper_West_Hill <--> Glacier__Revival__Pillar
+Glacier__Dock_Outside__Upper_West_Hill <--> Glacier__Revival__Pillar_Step
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8
@@ -2853,6 +2863,16 @@ Glacier__Grid_32_7_10__Left_Rock --> Glacier__Grid_32_7_10__Column
 Glacier__Grid_32_7_10__West_10 --> Glacier__Grid_32_7_10__Left_Rock
 Glacier__Grid_37_38_9__East <--> Glacier__Grid_39_40_7_9__West
 Glacier__Grid_37_38_9__West <--> Glacier__Vertical_Room__East_9
+Glacier__Grid_39_40_7_9__East_9 <--> Glacier__Grid_39_40_7_9__Under_Scaffolding
+Glacier__Grid_39_40_7_9__East_9 <--> Glacier__Revival__West_9
+Glacier__Grid_39_40_7_9__First_Upper_Platform <--> Glacier__Revival__Save_Point
+Glacier__Grid_39_40_7_9__Floating_Rock --> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Grid_39_40_7_9__Floating_Rock --> Menu__Kiengir_Map__Glacier_40_8
+Glacier__Grid_39_40_7_9__Floating_Rock --> Menu__Warp_Only__Kiengir
+Glacier__Grid_39_40_7_9__Lower_Floor --> Glacier__Grid_39_40_7_9__East_9
+Glacier__Grid_39_40_7_9__Lower_Floor --> Glacier__Grid_39_40_7_9__Under_Scaffolding
+Glacier__Grid_39_40_7_9__Third_Upper_Platform --> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Grid_39_40_7_9__Under_Scaffolding --> Glacier__Grid_39_40_7_9__Upper_Scaffolding
 Glacier__Grid_39_40_7_9__Upper_East <--> Glacier__Revival__West_8
 Glacier__Grid_42_10__East <--> Glacier__Grid_43_10_11__Top
 Glacier__Grid_42_10__West <--> Glacier__Revival__Lower_East
@@ -2897,6 +2917,11 @@ Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Top_Rock --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
+Glacier__Revival__Ledge --> Glacier__Revival__West_9
+Glacier__Revival__Mid_air --> Glacier__Dock_Outside__Ruins_Platform
+Glacier__Revival__Mid_air --> Glacier__Dock_Outside__Ruins_Stairs
+Glacier__Revival__Overhang <--> Glacier__Revival__West_9
+Glacier__Revival__Save_Point --> Glacier__Revival__Pillar
 Glacier__Sea_Burial__Breakable_Rock_Left <--> Glacier__Sea_Burial__Breakable_Rock_Right
 Glacier__Sea_Burial__Collapsing_Ceiling --> Glacier__Revival__Save_Point
 Glacier__Sea_Burial__Deep_Cache --> Glacier__Sea_Burial__Right_Center_Rock

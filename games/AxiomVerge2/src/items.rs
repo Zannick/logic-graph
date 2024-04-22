@@ -524,7 +524,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Melee_Damage_3
             | Item::Melee_Speed_3
             | Item::Nano_Points_3
-            | Item::Notes_2053_02_27
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
             | Item::Royal_Dagger
