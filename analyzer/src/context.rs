@@ -759,7 +759,10 @@ impl<T: Ctx> ContextWrapper<T> {
             }
             History::G(item, loc_id) => {
                 let loc = world.get_location(loc_id);
-                self.visit(world, loc);
+                // We assert that if a loc is skippable that its item is never checked in any rule in this world+settings.
+                if !loc.skippable() {
+                    self.visit(world, loc);
+                }
                 assert!(loc.item() == item, "Invalid replay: visit {:?}", loc_id);
             }
             History::E(exit_id) => {
@@ -770,7 +773,12 @@ impl<T: Ctx> ContextWrapper<T> {
                 let exit = world.get_exit(exit_id);
                 let loc =
                     world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
-                self.visit_exit(world, loc, exit);
+                // We assert that if a loc is skippable that its item is never checked in any rule in this world+settings.
+                if loc.skippable() {
+                    self.exit(world, exit);
+                } else {
+                    self.visit_exit(world, loc, exit);
+                }
                 assert!(
                     loc.item() == item,
                     "Invalid replay: visit-exit {:?}",
