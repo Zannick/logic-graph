@@ -600,7 +600,7 @@ where
             let (key, value) = item?;
             let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
 
-            let raw = u64::from_be_bytes(key[0..8].as_ref().try_into().unwrap()) + 1;
+            let raw = u64::from_be_bytes(<[u8] as AsRef<[u8]>>::as_ref(&key[0..8]).try_into().unwrap()) + 1;
             // Ignore error
             let _ = self.db.delete_opt(&key, &self.write_opts);
             self.delete.fetch_max(raw, Ordering::Release);
@@ -1106,7 +1106,7 @@ where
             iter_opts.set_tailing(true);
             iter_opts.fill_cache(false);
             let start_progress = if let Some(skey) = start_key {
-                let p = u32::from_be_bytes(skey[0..4].as_ref().try_into().unwrap());
+                let p = u32::from_be_bytes(<[u8] as AsRef<[u8]>>::as_ref(&skey[0..4]).try_into().unwrap());
                 iter_opts.set_iterate_lower_bound(skey);
                 p
             } else {
@@ -1143,7 +1143,7 @@ where
                         continue;
                     }
 
-                    let known = u32::from_be_bytes(key[8..12].as_ref().try_into().unwrap());
+                    let known = u32::from_be_bytes(<[u8] as AsRef<[u8]>>::as_ref(&key[8..12]).try_into().unwrap());
                     if known > elapsed {
                         let new_key = self.new_heap_key(&key, known, elapsed);
                         batch.put(new_key, value);
