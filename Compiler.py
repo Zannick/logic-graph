@@ -1770,11 +1770,12 @@ class GameLogic(object):
         self.region_colors
         files = {
             '.': ['Cargo.toml'],
-            'data': ['digraph.dot', 'digraph.mmd', 'graph_map.sh'],
+            'data': ['digraph.dot', 'digraph.mmd', 'graph_map.sh', 'digraph_nodes.dot', 'full_graph.m4'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'graph.rs', 'graph_enums.rs', 'context.rs',
                     'observe.rs', 'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
+            'solutions': [],
             'tests': ['unittest.rs'],
         }
         rustfiles = []

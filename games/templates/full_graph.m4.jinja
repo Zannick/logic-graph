@@ -1,0 +1,37 @@
+// use neato to use the coordinates
+digraph {{ game }} {
+    node[shape=square,width=0.225,height=0.225,colorscheme=dark28,style=filled,margin=0];
+    include(`digraph_nodes.dot')
+
+    edge[arrowsize=0.5];
+%% for r in regions|reject('exclude_by_tag')|sort(attribute='id')
+%% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+%% for e in s.exits|reject('exclude_by_tag')|sort(attribute='id')
+    {{ s.id }} -> {{ e|get_exit_target }};
+%% endfor
+%% for h in s.hybrid|reject('exclude_by_tag')|sort(attribute='id')
+    {{ s.id }} -> {{ h|get_exit_target }};
+%% endfor
+%% endfor
+%% endfor
+%% endfor
+    edge [arrowhead=none,style=dashed];
+%% for (k, l) in local_distances
+%% if k|get_area is not exclude_by_tag and l|get_area is not exclude_by_tag:
+    {{ k }} -> {{ l }};
+%% endif
+%% endfor
+    edge [arrowhead=normal,arrowtail=inv,dir=both,style=bold,color=white];
+%% for r in regions|reject('exclude_by_tag')|sort(attribute='id')
+%% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+%% for a in s.actions|reject('exclude_by_tag')|sort(attribute='id')
+%% if a.to and not a.to.startswith('^'):
+    {{ s.id }} -> {{ a|get_exit_target }};
+%% endif
+%% endfor
+%% endfor
+%% endfor
+%% endfor
+}
