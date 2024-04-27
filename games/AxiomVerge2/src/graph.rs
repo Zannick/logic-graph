@@ -1169,6 +1169,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
+        | SpotId::Glacier__Revival__Above_Save_Point
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
         | SpotId::Glacier__Revival__Pillar_Step
@@ -2870,6 +2871,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
+        | SpotId::Glacier__Revival__Above_Save_Point
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
         | SpotId::Glacier__Revival__Pillar_Step
@@ -5434,6 +5436,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
+            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::access_invoke_hook(ctx, world),
@@ -6814,6 +6817,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -8215,6 +8219,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -9201,6 +9206,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::access_breach_attractor_and_anuman(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::access_invoke_can_deploy_and_invoke_hover(ctx, world),
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => true,
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_invoke_open(ctx, world),
@@ -9311,6 +9317,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_invoke_hover(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => rules::observe_access_breach_attractor(ctx, world, full_obs),
@@ -10228,6 +10235,16 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_invoke_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Above Save Point"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -10490,6 +10507,7 @@ impl world::Action for Action {
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__solid_rock__careful_break__do(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(ctx, world),
@@ -10613,6 +10631,9 @@ impl world::Action for Action {
             }
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
                 SpotId::Glacier__Dock_Outside__Above_Ruins
+            }
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
+                SpotId::Glacier__Revival__Above_Save_Point
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
                 SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
@@ -11073,6 +11094,9 @@ impl world::Action for Action {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
                 rules::observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
                     ctx, world, full_obs,
@@ -11428,7 +11452,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1680] = [
+static RAW_SPOTS: [SpotId; 1681] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
@@ -12599,6 +12623,7 @@ static RAW_SPOTS: [SpotId; 1680] = [
     SpotId::Glacier__Peak__Under_West_Cliff,
     SpotId::Glacier__Peak__West_8,
     SpotId::Glacier__Peak__West_Cliff,
+    SpotId::Glacier__Revival__Above_Save_Point,
     SpotId::Glacier__Revival__East_9,
     SpotId::Glacier__Revival__Ledge,
     SpotId::Glacier__Revival__Lower_East,
@@ -13663,7 +13688,7 @@ lazy_static! {
             end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
         },
         AreaId::Glacier__Revival => Range {
-            start: SpotId::Glacier__Revival__East_9.into_usize(),
+            start: SpotId::Glacier__Revival__Above_Save_Point.into_usize(),
             end: SpotId::Glacier__Revival__West_9.into_usize() + 1,
         },
         AreaId::Glacier__Sea_Burial => Range {
@@ -14578,7 +14603,10 @@ impl world::World for World {
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
                 SpotId::Glacier__Dock_Outside__Ruins_Platform
             }
-            ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            ActionId::Glacier__Revival__Save_Point__Save
+            | ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
+                SpotId::Glacier__Revival__Save_Point
+            }
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
                 SpotId::Glacier__The_Big_Drop__Solid_Rock
             }
@@ -15384,6 +15412,7 @@ impl world::World for World {
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 | ExitId:: Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => SpotId::Glacier__Revival__West_9,
             ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 | ExitId:: Glacier__Revival__Save_Point__ex__Pillar_1 => SpotId::Glacier__Revival__Save_Point,
+            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => SpotId::Glacier__Revival__Above_Save_Point,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => SpotId::Glacier__Revival__West_8,
             ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar,
             ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar_Step,
@@ -17499,6 +17528,7 @@ impl world::World for World {
             | SpotId::Glacier__Ledge_Grab_Room__Pedestal
             | SpotId::Glacier__Peak__East_8
             | SpotId::Glacier__Peak__West_8
+            | SpotId::Glacier__Revival__Above_Save_Point
             | SpotId::Glacier__Revival__East_9
             | SpotId::Glacier__Revival__Lower_East
             | SpotId::Glacier__Revival__Mid_air
@@ -29460,6 +29490,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => Exit {
+            id: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
+            time: 2500,
+            dest: SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => Exit {
             id: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
             time: 1350,
@@ -33879,6 +33916,11 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
             time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => Action {
+            id: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West,
+            time: 750,
             price: Currency::Free,
         },
         ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => Action {
@@ -48510,7 +48552,20 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             actions: Range {
                 start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
-                end: ActionId::Glacier__Revival__Save_Point__Save.into_usize() + 1,
+                end: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Revival__Above_Save_Point => Spot {
+            id: SpotId::Glacier__Revival__Above_Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize(),
+                end: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
             },
         },
         SpotId::Glacier__Revival__West_8 => Spot {

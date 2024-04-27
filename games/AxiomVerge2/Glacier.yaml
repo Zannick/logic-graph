@@ -186,6 +186,8 @@ areas:
           jumps: 1
     - name: Cave Treasure
       coord: [44.6, 8.5]
+      data:
+        map_spot: Menu > Kiengir Map > Glacier Dock Flask
       locations:
         - name: Item
           canon: Glacier_Dock_Flask
@@ -299,6 +301,21 @@ areas:
         - name: Save
           do: $save
           tags: [save]
+        - name: Throw Drone West
+          req: $can_deploy and $hover
+          do: $deploy_drone
+          to: Just Thrown
+          time: 0.75
+    # TODO: handle movement and penalty_tags in actions?
+    - name: Just Thrown
+      coord: [41.5, 7.3]
+      local:
+        - to: Save Point
+      exits:
+        - to: Grid 39-40,7-9 > First Upper Platform
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -base.1]
     - name: West 8
       coord: [41.05, 7.95]
       local:

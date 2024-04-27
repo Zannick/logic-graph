@@ -1,6 +1,5 @@
 rules:
-  victory: just_objective
-  objective: All Items
+  objective: Any%
 major_glitches: true
 minor_glitches: true
 boomerang_steering: true

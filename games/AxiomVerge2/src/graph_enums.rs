@@ -1900,6 +1900,7 @@ pub enum SpotId {
     Glacier__Peak__Under_West_Cliff,
     Glacier__Peak__West_8,
     Glacier__Peak__West_Cliff,
+    Glacier__Revival__Above_Save_Point,
     Glacier__Revival__East_9,
     Glacier__Revival__Ledge,
     Glacier__Revival__Lower_East,
@@ -5352,6 +5353,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Peak__West_8 => write!(f, "{}", "Glacier > Peak > West 8"),
             SpotId::Glacier__Peak__West_Cliff => write!(f, "{}", "Glacier > Peak > West Cliff"),
+            SpotId::Glacier__Revival__Above_Save_Point => {
+                write!(f, "{}", "Glacier > Revival > Above Save Point")
+            }
             SpotId::Glacier__Revival__East_9 => write!(f, "{}", "Glacier > Revival > East 9"),
             SpotId::Glacier__Revival__Ledge => write!(f, "{}", "Glacier > Revival > Ledge"),
             SpotId::Glacier__Revival__Lower_East => {
@@ -8786,6 +8790,9 @@ impl std::str::FromStr for SpotId {
             "Glacier > Peak > Under West Cliff" => Ok(SpotId::Glacier__Peak__Under_West_Cliff),
             "Glacier > Peak > West 8" => Ok(SpotId::Glacier__Peak__West_8),
             "Glacier > Peak > West Cliff" => Ok(SpotId::Glacier__Peak__West_Cliff),
+            "Glacier > Revival > Above Save Point" => {
+                Ok(SpotId::Glacier__Revival__Above_Save_Point)
+            }
             "Glacier > Revival > East 9" => Ok(SpotId::Glacier__Revival__East_9),
             "Glacier > Revival > Ledge" => Ok(SpotId::Glacier__Revival__Ledge),
             "Glacier > Revival > Lower East" => Ok(SpotId::Glacier__Revival__Lower_East),
@@ -11965,6 +11972,7 @@ pub enum ExitId {
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,
     Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,
+    Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
     Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
     Glacier__Revival__Ledge__ex__West_9_1,
     Glacier__Revival__Ledge__ex__West_9_2,
@@ -13677,6 +13685,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (2)"),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),
+            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => write!(f, "{}", "Glacier > Revival > Above Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)"),
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (1)"),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (2)"),
@@ -15394,6 +15403,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Peak > Under West Cliff ==> West Cliff (1)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1),
             "Glacier > Peak > Under West Cliff ==> West Cliff (2)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2),
             "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)" => Ok(ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1),
+            "Glacier > Revival > Above Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)" => Ok(ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1),
             "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1),
             "Glacier > Revival > Ledge ==> West 9 (1)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_1),
             "Glacier > Revival > Ledge ==> West 9 (2)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_2),
@@ -16025,6 +16035,7 @@ pub enum ActionId {
     Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
     Glacier__Hammonds_End__West_11__Open_Doors,
     Glacier__Revival__Save_Point__Save,
+    Glacier__Revival__Save_Point__Throw_Drone_West,
     Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
     Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
     Glacier__Vertical_Room__Upper_Switch__Open_Gate,
@@ -16428,6 +16439,9 @@ impl fmt::Display for ActionId {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
+                write!(f, "{}", "Glacier > Revival > Save Point > Throw Drone West")
+            }
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => write!(
                 f,
                 "{}",
@@ -16825,6 +16839,9 @@ impl std::str::FromStr for ActionId {
             }
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
+            }
+            "Glacier > Revival > Save Point > Throw Drone West" => {
+                Ok(ActionId::Glacier__Revival__Save_Point__Throw_Drone_West)
             }
             "Glacier > The Big Drop > Solid Rock > Careful Break" => {
                 Ok(ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break)
