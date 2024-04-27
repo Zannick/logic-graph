@@ -429,7 +429,7 @@ special:  # MARK: special
   # a tile is 432x240, and split into 27x15 16x16 squares
   # scaled to 50%, it's 216x120. scaled to 10/24, it's 180x100
   graph_scale: [216, -120]
-  graph_exclude_tags: [interior, exterior, portal, cskip, map, warp]
+  graph_exclude_tags: [interior, exterior, portal, cskip, map, warp, menu]
   map_ppi: 72
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]

@@ -1158,19 +1158,51 @@ class GameLogic(object):
 
     @cached_property
     def adjacent_regions(self):
-        conns = set()
+        conns = defaultdict(set)
         for r in self.regions:
             for a in r['areas']:
                 for s in a['spots']:
                     for ex in s.get('exits', ()):
+                        # This adjacency is only important for graphs, so if we exclude exits from the graph,
+                        # we can exclude them here
+                        if self.exclude_by_tag(ex):
+                            continue
                         target = ex['to'].split('>')
                         if len(target) == 3:
-                            t = target[0].strip()
-                            if r['id'] < t:
-                                conns.add((r['id'], t))
-                            else:
-                                conns.add((t, r['id']))
+                            t = construct_id(target[0].strip())
+                            conns[t].add(r['id'])
+                            conns[r['id']].add(t)
+            if r['id'] not in conns:
+                conns[r['id']] = set()
         return conns
+
+
+    @cached_property
+    def region_colors(self):
+        d = {}
+        NUMCOLORS = 7
+        nextcolor = 0
+        left = []
+        for rid, neighbors in sorted(self.adjacent_regions.items(), key=lambda x: len(x[1])):
+            ncolors = set(d[n] for n in neighbors if n in d)
+            if nextcolor not in ncolors:
+                d[rid] = nextcolor
+                nextcolor = (nextcolor + 1) % NUMCOLORS
+            else:
+                left.append((rid, neighbors))
+        for rid, neighbors in left:
+            ncolors = set(d[n] for n in neighbors if n in d)
+            if len(ncolors) >= NUMCOLORS:
+                d[rid] = NUMCOLORS
+            for offset in range(0, NUMCOLORS):
+                nc = (nextcolor + offset) % NUMCOLORS
+                if nc not in ncolors:
+                    d[rid] = nc
+                    nextcolor = nc
+                    break
+            else:
+                d[rid] = NUMCOLORS
+        return d
 
 
     def handle_typehint_config(self, category, d):
@@ -1717,7 +1749,7 @@ class GameLogic(object):
         self.context_trigger_rules
         self.context_position_watchers
         self.all_connections
-        self.adjacent_regions
+        self.region_colors
         files = {
             '.': ['Cargo.toml'],
             'data': ['digraph.dot', 'digraph.mmd', 'graph_map.sh'],

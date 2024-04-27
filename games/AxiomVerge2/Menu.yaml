@@ -1,6 +1,7 @@
 name: Menu
 data:
   realm: menu
+tags: [menu]
 
 areas:
 - name: Upgrade Menu  # MARK: Upgrade Menu

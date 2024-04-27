@@ -5,7 +5,7 @@ digraph AxiomVerge2 {
     viewport = "9936,10920,1,'Center'";
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
-        node[fillcolor="1"];
+        node[fillcolor="6"];
         Amagi_Breach__East_Connector__East [label = "", pos = "110.7,-76.25!"];
         Amagi_Breach__East_Connector__West [label = "", pos = "108.3,-76.25!"];
         Amagi_Breach__East_Entrance__East [label = "", pos = "113.7,-74.583333!"];
@@ -394,7 +394,7 @@ digraph AxiomVerge2 {
         Annuna__West_Climb__Platform_3 [label = "", pos = "109.5,-30.666667!"];
         Annuna__West_Climb__North [label = "", pos = "109.5,-30.333333!"];
         Annuna__West_Climb__East_19 [label = "", pos = "110.85,-31.25!"];
-        node[fillcolor="4"];
+        node[fillcolor="1"];
         Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
         Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
         Antarctica__Building_1W__West_Entry [label = "", pos = "120.75,-102.5!"];
@@ -416,7 +416,7 @@ digraph AxiomVerge2 {
         Antarctica__West__Helipad [label = "", pos = "115.5,-2.666667!"];
         Antarctica__West__Shed_Entry [label = "", pos = "112.05,-3.0!"];
         Antarctica__West__Boxes [label = "", pos = "120.3,-2.5!"];
-        node[fillcolor="5"];
+        node[fillcolor="6"];
         Ebih__Base_Camp__East_11 [label = "", pos = "92.85,-17.25!"];
         Ebih__Base_Camp__East_12 [label = "", pos = "92.85,-19.5!"];
         Ebih__Base_Camp__Staircase [label = "", pos = "91.2,-19.833333!"];
@@ -610,7 +610,7 @@ digraph AxiomVerge2 {
         Ebih__Waterfall__East_7 [label = "", pos = "74.85,-11.25!"];
         Ebih__Waterfall__Top_Waterfall [label = "", pos = "68.25,-11.666667!"];
         Ebih__Waterfall__West_7 [label = "", pos = "63.15,-11.25!"];
-        node[fillcolor="6"];
+        node[fillcolor="1"];
         Filter__Core__East [label = "", pos = "14.85,-26.25!"];
         Filter__Core__Bottom [label = "", pos = "13.05,-26.25!"];
         Filter__Core__Terminal_East [label = "", pos = "11.1,-24.25!"];
@@ -632,7 +632,7 @@ digraph AxiomVerge2 {
         Filter__Upper_Hallway__East [label = "", pos = "17.85,-26.333333!"];
         Filter__Upper_Hallway__Corner [label = "", pos = "15.75,-26.333333!"];
         Filter__Upper_Hallway__West [label = "", pos = "15.15,-26.25!"];
-        node[fillcolor="7"];
+        node[fillcolor="2"];
         Giguna_Breach__Antechamber__North [label = "", pos = "49.5,-68.666667!"];
         Giguna_Breach__Ascent__West_9 [label = "", pos = "48.3,-64.166667!"];
         Giguna_Breach__Ascent__Bottom [label = "", pos = "48.9,-64.166667!"];
@@ -1050,7 +1050,7 @@ digraph AxiomVerge2 {
         Giguna__West_Tower__East_7 [label = "", pos = "38.85,-10.5!"];
         Giguna__West_Tower__Top [label = "", pos = "37.8,-12.0!"];
         Giguna__West_Tower__Southwest [label = "", pos = "36.6,-14.833333!"];
-        node[fillcolor="2"];
+        node[fillcolor="5"];
         Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
         Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
         Glacier_Breach__Angry_Lions__Second_Platform [label = "", pos = "121.65,-74.666667!"];
@@ -1124,7 +1124,7 @@ digraph AxiomVerge2 {
         Glacier_Breach__Zappers__Hill_East [label = "", pos = "114.3,-70.833333!"];
         Glacier_Breach__Zappers__Trough [label = "", pos = "112.5,-71.166667!"];
         Glacier_Breach__Zappers__West [label = "", pos = "111.3,-71.25!"];
-        node[fillcolor="3"];
+        node[fillcolor="5"];
         Glacier__Apocalypse_Entry__West_10 [label = "", pos = "132.15,-16.666667!"];
         Glacier__Apocalypse_Entry__Terminal [label = "", pos = "133.8,-16.666667!"];
         Glacier__Apocalypse_Entry__Grate_Ledge [label = "", pos = "133.95,-17.0!"];
@@ -1322,7 +1322,7 @@ digraph AxiomVerge2 {
         Glacier__Vertical_Room__East_17_while_hovering [label = "", pos = "110.7,-27.75!"];
         Glacier__Vertical_Room__Lower_Gatestone [label = "", pos = "109.8,-28.333333!"];
         Glacier__Vertical_Room__South [label = "", pos = "109.5,-29.666667!"];
-        node[fillcolor="4"];
+        node[fillcolor="7"];
         Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
         Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
         Interior__Bunker_Interior__Entry [label = "", pos = "90.675,-121.0!"];
@@ -1341,7 +1341,7 @@ digraph AxiomVerge2 {
         Interior__Outpost_Interior__Bookshelf [label = "", pos = "41.55,-125.0!"];
         Interior__Tent_Interior__Entry [label = "", pos = "85.275,-121.166667!"];
         Interior__Tent_Interior__Desk [label = "", pos = "85.5,-121.166667!"];
-        node[fillcolor="5"];
+        node[fillcolor="3"];
         Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
         Irikar_Breach__Exit_Corridor__North_12 [label = "", pos = "37.5,-93.666667!"];
         Irikar_Breach__Exit_Corridor__West [label = "", pos = "36.3,-94.583333!"];
@@ -1391,7 +1391,7 @@ digraph AxiomVerge2 {
         Irikar_Breach__Worm_Rave__East [label = "", pos = "38.7,-92.166667!"];
         Irikar_Breach__Worm_Rave__South [label = "", pos = "37.5,-93.0!"];
         Irikar_Breach__Worm_Rave__Corner [label = "", pos = "36.6,-92.833333!"];
-        node[fillcolor="6"];
+        node[fillcolor="4"];
         Irikar__Abandoned_Room__Empty_Pedestal [label = "", pos = "43.575,-44.5!"];
         Irikar__Abandoned_Room__Corner_Core [label = "", pos = "44.4,-44.5!"];
         Irikar__Abandoned_Room__West [label = "", pos = "42.15,-44.666667!"];
@@ -1498,11 +1498,6 @@ digraph AxiomVerge2 {
         Irikar__Sight_Room__Above_Room_North [label = "", pos = "43.95,-38.5!"];
         Irikar__Sight_Room__Above_Room_East [label = "", pos = "44.85,-39.0!"];
         node[fillcolor="7"];
-        Menu__Upgrade_Menu__Physiology [label = "", fillcolor = "8"];
-        Menu__Upgrade_Menu__Combat [label = "", fillcolor = "8"];
-        Menu__Upgrade_Menu__Infection [label = "", fillcolor = "8"];
-        Menu__Upgrade_Menu__Drone [label = "", fillcolor = "8"];
-        node[fillcolor="1"];
         Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
         Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];
         Uhrum__Annuna_Corridor__Pedestal [label = "", pos = "88.5,-40.916667!"];
@@ -3078,18 +3073,6 @@ digraph AxiomVerge2 {
     Irikar_Breach__Worm_Rave__South -> Irikar_Breach__Worm_Rave__Corner;
     Irikar_Breach__Worm_Rave__South -> Irikar_Breach__Worm_Rave__East;
     Irikar_Breach__Worm_Rave__South -> Irikar_Breach__Exit_Corridor__North_12;
-    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Combat;
-    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Drone;
-    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Infection;
-    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Drone;
-    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Infection;
-    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Physiology;
-    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Combat;
-    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Drone;
-    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Physiology;
-    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Combat;
-    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Infection;
-    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Physiology;
     Uhrum__Annuna_Corridor__West_25 -> Uhrum__Waterfalls__East_25;
     Uhrum__Annuna_Corridor__West_26 -> Uhrum__Waterfalls__East_26;
     Uhrum__Annuna_Corridor__Block_West -> Uhrum__Annuna_Corridor__Block_East;
