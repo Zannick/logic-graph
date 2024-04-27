@@ -167,6 +167,7 @@
 * Collect Big_Flask from Glacier Breach > Control > Upper Corner > Control Enemy
 * Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn
 
+  Move... to Annuna > Lamassu > Portal Stand
 ! Do Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West
 * Collect Goodbye from Glacier > Hammond's End > Hammond > Note
 ! Do Glacier Breach > Angry Lions > North > Summon Portal to Second Platform
