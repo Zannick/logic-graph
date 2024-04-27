@@ -57,8 +57,10 @@ areas:
         - to: Behind Vehicle
       exits:
         - to: Top Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Top Platform
           req: $mist2
-          price: 125
           movement: mist2
       actions:
         - name: Save
@@ -673,7 +675,10 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Lower West Tree
-          req: Nanite_Mist and Mist_Upgrade
+          req: Nanite_Mist
+          movement: mist1
+        - to: Lower West Tree
+          req: $mist2
           movement: mist2
         - to: Wall Left
           req: Ebih_Waterfall_Wall
@@ -681,7 +686,13 @@ areas:
       hybrid:
         - name: Break Through Wall
           to: Wall Left
-          req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
+          req: not Ebih_Waterfall_Wall and Nanite_Mist
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          to: Wall Left
+          req: not Ebih_Waterfall_Wall and $mist2
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
           movement: mist2
@@ -703,7 +714,13 @@ areas:
       hybrid:
         - name: Break Through Wall
           to: Wall Right
-          req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
+          req: not Ebih_Waterfall_Wall and Nanite_Mist
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          to: Wall Right
+          req: not Ebih_Waterfall_Wall and $mist2
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
           movement: mist2

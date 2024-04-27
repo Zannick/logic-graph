@@ -98,11 +98,9 @@ areas:
       exits:
         - to: Grate Interior
           req: Nanite_Mist
-          price: 50
           movement: mist1
         - to: Grate Interior
           req: $mist2
-          price: 50
           movement: mist2
     - name: Grate Interior
       coord: [39.55, 12.9]
@@ -113,35 +111,27 @@ areas:
       exits:
         - to: Grate West
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Grate West
           req: $mist2
-          price: 40
           movement: mist2
         - to: Grate Corner
           req: Nanite_Mist
-          price: 50
           movement: mist1
         - to: Grate Corner
           req: $mist2
-          price: 50
           movement: mist2
         - to: Grate Southeast
           req: Nanite_Mist
-          price: 50
           movement: mist1
         - to: Grate Southeast
           req: $mist2
-          price: 50
           movement: mist2
         - to: Grate East
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Grate East
           req: $mist2
-          price: 40
           movement: mist2
     - name: Below Grate
       coord: [39.5, 13.65]
@@ -157,11 +147,9 @@ areas:
       exits:
         - to: Grate Interior
           req: Nanite_Mist
-          price: 50
           movement: mist1
         - to: Grate Interior
           req: $mist2
-          price: 50
           movement: mist2
         - to: East Hill
           req: $hook or $hover
@@ -179,11 +167,9 @@ areas:
           jumps: 1
         - to: Grate Interior
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Grate Interior
           req: $mist2
-          price: 40
           movement: mist2
     - name: Grate East
       coord: [39.7, 12.9]
@@ -193,11 +179,9 @@ areas:
           movement: base
         - to: Grate Interior
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Grate Interior
           req: $mist2
-          price: 40
           movement: mist2
 
     - name: East Hill

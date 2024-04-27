@@ -32,7 +32,7 @@ areas:
           time: 30  # ?
       actions:
         - name: Save
-          req: NOT Separation or Defeat_Indra
+          req: Defeat_Indra
           do: $save
     - name: Eastward
       coord: [32.95, 25.4]
@@ -43,8 +43,10 @@ areas:
           req: NOT Separation or Defeat_Indra
           movement: base
         - to: Staircase
+          req: Separation and NOT Defeat_Indra and Nanite_Mist
+          movement: mist1
+        - to: Staircase
           req: Separation and NOT Defeat_Indra and $mist2
-          price: 30
           movement: mist2
     - name: Staircase
       coord: [33.1, 25.4]
@@ -56,8 +58,10 @@ areas:
           req: NOT Separation or Defeat_Indra
           movement: base
         - to: Eastward
+          req: Separation and NOT Defeat_Indra and Nanite_Mist
+          movement: mist1
+        - to: Eastward
           req: Separation and NOT Defeat_Indra and $mist2
-          price: 30
           movement: mist2
     - name: East 25 Lower
       coord: [33.95, 24.8]
@@ -859,9 +863,11 @@ areas:
           req: $hook or $hover
           movement: base
         - to: Cavern Outer Rock West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cavern Outer Rock West
           req: $mist2
           movement: mist2
-          price: 10
     - name: High Ledge
       coord: [40.125, 22.35]
       local:
@@ -915,9 +921,14 @@ areas:
           to: Cavern Outer Rock East
           item: Sniper_Valley_Rock_1
           canon: Sniper_Valley_Rock_1
+          req: Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist Through Outer Wall
+          to: Cavern Outer Rock East
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
           req: $mist2
           movement: mist2
-          price: 130
     - name: Cavern Outer Rock East
       coord: [41.3, 22.25]
       exits:
@@ -936,9 +947,14 @@ areas:
           to: Cavern Outer Rock West
           item: Sniper_Valley_Rock_1
           canon: Sniper_Valley_Rock_1
+          req: Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist Through Outer Wall
+          to: Cavern Outer Rock West
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
           req: $mist2
           movement: mist2
-          price: 130
     - name: Cavern Inner Rock West
       coord: [41.65, 22.225]
       exits:
@@ -950,9 +966,14 @@ areas:
           to: Cavern Inner Rock East
           item: Sniper_Valley_Rock_2
           canon: Sniper_Valley_Rock_2
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist Through Inner Wall
+          to: Cavern Inner Rock East
+          item: Sniper_Valley_Rock_2
+          canon: Sniper_Valley_Rock_2
           req: ^mode == 'drone' and $mist2
           movement: mist2
-          price: 30
     - name: Cavern Inner Rock East
       coord: [41.95, 22.225]
       local:
@@ -967,9 +988,14 @@ areas:
           to: Cavern Inner Rock West
           item: Sniper_Valley_Rock_2
           canon: Sniper_Valley_Rock_2
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist Through Inner Wall
+          to: Cavern Inner Rock West
+          item: Sniper_Valley_Rock_2
+          canon: Sniper_Valley_Rock_2
           req: ^mode == 'drone' and $mist2
           movement: mist2
-          price: 30
     - name: Cavern Tight Corner
       coord: [42.175, 22.55]
       local:
@@ -1640,11 +1666,9 @@ areas:
           tags: [xshift]
         - to: Grate Left
           req: Nanite_Mist
-          price: 20
           movement: mist1
         - to: Grate Left
           req: $mist2
-          price: 20
           movement: mist2
 
     - name: East 24
@@ -1713,11 +1737,9 @@ areas:
       exits:
         - to: East 22
           req: Nanite_Mist
-          price: 20
           movement: mist1
         - to: East 22
           req: $mist2
-          price: 20
           movement: mist2
 
 - name: Filter Teleporter  # MARK: Filter Teleporter
@@ -2137,8 +2159,10 @@ areas:
           jumps: 1
         - to: East 16
           req: Nanite_Mist
-          price: 40
-          movement: base
+          movement: mist1
+        - to: East 16
+          req: $mist2
+          movement: mist2
     - name: Above Flat Ground
       coord: [38.75, 15.7]
       local:
@@ -2151,8 +2175,10 @@ areas:
           jumps: 1
         - to: East 16
           req: Nanite_Mist
-          price: 40
-          movement: base
+          movement: mist1
+        - to: East 16
+          req: $mist2
+          movement: mist2
 
     - name: East 16
       coord: [38.95, 15.8]
@@ -2161,16 +2187,22 @@ areas:
           tags: [xshift]
         - to: Flat Ground
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Above Flat Ground
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Ledge By Grate
           req: Nanite_Mist
-          price: 80
           movement: mist1
+        - to: Flat Ground
+          req: $mist2
+          movement: mist2
+        - to: Above Flat Ground
+          req: $mist2
+          movement: mist2
+        - to: Ledge By Grate
+          req: $mist2
+          movement: mist2
     - name: Ledge By Grate
       coord: [38.75, 15.4]
       local:
@@ -2178,8 +2210,10 @@ areas:
       exits:
         - to: East 16
           req: Nanite_Mist
-          price: 40
-          movement: base
+          movement: mist1
+        - to: East 16
+          req: $mist2
+          movement: mist2
         - to: Lower Brick Ledge
           req: $grab
           movement: base
@@ -2756,11 +2790,9 @@ areas:
         - to: Passage Entrance
           req: Nanite_Mist and ^mode == 'drone'
           movement: mist1
-          price: 120  # ?
         - to: Passage Entrance
           req: $mist2 and ^mode == 'drone'
           movement: mist2
-          price: 60  # ?
         - to: Corner Platform
           req: Anuman
           movement: base
@@ -2971,14 +3003,12 @@ areas:
         - name: Break Through Wall with Mist
           to: Wall Left
           req: Nanite_Mist
-          price: 40
           canon: Siuna_Storage_Wall
           item: Siuna_Storage_Wall
           movement: mist1
         - name: Break Through Wall with Mist 2
           to: Wall Left
           req: $mist2
-          price: 40
           canon: Siuna_Storage_Wall
           item: Siuna_Storage_Wall
           movement: mist2
@@ -3014,14 +3044,12 @@ areas:
         - name: Break Through Wall with Mist
           to: Wall Right
           req: Nanite_Mist
-          price: 40
           canon: Siuna_Storage_Wall
           item: Siuna_Storage_Wall
           movement: mist1
         - name: Break Through Wall with Mist 2
           to: Wall Right
           req: $mist2
-          price: 40
           canon: Siuna_Storage_Wall
           item: Siuna_Storage_Wall
           movement: mist2
@@ -3220,14 +3248,12 @@ areas:
           req: ^mode == 'drone' and Nanite_Mist
           canon: Apocalypse_Seals_Wall
           item: Apocalypse_Seals_Wall
-          price: 40
           movement: mist1
         - name: Faster Mist Through Wall
           to: Inner Wall
           req: ^mode == 'drone' and $mist2
           canon: Apocalypse_Seals_Wall
           item: Apocalypse_Seals_Wall
-          price: 30
           movement: mist2
     - name: Inner Wall
       coord: [41.9, 15.6]
@@ -3392,11 +3418,9 @@ areas:
       exits:
         - to: Northwest Scaffold 2 West
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Northwest Scaffold 2 West
           req: $mist2
-          price: 40
           movement: mist2
 
     - name: Northwest Scaffold 2 West

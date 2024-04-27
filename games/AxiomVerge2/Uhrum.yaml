@@ -249,9 +249,15 @@ areas:
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Upper_Wall
           canon: Uhrum_West_Entrance_Upper_Wall
+          req: Nanite_Mist
+          to: Upper Wall East
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
           req: $mist2
           to: Upper Wall East
-          price: 20
+          movement: mist2
     - name: Upper Wall East
       coord: [20.45, 25.3]
       local:
@@ -277,9 +283,14 @@ areas:
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Upper_Wall
           canon: Uhrum_West_Entrance_Upper_Wall
+          req: Nanite_Mist
+          to: Upper Wall West
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_West_Entrance_Upper_Wall
+          canon: Uhrum_West_Entrance_Upper_Wall
           req: $mist2
           to: Upper Wall West
-          price: 20
           movement: mist2
     - name: Upper Fork
       coord: [20.55, 25.6]
@@ -292,8 +303,10 @@ areas:
           movement: base
           jumps: 1
         - to: Upper Wall East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Wall East
           req: $mist2
-          price: 30
           movement: mist2
     - name: East 26
       coord: [20.95, 25.8]
@@ -346,9 +359,14 @@ areas:
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
+          req: Nanite_Mist
+          to: Lower Wall East
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
           req: $mist2
           to: Lower Wall East
-          price: 40
           movement: mist2
     - name: Lower Wall East
       coord: [20.1, 26.8]
@@ -375,9 +393,14 @@ areas:
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
+          req: Nanite_Mist
+          to: Lower Wall West
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_West_Entrance_Lower_Wall
+          canon: Uhrum_West_Entrance_Lower_Wall
           req: $mist2
           to: Lower Wall West
-          price: 40
           movement: mist2
     - name: Lower Path Rock
       coord: [20.3, 26.9]
@@ -465,8 +488,10 @@ areas:
           req: $hover
           movement: base
         - to: Northwest Door
+          req: Nanite_Mist
+          movement: mist1
+        - to: Northwest Door
           req: $mist2
-          price: 40
           movement: mist2
     - name: Western Rock
       coord: [21.3, 25.0]
@@ -496,7 +521,7 @@ areas:
           movement: base
         - to: Giguna > Vertical Interchange > South
           req: $mist2
-          price: 60
+          movement: mist2
           tags: [ydoor]
     - name: Northwest Platform
       coord: [21.75, 24.7]
@@ -511,8 +536,10 @@ areas:
           movement: base
           jumps: 2
         - to: Northwest Door
+          req: Nanite_Mist
+          movement: mist1
+        - to: Northwest Door
           req: $mist2
-          price: 20
           movement: mist2
     - name: West Greenery
       coord: [22.2, 25.35]
@@ -715,8 +742,10 @@ areas:
           movement: base
           jumps: 1
         - to: Upper Rock East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Rock East
           req: $mist2
-          price: 20
           movement: mist2
     - name: East 25
       coord: [25.95, 24.75]
@@ -884,10 +913,15 @@ areas:
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
+          req: Nanite_Mist
+          to: Barrier East
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
           req: $mist2
           to: Barrier East
-          time: 1  # ?
-          price: 20
+          movement: mist2
     - name: Barrier East
       coord: [27.7, 23.4]
       local:
@@ -915,10 +949,15 @@ areas:
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
+          req: Nanite_Mist
+          to: Barrier West
+          movement: mist1
+        - name: Upgraded Mist through Wall
+          item: Uhrum_Waterfall_Wall
+          canon: Uhrum_Waterfall_Wall
           req: $mist2
           to: Barrier West
-          time: 1  # ?
-          price: 20
+          movement: mist2
     - name: East 24
       coord: [27.95, 23.8]
       local:

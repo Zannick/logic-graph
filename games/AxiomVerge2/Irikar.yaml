@@ -289,8 +289,13 @@ areas:
         - name: Mist into Wall
           to: Royal Storage in Wall
           item: Irikar_Royal_Storage_Wall
-          req: not Irikar_Royal_Storage_Wall and Mist_Upgrade
-          price: 20
+          req: not Irikar_Royal_Storage_Wall and Nanite_Mist
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist into Wall
+          to: Royal Storage in Wall
+          item: Irikar_Royal_Storage_Wall
+          req: not Irikar_Royal_Storage_Wall and $mist2
           movement: mist2
           tags: [event]
       actions:
@@ -450,8 +455,7 @@ areas:
           jumps: 1
         - to: East Platform
           req: $mist2
-          price: 60
-          time: 3
+          movement: mist2
     - name: Moving Platform Start
       coord: [12.3, 27.2]
       local:
@@ -556,9 +560,11 @@ areas:
           jumps: 2
       exits:
         - to: Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Ledge
           req: $mist2
-          price: 20
-          time: 2  # ?
+          movement: mist2
     - name: East 28
       coord: [13.95, 27.7]
       local:
@@ -858,10 +864,11 @@ areas:
           movement: base
           jumps: 2
         - to: Top Rooftop
+          req: Nanite_Mist
+          movement: mist1
+        - to: Top Rooftop
           req: $mist2
-          price: 20
-          movement: base
-          jumps: 1
+          movement: mist2
         - to: Boss Room > Upper Rooftops
           tags: [yshift]
     - name: East Mid-air

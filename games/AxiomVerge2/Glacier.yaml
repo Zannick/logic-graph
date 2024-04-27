@@ -56,11 +56,9 @@ areas:
           req: $hover
         - to: Upper Ledge
           req: Nanite_Mist
-          price: 60
           movement: mist1
         - to: Upper Ledge
           req: $mist2
-          price: 50
           movement: mist2
     - name: Upper Ledge
       coord: [43.0, 7.8]
@@ -496,8 +494,10 @@ areas:
       coord: [41.95, 12.8]
       exits:
         - to: East
+          req: Nanite_Mist
+          movement: mist1
+        - to: East
           req: $mist2
-          price: 150  # ?
           movement: mist2
     - name: Water Surface
       coord: [41.05, 12.9]
@@ -639,8 +639,10 @@ areas:
           jumps: 1
         - to: Grate Left
           req: Nanite_Mist
-          price: 40
-          movement: base
+          movement: mist1
+        - to: Grate Left
+          req: $mist2
+          movement: mist2
     - name: West Basin
       coord: [39.8, 13.4]
       local:
@@ -717,14 +719,12 @@ areas:
         - name: Mist Through
           to: Breakable Rock Right
           req: Nanite_Mist
-          price: 40
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
           movement: mist1
         - name: Mist Through Faster
           to: Breakable Rock Right
-          req: Nanite_Mist
-          price: 40
+          req: $mist2
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
           movement: mist2
@@ -746,14 +746,12 @@ areas:
         - name: Mist Through
           to: Breakable Rock Left
           req: Nanite_Mist
-          price: 40
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
           movement: mist1
         - name: Mist Through Faster
           to: Breakable Rock Left
-          req: Nanite_Mist
-          price: 40
+          req: $mist2
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
           movement: mist2
@@ -799,8 +797,10 @@ areas:
       exits:
         - to: Grate Right
           req: Nanite_Mist
-          price: 40
           movement: mist1
+        - to: Grate Right
+          req: $mist2
+          movement: mist2
 
 - name: Grid 39-40,7-9  # MARK: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
@@ -2016,11 +2016,9 @@ areas:
       exits:
         - to: Below Grate
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Below Grate
           req: $mist2
-          price: 30
           movement: mist2
     - name: Below Grate
       coord: [44.55, 10.5]
@@ -2162,11 +2160,9 @@ areas:
         - to: Portal Cage
           req: Nanite_Mist
           movement: mist1
-          price: 40
         - to: Portal Cage
           req: $mist2
           movement: mist2
-          price: 40
 
     - name: Lower Slope
       coord: [37.8, 15.3]
@@ -2179,9 +2175,11 @@ areas:
           movement: base
           jumps: 3
         - to: Grate Left
+          req: Nanite_Mist
+          movement: mist1
+        - to: Grate Left
           req: $mist2
           movement: mist2
-          price: 50
     - name: Lower Corner
       coord: [37.7, 15.6]
       local:
@@ -2222,11 +2220,9 @@ areas:
         - to: Grate Left
           req: Nanite_Mist
           movement: mist1
-          price: 40
         - to: Grate Left
           req: $mist2
           movement: mist2
-          price: 40
 
 - name: Hammond's End  # MARK: Hammond's End
   on_entry: $reset_old_area(^newpos)
@@ -2254,11 +2250,9 @@ areas:
       exits:
         - to: Upper Grate Left
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Upper Grate Left
           req: $mist2
-          price: 40
           movement: mist2
     - name: Upper Floor
       coord: [40.25, 9.8]
@@ -2425,11 +2419,9 @@ areas:
           jumps: 3
         - to: Lower Grate Left
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Lower Grate Left
           req: $mist2
-          price: 40
           movement: mist2
 
     - name: Lower Grate Left
@@ -2439,11 +2431,9 @@ areas:
       exits:
         - to: Lower Grate Right
           req: Nanite_Mist
-          price: 40
           movement: mist1
         - to: Lower Grate Right
           req: $mist2
-          price: 40
           movement: mist2
 
     - name: Switch from Ledge

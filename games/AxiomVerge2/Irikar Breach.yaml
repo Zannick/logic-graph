@@ -361,7 +361,11 @@ areas:
         - to: Four-way > South
           tags: [ydoor]
         - to: Pillar
-          req: $hover and Mist_Upgrade
+          req: $hover and Nanite_Mist
+          price: 24
+          movement: base
+        - to: Pillar
+          req: $hover and $mist2
           price: 20
           movement: base
     - name: Passage

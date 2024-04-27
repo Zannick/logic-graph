@@ -758,7 +758,13 @@ areas:
           to: Passage Cache
           item: Ebih_Wasteland_Passage_H
           canon: Ebih_Wasteland_Passage_H
-          req: ^mode == 'drone' and Mist_Upgrade
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist through Horizontal Passage
+          to: Passage Cache
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and $mist2
           movement: mist2
 
     - name: Passage Cache
@@ -786,7 +792,13 @@ areas:
           to: Passage East
           item: Ebih_Wasteland_Passage_H
           canon: Ebih_Wasteland_Passage_H
-          req: ^mode == 'drone' and Mist_Upgrade
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist through Horizontal Passage
+          to: Passage East
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and $mist2
           movement: mist2
     - name: Westward Hill
       coord: [16.45, 13.4]
@@ -973,14 +985,18 @@ areas:
       exits:
         - to: West 15
           req: Nanite_Mist
-          price: 30
+          movement: mist1
+        - to: West 15
+          req: $mist2
           movement: mist2
     - name: West 15
       coord: [13.05, 14.75]
       exits:
         - to: West Grate
           req: Nanite_Mist
-          price: 30
+          movement: mist1
+        - to: West Grate
+          req: $mist2
           movement: mist2
         - to: Helipad > East 15
           tags: [xshift]
@@ -1191,8 +1207,10 @@ areas:
         - to: Ledge
       exits:
         - to: Way Up High
+          req: Nanite_Mist
+          movement: mist1
+        - to: Way Up High
           req: $mist2
-          price: 100  # ?
           movement: mist2
     - name: West 7
       coord: [16.05, 6.8]
@@ -1695,8 +1713,10 @@ areas:
           jumps_down: [1, 0]
       exits:
         - to: Wall Top
-          req: Nanite_Mist and Mist_Upgrade
-          price: 70
+          req: Nanite_Mist
+          movement: mist1
+        - to: Wall Top
+          req: $mist2
           movement: mist2
     - name: Wall Bottom
       coord: [11.9, 16.7]
@@ -1712,9 +1732,11 @@ areas:
           req: $hover
           movement: base
         - to: Tablet Ledge
-          req: Nanite_Mist and Mist_Upgrade
-          price: 20
-          movement: base
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tablet Ledge
+          req: $mist2
+          movement: mist2
     - name: Tablet Ledge
       coord: [11.5, 16.7]
       local:
@@ -2048,9 +2070,15 @@ areas:
           to: Wall Secret
           item: Giguna_Dual_Path_Wall
           canon: Giguna_Dual_Path_Wall
-          req: ^mode == 'drone' and Mist_Upgrade
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist into Wall
+          to: Wall Secret
+          item: Giguna_Dual_Path_Wall
+          canon: Giguna_Dual_Path_Wall
+          req: ^mode == 'drone' and $mist2
           movement: mist2
-          price: 20  # ?
           tags: [event]
     - name: Wall Secret
       coord: [17.95, 17.75]
@@ -2244,8 +2272,13 @@ areas:
           item: Giguna_Boulder
           canon: Giguna_Boulder
           to: Rock Center
-          req: Nanite_Mist and Mist_Upgrade
-          price: 30
+          req: Nanite_Mist
+          movement: mist1
+        - name: Enter Rock as Upgraded Mist
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          to: Rock Center
+          req: $mist2
           movement: mist2
     - name: Rock Center
       coord: [15.55, 16.85]
@@ -2277,8 +2310,13 @@ areas:
           item: Giguna_Boulder
           canon: Giguna_Boulder
           to: Rock Center
-          req: Nanite_Mist and Mist_Upgrade
-          price: 30
+          req: Nanite_Mist
+          movement: mist1
+        - name: Enter Rock as Upgraded Mist
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          to: Rock Center
+          req: $mist2
           movement: mist2
     - name: West 17
       coord: [15.05, 16.6]
@@ -2598,7 +2636,11 @@ areas:
           req: $hover and $hook and ^_combo_entered
           time: 1.75  # ?
         - to: Hidden Passage West
-          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+          req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
+          price: 24
+          time: 1.75  # ?
+        - to: Hidden Passage West
+          req: ^mode == 'drone' and $mist2 and ^_combo_entered
           price: 20
           time: 1.5  # ?
 
@@ -2620,9 +2662,15 @@ areas:
           movement: base
           jumps: 1
         - to: Hidden Passage West
+          req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
+          price: 24
+          time: 1.4  # ?
+          movement: mist2
+        - to: Hidden Passage West
           req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
           price: 20
           time: 1.2  # ?
+          movement: mist2
       actions:
         - name: Open Door
           req: not ^_door_opened and $unlock2 and $range1
@@ -2673,9 +2721,11 @@ areas:
           req: $hook
           time: 1  # ?
         - to: Hidden Passage West
-          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+          req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
+          movement: mist1
+        - to: Hidden Passage West
+          req: ^mode == 'drone' and $mist2 and ^_combo_entered
           movement: mist2
-          price: 30
     - name: Arc Passage
       coord: [20.4, 15.6]
       local:

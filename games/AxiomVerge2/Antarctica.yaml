@@ -98,7 +98,10 @@ areas:
         - to: Building 1E > East Entry
           tags: [interior]
         - to: Building 2 Upper  # unrealistic, but possible with mist
-          req: Mist_Upgrade
+          req: Nanite_Mist
+          movement: mist1
+        - to: Building 2 Upper  # unrealistic, but possible with mist
+          req: $mist2
           movement: mist2
     - name: Save Point
       coord: [42, 1.8]
@@ -115,7 +118,10 @@ areas:
         - to: Building 2 > Entry
           tags: [interior]
         - to: Building 2 Upper  # unrealistic, but possible with mist
-          req: Mist_Upgrade
+          req: Nanite_Mist
+          movement: mist1
+        - to: Building 2 Upper  # unrealistic, but possible with mist
+          req: $mist2
           movement: mist2
     - name: Building 2 Upper
       coord: [41.3, 0.7]
