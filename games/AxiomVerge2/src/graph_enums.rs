@@ -1900,8 +1900,8 @@ pub enum SpotId {
     Glacier__Peak__Under_West_Cliff,
     Glacier__Peak__West_8,
     Glacier__Peak__West_Cliff,
-    Glacier__Revival__Above_Save_Point,
     Glacier__Revival__East_9,
+    Glacier__Revival__Just_Thrown,
     Glacier__Revival__Ledge,
     Glacier__Revival__Lower_East,
     Glacier__Revival__Mid_air,
@@ -5353,10 +5353,10 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Peak__West_8 => write!(f, "{}", "Glacier > Peak > West 8"),
             SpotId::Glacier__Peak__West_Cliff => write!(f, "{}", "Glacier > Peak > West Cliff"),
-            SpotId::Glacier__Revival__Above_Save_Point => {
-                write!(f, "{}", "Glacier > Revival > Above Save Point")
-            }
             SpotId::Glacier__Revival__East_9 => write!(f, "{}", "Glacier > Revival > East 9"),
+            SpotId::Glacier__Revival__Just_Thrown => {
+                write!(f, "{}", "Glacier > Revival > Just Thrown")
+            }
             SpotId::Glacier__Revival__Ledge => write!(f, "{}", "Glacier > Revival > Ledge"),
             SpotId::Glacier__Revival__Lower_East => {
                 write!(f, "{}", "Glacier > Revival > Lower East")
@@ -8790,10 +8790,8 @@ impl std::str::FromStr for SpotId {
             "Glacier > Peak > Under West Cliff" => Ok(SpotId::Glacier__Peak__Under_West_Cliff),
             "Glacier > Peak > West 8" => Ok(SpotId::Glacier__Peak__West_8),
             "Glacier > Peak > West Cliff" => Ok(SpotId::Glacier__Peak__West_Cliff),
-            "Glacier > Revival > Above Save Point" => {
-                Ok(SpotId::Glacier__Revival__Above_Save_Point)
-            }
             "Glacier > Revival > East 9" => Ok(SpotId::Glacier__Revival__East_9),
+            "Glacier > Revival > Just Thrown" => Ok(SpotId::Glacier__Revival__Just_Thrown),
             "Glacier > Revival > Ledge" => Ok(SpotId::Glacier__Revival__Ledge),
             "Glacier > Revival > Lower East" => Ok(SpotId::Glacier__Revival__Lower_East),
             "Glacier > Revival > Mid-air" => Ok(SpotId::Glacier__Revival__Mid_air),
@@ -11972,8 +11970,8 @@ pub enum ExitId {
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,
     Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,
-    Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
     Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
+    Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1,
     Glacier__Revival__Ledge__ex__West_9_1,
     Glacier__Revival__Ledge__ex__West_9_2,
     Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
@@ -13685,8 +13683,8 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (2)"),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),
-            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => write!(f, "{}", "Glacier > Revival > Above Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)"),
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),
+            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => write!(f, "{}", "Glacier > Revival > Just Thrown ==> Grid 39-40,7-9 > First Upper Platform (1)"),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (1)"),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => write!(f, "{}", "Glacier > Revival > Ledge ==> West 9 (2)"),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),
@@ -15403,8 +15401,8 @@ impl std::str::FromStr for ExitId {
             "Glacier > Peak > Under West Cliff ==> West Cliff (1)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1),
             "Glacier > Peak > Under West Cliff ==> West Cliff (2)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2),
             "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)" => Ok(ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1),
-            "Glacier > Revival > Above Save Point ==> Grid 39-40,7-9 > First Upper Platform (1)" => Ok(ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1),
             "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1),
+            "Glacier > Revival > Just Thrown ==> Grid 39-40,7-9 > First Upper Platform (1)" => Ok(ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1),
             "Glacier > Revival > Ledge ==> West 9 (1)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_1),
             "Glacier > Revival > Ledge ==> West 9 (2)" => Ok(ExitId::Glacier__Revival__Ledge__ex__West_9_2),
             "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1),
@@ -18285,18 +18283,18 @@ impl std::str::FromStr for RuleVictory {
 #[repr(u8)]
 pub enum RuleObjective {
     #[default]
-    Start,
+    Any,
+    Any,
     AllItems,
     AllUrns,
-    Any,
 }
 impl fmt::Display for RuleObjective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            RuleObjective::Start => write!(f, "{}", "Start"),
+            RuleObjective::Any => write!(f, "{}", "Any%"),
+            RuleObjective::Any => write!(f, "{}", "Any%"),
             RuleObjective::AllItems => write!(f, "{}", "All Items"),
             RuleObjective::AllUrns => write!(f, "{}", "All Urns"),
-            RuleObjective::Any => write!(f, "{}", "Any%"),
         }
     }
 }
@@ -18305,10 +18303,9 @@ impl std::str::FromStr for RuleObjective {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Start" => Ok(RuleObjective::Start),
+            "Any%" => Ok(RuleObjective::Any),
             "All Items" => Ok(RuleObjective::AllItems),
             "All Urns" => Ok(RuleObjective::AllUrns),
-            "Any%" => Ok(RuleObjective::Any),
             _ => Err(format!("Could not recognize as a RuleObjective: {}", s)),
         }
     }

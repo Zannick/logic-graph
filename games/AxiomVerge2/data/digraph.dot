@@ -1263,7 +1263,7 @@ digraph AxiomVerge2 {
         Glacier__Revival__Lower_East [label = "", pos = "125.85,-16.166667!"];
         Glacier__Revival__West_9 [label = "", pos = "123.15,-14.0!"];
         Glacier__Revival__Save_Point [label = "", pos = "124.5,-12.5!"];
-        Glacier__Revival__Above_Save_Point [label = "", pos = "124.5,-12.166667!"];
+        Glacier__Revival__Just_Thrown [label = "", pos = "124.5,-12.166667!"];
         Glacier__Revival__West_8 [label = "", pos = "123.15,-13.25!"];
         Glacier__Revival__Pillar [label = "", pos = "125.4,-12.333333!"];
         Glacier__Revival__Pillar_Step [label = "", pos = "125.7,-12.666667!"];
@@ -2793,7 +2793,7 @@ digraph AxiomVerge2 {
     Glacier__Revival__West_9 -> Glacier__Revival__Overhang;
     Glacier__Revival__Save_Point -> Glacier__Grid_39_40_7_9__First_Upper_Platform;
     Glacier__Revival__Save_Point -> Glacier__Revival__Pillar;
-    Glacier__Revival__Above_Save_Point -> Glacier__Grid_39_40_7_9__First_Upper_Platform;
+    Glacier__Revival__Just_Thrown -> Glacier__Grid_39_40_7_9__First_Upper_Platform;
     Glacier__Revival__West_8 -> Glacier__Grid_39_40_7_9__Upper_East;
     Glacier__Revival__Pillar -> Glacier__Dock_Outside__Upper_West_Hill;
     Glacier__Revival__Pillar_Step -> Glacier__Dock_Outside__Upper_West_Hill;
@@ -5101,6 +5101,7 @@ digraph AxiomVerge2 {
     Glacier__Revival__West_9 -> Glacier__Revival__Ledge;
     Glacier__Revival__Save_Point -> Glacier__Revival__West_8;
     Glacier__Revival__Save_Point -> Glacier__Revival__Mid_air;
+    Glacier__Revival__Just_Thrown -> Glacier__Revival__Save_Point;
     Glacier__Revival__West_8 -> Glacier__Revival__Save_Point;
     Glacier__Revival__Pillar -> Glacier__Revival__Save_Point;
     Glacier__Revival__Pillar_Step -> Glacier__Revival__Pillar;
@@ -5931,7 +5932,7 @@ digraph AxiomVerge2 {
     Glacier__Hammonds_End__Upper_Right_Pedestal -> Glacier__Hammonds_End__Upper_Right_Mid_air;
     Glacier__Hammonds_End__Upper_Right_Pedestal -> Glacier__Hammonds_End__Hammond;
     Glacier__Hammonds_End__Upper_Right_Mid_air -> Glacier__Hammonds_End__Corner;
-    Glacier__Revival__Save_Point -> Glacier__Revival__Above_Save_Point;
+    Glacier__Revival__Save_Point -> Glacier__Revival__Just_Thrown;
     Glacier_Breach__Angry_Lions__North -> Glacier_Breach__Angry_Lions__Second_Platform;
     Glacier_Breach__Angry_Lions__North -> Glacier_Breach__Angry_Lions__Top_Platform;
     Interior__Cave_Behind_Waterfall__Middle -> Interior__Cave_Behind_Waterfall__Top;

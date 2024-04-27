@@ -1169,7 +1169,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
-        | SpotId::Glacier__Revival__Above_Save_Point
+        | SpotId::Glacier__Revival__Just_Thrown
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
         | SpotId::Glacier__Revival__Pillar_Step
@@ -2871,7 +2871,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Revival__Lower_East
         | SpotId::Glacier__Revival__West_9
         | SpotId::Glacier__Revival__Save_Point
-        | SpotId::Glacier__Revival__Above_Save_Point
+        | SpotId::Glacier__Revival__Just_Thrown
         | SpotId::Glacier__Revival__West_8
         | SpotId::Glacier__Revival__Pillar
         | SpotId::Glacier__Revival__Pillar_Step
@@ -5436,8 +5436,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
-            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
+            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
@@ -6817,7 +6817,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -8219,7 +8219,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -10240,7 +10240,7 @@ impl world::Accessible for Action {
                     rules::explain_invoke_can_deploy_and_invoke_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, "Above Save Point"));
+                    edict.insert("dest", format!("{} ({})", dest, "Just Thrown"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -10633,7 +10633,7 @@ impl world::Action for Action {
                 SpotId::Glacier__Dock_Outside__Above_Ruins
             }
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
-                SpotId::Glacier__Revival__Above_Save_Point
+                SpotId::Glacier__Revival__Just_Thrown
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
                 SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air
@@ -12623,8 +12623,8 @@ static RAW_SPOTS: [SpotId; 1681] = [
     SpotId::Glacier__Peak__Under_West_Cliff,
     SpotId::Glacier__Peak__West_8,
     SpotId::Glacier__Peak__West_Cliff,
-    SpotId::Glacier__Revival__Above_Save_Point,
     SpotId::Glacier__Revival__East_9,
+    SpotId::Glacier__Revival__Just_Thrown,
     SpotId::Glacier__Revival__Ledge,
     SpotId::Glacier__Revival__Lower_East,
     SpotId::Glacier__Revival__Mid_air,
@@ -13688,7 +13688,7 @@ lazy_static! {
             end: SpotId::Glacier__Peak__West_Cliff.into_usize() + 1,
         },
         AreaId::Glacier__Revival => Range {
-            start: SpotId::Glacier__Revival__Above_Save_Point.into_usize(),
+            start: SpotId::Glacier__Revival__East_9.into_usize(),
             end: SpotId::Glacier__Revival__West_9.into_usize() + 1,
         },
         AreaId::Glacier__Sea_Burial => Range {
@@ -15412,7 +15412,7 @@ impl world::World for World {
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 | ExitId:: Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => SpotId::Glacier__Revival__West_9,
             ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 | ExitId:: Glacier__Revival__Save_Point__ex__Pillar_1 => SpotId::Glacier__Revival__Save_Point,
-            ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => SpotId::Glacier__Revival__Above_Save_Point,
+            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => SpotId::Glacier__Revival__Just_Thrown,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => SpotId::Glacier__Revival__West_8,
             ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar,
             ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar_Step,
@@ -15796,10 +15796,15 @@ impl world::World for World {
                     map.insert(Item::Escape, 1);
                 }
                 match self.rule_objective {
-                    RuleObjective::Start => {
-                        if !ctx.has(Item::Remote_Drone) {
-                            if !map.contains_key(&Item::Remote_Drone) {
-                                map.insert(Item::Remote_Drone, 1);
+                    RuleObjective::Any => {
+                        if !ctx.has(Item::Infect) {
+                            if !map.contains_key(&Item::Infect) {
+                                map.insert(Item::Infect, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Nanite_Mist) {
+                            if !map.contains_key(&Item::Nanite_Mist) {
+                                map.insert(Item::Nanite_Mist, 1);
                             }
                         }
                     }
@@ -16118,25 +16123,18 @@ impl world::World for World {
                             }
                         }
                     }
-                    RuleObjective::Any => {
-                        if !ctx.has(Item::Infect) {
-                            if !map.contains_key(&Item::Infect) {
-                                map.insert(Item::Infect, 1);
-                            }
-                        }
-                        if !ctx.has(Item::Nanite_Mist) {
-                            if !map.contains_key(&Item::Nanite_Mist) {
-                                map.insert(Item::Nanite_Mist, 1);
-                            }
-                        }
-                    }
                 }
             }
             RuleVictory::JustObjective => match self.rule_objective {
-                RuleObjective::Start => {
-                    if !ctx.has(Item::Remote_Drone) {
-                        if !map.contains_key(&Item::Remote_Drone) {
-                            map.insert(Item::Remote_Drone, 1);
+                RuleObjective::Any => {
+                    if !ctx.has(Item::Infect) {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Nanite_Mist) {
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
                         }
                     }
                 }
@@ -16452,18 +16450,6 @@ impl world::World for World {
                         }
                     }
                 }
-                RuleObjective::Any => {
-                    if !ctx.has(Item::Infect) {
-                        if !map.contains_key(&Item::Infect) {
-                            map.insert(Item::Infect, 1);
-                        }
-                    }
-                    if !ctx.has(Item::Nanite_Mist) {
-                        if !map.contains_key(&Item::Nanite_Mist) {
-                            map.insert(Item::Nanite_Mist, 1);
-                        }
-                    }
-                }
             },
             RuleVictory::Bench => {
                 if ctx.count(Item::Flask) < 6 {
@@ -16486,9 +16472,12 @@ impl world::World for World {
                 map.insert(Item::Apocalypse_Bomb, 1);
                 map.insert(Item::Escape, 1);
                 match self.rule_objective {
-                    RuleObjective::Start => {
-                        if !map.contains_key(&Item::Remote_Drone) {
-                            map.insert(Item::Remote_Drone, 1);
+                    RuleObjective::Any => {
+                        if !map.contains_key(&Item::Infect) {
+                            map.insert(Item::Infect, 1);
+                        }
+                        if !map.contains_key(&Item::Nanite_Mist) {
+                            map.insert(Item::Nanite_Mist, 1);
                         }
                     }
                     RuleObjective::AllItems => {
@@ -16683,20 +16672,15 @@ impl world::World for World {
                             map.insert(Item::Wall_Climb, 1);
                         }
                     }
-                    RuleObjective::Any => {
-                        if !map.contains_key(&Item::Infect) {
-                            map.insert(Item::Infect, 1);
-                        }
-                        if !map.contains_key(&Item::Nanite_Mist) {
-                            map.insert(Item::Nanite_Mist, 1);
-                        }
-                    }
                 }
             }
             RuleVictory::JustObjective => match self.rule_objective {
-                RuleObjective::Start => {
-                    if !map.contains_key(&Item::Remote_Drone) {
-                        map.insert(Item::Remote_Drone, 1);
+                RuleObjective::Any => {
+                    if !map.contains_key(&Item::Infect) {
+                        map.insert(Item::Infect, 1);
+                    }
+                    if !map.contains_key(&Item::Nanite_Mist) {
+                        map.insert(Item::Nanite_Mist, 1);
                     }
                 }
                 RuleObjective::AllItems => {
@@ -16889,14 +16873,6 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Wall_Climb) {
                         map.insert(Item::Wall_Climb, 1);
-                    }
-                }
-                RuleObjective::Any => {
-                    if !map.contains_key(&Item::Infect) {
-                        map.insert(Item::Infect, 1);
-                    }
-                    if !map.contains_key(&Item::Nanite_Mist) {
-                        map.insert(Item::Nanite_Mist, 1);
                     }
                 }
             },
@@ -17528,8 +17504,8 @@ impl world::World for World {
             | SpotId::Glacier__Ledge_Grab_Room__Pedestal
             | SpotId::Glacier__Peak__East_8
             | SpotId::Glacier__Peak__West_8
-            | SpotId::Glacier__Revival__Above_Save_Point
             | SpotId::Glacier__Revival__East_9
+            | SpotId::Glacier__Revival__Just_Thrown
             | SpotId::Glacier__Revival__Lower_East
             | SpotId::Glacier__Revival__Mid_air
             | SpotId::Glacier__Revival__Pillar
@@ -17732,6 +17708,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
             | SpotId::Menu__Kiengir_Map__Glacier_40_8
+            | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Hammond
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
@@ -17850,7 +17827,7 @@ impl World {
     fn unused_by_rules(&self, item: Item) -> bool {
         match self.rule_victory {
             RuleVictory::Default => match self.rule_objective {
-                RuleObjective::Start => {
+                RuleObjective::Any => {
                     matches!(
                         item,
                         Item::Aansur
@@ -17929,59 +17906,6 @@ impl World {
                     )
                 }
                 RuleObjective::AllUrns => {
-                    matches!(
-                        item,
-                        Item::Aansur
-                            | Item::Amagi_Stronghold_Left_Wall
-                            | Item::Beware_the_Patternmind
-                            | Item::Bounty_List
-                            | Item::Bronze_Axe
-                            | Item::Building_of_the_School
-                            | Item::Carnelian_Ring
-                            | Item::Commemorative_Speech
-                            | Item::Companies_Layoff
-                            | Item::Compass
-                            | Item::Dangerous_Ideas
-                            | Item::Dear_Ernest
-                            | Item::Destruction_Pogrom
-                            | Item::Double_Axe
-                            | Item::Dr_Gloria
-                            | Item::Drone_Melee_Damage_3
-                            | Item::Drone_Melee_Speed_3
-                            | Item::Eye_Ring
-                            | Item::Family_Tragedy
-                            | Item::Goodbye
-                            | Item::Health_Upgrade_5
-                            | Item::Heretics_Granddaughter
-                            | Item::Heretics_Tablet
-                            | Item::Infection_Speed_2
-                            | Item::Journal_2049_10_29
-                            | Item::Lament_for_Fools
-                            | Item::Letter_from_Trace
-                            | Item::Melee_Charge
-                            | Item::Melee_Damage_3
-                            | Item::Melee_Speed_3
-                            | Item::Nano_Lattice_2
-                            | Item::Nano_Points_3
-                            | Item::Notes_2053_02_27
-                            | Item::Plague_of_Thoughts
-                            | Item::Ranged_Damage_3
-                            | Item::Ranged_Speed_3
-                            | Item::Record_Losses
-                            | Item::Researchers_Missing
-                            | Item::Royal_Dagger
-                            | Item::Royal_Ring
-                            | Item::Storm_Bomb
-                            | Item::Suspension_Bridge
-                            | Item::Terminal_Breakthrough_1
-                            | Item::Terminal_Breakthrough_2
-                            | Item::The_Eternal_Arm
-                            | Item::The_Ideal_Kiengir
-                            | Item::Udusan
-                            | Item::Under_Siege
-                    )
-                }
-                RuleObjective::Any => {
                     matches!(
                         item,
                         Item::Aansur
@@ -18036,7 +17960,7 @@ impl World {
                 }
             },
             RuleVictory::JustObjective => match self.rule_objective {
-                RuleObjective::Start => {
+                RuleObjective::Any => {
                     matches!(
                         item,
                         Item::Aansur
@@ -18117,60 +18041,6 @@ impl World {
                     )
                 }
                 RuleObjective::AllUrns => {
-                    matches!(
-                        item,
-                        Item::Aansur
-                            | Item::Amagi_Stronghold_Left_Wall
-                            | Item::Beware_the_Patternmind
-                            | Item::Bounty_List
-                            | Item::Bronze_Axe
-                            | Item::Building_of_the_School
-                            | Item::Carnelian_Ring
-                            | Item::Commemorative_Speech
-                            | Item::Companies_Layoff
-                            | Item::Compass
-                            | Item::Dangerous_Ideas
-                            | Item::Dear_Ernest
-                            | Item::Destruction_Pogrom
-                            | Item::Double_Axe
-                            | Item::Dr_Gloria
-                            | Item::Drone_Melee_Damage_3
-                            | Item::Drone_Melee_Speed_3
-                            | Item::Escape
-                            | Item::Eye_Ring
-                            | Item::Family_Tragedy
-                            | Item::Goodbye
-                            | Item::Health_Upgrade_5
-                            | Item::Heretics_Granddaughter
-                            | Item::Heretics_Tablet
-                            | Item::Infection_Speed_2
-                            | Item::Journal_2049_10_29
-                            | Item::Lament_for_Fools
-                            | Item::Letter_from_Trace
-                            | Item::Melee_Charge
-                            | Item::Melee_Damage_3
-                            | Item::Melee_Speed_3
-                            | Item::Nano_Lattice_2
-                            | Item::Nano_Points_3
-                            | Item::Notes_2053_02_27
-                            | Item::Plague_of_Thoughts
-                            | Item::Ranged_Damage_3
-                            | Item::Ranged_Speed_3
-                            | Item::Record_Losses
-                            | Item::Researchers_Missing
-                            | Item::Royal_Dagger
-                            | Item::Royal_Ring
-                            | Item::Storm_Bomb
-                            | Item::Suspension_Bridge
-                            | Item::Terminal_Breakthrough_1
-                            | Item::Terminal_Breakthrough_2
-                            | Item::The_Eternal_Arm
-                            | Item::The_Ideal_Kiengir
-                            | Item::Udusan
-                            | Item::Under_Siege
-                    )
-                }
-                RuleObjective::Any => {
                     matches!(
                         item,
                         Item::Aansur
@@ -18286,7 +18156,7 @@ impl World {
         match self.rule_victory {
             RuleVictory::Default => {
                 let mut set = match self.rule_objective {
-                    RuleObjective::Start => {
+                    RuleObjective::Any => {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
@@ -18363,58 +18233,6 @@ impl World {
                         iset
                     }
                     RuleObjective::AllUrns => {
-                        let mut iset = FxHashSet::default();
-                        iset.insert(Item::Aansur);
-                        iset.insert(Item::Amagi_Stronghold_Left_Wall);
-                        iset.insert(Item::Beware_the_Patternmind);
-                        iset.insert(Item::Bounty_List);
-                        iset.insert(Item::Bronze_Axe);
-                        iset.insert(Item::Building_of_the_School);
-                        iset.insert(Item::Carnelian_Ring);
-                        iset.insert(Item::Commemorative_Speech);
-                        iset.insert(Item::Companies_Layoff);
-                        iset.insert(Item::Compass);
-                        iset.insert(Item::Dangerous_Ideas);
-                        iset.insert(Item::Dear_Ernest);
-                        iset.insert(Item::Destruction_Pogrom);
-                        iset.insert(Item::Double_Axe);
-                        iset.insert(Item::Dr_Gloria);
-                        iset.insert(Item::Drone_Melee_Damage_3);
-                        iset.insert(Item::Drone_Melee_Speed_3);
-                        iset.insert(Item::Eye_Ring);
-                        iset.insert(Item::Family_Tragedy);
-                        iset.insert(Item::Goodbye);
-                        iset.insert(Item::Health_Upgrade_5);
-                        iset.insert(Item::Heretics_Granddaughter);
-                        iset.insert(Item::Heretics_Tablet);
-                        iset.insert(Item::Infection_Speed_2);
-                        iset.insert(Item::Journal_2049_10_29);
-                        iset.insert(Item::Lament_for_Fools);
-                        iset.insert(Item::Letter_from_Trace);
-                        iset.insert(Item::Melee_Charge);
-                        iset.insert(Item::Melee_Damage_3);
-                        iset.insert(Item::Melee_Speed_3);
-                        iset.insert(Item::Nano_Lattice_2);
-                        iset.insert(Item::Nano_Points_3);
-                        iset.insert(Item::Notes_2053_02_27);
-                        iset.insert(Item::Plague_of_Thoughts);
-                        iset.insert(Item::Ranged_Damage_3);
-                        iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Researchers_Missing);
-                        iset.insert(Item::Royal_Dagger);
-                        iset.insert(Item::Royal_Ring);
-                        iset.insert(Item::Storm_Bomb);
-                        iset.insert(Item::Suspension_Bridge);
-                        iset.insert(Item::Terminal_Breakthrough_1);
-                        iset.insert(Item::Terminal_Breakthrough_2);
-                        iset.insert(Item::The_Eternal_Arm);
-                        iset.insert(Item::The_Ideal_Kiengir);
-                        iset.insert(Item::Udusan);
-                        iset.insert(Item::Under_Siege);
-                        iset
-                    }
-                    RuleObjective::Any => {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
@@ -18471,7 +18289,7 @@ impl World {
             }
             RuleVictory::JustObjective => {
                 let mut set = match self.rule_objective {
-                    RuleObjective::Start => {
+                    RuleObjective::Any => {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
@@ -18550,59 +18368,6 @@ impl World {
                         iset
                     }
                     RuleObjective::AllUrns => {
-                        let mut iset = FxHashSet::default();
-                        iset.insert(Item::Aansur);
-                        iset.insert(Item::Amagi_Stronghold_Left_Wall);
-                        iset.insert(Item::Beware_the_Patternmind);
-                        iset.insert(Item::Bounty_List);
-                        iset.insert(Item::Bronze_Axe);
-                        iset.insert(Item::Building_of_the_School);
-                        iset.insert(Item::Carnelian_Ring);
-                        iset.insert(Item::Commemorative_Speech);
-                        iset.insert(Item::Companies_Layoff);
-                        iset.insert(Item::Compass);
-                        iset.insert(Item::Dangerous_Ideas);
-                        iset.insert(Item::Dear_Ernest);
-                        iset.insert(Item::Destruction_Pogrom);
-                        iset.insert(Item::Double_Axe);
-                        iset.insert(Item::Dr_Gloria);
-                        iset.insert(Item::Drone_Melee_Damage_3);
-                        iset.insert(Item::Drone_Melee_Speed_3);
-                        iset.insert(Item::Escape);
-                        iset.insert(Item::Eye_Ring);
-                        iset.insert(Item::Family_Tragedy);
-                        iset.insert(Item::Goodbye);
-                        iset.insert(Item::Health_Upgrade_5);
-                        iset.insert(Item::Heretics_Granddaughter);
-                        iset.insert(Item::Heretics_Tablet);
-                        iset.insert(Item::Infection_Speed_2);
-                        iset.insert(Item::Journal_2049_10_29);
-                        iset.insert(Item::Lament_for_Fools);
-                        iset.insert(Item::Letter_from_Trace);
-                        iset.insert(Item::Melee_Charge);
-                        iset.insert(Item::Melee_Damage_3);
-                        iset.insert(Item::Melee_Speed_3);
-                        iset.insert(Item::Nano_Lattice_2);
-                        iset.insert(Item::Nano_Points_3);
-                        iset.insert(Item::Notes_2053_02_27);
-                        iset.insert(Item::Plague_of_Thoughts);
-                        iset.insert(Item::Ranged_Damage_3);
-                        iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Record_Losses);
-                        iset.insert(Item::Researchers_Missing);
-                        iset.insert(Item::Royal_Dagger);
-                        iset.insert(Item::Royal_Ring);
-                        iset.insert(Item::Storm_Bomb);
-                        iset.insert(Item::Suspension_Bridge);
-                        iset.insert(Item::Terminal_Breakthrough_1);
-                        iset.insert(Item::Terminal_Breakthrough_2);
-                        iset.insert(Item::The_Eternal_Arm);
-                        iset.insert(Item::The_Ideal_Kiengir);
-                        iset.insert(Item::Udusan);
-                        iset.insert(Item::Under_Siege);
-                        iset
-                    }
-                    RuleObjective::Any => {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
@@ -29490,8 +29255,8 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 => Exit {
-            id: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1,
+        ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => Exit {
+            id: ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1,
             time: 2500,
             dest: SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
             price: Currency::Free,
@@ -48555,14 +48320,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Revival__Above_Save_Point => Spot {
-            id: SpotId::Glacier__Revival__Above_Save_Point,
+        SpotId::Glacier__Revival__Just_Thrown => Spot {
+            id: SpotId::Glacier__Revival__Just_Thrown,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize(),
-                end: ExitId::Glacier__Revival__Above_Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize() + 1,
+                start: ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize(),
+                end: ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

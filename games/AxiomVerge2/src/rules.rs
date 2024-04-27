@@ -51,10 +51,6 @@ pub fn access___invoke_objective(ctx: &Context, world: &graph::World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
 }
-pub fn access___remote_drone(ctx: &Context, world: &graph::World) -> bool {
-    // [Remote_Drone]
-    ctx.has(Item::Remote_Drone)
-}
 pub fn access___remote_drone_flask__6(ctx: &Context, world: &graph::World) -> bool {
     // [Remote_Drone, Flask{6}]
     ctx.has(Item::Remote_Drone) && ctx.count(Item::Flask) >= 6
@@ -3153,23 +3149,6 @@ pub fn explain___invoke_objective(
     {
         let mut refs = Vec::new();
         let mut h = rexplain__objective!(ctx, world, edict);
-        refs.append(&mut h.1);
-        (h.0, refs)
-    }
-}
-pub fn explain___remote_drone(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // [Remote_Drone]
-    {
-        let mut refs = Vec::new();
-        let mut h = {
-            let h = ctx.has(Item::Remote_Drone);
-            edict.insert("Remote_Drone", format!("{}", h));
-            (h, vec!["Remote_Drone"])
-        };
         refs.append(&mut h.1);
         (h.0, refs)
     }
@@ -12125,17 +12104,6 @@ pub fn observe_access___invoke_objective(
 ) -> bool {
     // [$objective]
     robserve__objective!(ctx, world, full_obs)
-}
-pub fn observe_access___remote_drone(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // [Remote_Drone]
-    ({
-        full_obs.observe_remote_drone();
-        ctx.has(Item::Remote_Drone)
-    })
 }
 pub fn observe_access___remote_drone_flask__6(
     ctx: &Context,

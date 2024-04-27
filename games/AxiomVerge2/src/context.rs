@@ -1305,8 +1305,8 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Glacier_Breach__West_Save__West_11 => SpotId::Glacier_Breach__West_Save__Save_Point,
         SpotId::Glacier_Breach__West_Save__West_Ledge => SpotId::Glacier_Breach__West_Save__Save_Point,
         SpotId::Glacier_Breach__West_Save__West_Nub => SpotId::Glacier_Breach__West_Save__Save_Point,
-        SpotId::Glacier__Revival__Above_Save_Point => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__East_9 => SpotId::Glacier__Revival__Save_Point,
+        SpotId::Glacier__Revival__Just_Thrown => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Ledge => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Lower_East => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Mid_air => SpotId::Glacier__Revival__Save_Point,
@@ -1522,6 +1522,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Glacier__Crystals__Lower_Corner => SpotId::Menu__Kiengir_Map__Breach_Attractor,
         SpotId::Glacier__Crystals__Lower_Slope => SpotId::Menu__Kiengir_Map__Breach_Attractor,
         SpotId::Glacier__Crystals__Portal_Stand => SpotId::Menu__Kiengir_Map__Breach_Attractor,
+        SpotId::Glacier__Dock_Outside__Cave_Treasure => SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
         SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform => SpotId::Menu__Kiengir_Map__Glacier_40_8,
         SpotId::Glacier__Grid_39_40_7_9__Upper_East => SpotId::Menu__Kiengir_Map__Glacier_40_8,
         SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding => SpotId::Menu__Kiengir_Map__Glacier_40_8,
@@ -1532,7 +1533,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Glacier__Hammonds_End__Lower_Pedestal_West => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air => SpotId::Menu__Kiengir_Map__Hammond,
-        SpotId::Glacier__Revival__Above_Save_Point => SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        SpotId::Glacier__Revival__Just_Thrown => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Mid_air => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Pillar => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Pillar_Step => SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -6506,7 +6507,7 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GLACIER__HAMMONDS_END__HAMMOND);
 
                 }
-                SpotId::Glacier__Revival__Above_Save_Point => {
+                SpotId::Glacier__Revival__Just_Thrown => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
 
                 }
