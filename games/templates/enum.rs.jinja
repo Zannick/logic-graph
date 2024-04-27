@@ -4,10 +4,10 @@
 pub enum {{ name }} {
 %% if default or default_value
     #[default]
-    {{ default_value|construct_id|camelize if camelize else default_value }},
+    {{ default_value|construct_id|camelize if camelize and default_value else default_value }},
 %% endif
 %% for v in values
-%% if (v.id or v|construct_id) != default_value
+%% if not default_value or (v.id or v|construct_id) != default_value|construct_id
     {{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }},
 %% endif
 %% endfor
@@ -19,7 +19,7 @@ impl fmt::Display for {{ name }} {
             {{ name }}::{{ default_value|construct_id|camelize if camelize else default_value }} => write!(f, "{}", "{{ default_value }}"),
 %% endif
 %% for v in values
-%% if (v.id or v|construct_id) != default_value
+%% if not default_value or (v.id or v|construct_id) != default_value|construct_id
             {{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
 %% endif
 %% endfor

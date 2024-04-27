@@ -18497,14 +18497,12 @@ impl std::str::FromStr for RuleVictory {
 pub enum RuleObjective {
     #[default]
     Any,
-    Any,
     AllItems,
     AllUrns,
 }
 impl fmt::Display for RuleObjective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            RuleObjective::Any => write!(f, "{}", "Any%"),
             RuleObjective::Any => write!(f, "{}", "Any%"),
             RuleObjective::AllItems => write!(f, "{}", "All Items"),
             RuleObjective::AllUrns => write!(f, "{}", "All Urns"),
