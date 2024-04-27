@@ -853,7 +853,7 @@ areas:
       local:
         - to: Bridge Upper Ledge
       exits:
-        - to: East Bridge > East 24
+        - to: East Bridge > East 23
           tags: [xshift]
         - to: High Ledge
           req: $hook or $hover

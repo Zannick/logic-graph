@@ -1923,7 +1923,7 @@ digraph AxiomVerge2 {
     Annuna__Sniper_Valley__Bridge_End -> Annuna__Sniper_Valley__Bridge_Lower_Ledge;
     Annuna__Sniper_Valley__East -> Annuna__Factory_Entrance__West;
     Annuna__Sniper_Valley__West_23 -> Annuna__Sniper_Valley__Cavern_Outer_Rock_West;
-    Annuna__Sniper_Valley__West_23 -> Annuna__East_Bridge__East_24;
+    Annuna__Sniper_Valley__West_23 -> Annuna__East_Bridge__East_23;
     Annuna__Sniper_Valley__West_23 -> Annuna__Sniper_Valley__High_Ledge;
     Annuna__Sniper_Valley__West_24 -> Annuna__East_Bridge__East_24;
     Annuna__Sniper_Valley__Bridge_Upper_Middle -> Annuna__Sniper_Valley__West_24;
