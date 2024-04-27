@@ -85,6 +85,7 @@ exit_movements:  # MARK: exit_movements
     x: .75
   # TODO: does water affect this?
   mist1:
+    ignore_base: true
     x: .1425  # ?
     y: .25
     # Actual price is 30/sec with no base, but we want a buffer
@@ -92,6 +93,7 @@ exit_movements:  # MARK: exit_movements
     price_per_sec: 33
     base_price: 5
   mist2:
+    ignore_base: true
     # roughly .4 at a diagonal...
     x: .285
     y: .5
@@ -101,6 +103,7 @@ exit_movements:  # MARK: exit_movements
     base_price: 5
     # it takes ~.6 seconds to exit form (though you might use that to keep moving)
   platform:
+    ignore_base: true
     x: .138
     # y: .3  ?  TODO: Re-measure more accurately
     # technically uses xy (ortho) movement but x!=y

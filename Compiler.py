@@ -461,8 +461,9 @@ class GameLogic(object):
                     if exit['movement'] == 'base':
                         exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
                     elif (m := exit['movement']) in self.all_movements:
-                        exit['time'] = self.movement_time([m], base, abs(tx - sx), ty - sy, jumps, jumps_down)
                         mvmt = self.all_movements[m]
+                        exit['time'] = self.movement_time([m], None if mvmt.get('ignore_base') else base,
+                                                          abs(tx - sx), ty - sy, jumps, jumps_down)
                         if 'price' not in exit and 'price_per_sec' in mvmt:
                             exit['price'] = int(math.ceil(mvmt['price_per_sec'] * exit['time'] + mvmt.get('base_price', 0)))
                             if costs := mvmt.get('costs'):
@@ -476,7 +477,7 @@ class GameLogic(object):
                         self._errors.append(f'Unrecognized movement type in exit {exit["fullname"]}: {m!r}')
                         continue
                     if exit['time'] is None:
-                        self._errors.append(f'Unable to determine movement time for exit {exit["fullname"]}: missing jumps?')
+                        self._errors.append(f'Unable to determine movement time for exit {exit["fullname"]} with movement {m!r}: missing jumps?')
 
 
     def process_times(self):
@@ -758,11 +759,13 @@ class GameLogic(object):
         times = []
         xtimes = []
         ytimes = []
-        defallt = base.get('fall', 0)
-        dejumpt = base.get('jump', 0)
-        dejumpdownt = base.get('jump_down', 0)
+        defallt = base.get('fall', 0) if base else None
+        dejumpt = base.get('jump', 0) if base else None
+        dejumpdownt = base.get('jump_down', 0) if base else None
         mp = [(m, self.all_movements[m]) for m in mset]
-        for m, mvmt in mp + [('base', base)]:
+        if base:
+            mp.append(('base', base))
+        for m, mvmt in mp:
             # TODO: This is all cacheable (per pair of spots, per movement type, per pair of points)
             # instead of calculating the times lists for a,b for m, once per powerset of movements
             if s := mvmt.get('free'):
@@ -778,13 +781,18 @@ class GameLogic(object):
                 ytimes.append(abs(b) / sy)
             if sfall := mvmt.get('fall', defallt):
                 # fall speed must be the same direction as "down"
-                if (t := b / sfall) > 0:
-                    t += jumps_down * mvmt.get('jump_down', dejumpdownt)
+                if (t := b / sfall) > 0 and (jd := mvmt.get('jump_down', dejumpdownt)):
+                    t += jumps_down * jd
                     ytimes.append(t)
                 elif (jumps and t < 0 and (jmvmt is None or m == jmvmt)
                         and (sjump := mvmt.get('jump', dejumpt))):
                     # Direction is negative but jumps is just time taken
                     ytimes.append(jumps * sjump)
+            # An exit movement (eg) may not have a fall speed
+            elif (jumps and (jmvmt is None or m == jmvmt)
+                    and (sjump := mvmt.get('jump', dejumpt))):
+                # Direction is negative but jumps is just time taken
+                ytimes.append(jumps * sjump)
         if xtimes and ytimes:
             times.append(max(min(xtimes), min(ytimes)))
         elif xtimes and b == 0:

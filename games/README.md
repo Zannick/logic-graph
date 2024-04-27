@@ -147,6 +147,8 @@ Any field defined in that default movement is implicitly available for other mov
 
 The availability of non-base movements must be evaluated during the search, and thus having a large number of them can negatively affect analyzer performance.
 
+Lastly, *Exit movements* are movements that are only used explicitly by **Exits** and **Hybrids**; they do not define **req**. Here you can define movements that ignore default movement values by setting **ignore_base** to `true`.
+
 ### Warps
 
 Warps are always defined globally in `Game.yaml` and are available from any **Spot** (though they can be restricted using **requirements**). They are defined as a dictionary keyed on their **name** and may have the following fields:

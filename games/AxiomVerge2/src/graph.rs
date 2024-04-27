@@ -21579,9 +21579,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => Exit {
             id: ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1,
-            time: 450,
+            time: 701,
             dest: SpotId::Amagi_Breach__East_Entrance__Grate_Left,
-            price: Currency::Energy(20),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => Exit {
@@ -21600,9 +21600,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => Exit {
             id: ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1,
-            time: 450,
+            time: 701,
             dest: SpotId::Amagi_Breach__East_Entrance__Grate_Right,
-            price: Currency::Energy(20),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => Exit {
@@ -21936,9 +21936,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2 => Exit {
             id: ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2,
-            time: 526,
+            time: 1052,
             dest: SpotId::Annuna__Mirror_Match__Staircase,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_3 => Exit {
@@ -21957,9 +21957,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => Exit {
             id: ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2,
-            time: 526,
+            time: 1052,
             dest: SpotId::Annuna__Mirror_Match__Eastward,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_3 => Exit {
@@ -22545,9 +22545,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => Exit {
             id: ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1,
-            time: 701,
+            time: 1403,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: None,
         },
         ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_2 => Exit {
@@ -22587,9 +22587,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => Exit {
             id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
-            time: 3684,
+            time: 7368,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
-            price: Currency::Energy(127),
+            price: Currency::Energy(249),
             loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall => Exit {
@@ -22615,9 +22615,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => Exit {
             id: ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
-            time: 3684,
+            time: 7368,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
-            price: Currency::Energy(127),
+            price: Currency::Energy(249),
             loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => Exit {
@@ -22636,9 +22636,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => Exit {
             id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
-            time: 1052,
+            time: 2105,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
-            price: Currency::Energy(40),
+            price: Currency::Energy(75),
             loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall => Exit {
@@ -22657,9 +22657,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => Exit {
             id: ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
-            time: 1052,
+            time: 2105,
             dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
-            price: Currency::Energy(40),
+            price: Currency::Energy(75),
             loc_id: Some(LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
         },
         ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => Exit {
@@ -23126,9 +23126,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => Exit {
             id: ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Factory_Access__Grate_Left,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_2 => Exit {
@@ -23196,9 +23196,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_1 => Exit {
             id: ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Factory_Access__East_22,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_2 => Exit {
@@ -23518,9 +23518,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => Exit {
             id: ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1,
-            time: 701,
+            time: 1403,
             dest: SpotId::Annuna__Lamassu__East_16,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_2 => Exit {
@@ -23539,9 +23539,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => Exit {
             id: ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1,
-            time: 701,
+            time: 1403,
             dest: SpotId::Annuna__Lamassu__East_16,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_2 => Exit {
@@ -23560,16 +23560,16 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => Exit {
             id: ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1,
-            time: 701,
+            time: 1403,
             dest: SpotId::Annuna__Lamassu__Flat_Ground,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => Exit {
             id: ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1,
-            time: 701,
+            time: 1403,
             dest: SpotId::Annuna__Lamassu__Above_Flat_Ground,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => Exit {
@@ -23602,16 +23602,16 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => Exit {
             id: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1,
-            time: 701,
+            time: 1600,
             dest: SpotId::Annuna__Lamassu__East_16,
-            price: Currency::Energy(29),
+            price: Currency::Energy(58),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_2 => Exit {
             id: ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_2,
-            time: 701,
+            time: 800,
             dest: SpotId::Annuna__Lamassu__East_16,
-            price: Currency::Energy(29),
+            price: Currency::Energy(32),
             loc_id: None,
         },
         ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => Exit {
@@ -24001,9 +24001,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => Exit {
             id: ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1,
-            time: 2599,
+            time: 3157,
             dest: SpotId::Annuna__Egg_Room__Passage_Entrance,
-            price: Currency::Energy(91),
+            price: Currency::Energy(110),
             loc_id: None,
         },
         ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_2 => Exit {
@@ -24169,9 +24169,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => Exit {
             id: ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Siuna_Storage__Wall_Left,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
         },
         ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => Exit {
@@ -24197,9 +24197,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => Exit {
             id: ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Siuna_Storage__Wall_Right,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
         },
         ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => Exit {
@@ -24365,9 +24365,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => Exit {
             id: ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Seals__Inner_Wall,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
         },
         ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => Exit {
@@ -24554,9 +24554,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => Exit {
             id: ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Annuna__Apocalypse__Northwest_Scaffold_2_West,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => Exit {
@@ -24687,9 +24687,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1 => Exit {
             id: ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1,
-            time: 4035,
+            time: 8070,
             dest: SpotId::Antarctica__East__Building_2_Upper,
-            price: Currency::Energy(139),
+            price: Currency::Energy(272),
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_2 => Exit {
@@ -25233,9 +25233,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => Exit {
             id: ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1,
-            time: 3000,
+            time: 3508,
             dest: SpotId::Ebih__Waterfall__Lower_West_Tree,
-            price: Currency::Energy(104),
+            price: Currency::Energy(121),
             loc_id: None,
         },
         ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_2 => Exit {
@@ -25254,9 +25254,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => Exit {
             id: ExitId::Ebih__Waterfall__Wall_Right__Break_Through_Wall,
-            time: 701,
+            time: 1403,
             dest: SpotId::Ebih__Waterfall__Wall_Left,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: Some(LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall),
         },
         ExitId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall => Exit {
@@ -25275,9 +25275,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => Exit {
             id: ExitId::Ebih__Waterfall__Wall_Left__Break_Through_Wall,
-            time: 701,
+            time: 1403,
             dest: SpotId::Ebih__Waterfall__Wall_Right,
-            price: Currency::Energy(29),
+            price: Currency::Energy(52),
             loc_id: Some(LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall),
         },
         ExitId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall => Exit {
@@ -27256,9 +27256,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => Exit {
             id: ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
-            time: 4210,
+            time: 8421,
             dest: SpotId::Giguna__Wasteland__Passage_Cache,
-            price: Currency::Energy(144),
+            price: Currency::Energy(283),
             loc_id: Some(LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
         },
         ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => Exit {
@@ -27298,9 +27298,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => Exit {
             id: ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
-            time: 4210,
+            time: 8421,
             dest: SpotId::Giguna__Wasteland__Passage_East,
-            price: Currency::Energy(144),
+            price: Currency::Energy(283),
             loc_id: Some(LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
         },
         ExitId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => Exit {
@@ -27417,9 +27417,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1 => Exit {
             id: ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Giguna__Giguna_Base__West_15,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_2 => Exit {
@@ -27431,9 +27431,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 => Exit {
             id: ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Giguna__Giguna_Base__West_Grate,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_2 => Exit {
@@ -27851,9 +27851,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => Exit {
             id: ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1,
-            time: 2456,
+            time: 4912,
             dest: SpotId::Giguna__Helipad__Wall_Top,
-            price: Currency::Energy(87),
+            price: Currency::Energy(168),
             loc_id: None,
         },
         ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => Exit {
@@ -27872,9 +27872,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => Exit {
             id: ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2,
-            time: 350,
+            time: 701,
             dest: SpotId::Giguna__Helipad__Tablet_Ledge,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_3 => Exit {
@@ -28047,9 +28047,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => Exit {
             id: ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
-            time: 350,
+            time: 701,
             dest: SpotId::Giguna__Dual_Path__Wall_Secret,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
         },
         ExitId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => Exit {
@@ -28187,9 +28187,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => Exit {
             id: ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
-            time: 526,
+            time: 1052,
             dest: SpotId::Giguna__Hard_Rock__Rock_Center,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
         },
         ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist => Exit {
@@ -28208,9 +28208,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => Exit {
             id: ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
-            time: 526,
+            time: 1052,
             dest: SpotId::Giguna__Hard_Rock__Rock_Center,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
         },
         ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist => Exit {
@@ -29125,9 +29125,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1,
-            time: 877,
+            time: 1754,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_West,
-            price: Currency::Energy(34),
+            price: Currency::Energy(63),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2 => Exit {
@@ -29139,37 +29139,37 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1,
-            time: 701,
+            time: 1600,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
-            price: Currency::Energy(29),
+            price: Currency::Energy(58),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_2,
-            time: 701,
+            time: 800,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Corner,
-            price: Currency::Energy(29),
+            price: Currency::Energy(32),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1,
-            time: 526,
+            time: 1799,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
-            price: Currency::Energy(23),
+            price: Currency::Energy(65),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_2,
-            time: 526,
+            time: 899,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
-            price: Currency::Energy(23),
+            price: Currency::Energy(35),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1,
-            time: 526,
+            time: 1052,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_East,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_2 => Exit {
@@ -29216,9 +29216,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1,
-            time: 877,
+            time: 1754,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
-            price: Currency::Energy(34),
+            price: Currency::Energy(63),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_2 => Exit {
@@ -29237,9 +29237,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => Exit {
             id: ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1,
-            time: 526,
+            time: 1052,
             dest: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_2 => Exit {
@@ -29993,9 +29993,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => Exit {
             id: ExitId::Glacier__The_Big_Drop__West_14__Mist_Through,
-            time: 526,
+            time: 1052,
             dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Glacier__The_Big_Drop__West_14__Mist_Through),
         },
         ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => Exit {
@@ -30014,9 +30014,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => Exit {
             id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
-            time: 526,
+            time: 1052,
             dest: SpotId::Glacier__The_Big_Drop__West_14,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
         },
         ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => Exit {
@@ -30077,9 +30077,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => Exit {
             id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1,
-            time: 450,
+            time: 701,
             dest: SpotId::Glacier__Sea_Burial__Grate_Left,
-            price: Currency::Energy(20),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2 => Exit {
@@ -30133,9 +30133,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => Exit {
             id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
-            time: 563,
+            time: 877,
             dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
-            price: Currency::Energy(24),
+            price: Currency::Energy(34),
             loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
         },
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => Exit {
@@ -30154,9 +30154,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => Exit {
             id: ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
-            time: 563,
+            time: 877,
             dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
-            price: Currency::Energy(24),
+            price: Currency::Energy(34),
             loc_id: Some(LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
         },
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => Exit {
@@ -30182,9 +30182,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => Exit {
             id: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1,
-            time: 450,
+            time: 701,
             dest: SpotId::Glacier__Sea_Burial__Grate_Right,
-            price: Currency::Energy(20),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2 => Exit {
@@ -31085,16 +31085,16 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => Exit {
             id: ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1,
-            time: 300,
+            time: 1200,
             dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
-            price: Currency::Energy(15),
+            price: Currency::Energy(45),
             loc_id: None,
         },
         ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_2 => Exit {
             id: ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_2,
-            time: 300,
+            time: 600,
             dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
-            price: Currency::Energy(15),
+            price: Currency::Energy(25),
             loc_id: None,
         },
         ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => Exit {
@@ -31197,9 +31197,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => Exit {
             id: ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Glacier__Crystals__Portal_Cage,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_2 => Exit {
@@ -31246,9 +31246,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => Exit {
             id: ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Glacier__Crystals__Grate_Left,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_2 => Exit {
@@ -31267,9 +31267,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => Exit {
             id: ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1,
-            time: 526,
+            time: 1052,
             dest: SpotId::Glacier__Hammonds_End__Upper_Grate_Left,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: None,
         },
         ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_2 => Exit {
@@ -31337,9 +31337,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => Exit {
             id: ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_2 => Exit {
@@ -31351,9 +31351,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => Exit {
             id: ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1,
-            time: 350,
+            time: 701,
             dest: SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: None,
         },
         ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_2 => Exit {
@@ -31953,9 +31953,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => Exit {
             id: ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
-            time: 350,
+            time: 701,
             dest: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
         },
         ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => Exit {
@@ -32275,9 +32275,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => Exit {
             id: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2,
-            time: 1403,
+            time: 2807,
             dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
-            price: Currency::Energy(52),
+            price: Currency::Energy(98),
             loc_id: None,
         },
         ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_3 => Exit {
@@ -32863,9 +32863,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
-            time: 526,
+            time: 1052,
             dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
         },
         ExitId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => Exit {
@@ -32898,9 +32898,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
-            time: 526,
+            time: 1052,
             dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
-            price: Currency::Energy(23),
+            price: Currency::Energy(40),
             loc_id: Some(LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
         },
         ExitId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => Exit {
@@ -32982,9 +32982,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
-            time: 877,
+            time: 1754,
             dest: SpotId::Uhrum__West_Entrance__Lower_Wall_East,
-            price: Currency::Energy(34),
+            price: Currency::Energy(63),
             loc_id: Some(LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
         },
         ExitId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall => Exit {
@@ -33017,9 +33017,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
-            time: 877,
+            time: 1754,
             dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
-            price: Currency::Energy(34),
+            price: Currency::Energy(63),
             loc_id: Some(LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
         },
         ExitId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => Exit {
@@ -33101,9 +33101,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => Exit {
             id: ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1,
-            time: 1600,
+            time: 2807,
             dest: SpotId::Uhrum__Siege_Corridor__Northwest_Door,
-            price: Currency::Energy(58),
+            price: Currency::Energy(98),
             loc_id: None,
         },
         ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_2 => Exit {
@@ -33409,9 +33409,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
-            time: 350,
+            time: 701,
             dest: SpotId::Uhrum__Waterfalls__Barrier_East,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
         },
         ExitId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall => Exit {
@@ -33451,9 +33451,9 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => Exit {
             id: ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
-            time: 350,
+            time: 701,
             dest: SpotId::Uhrum__Waterfalls__Barrier_West,
-            price: Currency::Energy(17),
+            price: Currency::Energy(29),
             loc_id: Some(LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
         },
         ExitId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => Exit {
