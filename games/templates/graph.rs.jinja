@@ -887,7 +887,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::{{ loc.id }},
             canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
             item: Item::{{ loc.item or 'None' }},
-            {{ price(loc.price, loc.costs) }}
+            {% if loc.to is defined %}{{ price(loc.item_price, loc.item_costs) }}{% else %}{{ price(loc.price, loc.costs) }}{% endif %}
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
             skippable: false,
@@ -903,7 +903,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::{{ ex.id }},
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
-            {% if ex.item %}{{ price(ex.exit_price, ex.exit_costs) }}{% else %}{{ price(ex.price, ex.costs) }}{% endif %}
+            {{ price(ex.price, ex.costs) }}
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
         },
 %% endfor

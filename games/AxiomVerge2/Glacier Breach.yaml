@@ -329,7 +329,7 @@ areas:
           req: $sync
           price: 50
           tags: [flask]
-          time: 6.0
+          time: 6.5
       hybrid:
         - name: Control Enemy And Jump
           to: Lower Corner
@@ -338,7 +338,6 @@ areas:
           req: $sync
           price: 50
           movement: base
-          item_time: 5.5
           item_tags: [flask]
     - name: Lower Corner
       coord: [36.4, 13.6]

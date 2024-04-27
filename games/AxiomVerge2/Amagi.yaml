@@ -739,8 +739,7 @@ areas:
           canon: Shockwave
           req: $boomerang
           time: 1
-          item_time: 5.5
-          tags: [nearby_urn]
+          item_tags: [urn]
     - name: Stronghold Item
       coord: [23.4, 19.75]
       local:

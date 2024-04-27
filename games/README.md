@@ -67,7 +67,7 @@ The file is considered a dictionary, where these are the allowed keys:
 * **base_movements**: A list of [Movements](#movements). **Required** to have if you want to use movement calculations. Base movements beyond the first may have `data` restrictions based on Place features.
 * **movements**: A dictionary of named [Movements](#movements) that may have requirements. These may be used in movement calculations.
 * **exit_movements**: A dictionary of named [Movements](#movements). These are used in **Exits** to automatically calculate the time traversing the Exit would take, and not in local movement calculations.
-* **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag **default** represents the fallback if there is no tag and no time.
+* **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag `default` represents the fallback if there is no tag and no time, and the tag `hybrid_item_default` represents the fallback for **item_time** in Hybrids.
 * **warps**: A dictionary of [Warps](#warps).
 * **actions**: A list of the global [Actions](#actions).
 * **helpers**: A dictionary of logic helpers. The names of keys must start with `$`. If the helper is not meant to evaluate to a boolean, its type must be specified by adding a `:` followed by the Logic rule name. Helpers can accept arguments, which must be defined in parentheses after the type (if mentioned), with their own types included after a `:`. See the [Logic grammar reference](#logic-grammar-reference) below.
@@ -203,9 +203,10 @@ Exits are always defined in a **Spot**. They may have the following fields:
 Hybrids are always defined in a **Spot**. They have the same fields as both Locations and Exits with the following caveats:
 
 * **req** is used for both **Location** and **Exit**.
-* **price** and **costs** refer to the **Location**, and as such will only be paid once when the Location is accessed. To set a cost of taking the Exit separately, use **exit_price** and **exit_costs**. If those are left unset, the Exit is considered free (other than the Location visit).
+* **price** and **costs** refer to the **Exit**, and as such will need to be paid whenever the Exit is used. To set a cost of taking the item separately, use **item_price** and **item_costs**. If those are left unset, the Location is considered free (other than the Location visit).
 * **time** refers to the **Exit**. To set a time for the **Location** access, use **item_time**.
-* **tags** are used to set a default time for both **time** and **item_time**. You may override either or both.
+* **tags** sets a default for the Exit **time**, where the default is otherwise given by the `time` tag `default`.
+* **item_tags** sets a default for the Location **item_time**, where the default is otherwise given by the `time` tag `hybrid_item_default`.
 
 ### Actions
 

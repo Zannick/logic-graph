@@ -1775,8 +1775,7 @@ areas:
           to: Portal
           req: Boomerang
           time: 1
-          item_time: 6
-          tags: [nearby_urn]
+          item_tags: [nearby_urn]
     - name: Portal Exit
       coord: [24.5, 4.45]
       local:

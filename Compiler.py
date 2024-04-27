@@ -462,6 +462,16 @@ class GameLogic(object):
                         exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
                     elif (m := exit['movement']) in self.all_movements:
                         exit['time'] = self.movement_time([m], base, abs(tx - sx), ty - sy, jumps, jumps_down)
+                        mvmt = self.all_movements[m]
+                        if 'price' not in exit and 'price_per_sec' in mvmt:
+                            exit['price'] = int(math.ceil(mvmt['price_per_sec'] * exit['time'] + mvmt.get('base_price', 0)))
+                            if costs := mvmt.get('costs'):
+                                if 'costs' in exit and exit['costs'] != costs:
+                                    logging.warning(f'field "costs" in exit {exit["fullname"]} overridden by movement {m!r}: {costs}')
+                                exit['costs'] = costs
+                            elif 'costs' in exit:
+                                logging.warning(f'field "costs" in exit {exit["fullname"]} overridden by movement {m!r}: default ({self.default_price_type})')
+                                del exit['costs']
                     else:
                         self._errors.append(f'Unrecognized movement type in exit {exit["fullname"]}: {m!r}')
                         continue
