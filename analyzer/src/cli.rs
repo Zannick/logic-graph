@@ -73,7 +73,14 @@ pub enum Commands {
 
     /// Attempts to minimize the given route (must be a winning route)
     Minimize {
-        /// test file with winning route
+        /// text file with winning route
+        #[arg(value_name = "FILE")]
+        route: PathBuf,
+    },
+
+    /// Creates a graph file of the given route (must be a winning route)
+    Draw {
+        /// text file with winning route
         #[arg(value_name = "FILE")]
         route: PathBuf,
     },
@@ -165,7 +172,8 @@ where
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();
             if !world.won(ctx.get()) {
-                println!("Route did not win");
+                let left = world.items_needed(ctx.get());
+                println!("Route did not win: still need {:?}", left);
                 return Ok(());
             }
             let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
@@ -200,6 +208,24 @@ where
             } else {
                 println!("Could not improve solution.");
             }
+            Ok(())
+        }
+        Commands::Draw { route } => {
+            // This duplicates the creation later by the heap wrapper.
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+            let ctx =
+                route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
+                    .unwrap();
+            if !world.won(ctx.get()) {
+                let left = world.items_needed(ctx.get());
+                println!("Route did not win: still need {:?}", left);
+                return Ok(());
+            }
+            let solution = Solution::<T> {
+                elapsed: ctx.elapsed(),
+                history: ctx.recent_history().to_vec(),
+            };
+            solution.write_graph(world, &startctx).unwrap();
             Ok(())
         }
         Commands::Info => {

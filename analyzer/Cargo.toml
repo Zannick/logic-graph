@@ -30,5 +30,6 @@ similar = "*"
 union-find = "*"
 serde = { version = ">=1.0", features = ["derive", "rc"] }
 sort_by_derive = ">=0.1.10"
+tera = { version = "1", default-features = false }
 yaml-rust = "*"
 libtest-mimic = "*"

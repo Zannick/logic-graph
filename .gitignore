@@ -18,6 +18,7 @@ target/
 *.out.*
 # Output
 **/data/*.txt
+**/solutions/*.m4
 log/
 .db/
 .vs/

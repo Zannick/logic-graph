@@ -2,11 +2,20 @@ use crate::context::*;
 use crate::new_hashset_with;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
+use lazy_static::lazy_static;
 use log;
+use serde::Serialize;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
+use std::path::PathBuf;
 use std::sync::Arc;
+use std::time::Instant;
+use tera::{Context, Tera};
+
+lazy_static! {
+    pub static ref TEMPLATES: Tera = Tera::new("../templates/*.tera").unwrap();
+}
 
 fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
@@ -25,10 +34,51 @@ where
     true
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct Solution<T: Ctx> {
     pub elapsed: u32,
     pub history: Vec<HistoryAlias<T>>,
+}
+
+impl<T> Solution<T>
+where
+    T: Ctx,
+{
+    pub fn write_graph<W>(&self, world: &W, startctx: &T) -> anyhow::Result<()>
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        let now = Instant::now();
+        let mut edges = Vec::new();
+        let mut ctx = ContextWrapper::new(startctx.clone());
+        for h in &self.history {
+            let spot = ctx.get().position();
+            ctx.replay(world, *h);
+            if ctx.get().position() != spot {
+                edges.push((format!("{:?}", spot), format!("{:?}", ctx.get().position())));
+            }
+        }
+        let mut context = Context::new();
+        context.insert("edges", &edges);
+        let res = TEMPLATES.render("solution_graph.m4.tera", &context)?;
+        let mut path = PathBuf::from(format!("solutions/{}.m4", self.elapsed));
+        let mut i = 0;
+        while path.exists() {
+            i += 1;
+            path.set_file_name(format!("{}_{}.m4", self.elapsed, i));
+        }
+        let mut file = File::create(&path).unwrap();
+        write!(file, "{}", res)?;
+        log::info!(
+            "Wrote solution of {}ms to {:?} in {:?}",
+            self.elapsed,
+            path,
+            now.elapsed()
+        );
+        Ok(())
+    }
 }
 
 #[derive(Clone, Debug)]

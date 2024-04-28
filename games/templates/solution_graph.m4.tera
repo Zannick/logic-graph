@@ -1,0 +1,10 @@
+// use neato to use the coordinates
+digraph solution {
+    node[shape=square,width=0.225,height=0.225,colorscheme=dark28,style=invis,margin=0];
+    include(`digraph_nodes.dot')
+
+    edge[arrowsize=0.5];
+{% for edge in edges %}
+    {{ edge.0 }} -> {{ edge.1 }};
+{%- endfor %}
+}
