@@ -229,6 +229,9 @@ pub trait World: Sync + Default {
         i16,
     )>;
 
+    fn should_draw_edge(&self, exit_id: <Self::Exit as Exit>::ExitId) -> bool;
+    fn should_draw_spot(&self, spot_id: <Self::Exit as Exit>::SpotId) -> bool;
+
     /// Edge connections for the purpose of Steiner graph.
     fn base_edges(
         &self,

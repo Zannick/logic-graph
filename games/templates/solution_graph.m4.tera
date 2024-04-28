@@ -1,10 +1,14 @@
 // use neato to use the coordinates
 digraph solution {
-    node[shape=square,width=0.225,height=0.225,colorscheme=dark28,style=invis,margin=0];
+    node[shape=square,width=0.225,height=0.225,colorscheme=dark28,style=invis,margin=0,fontsize=42];
     include(`digraph_nodes.dot')
 
-    edge[arrowsize=0.5];
+    edge[penwidth=3.0, fontsize=28];
 {% for edge in edges %}
-    {{ edge.0 }} -> {{ edge.1 }};
+    {{ edge.0 }} -> {{ edge.1 }} [{% if edge.3 %}label="{{ edge.2 }}. {{ edge.4 }}", color=chartreuse{% else %}label="{{ edge.2 }}"{% endif %}{% if edge.4 is starting_with("!") %}, color=white{% endif %}];
+{%- endfor %}
+
+{% for spot in spots %}
+    {{ spot.0 }}[style=filled{% if spot.2 %}, xlabel="{{ spot.1 }}. {{ spot.2 }}"{% endif %}];
 {%- endfor %}
 }

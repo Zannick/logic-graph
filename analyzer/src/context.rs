@@ -7,10 +7,19 @@ use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, format, Debug, Display};
+use std::fs::File;
 use std::hash::Hash;
+use std::io::Write;
+use std::path::PathBuf;
 use std::str::FromStr;
 use std::sync::Arc;
+use std::time::Instant;
+use tera::{Context, Tera};
 use yaml_rust::Yaml;
+
+lazy_static! {
+    pub static ref TEMPLATES: Tera = Tera::new("../templates/*.tera").unwrap();
+}
 
 pub trait Ctx:
     Clone
@@ -972,4 +981,77 @@ where
     }
     vec.push(prev.into_inner());
     vec
+}
+
+pub fn write_graph<W, T>(world: &W, startctx: &T, history: &[HistoryAlias<T>]) -> anyhow::Result<()>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+{
+    let now = Instant::now();
+    let mut edges = Vec::new();
+    let mut spots = Vec::new();
+    let mut ctx = ContextWrapper::new(startctx.clone());
+    let mut spot = ctx.get().position();
+    let mut warp = false;
+    for (i, h) in history.iter().enumerate() {
+        match h {
+            History::G(item, _) | History::H(item, _) => {
+                if world.should_draw_spot(ctx.get().position()) {
+                    spots.push((
+                        format!("{:?}", ctx.get().position()),
+                        i,
+                        format!("{}", item),
+                    ));
+                }
+            }
+            _ => (),
+        }
+        ctx.replay(world, *h);
+        if ctx.get().position() != spot {
+            if world.should_draw_spot(spot) && world.should_draw_spot(ctx.get().position()) {
+                edges.push((
+                    format!("{:?}", spot),
+                    format!("{:?}", ctx.get().position()),
+                    i,
+                    warp || matches!(h, History::W(..)),
+                    format!("{}", h),
+                ));
+                warp = false;
+            } else if !warp {
+                if world.should_draw_spot(spot) {
+                    spots.push((
+                        format!("{:?}", spot),
+                        i,
+                        match h {
+                            History::W(..) => format!("{}", h),
+                            _ => String::from(""),
+                        },
+                    ));
+                }
+                warp = true;
+            }
+        }
+        spot = ctx.get().position();
+    }
+    let mut context = Context::new();
+    context.insert("edges", &edges);
+    context.insert("spots", &spots);
+    let res = TEMPLATES.render("solution_graph.m4.tera", &context)?;
+    let mut path = PathBuf::from(format!("solutions/{}.m4", ctx.elapsed()));
+    let mut i = 0;
+    while path.exists() {
+        i += 1;
+        path.set_file_name(format!("{}_{}.m4", ctx.elapsed(), i));
+    }
+    let mut file = File::create(&path).unwrap();
+    write!(file, "{}", res)?;
+    log::info!(
+        "Wrote route of {}ms to {:?} in {:?}",
+        ctx.elapsed(),
+        path,
+        now.elapsed()
+    );
+    Ok(())
 }

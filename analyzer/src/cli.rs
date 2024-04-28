@@ -216,16 +216,8 @@ where
             let ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();
-            if !world.won(ctx.get()) {
-                let left = world.items_needed(ctx.get());
-                println!("Route did not win: still need {:?}", left);
-                return Ok(());
-            }
-            let solution = Solution::<T> {
-                elapsed: ctx.elapsed(),
-                history: ctx.recent_history().to_vec(),
-            };
-            solution.write_graph(world, &startctx).unwrap();
+
+            write_graph(world, &startctx, ctx.recent_history()).unwrap();
             Ok(())
         }
         Commands::Info => {

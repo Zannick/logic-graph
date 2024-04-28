@@ -737,6 +737,38 @@ impl world::World for World {
         map.drain().collect()
     }
 
+
+    fn should_draw_edge(&self, exit_id: ExitId) -> bool {
+        match exit_id {
+%% for r in regions|reject('exclude_by_tag')|sort(attribute='id')
+%% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+%% for e in s.exits|reject('exclude_by_tag')|sort(attribute='id')
+            ExitId::{{ e.id }} => true,
+%% endfor
+%% for h in s.hybrid|reject('exclude_by_tag')|sort(attribute='id')
+            ExitId::{{ h.id }} => true,
+%% endfor
+%% endfor
+%% endfor
+%% endfor
+            _ => false,
+        }
+    }
+
+    fn should_draw_spot(&self, spot_id: SpotId) -> bool {
+        match spot_id {
+%% for r in regions|reject('exclude_by_tag')|sort(attribute='id')
+%% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
+%% for s in a.spots
+            SpotId::{{ s.id }} => true,
+%% endfor
+%% endfor
+%% endfor
+            _ => false,
+        }
+    }
+
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }
