@@ -59336,7 +59336,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         WarpId::EarthSave => Warp {
             id: WarpId::EarthSave,
             dest: SpotId::None,
-            time: 5000,
+            time: 3000,
             price: Currency::Free,
         },
         WarpId::ExitBreach => Warp {

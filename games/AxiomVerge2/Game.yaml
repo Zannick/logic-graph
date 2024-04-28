@@ -165,8 +165,9 @@ time:  # MARK: time
   base.1: 0.35
 
 warps:  # MARK: warps
+  # initial savewarp pre-amashi
   earth_save:
-    time: 5  # initial savewarp pre-amashi
+    time: 3  # IGT goes backward due to the fadeout not counting
     req: allow_warps and WITHIN `Antarctica`
     to: ^save
     loads: true
