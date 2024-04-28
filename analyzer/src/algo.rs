@@ -276,6 +276,7 @@ where
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
+            &ctx,
         )?;
 
         let startctx = ContextWrapper::new(ctx);
@@ -307,7 +308,7 @@ where
         let initial_max_time = if let Some(wonctx) = wins.last() {
             let max_time = wonctx.elapsed();
             let sol = wonctx.to_solution();
-            if solutions.insert_solution(sol.clone()).accepted() {
+            if solutions.insert_solution(sol.clone(), world).accepted() {
                 record_observations(
                     startctx.get(),
                     world,
@@ -318,7 +319,7 @@ where
             }
             for w in &wins {
                 let sol = w.to_solution();
-                if solutions.insert_solution(sol.clone()).accepted() {
+                if solutions.insert_solution(sol.clone(), world).accepted() {
                     record_observations(
                         startctx.get(),
                         world,
@@ -329,7 +330,7 @@ where
                 }
                 if let Some(better) = trie_minimize(world, startctx.get(), sol, &solve_trie) {
                     let solution = better.to_solution();
-                    if solutions.insert_solution(solution.clone()).accepted() {
+                    if solutions.insert_solution(solution.clone(), world).accepted() {
                         record_observations(
                             startctx.get(),
                             world,
@@ -482,7 +483,7 @@ where
         }
 
         let min_progress = self.min_progress();
-        let res = sols.insert_solution(solution.clone());
+        let res = sols.insert_solution(solution.clone(), self.world);
         if res.accepted() {
             if res == SolutionResult::IsUnique {
                 log::info!(
@@ -523,7 +524,7 @@ where
             }
 
             let solution = ctx.to_solution();
-            let res = sols.insert_solution(solution.clone());
+            let res = sols.insert_solution(solution.clone(), self.world);
             if res == SolutionResult::IsUnique {
                 log::info!("Minimized found new unique solution");
             }

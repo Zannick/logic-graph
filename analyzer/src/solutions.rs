@@ -2,12 +2,21 @@ use crate::context::*;
 use crate::new_hashset_with;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
+use lazy_static::lazy_static;
 use log;
 use serde::Serialize;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
+use std::path::PathBuf;
 use std::sync::Arc;
+use std::time::Instant;
+use tera::{Context, Tera};
+
+lazy_static! {
+    pub static ref TEMPLATES: Tera = Tera::new("../templates/*.tera").unwrap();
+    pub static ref SOLUTIONS_DIR: PathBuf = PathBuf::from("solutions/");
+}
 
 fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
@@ -26,10 +35,85 @@ where
     true
 }
 
+pub fn write_graph<W, T>(world: &W, startctx: &T, history: &[HistoryAlias<T>]) -> anyhow::Result<PathBuf>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+{
+    let now = Instant::now();
+    let mut edges = Vec::new();
+    let mut spots = Vec::new();
+    let mut ctx = ContextWrapper::new(startctx.clone());
+    let mut spot = ctx.get().position();
+    let mut warp = false;
+    for (i, h) in history.iter().enumerate() {
+        match h {
+            History::G(item, _) | History::H(item, _) => {
+                if world.should_draw_spot(ctx.get().position()) {
+                    spots.push((
+                        format!("{:?}", ctx.get().position()),
+                        i,
+                        format!("{}", item),
+                    ));
+                }
+            }
+            _ => (),
+        }
+        ctx.replay(world, *h);
+        if ctx.get().position() != spot {
+            if world.should_draw_spot(spot) && world.should_draw_spot(ctx.get().position()) {
+                edges.push((
+                    format!("{:?}", spot),
+                    format!("{:?}", ctx.get().position()),
+                    i,
+                    warp || matches!(h, History::W(..)),
+                    format!("{}", h),
+                ));
+                warp = false;
+            } else if !warp {
+                if world.should_draw_spot(spot) {
+                    spots.push((
+                        format!("{:?}", spot),
+                        i,
+                        match h {
+                            History::W(..) => format!("{}", h),
+                            _ => String::from(""),
+                        },
+                    ));
+                }
+                warp = true;
+            }
+        }
+        spot = ctx.get().position();
+    }
+    let mut context = Context::new();
+    context.insert("edges", &edges);
+    context.insert("spots", &spots);
+    let res = TEMPLATES.render("solution_graph.m4.tera", &context)?;
+    let mut path = SOLUTIONS_DIR.clone();
+    path.push(format!("{}.m4", ctx.elapsed()));
+    let mut i = 0;
+    while path.exists() {
+        i += 1;
+        path.set_file_name(format!("{}_{}.m4", ctx.elapsed(), i));
+    }
+    let mut file = File::create(&path).unwrap();
+    write!(file, "{}", res)?;
+    log::info!(
+        "Wrote route of {}ms to {:?} in {:?}",
+        ctx.elapsed(),
+        path,
+        now.elapsed()
+    );
+    Ok(path)
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct Solution<T: Ctx> {
     pub elapsed: u32,
     pub history: Vec<HistoryAlias<T>>,
+    // TODO: generate a solution-specific filename on new()
 }
 
 #[derive(Clone, Debug)]
@@ -86,6 +170,7 @@ where
     path: &'static str,
     previews: &'static str,
     best_file: &'static str,
+    startctx: T,
     file: File,
     count: usize,
     best: u32,
@@ -99,12 +184,21 @@ where
         sols_file: &'static str,
         previews_file: &'static str,
         best_file: &'static str,
+        startctx: &T,
     ) -> io::Result<SolutionCollector<T>> {
+        // Clear entries out of the solutions dir before starting
+        for entry in std::fs::read_dir(&*SOLUTIONS_DIR)? {
+            let path = entry?.path();
+            if path.is_file() {
+                std::fs::remove_file(path)?;
+            }
+        }
         Ok(SolutionCollector {
             map: new_hashmap(),
             file: File::create(sols_file)?,
             path: sols_file,
             previews: previews_file,
+            startctx: startctx.clone(),
             best_file,
             count: 0,
             best: 0,
@@ -129,7 +223,7 @@ where
 
     /// Inserts a solution into the collection and returns a status detailing
     /// whether this solution was accepted and if it's unique.
-    pub fn insert_solution<W, L, E, Wp>(&mut self, solution: Arc<Solution<T>>) -> SolutionResult
+    pub fn insert_solution<W, L, E, Wp>(&mut self, solution: Arc<Solution<T>>, world: &W) -> SolutionResult
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -150,6 +244,7 @@ where
             .collect();
         if self.count == 0 || solution.elapsed < self.best {
             self.best = solution.elapsed;
+            write_graph(world, &self.startctx, &solution.history).unwrap();
         } else if solution.elapsed - self.best > self.best / 10 {
             log::info!(
                 "Excluding solution as too slow: {} > 1.1 * {}",

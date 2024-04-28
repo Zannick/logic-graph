@@ -8,7 +8,7 @@ use crate::minimize::trie_minimize;
 use crate::observer::record_observations;
 use crate::observer::Observer;
 use crate::route::*;
-use crate::solutions::Solution;
+use crate::solutions::{write_graph, Solution};
 use crate::world::*;
 use clap::{Parser, Subcommand};
 use rustc_hash::FxHashSet;
