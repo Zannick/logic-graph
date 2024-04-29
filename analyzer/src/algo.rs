@@ -947,9 +947,9 @@ where
             if iters % 1_000_000 == 0 {
                 let last_clean = self.last_clean.load(Ordering::Acquire);
                 let solves_since = self.solves_since_clean.load(Ordering::Acquire);
-                if last_clean + 5_000_000 <= iters && solves_since > 0 {
+                if last_clean + 10_000_000 <= iters && solves_since > 0 {
                     let last_solve = self.last_solve.load(Ordering::Acquire);
-                    if solves_since > 20 || last_solve + 10_000_000 <= iters {
+                    if solves_since > 20 || last_solve + 20_000_000 <= iters {
                         self.solves_since_clean.store(0, Ordering::Release);
                         self.last_clean.store(iters, Ordering::Release);
                         self.clean_solutions();
