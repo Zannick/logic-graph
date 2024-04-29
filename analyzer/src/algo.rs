@@ -452,16 +452,6 @@ where
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
 
         let solution = Arc::new(Solution { elapsed, history });
-        let min_ctx = if mode != SearchMode::Minimized {
-            trie_minimize(
-                self.world,
-                self.startctx.get(),
-                solution.clone(),
-                &self.solve_trie,
-            )
-        } else {
-            None
-        };
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 && sols.unique() > 4 {
@@ -497,7 +487,7 @@ where
             record_observations(
                 self.startctx.get(),
                 self.world,
-                solution,
+                solution.clone(),
                 min_progress,
                 &self.solve_trie,
             );
@@ -505,6 +495,17 @@ where
             self.last_solve
                 .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
+
+        let min_ctx = if mode != SearchMode::Minimized {
+            trie_minimize(
+                self.world,
+                self.startctx.get(),
+                solution,
+                &self.solve_trie,
+            )
+        } else {
+            None
+        };
 
         if let Some(ctx) = min_ctx {
             if iters > 10_000_000 && sols.unique() > 4 {
