@@ -220,9 +220,10 @@ impl FullObservation {
         fields
     }
 
-%# This might get used instead of apply.-
 %% for ctx, t in context_types.items()
-%% if ctx in bfp.varmap
+%% if ctx in special.ignore_observations
+    pub fn observe_{{ ctx }}(&self) {}
+%% elif ctx in bfp.varmap
     pub fn observe_{{ ctx }}(&mut self) {
         self.cbits{{ bfp.varmap[ctx] }}.insert(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
     }

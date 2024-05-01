@@ -446,3 +446,5 @@ special:  # MARK: special
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
   unplaced_items: [Exit_Breach, Remote_Boomerang, Separation, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
+  ignore_observations:
+    - prev_area

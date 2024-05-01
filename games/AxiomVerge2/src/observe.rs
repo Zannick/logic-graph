@@ -1971,9 +1971,7 @@ impl FullObservation {
     pub fn observe_prev_portal(&mut self) {
         self.prev_portal = true;
     }
-    pub fn observe_prev_area(&mut self) {
-        self.prev_area = true;
-    }
+    pub fn observe_prev_area(&self) {}
     pub fn observe_map__amagi_breach__east_entrance__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE);
