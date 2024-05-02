@@ -16,7 +16,7 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 use std::ops::Range;
 use std::option::Option;
 
@@ -151,6 +151,7 @@ pub struct Location {
     time: u32,
     exit_id: Option<ExitId>,
     price: Currency,
+    skippable: bool,
 }
 
 impl world::Accessible for Location {
@@ -159,39 +160,39 @@ impl world::Accessible for Location {
 
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::access_deku_back_room_web_and_can_blast_or_smash(ctx, world),
-            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::access_has_fire_source_with_torch_or_can_use__bow(ctx, world),
-            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::access_is_adult_or_sticks_or_kokiri_sword(ctx, world),
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::access_deku_basement_block_and_is_child_and_sticks(ctx, world),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::access_deku_back_room_web_and_invoke_can_blast_or_smash(ctx, world),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::access_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(ctx, world),
             LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::access_deku_basement_switch(ctx, world),
-            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::access_is_adult_or_can_child_attack(ctx, world),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::access_invoke_is_adult_or_invoke_can_child_attack(ctx, world),
             LocationId::Deku_Tree__Basement_1__Corner__Switch => true,
-            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::access_has_shield(ctx, world),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::access_invoke_has_shield(ctx, world),
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => true,
-            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::access_has_fire_source(ctx, world),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::access_invoke_has_fire_source(ctx, world),
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::access_defeat_gohma(ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(ctx, world),
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::access_defeat_gohma(ctx, world),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(ctx, world),
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => true,
-            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::access_is_child_and_sticks_and_nuts(ctx, world),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(ctx, world),
             LocationId::Deku_Tree__Compass_Room__Ledge__Chest => true,
-            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::access_is_adult_or_can_child_attack(ctx, world),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::access_invoke_is_adult_or_invoke_can_child_attack(ctx, world),
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => true,
-            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(ctx, world),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::access_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(ctx, world),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
             LocationId::Deku_Tree__Lobby__Center__Web => rules::access_false(ctx, world),
-            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::access_has_shield(ctx, world),
-            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::access_can_use__boomerang_or_can_use__hookshot(ctx, world),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::access_invoke_has_shield(ctx, world),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::access_invoke_can_use__boomerang_or_invoke_can_use__hookshot(ctx, world),
             LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => true,
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => true,
             LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::access_gold_skulltula_token__10(ctx, world),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::access_is_adult(ctx, world),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::access_invoke_is_adult(ctx, world),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::access_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world),
             LocationId::KF__Boulder_Maze__Reward__Chest => true,
-            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::access_is_child_and_kokiri_sword_and_deku_shield(ctx, world),
-            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::access_objective(ctx, world),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(ctx, world),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::access_invoke_objective(ctx, world),
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => true,
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => true,
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => true,
@@ -212,31 +213,31 @@ impl world::Accessible for Location {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::observe_access_deku_back_room_web_and_can_blast_or_smash(ctx, world, full_obs),
-            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::observe_access_has_fire_source_with_torch_or_can_use__bow(ctx, world, full_obs),
-            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::observe_access_is_adult_or_sticks_or_kokiri_sword(ctx, world, full_obs),
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::observe_access_deku_basement_block_and_is_child_and_sticks(ctx, world, full_obs),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::observe_access_deku_back_room_web_and_invoke_can_blast_or_smash(ctx, world, full_obs),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::observe_access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::observe_access_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::observe_access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(ctx, world, full_obs),
             LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::observe_access_deku_basement_switch(ctx, world, full_obs),
-            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::observe_access_is_adult_or_can_child_attack(ctx, world, full_obs),
-            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::observe_access_has_shield(ctx, world, full_obs),
-            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::observe_access_has_fire_source(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::observe_access_invoke_is_adult_or_invoke_can_child_attack(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::observe_access_invoke_has_shield(ctx, world, full_obs),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::observe_access_invoke_has_fire_source(ctx, world, full_obs),
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::observe_access_defeat_gohma(ctx, world, full_obs),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::observe_access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::observe_access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(ctx, world, full_obs),
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::observe_access_defeat_gohma(ctx, world, full_obs),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::observe_access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world, full_obs),
-            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::observe_access_is_child_and_sticks_and_nuts(ctx, world, full_obs),
-            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::observe_access_is_adult_or_can_child_attack(ctx, world, full_obs),
-            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::observe_access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world, full_obs),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::observe_access_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::observe_access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(ctx, world, full_obs),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::observe_access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(ctx, world, full_obs),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::observe_access_invoke_is_adult_or_invoke_can_child_attack(ctx, world, full_obs),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::observe_access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(ctx, world, full_obs),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::observe_access_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(ctx, world, full_obs),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::observe_access_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
             LocationId::Deku_Tree__Lobby__Center__Web => rules::observe_access_false(ctx, world, full_obs),
-            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::observe_access_has_shield(ctx, world, full_obs),
-            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::observe_access_can_use__boomerang_or_can_use__hookshot(ctx, world, full_obs),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::observe_access_invoke_has_shield(ctx, world, full_obs),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::observe_access_invoke_can_use__boomerang_or_invoke_can_use__hookshot(ctx, world, full_obs),
             LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::observe_access_gold_skulltula_token__10(ctx, world, full_obs),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::observe_access_is_adult(ctx, world, full_obs),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::observe_access_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
-            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::observe_access_is_child_and_kokiri_sword_and_deku_shield(ctx, world, full_obs),
-            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::observe_access_objective(ctx, world, full_obs),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::observe_access_invoke_is_adult(ctx, world, full_obs),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::observe_access_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world, full_obs),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::observe_access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(ctx, world, full_obs),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::observe_access_invoke_objective(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -260,31 +261,31 @@ impl world::Accessible for Location {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::explain_deku_back_room_web_and_can_blast_or_smash(ctx, world, edict),
-            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::explain_has_fire_source_with_torch_or_can_use__bow(ctx, world, edict),
-            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::explain_is_adult_or_sticks_or_kokiri_sword(ctx, world, edict),
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::explain_deku_basement_block_and_is_child_and_sticks(ctx, world, edict),
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::explain_deku_back_room_web_and_invoke_can_blast_or_smash(ctx, world, edict),
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::explain_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => rules::explain_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => rules::explain_deku_basement_block_and_invoke_is_child_and_invoke_sticks(ctx, world, edict),
             LocationId::Deku_Tree__Basement_1__Corner__Chest => rules::explain_deku_basement_switch(ctx, world, edict),
-            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::explain_is_adult_or_can_child_attack(ctx, world, edict),
-            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::explain_has_shield(ctx, world, edict),
-            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::explain_has_fire_source(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => rules::explain_invoke_is_adult_or_invoke_can_child_attack(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => rules::explain_invoke_has_shield(ctx, world, edict),
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => rules::explain_invoke_has_fire_source(ctx, world, edict),
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::explain_defeat_gohma(ctx, world, edict),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::explain___nuts_or_can_use__slingshot_and_can_jumpslash(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => rules::explain___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(ctx, world, edict),
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => rules::explain_defeat_gohma(ctx, world, edict),
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::explain_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(ctx, world, edict),
-            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::explain_is_child_and_sticks_and_nuts(ctx, world, edict),
-            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::explain_is_adult_or_can_child_attack(ctx, world, edict),
-            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::explain_is_adult_or_slingshot_or_sticks_or_kokiri_sword(ctx, world, edict),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::explain_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => rules::explain_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(ctx, world, edict),
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => rules::explain_invoke_is_child_and_invoke_sticks_and_invoke_nuts(ctx, world, edict),
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => rules::explain_invoke_is_adult_or_invoke_can_child_attack(ctx, world, edict),
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => rules::explain_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(ctx, world, edict),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::explain_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(ctx, world, edict),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::explain_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
             LocationId::Deku_Tree__Lobby__Center__Web => rules::explain_false(ctx, world, edict),
-            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::explain_has_shield(ctx, world, edict),
-            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::explain_can_use__boomerang_or_can_use__hookshot(ctx, world, edict),
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::explain_invoke_has_shield(ctx, world, edict),
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => rules::explain_invoke_can_use__boomerang_or_invoke_can_use__hookshot(ctx, world, edict),
             LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::explain_gold_skulltula_token__10(ctx, world, edict),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::explain_is_adult(ctx, world, edict),
-            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::explain_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
-            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::explain_is_child_and_kokiri_sword_and_deku_shield(ctx, world, edict),
-            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::explain_objective(ctx, world, edict),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => rules::explain_invoke_is_adult(ctx, world, edict),
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => rules::explain_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx, world, edict),
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => rules::explain_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(ctx, world, edict),
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => rules::explain_invoke_objective(ctx, world, edict),
             _ => (true, vec![])
         }
     }
@@ -307,6 +308,15 @@ impl world::Location for Location {
     fn exit_id(&self) -> &Option<ExitId> {
         &self.exit_id
     }
+    fn skippable(&self) -> bool {
+        self.skippable
+    }
+}
+
+impl Location {
+    pub fn set_skippable(&mut self, skippable: bool) {
+        self.skippable = skippable;
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -325,17 +335,19 @@ impl world::Accessible for Exit {
         ctx.can_afford(&self.price)
             && match self.id {
                 ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
-                    rules::access_is_child(ctx, world)
+                    rules::access_invoke_is_child(ctx, world)
                 }
                 ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
                     rules::access_deku_back_room_web_and_deku_back_room_wall(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                    rules::access_deku_basement_block_and_is_child_and_sticks(ctx, world)
+                    rules::access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
+                        ctx, world,
+                    )
                 }
                 ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
-                    rules::access_is_adult_or_deku_basement_block(ctx, world)
+                    rules::access_invoke_is_adult_or_deku_basement_block(ctx, world)
                 }
                 ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => true,
                 ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
@@ -350,7 +362,7 @@ impl world::Accessible for Exit {
                     rules::access_defeat_gohma(ctx, world)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                    rules::access_is_child_and_sticks_and_nuts(ctx, world)
+                    rules::access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(ctx, world)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
                     rules::access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
@@ -364,17 +376,21 @@ impl world::Accessible for Exit {
                 ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
-                    rules::access_can_use__slingshot(ctx, world)
+                    rules::access_invoke_can_use__slingshot(ctx, world)
                 }
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1 => true,
                 ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
-                    rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world)
+                    rules::access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                        ctx, world,
+                    )
                 }
                 ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
-                    rules::access_is_adult_or_can_child_attack_or_nuts(ctx, world)
+                    rules::access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                        ctx, world,
+                    )
                 }
                 ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
                     rules::access_deku_lobby_web(ctx, world)
@@ -397,7 +413,7 @@ impl world::Accessible for Exit {
                     true
                 }
                 ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
-                    rules::access_is_child(ctx, world)
+                    rules::access_invoke_is_child(ctx, world)
                 }
                 ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => {
                     true
@@ -407,13 +423,13 @@ impl world::Accessible for Exit {
                 }
                 ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
-                    rules::access_is_adult_or_showed_mido(ctx, world)
+                    rules::access_invoke_is_adult_or_showed_mido(ctx, world)
                 }
                 ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
-                    rules::access_is_child(ctx, world)
+                    rules::access_invoke_is_child(ctx, world)
                 }
                 ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => true,
                 ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => true,
@@ -426,7 +442,7 @@ impl world::Accessible for Exit {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
-                rules::observe_access_is_child(ctx, world, full_obs)
+                rules::observe_access_invoke_is_child(ctx, world, full_obs)
             }
             ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
                 rules::observe_access_deku_back_room_web_and_deku_back_room_wall(
@@ -434,12 +450,12 @@ impl world::Accessible for Exit {
                 )
             }
             ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                rules::observe_access_deku_basement_block_and_is_child_and_sticks(
+                rules::observe_access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
                     ctx, world, full_obs,
                 )
             }
             ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
-                rules::observe_access_is_adult_or_deku_basement_block(ctx, world, full_obs)
+                rules::observe_access_invoke_is_adult_or_deku_basement_block(ctx, world, full_obs)
             }
             ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
                 rules::observe_access_deku_basement_scrubs(ctx, world, full_obs)
@@ -451,7 +467,9 @@ impl world::Accessible for Exit {
                 rules::observe_access_defeat_gohma(ctx, world, full_obs)
             }
             ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                rules::observe_access_is_child_and_sticks_and_nuts(ctx, world, full_obs)
+                rules::observe_access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
+                    ctx, world, full_obs,
+                )
             }
             ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
                 rules::observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
@@ -459,13 +477,17 @@ impl world::Accessible for Exit {
                 )
             }
             ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
-                rules::observe_access_can_use__slingshot(ctx, world, full_obs)
+                rules::observe_access_invoke_can_use__slingshot(ctx, world, full_obs)
             }
             ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
-                rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs)
+                rules::observe_access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                    ctx, world, full_obs,
+                )
             }
             ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
-                rules::observe_access_is_adult_or_can_child_attack_or_nuts(ctx, world, full_obs)
+                rules::observe_access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                    ctx, world, full_obs,
+                )
             }
             ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
                 rules::observe_access_deku_lobby_web(ctx, world, full_obs)
@@ -477,13 +499,13 @@ impl world::Accessible for Exit {
                 rules::observe_access_deku_slingshot_scrub(ctx, world, full_obs)
             }
             ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
-                rules::observe_access_is_child(ctx, world, full_obs)
+                rules::observe_access_invoke_is_child(ctx, world, full_obs)
             }
             ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
-                rules::observe_access_is_adult_or_showed_mido(ctx, world, full_obs)
+                rules::observe_access_invoke_is_adult_or_showed_mido(ctx, world, full_obs)
             }
             ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
-                rules::observe_access_is_child(ctx, world, full_obs)
+                rules::observe_access_invoke_is_child(ctx, world, full_obs)
             }
             _ => true,
         }
@@ -509,16 +531,18 @@ impl world::Accessible for Exit {
     ) -> (bool, Vec<&'static str>) {
         match self.id {
             ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
-                rules::explain_is_child(ctx, world, edict)
+                rules::explain_invoke_is_child(ctx, world, edict)
             }
             ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
                 rules::explain_deku_back_room_web_and_deku_back_room_wall(ctx, world, edict)
             }
             ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                rules::explain_deku_basement_block_and_is_child_and_sticks(ctx, world, edict)
+                rules::explain_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
+                    ctx, world, edict,
+                )
             }
             ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
-                rules::explain_is_adult_or_deku_basement_block(ctx, world, edict)
+                rules::explain_invoke_is_adult_or_deku_basement_block(ctx, world, edict)
             }
             ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
                 rules::explain_deku_basement_scrubs(ctx, world, edict)
@@ -530,7 +554,7 @@ impl world::Accessible for Exit {
                 rules::explain_defeat_gohma(ctx, world, edict)
             }
             ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                rules::explain_is_child_and_sticks_and_nuts(ctx, world, edict)
+                rules::explain_invoke_is_child_and_invoke_sticks_and_invoke_nuts(ctx, world, edict)
             }
             ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
                 rules::explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
@@ -538,13 +562,17 @@ impl world::Accessible for Exit {
                 )
             }
             ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
-                rules::explain_can_use__slingshot(ctx, world, edict)
+                rules::explain_invoke_can_use__slingshot(ctx, world, edict)
             }
             ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
-                rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict)
+                rules::explain_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                    ctx, world, edict,
+                )
             }
             ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
-                rules::explain_is_adult_or_can_child_attack_or_nuts(ctx, world, edict)
+                rules::explain_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
+                    ctx, world, edict,
+                )
             }
             ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => {
                 rules::explain_deku_lobby_web(ctx, world, edict)
@@ -556,13 +584,13 @@ impl world::Accessible for Exit {
                 rules::explain_deku_slingshot_scrub(ctx, world, edict)
             }
             ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
-                rules::explain_is_child(ctx, world, edict)
+                rules::explain_invoke_is_child(ctx, world, edict)
             }
             ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
-                rules::explain_is_adult_or_showed_mido(ctx, world, edict)
+                rules::explain_invoke_is_adult_or_showed_mido(ctx, world, edict)
             }
             ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
-                rules::explain_is_child(ctx, world, edict)
+                rules::explain_invoke_is_child(ctx, world, edict)
             }
             _ => (true, vec![]),
         }
@@ -681,7 +709,16 @@ impl world::Accessible for Action {
     ) -> (bool, Vec<&'static str>) {
         match self.id {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::explain_deku_tree__compass_room__entry__light_torch__req(ctx, world, edict)
+                let (ret, mut tags) =
+                    rules::explain_deku_tree__compass_room__entry__light_torch__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
             }
             _ => (true, vec![]),
         }
@@ -704,7 +741,7 @@ impl world::Action for Action {
                 rules::action_deku_tree__compass_room__entry__light_torch__do(ctx, world)
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::action_rupees_set_max__rupees_add_20_wallet_max(ctx, world)
+                rules::action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world)
             }
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
                 rules::action_save_set_position(ctx, world)
@@ -734,7 +771,7 @@ impl world::Action for Action {
                 );
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::observe_action_rupees_set_max__rupees_add_20_wallet_max(
+                rules::observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
                     ctx, world, full_obs,
                 );
             }
@@ -759,7 +796,7 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::Minuet => rules::access_can_play__minuet_of_forest(ctx, world),
+                WarpId::Minuet => rules::access_invoke_can_play__minuet_of_forest(ctx, world),
                 WarpId::Save => true,
             }
     }
@@ -767,7 +804,7 @@ impl world::Accessible for Warp {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
             WarpId::Minuet => {
-                rules::observe_access_can_play__minuet_of_forest(ctx, world, full_obs)
+                rules::observe_access_invoke_can_play__minuet_of_forest(ctx, world, full_obs)
             }
             _ => true,
         }
@@ -792,7 +829,19 @@ impl world::Accessible for Warp {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
-            WarpId::Minuet => rules::explain_can_play__minuet_of_forest(ctx, world, edict),
+            WarpId::Minuet => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_play__minuet_of_forest(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "SpotId::KF__Kokiri_Village__Shop_Porch"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             _ => (true, vec![]),
         }
     }
@@ -1028,7 +1077,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 48;
+    const NUM_CANON_LOCATIONS: usize = 44;
 
     fn ruleset(&self) -> String {
         format!(
@@ -1063,26 +1112,6 @@ impl world::World for World {
     }
     fn get_warp(&self, id: WarpId) -> &Warp {
         &self.warps[id]
-    }
-
-    fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
-        let loc = self.get_location(loc_id);
-        match world::Location::canon_id(loc) {
-            CanonId::None => vec![],
-            CanonId::Deku_Lobby_Web => vec![
-                LocationId::Deku_Tree__Lobby__Center__Web,
-                LocationId::Deku_Tree__Floor_3__Door__Break_Web,
-                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web,
-            ],
-            CanonId::Deku_Basement_Web => vec![
-                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
-                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web,
-            ],
-            CanonId::Defeat_Gohma => vec![
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
-            ],
-        }
     }
 
     // Hardcoded locations. To support a randomizer, this would be better as a cache.
@@ -1437,22 +1466,12 @@ impl world::World for World {
         RAW_SPOTS.as_slice()
     }
 
-    fn skip_unused_items(&self, ctx: &mut Context) {
-        for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc))
-                || self.unused_by_rules(world::Location::item(loc))
-            {
-                ctx.skip(id);
-            }
-        }
-    }
-
     fn won(&self, ctx: &Context) -> bool {
         crate::rule__victory!(ctx, self)
     }
 
     fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
-        let mut map = analyzer::new_hashmap();
+        let mut map = FxHashMap::default();
 
         match self.rule_victory {
             RuleVictory::Default => {
@@ -1499,7 +1518,7 @@ impl world::World for World {
     }
 
     fn required_items(&self) -> Vec<(Item, i16)> {
-        let mut map = analyzer::new_hashmap();
+        let mut map = FxHashMap::default();
 
         match self.rule_victory {
             RuleVictory::Default => {
@@ -1530,6 +1549,145 @@ impl world::World for World {
         }
 
         map.drain().collect()
+    }
+
+    fn unused_items(&self) -> Vec<Item> {
+        let mut vec = Vec::from_iter(self.get_unused_items());
+        vec.sort();
+        vec
+    }
+
+    fn remaining_items(&self, ctx: &Context) -> Vec<(Item, i16)> {
+        let mut map = FxHashMap::default();
+        let mut canons_seen = FxHashSet::default();
+        for loc in self.locations.values() {
+            let cid = world::Location::canon_id(loc);
+            if ctx.todo(loc) && !canons_seen.contains(&cid) {
+                canons_seen.insert(cid);
+                let item = world::Location::item(loc);
+                if let Some(val) = map.get_mut(&item) {
+                    *val = *val + 1;
+                } else {
+                    map.insert(item, 1);
+                }
+            }
+        }
+        map.drain().collect()
+    }
+
+    fn should_draw_edge(&self, exit_id: ExitId) -> bool {
+        match exit_id {
+            ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => true,
+            ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => true,
+            ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => true,
+            ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => true,
+            ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1 => true,
+            ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1 => true,
+            ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => true,
+            ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => true,
+            ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => true,
+            ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => true,
+            ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_3__Door__Break_Web => true,
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => true,
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => true,
+            ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => true,
+            ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => true,
+            ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1 => true,
+            ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1 => true,
+            ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1 => true,
+            ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1 => true,
+            ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1 => true,
+            ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1 => true,
+            ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1 => true,
+            ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => true,
+            ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => true,
+            ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => true,
+            ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => true,
+            ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => true,
+            ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1 => true,
+            ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1 => true,
+            ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => true,
+            _ => false,
+        }
+    }
+
+    fn should_draw_spot(&self, spot_id: SpotId) -> bool {
+        match spot_id {
+            SpotId::Deku_Tree__Back_Room__South => true,
+            SpotId::Deku_Tree__Back_Room__Northwest => true,
+            SpotId::Deku_Tree__Back_Room__East => true,
+            SpotId::Deku_Tree__Basement_1__Center => true,
+            SpotId::Deku_Tree__Basement_1__Corner => true,
+            SpotId::Deku_Tree__Basement_1__South_Door => true,
+            SpotId::Deku_Tree__Basement_2__Pool => true,
+            SpotId::Deku_Tree__Basement_2__Boss_Door => true,
+            SpotId::Deku_Tree__Basement_Ledge__Block => true,
+            SpotId::Deku_Tree__Basement_Ledge__Web => true,
+            SpotId::Deku_Tree__Boss_Room__Entry => true,
+            SpotId::Deku_Tree__Boss_Room__Arena => true,
+            SpotId::Deku_Tree__Compass_Room__Entry => true,
+            SpotId::Deku_Tree__Compass_Room__Compass => true,
+            SpotId::Deku_Tree__Compass_Room__Ledge => true,
+            SpotId::Deku_Tree__Floor_2__Lower => true,
+            SpotId::Deku_Tree__Floor_2__Vines => true,
+            SpotId::Deku_Tree__Floor_2__Slingshot_Door => true,
+            SpotId::Deku_Tree__Floor_3__Climb => true,
+            SpotId::Deku_Tree__Floor_3__Door => true,
+            SpotId::Deku_Tree__Lobby__Entry => true,
+            SpotId::Deku_Tree__Lobby__Center => true,
+            SpotId::Deku_Tree__Lobby__Vines => true,
+            SpotId::Deku_Tree__Scrub_Room__Entry => true,
+            SpotId::Deku_Tree__Scrub_Room__Rear => true,
+            SpotId::Deku_Tree__Skull_Room__Entry => true,
+            SpotId::Deku_Tree__Slingshot_Room__Entry => true,
+            SpotId::Deku_Tree__Slingshot_Room__Slingshot => true,
+            SpotId::Deku_Tree__Slingshot_Upper__Ledge => true,
+            SpotId::Kak__Spider_House__Entry => true,
+            SpotId::KF__Baba_Corridor__Village_Side => true,
+            SpotId::KF__Baba_Corridor__Deku_Babas => true,
+            SpotId::KF__Baba_Corridor__Tree_Side => true,
+            SpotId::KF__Boulder_Maze__Entry => true,
+            SpotId::KF__Boulder_Maze__Reward => true,
+            SpotId::KF__Know_it_all_House__Entry => true,
+            SpotId::KF__Kokiri_Village__Links_Porch => true,
+            SpotId::KF__Kokiri_Village__Midos_Porch => true,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch => true,
+            SpotId::KF__Kokiri_Village__Training_Center => true,
+            SpotId::KF__Kokiri_Village__Shop_Porch => true,
+            SpotId::KF__Kokiri_Village__Sarias_Porch => true,
+            SpotId::KF__Kokiri_Village__Midos_Guardpost => true,
+            SpotId::KF__Links_House__Start_Point => true,
+            SpotId::KF__Links_House__Entry => true,
+            SpotId::KF__Midos_House__Entry => true,
+            SpotId::KF__Outside_Deku_Tree__Entry => true,
+            SpotId::KF__Outside_Deku_Tree__Left => true,
+            SpotId::KF__Outside_Deku_Tree__Right => true,
+            SpotId::KF__Outside_Deku_Tree__Mouth => true,
+            SpotId::KF__Shop__Entry => true,
+            _ => false,
+        }
     }
 
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
@@ -1759,25 +1917,145 @@ impl World {
             },
         }
     }
+
+    fn get_unused_items(&self) -> FxHashSet<Item> {
+        match self.rule_victory {
+            RuleVictory::Default => {
+                let mut set = match self.rule_objective {
+                    RuleObjective::Gohma => {
+                        let mut iset = FxHashSet::default();
+                        iset.insert(Item::Arrows_10);
+                        iset.insert(Item::Blue_Fire_Arrows);
+                        iset.insert(Item::Buy_Arrows_10);
+                        iset.insert(Item::Buy_Arrows_30);
+                        iset.insert(Item::Buy_Deku_Seeds_30);
+                        iset.insert(Item::Buy_Heart);
+                        iset.insert(Item::Compass_Deku_Tree);
+                        iset.insert(Item::Defeat_Ganon);
+                        iset.insert(Item::Dins_Fire);
+                        iset.insert(Item::Farores_Wind);
+                        iset.insert(Item::Fire_Arrows);
+                        iset.insert(Item::Goron_Tunic);
+                        iset.insert(Item::Gossip_Stone_Deku_Left);
+                        iset.insert(Item::Gossip_Stone_Deku_Right);
+                        iset.insert(Item::Heart_Container);
+                        iset.insert(Item::Hookshot);
+                        iset.insert(Item::Hover_Boots);
+                        iset.insert(Item::Iron_Boots);
+                        iset.insert(Item::Lens_of_Truth);
+                        iset.insert(Item::Light_Arrows);
+                        iset.insert(Item::Map_Deku_Tree);
+                        iset.insert(Item::Megaton_Hammer);
+                        iset.insert(Item::Minuet_of_Forest);
+                        iset.insert(Item::Mirror_Shield);
+                        iset.insert(Item::Nayrus_Love);
+                        iset.insert(Item::Progressive_Wallet);
+                        iset.insert(Item::Recovery_Heart);
+                        iset.insert(Item::Triforce_Piece);
+                        iset.insert(Item::Zora_Tunic);
+                        iset
+                    }
+                    RuleObjective::Ganon => {
+                        let mut iset = FxHashSet::default();
+                        iset.insert(Item::Arrows_10);
+                        iset.insert(Item::Blue_Fire_Arrows);
+                        iset.insert(Item::Buy_Arrows_10);
+                        iset.insert(Item::Buy_Arrows_30);
+                        iset.insert(Item::Buy_Deku_Seeds_30);
+                        iset.insert(Item::Buy_Heart);
+                        iset.insert(Item::Compass_Deku_Tree);
+                        iset.insert(Item::Dins_Fire);
+                        iset.insert(Item::Farores_Wind);
+                        iset.insert(Item::Fire_Arrows);
+                        iset.insert(Item::Goron_Tunic);
+                        iset.insert(Item::Gossip_Stone_Deku_Left);
+                        iset.insert(Item::Gossip_Stone_Deku_Right);
+                        iset.insert(Item::Heart_Container);
+                        iset.insert(Item::Hookshot);
+                        iset.insert(Item::Hover_Boots);
+                        iset.insert(Item::Iron_Boots);
+                        iset.insert(Item::Kokiri_Emerald);
+                        iset.insert(Item::Lens_of_Truth);
+                        iset.insert(Item::Light_Arrows);
+                        iset.insert(Item::Map_Deku_Tree);
+                        iset.insert(Item::Megaton_Hammer);
+                        iset.insert(Item::Minuet_of_Forest);
+                        iset.insert(Item::Mirror_Shield);
+                        iset.insert(Item::Nayrus_Love);
+                        iset.insert(Item::Progressive_Wallet);
+                        iset.insert(Item::Recovery_Heart);
+                        iset.insert(Item::Triforce_Piece);
+                        iset.insert(Item::Zora_Tunic);
+                        iset
+                    }
+                    RuleObjective::TriforceHunt => {
+                        let mut iset = FxHashSet::default();
+                        iset.insert(Item::Arrows_10);
+                        iset.insert(Item::Blue_Fire_Arrows);
+                        iset.insert(Item::Buy_Arrows_10);
+                        iset.insert(Item::Buy_Arrows_30);
+                        iset.insert(Item::Buy_Deku_Seeds_30);
+                        iset.insert(Item::Buy_Heart);
+                        iset.insert(Item::Compass_Deku_Tree);
+                        iset.insert(Item::Defeat_Ganon);
+                        iset.insert(Item::Dins_Fire);
+                        iset.insert(Item::Farores_Wind);
+                        iset.insert(Item::Fire_Arrows);
+                        iset.insert(Item::Goron_Tunic);
+                        iset.insert(Item::Gossip_Stone_Deku_Left);
+                        iset.insert(Item::Gossip_Stone_Deku_Right);
+                        iset.insert(Item::Heart_Container);
+                        iset.insert(Item::Hookshot);
+                        iset.insert(Item::Hover_Boots);
+                        iset.insert(Item::Iron_Boots);
+                        iset.insert(Item::Kokiri_Emerald);
+                        iset.insert(Item::Lens_of_Truth);
+                        iset.insert(Item::Light_Arrows);
+                        iset.insert(Item::Map_Deku_Tree);
+                        iset.insert(Item::Megaton_Hammer);
+                        iset.insert(Item::Minuet_of_Forest);
+                        iset.insert(Item::Mirror_Shield);
+                        iset.insert(Item::Nayrus_Love);
+                        iset.insert(Item::Progressive_Wallet);
+                        iset.insert(Item::Recovery_Heart);
+                        iset.insert(Item::Zora_Tunic);
+                        iset
+                    }
+                };
+                set
+            }
+        }
+    }
+
+    pub fn update_skippable_locations(&mut self) {
+        let unused_items = self.get_unused_items();
+        for loc in self.locations.values_mut() {
+            let item = world::Location::item(loc);
+            let skippable = unused_item(item) || unused_items.contains(&item);
+            loc.set_skippable(skippable);
+        }
+    }
 }
 
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
         LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => Location {
             id: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
             item: Item::Deku_Stick_Drop,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => Location {
             id: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
             item: Item::Deku_Nut_Drop,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Lobby__Center__Web => Location {
             id: LocationId::Deku_Tree__Lobby__Center__Web,
@@ -1786,38 +2064,43 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => Location {
             id: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Floor_2__Vines__Map_Chest,
             item: Item::Map_Deku_Tree,
             price: Currency::Free,
             time: 3000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => Location {
             id: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Scrub_Room__Entry__Scrub,
             item: Item::Deku_Slingshot_Scrub,
             price: Currency::Free,
             time: 2000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => Location {
             id: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest,
             item: Item::Slingshot,
             price: Currency::Free,
             time: 3000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => Location {
             id: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest,
             item: Item::Recovery_Heart,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Floor_3__Door__Break_Web => Location {
             id: LocationId::Deku_Tree__Floor_3__Door__Break_Web,
@@ -1826,6 +2109,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 0,
             exit_id: Some(ExitId::Deku_Tree__Floor_3__Door__Break_Web),
+            skippable: false,
         },
         LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => Location {
             id: LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web,
@@ -1834,62 +2118,70 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: Some(ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web),
+            skippable: false,
         },
         LocationId::Deku_Tree__Compass_Room__Compass__Chest => Location {
             id: LocationId::Deku_Tree__Compass_Room__Compass__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Compass_Room__Compass__Chest,
             item: Item::Compass_Deku_Tree,
             price: Currency::Free,
             time: 3000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Compass_Room__Ledge__Chest => Location {
             id: LocationId::Deku_Tree__Compass_Room__Ledge__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Compass_Room__Ledge__Chest,
             item: Item::Recovery_Heart,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Compass_Room__Ledge__GS => Location {
             id: LocationId::Deku_Tree__Compass_Room__Ledge__GS,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Compass_Room__Ledge__GS,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_1__Center__Vines_GS => Location {
             id: LocationId::Deku_Tree__Basement_1__Center__Vines_GS,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_1__Center__Vines_GS,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
             time: 2000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Switch => Location {
             id: LocationId::Deku_Tree__Basement_1__Corner__Switch,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_1__Corner__Switch,
             item: Item::Deku_Basement_Switch,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Chest => Location {
             id: LocationId::Deku_Tree__Basement_1__Corner__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_1__Corner__Chest,
             item: Item::Recovery_Heart,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => Location {
             id: LocationId::Deku_Tree__Basement_1__Corner__Gate_GS,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_1__Corner__Gate_GS,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
             time: 2000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => Location {
             id: LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
@@ -1898,38 +2190,43 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: Some(ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web),
+            skippable: false,
         },
         LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => Location {
             id: LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Back_Room__Northwest__Burn_Web,
             item: Item::Deku_Back_Room_Web,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => Location {
             id: LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Back_Room__Northwest__Break_Wall,
             item: Item::Deku_Back_Room_Wall,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Skull_Room__Entry__GS => Location {
             id: LocationId::Deku_Tree__Skull_Room__Entry__GS,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Skull_Room__Entry__GS,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => Location {
             id: LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_Ledge__Block__Push_Block,
             item: Item::Deku_Basement_Block,
             price: Currency::Free,
             time: 4000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => Location {
             id: LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web,
@@ -1938,14 +2235,16 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => Location {
             id: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs,
             item: Item::Deku_Basement_Scrubs,
             price: Currency::Free,
             time: 4000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma => Location {
             id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
@@ -1954,6 +2253,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 10000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => Location {
             id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
@@ -1962,190 +2262,214 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::Free,
             time: 4000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => Location {
             id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart,
             item: Item::Heart_Container,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => Location {
             id: LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp,
             item: Item::Kokiri_Emerald,
             price: Currency::Free,
-            time: 6000,
+            time: 1000,
             exit_id: Some(ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp),
+            skippable: false,
         },
         LocationId::KF__Kokiri_Village__Training_Center__Victory => Location {
             id: LocationId::KF__Kokiri_Village__Training_Center__Victory,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Kokiri_Village__Training_Center__Victory,
             item: Item::Victory,
             price: Currency::Free,
             time: 0,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => Location {
             id: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
             item: Item::Showed_Mido,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Boulder_Maze__Reward__Chest => Location {
             id: LocationId::KF__Boulder_Maze__Reward__Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Boulder_Maze__Reward__Chest,
             item: Item::Kokiri_Sword,
             price: Currency::Free,
             time: 3000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => Location {
             id: LocationId::KF__Baba_Corridor__Deku_Babas__Sticks,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Sticks,
             item: Item::Deku_Stick_Drop,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => Location {
             id: LocationId::KF__Baba_Corridor__Deku_Babas__Nuts,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Nuts,
             item: Item::Deku_Nut_Drop,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => Location {
             id: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone,
             item: Item::Gossip_Stone_Deku_Left,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => Location {
             id: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone,
             item: Item::Gossip_Stone_Deku_Right,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Midos_House__Entry__Top_Left_Chest => Location {
             id: LocationId::KF__Midos_House__Entry__Top_Left_Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Midos_House__Entry__Top_Left_Chest,
             item: Item::Rupees_5,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Midos_House__Entry__Top_Right_Chest => Location {
             id: LocationId::KF__Midos_House__Entry__Top_Right_Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Midos_House__Entry__Top_Right_Chest,
             item: Item::Rupees_50,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => Location {
             id: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Midos_House__Entry__Bottom_Left_Chest,
             item: Item::Rupee_1,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => Location {
             id: LocationId::KF__Midos_House__Entry__Bottom_Right_Chest,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Midos_House__Entry__Bottom_Right_Chest,
             item: Item::Recovery_Heart,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Blue_Rupee => Location {
             id: LocationId::KF__Shop__Entry__Blue_Rupee,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Blue_Rupee,
             item: Item::Rupees_5,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_1 => Location {
             id: LocationId::KF__Shop__Entry__Item_1,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_1,
             item: Item::Buy_Deku_Shield,
             price: Currency::Rupees(40),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_2 => Location {
             id: LocationId::KF__Shop__Entry__Item_2,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_2,
             item: Item::Buy_Deku_Nut_5,
             price: Currency::Rupees(15),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_3 => Location {
             id: LocationId::KF__Shop__Entry__Item_3,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_3,
             item: Item::Buy_Deku_Nut_10,
             price: Currency::Rupees(30),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_4 => Location {
             id: LocationId::KF__Shop__Entry__Item_4,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_4,
             item: Item::Buy_Deku_Stick_1,
             price: Currency::Rupees(10),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_5 => Location {
             id: LocationId::KF__Shop__Entry__Item_5,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_5,
             item: Item::Buy_Deku_Seeds_30,
             price: Currency::Rupees(30),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_6 => Location {
             id: LocationId::KF__Shop__Entry__Item_6,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_6,
             item: Item::Buy_Arrows_10,
             price: Currency::Rupees(20),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_7 => Location {
             id: LocationId::KF__Shop__Entry__Item_7,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_7,
             item: Item::Buy_Arrows_30,
             price: Currency::Rupees(60),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::KF__Shop__Entry__Item_8 => Location {
             id: LocationId::KF__Shop__Entry__Item_8,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_KF__Shop__Entry__Item_8,
             item: Item::Buy_Heart,
             price: Currency::Rupees(10),
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
         LocationId::Kak__Spider_House__Entry__Skulls_10 => Location {
             id: LocationId::Kak__Spider_House__Entry__Skulls_10,
-            canonical: CanonId::None,
+            canonical: CanonId::Loc_Kak__Spider_House__Entry__Skulls_10,
             item: Item::Arrows_10,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
+            skippable: false,
         },
     }
 }

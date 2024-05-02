@@ -522,6 +522,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             2000,
         ),
         (
+            SpotId::Deku_Tree__Back_Room__East,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Back_Room__Northwest,
             SpotId::Deku_Tree__Back_Room__East,
             2236,
@@ -537,6 +542,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Deku_Tree__Back_Room__Northwest,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Back_Room__South,
             SpotId::Deku_Tree__Back_Room__East,
             1414,
@@ -545,6 +555,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Back_Room__South,
             SpotId::Deku_Tree__Back_Room__Northwest,
             2236,
+        ),
+        (
+            SpotId::Deku_Tree__Back_Room__South,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Basement_1__Center,
@@ -562,6 +577,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             6000,
         ),
         (
+            SpotId::Deku_Tree__Basement_1__Center,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Basement_1__Corner,
             SpotId::Deku_Tree__Basement_1__Center,
             1000,
@@ -580,6 +600,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Basement_1__Corner,
             SpotId::Deku_Tree__Basement_Ledge__Web,
             2000,
+        ),
+        (
+            SpotId::Deku_Tree__Basement_1__Corner,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Basement_1__South_Door,
@@ -597,6 +622,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             2000,
         ),
         (
+            SpotId::Deku_Tree__Basement_1__South_Door,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Basement_2__Boss_Door,
             SpotId::Deku_Tree__Basement_2__Pool,
             2000,
@@ -605,6 +635,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Basement_2__Boss_Door,
             SpotId::Deku_Tree__Boss_Room__Entry,
             2000,
+        ),
+        (
+            SpotId::Deku_Tree__Basement_2__Boss_Door,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Basement_2__Pool,
@@ -617,6 +652,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             6000,
         ),
         (
+            SpotId::Deku_Tree__Basement_2__Pool,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Basement_Ledge__Block,
             SpotId::Deku_Tree__Basement_1__Corner,
             1000,
@@ -625,6 +665,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Basement_Ledge__Block,
             SpotId::Deku_Tree__Basement_Ledge__Web,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Basement_Ledge__Block,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Basement_Ledge__Web,
@@ -637,8 +682,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Deku_Tree__Basement_Ledge__Web,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Boss_Room__Arena,
             SpotId::KF__Outside_Deku_Tree__Mouth,
+            8000,
+        ),
+        (
+            SpotId::Deku_Tree__Boss_Room__Arena,
+            SpotId::Lobby__Entry,
             8000,
         ),
         (
@@ -647,9 +702,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Deku_Tree__Boss_Room__Entry,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Compass_Room__Compass,
             SpotId::Deku_Tree__Compass_Room__Entry,
             2000,
+        ),
+        (
+            SpotId::Deku_Tree__Compass_Room__Compass,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Compass_Room__Entry,
@@ -672,9 +737,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             5000,
         ),
         (
+            SpotId::Deku_Tree__Compass_Room__Entry,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Compass_Room__Ledge,
             SpotId::Deku_Tree__Compass_Room__Entry,
             1414,
+        ),
+        (
+            SpotId::Deku_Tree__Compass_Room__Ledge,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Floor_2__Lower,
@@ -695,6 +770,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Floor_2__Lower,
             SpotId::Deku_Tree__Lobby__Vines,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Floor_2__Lower,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Floor_2__Slingshot_Door,
@@ -720,6 +800,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Floor_2__Slingshot_Door,
             SpotId::Deku_Tree__Scrub_Room__Entry,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Floor_2__Slingshot_Door,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Floor_2__Vines,
@@ -752,9 +837,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Deku_Tree__Floor_2__Vines,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Floor_3__Climb,
             SpotId::Deku_Tree__Floor_3__Door,
             2000,
+        ),
+        (
+            SpotId::Deku_Tree__Floor_3__Climb,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Floor_3__Door,
@@ -776,6 +871,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Lobby__Center,
             3000,
         ),
+        (SpotId::Deku_Tree__Floor_3__Door, SpotId::Lobby__Entry, 8000),
         (
             SpotId::Deku_Tree__Lobby__Center,
             SpotId::Deku_Tree__Basement_1__Center,
@@ -796,11 +892,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Lobby__Vines,
             1000,
         ),
+        (SpotId::Deku_Tree__Lobby__Center, SpotId::Lobby__Entry, 8000),
         (
             SpotId::Deku_Tree__Lobby__Entry,
             SpotId::Deku_Tree__Lobby__Center,
             1000,
         ),
+        (SpotId::Deku_Tree__Lobby__Entry, SpotId::Lobby__Entry, 8000),
         (
             SpotId::Deku_Tree__Lobby__Vines,
             SpotId::Deku_Tree__Floor_2__Lower,
@@ -811,6 +909,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Lobby__Center,
             1000,
         ),
+        (SpotId::Deku_Tree__Lobby__Vines, SpotId::Lobby__Entry, 8000),
         (
             SpotId::Deku_Tree__Scrub_Room__Entry,
             SpotId::Deku_Tree__Floor_2__Slingshot_Door,
@@ -822,6 +921,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             2000,
         ),
         (
+            SpotId::Deku_Tree__Scrub_Room__Entry,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Scrub_Room__Rear,
             SpotId::Deku_Tree__Scrub_Room__Entry,
             2000,
@@ -832,9 +936,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Deku_Tree__Scrub_Room__Rear,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Skull_Room__Entry,
             SpotId::Deku_Tree__Back_Room__Northwest,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Skull_Room__Entry,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Slingshot_Room__Entry,
@@ -845,6 +959,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Deku_Tree__Slingshot_Room__Entry,
             SpotId::Deku_Tree__Slingshot_Room__Slingshot,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Slingshot_Room__Entry,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::Deku_Tree__Slingshot_Room__Slingshot,
@@ -857,9 +976,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             4000,
         ),
         (
+            SpotId::Deku_Tree__Slingshot_Room__Slingshot,
+            SpotId::Lobby__Entry,
+            8000,
+        ),
+        (
             SpotId::Deku_Tree__Slingshot_Upper__Ledge,
             SpotId::Deku_Tree__Slingshot_Room__Slingshot,
             1000,
+        ),
+        (
+            SpotId::Deku_Tree__Slingshot_Upper__Ledge,
+            SpotId::Lobby__Entry,
+            8000,
         ),
         (
             SpotId::KF__Baba_Corridor__Deku_Babas,

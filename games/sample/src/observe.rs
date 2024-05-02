@@ -77,7 +77,7 @@ impl Observer for FullObservation {
         full_obs.position = true;
         match world.rule_victory {
             RuleVictory::Default => {
-                rules::observe_access___victory_objective(won, world, &mut full_obs);
+                rules::observe_access___victory_invoke_objective(won, world, &mut full_obs);
             }
         }
         full_obs
@@ -85,313 +85,206 @@ impl Observer for FullObservation {
 
     fn observe_visit(&mut self, loc_id: LocationId) {
         match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Web
+            | LocationId::Deku_Tree__Floor_3__Door__Break_Web
+            | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                self.cbits1
+                    .insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web
+            | LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                self.cbits1
+                    .insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma
+            | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                self.cbits1
+                    .insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
+            }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
                 );
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
-            }
-            LocationId::Deku_Tree__Lobby__Center__Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__LOBBY__CENTER__WEB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__LOBBY__CENTER__WEB);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS,
+                );
             }
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
             }
             LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
             }
             LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
                 );
             }
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
-            }
-            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__FLOOR_3__DOOR__BREAK_WEB);
-            }
-            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__COMPASS_ROOM__ENTRY__BURN_WEB);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST,
+                );
             }
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST,
+                );
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
             }
             LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS,
+                );
             }
             LocationId::Deku_Tree__Basement_1__Corner__Switch => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
             }
             LocationId::Deku_Tree__Basement_1__Corner__Chest => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
             }
             LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
-            }
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_1__CORNER__BURN_BASEMENT_WEB,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS,
                 );
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+                );
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
                 );
             }
             LocationId::Deku_Tree__Skull_Room__Entry__GS => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
             }
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
                 );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
-                );
-            }
-            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_LEDGE__WEB__BURN_WEB);
             }
             LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
-            }
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA);
-            }
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_QUICK_KILL,
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS,
                 );
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART,
+                );
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
+                );
             }
             LocationId::KF__Kokiri_Village__Training_Center__Victory => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+                    flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
                 );
             }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 self.cbits1.insert(
-                    flags::ContextBits1::VISITED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+                    flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
                 );
             }
             LocationId::KF__Boulder_Maze__Reward__Chest => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_KF__BOULDER_MAZE__REWARD__CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__BOULDER_MAZE__REWARD__CHEST);
+                    .insert(flags::ContextBits1::VISITED_LOC_KF__BOULDER_MAZE__REWARD__CHEST);
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+                    .insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
                 self.cbits1
-                    .insert(flags::ContextBits1::VISITED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+                    .insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
             }
             LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+                );
             }
             LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
                 self.cbits2.insert(
-                    flags::ContextBits2::VISITED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+                    flags::ContextBits2::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
                 );
             }
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST,
+                );
             }
             LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST,
+                );
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+                );
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                self.cbits2.insert(
-                    flags::ContextBits2::VISITED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
-                );
-                self.cbits2.insert(
-                    flags::ContextBits2::SKIPPED_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+                self.cbits1.insert(
+                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
                 );
             }
             LocationId::KF__Shop__Entry__Blue_Rupee => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__BLUE_RUPEE);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__BLUE_RUPEE);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE);
             }
             LocationId::KF__Shop__Entry__Item_1 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_1);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_1);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_1);
             }
             LocationId::KF__Shop__Entry__Item_2 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_2);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_2);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_2);
             }
             LocationId::KF__Shop__Entry__Item_3 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_3);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_3);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_3);
             }
             LocationId::KF__Shop__Entry__Item_4 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_4);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_4);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_4);
             }
             LocationId::KF__Shop__Entry__Item_5 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_5);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_5);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_5);
             }
             LocationId::KF__Shop__Entry__Item_6 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_6);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_6);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_6);
             }
             LocationId::KF__Shop__Entry__Item_7 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_7);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_7);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_7);
             }
             LocationId::KF__Shop__Entry__Item_8 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KF__SHOP__ENTRY__ITEM_8);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KF__SHOP__ENTRY__ITEM_8);
+                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_8);
             }
             LocationId::Kak__Spider_House__Entry__Skulls_10 => {
                 self.cbits2
-                    .insert(flags::ContextBits2::VISITED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
-                self.cbits2
-                    .insert(flags::ContextBits2::SKIPPED_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+                    .insert(flags::ContextBits2::VISITED_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
             }
         }
     }
@@ -399,13 +292,19 @@ impl Observer for FullObservation {
     fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
         match item {
             Item::Rupee_1 => {
-                rules::observe_action_rupees_set_min__rupees_add_1_wallet_max(ctx, world, self)
+                rules::observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
+                    ctx, world, self,
+                )
             }
             Item::Rupees_5 => {
-                rules::observe_action_rupees_set_min__rupees_add_5_wallet_max(ctx, world, self)
+                rules::observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
+                    ctx, world, self,
+                )
             }
             Item::Rupees_50 => {
-                rules::observe_action_rupees_set_min__rupees_add_50_wallet_max(ctx, world, self)
+                rules::observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
+                    ctx, world, self,
+                )
             }
             _ => (),
         }

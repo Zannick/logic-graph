@@ -1,6 +1,5 @@
 from collections import Counter, defaultdict
 import logging
-import re
 
 from Utils import construct_id
 
@@ -66,11 +65,11 @@ class ItemVisitor(RulesVisitor):
     visitPerItemBool = visitPerItemNum = visitPerItemStr = _switch_count
 
     # These will either need to check for the items used in the calls,
-    # or the rules could be removed. (Other rules using REF don't use count,
+    # or the rules could be removed. (Other rules using ref don't use count,
     # so it's sufficient to count the provided item as 1 in the calling rule.)
     def _switch_warn(self, ctx):
-        # TODO: check the type of REF, we don't need to warn if the type is not Item
-        if ctx.REF() and ctx.INT():
+        # TODO: check the type of ref, we don't need to warn if the type is not Item
+        if ctx.ref() and ctx.INT():
             logging.warning('Rule %r checks for count of ref: not supported', self.name)
         return self.visitChildren(ctx)
 

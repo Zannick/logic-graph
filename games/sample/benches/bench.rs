@@ -26,8 +26,8 @@ use std::sync::Arc;
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut world = graph::World::new();
     analyzer::world::World::condense_graph(&mut world);
+    world.update_skippable_locations();
     let mut ctx = Context::default();
-    world.skip_unused_items(&mut ctx);
     c.bench_function("can_win_from_scratch", |b| {
         b.iter(|| can_win(&world, &ctx, u32::MAX))
     });
@@ -61,12 +61,6 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         });
     }
 
-    let progress_locations: FxHashSet<_> = world
-        .required_items()
-        .into_iter()
-        .flat_map(|(item, _)| world.get_item_locations(item))
-        .collect();
-
     if let Ok(win) = greedy_search(&world, &ctx, u32::MAX, 2) {
         let sol = Arc::new(Solution {
             elapsed: win.elapsed(),
@@ -75,24 +69,11 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
                 || MatcherTrie::<ObservationMatcher>::default(),
-                |trie| {
-                    record_observations(
-                        ctx.get(),
-                        &world,
-                        sol.clone(),
-                        1,
-                        &progress_locations,
-                        trie,
-                    )
-                },
+                |trie| record_observations(ctx.get(), &world, sol.clone(), 1, trie),
                 BatchSize::SmallInput,
             );
         });
     }
-
-    c.bench_function("minimal playthrough", |b| {
-        b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
-    });
 }
 
 criterion_group! {

@@ -1306,25 +1306,171 @@ impl std::str::FromStr for ActionId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    Default,
     serde_repr::Serialize_repr,
     serde_repr::Deserialize_repr,
 )]
 #[repr(u8)]
 pub enum CanonId {
-    #[default]
-    None,
-    Deku_Lobby_Web,
-    Deku_Basement_Web,
     Defeat_Gohma,
+    Deku_Basement_Web,
+    Deku_Lobby_Web,
+    Loc_Deku_Tree__Back_Room__Northwest__Break_Wall,
+    Loc_Deku_Tree__Back_Room__Northwest__Burn_Web,
+    Loc_Deku_Tree__Basement_1__Center__Vines_GS,
+    Loc_Deku_Tree__Basement_1__Corner__Chest,
+    Loc_Deku_Tree__Basement_1__Corner__Gate_GS,
+    Loc_Deku_Tree__Basement_1__Corner__Switch,
+    Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs,
+    Loc_Deku_Tree__Basement_Ledge__Block__Push_Block,
+    Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp,
+    Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart,
+    Loc_Deku_Tree__Compass_Room__Compass__Chest,
+    Loc_Deku_Tree__Compass_Room__Ledge__Chest,
+    Loc_Deku_Tree__Compass_Room__Ledge__GS,
+    Loc_Deku_Tree__Floor_2__Vines__Map_Chest,
+    Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
+    Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
+    Loc_Deku_Tree__Scrub_Room__Entry__Scrub,
+    Loc_Deku_Tree__Skull_Room__Entry__GS,
+    Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest,
+    Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest,
+    Loc_Kak__Spider_House__Entry__Skulls_10,
+    Loc_KF__Baba_Corridor__Deku_Babas__Nuts,
+    Loc_KF__Baba_Corridor__Deku_Babas__Sticks,
+    Loc_KF__Boulder_Maze__Reward__Chest,
+    Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
+    Loc_KF__Kokiri_Village__Training_Center__Victory,
+    Loc_KF__Midos_House__Entry__Bottom_Left_Chest,
+    Loc_KF__Midos_House__Entry__Bottom_Right_Chest,
+    Loc_KF__Midos_House__Entry__Top_Left_Chest,
+    Loc_KF__Midos_House__Entry__Top_Right_Chest,
+    Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone,
+    Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone,
+    Loc_KF__Shop__Entry__Blue_Rupee,
+    Loc_KF__Shop__Entry__Item_1,
+    Loc_KF__Shop__Entry__Item_2,
+    Loc_KF__Shop__Entry__Item_3,
+    Loc_KF__Shop__Entry__Item_4,
+    Loc_KF__Shop__Entry__Item_5,
+    Loc_KF__Shop__Entry__Item_6,
+    Loc_KF__Shop__Entry__Item_7,
+    Loc_KF__Shop__Entry__Item_8,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            CanonId::None => write!(f, "{}", "None"),
-            CanonId::Deku_Lobby_Web => write!(f, "{}", "Deku_Lobby_Web"),
-            CanonId::Deku_Basement_Web => write!(f, "{}", "Deku_Basement_Web"),
             CanonId::Defeat_Gohma => write!(f, "{}", "Defeat_Gohma"),
+            CanonId::Deku_Basement_Web => write!(f, "{}", "Deku_Basement_Web"),
+            CanonId::Deku_Lobby_Web => write!(f, "{}", "Deku_Lobby_Web"),
+            CanonId::Loc_Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                write!(f, "{}", "Loc_Deku_Tree__Back_Room__Northwest__Break_Wall")
+            }
+            CanonId::Loc_Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                write!(f, "{}", "Loc_Deku_Tree__Back_Room__Northwest__Burn_Web")
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Center__Vines_GS => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_1__Center__Vines_GS")
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_1__Corner__Chest")
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Gate_GS => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_1__Corner__Gate_GS")
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Switch => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_1__Corner__Switch")
+            }
+            CanonId::Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs")
+            }
+            CanonId::Loc_Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                write!(f, "{}", "Loc_Deku_Tree__Basement_Ledge__Block__Push_Block")
+            }
+            CanonId::Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                write!(f, "{}", "Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp")
+            }
+            CanonId::Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                write!(f, "{}", "Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart")
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Compass__Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Compass_Room__Compass__Chest")
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Ledge__Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Compass_Room__Ledge__Chest")
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Ledge__GS => {
+                write!(f, "{}", "Loc_Deku_Tree__Compass_Room__Ledge__GS")
+            }
+            CanonId::Loc_Deku_Tree__Floor_2__Vines__Map_Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Floor_2__Vines__Map_Chest")
+            }
+            CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                write!(f, "{}", "Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts")
+            }
+            CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                write!(f, "{}", "Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks")
+            }
+            CanonId::Loc_Deku_Tree__Scrub_Room__Entry__Scrub => {
+                write!(f, "{}", "Loc_Deku_Tree__Scrub_Room__Entry__Scrub")
+            }
+            CanonId::Loc_Deku_Tree__Skull_Room__Entry__GS => {
+                write!(f, "{}", "Loc_Deku_Tree__Skull_Room__Entry__GS")
+            }
+            CanonId::Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest")
+            }
+            CanonId::Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                write!(f, "{}", "Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest")
+            }
+            CanonId::Loc_Kak__Spider_House__Entry__Skulls_10 => {
+                write!(f, "{}", "Loc_Kak__Spider_House__Entry__Skulls_10")
+            }
+            CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Nuts => {
+                write!(f, "{}", "Loc_KF__Baba_Corridor__Deku_Babas__Nuts")
+            }
+            CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Sticks => {
+                write!(f, "{}", "Loc_KF__Baba_Corridor__Deku_Babas__Sticks")
+            }
+            CanonId::Loc_KF__Boulder_Maze__Reward__Chest => {
+                write!(f, "{}", "Loc_KF__Boulder_Maze__Reward__Chest")
+            }
+            CanonId::Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido => write!(
+                f,
+                "{}",
+                "Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido"
+            ),
+            CanonId::Loc_KF__Kokiri_Village__Training_Center__Victory => {
+                write!(f, "{}", "Loc_KF__Kokiri_Village__Training_Center__Victory")
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Bottom_Left_Chest => {
+                write!(f, "{}", "Loc_KF__Midos_House__Entry__Bottom_Left_Chest")
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Bottom_Right_Chest => {
+                write!(f, "{}", "Loc_KF__Midos_House__Entry__Bottom_Right_Chest")
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Top_Left_Chest => {
+                write!(f, "{}", "Loc_KF__Midos_House__Entry__Top_Left_Chest")
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Top_Right_Chest => {
+                write!(f, "{}", "Loc_KF__Midos_House__Entry__Top_Right_Chest")
+            }
+            CanonId::Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                write!(f, "{}", "Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone")
+            }
+            CanonId::Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                write!(f, "{}", "Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone")
+            }
+            CanonId::Loc_KF__Shop__Entry__Blue_Rupee => {
+                write!(f, "{}", "Loc_KF__Shop__Entry__Blue_Rupee")
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_1 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_1"),
+            CanonId::Loc_KF__Shop__Entry__Item_2 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_2"),
+            CanonId::Loc_KF__Shop__Entry__Item_3 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_3"),
+            CanonId::Loc_KF__Shop__Entry__Item_4 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_4"),
+            CanonId::Loc_KF__Shop__Entry__Item_5 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_5"),
+            CanonId::Loc_KF__Shop__Entry__Item_6 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_6"),
+            CanonId::Loc_KF__Shop__Entry__Item_7 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_7"),
+            CanonId::Loc_KF__Shop__Entry__Item_8 => write!(f, "{}", "Loc_KF__Shop__Entry__Item_8"),
         }
     }
 }
@@ -1334,9 +1480,114 @@ impl std::str::FromStr for CanonId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Deku_Lobby_Web" => Ok(CanonId::Deku_Lobby_Web),
-            "Deku_Basement_Web" => Ok(CanonId::Deku_Basement_Web),
             "Defeat_Gohma" => Ok(CanonId::Defeat_Gohma),
+            "Deku_Basement_Web" => Ok(CanonId::Deku_Basement_Web),
+            "Deku_Lobby_Web" => Ok(CanonId::Deku_Lobby_Web),
+            "Loc_Deku_Tree__Back_Room__Northwest__Break_Wall" => {
+                Ok(CanonId::Loc_Deku_Tree__Back_Room__Northwest__Break_Wall)
+            }
+            "Loc_Deku_Tree__Back_Room__Northwest__Burn_Web" => {
+                Ok(CanonId::Loc_Deku_Tree__Back_Room__Northwest__Burn_Web)
+            }
+            "Loc_Deku_Tree__Basement_1__Center__Vines_GS" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_1__Center__Vines_GS)
+            }
+            "Loc_Deku_Tree__Basement_1__Corner__Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_1__Corner__Chest)
+            }
+            "Loc_Deku_Tree__Basement_1__Corner__Gate_GS" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_1__Corner__Gate_GS)
+            }
+            "Loc_Deku_Tree__Basement_1__Corner__Switch" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_1__Corner__Switch)
+            }
+            "Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs)
+            }
+            "Loc_Deku_Tree__Basement_Ledge__Block__Push_Block" => {
+                Ok(CanonId::Loc_Deku_Tree__Basement_Ledge__Block__Push_Block)
+            }
+            "Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp" => {
+                Ok(CanonId::Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp)
+            }
+            "Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart" => {
+                Ok(CanonId::Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart)
+            }
+            "Loc_Deku_Tree__Compass_Room__Compass__Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Compass_Room__Compass__Chest)
+            }
+            "Loc_Deku_Tree__Compass_Room__Ledge__Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Compass_Room__Ledge__Chest)
+            }
+            "Loc_Deku_Tree__Compass_Room__Ledge__GS" => {
+                Ok(CanonId::Loc_Deku_Tree__Compass_Room__Ledge__GS)
+            }
+            "Loc_Deku_Tree__Floor_2__Vines__Map_Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Floor_2__Vines__Map_Chest)
+            }
+            "Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts" => {
+                Ok(CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts)
+            }
+            "Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks" => {
+                Ok(CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks)
+            }
+            "Loc_Deku_Tree__Scrub_Room__Entry__Scrub" => {
+                Ok(CanonId::Loc_Deku_Tree__Scrub_Room__Entry__Scrub)
+            }
+            "Loc_Deku_Tree__Skull_Room__Entry__GS" => {
+                Ok(CanonId::Loc_Deku_Tree__Skull_Room__Entry__GS)
+            }
+            "Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest)
+            }
+            "Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest" => {
+                Ok(CanonId::Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest)
+            }
+            "Loc_Kak__Spider_House__Entry__Skulls_10" => {
+                Ok(CanonId::Loc_Kak__Spider_House__Entry__Skulls_10)
+            }
+            "Loc_KF__Baba_Corridor__Deku_Babas__Nuts" => {
+                Ok(CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Nuts)
+            }
+            "Loc_KF__Baba_Corridor__Deku_Babas__Sticks" => {
+                Ok(CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Sticks)
+            }
+            "Loc_KF__Boulder_Maze__Reward__Chest" => {
+                Ok(CanonId::Loc_KF__Boulder_Maze__Reward__Chest)
+            }
+            "Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido" => {
+                Ok(CanonId::Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido)
+            }
+            "Loc_KF__Kokiri_Village__Training_Center__Victory" => {
+                Ok(CanonId::Loc_KF__Kokiri_Village__Training_Center__Victory)
+            }
+            "Loc_KF__Midos_House__Entry__Bottom_Left_Chest" => {
+                Ok(CanonId::Loc_KF__Midos_House__Entry__Bottom_Left_Chest)
+            }
+            "Loc_KF__Midos_House__Entry__Bottom_Right_Chest" => {
+                Ok(CanonId::Loc_KF__Midos_House__Entry__Bottom_Right_Chest)
+            }
+            "Loc_KF__Midos_House__Entry__Top_Left_Chest" => {
+                Ok(CanonId::Loc_KF__Midos_House__Entry__Top_Left_Chest)
+            }
+            "Loc_KF__Midos_House__Entry__Top_Right_Chest" => {
+                Ok(CanonId::Loc_KF__Midos_House__Entry__Top_Right_Chest)
+            }
+            "Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone" => {
+                Ok(CanonId::Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone)
+            }
+            "Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone" => {
+                Ok(CanonId::Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone)
+            }
+            "Loc_KF__Shop__Entry__Blue_Rupee" => Ok(CanonId::Loc_KF__Shop__Entry__Blue_Rupee),
+            "Loc_KF__Shop__Entry__Item_1" => Ok(CanonId::Loc_KF__Shop__Entry__Item_1),
+            "Loc_KF__Shop__Entry__Item_2" => Ok(CanonId::Loc_KF__Shop__Entry__Item_2),
+            "Loc_KF__Shop__Entry__Item_3" => Ok(CanonId::Loc_KF__Shop__Entry__Item_3),
+            "Loc_KF__Shop__Entry__Item_4" => Ok(CanonId::Loc_KF__Shop__Entry__Item_4),
+            "Loc_KF__Shop__Entry__Item_5" => Ok(CanonId::Loc_KF__Shop__Entry__Item_5),
+            "Loc_KF__Shop__Entry__Item_6" => Ok(CanonId::Loc_KF__Shop__Entry__Item_6),
+            "Loc_KF__Shop__Entry__Item_7" => Ok(CanonId::Loc_KF__Shop__Entry__Item_7),
+            "Loc_KF__Shop__Entry__Item_8" => Ok(CanonId::Loc_KF__Shop__Entry__Item_8),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
     }

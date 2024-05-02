@@ -39,7 +39,7 @@ class HelperVisitor(RulesVisitor):
             # TODO: if the setting is a dict
             return self.settings[s]['type']
         else:
-            ref = self._getFullRef(str(valueCtx.REF())[1:])
+            ref = self._getFullRef(str(valueCtx.ref().REF()[-1])[1:])
             if ref in self.context_types:
                 return self.context_types[ref]
             elif ref in self.data_types:
