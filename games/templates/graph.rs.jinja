@@ -301,7 +301,9 @@ impl world::Action for Action {
                 rules::action_{{ act.after_id }}(ctx, world);
 %% endif
 %% for tile in act.tiles
+%% if tile in used_map_tiles
                 ctx.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
 %% endfor
             }
 %% endif

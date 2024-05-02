@@ -651,9 +651,12 @@ class GameLogic(object):
         self.context_str_values = cv.values
         self.swap_pairs = cv.swap_pairs
         self.named_spots.update(cv.named_spots)
+        self.used_map_tiles = cv.used_map_tiles
+        self.unused_map_tiles = self.all_map_tiles - self.used_map_tiles
 
     def process_bitflags(self):
-        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts, self.canon_places)
+        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts,
+                                    self.canon_places, self.unused_map_tiles)
         self.bfp.process()
 
     def process_special(self):
@@ -1437,6 +1440,7 @@ class GameLogic(object):
             elif hints['type'] == 'bool':
                 gc[ctx] = False
 
+        self.all_map_tiles = set()
         for area in self.areas():
             if 'map' not in area:
                 continue
@@ -1448,6 +1452,7 @@ class GameLogic(object):
                 if k in gc:
                     self._errors.append(f'Name conflict: cannot define "{k}" and map tile "{tilename}" in {area["fullname"]}')
                 else:
+                    self.all_map_tiles.add(k)
                     gc[k] = False
 
         def _check_shadow(ctx, category, *names):

@@ -9,11 +9,12 @@ MAX_GROUP_SIZE = 64
 
 class BitFlagProcessor(object):
 
-    def __init__(self, context_values, settings, item_max_counts, canon_places):
+    def __init__(self, context_values, settings, item_max_counts, canon_places, unused_map_tiles):
         self.context_values = context_values
         self.settings = settings
         self.item_max_counts = item_max_counts
         self.canon_places = canon_places
+        self.unused_map_tiles = unused_map_tiles
         self.flag_groups = []
         self.varmap = {}
         self.visit_groups = None
@@ -26,7 +27,8 @@ class BitFlagProcessor(object):
         self.skip_region_groups = {}
 
     def process(self):
-        context_vars = [c for c, val in self.context_values.items() if typenameof(val) == 'bool']
+        context_vars = [c for c, val in self.context_values.items()
+                        if typenameof(val) == 'bool' and c not in self.unused_map_tiles]
         items = sorted(i for i, n in self.item_max_counts.items() if n == 1)
         visits = sorted('VISITED_' + canon for canon in self.canon_places)
         basic = context_vars + items

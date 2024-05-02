@@ -21,6 +21,7 @@ class ContextVisitor(RulesVisitor):
         }
         self.swap_pairs = set()
         self.named_spots = set()
+        self.used_map_tiles = set()
         self.ref = ''
 
     def visit(self, tree, name:str ='', ctxdict=None, local_types=None):
@@ -41,6 +42,8 @@ class ContextVisitor(RulesVisitor):
     def _checkRef(self, ref):
         if ref not in self.ctxdict and ref not in self.local_types:
             self.errors.append(f'Undefined ctx property ^{ref} in {self.name}')
+        if ref in self.ctxdict and ref.startswith('map__'):
+            self.used_map_tiles.add(ref)
 
     def _getType(self, ref):
         if ref not in self.context_types and ref not in self.data_types and ref not in self.local_types:

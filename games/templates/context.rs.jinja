@@ -283,7 +283,9 @@ impl context::Ctx for Context {
 %% if ex.tiles
             ExitId::{{ ex.id }} => {
 %% for tile in ex.tiles
+%% if tile in used_map_tiles
                 self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
 %% endfor
             }
 %% endif
@@ -327,7 +329,9 @@ impl context::Ctx for Context {
                     rules::action_{{ place.action_id }}(self, world, pos);
 %% endif
 %% for tile in place.tiles
+%% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
 %% endfor
                 }
             }
@@ -343,7 +347,9 @@ impl context::Ctx for Context {
 %% set spot = id_lookup[s]
                 SpotId::{{ s }} => {
 %% for tile in spot.tiles
+%% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
 %% endfor
 %% for c, val in context_trigger_rules.enter['spot'].get(s, {}).items()
 %% if c in bfp.varmap
@@ -455,7 +461,9 @@ impl context::Ctx for Context {
             LocationId::{{ loc.id }} => {
                 self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
 %% for tile in loc.tiles
+%% if tile in used_map_tiles
                 self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
 %% endfor
             }
 %% endfor
