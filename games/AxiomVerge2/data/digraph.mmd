@@ -1522,6 +1522,15 @@ subgraph Glacier
         Glacier__Ledge_Grab_Room__Lower_Platform(Lower Platform);
         Glacier__Ledge_Grab_Room__Upper_Platform(Upper Platform);
         Glacier__Ledge_Grab_Room__Fork(Fork);
+        Glacier__Ledge_Grab_Room__Upper_Grate_Right(Upper Grate Right);
+        Glacier__Ledge_Grab_Room__Upper_Grate_Left(Upper Grate Left);
+        Glacier__Ledge_Grab_Room__North(North);
+        Glacier__Ledge_Grab_Room__Upper_Mid_air(Upper Mid-air);
+        Glacier__Ledge_Grab_Room__Upper_Hill(Upper Hill);
+        Glacier__Ledge_Grab_Room__Upper_Path(Upper Path);
+        Glacier__Ledge_Grab_Room__Upper_at_Wall(Upper at Wall);
+        Glacier__Ledge_Grab_Room__Northwest_Ledge(Northwest Ledge);
+        Glacier__Ledge_Grab_Room__West_9(West 9);
     end
     subgraph Glacier__Peak[Peak]
         Glacier__Peak__East_8(East 8);
@@ -1531,6 +1540,8 @@ subgraph Glacier
         Glacier__Peak__West_Cliff(West Cliff);
         Glacier__Peak__Under_West_Cliff(Under West Cliff);
         Glacier__Peak__West_8(West 8);
+        Glacier__Peak__South(South);
+        Glacier__Peak__Birds_Eye(Bird's Eye);
     end
     subgraph Glacier__Grid_32_7_10[Grid 32,7-10]
         Glacier__Grid_32_7_10__East_8(East 8);
@@ -1539,6 +1550,9 @@ subgraph Glacier
         Glacier__Grid_32_7_10__Left_Rock(Left Rock);
         Glacier__Grid_32_7_10__West_9(West 9);
         Glacier__Grid_32_7_10__West_10(West 10);
+        Glacier__Grid_32_7_10__Grate_Left(Grate Left);
+        Glacier__Grid_32_7_10__Grate_Left_Upper(Grate Left Upper);
+        Glacier__Grid_32_7_10__East_9(East 9);
     end
     subgraph Glacier__Grid_31_9_12[Grid 31,9-12]
         Glacier__Grid_31_9_12__East_9(East 9);
@@ -1907,6 +1921,7 @@ subgraph Menu
         Menu__Kiengir_Map__Apocalypse_Cache(Apocalypse Cache);
         Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
         Menu__Kiengir_Map__Glacier_40_8(Glacier 40,8);
+        Menu__Kiengir_Map__Glacier_Peak_Birds_Eye(Glacier Peak Bird's Eye);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2859,6 +2874,9 @@ Glacier__Dock_Outside__Upper_West_Hill <--> Glacier__Revival__Pillar_Step
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8
+Glacier__Grid_32_7_10__East_9 <--> Glacier__Grid_32_7_10__Grate_Left
+Glacier__Grid_32_7_10__East_9 <--> Glacier__Ledge_Grab_Room__West_9
+Glacier__Grid_32_7_10__Grate_Left_Upper --> Glacier__Grid_32_7_10__East_9
 Glacier__Grid_32_7_10__Left_Rock --> Glacier__Grid_32_7_10__Column
 Glacier__Grid_32_7_10__West_10 --> Glacier__Grid_32_7_10__Left_Rock
 Glacier__Grid_37_38_9__East <--> Glacier__Grid_39_40_7_9__West
@@ -2910,8 +2928,14 @@ Glacier__Ledge_Grab_Room__Lower_Platform --> Glacier__Ledge_Grab_Room__Upper_Pla
 Glacier__Ledge_Grab_Room__Lower_Platform --> Glacier__Ledge_Grab_Room__West_End
 Glacier__Ledge_Grab_Room__Mid_34 --> Glacier__Ledge_Grab_Room__Lower_Platform
 Glacier__Ledge_Grab_Room__Mid_35 --> Glacier__Ledge_Grab_Room__Fork
+Glacier__Ledge_Grab_Room__North <--> Glacier__Peak__South
 Glacier__Ledge_Grab_Room__Pedestal --> Glacier__Ledge_Grab_Room__West_End
+Glacier__Ledge_Grab_Room__Upper_Grate_Left <--> Glacier__Ledge_Grab_Room__Upper_Grate_Right
+Glacier__Ledge_Grab_Room__Upper_Grate_Right --> Glacier__Ledge_Grab_Room__North
+Glacier__Ledge_Grab_Room__Upper_Mid_air --> Glacier__Ledge_Grab_Room__North
+Glacier__Ledge_Grab_Room__Upper_Path --> Glacier__Ledge_Grab_Room__Northwest_Ledge
 Glacier__Ledge_Grab_Room__Upper_Platform --> Glacier__Ledge_Grab_Room__Fork
+Glacier__Ledge_Grab_Room__Upper_at_Wall --> Glacier__Ledge_Grab_Room__Northwest_Ledge
 Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
 Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform

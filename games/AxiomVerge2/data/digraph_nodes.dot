@@ -1186,6 +1186,9 @@
         Glacier__Grid_32_7_10__Left_Rock [label = "", pos = "96.9,-14.333333!"];
         Glacier__Grid_32_7_10__West_9 [label = "", pos = "96.15,-14.25!"];
         Glacier__Grid_32_7_10__West_10 [label = "", pos = "96.15,-15.458333!"];
+        Glacier__Grid_32_7_10__Grate_Left [label = "", pos = "98.4,-14.166667!"];
+        Glacier__Grid_32_7_10__Grate_Left_Upper [label = "", pos = "98.4,-13.833333!"];
+        Glacier__Grid_32_7_10__East_9 [label = "", pos = "98.85,-14.166667!"];
         Glacier__Grid_37_38_9__East [label = "", pos = "116.85,-14.416667!"];
         Glacier__Grid_37_38_9__West [label = "", pos = "111.15,-14.583333!"];
         Glacier__Grid_39_40_7_9__Upper_East [label = "", pos = "122.85,-13.25!"];
@@ -1248,6 +1251,15 @@
         Glacier__Ledge_Grab_Room__Lower_Platform [label = "", pos = "103.2,-16.833333!"];
         Glacier__Ledge_Grab_Room__Upper_Platform [label = "", pos = "103.5,-15.916667!"];
         Glacier__Ledge_Grab_Room__Fork [label = "", pos = "105.0,-15.166667!"];
+        Glacier__Ledge_Grab_Room__Upper_Grate_Right [label = "", pos = "104.25,-14.166667!"];
+        Glacier__Ledge_Grab_Room__Upper_Grate_Left [label = "", pos = "103.95,-14.166667!"];
+        Glacier__Ledge_Grab_Room__North [label = "", pos = "103.5,-13.666667!"];
+        Glacier__Ledge_Grab_Room__Upper_Mid_air [label = "", pos = "103.5,-14.083333!"];
+        Glacier__Ledge_Grab_Room__Upper_Hill [label = "", pos = "103.35,-14.25!"];
+        Glacier__Ledge_Grab_Room__Upper_Path [label = "", pos = "100.8,-15.166667!"];
+        Glacier__Ledge_Grab_Room__Upper_at_Wall [label = "", pos = "99.75,-14.916667!"];
+        Glacier__Ledge_Grab_Room__Northwest_Ledge [label = "", pos = "99.45,-14.333333!"];
+        Glacier__Ledge_Grab_Room__West_9 [label = "", pos = "99.15,-14.166667!"];
         Glacier__Peak__East_8 [label = "", pos = "107.85,-12.916667!"];
         Glacier__Peak__Top_Platform_East [label = "", pos = "105.3,-10.083333!"];
         Glacier__Peak__Top_Rock [label = "", pos = "103.8,-9.833333!"];
@@ -1255,6 +1267,8 @@
         Glacier__Peak__West_Cliff [label = "", pos = "100.95,-10.916667!"];
         Glacier__Peak__Under_West_Cliff [label = "", pos = "100.8,-12.0!"];
         Glacier__Peak__West_8 [label = "", pos = "99.15,-12.916667!"];
+        Glacier__Peak__South [label = "", pos = "103.5,-13.0!"];
+        Glacier__Peak__Birds_Eye [label = "", pos = "103.8,-13.0!"];
         Glacier__Revival__East_9 [label = "", pos = "125.85,-14.166667!"];
         Glacier__Revival__Overhang [label = "", pos = "124.8,-14.166667!"];
         Glacier__Revival__Ledge [label = "", pos = "123.9,-14.666667!"];

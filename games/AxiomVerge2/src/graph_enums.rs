@@ -1828,6 +1828,9 @@ pub enum SpotId {
     Glacier__Grid_32_7_10__Center_Platform,
     Glacier__Grid_32_7_10__Column,
     Glacier__Grid_32_7_10__East_8,
+    Glacier__Grid_32_7_10__East_9,
+    Glacier__Grid_32_7_10__Grate_Left,
+    Glacier__Grid_32_7_10__Grate_Left_Upper,
     Glacier__Grid_32_7_10__Left_Rock,
     Glacier__Grid_32_7_10__West_10,
     Glacier__Grid_32_7_10__West_9,
@@ -1890,11 +1893,22 @@ pub enum SpotId {
     Glacier__Ledge_Grab_Room__Lower_Platform,
     Glacier__Ledge_Grab_Room__Mid_34,
     Glacier__Ledge_Grab_Room__Mid_35,
+    Glacier__Ledge_Grab_Room__North,
+    Glacier__Ledge_Grab_Room__Northwest_Ledge,
     Glacier__Ledge_Grab_Room__Pedestal,
+    Glacier__Ledge_Grab_Room__Upper_at_Wall,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Left,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Right,
+    Glacier__Ledge_Grab_Room__Upper_Hill,
+    Glacier__Ledge_Grab_Room__Upper_Mid_air,
+    Glacier__Ledge_Grab_Room__Upper_Path,
     Glacier__Ledge_Grab_Room__Upper_Platform,
+    Glacier__Ledge_Grab_Room__West_9,
     Glacier__Ledge_Grab_Room__West_End,
+    Glacier__Peak__Birds_Eye,
     Glacier__Peak__East_8,
     Glacier__Peak__Highest_Platform,
+    Glacier__Peak__South,
     Glacier__Peak__Top_Platform_East,
     Glacier__Peak__Top_Rock,
     Glacier__Peak__Under_West_Cliff,
@@ -2275,6 +2289,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Giguna_Separator,
     Menu__Kiengir_Map__Glacier_40_8,
     Menu__Kiengir_Map__Glacier_Dock_Flask,
+    Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
     Menu__Kiengir_Map__Glacier_Revival,
     Menu__Kiengir_Map__Hammond,
     Menu__Kiengir_Map__Infect,
@@ -5155,6 +5170,15 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Grid_32_7_10__East_8 => {
                 write!(f, "{}", "Glacier > Grid 32,7-10 > East 8")
             }
+            SpotId::Glacier__Grid_32_7_10__East_9 => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > East 9")
+            }
+            SpotId::Glacier__Grid_32_7_10__Grate_Left => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left")
+            }
+            SpotId::Glacier__Grid_32_7_10__Grate_Left_Upper => {
+                write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left Upper")
+            }
             SpotId::Glacier__Grid_32_7_10__Left_Rock => {
                 write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock")
             }
@@ -5331,19 +5355,48 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Ledge_Grab_Room__Mid_35 => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35")
             }
+            SpotId::Glacier__Ledge_Grab_Room__North => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > North")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Northwest_Ledge => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Northwest Ledge")
+            }
             SpotId::Glacier__Ledge_Grab_Room__Pedestal => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_at_Wall => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper at Wall")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Left => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Left")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Right => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Right")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Hill => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Hill")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Mid_air => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Mid-air")
+            }
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Path => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > Upper Path")
             }
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform")
             }
+            SpotId::Glacier__Ledge_Grab_Room__West_9 => {
+                write!(f, "{}", "Glacier > Ledge Grab Room > West 9")
+            }
             SpotId::Glacier__Ledge_Grab_Room__West_End => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > West End")
             }
+            SpotId::Glacier__Peak__Birds_Eye => write!(f, "{}", "Glacier > Peak > Bird's Eye"),
             SpotId::Glacier__Peak__East_8 => write!(f, "{}", "Glacier > Peak > East 8"),
             SpotId::Glacier__Peak__Highest_Platform => {
                 write!(f, "{}", "Glacier > Peak > Highest Platform")
             }
+            SpotId::Glacier__Peak__South => write!(f, "{}", "Glacier > Peak > South"),
             SpotId::Glacier__Peak__Top_Platform_East => {
                 write!(f, "{}", "Glacier > Peak > Top Platform East")
             }
@@ -6377,6 +6430,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Dock Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier Peak Bird's Eye")
             }
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
@@ -8640,6 +8696,11 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Grid 32,7-10 > Column" => Ok(SpotId::Glacier__Grid_32_7_10__Column),
             "Glacier > Grid 32,7-10 > East 8" => Ok(SpotId::Glacier__Grid_32_7_10__East_8),
+            "Glacier > Grid 32,7-10 > East 9" => Ok(SpotId::Glacier__Grid_32_7_10__East_9),
+            "Glacier > Grid 32,7-10 > Grate Left" => Ok(SpotId::Glacier__Grid_32_7_10__Grate_Left),
+            "Glacier > Grid 32,7-10 > Grate Left Upper" => {
+                Ok(SpotId::Glacier__Grid_32_7_10__Grate_Left_Upper)
+            }
             "Glacier > Grid 32,7-10 > Left Rock" => Ok(SpotId::Glacier__Grid_32_7_10__Left_Rock),
             "Glacier > Grid 32,7-10 > West 10" => Ok(SpotId::Glacier__Grid_32_7_10__West_10),
             "Glacier > Grid 32,7-10 > West 9" => Ok(SpotId::Glacier__Grid_32_7_10__West_9),
@@ -8774,17 +8835,42 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Ledge Grab Room > Mid 34" => Ok(SpotId::Glacier__Ledge_Grab_Room__Mid_34),
             "Glacier > Ledge Grab Room > Mid 35" => Ok(SpotId::Glacier__Ledge_Grab_Room__Mid_35),
+            "Glacier > Ledge Grab Room > North" => Ok(SpotId::Glacier__Ledge_Grab_Room__North),
+            "Glacier > Ledge Grab Room > Northwest Ledge" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Northwest_Ledge)
+            }
             "Glacier > Ledge Grab Room > Pedestal" => {
                 Ok(SpotId::Glacier__Ledge_Grab_Room__Pedestal)
+            }
+            "Glacier > Ledge Grab Room > Upper at Wall" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_at_Wall)
+            }
+            "Glacier > Ledge Grab Room > Upper Grate Left" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Left)
+            }
+            "Glacier > Ledge Grab Room > Upper Grate Right" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Right)
+            }
+            "Glacier > Ledge Grab Room > Upper Hill" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Hill)
+            }
+            "Glacier > Ledge Grab Room > Upper Mid-air" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Mid_air)
+            }
+            "Glacier > Ledge Grab Room > Upper Path" => {
+                Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Path)
             }
             "Glacier > Ledge Grab Room > Upper Platform" => {
                 Ok(SpotId::Glacier__Ledge_Grab_Room__Upper_Platform)
             }
+            "Glacier > Ledge Grab Room > West 9" => Ok(SpotId::Glacier__Ledge_Grab_Room__West_9),
             "Glacier > Ledge Grab Room > West End" => {
                 Ok(SpotId::Glacier__Ledge_Grab_Room__West_End)
             }
+            "Glacier > Peak > Bird's Eye" => Ok(SpotId::Glacier__Peak__Birds_Eye),
             "Glacier > Peak > East 8" => Ok(SpotId::Glacier__Peak__East_8),
             "Glacier > Peak > Highest Platform" => Ok(SpotId::Glacier__Peak__Highest_Platform),
+            "Glacier > Peak > South" => Ok(SpotId::Glacier__Peak__South),
             "Glacier > Peak > Top Platform East" => Ok(SpotId::Glacier__Peak__Top_Platform_East),
             "Glacier > Peak > Top Rock" => Ok(SpotId::Glacier__Peak__Top_Rock),
             "Glacier > Peak > Under West Cliff" => Ok(SpotId::Glacier__Peak__Under_West_Cliff),
@@ -9547,6 +9633,9 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Glacier Dock Flask" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask)
             }
+            "Menu > Kiengir Map > Glacier Peak Bird's Eye" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye)
+            }
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
@@ -10030,6 +10119,7 @@ pub enum LocationId {
     Glacier__Hammonds_End__Hammond__Note,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
+    Glacier__Peak__Birds_Eye__Item,
     Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
     Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
     Glacier__Revival__Pillar__Health,
@@ -10353,6 +10443,7 @@ impl fmt::Display for LocationId {
             LocationId::Glacier__Hammonds_End__Hammond__Note => write!(f, "{}", "Glacier > Hammond's End > Hammond > Note"),
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"),
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item"),
+            LocationId::Glacier__Peak__Birds_Eye__Item => write!(f, "{}", "Glacier > Peak > Bird's Eye > Item"),
             LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Platform and Grab"),
             LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => write!(f, "{}", "Glacier > Revival > Mid-air > Fly to the Stairs and Grab"),
             LocationId::Glacier__Revival__Pillar__Health => write!(f, "{}", "Glacier > Revival > Pillar > Health"),
@@ -10681,6 +10772,7 @@ impl std::str::FromStr for LocationId {
             "Glacier > Hammond's End > Hammond > Note" => Ok(LocationId::Glacier__Hammonds_End__Hammond__Note),
             "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab),
             "Glacier > Ledge Grab Room > Pedestal > Item" => Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item),
+            "Glacier > Peak > Bird's Eye > Item" => Ok(LocationId::Glacier__Peak__Birds_Eye__Item),
             "Glacier > Revival > Mid-air > Fly to the Platform and Grab" => Ok(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
             "Glacier > Revival > Mid-air > Fly to the Stairs and Grab" => Ok(LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
             "Glacier > Revival > Pillar > Health" => Ok(LocationId::Glacier__Revival__Pillar__Health),
@@ -11965,6 +12057,13 @@ pub enum ExitId {
     Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
     Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1,
     Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1,
+    Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1,
+    Glacier__Grid_32_7_10__East_9__ex__Grate_Left_2,
+    Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1,
+    Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1,
+    Glacier__Grid_32_7_10__Grate_Left__ex__East_9_2,
+    Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1,
+    Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_2,
     Glacier__Grid_32_7_10__Left_Rock__ex__Column_1,
     Glacier__Grid_32_7_10__Left_Rock__ex__Column_2,
     Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1,
@@ -12048,10 +12147,24 @@ pub enum ExitId {
     Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1,
     Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2,
     Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1,
+    Glacier__Ledge_Grab_Room__North__ex__Peak__South_1,
     Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1,
+    Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1,
+    Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_2,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_2,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1,
+    Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_2,
+    Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_1,
+    Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_2,
+    Glacier__Ledge_Grab_Room__Upper_Path__ex__Northwest_Ledge_1,
     Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1,
+    Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1,
     Glacier__Peak__East_8__ex__Top_Platform_East_1,
     Glacier__Peak__East_8__ex__Vertical_Room__West_8_1,
+    Glacier__Peak__South__ex__Ledge_Grab_Room__North_1,
     Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1,
     Glacier__Peak__Top_Rock__ex__Highest_Platform_1,
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
@@ -13728,6 +13841,13 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),
             ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),
             ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),
+            ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 9 ==> Grate Left (1)"),
+            ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_2 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 9 ==> Grate Left (2)"),
+            ExitId::Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 9 ==> Ledge Grab Room > West 9 (1)"),
+            ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left ==> East 9 (1)"),
+            ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_2 => write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left ==> East 9 (2)"),
+            ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left Upper ==> East 9 (1)"),
+            ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_2 => write!(f, "{}", "Glacier > Grid 32,7-10 > Grate Left Upper ==> East 9 (2)"),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (2)"),
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),
@@ -13811,10 +13931,24 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)"),
             ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (2)"),
             ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1 => write!(f, "{}", "Glacier > Ledge Grab Room > North ==> Peak > South (1)"),
             ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal ==> West End (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper at Wall ==> Northwest Ledge (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper at Wall ==> Northwest Ledge (2)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Left ==> Upper Grate Right (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Left ==> Upper Grate Right (2)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Right ==> North (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Right ==> North (2)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Right ==> Upper Grate Left (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Grate Right ==> Upper Grate Left (2)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Mid-air ==> North (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_2 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Mid-air ==> North (2)"),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_Path__ex__Northwest_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Path ==> Northwest Ledge (1)"),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)"),
+            ExitId::Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1 => write!(f, "{}", "Glacier > Ledge Grab Room > West 9 ==> Grid 32,7-10 > East 9 (1)"),
             ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),
             ExitId::Glacier__Peak__East_8__ex__Vertical_Room__West_8_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Vertical Room > West 8 (1)"),
+            ExitId::Glacier__Peak__South__ex__Ledge_Grab_Room__North_1 => write!(f, "{}", "Glacier > Peak > South ==> Ledge Grab Room > North (1)"),
             ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 => write!(f, "{}", "Glacier > Peak > Top Platform East ==> Highest Platform (1)"),
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => write!(f, "{}", "Glacier > Peak > Top Rock ==> Highest Platform (1)"),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),
@@ -15496,6 +15630,13 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1),
             "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1),
             "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1),
+            "Glacier > Grid 32,7-10 > East 9 ==> Grate Left (1)" => Ok(ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1),
+            "Glacier > Grid 32,7-10 > East 9 ==> Grate Left (2)" => Ok(ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_2),
+            "Glacier > Grid 32,7-10 > East 9 ==> Ledge Grab Room > West 9 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1),
+            "Glacier > Grid 32,7-10 > Grate Left ==> East 9 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1),
+            "Glacier > Grid 32,7-10 > Grate Left ==> East 9 (2)" => Ok(ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_2),
+            "Glacier > Grid 32,7-10 > Grate Left Upper ==> East 9 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1),
+            "Glacier > Grid 32,7-10 > Grate Left Upper ==> East 9 (2)" => Ok(ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_2),
             "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)" => Ok(ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1),
             "Glacier > Grid 32,7-10 > Left Rock ==> Column (2)" => Ok(ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2),
             "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)" => Ok(ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1),
@@ -15579,10 +15720,24 @@ impl std::str::FromStr for ExitId {
             "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1),
             "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2),
             "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1),
+            "Glacier > Ledge Grab Room > North ==> Peak > South (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1),
             "Glacier > Ledge Grab Room > Pedestal ==> West End (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1),
+            "Glacier > Ledge Grab Room > Upper at Wall ==> Northwest Ledge (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1),
+            "Glacier > Ledge Grab Room > Upper at Wall ==> Northwest Ledge (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2),
+            "Glacier > Ledge Grab Room > Upper Grate Left ==> Upper Grate Right (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1),
+            "Glacier > Ledge Grab Room > Upper Grate Left ==> Upper Grate Right (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_2),
+            "Glacier > Ledge Grab Room > Upper Grate Right ==> North (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1),
+            "Glacier > Ledge Grab Room > Upper Grate Right ==> North (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_2),
+            "Glacier > Ledge Grab Room > Upper Grate Right ==> Upper Grate Left (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1),
+            "Glacier > Ledge Grab Room > Upper Grate Right ==> Upper Grate Left (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_2),
+            "Glacier > Ledge Grab Room > Upper Mid-air ==> North (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_1),
+            "Glacier > Ledge Grab Room > Upper Mid-air ==> North (2)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_2),
+            "Glacier > Ledge Grab Room > Upper Path ==> Northwest Ledge (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Path__ex__Northwest_Ledge_1),
             "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1),
+            "Glacier > Ledge Grab Room > West 9 ==> Grid 32,7-10 > East 9 (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1),
             "Glacier > Peak > East 8 ==> Top Platform East (1)" => Ok(ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1),
             "Glacier > Peak > East 8 ==> Vertical Room > West 8 (1)" => Ok(ExitId::Glacier__Peak__East_8__ex__Vertical_Room__West_8_1),
+            "Glacier > Peak > South ==> Ledge Grab Room > North (1)" => Ok(ExitId::Glacier__Peak__South__ex__Ledge_Grab_Room__North_1),
             "Glacier > Peak > Top Platform East ==> Highest Platform (1)" => Ok(ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1),
             "Glacier > Peak > Top Rock ==> Highest Platform (1)" => Ok(ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1),
             "Glacier > Peak > Under West Cliff ==> West Cliff (1)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1),
@@ -17240,6 +17395,7 @@ pub enum CanonId {
     Loc_Glacier__Crystals__Lower_Corner__Item,
     Loc_Glacier__Crystals__Top_Corner__Tablet,
     Loc_Glacier__Hammonds_End__Between_Center_Doors__Health,
+    Loc_Glacier__Peak__Birds_Eye__Item,
     Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
     Loc_Glacier__Sea_Burial__Deep_Cache__Health,
     Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes,
@@ -17624,6 +17780,9 @@ impl fmt::Display for CanonId {
                 "{}",
                 "Loc_Glacier__Hammonds_End__Between_Center_Doors__Health"
             ),
+            CanonId::Loc_Glacier__Peak__Birds_Eye__Item => {
+                write!(f, "{}", "Loc_Glacier__Peak__Birds_Eye__Item")
+            }
             CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown => write!(
                 f,
                 "{}",
@@ -18153,6 +18312,7 @@ impl std::str::FromStr for CanonId {
             "Loc_Glacier__Hammonds_End__Between_Center_Doors__Health" => {
                 Ok(CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health)
             }
+            "Loc_Glacier__Peak__Birds_Eye__Item" => Ok(CanonId::Loc_Glacier__Peak__Birds_Eye__Item),
             "Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown" => {
                 Ok(CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown)
             }

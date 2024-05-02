@@ -515,6 +515,8 @@ areas:
       coord: [44, 9]
     - name: Glacier 40,8
       coord: [40, 8]
+    - name: Glacier Peak Bird's Eye
+      coord: [34, 8]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

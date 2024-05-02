@@ -1531,6 +1531,8 @@ areas:
       coord: [35.1, 8.65]
       local:
         - to: Fork
+        - to: Upper Grate Right
+          jumps: 1
       exits:
         # Requires mist, hover, hook, climb, or grab
         - to: Column
@@ -1690,6 +1692,110 @@ areas:
           movement: base
           jumps: 2
 
+    # Northwest area
+    - name: Upper Grate Right
+      coord: [34.75, 8.5]
+      local:
+        - to: Gate Ledge
+      exits:
+        - to: Upper Grate Left
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Grate Left
+          req: $mist2
+          movement: mist2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
+        - to: North
+          req: $mist2
+          movement: mist2
+    - name: Upper Grate Left
+      coord: [34.65, 8.5]
+      local:
+        - to: Upper Mid-air
+          jumps: 1
+      exits:
+        - to: Upper Grate Right
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Grate Right
+          req: $mist2
+          movement: mist2
+    - name: North
+      coord: [34.5, 8.2]
+      local:
+        - to: Upper Path
+        - to: Upper Mid-air
+        - to: Upper Hill
+        - to: Upper Grate Left
+      exits:
+        - to: Peak > South
+          req: Nanite_Mist
+          movement: mist1  
+          tags: [ydoor]  # tags, not penalty_tags, to set the time
+          # TODO: this can be partially paid, because we still make it if we run out partway
+    - name: Upper Mid-air
+      coord: [34.5, 8.45]
+      local:
+        - to: Upper Hill
+        - to: Upper Grate Left
+        - to: Upper Path
+      exits:
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
+        - to: North
+          req: $mist2
+          movement: mist2
+    - name: Upper Hill
+      coord: [34.45, 8.55]
+      local:
+        - to: Upper Path
+        - to: Upper Mid-air
+          jumps: 1
+        - to: Upper Grate Left
+          jumps: 1
+    - name: Upper Path
+      coord: [33.6, 9.1]
+      local:
+        - to: Upper at Wall
+          jumps: 2
+        - to: Upper Hill
+          jumps: 5
+      exits:
+        - to: Northwest Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 1
+    - name: Upper at Wall
+      coord: [33.25, 8.95]
+      local:
+        - to: Upper Path
+      exits:
+        - to: Northwest Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Northwest Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Northwest Ledge
+      coord: [33.15, 8.6]
+      local:
+        - to: West 9
+          jumps: 1
+        - to: Upper Path
+        - to: Upper at Wall
+    - name: West 9
+      coord: [33.05, 8.5]
+      local:
+        - to: Northwest Ledge
+      exits:
+        - to: Grid 32,7-10 > East 9
+          tags: [xshift]
+
 - name: Peak  # MARK: Peak
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -1757,6 +1863,27 @@ areas:
         - to: Grid 32,7-10 > East 8
           tags: [xshift]
 
+    # Small cave in the south
+    - name: South
+      coord: [34.5, 7.8]
+      data:
+        map_spot: Menu > Kiengir Map > Glacier Peak Bird's Eye
+      local:
+        - to: Bird's Eye
+      exits:
+        - to: Ledge Grab Room > North
+          tags: [ydoor]
+    - name: Bird's Eye
+      coord: [34.6, 7.8]
+      data:
+        map_spot: Menu > Kiengir Map > Glacier Peak Bird's Eye
+      local:
+        - to: South
+      locations:
+        - name: Item
+          item: Health_Fragment
+          tags: [standing]
+
 - name: Grid 32,7-10  # MARK: Grid 32,7-10
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -1765,6 +1892,8 @@ areas:
       local:
         - to: Center Platform
         - to: Column
+        - to: Grate Left Upper
+          thru: [32.75, 8.0]
       exits:
         - to: Peak > West 8
           tags: [xshift]
@@ -1784,6 +1913,7 @@ areas:
         - to: Center Platform
         - to: West 9
         - to: Left Rock
+        - to: Grate Left
       local:
         - to: Center Platform
           jumps: 3
@@ -1822,6 +1952,42 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+    # Grate
+    - name: Grate Left
+      coord: [32.8, 8.5]
+      local:
+        - to: Column
+          jumps: 1
+      exits:
+        - to: East 9
+          req: Nanite_Mist
+          movement: mist1
+        - to: East 9
+          req: $mist2
+          movement: mist2
+    - name: Grate Left Upper
+      coord: [32.8, 8.3]
+      local:
+        - to: Grate Left
+      exits:
+        - to: East 9
+          req: Nanite_Mist
+          movement: mist1
+        - to: East 9
+          req: $mist2
+          movement: mist2
+    - name: East 9
+      coord: [32.95, 8.5]
+      exits:
+        - to: Grate Left
+          req: Nanite_Mist
+          movement: mist1
+        - to: Grate Left
+          req: $mist2
+          movement: mist2
+        - to: Ledge Grab Room > West 9
+          tags: [xshift]
+
 
 - name: Grid 31,9-12  # MARK: Grid 31,9-12
   on_entry: $reset_old_area(^newpos)
