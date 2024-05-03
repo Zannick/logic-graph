@@ -4,7 +4,9 @@ use crate::estimates::ContextScorer;
 use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::{Exit, Location, World};
+use lazy_static::lazy_static;
 use std::str::FromStr;
+use std::time::{Instant, Duration};
 use yaml_rust::Yaml;
 
 pub(crate) fn hist_from_string<W, T, L>(route: &str) -> Result<Vec<HistoryAlias<T>>, String>
@@ -76,6 +78,7 @@ where
     L: Location<Context = T>,
 {
     let pos = Wrapper::get(&ctx).position();
+    let start = Instant::now();
     match h {
         History::G(item, loc_id) => {
             let spot_id = world.get_location_spot(loc_id);
@@ -152,6 +155,13 @@ where
             ctx.assert_and_replay(world, h);
         }
     }
+    let elapsed = start.elapsed();
+    lazy_static! {
+        static ref WARNING_DUR: Duration = Duration::from_millis(50);
+    }
+    if elapsed > *WARNING_DUR {
+        log::warn!("Long route step {} from {} ({:?}): {}", i, pos, elapsed, h);
+    }
     Ok(ctx)
 }
 
@@ -211,6 +221,8 @@ where
     let histlines = histlines_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
     let mut output: Vec<String> = Vec::new();
+    let steps = histlines.len();
+    let start = Instant::now();
 
     for (i, (h, line)) in histlines.into_iter().enumerate() {
         output.push(format!("== {}. {} ==", i + 1, line));
@@ -235,5 +247,6 @@ where
             world.items_needed(ctx.get())
         ));
     }
+    log::info!("Completed route in {:?} (average {:?})", start.elapsed(), start.elapsed() / steps as u32);
     Ok(output.join("\n"))
 }

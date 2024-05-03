@@ -147,6 +147,7 @@
 ! Do Annuna > East Bridge > Center Gap East > Throw Drone into Tower
 * Collect Lament_for_Fools from Annuna > East Bridge > Tower Gate > Tablet
 * Collect Family_Tragedy from Annuna > Sniper Valley > Table > Item
+  Move... to Annuna > Lower Hallway > East
 * Collect Destruction_Pogrom from Annuna > Twisty Passages > Top > Tablet
 
 ! Do Annuna > West Climb > Switch Ledge > Open Door
@@ -164,10 +165,14 @@
 ! Do Glacier > Vertical Room > Lower Switch > Open Lower Gatestones
 * Collect Breach_Attractor from Glacier > Crystals > Lower Corner > Item
 * Collect Dr_Gloria from Glacier > Sea Burial > Inside the Grate > Notes
-* Collect Big_Flask from Glacier Breach > Control > Upper Corner > Control Enemy
 * Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn
 
   Move... to Annuna > Lamassu > Portal Stand
+  Portalwarp to Glacier Breach > South Save > Save Point
+* Collect Big_Flask from Glacier Breach > Control > Upper Corner > Control Enemy
+  Move... to Glacier Breach > West Save > Save Point
+  Move... to Glacier Breach > Save and Exit > Portal Stand
+  Portalwarp to Glacier > Hammond's End > Upper Right Pedestal
 ! Do Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West
 * Collect Goodbye from Glacier > Hammond's End > Hammond > Note
 ! Do Glacier Breach > Angry Lions > North > Summon Portal to Second Platform
