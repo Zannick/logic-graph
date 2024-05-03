@@ -357,7 +357,9 @@ class GameLogic(object):
                         spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
                         dest = eh['to']
-                        if dest.startswith('^'):
+                        if not dest:
+                            self._errors.append(f'Exit {eh["fullname"]} has no destination')
+                        elif dest.startswith('^'):
                             if d := spot.get('data', {}).get(dest[1:]):
                                 if self.data_types[dest[1:]] != 'SpotId':
                                     self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')
