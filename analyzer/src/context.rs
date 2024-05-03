@@ -426,44 +426,6 @@ pub type HistoryAlias<T> = History<
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
 
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-struct HistoryNode<I, S, L, E, A, Wp> {
-    entry: History<I, S, L, E, A, Wp>,
-    #[allow(clippy::type_complexity)]
-    prev: Option<Arc<HistoryNode<I, S, L, E, A, Wp>>>,
-}
-
-type HistoryNodeAlias<T> = HistoryNode<
-    <T as Ctx>::ItemId,
-    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
-    <<<T as Ctx>::World as World>::Location as Location>::LocId,
-    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
-    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
-    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
->;
-
-struct HistoryIterator<T>
-where
-    T: Ctx,
-{
-    next: Option<Arc<HistoryNodeAlias<T>>>,
-}
-impl<T> Iterator for HistoryIterator<T>
-where
-    T: Ctx,
-{
-    type Item = HistoryAlias<T>;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        if let Some(hist) = self.next.clone() {
-            self.next = hist.prev.clone();
-            Some(hist.entry)
-        } else {
-            None
-        }
-    }
-}
-
 pub trait Wrapper<T> {
     fn get(&self) -> &T;
     fn elapsed(&self) -> u32;
