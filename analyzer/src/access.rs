@@ -20,10 +20,15 @@ where
     L: Location<ExitId = E::ExitId, Context = T>,
     E: Exit<Context = T>,
 {
-    world
-        .get_spot_locations(ctx.position())
-        .iter()
-        .any(|loc| ctx.todo(loc) && loc.can_access(ctx, world))
+    world.get_spot_locations(ctx.position()).iter().any(|loc| {
+        ctx.todo(loc)
+            && loc.can_access(ctx, world)
+            && if let Some(exit_id) = loc.exit_id() {
+                world.get_exit(*exit_id).can_access(ctx, world)
+            } else {
+                true
+            }
+    })
 }
 
 /// Check whether there are available actions at this position, including global actions.
@@ -39,16 +44,6 @@ where
         .iter()
         .chain(world.get_spot_actions(ctx.position()))
         .any(|act| act.can_access(ctx, world))
-}
-
-pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-{
-    spot_has_locations(world, ctx.get()) || spot_has_actions(world, ctx.get())
 }
 
 fn expand<W, T, E, Wp>(
