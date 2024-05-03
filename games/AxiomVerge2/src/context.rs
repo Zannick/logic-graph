@@ -2122,26 +2122,6 @@ pub struct Context {
     pub portal: SpotId,
     pub prev_portal: SpotId,
     pub prev_area: AreaId,
-    pub map__amagi__west_lake__urn: bool,
-    pub map__amagi__east_lake__surface_east: bool,
-    pub map__amagi__east_lake__surface_center: bool,
-    pub map__amagi__east_lake__surface_west: bool,
-    pub map__amagi__east_lake__southeast: bool,
-    pub map__annuna__west_bridge__save: bool,
-    pub map__annuna__filter_teleporter__flask: bool,
-    pub map__annuna__filter_teleporter__tablet: bool,
-    pub map__annuna__filter_teleporter__spiders: bool,
-    pub map__annuna__siuna_storage__urn: bool,
-    pub map__annuna__final_save__save: bool,
-    pub map__ebih__waterfall__axe: bool,
-    pub map__ebih__drone_room__urn: bool,
-    pub map__glacier__the_big_drop__bottom: bool,
-    pub map__glacier__grid_39_40_7_9__flask: bool,
-    pub map__glacier__crystals__lower: bool,
-    pub map__glacier__hammonds_end__hammond: bool,
-    pub map__irikar_breach__basement_save__save: bool,
-    pub map__irikar__sight_room__urn: bool,
-    pub map__uhrum__annuna_corridor__urn: bool,
     // items
     pub big_flask: i8,
     pub flask: i8,
@@ -2172,26 +2152,6 @@ impl Default for Context {
             flasks: 0,
             refills: 0,
             mode: enums::Mode::Indra,
-            map__amagi__west_lake__urn: false,
-            map__amagi__east_lake__surface_east: false,
-            map__amagi__east_lake__surface_center: false,
-            map__amagi__east_lake__surface_west: false,
-            map__amagi__east_lake__southeast: false,
-            map__annuna__west_bridge__save: false,
-            map__annuna__filter_teleporter__flask: false,
-            map__annuna__filter_teleporter__tablet: false,
-            map__annuna__filter_teleporter__spiders: false,
-            map__annuna__siuna_storage__urn: false,
-            map__annuna__final_save__save: false,
-            map__ebih__waterfall__axe: false,
-            map__ebih__drone_room__urn: false,
-            map__glacier__the_big_drop__bottom: false,
-            map__glacier__grid_39_40_7_9__flask: false,
-            map__glacier__crystals__lower: false,
-            map__glacier__hammonds_end__hammond: false,
-            map__irikar_breach__basement_save__save: false,
-            map__irikar__sight_room__urn: false,
-            map__uhrum__annuna_corridor__urn: false,
             // items
             big_flask: Default::default(),
             flask: Default::default(),
@@ -3323,52 +3283,26 @@ impl context::Ctx for Context {
             ("map__amagi_breach__east_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__main_area__save", Yaml::Boolean(b)) => self.set_map__amagi__main_area__save(*b),
             ("map__amagi__main_area__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__west_lake__urn", Yaml::Boolean(b)) => self.set_map__amagi__west_lake__urn(*b),
-            ("map__amagi__west_lake__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__east_lake__save", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__save(*b),
             ("map__amagi__east_lake__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_east", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__surface_east(*b),
-            ("map__amagi__east_lake__surface_east", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_center", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__surface_center(*b),
-            ("map__amagi__east_lake__surface_center", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_west", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__surface_west(*b),
-            ("map__amagi__east_lake__surface_west", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__southeast", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__southeast(*b),
-            ("map__amagi__east_lake__southeast", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__mirror_match__save", Yaml::Boolean(b)) => self.set_map__annuna__mirror_match__save(*b),
             ("map__annuna__mirror_match__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__west_bridge__save", Yaml::Boolean(b)) => self.set_map__annuna__west_bridge__save(*b),
-            ("map__annuna__west_bridge__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__vertical_room__save", Yaml::Boolean(b)) => self.set_map__annuna__vertical_room__save(*b),
             ("map__annuna__vertical_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__factory_entrance__save", Yaml::Boolean(b)) => self.set_map__annuna__factory_entrance__save(*b),
             ("map__annuna__factory_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__flask", Yaml::Boolean(b)) => self.set_map__annuna__filter_teleporter__flask(*b),
-            ("map__annuna__filter_teleporter__flask", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__tablet", Yaml::Boolean(b)) => self.set_map__annuna__filter_teleporter__tablet(*b),
-            ("map__annuna__filter_teleporter__tablet", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__spiders", Yaml::Boolean(b)) => self.set_map__annuna__filter_teleporter__spiders(*b),
-            ("map__annuna__filter_teleporter__spiders", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__upper_save__save", Yaml::Boolean(b)) => self.set_map__annuna__upper_save__save(*b),
             ("map__annuna__upper_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__center_save__save", Yaml::Boolean(b)) => self.set_map__annuna__center_save__save(*b),
             ("map__annuna__center_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__siuna_storage__urn", Yaml::Boolean(b)) => self.set_map__annuna__siuna_storage__urn(*b),
-            ("map__annuna__siuna_storage__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__final_save__save", Yaml::Boolean(b)) => self.set_map__annuna__final_save__save(*b),
-            ("map__annuna__final_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__base_camp__save", Yaml::Boolean(b)) => self.set_map__ebih__base_camp__save(*b),
             ("map__ebih__base_camp__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__ebih__waterfall__axe", Yaml::Boolean(b)) => self.set_map__ebih__waterfall__axe(*b),
-            ("map__ebih__waterfall__axe", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__mid_save", Yaml::Boolean(b)) => self.set_map__ebih__ebih_west__mid_save(*b),
             ("map__ebih__ebih_west__mid_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__upper_save", Yaml::Boolean(b)) => self.set_map__ebih__ebih_west__upper_save(*b),
             ("map__ebih__ebih_west__upper_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__lower_save", Yaml::Boolean(b)) => self.set_map__ebih__ebih_west__lower_save(*b),
             ("map__ebih__ebih_west__lower_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__ebih__drone_room__urn", Yaml::Boolean(b)) => self.set_map__ebih__drone_room__urn(*b),
-            ("map__ebih__drone_room__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__giguna_breach__peak__save", Yaml::Boolean(b)) => self.set_map__giguna_breach__peak__save(*b),
             ("map__giguna_breach__peak__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__giguna_breach__sw_save__save", Yaml::Boolean(b)) => self.set_map__giguna_breach__sw_save__save(*b),
@@ -3393,32 +3327,18 @@ impl context::Ctx for Context {
             ("map__glacier_breach__hammonds_breach__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__glacier__revival__save", Yaml::Boolean(b)) => self.set_map__glacier__revival__save(*b),
             ("map__glacier__revival__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__the_big_drop__bottom", Yaml::Boolean(b)) => self.set_map__glacier__the_big_drop__bottom(*b),
-            ("map__glacier__the_big_drop__bottom", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__grid_39_40_7_9__flask", Yaml::Boolean(b)) => self.set_map__glacier__grid_39_40_7_9__flask(*b),
-            ("map__glacier__grid_39_40_7_9__flask", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__crystals__lower", Yaml::Boolean(b)) => self.set_map__glacier__crystals__lower(*b),
-            ("map__glacier__crystals__lower", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__hammonds_end__hammond", Yaml::Boolean(b)) => self.set_map__glacier__hammonds_end__hammond(*b),
-            ("map__glacier__hammonds_end__hammond", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar_breach__save_room__save", Yaml::Boolean(b)) => self.set_map__irikar_breach__save_room__save(*b),
             ("map__irikar_breach__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar_breach__gauntlet__save", Yaml::Boolean(b)) => self.set_map__irikar_breach__gauntlet__save(*b),
             ("map__irikar_breach__gauntlet__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__irikar_breach__basement_save__save", Yaml::Boolean(b)) => self.set_map__irikar_breach__basement_save__save(*b),
-            ("map__irikar_breach__basement_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar__hub__save", Yaml::Boolean(b)) => self.set_map__irikar__hub__save(*b),
             ("map__irikar__hub__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__irikar__sight_room__urn", Yaml::Boolean(b)) => self.set_map__irikar__sight_room__urn(*b),
-            ("map__irikar__sight_room__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__west_entrance__save", Yaml::Boolean(b)) => self.set_map__uhrum__west_entrance__save(*b),
             ("map__uhrum__west_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__save_room__save", Yaml::Boolean(b)) => self.set_map__uhrum__save_room__save(*b),
             ("map__uhrum__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__annuna_corridor__save", Yaml::Boolean(b)) => self.set_map__uhrum__annuna_corridor__save(*b),
             ("map__uhrum__annuna_corridor__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__uhrum__annuna_corridor__urn", Yaml::Boolean(b)) => self.set_map__uhrum__annuna_corridor__urn(*b),
-            ("map__uhrum__annuna_corridor__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("glacier__ctx__hammonds_doors", Yaml::Boolean(b)) => self.set_glacier__ctx__hammonds_doors(*b),
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => self.set_amagi__main_area__ctx__combo(*b),
@@ -3522,39 +3442,26 @@ impl context::Ctx for Context {
             ("map__amagi_breach__east_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__main_area__save", Yaml::Boolean(b)) => Expectation::MapAmagiMainAreaSave(*b),
             ("map__amagi__main_area__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__west_lake__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__east_lake__save", Yaml::Boolean(b)) => Expectation::MapAmagiEastLakeSave(*b),
             ("map__amagi__east_lake__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_east", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_center", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__surface_west", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__amagi__east_lake__southeast", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__mirror_match__save", Yaml::Boolean(b)) => Expectation::MapAnnunaMirrorMatchSave(*b),
             ("map__annuna__mirror_match__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__west_bridge__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__vertical_room__save", Yaml::Boolean(b)) => Expectation::MapAnnunaVerticalRoomSave(*b),
             ("map__annuna__vertical_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__factory_entrance__save", Yaml::Boolean(b)) => Expectation::MapAnnunaFactoryEntranceSave(*b),
             ("map__annuna__factory_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__flask", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__tablet", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__filter_teleporter__spiders", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__upper_save__save", Yaml::Boolean(b)) => Expectation::MapAnnunaUpperSaveSave(*b),
             ("map__annuna__upper_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__annuna__center_save__save", Yaml::Boolean(b)) => Expectation::MapAnnunaCenterSaveSave(*b),
             ("map__annuna__center_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__siuna_storage__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__annuna__final_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__base_camp__save", Yaml::Boolean(b)) => Expectation::MapEbihBaseCampSave(*b),
             ("map__ebih__base_camp__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__ebih__waterfall__axe", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__mid_save", Yaml::Boolean(b)) => Expectation::MapEbihEbihWestMidSave(*b),
             ("map__ebih__ebih_west__mid_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__upper_save", Yaml::Boolean(b)) => Expectation::MapEbihEbihWestUpperSave(*b),
             ("map__ebih__ebih_west__upper_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__ebih__ebih_west__lower_save", Yaml::Boolean(b)) => Expectation::MapEbihEbihWestLowerSave(*b),
             ("map__ebih__ebih_west__lower_save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__ebih__drone_room__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__giguna_breach__peak__save", Yaml::Boolean(b)) => Expectation::MapGigunaBreachPeakSave(*b),
             ("map__giguna_breach__peak__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__giguna_breach__sw_save__save", Yaml::Boolean(b)) => Expectation::MapGigunaBreachSwSaveSave(*b),
@@ -3579,25 +3486,18 @@ impl context::Ctx for Context {
             ("map__glacier_breach__hammonds_breach__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__glacier__revival__save", Yaml::Boolean(b)) => Expectation::MapGlacierRevivalSave(*b),
             ("map__glacier__revival__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__the_big_drop__bottom", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__grid_39_40_7_9__flask", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__crystals__lower", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__glacier__hammonds_end__hammond", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar_breach__save_room__save", Yaml::Boolean(b)) => Expectation::MapIrikarBreachSaveRoomSave(*b),
             ("map__irikar_breach__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar_breach__gauntlet__save", Yaml::Boolean(b)) => Expectation::MapIrikarBreachGauntletSave(*b),
             ("map__irikar_breach__gauntlet__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__irikar_breach__basement_save__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__irikar__hub__save", Yaml::Boolean(b)) => Expectation::MapIrikarHubSave(*b),
             ("map__irikar__hub__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__irikar__sight_room__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__west_entrance__save", Yaml::Boolean(b)) => Expectation::MapUhrumWestEntranceSave(*b),
             ("map__uhrum__west_entrance__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__save_room__save", Yaml::Boolean(b)) => Expectation::MapUhrumSaveRoomSave(*b),
             ("map__uhrum__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__annuna_corridor__save", Yaml::Boolean(b)) => Expectation::MapUhrumAnnunaCorridorSave(*b),
             ("map__uhrum__annuna_corridor__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("map__uhrum__annuna_corridor__urn", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("glacier__ctx__hammonds_doors", Yaml::Boolean(b)) => Expectation::GlacierCtxHammondsDoors(*b),
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => Expectation::AmagiMainAreaCtxCombo(*b),
@@ -9100,66 +9000,6 @@ impl context::Ctx for Context {
         if old.prev_area != self.prev_area {
             list.push(format!("prev_area: {:?} → {:?}", old.prev_area, self.prev_area));
         }
-        if old.map__amagi__west_lake__urn != self.map__amagi__west_lake__urn {
-            list.push(format!("map__amagi__west_lake__urn: {:?} → {:?}", old.map__amagi__west_lake__urn, self.map__amagi__west_lake__urn));
-        }
-        if old.map__amagi__east_lake__surface_east != self.map__amagi__east_lake__surface_east {
-            list.push(format!("map__amagi__east_lake__surface_east: {:?} → {:?}", old.map__amagi__east_lake__surface_east, self.map__amagi__east_lake__surface_east));
-        }
-        if old.map__amagi__east_lake__surface_center != self.map__amagi__east_lake__surface_center {
-            list.push(format!("map__amagi__east_lake__surface_center: {:?} → {:?}", old.map__amagi__east_lake__surface_center, self.map__amagi__east_lake__surface_center));
-        }
-        if old.map__amagi__east_lake__surface_west != self.map__amagi__east_lake__surface_west {
-            list.push(format!("map__amagi__east_lake__surface_west: {:?} → {:?}", old.map__amagi__east_lake__surface_west, self.map__amagi__east_lake__surface_west));
-        }
-        if old.map__amagi__east_lake__southeast != self.map__amagi__east_lake__southeast {
-            list.push(format!("map__amagi__east_lake__southeast: {:?} → {:?}", old.map__amagi__east_lake__southeast, self.map__amagi__east_lake__southeast));
-        }
-        if old.map__annuna__west_bridge__save != self.map__annuna__west_bridge__save {
-            list.push(format!("map__annuna__west_bridge__save: {:?} → {:?}", old.map__annuna__west_bridge__save, self.map__annuna__west_bridge__save));
-        }
-        if old.map__annuna__filter_teleporter__flask != self.map__annuna__filter_teleporter__flask {
-            list.push(format!("map__annuna__filter_teleporter__flask: {:?} → {:?}", old.map__annuna__filter_teleporter__flask, self.map__annuna__filter_teleporter__flask));
-        }
-        if old.map__annuna__filter_teleporter__tablet != self.map__annuna__filter_teleporter__tablet {
-            list.push(format!("map__annuna__filter_teleporter__tablet: {:?} → {:?}", old.map__annuna__filter_teleporter__tablet, self.map__annuna__filter_teleporter__tablet));
-        }
-        if old.map__annuna__filter_teleporter__spiders != self.map__annuna__filter_teleporter__spiders {
-            list.push(format!("map__annuna__filter_teleporter__spiders: {:?} → {:?}", old.map__annuna__filter_teleporter__spiders, self.map__annuna__filter_teleporter__spiders));
-        }
-        if old.map__annuna__siuna_storage__urn != self.map__annuna__siuna_storage__urn {
-            list.push(format!("map__annuna__siuna_storage__urn: {:?} → {:?}", old.map__annuna__siuna_storage__urn, self.map__annuna__siuna_storage__urn));
-        }
-        if old.map__annuna__final_save__save != self.map__annuna__final_save__save {
-            list.push(format!("map__annuna__final_save__save: {:?} → {:?}", old.map__annuna__final_save__save, self.map__annuna__final_save__save));
-        }
-        if old.map__ebih__waterfall__axe != self.map__ebih__waterfall__axe {
-            list.push(format!("map__ebih__waterfall__axe: {:?} → {:?}", old.map__ebih__waterfall__axe, self.map__ebih__waterfall__axe));
-        }
-        if old.map__ebih__drone_room__urn != self.map__ebih__drone_room__urn {
-            list.push(format!("map__ebih__drone_room__urn: {:?} → {:?}", old.map__ebih__drone_room__urn, self.map__ebih__drone_room__urn));
-        }
-        if old.map__glacier__the_big_drop__bottom != self.map__glacier__the_big_drop__bottom {
-            list.push(format!("map__glacier__the_big_drop__bottom: {:?} → {:?}", old.map__glacier__the_big_drop__bottom, self.map__glacier__the_big_drop__bottom));
-        }
-        if old.map__glacier__grid_39_40_7_9__flask != self.map__glacier__grid_39_40_7_9__flask {
-            list.push(format!("map__glacier__grid_39_40_7_9__flask: {:?} → {:?}", old.map__glacier__grid_39_40_7_9__flask, self.map__glacier__grid_39_40_7_9__flask));
-        }
-        if old.map__glacier__crystals__lower != self.map__glacier__crystals__lower {
-            list.push(format!("map__glacier__crystals__lower: {:?} → {:?}", old.map__glacier__crystals__lower, self.map__glacier__crystals__lower));
-        }
-        if old.map__glacier__hammonds_end__hammond != self.map__glacier__hammonds_end__hammond {
-            list.push(format!("map__glacier__hammonds_end__hammond: {:?} → {:?}", old.map__glacier__hammonds_end__hammond, self.map__glacier__hammonds_end__hammond));
-        }
-        if old.map__irikar_breach__basement_save__save != self.map__irikar_breach__basement_save__save {
-            list.push(format!("map__irikar_breach__basement_save__save: {:?} → {:?}", old.map__irikar_breach__basement_save__save, self.map__irikar_breach__basement_save__save));
-        }
-        if old.map__irikar__sight_room__urn != self.map__irikar__sight_room__urn {
-            list.push(format!("map__irikar__sight_room__urn: {:?} → {:?}", old.map__irikar__sight_room__urn, self.map__irikar__sight_room__urn));
-        }
-        if old.map__uhrum__annuna_corridor__urn != self.map__uhrum__annuna_corridor__urn {
-            list.push(format!("map__uhrum__annuna_corridor__urn: {:?} → {:?}", old.map__uhrum__annuna_corridor__urn, self.map__uhrum__annuna_corridor__urn));
-        }
         if old.big_flask != self.big_flask {
             list.push(format!("Big_Flask: {:+}", self.big_flask - old.big_flask));
         }
@@ -11198,53 +11038,17 @@ impl Context {
     pub fn set_map__amagi__main_area__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE, val);
     }
-    pub fn map__amagi__west_lake__urn(&self) -> bool {
-        self.map__amagi__west_lake__urn
-    }
-    pub fn set_map__amagi__west_lake__urn(&mut self, val: bool) {
-        self.map__amagi__west_lake__urn = val;
-    }
     pub fn map__amagi__east_lake__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE)
     }
     pub fn set_map__amagi__east_lake__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE, val);
     }
-    pub fn map__amagi__east_lake__surface_east(&self) -> bool {
-        self.map__amagi__east_lake__surface_east
-    }
-    pub fn set_map__amagi__east_lake__surface_east(&mut self, val: bool) {
-        self.map__amagi__east_lake__surface_east = val;
-    }
-    pub fn map__amagi__east_lake__surface_center(&self) -> bool {
-        self.map__amagi__east_lake__surface_center
-    }
-    pub fn set_map__amagi__east_lake__surface_center(&mut self, val: bool) {
-        self.map__amagi__east_lake__surface_center = val;
-    }
-    pub fn map__amagi__east_lake__surface_west(&self) -> bool {
-        self.map__amagi__east_lake__surface_west
-    }
-    pub fn set_map__amagi__east_lake__surface_west(&mut self, val: bool) {
-        self.map__amagi__east_lake__surface_west = val;
-    }
-    pub fn map__amagi__east_lake__southeast(&self) -> bool {
-        self.map__amagi__east_lake__southeast
-    }
-    pub fn set_map__amagi__east_lake__southeast(&mut self, val: bool) {
-        self.map__amagi__east_lake__southeast = val;
-    }
     pub fn map__annuna__mirror_match__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE)
     }
     pub fn set_map__annuna__mirror_match__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE, val);
-    }
-    pub fn map__annuna__west_bridge__save(&self) -> bool {
-        self.map__annuna__west_bridge__save
-    }
-    pub fn set_map__annuna__west_bridge__save(&mut self, val: bool) {
-        self.map__annuna__west_bridge__save = val;
     }
     pub fn map__annuna__vertical_room__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE)
@@ -11258,24 +11062,6 @@ impl Context {
     pub fn set_map__annuna__factory_entrance__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE, val);
     }
-    pub fn map__annuna__filter_teleporter__flask(&self) -> bool {
-        self.map__annuna__filter_teleporter__flask
-    }
-    pub fn set_map__annuna__filter_teleporter__flask(&mut self, val: bool) {
-        self.map__annuna__filter_teleporter__flask = val;
-    }
-    pub fn map__annuna__filter_teleporter__tablet(&self) -> bool {
-        self.map__annuna__filter_teleporter__tablet
-    }
-    pub fn set_map__annuna__filter_teleporter__tablet(&mut self, val: bool) {
-        self.map__annuna__filter_teleporter__tablet = val;
-    }
-    pub fn map__annuna__filter_teleporter__spiders(&self) -> bool {
-        self.map__annuna__filter_teleporter__spiders
-    }
-    pub fn set_map__annuna__filter_teleporter__spiders(&mut self, val: bool) {
-        self.map__annuna__filter_teleporter__spiders = val;
-    }
     pub fn map__annuna__upper_save__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE)
     }
@@ -11288,29 +11074,11 @@ impl Context {
     pub fn set_map__annuna__center_save__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE, val);
     }
-    pub fn map__annuna__siuna_storage__urn(&self) -> bool {
-        self.map__annuna__siuna_storage__urn
-    }
-    pub fn set_map__annuna__siuna_storage__urn(&mut self, val: bool) {
-        self.map__annuna__siuna_storage__urn = val;
-    }
-    pub fn map__annuna__final_save__save(&self) -> bool {
-        self.map__annuna__final_save__save
-    }
-    pub fn set_map__annuna__final_save__save(&mut self, val: bool) {
-        self.map__annuna__final_save__save = val;
-    }
     pub fn map__ebih__base_camp__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE)
     }
     pub fn set_map__ebih__base_camp__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE, val);
-    }
-    pub fn map__ebih__waterfall__axe(&self) -> bool {
-        self.map__ebih__waterfall__axe
-    }
-    pub fn set_map__ebih__waterfall__axe(&mut self, val: bool) {
-        self.map__ebih__waterfall__axe = val;
     }
     pub fn map__ebih__ebih_west__mid_save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE)
@@ -11329,12 +11097,6 @@ impl Context {
     }
     pub fn set_map__ebih__ebih_west__lower_save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE, val);
-    }
-    pub fn map__ebih__drone_room__urn(&self) -> bool {
-        self.map__ebih__drone_room__urn
-    }
-    pub fn set_map__ebih__drone_room__urn(&mut self, val: bool) {
-        self.map__ebih__drone_room__urn = val;
     }
     pub fn map__giguna_breach__peak__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE)
@@ -11408,30 +11170,6 @@ impl Context {
     pub fn set_map__glacier__revival__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE, val);
     }
-    pub fn map__glacier__the_big_drop__bottom(&self) -> bool {
-        self.map__glacier__the_big_drop__bottom
-    }
-    pub fn set_map__glacier__the_big_drop__bottom(&mut self, val: bool) {
-        self.map__glacier__the_big_drop__bottom = val;
-    }
-    pub fn map__glacier__grid_39_40_7_9__flask(&self) -> bool {
-        self.map__glacier__grid_39_40_7_9__flask
-    }
-    pub fn set_map__glacier__grid_39_40_7_9__flask(&mut self, val: bool) {
-        self.map__glacier__grid_39_40_7_9__flask = val;
-    }
-    pub fn map__glacier__crystals__lower(&self) -> bool {
-        self.map__glacier__crystals__lower
-    }
-    pub fn set_map__glacier__crystals__lower(&mut self, val: bool) {
-        self.map__glacier__crystals__lower = val;
-    }
-    pub fn map__glacier__hammonds_end__hammond(&self) -> bool {
-        self.map__glacier__hammonds_end__hammond
-    }
-    pub fn set_map__glacier__hammonds_end__hammond(&mut self, val: bool) {
-        self.map__glacier__hammonds_end__hammond = val;
-    }
     pub fn map__irikar_breach__save_room__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE)
     }
@@ -11444,23 +11182,11 @@ impl Context {
     pub fn set_map__irikar_breach__gauntlet__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE, val);
     }
-    pub fn map__irikar_breach__basement_save__save(&self) -> bool {
-        self.map__irikar_breach__basement_save__save
-    }
-    pub fn set_map__irikar_breach__basement_save__save(&mut self, val: bool) {
-        self.map__irikar_breach__basement_save__save = val;
-    }
     pub fn map__irikar__hub__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE)
     }
     pub fn set_map__irikar__hub__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE, val);
-    }
-    pub fn map__irikar__sight_room__urn(&self) -> bool {
-        self.map__irikar__sight_room__urn
-    }
-    pub fn set_map__irikar__sight_room__urn(&mut self, val: bool) {
-        self.map__irikar__sight_room__urn = val;
     }
     pub fn map__uhrum__west_entrance__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE)
@@ -11479,12 +11205,6 @@ impl Context {
     }
     pub fn set_map__uhrum__annuna_corridor__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE, val);
-    }
-    pub fn map__uhrum__annuna_corridor__urn(&self) -> bool {
-        self.map__uhrum__annuna_corridor__urn
-    }
-    pub fn set_map__uhrum__annuna_corridor__urn(&mut self, val: bool) {
-        self.map__uhrum__annuna_corridor__urn = val;
     }
     pub fn glacier__ctx__hammonds_doors(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS)

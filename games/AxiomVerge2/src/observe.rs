@@ -41,26 +41,6 @@ pub enum OneObservation {
     Portal(SpotId),
     PrevPortal(SpotId),
     PrevArea(AreaId),
-    MapAmagiWestLakeUrn(bool),
-    MapAmagiEastLakeSurfaceEast(bool),
-    MapAmagiEastLakeSurfaceCenter(bool),
-    MapAmagiEastLakeSurfaceWest(bool),
-    MapAmagiEastLakeSoutheast(bool),
-    MapAnnunaWestBridgeSave(bool),
-    MapAnnunaFilterTeleporterFlask(bool),
-    MapAnnunaFilterTeleporterTablet(bool),
-    MapAnnunaFilterTeleporterSpiders(bool),
-    MapAnnunaSiunaStorageUrn(bool),
-    MapAnnunaFinalSaveSave(bool),
-    MapEbihWaterfallAxe(bool),
-    MapEbihDroneRoomUrn(bool),
-    MapGlacierTheBigDropBottom(bool),
-    MapGlacierGrid394079Flask(bool),
-    MapGlacierCrystalsLower(bool),
-    MapGlacierHammondsEndHammond(bool),
-    MapIrikarBreachBasementSaveSave(bool),
-    MapIrikarSightRoomUrn(bool),
-    MapUhrumAnnunaCorridorUrn(bool),
     // items
     BigFlaskExact(i8),
     BigFlaskEq(i8, bool),
@@ -129,26 +109,6 @@ pub struct FullObservation {
     portal: bool,
     prev_portal: bool,
     prev_area: bool,
-    map__amagi__west_lake__urn: bool,
-    map__amagi__east_lake__surface_east: bool,
-    map__amagi__east_lake__surface_center: bool,
-    map__amagi__east_lake__surface_west: bool,
-    map__amagi__east_lake__southeast: bool,
-    map__annuna__west_bridge__save: bool,
-    map__annuna__filter_teleporter__flask: bool,
-    map__annuna__filter_teleporter__tablet: bool,
-    map__annuna__filter_teleporter__spiders: bool,
-    map__annuna__siuna_storage__urn: bool,
-    map__annuna__final_save__save: bool,
-    map__ebih__waterfall__axe: bool,
-    map__ebih__drone_room__urn: bool,
-    map__glacier__the_big_drop__bottom: bool,
-    map__glacier__grid_39_40_7_9__flask: bool,
-    map__glacier__crystals__lower: bool,
-    map__glacier__hammonds_end__hammond: bool,
-    map__irikar_breach__basement_save__save: bool,
-    map__irikar__sight_room__urn: bool,
-    map__uhrum__annuna_corridor__urn: bool,
     // items
     big_flask: IntegerObservation<i8>,
     flask: IntegerObservation<i8>,
@@ -1785,106 +1745,6 @@ impl Observer for FullObservation {
         if self.prev_area {
             vec.push(OneObservation::PrevArea(ctx.prev_area));
         }
-        if self.map__amagi__west_lake__urn {
-            vec.push(OneObservation::MapAmagiWestLakeUrn(
-                ctx.map__amagi__west_lake__urn,
-            ));
-        }
-        if self.map__amagi__east_lake__surface_east {
-            vec.push(OneObservation::MapAmagiEastLakeSurfaceEast(
-                ctx.map__amagi__east_lake__surface_east,
-            ));
-        }
-        if self.map__amagi__east_lake__surface_center {
-            vec.push(OneObservation::MapAmagiEastLakeSurfaceCenter(
-                ctx.map__amagi__east_lake__surface_center,
-            ));
-        }
-        if self.map__amagi__east_lake__surface_west {
-            vec.push(OneObservation::MapAmagiEastLakeSurfaceWest(
-                ctx.map__amagi__east_lake__surface_west,
-            ));
-        }
-        if self.map__amagi__east_lake__southeast {
-            vec.push(OneObservation::MapAmagiEastLakeSoutheast(
-                ctx.map__amagi__east_lake__southeast,
-            ));
-        }
-        if self.map__annuna__west_bridge__save {
-            vec.push(OneObservation::MapAnnunaWestBridgeSave(
-                ctx.map__annuna__west_bridge__save,
-            ));
-        }
-        if self.map__annuna__filter_teleporter__flask {
-            vec.push(OneObservation::MapAnnunaFilterTeleporterFlask(
-                ctx.map__annuna__filter_teleporter__flask,
-            ));
-        }
-        if self.map__annuna__filter_teleporter__tablet {
-            vec.push(OneObservation::MapAnnunaFilterTeleporterTablet(
-                ctx.map__annuna__filter_teleporter__tablet,
-            ));
-        }
-        if self.map__annuna__filter_teleporter__spiders {
-            vec.push(OneObservation::MapAnnunaFilterTeleporterSpiders(
-                ctx.map__annuna__filter_teleporter__spiders,
-            ));
-        }
-        if self.map__annuna__siuna_storage__urn {
-            vec.push(OneObservation::MapAnnunaSiunaStorageUrn(
-                ctx.map__annuna__siuna_storage__urn,
-            ));
-        }
-        if self.map__annuna__final_save__save {
-            vec.push(OneObservation::MapAnnunaFinalSaveSave(
-                ctx.map__annuna__final_save__save,
-            ));
-        }
-        if self.map__ebih__waterfall__axe {
-            vec.push(OneObservation::MapEbihWaterfallAxe(
-                ctx.map__ebih__waterfall__axe,
-            ));
-        }
-        if self.map__ebih__drone_room__urn {
-            vec.push(OneObservation::MapEbihDroneRoomUrn(
-                ctx.map__ebih__drone_room__urn,
-            ));
-        }
-        if self.map__glacier__the_big_drop__bottom {
-            vec.push(OneObservation::MapGlacierTheBigDropBottom(
-                ctx.map__glacier__the_big_drop__bottom,
-            ));
-        }
-        if self.map__glacier__grid_39_40_7_9__flask {
-            vec.push(OneObservation::MapGlacierGrid394079Flask(
-                ctx.map__glacier__grid_39_40_7_9__flask,
-            ));
-        }
-        if self.map__glacier__crystals__lower {
-            vec.push(OneObservation::MapGlacierCrystalsLower(
-                ctx.map__glacier__crystals__lower,
-            ));
-        }
-        if self.map__glacier__hammonds_end__hammond {
-            vec.push(OneObservation::MapGlacierHammondsEndHammond(
-                ctx.map__glacier__hammonds_end__hammond,
-            ));
-        }
-        if self.map__irikar_breach__basement_save__save {
-            vec.push(OneObservation::MapIrikarBreachBasementSaveSave(
-                ctx.map__irikar_breach__basement_save__save,
-            ));
-        }
-        if self.map__irikar__sight_room__urn {
-            vec.push(OneObservation::MapIrikarSightRoomUrn(
-                ctx.map__irikar__sight_room__urn,
-            ));
-        }
-        if self.map__uhrum__annuna_corridor__urn {
-            vec.push(OneObservation::MapUhrumAnnunaCorridorUrn(
-                ctx.map__uhrum__annuna_corridor__urn,
-            ));
-        }
         match self.big_flask {
             IntegerObservation::Unknown => (),
             IntegerObservation::Exact => vec.push(OneObservation::BigFlaskExact(ctx.big_flask)),
@@ -2041,66 +1901,6 @@ impl FullObservation {
         if self.prev_area {
             fields += 1;
         }
-        if self.map__amagi__west_lake__urn {
-            fields += 1;
-        }
-        if self.map__amagi__east_lake__surface_east {
-            fields += 1;
-        }
-        if self.map__amagi__east_lake__surface_center {
-            fields += 1;
-        }
-        if self.map__amagi__east_lake__surface_west {
-            fields += 1;
-        }
-        if self.map__amagi__east_lake__southeast {
-            fields += 1;
-        }
-        if self.map__annuna__west_bridge__save {
-            fields += 1;
-        }
-        if self.map__annuna__filter_teleporter__flask {
-            fields += 1;
-        }
-        if self.map__annuna__filter_teleporter__tablet {
-            fields += 1;
-        }
-        if self.map__annuna__filter_teleporter__spiders {
-            fields += 1;
-        }
-        if self.map__annuna__siuna_storage__urn {
-            fields += 1;
-        }
-        if self.map__annuna__final_save__save {
-            fields += 1;
-        }
-        if self.map__ebih__waterfall__axe {
-            fields += 1;
-        }
-        if self.map__ebih__drone_room__urn {
-            fields += 1;
-        }
-        if self.map__glacier__the_big_drop__bottom {
-            fields += 1;
-        }
-        if self.map__glacier__grid_39_40_7_9__flask {
-            fields += 1;
-        }
-        if self.map__glacier__crystals__lower {
-            fields += 1;
-        }
-        if self.map__glacier__hammonds_end__hammond {
-            fields += 1;
-        }
-        if self.map__irikar_breach__basement_save__save {
-            fields += 1;
-        }
-        if self.map__irikar__sight_room__urn {
-            fields += 1;
-        }
-        if self.map__uhrum__annuna_corridor__urn {
-            fields += 1;
-        }
         if self.big_flask != IntegerObservation::Unknown {
             fields += 1;
         }
@@ -2191,31 +1991,13 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
     }
-    pub fn observe_map__amagi__west_lake__urn(&mut self) {
-        self.map__amagi__west_lake__urn = true;
-    }
     pub fn observe_map__amagi__east_lake__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
     }
-    pub fn observe_map__amagi__east_lake__surface_east(&mut self) {
-        self.map__amagi__east_lake__surface_east = true;
-    }
-    pub fn observe_map__amagi__east_lake__surface_center(&mut self) {
-        self.map__amagi__east_lake__surface_center = true;
-    }
-    pub fn observe_map__amagi__east_lake__surface_west(&mut self) {
-        self.map__amagi__east_lake__surface_west = true;
-    }
-    pub fn observe_map__amagi__east_lake__southeast(&mut self) {
-        self.map__amagi__east_lake__southeast = true;
-    }
     pub fn observe_map__annuna__mirror_match__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
-    }
-    pub fn observe_map__annuna__west_bridge__save(&mut self) {
-        self.map__annuna__west_bridge__save = true;
     }
     pub fn observe_map__annuna__vertical_room__save(&mut self) {
         self.cbits1
@@ -2225,15 +2007,6 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
     }
-    pub fn observe_map__annuna__filter_teleporter__flask(&mut self) {
-        self.map__annuna__filter_teleporter__flask = true;
-    }
-    pub fn observe_map__annuna__filter_teleporter__tablet(&mut self) {
-        self.map__annuna__filter_teleporter__tablet = true;
-    }
-    pub fn observe_map__annuna__filter_teleporter__spiders(&mut self) {
-        self.map__annuna__filter_teleporter__spiders = true;
-    }
     pub fn observe_map__annuna__upper_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE);
@@ -2242,18 +2015,9 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE);
     }
-    pub fn observe_map__annuna__siuna_storage__urn(&mut self) {
-        self.map__annuna__siuna_storage__urn = true;
-    }
-    pub fn observe_map__annuna__final_save__save(&mut self) {
-        self.map__annuna__final_save__save = true;
-    }
     pub fn observe_map__ebih__base_camp__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
-    }
-    pub fn observe_map__ebih__waterfall__axe(&mut self) {
-        self.map__ebih__waterfall__axe = true;
     }
     pub fn observe_map__ebih__ebih_west__mid_save(&mut self) {
         self.cbits1
@@ -2266,9 +2030,6 @@ impl FullObservation {
     pub fn observe_map__ebih__ebih_west__lower_save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
-    }
-    pub fn observe_map__ebih__drone_room__urn(&mut self) {
-        self.map__ebih__drone_room__urn = true;
     }
     pub fn observe_map__giguna_breach__peak__save(&mut self) {
         self.cbits1
@@ -2318,18 +2079,6 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
     }
-    pub fn observe_map__glacier__the_big_drop__bottom(&mut self) {
-        self.map__glacier__the_big_drop__bottom = true;
-    }
-    pub fn observe_map__glacier__grid_39_40_7_9__flask(&mut self) {
-        self.map__glacier__grid_39_40_7_9__flask = true;
-    }
-    pub fn observe_map__glacier__crystals__lower(&mut self) {
-        self.map__glacier__crystals__lower = true;
-    }
-    pub fn observe_map__glacier__hammonds_end__hammond(&mut self) {
-        self.map__glacier__hammonds_end__hammond = true;
-    }
     pub fn observe_map__irikar_breach__save_room__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
@@ -2338,15 +2087,9 @@ impl FullObservation {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
     }
-    pub fn observe_map__irikar_breach__basement_save__save(&mut self) {
-        self.map__irikar_breach__basement_save__save = true;
-    }
     pub fn observe_map__irikar__hub__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
-    }
-    pub fn observe_map__irikar__sight_room__urn(&mut self) {
-        self.map__irikar__sight_room__urn = true;
     }
     pub fn observe_map__uhrum__west_entrance__save(&mut self) {
         self.cbits1
@@ -2359,9 +2102,6 @@ impl FullObservation {
     pub fn observe_map__uhrum__annuna_corridor__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
-    }
-    pub fn observe_map__uhrum__annuna_corridor__urn(&mut self) {
-        self.map__uhrum__annuna_corridor__urn = true;
     }
     pub fn observe_glacier__ctx__hammonds_doors(&mut self) {
         self.cbits1
@@ -3008,28 +2748,6 @@ pub enum ObservationMatcher {
     PortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     PrevPortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
-    MapAmagiWestLakeUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAmagiEastLakeSurfaceEastLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAmagiEastLakeSurfaceCenterLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAmagiEastLakeSurfaceWestLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAmagiEastLakeSoutheastLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAnnunaWestBridgeSaveLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAnnunaFilterTeleporterFlaskLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAnnunaFilterTeleporterTabletLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAnnunaFilterTeleporterSpidersLookup(
-        LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>,
-    ),
-    MapAnnunaSiunaStorageUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAnnunaFinalSaveSaveLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapEbihWaterfallAxeLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapEbihDroneRoomUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapGlacierTheBigDropBottomLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapGlacierGrid394079FlaskLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapGlacierCrystalsLowerLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapGlacierHammondsEndHammondLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapIrikarBreachBasementSaveSaveLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapIrikarSightRoomUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapUhrumAnnunaCorridorUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
     // items
     BigFlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     BigFlaskEq {
@@ -3242,113 +2960,6 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::PrevAreaLookup(m))
             }
-            &OneObservation::MapAmagiWestLakeUrn(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAmagiWestLakeUrnLookup(m))
-            }
-            &OneObservation::MapAmagiEastLakeSurfaceEast(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAmagiEastLakeSurfaceEastLookup(m),
-                )
-            }
-            &OneObservation::MapAmagiEastLakeSurfaceCenter(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAmagiEastLakeSurfaceCenterLookup(m),
-                )
-            }
-            &OneObservation::MapAmagiEastLakeSurfaceWest(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAmagiEastLakeSurfaceWestLookup(m),
-                )
-            }
-            &OneObservation::MapAmagiEastLakeSoutheast(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAmagiEastLakeSoutheastLookup(m))
-            }
-            &OneObservation::MapAnnunaWestBridgeSave(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAnnunaWestBridgeSaveLookup(m))
-            }
-            &OneObservation::MapAnnunaFilterTeleporterFlask(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAnnunaFilterTeleporterFlaskLookup(m),
-                )
-            }
-            &OneObservation::MapAnnunaFilterTeleporterTablet(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAnnunaFilterTeleporterTabletLookup(m),
-                )
-            }
-            &OneObservation::MapAnnunaFilterTeleporterSpiders(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapAnnunaFilterTeleporterSpidersLookup(m),
-                )
-            }
-            &OneObservation::MapAnnunaSiunaStorageUrn(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAnnunaSiunaStorageUrnLookup(m))
-            }
-            &OneObservation::MapAnnunaFinalSaveSave(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAnnunaFinalSaveSaveLookup(m))
-            }
-            &OneObservation::MapEbihWaterfallAxe(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapEbihWaterfallAxeLookup(m))
-            }
-            &OneObservation::MapEbihDroneRoomUrn(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapEbihDroneRoomUrnLookup(m))
-            }
-            &OneObservation::MapGlacierTheBigDropBottom(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapGlacierTheBigDropBottomLookup(m),
-                )
-            }
-            &OneObservation::MapGlacierGrid394079Flask(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapGlacierGrid394079FlaskLookup(m))
-            }
-            &OneObservation::MapGlacierCrystalsLower(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapGlacierCrystalsLowerLookup(m))
-            }
-            &OneObservation::MapGlacierHammondsEndHammond(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapGlacierHammondsEndHammondLookup(m),
-                )
-            }
-            &OneObservation::MapIrikarBreachBasementSaveSave(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (
-                    node,
-                    ObservationMatcher::MapIrikarBreachBasementSaveSaveLookup(m),
-                )
-            }
-            &OneObservation::MapIrikarSightRoomUrn(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapIrikarSightRoomUrnLookup(m))
-            }
-            &OneObservation::MapUhrumAnnunaCorridorUrn(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapUhrumAnnunaCorridorUrnLookup(m))
-            }
             &OneObservation::BigFlaskExact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::BigFlaskLookup(m))
@@ -3492,26 +3103,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PortalLookup(m) => m.clear(),
             Self::PrevPortalLookup(m) => m.clear(),
             Self::PrevAreaLookup(m) => m.clear(),
-            Self::MapAmagiWestLakeUrnLookup(m) => m.clear(),
-            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.clear(),
-            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.clear(),
-            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.clear(),
-            Self::MapAmagiEastLakeSoutheastLookup(m) => m.clear(),
-            Self::MapAnnunaWestBridgeSaveLookup(m) => m.clear(),
-            Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.clear(),
-            Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.clear(),
-            Self::MapAnnunaFilterTeleporterSpidersLookup(m) => m.clear(),
-            Self::MapAnnunaSiunaStorageUrnLookup(m) => m.clear(),
-            Self::MapAnnunaFinalSaveSaveLookup(m) => m.clear(),
-            Self::MapEbihWaterfallAxeLookup(m) => m.clear(),
-            Self::MapEbihDroneRoomUrnLookup(m) => m.clear(),
-            Self::MapGlacierTheBigDropBottomLookup(m) => m.clear(),
-            Self::MapGlacierGrid394079FlaskLookup(m) => m.clear(),
-            Self::MapGlacierCrystalsLowerLookup(m) => m.clear(),
-            Self::MapGlacierHammondsEndHammondLookup(m) => m.clear(),
-            Self::MapIrikarBreachBasementSaveSaveLookup(m) => m.clear(),
-            Self::MapIrikarSightRoomUrnLookup(m) => m.clear(),
-            Self::MapUhrumAnnunaCorridorUrnLookup(m) => m.clear(),
             Self::BigFlaskLookup(m) => m.clear(),
             Self::BigFlaskEq { matcher, .. } => matcher.clear(),
             Self::BigFlaskGe { matcher, .. } => matcher.clear(),
@@ -3574,52 +3165,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PortalLookup(m) => m.lookup(val.portal),
             Self::PrevPortalLookup(m) => m.lookup(val.prev_portal),
             Self::PrevAreaLookup(m) => m.lookup(val.prev_area),
-            Self::MapAmagiWestLakeUrnLookup(m) => m.lookup(val.map__amagi__west_lake__urn),
-            Self::MapAmagiEastLakeSurfaceEastLookup(m) => {
-                m.lookup(val.map__amagi__east_lake__surface_east)
-            }
-            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => {
-                m.lookup(val.map__amagi__east_lake__surface_center)
-            }
-            Self::MapAmagiEastLakeSurfaceWestLookup(m) => {
-                m.lookup(val.map__amagi__east_lake__surface_west)
-            }
-            Self::MapAmagiEastLakeSoutheastLookup(m) => {
-                m.lookup(val.map__amagi__east_lake__southeast)
-            }
-            Self::MapAnnunaWestBridgeSaveLookup(m) => m.lookup(val.map__annuna__west_bridge__save),
-            Self::MapAnnunaFilterTeleporterFlaskLookup(m) => {
-                m.lookup(val.map__annuna__filter_teleporter__flask)
-            }
-            Self::MapAnnunaFilterTeleporterTabletLookup(m) => {
-                m.lookup(val.map__annuna__filter_teleporter__tablet)
-            }
-            Self::MapAnnunaFilterTeleporterSpidersLookup(m) => {
-                m.lookup(val.map__annuna__filter_teleporter__spiders)
-            }
-            Self::MapAnnunaSiunaStorageUrnLookup(m) => {
-                m.lookup(val.map__annuna__siuna_storage__urn)
-            }
-            Self::MapAnnunaFinalSaveSaveLookup(m) => m.lookup(val.map__annuna__final_save__save),
-            Self::MapEbihWaterfallAxeLookup(m) => m.lookup(val.map__ebih__waterfall__axe),
-            Self::MapEbihDroneRoomUrnLookup(m) => m.lookup(val.map__ebih__drone_room__urn),
-            Self::MapGlacierTheBigDropBottomLookup(m) => {
-                m.lookup(val.map__glacier__the_big_drop__bottom)
-            }
-            Self::MapGlacierGrid394079FlaskLookup(m) => {
-                m.lookup(val.map__glacier__grid_39_40_7_9__flask)
-            }
-            Self::MapGlacierCrystalsLowerLookup(m) => m.lookup(val.map__glacier__crystals__lower),
-            Self::MapGlacierHammondsEndHammondLookup(m) => {
-                m.lookup(val.map__glacier__hammonds_end__hammond)
-            }
-            Self::MapIrikarBreachBasementSaveSaveLookup(m) => {
-                m.lookup(val.map__irikar_breach__basement_save__save)
-            }
-            Self::MapIrikarSightRoomUrnLookup(m) => m.lookup(val.map__irikar__sight_room__urn),
-            Self::MapUhrumAnnunaCorridorUrnLookup(m) => {
-                m.lookup(val.map__uhrum__annuna_corridor__urn)
-            }
             Self::BigFlaskLookup(m) => m.lookup(val.big_flask),
             Self::BigFlaskEq { eq, matcher } => matcher.lookup(val.big_flask == *eq),
             Self::BigFlaskGe { lo, matcher } => matcher.lookup(val.big_flask >= *lo),
@@ -3714,81 +3259,6 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::PortalLookup(m), OneObservation::Portal(v)) => Some(m.insert(*v)),
             (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => Some(m.insert(*v)),
             (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => Some(m.insert(*v)),
-            (Self::MapAmagiWestLakeUrnLookup(m), OneObservation::MapAmagiWestLakeUrn(v)) => {
-                Some(m.insert(*v))
-            }
-            (
-                Self::MapAmagiEastLakeSurfaceEastLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceEast(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAmagiEastLakeSurfaceCenterLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceCenter(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAmagiEastLakeSurfaceWestLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceWest(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAmagiEastLakeSoutheastLookup(m),
-                OneObservation::MapAmagiEastLakeSoutheast(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAnnunaWestBridgeSaveLookup(m),
-                OneObservation::MapAnnunaWestBridgeSave(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAnnunaFilterTeleporterFlaskLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterFlask(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAnnunaFilterTeleporterTabletLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterTablet(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAnnunaFilterTeleporterSpidersLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterSpiders(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapAnnunaSiunaStorageUrnLookup(m),
-                OneObservation::MapAnnunaSiunaStorageUrn(v),
-            ) => Some(m.insert(*v)),
-            (Self::MapAnnunaFinalSaveSaveLookup(m), OneObservation::MapAnnunaFinalSaveSave(v)) => {
-                Some(m.insert(*v))
-            }
-            (Self::MapEbihWaterfallAxeLookup(m), OneObservation::MapEbihWaterfallAxe(v)) => {
-                Some(m.insert(*v))
-            }
-            (Self::MapEbihDroneRoomUrnLookup(m), OneObservation::MapEbihDroneRoomUrn(v)) => {
-                Some(m.insert(*v))
-            }
-            (
-                Self::MapGlacierTheBigDropBottomLookup(m),
-                OneObservation::MapGlacierTheBigDropBottom(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapGlacierGrid394079FlaskLookup(m),
-                OneObservation::MapGlacierGrid394079Flask(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapGlacierCrystalsLowerLookup(m),
-                OneObservation::MapGlacierCrystalsLower(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapGlacierHammondsEndHammondLookup(m),
-                OneObservation::MapGlacierHammondsEndHammond(v),
-            ) => Some(m.insert(*v)),
-            (
-                Self::MapIrikarBreachBasementSaveSaveLookup(m),
-                OneObservation::MapIrikarBreachBasementSaveSave(v),
-            ) => Some(m.insert(*v)),
-            (Self::MapIrikarSightRoomUrnLookup(m), OneObservation::MapIrikarSightRoomUrn(v)) => {
-                Some(m.insert(*v))
-            }
-            (
-                Self::MapUhrumAnnunaCorridorUrnLookup(m),
-                OneObservation::MapUhrumAnnunaCorridorUrn(v),
-            ) => Some(m.insert(*v)),
             (Self::BigFlaskLookup(m), OneObservation::BigFlaskExact(v)) => Some(m.insert(*v)),
             (Self::BigFlaskEq { eq, matcher }, OneObservation::BigFlaskEq(eq2, v)) if eq2 == eq => {
                 Some(matcher.insert(*v))
@@ -3969,81 +3439,6 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::PortalLookup(m), OneObservation::Portal(v)) => m.add_value(*v, value),
             (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => m.add_value(*v, value),
             (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.add_value(*v, value),
-            (Self::MapAmagiWestLakeUrnLookup(m), OneObservation::MapAmagiWestLakeUrn(v)) => {
-                m.add_value(*v, value)
-            }
-            (
-                Self::MapAmagiEastLakeSurfaceEastLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceEast(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAmagiEastLakeSurfaceCenterLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceCenter(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAmagiEastLakeSurfaceWestLookup(m),
-                OneObservation::MapAmagiEastLakeSurfaceWest(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAmagiEastLakeSoutheastLookup(m),
-                OneObservation::MapAmagiEastLakeSoutheast(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAnnunaWestBridgeSaveLookup(m),
-                OneObservation::MapAnnunaWestBridgeSave(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAnnunaFilterTeleporterFlaskLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterFlask(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAnnunaFilterTeleporterTabletLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterTablet(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAnnunaFilterTeleporterSpidersLookup(m),
-                OneObservation::MapAnnunaFilterTeleporterSpiders(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapAnnunaSiunaStorageUrnLookup(m),
-                OneObservation::MapAnnunaSiunaStorageUrn(v),
-            ) => m.add_value(*v, value),
-            (Self::MapAnnunaFinalSaveSaveLookup(m), OneObservation::MapAnnunaFinalSaveSave(v)) => {
-                m.add_value(*v, value)
-            }
-            (Self::MapEbihWaterfallAxeLookup(m), OneObservation::MapEbihWaterfallAxe(v)) => {
-                m.add_value(*v, value)
-            }
-            (Self::MapEbihDroneRoomUrnLookup(m), OneObservation::MapEbihDroneRoomUrn(v)) => {
-                m.add_value(*v, value)
-            }
-            (
-                Self::MapGlacierTheBigDropBottomLookup(m),
-                OneObservation::MapGlacierTheBigDropBottom(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapGlacierGrid394079FlaskLookup(m),
-                OneObservation::MapGlacierGrid394079Flask(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapGlacierCrystalsLowerLookup(m),
-                OneObservation::MapGlacierCrystalsLower(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapGlacierHammondsEndHammondLookup(m),
-                OneObservation::MapGlacierHammondsEndHammond(v),
-            ) => m.add_value(*v, value),
-            (
-                Self::MapIrikarBreachBasementSaveSaveLookup(m),
-                OneObservation::MapIrikarBreachBasementSaveSave(v),
-            ) => m.add_value(*v, value),
-            (Self::MapIrikarSightRoomUrnLookup(m), OneObservation::MapIrikarSightRoomUrn(v)) => {
-                m.add_value(*v, value)
-            }
-            (
-                Self::MapUhrumAnnunaCorridorUrnLookup(m),
-                OneObservation::MapUhrumAnnunaCorridorUrn(v),
-            ) => m.add_value(*v, value),
             (Self::BigFlaskLookup(m), OneObservation::BigFlaskExact(v)) => m.add_value(*v, value),
             (Self::BigFlaskEq { eq, matcher }, OneObservation::BigFlaskEq(eq2, v)) if eq2 == eq => {
                 matcher.add_value(*v, value)
@@ -4196,26 +3591,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PortalLookup(m) => m.nodes(),
             Self::PrevPortalLookup(m) => m.nodes(),
             Self::PrevAreaLookup(m) => m.nodes(),
-            Self::MapAmagiWestLakeUrnLookup(m) => m.nodes(),
-            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.nodes(),
-            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.nodes(),
-            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.nodes(),
-            Self::MapAmagiEastLakeSoutheastLookup(m) => m.nodes(),
-            Self::MapAnnunaWestBridgeSaveLookup(m) => m.nodes(),
-            Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.nodes(),
-            Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.nodes(),
-            Self::MapAnnunaFilterTeleporterSpidersLookup(m) => m.nodes(),
-            Self::MapAnnunaSiunaStorageUrnLookup(m) => m.nodes(),
-            Self::MapAnnunaFinalSaveSaveLookup(m) => m.nodes(),
-            Self::MapEbihWaterfallAxeLookup(m) => m.nodes(),
-            Self::MapEbihDroneRoomUrnLookup(m) => m.nodes(),
-            Self::MapGlacierTheBigDropBottomLookup(m) => m.nodes(),
-            Self::MapGlacierGrid394079FlaskLookup(m) => m.nodes(),
-            Self::MapGlacierCrystalsLowerLookup(m) => m.nodes(),
-            Self::MapGlacierHammondsEndHammondLookup(m) => m.nodes(),
-            Self::MapIrikarBreachBasementSaveSaveLookup(m) => m.nodes(),
-            Self::MapIrikarSightRoomUrnLookup(m) => m.nodes(),
-            Self::MapUhrumAnnunaCorridorUrnLookup(m) => m.nodes(),
             Self::BigFlaskLookup(m) => m.nodes(),
             Self::BigFlaskEq { matcher, .. } => matcher.nodes(),
             Self::BigFlaskGe { matcher, .. } => matcher.nodes(),
@@ -4272,26 +3647,6 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PortalLookup(m) => m.num_values(),
             Self::PrevPortalLookup(m) => m.num_values(),
             Self::PrevAreaLookup(m) => m.num_values(),
-            Self::MapAmagiWestLakeUrnLookup(m) => m.num_values(),
-            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.num_values(),
-            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.num_values(),
-            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.num_values(),
-            Self::MapAmagiEastLakeSoutheastLookup(m) => m.num_values(),
-            Self::MapAnnunaWestBridgeSaveLookup(m) => m.num_values(),
-            Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.num_values(),
-            Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.num_values(),
-            Self::MapAnnunaFilterTeleporterSpidersLookup(m) => m.num_values(),
-            Self::MapAnnunaSiunaStorageUrnLookup(m) => m.num_values(),
-            Self::MapAnnunaFinalSaveSaveLookup(m) => m.num_values(),
-            Self::MapEbihWaterfallAxeLookup(m) => m.num_values(),
-            Self::MapEbihDroneRoomUrnLookup(m) => m.num_values(),
-            Self::MapGlacierTheBigDropBottomLookup(m) => m.num_values(),
-            Self::MapGlacierGrid394079FlaskLookup(m) => m.num_values(),
-            Self::MapGlacierCrystalsLowerLookup(m) => m.num_values(),
-            Self::MapGlacierHammondsEndHammondLookup(m) => m.num_values(),
-            Self::MapIrikarBreachBasementSaveSaveLookup(m) => m.num_values(),
-            Self::MapIrikarSightRoomUrnLookup(m) => m.num_values(),
-            Self::MapUhrumAnnunaCorridorUrnLookup(m) => m.num_values(),
             Self::BigFlaskLookup(m) => m.num_values(),
             Self::BigFlaskEq { matcher, .. } => matcher.num_values(),
             Self::BigFlaskGe { matcher, .. } => matcher.num_values(),

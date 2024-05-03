@@ -17,7 +17,7 @@ use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum OneObservation {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
     {{ c }}Exact({{ t }}),
@@ -51,7 +51,7 @@ pub struct FullObservation {
     // context vars: observed or not. Ints get comparisons as well but they are observed-as-true comparisons,
     // or otherwise partitioned as exact
 %# TODO: Allow disjoint comparisons so we can generalize into boolean better without the actual observation here.
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% if t in int_types
     {{ ctx }}: IntegerObservation<{{ t }}>,
 %% else
@@ -146,7 +146,7 @@ impl Observer for FullObservation {
 %# We compare all the integer observations since the bounds have to change.-
 %# Otherwise we have to understand all the action rules to reverse them.-
     fn update(&mut self, from: &Context, to: &Context) {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% if t in int_types
         if from.{{ ctx }} != to.{{ ctx }} {
             self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
@@ -163,7 +163,7 @@ impl Observer for FullObservation {
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
         let mut vec = Vec::with_capacity(self.fields_observed());
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             match self.{{ ctx }} {
@@ -204,7 +204,7 @@ impl Observer for FullObservation {
 impl FullObservation {
     fn fields_observed(&self) -> usize {
         let mut fields = 0;
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% if t in int_types
         if self.{{ ctx }} != IntegerObservation::Unknown { fields += 1; }
 %% else
@@ -220,7 +220,7 @@ impl FullObservation {
         fields
     }
 
-%% for ctx, t in context_types.items()
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles
 %% if ctx in special.ignore_observations
     pub fn observe_{{ ctx }}(&self) {}
 %% elif ctx in bfp.varmap
@@ -282,7 +282,7 @@ impl FullObservation {
 
 #[derive(Debug)]
 pub enum ObservationMatcher {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
     {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
@@ -351,7 +351,7 @@ impl MatcherDispatch for ObservationMatcher {
     type Value = SolutionSuffix<Context>;
     fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
         match obs {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             &OneObservation::{{ c }}Exact(v) => {
@@ -415,7 +415,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn clear(&mut self) {
         match self {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             Self::{{ c }}Lookup(m) => m.clear(),
@@ -444,7 +444,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
         match self {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             Self::{{ c }}Lookup(m) => m.lookup(val.{{ ctx }}),
@@ -473,7 +473,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self>>>> {
         match (self, obs) {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => Some(m.insert(*v)),
@@ -502,7 +502,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
         match (self, obs) {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.add_value(*v, value),
@@ -531,7 +531,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn nodes(&self) -> Vec<Arc<Mutex<Node<Self>>>> {
         match self {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             Self::{{ c }}Lookup(m) => m.nodes(),
@@ -560,7 +560,7 @@ impl MatcherDispatch for ObservationMatcher {
 
     fn num_values(&self) -> usize {
         match self {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
             Self::{{ c }}Lookup(m) => m.num_values(),

@@ -33,10 +33,8 @@ use std::fmt;
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Expectation {
-%% for ctx, t in context_types.items()
-%% if ctx not in unused_map_tiles
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles
     {{ ctx|camelize|camelize }}({{ t }}),
-%% endif
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort
@@ -94,7 +92,7 @@ impl Default for ContextBits{{ loop.index }} {
 pub struct Context {
 %#- Splitting into separate Cow structs performs worse :(
     // context vars
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
     pub {{ ctx }}: {{ t }},
 %% endfor
     // items
@@ -110,7 +108,7 @@ pub struct Context {
 impl Default for Context {
     fn default() -> Context {
         Context {
-%% for k, v in context_values.items() if k not in bfp.varmap
+%% for k, v in context_values.items() if k not in bfp.varmap and k not in unused_map_tiles
             {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
 %% endfor
             // items
@@ -207,7 +205,7 @@ impl context::Ctx for Context {
     // test helper for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
         match (ckey, cval) {
-%% for ctx, t in context_types.items()
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles
 %% if t in int_types
             ("{{ ctx }}", Yaml::Integer(i)) => self.set_{{ ctx }}({{ t }}::try_from(*i).map_err(|e| format!("{}", e))?),
 %% elif t == "bool"
@@ -226,15 +224,13 @@ impl context::Ctx for Context {
 
     fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Expectation, String> {
         Ok(match (ckey, cval) {
-%% for ctx, t in context_types.items()
-%% if ctx not in unused_map_tiles
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles
 %% if t in int_types
             ("{{ ctx }}", Yaml::Integer(i)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::try_from(*i).map_err(|e| format!("{}", e))?),
 %% elif t == "bool"
             ("{{ ctx }}", Yaml::Boolean(b)) => Expectation::{{ ctx|camelize|camelize }}(*b),
 %% else
             ("{{ ctx }}", Yaml::String(s)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::from_str(s).map_err(|e| format!("{}", e))?),
-%% endif
 %% endif
             ("{{ ctx }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
 %% endfor
@@ -255,15 +251,13 @@ impl context::Ctx for Context {
         let mut errs = Vec::new();
         for exp in exps {
             match exp {
-%% for ctx in context_types
-%% if ctx not in unused_map_tiles
+%% for ctx in context_types if ctx not in unused_map_tiles
                 Expectation::{{ ctx|camelize|camelize }}(e) => {
                     let v = self.{{ ctx }}();
                     if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "{{ ctx }}", e, v));
                     }
                 }
-%% endif
 %% endfor
 %% for item, ct in gl.item_max_counts.items()|sort
             Expectation::{{ item|camelize }}(e) => {
@@ -532,7 +526,7 @@ impl context::Ctx for Context {
     fn diff(&self, old: &Context) -> String {
         let mut list: Vec<String> = Vec::new();
 
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
         if old.{{ ctx }} != self.{{ ctx }} {
             list.push(format!("{{ ctx }}: {:?} → {:?}", old.{{ ctx }}, self.{{ ctx }}));
         }
@@ -567,7 +561,7 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-%% for ctx, t in context_types.items()
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles
     pub fn {{ ctx }}(&self) -> {{ t }} {
 %% if ctx in bfp.varmap
         self.cbits{{ bfp.varmap[ctx] }}.contains(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }})
