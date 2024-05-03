@@ -968,7 +968,8 @@ where
         ctx: &ContextWrapper<T>,
     ) {
         let mut s = start.lock().unwrap();
-        log::debug!("{} iters took {:?}", num_rounds, s.elapsed());
+        let dur = s.elapsed();
+        log::debug!("{} iters took {:?}: throughput = {}/sec", num_rounds, dur, num_rounds as f32 / dur.as_secs_f32());
         *s = Instant::now();
 
         let sols = self.solutions.lock().unwrap();
