@@ -118,7 +118,47 @@ subgraph Amagi
     subgraph Amagi__East_Lake[East Lake]
         Amagi__East_Lake__East_15_Flat(East 15 Flat);
         Amagi__East_Lake__East_15_Lower(East 15 Lower);
+        Amagi__East_Lake__East_15_Upper_Hover(East 15 Upper Hover);
+        Amagi__East_Lake__East_15_Lower_Hover(East 15 Lower Hover);
+        Amagi__East_Lake__East_Hill(East Hill);
+        Amagi__East_Lake__Underwater_Hill(Underwater Hill);
+        Amagi__East_Lake__East_Water_Surface(East Water Surface);
+        Amagi__East_Lake__Center_East_Water_Surface_Fast(Center East Water Surface Fast);
+        Amagi__East_Lake__Center_East_Water_Surface_Slow(Center East Water Surface Slow);
+        Amagi__East_Lake__Center_Lower_Platform_East(Center Lower Platform East);
+        Amagi__East_Lake__Center_Water_Below_Platform_East(Center Water Below Platform East);
+        Amagi__East_Lake__Center_Water_Below_Platform_West(Center Water Below Platform West);
+        Amagi__East_Lake__Center_Northeast_Platform(Center Northeast Platform);
+        Amagi__East_Lake__Center_Upper_Platform(Center Upper Platform);
+        Amagi__East_Lake__Center_West_Platform(Center West Platform);
+        Amagi__East_Lake__Center_West_Water_Surface(Center West Water Surface);
+        Amagi__East_Lake__West_Water_Surface(West Water Surface);
+        Amagi__East_Lake__Far_West_Water_Surface(Far West Water Surface);
+        Amagi__East_Lake__West_Platform_1_West(West Platform 1 West);
+        Amagi__East_Lake__West_Platform_1_West_Hook(West Platform 1 West Hook);
+        Amagi__East_Lake__West_Platform_1_East(West Platform 1 East);
+        Amagi__East_Lake__West_Platform_2_West(West Platform 2 West);
+        Amagi__East_Lake__West_Platform_2_East(West Platform 2 East);
+        Amagi__East_Lake__West_Platform_3(West Platform 3);
+        Amagi__East_Lake__West_Platform_3_Hook(West Platform 3 Hook);
+        Amagi__East_Lake__Portal_Stand(Portal Stand);
+        Amagi__East_Lake__Portal_Ledge(Portal Ledge);
+        Amagi__East_Lake__West_17(West 17);
         Amagi__East_Lake__Save_Point(Save Point);
+        Amagi__East_Lake__Southeast_Column(Southeast Column);
+        Amagi__East_Lake__Arch_East(Arch East);
+        Amagi__East_Lake__Arch_West(Arch West);
+        Amagi__East_Lake__Southwest_Column_East(Southwest Column East);
+        Amagi__East_Lake__Southwest_Column_West(Southwest Column West);
+        Amagi__East_Lake__Southwest_Column_Base(Southwest Column Base);
+        Amagi__East_Lake__Southwest_Brick(Southwest Brick);
+        Amagi__East_Lake__West_18(West 18);
+        Amagi__East_Lake__Kum_Abala(Kum Abala);
+        Amagi__East_Lake__Foot(Foot);
+    end
+    subgraph Amagi__Gated_Community[Gated Community]
+        Amagi__Gated_Community__East_17(East 17);
+        Amagi__Gated_Community__East_18(East 18);
     end
 end
 subgraph Annuna
@@ -1922,6 +1962,7 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
         Menu__Kiengir_Map__Glacier_40_8(Glacier 40,8);
         Menu__Kiengir_Map__Glacier_Peak_Birds_Eye(Glacier Peak Bird's Eye);
+        Menu__Kiengir_Map__Forbidden_Knowledge(Forbidden Knowledge);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2102,6 +2143,74 @@ Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
 Amagi_Breach__East_Entrance__Grate_Left --> Amagi_Breach__East_Entrance__Upper_Slope
 Amagi_Breach__East_Entrance__West --> Amagi_Breach__East_Connector__East
+Amagi__East_Lake__Arch_East --> Amagi__East_Lake__Underwater_Hill
+Amagi__East_Lake__Arch_West <--> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Arch_West
+Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Southwest_Brick
+Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__West_Platform_3
+Amagi__East_Lake__Center_Lower_Platform_East <--> Amagi__East_Lake__East_Hill
+Amagi__East_Lake__Center_Northeast_Platform <--> Amagi__East_Lake__East_Hill
+Amagi__East_Lake__Center_Water_Below_Platform_East --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Center_Water_Below_Platform_East --> Amagi__East_Lake__Southwest_Brick
+Amagi__East_Lake__Center_Water_Below_Platform_East --> Amagi__East_Lake__West_Platform_3
+Amagi__East_Lake__Center_West_Platform --> Amagi__East_Lake__Far_West_Water_Surface
+Amagi__East_Lake__East_15_Flat <--> Glacier__Vertical_Room__West_15_Flat
+Amagi__East_Lake__East_15_Lower <--> Glacier__Vertical_Room__West_15_Lower
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Arch_East
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Arch_West
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Center_East_Water_Surface_Fast
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Center_Lower_Platform_East
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__Southwest_Brick
+Amagi__East_Lake__East_15_Lower_Hover --> Amagi__East_Lake__West_Platform_3
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Arch_East
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Arch_West
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Center_East_Water_Surface_Fast
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Center_Lower_Platform_East
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Center_Northeast_Platform
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Southwest_Brick
+Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__West_Platform_3
+Amagi__East_Lake__East_Water_Surface --> Amagi__East_Lake__Arch_East
+Amagi__East_Lake__East_Water_Surface --> Amagi__East_Lake__Arch_West
+Amagi__East_Lake__Kum_Abala <--> Amagi__East_Lake__Southeast_Column
+Amagi__East_Lake__Kum_Abala --> Amagi__East_Lake__Underwater_Hill
+Amagi__East_Lake__Portal_Ledge <--> Amagi__East_Lake__Portal_Stand
+Amagi__East_Lake__Portal_Stand --> Amagi__East_Lake__Kum_Abala
+Amagi__East_Lake__Portal_Stand --> Amagi__East_Lake__Save_Point
+Amagi__East_Lake__Portal_Stand --> Amagi__East_Lake__West_17
+Amagi__East_Lake__Portal_Stand --> Amagi__East_Lake__West_Platform_3
+Amagi__East_Lake__Save_Point --> Amagi__East_Lake__Southeast_Column
+Amagi__East_Lake__Save_Point --> Amagi__East_Lake__Southwest_Column_East
+Amagi__East_Lake__Southeast_Column --> Amagi__East_Lake__Foot
+Amagi__East_Lake__Southeast_Column --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Southeast_Column --> Amagi__East_Lake__Southwest_Brick
+Amagi__East_Lake__Southeast_Column --> Amagi__East_Lake__Underwater_Hill
+Amagi__East_Lake__Southwest_Column_Base --> Amagi__East_Lake__Southwest_Column_West
+Amagi__East_Lake__Southwest_Column_East --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Southwest_Column_West --> Amagi__East_Lake__Portal_Ledge
+Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__Center_Lower_Platform_East
+Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__Center_Northeast_Platform
+Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__East_Hill
+Amagi__East_Lake__West_17 --> Amagi__Gated_Community__East_17
+Amagi__East_Lake__West_18 --> Amagi__Gated_Community__East_18
+Amagi__East_Lake__West_Platform_1_East --> Amagi__East_Lake__West_Platform_2_West
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_Lower_Platform_East
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_Northeast_Platform
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_Upper_Platform
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_West_Platform
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Foot
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Kum_Abala
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Underwater_Hill
+Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__West_Platform_1_West
+Amagi__East_Lake__West_Platform_2_East --> Amagi__East_Lake__West_Platform_1_West
+Amagi__East_Lake__West_Platform_2_West --> Amagi__East_Lake__West_Platform_1_West
+Amagi__East_Lake__West_Platform_3 --> Amagi__East_Lake__West_Platform_2_East
+Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Foot
+Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Kum_Abala
+Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Underwater_Hill
+Amagi__East_Lake__West_Water_Surface --> Amagi__East_Lake__Center_West_Platform
 Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
 Amagi__Grid_31_19__West <--> Amagi__Main_Area__East_19
 Amagi__Liru_Room__Platform_4_Left <--> Amagi__Liru_Room__West_20
@@ -2961,6 +3070,7 @@ Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Sea_Burial__Collapsing_Ceiling
 Glacier__The_Big_Drop__West_11_Door --> Glacier__The_Big_Drop__East
 Glacier__Vertical_Room__Above_Switch <--> Glacier__Vertical_Room__Upper_Gatestone
+Glacier__Vertical_Room__Below_Upper_Switch --> Amagi__East_Lake__East_15_Upper_Hover
 Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__East_14
 Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__Upper_Switch
 Glacier__Vertical_Room__East_14 --> Glacier__Crystals__West
@@ -2983,8 +3093,7 @@ Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Below_Upper_Switch
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Upper_Switch
 Glacier__Vertical_Room__Upper_Switch --> Glacier__Vertical_Room__Above_Switch
-Glacier__Vertical_Room__West_15_Flat --> Amagi__East_Lake__East_15_Flat
-Glacier__Vertical_Room__West_15_Lower --> Amagi__East_Lake__East_15_Lower
+Glacier__Vertical_Room__Waters_Ledge --> Amagi__East_Lake__East_15_Lower_Hover
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Middle
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top
@@ -3083,6 +3192,7 @@ Menu__Breach_Map__GlB_West --> Glacier_Breach__West_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
+Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
 Menu__Kiengir_Map__Annuna_Factory_Entrance --> Annuna__Factory_Entrance__Save_Point

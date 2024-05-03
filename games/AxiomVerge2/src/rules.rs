@@ -1687,6 +1687,10 @@ pub fn access_invoke_climb_and_invoke_grab_and_anuman(ctx: &Context, world: &gra
     // $climb and $grab and Anuman
     ((helper__climb!(ctx, world) && helper__grab!(ctx, world)) && ctx.has(Item::Anuman))
 }
+pub fn access_invoke_climb_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $climb and Underwater_Movement
+    (helper__climb!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
 pub fn access_invoke_climb_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // $climb or $hook
     (helper__climb!(ctx, world) || helper__hook!(ctx, world))
@@ -1784,6 +1788,17 @@ pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement(
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
         && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    (((((helper__hook!(ctx, world) && helper__hover!(ctx, world))
+        && ctx.has(Item::Underwater_Movement))
+        && ctx.has(Item::Breach_Attractor))
+        && ctx.has(Item::Anuman))
+        && ctx.portal() == data::portal_start(ctx.position()))
+}
 pub fn access_invoke_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
@@ -1832,6 +1847,20 @@ pub fn access_invoke_hover_and_invoke_mist2(ctx: &Context, world: &graph::World)
 pub fn access_invoke_hover_and_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
     // $hover and Nanite_Mist
     (helper__hover!(ctx, world) && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_invoke_hover_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+    // $hover and Underwater_Movement
+    (helper__hover!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    ((((helper__hover!(ctx, world) && ctx.has(Item::Underwater_Movement))
+        && ctx.has(Item::Breach_Attractor))
+        && ctx.has(Item::Anuman))
+        && ctx.portal() == data::portal_start(ctx.position()))
 }
 pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // $hover or $hook
@@ -1984,6 +2013,10 @@ pub fn access_irikar_gudam(ctx: &Context, world: &graph::World) -> bool {
 pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &graph::World) -> bool {
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
+}
+pub fn access_map__amagi__east_lake__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__amagi__east_lake__save
+    ctx.map__amagi__east_lake__save()
 }
 pub fn access_map__amagi__main_area__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__amagi__main_area__save
@@ -3025,6 +3058,14 @@ pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::Wo
     // ^mode = 'Indra'; ^last = ^indra
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
+}
+pub fn action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx: &mut Context, world: &graph::World) {
+    // ^portal = `Amagi > East Lake > Arch East`
+    ctx.set_portal(SpotId::Amagi__East_Lake__Arch_East);
+}
+pub fn action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx: &mut Context, world: &graph::World) {
+    // ^portal = `Amagi > East Lake > Arch West`
+    ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
 }
 pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &mut Context,
@@ -8837,6 +8878,32 @@ pub fn explain_invoke_climb_and_invoke_grab_and_anuman(
         }
     }
 }
+pub fn explain_invoke_climb_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb and Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_climb_or_invoke_hook(
     ctx: &Context,
     world: &graph::World,
@@ -9420,6 +9487,94 @@ pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let mut left = {
+                            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                            edict.insert("$hook", format!("{:?}", res));
+                            refs.push("$hook");
+                            (res, refs)
+                        };
+                        if !left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                                edict.insert("$hover", format!("{:?}", res));
+                                refs.push("$hover");
+                                (res, refs)
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Underwater_Movement);
+                            edict.insert("Underwater_Movement", format!("{}", h));
+                            (h, vec!["Underwater_Movement"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Breach_Attractor);
+                        edict.insert("Breach_Attractor", format!("{}", h));
+                        (h, vec!["Breach_Attractor"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut left = {
+                    let r = ctx.portal();
+                    edict.insert("^portal", format!("{:?}", r));
+                    (r, vec!["^portal"])
+                };
+                let mut right = {
+                    let r = data::portal_start(ctx.position());
+                    edict.insert("^portal_start", format!("{:?}", r));
+                    (r, vec!["^portal_start"])
+                };
+                left.1.append(&mut right.1);
+                (left.0 == right.0, left.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
@@ -9679,6 +9834,106 @@ pub fn explain_invoke_hover_and_nanite_mist(
                 let h = ctx.has(Item::Nanite_Mist);
                 edict.insert("Nanite_Mist", format!("{}", h));
                 (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                        edict.insert("$hover", format!("{:?}", res));
+                        refs.push("$hover");
+                        (res, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Underwater_Movement);
+                            edict.insert("Underwater_Movement", format!("{}", h));
+                            (h, vec!["Underwater_Movement"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Breach_Attractor);
+                        edict.insert("Breach_Attractor", format!("{}", h));
+                        (h, vec!["Breach_Attractor"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut left = {
+                    let r = ctx.portal();
+                    edict.insert("^portal", format!("{:?}", r));
+                    (r, vec!["^portal"])
+                };
+                let mut right = {
+                    let r = data::portal_start(ctx.position());
+                    edict.insert("^portal_start", format!("{:?}", r));
+                    (r, vec!["^portal_start"])
+                };
+                left.1.append(&mut right.1);
+                (left.0 == right.0, left.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -10334,6 +10589,18 @@ pub fn explain_irikar_royal_storage_wall(
         let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
         edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
         (h, vec!["Irikar_Royal_Storage_Wall"])
+    }
+}
+pub fn explain_map__amagi__east_lake__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__amagi__east_lake__save
+    {
+        let r = ctx.map__amagi__east_lake__save();
+        edict.insert("^map__amagi__east_lake__save", format!("{:?}", r));
+        (r, vec!["^map__amagi__east_lake__save"])
     }
 }
 pub fn explain_map__amagi__main_area__save(
@@ -15331,6 +15598,18 @@ pub fn observe_access_invoke_climb_and_invoke_grab_and_anuman(
             ctx.has(Item::Anuman)
         }))
 }
+pub fn observe_access_invoke_climb_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb and Underwater_Movement
+    (hobserve__climb!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
 pub fn observe_access_invoke_climb_or_invoke_hook(
     ctx: &Context,
     world: &graph::World,
@@ -15546,6 +15825,34 @@ pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    (((((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_breach_attractor();
+            ctx.has(Item::Breach_Attractor)
+        }))
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        && ({
+            let left = {
+                full_obs.observe_portal();
+                ctx.portal()
+            };
+            let right = data::portal_start(ctx.position());
+            left == right
+        }))
+}
 pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &graph::World,
@@ -15645,6 +15952,46 @@ pub fn observe_access_invoke_hover_and_nanite_mist(
         && ({
             full_obs.observe_nanite_mist();
             ctx.has(Item::Nanite_Mist)
+        }))
+}
+pub fn observe_access_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Underwater_Movement
+    (hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+    ((((hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_breach_attractor();
+            ctx.has(Item::Breach_Attractor)
+        }))
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        && ({
+            let left = {
+                full_obs.observe_portal();
+                ctx.portal()
+            };
+            let right = data::portal_start(ctx.position());
+            left == right
         }))
 }
 pub fn observe_access_invoke_hover_or_invoke_hook(
@@ -15940,6 +16287,17 @@ pub fn observe_access_irikar_royal_storage_wall(
     {
         full_obs.observe_irikar_royal_storage_wall();
         ctx.has(Item::Irikar_Royal_Storage_Wall)
+    }
+}
+pub fn observe_access_map__amagi__east_lake__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__amagi__east_lake__save
+    {
+        full_obs.observe_map__amagi__east_lake__save();
+        ctx.map__amagi__east_lake__save()
     }
 }
 pub fn observe_access_map__amagi__main_area__save(
@@ -17885,6 +18243,20 @@ pub fn observe_action_mode_set_indra_last_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
+}
+pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Amagi > East Lake > Arch East`
+}
+pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Amagi > East Lake > Arch West`
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &Context,

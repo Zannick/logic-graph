@@ -126,7 +126,46 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Amagi__West_Lake__West_15 => AreaId::Amagi__West_Lake,
         SpotId::Amagi__East_Lake__East_15_Flat
         | SpotId::Amagi__East_Lake__East_15_Lower
-        | SpotId::Amagi__East_Lake__Save_Point => AreaId::Amagi__East_Lake,
+        | SpotId::Amagi__East_Lake__East_15_Upper_Hover
+        | SpotId::Amagi__East_Lake__East_15_Lower_Hover
+        | SpotId::Amagi__East_Lake__East_Hill
+        | SpotId::Amagi__East_Lake__Underwater_Hill
+        | SpotId::Amagi__East_Lake__East_Water_Surface
+        | SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast
+        | SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow
+        | SpotId::Amagi__East_Lake__Center_Lower_Platform_East
+        | SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East
+        | SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West
+        | SpotId::Amagi__East_Lake__Center_Northeast_Platform
+        | SpotId::Amagi__East_Lake__Center_Upper_Platform
+        | SpotId::Amagi__East_Lake__Center_West_Platform
+        | SpotId::Amagi__East_Lake__Center_West_Water_Surface
+        | SpotId::Amagi__East_Lake__West_Water_Surface
+        | SpotId::Amagi__East_Lake__Far_West_Water_Surface
+        | SpotId::Amagi__East_Lake__West_Platform_1_West
+        | SpotId::Amagi__East_Lake__West_Platform_1_West_Hook
+        | SpotId::Amagi__East_Lake__West_Platform_1_East
+        | SpotId::Amagi__East_Lake__West_Platform_2_West
+        | SpotId::Amagi__East_Lake__West_Platform_2_East
+        | SpotId::Amagi__East_Lake__West_Platform_3
+        | SpotId::Amagi__East_Lake__West_Platform_3_Hook
+        | SpotId::Amagi__East_Lake__Portal_Stand
+        | SpotId::Amagi__East_Lake__Portal_Ledge
+        | SpotId::Amagi__East_Lake__West_17
+        | SpotId::Amagi__East_Lake__Save_Point
+        | SpotId::Amagi__East_Lake__Southeast_Column
+        | SpotId::Amagi__East_Lake__Arch_East
+        | SpotId::Amagi__East_Lake__Arch_West
+        | SpotId::Amagi__East_Lake__Southwest_Column_East
+        | SpotId::Amagi__East_Lake__Southwest_Column_West
+        | SpotId::Amagi__East_Lake__Southwest_Column_Base
+        | SpotId::Amagi__East_Lake__Southwest_Brick
+        | SpotId::Amagi__East_Lake__West_18
+        | SpotId::Amagi__East_Lake__Kum_Abala
+        | SpotId::Amagi__East_Lake__Foot => AreaId::Amagi__East_Lake,
+        SpotId::Amagi__Gated_Community__East_17 | SpotId::Amagi__Gated_Community__East_18 => {
+            AreaId::Amagi__Gated_Community
+        }
         SpotId::Annuna__Mirror_Match__West_25
         | SpotId::Annuna__Mirror_Match__West_Gap
         | SpotId::Annuna__Mirror_Match__Save_Point
@@ -1592,7 +1631,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
         | SpotId::Menu__Kiengir_Map__Glacier_40_8
-        | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
+        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -1853,7 +1893,46 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Amagi__West_Lake__West_15 => RegionId::Amagi,
         SpotId::Amagi__East_Lake__East_15_Flat
         | SpotId::Amagi__East_Lake__East_15_Lower
-        | SpotId::Amagi__East_Lake__Save_Point => RegionId::Amagi,
+        | SpotId::Amagi__East_Lake__East_15_Upper_Hover
+        | SpotId::Amagi__East_Lake__East_15_Lower_Hover
+        | SpotId::Amagi__East_Lake__East_Hill
+        | SpotId::Amagi__East_Lake__Underwater_Hill
+        | SpotId::Amagi__East_Lake__East_Water_Surface
+        | SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast
+        | SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow
+        | SpotId::Amagi__East_Lake__Center_Lower_Platform_East
+        | SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East
+        | SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West
+        | SpotId::Amagi__East_Lake__Center_Northeast_Platform
+        | SpotId::Amagi__East_Lake__Center_Upper_Platform
+        | SpotId::Amagi__East_Lake__Center_West_Platform
+        | SpotId::Amagi__East_Lake__Center_West_Water_Surface
+        | SpotId::Amagi__East_Lake__West_Water_Surface
+        | SpotId::Amagi__East_Lake__Far_West_Water_Surface
+        | SpotId::Amagi__East_Lake__West_Platform_1_West
+        | SpotId::Amagi__East_Lake__West_Platform_1_West_Hook
+        | SpotId::Amagi__East_Lake__West_Platform_1_East
+        | SpotId::Amagi__East_Lake__West_Platform_2_West
+        | SpotId::Amagi__East_Lake__West_Platform_2_East
+        | SpotId::Amagi__East_Lake__West_Platform_3
+        | SpotId::Amagi__East_Lake__West_Platform_3_Hook
+        | SpotId::Amagi__East_Lake__Portal_Stand
+        | SpotId::Amagi__East_Lake__Portal_Ledge
+        | SpotId::Amagi__East_Lake__West_17
+        | SpotId::Amagi__East_Lake__Save_Point
+        | SpotId::Amagi__East_Lake__Southeast_Column
+        | SpotId::Amagi__East_Lake__Arch_East
+        | SpotId::Amagi__East_Lake__Arch_West
+        | SpotId::Amagi__East_Lake__Southwest_Column_East
+        | SpotId::Amagi__East_Lake__Southwest_Column_West
+        | SpotId::Amagi__East_Lake__Southwest_Column_Base
+        | SpotId::Amagi__East_Lake__Southwest_Brick
+        | SpotId::Amagi__East_Lake__West_18
+        | SpotId::Amagi__East_Lake__Kum_Abala
+        | SpotId::Amagi__East_Lake__Foot => RegionId::Amagi,
+        SpotId::Amagi__Gated_Community__East_17 | SpotId::Amagi__Gated_Community__East_18 => {
+            RegionId::Amagi
+        }
         SpotId::Annuna__Mirror_Match__West_25
         | SpotId::Annuna__Mirror_Match__West_Gap
         | SpotId::Annuna__Mirror_Match__Save_Point
@@ -3299,7 +3378,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Apocalypse_Cache
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
         | SpotId::Menu__Kiengir_Map__Glacier_40_8
-        | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
+        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3472,6 +3552,7 @@ impl world::Accessible for Location {
 
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            LocationId::Amagi__East_Lake__Foot__Tablet => true,
             LocationId::Amagi__Liru_Room__Shrine__Item => true,
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => true,
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => true,
@@ -4326,6 +4407,94 @@ impl world::Accessible for Exit {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => rules::access_invoke_climb_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => rules::access_invoke_climb_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => rules::access_invoke_climb_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => true,
+            ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
@@ -5628,6 +5797,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
@@ -5665,6 +5835,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => true,
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
@@ -5898,6 +6069,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::access_map__amagi__east_lake__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::access_map__annuna__factory_entrance__save(ctx, world),
@@ -6111,6 +6283,90 @@ impl world::Accessible for Exit {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => rules::observe_access_invoke_climb_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => rules::observe_access_invoke_climb_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => rules::observe_access_invoke_climb_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -7066,6 +7322,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
@@ -7097,6 +7354,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_invoke_sync(ctx, world, full_obs),
@@ -7239,6 +7497,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::observe_access_map__amagi__east_lake__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::observe_access_map__annuna__center_save__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::observe_access_map__annuna__factory_entrance__save(ctx, world, full_obs),
@@ -7434,6 +7693,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
@@ -7581,6 +7847,90 @@ impl world::Accessible for Exit {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => rules::explain_invoke_climb_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => rules::explain_invoke_climb_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => rules::explain_invoke_climb_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -8536,6 +8886,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
@@ -8567,6 +8918,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_invoke_sync(ctx, world, edict),
@@ -8709,6 +9061,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::explain_map__amagi__east_lake__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => rules::explain_map__annuna__factory_entrance__save(ctx, world, edict),
@@ -8913,6 +9266,10 @@ impl world::Exit for Exit {
 
     fn always(id: ExitId) -> bool {
         match id {
+            ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => true,
+            ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => true,
+            ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
@@ -9403,6 +9760,11 @@ impl world::Accessible for Action {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
+            ActionId::Amagi__East_Lake__Save_Point__Save => true,
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__req(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => true,
@@ -9532,6 +9894,10 @@ impl world::Accessible for Action {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
@@ -9651,6 +10017,42 @@ impl world::Accessible for Action {
         edict: &mut FxHashMap<&'static str, String>,
     ) -> (bool, Vec<&'static str>) {
         match self.id {
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
+                let (ret, mut tags) = rules::explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Arch East"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => {
+                let (ret, mut tags) = rules::explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Arch East"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
+                let (ret, mut tags) = rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Arch West"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => {
+                let (ret, mut tags) = rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Arch West"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 let (ret, mut tags) =
                     rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict);
@@ -10707,6 +11109,11 @@ impl world::Action for Action {
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
+            ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone(ctx, world),
@@ -10842,6 +11249,18 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
             ActionId::Global__Recall_Fast_Travel => data::map_spot(ctx.position()),
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__Arch_East
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__Arch_East
+            }
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__Arch_West
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__Arch_West
+            }
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 SpotId::Annuna__East_Bridge__Tower_Core
             }
@@ -10992,6 +11411,29 @@ impl world::Action for Action {
                 );
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
+                rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => {
+                rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => {
+                rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
+                rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Amagi__East_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
@@ -11746,11 +12188,49 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1696] = [
+static RAW_SPOTS: [SpotId; 1735] = [
     SpotId::None,
+    SpotId::Amagi__East_Lake__Arch_East,
+    SpotId::Amagi__East_Lake__Arch_West,
+    SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast,
+    SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow,
+    SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+    SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+    SpotId::Amagi__East_Lake__Center_Upper_Platform,
+    SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East,
+    SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West,
+    SpotId::Amagi__East_Lake__Center_West_Platform,
+    SpotId::Amagi__East_Lake__Center_West_Water_Surface,
     SpotId::Amagi__East_Lake__East_15_Flat,
     SpotId::Amagi__East_Lake__East_15_Lower,
+    SpotId::Amagi__East_Lake__East_15_Lower_Hover,
+    SpotId::Amagi__East_Lake__East_15_Upper_Hover,
+    SpotId::Amagi__East_Lake__East_Hill,
+    SpotId::Amagi__East_Lake__East_Water_Surface,
+    SpotId::Amagi__East_Lake__Far_West_Water_Surface,
+    SpotId::Amagi__East_Lake__Foot,
+    SpotId::Amagi__East_Lake__Kum_Abala,
+    SpotId::Amagi__East_Lake__Portal_Ledge,
+    SpotId::Amagi__East_Lake__Portal_Stand,
     SpotId::Amagi__East_Lake__Save_Point,
+    SpotId::Amagi__East_Lake__Southeast_Column,
+    SpotId::Amagi__East_Lake__Southwest_Brick,
+    SpotId::Amagi__East_Lake__Southwest_Column_Base,
+    SpotId::Amagi__East_Lake__Southwest_Column_East,
+    SpotId::Amagi__East_Lake__Southwest_Column_West,
+    SpotId::Amagi__East_Lake__Underwater_Hill,
+    SpotId::Amagi__East_Lake__West_17,
+    SpotId::Amagi__East_Lake__West_18,
+    SpotId::Amagi__East_Lake__West_Platform_1_East,
+    SpotId::Amagi__East_Lake__West_Platform_1_West,
+    SpotId::Amagi__East_Lake__West_Platform_1_West_Hook,
+    SpotId::Amagi__East_Lake__West_Platform_2_East,
+    SpotId::Amagi__East_Lake__West_Platform_2_West,
+    SpotId::Amagi__East_Lake__West_Platform_3,
+    SpotId::Amagi__East_Lake__West_Platform_3_Hook,
+    SpotId::Amagi__East_Lake__West_Water_Surface,
+    SpotId::Amagi__Gated_Community__East_17,
+    SpotId::Amagi__Gated_Community__East_18,
     SpotId::Amagi__Grid_31_19__East,
     SpotId::Amagi__Grid_31_19__West,
     SpotId::Amagi__Liru_Room__Bottom,
@@ -13298,6 +13778,7 @@ static RAW_SPOTS: [SpotId; 1696] = [
     SpotId::Menu__Kiengir_Map__Filter_Flask,
     SpotId::Menu__Kiengir_Map__Filter_Spiders,
     SpotId::Menu__Kiengir_Map__Filter_Tablet,
+    SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
     SpotId::Menu__Kiengir_Map__Giguna_Base,
     SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
     SpotId::Menu__Kiengir_Map__Giguna_Northeast,
@@ -13457,8 +13938,12 @@ lazy_static! {
             end: SpotId::Amagi_Breach__East_Entrance__West.into_usize() + 1,
         },
         AreaId::Amagi__East_Lake => Range {
-            start: SpotId::Amagi__East_Lake__East_15_Flat.into_usize(),
-            end: SpotId::Amagi__East_Lake__Save_Point.into_usize() + 1,
+            start: SpotId::Amagi__East_Lake__Arch_East.into_usize(),
+            end: SpotId::Amagi__East_Lake__West_Water_Surface.into_usize() + 1,
+        },
+        AreaId::Amagi__Gated_Community => Range {
+            start: SpotId::Amagi__Gated_Community__East_17.into_usize(),
+            end: SpotId::Amagi__Gated_Community__East_18.into_usize() + 1,
         },
         AreaId::Amagi__Grid_31_19 => Range {
             start: SpotId::Amagi__Grid_31_19__East.into_usize(),
@@ -14228,7 +14713,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 197;
+    const NUM_CANON_LOCATIONS: usize = 198;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14282,6 +14767,7 @@ impl world::World for World {
             Item::Amagi_Stronghold_Wall_2 => vec![LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall],
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => vec![LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall],
             Item::Amagi_West_Lake_Surface_Wall => vec![LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall, LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall],
+            Item::Forbidden_Knowledge => vec![LocationId::Amagi__East_Lake__Foot__Tablet],
             Item::Defeat_Indra => vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight],
             Item::Annuna_Mirror_Match_Switch => vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch],
             Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward],
@@ -14461,6 +14947,7 @@ impl world::World for World {
             LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => SpotId::Amagi__West_Lake__Surface_Wall_Right,
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => SpotId::Amagi__West_Lake__Surface_Wall_Left,
+            LocationId::Amagi__East_Lake__Foot__Tablet => SpotId::Amagi__East_Lake__Foot,
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => SpotId::Annuna__Mirror_Match__Save_Point,
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => SpotId::Annuna__Mirror_Match__Below_Switch,
             LocationId::Annuna__Mirror_Match__Plinth__Item => SpotId::Annuna__Mirror_Match__Plinth,
@@ -14678,6 +15165,19 @@ impl world::World for World {
             }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
             ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__East_15_Flat
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__East_15_Lower
+            }
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__East_15_Upper_Hover
+            }
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
+                SpotId::Amagi__East_Lake__East_15_Lower_Hover
+            }
+            ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 SpotId::Annuna__Mirror_Match__Save_Point
             }
@@ -15016,6 +15516,37 @@ impl world::World for World {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => SpotId::Amagi__West_Lake__Surface_Wall_Right,
             ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => SpotId::Amagi__West_Lake__Surface_Wall_Left,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => SpotId::Amagi__West_Lake__West_15,
+            ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => SpotId::Amagi__East_Lake__East_15_Flat,
+            ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => SpotId::Amagi__East_Lake__East_15_Lower,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 | ExitId:: Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => SpotId::Amagi__East_Lake__East_15_Upper_Hover,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 | ExitId:: Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => SpotId::Amagi__East_Lake__East_15_Lower_Hover,
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 | ExitId:: Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => SpotId::Amagi__East_Lake__East_Hill,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 | ExitId:: Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 | ExitId:: Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 | ExitId:: Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 | ExitId:: Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 | ExitId:: Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => SpotId::Amagi__East_Lake__Underwater_Hill,
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 | ExitId:: Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 | ExitId:: Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 | ExitId:: Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => SpotId::Amagi__East_Lake__East_Water_Surface,
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 | ExitId:: Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 | ExitId:: Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast,
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 | ExitId:: Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East,
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => SpotId::Amagi__East_Lake__Center_West_Platform,
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => SpotId::Amagi__East_Lake__West_Water_Surface,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 | ExitId:: Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => SpotId::Amagi__East_Lake__West_Platform_1_West_Hook,
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => SpotId::Amagi__East_Lake__West_Platform_1_East,
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 | ExitId:: Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 | ExitId:: Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => SpotId::Amagi__East_Lake__West_Platform_2_West,
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 | ExitId:: Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 | ExitId:: Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => SpotId::Amagi__East_Lake__West_Platform_2_East,
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => SpotId::Amagi__East_Lake__West_Platform_3,
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 | ExitId:: Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 | ExitId:: Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => SpotId::Amagi__East_Lake__West_Platform_3_Hook,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__West_17_1 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 | ExitId:: Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => SpotId::Amagi__East_Lake__Portal_Stand,
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 | ExitId:: Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 | ExitId:: Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => SpotId::Amagi__East_Lake__Portal_Ledge,
+            ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => SpotId::Amagi__East_Lake__West_17,
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 | ExitId:: Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 | ExitId:: Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 | ExitId:: Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => SpotId::Amagi__East_Lake__Save_Point,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 | ExitId:: Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 | ExitId:: Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 | ExitId:: Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 | ExitId:: Amagi__East_Lake__Southeast_Column__ex__Foot_1 => SpotId::Amagi__East_Lake__Southeast_Column,
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => SpotId::Amagi__East_Lake__Arch_East,
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => SpotId::Amagi__East_Lake__Arch_West,
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => SpotId::Amagi__East_Lake__Southwest_Column_East,
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => SpotId::Amagi__East_Lake__Southwest_Column_West,
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 | ExitId:: Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => SpotId::Amagi__East_Lake__Southwest_Column_Base,
+            ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => SpotId::Amagi__East_Lake__West_18,
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 | ExitId:: Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => SpotId::Amagi__East_Lake__Kum_Abala,
             ExitId::Annuna__Mirror_Match__West_25__ex__Uhrum__Annuna_Corridor__East_25_1 => SpotId::Annuna__Mirror_Match__West_25,
             ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_1 | ExitId:: Annuna__Mirror_Match__Eastward__ex__Staircase_2 | ExitId:: Annuna__Mirror_Match__Eastward__ex__Staircase_3 => SpotId::Annuna__Mirror_Match__Eastward,
             ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_1 | ExitId:: Annuna__Mirror_Match__Staircase__ex__Eastward_2 | ExitId:: Annuna__Mirror_Match__Staircase__ex__Eastward_3 => SpotId::Annuna__Mirror_Match__Staircase,
@@ -15784,10 +16315,11 @@ impl world::World for World {
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => SpotId::Glacier__Vertical_Room__Above_Switch,
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 | ExitId:: Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => SpotId::Glacier__Vertical_Room__East_14,
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => SpotId::Glacier__Vertical_Room__Upper_Switch,
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
             ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => SpotId::Glacier__Vertical_Room__Flat_Platform,
             ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => SpotId::Glacier__Vertical_Room__West_15_Flat,
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => SpotId::Glacier__Vertical_Room__West_15_Lower,
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => SpotId::Glacier__Vertical_Room__Waters_Ledge,
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => SpotId::Glacier__Vertical_Room__Middle_Gatestone,
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => SpotId::Glacier__Vertical_Room__Lower_Switch,
             ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => SpotId::Glacier__Vertical_Room__East_17,
@@ -15978,6 +16510,7 @@ impl world::World for World {
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Infection_1 | ExitId:: Menu__Upgrade_Menu__Combat__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Combat,
             ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Infection__ex__Drone_1 => SpotId::Menu__Upgrade_Menu__Infection,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Combat_1 | ExitId:: Menu__Upgrade_Menu__Drone__ex__Infection_1 => SpotId::Menu__Upgrade_Menu__Drone,
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
@@ -16237,6 +16770,11 @@ impl world::World for World {
                                 *val = std::cmp::max(*val, 15 - ctx.count(Item::Flask));
                             } else {
                                 map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
+                            }
+                        }
+                        if !ctx.has(Item::Forbidden_Knowledge) {
+                            if !map.contains_key(&Item::Forbidden_Knowledge) {
+                                map.insert(Item::Forbidden_Knowledge, 1);
                             }
                         }
                         if !ctx.has(Item::Goodbye) {
@@ -16569,6 +17107,11 @@ impl world::World for World {
                             map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
                         }
                     }
+                    if !ctx.has(Item::Forbidden_Knowledge) {
+                        if !map.contains_key(&Item::Forbidden_Knowledge) {
+                            map.insert(Item::Forbidden_Knowledge, 1);
+                        }
+                    }
                     if !ctx.has(Item::Goodbye) {
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
@@ -16869,6 +17412,9 @@ impl world::World for World {
                         } else {
                             map.insert(Item::Flask, 15);
                         }
+                        if !map.contains_key(&Item::Forbidden_Knowledge) {
+                            map.insert(Item::Forbidden_Knowledge, 1);
+                        }
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
                         }
@@ -17072,6 +17618,9 @@ impl world::World for World {
                     } else {
                         map.insert(Item::Flask, 15);
                     }
+                    if !map.contains_key(&Item::Forbidden_Knowledge) {
+                        map.insert(Item::Forbidden_Knowledge, 1);
+                    }
                     if !map.contains_key(&Item::Goodbye) {
                         map.insert(Item::Goodbye, 1);
                     }
@@ -17232,6 +17781,94 @@ impl world::World for World {
 
     fn should_draw_edge(&self, exit_id: ExitId) -> bool {
         match exit_id {
+            ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => true,
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => true,
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => true,
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => true,
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => true,
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => true,
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => true,
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => true,
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => true,
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => true,
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => true,
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => true,
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => true,
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => true,
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => true,
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => true,
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => true,
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => true,
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => true,
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => true,
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => true,
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => true,
+            ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => true,
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => true,
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => true,
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => true,
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => true,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => true,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => true,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => true,
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => true,
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => true,
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => true,
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => true,
+            ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => true,
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => true,
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
@@ -18524,12 +19161,14 @@ impl world::World for World {
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => true,
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => true,
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => true,
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => true,
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => true,
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => true,
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => true,
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => true,
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 => true,
@@ -18932,7 +19571,45 @@ impl world::World for World {
         match spot_id {
             SpotId::Amagi__East_Lake__East_15_Flat => true,
             SpotId::Amagi__East_Lake__East_15_Lower => true,
+            SpotId::Amagi__East_Lake__East_15_Upper_Hover => true,
+            SpotId::Amagi__East_Lake__East_15_Lower_Hover => true,
+            SpotId::Amagi__East_Lake__East_Hill => true,
+            SpotId::Amagi__East_Lake__Underwater_Hill => true,
+            SpotId::Amagi__East_Lake__East_Water_Surface => true,
+            SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast => true,
+            SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow => true,
+            SpotId::Amagi__East_Lake__Center_Lower_Platform_East => true,
+            SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East => true,
+            SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West => true,
+            SpotId::Amagi__East_Lake__Center_Northeast_Platform => true,
+            SpotId::Amagi__East_Lake__Center_Upper_Platform => true,
+            SpotId::Amagi__East_Lake__Center_West_Platform => true,
+            SpotId::Amagi__East_Lake__Center_West_Water_Surface => true,
+            SpotId::Amagi__East_Lake__West_Water_Surface => true,
+            SpotId::Amagi__East_Lake__Far_West_Water_Surface => true,
+            SpotId::Amagi__East_Lake__West_Platform_1_West => true,
+            SpotId::Amagi__East_Lake__West_Platform_1_West_Hook => true,
+            SpotId::Amagi__East_Lake__West_Platform_1_East => true,
+            SpotId::Amagi__East_Lake__West_Platform_2_West => true,
+            SpotId::Amagi__East_Lake__West_Platform_2_East => true,
+            SpotId::Amagi__East_Lake__West_Platform_3 => true,
+            SpotId::Amagi__East_Lake__West_Platform_3_Hook => true,
+            SpotId::Amagi__East_Lake__Portal_Stand => true,
+            SpotId::Amagi__East_Lake__Portal_Ledge => true,
+            SpotId::Amagi__East_Lake__West_17 => true,
             SpotId::Amagi__East_Lake__Save_Point => true,
+            SpotId::Amagi__East_Lake__Southeast_Column => true,
+            SpotId::Amagi__East_Lake__Arch_East => true,
+            SpotId::Amagi__East_Lake__Arch_West => true,
+            SpotId::Amagi__East_Lake__Southwest_Column_East => true,
+            SpotId::Amagi__East_Lake__Southwest_Column_West => true,
+            SpotId::Amagi__East_Lake__Southwest_Column_Base => true,
+            SpotId::Amagi__East_Lake__Southwest_Brick => true,
+            SpotId::Amagi__East_Lake__West_18 => true,
+            SpotId::Amagi__East_Lake__Kum_Abala => true,
+            SpotId::Amagi__East_Lake__Foot => true,
+            SpotId::Amagi__Gated_Community__East_17 => true,
+            SpotId::Amagi__Gated_Community__East_18 => true,
             SpotId::Amagi__Grid_31_19__West => true,
             SpotId::Amagi__Grid_31_19__East => true,
             SpotId::Amagi__Liru_Room__West_19 => true,
@@ -20570,7 +21247,17 @@ impl world::World for World {
 
     fn spot_of_interest(&self, sp: SpotId) -> bool {
         match sp {
-            SpotId::Amagi__East_Lake__Save_Point
+            SpotId::Amagi__East_Lake__Arch_East
+            | SpotId::Amagi__East_Lake__Arch_West
+            | SpotId::Amagi__East_Lake__East_15_Flat
+            | SpotId::Amagi__East_Lake__East_15_Lower
+            | SpotId::Amagi__East_Lake__East_15_Lower_Hover
+            | SpotId::Amagi__East_Lake__East_15_Upper_Hover
+            | SpotId::Amagi__East_Lake__Foot
+            | SpotId::Amagi__East_Lake__Portal_Stand
+            | SpotId::Amagi__East_Lake__Save_Point
+            | SpotId::Amagi__East_Lake__West_17
+            | SpotId::Amagi__East_Lake__West_18
             | SpotId::Amagi__Grid_31_19__East
             | SpotId::Amagi__Grid_31_19__West
             | SpotId::Amagi__Liru_Room__Shrine
@@ -21168,6 +21855,7 @@ impl world::World for World {
             | SpotId::Glacier__The_Big_Drop__Water_Surface
             | SpotId::Glacier__The_Big_Drop__West_11_Door
             | SpotId::Glacier__The_Big_Drop__West_14
+            | SpotId::Glacier__Vertical_Room__Below_Upper_Switch
             | SpotId::Glacier__Vertical_Room__East_12
             | SpotId::Glacier__Vertical_Room__East_13
             | SpotId::Glacier__Vertical_Room__East_14
@@ -21179,6 +21867,7 @@ impl world::World for World {
             | SpotId::Glacier__Vertical_Room__South
             | SpotId::Glacier__Vertical_Room__Under_Switch
             | SpotId::Glacier__Vertical_Room__Upper_Switch
+            | SpotId::Glacier__Vertical_Room__Waters_Ledge
             | SpotId::Glacier__Vertical_Room__West_15_Flat
             | SpotId::Glacier__Vertical_Room__West_15_Lower
             | SpotId::Glacier__Vertical_Room__West_8
@@ -21325,6 +22014,7 @@ impl world::World for World {
             | SpotId::Menu__Breach_Map__IB_Gauntlet
             | SpotId::Menu__Breach_Map__IB_Save_Room
             | SpotId::Menu__Breach_Map__LAB_East
+            | SpotId::Menu__Kiengir_Map__Amagi_East_Lake
             | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
             | SpotId::Menu__Kiengir_Map__Annuna_Center_Save
             | SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance
@@ -21344,6 +22034,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Filter_Flask
             | SpotId::Menu__Kiengir_Map__Filter_Spiders
             | SpotId::Menu__Kiengir_Map__Filter_Tablet
+            | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
             | SpotId::Menu__Kiengir_Map__Giguna_Base
             | SpotId::Menu__Kiengir_Map__Giguna_Northeast
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
@@ -21491,6 +22182,7 @@ impl World {
                             | Item::Drone_Melee_Speed_3
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Forbidden_Knowledge
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -21569,6 +22261,7 @@ impl World {
                             | Item::Drone_Melee_Speed_3
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Forbidden_Knowledge
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -21625,6 +22318,7 @@ impl World {
                             | Item::Escape
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Forbidden_Knowledge
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -21705,6 +22399,7 @@ impl World {
                             | Item::Escape
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
+                            | Item::Forbidden_Knowledge
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -21760,6 +22455,7 @@ impl World {
                         | Item::Escape
                         | Item::Eye_Ring
                         | Item::Family_Tragedy
+                        | Item::Forbidden_Knowledge
                         | Item::Goodbye
                         | Item::Health_Upgrade_5
                         | Item::Heretics_Granddaughter
@@ -21819,6 +22515,7 @@ impl World {
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
+                        iset.insert(Item::Forbidden_Knowledge);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -21895,6 +22592,7 @@ impl World {
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
+                        iset.insert(Item::Forbidden_Knowledge);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -21953,6 +22651,7 @@ impl World {
                         iset.insert(Item::Escape);
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
+                        iset.insert(Item::Forbidden_Knowledge);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -22031,6 +22730,7 @@ impl World {
                         iset.insert(Item::Escape);
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
+                        iset.insert(Item::Forbidden_Knowledge);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -22087,6 +22787,7 @@ impl World {
                 set.insert(Item::Escape);
                 set.insert(Item::Eye_Ring);
                 set.insert(Item::Family_Tragedy);
+                set.insert(Item::Forbidden_Knowledge);
                 set.insert(Item::Goodbye);
                 set.insert(Item::Health_Upgrade_5);
                 set.insert(Item::Heretics_Granddaughter);
@@ -22301,6 +23002,15 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Amagi_West_Lake_Surface_Wall,
             price: Currency::Energy(100),
             time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Amagi__East_Lake__Foot__Tablet => Location {
+            id: LocationId::Amagi__East_Lake__Foot__Tablet,
+            canonical: CanonId::Loc_Amagi__East_Lake__Foot__Tablet,
+            item: Item::Forbidden_Knowledge,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
             skippable: false,
         },
@@ -25365,6 +26075,622 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1,
             time: 1350,
             dest: SpotId::Ebih__Vertical_Interchange__East_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1,
+            time: 1350,
+            dest: SpotId::Glacier__Vertical_Room__West_15_Flat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1,
+            time: 1350,
+            dest: SpotId::Glacier__Vertical_Room__West_15_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1,
+            time: 2625,
+            dest: SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1,
+            time: 3125,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1,
+            time: 3000,
+            dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1,
+            time: 5625,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1,
+            time: 7000,
+            dest: SpotId::Amagi__East_Lake__Southwest_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1,
+            time: 5375,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1,
+            time: 3250,
+            dest: SpotId::Amagi__East_Lake__Arch_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1,
+            time: 4000,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1,
+            time: 2625,
+            dest: SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1,
+            time: 3125,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1,
+            time: 5625,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1,
+            time: 7000,
+            dest: SpotId::Amagi__East_Lake__Southwest_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1,
+            time: 5375,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1,
+            time: 3250,
+            dest: SpotId::Amagi__East_Lake__Arch_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1,
+            time: 4000,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1,
+            time: 4504,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1,
+            time: 4279,
+            dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1,
+            time: 4000,
+            dest: SpotId::Amagi__East_Lake__East_Hill,
+            price: Currency::Energy(137),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__East_Hill,
+            price: Currency::Energy(71),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1,
+            time: 6666,
+            dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            price: Currency::Energy(226),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2,
+            time: 3333,
+            dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            price: Currency::Energy(116),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1,
+            time: 7017,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Energy(237),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2,
+            time: 3508,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Energy(121),
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1,
+            time: 3828,
+            dest: SpotId::Amagi__East_Lake__Arch_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1,
+            time: 5180,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2,
+            time: 2982,
+            dest: SpotId::Amagi__East_Lake__Arch_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => Exit {
+            id: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2,
+            time: 4035,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1,
+            time: 1800,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1,
+            time: 2750,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1,
+            time: 2999,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1,
+            time: 4375,
+            dest: SpotId::Amagi__East_Lake__Southwest_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1,
+            time: 4504,
+            dest: SpotId::Amagi__East_Lake__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1,
+            time: 3508,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1,
+            time: 3157,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1,
+            time: 5438,
+            dest: SpotId::Amagi__East_Lake__Southwest_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1,
+            time: 4279,
+            dest: SpotId::Amagi__East_Lake__East_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1,
+            time: 3828,
+            dest: SpotId::Amagi__East_Lake__Far_West_Water_Surface,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1,
+            time: 1576,
+            dest: SpotId::Amagi__East_Lake__Center_West_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1,
+            time: 500,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1,
+            time: 3875,
+            dest: SpotId::Amagi__East_Lake__Kum_Abala,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1,
+            time: 5374,
+            dest: SpotId::Amagi__East_Lake__Foot,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1,
+            time: 1250,
+            dest: SpotId::Amagi__East_Lake__Center_West_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1,
+            time: 1875,
+            dest: SpotId::Amagi__East_Lake__Center_Upper_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1,
+            time: 2750,
+            dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1,
+            time: 2625,
+            dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1,
+            time: 5125,
+            dest: SpotId::Amagi__East_Lake__Underwater_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1,
+            time: 1875,
+            dest: SpotId::Amagi__East_Lake__West_Platform_2_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1,
+            time: 2027,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2,
+            time: 2027,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3,
+            time: 1578,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_2_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1,
+            time: 4000,
+            dest: SpotId::Amagi__East_Lake__Kum_Abala,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1,
+            time: 5499,
+            dest: SpotId::Amagi__East_Lake__Foot,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1,
+            time: 5250,
+            dest: SpotId::Amagi__East_Lake__Underwater_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1,
+            time: 1013,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__West_Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1,
+            time: 1062,
+            dest: SpotId::Amagi__East_Lake__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1,
+            time: 812,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1,
+            time: 2562,
+            dest: SpotId::Amagi__East_Lake__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1,
+            time: 4312,
+            dest: SpotId::Amagi__East_Lake__Kum_Abala,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1,
+            time: 2477,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2,
+            time: 1929,
+            dest: SpotId::Amagi__East_Lake__Arch_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1,
+            time: 1350,
+            dest: SpotId::Amagi__Gated_Community__East_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1,
+            time: 3000,
+            dest: SpotId::Amagi__East_Lake__Southwest_Column_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2,
+            time: 1228,
+            dest: SpotId::Amagi__East_Lake__Southwest_Column_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1,
+            time: 3000,
+            dest: SpotId::Amagi__East_Lake__Southeast_Column,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2,
+            time: 1052,
+            dest: SpotId::Amagi__East_Lake__Southeast_Column,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1,
+            time: 6000,
+            dest: SpotId::Amagi__East_Lake__Underwater_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1,
+            time: 2500,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1,
+            time: 4124,
+            dest: SpotId::Amagi__East_Lake__Southwest_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__Kum_Abala,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1,
+            time: 2500,
+            dest: SpotId::Amagi__East_Lake__Foot,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1,
+            time: 4000,
+            dest: SpotId::Amagi__East_Lake__Underwater_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1,
+            time: 1929,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__Portal_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1,
+            time: 3000,
+            dest: SpotId::Amagi__East_Lake__Southwest_Column_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => Exit {
+            id: ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2,
+            time: 2000,
+            dest: SpotId::Amagi__East_Lake__Southwest_Column_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => Exit {
+            id: ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1,
+            time: 1350,
+            dest: SpotId::Amagi__Gated_Community__East_18,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1,
+            time: 6000,
+            dest: SpotId::Amagi__East_Lake__Underwater_Hill,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => Exit {
+            id: ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1,
+            time: 1000,
+            dest: SpotId::Amagi__East_Lake__Southeast_Column,
             price: Currency::Free,
             loc_id: None,
         },
@@ -33964,6 +35290,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1,
+            time: 2849,
+            dest: SpotId::Amagi__East_Lake__East_15_Upper_Hover,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => Exit {
             id: ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1,
             time: 1200,
@@ -33982,6 +35315,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
             time: 1350,
             dest: SpotId::Amagi__East_Lake__East_15_Lower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1,
+            time: 2474,
+            dest: SpotId::Amagi__East_Lake__East_15_Lower_Hover,
             price: Currency::Free,
             loc_id: None,
         },
@@ -36036,6 +37376,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => Exit {
+            id: ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1,
+            time: 12000,
+            dest: SpotId::Amagi__East_Lake__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => Exit {
             id: ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
             time: 12000,
@@ -37521,6 +38868,31 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Amagi__Main_Area__Save_Point__Save => Action {
             id: ActionId::Amagi__Main_Area__Save_Point__Save,
             time: 1200,
+            price: Currency::Free,
+        },
+        ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => Action {
+            id: ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch,
+            time: 6000,
+            price: Currency::Free,
+        },
+        ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => Action {
+            id: ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch,
+            time: 6000,
+            price: Currency::Free,
+        },
+        ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => Action {
+            id: ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch,
+            time: 5500,
+            price: Currency::Free,
+        },
+        ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => Action {
+            id: ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch,
+            time: 5500,
+            price: Currency::Free,
+        },
+        ActionId::Amagi__East_Lake__Save_Point__Save => Action {
+            id: ActionId::Amagi__East_Lake__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
         },
         ActionId::Annuna__Mirror_Match__Save_Point__Save => Action {
@@ -39361,14 +40733,110 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch.into_usize(),
+                end: ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__East_Lake__East_15_Lower => Spot {
+            id: SpotId::Amagi__East_Lake__East_15_Lower,
+            locations: Range {
                 start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch.into_usize(),
+                end: ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__East_Lake__East_15_Upper_Hover => Spot {
+            id: SpotId::Amagi__East_Lake__East_15_Upper_Hover,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch.into_usize(),
+                end: ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__East_Lake__East_15_Lower_Hover => Spot {
+            id: SpotId::Amagi__East_Lake__East_15_Lower_Hover,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch.into_usize(),
+                end: ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__East_Lake__East_Hill => Spot {
+            id: SpotId::Amagi__East_Lake__East_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
         },
-        SpotId::Amagi__East_Lake__East_15_Lower => Spot {
-            id: SpotId::Amagi__East_Lake__East_15_Lower,
+        SpotId::Amagi__East_Lake__Underwater_Hill => Spot {
+            id: SpotId::Amagi__East_Lake__Underwater_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__East_Water_Surface => Spot {
+            id: SpotId::Amagi__East_Lake__East_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast => Spot {
+            id: SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow => Spot {
+            id: SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -39379,8 +40847,405 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Amagi__East_Lake__Center_Lower_Platform_East => Spot {
+            id: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East => Spot {
+            id: SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West => Spot {
+            id: SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_Northeast_Platform => Spot {
+            id: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_Upper_Platform => Spot {
+            id: SpotId::Amagi__East_Lake__Center_Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_West_Platform => Spot {
+            id: SpotId::Amagi__East_Lake__Center_West_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Center_West_Water_Surface => Spot {
+            id: SpotId::Amagi__East_Lake__Center_West_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Water_Surface => Spot {
+            id: SpotId::Amagi__East_Lake__West_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Far_West_Water_Surface => Spot {
+            id: SpotId::Amagi__East_Lake__Far_West_Water_Surface,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_1_West => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_1_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_1_West_Hook => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_1_West_Hook,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_1_East => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_1_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_2_West => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_2_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_2_East => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_2_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_3 => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_Platform_3_Hook => Spot {
+            id: SpotId::Amagi__East_Lake__West_Platform_3_Hook,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Portal_Stand => Spot {
+            id: SpotId::Amagi__East_Lake__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Portal_Ledge => Spot {
+            id: SpotId::Amagi__East_Lake__Portal_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_17 => Spot {
+            id: SpotId::Amagi__East_Lake__West_17,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Amagi__East_Lake__Save_Point => Spot {
             id: SpotId::Amagi__East_Lake__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__East_Lake__Save_Point__Save.into_usize(),
+                end: ActionId::Amagi__East_Lake__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__East_Lake__Southeast_Column => Spot {
+            id: SpotId::Amagi__East_Lake__Southeast_Column,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Arch_East => Spot {
+            id: SpotId::Amagi__East_Lake__Arch_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Arch_West => Spot {
+            id: SpotId::Amagi__East_Lake__Arch_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Southwest_Column_East => Spot {
+            id: SpotId::Amagi__East_Lake__Southwest_Column_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Southwest_Column_West => Spot {
+            id: SpotId::Amagi__East_Lake__Southwest_Column_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Southwest_Column_Base => Spot {
+            id: SpotId::Amagi__East_Lake__Southwest_Column_Base,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Southwest_Brick => Spot {
+            id: SpotId::Amagi__East_Lake__Southwest_Brick,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__West_18 => Spot {
+            id: SpotId::Amagi__East_Lake__West_18,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Kum_Abala => Spot {
+            id: SpotId::Amagi__East_Lake__Kum_Abala,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1.into_usize(),
+                end: ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__East_Lake__Foot => Spot {
+            id: SpotId::Amagi__East_Lake__Foot,
+            locations: Range {
+                start: LocationId::Amagi__East_Lake__Foot__Tablet.into_usize(),
+                end: LocationId::Amagi__East_Lake__Foot__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Gated_Community__East_17 => Spot {
+            id: SpotId::Amagi__Gated_Community__East_17,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Gated_Community__East_18 => Spot {
+            id: SpotId::Amagi__Gated_Community__East_18,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -53498,7 +55363,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1.into_usize(),
+                start: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1.into_usize(),
                 end: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1.into_usize() + 1,
             },
             actions: Range {
@@ -53550,7 +55415,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -57334,7 +59200,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1.into_usize(),
+                end: ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -57877,6 +59744,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => Spot {
             id: SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => Spot {
+            id: SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
             locations: Range {
                 start: 0, end: 0,
             },

@@ -1221,7 +1221,10 @@ areas:
           req: $hook
           movement: base
           jumps: 1
-        # TODO: fast_hover into East Lake
+        - to: Amagi > East Lake > East 15 Upper Hover
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Flat Platform
       coord: [36.45, 14.55]
       local:
@@ -1262,6 +1265,12 @@ areas:
           jumps: 1
         - to: Flat Platform
           jumps: 1
+      exits:
+        - to: Amagi > East Lake > East 15 Lower Hover
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Middle Gatestone
       coord: [36.6, 15.75]
       data:

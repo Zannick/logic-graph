@@ -273,6 +273,14 @@ areas:
     #region Kiengir fast travel points
     - name: Amagi East Lake
       coord: [34, 18]
+      exits:
+        - to: Amagi > East Lake > Save Point
+          req: ^map__amagi__east_lake__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Amagi Isolation
       coord: [34, 21]
     - name: Amagi Main Area
@@ -517,6 +525,8 @@ areas:
       coord: [40, 8]
     - name: Glacier Peak Bird's Eye
       coord: [34, 8]
+    - name: Forbidden Knowledge
+      coord: [35, 18]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

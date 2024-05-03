@@ -1969,7 +1969,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -1997,6 +1997,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Dr_Gloria)
             && $ctx.has(Item::Goodbye)
             && $ctx.has(Item::Notes_2053_02_27)
+            && $ctx.has(Item::Forbidden_Knowledge)
     }};
 }
 #[macro_export]
@@ -2217,6 +2218,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Notes_2053_02_27"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Forbidden_Knowledge);
+                $edict.insert("Forbidden_Knowledge", format!("{}", h));
+                (h, vec!["Forbidden_Knowledge"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2296,6 +2306,9 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_notes_2053_02_27();
             $ctx.has(Item::Notes_2053_02_27)
+        }) && ({
+            $full_obs.observe_forbidden_knowledge();
+            $ctx.has(Item::Forbidden_Knowledge)
         })
     }};
 }

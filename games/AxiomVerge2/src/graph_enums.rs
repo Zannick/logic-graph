@@ -100,6 +100,7 @@ impl std::str::FromStr for RegionId {
 #[repr(u8)]
 pub enum AreaId {
     Amagi__East_Lake,
+    Amagi__Gated_Community,
     Amagi__Grid_31_19,
     Amagi__Liru_Room,
     Amagi__Main_Area,
@@ -290,6 +291,7 @@ impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             AreaId::Amagi__East_Lake => write!(f, "{}", "Amagi > East Lake"),
+            AreaId::Amagi__Gated_Community => write!(f, "{}", "Amagi > Gated Community"),
             AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
@@ -523,6 +525,7 @@ impl std::str::FromStr for AreaId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Amagi > East Lake" => Ok(AreaId::Amagi__East_Lake),
+            "Amagi > Gated Community" => Ok(AreaId::Amagi__Gated_Community),
             "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
@@ -731,9 +734,47 @@ impl std::str::FromStr for AreaId {
 pub enum SpotId {
     #[default]
     None,
+    Amagi__East_Lake__Arch_East,
+    Amagi__East_Lake__Arch_West,
+    Amagi__East_Lake__Center_East_Water_Surface_Fast,
+    Amagi__East_Lake__Center_East_Water_Surface_Slow,
+    Amagi__East_Lake__Center_Lower_Platform_East,
+    Amagi__East_Lake__Center_Northeast_Platform,
+    Amagi__East_Lake__Center_Upper_Platform,
+    Amagi__East_Lake__Center_Water_Below_Platform_East,
+    Amagi__East_Lake__Center_Water_Below_Platform_West,
+    Amagi__East_Lake__Center_West_Platform,
+    Amagi__East_Lake__Center_West_Water_Surface,
     Amagi__East_Lake__East_15_Flat,
     Amagi__East_Lake__East_15_Lower,
+    Amagi__East_Lake__East_15_Lower_Hover,
+    Amagi__East_Lake__East_15_Upper_Hover,
+    Amagi__East_Lake__East_Hill,
+    Amagi__East_Lake__East_Water_Surface,
+    Amagi__East_Lake__Far_West_Water_Surface,
+    Amagi__East_Lake__Foot,
+    Amagi__East_Lake__Kum_Abala,
+    Amagi__East_Lake__Portal_Ledge,
+    Amagi__East_Lake__Portal_Stand,
     Amagi__East_Lake__Save_Point,
+    Amagi__East_Lake__Southeast_Column,
+    Amagi__East_Lake__Southwest_Brick,
+    Amagi__East_Lake__Southwest_Column_Base,
+    Amagi__East_Lake__Southwest_Column_East,
+    Amagi__East_Lake__Southwest_Column_West,
+    Amagi__East_Lake__Underwater_Hill,
+    Amagi__East_Lake__West_17,
+    Amagi__East_Lake__West_18,
+    Amagi__East_Lake__West_Platform_1_East,
+    Amagi__East_Lake__West_Platform_1_West,
+    Amagi__East_Lake__West_Platform_1_West_Hook,
+    Amagi__East_Lake__West_Platform_2_East,
+    Amagi__East_Lake__West_Platform_2_West,
+    Amagi__East_Lake__West_Platform_3,
+    Amagi__East_Lake__West_Platform_3_Hook,
+    Amagi__East_Lake__West_Water_Surface,
+    Amagi__Gated_Community__East_17,
+    Amagi__Gated_Community__East_18,
     Amagi__Grid_31_19__East,
     Amagi__Grid_31_19__West,
     Amagi__Liru_Room__Bottom,
@@ -2281,6 +2322,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Filter_Flask,
     Menu__Kiengir_Map__Filter_Spiders,
     Menu__Kiengir_Map__Filter_Tablet,
+    Menu__Kiengir_Map__Forbidden_Knowledge,
     Menu__Kiengir_Map__Giguna_Base,
     Menu__Kiengir_Map__Giguna_Labyrinth,
     Menu__Kiengir_Map__Giguna_Northeast,
@@ -2431,14 +2473,122 @@ impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             SpotId::None => write!(f, "{}", "None"),
+            SpotId::Amagi__East_Lake__Arch_East => write!(f, "{}", "Amagi > East Lake > Arch East"),
+            SpotId::Amagi__East_Lake__Arch_West => write!(f, "{}", "Amagi > East Lake > Arch West"),
+            SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > Center East Water Surface Fast"
+            ),
+            SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > Center East Water Surface Slow"
+            ),
+            SpotId::Amagi__East_Lake__Center_Lower_Platform_East => {
+                write!(f, "{}", "Amagi > East Lake > Center Lower Platform East")
+            }
+            SpotId::Amagi__East_Lake__Center_Northeast_Platform => {
+                write!(f, "{}", "Amagi > East Lake > Center Northeast Platform")
+            }
+            SpotId::Amagi__East_Lake__Center_Upper_Platform => {
+                write!(f, "{}", "Amagi > East Lake > Center Upper Platform")
+            }
+            SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > Center Water Below Platform East"
+            ),
+            SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > Center Water Below Platform West"
+            ),
+            SpotId::Amagi__East_Lake__Center_West_Platform => {
+                write!(f, "{}", "Amagi > East Lake > Center West Platform")
+            }
+            SpotId::Amagi__East_Lake__Center_West_Water_Surface => {
+                write!(f, "{}", "Amagi > East Lake > Center West Water Surface")
+            }
             SpotId::Amagi__East_Lake__East_15_Flat => {
                 write!(f, "{}", "Amagi > East Lake > East 15 Flat")
             }
             SpotId::Amagi__East_Lake__East_15_Lower => {
                 write!(f, "{}", "Amagi > East Lake > East 15 Lower")
             }
+            SpotId::Amagi__East_Lake__East_15_Lower_Hover => {
+                write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover")
+            }
+            SpotId::Amagi__East_Lake__East_15_Upper_Hover => {
+                write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover")
+            }
+            SpotId::Amagi__East_Lake__East_Hill => write!(f, "{}", "Amagi > East Lake > East Hill"),
+            SpotId::Amagi__East_Lake__East_Water_Surface => {
+                write!(f, "{}", "Amagi > East Lake > East Water Surface")
+            }
+            SpotId::Amagi__East_Lake__Far_West_Water_Surface => {
+                write!(f, "{}", "Amagi > East Lake > Far West Water Surface")
+            }
+            SpotId::Amagi__East_Lake__Foot => write!(f, "{}", "Amagi > East Lake > Foot"),
+            SpotId::Amagi__East_Lake__Kum_Abala => write!(f, "{}", "Amagi > East Lake > Kum Abala"),
+            SpotId::Amagi__East_Lake__Portal_Ledge => {
+                write!(f, "{}", "Amagi > East Lake > Portal Ledge")
+            }
+            SpotId::Amagi__East_Lake__Portal_Stand => {
+                write!(f, "{}", "Amagi > East Lake > Portal Stand")
+            }
             SpotId::Amagi__East_Lake__Save_Point => {
                 write!(f, "{}", "Amagi > East Lake > Save Point")
+            }
+            SpotId::Amagi__East_Lake__Southeast_Column => {
+                write!(f, "{}", "Amagi > East Lake > Southeast Column")
+            }
+            SpotId::Amagi__East_Lake__Southwest_Brick => {
+                write!(f, "{}", "Amagi > East Lake > Southwest Brick")
+            }
+            SpotId::Amagi__East_Lake__Southwest_Column_Base => {
+                write!(f, "{}", "Amagi > East Lake > Southwest Column Base")
+            }
+            SpotId::Amagi__East_Lake__Southwest_Column_East => {
+                write!(f, "{}", "Amagi > East Lake > Southwest Column East")
+            }
+            SpotId::Amagi__East_Lake__Southwest_Column_West => {
+                write!(f, "{}", "Amagi > East Lake > Southwest Column West")
+            }
+            SpotId::Amagi__East_Lake__Underwater_Hill => {
+                write!(f, "{}", "Amagi > East Lake > Underwater Hill")
+            }
+            SpotId::Amagi__East_Lake__West_17 => write!(f, "{}", "Amagi > East Lake > West 17"),
+            SpotId::Amagi__East_Lake__West_18 => write!(f, "{}", "Amagi > East Lake > West 18"),
+            SpotId::Amagi__East_Lake__West_Platform_1_East => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 1 East")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_1_West => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 1 West")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_1_West_Hook => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_2_East => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 2 East")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_2_West => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 2 West")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_3 => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 3")
+            }
+            SpotId::Amagi__East_Lake__West_Platform_3_Hook => {
+                write!(f, "{}", "Amagi > East Lake > West Platform 3 Hook")
+            }
+            SpotId::Amagi__East_Lake__West_Water_Surface => {
+                write!(f, "{}", "Amagi > East Lake > West Water Surface")
+            }
+            SpotId::Amagi__Gated_Community__East_17 => {
+                write!(f, "{}", "Amagi > Gated Community > East 17")
+            }
+            SpotId::Amagi__Gated_Community__East_18 => {
+                write!(f, "{}", "Amagi > Gated Community > East 18")
             }
             SpotId::Amagi__Grid_31_19__East => write!(f, "{}", "Amagi > Grid 31,19 > East"),
             SpotId::Amagi__Grid_31_19__West => write!(f, "{}", "Amagi > Grid 31,19 > West"),
@@ -6407,6 +6557,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Filter_Tablet => {
                 write!(f, "{}", "Menu > Kiengir Map > Filter Tablet")
             }
+            SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => {
+                write!(f, "{}", "Menu > Kiengir Map > Forbidden Knowledge")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Base => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
             }
@@ -6811,9 +6964,95 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake > Arch East" => Ok(SpotId::Amagi__East_Lake__Arch_East),
+            "Amagi > East Lake > Arch West" => Ok(SpotId::Amagi__East_Lake__Arch_West),
+            "Amagi > East Lake > Center East Water Surface Fast" => {
+                Ok(SpotId::Amagi__East_Lake__Center_East_Water_Surface_Fast)
+            }
+            "Amagi > East Lake > Center East Water Surface Slow" => {
+                Ok(SpotId::Amagi__East_Lake__Center_East_Water_Surface_Slow)
+            }
+            "Amagi > East Lake > Center Lower Platform East" => {
+                Ok(SpotId::Amagi__East_Lake__Center_Lower_Platform_East)
+            }
+            "Amagi > East Lake > Center Northeast Platform" => {
+                Ok(SpotId::Amagi__East_Lake__Center_Northeast_Platform)
+            }
+            "Amagi > East Lake > Center Upper Platform" => {
+                Ok(SpotId::Amagi__East_Lake__Center_Upper_Platform)
+            }
+            "Amagi > East Lake > Center Water Below Platform East" => {
+                Ok(SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East)
+            }
+            "Amagi > East Lake > Center Water Below Platform West" => {
+                Ok(SpotId::Amagi__East_Lake__Center_Water_Below_Platform_West)
+            }
+            "Amagi > East Lake > Center West Platform" => {
+                Ok(SpotId::Amagi__East_Lake__Center_West_Platform)
+            }
+            "Amagi > East Lake > Center West Water Surface" => {
+                Ok(SpotId::Amagi__East_Lake__Center_West_Water_Surface)
+            }
             "Amagi > East Lake > East 15 Flat" => Ok(SpotId::Amagi__East_Lake__East_15_Flat),
             "Amagi > East Lake > East 15 Lower" => Ok(SpotId::Amagi__East_Lake__East_15_Lower),
+            "Amagi > East Lake > East 15 Lower Hover" => {
+                Ok(SpotId::Amagi__East_Lake__East_15_Lower_Hover)
+            }
+            "Amagi > East Lake > East 15 Upper Hover" => {
+                Ok(SpotId::Amagi__East_Lake__East_15_Upper_Hover)
+            }
+            "Amagi > East Lake > East Hill" => Ok(SpotId::Amagi__East_Lake__East_Hill),
+            "Amagi > East Lake > East Water Surface" => {
+                Ok(SpotId::Amagi__East_Lake__East_Water_Surface)
+            }
+            "Amagi > East Lake > Far West Water Surface" => {
+                Ok(SpotId::Amagi__East_Lake__Far_West_Water_Surface)
+            }
+            "Amagi > East Lake > Foot" => Ok(SpotId::Amagi__East_Lake__Foot),
+            "Amagi > East Lake > Kum Abala" => Ok(SpotId::Amagi__East_Lake__Kum_Abala),
+            "Amagi > East Lake > Portal Ledge" => Ok(SpotId::Amagi__East_Lake__Portal_Ledge),
+            "Amagi > East Lake > Portal Stand" => Ok(SpotId::Amagi__East_Lake__Portal_Stand),
             "Amagi > East Lake > Save Point" => Ok(SpotId::Amagi__East_Lake__Save_Point),
+            "Amagi > East Lake > Southeast Column" => {
+                Ok(SpotId::Amagi__East_Lake__Southeast_Column)
+            }
+            "Amagi > East Lake > Southwest Brick" => Ok(SpotId::Amagi__East_Lake__Southwest_Brick),
+            "Amagi > East Lake > Southwest Column Base" => {
+                Ok(SpotId::Amagi__East_Lake__Southwest_Column_Base)
+            }
+            "Amagi > East Lake > Southwest Column East" => {
+                Ok(SpotId::Amagi__East_Lake__Southwest_Column_East)
+            }
+            "Amagi > East Lake > Southwest Column West" => {
+                Ok(SpotId::Amagi__East_Lake__Southwest_Column_West)
+            }
+            "Amagi > East Lake > Underwater Hill" => Ok(SpotId::Amagi__East_Lake__Underwater_Hill),
+            "Amagi > East Lake > West 17" => Ok(SpotId::Amagi__East_Lake__West_17),
+            "Amagi > East Lake > West 18" => Ok(SpotId::Amagi__East_Lake__West_18),
+            "Amagi > East Lake > West Platform 1 East" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_1_East)
+            }
+            "Amagi > East Lake > West Platform 1 West" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_1_West)
+            }
+            "Amagi > East Lake > West Platform 1 West Hook" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_1_West_Hook)
+            }
+            "Amagi > East Lake > West Platform 2 East" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_2_East)
+            }
+            "Amagi > East Lake > West Platform 2 West" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_2_West)
+            }
+            "Amagi > East Lake > West Platform 3" => Ok(SpotId::Amagi__East_Lake__West_Platform_3),
+            "Amagi > East Lake > West Platform 3 Hook" => {
+                Ok(SpotId::Amagi__East_Lake__West_Platform_3_Hook)
+            }
+            "Amagi > East Lake > West Water Surface" => {
+                Ok(SpotId::Amagi__East_Lake__West_Water_Surface)
+            }
+            "Amagi > Gated Community > East 17" => Ok(SpotId::Amagi__Gated_Community__East_17),
+            "Amagi > Gated Community > East 18" => Ok(SpotId::Amagi__Gated_Community__East_18),
             "Amagi > Grid 31,19 > East" => Ok(SpotId::Amagi__Grid_31_19__East),
             "Amagi > Grid 31,19 > West" => Ok(SpotId::Amagi__Grid_31_19__West),
             "Amagi > Liru Room > Bottom" => Ok(SpotId::Amagi__Liru_Room__Bottom),
@@ -9613,6 +9852,9 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Filter Flask" => Ok(SpotId::Menu__Kiengir_Map__Filter_Flask),
             "Menu > Kiengir Map > Filter Spiders" => Ok(SpotId::Menu__Kiengir_Map__Filter_Spiders),
             "Menu > Kiengir Map > Filter Tablet" => Ok(SpotId::Menu__Kiengir_Map__Filter_Tablet),
+            "Menu > Kiengir Map > Forbidden Knowledge" => {
+                Ok(SpotId::Menu__Kiengir_Map__Forbidden_Knowledge)
+            }
             "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
             "Menu > Kiengir Map > Giguna Labyrinth" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Labyrinth)
@@ -9928,6 +10170,7 @@ impl std::str::FromStr for SpotId {
 )]
 #[repr(u16)]
 pub enum LocationId {
+    Amagi__East_Lake__Foot__Tablet,
     Amagi__Liru_Room__Shrine__Item,
     Amagi__Main_Area__Way_Off_To_The_Side__Item,
     Amagi__West_Lake__Cavern_Eye__Item,
@@ -10252,6 +10495,7 @@ pub enum LocationId {
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            LocationId::Amagi__East_Lake__Foot__Tablet => write!(f, "{}", "Amagi > East Lake > Foot > Tablet"),
             LocationId::Amagi__Liru_Room__Shrine__Item => write!(f, "{}", "Amagi > Liru Room > Shrine > Item"),
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item"),
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item"),
@@ -10581,6 +10825,7 @@ impl std::str::FromStr for LocationId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake > Foot > Tablet" => Ok(LocationId::Amagi__East_Lake__Foot__Tablet),
             "Amagi > Liru Room > Shrine > Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
             "Amagi > Main Area > Way Off To The Side > Item" => Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item),
             "Amagi > West Lake > Cavern Eye > Item" => Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item),
@@ -10921,6 +11166,94 @@ impl std::str::FromStr for LocationId {
 )]
 #[repr(u16)]
 pub enum ExitId {
+    Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1,
+    Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1,
+    Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1,
+    Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1,
+    Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1,
+    Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1,
+    Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1,
+    Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1,
+    Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1,
+    Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1,
+    Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1,
+    Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1,
+    Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1,
+    Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1,
+    Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1,
+    Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1,
+    Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2,
+    Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1,
+    Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2,
+    Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1,
+    Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1,
+    Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1,
+    Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2,
+    Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1,
+    Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1,
+    Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Portal_Stand__ex__Save_Point_1,
+    Amagi__East_Lake__Portal_Stand__ex__West_17_1,
+    Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1,
+    Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2,
+    Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3,
+    Amagi__East_Lake__Save_Point__ex__Southeast_Column_1,
+    Amagi__East_Lake__Save_Point__ex__Southeast_Column_2,
+    Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1,
+    Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2,
+    Amagi__East_Lake__Southeast_Column__ex__Foot_1,
+    Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1,
+    Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1,
+    Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1,
+    Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1,
+    Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2,
+    Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1,
+    Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1,
+    Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2,
+    Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1,
+    Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2,
+    Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1,
+    Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2,
+    Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1,
+    Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1,
+    Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1,
+    Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1,
+    Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1,
+    Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2,
+    Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3,
+    Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1,
+    Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2,
+    Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3,
+    Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1,
+    Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1,
+    Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1,
+    Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1,
+    Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1,
     Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
     Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
     Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
@@ -12223,6 +12556,7 @@ pub enum ExitId {
     Glacier__The_Big_Drop__West_14__Mist_Through,
     Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
     Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1,
+    Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1,
     Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1,
     Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2,
     Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1,
@@ -12260,6 +12594,7 @@ pub enum ExitId {
     Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1,
     Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1,
     Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1,
+    Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1,
     Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1,
     Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1,
     Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
@@ -12493,6 +12828,7 @@ pub enum ExitId {
     Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1,
     Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1,
     Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
+    Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1,
     Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1,
     Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1,
@@ -12705,6 +13041,94 @@ pub enum ExitId {
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1 => write!(f, "{}", "Amagi > East Lake > Arch East ==> Underwater Hill (1)"),
+            ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Arch West ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => write!(f, "{}", "Amagi > East Lake > Center East Water Surface Fast ==> Arch West (1)"),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Center East Water Surface Fast ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1 => write!(f, "{}", "Amagi > East Lake > Center East Water Surface Fast ==> Southwest Brick (1)"),
+            ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1 => write!(f, "{}", "Amagi > East Lake > Center East Water Surface Fast ==> West Platform 3 (1)"),
+            ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1 => write!(f, "{}", "Amagi > East Lake > Center Lower Platform East ==> East Hill (1)"),
+            ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1 => write!(f, "{}", "Amagi > East Lake > Center Northeast Platform ==> East Hill (1)"),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Center Water Below Platform East ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => write!(f, "{}", "Amagi > East Lake > Center Water Below Platform East ==> Southwest Brick (1)"),
+            ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1 => write!(f, "{}", "Amagi > East Lake > Center Water Below Platform East ==> West Platform 3 (1)"),
+            ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1 => write!(f, "{}", "Amagi > East Lake > Center West Platform ==> Far West Water Surface (1)"),
+            ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1 => write!(f, "{}", "Amagi > East Lake > East 15 Flat ==> Glacier > Vertical Room > West 15 Flat (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower ==> Glacier > Vertical Room > West 15 Lower (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Arch East (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Arch West (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Center East Water Surface Fast (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Center Lower Platform East (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> Southwest Brick (1)"),
+            ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1 => write!(f, "{}", "Amagi > East Lake > East 15 Lower Hover ==> West Platform 3 (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Arch East (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Arch West (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Center East Water Surface Fast (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Center Lower Platform East (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Center Northeast Platform (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> Southwest Brick (1)"),
+            ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1 => write!(f, "{}", "Amagi > East Lake > East 15 Upper Hover ==> West Platform 3 (1)"),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1 => write!(f, "{}", "Amagi > East Lake > East Hill ==> Center Lower Platform East (1)"),
+            ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1 => write!(f, "{}", "Amagi > East Lake > East Hill ==> Center Northeast Platform (1)"),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => write!(f, "{}", "Amagi > East Lake > East Water Surface ==> Arch East (1)"),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => write!(f, "{}", "Amagi > East Lake > East Water Surface ==> Arch East (2)"),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => write!(f, "{}", "Amagi > East Lake > East Water Surface ==> Arch West (1)"),
+            ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => write!(f, "{}", "Amagi > East Lake > East Water Surface ==> Arch West (2)"),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => write!(f, "{}", "Amagi > East Lake > Kum Abala ==> Southeast Column (1)"),
+            ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => write!(f, "{}", "Amagi > East Lake > Kum Abala ==> Underwater Hill (1)"),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => write!(f, "{}", "Amagi > East Lake > Portal Ledge ==> Arch West (1)"),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2 => write!(f, "{}", "Amagi > East Lake > Portal Ledge ==> Arch West (2)"),
+            ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => write!(f, "{}", "Amagi > East Lake > Portal Ledge ==> Portal Stand (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> Kum Abala (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> Save Point (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> West 17 (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> West Platform 3 (1)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> West Platform 3 (2)"),
+            ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3 => write!(f, "{}", "Amagi > East Lake > Portal Stand ==> West Platform 3 (3)"),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => write!(f, "{}", "Amagi > East Lake > Save Point ==> Southeast Column (1)"),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2 => write!(f, "{}", "Amagi > East Lake > Save Point ==> Southeast Column (2)"),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => write!(f, "{}", "Amagi > East Lake > Save Point ==> Southwest Column East (1)"),
+            ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2 => write!(f, "{}", "Amagi > East Lake > Save Point ==> Southwest Column East (2)"),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1 => write!(f, "{}", "Amagi > East Lake > Southeast Column ==> Foot (1)"),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => write!(f, "{}", "Amagi > East Lake > Southeast Column ==> Kum Abala (1)"),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Southeast Column ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1 => write!(f, "{}", "Amagi > East Lake > Southeast Column ==> Southwest Brick (1)"),
+            ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1 => write!(f, "{}", "Amagi > East Lake > Southeast Column ==> Underwater Hill (1)"),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => write!(f, "{}", "Amagi > East Lake > Southwest Column Base ==> Southwest Column West (1)"),
+            ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2 => write!(f, "{}", "Amagi > East Lake > Southwest Column Base ==> Southwest Column West (2)"),
+            ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Southwest Column East ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1 => write!(f, "{}", "Amagi > East Lake > Southwest Column West ==> Portal Ledge (1)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> Center Lower Platform East (1)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> Center Lower Platform East (2)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> Center Northeast Platform (1)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> Center Northeast Platform (2)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> East Hill (1)"),
+            ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2 => write!(f, "{}", "Amagi > East Lake > Underwater Hill ==> East Hill (2)"),
+            ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1 => write!(f, "{}", "Amagi > East Lake > West 17 ==> Gated Community > East 17 (1)"),
+            ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => write!(f, "{}", "Amagi > East Lake > West 18 ==> Gated Community > East 18 (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 East ==> West Platform 2 West (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Center Lower Platform East (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Center Northeast Platform (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Center Upper Platform (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Center West Platform (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Foot (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Kum Abala (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> Underwater Hill (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1 => write!(f, "{}", "Amagi > East Lake > West Platform 1 West Hook ==> West Platform 1 West (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => write!(f, "{}", "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2 => write!(f, "{}", "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (2)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3 => write!(f, "{}", "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (3)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => write!(f, "{}", "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2 => write!(f, "{}", "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (2)"),
+            ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3 => write!(f, "{}", "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (3)"),
+            ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1 => write!(f, "{}", "Amagi > East Lake > West Platform 3 ==> West Platform 2 East (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1 => write!(f, "{}", "Amagi > East Lake > West Platform 3 Hook ==> Foot (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => write!(f, "{}", "Amagi > East Lake > West Platform 3 Hook ==> Kum Abala (1)"),
+            ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => write!(f, "{}", "Amagi > East Lake > West Platform 3 Hook ==> Underwater Hill (1)"),
+            ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => write!(f, "{}", "Amagi > East Lake > West Water Surface ==> Center West Platform (1)"),
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)"),
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)"),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)"),
@@ -14007,6 +14431,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through"),
             ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => write!(f, "{}", "Glacier > The Big Drop > West 14 > Mist Through Faster"),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => write!(f, "{}", "Glacier > Vertical Room > Above Switch ==> Upper Gatestone (1)"),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> Amagi > East Lake > East 15 Upper Hover (1)"),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> East 14 (1)"),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> East 14 (2)"),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Below Upper Switch ==> Upper Switch (1)"),
@@ -14044,6 +14469,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone ==> Below Upper Switch (1)"),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Gatestone ==> Upper Switch (1)"),
             ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Upper Switch ==> Above Switch (1)"),
+            ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => write!(f, "{}", "Glacier > Vertical Room > Water's Ledge ==> Amagi > East Lake > East 15 Lower Hover (1)"),
             ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Flat ==> Amagi > East Lake > East 15 Flat (1)"),
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => write!(f, "{}", "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)"),
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),
@@ -14277,6 +14703,7 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)"),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)"),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Breach Map > LAB East ==> Amagi Breach > East Entrance > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Amagi East Lake ==> Amagi > East Lake > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)"),
@@ -14494,6 +14921,94 @@ impl std::str::FromStr for ExitId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake > Arch East ==> Underwater Hill (1)" => Ok(ExitId::Amagi__East_Lake__Arch_East__ex__Underwater_Hill_1),
+            "Amagi > East Lake > Arch West ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Arch_West__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Center East Water Surface Fast ==> Arch West (1)" => Ok(ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1),
+            "Amagi > East Lake > Center East Water Surface Fast ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Center East Water Surface Fast ==> Southwest Brick (1)" => Ok(ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Southwest_Brick_1),
+            "Amagi > East Lake > Center East Water Surface Fast ==> West Platform 3 (1)" => Ok(ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__West_Platform_3_1),
+            "Amagi > East Lake > Center Lower Platform East ==> East Hill (1)" => Ok(ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1),
+            "Amagi > East Lake > Center Northeast Platform ==> East Hill (1)" => Ok(ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1),
+            "Amagi > East Lake > Center Water Below Platform East ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Center Water Below Platform East ==> Southwest Brick (1)" => Ok(ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1),
+            "Amagi > East Lake > Center Water Below Platform East ==> West Platform 3 (1)" => Ok(ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__West_Platform_3_1),
+            "Amagi > East Lake > Center West Platform ==> Far West Water Surface (1)" => Ok(ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1),
+            "Amagi > East Lake > East 15 Flat ==> Glacier > Vertical Room > West 15 Flat (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Flat__ex__Glacier__Vertical_Room__West_15_Flat_1),
+            "Amagi > East Lake > East 15 Lower ==> Glacier > Vertical Room > West 15 Lower (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower__ex__Glacier__Vertical_Room__West_15_Lower_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Arch East (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_East_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Arch West (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Arch_West_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Center East Water Surface Fast (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_East_Water_Surface_Fast_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Center Lower Platform East (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Center_Lower_Platform_East_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Portal_Ledge_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> Southwest Brick (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__Southwest_Brick_1),
+            "Amagi > East Lake > East 15 Lower Hover ==> West Platform 3 (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Lower_Hover__ex__West_Platform_3_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Arch East (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_East_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Arch West (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Arch_West_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Center East Water Surface Fast (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_East_Water_Surface_Fast_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Center Lower Platform East (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Lower_Platform_East_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Center Northeast Platform (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Center_Northeast_Platform_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Portal_Ledge_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> Southwest Brick (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__Southwest_Brick_1),
+            "Amagi > East Lake > East 15 Upper Hover ==> West Platform 3 (1)" => Ok(ExitId::Amagi__East_Lake__East_15_Upper_Hover__ex__West_Platform_3_1),
+            "Amagi > East Lake > East Hill ==> Center Lower Platform East (1)" => Ok(ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1),
+            "Amagi > East Lake > East Hill ==> Center Northeast Platform (1)" => Ok(ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1),
+            "Amagi > East Lake > East Water Surface ==> Arch East (1)" => Ok(ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1),
+            "Amagi > East Lake > East Water Surface ==> Arch East (2)" => Ok(ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2),
+            "Amagi > East Lake > East Water Surface ==> Arch West (1)" => Ok(ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1),
+            "Amagi > East Lake > East Water Surface ==> Arch West (2)" => Ok(ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2),
+            "Amagi > East Lake > Kum Abala ==> Southeast Column (1)" => Ok(ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1),
+            "Amagi > East Lake > Kum Abala ==> Underwater Hill (1)" => Ok(ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1),
+            "Amagi > East Lake > Portal Ledge ==> Arch West (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1),
+            "Amagi > East Lake > Portal Ledge ==> Arch West (2)" => Ok(ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_2),
+            "Amagi > East Lake > Portal Ledge ==> Portal Stand (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1),
+            "Amagi > East Lake > Portal Stand ==> Kum Abala (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1),
+            "Amagi > East Lake > Portal Stand ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Portal Stand ==> Save Point (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1),
+            "Amagi > East Lake > Portal Stand ==> West 17 (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1),
+            "Amagi > East Lake > Portal Stand ==> West Platform 3 (1)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1),
+            "Amagi > East Lake > Portal Stand ==> West Platform 3 (2)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_2),
+            "Amagi > East Lake > Portal Stand ==> West Platform 3 (3)" => Ok(ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_3),
+            "Amagi > East Lake > Save Point ==> Southeast Column (1)" => Ok(ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1),
+            "Amagi > East Lake > Save Point ==> Southeast Column (2)" => Ok(ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_2),
+            "Amagi > East Lake > Save Point ==> Southwest Column East (1)" => Ok(ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1),
+            "Amagi > East Lake > Save Point ==> Southwest Column East (2)" => Ok(ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_2),
+            "Amagi > East Lake > Southeast Column ==> Foot (1)" => Ok(ExitId::Amagi__East_Lake__Southeast_Column__ex__Foot_1),
+            "Amagi > East Lake > Southeast Column ==> Kum Abala (1)" => Ok(ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1),
+            "Amagi > East Lake > Southeast Column ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Southeast_Column__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Southeast Column ==> Southwest Brick (1)" => Ok(ExitId::Amagi__East_Lake__Southeast_Column__ex__Southwest_Brick_1),
+            "Amagi > East Lake > Southeast Column ==> Underwater Hill (1)" => Ok(ExitId::Amagi__East_Lake__Southeast_Column__ex__Underwater_Hill_1),
+            "Amagi > East Lake > Southwest Column Base ==> Southwest Column West (1)" => Ok(ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1),
+            "Amagi > East Lake > Southwest Column Base ==> Southwest Column West (2)" => Ok(ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_2),
+            "Amagi > East Lake > Southwest Column East ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Southwest_Column_East__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Southwest Column West ==> Portal Ledge (1)" => Ok(ExitId::Amagi__East_Lake__Southwest_Column_West__ex__Portal_Ledge_1),
+            "Amagi > East Lake > Underwater Hill ==> Center Lower Platform East (1)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1),
+            "Amagi > East Lake > Underwater Hill ==> Center Lower Platform East (2)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_2),
+            "Amagi > East Lake > Underwater Hill ==> Center Northeast Platform (1)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1),
+            "Amagi > East Lake > Underwater Hill ==> Center Northeast Platform (2)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_2),
+            "Amagi > East Lake > Underwater Hill ==> East Hill (1)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1),
+            "Amagi > East Lake > Underwater Hill ==> East Hill (2)" => Ok(ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_2),
+            "Amagi > East Lake > West 17 ==> Gated Community > East 17 (1)" => Ok(ExitId::Amagi__East_Lake__West_17__ex__Gated_Community__East_17_1),
+            "Amagi > East Lake > West 18 ==> Gated Community > East 18 (1)" => Ok(ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1),
+            "Amagi > East Lake > West Platform 1 East ==> West Platform 2 West (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_East__ex__West_Platform_2_West_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Center Lower Platform East (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Lower_Platform_East_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Center Northeast Platform (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Northeast_Platform_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Center Upper Platform (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_Upper_Platform_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Center West Platform (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Center_West_Platform_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Foot (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Foot_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Kum Abala (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Kum_Abala_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> Underwater Hill (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__Underwater_Hill_1),
+            "Amagi > East Lake > West Platform 1 West Hook ==> West Platform 1 West (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_1_West_Hook__ex__West_Platform_1_West_1),
+            "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1),
+            "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (2)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_2),
+            "Amagi > East Lake > West Platform 2 East ==> West Platform 1 West (3)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_3),
+            "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1),
+            "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (2)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_2),
+            "Amagi > East Lake > West Platform 2 West ==> West Platform 1 West (3)" => Ok(ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_3),
+            "Amagi > East Lake > West Platform 3 ==> West Platform 2 East (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_3__ex__West_Platform_2_East_1),
+            "Amagi > East Lake > West Platform 3 Hook ==> Foot (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Foot_1),
+            "Amagi > East Lake > West Platform 3 Hook ==> Kum Abala (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1),
+            "Amagi > East Lake > West Platform 3 Hook ==> Underwater Hill (1)" => Ok(ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1),
+            "Amagi > East Lake > West Water Surface ==> Center West Platform (1)" => Ok(ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1),
             "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1),
             "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1),
             "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1),
@@ -15796,6 +16311,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > The Big Drop > West 14 > Mist Through" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
             "Glacier > The Big Drop > West 14 > Mist Through Faster" => Ok(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
             "Glacier > Vertical Room > Above Switch ==> Upper Gatestone (1)" => Ok(ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1),
+            "Glacier > Vertical Room > Below Upper Switch ==> Amagi > East Lake > East 15 Upper Hover (1)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1),
             "Glacier > Vertical Room > Below Upper Switch ==> East 14 (1)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1),
             "Glacier > Vertical Room > Below Upper Switch ==> East 14 (2)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2),
             "Glacier > Vertical Room > Below Upper Switch ==> Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1),
@@ -15833,6 +16349,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room > Upper Gatestone ==> Below Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1),
             "Glacier > Vertical Room > Upper Gatestone ==> Upper Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1),
             "Glacier > Vertical Room > Upper Switch ==> Above Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1),
+            "Glacier > Vertical Room > Water's Ledge ==> Amagi > East Lake > East 15 Lower Hover (1)" => Ok(ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1),
             "Glacier > Vertical Room > West 15 Flat ==> Amagi > East Lake > East 15 Flat (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1),
             "Glacier > Vertical Room > West 15 Lower ==> Amagi > East Lake > East 15 Lower (1)" => Ok(ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1),
             "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
@@ -16066,6 +16583,7 @@ impl std::str::FromStr for ExitId {
             "Menu > Breach Map > IB Gauntlet ==> Irikar Breach > Gauntlet > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1),
             "Menu > Breach Map > IB Save Room ==> Irikar Breach > Save Room > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1),
             "Menu > Breach Map > LAB East ==> Amagi Breach > East Entrance > Save Point (1)" => Ok(ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1),
+            "Menu > Kiengir Map > Amagi East Lake ==> Amagi > East Lake > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1),
             "Menu > Kiengir Map > Amagi Main Area ==> Amagi > Main Area > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1),
             "Menu > Kiengir Map > Annuna Center Save ==> Annuna > Center Save > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1),
             "Menu > Kiengir Map > Annuna Factory Entrance ==> Annuna > Factory Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1),
@@ -16294,6 +16812,11 @@ impl std::str::FromStr for ExitId {
 )]
 #[repr(u8)]
 pub enum ActionId {
+    Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch,
+    Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch,
+    Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch,
+    Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch,
+    Amagi__East_Lake__Save_Point__Save,
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
     Amagi_Breach__East_Entrance__Save_Point__Save,
@@ -16422,6 +16945,29 @@ pub enum ActionId {
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > East 15 Flat > Attract Portal to Arch"
+            ),
+            ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > East 15 Lower > Attract Portal to Arch"
+            ),
+            ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > East 15 Lower Hover > Attract Portal to Arch"
+            ),
+            ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => write!(
+                f,
+                "{}",
+                "Amagi > East Lake > East 15 Upper Hover > Attract Portal to Arch"
+            ),
+            ActionId::Amagi__East_Lake__Save_Point__Save => {
+                write!(f, "{}", "Amagi > East Lake > Save Point > Save")
+            }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 write!(f, "{}", "Amagi > Main Area > Carving > Key Combo")
             }
@@ -16905,6 +17451,21 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > East Lake > East 15 Flat > Attract Portal to Arch" => {
+                Ok(ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch)
+            }
+            "Amagi > East Lake > East 15 Lower > Attract Portal to Arch" => {
+                Ok(ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch)
+            }
+            "Amagi > East Lake > East 15 Lower Hover > Attract Portal to Arch" => {
+                Ok(ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch)
+            }
+            "Amagi > East Lake > East 15 Upper Hover > Attract Portal to Arch" => {
+                Ok(ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch)
+            }
+            "Amagi > East Lake > Save Point > Save" => {
+                Ok(ActionId::Amagi__East_Lake__Save_Point__Save)
+            }
             "Amagi > Main Area > Carving > Key Combo" => {
                 Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo)
             }
@@ -17325,6 +17886,7 @@ pub enum CanonId {
     Irikar_Royal_Storage_Flask,
     Irikar_Royal_Storage_Wall,
     Ledge_Grab,
+    Loc_Amagi__East_Lake__Foot__Tablet,
     Loc_Amagi__Liru_Room__Shrine__Item,
     Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item,
     Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
@@ -17528,6 +18090,9 @@ impl fmt::Display for CanonId {
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            CanonId::Loc_Amagi__East_Lake__Foot__Tablet => {
+                write!(f, "{}", "Loc_Amagi__East_Lake__Foot__Tablet")
+            }
             CanonId::Loc_Amagi__Liru_Room__Shrine__Item => {
                 write!(f, "{}", "Loc_Amagi__Liru_Room__Shrine__Item")
             }
@@ -18110,6 +18675,7 @@ impl std::str::FromStr for CanonId {
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
+            "Loc_Amagi__East_Lake__Foot__Tablet" => Ok(CanonId::Loc_Amagi__East_Lake__Foot__Tablet),
             "Loc_Amagi__Liru_Room__Shrine__Item" => Ok(CanonId::Loc_Amagi__Liru_Room__Shrine__Item),
             "Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item" => {
                 Ok(CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item)

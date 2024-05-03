@@ -42,7 +42,10 @@ pub enum OneObservation {
     PrevPortal(SpotId),
     PrevArea(AreaId),
     MapAmagiWestLakeUrn(bool),
-    MapAmagiEastLakeSave(bool),
+    MapAmagiEastLakeSurfaceEast(bool),
+    MapAmagiEastLakeSurfaceCenter(bool),
+    MapAmagiEastLakeSurfaceWest(bool),
+    MapAmagiEastLakeSoutheast(bool),
     MapAnnunaWestBridgeSave(bool),
     MapAnnunaFilterTeleporterFlask(bool),
     MapAnnunaFilterTeleporterTablet(bool),
@@ -104,6 +107,10 @@ pub enum OneObservation {
         mask: flags::ContextBits6,
         result: flags::ContextBits6,
     },
+    CBits7 {
+        mask: flags::ContextBits7,
+        result: flags::ContextBits7,
+    },
 }
 
 #[derive(Debug, Default)]
@@ -123,7 +130,10 @@ pub struct FullObservation {
     prev_portal: bool,
     prev_area: bool,
     map__amagi__west_lake__urn: bool,
-    map__amagi__east_lake__save: bool,
+    map__amagi__east_lake__surface_east: bool,
+    map__amagi__east_lake__surface_center: bool,
+    map__amagi__east_lake__surface_west: bool,
+    map__amagi__east_lake__southeast: bool,
     map__annuna__west_bridge__save: bool,
     map__annuna__filter_teleporter__flask: bool,
     map__annuna__filter_teleporter__tablet: bool,
@@ -151,6 +161,7 @@ pub struct FullObservation {
     cbits4: Option<flags::ContextBits4>,
     cbits5: Option<flags::ContextBits5>,
     cbits6: Option<flags::ContextBits6>,
+    cbits7: Option<flags::ContextBits7>,
     pub strict: bool,
 }
 
@@ -188,7 +199,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_SHOCKWAVE);
             }
             LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall | LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
-                self.cbits3.insert(flags::ContextBits3::VISITED_AMAGI_STRONGHOLD_WALL_1);
+                self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI_STRONGHOLD_WALL_1);
             }
             LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => {
                 self.cbits3.insert(flags::ContextBits3::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
@@ -197,7 +208,7 @@ impl Observer for FullObservation {
                 self.cbits3.insert(flags::ContextBits3::VISITED_AMAGI_STRONGHOLD_BOULDER_2);
             }
             LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall | LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => {
-                self.cbits3.insert(flags::ContextBits3::VISITED_AMAGI_STRONGHOLD_WALL_2);
+                self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI_STRONGHOLD_WALL_2);
             }
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall | LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI_WEST_LAKE_SURFACE_WALL);
@@ -332,10 +343,10 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_IRIKAR_GUDAM);
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
+                self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_FAST_TRAVEL);
@@ -344,7 +355,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block | LocationId::Uhrum__Waterfalls__Above_Block__Block | LocationId::Uhrum__Waterfalls__East_26__Block => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_UHRUM_WATERFALLS_BLOCK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM_WATERFALLS_BLOCK);
             }
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_ANUMAN);
@@ -372,6 +383,9 @@ impl Observer for FullObservation {
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER);
+            }
+            LocationId::Amagi__East_Lake__Foot__Tablet => {
+                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET);
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT);
@@ -425,13 +439,13 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__TWISTY_PASSAGES__NORTHWEST_ALCOVE__REFILL);
             }
             LocationId::Annuna__West_Climb__Cache__Item => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__WEST_CLIMB__CACHE__ITEM);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__WEST_CLIMB__CACHE__ITEM);
             }
             LocationId::Antarctica__Shed__Interior__Shelf => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANTARCTICA__SHED__INTERIOR__SHELF);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANTARCTICA__SHED__INTERIOR__SHELF);
             }
             LocationId::Antarctica__Power_Room__Switch__Flip => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANTARCTICA__POWER_ROOM__SWITCH__FLIP);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANTARCTICA__POWER_ROOM__SWITCH__FLIP);
             }
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__BY_GARAGE__CRAWLSPACE__FRAGMENT);
@@ -611,7 +625,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__SAT_TOWER_TOP_LEDGE__TABLET);
             }
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON);
             }
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__ROYAL_STORAGE_BY_WALL__MIST_INTO_WALL);
@@ -629,10 +643,10 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_IRIKAR__BOSS_ROOM__BULLS_FEET__BOSS_REWARD);
             }
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH);
             }
             LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_IRIKAR__EAST_ROOFTOPS__TOP_ROOFTOP__TABLET);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__EAST_ROOFTOPS__TOP_ROOFTOP__TABLET);
             }
             LocationId::Irikar__Lamassu__Desk__Item => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__LAMASSU__DESK__ITEM);
@@ -797,6 +811,11 @@ impl Observer for FullObservation {
         let area = get_area(dest);
         match area {
             AreaId::Amagi__East_Lake => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Amagi__Gated_Community => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
@@ -1771,9 +1790,24 @@ impl Observer for FullObservation {
                 ctx.map__amagi__west_lake__urn,
             ));
         }
-        if self.map__amagi__east_lake__save {
-            vec.push(OneObservation::MapAmagiEastLakeSave(
-                ctx.map__amagi__east_lake__save,
+        if self.map__amagi__east_lake__surface_east {
+            vec.push(OneObservation::MapAmagiEastLakeSurfaceEast(
+                ctx.map__amagi__east_lake__surface_east,
+            ));
+        }
+        if self.map__amagi__east_lake__surface_center {
+            vec.push(OneObservation::MapAmagiEastLakeSurfaceCenter(
+                ctx.map__amagi__east_lake__surface_center,
+            ));
+        }
+        if self.map__amagi__east_lake__surface_west {
+            vec.push(OneObservation::MapAmagiEastLakeSurfaceWest(
+                ctx.map__amagi__east_lake__surface_west,
+            ));
+        }
+        if self.map__amagi__east_lake__southeast {
+            vec.push(OneObservation::MapAmagiEastLakeSoutheast(
+                ctx.map__amagi__east_lake__southeast,
             ));
         }
         if self.map__annuna__west_bridge__save {
@@ -1958,6 +1992,12 @@ impl Observer for FullObservation {
                 result: mask & ctx.cbits6,
             });
         }
+        if let Some(mask) = self.cbits7 {
+            vec.push(OneObservation::CBits7 {
+                mask,
+                result: mask & ctx.cbits7,
+            });
+        }
         vec
     }
 }
@@ -2004,7 +2044,16 @@ impl FullObservation {
         if self.map__amagi__west_lake__urn {
             fields += 1;
         }
-        if self.map__amagi__east_lake__save {
+        if self.map__amagi__east_lake__surface_east {
+            fields += 1;
+        }
+        if self.map__amagi__east_lake__surface_center {
+            fields += 1;
+        }
+        if self.map__amagi__east_lake__surface_west {
+            fields += 1;
+        }
+        if self.map__amagi__east_lake__southeast {
             fields += 1;
         }
         if self.map__annuna__west_bridge__save {
@@ -2082,6 +2131,9 @@ impl FullObservation {
         if self.cbits6.is_some() {
             fields += 1;
         }
+        if self.cbits7.is_some() {
+            fields += 1;
+        }
         fields
     }
 
@@ -2143,7 +2195,20 @@ impl FullObservation {
         self.map__amagi__west_lake__urn = true;
     }
     pub fn observe_map__amagi__east_lake__save(&mut self) {
-        self.map__amagi__east_lake__save = true;
+        self.cbits1
+            .insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
+    }
+    pub fn observe_map__amagi__east_lake__surface_east(&mut self) {
+        self.map__amagi__east_lake__surface_east = true;
+    }
+    pub fn observe_map__amagi__east_lake__surface_center(&mut self) {
+        self.map__amagi__east_lake__surface_center = true;
+    }
+    pub fn observe_map__amagi__east_lake__surface_west(&mut self) {
+        self.map__amagi__east_lake__surface_west = true;
+    }
+    pub fn observe_map__amagi__east_lake__southeast(&mut self) {
+        self.map__amagi__east_lake__southeast = true;
     }
     pub fn observe_map__annuna__mirror_match__save(&mut self) {
         self.cbits1
@@ -2435,8 +2500,8 @@ impl FullObservation {
             .insert(flags::ContextBits1::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
     }
     pub fn observe_amagi_dragon_eye_passage(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+        self.cbits2
+            .insert(flags::ContextBits2::AMAGI_DRAGON_EYE_PASSAGE);
     }
     pub fn observe_amagi_stronghold_boulder_1(&mut self) {
         self.cbits2
@@ -2611,6 +2676,9 @@ impl FullObservation {
             self.flask = self.flask.combine(obs);
         }
     }
+    pub fn observe_forbidden_knowledge(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::FORBIDDEN_KNOWLEDGE);
+    }
     pub fn observe_giguna_boulder(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
     }
@@ -2677,10 +2745,10 @@ impl FullObservation {
         self.cbits2.insert(flags::ContextBits2::HEALTH_UPGRADE_4);
     }
     pub fn observe_heretics_tablet(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
+        self.cbits3.insert(flags::ContextBits3::HERETICS_TABLET);
     }
     pub fn observe_ice_axe(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::ICE_AXE);
+        self.cbits3.insert(flags::ContextBits3::ICE_AXE);
     }
     pub fn observe_infect(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECT);
@@ -2941,7 +3009,10 @@ pub enum ObservationMatcher {
     PrevPortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
     MapAmagiWestLakeUrnLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
-    MapAmagiEastLakeSaveLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
+    MapAmagiEastLakeSurfaceEastLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
+    MapAmagiEastLakeSurfaceCenterLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
+    MapAmagiEastLakeSurfaceWestLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
+    MapAmagiEastLakeSoutheastLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
     MapAnnunaWestBridgeSaveLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
     MapAnnunaFilterTeleporterFlaskLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
     MapAnnunaFilterTeleporterTabletLookup(LookupMatcher<Node<Self>, bool, SolutionSuffix<Context>>),
@@ -3057,6 +3128,10 @@ pub enum ObservationMatcher {
         mask: flags::ContextBits6,
         matcher: LookupMatcher<Node<Self>, flags::ContextBits6, SolutionSuffix<Context>>,
     },
+    LookupCBits7 {
+        mask: flags::ContextBits7,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits7, SolutionSuffix<Context>>,
+    },
 }
 
 impl Default for ObservationMatcher {
@@ -3171,9 +3246,30 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::MapAmagiWestLakeUrnLookup(m))
             }
-            &OneObservation::MapAmagiEastLakeSave(v) => {
+            &OneObservation::MapAmagiEastLakeSurfaceEast(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::MapAmagiEastLakeSaveLookup(m))
+                (
+                    node,
+                    ObservationMatcher::MapAmagiEastLakeSurfaceEastLookup(m),
+                )
+            }
+            &OneObservation::MapAmagiEastLakeSurfaceCenter(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (
+                    node,
+                    ObservationMatcher::MapAmagiEastLakeSurfaceCenterLookup(m),
+                )
+            }
+            &OneObservation::MapAmagiEastLakeSurfaceWest(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (
+                    node,
+                    ObservationMatcher::MapAmagiEastLakeSurfaceWestLookup(m),
+                )
+            }
+            &OneObservation::MapAmagiEastLakeSoutheast(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (node, ObservationMatcher::MapAmagiEastLakeSoutheastLookup(m))
             }
             &OneObservation::MapAnnunaWestBridgeSave(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -3363,6 +3459,10 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits6 { mask, matcher })
             }
+            &OneObservation::CBits7 { mask, result } => {
+                let (node, matcher) = LookupMatcher::new_with(result);
+                (node, ObservationMatcher::LookupCBits7 { mask, matcher })
+            }
         }
     }
 
@@ -3393,7 +3493,10 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PrevPortalLookup(m) => m.clear(),
             Self::PrevAreaLookup(m) => m.clear(),
             Self::MapAmagiWestLakeUrnLookup(m) => m.clear(),
-            Self::MapAmagiEastLakeSaveLookup(m) => m.clear(),
+            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.clear(),
+            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.clear(),
+            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.clear(),
+            Self::MapAmagiEastLakeSoutheastLookup(m) => m.clear(),
             Self::MapAnnunaWestBridgeSaveLookup(m) => m.clear(),
             Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.clear(),
             Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.clear(),
@@ -3435,6 +3538,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits4 { matcher, .. } => matcher.clear(),
             Self::LookupCBits5 { matcher, .. } => matcher.clear(),
             Self::LookupCBits6 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits7 { matcher, .. } => matcher.clear(),
         }
     }
 
@@ -3471,7 +3575,18 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PrevPortalLookup(m) => m.lookup(val.prev_portal),
             Self::PrevAreaLookup(m) => m.lookup(val.prev_area),
             Self::MapAmagiWestLakeUrnLookup(m) => m.lookup(val.map__amagi__west_lake__urn),
-            Self::MapAmagiEastLakeSaveLookup(m) => m.lookup(val.map__amagi__east_lake__save),
+            Self::MapAmagiEastLakeSurfaceEastLookup(m) => {
+                m.lookup(val.map__amagi__east_lake__surface_east)
+            }
+            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => {
+                m.lookup(val.map__amagi__east_lake__surface_center)
+            }
+            Self::MapAmagiEastLakeSurfaceWestLookup(m) => {
+                m.lookup(val.map__amagi__east_lake__surface_west)
+            }
+            Self::MapAmagiEastLakeSoutheastLookup(m) => {
+                m.lookup(val.map__amagi__east_lake__southeast)
+            }
             Self::MapAnnunaWestBridgeSaveLookup(m) => m.lookup(val.map__annuna__west_bridge__save),
             Self::MapAnnunaFilterTeleporterFlaskLookup(m) => {
                 m.lookup(val.map__annuna__filter_teleporter__flask)
@@ -3539,6 +3654,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits4 { mask, matcher } => matcher.lookup(val.cbits4 & *mask),
             Self::LookupCBits5 { mask, matcher } => matcher.lookup(val.cbits5 & *mask),
             Self::LookupCBits6 { mask, matcher } => matcher.lookup(val.cbits6 & *mask),
+            Self::LookupCBits7 { mask, matcher } => matcher.lookup(val.cbits7 & *mask),
         }
     }
 
@@ -3601,9 +3717,22 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::MapAmagiWestLakeUrnLookup(m), OneObservation::MapAmagiWestLakeUrn(v)) => {
                 Some(m.insert(*v))
             }
-            (Self::MapAmagiEastLakeSaveLookup(m), OneObservation::MapAmagiEastLakeSave(v)) => {
-                Some(m.insert(*v))
-            }
+            (
+                Self::MapAmagiEastLakeSurfaceEastLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceEast(v),
+            ) => Some(m.insert(*v)),
+            (
+                Self::MapAmagiEastLakeSurfaceCenterLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceCenter(v),
+            ) => Some(m.insert(*v)),
+            (
+                Self::MapAmagiEastLakeSurfaceWestLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceWest(v),
+            ) => Some(m.insert(*v)),
+            (
+                Self::MapAmagiEastLakeSoutheastLookup(m),
+                OneObservation::MapAmagiEastLakeSoutheast(v),
+            ) => Some(m.insert(*v)),
             (
                 Self::MapAnnunaWestBridgeSaveLookup(m),
                 OneObservation::MapAnnunaWestBridgeSave(v),
@@ -3773,6 +3902,13 @@ impl MatcherDispatch for ObservationMatcher {
                     result,
                 },
             ) if mask == mask2 => Some(matcher.insert(*result)),
+            (
+                Self::LookupCBits7 { mask, matcher },
+                OneObservation::CBits7 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => Some(matcher.insert(*result)),
             _ => None,
         }
     }
@@ -3836,9 +3972,22 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::MapAmagiWestLakeUrnLookup(m), OneObservation::MapAmagiWestLakeUrn(v)) => {
                 m.add_value(*v, value)
             }
-            (Self::MapAmagiEastLakeSaveLookup(m), OneObservation::MapAmagiEastLakeSave(v)) => {
-                m.add_value(*v, value)
-            }
+            (
+                Self::MapAmagiEastLakeSurfaceEastLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceEast(v),
+            ) => m.add_value(*v, value),
+            (
+                Self::MapAmagiEastLakeSurfaceCenterLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceCenter(v),
+            ) => m.add_value(*v, value),
+            (
+                Self::MapAmagiEastLakeSurfaceWestLookup(m),
+                OneObservation::MapAmagiEastLakeSurfaceWest(v),
+            ) => m.add_value(*v, value),
+            (
+                Self::MapAmagiEastLakeSoutheastLookup(m),
+                OneObservation::MapAmagiEastLakeSoutheast(v),
+            ) => m.add_value(*v, value),
             (
                 Self::MapAnnunaWestBridgeSaveLookup(m),
                 OneObservation::MapAnnunaWestBridgeSave(v),
@@ -4010,6 +4159,13 @@ impl MatcherDispatch for ObservationMatcher {
                     result,
                 },
             ) if mask == mask2 => matcher.add_value(*result, value),
+            (
+                Self::LookupCBits7 { mask, matcher },
+                OneObservation::CBits7 {
+                    mask: mask2,
+                    result,
+                },
+            ) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }
@@ -4041,7 +4197,10 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PrevPortalLookup(m) => m.nodes(),
             Self::PrevAreaLookup(m) => m.nodes(),
             Self::MapAmagiWestLakeUrnLookup(m) => m.nodes(),
-            Self::MapAmagiEastLakeSaveLookup(m) => m.nodes(),
+            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.nodes(),
+            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.nodes(),
+            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.nodes(),
+            Self::MapAmagiEastLakeSoutheastLookup(m) => m.nodes(),
             Self::MapAnnunaWestBridgeSaveLookup(m) => m.nodes(),
             Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.nodes(),
             Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.nodes(),
@@ -4083,6 +4242,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits4 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits5 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits6 { matcher, .. } => matcher.nodes(),
+            Self::LookupCBits7 { matcher, .. } => matcher.nodes(),
         }
     }
 
@@ -4113,7 +4273,10 @@ impl MatcherDispatch for ObservationMatcher {
             Self::PrevPortalLookup(m) => m.num_values(),
             Self::PrevAreaLookup(m) => m.num_values(),
             Self::MapAmagiWestLakeUrnLookup(m) => m.num_values(),
-            Self::MapAmagiEastLakeSaveLookup(m) => m.num_values(),
+            Self::MapAmagiEastLakeSurfaceEastLookup(m) => m.num_values(),
+            Self::MapAmagiEastLakeSurfaceCenterLookup(m) => m.num_values(),
+            Self::MapAmagiEastLakeSurfaceWestLookup(m) => m.num_values(),
+            Self::MapAmagiEastLakeSoutheastLookup(m) => m.num_values(),
             Self::MapAnnunaWestBridgeSaveLookup(m) => m.num_values(),
             Self::MapAnnunaFilterTeleporterFlaskLookup(m) => m.num_values(),
             Self::MapAnnunaFilterTeleporterTabletLookup(m) => m.num_values(),
@@ -4155,6 +4318,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits4 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits5 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits6 { matcher, .. } => matcher.num_values(),
+            Self::LookupCBits7 { matcher, .. } => matcher.num_values(),
         }
     }
 }

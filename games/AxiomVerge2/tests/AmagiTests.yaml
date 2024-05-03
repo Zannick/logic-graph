@@ -55,3 +55,14 @@ tests:
       energy: 300
     can_obtain: Defeat_MUS_A_M20
     
+  - name: East Lake traversal
+    start: Glacier > Vertical Room > West 15 Flat
+    context:
+      mode: drone
+      indra: Ebih > Base Camp > Save Point
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+      - Breach_Attractor
+      - Underwater_Movement
+    can_reach: Amagi > East Lake > West 17

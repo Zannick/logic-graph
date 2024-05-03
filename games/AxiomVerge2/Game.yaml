@@ -319,7 +319,7 @@ helpers:  # MARK: helpers
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
-     Goodbye, Notes_2053_02_27]
+     Goodbye, Notes_2053_02_27, Forbidden_Knowledge]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
     [Flask{15}, Big_Flask{3}]

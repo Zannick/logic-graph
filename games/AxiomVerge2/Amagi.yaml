@@ -982,13 +982,699 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [34, 18, 35, 19]
+    surface_east: [35, 14, 36, 15]
+    surface_center: [34, 14, 35, 15]
+    surface_west: [33, 14, 34, 15]
+    southeast: [35, 17, 36, 18]
   data:
     save_point: Save Point
+    portal_start: Portal Stand
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Amagi East Lake
+      southeast: Menu > Kiengir Map > Forbidden Knowledge
+    water:
+      surface_east: false
+      surface_center: false
+      surface_west: false
   spots:
     - name: East 15 Flat
       coord: [35.95, 14.55]
+      local:
+        - to: East Hill
+      exits:
+        - to: Glacier > Vertical Room > West 15 Flat
+          tags: [xshift]
+      actions:
+        - name: Attract Portal to Arch
+          do: ^portal = `Amagi > East Lake > Arch East`
+          to: Arch East
+          req: $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+          time: 6
     - name: East 15 Lower
       coord: [35.95, 14.7]
+      local:
+        - to: East Hill
+      exits:
+        - to: Glacier > Vertical Room > West 15 Lower
+          tags: [xshift]
+      actions:
+        - name: Attract Portal to Arch
+          do: ^portal = `Amagi > East Lake > Arch East`
+          to: Arch East
+          req: $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+          time: 6
+    - name: East 15 Upper Hover
+      coord: [35.95, 14.5]
+      local:
+        - to: East Hill
+      exits:
+        - to: Center East Water Surface Fast
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Center Lower Platform East
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Center Northeast Platform
+          req: $hook and $hover
+          movement: fast_hover
+        - to: West Platform 3
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Southwest Brick
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Arch East
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Arch West
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+      actions:
+        - name: Attract Portal to Arch
+          do: ^portal = `Amagi > East Lake > Arch West`
+          to: Arch West
+          req: $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+          time: 5.5
+    - name: East 15 Lower Hover
+      coord: [35.95, 14.65]
+      local:
+        - to: East Hill
+      exits:
+        - to: Center East Water Surface Fast
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Center Lower Platform East
+          req: $hook and $hover
+          movement: fast_hover
+        - to: West Platform 3
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Southwest Brick
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Arch East
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Arch West
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+      actions:
+        - name: Attract Portal to Arch
+          do: ^portal = `Amagi > East Lake > Arch West`
+          to: Arch West
+          req: $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
+          time: 5.5
+    - name: East Hill
+      coord: [35.7, 14.7]
+      local:
+        - to: East Water Surface
+          jumps_down: 1
+        - to: East 15 Lower
+        - to: East 15 Flat
+          jumps: 1
+      exits:
+        - to: Center Lower Platform East
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Center Northeast Platform
+          req: $hover
+          movement: base
+          jumps: 1
+
+    - name: Underwater Hill
+      coord: [35.7, 15.7]
+      local:
+        - to: Southeast Column
+        - to: Kum Abala
+      exits:
+        - to: East Hill
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Hill
+          req: $mist2
+          movement: mist2
+        - to: Center Northeast Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Northeast Platform
+          req: $mist2
+          movement: mist2
+        - to: Center Lower Platform East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Lower Platform East
+          req: $mist2
+          movement: mist2
+
+    - name: East Water Surface
+      coord: [35.5, 15.0]
+      data:
+        water: true
+      local:
+        - to: Kum Abala
+        - to: Foot
+          thru: [35.25, 16.9]
+        - to: Southeast Column
+      exits:
+        - to: Arch East
+          req: $hover
+          movement: base
+        - to: Arch West
+          req: $hover
+          movement: base
+        - to: Arch East
+          req: $hover and Underwater_Movement
+          movement: water
+        - to: Arch West
+          req: $hover and Underwater_Movement
+          movement: water
+    - name: Center East Water Surface Fast
+      coord: [34.9, 15.0]
+      data:
+        water: true
+      local:
+        - to: Arch East
+        - to: Arch West
+      exits:
+        - to: Arch West
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: West Platform 3
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Southwest Brick
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: Center East Water Surface Slow
+      coord: [34.95, 15.0]
+      data:
+        water: true
+      local:
+        - to: Kum Abala
+        - to: Foot
+          thru: [35.25, 16.9]
+    - name: Center Lower Platform East
+      coord: [34.7, 14.9]
+      local:
+        - to: Center East Water Surface Slow
+        - to: Center Water Below Platform East
+          jumps_down: 1
+        - to: Center Water Below Platform West
+          jumps_down: 1
+        - to: Center Northeast Platform
+          jumps: 1
+        - to: Center Upper Platform
+          jumps: 1
+        - to: Center West Platform
+          jumps: 1
+        - to: West Platform 1 East
+      exits:
+        - to: East Hill
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Center Water Below Platform East
+      coord: [34.7, 15.0]
+      data:
+        water: true
+      local:
+        - to: Kum Abala
+        - to: Southeast Column
+        - to: Arch East
+        - to: Arch West
+        - to: Southwest Column East
+        - to: Southwest Column West
+        - to: Southwest Brick
+      exits:
+        - to: West Platform 3
+          req: $hover and Underwater_Movement
+          movement: water
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: water
+        - to: Southwest Brick
+          req: $hook and $hover and Underwater_Movement
+          movement: water
+    - name: Center Water Below Platform West
+      coord: [34.3, 15.0]
+      data:
+        water: true
+      local:
+        - to: Kum Abala
+        - to: Arch East
+        - to: Arch West
+        - to: Southwest Column East
+        - to: Southwest Column West
+          thru: [34.15, 16.3]
+        - to: West Platform 3
+    - name: Center Northeast Platform
+      coord: [34.75, 14.7]
+      local:
+        - to: Center Upper Platform
+          jumps: 1
+        - to: Center Lower Platform East
+          jumps_down: 1
+        - to: Center Water Below Platform West
+          jumps_down: 1
+        - to: West Platform 1 East
+        - to: Center East Water Surface Slow
+      exits:
+        - to: East Hill
+          req: $hover
+          movement: base
+    - name: Center Upper Platform
+      coord: [34.4, 14.65]
+      local:
+        - to: Center West Platform
+        - to: Center Water Below Platform West
+          jumps_down: 2
+        - to: Center Northeast Platform
+        - to: Center Lower Platform East
+          jumps_down: 1
+    - name: Center West Platform
+      coord: [34.15, 14.75]
+      local:
+        - to: West Platform 1 West
+        - to: Center West Water Surface
+          jumps_down: 1
+        - to: Center Water Below Platform West
+          jumps_down: 1
+        - to: Center Lower Platform East
+        - to: Center Upper Platform
+          jumps: 1
+      exits:
+        - to: Far West Water Surface
+          req: $hover
+          movement: base
+    - name: Center West Water Surface
+      coord: [34.1, 15.0]
+      data:
+        water: true
+      local:
+        - to: West Platform 3
+        - to: Arch West
+        - to: Save Point
+          thru: [34.35, 17.2]
+        - to: Southwest Column West
+          thru: [34.15, 16.3]
+
+    - name: West Water Surface
+      coord: [33.8, 15.0]
+      exits:
+        - to: Center West Platform
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Far West Water Surface
+      coord: [33.3, 15.0]
+      data:
+        water: true
+      local:
+        - to: West Platform 2 West
+        - to: West 17
+    - name: West Platform 1 West
+      coord: [33.75, 15.05]
+      local:
+        - to: West Water Surface
+          jumps: 1
+        - to: West Platform 1 East
+        - to: West Platform 1 West Hook
+        - to: West Platform 2 West
+        - to: West Platform 3
+    - name: West Platform 1 West Hook
+      coord: [33.65, 15.1]
+      local:
+        - to: West Platform 2 West
+        - to: West Platform 2 East
+        - to: Arch West
+        - to: Arch East
+      exits:
+        - to: West Platform 1 West
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+        - to: Kum Abala
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Foot
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Center West Platform
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Center Upper Platform
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Center Northeast Platform
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Center Lower Platform East
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Underwater Hill
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: West Platform 1 East
+      coord: [34.05, 15.05]
+      local:
+        - to: West Platform 1 West
+        - to: West Platform 3
+        - to: Save Point
+        - to: Southwest Column East
+        - to: Southwest Column West
+          thru: [34.15, 16.3]
+        - to: Arch West
+        - to: Arch East
+        - to: Center West Platform
+          jumps: 1
+          jump_mvmt: water
+        - to: Center Lower Platform East
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: West Platform 2 West
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: West Platform 2 West
+      coord: [33.3, 15.45]
+      local:
+        - to: West 17
+        - to: Portal Stand
+        - to: West Platform 2 East
+        - to: West Platform 1 West
+          jumps: 1
+          jump_mvmt: water
+        - to: West Platform 1 West Hook
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: West Platform 1 West
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West Platform 1 West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West Platform 1 West
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: West Platform 2 East
+      coord: [33.65, 15.45]
+      local:
+        - to: West Platform 2 West
+        - to: West Platform 1 West
+          jumps: 1
+          jump_mvmt: water
+        - to: West Platform 1 West Hook
+          jumps: 1
+          jump_mvmt: water
+        - to: Arch East
+        - to: Arch West
+        - to: Save Point
+          thru: [34.35, 17.2]
+        - to: Southwest Column West
+          thru: [34.15, 16.3]
+        - to: West Platform 3
+        - to: Portal Stand
+          thru: [33.7, 15.7]
+      exits:
+        - to: West Platform 1 West
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West Platform 1 West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West Platform 1 West
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: West Platform 3
+      coord: [33.7, 15.95]
+      local:
+        - to: Portal Stand
+        - to: Arch East
+        - to: Arch West
+        - to: Save Point
+          thru: [34.15, 16.3]
+      exits:
+        - to: West Platform 2 East
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: West Platform 3 Hook
+      coord: [33.6, 16.0]
+      exits:
+        - to: Kum Abala
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Foot
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Underwater Hill
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+
+    - name: Portal Stand
+      coord: [33.475, 16.3]
+      local:
+        - to: West 17
+        - to: Portal Ledge
+        - to: West Platform 3
+          jumps: 1
+          jump_mvmt: water
+        - to: West Platform 3 Hook
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: West Platform 3
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: West Platform 3
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West Platform 3
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: West 17
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Save Point
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Kum Abala
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: Portal Ledge
+      coord: [33.8, 16.45]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Southwest Brick
+          thru: [33.75, 16.8]
+        - to: Southwest Column Base
+        - to: Southwest Column West
+        - to: Southwest Column East
+      exits:
+        - to: Arch West
+          req: $hover
+          movement: base
+        - to: Arch West
+          req: $hover and Underwater_Movement
+          movement: water
+        - to: Portal Stand
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+    - name: West 17
+      coord: [33.05, 16.6]
+      local:
+        - to: Portal Stand
+          jumps: 2
+      exits:
+        - to: Gated Community > East 17
+          tags: [xshift]
 
     - name: Save Point
       coord: [34.5, 17.6]
+      exits:
+        - to: Southwest Column East
+          req: $climb and Underwater_Movement
+          movement: water
+          jumps: 3
+        - to: Southwest Column East
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Southeast Column
+          req: $climb and Underwater_Movement
+          movement: water
+          jumps: 3
+        - to: Southeast Column
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Southeast Column
+      coord: [34.8, 17.1]
+      local:
+        - to: Save Point
+        - to: Kum Abala
+        - to: Arch East
+          jumps: 1
+      exits:
+        - to: Underwater Hill
+          req: $hook and $hover and Underwater_Movement
+          movement: water
+          jumps: 6
+        - to: Portal Ledge
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Southwest Brick
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Kum Abala
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+        - to: Foot
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: Arch East
+      coord: [34.65, 16.8]
+      local:
+        - to: Arch West
+        - to: Save Point
+          thru: [34.65, 17.2]
+        - to: Kum Abala
+        - to: Southeast Column
+      exits:
+        - to: Underwater Hill
+          req: $hook and $hover and Underwater_Movement
+          movement: water
+          jumps: 4
+    - name: Arch West
+      coord: [34.35, 16.8]
+      local:
+        - to: Arch East
+        - to: Save Point
+          thru: [34.35, 17.2]
+        - to: Southwest Column East
+        - to: Southwest Column West
+      exits:
+        - to: Portal Ledge
+          req: $hover and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: Southwest Column East
+      coord: [34.15, 17.1]
+      local:
+        - to: Save Point
+        - to: Arch West
+          jumps: 1
+          jump_mvmt: water
+        - to: Southwest Column West
+      exits:
+        - to: Portal Ledge
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+    - name: Southwest Column West
+      coord: [33.9, 17.1]
+      local:
+        - to: Southwest Column East
+        - to: Southwest Column Base
+        - to: Southwest Brick
+      exits:
+        - to: Portal Ledge
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+    - name: Southwest Column Base
+      coord: [33.7, 17.75]
+      local:
+        - to: Southwest Brick
+      exits:
+        - to: Southwest Column West
+          req: $climb and Underwater_Movement
+          movement: water
+          jumps: 3
+        - to: Southwest Column West
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+    - name: Southwest Brick
+      coord: [33.15, 17.75]
+      local:
+        - to: West 18
+          jumps: 1
+        - to: Southwest Column Base
+    - name: West 18
+      coord: [33.05, 17.7]
+      local:
+        - to: Southwest Brick
+      exits:
+        - to: Gated Community > East 18
+          tags: [xshift]
+
+    - name: Kum Abala
+      coord: [35.2, 17.25]
+      local:
+        - to: Foot
+        - to: Southeast Column
+          jumps: 1
+      exits:
+        - to: Underwater Hill
+          req: $hook and $hover and Underwater_Movement
+          movement: water
+          jumps: 6
+        - to: Southeast Column
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+    - name: Foot
+      coord: [35.8, 17.75]
+      local:
+        - to: Kum Abala
+          jumps: 2
+      locations:
+        - name: Tablet
+          item: Forbidden_Knowledge
+          tags: [standing]
+
+- name: Gated Community
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 17
+      coord: [32.95, 16.6]
+    - name: East 18
+      coord: [32.95, 17.7]
