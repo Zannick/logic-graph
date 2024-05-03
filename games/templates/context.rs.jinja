@@ -34,7 +34,9 @@ use std::fmt;
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Expectation {
 %% for ctx, t in context_types.items()
+%% if ctx not in unused_map_tiles
     {{ ctx|camelize|camelize }}({{ t }}),
+%% endif
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort
@@ -225,12 +227,14 @@ impl context::Ctx for Context {
     fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Expectation, String> {
         Ok(match (ckey, cval) {
 %% for ctx, t in context_types.items()
+%% if ctx not in unused_map_tiles
 %% if t in int_types
             ("{{ ctx }}", Yaml::Integer(i)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::try_from(*i).map_err(|e| format!("{}", e))?),
 %% elif t == "bool"
             ("{{ ctx }}", Yaml::Boolean(b)) => Expectation::{{ ctx|camelize|camelize }}(*b),
 %% else
             ("{{ ctx }}", Yaml::String(s)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::from_str(s).map_err(|e| format!("{}", e))?),
+%% endif
 %% endif
             ("{{ ctx }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
 %% endfor
@@ -252,12 +256,14 @@ impl context::Ctx for Context {
         for exp in exps {
             match exp {
 %% for ctx in context_types
+%% if ctx not in unused_map_tiles
                 Expectation::{{ ctx|camelize|camelize }}(e) => {
                     let v = self.{{ ctx }}();
                     if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "{{ ctx }}", e, v));
                     }
                 }
+%% endif
 %% endfor
 %% for item, ct in gl.item_max_counts.items()|sort
             Expectation::{{ item|camelize }}(e) => {
