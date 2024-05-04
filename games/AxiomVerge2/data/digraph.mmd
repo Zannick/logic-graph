@@ -66,7 +66,16 @@ subgraph Amagi
         Amagi__Liru_Room__Shrine(Shrine);
         Amagi__Liru_Room__West_20(West 20);
         Amagi__Liru_Room__East_Passage(East Passage);
+        Amagi__Liru_Room__East_Platform_1_Left(East Platform 1 Left);
+        Amagi__Liru_Room__East_Platform_1_Right(East Platform 1 Right);
+        Amagi__Liru_Room__East_Platform_2_Left(East Platform 2 Left);
+        Amagi__Liru_Room__East_Platform_2_Right(East Platform 2 Right);
+        Amagi__Liru_Room__East_Platform_3_Left(East Platform 3 Left);
+        Amagi__Liru_Room__East_Platform_3_Right(East Platform 3 Right);
         Amagi__Liru_Room__Hidden_Exit(Hidden Exit);
+    end
+    subgraph Amagi__Secret_Chamber[Secret Chamber]
+        Amagi__Secret_Chamber__West(West);
     end
     subgraph Amagi__West_Lake[West Lake]
         Amagi__West_Lake__East_15(East 15);
@@ -2213,6 +2222,15 @@ Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__West_Water_Surface --> Amagi__East_Lake__Center_West_Platform
 Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
 Amagi__Grid_31_19__West <--> Amagi__Main_Area__East_19
+Amagi__Liru_Room__East_Passage --> Amagi__Liru_Room__East_Platform_1_Left
+Amagi__Liru_Room__East_Platform_1_Left --> Amagi__Liru_Room__East_Platform_2_Right
+Amagi__Liru_Room__East_Platform_1_Left --> Amagi__Liru_Room__East_Platform_3_Left
+Amagi__Liru_Room__East_Platform_1_Left --> Amagi__Liru_Room__Hidden_Exit
+Amagi__Liru_Room__East_Platform_1_Right --> Amagi__Liru_Room__East_Platform_2_Right
+Amagi__Liru_Room__East_Platform_1_Right --> Amagi__Liru_Room__Hidden_Exit
+Amagi__Liru_Room__East_Platform_2_Right --> Amagi__Liru_Room__Hidden_Exit
+Amagi__Liru_Room__East_Platform_3_Left --> Amagi__Liru_Room__Hidden_Exit
+Amagi__Liru_Room__Hidden_Exit --> Amagi__Secret_Chamber__West
 Amagi__Liru_Room__Platform_4_Left <--> Amagi__Liru_Room__West_20
 Amagi__Liru_Room__Platform_4_Right --> Amagi__Liru_Room__East_Passage
 Amagi__Liru_Room__West_20 --> Amagi__Liru_Room__Platform_4_Right

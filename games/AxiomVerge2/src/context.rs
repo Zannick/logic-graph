@@ -686,6 +686,12 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi__Grid_31_19__West => true,
         SpotId::Amagi__Liru_Room__Bottom => true,
         SpotId::Amagi__Liru_Room__East_Passage => true,
+        SpotId::Amagi__Liru_Room__East_Platform_1_Left => true,
+        SpotId::Amagi__Liru_Room__East_Platform_1_Right => true,
+        SpotId::Amagi__Liru_Room__East_Platform_2_Left => true,
+        SpotId::Amagi__Liru_Room__East_Platform_2_Right => true,
+        SpotId::Amagi__Liru_Room__East_Platform_3_Left => true,
+        SpotId::Amagi__Liru_Room__East_Platform_3_Right => true,
         SpotId::Amagi__Liru_Room__Hidden_Enemies => true,
         SpotId::Amagi__Liru_Room__Hidden_Exit => true,
         SpotId::Amagi__Liru_Room__Platform_1_Left => true,
@@ -728,6 +734,7 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi__Main_Area__West_Mini_Hill => true,
         SpotId::Amagi__Main_Area__West_Shelf => true,
         SpotId::Amagi__Main_Area__West_Side => true,
+        SpotId::Amagi__Secret_Chamber__West => true,
         SpotId::Amagi__West_Lake__Cavern_Back_Teeth => true,
         SpotId::Amagi__West_Lake__Cavern_Chin => true,
         SpotId::Amagi__West_Lake__Cavern_Eye => true,
@@ -5233,6 +5240,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Amagi__Main_Area => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Amagi__Secret_Chamber => {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }

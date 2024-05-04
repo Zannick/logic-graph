@@ -3440,13 +3440,13 @@ areas:
           item: Apocalypse_Bomb  # TODO: other finales
           canon: Apocalypse_Bomb
           to: Bomb Northwest
-          req: Infect and Anuman
+          req: Infect and Anuman and $objective
           time: 28
         - name: Fill It Up
           item: Apocalypse_Bomb
           canon: Apocalypse_Bomb
           to: Bomb East
-          req: Infect and not Anuman
+          req: Infect and not Anuman and $objective
           time: 15
     
     - name: Southwest Switch

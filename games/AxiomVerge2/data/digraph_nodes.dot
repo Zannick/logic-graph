@@ -70,6 +70,12 @@
         Amagi__Liru_Room__Shrine [label = "", pos = "100.5,-34.0!"];
         Amagi__Liru_Room__West_20 [label = "", pos = "96.15,-33.333333!"];
         Amagi__Liru_Room__East_Passage [label = "", pos = "99.0,-33.0!"];
+        Amagi__Liru_Room__East_Platform_1_Left [label = "", pos = "100.2,-32.25!"];
+        Amagi__Liru_Room__East_Platform_1_Right [label = "", pos = "101.4,-32.25!"];
+        Amagi__Liru_Room__East_Platform_2_Left [label = "", pos = "99.45,-31.333333!"];
+        Amagi__Liru_Room__East_Platform_2_Right [label = "", pos = "100.05,-31.333333!"];
+        Amagi__Liru_Room__East_Platform_3_Left [label = "", pos = "100.35,-30.833333!"];
+        Amagi__Liru_Room__East_Platform_3_Right [label = "", pos = "100.95,-30.833333!"];
         Amagi__Liru_Room__Hidden_Exit [label = "", pos = "101.85,-31.333333!"];
         Amagi__Main_Area__East_15 [label = "", pos = "92.85,-24.75!"];
         Amagi__Main_Area__Waters_Edge [label = "", pos = "89.4,-24.75!"];
@@ -100,6 +106,7 @@
         Amagi__Main_Area__West_19 [label = "", pos = "81.15,-31.166667!"];
         Amagi__Main_Area__Secret_Waterfall [label = "", pos = "82.2,-22.25!"];
         Amagi__Main_Area__Way_Off_To_The_Side [label = "", pos = "91.2,-22.166667!"];
+        Amagi__Secret_Chamber__West [label = "", pos = "102.15,-31.333333!"];
         Amagi__West_Lake__East_15 [label = "", pos = "80.85,-24.75!"];
         Amagi__West_Lake__East_Shore [label = "", pos = "80.4,-24.75!"];
         Amagi__West_Lake__East_Bank [label = "", pos = "79.35,-26.0!"];

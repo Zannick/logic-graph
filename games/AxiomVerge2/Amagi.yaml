@@ -453,8 +453,113 @@ areas:
           jumps_down: 1
         - to: Bottom
           jumps_down: 1
+        - to: East Platform 1 Left
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: East Platform 1 Left
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+
+    - name: East Platform 1 Left
+      coord: [33.4, 19.35]
+      local:
+        - to: East Platform 1 Right
+        - to: East Passage
+      exits:
+        - to: Hidden Exit
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Hidden Exit
+          req: ($grab or $climb) and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: East Platform 2 Right
+          req: $grab and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: East Platform 2 Right
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1.5
+        - to: East Platform 3 Left
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+    - name: East Platform 1 Right
+      coord: [33.8, 19.35]
+      local:
+        - to: East Platform 1 Left
+      exits:
+        - to: Hidden Exit
+          req: ($grab or $climb or $hook) and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: East Platform 2 Right
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: East Platform 2 Left
+      coord: [33.15, 18.8]
+      local:
+        - to: East Platform 2 Right
+        - to: East Passage
+          thru: [33.1, 19.3]
+    - name: East Platform 2 Right
+      coord: [33.35, 18.8]
+      local:
+        - to: East Platform 2 Left
+        - to: East Platform 1 Left
+        - to: East Platform 1 Right
+        - to: East Platform 3 Left
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Hidden Exit
+          req: $hover
+          movement: base
+        - to: Hidden Exit
+          req: $hover and Underwater_Movement
+          movement: water
+      
+    - name: East Platform 3 Left
+      coord: [33.45, 18.5]
+      local:
+        - to: East Platform 3 Right
+        - to: East Platform 2 Right
+        - to: East Platform 2 Left
+        - to: East Platform 1 Left
+      exits:
+        - to: Hidden Exit
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+    - name: East Platform 3 Right
+      coord: [33.65, 18.5]
+      local:
+        - to: East Platform 3 Left
+        - to: East Platform 1 Right
+        - to: East Platform 1 Left
+          thru: [33.65, 18.7]
+        - to: Hidden Exit
     - name: Hidden Exit
       coord: [33.95, 18.8]
+      local:
+        - to: East Platform 3 Right
+          jumps: 1
+          jump_mvmt: water
+        - to: East Platform 1 Left
+        - to: East Platform 1 Right
+      exits:
+        - to: Secret Chamber > West
+          tags: [xshift]
+
+- name: Secret Chamber  # MARK: Secret Chamber
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [34.05, 18.8]
 
 # TODO: most of this movement requires Underwater_Movement
 # but we can't (yet) restrict to that other than making exits

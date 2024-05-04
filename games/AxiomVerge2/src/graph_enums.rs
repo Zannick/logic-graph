@@ -104,6 +104,7 @@ pub enum AreaId {
     Amagi__Grid_31_19,
     Amagi__Liru_Room,
     Amagi__Main_Area,
+    Amagi__Secret_Chamber,
     Amagi__West_Lake,
     Amagi_Breach__East_Connector,
     Amagi_Breach__East_Entrance,
@@ -295,6 +296,7 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
+            AreaId::Amagi__Secret_Chamber => write!(f, "{}", "Amagi > Secret Chamber"),
             AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
             AreaId::Amagi_Breach__East_Connector => {
                 write!(f, "{}", "Amagi Breach > East Connector")
@@ -529,6 +531,7 @@ impl std::str::FromStr for AreaId {
             "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
+            "Amagi > Secret Chamber" => Ok(AreaId::Amagi__Secret_Chamber),
             "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
             "Amagi Breach > East Connector" => Ok(AreaId::Amagi_Breach__East_Connector),
             "Amagi Breach > East Entrance" => Ok(AreaId::Amagi_Breach__East_Entrance),
@@ -779,6 +782,12 @@ pub enum SpotId {
     Amagi__Grid_31_19__West,
     Amagi__Liru_Room__Bottom,
     Amagi__Liru_Room__East_Passage,
+    Amagi__Liru_Room__East_Platform_1_Left,
+    Amagi__Liru_Room__East_Platform_1_Right,
+    Amagi__Liru_Room__East_Platform_2_Left,
+    Amagi__Liru_Room__East_Platform_2_Right,
+    Amagi__Liru_Room__East_Platform_3_Left,
+    Amagi__Liru_Room__East_Platform_3_Right,
     Amagi__Liru_Room__Hidden_Enemies,
     Amagi__Liru_Room__Hidden_Exit,
     Amagi__Liru_Room__Platform_1_Left,
@@ -821,6 +830,7 @@ pub enum SpotId {
     Amagi__Main_Area__West_Mini_Hill,
     Amagi__Main_Area__West_Shelf,
     Amagi__Main_Area__West_Side,
+    Amagi__Secret_Chamber__West,
     Amagi__West_Lake__Cavern_Back_Teeth,
     Amagi__West_Lake__Cavern_Chin,
     Amagi__West_Lake__Cavern_Eye,
@@ -2596,6 +2606,24 @@ impl fmt::Display for SpotId {
             SpotId::Amagi__Liru_Room__East_Passage => {
                 write!(f, "{}", "Amagi > Liru Room > East Passage")
             }
+            SpotId::Amagi__Liru_Room__East_Platform_1_Left => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left")
+            }
+            SpotId::Amagi__Liru_Room__East_Platform_1_Right => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 1 Right")
+            }
+            SpotId::Amagi__Liru_Room__East_Platform_2_Left => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 2 Left")
+            }
+            SpotId::Amagi__Liru_Room__East_Platform_2_Right => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 2 Right")
+            }
+            SpotId::Amagi__Liru_Room__East_Platform_3_Left => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 3 Left")
+            }
+            SpotId::Amagi__Liru_Room__East_Platform_3_Right => {
+                write!(f, "{}", "Amagi > Liru Room > East Platform 3 Right")
+            }
             SpotId::Amagi__Liru_Room__Hidden_Enemies => {
                 write!(f, "{}", "Amagi > Liru Room > Hidden Enemies")
             }
@@ -2698,6 +2726,7 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Amagi > Main Area > West Shelf")
             }
             SpotId::Amagi__Main_Area__West_Side => write!(f, "{}", "Amagi > Main Area > West Side"),
+            SpotId::Amagi__Secret_Chamber__West => write!(f, "{}", "Amagi > Secret Chamber > West"),
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth => {
                 write!(f, "{}", "Amagi > West Lake > Cavern Back Teeth")
             }
@@ -7057,6 +7086,24 @@ impl std::str::FromStr for SpotId {
             "Amagi > Grid 31,19 > West" => Ok(SpotId::Amagi__Grid_31_19__West),
             "Amagi > Liru Room > Bottom" => Ok(SpotId::Amagi__Liru_Room__Bottom),
             "Amagi > Liru Room > East Passage" => Ok(SpotId::Amagi__Liru_Room__East_Passage),
+            "Amagi > Liru Room > East Platform 1 Left" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_1_Left)
+            }
+            "Amagi > Liru Room > East Platform 1 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_1_Right)
+            }
+            "Amagi > Liru Room > East Platform 2 Left" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_2_Left)
+            }
+            "Amagi > Liru Room > East Platform 2 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_2_Right)
+            }
+            "Amagi > Liru Room > East Platform 3 Left" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_3_Left)
+            }
+            "Amagi > Liru Room > East Platform 3 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__East_Platform_3_Right)
+            }
             "Amagi > Liru Room > Hidden Enemies" => Ok(SpotId::Amagi__Liru_Room__Hidden_Enemies),
             "Amagi > Liru Room > Hidden Exit" => Ok(SpotId::Amagi__Liru_Room__Hidden_Exit),
             "Amagi > Liru Room > Platform 1 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_1_Left),
@@ -7117,6 +7164,7 @@ impl std::str::FromStr for SpotId {
             "Amagi > Main Area > West Mini-Hill" => Ok(SpotId::Amagi__Main_Area__West_Mini_Hill),
             "Amagi > Main Area > West Shelf" => Ok(SpotId::Amagi__Main_Area__West_Shelf),
             "Amagi > Main Area > West Side" => Ok(SpotId::Amagi__Main_Area__West_Side),
+            "Amagi > Secret Chamber > West" => Ok(SpotId::Amagi__Secret_Chamber__West),
             "Amagi > West Lake > Cavern Back Teeth" => {
                 Ok(SpotId::Amagi__West_Lake__Cavern_Back_Teeth)
             }
@@ -11256,6 +11304,18 @@ pub enum ExitId {
     Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1,
     Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
     Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
+    Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1,
+    Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1,
+    Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2,
+    Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1,
+    Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1,
+    Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2,
+    Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1,
+    Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1,
+    Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1,
+    Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2,
+    Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1,
+    Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1,
     Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
     Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1,
     Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1,
@@ -13131,6 +13191,18 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => write!(f, "{}", "Amagi > East Lake > West Water Surface ==> Center West Platform (1)"),
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)"),
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)"),
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => write!(f, "{}", "Amagi > Liru Room > East Passage ==> East Platform 1 Left (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left ==> East Platform 2 Right (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left ==> East Platform 2 Right (2)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left ==> East Platform 3 Left (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left ==> Hidden Exit (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Left ==> Hidden Exit (2)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Right ==> East Platform 2 Right (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 1 Right ==> Hidden Exit (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 2 Right ==> Hidden Exit (1)"),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => write!(f, "{}", "Amagi > Liru Room > East Platform 2 Right ==> Hidden Exit (2)"),
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => write!(f, "{}", "Amagi > Liru Room > East Platform 3 Left ==> Hidden Exit (1)"),
+            ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => write!(f, "{}", "Amagi > Liru Room > Hidden Exit ==> Secret Chamber > West (1)"),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)"),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Right ==> East Passage (1)"),
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => write!(f, "{}", "Amagi > Liru Room > West 19 ==> Grid 31,19 > East (1)"),
@@ -15011,6 +15083,18 @@ impl std::str::FromStr for ExitId {
             "Amagi > East Lake > West Water Surface ==> Center West Platform (1)" => Ok(ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1),
             "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1),
             "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1),
+            "Amagi > Liru Room > East Passage ==> East Platform 1 Left (1)" => Ok(ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1),
+            "Amagi > Liru Room > East Platform 1 Left ==> East Platform 2 Right (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1),
+            "Amagi > Liru Room > East Platform 1 Left ==> East Platform 2 Right (2)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2),
+            "Amagi > Liru Room > East Platform 1 Left ==> East Platform 3 Left (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1),
+            "Amagi > Liru Room > East Platform 1 Left ==> Hidden Exit (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1),
+            "Amagi > Liru Room > East Platform 1 Left ==> Hidden Exit (2)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2),
+            "Amagi > Liru Room > East Platform 1 Right ==> East Platform 2 Right (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1),
+            "Amagi > Liru Room > East Platform 1 Right ==> Hidden Exit (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1),
+            "Amagi > Liru Room > East Platform 2 Right ==> Hidden Exit (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1),
+            "Amagi > Liru Room > East Platform 2 Right ==> Hidden Exit (2)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2),
+            "Amagi > Liru Room > East Platform 3 Left ==> Hidden Exit (1)" => Ok(ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1),
+            "Amagi > Liru Room > Hidden Exit ==> Secret Chamber > West (1)" => Ok(ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1),
             "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1),
             "Amagi > Liru Room > Platform 4 Right ==> East Passage (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1),
             "Amagi > Liru Room > West 19 ==> Grid 31,19 > East (1)" => Ok(ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1),

@@ -78,7 +78,14 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Amagi__Liru_Room__Shrine
         | SpotId::Amagi__Liru_Room__West_20
         | SpotId::Amagi__Liru_Room__East_Passage
+        | SpotId::Amagi__Liru_Room__East_Platform_1_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_1_Right
+        | SpotId::Amagi__Liru_Room__East_Platform_2_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_2_Right
+        | SpotId::Amagi__Liru_Room__East_Platform_3_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_3_Right
         | SpotId::Amagi__Liru_Room__Hidden_Exit => AreaId::Amagi__Liru_Room,
+        SpotId::Amagi__Secret_Chamber__West => AreaId::Amagi__Secret_Chamber,
         SpotId::Amagi__West_Lake__East_15
         | SpotId::Amagi__West_Lake__East_Shore
         | SpotId::Amagi__West_Lake__East_Bank
@@ -1845,7 +1852,14 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Amagi__Liru_Room__Shrine
         | SpotId::Amagi__Liru_Room__West_20
         | SpotId::Amagi__Liru_Room__East_Passage
+        | SpotId::Amagi__Liru_Room__East_Platform_1_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_1_Right
+        | SpotId::Amagi__Liru_Room__East_Platform_2_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_2_Right
+        | SpotId::Amagi__Liru_Room__East_Platform_3_Left
+        | SpotId::Amagi__Liru_Room__East_Platform_3_Right
         | SpotId::Amagi__Liru_Room__Hidden_Exit => RegionId::Amagi,
+        SpotId::Amagi__Secret_Chamber__West => RegionId::Amagi,
         SpotId::Amagi__West_Lake__East_15
         | SpotId::Amagi__West_Lake__East_Shore
         | SpotId::Amagi__West_Lake__East_Bank
@@ -3572,8 +3586,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => true,
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman(ctx, world),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman(ctx, world),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::access_invoke_boomerang(ctx, world),
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::access_invoke_can_damage(ctx, world),
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => true,
@@ -3892,8 +3906,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman(ctx, world, full_obs),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman(ctx, world, full_obs),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -4169,8 +4183,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman(ctx, world, edict),
-            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman(ctx, world, edict),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
+            LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -4497,6 +4511,18 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => rules::access_invoke_grab_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => rules::access___invoke_grab_or_invoke_climb_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => rules::access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => true,
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
@@ -4545,8 +4571,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman(ctx, world),
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman(ctx, world),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::access_invoke_grab(ctx, world),
@@ -6367,6 +6393,17 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => rules::observe_access_invoke_grab_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => rules::observe_access___invoke_grab_or_invoke_climb_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => rules::observe_access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6401,8 +6438,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman(ctx, world, full_obs),
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -7931,6 +7968,17 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Kum_Abala_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__East_Lake__West_Platform_3_Hook__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => rules::explain_invoke_grab_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => rules::explain___invoke_grab_or_invoke_climb_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => rules::explain___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -7965,8 +8013,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::explain_invoke_mist2(ctx, world, edict),
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman(ctx, world, edict),
-            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
+            ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -9272,6 +9320,7 @@ impl world::Exit for Exit {
             ExitId::Amagi__East_Lake__West_18__ex__Gated_Community__East_18_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
+            ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => true,
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => true,
@@ -12188,7 +12237,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1735] = [
+static RAW_SPOTS: [SpotId; 1742] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -12235,6 +12284,12 @@ static RAW_SPOTS: [SpotId; 1735] = [
     SpotId::Amagi__Grid_31_19__West,
     SpotId::Amagi__Liru_Room__Bottom,
     SpotId::Amagi__Liru_Room__East_Passage,
+    SpotId::Amagi__Liru_Room__East_Platform_1_Left,
+    SpotId::Amagi__Liru_Room__East_Platform_1_Right,
+    SpotId::Amagi__Liru_Room__East_Platform_2_Left,
+    SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+    SpotId::Amagi__Liru_Room__East_Platform_3_Left,
+    SpotId::Amagi__Liru_Room__East_Platform_3_Right,
     SpotId::Amagi__Liru_Room__Hidden_Enemies,
     SpotId::Amagi__Liru_Room__Hidden_Exit,
     SpotId::Amagi__Liru_Room__Platform_1_Left,
@@ -12277,6 +12332,7 @@ static RAW_SPOTS: [SpotId; 1735] = [
     SpotId::Amagi__Main_Area__West_Mini_Hill,
     SpotId::Amagi__Main_Area__West_Shelf,
     SpotId::Amagi__Main_Area__West_Side,
+    SpotId::Amagi__Secret_Chamber__West,
     SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
     SpotId::Amagi__West_Lake__Cavern_Chin,
     SpotId::Amagi__West_Lake__Cavern_Eye,
@@ -13957,6 +14013,10 @@ lazy_static! {
             start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
             end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
         },
+        AreaId::Amagi__Secret_Chamber => Range {
+            start: SpotId::Amagi__Secret_Chamber__West.into_usize(),
+            end: SpotId::Amagi__Secret_Chamber__West.into_usize() + 1,
+        },
         AreaId::Amagi__West_Lake => Range {
             start: SpotId::Amagi__West_Lake__Cavern_Back_Teeth.into_usize(),
             end: SpotId::Amagi__West_Lake__West_Shore.into_usize() + 1,
@@ -15498,6 +15558,12 @@ impl world::World for World {
             ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => SpotId::Amagi__Liru_Room__Platform_4_Left,
             ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => SpotId::Amagi__Liru_Room__Platform_4_Right,
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 | ExitId:: Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 | ExitId:: Amagi__Liru_Room__West_20__ex__Shrine_1 => SpotId::Amagi__Liru_Room__West_20,
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => SpotId::Amagi__Liru_Room__East_Passage,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 | ExitId:: Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 | ExitId:: Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 | ExitId:: Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 | ExitId:: Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => SpotId::Amagi__Liru_Room__East_Platform_1_Left,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 | ExitId:: Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => SpotId::Amagi__Liru_Room__East_Platform_1_Right,
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 | ExitId:: Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => SpotId::Amagi__Liru_Room__East_Platform_3_Left,
+            ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => SpotId::Amagi__Liru_Room__Hidden_Exit,
             ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1 => SpotId::Amagi__West_Lake__East_15,
             ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => SpotId::Amagi__West_Lake__Northwest_Platform,
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => SpotId::Amagi__West_Lake__East_18,
@@ -17877,6 +17943,18 @@ impl world::World for World {
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => true,
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => true,
             ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => true,
+            ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => true,
+            ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => true,
+            ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => true,
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
             ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => true,
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => true,
@@ -19626,6 +19704,12 @@ impl world::World for World {
             SpotId::Amagi__Liru_Room__Shrine => true,
             SpotId::Amagi__Liru_Room__West_20 => true,
             SpotId::Amagi__Liru_Room__East_Passage => true,
+            SpotId::Amagi__Liru_Room__East_Platform_1_Left => true,
+            SpotId::Amagi__Liru_Room__East_Platform_1_Right => true,
+            SpotId::Amagi__Liru_Room__East_Platform_2_Left => true,
+            SpotId::Amagi__Liru_Room__East_Platform_2_Right => true,
+            SpotId::Amagi__Liru_Room__East_Platform_3_Left => true,
+            SpotId::Amagi__Liru_Room__East_Platform_3_Right => true,
             SpotId::Amagi__Liru_Room__Hidden_Exit => true,
             SpotId::Amagi__Main_Area__East_15 => true,
             SpotId::Amagi__Main_Area__Waters_Edge => true,
@@ -19656,6 +19740,7 @@ impl world::World for World {
             SpotId::Amagi__Main_Area__West_19 => true,
             SpotId::Amagi__Main_Area__Secret_Waterfall => true,
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side => true,
+            SpotId::Amagi__Secret_Chamber__West => true,
             SpotId::Amagi__West_Lake__East_15 => true,
             SpotId::Amagi__West_Lake__East_Shore => true,
             SpotId::Amagi__West_Lake__East_Bank => true,
@@ -21260,6 +21345,7 @@ impl world::World for World {
             | SpotId::Amagi__East_Lake__West_18
             | SpotId::Amagi__Grid_31_19__East
             | SpotId::Amagi__Grid_31_19__West
+            | SpotId::Amagi__Liru_Room__Hidden_Exit
             | SpotId::Amagi__Liru_Room__Shrine
             | SpotId::Amagi__Liru_Room__West_19
             | SpotId::Amagi__Main_Area__Broken_Wall
@@ -25935,6 +26021,90 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1,
             time: 3500,
             dest: SpotId::Amagi__Liru_Room__Shrine,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1,
+            time: 1403,
+            dest: SpotId::Amagi__Liru_Room__East_Platform_1_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1,
+            time: 1929,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2,
+            time: 2000,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1,
+            time: 2000,
+            dest: SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_2,
+            time: 1500,
+            dest: SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_3_Left_1,
+            time: 2000,
+            dest: SpotId::Amagi__Liru_Room__East_Platform_3_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1,
+            time: 2000,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1,
+            time: 1578,
+            dest: SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1,
+            time: 2702,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2,
+            time: 2105,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1,
+            time: 1250,
+            dest: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1,
+            time: 1350,
+            dest: SpotId::Amagi__Secret_Chamber__West,
             price: Currency::Free,
             loc_id: None,
         },
@@ -40139,6 +40309,83 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__East_Passage__ex__East_Platform_1_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_1_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_1_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_1_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_1_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__East_Platform_2_Right_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__East_Platform_1_Right__ex__Hidden_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_2_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_2_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_2_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_2_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_3_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_3_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__East_Platform_3_Left__ex__Hidden_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Platform_3_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Platform_3_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -40147,6 +40394,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Amagi__Liru_Room__Hidden_Exit => Spot {
             id: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__Hidden_Exit__ex__Secret_Chamber__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Amagi__Secret_Chamber__West => Spot {
+            id: SpotId::Amagi__Secret_Chamber__West,
             locations: Range {
                 start: 0, end: 0,
             },

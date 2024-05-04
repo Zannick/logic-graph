@@ -47,6 +47,22 @@ pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all
         && helper__all_health!(ctx, world)
         && helper__all_flasks!(ctx, world)
 }
+pub fn access___invoke_grab_or_invoke_climb_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ($grab or $climb) and Underwater_Movement
+    ((helper__grab!(ctx, world) || helper__climb!(ctx, world))
+        && ctx.has(Item::Underwater_Movement))
+}
+pub fn access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ($grab or $climb or $hook) and Underwater_Movement
+    (((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
+        && ctx.has(Item::Underwater_Movement))
+}
 pub fn access___invoke_objective(ctx: &Context, world: &graph::World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
@@ -1562,13 +1578,16 @@ pub fn access_infect(ctx: &Context, world: &graph::World) -> bool {
     // Infect
     ctx.has(Item::Infect)
 }
-pub fn access_infect_and_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // Infect and Anuman
-    (ctx.has(Item::Infect) && ctx.has(Item::Anuman))
+pub fn access_infect_and_anuman_and_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+    // Infect and Anuman and $objective
+    ((ctx.has(Item::Infect) && ctx.has(Item::Anuman)) && rule__objective!(ctx, world))
 }
-pub fn access_infect_and_not_anuman(ctx: &Context, world: &graph::World) -> bool {
-    // Infect and not Anuman
-    (ctx.has(Item::Infect) && !ctx.has(Item::Anuman))
+pub fn access_infect_and_not_anuman_and_invoke_objective(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Infect and not Anuman and $objective
+    ((ctx.has(Item::Infect) && !ctx.has(Item::Anuman)) && rule__objective!(ctx, world))
 }
 pub fn access_infect_l1(ctx: &Context, world: &graph::World) -> bool {
     // Infect_L1
@@ -3216,6 +3235,100 @@ pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_al
         let mut h = hexplain__all_flasks!(ctx, world, edict);
         refs.append(&mut h.1);
         (h.0, refs)
+    }
+}
+pub fn explain___invoke_grab_or_invoke_climb_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($grab or $climb) and Underwater_Movement
+    {
+        let mut left = ({
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($grab or $climb or $hook) and Underwater_Movement
+    {
+        let mut left = ({
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain___invoke_objective(
@@ -8322,50 +8435,78 @@ pub fn explain_infect(
         (h, vec!["Infect"])
     }
 }
-pub fn explain_infect_and_anuman(
+pub fn explain_infect_and_anuman_and_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Infect and Anuman
+    // Infect and Anuman and $objective
     {
         let mut left = {
-            let h = ctx.has(Item::Infect);
-            edict.insert("Infect", format!("{}", h));
-            (h, vec!["Infect"])
+            let mut left = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
         };
         if !left.0 {
             left
         } else {
             let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
+                let (res, mut refs) = rexplain__objective!(ctx, world, edict);
+                edict.insert("$objective", format!("{:?}", res));
+                refs.push("$objective");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
     }
 }
-pub fn explain_infect_and_not_anuman(
+pub fn explain_infect_and_not_anuman_and_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Infect and not Anuman
+    // Infect and not Anuman and $objective
     {
         let mut left = {
-            let h = ctx.has(Item::Infect);
-            edict.insert("Infect", format!("{}", h));
-            (h, vec!["Infect"])
+            let mut left = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (!h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
         };
         if !left.0 {
             left
         } else {
             let mut right = {
-                let h = ctx.has(Item::Anuman);
-                edict.insert("Anuman", format!("{}", h));
-                (!h, vec!["Anuman"])
+                let (res, mut refs) = rexplain__objective!(ctx, world, edict);
+                edict.insert("$objective", format!("{:?}", res));
+                refs.push("$objective");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12594,6 +12735,31 @@ pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_in
         && hobserve__all_health!(ctx, world, full_obs)
         && hobserve__all_flasks!(ctx, world, full_obs)
 }
+pub fn observe_access___invoke_grab_or_invoke_climb_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($grab or $climb) and Underwater_Movement
+    ((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($grab or $climb or $hook) and Underwater_Movement
+    (((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+        || hobserve__hook!(ctx, world, full_obs))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
 pub fn observe_access___invoke_objective(
     ctx: &Context,
     world: &graph::World,
@@ -15319,33 +15485,33 @@ pub fn observe_access_infect(
         ctx.has(Item::Infect)
     }
 }
-pub fn observe_access_infect_and_anuman(
+pub fn observe_access_infect_and_anuman_and_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Infect and Anuman
-    ({
+    // Infect and Anuman and $objective
+    (({
         full_obs.observe_infect();
         ctx.has(Item::Infect)
     } && ({
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
-    }))
+    })) && (robserve__objective!(ctx, world, full_obs)))
 }
-pub fn observe_access_infect_and_not_anuman(
+pub fn observe_access_infect_and_not_anuman_and_invoke_objective(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Infect and not Anuman
-    ({
+    // Infect and not Anuman and $objective
+    (({
         full_obs.observe_infect();
         ctx.has(Item::Infect)
     } && ({
         full_obs.observe_anuman();
         !ctx.has(Item::Anuman)
-    }))
+    })) && (robserve__objective!(ctx, world, full_obs)))
 }
 pub fn observe_access_infect_l1(
     ctx: &Context,
