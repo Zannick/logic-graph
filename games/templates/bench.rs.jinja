@@ -67,6 +67,14 @@ pub fn criterion_benchmark(c: &mut Criterion) {
                 BatchSize::SmallInput,
             );
         });
+        c.bench_function("replay solution", |b| {
+            b.iter(|| {
+                let mut c2 = ctx.clone();
+                for step in &sol.history {
+                    c2.assert_and_replay(&world, *step);
+                }
+            });
+        });
     }
 }
 
