@@ -4,7 +4,7 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
-use crate::minimize::trie_minimize;
+use crate::minimize::{spot_revisit_minimize, trie_minimize};
 use crate::observer::record_observations;
 use crate::observer::Observer;
 use crate::route::*;
@@ -189,12 +189,32 @@ where
                 trie.max_depth(),
                 trie.num_values()
             );
-            if let Some(best) = trie_minimize(world, &startctx, solution.clone(), &trie) {
+            let better = trie_minimize(world, &startctx, solution.clone(), &trie);
+            let solution2 = if let Some(best) = &better {
                 println!(
-                    "Improved route from {}ms to {}ms",
+                    "Improved route via trie from {}ms to {}ms",
                     solution.elapsed,
                     best.elapsed()
                 );
+                Arc::new(Solution {
+                    elapsed: best.elapsed(),
+                    history: best.recent_history().to_vec(),
+                })
+            } else {
+                solution.clone()
+            };
+            let best =
+                if let Some(best) = spot_revisit_minimize(world, &startctx, solution2.clone()) {
+                    println!(
+                        "Improved route via trimming spot loops from {}ms to {}ms",
+                        solution2.elapsed,
+                        best.elapsed()
+                    );
+                    Some(best)
+                } else {
+                    better
+                };
+            if let Some(best) = best {
                 let old_hist = history_str::<T, _>(solution.history.iter().copied());
                 let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
                 let text_diff = TextDiff::from_lines(&old_hist, &new_hist);

@@ -840,6 +840,62 @@ impl<T: Ctx> ContextWrapper<T> {
         self.replay(world, step);
     }
 
+    /// Checks whether the replay is possible. If it is, replays the step;
+    /// otherwise returns an explanation of the properties evaluated.
+    pub fn try_replay<W, L, E, Wp>(
+        &mut self,
+        world: &W,
+        step: HistoryAlias<T>,
+    ) -> Result<(), String>
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        if self.can_replay(world, step) {
+            Ok(self.replay(world, step))
+        } else {
+            Err(self.explain_pre_replay(world, step))
+        }
+    }
+
+    /// Returns true and replays if the step is valid, or false with no changes otherwise.
+    pub fn maybe_replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>) -> bool
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        if self.can_replay(world, step) {
+            self.replay(world, step);
+            true
+        } else {
+            false
+        }
+    }
+
+    /// Returns the replay if all steps are valid in the order presented, or None if any step failed.
+    /// This consumes the object, so use a clone if you want to keep a copy.
+    pub fn maybe_replay_all<W, L, E, Wp>(mut self, world: &W, steps: &[HistoryAlias<T>]) -> Option<Self>
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        for step in steps {
+            if !self.maybe_replay(world, *step) {
+                return None;
+            }
+        }
+        Some(self)
+    }
+
     pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
             "At {}ms (elapsed={} est. left={}), visited={}\nNow: {} after {}",
