@@ -41,6 +41,7 @@ where
 {
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut spot_map = new_hashmap();
+    // position -> list of step indices where the state is at that position before executing that step
     spot_map.insert(replay.get().position(), VecDeque::from(vec![0]));
     for (index, step) in solution.history.iter().enumerate() {
         replay.assert_and_replay(world, *step);
@@ -70,10 +71,11 @@ where
     // Iterating through indexes as a "start" index is akin to iterating forward through the replay
     let mut last_index = 0;
     let mut replay = ContextWrapper::new(startctx.clone());
-    replay.assert_and_replay(world, solution.history[0]);
     let mut best = None;
     while let Some(start_index) = indexes.pop() {
-        for step in &solution.history[last_index + 1..=start_index] {
+        // start_index is the index of a step where the state is at "spot" just before executing
+        // to recreate that state, we replay up to but not including start_index
+        for step in &solution.history[last_index..start_index] {
             replay.assert_and_replay(world, *step);
         }
         last_index = start_index;
@@ -101,7 +103,7 @@ where
             }
             if let Some(improved) = replay
                 .clone()
-                .maybe_replay_all(world, &solution.history[next_index + 1..])
+                .maybe_replay_all(world, &solution.history[next_index..])
             {
                 best = Some(improved);
                 last_index = next_index;

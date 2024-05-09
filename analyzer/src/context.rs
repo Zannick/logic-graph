@@ -861,6 +861,28 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
+    /// Returns the replay if all steps are valid in the order presented, or an error message if any step failed.
+    /// This consumes the object, so use a clone if you want to keep a copy.
+    pub fn try_replay_all<W, L, E, Wp>(
+        mut self,
+        world: &W,
+        steps: &[HistoryAlias<T>],
+    ) -> Result<Self, String>
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        for &step in steps {
+            if let Err(s) = self.try_replay(world, step) {
+                return Err(format!("Replay failed at \"{}\": {}", step, s));
+            }
+        }
+        Ok(self)
+    }
+
     /// Returns true and replays if the step is valid, or false with no changes otherwise.
     pub fn maybe_replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>) -> bool
     where
@@ -880,7 +902,11 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns the replay if all steps are valid in the order presented, or None if any step failed.
     /// This consumes the object, so use a clone if you want to keep a copy.
-    pub fn maybe_replay_all<W, L, E, Wp>(mut self, world: &W, steps: &[HistoryAlias<T>]) -> Option<Self>
+    pub fn maybe_replay_all<W, L, E, Wp>(
+        mut self,
+        world: &W,
+        steps: &[HistoryAlias<T>],
+    ) -> Option<Self>
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -888,8 +914,8 @@ impl<T: Ctx> ContextWrapper<T> {
         E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
-        for step in steps {
-            if !self.maybe_replay(world, *step) {
+        for &step in steps {
+            if !self.maybe_replay(world, step) {
                 return None;
             }
         }
