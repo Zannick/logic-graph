@@ -959,6 +959,8 @@ areas:
       coord: [21.05, 6.75]
       local:
         - to: Top Waterfall
+        - to: Cave Entrance
+          thru: [22.5, 7.0]
       exits:
         - to: Ebih West > East 7
           tags: [xshift]

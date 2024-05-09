@@ -2807,6 +2807,7 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__Center_Main_Path;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__East_7;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__West_7;
+    Ebih__Waterfall__West_7 -> Ebih__Waterfall__Cave_Entrance;
     Ebih__Waterfall__West_7 -> Ebih__Waterfall__Top_Waterfall;
     Ebih__Ebih_West__East_10 -> Ebih__Ebih_West__Mid_Save;
     Ebih__Ebih_West__Mid_Save -> Ebih__Ebih_West__East_10;
