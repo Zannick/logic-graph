@@ -47,6 +47,7 @@
 * Collect Flask from Amagi > West Lake > Cavern Tear Duct > Remote Flask
 
   MainSavewarp to Ebih > Ebih West > Upper Save
+# This should be cut out by the minimizer.
 ! Do Ebih > Waterfall > Ledge Below Hole > Throw Drone
 ! Do Ebih > Waterfall > Below Left Switch > Open Door
 ! Do Recall Drone
@@ -181,7 +182,3 @@
 ! Do Become Indra
 * Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Wall as Indra
 * Take hybrid exit Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel, collecting Nanite_Mist
-  Move... to Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)
-! Do Become Drone
-* Take hybrid exit Annuna > Apocalypse > Center Scaffold West > Boss Fight, collecting Apocalypse_Bomb
-* Take hybrid exit Glacier > Apocalypse Entry > Grate Ledge > Escape, collecting Escape
