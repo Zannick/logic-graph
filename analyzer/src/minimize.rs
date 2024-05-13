@@ -1,11 +1,11 @@
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
-use crate::observer::record_observations;
-use crate::observer::Observer;
+use crate::observer::{record_observations, Observer};
 use crate::solutions::Solution;
 use crate::world::*;
-use std::collections::VecDeque;
+use crate::CommonHasher;
+use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 
 /// Attempts to create better solutions by removing sections of the route
@@ -26,6 +26,42 @@ where
     trie_minimize(world, startctx, solution, &trie)
 }
 
+/// Produces a map of spots to a list of indices where the route moves into that spot.
+fn get_spot_index_map<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    solution: Arc<Solution<T>>,
+) -> HashMap<E::SpotId, VecDeque<usize>, CommonHasher>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut replay = ContextWrapper::new(startctx.clone());
+    let mut spot_map = new_hashmap();
+    // position -> list of step indices where the state has just moved into that spot
+    let mut last_spot = replay.get().position();
+    spot_map.insert(replay.get().position(), VecDeque::from(vec![0]));
+    for (index, step) in solution.history.iter().enumerate() {
+        replay.assert_and_replay(world, *step);
+        let pos = replay.get().position();
+        // Exclude times when we didn't move.
+        if pos == last_spot {
+            continue;
+        }
+        last_spot = pos;
+        if let Some(deq) = spot_map.get_mut(&replay.get().position()) {
+            deq.push_back(index + 1);
+        } else {
+            let mut deq = VecDeque::new();
+            deq.push_back(index + 1);
+            spot_map.insert(replay.get().position(), deq);
+        }
+    }
+    spot_map
+}
+
 /// Attempts to create better solutions by removing sections of the route
 /// that revisit spots.
 pub fn spot_revisit_minimize<W, T, L, E>(
@@ -39,25 +75,9 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut replay = ContextWrapper::new(startctx.clone());
-    let mut spot_map = new_hashmap();
-    // position -> list of step indices where the state is at that position before executing that step
-    spot_map.insert(replay.get().position(), VecDeque::from(vec![0]));
-    for (index, step) in solution.history.iter().enumerate() {
-        replay.assert_and_replay(world, *step);
-        if let Some(deq) = spot_map.get_mut(&replay.get().position()) {
-            deq.push_back(index + 1);
-        } else {
-            let mut deq = VecDeque::new();
-            deq.push_back(index + 1);
-            spot_map.insert(replay.get().position(), deq);
-        }
-    }
+    let mut spot_map = get_spot_index_map(world, startctx, solution.clone());
     spot_map.retain(|_, deq| deq.len() > 1);
-    if spot_map.is_empty() {
-        return None;
-    }
-    // Indices are unique
+    // We want to calculate the index->spot map after calling retain so we don't include indexes we don't care about
     let mut index_map = new_hashmap();
     for (spot, deq) in &spot_map {
         for i in deq {
@@ -97,10 +117,6 @@ where
                 spot,
                 deq
             );
-            // Don't bother skipping anything that kept us in the same place once.
-            if next_index == start_index + 1 {
-                continue;
-            }
             if let Some(improved) = replay
                 .clone()
                 .maybe_replay_all(world, &solution.history[next_index..])
