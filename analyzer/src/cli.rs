@@ -4,7 +4,7 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
-use crate::minimize::{mutate_spot_revisits, spot_revisit_minimize, trie_minimize};
+use crate::minimize::{mutate_spot_revisits, trie_minimize};
 use crate::observer::{record_observations, Observer};
 use crate::route::*;
 use crate::solutions::{write_graph, Solution};
@@ -203,14 +203,7 @@ where
                     history: ctx.recent_history().to_vec(),
                 })
             }
-            if let Some(better) = spot_revisit_minimize(world, &startctx, solution.clone()) {
-                println!(
-                    "Improved route via trimming spot loops from {}ms to {}ms",
-                    solution.elapsed,
-                    better.elapsed(),
-                );
-                improvements.push(better);
-            };
+
             let mut mutations = mutate_spot_revisits(world, &startctx, solution.clone());
             let old_len = mutations.len();
             mutations.retain(|c| world.won(c.get()));
