@@ -62,6 +62,24 @@ where
     spot_map
 }
 
+fn get_index_map_and_list<S>(
+    spot_map: &HashMap<S, VecDeque<usize>, CommonHasher>,
+) -> (HashMap<usize, S, CommonHasher>, Vec<usize>)
+where
+    S: Copy,
+{
+    let mut index_map = new_hashmap();
+    for (spot, deq) in spot_map.iter() {
+        for i in deq {
+            index_map.insert(*i, *spot);
+        }
+    }
+    let mut indexes: Vec<usize> = Vec::with_capacity(index_map.len());
+    indexes.extend(index_map.keys());
+    indexes.sort_unstable();
+    (index_map, indexes)
+}
+
 /// Attempts to create better solutions by removing sections of the route
 /// that revisit spots.
 pub fn spot_revisit_minimize<W, T, L, E>(
@@ -78,15 +96,8 @@ where
     let mut spot_map = get_spot_index_map(world, startctx, solution.clone());
     spot_map.retain(|_, deq| deq.len() > 1);
     // We want to calculate the index->spot map after calling retain so we don't include indexes we don't care about
-    let mut index_map = new_hashmap();
-    for (spot, deq) in &spot_map {
-        for i in deq {
-            index_map.insert(*i, *spot);
-        }
-    }
-    let mut indexes: Vec<usize> = Vec::with_capacity(index_map.len());
-    indexes.extend(index_map.keys());
-    indexes.sort_unstable();
+    let (index_map, mut indexes) = get_index_map_and_list(&spot_map);
+    // Turn the list into a stack we can pop from.
     indexes.reverse();
     // Iterating through indexes as a "start" index is akin to iterating forward through the replay
     let mut last_index = 0;
