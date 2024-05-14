@@ -900,13 +900,13 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    /// Returns the replay if all steps are valid in the order presented, or None if any step failed.
-    /// This consumes the object, so use a clone if you want to keep a copy.
+    /// Returns true and replays if all steps are valid in the order presented, or false if any step failed.
+    /// This mutates the object, so use a clone if you want to keep a copy of the original.
     pub fn maybe_replay_all<W, L, E, Wp>(
-        mut self,
+        &mut self,
         world: &W,
         steps: &[HistoryAlias<T>],
-    ) -> Option<Self>
+    ) -> bool
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -916,10 +916,10 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         for &step in steps {
             if !self.maybe_replay(world, step) {
-                return None;
+                return false;
             }
         }
-        Some(self)
+        true
     }
 
     pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {

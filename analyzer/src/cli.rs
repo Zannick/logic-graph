@@ -4,9 +4,8 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
-use crate::minimize::{spot_revisit_minimize, trie_minimize};
-use crate::observer::record_observations;
-use crate::observer::Observer;
+use crate::minimize::{mutate_spot_revisits, spot_revisit_minimize, trie_minimize};
+use crate::observer::{record_observations, Observer};
 use crate::route::*;
 use crate::solutions::{write_graph, Solution};
 use crate::world::*;
@@ -168,7 +167,7 @@ where
         Commands::Minimize { route } => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
-            let ctx =
+            let mut ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();
             if !world.won(ctx.get()) {
@@ -177,53 +176,96 @@ where
                 return Ok(());
             }
             let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
-            let solution = Arc::new(Solution {
+            let mut solution = Arc::new(Solution {
                 elapsed: ctx.elapsed(),
                 history: ctx.recent_history().to_vec(),
             });
+            let orig = solution.clone();
             record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             println!(
                 "Initial solution of length {} produces trie of size {} depth {} and num values {}",
                 solution.history.len(),
                 trie.size(),
                 trie.max_depth(),
-                trie.num_values()
+                trie.num_values(),
             );
-            let better = trie_minimize(world, &startctx, solution.clone(), &trie);
-            let solution2 = if let Some(best) = &better {
+            let mut improvements = Vec::new();
+            if let Some(better) = trie_minimize(world, &startctx, solution.clone(), &trie) {
+                ctx = better;
                 println!(
                     "Improved route via trie from {}ms to {}ms",
                     solution.elapsed,
-                    best.elapsed()
+                    ctx.elapsed()
                 );
-                Arc::new(Solution {
-                    elapsed: best.elapsed(),
-                    history: best.recent_history().to_vec(),
+                improvements.push(ctx.clone());
+                solution = Arc::new(Solution {
+                    elapsed: ctx.elapsed(),
+                    history: ctx.recent_history().to_vec(),
                 })
-            } else {
-                solution.clone()
+            }
+            if let Some(better) = spot_revisit_minimize(world, &startctx, solution.clone()) {
+                println!(
+                    "Improved route via trimming spot loops from {}ms to {}ms",
+                    solution.elapsed,
+                    better.elapsed(),
+                );
+                improvements.push(better);
             };
-            let best =
-                if let Some(best) = spot_revisit_minimize(world, &startctx, solution2.clone()) {
-                    println!(
-                        "Improved route via trimming spot loops from {}ms to {}ms",
-                        solution2.elapsed,
-                        best.elapsed()
-                    );
-                    Some(best)
-                } else {
-                    better
-                };
-            if let Some(best) = best {
-                let old_hist = history_str::<T, _>(solution.history.iter().copied());
+            let mut mutations = mutate_spot_revisits(world, &startctx, solution.clone());
+            let old_len = mutations.len();
+            mutations.retain(|c| world.won(c.get()));
+            let mutations: Vec<_> = mutations
+                .into_iter()
+                .map(|mut m| {
+                    Arc::new(Solution {
+                        elapsed: m.elapsed(),
+                        history: m.remove_history().0,
+                    })
+                })
+                .collect();
+            if !mutations.is_empty() {
+                println!(
+                    "Route swapping got {} solutions and {} partials",
+                    mutations.len(),
+                    old_len - mutations.len()
+                );
+                for sol in &mutations {
+                    record_observations(&startctx, world, sol.clone(), 0, &mut trie);
+                }
+                println!(
+                    "After observing new routes, trie has: size {} depth {} and num values {}",
+                    trie.size(),
+                    trie.max_depth(),
+                    trie.num_values(),
+                );
+                for sol in mutations {
+                    if let Some(better) = trie_minimize(world, &startctx, sol, &trie) {
+                        improvements.push(better);
+                    }
+                }
+            }
+
+            if improvements.len() > 1 {
+                println!(
+                    "Found improved routes: {:?}",
+                    improvements.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
+                );
+            }
+
+            if let Some(best) = improvements.into_iter().min_by_key(|c| c.elapsed()) {
+                let old_hist = history_str::<T, _>(orig.history.iter().copied());
                 let new_hist = history_str::<T, _>(best.recent_history().iter().copied());
                 let text_diff = TextDiff::from_lines(&old_hist, &new_hist);
                 print!(
                     "{}",
-                    text_diff
-                        .unified_diff()
-                        .context_radius(3)
-                        .header("original", "best")
+                    text_diff.unified_diff().context_radius(3).header(
+                        &format!("original [{}ms]", orig.elapsed),
+                        &format!(
+                            "best [{}ms (-{}ms)]",
+                            best.elapsed(),
+                            orig.elapsed - best.elapsed()
+                        )
+                    )
                 );
             } else {
                 println!("Could not improve solution.");

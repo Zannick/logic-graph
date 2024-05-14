@@ -104,7 +104,7 @@ where
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut best = None;
     while let Some(start_index) = indexes.pop() {
-        // start_index is the index of a step where the state is at "spot" just before executing
+        // start_index is the index of a step where the state is at "spot" just before executing.
         // to recreate that state, we replay up to but not including start_index
         for step in &solution.history[last_index..start_index] {
             replay.assert_and_replay(world, *step);
@@ -128,10 +128,8 @@ where
                 spot,
                 deq
             );
-            if let Some(improved) = replay
-                .clone()
-                .maybe_replay_all(world, &solution.history[next_index..])
-            {
+            let mut improved = replay.clone();
+            if improved.maybe_replay_all(world, &solution.history[next_index..]) {
                 best = Some(improved);
                 last_index = next_index;
                 log::info!("Cut out a loop! {} to {}", start_index, next_index);
@@ -149,6 +147,70 @@ where
         }
     }
     best
+}
+
+/// Attempts to reorder segments of the solution that are at the same point.
+pub fn mutate_spot_revisits<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    solution: Arc<Solution<T>>,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut spot_map = get_spot_index_map(world, startctx, solution.clone());
+    spot_map.retain(|_, deq| deq.len() > 2);
+    let mut vec = Vec::new();
+
+    // We want to calculate the index->spot map after calling retain so we don't include indexes we don't care about
+    // This is mostly to let us iterate forward once through the history for a base replay.
+    let (index_map, indexes) = get_index_map_and_list(&spot_map);
+
+    // Iterating through indexes as a "start" index is akin to iterating forward through the replay
+    let mut last_index = 0;
+    let mut replay = ContextWrapper::new(startctx.clone());
+    for start_index in indexes {
+        // start_index is the index of a step where the state is at "spot" just before executing.
+        // to recreate that state, we replay up to but not including start_index
+        for step in &solution.history[last_index..start_index] {
+            replay.assert_and_replay(world, *step);
+        }
+        last_index = start_index;
+        let spot = index_map
+            .get(&start_index)
+            .expect("index missing from index map");
+        let deq = spot_map
+            .get_mut(spot)
+            .expect("spot in index map missing from spot map");
+        // Since the deqs are ascending, this should always be true at least once.
+        while !deq.is_empty() && deq.front() <= Some(&start_index) {
+            deq.pop_front();
+        }
+        if deq.len() < 2 {
+            continue;
+        }
+
+        // Given distinct times visiting a spot A, B, C, we can attempt to swap the order of A->B and B->C.
+        let index_b = deq[0];
+        let index_c = deq[1];
+        // A->B is [start_index..index_b]
+        // B->C is [index_b..index_c]
+        // C->F is [index_c..]
+        let mut swapped = replay.clone();
+        if swapped.maybe_replay_all(world, &solution.history[index_b..index_c])
+            && swapped.maybe_replay_all(world, &solution.history[start_index..index_b])
+            && swapped.maybe_replay_all(world, &solution.history[index_c..])
+        {
+            vec.push(swapped);
+        } else if swapped.recent_history().len() > replay.recent_history().len() {
+            vec.push(swapped);
+        }
+    }
+
+    vec
 }
 
 /// Use a matcher trie to minimize a solution
