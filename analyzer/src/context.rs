@@ -479,6 +479,13 @@ impl<T: Ctx> ContextWrapper<T> {
         })
     }
 
+    pub fn into_solution(self) -> Arc<Solution<T>> {
+        Arc::new(Solution {
+            elapsed: self.elapsed,
+            history: self.hist,
+        })
+    }
+
     pub fn with_elapsed(ctx: T, elapsed: u32) -> ContextWrapper<T> {
         ContextWrapper {
             ctx,

@@ -7,7 +7,7 @@ use crate::matchertrie::MatcherTrie;
 use crate::minimize::{mutate_spot_revisits, trie_minimize};
 use crate::observer::{record_observations, Observer};
 use crate::route::*;
-use crate::solutions::{write_graph, Solution};
+use crate::solutions::write_graph;
 use crate::world::*;
 use clap::{Parser, Subcommand};
 use rustc_hash::FxHashSet;
@@ -17,7 +17,6 @@ use std::fs::File;
 use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
 
 #[derive(Parser)]
 #[command(about = "Graph algorithm analysis", long_about = None)]
@@ -176,10 +175,7 @@ where
                 return Ok(());
             }
             let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
-            let mut solution = Arc::new(Solution {
-                elapsed: ctx.elapsed(),
-                history: ctx.recent_history().to_vec(),
-            });
+            let mut solution = ctx.to_solution();
             let orig = solution.clone();
             record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             println!(
@@ -198,24 +194,13 @@ where
                     ctx.elapsed()
                 );
                 improvements.push(ctx.clone());
-                solution = Arc::new(Solution {
-                    elapsed: ctx.elapsed(),
-                    history: ctx.recent_history().to_vec(),
-                })
+                solution = ctx.to_solution();
             }
 
             let mut mutations = mutate_spot_revisits(world, &startctx, solution.clone());
             let old_len = mutations.len();
             mutations.retain(|c| world.won(c.get()));
-            let mutations: Vec<_> = mutations
-                .into_iter()
-                .map(|mut m| {
-                    Arc::new(Solution {
-                        elapsed: m.elapsed(),
-                        history: m.remove_history().0,
-                    })
-                })
-                .collect();
+            let mutations: Vec<_> = mutations.into_iter().map(|m| m.into_solution()).collect();
             if !mutations.is_empty() {
                 println!(
                     "Route swapping got {} solutions and {} partials",
