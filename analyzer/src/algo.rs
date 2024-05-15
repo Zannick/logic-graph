@@ -540,6 +540,7 @@ where
                 .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
 
+        drop(sols); // release before minimizing
         let min_ctx = if mode != SearchMode::Minimized {
             trie_minimize(
                 self.world,
@@ -551,6 +552,7 @@ where
             None
         };
 
+        let mut sols = self.solutions.lock().unwrap();
         if let Some(ctx) = min_ctx {
             if iters > 10_000_000 && sols.unique() > 4 {
                 self.queue.set_max_time(ctx.elapsed());
