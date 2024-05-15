@@ -3,8 +3,7 @@ use crate::context::*;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
-use crate::minimize::trie_minimize;
-use crate::minimize::trie_search;
+use crate::minimize::{mutate_spot_revisits, trie_minimize, trie_search};
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
@@ -34,6 +33,7 @@ enum SearchMode {
     Mode(usize),
     Unknown,
     Similar,
+    Mutate,
 }
 
 fn mode_by_index(index: usize) -> SearchMode {
@@ -309,35 +309,74 @@ where
             let max_time = wonctx.elapsed();
             let sol = wonctx.to_solution();
             if solutions.insert_solution(sol.clone(), world).accepted() {
-                record_observations(
-                    startctx.get(),
-                    world,
-                    sol,
-                    1,
-                    &solve_trie,
-                );
+                record_observations(startctx.get(), world, sol, 1, &solve_trie);
             }
             for w in &wins {
                 let sol = w.to_solution();
+
+                // Insert the solution.
                 if solutions.insert_solution(sol.clone(), world).accepted() {
-                    record_observations(
-                        startctx.get(),
-                        world,
-                        sol.clone(),
-                        1,
-                        &solve_trie,
-                    );
+                    record_observations(startctx.get(), world, sol.clone(), 1, &solve_trie);
                 }
-                if let Some(better) = trie_minimize(world, startctx.get(), sol, &solve_trie) {
-                    let solution = better.to_solution();
-                    if solutions.insert_solution(solution.clone(), world).accepted() {
+                // Try trie-minimization; if successful, insert and record that solution.
+                let improved = if let Some(solution) =
+                    trie_minimize(world, startctx.get(), sol.clone(), &solve_trie)
+                        .map(|c| c.into_solution())
+                {
+                    if solutions
+                        .insert_solution(solution.clone(), world)
+                        .accepted()
+                    {
                         record_observations(
                             startctx.get(),
                             world,
-                            solution,
+                            solution.clone(),
                             1,
                             &solve_trie,
                         );
+                    }
+                    solution
+                } else {
+                    sol
+                };
+                // Try revisit mutation on the improved solution or the base one.
+                // This may produce more solutions; try to trie-minimize those as well.
+                // Any that aren't solutions will be additional routes.
+                let vec = mutate_spot_revisits(world, startctx.get(), improved);
+                for c in vec {
+                    if world.won(c.get()) {
+                        let solution = c.into_solution();
+                        if solutions
+                            .insert_solution(solution.clone(), world)
+                            .accepted()
+                        {
+                            record_observations(
+                                startctx.get(),
+                                world,
+                                solution.clone(),
+                                1,
+                                &solve_trie,
+                            );
+                        }
+                        if let Some(solution) =
+                            trie_minimize(world, startctx.get(), solution.clone(), &solve_trie)
+                                .map(|c| c.into_solution())
+                        {
+                            if solutions
+                                .insert_solution(solution.clone(), world)
+                                .accepted()
+                            {
+                                record_observations(
+                                    startctx.get(),
+                                    world,
+                                    solution,
+                                    1,
+                                    &solve_trie,
+                                );
+                            }
+                        }
+                    } else {
+                        others.push(c);
                     }
                 }
             }
@@ -345,6 +384,11 @@ where
         } else {
             estimates::UNREASONABLE_TIME
         };
+        log::info!(
+            "Minimization results: {} solutions, {} others",
+            solutions.len(),
+            others.len()
+        );
 
         let solutions = Arc::new(Mutex::new(solutions));
 
@@ -500,7 +544,7 @@ where
             trie_minimize(
                 self.world,
                 self.startctx.get(),
-                solution,
+                solution.clone(),
                 &self.solve_trie,
             )
         } else {
@@ -524,10 +568,10 @@ where
                 log::info!("Max time to consider is now: {}ms", self.queue.max_time());
             }
 
-            let solution = ctx.to_solution();
+            let solution = ctx.into_solution();
             let res = sols.insert_solution(solution.clone(), self.world);
             if res == SolutionResult::IsUnique {
-                log::info!("Minimized found new unique solution");
+                log::info!("Minimized({:?}) found new unique solution", mode);
             }
             if res.accepted() {
                 record_observations(
@@ -541,6 +585,20 @@ where
 
             drop(sols);
             self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
+                .unwrap();
+            if mode != SearchMode::Mutate {
+                self.mutate_solution(solution);
+            }
+        } else if !matches!(mode, SearchMode::Minimized | SearchMode::Mutate) {
+            drop(sols);
+            self.mutate_solution(solution);
+        }
+    }
+
+    fn mutate_solution(&self, solution: Arc<Solution<T>>) {
+        let vec = mutate_spot_revisits(self.world, self.startctx.get(), solution);
+        for mut c in vec {
+            self.recreate_store(&self.startctx, &c.remove_history().0, SearchMode::Mutate)
                 .unwrap();
         }
     }
@@ -969,7 +1027,12 @@ where
     ) {
         let mut s = start.lock().unwrap();
         let dur = s.elapsed();
-        log::debug!("{} iters took {:?}: throughput = {}/sec", num_rounds, dur, num_rounds as f32 / dur.as_secs_f32());
+        log::debug!(
+            "{} iters took {:?}: throughput = {}/sec",
+            num_rounds,
+            dur,
+            num_rounds as f32 / dur.as_secs_f32()
+        );
         *s = Instant::now();
 
         let sols = self.solutions.lock().unwrap();
