@@ -50,48 +50,61 @@ where
     let mut spots = Vec::new();
     let mut ctx = ContextWrapper::new(startctx.clone());
     let mut spot = ctx.get().position();
-    let mut warp = false;
-    for (i, h) in history.iter().enumerate() {
+    let mut recent = Vec::new();
+    let mut last_real_spot = Default::default();
+    let mut i = 0;
+    for h in history.iter() {
         match h {
             History::G(item, _) | History::H(item, _) => {
                 if world.should_draw_spot(ctx.get().position()) {
-                    spots.push((
-                        format!("{:?}", ctx.get().position()),
-                        i,
-                        format!("{}", item),
-                    ));
+                    recent.push(format!("{}", item));
+                    spots.push((format!("{:?}", ctx.get().position()), i, recent.join("\\n")));
+                    recent.clear();
+                } else {
+                    recent.push(format!("{}", item));
                 }
             }
-            _ => (),
+            History::C(..) | History::L(..) => (),
+            History::W(w, ..) => {
+                recent.push(format!("{}Warp", w));
+            }
+            _ => {
+                recent.push(format!("{}", h));
+            }
         }
         ctx.replay(world, *h);
         let is_warp = matches!(h, History::W(..));
         if ctx.get().position() != spot {
-            if world.should_draw_spot(spot) && world.should_draw_spot(ctx.get().position()) {
+            if world.should_draw_spot(spot) {
+                if world.should_draw_spot(ctx.get().position()) {
+                    edges.push((
+                        format!("{:?}", spot),
+                        format!("{:?}", ctx.get().position()),
+                        i,
+                        is_warp,
+                        recent.join("\\n"),
+                    ));
+                    i += 1;
+                    recent.clear();
+                    if is_warp {
+                        spots.push((format!("{:?}", ctx.get().position()), i, String::from("")));
+                    }
+                    last_real_spot = ctx.get().position();
+                }
+            } else if last_real_spot != Default::default()
+                && !recent.is_empty()
+                && world.should_draw_spot(ctx.get().position())
+            {
+                // Draw the edge
                 edges.push((
-                    format!("{:?}", spot),
+                    format!("{:?}", last_real_spot),
                     format!("{:?}", ctx.get().position()),
                     i,
-                    is_warp,
-                    format!("{}", h),
+                    true,
+                    recent.join("\\n"),
                 ));
-                if is_warp {
-                    spots.push((format!("{:?}", ctx.get().position()), i + 1, String::from("")));
-                }
-                warp = false;
-            } else if !warp {
-                if world.should_draw_spot(spot) {
-                    spots.push((
-                        format!("{:?}", spot),
-                        i,
-                        if is_warp {
-                            format!("{}", h)
-                        } else {
-                            String::from("")
-                        },
-                    ));
-                }
-                warp = true;
+                i += 1;
+                recent.clear();
             }
         }
         spot = ctx.get().position();
