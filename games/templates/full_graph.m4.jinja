@@ -18,7 +18,7 @@ digraph {{ game }} {
 %% endfor
     edge [arrowhead=none,style=dashed];
 %% for (k, l) in local_distances
-%% if k|get_area is not exclude_by_tag and l|get_area is not exclude_by_tag:
+%% if k|get_area is not exclude_local and l|get_area is not exclude_local:
     {{ k }} -> {{ l }};
 %% endif
 %% endfor

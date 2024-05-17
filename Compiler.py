@@ -723,6 +723,9 @@ class GameLogic(object):
             if tags := info.get('tags'):
                 return any(x in exc for x in tags)
         return False
+    
+    def exclude_local(self, info):
+        return info.get('graph_exclude_local_edges', False) or self.exclude_by_tag(info)
 
     def spot_base_movement(self, spot_data):
         d = dict(self.base_movements[0])
@@ -1762,6 +1765,7 @@ class GameLogic(object):
         })
         env.tests.update({
             'exclude_by_tag': self.exclude_by_tag,
+            'exclude_local': self.exclude_local,
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items

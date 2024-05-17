@@ -10,21 +10,27 @@
 %% endif
     bgcolor = "transparent";
 %% for r in regions|reject('exclude_by_tag')
+    {
         node[fillcolor="{{ region_colors[r.id] + 1 }}"];
 %% set r_offx, r_offy = r.graph_offset or (0, 0)
-%% set r_attr = r.graph_attrs or ""
+%% if r.graph_attrs
+        node[{{ r.graph_attrs }}];
+%% endif
 %% for a in r.areas|reject('exclude_by_tag')|sort(attribute='id')
+        {
 %% set a_offx, a_offy = a.graph_offset or (0, 0)
-%% set a_attr = a.graph_attrs or ""
+%% if a.graph_attrs
+            node[{{ a.graph_attrs }}];
+%% endif
 %% for s in a.spots
 %% set s_offx, s_offy = s.graph_offset or (0, 0)
 %% set s_attr = s.graph_attrs or ""
-        {{ s.id }} [label = ""
-        {%- if s.coord %}, pos = "{{ (scalex*(r_offx + a_offx + s_offx + s.coord[0])/ppi)|round(6) }},{{ (scaley*(r_offy + a_offy + s_offy + s.coord[1])/ppi)|round(6) }}!"
-        {%- else %}, fillcolor = "8"{% endif %}
-        {%- if r_attr %}, {{ r_attr }}{% endif %}
-        {%- if a_attr %}, {{ a_attr }}{% endif %}
-        {%- if s_attr %}, {{ s_attr }}{% endif %}];
+            {{ s.id }} [label = ""
+            {%- if s.coord %}, pos = "{{ (scalex*(r_offx + a_offx + s_offx + s.coord[0])/ppi)|round(6) }},{{ (scaley*(r_offy + a_offy + s_offy + s.coord[1])/ppi)|round(6) }}!"
+            {%- else %}, fillcolor = "8"{% endif %}
+            {%- if s_attr %}, {{ s_attr }}{% endif %}];
 %% endfor
+        }
 %% endfor
+    }
 %% endfor

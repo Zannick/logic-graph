@@ -86,7 +86,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 
 * **name**: The name of the region.
 * **short**: Optionally, a short version of the name. If present, this is the version that will show in most places.
-* **graph_offset**: Optionally, a pair of floats used to offset where this region is placed in the graphviz generated graph. No effect on the game graph itself.
+* **graph_offset**: Optionally, a pair of floats used to offset where this region is placed in the graphviz generated digraph. No effect on the game graph itself.
 * **graph_attrs**: Optionally, a string of graphviz node attributes to apply to spots within this region. No effect on the game graph itself.
 * **data**: A dictionary of values for Place-based data. Format is the same as in `Game.yaml` but the values here override those values, and in turn can be overridden by **data** definitions in more specific places.
 * **enter**, **load**, **reset**: A dictionary of context variable values to be set on a certain trigger: respectively, whenever the player *enters* the **Region** (i.e. the previous position was not in the **Region** and the new position is), whenever the game is *loaded* (by using a warp that loads the game), and whenever the area is *reset* (via a call to the [built-in function](#built-in-functions) `$reset` or whenever the game is *loaded*). Context variables may be defined here and omitted from `Game.yaml` fields as long as the type is inferrable from the value, and the name does not collide with any other context variable. You may prefix context variables used only in this Region (i.e. *local context variables*) with `_`; other Regions or Places may have a similarly named local context variable without collision.
@@ -100,6 +100,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 * **name**: The name of the area. Area names must be unique within a Region. **Required**.
 * **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots** or in **datamap**. If a data value is a **Spot** in the same **Region**, you can omit the Region part of the name; if it's a **Spot** in this **Area** you can omit both the **Region** and **Area**.
 * **enter**, **load**, **reset**, **on_entry**, **graph_offset**, **graph_attrs**: Same as in **Region** but applying to this **Area** instead.
+* **graph_exclude_local_edges**: If true, local edges in this region will not be draw on the full digraph, i.e. only nodes will be drawn. No effect on the game graph itself.
 * **map**: Map tile definitions for the Area. This is usually a dictionary of a short-form tile name (string) with values that are bounding boxes&mdash;any Spots in the bounding box (including on the edges) mark that tile as seen when reached.
     * The bounding box is a sequence of 4 numbers (floats allowed). The first two are the corner with the smallest coordinates, and the other two are the opposite corner. For example, the unit circle's bounding box would be `[-1, -1, 1, 1]`.
     * If all Spots in the Area see all map tiles, then you can provide a string or list of strings instead of a dictionary. For example, `map: save`.

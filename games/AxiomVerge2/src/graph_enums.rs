@@ -2359,6 +2359,7 @@ pub enum SpotId {
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
     Menu__Upgrade_Menu__Physiology,
+    Menu__Warp_Only__Breach,
     Menu__Warp_Only__Kiengir,
     Uhrum__Annuna_Corridor__Between_Two_Flowers,
     Uhrum__Annuna_Corridor__Block_East,
@@ -6659,6 +6660,7 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Upgrade_Menu__Physiology => {
                 write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
+            SpotId::Menu__Warp_Only__Breach => write!(f, "{}", "Menu > Warp Only > Breach"),
             SpotId::Menu__Warp_Only__Kiengir => write!(f, "{}", "Menu > Warp Only > Kiengir"),
             SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => {
                 write!(f, "{}", "Uhrum > Annuna Corridor > Between Two Flowers")
@@ -9949,6 +9951,7 @@ impl std::str::FromStr for SpotId {
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
             "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
+            "Menu > Warp Only > Breach" => Ok(SpotId::Menu__Warp_Only__Breach),
             "Menu > Warp Only > Kiengir" => Ok(SpotId::Menu__Warp_Only__Kiengir),
             "Uhrum > Annuna Corridor > Between Two Flowers" => {
                 Ok(SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers)

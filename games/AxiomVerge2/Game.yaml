@@ -207,7 +207,6 @@ warps:  # MARK: warps
   # Fast travels are technically doable from the menu, but it costs time to switch tabs, so just model that
   # as exit menu time.
   # Fast travel isn't possible across realms: main/kiengir, breach, emergence, filter, interior(!)
-  # TODO: fast travel collection skip... should these only be possible from a Menu > Map area?
   fast_travel_kiengir:
     time: 0.1
     req: allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
@@ -440,7 +439,7 @@ special:  # MARK: special
   # a tile is 432x240, and split into 27x15 16x16 squares
   # scaled to 50%, it's 216x120. scaled to 10/24, it's 180x100
   graph_scale: [216, -120]
-  graph_exclude_tags: [interior, exterior, portal, cskip, map, warp, menu]
+  graph_exclude_tags: [interior, exterior, portal, cskip, warp, menu]
   map_ppi: 72
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]

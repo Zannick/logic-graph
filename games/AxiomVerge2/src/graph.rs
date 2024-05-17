@@ -1593,7 +1593,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
-        SpotId::Menu__Warp_Only__Kiengir => AreaId::Menu__Warp_Only,
+        SpotId::Menu__Warp_Only__Kiengir | SpotId::Menu__Warp_Only__Breach => {
+            AreaId::Menu__Warp_Only
+        }
         SpotId::Menu__Kiengir_Map__Amagi_East_Lake
         | SpotId::Menu__Kiengir_Map__Amagi_Isolation
         | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
@@ -3347,7 +3349,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
         | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
-        SpotId::Menu__Warp_Only__Kiengir => RegionId::Menu,
+        SpotId::Menu__Warp_Only__Kiengir | SpotId::Menu__Warp_Only__Breach => RegionId::Menu,
         SpotId::Menu__Kiengir_Map__Amagi_East_Lake
         | SpotId::Menu__Kiengir_Map__Amagi_Isolation
         | SpotId::Menu__Kiengir_Map__Amagi_Main_Area
@@ -12237,7 +12239,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1742] = [
+static RAW_SPOTS: [SpotId; 1743] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -13861,6 +13863,7 @@ static RAW_SPOTS: [SpotId; 1742] = [
     SpotId::Menu__Upgrade_Menu__Drone,
     SpotId::Menu__Upgrade_Menu__Infection,
     SpotId::Menu__Upgrade_Menu__Physiology,
+    SpotId::Menu__Warp_Only__Breach,
     SpotId::Menu__Warp_Only__Kiengir,
     SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
     SpotId::Uhrum__Annuna_Corridor__Block_East,
@@ -14698,7 +14701,7 @@ lazy_static! {
             end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
         },
         AreaId::Menu__Warp_Only => Range {
-            start: SpotId::Menu__Warp_Only__Kiengir.into_usize(),
+            start: SpotId::Menu__Warp_Only__Breach.into_usize(),
             end: SpotId::Menu__Warp_Only__Kiengir.into_usize() + 1,
         },
         AreaId::Uhrum__Annuna_Corridor => Range {
@@ -21185,6 +21188,86 @@ impl world::World for World {
             SpotId::Irikar_Breach__Worm_Rave__East => true,
             SpotId::Irikar_Breach__Worm_Rave__South => true,
             SpotId::Irikar_Breach__Worm_Rave__Corner => true,
+            SpotId::Menu__Breach_Map__AGB_Bridge_Lower => true,
+            SpotId::Menu__Breach_Map__AGB_Bridge_Upper => true,
+            SpotId::Menu__Breach_Map__AGB_East => true,
+            SpotId::Menu__Breach_Map__AGB_Enclosed => true,
+            SpotId::Menu__Breach_Map__AGB_North => true,
+            SpotId::Menu__Breach_Map__AGB_South => true,
+            SpotId::Menu__Breach_Map__GlB_Arena => true,
+            SpotId::Menu__Breach_Map__GlB_Center => true,
+            SpotId::Menu__Breach_Map__GlB_East => true,
+            SpotId::Menu__Breach_Map__GlB_South => true,
+            SpotId::Menu__Breach_Map__GlB_West => true,
+            SpotId::Menu__Breach_Map__GSB_East => true,
+            SpotId::Menu__Breach_Map__GSB_Emergence => true,
+            SpotId::Menu__Breach_Map__GSB_Labyrinth => true,
+            SpotId::Menu__Breach_Map__GSB_Peak => true,
+            SpotId::Menu__Breach_Map__GSB_South => true,
+            SpotId::Menu__Breach_Map__GSB_SW_Save => true,
+            SpotId::Menu__Breach_Map__IB_Basement => true,
+            SpotId::Menu__Breach_Map__IB_Gauntlet => true,
+            SpotId::Menu__Breach_Map__IB_Save_Room => true,
+            SpotId::Menu__Breach_Map__IB_West => true,
+            SpotId::Menu__Breach_Map__LAB_Center => true,
+            SpotId::Menu__Breach_Map__LAB_East => true,
+            SpotId::Menu__Breach_Map__LAB_Enclosed => true,
+            SpotId::Menu__Breach_Map__LAB_Southeast => true,
+            SpotId::Menu__Breach_Map__LAB_Southwest => true,
+            SpotId::Menu__Breach_Map__MEB_Drone => true,
+            SpotId::Menu__Breach_Map__MEB_Peak => true,
+            SpotId::Menu__Breach_Map__MEB_Southeast => true,
+            SpotId::Menu__Breach_Map__MEB_Southwest => true,
+            SpotId::Menu__Breach_Map__UVB_Center => true,
+            SpotId::Menu__Breach_Map__UVB_Dead_end => true,
+            SpotId::Menu__Breach_Map__UVB_East => true,
+            SpotId::Menu__Breach_Map__UVB_West => true,
+            SpotId::Menu__Kiengir_Map__Amagi_East_Lake => true,
+            SpotId::Menu__Kiengir_Map__Amagi_Isolation => true,
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area => true,
+            SpotId::Menu__Kiengir_Map__Annuna_Center_Save => true,
+            SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => true,
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => true,
+            SpotId::Menu__Kiengir_Map__Annuna_Upper => true,
+            SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => true,
+            SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => true,
+            SpotId::Menu__Kiengir_Map__Apocalypse => true,
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => true,
+            SpotId::Menu__Kiengir_Map__Ebih_Observatory => true,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Lower => true,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Mid => true,
+            SpotId::Menu__Kiengir_Map__Ebih_West_Upper => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Base => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Separator => true,
+            SpotId::Menu__Kiengir_Map__Glacier_Revival => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Hub => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Midwest => true,
+            SpotId::Menu__Kiengir_Map__Uhrum_Center => true,
+            SpotId::Menu__Kiengir_Map__Uhrum_East => true,
+            SpotId::Menu__Kiengir_Map__Uhrum_Emergence => true,
+            SpotId::Menu__Kiengir_Map__Uhrum_West => true,
+            SpotId::Menu__Kiengir_Map__Infect => true,
+            SpotId::Menu__Kiengir_Map__Remote_Drone => true,
+            SpotId::Menu__Kiengir_Map__Breach_Sight => true,
+            SpotId::Menu__Kiengir_Map__Shockwave => true,
+            SpotId::Menu__Kiengir_Map__Anuman => true,
+            SpotId::Menu__Kiengir_Map__Bronze_Axe => true,
+            SpotId::Menu__Kiengir_Map__Filter_Flask => true,
+            SpotId::Menu__Kiengir_Map__Filter_Tablet => true,
+            SpotId::Menu__Kiengir_Map__Filter_Spiders => true,
+            SpotId::Menu__Kiengir_Map__Breach_Attractor => true,
+            SpotId::Menu__Kiengir_Map__Hammond => true,
+            SpotId::Menu__Kiengir_Map__Nanite_Mist => true,
+            SpotId::Menu__Kiengir_Map__Apocalypse_Cache => true,
+            SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => true,
+            SpotId::Menu__Kiengir_Map__Glacier_40_8 => true,
+            SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => true,
+            SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -59444,6 +59527,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Warp_Only__Kiengir => Spot {
             id: SpotId::Menu__Warp_Only__Kiengir,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Warp_Only__Breach => Spot {
+            id: SpotId::Menu__Warp_Only__Breach,
             locations: Range {
                 start: 0, end: 0,
             },

@@ -627,6 +627,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Upgrade_Menu__Drone => enums::Realm::Menu,
         SpotId::Menu__Upgrade_Menu__Infection => enums::Realm::Menu,
         SpotId::Menu__Upgrade_Menu__Physiology => enums::Realm::Menu,
+        SpotId::Menu__Warp_Only__Breach => enums::Realm::Breach,
         SpotId::Menu__Warp_Only__Kiengir => enums::Realm::Main,
         _ => enums::Realm::Main
     }

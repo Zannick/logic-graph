@@ -35,7 +35,11 @@ where
     true
 }
 
-pub fn write_graph<W, T>(world: &W, startctx: &T, history: &[HistoryAlias<T>]) -> anyhow::Result<PathBuf>
+pub fn write_graph<W, T>(
+    world: &W,
+    startctx: &T,
+    history: &[HistoryAlias<T>],
+) -> anyhow::Result<PathBuf>
 where
     W: World,
     T: Ctx<World = W>,
@@ -61,24 +65,29 @@ where
             _ => (),
         }
         ctx.replay(world, *h);
+        let is_warp = matches!(h, History::W(..));
         if ctx.get().position() != spot {
             if world.should_draw_spot(spot) && world.should_draw_spot(ctx.get().position()) {
                 edges.push((
                     format!("{:?}", spot),
                     format!("{:?}", ctx.get().position()),
                     i,
-                    warp || matches!(h, History::W(..)),
+                    is_warp,
                     format!("{}", h),
                 ));
+                if is_warp {
+                    spots.push((format!("{:?}", ctx.get().position()), i + 1, String::from("")));
+                }
                 warp = false;
             } else if !warp {
                 if world.should_draw_spot(spot) {
                     spots.push((
                         format!("{:?}", spot),
                         i,
-                        match h {
-                            History::W(..) => format!("{}", h),
-                            _ => String::from(""),
+                        if is_warp {
+                            format!("{}", h)
+                        } else {
+                            String::from("")
                         },
                     ));
                 }
@@ -223,7 +232,11 @@ where
 
     /// Inserts a solution into the collection and returns a status detailing
     /// whether this solution was accepted and if it's unique.
-    pub fn insert_solution<W, L, E, Wp>(&mut self, solution: Arc<Solution<T>>, world: &W) -> SolutionResult
+    pub fn insert_solution<W, L, E, Wp>(
+        &mut self,
+        solution: Arc<Solution<T>>,
+        world: &W,
+    ) -> SolutionResult
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,

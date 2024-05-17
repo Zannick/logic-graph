@@ -1,10 +1,10 @@
 name: Menu
 data:
   realm: menu
-tags: [menu]
 
 areas:
 - name: Upgrade Menu  # MARK: Upgrade Menu
+  tags: [menu]
   spots:
     - name: Physiology
       locations:
@@ -218,11 +218,14 @@ areas:
 - name: Warp Only  # MARK: Warp Only
   on_entry: $save_last
   # These spots allow savewarp only by tagging the appropriate realm and having no other way out
-  tags: [cskip]
+  tags: [cskip, menu]
   spots:
     - name: Kiengir
       data:
         realm: main
+    - name: Breach
+      data:
+        realm: breach
 
 ## Fast travel maps
 # These areas are representations of moving on the map.
@@ -236,6 +239,8 @@ areas:
   data:
     realm: map
   tags: [map]
+  graph_attrs: "shape=doublecircle, fillcolor=\"8\""
+  graph_exclude_local_edges: true
   all:
     # We only need the fast travel locations specified here. Note self-edges are ignored.
     # These would otherwise be repeated on all spots.
@@ -534,6 +539,9 @@ areas:
   data:
     realm: map
   tags: [map]
+  graph_offset: [0, 30]
+  graph_attrs: "shape=doublecircle, fillcolor=\"8\""
+  graph_exclude_local_edges: true
   all:
     local:
       - to: AGB Bridge Lower
