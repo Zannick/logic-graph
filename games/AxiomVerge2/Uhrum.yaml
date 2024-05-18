@@ -1081,7 +1081,7 @@ areas:
           canon: Uhrum_Waterfalls_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Small Rock
           req: $hover
@@ -1112,7 +1112,7 @@ areas:
           canon: Uhrum_Waterfalls_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Below Block
           req: Uhrum_Waterfalls_Block
@@ -1131,7 +1131,7 @@ areas:
           canon: Uhrum_Waterfalls_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Below Block
           req: Uhrum_Waterfalls_Block
@@ -1485,7 +1485,7 @@ areas:
           canon: Uhrum_Annuna_Corridor_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Block East
           req: Uhrum_Annuna_Corridor_Block
@@ -1504,7 +1504,7 @@ areas:
           canon: Uhrum_Annuna_Corridor_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Block West
           req: Uhrum_Annuna_Corridor_Block

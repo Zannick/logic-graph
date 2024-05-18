@@ -1737,11 +1737,12 @@ macro_rules! hobserve__block_clip_escape {
 }
 
 /// $infinite_climb (  )
-/// Anuman and Wall_Climb and Drone_Hover
+/// Anuman and Wall_Climb and Remote_Drone and Drone_Hover
 #[macro_export]
 macro_rules! helper__infinite_climb {
     ($ctx:expr, $world:expr) => {{
-        (($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) && $ctx.has(Item::Drone_Hover))
+        ((($ctx.has(Item::Anuman) && $ctx.has(Item::Wall_Climb)) && $ctx.has(Item::Remote_Drone))
+            && $ctx.has(Item::Drone_Hover))
     }};
 }
 #[macro_export]
@@ -1750,17 +1751,30 @@ macro_rules! hexplain__infinite_climb {
         {
             let mut left = {
                 let mut left = {
-                    let h = $ctx.has(Item::Anuman);
-                    $edict.insert("Anuman", format!("{}", h));
-                    (h, vec!["Anuman"])
+                    let mut left = {
+                        let h = $ctx.has(Item::Anuman);
+                        $edict.insert("Anuman", format!("{}", h));
+                        (h, vec!["Anuman"])
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Wall_Climb);
+                            $edict.insert("Wall_Climb", format!("{}", h));
+                            (h, vec!["Wall_Climb"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
                 };
                 if !left.0 {
                     left
                 } else {
                     let mut right = {
-                        let h = $ctx.has(Item::Wall_Climb);
-                        $edict.insert("Wall_Climb", format!("{}", h));
-                        (h, vec!["Wall_Climb"])
+                        let h = $ctx.has(Item::Remote_Drone);
+                        $edict.insert("Remote_Drone", format!("{}", h));
+                        (h, vec!["Remote_Drone"])
                     };
                     left.1.append(&mut right.1);
                     (right.0, left.1)
@@ -1783,12 +1797,15 @@ macro_rules! hexplain__infinite_climb {
 #[macro_export]
 macro_rules! hobserve__infinite_climb {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        (({
+        ((({
             $full_obs.observe_anuman();
             $ctx.has(Item::Anuman)
         } && ({
             $full_obs.observe_wall_climb();
             $ctx.has(Item::Wall_Climb)
+        })) && ({
+            $full_obs.observe_remote_drone();
+            $ctx.has(Item::Remote_Drone)
         })) && ({
             $full_obs.observe_drone_hover();
             $ctx.has(Item::Drone_Hover)

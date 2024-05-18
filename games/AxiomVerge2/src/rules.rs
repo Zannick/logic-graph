@@ -611,6 +611,63 @@ pub fn access_ebih__grid_25_10_12__east_11__ex__door_1__req(
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
+pub fn access_ebih__truck_gate__door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__door__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__portal_stand__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_door_open and $open and $range1
+    ((!ctx.ebih__truck_gate__ctx__door_open() && helper__open!(ctx, world))
+        && helper__range1!(ctx, world))
+}
+pub fn access_ebih__truck_gate__switch__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__switch__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // ^_door_open
+    ctx.ebih__truck_gate__ctx__door_open()
+}
+pub fn access_ebih__truck_gate__switch__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_door_open and $open
+    (!ctx.ebih__truck_gate__ctx__door_open() && helper__open!(ctx, world))
+}
 pub fn access_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -717,6 +774,10 @@ pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_ho
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
     ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
         && helper__hook!(ctx, world))
+}
+pub fn access_ebih_walled_off_wall(ctx: &Context, world: &graph::World) -> bool {
+    // Ebih_Walled_Off_Wall
+    ctx.has(Item::Ebih_Walled_Off_Wall)
 }
 pub fn access_ebih_wasteland_door(ctx: &Context, world: &graph::World) -> bool {
     // Ebih_Wasteland_Door
@@ -1889,6 +1950,10 @@ pub fn access_invoke_hover_or_invoke_mist2(ctx: &Context, world: &graph::World) 
     // $hover or $mist2
     (helper__hover!(ctx, world) || helper__mist2!(ctx, world))
 }
+pub fn access_invoke_infinite_climb(ctx: &Context, world: &graph::World) -> bool {
+    // $infinite_climb
+    helper__infinite_climb!(ctx, world)
+}
 pub fn access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
@@ -2634,6 +2699,17 @@ pub fn action_ebih__grid_25_10_12__east_11__open_door__do(ctx: &mut Context, wor
     // ^_door_open = true
     ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
 }
+pub fn action_ebih__truck_gate__portal_stand__open_door__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_door_open = true
+    ctx.set_ebih__truck_gate__ctx__door_open(true);
+}
+pub fn action_ebih__truck_gate__switch__open_door__do(ctx: &mut Context, world: &graph::World) {
+    // ^_door_open = true
+    ctx.set_ebih__truck_gate__ctx__door_open(true);
+}
 pub fn action_ebih__vertical_interchange__west_13__open_door__do(
     ctx: &mut Context,
     world: &graph::World,
@@ -2923,14 +2999,15 @@ pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &graph::World) 
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
 }
-pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
+pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
     ctx: &mut Context,
     world: &graph::World,
 ) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
     ctx.collect(Item::Irikar_Royal_Storage_Wall, world);
     ctx.collect(Item::Flask, world);
     ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
+    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall);
 }
 pub fn action_invoke_deploy_drone(ctx: &mut Context, world: &graph::World) {
     // $deploy_drone
@@ -5269,6 +5346,150 @@ pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
         (r, vec!["^ebih__grid_25_10_12__ctx__door_open"])
     }
 }
+pub fn explain_ebih__truck_gate__door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__door__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__portal_stand__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door_open and $open and $range1
+    {
+        let mut left = {
+            let mut left = {
+                let val = {
+                    let r = ctx.ebih__truck_gate__ctx__door_open();
+                    edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+                    (r, vec!["^ebih__truck_gate__ctx__door_open"])
+                };
+                (!val.0, val.1)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__open!(ctx, world, edict);
+                    edict.insert("$open", format!("{:?}", res));
+                    refs.push("$open");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range1!(ctx, world, edict);
+                edict.insert("$range1", format!("{:?}", res));
+                refs.push("$range1");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_ebih__truck_gate__switch__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__switch__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.ebih__truck_gate__ctx__door_open();
+        edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^ebih__truck_gate__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__truck_gate__switch__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door_open and $open
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.ebih__truck_gate__ctx__door_open();
+                edict.insert("^ebih__truck_gate__ctx__door_open", format!("{:?}", r));
+                (r, vec!["^ebih__truck_gate__ctx__door_open"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__open!(ctx, world, edict);
+                edict.insert("$open", format!("{:?}", res));
+                refs.push("$open");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -5599,6 +5820,18 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_h
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_ebih_walled_off_wall(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Walled_Off_Wall
+    {
+        let h = ctx.has(Item::Ebih_Walled_Off_Wall);
+        edict.insert("Ebih_Walled_Off_Wall", format!("{}", h));
+        (h, vec!["Ebih_Walled_Off_Wall"])
     }
 }
 pub fn explain_ebih_wasteland_door(
@@ -10135,6 +10368,19 @@ pub fn explain_invoke_hover_or_invoke_mist2(
         }
     }
 }
+pub fn explain_invoke_infinite_climb(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $infinite_climb
+    {
+        let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+        edict.insert("$infinite_climb", format!("{:?}", res));
+        refs.push("$infinite_climb");
+        (res, refs)
+    }
+}
 pub fn explain_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
@@ -13775,6 +14021,95 @@ pub fn observe_access_ebih__grid_25_10_12__east_11__ex__door_1__req(
         ctx.ebih__grid_25_10_12__ctx__door_open()
     }
 }
+pub fn observe_access_ebih__truck_gate__door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__door__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__portal_stand__ex__switch_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door_open and $open and $range1
+    ((!({
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }) && (hobserve__open!(ctx, world, full_obs)))
+        && (hobserve__range1!(ctx, world, full_obs)))
+}
+pub fn observe_access_ebih__truck_gate__switch__ex__door_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__switch__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }
+}
+pub fn observe_access_ebih__truck_gate__switch__open_door__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door_open and $open
+    (!({
+        full_obs.observe_ebih__truck_gate__ctx__door_open();
+        ctx.ebih__truck_gate__ctx__door_open()
+    }) && (hobserve__open!(ctx, world, full_obs)))
+}
 pub fn observe_access_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
     world: &graph::World,
@@ -13963,6 +14298,17 @@ pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_i
         full_obs.observe_ebih_interchange_block();
         !ctx.has(Item::Ebih_Interchange_Block)
     })) && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_ebih_walled_off_wall(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Walled_Off_Wall
+    {
+        full_obs.observe_ebih_walled_off_wall();
+        ctx.has(Item::Ebih_Walled_Off_Wall)
+    }
 }
 pub fn observe_access_ebih_wasteland_door(
     ctx: &Context,
@@ -16176,6 +16522,14 @@ pub fn observe_access_invoke_hover_or_invoke_mist2(
     // $hover or $mist2
     (hobserve__hover!(ctx, world, full_obs) || hobserve__mist2!(ctx, world, full_obs))
 }
+pub fn observe_access_invoke_infinite_climb(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $infinite_climb
+    hobserve__infinite_climb!(ctx, world, full_obs)
+}
 pub fn observe_access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
     world: &graph::World,
@@ -17804,6 +18158,20 @@ pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
 ) {
     // ^_door_open = true
 }
+pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_open = true
+}
+pub fn observe_action_ebih__truck_gate__switch__open_door__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_open = true
+}
 pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     ctx: &Context,
     world: &graph::World,
@@ -18162,12 +18530,12 @@ pub fn observe_action_invoke_clear_breach_save(
     hobserve__clear_breach_save!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(
+pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
     ctx: &Context,
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     rules::observe_action_flasks_incr_1(ctx, world, full_obs);

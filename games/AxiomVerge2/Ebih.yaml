@@ -302,13 +302,16 @@ areas:
         - to: Grid 25,10-12 > East 12
           tags: [xshift]
     - name: West 13
-      coord: [26.05, 12.7]
+      coord: [26.05, 12.75]
       local:
         - to: Lower Platform
           jumps: 3
         - to: West Below Platforms
+      exits:
+        - to: Truck Gate > East
+          tags: [xshift]
     - name: West Below Platforms
-      coord: [26.3, 12.7]
+      coord: [26.3, 12.75]
       local:
         - to: West 13
         - to: Garage Entry
@@ -336,6 +339,63 @@ areas:
       local:
         - to: East Platform
 
+- name: Truck Gate  # MARK: Truck Gate
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    map_spot: Menu > Kiengir Map > Ebih Truck Gate
+  start:
+    _door_open: false
+  spots:
+    - name: East
+      coord: [25.95, 12.75]
+      local:
+        - to: Switch
+      exits:
+        - to: By Garage > West 13
+          tags: [xshift]
+    - name: Switch
+      coord: [25.7, 12.75]
+      local:
+        - to: East
+      exits:
+        - to: Door
+          req: ^_door_open
+          movement: base
+        - to: Portal Stand
+          req: ^_door_open
+          movement: base
+          jumps: 1
+      actions:
+        - name: Open Door
+          do: ^_door_open = true
+          req: not ^_door_open and $open
+          tags: [hack]
+    - name: Door
+      coord: [25.5, 12.75]
+      exits:
+        - to: Portal Stand
+          req: ^_door_open
+          movement: base
+          jumps: 1
+        - to: Switch
+          req: ^_door_open
+          movement: base
+    - name: Portal Stand
+      coord: [25.35, 12.6]
+      exits:
+        - to: Door
+          req: ^_door_open
+          movement: base
+        - to: Switch
+          req: ^_door_open
+          movement: base
+      actions:
+        - name: Open Door
+          req: not ^_door_open and $open and $range1
+          do: ^_door_open = true
+          tags: [hack]
+
 - name: Grid 25,10-12  # MARK: Grid 25,10-12
   on_entry: $reset_old_area(^newpos)
   start:
@@ -362,6 +422,9 @@ areas:
       coord: [25.05, 11.8]
       local:
         - to: Below Bush
+      exits:
+        - to: Walled Off > East 12
+          tags: [xshift]
     - name: Below Bush
       coord: [25.4, 11.8]
       local:
@@ -626,13 +689,13 @@ areas:
           canon: Ebih_Waterfall_Block_Right
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
         - name: Block Left
           item: Ebih_Waterfall_Block_Left
           canon: Ebih_Waterfall_Block_Left
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Alcove Left
           req: ^mode == 'drone' and Ebih_Waterfall_Block_Left
@@ -1209,7 +1272,7 @@ areas:
           item: Ebih_West_Block
           canon: Ebih_West_Block
           req: $shockwave
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Block Left
           req: Ebih_West_Block
@@ -2196,7 +2259,7 @@ areas:
           item: Ebih_Interchange_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
     - name: Cubby Exit
       coord: [21.85, 13.9]
       local:
@@ -2285,11 +2348,289 @@ areas:
           req: $hook
           time: 1  # ?
 
+- name: Walled Off  # MARK: Walled Off
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 12
+      coord: [24.95, 11.8]
+      local:
+        - to: Wall Right
+      exits:
+        - to: Grid 25,10-12 > West 12
+          tags: [xshift]
+    - name: Wall Right
+      coord: [24.8, 11.8]
+      local:
+        - to: East 12
+      locations:
+        - name: Break Wall
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Wall Left
+          req: Ebih_Walled_Off_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          to: Wall Left
+          req: Nanite_Mist
+          movement: mist1
+        - name: Break Through Wall Faster
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          to: Wall Left
+          req: $mist2
+          movement: mist2
+    - name: Wall Left
+      coord: [24.65, 11.8]
+      local:
+        - to: Upper Slope
+      locations:
+        - name: Break Wall
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Wall Right
+          req: Ebih_Walled_Off_Wall
+          movement: base
+        - to: West 12
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - to: West 12
+          req: ^mode == 'drone' and $mist2
+          movement: mist2
+      hybrid:
+        - name: Break Through Wall
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          to: Wall Right
+          req: Nanite_Mist
+          movement: mist1
+        - name: Break Through Wall Faster
+          item: Ebih_Walled_Off_Wall
+          canon: Ebih_Walled_Off_Wall
+          to: Wall Right
+          req: $mist2
+          movement: mist2
+
+    - name: Upper Slope
+      coord: [24.5, 11.8]
+      local:
+        - to: Wall Left
+        - to: Upper Left Ledge
+        - to: West 14
+          thru: [[24.375, 12.0], [24.55, 12.7], [24.45, 13.2]]
+      exits:
+        - to: West 12
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+        - to: West 12
+          req: ^mode == 'drone' and Nanite_Mist
+          movement: mist1
+        - to: West 12
+          req: ^mode == 'drone' and $mist2
+          movement: mist2
+    - name: Upper Left Ledge
+      coord: [24.25, 11.95]
+      local:
+        - to: Upper Slope
+          jumps: 2
+        - to: Middle Ledge
+      exits:
+        - to: West 12
+          req: $infinite_climb
+          movement: base
+          jumps: 6
+        - to: West 12
+          req: $infinite_climb and Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: West 12
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: West 12
+      coord: [24.05, 11.2]
+      local:
+        - to: Upper Left Ledge
+        - to: Middle Ledge
+      exits:
+        - to: Upper Slope
+          req: $hook or $hover
+          movement: base
+        - to: Guarded Health > East
+          req: ^mode == 'drone'
+          tags: [xshift]
+
+    - name: Middle Ledge
+      coord: [24.45, 12.4]
+      local:
+        - to: Platform 5
+        - to: West 14
+          thru: [[24.55, 12.7], [24.45, 13.2]]
+      exits:
+        - to: Upper Left Ledge
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Upper Slope
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Upper Left Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Slope
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Platform 5
+      coord: [24.6, 12.9]
+      local:
+        - to: West 14
+        - to: Platform 4
+        - to: Platform 3
+      exits:
+        - to: Middle Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Platform 4
+      coord: [24.45, 13.05]
+      local:
+        - to: Platform 5
+          jumps: 1
+        - to: Platform 3
+        - to: West 14
+          thru: [24.2, 13.1]
+    - name: Platform 3
+      coord: [24.5, 13.35]
+      local:
+        - to: West 14
+      exits:
+        - to: Platform 4
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Platform 4
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West 14
+      coord: [24.05, 13.8]
+      local:
+        - to: Platform 3
+          jumps: 3
+      exits:
+        - to: Gem Room > East 14
+          tags: [xshift]
+
+- name: Guarded Health  # MARK: Guarded Health
+  on_entry: $reset_old_area(^newpos)
+  map:
+    west: [21, 11, 22, 12]
+  datamap:
+    map_spot:
+      west: Menu > Kiengir Map > Ebih Guarded Health
+  spots:
+    - name: East
+      coord: [23.95, 11.2]
+      local:
+        - to: East Hills
+        - to: East Ruins
+      exits:
+        - to: Walled Off > West 12
+          req: ^mode == 'drone'
+          tags: [xshift]
+    - name: East Hills
+      coord: [23.65, 11.6]
+      local:
+        - to: East Ruins
+          jumps: 2
+      exits:
+        - to: East
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: East Ruins
+      coord: [23.35, 11.4]
+      local:
+        - to: East Hills
+        - to: Small Pond
+          jumps: 5
+        - to: West Hill
+          jumps: 7
+      exits:
+        - to: East
+          req: $hover
+          movement: base
+          jumps: 2
+    - name: Small Pond
+      coord: [22.5, 11.65]
+      local:
+        - to: East Ruins
+          jumps: 4
+        - to: West Hill
+          jumps: 2
+      exits:
+        - to: East Ruins
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: West Hill
+      coord: [22.05, 11.35]
+      local:
+        - to: Small Pond
+        - to: West Basin
+        - to: Far West
+        - to: East Ruins
+    - name: West Basin
+      coord: [21.6, 11.8]
+      local:
+        - to: West Hill
+          jumps: 4
+        - to: Far West
+          jumps: 2
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Far West
+      coord: [21.2, 11.5]
+      local:
+        - to: West Basin
+        - to: West Hill
+          jumps: 5
+      locations:
+        - name: Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+
 - name: Gem Room  # MARK: Gem Room
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 13
-      coord: [21.05, 12.75]
+      coord: [22.05, 12.75]
       exits:
         - to: Vertical Interchange > East 13
+          tags: [xshift]
+    - name: East 14
+      coord: [23.95, 13.8]
+      exits:
+        - to: Walled Off > West 14
           tags: [xshift]

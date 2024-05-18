@@ -604,8 +604,8 @@
             Ebih__By_Garage__Lower_Platform [label = "", pos = "79.2,-20.583333!"];
             Ebih__By_Garage__West_Bush [label = "", pos = "78.9,-19.916667!"];
             Ebih__By_Garage__West_12 [label = "", pos = "78.15,-19.5!"];
-            Ebih__By_Garage__West_13 [label = "", pos = "78.15,-21.166667!"];
-            Ebih__By_Garage__West_Below_Platforms [label = "", pos = "78.9,-21.166667!"];
+            Ebih__By_Garage__West_13 [label = "", pos = "78.15,-21.25!"];
+            Ebih__By_Garage__West_Below_Platforms [label = "", pos = "78.9,-21.25!"];
             Ebih__By_Garage__Garage_Entry [label = "", pos = "81.45,-21.333333!"];
             Ebih__By_Garage__East_Below_Platforms [label = "", pos = "82.8,-21.125!"];
             Ebih__By_Garage__East_12 [label = "", pos = "83.85,-19.166667!"];
@@ -677,7 +677,8 @@
             Ebih__Ebih_West__East_13 [label = "", pos = "62.85,-21.25!"];
         }
         {
-            Ebih__Gem_Room__West_13 [label = "", pos = "63.15,-21.25!"];
+            Ebih__Gem_Room__West_13 [label = "", pos = "66.15,-21.25!"];
+            Ebih__Gem_Room__East_14 [label = "", pos = "71.85,-23.0!"];
         }
         {
             Ebih__Grid_21_2_6__West_6 [label = "", pos = "63.15,-9.333333!"];
@@ -715,12 +716,27 @@
             Ebih__Grid_26_10_11__East_10 [label = "", pos = "80.85,-16.25!"];
         }
         {
+            Ebih__Guarded_Health__East [label = "", pos = "71.85,-18.666667!"];
+            Ebih__Guarded_Health__East_Hills [label = "", pos = "70.95,-19.333333!"];
+            Ebih__Guarded_Health__East_Ruins [label = "", pos = "70.05,-19.0!"];
+            Ebih__Guarded_Health__Small_Pond [label = "", pos = "67.5,-19.416667!"];
+            Ebih__Guarded_Health__West_Hill [label = "", pos = "66.15,-18.916667!"];
+            Ebih__Guarded_Health__West_Basin [label = "", pos = "64.8,-19.666667!"];
+            Ebih__Guarded_Health__Far_West [label = "", pos = "63.6,-19.166667!"];
+        }
+        {
             Ebih__Observation_Tower_Room__West_9 [label = "", pos = "81.15,-13.833333!"];
             Ebih__Observation_Tower_Room__Tower_Top [label = "", pos = "82.5,-14.833333!"];
             Ebih__Observation_Tower_Room__Tower_Bottom [label = "", pos = "82.5,-16.5!"];
             Ebih__Observation_Tower_Room__Cliff [label = "", pos = "82.95,-16.833333!"];
             Ebih__Observation_Tower_Room__West_10 [label = "", pos = "81.15,-16.25!"];
             Ebih__Observation_Tower_Room__East_11 [label = "", pos = "83.85,-17.666667!"];
+        }
+        {
+            Ebih__Truck_Gate__East [label = "", pos = "77.85,-21.25!"];
+            Ebih__Truck_Gate__Switch [label = "", pos = "77.1,-21.25!"];
+            Ebih__Truck_Gate__Door [label = "", pos = "76.5,-21.25!"];
+            Ebih__Truck_Gate__Portal_Stand [label = "", pos = "76.05,-21.0!"];
         }
         {
             Ebih__Vertical_Interchange__West_13 [label = "", pos = "63.15,-21.25!"];
@@ -743,6 +759,19 @@
             Ebih__Vertical_Interchange__Lower_West_Cliff [label = "", pos = "64.2,-25.666667!"];
             Ebih__Vertical_Interchange__Switch [label = "", pos = "64.8,-26.166667!"];
             Ebih__Vertical_Interchange__South [label = "", pos = "64.5,-26.333333!"];
+        }
+        {
+            Ebih__Walled_Off__East_12 [label = "", pos = "74.85,-19.666667!"];
+            Ebih__Walled_Off__Wall_Right [label = "", pos = "74.4,-19.666667!"];
+            Ebih__Walled_Off__Wall_Left [label = "", pos = "73.95,-19.666667!"];
+            Ebih__Walled_Off__Upper_Slope [label = "", pos = "73.5,-19.666667!"];
+            Ebih__Walled_Off__Upper_Left_Ledge [label = "", pos = "72.75,-19.916667!"];
+            Ebih__Walled_Off__West_12 [label = "", pos = "72.15,-18.666667!"];
+            Ebih__Walled_Off__Middle_Ledge [label = "", pos = "73.35,-20.666667!"];
+            Ebih__Walled_Off__Platform_5 [label = "", pos = "73.8,-21.5!"];
+            Ebih__Walled_Off__Platform_4 [label = "", pos = "73.35,-21.75!"];
+            Ebih__Walled_Off__Platform_3 [label = "", pos = "73.5,-22.25!"];
+            Ebih__Walled_Off__West_14 [label = "", pos = "72.15,-23.0!"];
         }
         {
             Ebih__Waterfall__East_10 [label = "", pos = "74.85,-16.166667!"];
@@ -2017,6 +2046,8 @@
             Menu__Kiengir_Map__Glacier_40_8 [label = "", pos = "120.0,-13.333333!"];
             Menu__Kiengir_Map__Glacier_Peak_Birds_Eye [label = "", pos = "102.0,-13.333333!"];
             Menu__Kiengir_Map__Forbidden_Knowledge [label = "", pos = "105.0,-30.0!"];
+            Menu__Kiengir_Map__Ebih_Truck_Gate [label = "", pos = "75.0,-21.666667!"];
+            Menu__Kiengir_Map__Ebih_Guarded_Health [label = "", pos = "63.0,-20.0!"];
         }
     }
     {

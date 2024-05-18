@@ -590,6 +590,12 @@ subgraph Ebih
         Ebih__By_Garage__East_Below_Platforms(East Below Platforms);
         Ebih__By_Garage__East_12(East 12);
     end
+    subgraph Ebih__Truck_Gate[Truck Gate]
+        Ebih__Truck_Gate__East(East);
+        Ebih__Truck_Gate__Switch(Switch);
+        Ebih__Truck_Gate__Door(Door);
+        Ebih__Truck_Gate__Portal_Stand(Portal Stand);
+    end
     subgraph Ebih__Grid_25_10_12[Grid 25,10-12]
         Ebih__Grid_25_10_12__East_12(East 12);
         Ebih__Grid_25_10_12__Bush(Bush);
@@ -774,8 +780,31 @@ subgraph Ebih
         Ebih__Vertical_Interchange__Switch(Switch);
         Ebih__Vertical_Interchange__South(South);
     end
+    subgraph Ebih__Walled_Off[Walled Off]
+        Ebih__Walled_Off__East_12(East 12);
+        Ebih__Walled_Off__Wall_Right(Wall Right);
+        Ebih__Walled_Off__Wall_Left(Wall Left);
+        Ebih__Walled_Off__Upper_Slope(Upper Slope);
+        Ebih__Walled_Off__Upper_Left_Ledge(Upper Left Ledge);
+        Ebih__Walled_Off__West_12(West 12);
+        Ebih__Walled_Off__Middle_Ledge(Middle Ledge);
+        Ebih__Walled_Off__Platform_5(Platform 5);
+        Ebih__Walled_Off__Platform_4(Platform 4);
+        Ebih__Walled_Off__Platform_3(Platform 3);
+        Ebih__Walled_Off__West_14(West 14);
+    end
+    subgraph Ebih__Guarded_Health[Guarded Health]
+        Ebih__Guarded_Health__East(East);
+        Ebih__Guarded_Health__East_Hills(East Hills);
+        Ebih__Guarded_Health__East_Ruins(East Ruins);
+        Ebih__Guarded_Health__Small_Pond(Small Pond);
+        Ebih__Guarded_Health__West_Hill(West Hill);
+        Ebih__Guarded_Health__West_Basin(West Basin);
+        Ebih__Guarded_Health__Far_West(Far West);
+    end
     subgraph Ebih__Gem_Room[Gem Room]
         Ebih__Gem_Room__West_13(West 13);
+        Ebih__Gem_Room__East_14(East 14);
     end
 end
 subgraph Filter
@@ -1973,6 +2002,8 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_40_8(Glacier 40,8);
         Menu__Kiengir_Map__Glacier_Peak_Birds_Eye(Glacier Peak Bird's Eye);
         Menu__Kiengir_Map__Forbidden_Knowledge(Forbidden Knowledge);
+        Menu__Kiengir_Map__Ebih_Truck_Gate(Ebih Truck Gate);
+        Menu__Kiengir_Map__Ebih_Guarded_Health(Ebih Guarded Health);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2553,6 +2584,7 @@ Ebih__By_Garage__Garage_Entry <--> Interior__Garage__Entry
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Ebih__By_Garage__West_12 <--> Ebih__Grid_25_10_12__East_12
+Ebih__By_Garage__West_13 <--> Ebih__Truck_Gate__East
 Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
 Ebih__Drone_Room__Item --> Menu__Kiengir_Map__Remote_Drone
 Ebih__Drone_Room__Item --> Menu__Warp_Only__Kiengir
@@ -2597,6 +2629,7 @@ Ebih__Ebih_West__West_12 <--> Giguna__Wasteland__East_12
 Ebih__Ebih_West__West_13 <--> Giguna__Wasteland__East_13
 Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
 Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
+Ebih__Gem_Room__East_14 <--> Ebih__Walled_Off__West_14
 Ebih__Gem_Room__West_13 <--> Ebih__Vertical_Interchange__East_13
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
 Ebih__Grid_25_10_12__Bush --> Ebih__Grid_25_10_12__Mid_Ledge
@@ -2609,6 +2642,7 @@ Ebih__Grid_25_10_12__Mid_Ledge --> Ebih__Grid_25_10_12__West_11
 Ebih__Grid_25_10_12__Top_Platform --> Ebih__Grid_25_10_12__West_10
 Ebih__Grid_25_10_12__West_10 <--> Ebih__Waterfall__East_10
 Ebih__Grid_25_10_12__West_11 <--> Ebih__Waterfall__East_11
+Ebih__Grid_25_10_12__West_12 <--> Ebih__Walled_Off__East_12
 Ebih__Grid_25_2_6__West_4 --> Ebih__Grid_25_2_6__Pit
 Ebih__Grid_26_10_11__East_10 <--> Ebih__Observation_Tower_Room__West_10
 Ebih__Grid_26_10_11__Ledge --> Ebih__Grid_26_10_11__Upper_Platform
@@ -2617,8 +2651,15 @@ Ebih__Grid_26_10_11__Middle_Platform --> Ebih__Grid_26_10_11__West_10
 Ebih__Grid_26_10_11__Under_Ledge --> Ebih__Grid_26_10_11__Ledge
 Ebih__Grid_26_10_11__Upper_Platform --> Ebih__Grid_26_10_11__Cliff
 Ebih__Grid_26_10_11__Upper_Platform --> Ebih__Grid_26_10_11__West_10
+Ebih__Guarded_Health__East <--> Ebih__Walled_Off__West_12
+Ebih__Guarded_Health__East_Hills --> Ebih__Guarded_Health__East
+Ebih__Guarded_Health__East_Ruins --> Ebih__Guarded_Health__East
+Ebih__Guarded_Health__Small_Pond --> Ebih__Guarded_Health__East_Ruins
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Observation_Tower_Room__Cliff
 Ebih__Observation_Tower_Room__Tower_Top --> Ebih__Observation_Tower_Room__West_9
+Ebih__Truck_Gate__Door <--> Ebih__Truck_Gate__Portal_Stand
+Ebih__Truck_Gate__Door <--> Ebih__Truck_Gate__Switch
+Ebih__Truck_Gate__Portal_Stand <--> Ebih__Truck_Gate__Switch
 Ebih__Vertical_Interchange__Below_Door <--> Ebih__Vertical_Interchange__Blocked_Refill_Station
 Ebih__Vertical_Interchange__Below_Door <--> Ebih__Vertical_Interchange__Refill_Station
 Ebih__Vertical_Interchange__Blocked_Refill_Station <--> Ebih__Vertical_Interchange__Cliff_by_Refill
@@ -2639,6 +2680,14 @@ Ebih__Vertical_Interchange__Passage_East <--> Ebih__Vertical_Interchange__Passag
 Ebih__Vertical_Interchange__Passage_West --> Ebih__Vertical_Interchange__Door_West
 Ebih__Vertical_Interchange__South --> Ebih__Vertical_Interchange__Below_Door
 Ebih__Vertical_Interchange__Switch --> Ebih__Vertical_Interchange__Below_Door
+Ebih__Walled_Off__Middle_Ledge --> Ebih__Walled_Off__Upper_Left_Ledge
+Ebih__Walled_Off__Middle_Ledge --> Ebih__Walled_Off__Upper_Slope
+Ebih__Walled_Off__Platform_3 --> Ebih__Walled_Off__Platform_4
+Ebih__Walled_Off__Platform_5 --> Ebih__Walled_Off__Middle_Ledge
+Ebih__Walled_Off__Upper_Left_Ledge --> Ebih__Walled_Off__West_12
+Ebih__Walled_Off__Upper_Slope <--> Ebih__Walled_Off__West_12
+Ebih__Walled_Off__Wall_Left <--> Ebih__Walled_Off__Wall_Right
+Ebih__Walled_Off__Wall_Left --> Ebih__Walled_Off__West_12
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Left
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Right
 Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left

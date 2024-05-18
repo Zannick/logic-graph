@@ -157,8 +157,11 @@ pub enum AreaId {
     Ebih__Grid_25_10_12,
     Ebih__Grid_25_2_6,
     Ebih__Grid_26_10_11,
+    Ebih__Guarded_Health,
     Ebih__Observation_Tower_Room,
+    Ebih__Truck_Gate,
     Ebih__Vertical_Interchange,
+    Ebih__Walled_Off,
     Ebih__Waterfall,
     Filter__Core,
     Filter__Entrance,
@@ -353,10 +356,13 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Grid_25_10_12 => write!(f, "{}", "Ebih > Grid 25,10-12"),
             AreaId::Ebih__Grid_25_2_6 => write!(f, "{}", "Ebih > Grid 25,2-6"),
             AreaId::Ebih__Grid_26_10_11 => write!(f, "{}", "Ebih > Grid 26,10-11"),
+            AreaId::Ebih__Guarded_Health => write!(f, "{}", "Ebih > Guarded Health"),
             AreaId::Ebih__Observation_Tower_Room => {
                 write!(f, "{}", "Ebih > Observation Tower Room")
             }
+            AreaId::Ebih__Truck_Gate => write!(f, "{}", "Ebih > Truck Gate"),
             AreaId::Ebih__Vertical_Interchange => write!(f, "{}", "Ebih > Vertical Interchange"),
+            AreaId::Ebih__Walled_Off => write!(f, "{}", "Ebih > Walled Off"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
             AreaId::Filter__Core => write!(f, "{}", "Filter > Core"),
             AreaId::Filter__Entrance => write!(f, "{}", "Filter > Entrance"),
@@ -584,8 +590,11 @@ impl std::str::FromStr for AreaId {
             "Ebih > Grid 25,10-12" => Ok(AreaId::Ebih__Grid_25_10_12),
             "Ebih > Grid 25,2-6" => Ok(AreaId::Ebih__Grid_25_2_6),
             "Ebih > Grid 26,10-11" => Ok(AreaId::Ebih__Grid_26_10_11),
+            "Ebih > Guarded Health" => Ok(AreaId::Ebih__Guarded_Health),
             "Ebih > Observation Tower Room" => Ok(AreaId::Ebih__Observation_Tower_Room),
+            "Ebih > Truck Gate" => Ok(AreaId::Ebih__Truck_Gate),
             "Ebih > Vertical Interchange" => Ok(AreaId::Ebih__Vertical_Interchange),
+            "Ebih > Walled Off" => Ok(AreaId::Ebih__Walled_Off),
             "Ebih > Waterfall" => Ok(AreaId::Ebih__Waterfall),
             "Filter > Core" => Ok(AreaId::Filter__Core),
             "Filter > Entrance" => Ok(AreaId::Filter__Entrance),
@@ -1290,6 +1299,7 @@ pub enum SpotId {
     Ebih__Ebih_West__West_9,
     Ebih__Ebih_West__West_Fork,
     Ebih__Ebih_West__West_High_Cliff,
+    Ebih__Gem_Room__East_14,
     Ebih__Gem_Room__West_13,
     Ebih__Grid_21_2_6__East_6,
     Ebih__Grid_21_2_6__Portal_Stand,
@@ -1318,12 +1328,23 @@ pub enum SpotId {
     Ebih__Grid_26_10_11__Upper_Platform,
     Ebih__Grid_26_10_11__West_10,
     Ebih__Grid_26_10_11__West_11,
+    Ebih__Guarded_Health__East,
+    Ebih__Guarded_Health__East_Hills,
+    Ebih__Guarded_Health__East_Ruins,
+    Ebih__Guarded_Health__Far_West,
+    Ebih__Guarded_Health__Small_Pond,
+    Ebih__Guarded_Health__West_Basin,
+    Ebih__Guarded_Health__West_Hill,
     Ebih__Observation_Tower_Room__Cliff,
     Ebih__Observation_Tower_Room__East_11,
     Ebih__Observation_Tower_Room__Tower_Bottom,
     Ebih__Observation_Tower_Room__Tower_Top,
     Ebih__Observation_Tower_Room__West_10,
     Ebih__Observation_Tower_Room__West_9,
+    Ebih__Truck_Gate__Door,
+    Ebih__Truck_Gate__East,
+    Ebih__Truck_Gate__Portal_Stand,
+    Ebih__Truck_Gate__Switch,
     Ebih__Vertical_Interchange__Below_Door,
     Ebih__Vertical_Interchange__Block_Cubby,
     Ebih__Vertical_Interchange__Blocked_Refill_Station,
@@ -1344,6 +1365,17 @@ pub enum SpotId {
     Ebih__Vertical_Interchange__South,
     Ebih__Vertical_Interchange__Switch,
     Ebih__Vertical_Interchange__West_13,
+    Ebih__Walled_Off__East_12,
+    Ebih__Walled_Off__Middle_Ledge,
+    Ebih__Walled_Off__Platform_3,
+    Ebih__Walled_Off__Platform_4,
+    Ebih__Walled_Off__Platform_5,
+    Ebih__Walled_Off__Upper_Left_Ledge,
+    Ebih__Walled_Off__Upper_Slope,
+    Ebih__Walled_Off__Wall_Left,
+    Ebih__Walled_Off__Wall_Right,
+    Ebih__Walled_Off__West_12,
+    Ebih__Walled_Off__West_14,
     Ebih__Waterfall__Alcove,
     Ebih__Waterfall__Alcove_Left,
     Ebih__Waterfall__Alcove_Right,
@@ -2325,7 +2357,9 @@ pub enum SpotId {
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Bronze_Axe,
     Menu__Kiengir_Map__Ebih_Base_Camp,
+    Menu__Kiengir_Map__Ebih_Guarded_Health,
     Menu__Kiengir_Map__Ebih_Observatory,
+    Menu__Kiengir_Map__Ebih_Truck_Gate,
     Menu__Kiengir_Map__Ebih_West_Lower,
     Menu__Kiengir_Map__Ebih_West_Mid,
     Menu__Kiengir_Map__Ebih_West_Upper,
@@ -3861,6 +3895,7 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Ebih_West__West_High_Cliff => {
                 write!(f, "{}", "Ebih > Ebih West > West High Cliff")
             }
+            SpotId::Ebih__Gem_Room__East_14 => write!(f, "{}", "Ebih > Gem Room > East 14"),
             SpotId::Ebih__Gem_Room__West_13 => write!(f, "{}", "Ebih > Gem Room > West 13"),
             SpotId::Ebih__Grid_21_2_6__East_6 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6"),
             SpotId::Ebih__Grid_21_2_6__Portal_Stand => {
@@ -3927,6 +3962,25 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Grid_26_10_11__West_11 => {
                 write!(f, "{}", "Ebih > Grid 26,10-11 > West 11")
             }
+            SpotId::Ebih__Guarded_Health__East => write!(f, "{}", "Ebih > Guarded Health > East"),
+            SpotId::Ebih__Guarded_Health__East_Hills => {
+                write!(f, "{}", "Ebih > Guarded Health > East Hills")
+            }
+            SpotId::Ebih__Guarded_Health__East_Ruins => {
+                write!(f, "{}", "Ebih > Guarded Health > East Ruins")
+            }
+            SpotId::Ebih__Guarded_Health__Far_West => {
+                write!(f, "{}", "Ebih > Guarded Health > Far West")
+            }
+            SpotId::Ebih__Guarded_Health__Small_Pond => {
+                write!(f, "{}", "Ebih > Guarded Health > Small Pond")
+            }
+            SpotId::Ebih__Guarded_Health__West_Basin => {
+                write!(f, "{}", "Ebih > Guarded Health > West Basin")
+            }
+            SpotId::Ebih__Guarded_Health__West_Hill => {
+                write!(f, "{}", "Ebih > Guarded Health > West Hill")
+            }
             SpotId::Ebih__Observation_Tower_Room__Cliff => {
                 write!(f, "{}", "Ebih > Observation Tower Room > Cliff")
             }
@@ -3945,6 +3999,12 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Observation_Tower_Room__West_9 => {
                 write!(f, "{}", "Ebih > Observation Tower Room > West 9")
             }
+            SpotId::Ebih__Truck_Gate__Door => write!(f, "{}", "Ebih > Truck Gate > Door"),
+            SpotId::Ebih__Truck_Gate__East => write!(f, "{}", "Ebih > Truck Gate > East"),
+            SpotId::Ebih__Truck_Gate__Portal_Stand => {
+                write!(f, "{}", "Ebih > Truck Gate > Portal Stand")
+            }
+            SpotId::Ebih__Truck_Gate__Switch => write!(f, "{}", "Ebih > Truck Gate > Switch"),
             SpotId::Ebih__Vertical_Interchange__Below_Door => {
                 write!(f, "{}", "Ebih > Vertical Interchange > Below Door")
             }
@@ -4007,6 +4067,31 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Vertical_Interchange__West_13 => {
                 write!(f, "{}", "Ebih > Vertical Interchange > West 13")
             }
+            SpotId::Ebih__Walled_Off__East_12 => write!(f, "{}", "Ebih > Walled Off > East 12"),
+            SpotId::Ebih__Walled_Off__Middle_Ledge => {
+                write!(f, "{}", "Ebih > Walled Off > Middle Ledge")
+            }
+            SpotId::Ebih__Walled_Off__Platform_3 => {
+                write!(f, "{}", "Ebih > Walled Off > Platform 3")
+            }
+            SpotId::Ebih__Walled_Off__Platform_4 => {
+                write!(f, "{}", "Ebih > Walled Off > Platform 4")
+            }
+            SpotId::Ebih__Walled_Off__Platform_5 => {
+                write!(f, "{}", "Ebih > Walled Off > Platform 5")
+            }
+            SpotId::Ebih__Walled_Off__Upper_Left_Ledge => {
+                write!(f, "{}", "Ebih > Walled Off > Upper Left Ledge")
+            }
+            SpotId::Ebih__Walled_Off__Upper_Slope => {
+                write!(f, "{}", "Ebih > Walled Off > Upper Slope")
+            }
+            SpotId::Ebih__Walled_Off__Wall_Left => write!(f, "{}", "Ebih > Walled Off > Wall Left"),
+            SpotId::Ebih__Walled_Off__Wall_Right => {
+                write!(f, "{}", "Ebih > Walled Off > Wall Right")
+            }
+            SpotId::Ebih__Walled_Off__West_12 => write!(f, "{}", "Ebih > Walled Off > West 12"),
+            SpotId::Ebih__Walled_Off__West_14 => write!(f, "{}", "Ebih > Walled Off > West 14"),
             SpotId::Ebih__Waterfall__Alcove => write!(f, "{}", "Ebih > Waterfall > Alcove"),
             SpotId::Ebih__Waterfall__Alcove_Left => {
                 write!(f, "{}", "Ebih > Waterfall > Alcove Left")
@@ -6566,8 +6651,14 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
             }
+            SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Guarded Health")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_Observatory => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Observatory")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Truck Gate")
             }
             SpotId::Menu__Kiengir_Map__Ebih_West_Lower => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih West Lower")
@@ -8000,6 +8091,7 @@ impl std::str::FromStr for SpotId {
             "Ebih > Ebih West > West 9" => Ok(SpotId::Ebih__Ebih_West__West_9),
             "Ebih > Ebih West > West Fork" => Ok(SpotId::Ebih__Ebih_West__West_Fork),
             "Ebih > Ebih West > West High Cliff" => Ok(SpotId::Ebih__Ebih_West__West_High_Cliff),
+            "Ebih > Gem Room > East 14" => Ok(SpotId::Ebih__Gem_Room__East_14),
             "Ebih > Gem Room > West 13" => Ok(SpotId::Ebih__Gem_Room__West_13),
             "Ebih > Grid 21,2-6 > East 6" => Ok(SpotId::Ebih__Grid_21_2_6__East_6),
             "Ebih > Grid 21,2-6 > Portal Stand" => Ok(SpotId::Ebih__Grid_21_2_6__Portal_Stand),
@@ -8034,6 +8126,13 @@ impl std::str::FromStr for SpotId {
             }
             "Ebih > Grid 26,10-11 > West 10" => Ok(SpotId::Ebih__Grid_26_10_11__West_10),
             "Ebih > Grid 26,10-11 > West 11" => Ok(SpotId::Ebih__Grid_26_10_11__West_11),
+            "Ebih > Guarded Health > East" => Ok(SpotId::Ebih__Guarded_Health__East),
+            "Ebih > Guarded Health > East Hills" => Ok(SpotId::Ebih__Guarded_Health__East_Hills),
+            "Ebih > Guarded Health > East Ruins" => Ok(SpotId::Ebih__Guarded_Health__East_Ruins),
+            "Ebih > Guarded Health > Far West" => Ok(SpotId::Ebih__Guarded_Health__Far_West),
+            "Ebih > Guarded Health > Small Pond" => Ok(SpotId::Ebih__Guarded_Health__Small_Pond),
+            "Ebih > Guarded Health > West Basin" => Ok(SpotId::Ebih__Guarded_Health__West_Basin),
+            "Ebih > Guarded Health > West Hill" => Ok(SpotId::Ebih__Guarded_Health__West_Hill),
             "Ebih > Observation Tower Room > Cliff" => {
                 Ok(SpotId::Ebih__Observation_Tower_Room__Cliff)
             }
@@ -8052,6 +8151,10 @@ impl std::str::FromStr for SpotId {
             "Ebih > Observation Tower Room > West 9" => {
                 Ok(SpotId::Ebih__Observation_Tower_Room__West_9)
             }
+            "Ebih > Truck Gate > Door" => Ok(SpotId::Ebih__Truck_Gate__Door),
+            "Ebih > Truck Gate > East" => Ok(SpotId::Ebih__Truck_Gate__East),
+            "Ebih > Truck Gate > Portal Stand" => Ok(SpotId::Ebih__Truck_Gate__Portal_Stand),
+            "Ebih > Truck Gate > Switch" => Ok(SpotId::Ebih__Truck_Gate__Switch),
             "Ebih > Vertical Interchange > Below Door" => {
                 Ok(SpotId::Ebih__Vertical_Interchange__Below_Door)
             }
@@ -8108,6 +8211,19 @@ impl std::str::FromStr for SpotId {
             "Ebih > Vertical Interchange > West 13" => {
                 Ok(SpotId::Ebih__Vertical_Interchange__West_13)
             }
+            "Ebih > Walled Off > East 12" => Ok(SpotId::Ebih__Walled_Off__East_12),
+            "Ebih > Walled Off > Middle Ledge" => Ok(SpotId::Ebih__Walled_Off__Middle_Ledge),
+            "Ebih > Walled Off > Platform 3" => Ok(SpotId::Ebih__Walled_Off__Platform_3),
+            "Ebih > Walled Off > Platform 4" => Ok(SpotId::Ebih__Walled_Off__Platform_4),
+            "Ebih > Walled Off > Platform 5" => Ok(SpotId::Ebih__Walled_Off__Platform_5),
+            "Ebih > Walled Off > Upper Left Ledge" => {
+                Ok(SpotId::Ebih__Walled_Off__Upper_Left_Ledge)
+            }
+            "Ebih > Walled Off > Upper Slope" => Ok(SpotId::Ebih__Walled_Off__Upper_Slope),
+            "Ebih > Walled Off > Wall Left" => Ok(SpotId::Ebih__Walled_Off__Wall_Left),
+            "Ebih > Walled Off > Wall Right" => Ok(SpotId::Ebih__Walled_Off__Wall_Right),
+            "Ebih > Walled Off > West 12" => Ok(SpotId::Ebih__Walled_Off__West_12),
+            "Ebih > Walled Off > West 14" => Ok(SpotId::Ebih__Walled_Off__West_14),
             "Ebih > Waterfall > Alcove" => Ok(SpotId::Ebih__Waterfall__Alcove),
             "Ebih > Waterfall > Alcove Left" => Ok(SpotId::Ebih__Waterfall__Alcove_Left),
             "Ebih > Waterfall > Alcove Right" => Ok(SpotId::Ebih__Waterfall__Alcove_Right),
@@ -9889,8 +10005,14 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Bronze Axe" => Ok(SpotId::Menu__Kiengir_Map__Bronze_Axe),
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
+            "Menu > Kiengir Map > Ebih Guarded Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health)
+            }
             "Menu > Kiengir Map > Ebih Observatory" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Observatory)
+            }
+            "Menu > Kiengir Map > Ebih Truck Gate" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate)
             }
             "Menu > Kiengir Map > Ebih West Lower" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Lower)
@@ -10324,8 +10446,16 @@ pub enum LocationId {
     Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
     Ebih__Grid_25_2_6__Pit__Item,
     Ebih__Grid_26_10_11__Ledge__Note,
+    Ebih__Guarded_Health__Far_West__Refill,
+    Ebih__Guarded_Health__West_Basin__Health,
     Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
     Ebih__Vertical_Interchange__Switch__Activate_Switch,
+    Ebih__Walled_Off__Wall_Left__Break_Through_Wall,
+    Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
+    Ebih__Walled_Off__Wall_Left__Break_Wall,
+    Ebih__Walled_Off__Wall_Right__Break_Through_Wall,
+    Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
+    Ebih__Walled_Off__Wall_Right__Break_Wall,
     Ebih__Waterfall__Alcove__Block_Left,
     Ebih__Waterfall__Alcove__Block_Right,
     Ebih__Waterfall__Alcove__Pedestal,
@@ -10649,8 +10779,16 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush"),
             LocationId::Ebih__Grid_25_2_6__Pit__Item => write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item"),
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note"),
+            LocationId::Ebih__Guarded_Health__Far_West__Refill => write!(f, "{}", "Ebih > Guarded Health > Far West > Refill"),
+            LocationId::Ebih__Guarded_Health__West_Basin__Health => write!(f, "{}", "Ebih > Guarded Health > West Basin > Health"),
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(f, "{}", "Ebih > Vertical Interchange > Block Cubby > Shockwave Block"),
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => write!(f, "{}", "Ebih > Vertical Interchange > Switch > Activate Switch"),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Left > Break Through Wall"),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => write!(f, "{}", "Ebih > Walled Off > Wall Left > Break Through Wall Faster"),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Left > Break Wall"),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Right > Break Through Wall"),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => write!(f, "{}", "Ebih > Walled Off > Wall Right > Break Through Wall Faster"),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Right > Break Wall"),
             LocationId::Ebih__Waterfall__Alcove__Block_Left => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left"),
             LocationId::Ebih__Waterfall__Alcove__Block_Right => write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right"),
             LocationId::Ebih__Waterfall__Alcove__Pedestal => write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal"),
@@ -10979,8 +11117,16 @@ impl std::str::FromStr for LocationId {
             "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush),
             "Ebih > Grid 25,2-6 > Pit > Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
             "Ebih > Grid 26,10-11 > Ledge > Note" => Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note),
+            "Ebih > Guarded Health > Far West > Refill" => Ok(LocationId::Ebih__Guarded_Health__Far_West__Refill),
+            "Ebih > Guarded Health > West Basin > Health" => Ok(LocationId::Ebih__Guarded_Health__West_Basin__Health),
             "Ebih > Vertical Interchange > Block Cubby > Shockwave Block" => Ok(LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block),
             "Ebih > Vertical Interchange > Switch > Activate Switch" => Ok(LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch),
+            "Ebih > Walled Off > Wall Left > Break Through Wall" => Ok(LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
+            "Ebih > Walled Off > Wall Left > Break Through Wall Faster" => Ok(LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+            "Ebih > Walled Off > Wall Left > Break Wall" => Ok(LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall),
+            "Ebih > Walled Off > Wall Right > Break Through Wall" => Ok(LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
+            "Ebih > Walled Off > Wall Right > Break Through Wall Faster" => Ok(LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+            "Ebih > Walled Off > Wall Right > Break Wall" => Ok(LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall),
             "Ebih > Waterfall > Alcove > Block Left" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left),
             "Ebih > Waterfall > Alcove > Block Right" => Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right),
             "Ebih > Waterfall > Alcove > Pedestal" => Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal),
@@ -11816,6 +11962,7 @@ pub enum ExitId {
     Ebih__By_Garage__Lower_Platform__ex__West_Bush_1,
     Ebih__By_Garage__Lower_Platform__ex__West_Bush_2,
     Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1,
+    Ebih__By_Garage__West_13__ex__Truck_Gate__East_1,
     Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1,
     Ebih__Drone_Room__Item__Urn_Collection_Skip,
     Ebih__Drone_Room__Item__Urn_Fast_Travel,
@@ -11875,6 +12022,7 @@ pub enum ExitId {
     Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1,
     Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1,
     Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1,
+    Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1,
     Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
     Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1,
     Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1,
@@ -11894,6 +12042,7 @@ pub enum ExitId {
     Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1,
     Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1,
     Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1,
+    Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1,
     Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1,
     Ebih__Grid_25_2_6__West_4__ex__Pit_1,
     Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1,
@@ -11909,6 +12058,10 @@ pub enum ExitId {
     Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2,
     Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1,
     Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1,
+    Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1,
+    Ebih__Guarded_Health__East_Hills__ex__East_1,
+    Ebih__Guarded_Health__East_Ruins__ex__East_1,
+    Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1,
     Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1,
     Ebih__Observation_Tower_Room__East_11__ex__Cliff_1,
     Ebih__Observation_Tower_Room__East_11__ex__Cliff_2,
@@ -11916,6 +12069,13 @@ pub enum ExitId {
     Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2,
     Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
     Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
+    Ebih__Truck_Gate__Door__ex__Portal_Stand_1,
+    Ebih__Truck_Gate__Door__ex__Switch_1,
+    Ebih__Truck_Gate__East__ex__By_Garage__West_13_1,
+    Ebih__Truck_Gate__Portal_Stand__ex__Door_1,
+    Ebih__Truck_Gate__Portal_Stand__ex__Switch_1,
+    Ebih__Truck_Gate__Switch__ex__Door_1,
+    Ebih__Truck_Gate__Switch__ex__Portal_Stand_1,
     Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1,
     Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2,
     Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1,
@@ -11948,6 +12108,32 @@ pub enum ExitId {
     Ebih__Vertical_Interchange__South__ex__Below_Door_1,
     Ebih__Vertical_Interchange__Switch__ex__Below_Door_1,
     Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1,
+    Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1,
+    Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1,
+    Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2,
+    Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1,
+    Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2,
+    Ebih__Walled_Off__Platform_3__ex__Platform_4_1,
+    Ebih__Walled_Off__Platform_3__ex__Platform_4_2,
+    Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1,
+    Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2,
+    Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1,
+    Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2,
+    Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3,
+    Ebih__Walled_Off__Upper_Slope__ex__West_12_1,
+    Ebih__Walled_Off__Upper_Slope__ex__West_12_2,
+    Ebih__Walled_Off__Upper_Slope__ex__West_12_3,
+    Ebih__Walled_Off__Wall_Left__Break_Through_Wall,
+    Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
+    Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1,
+    Ebih__Walled_Off__Wall_Left__ex__West_12_1,
+    Ebih__Walled_Off__Wall_Left__ex__West_12_2,
+    Ebih__Walled_Off__Wall_Right__Break_Through_Wall,
+    Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
+    Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1,
+    Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1,
+    Ebih__Walled_Off__West_12__ex__Upper_Slope_1,
+    Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1,
     Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
     Ebih__Waterfall__Alcove__ex__Alcove_Left_2,
     Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
@@ -13703,6 +13889,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (2)"),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),
+            ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => write!(f, "{}", "Ebih > By Garage > West 13 ==> Truck Gate > East (1)"),
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),
             ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => write!(f, "{}", "Ebih > Drone Room > Item > Urn Collection Skip"),
             ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => write!(f, "{}", "Ebih > Drone Room > Item > Urn Fast Travel"),
@@ -13762,6 +13949,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => write!(f, "{}", "Ebih > Ebih West > West 13 ==> Giguna > Wasteland > East 13 (1)"),
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)"),
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)"),
+            ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => write!(f, "{}", "Ebih > Gem Room > East 14 ==> Walled Off > West 14 (1)"),
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => write!(f, "{}", "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)"),
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)"),
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)"),
@@ -13781,6 +13969,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),
+            ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 12 ==> Walled Off > East 12 (1)"),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),
             ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > East 10 ==> Observation Tower Room > West 10 (1)"),
@@ -13796,6 +13985,10 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform ==> West 10 (2)"),
             ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > West 10 ==> Grid 25,10-12 > East 10 (1)"),
             ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > West 11 ==> Grid 25,10-12 > East 11 (1)"),
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => write!(f, "{}", "Ebih > Guarded Health > East ==> Walled Off > West 12 (1)"),
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => write!(f, "{}", "Ebih > Guarded Health > East Hills ==> East (1)"),
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => write!(f, "{}", "Ebih > Guarded Health > East Ruins ==> East (1)"),
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => write!(f, "{}", "Ebih > Guarded Health > Small Pond ==> East Ruins (1)"),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => write!(f, "{}", "Ebih > Observation Tower Room > East 11 ==> Base Camp > West 11 (1)"),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => write!(f, "{}", "Ebih > Observation Tower Room > East 11 ==> Cliff (1)"),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => write!(f, "{}", "Ebih > Observation Tower Room > East 11 ==> Cliff (2)"),
@@ -13803,6 +13996,13 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => write!(f, "{}", "Ebih > Observation Tower Room > Tower Top ==> West 9 (2)"),
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)"),
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)"),
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => write!(f, "{}", "Ebih > Truck Gate > Door ==> Portal Stand (1)"),
+            ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => write!(f, "{}", "Ebih > Truck Gate > Door ==> Switch (1)"),
+            ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => write!(f, "{}", "Ebih > Truck Gate > East ==> By Garage > West 13 (1)"),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => write!(f, "{}", "Ebih > Truck Gate > Portal Stand ==> Door (1)"),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => write!(f, "{}", "Ebih > Truck Gate > Portal Stand ==> Switch (1)"),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => write!(f, "{}", "Ebih > Truck Gate > Switch ==> Door (1)"),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => write!(f, "{}", "Ebih > Truck Gate > Switch ==> Portal Stand (1)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (1)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (2)"),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => write!(f, "{}", "Ebih > Vertical Interchange > Below Door ==> Refill Station (1)"),
@@ -13835,6 +14035,32 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => write!(f, "{}", "Ebih > Vertical Interchange > South ==> Below Door (1)"),
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => write!(f, "{}", "Ebih > Vertical Interchange > Switch ==> Below Door (1)"),
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => write!(f, "{}", "Ebih > Vertical Interchange > West 13 ==> Ebih West > East 13 (1)"),
+            ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => write!(f, "{}", "Ebih > Walled Off > East 12 ==> Grid 25,10-12 > West 12 (1)"),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => write!(f, "{}", "Ebih > Walled Off > Middle Ledge ==> Upper Left Ledge (1)"),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => write!(f, "{}", "Ebih > Walled Off > Middle Ledge ==> Upper Left Ledge (2)"),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => write!(f, "{}", "Ebih > Walled Off > Middle Ledge ==> Upper Slope (1)"),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => write!(f, "{}", "Ebih > Walled Off > Middle Ledge ==> Upper Slope (2)"),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => write!(f, "{}", "Ebih > Walled Off > Platform 3 ==> Platform 4 (1)"),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => write!(f, "{}", "Ebih > Walled Off > Platform 3 ==> Platform 4 (2)"),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => write!(f, "{}", "Ebih > Walled Off > Platform 5 ==> Middle Ledge (1)"),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => write!(f, "{}", "Ebih > Walled Off > Platform 5 ==> Middle Ledge (2)"),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => write!(f, "{}", "Ebih > Walled Off > Upper Left Ledge ==> West 12 (1)"),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => write!(f, "{}", "Ebih > Walled Off > Upper Left Ledge ==> West 12 (2)"),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => write!(f, "{}", "Ebih > Walled Off > Upper Left Ledge ==> West 12 (3)"),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => write!(f, "{}", "Ebih > Walled Off > Upper Slope ==> West 12 (1)"),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => write!(f, "{}", "Ebih > Walled Off > Upper Slope ==> West 12 (2)"),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => write!(f, "{}", "Ebih > Walled Off > Upper Slope ==> West 12 (3)"),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Left > Break Through Wall"),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => write!(f, "{}", "Ebih > Walled Off > Wall Left > Break Through Wall Faster"),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => write!(f, "{}", "Ebih > Walled Off > Wall Left ==> Wall Right (1)"),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => write!(f, "{}", "Ebih > Walled Off > Wall Left ==> West 12 (1)"),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => write!(f, "{}", "Ebih > Walled Off > Wall Left ==> West 12 (2)"),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => write!(f, "{}", "Ebih > Walled Off > Wall Right > Break Through Wall"),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => write!(f, "{}", "Ebih > Walled Off > Wall Right > Break Through Wall Faster"),
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => write!(f, "{}", "Ebih > Walled Off > Wall Right ==> Wall Left (1)"),
+            ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => write!(f, "{}", "Ebih > Walled Off > West 12 ==> Guarded Health > East (1)"),
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => write!(f, "{}", "Ebih > Walled Off > West 12 ==> Upper Slope (1)"),
+            ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => write!(f, "{}", "Ebih > Walled Off > West 14 ==> Gem Room > East 14 (1)"),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Left (1)"),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Left (2)"),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Right (1)"),
@@ -15595,6 +15821,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > By Garage > Lower Platform ==> West Bush (1)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1),
             "Ebih > By Garage > Lower Platform ==> West Bush (2)" => Ok(ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2),
             "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)" => Ok(ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1),
+            "Ebih > By Garage > West 13 ==> Truck Gate > East (1)" => Ok(ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1),
             "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)" => Ok(ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1),
             "Ebih > Drone Room > Item > Urn Collection Skip" => Ok(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
             "Ebih > Drone Room > Item > Urn Fast Travel" => Ok(ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
@@ -15654,6 +15881,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Ebih West > West 13 ==> Giguna > Wasteland > East 13 (1)" => Ok(ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1),
             "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1),
             "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1),
+            "Ebih > Gem Room > East 14 ==> Walled Off > West 14 (1)" => Ok(ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1),
             "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)" => Ok(ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1),
             "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1),
             "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1),
@@ -15673,6 +15901,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1),
             "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1),
             "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1),
+            "Ebih > Grid 25,10-12 > West 12 ==> Walled Off > East 12 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1),
             "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)" => Ok(ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1),
             "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)" => Ok(ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1),
             "Ebih > Grid 26,10-11 > East 10 ==> Observation Tower Room > West 10 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1),
@@ -15688,6 +15917,10 @@ impl std::str::FromStr for ExitId {
             "Ebih > Grid 26,10-11 > Upper Platform ==> West 10 (2)" => Ok(ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2),
             "Ebih > Grid 26,10-11 > West 10 ==> Grid 25,10-12 > East 10 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1),
             "Ebih > Grid 26,10-11 > West 11 ==> Grid 25,10-12 > East 11 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1),
+            "Ebih > Guarded Health > East ==> Walled Off > West 12 (1)" => Ok(ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1),
+            "Ebih > Guarded Health > East Hills ==> East (1)" => Ok(ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1),
+            "Ebih > Guarded Health > East Ruins ==> East (1)" => Ok(ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1),
+            "Ebih > Guarded Health > Small Pond ==> East Ruins (1)" => Ok(ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1),
             "Ebih > Observation Tower Room > East 11 ==> Base Camp > West 11 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1),
             "Ebih > Observation Tower Room > East 11 ==> Cliff (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1),
             "Ebih > Observation Tower Room > East 11 ==> Cliff (2)" => Ok(ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2),
@@ -15695,6 +15928,13 @@ impl std::str::FromStr for ExitId {
             "Ebih > Observation Tower Room > Tower Top ==> West 9 (2)" => Ok(ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2),
             "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1),
             "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1),
+            "Ebih > Truck Gate > Door ==> Portal Stand (1)" => Ok(ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1),
+            "Ebih > Truck Gate > Door ==> Switch (1)" => Ok(ExitId::Ebih__Truck_Gate__Door__ex__Switch_1),
+            "Ebih > Truck Gate > East ==> By Garage > West 13 (1)" => Ok(ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1),
+            "Ebih > Truck Gate > Portal Stand ==> Door (1)" => Ok(ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1),
+            "Ebih > Truck Gate > Portal Stand ==> Switch (1)" => Ok(ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1),
+            "Ebih > Truck Gate > Switch ==> Door (1)" => Ok(ExitId::Ebih__Truck_Gate__Switch__ex__Door_1),
+            "Ebih > Truck Gate > Switch ==> Portal Stand (1)" => Ok(ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1),
             "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1),
             "Ebih > Vertical Interchange > Below Door ==> Blocked Refill Station (2)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2),
             "Ebih > Vertical Interchange > Below Door ==> Refill Station (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1),
@@ -15727,6 +15967,32 @@ impl std::str::FromStr for ExitId {
             "Ebih > Vertical Interchange > South ==> Below Door (1)" => Ok(ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1),
             "Ebih > Vertical Interchange > Switch ==> Below Door (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1),
             "Ebih > Vertical Interchange > West 13 ==> Ebih West > East 13 (1)" => Ok(ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1),
+            "Ebih > Walled Off > East 12 ==> Grid 25,10-12 > West 12 (1)" => Ok(ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1),
+            "Ebih > Walled Off > Middle Ledge ==> Upper Left Ledge (1)" => Ok(ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1),
+            "Ebih > Walled Off > Middle Ledge ==> Upper Left Ledge (2)" => Ok(ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2),
+            "Ebih > Walled Off > Middle Ledge ==> Upper Slope (1)" => Ok(ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1),
+            "Ebih > Walled Off > Middle Ledge ==> Upper Slope (2)" => Ok(ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2),
+            "Ebih > Walled Off > Platform 3 ==> Platform 4 (1)" => Ok(ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1),
+            "Ebih > Walled Off > Platform 3 ==> Platform 4 (2)" => Ok(ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2),
+            "Ebih > Walled Off > Platform 5 ==> Middle Ledge (1)" => Ok(ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1),
+            "Ebih > Walled Off > Platform 5 ==> Middle Ledge (2)" => Ok(ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2),
+            "Ebih > Walled Off > Upper Left Ledge ==> West 12 (1)" => Ok(ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1),
+            "Ebih > Walled Off > Upper Left Ledge ==> West 12 (2)" => Ok(ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2),
+            "Ebih > Walled Off > Upper Left Ledge ==> West 12 (3)" => Ok(ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3),
+            "Ebih > Walled Off > Upper Slope ==> West 12 (1)" => Ok(ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1),
+            "Ebih > Walled Off > Upper Slope ==> West 12 (2)" => Ok(ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2),
+            "Ebih > Walled Off > Upper Slope ==> West 12 (3)" => Ok(ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3),
+            "Ebih > Walled Off > Wall Left > Break Through Wall" => Ok(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
+            "Ebih > Walled Off > Wall Left > Break Through Wall Faster" => Ok(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+            "Ebih > Walled Off > Wall Left ==> Wall Right (1)" => Ok(ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1),
+            "Ebih > Walled Off > Wall Left ==> West 12 (1)" => Ok(ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1),
+            "Ebih > Walled Off > Wall Left ==> West 12 (2)" => Ok(ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2),
+            "Ebih > Walled Off > Wall Right > Break Through Wall" => Ok(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
+            "Ebih > Walled Off > Wall Right > Break Through Wall Faster" => Ok(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+            "Ebih > Walled Off > Wall Right ==> Wall Left (1)" => Ok(ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1),
+            "Ebih > Walled Off > West 12 ==> Guarded Health > East (1)" => Ok(ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1),
+            "Ebih > Walled Off > West 12 ==> Upper Slope (1)" => Ok(ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1),
+            "Ebih > Walled Off > West 14 ==> Gem Room > East 14 (1)" => Ok(ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1),
             "Ebih > Waterfall > Alcove ==> Alcove Left (1)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1),
             "Ebih > Waterfall > Alcove ==> Alcove Left (2)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2),
             "Ebih > Waterfall > Alcove ==> Alcove Right (1)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1),
@@ -16942,6 +17208,8 @@ pub enum ActionId {
     Ebih__Ebih_West__Upper_Save__Save,
     Ebih__Grid_25_10_12__Door_Left__Open_Door,
     Ebih__Grid_25_10_12__East_11__Open_Door,
+    Ebih__Truck_Gate__Portal_Stand__Open_Door,
+    Ebih__Truck_Gate__Switch__Open_Door,
     Ebih__Vertical_Interchange__West_13__Open_Door,
     Ebih__Waterfall__Below_Left_Switch__Open_Door,
     Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,
@@ -17198,6 +17466,12 @@ impl fmt::Display for ActionId {
             }
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 > Open Door")
+            }
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
+                write!(f, "{}", "Ebih > Truck Gate > Portal Stand > Open Door")
+            }
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
+                write!(f, "{}", "Ebih > Truck Gate > Switch > Open Door")
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
                 write!(f, "{}", "Ebih > Vertical Interchange > West 13 > Open Door")
@@ -17665,6 +17939,12 @@ impl std::str::FromStr for ActionId {
             "Ebih > Grid 25,10-12 > East 11 > Open Door" => {
                 Ok(ActionId::Ebih__Grid_25_10_12__East_11__Open_Door)
             }
+            "Ebih > Truck Gate > Portal Stand > Open Door" => {
+                Ok(ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door)
+            }
+            "Ebih > Truck Gate > Switch > Open Door" => {
+                Ok(ActionId::Ebih__Truck_Gate__Switch__Open_Door)
+            }
             "Ebih > Vertical Interchange > West 13 > Open Door" => {
                 Ok(ActionId::Ebih__Vertical_Interchange__West_13__Open_Door)
             }
@@ -17946,6 +18226,7 @@ pub enum CanonId {
     Ebih_Alu,
     Ebih_Base_Camp_Fragment,
     Ebih_Bush_Flask,
+    Ebih_Walled_Off_Wall,
     Ebih_Wasteland_Passage_H,
     Ebih_Waterfall_Block_Left,
     Ebih_Waterfall_Block_Right,
@@ -18009,6 +18290,8 @@ pub enum CanonId {
     Loc_Ebih__Ebih_West__Alcove__Tablet,
     Loc_Ebih__Grid_25_2_6__Pit__Item,
     Loc_Ebih__Grid_26_10_11__Ledge__Note,
+    Loc_Ebih__Guarded_Health__Far_West__Refill,
+    Loc_Ebih__Guarded_Health__West_Basin__Health,
     Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
     Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch,
     Loc_Ebih__Waterfall__Alcove__Pedestal,
@@ -18150,6 +18433,7 @@ impl fmt::Display for CanonId {
             CanonId::Ebih_Alu => write!(f, "{}", "Ebih_Alu"),
             CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih_Bush_Flask"),
+            CanonId::Ebih_Walled_Off_Wall => write!(f, "{}", "Ebih_Walled_Off_Wall"),
             CanonId::Ebih_Wasteland_Passage_H => write!(f, "{}", "Ebih_Wasteland_Passage_H"),
             CanonId::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
             CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
@@ -18312,6 +18596,12 @@ impl fmt::Display for CanonId {
             }
             CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note => {
                 write!(f, "{}", "Loc_Ebih__Grid_26_10_11__Ledge__Note")
+            }
+            CanonId::Loc_Ebih__Guarded_Health__Far_West__Refill => {
+                write!(f, "{}", "Loc_Ebih__Guarded_Health__Far_West__Refill")
+            }
+            CanonId::Loc_Ebih__Guarded_Health__West_Basin__Health => {
+                write!(f, "{}", "Loc_Ebih__Guarded_Health__West_Basin__Health")
             }
             CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => write!(
                 f,
@@ -18735,6 +19025,7 @@ impl std::str::FromStr for CanonId {
             "Ebih_Alu" => Ok(CanonId::Ebih_Alu),
             "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
             "Ebih_Bush_Flask" => Ok(CanonId::Ebih_Bush_Flask),
+            "Ebih_Walled_Off_Wall" => Ok(CanonId::Ebih_Walled_Off_Wall),
             "Ebih_Wasteland_Passage_H" => Ok(CanonId::Ebih_Wasteland_Passage_H),
             "Ebih_Waterfall_Block_Left" => Ok(CanonId::Ebih_Waterfall_Block_Left),
             "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),
@@ -18863,6 +19154,12 @@ impl std::str::FromStr for CanonId {
             "Loc_Ebih__Grid_25_2_6__Pit__Item" => Ok(CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item),
             "Loc_Ebih__Grid_26_10_11__Ledge__Note" => {
                 Ok(CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note)
+            }
+            "Loc_Ebih__Guarded_Health__Far_West__Refill" => {
+                Ok(CanonId::Loc_Ebih__Guarded_Health__Far_West__Refill)
+            }
+            "Loc_Ebih__Guarded_Health__West_Basin__Health" => {
+                Ok(CanonId::Loc_Ebih__Guarded_Health__West_Basin__Health)
             }
             "Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block" => {
                 Ok(CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block)

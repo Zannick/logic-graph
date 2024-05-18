@@ -509,6 +509,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__By_Garage__Garage_Entry
         | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => AreaId::Ebih__By_Garage,
+        SpotId::Ebih__Truck_Gate__East
+        | SpotId::Ebih__Truck_Gate__Switch
+        | SpotId::Ebih__Truck_Gate__Door
+        | SpotId::Ebih__Truck_Gate__Portal_Stand => AreaId::Ebih__Truck_Gate,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
@@ -672,7 +676,25 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => AreaId::Ebih__Vertical_Interchange,
-        SpotId::Ebih__Gem_Room__West_13 => AreaId::Ebih__Gem_Room,
+        SpotId::Ebih__Walled_Off__East_12
+        | SpotId::Ebih__Walled_Off__Wall_Right
+        | SpotId::Ebih__Walled_Off__Wall_Left
+        | SpotId::Ebih__Walled_Off__Upper_Slope
+        | SpotId::Ebih__Walled_Off__Upper_Left_Ledge
+        | SpotId::Ebih__Walled_Off__West_12
+        | SpotId::Ebih__Walled_Off__Middle_Ledge
+        | SpotId::Ebih__Walled_Off__Platform_5
+        | SpotId::Ebih__Walled_Off__Platform_4
+        | SpotId::Ebih__Walled_Off__Platform_3
+        | SpotId::Ebih__Walled_Off__West_14 => AreaId::Ebih__Walled_Off,
+        SpotId::Ebih__Guarded_Health__East
+        | SpotId::Ebih__Guarded_Health__East_Hills
+        | SpotId::Ebih__Guarded_Health__East_Ruins
+        | SpotId::Ebih__Guarded_Health__Small_Pond
+        | SpotId::Ebih__Guarded_Health__West_Hill
+        | SpotId::Ebih__Guarded_Health__West_Basin
+        | SpotId::Ebih__Guarded_Health__Far_West => AreaId::Ebih__Guarded_Health,
+        SpotId::Ebih__Gem_Room__West_13 | SpotId::Ebih__Gem_Room__East_14 => AreaId::Ebih__Gem_Room,
         SpotId::Filter__Entrance__Egg | SpotId::Filter__Entrance__East => AreaId::Filter__Entrance,
         SpotId::Filter__Lower_Hallway__West | SpotId::Filter__Lower_Hallway__East => {
             AreaId::Filter__Lower_Hallway
@@ -1641,7 +1663,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
         | SpotId::Menu__Kiengir_Map__Glacier_40_8
         | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
-        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
+        | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
+        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -2285,6 +2309,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__By_Garage__Garage_Entry
         | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => RegionId::Ebih,
+        SpotId::Ebih__Truck_Gate__East
+        | SpotId::Ebih__Truck_Gate__Switch
+        | SpotId::Ebih__Truck_Gate__Door
+        | SpotId::Ebih__Truck_Gate__Portal_Stand => RegionId::Ebih,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
@@ -2446,7 +2474,25 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => RegionId::Ebih,
-        SpotId::Ebih__Gem_Room__West_13 => RegionId::Ebih,
+        SpotId::Ebih__Walled_Off__East_12
+        | SpotId::Ebih__Walled_Off__Wall_Right
+        | SpotId::Ebih__Walled_Off__Wall_Left
+        | SpotId::Ebih__Walled_Off__Upper_Slope
+        | SpotId::Ebih__Walled_Off__Upper_Left_Ledge
+        | SpotId::Ebih__Walled_Off__West_12
+        | SpotId::Ebih__Walled_Off__Middle_Ledge
+        | SpotId::Ebih__Walled_Off__Platform_5
+        | SpotId::Ebih__Walled_Off__Platform_4
+        | SpotId::Ebih__Walled_Off__Platform_3
+        | SpotId::Ebih__Walled_Off__West_14 => RegionId::Ebih,
+        SpotId::Ebih__Guarded_Health__East
+        | SpotId::Ebih__Guarded_Health__East_Hills
+        | SpotId::Ebih__Guarded_Health__East_Ruins
+        | SpotId::Ebih__Guarded_Health__Small_Pond
+        | SpotId::Ebih__Guarded_Health__West_Hill
+        | SpotId::Ebih__Guarded_Health__West_Basin
+        | SpotId::Ebih__Guarded_Health__Far_West => RegionId::Ebih,
+        SpotId::Ebih__Gem_Room__West_13 | SpotId::Ebih__Gem_Room__East_14 => RegionId::Ebih,
         SpotId::Filter__Entrance__Egg | SpotId::Filter__Entrance__East => RegionId::Filter,
         SpotId::Filter__Lower_Hallway__West | SpotId::Filter__Lower_Hallway__East => {
             RegionId::Filter
@@ -3395,7 +3441,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask
         | SpotId::Menu__Kiengir_Map__Glacier_40_8
         | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
-        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
+        | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
+        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3671,8 +3719,16 @@ impl world::Accessible for Location {
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
             LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
+            LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Ebih__Guarded_Health__West_Basin__Health => true,
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::access_invoke_can_damage(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::access_nanite_mist(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::access_invoke_mist2(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::access_nanite_mist(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::access_invoke_mist2(ctx, world),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
@@ -3961,8 +4017,15 @@ impl world::Accessible for Location {
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::observe_access_invoke_bs(ctx, world, full_obs),
+            LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -4238,8 +4301,15 @@ impl world::Accessible for Location {
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Ebih_West__Block_Right__Break_Block => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::explain_invoke_bs(ctx, world, edict),
+            LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::explain_invoke_more_refills(ctx, world, edict),
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -5022,6 +5092,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
+            ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => true,
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
             ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
@@ -5081,6 +5152,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
+            ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => true,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
@@ -5100,6 +5172,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => true,
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => true,
+            ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => true,
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1 => true,
@@ -5115,6 +5188,10 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => true,
             ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1 => true,
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => true,
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => rules::access_invoke_hook(ctx, world),
@@ -5122,6 +5199,13 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => rules::access_invoke_hover(ctx, world),
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => rules::access_ebih__truck_gate__door__ex__portal_stand_1__req(ctx, world),
+            ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => rules::access_ebih__truck_gate__door__ex__switch_1__req(ctx, world),
+            ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => true,
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => rules::access_ebih__truck_gate__portal_stand__ex__door_1__req(ctx, world),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => rules::access_ebih__truck_gate__portal_stand__ex__switch_1__req(ctx, world),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => rules::access_ebih__truck_gate__switch__ex__door_1__req(ctx, world),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => rules::access_ebih__truck_gate__switch__ex__portal_stand_1__req(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => rules::access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => rules::access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => rules::access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(ctx, world),
@@ -5154,6 +5238,32 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
+            ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => rules::access_invoke_infinite_climb(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => rules::access_invoke_infinite_climb_and_slingshot_hook(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::access_nanite_mist(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::access_invoke_mist2(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => rules::access_ebih_walled_off_wall(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::access_nanite_mist(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::access_invoke_mist2(ctx, world),
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => rules::access_ebih_walled_off_wall(ctx, world),
+            ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
+            ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => true,
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_left(ctx, world),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::access_invoke_hook_and_not_ebih_waterfall_block_left(ctx, world),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::access_mode_eq_drone_and_ebih_waterfall_block_right(ctx, world),
@@ -6835,10 +6945,20 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => rules::observe_access_ebih__truck_gate__door__ex__portal_stand_1__req(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => rules::observe_access_ebih__truck_gate__door__ex__switch_1__req(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => rules::observe_access_ebih__truck_gate__portal_stand__ex__door_1__req(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => rules::observe_access_ebih__truck_gate__portal_stand__ex__switch_1__req(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => rules::observe_access_ebih__truck_gate__switch__ex__door_1__req(ctx, world, full_obs),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => rules::observe_access_ebih__truck_gate__switch__ex__portal_stand_1__req(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => rules::observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => rules::observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => rules::observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(ctx, world, full_obs),
@@ -6868,6 +6988,30 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => rules::observe_access_ebih_walled_off_wall(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => rules::observe_access_ebih_walled_off_wall(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::observe_access_mode_eq_drone_and_ebih_waterfall_block_left(ctx, world, full_obs),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::observe_access_invoke_hook_and_not_ebih_waterfall_block_left(ctx, world, full_obs),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::observe_access_mode_eq_drone_and_ebih_waterfall_block_right(ctx, world, full_obs),
@@ -8410,10 +8554,20 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => rules::explain_ebih__truck_gate__door__ex__portal_stand_1__req(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => rules::explain_ebih__truck_gate__door__ex__switch_1__req(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => rules::explain_ebih__truck_gate__portal_stand__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => rules::explain_ebih__truck_gate__portal_stand__ex__switch_1__req(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => rules::explain_ebih__truck_gate__switch__ex__door_1__req(ctx, world, edict),
+            ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => rules::explain_ebih__truck_gate__switch__ex__portal_stand_1__req(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => rules::explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => rules::explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => rules::explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(ctx, world, edict),
@@ -8443,6 +8597,30 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1 => rules::explain_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => rules::explain_invoke_infinite_climb(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => rules::explain_invoke_infinite_climb_and_slingshot_hook(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => rules::explain_ebih_walled_off_wall(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => rules::explain_ebih_walled_off_wall(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_left(ctx, world, edict),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::explain_invoke_hook_and_not_ebih_waterfall_block_left(ctx, world, edict),
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::explain_mode_eq_drone_and_ebih_waterfall_block_right(ctx, world, edict),
@@ -9455,6 +9633,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => true,
             ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => true,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
+            ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => true,
             ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip => true,
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
@@ -9473,6 +9652,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__Ebih_West__West_12__ex__Giguna__Wasteland__East_12_1 => true,
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
+            ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => true,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
@@ -9481,15 +9661,19 @@ impl world::Exit for Exit {
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => true,
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => true,
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => true,
+            ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => true,
             ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1 => true,
             ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => true,
             ExitId::Ebih__Grid_26_10_11__West_11__ex__Grid_25_10_12__East_11_1 => true,
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
+            ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1 => true,
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
+            ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => true,
             ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1 => true,
             ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => true,
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => true,
@@ -9854,6 +10038,8 @@ impl world::Accessible for Action {
             ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::access_ebih__truck_gate__portal_stand__open_door__req(ctx, world),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_ebih__truck_gate__switch__open_door__req(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_ebih__vertical_interchange__west_13__open_door__req(ctx, world),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
@@ -9976,6 +10162,8 @@ impl world::Accessible for Action {
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::observe_access_ebih__truck_gate__portal_stand__open_door__req(ctx, world, full_obs),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::observe_access_ebih__truck_gate__switch__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::observe_access_ebih__vertical_interchange__west_13__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
@@ -10415,6 +10603,27 @@ impl world::Accessible for Action {
             }
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
+                let (ret, mut tags) = rules::explain_ebih__truck_gate__portal_stand__open_door__req(
+                    ctx, world, edict,
+                );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
+                let (ret, mut tags) =
+                    rules::explain_ebih__truck_gate__switch__open_door__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -11184,6 +11393,8 @@ impl world::Action for Action {
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::action_ebih__truck_gate__switch__open_door__do(ctx, world),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::action_ebih__truck_gate__portal_stand__open_door__do(ctx, world),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
@@ -11273,7 +11484,7 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world),
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
@@ -11555,6 +11766,14 @@ impl world::Action for Action {
             }
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
                 rules::observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
+                rules::observe_action_ebih__truck_gate__switch__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
+                rules::observe_action_ebih__truck_gate__portal_stand__open_door__do(
                     ctx, world, full_obs,
                 );
             }
@@ -11944,7 +12163,7 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
-                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item(ctx, world, full_obs);
+                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world, full_obs);
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
@@ -12239,7 +12458,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1743] = [
+static RAW_SPOTS: [SpotId; 1768] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -12794,6 +13013,7 @@ static RAW_SPOTS: [SpotId; 1743] = [
     SpotId::Ebih__Ebih_West__West_9,
     SpotId::Ebih__Ebih_West__West_Fork,
     SpotId::Ebih__Ebih_West__West_High_Cliff,
+    SpotId::Ebih__Gem_Room__East_14,
     SpotId::Ebih__Gem_Room__West_13,
     SpotId::Ebih__Grid_21_2_6__East_6,
     SpotId::Ebih__Grid_21_2_6__Portal_Stand,
@@ -12822,12 +13042,23 @@ static RAW_SPOTS: [SpotId; 1743] = [
     SpotId::Ebih__Grid_26_10_11__Upper_Platform,
     SpotId::Ebih__Grid_26_10_11__West_10,
     SpotId::Ebih__Grid_26_10_11__West_11,
+    SpotId::Ebih__Guarded_Health__East,
+    SpotId::Ebih__Guarded_Health__East_Hills,
+    SpotId::Ebih__Guarded_Health__East_Ruins,
+    SpotId::Ebih__Guarded_Health__Far_West,
+    SpotId::Ebih__Guarded_Health__Small_Pond,
+    SpotId::Ebih__Guarded_Health__West_Basin,
+    SpotId::Ebih__Guarded_Health__West_Hill,
     SpotId::Ebih__Observation_Tower_Room__Cliff,
     SpotId::Ebih__Observation_Tower_Room__East_11,
     SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
     SpotId::Ebih__Observation_Tower_Room__Tower_Top,
     SpotId::Ebih__Observation_Tower_Room__West_10,
     SpotId::Ebih__Observation_Tower_Room__West_9,
+    SpotId::Ebih__Truck_Gate__Door,
+    SpotId::Ebih__Truck_Gate__East,
+    SpotId::Ebih__Truck_Gate__Portal_Stand,
+    SpotId::Ebih__Truck_Gate__Switch,
     SpotId::Ebih__Vertical_Interchange__Below_Door,
     SpotId::Ebih__Vertical_Interchange__Block_Cubby,
     SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
@@ -12848,6 +13079,17 @@ static RAW_SPOTS: [SpotId; 1743] = [
     SpotId::Ebih__Vertical_Interchange__South,
     SpotId::Ebih__Vertical_Interchange__Switch,
     SpotId::Ebih__Vertical_Interchange__West_13,
+    SpotId::Ebih__Walled_Off__East_12,
+    SpotId::Ebih__Walled_Off__Middle_Ledge,
+    SpotId::Ebih__Walled_Off__Platform_3,
+    SpotId::Ebih__Walled_Off__Platform_4,
+    SpotId::Ebih__Walled_Off__Platform_5,
+    SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
+    SpotId::Ebih__Walled_Off__Upper_Slope,
+    SpotId::Ebih__Walled_Off__Wall_Left,
+    SpotId::Ebih__Walled_Off__Wall_Right,
+    SpotId::Ebih__Walled_Off__West_12,
+    SpotId::Ebih__Walled_Off__West_14,
     SpotId::Ebih__Waterfall__Alcove,
     SpotId::Ebih__Waterfall__Alcove_Left,
     SpotId::Ebih__Waterfall__Alcove_Right,
@@ -13829,7 +14071,9 @@ static RAW_SPOTS: [SpotId; 1743] = [
     SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Bronze_Axe,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+    SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
     SpotId::Menu__Kiengir_Map__Ebih_Observatory,
+    SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate,
     SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
     SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
     SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
@@ -14201,7 +14445,7 @@ lazy_static! {
             end: SpotId::Ebih__Ebih_West__West_High_Cliff.into_usize() + 1,
         },
         AreaId::Ebih__Gem_Room => Range {
-            start: SpotId::Ebih__Gem_Room__West_13.into_usize(),
+            start: SpotId::Ebih__Gem_Room__East_14.into_usize(),
             end: SpotId::Ebih__Gem_Room__West_13.into_usize() + 1,
         },
         AreaId::Ebih__Grid_21_2_6 => Range {
@@ -14220,13 +14464,25 @@ lazy_static! {
             start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
             end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
         },
+        AreaId::Ebih__Guarded_Health => Range {
+            start: SpotId::Ebih__Guarded_Health__East.into_usize(),
+            end: SpotId::Ebih__Guarded_Health__West_Hill.into_usize() + 1,
+        },
         AreaId::Ebih__Observation_Tower_Room => Range {
             start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
             end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
         },
+        AreaId::Ebih__Truck_Gate => Range {
+            start: SpotId::Ebih__Truck_Gate__Door.into_usize(),
+            end: SpotId::Ebih__Truck_Gate__Switch.into_usize() + 1,
+        },
         AreaId::Ebih__Vertical_Interchange => Range {
             start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
             end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+        },
+        AreaId::Ebih__Walled_Off => Range {
+            start: SpotId::Ebih__Walled_Off__East_12.into_usize(),
+            end: SpotId::Ebih__Walled_Off__West_14.into_usize() + 1,
         },
         AreaId::Ebih__Waterfall => Range {
             start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
@@ -14776,7 +15032,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 198;
+    const NUM_CANON_LOCATIONS: usize = 201;
 
     fn ruleset(&self) -> String {
         format!(
@@ -14816,7 +15072,7 @@ impl world::World for World {
     // Hardcoded locations. To support a randomizer, this would be better as a cache.
     fn get_item_locations(&self, item: Item) -> Vec<LocationId> {
         match item {
-            Item::Health_Fragment => vec![LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item, LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side, LocationId::Ebih__Base_Camp__Top_Platform__Item, LocationId::Ebih__By_Garage__Crawlspace__Fragment, LocationId::Ebih__Ebih_East__Dispenser__Vend, LocationId::Giguna_Breach__Cubby__Rocks__Health, LocationId::Giguna__Wasteland__Door_Right__Health, LocationId::Giguna__Dual_Path__Wall_Secret__Health, LocationId::Glacier__Sea_Burial__Deep_Cache__Health, LocationId::Glacier__Peak__Birds_Eye__Item, LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health, LocationId::Interior__Ebih_Cave__Entry__Health, LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health, LocationId::Uhrum__Siege_Corridor__Center_Box__Box],
+            Item::Health_Fragment => vec![LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item, LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side, LocationId::Ebih__Base_Camp__Top_Platform__Item, LocationId::Ebih__By_Garage__Crawlspace__Fragment, LocationId::Ebih__Ebih_East__Dispenser__Vend, LocationId::Ebih__Guarded_Health__West_Basin__Health, LocationId::Giguna_Breach__Cubby__Rocks__Health, LocationId::Giguna__Wasteland__Door_Right__Health, LocationId::Giguna__Dual_Path__Wall_Secret__Health, LocationId::Glacier__Sea_Burial__Deep_Cache__Health, LocationId::Glacier__Peak__Birds_Eye__Item, LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health, LocationId::Interior__Ebih_Cave__Entry__Health, LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health, LocationId::Uhrum__Siege_Corridor__Center_Box__Box],
             Item::Flask => vec![LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item, LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask, LocationId::Amagi__West_Lake__Cavern_Eye__Item, LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward, LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask, LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask, LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush, LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush, LocationId::Ebih__Boss_Room__Boss__Boss_Reward, LocationId::Ebih__Grid_25_2_6__Pit__Item, LocationId::Giguna_Breach__Chimney__Cache__Flask, LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask, LocationId::Giguna__Giguna_Northeast__Vault__Item, LocationId::Giguna__Ruins_East__Way_Up_High__Item, LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask, LocationId::Giguna__Ruins_Top__Flask__Flask, LocationId::Giguna__Far_Corner__Grass__Obscured_Item, LocationId::Giguna__Lamassu__Deposit__Flask, LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask, LocationId::Giguna__Gateway__Flask_Ledge__Item, LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item, LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress, LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel, LocationId::Glacier__Vertical_Room__Peak__Flask, LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item, LocationId::Irikar_Breach__Worm_Rave__Corner__Item, LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item, LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask, LocationId::Uhrum__Annuna_Corridor__Statue__Item],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
             Item::Amagi_Dragon_Eye_Passage => vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall],
@@ -14838,7 +15094,7 @@ impl world::World for World {
             Item::Annuna_East_Bridge_Gate => vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch, LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below],
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
             Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
-            Item::Power_Core => vec![LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup, LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup, LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill, LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill, LocationId::Giguna__West_Caverns__Bush__Item, LocationId::Irikar__Abandoned_Room__Corner_Core__Core, LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup, LocationId::Uhrum__West_Entrance__Sand__Refill, LocationId::Uhrum__Siege_Corridor__Western_Cache__Core],
+            Item::Power_Core => vec![LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup, LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup, LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill, LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill, LocationId::Ebih__Guarded_Health__Far_West__Refill, LocationId::Giguna__West_Caverns__Bush__Item, LocationId::Irikar__Abandoned_Room__Corner_Core__Core, LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup, LocationId::Uhrum__West_Entrance__Sand__Refill, LocationId::Uhrum__Siege_Corridor__Western_Cache__Core],
             Item::Family_Tragedy => vec![LocationId::Annuna__Sniper_Valley__Table__Item],
             Item::Sniper_Valley_Rock_1 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall],
             Item::Sniper_Valley_Rock_2 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall],
@@ -14870,6 +15126,7 @@ impl world::World for World {
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
             Item::Ebih_Interchange_Block => vec![LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block],
             Item::Ebih_Interchange_Gate => vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch],
+            Item::Ebih_Walled_Off_Wall => vec![LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall, LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall, LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster, LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall, LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall, LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster],
             Item::Hammond_Auth => vec![LocationId::Filter__Core__Terminal_East__Authorize_Hammond],
             Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn],
             Item::Giguna_Northeast_Gate => vec![LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate, LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button],
@@ -15085,6 +15342,12 @@ impl world::World for World {
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => SpotId::Ebih__Vertical_Interchange__Block_Cubby,
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => SpotId::Ebih__Vertical_Interchange__Switch,
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => SpotId::Ebih__Walled_Off__Wall_Right,
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => SpotId::Ebih__Walled_Off__Wall_Right,
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => SpotId::Ebih__Walled_Off__Wall_Left,
+            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => SpotId::Ebih__Walled_Off__Wall_Left,
+            LocationId::Ebih__Guarded_Health__West_Basin__Health => SpotId::Ebih__Guarded_Health__West_Basin,
+            LocationId::Ebih__Guarded_Health__Far_West__Refill => SpotId::Ebih__Guarded_Health__Far_West,
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => SpotId::Filter__Core__Terminal_East,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => SpotId::Giguna_Breach__Chimney__Cache,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
@@ -15295,6 +15558,10 @@ impl world::World for World {
             }
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
                 SpotId::Ebih__Base_Camp__Left_Platform_Moved
+            }
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => SpotId::Ebih__Truck_Gate__Switch,
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
+                SpotId::Ebih__Truck_Gate__Portal_Stand
             }
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
                 SpotId::Ebih__Grid_25_10_12__Door_Left
@@ -15870,9 +16137,15 @@ impl world::World for World {
             ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => SpotId::Ebih__By_Garage__Crawlspace,
             ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__East_Bush_2 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 | ExitId:: Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => SpotId::Ebih__By_Garage__Lower_Platform,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => SpotId::Ebih__By_Garage__West_12,
+            ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => SpotId::Ebih__By_Garage__West_13,
             ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => SpotId::Ebih__By_Garage__Garage_Entry,
+            ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => SpotId::Ebih__Truck_Gate__East,
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 | ExitId:: Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => SpotId::Ebih__Truck_Gate__Switch,
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 | ExitId:: Ebih__Truck_Gate__Door__ex__Switch_1 => SpotId::Ebih__Truck_Gate__Door,
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 | ExitId:: Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => SpotId::Ebih__Truck_Gate__Portal_Stand,
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => SpotId::Ebih__Grid_25_10_12__East_12,
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => SpotId::Ebih__Grid_25_10_12__Bush,
+            ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => SpotId::Ebih__Grid_25_10_12__West_12,
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => SpotId::Ebih__Grid_25_10_12__Below_Bush,
             ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 | ExitId:: Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2 => SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1 => SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -15988,7 +16261,24 @@ impl world::World for World {
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => SpotId::Ebih__Vertical_Interchange__Below_Door,
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__Switch,
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__South,
+            ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => SpotId::Ebih__Walled_Off__East_12,
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => SpotId::Ebih__Walled_Off__Wall_Right,
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => SpotId::Ebih__Walled_Off__Wall_Right,
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 | ExitId:: Ebih__Walled_Off__Wall_Left__ex__West_12_1 | ExitId:: Ebih__Walled_Off__Wall_Left__ex__West_12_2 => SpotId::Ebih__Walled_Off__Wall_Left,
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall | ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => SpotId::Ebih__Walled_Off__Wall_Left,
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 | ExitId:: Ebih__Walled_Off__Upper_Slope__ex__West_12_2 | ExitId:: Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => SpotId::Ebih__Walled_Off__Upper_Slope,
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 | ExitId:: Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 | ExitId:: Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 | ExitId:: Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => SpotId::Ebih__Walled_Off__West_12,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 | ExitId:: Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 | ExitId:: Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 | ExitId:: Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => SpotId::Ebih__Walled_Off__Middle_Ledge,
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 | ExitId:: Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => SpotId::Ebih__Walled_Off__Platform_5,
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 | ExitId:: Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => SpotId::Ebih__Walled_Off__Platform_3,
+            ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => SpotId::Ebih__Walled_Off__West_14,
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => SpotId::Ebih__Guarded_Health__East,
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => SpotId::Ebih__Guarded_Health__East_Hills,
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => SpotId::Ebih__Guarded_Health__East_Ruins,
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => SpotId::Ebih__Guarded_Health__Small_Pond,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => SpotId::Ebih__Gem_Room__West_13,
+            ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => SpotId::Ebih__Gem_Room__East_14,
             ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => SpotId::Filter__Entrance__East,
             ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 | ExitId:: Filter__Lower_Hallway__West__ex__East_1 => SpotId::Filter__Lower_Hallway__West,
             ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => SpotId::Filter__Lower_Hallway__East,
@@ -18426,6 +18716,7 @@ impl world::World for World {
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => true,
             ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2 => true,
             ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => true,
+            ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1 => true,
@@ -18484,10 +18775,12 @@ impl world::World for World {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__East_13__ex__Vertical_Interchange__West_13_1 => true,
             ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
+            ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => true,
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => true,
+            ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => true,
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => true,
             ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => true,
             ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2 => true,
@@ -18517,6 +18810,10 @@ impl world::World for World {
             ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2 => true,
             ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => true,
             ExitId::Ebih__Grid_26_10_11__East_10__ex__Observation_Tower_Room__West_10_1 => true,
+            ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => true,
+            ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => true,
+            ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => true,
+            ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => true,
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2 => true,
@@ -18524,6 +18821,13 @@ impl world::World for World {
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => true,
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => true,
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2 => true,
+            ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => true,
+            ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => true,
+            ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => true,
+            ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => true,
+            ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => true,
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => true,
+            ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => true,
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => true,
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => true,
@@ -18556,6 +18860,32 @@ impl world::World for World {
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2 => true,
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => true,
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => true,
+            ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => true,
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => true,
+            ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => true,
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => true,
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => true,
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => true,
+            ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => true,
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => true,
+            ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => true,
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => true,
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => true,
+            ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => true,
+            ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => true,
+            ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => true,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => true,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => true,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => true,
+            ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => true,
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => true,
+            ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => true,
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => true,
+            ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => true,
+            ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => true,
             ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => true,
             ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => true,
             ExitId::Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1 => true,
@@ -20204,6 +20534,7 @@ impl world::World for World {
             SpotId::Ebih__Ebih_West__West_13 => true,
             SpotId::Ebih__Ebih_West__East_13 => true,
             SpotId::Ebih__Gem_Room__West_13 => true,
+            SpotId::Ebih__Gem_Room__East_14 => true,
             SpotId::Ebih__Grid_21_2_6__West_6 => true,
             SpotId::Ebih__Grid_21_2_6__Portal_Stand => true,
             SpotId::Ebih__Grid_21_2_6__East_6 => true,
@@ -20231,12 +20562,23 @@ impl world::World for World {
             SpotId::Ebih__Grid_26_10_11__West_10 => true,
             SpotId::Ebih__Grid_26_10_11__Cliff => true,
             SpotId::Ebih__Grid_26_10_11__East_10 => true,
+            SpotId::Ebih__Guarded_Health__East => true,
+            SpotId::Ebih__Guarded_Health__East_Hills => true,
+            SpotId::Ebih__Guarded_Health__East_Ruins => true,
+            SpotId::Ebih__Guarded_Health__Small_Pond => true,
+            SpotId::Ebih__Guarded_Health__West_Hill => true,
+            SpotId::Ebih__Guarded_Health__West_Basin => true,
+            SpotId::Ebih__Guarded_Health__Far_West => true,
             SpotId::Ebih__Observation_Tower_Room__West_9 => true,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top => true,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => true,
             SpotId::Ebih__Observation_Tower_Room__Cliff => true,
             SpotId::Ebih__Observation_Tower_Room__West_10 => true,
             SpotId::Ebih__Observation_Tower_Room__East_11 => true,
+            SpotId::Ebih__Truck_Gate__East => true,
+            SpotId::Ebih__Truck_Gate__Switch => true,
+            SpotId::Ebih__Truck_Gate__Door => true,
+            SpotId::Ebih__Truck_Gate__Portal_Stand => true,
             SpotId::Ebih__Vertical_Interchange__West_13 => true,
             SpotId::Ebih__Vertical_Interchange__Passage_West => true,
             SpotId::Ebih__Vertical_Interchange__Door_West => true,
@@ -20257,6 +20599,17 @@ impl world::World for World {
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => true,
             SpotId::Ebih__Vertical_Interchange__Switch => true,
             SpotId::Ebih__Vertical_Interchange__South => true,
+            SpotId::Ebih__Walled_Off__East_12 => true,
+            SpotId::Ebih__Walled_Off__Wall_Right => true,
+            SpotId::Ebih__Walled_Off__Wall_Left => true,
+            SpotId::Ebih__Walled_Off__Upper_Slope => true,
+            SpotId::Ebih__Walled_Off__Upper_Left_Ledge => true,
+            SpotId::Ebih__Walled_Off__West_12 => true,
+            SpotId::Ebih__Walled_Off__Middle_Ledge => true,
+            SpotId::Ebih__Walled_Off__Platform_5 => true,
+            SpotId::Ebih__Walled_Off__Platform_4 => true,
+            SpotId::Ebih__Walled_Off__Platform_3 => true,
+            SpotId::Ebih__Walled_Off__West_14 => true,
             SpotId::Ebih__Waterfall__East_10 => true,
             SpotId::Ebih__Waterfall__East_Ledge => true,
             SpotId::Ebih__Waterfall__East_11 => true,
@@ -21268,6 +21621,8 @@ impl world::World for World {
             SpotId::Menu__Kiengir_Map__Glacier_40_8 => true,
             SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => true,
             SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => true,
+            SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => true,
+            SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -21654,6 +22009,7 @@ impl world::World for World {
             | SpotId::Ebih__By_Garage__East_13
             | SpotId::Ebih__By_Garage__Garage_Entry
             | SpotId::Ebih__By_Garage__West_12
+            | SpotId::Ebih__By_Garage__West_13
             | SpotId::Ebih__Drone_Room__East_4
             | SpotId::Ebih__Drone_Room__Item
             | SpotId::Ebih__Drone_Room__Middle_Platform
@@ -21692,6 +22048,7 @@ impl world::World for World {
             | SpotId::Ebih__Ebih_West__West_12
             | SpotId::Ebih__Ebih_West__West_13
             | SpotId::Ebih__Ebih_West__West_9
+            | SpotId::Ebih__Gem_Room__East_14
             | SpotId::Ebih__Gem_Room__West_13
             | SpotId::Ebih__Grid_21_2_6__East_6
             | SpotId::Ebih__Grid_21_2_6__West_6
@@ -21702,20 +22059,32 @@ impl world::World for World {
             | SpotId::Ebih__Grid_25_10_12__Hidden_Bush
             | SpotId::Ebih__Grid_25_10_12__West_10
             | SpotId::Ebih__Grid_25_10_12__West_11
+            | SpotId::Ebih__Grid_25_10_12__West_12
             | SpotId::Ebih__Grid_25_2_6__Pit
             | SpotId::Ebih__Grid_25_2_6__West_4
             | SpotId::Ebih__Grid_26_10_11__East_10
             | SpotId::Ebih__Grid_26_10_11__Ledge
             | SpotId::Ebih__Grid_26_10_11__West_10
             | SpotId::Ebih__Grid_26_10_11__West_11
+            | SpotId::Ebih__Guarded_Health__East
+            | SpotId::Ebih__Guarded_Health__Far_West
+            | SpotId::Ebih__Guarded_Health__West_Basin
             | SpotId::Ebih__Observation_Tower_Room__East_11
             | SpotId::Ebih__Observation_Tower_Room__West_10
             | SpotId::Ebih__Observation_Tower_Room__West_9
+            | SpotId::Ebih__Truck_Gate__East
+            | SpotId::Ebih__Truck_Gate__Portal_Stand
+            | SpotId::Ebih__Truck_Gate__Switch
             | SpotId::Ebih__Vertical_Interchange__Block_Cubby
             | SpotId::Ebih__Vertical_Interchange__East_13
             | SpotId::Ebih__Vertical_Interchange__East_15
             | SpotId::Ebih__Vertical_Interchange__Switch
             | SpotId::Ebih__Vertical_Interchange__West_13
+            | SpotId::Ebih__Walled_Off__East_12
+            | SpotId::Ebih__Walled_Off__Wall_Left
+            | SpotId::Ebih__Walled_Off__Wall_Right
+            | SpotId::Ebih__Walled_Off__West_12
+            | SpotId::Ebih__Walled_Off__West_14
             | SpotId::Ebih__Waterfall__Alcove
             | SpotId::Ebih__Waterfall__Alcove_Left
             | SpotId::Ebih__Waterfall__Alcove_Right
@@ -22197,6 +22566,8 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Breach_Sight
             | SpotId::Menu__Kiengir_Map__Bronze_Axe
             | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
+            | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
+            | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
             | SpotId::Menu__Kiengir_Map__Ebih_West_Lower
             | SpotId::Menu__Kiengir_Map__Ebih_West_Mid
             | SpotId::Menu__Kiengir_Map__Ebih_West_Upper
@@ -24053,6 +24424,78 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Ebih_Interchange_Gate,
             price: Currency::Free,
             time: 250,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
+            skippable: false,
+        },
+        LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => Location {
+            id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
+            canonical: CanonId::Ebih_Walled_Off_Wall,
+            item: Item::Ebih_Walled_Off_Wall,
+            price: Currency::Free,
+            time: 0,
+            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+            skippable: false,
+        },
+        LocationId::Ebih__Guarded_Health__West_Basin__Health => Location {
+            id: LocationId::Ebih__Guarded_Health__West_Basin__Health,
+            canonical: CanonId::Loc_Ebih__Guarded_Health__West_Basin__Health,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Ebih__Guarded_Health__Far_West__Refill => Location {
+            id: LocationId::Ebih__Guarded_Health__Far_West__Refill,
+            canonical: CanonId::Loc_Ebih__Guarded_Health__Far_West__Refill,
+            item: Item::Power_Core,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
             skippable: false,
         },
@@ -30034,10 +30477,66 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1 => Exit {
+            id: ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1,
+            time: 1350,
+            dest: SpotId::Ebih__Truck_Gate__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1 => Exit {
             id: ExitId::Ebih__By_Garage__Garage_Entry__ex__Interior__Garage__Entry_1,
             time: 750,
             dest: SpotId::Interior__Garage__Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1,
+            time: 1350,
+            dest: SpotId::Ebih__By_Garage__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Switch__ex__Door_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Switch__ex__Door_1,
+            time: 701,
+            dest: SpotId::Ebih__Truck_Gate__Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1,
+            time: 1228,
+            dest: SpotId::Ebih__Truck_Gate__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1,
+            time: 600,
+            dest: SpotId::Ebih__Truck_Gate__Portal_Stand,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Door__ex__Switch_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Door__ex__Switch_1,
+            time: 701,
+            dest: SpotId::Ebih__Truck_Gate__Switch,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1,
+            time: 526,
+            dest: SpotId::Ebih__Truck_Gate__Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1 => Exit {
+            id: ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1,
+            time: 1228,
+            dest: SpotId::Ebih__Truck_Gate__Switch,
             price: Currency::Free,
             loc_id: None,
         },
@@ -30052,6 +30551,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1,
             time: 1500,
             dest: SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1,
+            time: 1350,
+            dest: SpotId::Ebih__Walled_Off__East_12,
             price: Currency::Free,
             loc_id: None,
         },
@@ -31336,10 +31842,227 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1,
+            time: 1350,
+            dest: SpotId::Ebih__Grid_25_10_12__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1,
+            time: 526,
+            dest: SpotId::Ebih__Walled_Off__Wall_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall,
+            time: 1052,
+            dest: SpotId::Ebih__Walled_Off__Wall_Left,
+            price: Currency::Energy(40),
+            loc_id: Some(LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
+        },
+        ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
+            time: 526,
+            dest: SpotId::Ebih__Walled_Off__Wall_Left,
+            price: Currency::Energy(23),
+            loc_id: Some(LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+        },
+        ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1,
+            time: 526,
+            dest: SpotId::Ebih__Walled_Off__Wall_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1,
+            time: 4210,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Energy(144),
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2,
+            time: 2105,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Energy(75),
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall,
+            time: 1052,
+            dest: SpotId::Ebih__Walled_Off__Wall_Right,
+            price: Currency::Energy(40),
+            loc_id: Some(LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
+        },
+        ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => Exit {
+            id: ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
+            time: 526,
+            dest: SpotId::Ebih__Walled_Off__Wall_Right,
+            price: Currency::Energy(23),
+            loc_id: Some(LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+        },
+        ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1,
+            time: 1578,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2,
+            time: 3157,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Energy(110),
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3,
+            time: 1578,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Energy(58),
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1,
+            time: 3599,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_2,
+            time: 2400,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3 => Exit {
+            id: ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3,
+            time: 1799,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1,
+            time: 1578,
+            dest: SpotId::Ebih__Walled_Off__Upper_Slope,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1,
+            time: 1350,
+            dest: SpotId::Ebih__Guarded_Health__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1,
+            time: 1799,
+            dest: SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1,
+            time: 2400,
+            dest: SpotId::Ebih__Walled_Off__Upper_Slope,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_2,
+            time: 1200,
+            dest: SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2,
+            time: 1200,
+            dest: SpotId::Ebih__Walled_Off__Upper_Slope,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1,
+            time: 1200,
+            dest: SpotId::Ebih__Walled_Off__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2,
+            time: 600,
+            dest: SpotId::Ebih__Walled_Off__Middle_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1,
+            time: 1200,
+            dest: SpotId::Ebih__Walled_Off__Platform_4,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2 => Exit {
+            id: ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2,
+            time: 600,
+            dest: SpotId::Ebih__Walled_Off__Platform_4,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1 => Exit {
+            id: ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1,
+            time: 1350,
+            dest: SpotId::Ebih__Gem_Room__East_14,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1 => Exit {
+            id: ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1,
+            time: 1350,
+            dest: SpotId::Ebih__Walled_Off__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1 => Exit {
+            id: ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1,
+            time: 1052,
+            dest: SpotId::Ebih__Guarded_Health__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1 => Exit {
+            id: ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1,
+            time: 2105,
+            dest: SpotId::Ebih__Guarded_Health__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => Exit {
+            id: ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1,
+            time: 2125,
+            dest: SpotId::Ebih__Guarded_Health__East_Ruins,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => Exit {
             id: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
             time: 1350,
             dest: SpotId::Ebih__Vertical_Interchange__East_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1 => Exit {
+            id: ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1,
+            time: 1350,
+            dest: SpotId::Ebih__Walled_Off__West_14,
             price: Currency::Free,
             loc_id: None,
         },
@@ -39243,6 +39966,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1000,
             price: Currency::Free,
         },
+        ActionId::Ebih__Truck_Gate__Switch__Open_Door => Action {
+            id: ActionId::Ebih__Truck_Gate__Switch__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => Action {
+            id: ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
         ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => Action {
             id: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door,
             time: 1000,
@@ -45871,7 +46604,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1.into_usize(),
+                end: ExitId::Ebih__By_Garage__West_13__ex__Truck_Gate__East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -45926,6 +46660,60 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Ebih__Truck_Gate__East => Spot {
+            id: SpotId::Ebih__Truck_Gate__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1.into_usize(),
+                end: ExitId::Ebih__Truck_Gate__East__ex__By_Garage__West_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Truck_Gate__Switch => Spot {
+            id: SpotId::Ebih__Truck_Gate__Switch,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Truck_Gate__Switch__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Truck_Gate__Switch__ex__Portal_Stand_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Truck_Gate__Switch__Open_Door.into_usize(),
+                end: ActionId::Ebih__Truck_Gate__Switch__Open_Door.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Truck_Gate__Door => Spot {
+            id: SpotId::Ebih__Truck_Gate__Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Truck_Gate__Door__ex__Portal_Stand_1.into_usize(),
+                end: ExitId::Ebih__Truck_Gate__Door__ex__Switch_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Truck_Gate__Portal_Stand => Spot {
+            id: SpotId::Ebih__Truck_Gate__Portal_Stand,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Truck_Gate__Portal_Stand__ex__Switch_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door.into_usize(),
+                end: ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door.into_usize() + 1,
+            },
+        },
         SpotId::Ebih__Grid_25_10_12__East_12 => Spot {
             id: SpotId::Ebih__Grid_25_10_12__East_12,
             locations: Range {
@@ -45958,7 +46746,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -48024,6 +48813,240 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Ebih__Walled_Off__East_12 => Spot {
+            id: SpotId::Ebih__Walled_Off__East_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__East_12__ex__Grid_25_10_12__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Wall_Right => Spot {
+            id: SpotId::Ebih__Walled_Off__Wall_Right,
+            locations: Range {
+                start: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall.into_usize(),
+                end: LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Wall_Right__ex__Wall_Left_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Wall_Left => Spot {
+            id: SpotId::Ebih__Walled_Off__Wall_Left,
+            locations: Range {
+                start: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall.into_usize(),
+                end: LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Wall_Left__ex__Wall_Right_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Upper_Slope => Spot {
+            id: SpotId::Ebih__Walled_Off__Upper_Slope,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Upper_Left_Ledge => Spot {
+            id: SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__West_12 => Spot {
+            id: SpotId::Ebih__Walled_Off__West_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__West_12__ex__Guarded_Health__East_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__West_12__ex__Upper_Slope_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Middle_Ledge => Spot {
+            id: SpotId::Ebih__Walled_Off__Middle_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Platform_5 => Spot {
+            id: SpotId::Ebih__Walled_Off__Platform_5,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Platform_4 => Spot {
+            id: SpotId::Ebih__Walled_Off__Platform_4,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__Platform_3 => Spot {
+            id: SpotId::Ebih__Walled_Off__Platform_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Walled_Off__West_14 => Spot {
+            id: SpotId::Ebih__Walled_Off__West_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1.into_usize(),
+                end: ExitId::Ebih__Walled_Off__West_14__ex__Gem_Room__East_14_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__East => Spot {
+            id: SpotId::Ebih__Guarded_Health__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1.into_usize(),
+                end: ExitId::Ebih__Guarded_Health__East__ex__Walled_Off__West_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__East_Hills => Spot {
+            id: SpotId::Ebih__Guarded_Health__East_Hills,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1.into_usize(),
+                end: ExitId::Ebih__Guarded_Health__East_Hills__ex__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__East_Ruins => Spot {
+            id: SpotId::Ebih__Guarded_Health__East_Ruins,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1.into_usize(),
+                end: ExitId::Ebih__Guarded_Health__East_Ruins__ex__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__Small_Pond => Spot {
+            id: SpotId::Ebih__Guarded_Health__Small_Pond,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1.into_usize(),
+                end: ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__West_Hill => Spot {
+            id: SpotId::Ebih__Guarded_Health__West_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__West_Basin => Spot {
+            id: SpotId::Ebih__Guarded_Health__West_Basin,
+            locations: Range {
+                start: LocationId::Ebih__Guarded_Health__West_Basin__Health.into_usize(),
+                end: LocationId::Ebih__Guarded_Health__West_Basin__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Guarded_Health__Far_West => Spot {
+            id: SpotId::Ebih__Guarded_Health__Far_West,
+            locations: Range {
+                start: LocationId::Ebih__Guarded_Health__Far_West__Refill.into_usize(),
+                end: LocationId::Ebih__Guarded_Health__Far_West__Refill.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Ebih__Gem_Room__West_13 => Spot {
             id: SpotId::Ebih__Gem_Room__West_13,
             locations: Range {
@@ -48032,6 +49055,19 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize(),
                 end: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Ebih__Gem_Room__East_14 => Spot {
+            id: SpotId::Ebih__Gem_Room__East_14,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1.into_usize(),
+                end: ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -60111,6 +61147,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => Spot {
             id: SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => Spot {
+            id: SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
             locations: Range {
                 start: 0, end: 0,
             },

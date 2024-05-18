@@ -1368,7 +1368,7 @@ areas:
           req: not ^_kishib_handled and $shockwave
           price: 100
           do: ^_kishib_handled = true
-          tags: [shockwave]
+          tags: [shockwave, event]
     - name: Upper Ledge
       coord: [13.6, 6.35]
       local:
@@ -2262,7 +2262,7 @@ areas:
           canon: Giguna_Boulder
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Rock Center
           req: Giguna_Boulder
@@ -2300,7 +2300,7 @@ areas:
           canon: Giguna_Boulder
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Rock Center
           req: Giguna_Boulder
@@ -2901,7 +2901,7 @@ areas:
           canon: Giguna_Gateway_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Block Lowered
           req: Giguna_Gateway_Block
@@ -2917,7 +2917,7 @@ areas:
           canon: Giguna_Gateway_Block
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Block Lowered
           req: Giguna_Gateway_Block

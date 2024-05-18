@@ -497,6 +497,7 @@ areas:
     #endregion
 
     #region Kiengir entry points (mostly items)
+    # TODO: sort by coord?
     - name: Infect
       coord: [26, 9]
     - name: Remote Drone
@@ -532,6 +533,10 @@ areas:
       coord: [34, 8]
     - name: Forbidden Knowledge
       coord: [35, 18]
+    - name: Ebih Truck Gate
+      coord: [25, 13]
+    - name: Ebih Guarded Health
+      coord: [21, 12]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map
