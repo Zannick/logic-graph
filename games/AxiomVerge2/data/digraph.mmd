@@ -1842,16 +1842,40 @@ subgraph Irikar
         Irikar__Hub__Sat_Tower_Long_Ledge(Sat Tower Long Ledge);
         Irikar__Hub__Sat_Tower_Bottom(Sat Tower Bottom);
         Irikar__Hub__Sat_Tower_East_24(Sat Tower East 24);
+        Irikar__Hub__Sat_Tower_Lower_Exterior(Sat Tower Lower Exterior);
         Irikar__Hub__NW_Bowl_Edifice(NW Bowl Edifice);
         Irikar__Hub__NW_Roof(NW Roof);
         Irikar__Hub__NW_Staircase_Upper(NW Staircase Upper);
         Irikar__Hub__Portal_Stand(Portal Stand);
         Irikar__Hub__NW_Middle_Building_Corner(NW Middle Building Corner);
+        Irikar__Hub__NW_Middle_Building_Broken_Outcrop(NW Middle Building Broken Outcrop);
+        Irikar__Hub__NW_Middle_Building_West_Hook_Point(NW Middle Building West Hook Point);
         Irikar__Hub__NW_Middle_Building_West_Entry(NW Middle Building West Entry);
         Irikar__Hub__Royal_Storage_South(Royal Storage South);
         Irikar__Hub__Dagger_Altar(Dagger Altar);
         Irikar__Hub__Royal_Storage_By_Wall(Royal Storage By Wall);
         Irikar__Hub__Royal_Storage_in_Wall(Royal Storage in Wall);
+        Irikar__Hub__NW_Middle_Building_Left_Ledge(NW Middle Building Left Ledge);
+        Irikar__Hub__NW_Middle_Building_Lower_Ledge(NW Middle Building Lower Ledge);
+        Irikar__Hub__NW_Middle_Building_East_Entry(NW Middle Building East Entry);
+        Irikar__Hub__SW_Building_NE_Roof(SW Building NE Roof);
+        Irikar__Hub__Ruined_Hallway_Gap_Left(Ruined Hallway Gap Left);
+        Irikar__Hub__Ruined_Hallway_Gap_Right(Ruined Hallway Gap Right);
+        Irikar__Hub__Ruined_Hallway_By_Well(Ruined Hallway By Well);
+        Irikar__Hub__Ruined_Hallway_Atop_Well(Ruined Hallway Atop Well);
+        Irikar__Hub__SW_Building_Broken_Wall(SW Building Broken Wall);
+        Irikar__Hub__SW_Building_Top_Platform(SW Building Top Platform);
+        Irikar__Hub__SW_Building_Platform_2(SW Building Platform 2);
+        Irikar__Hub__SW_Building_Lower_Platform(SW Building Lower Platform);
+        Irikar__Hub__SW_Building_Hallway_West(SW Building Hallway West);
+        Irikar__Hub__Lower_Well(Lower Well);
+        Irikar__Hub__Exposed_Passage_West(Exposed Passage West);
+        Irikar__Hub__Exposed_Passage_Center(Exposed Passage Center);
+        Irikar__Hub__Exposed_Passage_Upper_Ledge(Exposed Passage Upper Ledge);
+        Irikar__Hub__Collapsed_Column(Collapsed Column);
+        Irikar__Hub__Collapsed_Column_Debris(Collapsed Column Debris);
+        Irikar__Hub__Lower_Hallway_West(Lower Hallway West);
+        Irikar__Hub__West_26(West 26);
     end
     subgraph Irikar__Airy[Airy]
         Irikar__Airy__Northwest(Northwest);
@@ -1864,6 +1888,7 @@ subgraph Irikar
         Irikar__Sight_Room__Item_Pedestal(Item Pedestal);
         Irikar__Sight_Room__Above_Room_North(Above Room North);
         Irikar__Sight_Room__Above_Room_East(Above Room East);
+        Irikar__Sight_Room__Northwest(Northwest);
     end
     subgraph Irikar__Abandoned_Room[Abandoned Room]
         Irikar__Abandoned_Room__Empty_Pedestal(Empty Pedestal);
@@ -3233,11 +3258,35 @@ Irikar__Hub__Bowl_Middle_Platform_Center --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Middle_Platform_West --> Irikar__Hub__Bowl_Middle_Ledge
 Irikar__Hub__Bowl_Platform_3 --> Irikar__Hub__Bowl_Middle_Platform_Center
 Irikar__Hub__Bowl_Top_Platform --> Irikar__Hub__West_Rim
+Irikar__Hub__Collapsed_Column --> Irikar__Hub__Lower_Well
+Irikar__Hub__Collapsed_Column_Debris --> Irikar__Hub__Lower_Well
 Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
+Irikar__Hub__Exposed_Passage_Center --> Irikar__Hub__Exposed_Passage_Upper_Ledge
+Irikar__Hub__Exposed_Passage_Upper_Ledge --> Irikar__Hub__Ruined_Hallway_Gap_Left
+Irikar__Hub__Exposed_Passage_Upper_Ledge --> Irikar__Hub__Ruined_Hallway_Gap_Right
+Irikar__Hub__Exposed_Passage_West --> Irikar__Hub__NW_Middle_Building_Left_Ledge
+Irikar__Hub__Exposed_Passage_West <--> Irikar__Hub__SW_Building_Broken_Wall
+Irikar__Hub__Lower_Hallway_West --> Irikar__Hub__SW_Building_Hallway_West
+Irikar__Hub__Lower_Hallway_West --> Irikar__Hub__West_26
+Irikar__Hub__Lower_Well --> Irikar__Hub__Exposed_Passage_West
+Irikar__Hub__NW_Middle_Building_Broken_Outcrop --> Irikar__Hub__NW_Middle_Building_Corner
+Irikar__Hub__NW_Middle_Building_East_Entry <--> Irikar__Hub__NW_Middle_Building_Left_Ledge
+Irikar__Hub__NW_Middle_Building_East_Entry <--> Irikar__Hub__NW_Middle_Building_West_Entry
+Irikar__Hub__NW_Middle_Building_Left_Ledge --> Irikar__Hub__NW_Middle_Building_West_Entry
+Irikar__Hub__NW_Middle_Building_Lower_Ledge --> Irikar__Hub__NW_Middle_Building_East_Entry
+Irikar__Hub__NW_Middle_Building_Lower_Ledge --> Irikar__Hub__NW_Middle_Building_Left_Ledge
+Irikar__Hub__NW_Middle_Building_West_Hook_Point --> Irikar__Hub__Ruined_Hallway_By_Well
+Irikar__Hub__NW_Middle_Building_West_Hook_Point --> Irikar__Hub__Ruined_Hallway_Gap_Left
 Irikar__Hub__NW_Staircase_Upper --> Irikar__Hub__NW_Bowl_Edifice
 Irikar__Hub__Royal_Storage_By_Wall --> Irikar__Hub__Royal_Storage_in_Wall
+Irikar__Hub__Ruined_Hallway_Gap_Left --> Irikar__Hub__NW_Middle_Building_East_Entry
+Irikar__Hub__SW_Building_Broken_Wall --> Irikar__Hub__Exposed_Passage_Center
+Irikar__Hub__SW_Building_Broken_Wall --> Irikar__Hub__NW_Middle_Building_Left_Ledge
+Irikar__Hub__SW_Building_Platform_2 --> Irikar__Hub__Exposed_Passage_Center
+Irikar__Hub__SW_Building_Platform_2 --> Irikar__Hub__Exposed_Passage_West
 Irikar__Hub__Sat_Tower_East_24 <--> Irikar__Sight_Room__West_24
 Irikar__Hub__Sat_Tower_Floating_Platform --> Irikar__Hub__Sat_Tower_Top_Ledge
+Irikar__Hub__Sat_Tower_Lower_Exterior --> Irikar__Sight_Room__Northwest
 Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform
 Irikar__Hub__Sat_Tower_Northeast --> Irikar__Airy__Northwest
 Irikar__Hub__Save_Point --> Irikar__Hub__Bowl_Hole
@@ -3250,6 +3299,7 @@ Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_W
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
 Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir
+Irikar__Sight_Room__Northwest --> Irikar__Sight_Room__Above_Room_East
 Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GSB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
 Menu__Breach_Map__GlB_Arena --> Glacier_Breach__Save_and_Exit__Save_Point

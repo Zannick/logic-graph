@@ -1918,16 +1918,40 @@
             Irikar__Hub__Sat_Tower_Long_Ledge [label = "", pos = "39.3,-40.333333!"];
             Irikar__Hub__Sat_Tower_Bottom [label = "", pos = "40.2,-41.333333!"];
             Irikar__Hub__Sat_Tower_East_24 [label = "", pos = "41.85,-40.916667!"];
+            Irikar__Hub__Sat_Tower_Lower_Exterior [label = "", pos = "41.85,-38.5!"];
             Irikar__Hub__NW_Bowl_Edifice [label = "", pos = "35.85,-34.166667!"];
             Irikar__Hub__NW_Roof [label = "", pos = "34.2,-34.0!"];
             Irikar__Hub__NW_Staircase_Upper [label = "", pos = "35.4,-34.833333!"];
             Irikar__Hub__Portal_Stand [label = "", pos = "33.9,-36.166667!"];
             Irikar__Hub__NW_Middle_Building_Corner [label = "", pos = "33.0,-37.0!"];
-            Irikar__Hub__NW_Middle_Building_West_Entry [label = "", pos = "32.7,-38.166667!"];
+            Irikar__Hub__NW_Middle_Building_Broken_Outcrop [label = "", pos = "32.925,-37.666667!"];
+            Irikar__Hub__NW_Middle_Building_West_Hook_Point [label = "", pos = "32.7,-38.333333!"];
+            Irikar__Hub__NW_Middle_Building_West_Entry [label = "", pos = "32.85,-38.25!"];
             Irikar__Hub__Royal_Storage_South [label = "", pos = "40.5,-43.0!"];
             Irikar__Hub__Dagger_Altar [label = "", pos = "38.25,-42.666667!"];
             Irikar__Hub__Royal_Storage_By_Wall [label = "", pos = "36.6,-42.833333!"];
             Irikar__Hub__Royal_Storage_in_Wall [label = "", pos = "36.3,-42.833333!"];
+            Irikar__Hub__NW_Middle_Building_Left_Ledge [label = "", pos = "33.6,-38.833333!"];
+            Irikar__Hub__NW_Middle_Building_Lower_Ledge [label = "", pos = "34.05,-39.5!"];
+            Irikar__Hub__NW_Middle_Building_East_Entry [label = "", pos = "34.8,-38.833333!"];
+            Irikar__Hub__SW_Building_NE_Roof [label = "", pos = "33.6,-39.833333!"];
+            Irikar__Hub__Ruined_Hallway_Gap_Left [label = "", pos = "36.45,-39.5!"];
+            Irikar__Hub__Ruined_Hallway_Gap_Right [label = "", pos = "37.2,-39.5!"];
+            Irikar__Hub__Ruined_Hallway_By_Well [label = "", pos = "37.95,-39.5!"];
+            Irikar__Hub__Ruined_Hallway_Atop_Well [label = "", pos = "38.4,-39.333333!"];
+            Irikar__Hub__SW_Building_Broken_Wall [label = "", pos = "33.6,-41.166667!"];
+            Irikar__Hub__SW_Building_Top_Platform [label = "", pos = "32.85,-40.583333!"];
+            Irikar__Hub__SW_Building_Platform_2 [label = "", pos = "33.15,-41.0!"];
+            Irikar__Hub__SW_Building_Lower_Platform [label = "", pos = "32.25,-41.916667!"];
+            Irikar__Hub__SW_Building_Hallway_West [label = "", pos = "30.6,-42.333333!"];
+            Irikar__Hub__Lower_Well [label = "", pos = "34.65,-41.916667!"];
+            Irikar__Hub__Exposed_Passage_West [label = "", pos = "34.8,-41.333333!"];
+            Irikar__Hub__Exposed_Passage_Center [label = "", pos = "36.3,-41.0!"];
+            Irikar__Hub__Exposed_Passage_Upper_Ledge [label = "", pos = "36.75,-40.333333!"];
+            Irikar__Hub__Collapsed_Column [label = "", pos = "35.775,-42.708333!"];
+            Irikar__Hub__Collapsed_Column_Debris [label = "", pos = "35.4,-42.833333!"];
+            Irikar__Hub__Lower_Hallway_West [label = "", pos = "30.6,-43.0!"];
+            Irikar__Hub__West_26 [label = "", pos = "30.15,-42.25!"];
         }
         {
             Irikar__Lamassu__West_28 [label = "", pos = "51.15,-46.166667!"];
@@ -1957,6 +1981,7 @@
             Irikar__Sight_Room__Item_Pedestal [label = "", pos = "44.4,-42.666667!"];
             Irikar__Sight_Room__Above_Room_North [label = "", pos = "43.95,-38.5!"];
             Irikar__Sight_Room__Above_Room_East [label = "", pos = "44.85,-39.0!"];
+            Irikar__Sight_Room__Northwest [label = "", pos = "42.15,-38.5!"];
         }
     }
     {

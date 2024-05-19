@@ -204,6 +204,11 @@ areas:
       exits:
         - to: Sight Room > West 24
           tags: [xshift]
+    - name: Sat Tower Lower Exterior
+      coord: [13.95, 23.1]
+      exits:
+        - to: Sight Room > Northwest
+          tags: [xshift]
     #endregion
 
     #region Northwest Building/Portal
@@ -246,9 +251,42 @@ areas:
     - name: NW Middle Building Corner
       coord: [11.0, 22.2]
       local:
+        - to: NW Middle Building Broken Outcrop
         - to: NW Middle Building West Entry
+        - to: NW Middle Building West Hook Point
+    - name: NW Middle Building Broken Outcrop
+      coord: [10.975, 22.6]
+      local:
+        - to: NW Middle Building West Entry
+        - to: NW Middle Building Left Ledge
+        - to: NW Middle Building West Hook Point
+      exits:
+        - to: NW Middle Building Corner
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: NW Middle Building Corner
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: NW Middle Building West Hook Point
+      coord: [10.9, 23.0]
+      exits:
+        - to: Ruined Hallway By Well
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Ruined Hallway Gap Left
+          req: $hook and $hover
+          movement: fast_hover
     - name: NW Middle Building West Entry
-      coord: [10.9, 22.9]
+      coord: [10.95, 22.95]
+      local:
+        - to: NW Middle Building Left Ledge
+        - to: NW Middle Building West Hook Point
+      exits:
+        - to: NW Middle Building East Entry
+          req: $hover
+          movement: base
     #endregion
 
     #region Royal Storage
@@ -275,10 +313,10 @@ areas:
         - to: Dagger Altar
           jumps: 1
       locations:
-        # TODO: collect two items with two different canons at the same time?
         - name: Shockwave Wall
           item: Irikar_Royal_Storage_Wall
           canon: Irikar_Royal_Storage_Wall
+          req: $shockwave
           price: 100
           tags: [shockwave, event]
       exits:
@@ -299,7 +337,9 @@ areas:
           movement: mist2
           tags: [event]
       actions:
+        # collects two items with two different canons at the same time?
         # if the item is a flask or urn, this will collect it
+        # TODO: add a visit_collect/collect_from builtin
         - name: Shockwave Wall
           req: not Irikar_Royal_Storage_Wall and $shockwave
           do: >
@@ -318,6 +358,329 @@ areas:
           item: Flask
           canon: Irikar_Royal_Storage_Flask
           tags: [flask]
+    #endregion
+
+    #region SW Ruined Buildings
+    - name: NW Middle Building Left Ledge
+      coord: [11.2, 23.3]
+      local:
+        - to: NW Middle Building Lower Ledge
+        - to: SW Building NE Roof
+        - to: Lower Well
+        - to: SW Building Broken Wall
+      exits:
+        - to: NW Middle Building East Entry
+          req: $hover
+          movement: base
+        - to: NW Middle Building West Entry
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: NW Middle Building West Entry
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: NW Middle Building West Entry
+          req: Anuman
+          movement: base
+          jumps: 1.1
+    - name: NW Middle Building Lower Ledge
+      coord: [11.35, 23.7]
+      local:
+        - to: SW Building NE Roof
+        - to: SW Building Broken Wall
+        - to: Lower Well
+        - to: NW Middle Building East Entry
+          jumps: 2
+      exits:
+        - to: NW Middle Building Left Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: NW Middle Building East Entry
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: NW Middle Building East Entry
+      coord: [11.6, 23.3]
+      local:
+        - to: NW Middle Building Lower Ledge
+        - to: Ruined Hallway Gap Left
+      exits:
+        - to: NW Middle Building West Entry
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: NW Middle Building Left Ledge
+          req: $hover
+          movement: base
+    - name: SW Building NE Roof
+      coord: [11.2, 23.9]
+      local:
+        - to: SW Building Broken Wall
+        - to: Lower Well
+        - to: NW Middle Building Lower Ledge
+          jumps: 1
+    - name: Ruined Hallway Gap Left
+      coord: [12.15, 23.7]
+      local:
+        - to: Ruined Hallway Gap Right
+        - to: Exposed Passage Upper Ledge
+        - to: NW Middle Building East Entry
+          thru: [11.85, 23.7]
+          jumps: [0, 2]
+      exits:
+        - to: NW Middle Building East Entry
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Ruined Hallway Gap Right
+      coord: [12.4, 23.7]
+      local:
+        - to: Ruined Hallway Gap Left
+        - to: Exposed Passage Upper Ledge
+        - to: Ruined Hallway By Well
+    - name: Ruined Hallway By Well
+      coord: [12.65, 23.7]
+      local:
+        - to: Ruined Hallway Gap Right
+        - to: Ruined Hallway Atop Well
+          jumps: 1
+      locations:
+        - name: Shockwave Well
+          item: Flask
+          canon: Irikar_Well_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: Ruined Hallway Atop Well
+      coord: [12.8, 23.6]
+      local:
+        - to: Ruined Hallway By Well
+      locations:
+        - name: Well Item
+          item: Flask
+          canon: Irikar_Well_Flask
+          tags: [flask]
+
+    - name: SW Building Broken Wall
+      coord: [11.2, 24.7]
+      local:
+        - to: Lower Well
+        - to: SW Building Platform 2
+          jumps: 1
+        - to: SW Building Lower Platform
+          jumps_down: 1
+      exits:
+        - to: Exposed Passage West
+          req: $hover
+          movement: base
+        - to: Exposed Passage Center
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: NW Middle Building Left Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: NW Middle Building Left Ledge
+          req: $mist2
+          movement: mist2
+    - name: SW Building Top Platform
+      coord: [10.95, 24.35]
+      local:
+        - to: SW Building Platform 2
+          jumps_down: 1
+        - to: SW Building Lower Platform
+          jumps_down: 3
+      locations:
+        - name: Power Core
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+    - name: SW Building Platform 2
+      coord: [11.05, 24.6]
+      local:
+        - to: SW Building Top Platform
+          jumps: 1
+        - to: SW Building Lower Platform
+          jumps_down: 2
+        - to: SW Building Broken Wall
+      exits:
+        - to: Exposed Passage West
+          req: $hover
+          movement: base
+        - to: Exposed Passage Center
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: SW Building Lower Platform
+      coord: [10.75, 25.15]
+      local:
+        - to: SW Building Platform 2
+          jumps: 4
+        - to: SW Building Hallway West
+          jumps_down: 1
+    - name: SW Building Hallway West
+      coord: [10.2, 25.4]
+      local:
+        - to: SW Building Lower Platform
+          jumps: 2
+        - to: Lower Hallway West
+        - to: West 26
+          jumps: 1
+
+    - name: Lower Well
+      coord: [11.55, 25.15]
+      local:
+        - to: Collapsed Column
+        - to: Collapsed Column Debris
+        - to: SW Building Broken Wall
+          jumps: 3
+      exits:
+        - to: Exposed Passage West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Exposed Passage West
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Exposed Passage West
+      coord: [11.6, 24.8]
+      local:
+        - to: Lower Well
+        - to: Exposed Passage Center
+          jumps: 3
+      exits:
+        - to: SW Building Broken Wall
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: NW Middle Building Left Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: NW Middle Building Left Ledge
+          req: $mist2
+          movement: mist2
+    - name: Exposed Passage Center
+      coord: [12.1, 24.6]
+      local:
+        - to: Exposed Passage West
+      exits:
+        - to: Exposed Passage Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Exposed Passage Upper Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
+        - to: Exposed Passage Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Exposed Passage Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: Exposed Passage Upper Ledge
+      coord: [12.25, 24.2]
+      local:
+        - to: Exposed Passage Center
+      exits:
+        - to: Ruined Hallway Gap Left
+          req: $climb
+          movement: base
+          jumps: 3
+        - to: Ruined Hallway Gap Right
+          req: $climb
+          movement: base
+          jumps: 3
+        - to: Ruined Hallway Gap Left
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Ruined Hallway Gap Right
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Ruined Hallway Gap Left
+          req: Nanite_Mist
+          movement: mist1
+        - to: Ruined Hallway Gap Right
+          req: Nanite_Mist
+          movement: mist1
+        - to: Ruined Hallway Gap Left
+          req: $mist2
+          movement: mist2
+        - to: Ruined Hallway Gap Right
+          req: $mist2
+          movement: mist2
+
+    - name: Collapsed Column
+      coord: [11.925, 25.625]
+      local:
+        - to: Collapsed Column Debris
+      # A location is necessary for the required_locations part of the search algorithm
+      locations:
+        - name: Shockwave to Get Item
+          item: Flask
+          canon: Irikar_Royal_Storage_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Lower Well
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+      actions:
+        # collects two items with two different canons at the same time
+        # if the item is a flask or urn, this will collect it
+        - name: Shockwave Wall
+          req: not Irikar_Royal_Storage_Wall and $shockwave
+          do: >
+            $collect(Irikar_Royal_Storage_Wall);
+            $collect(Flask);
+            $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
+            $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
+          price: 100
+          tags: [shockwave, event]
+
+    - name: Collapsed Column Debris
+      coord: [11.8, 25.7]
+      local:
+        - to: Collapsed Column
+          jumps: 1
+        - to: Lower Well
+          jumps: 2
+        - to: Lower Hallway West
+      exits:
+        - to: Lower Well
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Lower Hallway West
+      coord: [10.2, 25.8]
+      local:
+        - to: Collapsed Column Debris
+          jumps: 2
+        - to: West 26
+          jumps: 2
+        - to: SW Building Hallway West
+          jumps: 2
+      exits:
+        - to: West 26
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: SW Building Hallway West
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West 26
+      coord: [10.05, 25.35]
+      local:
+        - to: SW Building Hallway West
+        - to: Lower Hallway West
     #endregion
 
 - name: Airy  # MARK: Airy
@@ -396,6 +759,15 @@ areas:
       exits:
         - to: East Rooftops > Upper West
           tags: [xshift]
+    - name: Northwest
+      coord: [14.05, 23.1]
+      local:
+        - to: Portal
+        - to: Item Pedestal
+      exits:
+        - to: Above Room East
+          req: $hover
+          movement: base
 
 - name: Abandoned Room  # MARK: Abandoned Room
   on_entry: $reset_old_area(^newpos)

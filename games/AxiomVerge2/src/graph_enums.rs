@@ -2206,25 +2206,42 @@ pub enum SpotId {
     Irikar__Hub__Bowl_Middle_Platform_West,
     Irikar__Hub__Bowl_Platform_3,
     Irikar__Hub__Bowl_Top_Platform,
+    Irikar__Hub__Collapsed_Column,
+    Irikar__Hub__Collapsed_Column_Debris,
     Irikar__Hub__Dagger_Altar,
     Irikar__Hub__East_Rim,
+    Irikar__Hub__Exposed_Passage_Center,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge,
+    Irikar__Hub__Exposed_Passage_West,
+    Irikar__Hub__Lower_Hallway_West,
+    Irikar__Hub__Lower_Well,
     Irikar__Hub__North_Above_Portal,
     Irikar__Hub__Northeast_Above_Bowl,
     Irikar__Hub__Northwest,
     Irikar__Hub__Northwest_Above_Bowl,
     Irikar__Hub__NW_Bowl_Edifice,
+    Irikar__Hub__NW_Middle_Building_Broken_Outcrop,
     Irikar__Hub__NW_Middle_Building_Corner,
+    Irikar__Hub__NW_Middle_Building_East_Entry,
+    Irikar__Hub__NW_Middle_Building_Left_Ledge,
+    Irikar__Hub__NW_Middle_Building_Lower_Ledge,
     Irikar__Hub__NW_Middle_Building_West_Entry,
+    Irikar__Hub__NW_Middle_Building_West_Hook_Point,
     Irikar__Hub__NW_Roof,
     Irikar__Hub__NW_Staircase_Upper,
     Irikar__Hub__Portal_Stand,
     Irikar__Hub__Royal_Storage_By_Wall,
     Irikar__Hub__Royal_Storage_in_Wall,
     Irikar__Hub__Royal_Storage_South,
+    Irikar__Hub__Ruined_Hallway_Atop_Well,
+    Irikar__Hub__Ruined_Hallway_By_Well,
+    Irikar__Hub__Ruined_Hallway_Gap_Left,
+    Irikar__Hub__Ruined_Hallway_Gap_Right,
     Irikar__Hub__Sat_Tower_Bottom,
     Irikar__Hub__Sat_Tower_East_24,
     Irikar__Hub__Sat_Tower_Floating_Platform,
     Irikar__Hub__Sat_Tower_Long_Ledge,
+    Irikar__Hub__Sat_Tower_Lower_Exterior,
     Irikar__Hub__Sat_Tower_Lower_Left_Ledge,
     Irikar__Hub__Sat_Tower_Lower_Right_Ledge,
     Irikar__Hub__Sat_Tower_Middle_Ledge,
@@ -2234,6 +2251,13 @@ pub enum SpotId {
     Irikar__Hub__Sat_Tower_Top_Ledge,
     Irikar__Hub__Sat_Tower_West_Valley,
     Irikar__Hub__Save_Point,
+    Irikar__Hub__SW_Building_Broken_Wall,
+    Irikar__Hub__SW_Building_Hallway_West,
+    Irikar__Hub__SW_Building_Lower_Platform,
+    Irikar__Hub__SW_Building_NE_Roof,
+    Irikar__Hub__SW_Building_Platform_2,
+    Irikar__Hub__SW_Building_Top_Platform,
+    Irikar__Hub__West_26,
     Irikar__Hub__West_Rim,
     Irikar__Lamassu__Bottom_Middle,
     Irikar__Lamassu__Catwalk_Middle,
@@ -2256,6 +2280,7 @@ pub enum SpotId {
     Irikar__Sight_Room__Above_Room_North,
     Irikar__Sight_Room__Item_Pedestal,
     Irikar__Sight_Room__Lower_Ledge,
+    Irikar__Sight_Room__Northwest,
     Irikar__Sight_Room__Portal,
     Irikar__Sight_Room__West_24,
     Irikar_Breach__Basement_Save__Save_Point,
@@ -6264,8 +6289,27 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__Bowl_Top_Platform => {
                 write!(f, "{}", "Irikar > Hub > Bowl Top Platform")
             }
+            SpotId::Irikar__Hub__Collapsed_Column => {
+                write!(f, "{}", "Irikar > Hub > Collapsed Column")
+            }
+            SpotId::Irikar__Hub__Collapsed_Column_Debris => {
+                write!(f, "{}", "Irikar > Hub > Collapsed Column Debris")
+            }
             SpotId::Irikar__Hub__Dagger_Altar => write!(f, "{}", "Irikar > Hub > Dagger Altar"),
             SpotId::Irikar__Hub__East_Rim => write!(f, "{}", "Irikar > Hub > East Rim"),
+            SpotId::Irikar__Hub__Exposed_Passage_Center => {
+                write!(f, "{}", "Irikar > Hub > Exposed Passage Center")
+            }
+            SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge => {
+                write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge")
+            }
+            SpotId::Irikar__Hub__Exposed_Passage_West => {
+                write!(f, "{}", "Irikar > Hub > Exposed Passage West")
+            }
+            SpotId::Irikar__Hub__Lower_Hallway_West => {
+                write!(f, "{}", "Irikar > Hub > Lower Hallway West")
+            }
+            SpotId::Irikar__Hub__Lower_Well => write!(f, "{}", "Irikar > Hub > Lower Well"),
             SpotId::Irikar__Hub__North_Above_Portal => {
                 write!(f, "{}", "Irikar > Hub > North Above Portal")
             }
@@ -6279,11 +6323,26 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__NW_Bowl_Edifice => {
                 write!(f, "{}", "Irikar > Hub > NW Bowl Edifice")
             }
+            SpotId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building Broken Outcrop")
+            }
             SpotId::Irikar__Hub__NW_Middle_Building_Corner => {
                 write!(f, "{}", "Irikar > Hub > NW Middle Building Corner")
             }
+            SpotId::Irikar__Hub__NW_Middle_Building_East_Entry => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building East Entry")
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_Left_Ledge => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building Left Ledge")
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_Lower_Ledge => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building Lower Ledge")
+            }
             SpotId::Irikar__Hub__NW_Middle_Building_West_Entry => {
                 write!(f, "{}", "Irikar > Hub > NW Middle Building West Entry")
+            }
+            SpotId::Irikar__Hub__NW_Middle_Building_West_Hook_Point => {
+                write!(f, "{}", "Irikar > Hub > NW Middle Building West Hook Point")
             }
             SpotId::Irikar__Hub__NW_Roof => write!(f, "{}", "Irikar > Hub > NW Roof"),
             SpotId::Irikar__Hub__NW_Staircase_Upper => {
@@ -6299,6 +6358,18 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Hub__Royal_Storage_South => {
                 write!(f, "{}", "Irikar > Hub > Royal Storage South")
             }
+            SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well => {
+                write!(f, "{}", "Irikar > Hub > Ruined Hallway Atop Well")
+            }
+            SpotId::Irikar__Hub__Ruined_Hallway_By_Well => {
+                write!(f, "{}", "Irikar > Hub > Ruined Hallway By Well")
+            }
+            SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left => {
+                write!(f, "{}", "Irikar > Hub > Ruined Hallway Gap Left")
+            }
+            SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => {
+                write!(f, "{}", "Irikar > Hub > Ruined Hallway Gap Right")
+            }
             SpotId::Irikar__Hub__Sat_Tower_Bottom => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Bottom")
             }
@@ -6310,6 +6381,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar__Hub__Sat_Tower_Long_Ledge => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Long Ledge")
+            }
+            SpotId::Irikar__Hub__Sat_Tower_Lower_Exterior => {
+                write!(f, "{}", "Irikar > Hub > Sat Tower Lower Exterior")
             }
             SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge => {
                 write!(f, "{}", "Irikar > Hub > Sat Tower Lower Left Ledge")
@@ -6336,6 +6410,25 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Irikar > Hub > Sat Tower West Valley")
             }
             SpotId::Irikar__Hub__Save_Point => write!(f, "{}", "Irikar > Hub > Save Point"),
+            SpotId::Irikar__Hub__SW_Building_Broken_Wall => {
+                write!(f, "{}", "Irikar > Hub > SW Building Broken Wall")
+            }
+            SpotId::Irikar__Hub__SW_Building_Hallway_West => {
+                write!(f, "{}", "Irikar > Hub > SW Building Hallway West")
+            }
+            SpotId::Irikar__Hub__SW_Building_Lower_Platform => {
+                write!(f, "{}", "Irikar > Hub > SW Building Lower Platform")
+            }
+            SpotId::Irikar__Hub__SW_Building_NE_Roof => {
+                write!(f, "{}", "Irikar > Hub > SW Building NE Roof")
+            }
+            SpotId::Irikar__Hub__SW_Building_Platform_2 => {
+                write!(f, "{}", "Irikar > Hub > SW Building Platform 2")
+            }
+            SpotId::Irikar__Hub__SW_Building_Top_Platform => {
+                write!(f, "{}", "Irikar > Hub > SW Building Top Platform")
+            }
+            SpotId::Irikar__Hub__West_26 => write!(f, "{}", "Irikar > Hub > West 26"),
             SpotId::Irikar__Hub__West_Rim => write!(f, "{}", "Irikar > Hub > West Rim"),
             SpotId::Irikar__Lamassu__Bottom_Middle => {
                 write!(f, "{}", "Irikar > Lamassu > Bottom Middle")
@@ -6379,6 +6472,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar__Sight_Room__Lower_Ledge => {
                 write!(f, "{}", "Irikar > Sight Room > Lower Ledge")
+            }
+            SpotId::Irikar__Sight_Room__Northwest => {
+                write!(f, "{}", "Irikar > Sight Room > Northwest")
             }
             SpotId::Irikar__Sight_Room__Portal => write!(f, "{}", "Irikar > Sight Room > Portal"),
             SpotId::Irikar__Sight_Room__West_24 => write!(f, "{}", "Irikar > Sight Room > West 24"),
@@ -9732,18 +9828,46 @@ impl std::str::FromStr for SpotId {
             }
             "Irikar > Hub > Bowl Platform 3" => Ok(SpotId::Irikar__Hub__Bowl_Platform_3),
             "Irikar > Hub > Bowl Top Platform" => Ok(SpotId::Irikar__Hub__Bowl_Top_Platform),
+            "Irikar > Hub > Collapsed Column" => Ok(SpotId::Irikar__Hub__Collapsed_Column),
+            "Irikar > Hub > Collapsed Column Debris" => {
+                Ok(SpotId::Irikar__Hub__Collapsed_Column_Debris)
+            }
             "Irikar > Hub > Dagger Altar" => Ok(SpotId::Irikar__Hub__Dagger_Altar),
             "Irikar > Hub > East Rim" => Ok(SpotId::Irikar__Hub__East_Rim),
+            "Irikar > Hub > Exposed Passage Center" => {
+                Ok(SpotId::Irikar__Hub__Exposed_Passage_Center)
+            }
+            "Irikar > Hub > Exposed Passage Upper Ledge" => {
+                Ok(SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge)
+            }
+            "Irikar > Hub > Exposed Passage West" => Ok(SpotId::Irikar__Hub__Exposed_Passage_West),
+            "Irikar > Hub > Lower Hallway West" => Ok(SpotId::Irikar__Hub__Lower_Hallway_West),
+            "Irikar > Hub > Lower Well" => Ok(SpotId::Irikar__Hub__Lower_Well),
             "Irikar > Hub > North Above Portal" => Ok(SpotId::Irikar__Hub__North_Above_Portal),
             "Irikar > Hub > Northeast Above Bowl" => Ok(SpotId::Irikar__Hub__Northeast_Above_Bowl),
             "Irikar > Hub > Northwest" => Ok(SpotId::Irikar__Hub__Northwest),
             "Irikar > Hub > Northwest Above Bowl" => Ok(SpotId::Irikar__Hub__Northwest_Above_Bowl),
             "Irikar > Hub > NW Bowl Edifice" => Ok(SpotId::Irikar__Hub__NW_Bowl_Edifice),
+            "Irikar > Hub > NW Middle Building Broken Outcrop" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop)
+            }
             "Irikar > Hub > NW Middle Building Corner" => {
                 Ok(SpotId::Irikar__Hub__NW_Middle_Building_Corner)
             }
+            "Irikar > Hub > NW Middle Building East Entry" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_East_Entry)
+            }
+            "Irikar > Hub > NW Middle Building Left Ledge" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_Left_Ledge)
+            }
+            "Irikar > Hub > NW Middle Building Lower Ledge" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_Lower_Ledge)
+            }
             "Irikar > Hub > NW Middle Building West Entry" => {
                 Ok(SpotId::Irikar__Hub__NW_Middle_Building_West_Entry)
+            }
+            "Irikar > Hub > NW Middle Building West Hook Point" => {
+                Ok(SpotId::Irikar__Hub__NW_Middle_Building_West_Hook_Point)
             }
             "Irikar > Hub > NW Roof" => Ok(SpotId::Irikar__Hub__NW_Roof),
             "Irikar > Hub > NW Staircase Upper" => Ok(SpotId::Irikar__Hub__NW_Staircase_Upper),
@@ -9755,12 +9879,27 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Irikar__Hub__Royal_Storage_in_Wall)
             }
             "Irikar > Hub > Royal Storage South" => Ok(SpotId::Irikar__Hub__Royal_Storage_South),
+            "Irikar > Hub > Ruined Hallway Atop Well" => {
+                Ok(SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well)
+            }
+            "Irikar > Hub > Ruined Hallway By Well" => {
+                Ok(SpotId::Irikar__Hub__Ruined_Hallway_By_Well)
+            }
+            "Irikar > Hub > Ruined Hallway Gap Left" => {
+                Ok(SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left)
+            }
+            "Irikar > Hub > Ruined Hallway Gap Right" => {
+                Ok(SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right)
+            }
             "Irikar > Hub > Sat Tower Bottom" => Ok(SpotId::Irikar__Hub__Sat_Tower_Bottom),
             "Irikar > Hub > Sat Tower East 24" => Ok(SpotId::Irikar__Hub__Sat_Tower_East_24),
             "Irikar > Hub > Sat Tower Floating Platform" => {
                 Ok(SpotId::Irikar__Hub__Sat_Tower_Floating_Platform)
             }
             "Irikar > Hub > Sat Tower Long Ledge" => Ok(SpotId::Irikar__Hub__Sat_Tower_Long_Ledge),
+            "Irikar > Hub > Sat Tower Lower Exterior" => {
+                Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Exterior)
+            }
             "Irikar > Hub > Sat Tower Lower Left Ledge" => {
                 Ok(SpotId::Irikar__Hub__Sat_Tower_Lower_Left_Ledge)
             }
@@ -9778,6 +9917,23 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Irikar__Hub__Sat_Tower_West_Valley)
             }
             "Irikar > Hub > Save Point" => Ok(SpotId::Irikar__Hub__Save_Point),
+            "Irikar > Hub > SW Building Broken Wall" => {
+                Ok(SpotId::Irikar__Hub__SW_Building_Broken_Wall)
+            }
+            "Irikar > Hub > SW Building Hallway West" => {
+                Ok(SpotId::Irikar__Hub__SW_Building_Hallway_West)
+            }
+            "Irikar > Hub > SW Building Lower Platform" => {
+                Ok(SpotId::Irikar__Hub__SW_Building_Lower_Platform)
+            }
+            "Irikar > Hub > SW Building NE Roof" => Ok(SpotId::Irikar__Hub__SW_Building_NE_Roof),
+            "Irikar > Hub > SW Building Platform 2" => {
+                Ok(SpotId::Irikar__Hub__SW_Building_Platform_2)
+            }
+            "Irikar > Hub > SW Building Top Platform" => {
+                Ok(SpotId::Irikar__Hub__SW_Building_Top_Platform)
+            }
+            "Irikar > Hub > West 26" => Ok(SpotId::Irikar__Hub__West_26),
             "Irikar > Hub > West Rim" => Ok(SpotId::Irikar__Hub__West_Rim),
             "Irikar > Lamassu > Bottom Middle" => Ok(SpotId::Irikar__Lamassu__Bottom_Middle),
             "Irikar > Lamassu > Catwalk Middle" => Ok(SpotId::Irikar__Lamassu__Catwalk_Middle),
@@ -9810,6 +9966,7 @@ impl std::str::FromStr for SpotId {
             }
             "Irikar > Sight Room > Item Pedestal" => Ok(SpotId::Irikar__Sight_Room__Item_Pedestal),
             "Irikar > Sight Room > Lower Ledge" => Ok(SpotId::Irikar__Sight_Room__Lower_Ledge),
+            "Irikar > Sight Room > Northwest" => Ok(SpotId::Irikar__Sight_Room__Northwest),
             "Irikar > Sight Room > Portal" => Ok(SpotId::Irikar__Sight_Room__Portal),
             "Irikar > Sight Room > West 24" => Ok(SpotId::Irikar__Sight_Room__West_24),
             "Irikar Breach > Basement Save > Save Point" => {
@@ -10582,12 +10739,16 @@ pub enum LocationId {
     Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
     Irikar__Boss_Room__Healthy_Rooftop__Health,
     Irikar__East_Rooftops__Top_Rooftop__Tablet,
+    Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item,
     Irikar__Hub__Dagger_Altar__Weapon,
     Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
     Irikar__Hub__Royal_Storage_in_Wall__Item,
+    Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item,
+    Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well,
     Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Irikar__Hub__SW_Building_Top_Platform__Power_Core,
     Irikar__Lamassu__Desk__Item,
     Irikar__Sight_Room__Item_Pedestal__Urn,
     Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
@@ -10915,12 +11076,16 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"),
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => write!(f, "{}", "Irikar > Boss Room > Healthy Rooftop > Health"),
             LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => write!(f, "{}", "Irikar > East Rooftops > Top Rooftop > Tablet"),
+            LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item => write!(f, "{}", "Irikar > Hub > Collapsed Column > Shockwave to Get Item"),
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => write!(f, "{}", "Irikar > Hub > Dagger Altar > Weapon"),
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Mist into Wall"),
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Shockwave Wall"),
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Upgraded Mist into Wall"),
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => write!(f, "{}", "Irikar > Hub > Royal Storage in Wall > Item"),
+            LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item => write!(f, "{}", "Irikar > Hub > Ruined Hallway Atop Well > Well Item"),
+            LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well => write!(f, "{}", "Irikar > Hub > Ruined Hallway By Well > Shockwave Well"),
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet"),
+            LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core => write!(f, "{}", "Irikar > Hub > SW Building Top Platform > Power Core"),
             LocationId::Irikar__Lamassu__Desk__Item => write!(f, "{}", "Irikar > Lamassu > Desk > Item"),
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn"),
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
@@ -11253,12 +11418,16 @@ impl std::str::FromStr for LocationId {
             "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam),
             "Irikar > Boss Room > Healthy Rooftop > Health" => Ok(LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health),
             "Irikar > East Rooftops > Top Rooftop > Tablet" => Ok(LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet),
+            "Irikar > Hub > Collapsed Column > Shockwave to Get Item" => Ok(LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item),
             "Irikar > Hub > Dagger Altar > Weapon" => Ok(LocationId::Irikar__Hub__Dagger_Altar__Weapon),
             "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
             "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall),
             "Irikar > Hub > Royal Storage By Wall > Upgraded Mist into Wall" => Ok(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall),
             "Irikar > Hub > Royal Storage in Wall > Item" => Ok(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item),
+            "Irikar > Hub > Ruined Hallway Atop Well > Well Item" => Ok(LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item),
+            "Irikar > Hub > Ruined Hallway By Well > Shockwave Well" => Ok(LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well),
             "Irikar > Hub > Sat Tower Top Ledge > Tablet" => Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet),
+            "Irikar > Hub > SW Building Top Platform > Power Core" => Ok(LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core),
             "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
             "Irikar > Sight Room > Item Pedestal > Urn" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn),
             "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
@@ -13001,18 +13170,60 @@ pub enum ExitId {
     Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1,
     Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1,
     Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
+    Irikar__Hub__Collapsed_Column__ex__Lower_Well_1,
+    Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1,
     Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
+    Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1,
+    Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2,
+    Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3,
+    Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_4,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_4,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3,
+    Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_4,
+    Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1,
+    Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_2,
+    Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1,
+    Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1,
+    Irikar__Hub__Lower_Hallway_West__ex__West_26_1,
+    Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1,
+    Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2,
+    Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1,
+    Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2,
+    Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1,
+    Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1,
+    Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1,
+    Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1,
+    Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2,
+    Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3,
+    Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1,
+    Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1,
+    Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1,
+    Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1,
+    Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1,
     Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1,
     Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2,
     Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1,
     Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
     Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1,
+    Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1,
     Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1,
     Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1,
+    Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1,
     Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1,
     Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1,
     Irikar__Hub__Save_Point__ex__Bowl_Hole_1,
+    Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_Center_1,
+    Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_West_1,
+    Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1,
+    Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2,
+    Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1,
+    Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1,
     Irikar__Hub__West_Rim__ex__East_Rim_1,
     Irikar__Lamassu__Catwalk_Middle__ex__Desk_1,
     Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1,
@@ -13024,6 +13235,7 @@ pub enum ExitId {
     Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
     Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
     Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
+    Irikar__Sight_Room__Northwest__ex__Above_Room_East_1,
     Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1,
     Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1,
     Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1,
@@ -14928,18 +15140,60 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1 => write!(f, "{}", "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)"),
             ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => write!(f, "{}", "Irikar > Hub > Bowl Platform 3 ==> Bowl Middle Platform Center (1)"),
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => write!(f, "{}", "Irikar > Hub > Bowl Top Platform ==> West Rim (1)"),
+            ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => write!(f, "{}", "Irikar > Hub > Collapsed Column ==> Lower Well (1)"),
+            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => write!(f, "{}", "Irikar > Hub > Collapsed Column Debris ==> Lower Well (1)"),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (1)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (2)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (3)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_4 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (4)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (1)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (2)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (3)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_4 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (4)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (1)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (2)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (3)"),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_4 => write!(f, "{}", "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (4)"),
+            ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage West ==> NW Middle Building Left Ledge (1)"),
+            ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_2 => write!(f, "{}", "Irikar > Hub > Exposed Passage West ==> NW Middle Building Left Ledge (2)"),
+            ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage West ==> SW Building Broken Wall (1)"),
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => write!(f, "{}", "Irikar > Hub > Lower Hallway West ==> SW Building Hallway West (1)"),
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => write!(f, "{}", "Irikar > Hub > Lower Hallway West ==> West 26 (1)"),
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => write!(f, "{}", "Irikar > Hub > Lower Well ==> Exposed Passage West (1)"),
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2 => write!(f, "{}", "Irikar > Hub > Lower Well ==> Exposed Passage West (2)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building Broken Outcrop ==> NW Middle Building Corner (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2 => write!(f, "{}", "Irikar > Hub > NW Middle Building Broken Outcrop ==> NW Middle Building Corner (2)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building East Entry ==> NW Middle Building Left Ledge (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building East Entry ==> NW Middle Building West Entry (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building East Entry (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2 => write!(f, "{}", "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (2)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3 => write!(f, "{}", "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (3)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building Lower Ledge ==> NW Middle Building East Entry (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building Lower Ledge ==> NW Middle Building Left Ledge (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building West Entry ==> NW Middle Building East Entry (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building West Hook Point ==> Ruined Hallway By Well (1)"),
+            ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1 => write!(f, "{}", "Irikar > Hub > NW Middle Building West Hook Point ==> Ruined Hallway Gap Left (1)"),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => write!(f, "{}", "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (1)"),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => write!(f, "{}", "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (2)"),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall ==> Royal Storage in Wall (1)"),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Mist into Wall"),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => write!(f, "{}", "Irikar > Hub > Royal Storage By Wall > Upgraded Mist into Wall"),
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => write!(f, "{}", "Irikar > Hub > Royal Storage South ==> Basement Portal > North (1)"),
+            ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1 => write!(f, "{}", "Irikar > Hub > Ruined Hallway Gap Left ==> NW Middle Building East Entry (1)"),
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => write!(f, "{}", "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)"),
+            ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Lower Exterior ==> Sight Room > Northwest (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)"),
             ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => write!(f, "{}", "Irikar > Hub > Sat Tower Northeast ==> Airy > Northwest (1)"),
             ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1 => write!(f, "{}", "Irikar > Hub > Save Point ==> Bowl Hole (1)"),
+            ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_Center_1 => write!(f, "{}", "Irikar > Hub > SW Building Broken Wall ==> Exposed Passage Center (1)"),
+            ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_West_1 => write!(f, "{}", "Irikar > Hub > SW Building Broken Wall ==> Exposed Passage West (1)"),
+            ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1 => write!(f, "{}", "Irikar > Hub > SW Building Broken Wall ==> NW Middle Building Left Ledge (1)"),
+            ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2 => write!(f, "{}", "Irikar > Hub > SW Building Broken Wall ==> NW Middle Building Left Ledge (2)"),
+            ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1 => write!(f, "{}", "Irikar > Hub > SW Building Platform 2 ==> Exposed Passage Center (1)"),
+            ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1 => write!(f, "{}", "Irikar > Hub > SW Building Platform 2 ==> Exposed Passage West (1)"),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => write!(f, "{}", "Irikar > Hub > West Rim ==> East Rim (1)"),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => write!(f, "{}", "Irikar > Lamassu > Catwalk Middle ==> Desk (1)"),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => write!(f, "{}", "Irikar > Lamassu > Catwalk Middle ==> Hidden Passage West (1)"),
@@ -14951,6 +15205,7 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => write!(f, "{}", "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)"),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"),
+            ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => write!(f, "{}", "Irikar > Sight Room > Northwest ==> Above Room East (1)"),
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => write!(f, "{}", "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)"),
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => write!(f, "{}", "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)"),
@@ -16860,18 +17115,60 @@ impl std::str::FromStr for ExitId {
             "Irikar > Hub > Bowl Middle Platform West ==> Bowl Middle Ledge (1)" => Ok(ExitId::Irikar__Hub__Bowl_Middle_Platform_West__ex__Bowl_Middle_Ledge_1),
             "Irikar > Hub > Bowl Platform 3 ==> Bowl Middle Platform Center (1)" => Ok(ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1),
             "Irikar > Hub > Bowl Top Platform ==> West Rim (1)" => Ok(ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1),
+            "Irikar > Hub > Collapsed Column ==> Lower Well (1)" => Ok(ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1),
+            "Irikar > Hub > Collapsed Column Debris ==> Lower Well (1)" => Ok(ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1),
             "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1),
+            "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1),
+            "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (2)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2),
+            "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (3)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3),
+            "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (4)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_4),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (2)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (3)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Left (4)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_4),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (2)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (3)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3),
+            "Irikar > Hub > Exposed Passage Upper Ledge ==> Ruined Hallway Gap Right (4)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_4),
+            "Irikar > Hub > Exposed Passage West ==> NW Middle Building Left Ledge (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1),
+            "Irikar > Hub > Exposed Passage West ==> NW Middle Building Left Ledge (2)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_2),
+            "Irikar > Hub > Exposed Passage West ==> SW Building Broken Wall (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1),
+            "Irikar > Hub > Lower Hallway West ==> SW Building Hallway West (1)" => Ok(ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1),
+            "Irikar > Hub > Lower Hallway West ==> West 26 (1)" => Ok(ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1),
+            "Irikar > Hub > Lower Well ==> Exposed Passage West (1)" => Ok(ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1),
+            "Irikar > Hub > Lower Well ==> Exposed Passage West (2)" => Ok(ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2),
+            "Irikar > Hub > NW Middle Building Broken Outcrop ==> NW Middle Building Corner (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1),
+            "Irikar > Hub > NW Middle Building Broken Outcrop ==> NW Middle Building Corner (2)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2),
+            "Irikar > Hub > NW Middle Building East Entry ==> NW Middle Building Left Ledge (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1),
+            "Irikar > Hub > NW Middle Building East Entry ==> NW Middle Building West Entry (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1),
+            "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building East Entry (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1),
+            "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1),
+            "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (2)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2),
+            "Irikar > Hub > NW Middle Building Left Ledge ==> NW Middle Building West Entry (3)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3),
+            "Irikar > Hub > NW Middle Building Lower Ledge ==> NW Middle Building East Entry (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1),
+            "Irikar > Hub > NW Middle Building Lower Ledge ==> NW Middle Building Left Ledge (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1),
+            "Irikar > Hub > NW Middle Building West Entry ==> NW Middle Building East Entry (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1),
+            "Irikar > Hub > NW Middle Building West Hook Point ==> Ruined Hallway By Well (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1),
+            "Irikar > Hub > NW Middle Building West Hook Point ==> Ruined Hallway Gap Left (1)" => Ok(ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1),
             "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (1)" => Ok(ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1),
             "Irikar > Hub > NW Staircase Upper ==> NW Bowl Edifice (2)" => Ok(ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2),
             "Irikar > Hub > Royal Storage By Wall ==> Royal Storage in Wall (1)" => Ok(ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1),
             "Irikar > Hub > Royal Storage By Wall > Mist into Wall" => Ok(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
             "Irikar > Hub > Royal Storage By Wall > Upgraded Mist into Wall" => Ok(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall),
             "Irikar > Hub > Royal Storage South ==> Basement Portal > North (1)" => Ok(ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1),
+            "Irikar > Hub > Ruined Hallway Gap Left ==> NW Middle Building East Entry (1)" => Ok(ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1),
             "Irikar > Hub > Sat Tower East 24 ==> Sight Room > West 24 (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1),
             "Irikar > Hub > Sat Tower Floating Platform ==> Sat Tower Top Ledge (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1),
+            "Irikar > Hub > Sat Tower Lower Exterior ==> Sight Room > Northwest (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1),
             "Irikar > Hub > Sat Tower Middle Ledge ==> Sat Tower Floating Platform (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Middle_Ledge__ex__Sat_Tower_Floating_Platform_1),
             "Irikar > Hub > Sat Tower Northeast ==> Airy > Northwest (1)" => Ok(ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1),
             "Irikar > Hub > Save Point ==> Bowl Hole (1)" => Ok(ExitId::Irikar__Hub__Save_Point__ex__Bowl_Hole_1),
+            "Irikar > Hub > SW Building Broken Wall ==> Exposed Passage Center (1)" => Ok(ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_Center_1),
+            "Irikar > Hub > SW Building Broken Wall ==> Exposed Passage West (1)" => Ok(ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_West_1),
+            "Irikar > Hub > SW Building Broken Wall ==> NW Middle Building Left Ledge (1)" => Ok(ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1),
+            "Irikar > Hub > SW Building Broken Wall ==> NW Middle Building Left Ledge (2)" => Ok(ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2),
+            "Irikar > Hub > SW Building Platform 2 ==> Exposed Passage Center (1)" => Ok(ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1),
+            "Irikar > Hub > SW Building Platform 2 ==> Exposed Passage West (1)" => Ok(ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1),
             "Irikar > Hub > West Rim ==> East Rim (1)" => Ok(ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1),
             "Irikar > Lamassu > Catwalk Middle ==> Desk (1)" => Ok(ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1),
             "Irikar > Lamassu > Catwalk Middle ==> Hidden Passage West (1)" => Ok(ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1),
@@ -16883,6 +17180,7 @@ impl std::str::FromStr for ExitId {
             "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)" => Ok(ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1),
             "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
             "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
+            "Irikar > Sight Room > Northwest ==> Above Room East (1)" => Ok(ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1),
             "Irikar > Sight Room > West 24 ==> Hub > Sat Tower East 24 (1)" => Ok(ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1),
             "Irikar Breach > Exit Corridor > East ==> Uhrum Connector > West (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__East__ex__Uhrum_Connector__West_1),
             "Irikar Breach > Exit Corridor > North 12 ==> Pillar (1)" => Ok(ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1),
@@ -17288,6 +17586,7 @@ pub enum ActionId {
     Global__Recall_Fast_Travel,
     Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
+    Irikar__Hub__Collapsed_Column__Shockwave_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
@@ -17769,6 +18068,9 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar > Basement Portal > Moving Platform Start > Activate Platform"
             ),
+            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
+                write!(f, "{}", "Irikar > Hub > Collapsed Column > Shockwave Wall")
+            }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
                 f,
                 "{}",
@@ -18169,6 +18471,9 @@ impl std::str::FromStr for ActionId {
             "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
                 Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
             }
+            "Irikar > Hub > Collapsed Column > Shockwave Wall" => {
+                Ok(ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall)
+            }
             "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
                 Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
             }
@@ -18253,6 +18558,7 @@ pub enum CanonId {
     Irikar_Gudam,
     Irikar_Royal_Storage_Flask,
     Irikar_Royal_Storage_Wall,
+    Irikar_Well_Flask,
     Ledge_Grab,
     Loc_Amagi__East_Lake__Foot__Tablet,
     Loc_Amagi__Liru_Room__Shrine__Item,
@@ -18348,6 +18654,7 @@ pub enum CanonId {
     Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
     Loc_Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
     Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
+    Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core,
     Loc_Irikar__Lamassu__Desk__Item,
     Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
     Loc_Irikar_Breach__Hover_Room__Bottom__Item,
@@ -18460,6 +18767,7 @@ impl fmt::Display for CanonId {
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
+            CanonId::Irikar_Well_Flask => write!(f, "{}", "Irikar_Well_Flask"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             CanonId::Loc_Amagi__East_Lake__Foot__Tablet => {
                 write!(f, "{}", "Loc_Amagi__East_Lake__Foot__Tablet")
@@ -18795,6 +19103,11 @@ impl fmt::Display for CanonId {
             CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
                 write!(f, "{}", "Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet")
             }
+            CanonId::Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core => write!(
+                f,
+                "{}",
+                "Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core"
+            ),
             CanonId::Loc_Irikar__Lamassu__Desk__Item => {
                 write!(f, "{}", "Loc_Irikar__Lamassu__Desk__Item")
             }
@@ -19052,6 +19365,7 @@ impl std::str::FromStr for CanonId {
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
+            "Irikar_Well_Flask" => Ok(CanonId::Irikar_Well_Flask),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             "Loc_Amagi__East_Lake__Foot__Tablet" => Ok(CanonId::Loc_Amagi__East_Lake__Foot__Tablet),
             "Loc_Amagi__Liru_Room__Shrine__Item" => Ok(CanonId::Loc_Amagi__Liru_Room__Shrine__Item),
@@ -19322,6 +19636,9 @@ impl std::str::FromStr for CanonId {
             }
             "Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet" => {
                 Ok(CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)
+            }
+            "Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core" => {
+                Ok(CanonId::Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core)
             }
             "Loc_Irikar__Lamassu__Desk__Item" => Ok(CanonId::Loc_Irikar__Lamassu__Desk__Item),
             "Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item" => {
