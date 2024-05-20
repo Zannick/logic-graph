@@ -617,9 +617,12 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Glacier_Revival => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Hammond => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Infect => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_10_25 => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Hub => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Midwest => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Well => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Nanite_Mist => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Remote_Drone => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Shockwave => enums::Realm::Map,
@@ -1085,8 +1088,19 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_23 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_24_Ground => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_24_Rooftop => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_25 => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__West_26 => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__West_Rim => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftop_1 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftop_2 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftop_3 => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_East => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Middle => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__West_Small_Middle_Rooftop => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Sight_Room__Above_Room_East => SpotId::Irikar__Sight_Room__Portal,
         SpotId::Irikar__Sight_Room__Above_Room_North => SpotId::Irikar__Sight_Room__Portal,
         SpotId::Irikar__Sight_Room__Item_Pedestal => SpotId::Irikar__Sight_Room__Portal,
@@ -1186,8 +1200,19 @@ pub fn portal_hidden(spot_id: SpotId) -> bool {
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => true,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => true,
         SpotId::Irikar__Hub__Save_Point => true,
+        SpotId::Irikar__Hub__West_23 => true,
+        SpotId::Irikar__Hub__West_24_Ground => true,
+        SpotId::Irikar__Hub__West_24_Rooftop => true,
+        SpotId::Irikar__Hub__West_25 => true,
         SpotId::Irikar__Hub__West_26 => true,
         SpotId::Irikar__Hub__West_Rim => true,
+        SpotId::Irikar__Hub__West_Rooftop_1 => true,
+        SpotId::Irikar__Hub__West_Rooftop_2 => true,
+        SpotId::Irikar__Hub__West_Rooftop_3 => true,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_East => true,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Middle => true,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase => true,
+        SpotId::Irikar__Hub__West_Small_Middle_Rooftop => true,
         SpotId::Irikar__Sight_Room__Above_Room_East => true,
         SpotId::Irikar__Sight_Room__Above_Room_North => true,
         SpotId::Irikar__Sight_Room__Item_Pedestal => true,
@@ -1552,8 +1577,19 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Save_Point => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_23 => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_24_Ground => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_24_Rooftop => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_25 => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__West_26 => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__West_Rim => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftop_1 => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftop_2 => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftop_3 => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_East => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Middle => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__West_Small_Middle_Rooftop => SpotId::Irikar__Hub__Save_Point,
         SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers => SpotId::Uhrum__Annuna_Corridor__Save_Point,
         SpotId::Uhrum__Annuna_Corridor__Block_East => SpotId::Uhrum__Annuna_Corridor__Save_Point,
         SpotId::Uhrum__Annuna_Corridor__Block_West => SpotId::Uhrum__Annuna_Corridor__Save_Point,
@@ -1750,7 +1786,17 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__Bowl_Middle_Platform_West => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__Bowl_Platform_3 => SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        SpotId::Irikar__Hub__Dagger_Altar => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+        SpotId::Irikar__Hub__Royal_Storage_By_Wall => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+        SpotId::Irikar__Hub__Royal_Storage_in_Wall => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+        SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well => SpotId::Menu__Kiengir_Map__Irikar_Well,
+        SpotId::Irikar__Hub__Ruined_Hallway_By_Well => SpotId::Menu__Kiengir_Map__Irikar_Well,
+        SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left => SpotId::Menu__Kiengir_Map__Irikar_Well,
+        SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => SpotId::Menu__Kiengir_Map__Irikar_Well,
+        SpotId::Irikar__Hub__SW_Building_Top_Platform => SpotId::Menu__Kiengir_Map__Irikar_10_25,
         SpotId::Irikar__Hub__Save_Point => SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        SpotId::Irikar__Hub__West_25 => SpotId::Menu__Kiengir_Map__Irikar_10_25,
+        SpotId::Irikar__Hub__West_Rooftop_1 => SpotId::Menu__Kiengir_Map__Irikar_10_25,
         SpotId::Irikar__Sight_Room__Item_Pedestal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Irikar__Sight_Room__Portal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Uhrum__Annuna_Corridor__Block_West => SpotId::Menu__Kiengir_Map__Uhrum_East,
@@ -6732,8 +6778,38 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
 
                 }
+                SpotId::Irikar__Hub__Dagger_Altar => {
+
+                }
+                SpotId::Irikar__Hub__Royal_Storage_By_Wall => {
+
+                }
+                SpotId::Irikar__Hub__Royal_Storage_in_Wall => {
+
+                }
+                SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well => {
+
+                }
+                SpotId::Irikar__Hub__Ruined_Hallway_By_Well => {
+
+                }
+                SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left => {
+
+                }
+                SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => {
+
+                }
                 SpotId::Irikar__Hub__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
+
+                }
+                SpotId::Irikar__Hub__SW_Building_Top_Platform => {
+
+                }
+                SpotId::Irikar__Hub__West_25 => {
+
+                }
+                SpotId::Irikar__Hub__West_Rooftop_1 => {
 
                 }
                 SpotId::Irikar__Sight_Room__Item_Pedestal => {

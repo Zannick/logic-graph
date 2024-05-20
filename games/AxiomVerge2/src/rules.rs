@@ -1942,6 +1942,10 @@ pub fn access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anum
         && ctx.has(Item::Anuman))
         && ctx.portal() == data::portal_start(ctx.position()))
 }
+pub fn access_invoke_hover_or_anuman(ctx: &Context, world: &graph::World) -> bool {
+    // $hover or Anuman
+    (helper__hover!(ctx, world) || ctx.has(Item::Anuman))
+}
 pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
     // $hover or $hook
     (helper__hover!(ctx, world) || helper__hook!(ctx, world))
@@ -10314,6 +10318,32 @@ pub fn explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anu
         }
     }
 }
+pub fn explain_invoke_hover_or_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover or Anuman
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hover_or_invoke_hook(
     ctx: &Context,
     world: &graph::World,
@@ -16505,6 +16535,17 @@ pub fn observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_
             let right = data::portal_start(ctx.position());
             left == right
         }))
+}
+pub fn observe_access_invoke_hover_or_anuman(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover or Anuman
+    (hobserve__hover!(ctx, world, full_obs) || {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
 }
 pub fn observe_access_invoke_hover_or_invoke_hook(
     ctx: &Context,

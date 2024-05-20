@@ -1876,6 +1876,17 @@ subgraph Irikar
         Irikar__Hub__Collapsed_Column_Debris(Collapsed Column Debris);
         Irikar__Hub__Lower_Hallway_West(Lower Hallway West);
         Irikar__Hub__West_26(West 26);
+        Irikar__Hub__West_25(West 25);
+        Irikar__Hub__West_Rooftop_1(West Rooftop 1);
+        Irikar__Hub__West_Rooftop_2(West Rooftop 2);
+        Irikar__Hub__West_Rooftop_3(West Rooftop 3);
+        Irikar__Hub__West_24_Ground(West 24 Ground);
+        Irikar__Hub__West_24_Rooftop(West 24 Rooftop);
+        Irikar__Hub__West_Small_Middle_Rooftop(West Small Middle Rooftop);
+        Irikar__Hub__West_23(West 23);
+        Irikar__Hub__West_Rooftops_Upper_Staircase(West Rooftops Upper Staircase);
+        Irikar__Hub__West_Rooftops_Upper_Middle(West Rooftops Upper Middle);
+        Irikar__Hub__West_Rooftops_Upper_East(West Rooftops Upper East);
     end
     subgraph Irikar__Airy[Airy]
         Irikar__Airy__Northwest(Northwest);
@@ -2029,6 +2040,9 @@ subgraph Menu
         Menu__Kiengir_Map__Forbidden_Knowledge(Forbidden Knowledge);
         Menu__Kiengir_Map__Ebih_Truck_Gate(Ebih Truck Gate);
         Menu__Kiengir_Map__Ebih_Guarded_Health(Ebih Guarded Health);
+        Menu__Kiengir_Map__Irikar_Well(Irikar Well);
+        Menu__Kiengir_Map__Irikar_10_25(Irikar 10,25);
+        Menu__Kiengir_Map__Irikar_Royal_Storage(Irikar Royal Storage);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -3290,7 +3304,19 @@ Irikar__Hub__Sat_Tower_Lower_Exterior --> Irikar__Sight_Room__Northwest
 Irikar__Hub__Sat_Tower_Middle_Ledge --> Irikar__Hub__Sat_Tower_Floating_Platform
 Irikar__Hub__Sat_Tower_Northeast --> Irikar__Airy__Northwest
 Irikar__Hub__Save_Point --> Irikar__Hub__Bowl_Hole
+Irikar__Hub__West_23 --> Irikar__Midwest__East_23
+Irikar__Hub__West_24_Ground <--> Irikar__Midwest__East_24_on_Floor
+Irikar__Hub__West_24_Rooftop <--> Irikar__Midwest__East_24_on_Building
+Irikar__Hub__West_25 --> Irikar__Hub__West_Rooftop_2
+Irikar__Hub__West_25 <--> Irikar__Midwest__East_25
+Irikar__Hub__West_26 <--> Irikar__Midwest__East_26
 Irikar__Hub__West_Rim --> Irikar__Hub__East_Rim
+Irikar__Hub__West_Rooftop_3 --> Irikar__Hub__West_24_Rooftop
+Irikar__Hub__West_Rooftop_3 --> Irikar__Hub__West_Small_Middle_Rooftop
+Irikar__Hub__West_Rooftops_Upper_Staircase --> Irikar__Hub__West_Rooftops_Upper_East
+Irikar__Hub__West_Small_Middle_Rooftop --> Irikar__Hub__NW_Middle_Building_Corner
+Irikar__Hub__West_Small_Middle_Rooftop --> Irikar__Hub__NW_Middle_Building_West_Entry
+Irikar__Hub__West_Small_Middle_Rooftop --> Irikar__Hub__NW_Middle_Building_West_Hook_Point
 Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Desk
 Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Hidden_Passage_West
 Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26

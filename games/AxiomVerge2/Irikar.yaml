@@ -9,17 +9,28 @@ areas:
     save_point: Save Point
   map:
     save: [12, 22, 13, 23]
+    well: [12, 23, 13, 24]
+    west25: [10, 24, 11, 25]
+    royal: [12, 25, 13, 26]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Irikar Hub
+      well: Menu > Kiengir Map > Irikar Well
+      west25: Menu > Kiengir Map > Irikar 10,25
+      royal: Menu > Kiengir Map > Irikar Royal Storage
   spots:
     - name: Northwest
       coord: [11.0, 20.1]
+      local:
+        - to: West Rooftops Upper East
+        - to: West Rooftops Upper Middle
+        - to: West Small Middle Rooftop
     - name: North Above Portal
       coord: [11.3, 20.1]
       local:
         - to: Portal Stand
         - to: NW Middle Building Corner
+        - to: West Rooftops Upper East
     - name: Northwest Above Bowl
       coord: [12.25, 20.1]
       local:
@@ -225,12 +236,15 @@ areas:
       local:
         - to: NW Bowl Edifice
         - to: NW Middle Building Corner
+        - to: West Rooftops Upper East
     - name: NW Staircase Upper
       coord: [11.8, 20.9]
       local:
         - to: Portal Stand
           jumps_down: 2
         - to: NW Middle Building Corner
+          jumps_down: 1
+        - to: West Rooftops Upper East
       exits:
         - to: NW Bowl Edifice
           req: $grab
@@ -254,6 +268,8 @@ areas:
         - to: NW Middle Building Broken Outcrop
         - to: NW Middle Building West Entry
         - to: NW Middle Building West Hook Point
+        - to: West 25
+          jumps_down: 2
     - name: NW Middle Building Broken Outcrop
       coord: [10.975, 22.6]
       local:
@@ -283,6 +299,8 @@ areas:
       local:
         - to: NW Middle Building Left Ledge
         - to: NW Middle Building West Hook Point
+        - to: West 25
+          jumps_down: 2
       exits:
         - to: NW Middle Building East Entry
           req: $hover
@@ -681,6 +699,149 @@ areas:
       local:
         - to: SW Building Hallway West
         - to: Lower Hallway West
+      exits:
+        - to: Midwest > East 26
+          tags: [xshift]
+    #endregion
+
+    #region West Rooftops
+    - name: West 25
+      coord: [10.05, 24.25]
+      local:
+        - to: West Rooftop 1
+      exits:
+        - to: Midwest > East 25
+          tags: [xshift]
+        - to: West Rooftop 2
+          req: $grab
+          movement: base
+          jumps: 3
+    - name: West Rooftop 1
+      coord: [10.5, 24.35]
+      local:
+        - to: West 25
+          jumps: 1
+        - to: West Rooftop 2
+          jumps: 3
+    - name: West Rooftop 2
+      coord: [10.65, 23.8]
+      local:
+        - to: West 25
+          jumps_down: 1
+        - to: West Rooftop 1
+          jumps_down: 1
+        - to: West 24 Ground
+          jumps: 2
+        - to: West Rooftop 3
+          jumps: 2
+    - name: West Rooftop 3
+      coord: [10.8, 23.5]
+      local:
+        - to: West 24 Ground
+        - to: West Rooftop 2
+          jumps_down: 2
+        - to: West 25
+          jumps_down: 2
+        - to: NW Middle Building West Hook Point
+          jumps: 2
+        - to: NW Middle Building West Entry
+          jumps: 2
+      exits:
+        - to: West 24 Rooftop
+          req: $hover or Anuman
+          movement: base
+          jumps: 1
+        - to: West Small Middle Rooftop
+          req: $hover or Anuman
+          movement: base
+          jumps: 2
+    - name: West 24 Ground
+      coord: [10.05, 23.7]
+      local:
+        - to: West Rooftop 2
+        - to: West Rooftop 3
+          jumps: 2
+      exits:
+        - to: Midwest > East 24 on Floor
+          tags: [xshift]
+    - name: West 24 Rooftop
+      coord: [10.05, 23.3]
+      local:
+        - to: West Small Middle Rooftop
+          jumps: 2
+        - to: West Rooftop 3
+      exits:
+        - to: Midwest > East 24 on Building
+          tags: [xshift]
+    - name: West Small Middle Rooftop
+      coord: [10.5, 23.1]
+      local:
+        - to: West 24 Rooftop
+        - to: West 24 Ground
+          jumps_down: 1
+        - to: West Rooftop 3
+        - to: West 23
+          jumps: 2
+        - to: West Rooftops Upper Staircase
+          jumps: 5
+        - to: West 25
+          thru: [10.35, 23.85]
+          jumps_down: [2, 0]
+      exits:
+        - to: NW Middle Building West Hook Point
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: NW Middle Building West Entry
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: NW Middle Building West Entry
+          req: Nanite_Mist
+          movement: mist1
+        - to: NW Middle Building West Entry
+          req: $mist2
+          movement: mist2
+        - to: NW Middle Building Corner
+          req: Nanite_Mist
+          movement: mist1
+        - to: NW Middle Building Corner
+          req: $mist2
+          movement: mist2
+    - name: West 23
+      coord: [10.05, 22.8]
+      exits:
+        - to: Midwest > East 23
+          tags: [xshift]
+    - name: West Rooftops Upper Staircase
+      coord: [10.4, 22.3]
+      local:
+        - to: West 23
+        - to: West Rooftops Upper Middle
+          jumps: 2
+      exits:
+        - to: West Rooftops Upper East
+          req: $hover
+          movement: base
+          jumps: 2
+    - name: West Rooftops Upper Middle
+      coord: [10.45, 21.9]
+      local:
+        - to: West 23
+        - to: West Rooftops Upper Staircase
+          jumps_down: 1
+        - to: West Rooftops Upper East
+    - name: West Rooftops Upper East
+      coord: [10.8, 22.0]
+      local:
+        - to: West Rooftops Upper Middle
+          jumps: 1
+        - to: West Rooftops Upper Staircase
+        - to: West 24 Rooftop
+        - to: West Small Middle Rooftop
+          jumps_down: 1
+        - to: West 25
+          jumps_down: 4
     #endregion
 
 - name: Airy  # MARK: Airy
@@ -1263,12 +1424,24 @@ areas:
       coord: [9.95, 22.8]  # Arbitrary positioning, just so it's possible to go directly
     - name: East 24 on Building
       coord: [9.95, 23.3]
+      exits:
+        - to: Hub > West 24 Rooftop
+          tags: [xshift]
     - name: East 24 on Floor
       coord: [9.95, 23.7]
+      exits:
+        - to: Hub > West 24 Ground
+          tags: [xshift]
     - name: East 25
       coord: [9.95, 24.25]
+      exits:
+        - to: Hub > West 25
+          tags: [xshift]
     - name: East 26
       coord: [9.95, 25.35]
+      exits:
+        - to: Hub > West 26
+          tags: [xshift]
     - name: East 27
       coord: [9.95, 26.35]
     - name: East 28

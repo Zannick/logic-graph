@@ -1952,6 +1952,17 @@
             Irikar__Hub__Collapsed_Column_Debris [label = "", pos = "35.4,-42.833333!"];
             Irikar__Hub__Lower_Hallway_West [label = "", pos = "30.6,-43.0!"];
             Irikar__Hub__West_26 [label = "", pos = "30.15,-42.25!"];
+            Irikar__Hub__West_25 [label = "", pos = "30.15,-40.416667!"];
+            Irikar__Hub__West_Rooftop_1 [label = "", pos = "31.5,-40.583333!"];
+            Irikar__Hub__West_Rooftop_2 [label = "", pos = "31.95,-39.666667!"];
+            Irikar__Hub__West_Rooftop_3 [label = "", pos = "32.4,-39.166667!"];
+            Irikar__Hub__West_24_Ground [label = "", pos = "30.15,-39.5!"];
+            Irikar__Hub__West_24_Rooftop [label = "", pos = "30.15,-38.833333!"];
+            Irikar__Hub__West_Small_Middle_Rooftop [label = "", pos = "31.5,-38.5!"];
+            Irikar__Hub__West_23 [label = "", pos = "30.15,-38.0!"];
+            Irikar__Hub__West_Rooftops_Upper_Staircase [label = "", pos = "31.2,-37.166667!"];
+            Irikar__Hub__West_Rooftops_Upper_Middle [label = "", pos = "31.35,-36.5!"];
+            Irikar__Hub__West_Rooftops_Upper_East [label = "", pos = "32.4,-36.666667!"];
         }
         {
             Irikar__Lamassu__West_28 [label = "", pos = "51.15,-46.166667!"];
@@ -2073,6 +2084,9 @@
             Menu__Kiengir_Map__Forbidden_Knowledge [label = "", pos = "105.0,-30.0!"];
             Menu__Kiengir_Map__Ebih_Truck_Gate [label = "", pos = "75.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Guarded_Health [label = "", pos = "63.0,-20.0!"];
+            Menu__Kiengir_Map__Irikar_Well [label = "", pos = "36.0,-40.0!"];
+            Menu__Kiengir_Map__Irikar_10_25 [label = "", pos = "30.0,-41.666667!"];
+            Menu__Kiengir_Map__Irikar_Royal_Storage [label = "", pos = "36.0,-43.333333!"];
         }
     }
     {

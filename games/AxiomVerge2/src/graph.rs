@@ -1562,7 +1562,18 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Hub__Collapsed_Column
         | SpotId::Irikar__Hub__Collapsed_Column_Debris
         | SpotId::Irikar__Hub__Lower_Hallway_West
-        | SpotId::Irikar__Hub__West_26 => AreaId::Irikar__Hub,
+        | SpotId::Irikar__Hub__West_26
+        | SpotId::Irikar__Hub__West_25
+        | SpotId::Irikar__Hub__West_Rooftop_1
+        | SpotId::Irikar__Hub__West_Rooftop_2
+        | SpotId::Irikar__Hub__West_Rooftop_3
+        | SpotId::Irikar__Hub__West_24_Ground
+        | SpotId::Irikar__Hub__West_24_Rooftop
+        | SpotId::Irikar__Hub__West_Small_Middle_Rooftop
+        | SpotId::Irikar__Hub__West_23
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_Middle
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_East => AreaId::Irikar__Hub,
         SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => {
             AreaId::Irikar__Airy
         }
@@ -1690,7 +1701,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
         | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
         | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
-        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
+        | SpotId::Menu__Kiengir_Map__Irikar_Well
+        | SpotId::Menu__Kiengir_Map__Irikar_10_25
+        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3371,7 +3385,18 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Hub__Collapsed_Column
         | SpotId::Irikar__Hub__Collapsed_Column_Debris
         | SpotId::Irikar__Hub__Lower_Hallway_West
-        | SpotId::Irikar__Hub__West_26 => RegionId::Irikar,
+        | SpotId::Irikar__Hub__West_26
+        | SpotId::Irikar__Hub__West_25
+        | SpotId::Irikar__Hub__West_Rooftop_1
+        | SpotId::Irikar__Hub__West_Rooftop_2
+        | SpotId::Irikar__Hub__West_Rooftop_3
+        | SpotId::Irikar__Hub__West_24_Ground
+        | SpotId::Irikar__Hub__West_24_Rooftop
+        | SpotId::Irikar__Hub__West_Small_Middle_Rooftop
+        | SpotId::Irikar__Hub__West_23
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_Middle
+        | SpotId::Irikar__Hub__West_Rooftops_Upper_East => RegionId::Irikar,
         SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => RegionId::Irikar,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
@@ -3493,7 +3518,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
         | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
         | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
-        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
+        | SpotId::Menu__Kiengir_Map__Irikar_Well
+        | SpotId::Menu__Kiengir_Map__Irikar_10_25
+        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -6247,7 +6275,22 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => true,
+            ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1 => true,
+            ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1 => true,
+            ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1 => true,
+            ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1 => true,
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 => rules::access_invoke_hover_or_anuman(ctx, world),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => rules::access_invoke_hover_or_anuman(ctx, world),
+            ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => true,
@@ -6255,6 +6298,10 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
+            ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
+            ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
@@ -7788,7 +7835,17 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 => rules::observe_access_invoke_hover_or_anuman(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => rules::observe_access_invoke_hover_or_anuman(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
@@ -9439,7 +9496,17 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 => rules::explain_invoke_hover_or_anuman(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => rules::explain_invoke_hover_or_anuman(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
@@ -10113,11 +10180,20 @@ impl world::Exit for Exit {
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Northeast__ex__Airy__Northwest_1 => true,
+            ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => true,
+            ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1 => true,
+            ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1 => true,
+            ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1 => true,
+            ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1 => true,
             ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => true,
             ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => true,
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
+            ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
+            ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
@@ -12666,7 +12742,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1793] = [
+static RAW_SPOTS: [SpotId; 1807] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -14179,8 +14255,19 @@ static RAW_SPOTS: [SpotId; 1793] = [
     SpotId::Irikar__Hub__SW_Building_NE_Roof,
     SpotId::Irikar__Hub__SW_Building_Platform_2,
     SpotId::Irikar__Hub__SW_Building_Top_Platform,
+    SpotId::Irikar__Hub__West_23,
+    SpotId::Irikar__Hub__West_24_Ground,
+    SpotId::Irikar__Hub__West_24_Rooftop,
+    SpotId::Irikar__Hub__West_25,
     SpotId::Irikar__Hub__West_26,
     SpotId::Irikar__Hub__West_Rim,
+    SpotId::Irikar__Hub__West_Rooftop_1,
+    SpotId::Irikar__Hub__West_Rooftop_2,
+    SpotId::Irikar__Hub__West_Rooftop_3,
+    SpotId::Irikar__Hub__West_Rooftops_Upper_East,
+    SpotId::Irikar__Hub__West_Rooftops_Upper_Middle,
+    SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase,
+    SpotId::Irikar__Hub__West_Small_Middle_Rooftop,
     SpotId::Irikar__Lamassu__Bottom_Middle,
     SpotId::Irikar__Lamassu__Catwalk_Middle,
     SpotId::Irikar__Lamassu__Catwalk_West,
@@ -14326,9 +14413,12 @@ static RAW_SPOTS: [SpotId; 1793] = [
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
     SpotId::Menu__Kiengir_Map__Hammond,
     SpotId::Menu__Kiengir_Map__Infect,
+    SpotId::Menu__Kiengir_Map__Irikar_10_25,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
     SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+    SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+    SpotId::Menu__Kiengir_Map__Irikar_Well,
     SpotId::Menu__Kiengir_Map__Nanite_Mist,
     SpotId::Menu__Kiengir_Map__Remote_Drone,
     SpotId::Menu__Kiengir_Map__Shockwave,
@@ -15163,7 +15253,7 @@ lazy_static! {
         },
         AreaId::Irikar__Hub => Range {
             start: SpotId::Irikar__Hub__Bowl_Hole.into_usize(),
-            end: SpotId::Irikar__Hub__West_Rim.into_usize() + 1,
+            end: SpotId::Irikar__Hub__West_Small_Middle_Rooftop.into_usize() + 1,
         },
         AreaId::Irikar__Lamassu => Range {
             start: SpotId::Irikar__Lamassu__Bottom_Middle.into_usize(),
@@ -17083,6 +17173,14 @@ impl world::World for World {
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => SpotId::Irikar__Hub__Collapsed_Column,
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => SpotId::Irikar__Hub__Collapsed_Column_Debris,
             ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 | ExitId:: Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => SpotId::Irikar__Hub__Lower_Hallway_West,
+            ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1 => SpotId::Irikar__Hub__West_26,
+            ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1 | ExitId:: Irikar__Hub__West_25__ex__West_Rooftop_2_1 => SpotId::Irikar__Hub__West_25,
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 | ExitId:: Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => SpotId::Irikar__Hub__West_Rooftop_3,
+            ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1 => SpotId::Irikar__Hub__West_24_Ground,
+            ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1 => SpotId::Irikar__Hub__West_24_Rooftop,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => SpotId::Irikar__Hub__West_Small_Middle_Rooftop,
+            ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => SpotId::Irikar__Hub__West_23,
+            ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase,
             ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => SpotId::Irikar__Airy__Middle_South,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
@@ -17117,6 +17215,10 @@ impl world::World for World {
             ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => SpotId::Irikar__East_Rooftops__Directly_Down,
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_3 | ExitId:: Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => SpotId::Irikar__East_Rooftops__Off_the_Edge,
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => SpotId::Irikar__East_Rooftops__East_Mid_air,
+            ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => SpotId::Irikar__Midwest__East_24_on_Building,
+            ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => SpotId::Irikar__Midwest__East_24_on_Floor,
+            ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => SpotId::Irikar__Midwest__East_25,
+            ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => SpotId::Irikar__Midwest__East_26,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => SpotId::Irikar__Lamassu__West_28,
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => SpotId::Irikar__Lamassu__East_27,
             ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => SpotId::Irikar__Lamassu__East_26,
@@ -20048,6 +20150,21 @@ impl world::World for World {
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => true,
             ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => true,
             ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => true,
+            ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1 => true,
+            ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1 => true,
+            ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1 => true,
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 => true,
+            ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => true,
+            ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1 => true,
+            ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 => true,
+            ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => true,
+            ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => true,
+            ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
             ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => true,
@@ -20055,6 +20172,10 @@ impl world::World for World {
             ExitId::Irikar__Lamassu__Catwalk_West__ex__Boss_Room__Catwalk_East_1 => true,
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => true,
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
+            ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
+            ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
+            ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => true,
@@ -21794,6 +21915,17 @@ impl world::World for World {
             SpotId::Irikar__Hub__Collapsed_Column_Debris => true,
             SpotId::Irikar__Hub__Lower_Hallway_West => true,
             SpotId::Irikar__Hub__West_26 => true,
+            SpotId::Irikar__Hub__West_25 => true,
+            SpotId::Irikar__Hub__West_Rooftop_1 => true,
+            SpotId::Irikar__Hub__West_Rooftop_2 => true,
+            SpotId::Irikar__Hub__West_Rooftop_3 => true,
+            SpotId::Irikar__Hub__West_24_Ground => true,
+            SpotId::Irikar__Hub__West_24_Rooftop => true,
+            SpotId::Irikar__Hub__West_Small_Middle_Rooftop => true,
+            SpotId::Irikar__Hub__West_23 => true,
+            SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase => true,
+            SpotId::Irikar__Hub__West_Rooftops_Upper_Middle => true,
+            SpotId::Irikar__Hub__West_Rooftops_Upper_East => true,
             SpotId::Irikar__Lamassu__West_28 => true,
             SpotId::Irikar__Lamassu__Bottom_Middle => true,
             SpotId::Irikar__Lamassu__East_27 => true,
@@ -21949,6 +22081,9 @@ impl world::World for World {
             SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => true,
             SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => true,
             SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Well => true,
+            SpotId::Menu__Kiengir_Map__Irikar_10_25 => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -22838,12 +22973,21 @@ impl world::World for World {
             | SpotId::Irikar__Hub__Sat_Tower_Top_Ledge
             | SpotId::Irikar__Hub__Save_Point
             | SpotId::Irikar__Hub__SW_Building_Top_Platform
+            | SpotId::Irikar__Hub__West_23
+            | SpotId::Irikar__Hub__West_24_Ground
+            | SpotId::Irikar__Hub__West_24_Rooftop
+            | SpotId::Irikar__Hub__West_25
+            | SpotId::Irikar__Hub__West_26
             | SpotId::Irikar__Lamassu__Catwalk_West
             | SpotId::Irikar__Lamassu__Desk
             | SpotId::Irikar__Lamassu__East_26
             | SpotId::Irikar__Lamassu__East_27
             | SpotId::Irikar__Lamassu__Hidden_Passage_East
             | SpotId::Irikar__Lamassu__West_28
+            | SpotId::Irikar__Midwest__East_24_on_Building
+            | SpotId::Irikar__Midwest__East_24_on_Floor
+            | SpotId::Irikar__Midwest__East_25
+            | SpotId::Irikar__Midwest__East_26
             | SpotId::Irikar__Sight_Room__Above_Room_East
             | SpotId::Irikar__Sight_Room__Item_Pedestal
             | SpotId::Irikar__Sight_Room__Portal
@@ -22915,7 +23059,10 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Hammond
+            | SpotId::Menu__Kiengir_Map__Irikar_10_25
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
+            | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage
+            | SpotId::Menu__Kiengir_Map__Irikar_Well
             | SpotId::Menu__Kiengir_Map__Nanite_Mist
             | SpotId::Menu__Kiengir_Map__Remote_Drone
             | SpotId::Menu__Kiengir_Map__Shockwave
@@ -38537,6 +38684,111 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1 => Exit {
+            id: ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1 => Exit {
+            id: ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1 => Exit {
+            id: ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1,
+            time: 2105,
+            dest: SpotId::Irikar__Hub__West_Rooftop_2,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1,
+            time: 2631,
+            dest: SpotId::Irikar__Hub__West_24_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1,
+            time: 1200,
+            dest: SpotId::Irikar__Hub__West_Small_Middle_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1 => Exit {
+            id: ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_24_on_Floor,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1 => Exit {
+            id: ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_24_on_Building,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1,
+            time: 1403,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Hook_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1,
+            time: 1578,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2,
+            time: 3157,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+            price: Currency::Energy(110),
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3,
+            time: 1578,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
+            price: Currency::Energy(58),
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1,
+            time: 3600,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            price: Currency::Energy(124),
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => Exit {
+            id: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2,
+            time: 1800,
+            dest: SpotId::Irikar__Hub__NW_Middle_Building_Corner,
+            price: Currency::Energy(65),
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => Exit {
+            id: ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1,
+            time: 1350,
+            dest: SpotId::Irikar__Midwest__East_23,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => Exit {
+            id: ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1,
+            time: 1403,
+            dest: SpotId::Irikar__Hub__West_Rooftops_Upper_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => Exit {
             id: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
             time: 1000,
@@ -38884,6 +39136,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1,
             time: 1350,
             dest: SpotId::Giguna__Breachable_Wall__West_Mid_air,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1,
+            time: 1350,
+            dest: SpotId::Irikar__Hub__West_24_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1,
+            time: 1350,
+            dest: SpotId::Irikar__Hub__West_24_Ground,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1,
+            time: 1350,
+            dest: SpotId::Irikar__Hub__West_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1,
+            time: 1350,
+            dest: SpotId::Irikar__Hub__West_26,
             price: Currency::Free,
             loc_id: None,
         },
@@ -60596,6 +60876,146 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_26__ex__Midwest__East_26_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_25 => Spot {
+            id: SpotId::Irikar__Hub__West_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_25__ex__Midwest__East_25_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_25__ex__West_Rooftop_2_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftop_1 => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftop_1,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftop_2 => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftop_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftop_3 => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftop_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_Rooftop_3__ex__West_24_Rooftop_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_Rooftop_3__ex__West_Small_Middle_Rooftop_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_24_Ground => Spot {
+            id: SpotId::Irikar__Hub__West_24_Ground,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_24_Ground__ex__Midwest__East_24_on_Floor_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_24_Rooftop => Spot {
+            id: SpotId::Irikar__Hub__West_24_Rooftop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_24_Rooftop__ex__Midwest__East_24_on_Building_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Small_Middle_Rooftop => Spot {
+            id: SpotId::Irikar__Hub__West_Small_Middle_Rooftop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_23 => Spot {
+            id: SpotId::Irikar__Hub__West_23,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1.into_usize(),
+                end: ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftops_Upper_Middle => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftops_Upper_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Hub__West_Rooftops_Upper_East => Spot {
+            id: SpotId::Irikar__Hub__West_Rooftops_Upper_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -61308,7 +61728,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61320,7 +61741,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61332,7 +61754,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61344,7 +61767,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -62167,6 +62591,42 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => Spot {
             id: SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Well => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Well,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_10_25 => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_10_25,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
             locations: Range {
                 start: 0, end: 0,
             },

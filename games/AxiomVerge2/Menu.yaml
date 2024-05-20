@@ -537,6 +537,12 @@ areas:
       coord: [25, 13]
     - name: Ebih Guarded Health
       coord: [21, 12]
+    - name: Irikar Well
+      coord: [12, 24]
+    - name: Irikar 10,25
+      coord: [10, 25]
+    - name: Irikar Royal Storage
+      coord: [12, 26]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map
