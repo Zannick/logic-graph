@@ -2392,6 +2392,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Breach_Attractor,
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Bronze_Axe,
+    Menu__Kiengir_Map__Commemorative_Speech,
     Menu__Kiengir_Map__Ebih_Base_Camp,
     Menu__Kiengir_Map__Ebih_Guarded_Health,
     Menu__Kiengir_Map__Ebih_Observatory,
@@ -2414,9 +2415,14 @@ pub enum SpotId {
     Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
     Menu__Kiengir_Map__Glacier_Revival,
     Menu__Kiengir_Map__Hammond,
+    Menu__Kiengir_Map__Heretics_Granddaughter,
     Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_10_25,
+    Menu__Kiengir_Map__Irikar_Abandoned_Room,
     Menu__Kiengir_Map__Irikar_Beach_Save,
+    Menu__Kiengir_Map__Irikar_Broken_Wall,
+    Menu__Kiengir_Map__Irikar_Gudam,
+    Menu__Kiengir_Map__Irikar_Gudam_Health,
     Menu__Kiengir_Map__Irikar_Hub,
     Menu__Kiengir_Map__Irikar_Midwest,
     Menu__Kiengir_Map__Irikar_Royal_Storage,
@@ -2424,6 +2430,8 @@ pub enum SpotId {
     Menu__Kiengir_Map__Nanite_Mist,
     Menu__Kiengir_Map__Remote_Drone,
     Menu__Kiengir_Map__Shockwave,
+    Menu__Kiengir_Map__Terminal_Breakthrough_2,
+    Menu__Kiengir_Map__The_Student,
     Menu__Kiengir_Map__Uhrum_Center,
     Menu__Kiengir_Map__Uhrum_East,
     Menu__Kiengir_Map__Uhrum_Emergence,
@@ -6779,6 +6787,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Bronze_Axe => {
                 write!(f, "{}", "Menu > Kiengir Map > Bronze Axe")
             }
+            SpotId::Menu__Kiengir_Map__Commemorative_Speech => {
+                write!(f, "{}", "Menu > Kiengir Map > Commemorative Speech")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
             }
@@ -6843,12 +6854,27 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
             }
             SpotId::Menu__Kiengir_Map__Hammond => write!(f, "{}", "Menu > Kiengir Map > Hammond"),
+            SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => {
+                write!(f, "{}", "Menu > Kiengir Map > Heretic's Granddaughter")
+            }
             SpotId::Menu__Kiengir_Map__Infect => write!(f, "{}", "Menu > Kiengir Map > Infect"),
             SpotId::Menu__Kiengir_Map__Irikar_10_25 => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar 10,25")
             }
+            SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Abandoned Room")
+            }
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Broken Wall")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Gudam => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Gudam")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Gudam Health")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Hub => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Hub")
@@ -6870,6 +6896,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Shockwave => {
                 write!(f, "{}", "Menu > Kiengir Map > Shockwave")
+            }
+            SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => {
+                write!(f, "{}", "Menu > Kiengir Map > Terminal Breakthrough 2")
+            }
+            SpotId::Menu__Kiengir_Map__The_Student => {
+                write!(f, "{}", "Menu > Kiengir Map > The Student")
             }
             SpotId::Menu__Kiengir_Map__Uhrum_Center => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum Center")
@@ -10224,6 +10256,9 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Bronze Axe" => Ok(SpotId::Menu__Kiengir_Map__Bronze_Axe),
+            "Menu > Kiengir Map > Commemorative Speech" => {
+                Ok(SpotId::Menu__Kiengir_Map__Commemorative_Speech)
+            }
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
             "Menu > Kiengir Map > Ebih Guarded Health" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health)
@@ -10274,10 +10309,23 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
             "Menu > Kiengir Map > Hammond" => Ok(SpotId::Menu__Kiengir_Map__Hammond),
+            "Menu > Kiengir Map > Heretic's Granddaughter" => {
+                Ok(SpotId::Menu__Kiengir_Map__Heretics_Granddaughter)
+            }
             "Menu > Kiengir Map > Infect" => Ok(SpotId::Menu__Kiengir_Map__Infect),
             "Menu > Kiengir Map > Irikar 10,25" => Ok(SpotId::Menu__Kiengir_Map__Irikar_10_25),
+            "Menu > Kiengir Map > Irikar Abandoned Room" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room)
+            }
             "Menu > Kiengir Map > Irikar Beach Save" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Save)
+            }
+            "Menu > Kiengir Map > Irikar Broken Wall" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall)
+            }
+            "Menu > Kiengir Map > Irikar Gudam" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Gudam),
+            "Menu > Kiengir Map > Irikar Gudam Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health)
             }
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
@@ -10288,6 +10336,10 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Nanite Mist" => Ok(SpotId::Menu__Kiengir_Map__Nanite_Mist),
             "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
             "Menu > Kiengir Map > Shockwave" => Ok(SpotId::Menu__Kiengir_Map__Shockwave),
+            "Menu > Kiengir Map > Terminal Breakthrough 2" => {
+                Ok(SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2)
+            }
+            "Menu > Kiengir Map > The Student" => Ok(SpotId::Menu__Kiengir_Map__The_Student),
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
             "Menu > Kiengir Map > Uhrum East" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_East),
             "Menu > Kiengir Map > Uhrum Emergence" => {

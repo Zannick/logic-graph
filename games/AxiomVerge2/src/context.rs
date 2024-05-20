@@ -594,6 +594,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Breach_Attractor => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Breach_Sight => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Bronze_Axe => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Commemorative_Speech => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Observatory => enums::Realm::Map,
@@ -616,9 +617,14 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Glacier_Revival => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Hammond => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Infect => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_10_25 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Gudam => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Hub => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Midwest => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => enums::Realm::Map,
@@ -626,6 +632,8 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Nanite_Mist => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Remote_Drone => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Shockwave => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__The_Student => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Center => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_East => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Emergence => enums::Realm::Map,
@@ -1782,11 +1790,27 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Menu__Breach_Map__IB_Save_Room,
         SpotId::Irikar_Breach__Save_Room__Upper_Area => SpotId::Menu__Breach_Map__IB_Save_Room,
         SpotId::Irikar_Breach__Save_Room__West => SpotId::Menu__Breach_Map__IB_Save_Room,
+        SpotId::Irikar__Abandoned_Room__Corner_Core => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
+        SpotId::Irikar__Abandoned_Room__Empty_Pedestal => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
+        SpotId::Irikar__Abandoned_Room__West => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
+        SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => SpotId::Menu__Kiengir_Map__The_Student,
+        SpotId::Irikar__Basement_Pipes__High_Pipe => SpotId::Menu__Kiengir_Map__The_Student,
+        SpotId::Irikar__Basement_Pipes__West_27 => SpotId::Menu__Kiengir_Map__The_Student,
+        SpotId::Irikar__Boss_Room__Bulls_Feet => SpotId::Menu__Kiengir_Map__Irikar_Gudam,
+        SpotId::Irikar__Boss_Room__Healthy_Rooftop => SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health,
+        SpotId::Irikar__Boss_Room__West_28 => SpotId::Menu__Kiengir_Map__Irikar_Gudam,
+        SpotId::Irikar__East_Rooftops__Directly_Down => SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
+        SpotId::Irikar__East_Rooftops__East_Mid_air => SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
+        SpotId::Irikar__East_Rooftops__Off_the_Edge => SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
+        SpotId::Irikar__East_Rooftops__Top_Rooftop => SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
         SpotId::Irikar__Hub__Bowl_Hole => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__Bowl_Middle_Platform_Center => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__Bowl_Middle_Platform_West => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__Bowl_Platform_3 => SpotId::Menu__Kiengir_Map__Irikar_Hub,
+        SpotId::Irikar__Hub__Collapsed_Column => SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
+        SpotId::Irikar__Hub__Collapsed_Column_Debris => SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
         SpotId::Irikar__Hub__Dagger_Altar => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+        SpotId::Irikar__Hub__Lower_Well => SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
         SpotId::Irikar__Hub__Royal_Storage_By_Wall => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
         SpotId::Irikar__Hub__Royal_Storage_in_Wall => SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
         SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well => SpotId::Menu__Kiengir_Map__Irikar_Well,
@@ -1794,9 +1818,14 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left => SpotId::Menu__Kiengir_Map__Irikar_Well,
         SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => SpotId::Menu__Kiengir_Map__Irikar_Well,
         SpotId::Irikar__Hub__SW_Building_Top_Platform => SpotId::Menu__Kiengir_Map__Irikar_10_25,
+        SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Menu__Kiengir_Map__Commemorative_Speech,
+        SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Menu__Kiengir_Map__Commemorative_Speech,
         SpotId::Irikar__Hub__Save_Point => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__West_25 => SpotId::Menu__Kiengir_Map__Irikar_10_25,
         SpotId::Irikar__Hub__West_Rooftop_1 => SpotId::Menu__Kiengir_Map__Irikar_10_25,
+        SpotId::Irikar__Lamassu__Desk => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
+        SpotId::Irikar__Lamassu__East_26 => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
+        SpotId::Irikar__Lamassu__Hidden_Passage_East => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
         SpotId::Irikar__Sight_Room__Item_Pedestal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Irikar__Sight_Room__Portal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Uhrum__Annuna_Corridor__Block_West => SpotId::Menu__Kiengir_Map__Uhrum_East,
@@ -6762,6 +6791,36 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GLACIER_BREACH__WEST_SAVE__SAVE);
 
                 }
+                SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => {
+
+                }
+                SpotId::Irikar__Basement_Pipes__High_Pipe => {
+
+                }
+                SpotId::Irikar__Basement_Pipes__West_27 => {
+
+                }
+                SpotId::Irikar__Boss_Room__Bulls_Feet => {
+
+                }
+                SpotId::Irikar__Boss_Room__Healthy_Rooftop => {
+
+                }
+                SpotId::Irikar__Boss_Room__West_28 => {
+
+                }
+                SpotId::Irikar__East_Rooftops__Directly_Down => {
+
+                }
+                SpotId::Irikar__East_Rooftops__East_Mid_air => {
+
+                }
+                SpotId::Irikar__East_Rooftops__Off_the_Edge => {
+
+                }
+                SpotId::Irikar__East_Rooftops__Top_Rooftop => {
+
+                }
                 SpotId::Irikar__Hub__Bowl_Hole => {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
 
@@ -6778,7 +6837,16 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
 
                 }
+                SpotId::Irikar__Hub__Collapsed_Column => {
+
+                }
+                SpotId::Irikar__Hub__Collapsed_Column_Debris => {
+
+                }
                 SpotId::Irikar__Hub__Dagger_Altar => {
+
+                }
+                SpotId::Irikar__Hub__Lower_Well => {
 
                 }
                 SpotId::Irikar__Hub__Royal_Storage_By_Wall => {
@@ -6799,6 +6867,12 @@ impl context::Ctx for Context {
                 SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => {
 
                 }
+                SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
+
+                }
+                SpotId::Irikar__Hub__Sat_Tower_West_Valley => {
+
+                }
                 SpotId::Irikar__Hub__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
 
@@ -6810,6 +6884,15 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Irikar__Hub__West_Rooftop_1 => {
+
+                }
+                SpotId::Irikar__Lamassu__Desk => {
+
+                }
+                SpotId::Irikar__Lamassu__East_26 => {
+
+                }
+                SpotId::Irikar__Lamassu__Hidden_Passage_East => {
 
                 }
                 SpotId::Irikar__Sight_Room__Item_Pedestal => {

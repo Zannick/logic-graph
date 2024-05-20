@@ -1704,7 +1704,15 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
         | SpotId::Menu__Kiengir_Map__Irikar_Well
         | SpotId::Menu__Kiengir_Map__Irikar_10_25
-        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage
+        | SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall
+        | SpotId::Menu__Kiengir_Map__Commemorative_Speech
+        | SpotId::Menu__Kiengir_Map__The_Student
+        | SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room
+        | SpotId::Menu__Kiengir_Map__Irikar_Gudam
+        | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
+        | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
+        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3521,7 +3529,15 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
         | SpotId::Menu__Kiengir_Map__Irikar_Well
         | SpotId::Menu__Kiengir_Map__Irikar_10_25
-        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage
+        | SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall
+        | SpotId::Menu__Kiengir_Map__Commemorative_Speech
+        | SpotId::Menu__Kiengir_Map__The_Student
+        | SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room
+        | SpotId::Menu__Kiengir_Map__Irikar_Gudam
+        | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
+        | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
+        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -12742,7 +12758,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1807] = [
+static RAW_SPOTS: [SpotId; 1815] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -14390,6 +14406,7 @@ static RAW_SPOTS: [SpotId; 1807] = [
     SpotId::Menu__Kiengir_Map__Breach_Attractor,
     SpotId::Menu__Kiengir_Map__Breach_Sight,
     SpotId::Menu__Kiengir_Map__Bronze_Axe,
+    SpotId::Menu__Kiengir_Map__Commemorative_Speech,
     SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
     SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
     SpotId::Menu__Kiengir_Map__Ebih_Observatory,
@@ -14412,9 +14429,14 @@ static RAW_SPOTS: [SpotId; 1807] = [
     SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
     SpotId::Menu__Kiengir_Map__Glacier_Revival,
     SpotId::Menu__Kiengir_Map__Hammond,
+    SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
     SpotId::Menu__Kiengir_Map__Infect,
     SpotId::Menu__Kiengir_Map__Irikar_10_25,
+    SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
+    SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
+    SpotId::Menu__Kiengir_Map__Irikar_Gudam,
+    SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health,
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
     SpotId::Menu__Kiengir_Map__Irikar_Midwest,
     SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
@@ -14422,6 +14444,8 @@ static RAW_SPOTS: [SpotId; 1807] = [
     SpotId::Menu__Kiengir_Map__Nanite_Mist,
     SpotId::Menu__Kiengir_Map__Remote_Drone,
     SpotId::Menu__Kiengir_Map__Shockwave,
+    SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
+    SpotId::Menu__Kiengir_Map__The_Student,
     SpotId::Menu__Kiengir_Map__Uhrum_Center,
     SpotId::Menu__Kiengir_Map__Uhrum_East,
     SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
@@ -22084,6 +22108,14 @@ impl world::World for World {
             SpotId::Menu__Kiengir_Map__Irikar_Well => true,
             SpotId::Menu__Kiengir_Map__Irikar_10_25 => true,
             SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => true,
+            SpotId::Menu__Kiengir_Map__Commemorative_Speech => true,
+            SpotId::Menu__Kiengir_Map__The_Student => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Gudam => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health => true,
+            SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => true,
+            SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -23040,6 +23072,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Breach_Attractor
             | SpotId::Menu__Kiengir_Map__Breach_Sight
             | SpotId::Menu__Kiengir_Map__Bronze_Axe
+            | SpotId::Menu__Kiengir_Map__Commemorative_Speech
             | SpotId::Menu__Kiengir_Map__Ebih_Base_Camp
             | SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health
             | SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate
@@ -23059,13 +23092,20 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye
             | SpotId::Menu__Kiengir_Map__Glacier_Revival
             | SpotId::Menu__Kiengir_Map__Hammond
+            | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
             | SpotId::Menu__Kiengir_Map__Irikar_10_25
+            | SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room
+            | SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall
+            | SpotId::Menu__Kiengir_Map__Irikar_Gudam
+            | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
             | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage
             | SpotId::Menu__Kiengir_Map__Irikar_Well
             | SpotId::Menu__Kiengir_Map__Nanite_Mist
             | SpotId::Menu__Kiengir_Map__Remote_Drone
             | SpotId::Menu__Kiengir_Map__Shockwave
+            | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2
+            | SpotId::Menu__Kiengir_Map__The_Student
             | SpotId::Menu__Kiengir_Map__Uhrum_Center
             | SpotId::Menu__Kiengir_Map__Uhrum_East
             | SpotId::Menu__Kiengir_Map__Uhrum_West
@@ -62627,6 +62667,102 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => Spot {
             id: SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Commemorative_Speech => Spot {
+            id: SpotId::Menu__Kiengir_Map__Commemorative_Speech,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__The_Student => Spot {
+            id: SpotId::Menu__Kiengir_Map__The_Student,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Gudam => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Gudam,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => Spot {
+            id: SpotId::Menu__Kiengir_Map__Heretics_Granddaughter,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => Spot {
+            id: SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
             locations: Range {
                 start: 0, end: 0,
             },

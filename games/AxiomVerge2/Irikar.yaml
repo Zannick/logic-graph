@@ -12,12 +12,16 @@ areas:
     well: [12, 23, 13, 24]
     west25: [10, 24, 11, 25]
     royal: [12, 25, 13, 26]
+    speech: [13, 21, 14, 22]
+    broken_wall: [11, 25, 12, 26]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Irikar Hub
       well: Menu > Kiengir Map > Irikar Well
       west25: Menu > Kiengir Map > Irikar 10,25
       royal: Menu > Kiengir Map > Irikar Royal Storage
+      speech: Menu > Kiengir Map > Commemorative Speech
+      broken_wall: Menu > Kiengir Map > Irikar Broken Wall
   spots:
     - name: Northwest
       coord: [11.0, 20.1]
@@ -932,6 +936,8 @@ areas:
 
 - name: Abandoned Room  # MARK: Abandoned Room
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Irikar Abandoned Room
   spots:
     - name: Empty Pedestal
       coord: [14.525, 26.7]
@@ -1113,6 +1119,11 @@ areas:
 
 - name: Basement Pipes  # MARK: Basement Pipes
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [10, 26, 11, 27]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > The Student
   spots:
     - name: East 28
       coord: [11.95, 27.55]
@@ -1248,6 +1259,13 @@ areas:
 
 - name: Boss Room  # MARK: Boss Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    gudam: [15, 27, 16, 28]
+    health: [15, 26, 16, 27]
+  datamap:
+    map_spot:
+      gudam: Menu > Kiengir Map > Irikar Gudam
+      health: Menu > Kiengir Map > Irikar Gudam Health
   spots:
     - name: West 28
       coord: [15.05, 27.7]
@@ -1365,6 +1383,11 @@ areas:
 
 - name: East Rooftops  # MARK: East Rooftops
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [15, 24, 16, 25]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Heretic's Granddaughter
   spots:
     - name: Upper West
       coord: [15.05, 23.4]
@@ -1449,6 +1472,11 @@ areas:
 
 - name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
+  map:
+    notes: [18, 25, 19, 26]
+  datamap:
+    map_spot:
+      notes: Menu > Kiengir Map > Terminal Breakthrough 2
   spots:
     - name: West 28
       coord: [17.05, 27.7]

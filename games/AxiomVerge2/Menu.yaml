@@ -543,6 +543,22 @@ areas:
       coord: [10, 25]
     - name: Irikar Royal Storage
       coord: [12, 26]
+    - name: Irikar Broken Wall
+      coord: [11, 26]
+    - name: Commemorative Speech
+      coord: [13, 22]
+    - name: The Student
+      coord: [10, 27]
+    - name: Irikar Abandoned Room
+      coord: [14, 27]
+    - name: Irikar Gudam
+      coord: [15, 28]
+    - name: Irikar Gudam Health
+      coord: [15, 27]
+    - name: Heretic's Granddaughter
+      coord: [15, 25]
+    - name: Terminal Breakthrough 2
+      coord: [18, 26]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

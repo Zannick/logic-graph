@@ -2087,6 +2087,14 @@
             Menu__Kiengir_Map__Irikar_Well [label = "", pos = "36.0,-40.0!"];
             Menu__Kiengir_Map__Irikar_10_25 [label = "", pos = "30.0,-41.666667!"];
             Menu__Kiengir_Map__Irikar_Royal_Storage [label = "", pos = "36.0,-43.333333!"];
+            Menu__Kiengir_Map__Irikar_Broken_Wall [label = "", pos = "33.0,-43.333333!"];
+            Menu__Kiengir_Map__Commemorative_Speech [label = "", pos = "39.0,-36.666667!"];
+            Menu__Kiengir_Map__The_Student [label = "", pos = "30.0,-45.0!"];
+            Menu__Kiengir_Map__Irikar_Abandoned_Room [label = "", pos = "42.0,-45.0!"];
+            Menu__Kiengir_Map__Irikar_Gudam [label = "", pos = "45.0,-46.666667!"];
+            Menu__Kiengir_Map__Irikar_Gudam_Health [label = "", pos = "45.0,-45.0!"];
+            Menu__Kiengir_Map__Heretics_Granddaughter [label = "", pos = "45.0,-41.666667!"];
+            Menu__Kiengir_Map__Terminal_Breakthrough_2 [label = "", pos = "54.0,-43.333333!"];
         }
     }
     {
