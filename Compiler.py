@@ -1,5 +1,6 @@
 import argparse
 from collections import namedtuple, Counter, defaultdict
+import contextlib
 from functools import cache, cached_property, partial
 import itertools
 import logging
@@ -163,6 +164,13 @@ def get_exit_target_id(ex):
     return construct_spot_id(*get_spot_reference_names(ex['to'], ex))
 
 
+@contextlib.contextmanager
+def processcontext(*args):
+    try:
+        yield
+    except Exception as e:
+        raise Exception(f'Exception thrown while processing {" > ".join(args)}') from e
+
 class GameLogic(object):
 
     def __init__(self, game: str):
@@ -259,36 +267,49 @@ class GameLogic(object):
         self.regions = self._info['regions']
         num_locs = 0
         for region in self.regions:
+            if 'name' not in region:
+                self._errors.append(f'Region in {region["_filename"]} requires name')
+                continue
             rname = region.get('short', region['name'])
-            region['id'] = construct_id(rname)
-            self.id_lookup[region['id']] = region
-            region['loc_ids'] = []
-            region['all_data'] = dict(self.data)
-            region['all_data'].update(region.get('data', {}))
-            if 'on_entry' in region:
-                region['act'] = parseAction(
-                        region['on_entry'], name=f'{region["name"]}:on_entry')
-                region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
-            if c := region.get('graph_offset'):
-                self._validate_pair(c, f'graph offset for {region["name"]}')
+            with processcontext(rname):
+                region['id'] = construct_id(rname)
+                self.id_lookup[region['id']] = region
+                region['loc_ids'] = []
+                region['all_data'] = dict(self.data)
+                region['all_data'].update(region.get('data', {}))
+                if 'on_entry' in region:
+                    region['act'] = parseAction(
+                            region['on_entry'], name=f'{region["name"]}:on_entry')
+                    region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
+                if c := region.get('graph_offset'):
+                    self._validate_pair(c, f'graph offset for {region["name"]}')
             for area in region['areas']:
+                if 'name' not in area:
+                    self._errors.append(f'Area in {rname} requires name')
+                    area["fullname"] = f'{rname} > Area without name'
+                    continue
                 aname = area['name']
-                area['region'] = rname
-                area['id'] = construct_id(rname, aname)
-                self.id_lookup[area['id']] = area
                 area['fullname'] = f'{rname} > {aname}'
-                area['spot_ids'] = []
-                area['loc_ids'] = []
-                area['all_data'] = dict(region['all_data'])
-                area['all_data'].update(area.get('data', {}))
-                if 'on_entry' in area:
-                    area['act'] = parseAction(
-                            area['on_entry'], name=f'{area["fullname"]}:on_entry')
-                    area['action_id'] = self.make_funcid(area, 'act', 'on_entry', ON_ENTRY_ARGS)
-                if c := area.get('graph_offset'):
-                    self._validate_pair(c, f'graph offset for {area["fullname"]}')
+                with processcontext(rname, aname):
+                    area['region'] = rname
+                    area['id'] = construct_id(rname, aname)
+                    self.id_lookup[area['id']] = area
+                    area['spot_ids'] = []
+                    area['loc_ids'] = []
+                    area['all_data'] = dict(region['all_data'])
+                    area['all_data'].update(area.get('data', {}))
+                    if 'on_entry' in area:
+                        area['act'] = parseAction(
+                                area['on_entry'], name=f'{area["fullname"]}:on_entry')
+                        area['action_id'] = self.make_funcid(area, 'act', 'on_entry', ON_ENTRY_ARGS)
+                    if c := area.get('graph_offset'):
+                        self._validate_pair(c, f'graph offset for {area["fullname"]}')
 
                 for spot in area['spots']:
+                    if 'name' not in spot:
+                        self._errors.append(f'Spot in {area["fullname"]} requires name')
+                        spot["fullname"] = f'{area["fullname"]} > Spot without name'
+                        continue
                     sname = spot['name']
                     fullname = f'{rname} > {aname} > {sname}'
                     unexp = spot.keys() - SPOT_FIELDS
@@ -298,122 +319,130 @@ class GameLogic(object):
                         else:
                             logging.warning(f'Unknown field {uk!r} in {fullname}')
 
-                    spot['area'] = aname
-                    spot['region'] = rname
-                    spot['id'] = construct_id(rname, aname, sname)
-                    self.id_lookup[spot['id']] = spot
-                    spot['fullname'] = fullname
-                    area['spot_ids'].append(spot['id'])
-                    spot['loc_ids'] = []
-                    spot['exit_ids'] = []
-                    spot['action_ids'] = []
-                    spot['all_data'] = dict(area['all_data'])
-                    spot['all_data'].update(spot.get('data', {}))
-                    spot['base_movement'] = self.spot_base_movement(spot['all_data'])
-                    if 'on_entry' in spot:
-                        spot['act'] = parseAction(
-                                spot['on_entry'], name=f'{spot["fullname"]}:on_entry')
-                        spot['action_id'] = self.make_funcid(spot, 'act', 'on_entry', ON_ENTRY_ARGS)
-                    if all_to_update := area.get('all'):
-                        if lcl := all_to_update.get('local'):
-                            if 'local' in spot:
-                                spot['local'].extend(lcl)
-                            else:
-                                spot['local'] = list(lcl)
+                    with processcontext(rname, aname, sname):
+                        spot['area'] = aname
+                        spot['region'] = rname
+                        spot['id'] = construct_id(rname, aname, sname)
+                        self.id_lookup[spot['id']] = spot
+                        spot['fullname'] = fullname
+                        area['spot_ids'].append(spot['id'])
+                        spot['loc_ids'] = []
+                        spot['exit_ids'] = []
+                        spot['action_ids'] = []
+                        spot['all_data'] = dict(area['all_data'])
+                        spot['all_data'].update(spot.get('data', {}))
+                        spot['base_movement'] = self.spot_base_movement(spot['all_data'])
+                        if 'on_entry' in spot:
+                            spot['act'] = parseAction(
+                                    spot['on_entry'], name=f'{spot["fullname"]}:on_entry')
+                            spot['action_id'] = self.make_funcid(spot, 'act', 'on_entry', ON_ENTRY_ARGS)
+                        if all_to_update := area.get('all'):
+                            if lcl := all_to_update.get('local'):
+                                if 'local' in spot:
+                                    spot['local'].extend(lcl)
+                                else:
+                                    spot['local'] = list(lcl)
                     # hybrid spots are exits but have names
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
-                        loc['spot'] = sname
-                        loc['area'] = aname
-                        loc['region'] = rname
                         if 'name' not in loc:
                             self._errors.append(f'Location in {spot["fullname"]} requires name')
                             loc["fullname"] = f'{spot["fullname"]} > Location without name'
                             continue
-                        loc['id'] = construct_id(rname, aname, sname, loc['name'])
-                        self.id_lookup[loc['id']] = loc
-                        spot['loc_ids'].append(loc['id'])
-                        area['loc_ids'].append(loc['id'])
-                        region['loc_ids'].append(loc['id'])
-                        loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
-                        if 'canon' in loc:
-                            self.canon_places[construct_id(loc['canon'])].append(loc)
-                            loc['canon_id'] = construct_id(loc['canon'])
-                        if 'req' in loc:
-                            loc['pr'] = _parseExpression(
-                                    loc['req'], loc['name'], spot['fullname'], ': ')
-                            loc['access_id'] = self.make_funcid(loc)
-                        if 'penalties' in loc:
-                            self._handle_penalties(loc, spot['fullname'])
-                        if 'maps' in loc:
-                            loc['tiles'] = [get_map_reference(tilename, loc) for tilename in loc['maps']]
+                        with processcontext(rname, aname, sname, loc['name']):
+                            loc['spot'] = sname
+                            loc['area'] = aname
+                            loc['region'] = rname
+                            loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
+                            loc['id'] = construct_id(rname, aname, sname, loc['name'])
+                            self.id_lookup[loc['id']] = loc
+                            spot['loc_ids'].append(loc['id'])
+                            area['loc_ids'].append(loc['id'])
+                            region['loc_ids'].append(loc['id'])
+                            if 'canon' in loc:
+                                self.canon_places[construct_id(loc['canon'])].append(loc)
+                                loc['canon_id'] = construct_id(loc['canon'])
+                            if 'req' in loc:
+                                loc['pr'] = _parseExpression(
+                                        loc['req'], loc['name'], spot['fullname'], ': ')
+                                loc['access_id'] = self.make_funcid(loc)
+                            if 'penalties' in loc:
+                                self._handle_penalties(loc, spot['fullname'])
+                            if 'maps' in loc:
+                                loc['tiles'] = [get_map_reference(tilename, loc) for tilename in loc['maps']]
                     # We need a counter for exits in case of alternates
                     ec = Counter()
                     for eh in spot.get('exits', []):
+                        if 'to' not in eh or not eh['to']:
+                            self._errors.append(f'Exit {eh["fullname"]} has no destination')
+                            continue
+                        dest = eh['to']
                         eh['spot'] = sname
                         eh['area'] = aname
                         eh['region'] = rname
                         ec[eh['to']] += 1
-                        eh['id'] = construct_id(rname, aname, sname, 'ex',
-                                                f'{eh["to"]}_{ec[eh["to"]]}')
-                        self.id_lookup[eh['id']] = eh
-                        spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
-                        dest = eh['to']
-                        if not dest:
-                            self._errors.append(f'Exit {eh["fullname"]} has no destination')
-                            continue
-                        
-                        if dest.startswith('^'):
-                            if d := spot.get('data', {}).get(dest[1:]):
-                                if self.data_types[dest[1:]] != 'SpotId':
-                                    self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')
-                                else:
-                                    dest = d
-                            else:
-                                self._errors.append(f'Exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
-                        # Limit to in-Area by marking exits across Areas as keep
-                        # Maybe later we can try changing to in-Region or global
-                        eh['keep'] = '>' in dest or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
-                        if 'req' in eh:
-                            eh['pr'] = _parseExpression(
-                                    eh['req'], eh['to'], spot['fullname'], ' ==> ')
-                            eh['access_id'] = self.make_funcid(eh)
-                        if 'penalties' in eh:
-                            self._handle_penalties(eh, spot['fullname'])
-                        if 'maps' in eh:
-                            eh['tiles'] = [get_map_reference(tilename, eh) for tilename in eh['maps']]
-                        eh['to'] = dest
-                    for act in spot.get('actions', ()):
-                        act['spot'] = sname
-                        act['area'] = aname
-                        act['region'] = rname
-                        act['id'] = construct_id(rname, aname, sname, act['name'])
-                        self.id_lookup[act['id']] = act
-                        spot['action_ids'].append(act['id'])
-                        act['fullname'] = f'{spot["fullname"]} > {act["name"]}'
-                        if 'req' in act:
-                            act['pr'] = _parseExpression(
-                                    act['req'], act['name'] + ' req', spot['fullname'], ': ')
-                            act['access_id'] = self.make_funcid(act)
-                        if 'penalties' in act:
-                            self._handle_penalties(act, spot['fullname'])
-                        if 'maps' in act:
-                            act['tiles'] = [get_map_reference(tilename, act) for tilename in act['maps']]
-                        act['act'] = parseAction(
-                                act['do'], name=f'{act["fullname"]}:do')
-                        act['action_id'] = self.make_funcid(act, 'act', 'do')
-                        if 'after' in act:
-                            act['act_post'] = parseAction(
-                                    act['after'], name=f'{act["name"]}:after')
-                            act['after_id'] = self.make_funcid(act, 'act_post', 'after')
-                        if 'to' in act:
-                            dest = act['to']
+                        with processcontext(eh['fullname']):
+                            eh['id'] = construct_id(rname, aname, sname, 'ex',
+                                                    f'{eh["to"]}_{ec[eh["to"]]}')
+                            self.id_lookup[eh['id']] = eh
+                            spot['exit_ids'].append(eh['id'])
+                            
                             if dest.startswith('^'):
                                 if d := spot.get('data', {}).get(dest[1:]):
                                     if self.data_types[dest[1:]] != 'SpotId':
-                                        self._errors.append(f'Action {act["fullname"]} moves to non-spot data: {dest}')
+                                        self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')
                                     else:
-                                        act['to'] = d
+                                        dest = d
+                                else:
+                                    self._errors.append(f'Exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
+                            # Limit to in-Area by marking exits across Areas as keep
+                            # Maybe later we can try changing to in-Region or global
+                            eh['keep'] = '>' in dest or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
+                            if 'req' in eh:
+                                eh['pr'] = _parseExpression(
+                                        eh['req'], eh['to'], spot['fullname'], ' ==> ')
+                                eh['access_id'] = self.make_funcid(eh)
+                            if 'penalties' in eh:
+                                self._handle_penalties(eh, spot['fullname'])
+                            if 'maps' in eh:
+                                eh['tiles'] = [get_map_reference(tilename, eh) for tilename in eh['maps']]
+                            eh['to'] = dest
+                    for act in spot.get('actions', ()):
+                        if 'name' not in act:
+                            self._errors.append(f'Action in {spot["fullname"]} requires name')
+                            act["fullname"] = f'{spot["fullname"]} > Action without name'
+                            continue
+                        with processcontext(rname, aname, sname, act['name']):
+                            act['spot'] = sname
+                            act['area'] = aname
+                            act['region'] = rname
+                            act['id'] = construct_id(rname, aname, sname, act['name'])
+                            self.id_lookup[act['id']] = act
+                            spot['action_ids'].append(act['id'])
+                            act['fullname'] = f'{spot["fullname"]} > {act["name"]}'
+                            if 'req' in act:
+                                act['pr'] = _parseExpression(
+                                        act['req'], act['name'] + ' req', spot['fullname'], ': ')
+                                act['access_id'] = self.make_funcid(act)
+                            if 'penalties' in act:
+                                self._handle_penalties(act, spot['fullname'])
+                            if 'maps' in act:
+                                act['tiles'] = [get_map_reference(tilename, act) for tilename in act['maps']]
+                            act['act'] = parseAction(
+                                    act['do'], name=f'{act["fullname"]}:do')
+                            act['action_id'] = self.make_funcid(act, 'act', 'do')
+                            if 'after' in act:
+                                act['act_post'] = parseAction(
+                                        act['after'], name=f'{act["name"]}:after')
+                                act['after_id'] = self.make_funcid(act, 'act_post', 'after')
+                            if 'to' in act:
+                                dest = act['to']
+                                if dest.startswith('^'):
+                                    if d := spot.get('data', {}).get(dest[1:]):
+                                        if self.data_types[dest[1:]] != 'SpotId':
+                                            self._errors.append(f'Action {act["fullname"]} moves to non-spot data: {dest}')
+                                        else:
+                                            act['to'] = d
 
             num_locs += len(region['loc_ids'])
         self.num_locations = num_locs
