@@ -1986,7 +1986,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2017,6 +2017,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Forbidden_Knowledge)
             && $ctx.has(Item::The_Student)
             && $ctx.has(Item::Freedom_from_Aansur)
+            && $ctx.has(Item::Heretics_Granddaughter)
     }};
 }
 #[macro_export]
@@ -2264,6 +2265,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Freedom_from_Aansur"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Heretics_Granddaughter);
+                $edict.insert("Heretics_Granddaughter", format!("{}", h));
+                (h, vec!["Heretics_Granddaughter"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2352,16 +2362,19 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_freedom_from_aansur();
             $ctx.has(Item::Freedom_from_Aansur)
+        }) && ({
+            $full_obs.observe_heretics_granddaughter();
+            $ctx.has(Item::Heretics_Granddaughter)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{16}, Big_Flask{4}]
+/// [Flask{18}, Big_Flask{6}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 16 && $ctx.count(Item::Big_Flask) >= 4
+        $ctx.count(Item::Flask) >= 18 && $ctx.count(Item::Big_Flask) >= 6
     }};
 }
 #[macro_export]
@@ -2372,7 +2385,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 16, vec!["Flask count"])
+                (ct >= 18, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2381,7 +2394,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 4, vec!["Big_Flask count"])
+                (ct >= 6, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2392,21 +2405,21 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(16));
-            $ctx.count(Item::Flask) >= 16
+            $full_obs.observe_flask(IntegerObservation::Ge(18));
+            $ctx.count(Item::Flask) >= 18
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(4));
-            $ctx.count(Item::Big_Flask) >= 4
+            $full_obs.observe_big_flask(IntegerObservation::Ge(6));
+            $ctx.count(Item::Big_Flask) >= 6
         })
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node{2}, Health_Fragment{6}]
+/// [Health_Node{2}, Health_Fragment{8}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 6
+        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 8
     }};
 }
 #[macro_export]
@@ -2426,7 +2439,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Fragment);
                 $edict.insert("Health_Fragment count", format!("{}", ct));
-                (ct >= 6, vec!["Health_Fragment count"])
+                (ct >= 8, vec!["Health_Fragment count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2440,18 +2453,22 @@ macro_rules! hobserve__all_health {
             $full_obs.observe_health_node(IntegerObservation::Ge(2));
             $ctx.count(Item::Health_Node) >= 2
         }) && ({
-            $full_obs.observe_health_fragment(IntegerObservation::Ge(6));
-            $ctx.count(Item::Health_Fragment) >= 6
+            $full_obs.observe_health_fragment(IntegerObservation::Ge(8));
+            $ctx.count(Item::Health_Fragment) >= 8
         })
     }};
 }
 
 /// $all_weapons (  )
-/// [Boomerang, Ice_Axe, Bronze_Axe]
+/// [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
-        $ctx.has(Item::Boomerang) && $ctx.has(Item::Ice_Axe) && $ctx.has(Item::Bronze_Axe)
+        $ctx.has(Item::Boomerang)
+            && $ctx.has(Item::Ice_Axe)
+            && $ctx.has(Item::Bronze_Axe)
+            && $ctx.has(Item::Royal_Dagger)
+            && $ctx.has(Item::Double_Axe)
     }};
 }
 #[macro_export]
@@ -2483,6 +2500,24 @@ macro_rules! hexplain__all_weapons {
                 (h, vec!["Bronze_Axe"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Royal_Dagger);
+                $edict.insert("Royal_Dagger", format!("{}", h));
+                (h, vec!["Royal_Dagger"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Double_Axe);
+                $edict.insert("Double_Axe", format!("{}", h));
+                (h, vec!["Double_Axe"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2499,20 +2534,27 @@ macro_rules! hobserve__all_weapons {
         }) && ({
             $full_obs.observe_bronze_axe();
             $ctx.has(Item::Bronze_Axe)
+        }) && ({
+            $full_obs.observe_royal_dagger();
+            $ctx.has(Item::Royal_Dagger)
+        }) && ({
+            $full_obs.observe_double_axe();
+            $ctx.has(Item::Double_Axe)
         })
     }};
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix, Nano_Lattice_2, Eye_Ring, Breach_Attractor]
+/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Compass)
-            && $ctx.has(Item::Power_Matrix)
+            && $ctx.count(Item::Power_Matrix) >= 2
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.has(Item::Eye_Ring)
             && $ctx.has(Item::Breach_Attractor)
+            && $ctx.has(Item::Udusan)
     }};
 }
 #[macro_export]
@@ -2530,9 +2572,9 @@ macro_rules! hexplain__other_items {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Power_Matrix);
-                $edict.insert("Power_Matrix", format!("{}", h));
-                (h, vec!["Power_Matrix"])
+                let ct = $ctx.count(Item::Power_Matrix);
+                $edict.insert("Power_Matrix count", format!("{}", ct));
+                (ct >= 2, vec!["Power_Matrix count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2562,6 +2604,15 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Breach_Attractor"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Udusan);
+                $edict.insert("Udusan", format!("{}", h));
+                (h, vec!["Udusan"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2573,8 +2624,8 @@ macro_rules! hobserve__other_items {
             $full_obs.observe_compass();
             $ctx.has(Item::Compass)
         }) && ({
-            $full_obs.observe_power_matrix();
-            $ctx.has(Item::Power_Matrix)
+            $full_obs.observe_power_matrix(IntegerObservation::Ge(2));
+            $ctx.count(Item::Power_Matrix) >= 2
         }) && ({
             $full_obs.observe_nano_lattice_2();
             $ctx.has(Item::Nano_Lattice_2)
@@ -2584,6 +2635,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_breach_attractor();
             $ctx.has(Item::Breach_Attractor)
+        }) && ({
+            $full_obs.observe_udusan();
+            $ctx.has(Item::Udusan)
         })
     }};
 }

@@ -62,6 +62,11 @@ pub enum OneObservation {
     HealthNodeGe(i8, bool),
     HealthNodeLe(i8, bool),
     HealthNodeRange(i8, i8, bool),
+    PowerMatrixExact(i8),
+    PowerMatrixEq(i8, bool),
+    PowerMatrixGe(i8, bool),
+    PowerMatrixLe(i8, bool),
+    PowerMatrixRange(i8, i8, bool),
     // bitflags
     CBits1 {
         mask: flags::ContextBits1,
@@ -114,6 +119,7 @@ pub struct FullObservation {
     flask: IntegerObservation<i8>,
     health_fragment: IntegerObservation<i8>,
     health_node: IntegerObservation<i8>,
+    power_matrix: IntegerObservation<i8>,
     // bitflags: optionally a mask
     cbits1: Option<flags::ContextBits1>,
     cbits2: Option<flags::ContextBits2>,
@@ -357,10 +363,10 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET);
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT);
             }
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH);
             }
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
@@ -396,7 +402,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP);
             }
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
             }
             LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL);
@@ -540,13 +546,13 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GLACIER__COMPASS_ROOM__CENTER__TABLE);
             }
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GLACIER__SEA_BURIAL__COLLAPSING_CEILING__DROWN);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GLACIER__SEA_BURIAL__COLLAPSING_CEILING__DROWN);
             }
             LocationId::Glacier__Sea_Burial__Deep_Cache__Health => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GLACIER__SEA_BURIAL__DEEP_CACHE__HEALTH);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GLACIER__SEA_BURIAL__DEEP_CACHE__HEALTH);
             }
             LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GLACIER__SEA_BURIAL__INSIDE_THE_GRATE__NOTES);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GLACIER__SEA_BURIAL__INSIDE_THE_GRATE__NOTES);
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GLACIER__VERTICAL_ROOM__UNDER_SWITCH__SWITCH);
@@ -753,13 +759,13 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_UHRUM__WEST_ENTRANCE__SAND__REFILL);
             }
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE);
             }
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__CENTER_BOX__BOX);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__CENTER_BOX__BOX);
             }
             LocationId::Uhrum__Siege_Corridor__Pond__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__POND__ITEM);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_UHRUM__SIEGE_CORRIDOR__POND__ITEM);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_UHRUM__WATERFALLS__CEILING_CACHE__FLASK);
@@ -1735,6 +1741,9 @@ impl Observer for FullObservation {
         if from.health_node != to.health_node {
             self.health_node = self.health_node.shift(to.health_node - from.health_node);
         }
+        if from.power_matrix != to.power_matrix {
+            self.power_matrix = self.power_matrix.shift(to.power_matrix - from.power_matrix);
+        }
     }
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
@@ -1873,6 +1882,26 @@ impl Observer for FullObservation {
                 ctx.health_node >= lo && ctx.health_node <= hi,
             )),
         }
+        match self.power_matrix {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => {
+                vec.push(OneObservation::PowerMatrixExact(ctx.power_matrix))
+            }
+            IntegerObservation::Eq(i) => {
+                vec.push(OneObservation::PowerMatrixEq(i, ctx.power_matrix == i))
+            }
+            IntegerObservation::Ge(i) => {
+                vec.push(OneObservation::PowerMatrixGe(i, ctx.power_matrix >= i))
+            }
+            IntegerObservation::Le(i) => {
+                vec.push(OneObservation::PowerMatrixLe(i, ctx.power_matrix <= i))
+            }
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::PowerMatrixRange(
+                lo,
+                hi,
+                ctx.power_matrix >= lo && ctx.power_matrix <= hi,
+            )),
+        }
         if let Some(mask) = self.cbits1 {
             vec.push(OneObservation::CBits1 {
                 mask,
@@ -1968,6 +1997,9 @@ impl FullObservation {
             fields += 1;
         }
         if self.health_node != IntegerObservation::Unknown {
+            fields += 1;
+        }
+        if self.power_matrix != IntegerObservation::Unknown {
             fields += 1;
         }
         if self.cbits1.is_some() {
@@ -2420,6 +2452,9 @@ impl FullObservation {
     pub fn observe_destruction_pogrom(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DESTRUCTION_POGROM);
     }
+    pub fn observe_double_axe(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::DOUBLE_AXE);
+    }
     pub fn observe_dr_gloria(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DR_GLORIA);
     }
@@ -2529,8 +2564,8 @@ impl FullObservation {
             .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
     }
     pub fn observe_glacier_big_drop_rock(&mut self) {
-        self.cbits2
-            .insert(flags::ContextBits2::GLACIER_BIG_DROP_ROCK);
+        self.cbits3
+            .insert(flags::ContextBits3::GLACIER_BIG_DROP_ROCK);
     }
     pub fn observe_glacier_sea_burial_rock(&mut self) {
         self.cbits3
@@ -2567,6 +2602,10 @@ impl FullObservation {
     }
     pub fn observe_health_upgrade_4(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HEALTH_UPGRADE_4);
+    }
+    pub fn observe_heretics_granddaughter(&mut self) {
+        self.cbits3
+            .insert(flags::ContextBits3::HERETICS_GRANDDAUGHTER);
     }
     pub fn observe_heretics_tablet(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HERETICS_TABLET);
@@ -2647,8 +2686,12 @@ impl FullObservation {
     pub fn observe_plague_of_thoughts(&mut self) {
         self.cbits3.insert(flags::ContextBits3::PLAGUE_OF_THOUGHTS);
     }
-    pub fn observe_power_matrix(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
+    pub fn observe_power_matrix(&mut self, obs: IntegerObservation<i8>) {
+        if self.strict {
+            self.power_matrix = IntegerObservation::Exact;
+        } else {
+            self.power_matrix = self.power_matrix.combine(obs);
+        }
     }
     pub fn observe_ranged_damage(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE);
@@ -2673,6 +2716,9 @@ impl FullObservation {
     }
     pub fn observe_researchers_missing(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RESEARCHERS_MISSING);
+    }
+    pub fn observe_royal_dagger(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::ROYAL_DAGGER);
     }
     pub fn observe_separation(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SEPARATION);
@@ -2732,21 +2778,24 @@ impl FullObservation {
     pub fn observe_the_student(&mut self) {
         self.cbits3.insert(flags::ContextBits3::THE_STUDENT);
     }
+    pub fn observe_udusan(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::UDUSAN);
+    }
     pub fn observe_uhrum_annuna_corridor_block(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::UHRUM_ANNUNA_CORRIDOR_BLOCK);
     }
     pub fn observe_uhrum_waterfall_wall(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WATERFALL_WALL);
+        self.cbits4
+            .insert(flags::ContextBits4::UHRUM_WATERFALL_WALL);
     }
     pub fn observe_uhrum_waterfalls_block(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WATERFALLS_BLOCK);
+        self.cbits4
+            .insert(flags::ContextBits4::UHRUM_WATERFALLS_BLOCK);
     }
     pub fn observe_uhrum_west_entrance_gate(&mut self) {
-        self.cbits3
-            .insert(flags::ContextBits3::UHRUM_WEST_ENTRANCE_GATE);
+        self.cbits4
+            .insert(flags::ContextBits4::UHRUM_WEST_ENTRANCE_GATE);
     }
     pub fn observe_uhrum_west_entrance_lower_wall(&mut self) {
         self.cbits4
@@ -2904,6 +2953,24 @@ pub enum ObservationMatcher {
         matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
     },
     HealthNodeRange {
+        lo: i8,
+        hi: i8,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+    },
+    PowerMatrixLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    PowerMatrixEq {
+        eq: i8,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+    },
+    PowerMatrixGe {
+        lo: i8,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+    },
+    PowerMatrixLe {
+        hi: i8,
+        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+    },
+    PowerMatrixRange {
         lo: i8,
         hi: i8,
         matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
@@ -3133,6 +3200,29 @@ impl MatcherDispatch for ObservationMatcher {
                     ObservationMatcher::HealthNodeRange { lo, hi, matcher },
                 )
             }
+            &OneObservation::PowerMatrixExact(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (node, ObservationMatcher::PowerMatrixLookup(m))
+            }
+            &OneObservation::PowerMatrixEq(eq, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (node, ObservationMatcher::PowerMatrixEq { eq, matcher })
+            }
+            &OneObservation::PowerMatrixGe(lo, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (node, ObservationMatcher::PowerMatrixGe { lo, matcher })
+            }
+            &OneObservation::PowerMatrixLe(hi, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (node, ObservationMatcher::PowerMatrixLe { hi, matcher })
+            }
+            &OneObservation::PowerMatrixRange(lo, hi, res) => {
+                let (node, matcher) = BooleanMatcher::new_with(res);
+                (
+                    node,
+                    ObservationMatcher::PowerMatrixRange { lo, hi, matcher },
+                )
+            }
             &OneObservation::CBits1 { mask, result } => {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits1 { mask, matcher })
@@ -3210,6 +3300,11 @@ impl MatcherDispatch for ObservationMatcher {
             Self::HealthNodeGe { matcher, .. } => matcher.clear(),
             Self::HealthNodeLe { matcher, .. } => matcher.clear(),
             Self::HealthNodeRange { matcher, .. } => matcher.clear(),
+            Self::PowerMatrixLookup(m) => m.clear(),
+            Self::PowerMatrixEq { matcher, .. } => matcher.clear(),
+            Self::PowerMatrixGe { matcher, .. } => matcher.clear(),
+            Self::PowerMatrixLe { matcher, .. } => matcher.clear(),
+            Self::PowerMatrixRange { matcher, .. } => matcher.clear(),
             Self::LookupCBits1 { matcher, .. } => matcher.clear(),
             Self::LookupCBits2 { matcher, .. } => matcher.clear(),
             Self::LookupCBits3 { matcher, .. } => matcher.clear(),
@@ -3279,6 +3374,13 @@ impl MatcherDispatch for ObservationMatcher {
             Self::HealthNodeLe { hi, matcher } => matcher.lookup(val.health_node <= *hi),
             Self::HealthNodeRange { lo, hi, matcher } => {
                 matcher.lookup(val.health_node >= *lo && val.health_node <= *hi)
+            }
+            Self::PowerMatrixLookup(m) => m.lookup(val.power_matrix),
+            Self::PowerMatrixEq { eq, matcher } => matcher.lookup(val.power_matrix == *eq),
+            Self::PowerMatrixGe { lo, matcher } => matcher.lookup(val.power_matrix >= *lo),
+            Self::PowerMatrixLe { hi, matcher } => matcher.lookup(val.power_matrix <= *hi),
+            Self::PowerMatrixRange { lo, hi, matcher } => {
+                matcher.lookup(val.power_matrix >= *lo && val.power_matrix <= *hi)
             }
             Self::LookupCBits1 { mask, matcher } => matcher.lookup(val.cbits1 & *mask),
             Self::LookupCBits2 { mask, matcher } => matcher.lookup(val.cbits2 & *mask),
@@ -3416,6 +3518,26 @@ impl MatcherDispatch for ObservationMatcher {
             (
                 Self::HealthNodeRange { lo, hi, matcher },
                 OneObservation::HealthNodeRange(lo2, hi2, v),
+            ) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
+            (Self::PowerMatrixLookup(m), OneObservation::PowerMatrixExact(v)) => Some(m.insert(*v)),
+            (Self::PowerMatrixEq { eq, matcher }, OneObservation::PowerMatrixEq(eq2, v))
+                if eq2 == eq =>
+            {
+                Some(matcher.insert(*v))
+            }
+            (Self::PowerMatrixGe { lo, matcher }, OneObservation::PowerMatrixGe(lo2, v))
+                if lo2 == lo =>
+            {
+                Some(matcher.insert(*v))
+            }
+            (Self::PowerMatrixLe { hi, matcher }, OneObservation::PowerMatrixLe(hi2, v))
+                if hi2 == hi =>
+            {
+                Some(matcher.insert(*v))
+            }
+            (
+                Self::PowerMatrixRange { lo, hi, matcher },
+                OneObservation::PowerMatrixRange(lo2, hi2, v),
             ) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
             (
                 Self::LookupCBits1 { mask, matcher },
@@ -3599,6 +3721,28 @@ impl MatcherDispatch for ObservationMatcher {
                 Self::HealthNodeRange { lo, hi, matcher },
                 OneObservation::HealthNodeRange(lo2, hi2, v),
             ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
+            (Self::PowerMatrixLookup(m), OneObservation::PowerMatrixExact(v)) => {
+                m.add_value(*v, value)
+            }
+            (Self::PowerMatrixEq { eq, matcher }, OneObservation::PowerMatrixEq(eq2, v))
+                if eq2 == eq =>
+            {
+                matcher.add_value(*v, value)
+            }
+            (Self::PowerMatrixGe { lo, matcher }, OneObservation::PowerMatrixGe(lo2, v))
+                if lo2 == lo =>
+            {
+                matcher.add_value(*v, value)
+            }
+            (Self::PowerMatrixLe { hi, matcher }, OneObservation::PowerMatrixLe(hi2, v))
+                if hi2 == hi =>
+            {
+                matcher.add_value(*v, value)
+            }
+            (
+                Self::PowerMatrixRange { lo, hi, matcher },
+                OneObservation::PowerMatrixRange(lo2, hi2, v),
+            ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
             (
                 Self::LookupCBits1 { mask, matcher },
                 OneObservation::CBits1 {
@@ -3698,6 +3842,11 @@ impl MatcherDispatch for ObservationMatcher {
             Self::HealthNodeGe { matcher, .. } => matcher.nodes(),
             Self::HealthNodeLe { matcher, .. } => matcher.nodes(),
             Self::HealthNodeRange { matcher, .. } => matcher.nodes(),
+            Self::PowerMatrixLookup(m) => m.nodes(),
+            Self::PowerMatrixEq { matcher, .. } => matcher.nodes(),
+            Self::PowerMatrixGe { matcher, .. } => matcher.nodes(),
+            Self::PowerMatrixLe { matcher, .. } => matcher.nodes(),
+            Self::PowerMatrixRange { matcher, .. } => matcher.nodes(),
             Self::LookupCBits1 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits2 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits3 { matcher, .. } => matcher.nodes(),
@@ -3754,6 +3903,11 @@ impl MatcherDispatch for ObservationMatcher {
             Self::HealthNodeGe { matcher, .. } => matcher.num_values(),
             Self::HealthNodeLe { matcher, .. } => matcher.num_values(),
             Self::HealthNodeRange { matcher, .. } => matcher.num_values(),
+            Self::PowerMatrixLookup(m) => m.num_values(),
+            Self::PowerMatrixEq { matcher, .. } => matcher.num_values(),
+            Self::PowerMatrixGe { matcher, .. } => matcher.num_values(),
+            Self::PowerMatrixLe { matcher, .. } => matcher.num_values(),
+            Self::PowerMatrixRange { matcher, .. } => matcher.num_values(),
             Self::LookupCBits1 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits2 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits3 { matcher, .. } => matcher.num_values(),

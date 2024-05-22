@@ -525,11 +525,9 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Amagi_Stronghold_Left_Wall
             | Item::Bounty_List
             | Item::Carnelian_Ring
-            | Item::Double_Axe
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5
-            | Item::Heretics_Granddaughter
             | Item::Infection_Speed_2
             | Item::Journal_2049_10_29
             | Item::Melee_Charge
@@ -538,8 +536,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Nano_Points_3
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
-            | Item::Royal_Dagger
             | Item::Royal_Ring
-            | Item::Udusan
     )
 }

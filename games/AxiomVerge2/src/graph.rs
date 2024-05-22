@@ -17863,11 +17863,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 4 {
+                        if ctx.count(Item::Big_Flask) < 6 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 4 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 6 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 4 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 6 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -17925,6 +17925,11 @@ impl world::World for World {
                                 map.insert(Item::Destruction_Pogrom, 1);
                             }
                         }
+                        if !ctx.has(Item::Double_Axe) {
+                            if !map.contains_key(&Item::Double_Axe) {
+                                map.insert(Item::Double_Axe, 1);
+                            }
+                        }
                         if !ctx.has(Item::Dr_Gloria) {
                             if !map.contains_key(&Item::Dr_Gloria) {
                                 map.insert(Item::Dr_Gloria, 1);
@@ -17950,11 +17955,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 16 {
+                        if ctx.count(Item::Flask) < 18 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 16 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 18 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 16 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 18 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -17972,13 +17977,13 @@ impl world::World for World {
                                 map.insert(Item::Goodbye, 1);
                             }
                         }
-                        if ctx.count(Item::Health_Fragment) < 6 {
+                        if ctx.count(Item::Health_Fragment) < 8 {
                             if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                                *val = std::cmp::max(*val, 6 - ctx.count(Item::Health_Fragment));
+                                *val = std::cmp::max(*val, 8 - ctx.count(Item::Health_Fragment));
                             } else {
                                 map.insert(
                                     Item::Health_Fragment,
-                                    6 - ctx.count(Item::Health_Fragment),
+                                    8 - ctx.count(Item::Health_Fragment),
                                 );
                             }
                         }
@@ -17987,6 +17992,11 @@ impl world::World for World {
                                 *val = std::cmp::max(*val, 2 - ctx.count(Item::Health_Node));
                             } else {
                                 map.insert(Item::Health_Node, 2 - ctx.count(Item::Health_Node));
+                            }
+                        }
+                        if !ctx.has(Item::Heretics_Granddaughter) {
+                            if !map.contains_key(&Item::Heretics_Granddaughter) {
+                                map.insert(Item::Heretics_Granddaughter, 1);
                             }
                         }
                         if !ctx.has(Item::Heretics_Tablet) {
@@ -18039,9 +18049,11 @@ impl world::World for World {
                                 map.insert(Item::Plague_of_Thoughts, 1);
                             }
                         }
-                        if !ctx.has(Item::Power_Matrix) {
-                            if !map.contains_key(&Item::Power_Matrix) {
-                                map.insert(Item::Power_Matrix, 1);
+                        if ctx.count(Item::Power_Matrix) < 2 {
+                            if let Some(val) = map.get_mut(&Item::Power_Matrix) {
+                                *val = std::cmp::max(*val, 2 - ctx.count(Item::Power_Matrix));
+                            } else {
+                                map.insert(Item::Power_Matrix, 2 - ctx.count(Item::Power_Matrix));
                             }
                         }
                         if !ctx.has(Item::Record_Losses) {
@@ -18057,6 +18069,11 @@ impl world::World for World {
                         if !ctx.has(Item::Researchers_Missing) {
                             if !map.contains_key(&Item::Researchers_Missing) {
                                 map.insert(Item::Researchers_Missing, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Royal_Dagger) {
+                            if !map.contains_key(&Item::Royal_Dagger) {
+                                map.insert(Item::Royal_Dagger, 1);
                             }
                         }
                         if !ctx.has(Item::Shockwave) {
@@ -18102,6 +18119,11 @@ impl world::World for World {
                         if !ctx.has(Item::The_Student) {
                             if !map.contains_key(&Item::The_Student) {
                                 map.insert(Item::The_Student, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Udusan) {
+                            if !map.contains_key(&Item::Udusan) {
+                                map.insert(Item::Udusan, 1);
                             }
                         }
                         if !ctx.has(Item::Under_Siege) {
@@ -18208,11 +18230,11 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                     }
-                    if ctx.count(Item::Big_Flask) < 4 {
+                    if ctx.count(Item::Big_Flask) < 6 {
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 4 - ctx.count(Item::Big_Flask));
+                            *val = std::cmp::max(*val, 6 - ctx.count(Item::Big_Flask));
                         } else {
-                            map.insert(Item::Big_Flask, 4 - ctx.count(Item::Big_Flask));
+                            map.insert(Item::Big_Flask, 6 - ctx.count(Item::Big_Flask));
                         }
                     }
                     if !ctx.has(Item::Boomerang) {
@@ -18270,6 +18292,11 @@ impl world::World for World {
                             map.insert(Item::Destruction_Pogrom, 1);
                         }
                     }
+                    if !ctx.has(Item::Double_Axe) {
+                        if !map.contains_key(&Item::Double_Axe) {
+                            map.insert(Item::Double_Axe, 1);
+                        }
+                    }
                     if !ctx.has(Item::Dr_Gloria) {
                         if !map.contains_key(&Item::Dr_Gloria) {
                             map.insert(Item::Dr_Gloria, 1);
@@ -18295,11 +18322,11 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 16 {
+                    if ctx.count(Item::Flask) < 18 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 16 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 18 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 16 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 18 - ctx.count(Item::Flask));
                         }
                     }
                     if !ctx.has(Item::Forbidden_Knowledge) {
@@ -18317,11 +18344,11 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                     }
-                    if ctx.count(Item::Health_Fragment) < 6 {
+                    if ctx.count(Item::Health_Fragment) < 8 {
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 6 - ctx.count(Item::Health_Fragment));
+                            *val = std::cmp::max(*val, 8 - ctx.count(Item::Health_Fragment));
                         } else {
-                            map.insert(Item::Health_Fragment, 6 - ctx.count(Item::Health_Fragment));
+                            map.insert(Item::Health_Fragment, 8 - ctx.count(Item::Health_Fragment));
                         }
                     }
                     if ctx.count(Item::Health_Node) < 2 {
@@ -18329,6 +18356,11 @@ impl world::World for World {
                             *val = std::cmp::max(*val, 2 - ctx.count(Item::Health_Node));
                         } else {
                             map.insert(Item::Health_Node, 2 - ctx.count(Item::Health_Node));
+                        }
+                    }
+                    if !ctx.has(Item::Heretics_Granddaughter) {
+                        if !map.contains_key(&Item::Heretics_Granddaughter) {
+                            map.insert(Item::Heretics_Granddaughter, 1);
                         }
                     }
                     if !ctx.has(Item::Heretics_Tablet) {
@@ -18381,9 +18413,11 @@ impl world::World for World {
                             map.insert(Item::Plague_of_Thoughts, 1);
                         }
                     }
-                    if !ctx.has(Item::Power_Matrix) {
-                        if !map.contains_key(&Item::Power_Matrix) {
-                            map.insert(Item::Power_Matrix, 1);
+                    if ctx.count(Item::Power_Matrix) < 2 {
+                        if let Some(val) = map.get_mut(&Item::Power_Matrix) {
+                            *val = std::cmp::max(*val, 2 - ctx.count(Item::Power_Matrix));
+                        } else {
+                            map.insert(Item::Power_Matrix, 2 - ctx.count(Item::Power_Matrix));
                         }
                     }
                     if !ctx.has(Item::Record_Losses) {
@@ -18399,6 +18433,11 @@ impl world::World for World {
                     if !ctx.has(Item::Researchers_Missing) {
                         if !map.contains_key(&Item::Researchers_Missing) {
                             map.insert(Item::Researchers_Missing, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Royal_Dagger) {
+                        if !map.contains_key(&Item::Royal_Dagger) {
+                            map.insert(Item::Royal_Dagger, 1);
                         }
                     }
                     if !ctx.has(Item::Shockwave) {
@@ -18444,6 +18483,11 @@ impl world::World for World {
                     if !ctx.has(Item::The_Student) {
                         if !map.contains_key(&Item::The_Student) {
                             map.insert(Item::The_Student, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Udusan) {
+                        if !map.contains_key(&Item::Udusan) {
+                            map.insert(Item::Udusan, 1);
                         }
                     }
                     if !ctx.has(Item::Under_Siege) {
@@ -18560,9 +18604,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 4);
+                            *val = std::cmp::max(*val, 6);
                         } else {
-                            map.insert(Item::Big_Flask, 4);
+                            map.insert(Item::Big_Flask, 6);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -18597,6 +18641,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Destruction_Pogrom) {
                             map.insert(Item::Destruction_Pogrom, 1);
                         }
+                        if !map.contains_key(&Item::Double_Axe) {
+                            map.insert(Item::Double_Axe, 1);
+                        }
                         if !map.contains_key(&Item::Dr_Gloria) {
                             map.insert(Item::Dr_Gloria, 1);
                         }
@@ -18613,9 +18660,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 16);
+                            *val = std::cmp::max(*val, 18);
                         } else {
-                            map.insert(Item::Flask, 16);
+                            map.insert(Item::Flask, 18);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
@@ -18627,14 +18674,17 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 6);
+                            *val = std::cmp::max(*val, 8);
                         } else {
-                            map.insert(Item::Health_Fragment, 6);
+                            map.insert(Item::Health_Fragment, 8);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Node) {
                             *val = std::cmp::max(*val, 2);
                         } else {
                             map.insert(Item::Health_Node, 2);
+                        }
+                        if !map.contains_key(&Item::Heretics_Granddaughter) {
+                            map.insert(Item::Heretics_Granddaughter, 1);
                         }
                         if !map.contains_key(&Item::Heretics_Tablet) {
                             map.insert(Item::Heretics_Tablet, 1);
@@ -18666,8 +18716,10 @@ impl world::World for World {
                         if !map.contains_key(&Item::Plague_of_Thoughts) {
                             map.insert(Item::Plague_of_Thoughts, 1);
                         }
-                        if !map.contains_key(&Item::Power_Matrix) {
-                            map.insert(Item::Power_Matrix, 1);
+                        if let Some(val) = map.get_mut(&Item::Power_Matrix) {
+                            *val = std::cmp::max(*val, 2);
+                        } else {
+                            map.insert(Item::Power_Matrix, 2);
                         }
                         if !map.contains_key(&Item::Record_Losses) {
                             map.insert(Item::Record_Losses, 1);
@@ -18677,6 +18729,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Researchers_Missing) {
                             map.insert(Item::Researchers_Missing, 1);
+                        }
+                        if !map.contains_key(&Item::Royal_Dagger) {
+                            map.insert(Item::Royal_Dagger, 1);
                         }
                         if !map.contains_key(&Item::Shockwave) {
                             map.insert(Item::Shockwave, 1);
@@ -18704,6 +18759,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::The_Student) {
                             map.insert(Item::The_Student, 1);
+                        }
+                        if !map.contains_key(&Item::Udusan) {
+                            map.insert(Item::Udusan, 1);
                         }
                         if !map.contains_key(&Item::Under_Siege) {
                             map.insert(Item::Under_Siege, 1);
@@ -18772,9 +18830,9 @@ impl world::World for World {
                         map.insert(Item::Beware_the_Patternmind, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                        *val = std::cmp::max(*val, 4);
+                        *val = std::cmp::max(*val, 6);
                     } else {
-                        map.insert(Item::Big_Flask, 4);
+                        map.insert(Item::Big_Flask, 6);
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
@@ -18809,6 +18867,9 @@ impl world::World for World {
                     if !map.contains_key(&Item::Destruction_Pogrom) {
                         map.insert(Item::Destruction_Pogrom, 1);
                     }
+                    if !map.contains_key(&Item::Double_Axe) {
+                        map.insert(Item::Double_Axe, 1);
+                    }
                     if !map.contains_key(&Item::Dr_Gloria) {
                         map.insert(Item::Dr_Gloria, 1);
                     }
@@ -18825,9 +18886,9 @@ impl world::World for World {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 16);
+                        *val = std::cmp::max(*val, 18);
                     } else {
-                        map.insert(Item::Flask, 16);
+                        map.insert(Item::Flask, 18);
                     }
                     if !map.contains_key(&Item::Forbidden_Knowledge) {
                         map.insert(Item::Forbidden_Knowledge, 1);
@@ -18839,14 +18900,17 @@ impl world::World for World {
                         map.insert(Item::Goodbye, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                        *val = std::cmp::max(*val, 6);
+                        *val = std::cmp::max(*val, 8);
                     } else {
-                        map.insert(Item::Health_Fragment, 6);
+                        map.insert(Item::Health_Fragment, 8);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Node) {
                         *val = std::cmp::max(*val, 2);
                     } else {
                         map.insert(Item::Health_Node, 2);
+                    }
+                    if !map.contains_key(&Item::Heretics_Granddaughter) {
+                        map.insert(Item::Heretics_Granddaughter, 1);
                     }
                     if !map.contains_key(&Item::Heretics_Tablet) {
                         map.insert(Item::Heretics_Tablet, 1);
@@ -18878,8 +18942,10 @@ impl world::World for World {
                     if !map.contains_key(&Item::Plague_of_Thoughts) {
                         map.insert(Item::Plague_of_Thoughts, 1);
                     }
-                    if !map.contains_key(&Item::Power_Matrix) {
-                        map.insert(Item::Power_Matrix, 1);
+                    if let Some(val) = map.get_mut(&Item::Power_Matrix) {
+                        *val = std::cmp::max(*val, 2);
+                    } else {
+                        map.insert(Item::Power_Matrix, 2);
                     }
                     if !map.contains_key(&Item::Record_Losses) {
                         map.insert(Item::Record_Losses, 1);
@@ -18889,6 +18955,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Researchers_Missing) {
                         map.insert(Item::Researchers_Missing, 1);
+                    }
+                    if !map.contains_key(&Item::Royal_Dagger) {
+                        map.insert(Item::Royal_Dagger, 1);
                     }
                     if !map.contains_key(&Item::Shockwave) {
                         map.insert(Item::Shockwave, 1);
@@ -18916,6 +18985,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::The_Student) {
                         map.insert(Item::The_Student, 1);
+                    }
+                    if !map.contains_key(&Item::Udusan) {
+                        map.insert(Item::Udusan, 1);
                     }
                     if !map.contains_key(&Item::Under_Siege) {
                         map.insert(Item::Under_Siege, 1);
@@ -23882,11 +23954,9 @@ impl World {
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Bounty_List
                             | Item::Carnelian_Ring
-                            | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Health_Upgrade_5
-                            | Item::Heretics_Granddaughter
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Melee_Charge
@@ -23895,9 +23965,7 @@ impl World {
                             | Item::Nano_Points_3
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
-                            | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::Udusan
                     )
                 }
                 RuleObjective::AllUrns => {
@@ -24022,12 +24090,10 @@ impl World {
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Bounty_List
                             | Item::Carnelian_Ring
-                            | Item::Double_Axe
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
                             | Item::Health_Upgrade_5
-                            | Item::Heretics_Granddaughter
                             | Item::Infection_Speed_2
                             | Item::Journal_2049_10_29
                             | Item::Melee_Charge
@@ -24036,9 +24102,7 @@ impl World {
                             | Item::Nano_Points_3
                             | Item::Ranged_Damage_3
                             | Item::Ranged_Speed_3
-                            | Item::Royal_Dagger
                             | Item::Royal_Ring
-                            | Item::Udusan
                     )
                 }
                 RuleObjective::AllUrns => {
@@ -24224,11 +24288,9 @@ impl World {
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
                         iset.insert(Item::Bounty_List);
                         iset.insert(Item::Carnelian_Ring);
-                        iset.insert(Item::Double_Axe);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Health_Upgrade_5);
-                        iset.insert(Item::Heretics_Granddaughter);
                         iset.insert(Item::Infection_Speed_2);
                         iset.insert(Item::Journal_2049_10_29);
                         iset.insert(Item::Melee_Charge);
@@ -24237,9 +24299,7 @@ impl World {
                         iset.insert(Item::Nano_Points_3);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
-                        iset.insert(Item::Udusan);
                         iset
                     }
                     RuleObjective::AllUrns => {
@@ -24364,12 +24424,10 @@ impl World {
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
                         iset.insert(Item::Bounty_List);
                         iset.insert(Item::Carnelian_Ring);
-                        iset.insert(Item::Double_Axe);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Escape);
                         iset.insert(Item::Health_Upgrade_5);
-                        iset.insert(Item::Heretics_Granddaughter);
                         iset.insert(Item::Infection_Speed_2);
                         iset.insert(Item::Journal_2049_10_29);
                         iset.insert(Item::Melee_Charge);
@@ -24378,9 +24436,7 @@ impl World {
                         iset.insert(Item::Nano_Points_3);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Royal_Dagger);
                         iset.insert(Item::Royal_Ring);
-                        iset.insert(Item::Udusan);
                         iset
                     }
                     RuleObjective::AllUrns => {
