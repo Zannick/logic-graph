@@ -2094,6 +2094,126 @@ pub fn access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1
     // not ^_platform_moved
     !ctx.irikar__basement_portal__ctx__platform_moved()
 }
+pub fn access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_left_platform and Nanite_Mist
+    (!ctx.irikar__midwest__ctx__left_platform() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_left_platform and $mist2
+    (!ctx.irikar__midwest__ctx__left_platform() && helper__mist2!(ctx, world))
+}
+pub fn access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
+}
+pub fn access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
+}
+pub fn access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
+}
+pub fn access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Nanite_Mist and not ^_right_platform
+    (ctx.has(Item::Nanite_Mist) && !ctx.irikar__midwest__ctx__right_platform())
+}
+pub fn access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $mist2 and not ^_right_platform
+    (helper__mist2!(ctx, world) && !ctx.irikar__midwest__ctx__right_platform())
+}
+pub fn access_irikar__midwest__left_platform_start__hack_and_ride__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_left_platform and $activate
+    (!ctx.irikar__midwest__ctx__left_platform() && helper__activate!(ctx, world))
+}
+pub fn access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $hover and $hook and not ^_left_platform
+    ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
+        && !ctx.irikar__midwest__ctx__left_platform())
+}
+pub fn access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and $activate
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__activate!(ctx, world))
+}
+pub fn access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // Nanite_Mist and not ^_right_platform
+    (ctx.has(Item::Nanite_Mist) && !ctx.irikar__midwest__ctx__right_platform())
+}
+pub fn access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // $mist2 and not ^_right_platform
+    (helper__mist2!(ctx, world) && !ctx.irikar__midwest__ctx__right_platform())
+}
+pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
+}
 pub fn access_irikar_gudam(ctx: &Context, world: &graph::World) -> bool {
     // Irikar_Gudam
     ctx.has(Item::Irikar_Gudam)
@@ -3132,6 +3252,20 @@ pub fn action_irikar__basement_portal__moving_platform_start__activate_platform_
 ) {
     // ^_platform_moved = true
     ctx.set_irikar__basement_portal__ctx__platform_moved(true);
+}
+pub fn action_irikar__midwest__left_platform_start__hack_and_ride__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_left_platform = true
+    ctx.set_irikar__midwest__ctx__left_platform(true);
+}
+pub fn action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(
+    ctx: &mut Context,
+    world: &graph::World,
+) {
+    // ^_right_platform = true
+    ctx.set_irikar__midwest__ctx__right_platform(true);
 }
 pub fn action_last_set_invoke_default(ctx: &mut Context, world: &graph::World) {
     // ^last = $default
@@ -10984,6 +11118,506 @@ pub fn explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_
         (!val.0, val.1)
     }
 }
+pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_left_platform and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__left_platform();
+                edict.insert("^irikar__midwest__ctx__left_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__left_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_left_platform and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__left_platform();
+                edict.insert("^irikar__midwest__ctx__left_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__left_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Nanite_Mist and not ^_right_platform
+    {
+        let mut left = {
+            let h = ctx.has(Item::Nanite_Mist);
+            edict.insert("Nanite_Mist", format!("{}", h));
+            (h, vec!["Nanite_Mist"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.irikar__midwest__ctx__right_platform();
+                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                    (r, vec!["^irikar__midwest__ctx__right_platform"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2 and not ^_right_platform
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+            edict.insert("$mist2", format!("{:?}", res));
+            refs.push("$mist2");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.irikar__midwest__ctx__right_platform();
+                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                    (r, vec!["^irikar__midwest__ctx__right_platform"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__left_platform_start__hack_and_ride__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_left_platform and $activate
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__left_platform();
+                edict.insert("^irikar__midwest__ctx__left_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__left_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+                edict.insert("$activate", format!("{:?}", res));
+                refs.push("$activate");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and $hook and not ^_left_platform
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.irikar__midwest__ctx__left_platform();
+                    edict.insert("^irikar__midwest__ctx__left_platform", format!("{:?}", r));
+                    (r, vec!["^irikar__midwest__ctx__left_platform"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and $activate
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__activate!(ctx, world, edict);
+                edict.insert("$activate", format!("{:?}", res));
+                refs.push("$activate");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Nanite_Mist and not ^_right_platform
+    {
+        let mut left = {
+            let h = ctx.has(Item::Nanite_Mist);
+            edict.insert("Nanite_Mist", format!("{}", h));
+            (h, vec!["Nanite_Mist"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.irikar__midwest__ctx__right_platform();
+                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                    (r, vec!["^irikar__midwest__ctx__right_platform"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2 and not ^_right_platform
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+            edict.insert("$mist2", format!("{:?}", res));
+            refs.push("$mist2");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.irikar__midwest__ctx__right_platform();
+                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                    (r, vec!["^irikar__midwest__ctx__right_platform"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_right_platform and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_irikar_gudam(
     ctx: &Context,
     world: &graph::World,
@@ -16828,6 +17462,217 @@ pub fn observe_access_irikar__basement_portal__portal_stand__ex__moving_platform
         ctx.irikar__basement_portal__ctx__platform_moved()
     })
 }
+pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_left_platform and Nanite_Mist
+    (!({
+        full_obs.observe_irikar__midwest__ctx__left_platform();
+        ctx.irikar__midwest__ctx__left_platform()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_left_platform and $mist2
+    (!({
+        full_obs.observe_irikar__midwest__ctx__left_platform();
+        ctx.irikar__midwest__ctx__left_platform()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Nanite_Mist and not ^_right_platform
+    ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    } && (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    })))
+}
+pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2 and not ^_right_platform
+    (hobserve__mist2!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_irikar__midwest__ctx__right_platform();
+            ctx.irikar__midwest__ctx__right_platform()
+        })))
+}
+pub fn observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_left_platform and $activate
+    (!({
+        full_obs.observe_irikar__midwest__ctx__left_platform();
+        ctx.irikar__midwest__ctx__left_platform()
+    }) && (hobserve__activate!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and $hook and not ^_left_platform
+    ((hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
+        && (!({
+            full_obs.observe_irikar__midwest__ctx__left_platform();
+            ctx.irikar__midwest__ctx__left_platform()
+        })))
+}
+pub fn observe_access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and $activate
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && (hobserve__activate!(ctx, world, full_obs)))
+}
+pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Nanite_Mist and not ^_right_platform
+    ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    } && (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    })))
+}
+pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2 and not ^_right_platform
+    (hobserve__mist2!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_irikar__midwest__ctx__right_platform();
+            ctx.irikar__midwest__ctx__right_platform()
+        })))
+}
+pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and Nanite_Mist
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_right_platform and $mist2
+    (!({
+        full_obs.observe_irikar__midwest__ctx__right_platform();
+        ctx.irikar__midwest__ctx__right_platform()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
 pub fn observe_access_irikar_gudam(
     ctx: &Context,
     world: &graph::World,
@@ -18776,6 +19621,20 @@ pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_p
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
+}
+pub fn observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_left_platform = true
+}
+pub fn observe_action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_right_platform = true
 }
 pub fn observe_action_last_set_invoke_default(
     ctx: &Context,

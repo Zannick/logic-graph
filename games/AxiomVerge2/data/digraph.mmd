@@ -1962,10 +1962,42 @@ subgraph Irikar
         Irikar__Midwest__East_23(East 23);
         Irikar__Midwest__East_24_on_Building(East 24 on Building);
         Irikar__Midwest__East_24_on_Floor(East 24 on Floor);
+        Irikar__Midwest__Small_Rooftop(Small Rooftop);
+        Irikar__Midwest__NE_Ledge(NE Ledge);
+        Irikar__Midwest__Left_Platform_Start(Left Platform Start);
+        Irikar__Midwest__Left_Platform_Dest(Left Platform Dest);
+        Irikar__Midwest__Right_Platform_Start(Right Platform Start);
+        Irikar__Midwest__Right_Platform_Dest(Right Platform Dest);
         Irikar__Midwest__East_25(East 25);
+        Irikar__Midwest__Save_Point(Save Point);
+        Irikar__Midwest__Save_Ledge(Save Ledge);
+        Irikar__Midwest__Center_Rock_1_East(Center Rock 1 East);
+        Irikar__Midwest__Center_Rock_1_West(Center Rock 1 West);
+        Irikar__Midwest__Center_Rock_2_East(Center Rock 2 East);
+        Irikar__Midwest__Center_Rock_2_West(Center Rock 2 West);
+        Irikar__Midwest__Center_Rock_3_West(Center Rock 3 West);
+        Irikar__Midwest__Center_Rock_3_East(Center Rock 3 East);
+        Irikar__Midwest__Tablet_Platform(Tablet Platform);
+        Irikar__Midwest__Center_Small_Rock(Center Small Rock);
+        Irikar__Midwest__The_Long_Rock_West(The Long Rock West);
+        Irikar__Midwest__The_Long_Rock_Middle(The Long Rock Middle);
+        Irikar__Midwest__The_Long_Rock_East(The Long Rock East);
+        Irikar__Midwest__East_Rock_1(East Rock 1);
+        Irikar__Midwest__East_Rock_2(East Rock 2);
+        Irikar__Midwest__East_Rock_3(East Rock 3);
+        Irikar__Midwest__Lower_East_Platform(Lower East Platform);
         Irikar__Midwest__East_26(East 26);
         Irikar__Midwest__East_27(East 27);
         Irikar__Midwest__East_28(East 28);
+        Irikar__Midwest__SE_Rock_West(SE Rock West);
+        Irikar__Midwest__Ground_Center(Ground Center);
+        Irikar__Midwest__Lower_Center_Platform(Lower Center Platform);
+        Irikar__Midwest__Lower_Rock_East(Lower Rock East);
+        Irikar__Midwest__Lower_Rock_West(Lower Rock West);
+        Irikar__Midwest__West_Platform(West Platform);
+        Irikar__Midwest__SW_Platform(SW Platform);
+        Irikar__Midwest__West_28_Platform(West 28 Platform);
+        Irikar__Midwest__West_28_Ground(West 28 Ground);
     end
     subgraph Irikar__Lamassu[Lamassu]
         Irikar__Lamassu__West_28(West 28);
@@ -1978,6 +2010,10 @@ subgraph Irikar
         Irikar__Lamassu__Northwest(Northwest);
         Irikar__Lamassu__Catwalk_West(Catwalk West);
         Irikar__Lamassu__Catwalk_Middle(Catwalk Middle);
+    end
+    subgraph Irikar__Beach_Save[Beach Save]
+        Irikar__Beach_Save__East_28_Platform(East 28 Platform);
+        Irikar__Beach_Save__East_28_Ground(East 28 Ground);
     end
 end
 subgraph Menu
@@ -2051,6 +2087,7 @@ subgraph Menu
         Menu__Kiengir_Map__Irikar_Gudam_Health(Irikar Gudam Health);
         Menu__Kiengir_Map__Heretics_Granddaughter(Heretic's Granddaughter);
         Menu__Kiengir_Map__Terminal_Breakthrough_2(Terminal Breakthrough 2);
+        Menu__Kiengir_Map__Irikar_Mid_air_Flask(Irikar Mid-air Flask);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -3251,8 +3288,8 @@ Irikar__Basement_Pipes__Double_Pipe_Left --> Irikar__Basement_Pipes__High_Pipe
 Irikar__Basement_Pipes__East_28 <--> Irikar__Basement_Portal__West_28
 Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge --> Irikar__Basement_Pipes__Brick_Ledge
 Irikar__Basement_Pipes__Right_Vertical_Pipe --> Irikar__Basement_Pipes__Double_Pipe_Left
-Irikar__Basement_Pipes__West_27 --> Irikar__Midwest__East_27
-Irikar__Basement_Pipes__West_28 --> Irikar__Midwest__East_28
+Irikar__Basement_Pipes__West_27 <--> Irikar__Midwest__East_27
+Irikar__Basement_Pipes__West_28 <--> Irikar__Midwest__East_28
 Irikar__Basement_Portal__Bottom_Middle --> Irikar__Basement_Portal__Ledge
 Irikar__Basement_Portal__East_28 --> Irikar__Basement_Portal__Ledge
 Irikar__Basement_Portal__East_28 <--> Irikar__Empty_Foyer__West
@@ -3330,6 +3367,35 @@ Irikar__Lamassu__Catwalk_Middle --> Irikar__Lamassu__Hidden_Passage_West
 Irikar__Lamassu__East_26 <--> Uhrum__West_Entrance__West_26
 Irikar__Lamassu__East_27 <--> Uhrum__West_Entrance__West_27
 Irikar__Lamassu__Hidden_Passage_East <--> Uhrum__West_Entrance__Hidden_Passage_West
+Irikar__Midwest__Center_Rock_1_East --> Irikar__Midwest__Left_Platform_Start
+Irikar__Midwest__Center_Rock_1_West --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Center_Rock_2_East --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Center_Rock_2_East --> Irikar__Midwest__Save_Point
+Irikar__Midwest__Center_Rock_2_West --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Center_Rock_3_East --> Irikar__Midwest__Save_Ledge
+Irikar__Midwest__Center_Rock_3_West --> Irikar__Midwest__Center_Rock_2_East
+Irikar__Midwest__Center_Rock_3_West --> Irikar__Midwest__Save_Ledge
+Irikar__Midwest__Center_Small_Rock --> Irikar__Midwest__Center_Rock_2_East
+Irikar__Midwest__East_27 --> Irikar__Midwest__East_Rock_3
+Irikar__Midwest__East_Rock_1 --> Irikar__Midwest__Save_Ledge
+Irikar__Midwest__East_Rock_3 --> Irikar__Midwest__East_Rock_1
+Irikar__Midwest__East_Rock_3 --> Irikar__Midwest__East_Rock_2
+Irikar__Midwest__Ground_Center --> Irikar__Midwest__SE_Rock_West
+Irikar__Midwest__Left_Platform_Start --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Lower_Center_Platform --> Irikar__Midwest__Lower_Rock_East
+Irikar__Midwest__Lower_East_Platform --> Irikar__Midwest__East_Rock_3
+Irikar__Midwest__Lower_East_Platform --> Irikar__Midwest__The_Long_Rock_East
+Irikar__Midwest__NE_Ledge --> Irikar__Midwest__Left_Platform_Start
+Irikar__Midwest__SW_Platform --> Irikar__Midwest__Lower_Rock_West
+Irikar__Midwest__Save_Point --> Irikar__Midwest__East_25
+Irikar__Midwest__Save_Point --> Irikar__Midwest__NE_Ledge
+Irikar__Midwest__Small_Rooftop --> Irikar__Midwest__Left_Platform_Start
+Irikar__Midwest__Small_Rooftop --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Tablet_Platform --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__The_Long_Rock_East --> Irikar__Midwest__East_Rock_2
+Irikar__Midwest__West_28_Ground --> Irikar__Beach_Save__East_28_Ground
+Irikar__Midwest__West_28_Platform --> Irikar__Beach_Save__East_28_Platform
+Irikar__Midwest__West_Platform --> Irikar__Midwest__The_Long_Rock_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
 Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir

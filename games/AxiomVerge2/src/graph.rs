@@ -1633,10 +1633,42 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Irikar__Midwest__East_23
         | SpotId::Irikar__Midwest__East_24_on_Building
         | SpotId::Irikar__Midwest__East_24_on_Floor
+        | SpotId::Irikar__Midwest__Small_Rooftop
+        | SpotId::Irikar__Midwest__NE_Ledge
+        | SpotId::Irikar__Midwest__Left_Platform_Start
+        | SpotId::Irikar__Midwest__Left_Platform_Dest
+        | SpotId::Irikar__Midwest__Right_Platform_Start
+        | SpotId::Irikar__Midwest__Right_Platform_Dest
         | SpotId::Irikar__Midwest__East_25
+        | SpotId::Irikar__Midwest__Save_Point
+        | SpotId::Irikar__Midwest__Save_Ledge
+        | SpotId::Irikar__Midwest__Center_Rock_1_East
+        | SpotId::Irikar__Midwest__Center_Rock_1_West
+        | SpotId::Irikar__Midwest__Center_Rock_2_East
+        | SpotId::Irikar__Midwest__Center_Rock_2_West
+        | SpotId::Irikar__Midwest__Center_Rock_3_West
+        | SpotId::Irikar__Midwest__Center_Rock_3_East
+        | SpotId::Irikar__Midwest__Tablet_Platform
+        | SpotId::Irikar__Midwest__Center_Small_Rock
+        | SpotId::Irikar__Midwest__The_Long_Rock_West
+        | SpotId::Irikar__Midwest__The_Long_Rock_Middle
+        | SpotId::Irikar__Midwest__The_Long_Rock_East
+        | SpotId::Irikar__Midwest__East_Rock_1
+        | SpotId::Irikar__Midwest__East_Rock_2
+        | SpotId::Irikar__Midwest__East_Rock_3
+        | SpotId::Irikar__Midwest__Lower_East_Platform
         | SpotId::Irikar__Midwest__East_26
         | SpotId::Irikar__Midwest__East_27
-        | SpotId::Irikar__Midwest__East_28 => AreaId::Irikar__Midwest,
+        | SpotId::Irikar__Midwest__East_28
+        | SpotId::Irikar__Midwest__SE_Rock_West
+        | SpotId::Irikar__Midwest__Ground_Center
+        | SpotId::Irikar__Midwest__Lower_Center_Platform
+        | SpotId::Irikar__Midwest__Lower_Rock_East
+        | SpotId::Irikar__Midwest__Lower_Rock_West
+        | SpotId::Irikar__Midwest__West_Platform
+        | SpotId::Irikar__Midwest__SW_Platform
+        | SpotId::Irikar__Midwest__West_28_Platform
+        | SpotId::Irikar__Midwest__West_28_Ground => AreaId::Irikar__Midwest,
         SpotId::Irikar__Lamassu__West_28
         | SpotId::Irikar__Lamassu__Bottom_Middle
         | SpotId::Irikar__Lamassu__East_27
@@ -1647,6 +1679,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Lamassu__Northwest
         | SpotId::Irikar__Lamassu__Catwalk_West
         | SpotId::Irikar__Lamassu__Catwalk_Middle => AreaId::Irikar__Lamassu,
+        SpotId::Irikar__Beach_Save__East_28_Platform
+        | SpotId::Irikar__Beach_Save__East_28_Ground => AreaId::Irikar__Beach_Save,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -1712,7 +1746,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Irikar_Gudam
         | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
         | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
-        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2
+        | SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3460,10 +3495,42 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Irikar__Midwest__East_23
         | SpotId::Irikar__Midwest__East_24_on_Building
         | SpotId::Irikar__Midwest__East_24_on_Floor
+        | SpotId::Irikar__Midwest__Small_Rooftop
+        | SpotId::Irikar__Midwest__NE_Ledge
+        | SpotId::Irikar__Midwest__Left_Platform_Start
+        | SpotId::Irikar__Midwest__Left_Platform_Dest
+        | SpotId::Irikar__Midwest__Right_Platform_Start
+        | SpotId::Irikar__Midwest__Right_Platform_Dest
         | SpotId::Irikar__Midwest__East_25
+        | SpotId::Irikar__Midwest__Save_Point
+        | SpotId::Irikar__Midwest__Save_Ledge
+        | SpotId::Irikar__Midwest__Center_Rock_1_East
+        | SpotId::Irikar__Midwest__Center_Rock_1_West
+        | SpotId::Irikar__Midwest__Center_Rock_2_East
+        | SpotId::Irikar__Midwest__Center_Rock_2_West
+        | SpotId::Irikar__Midwest__Center_Rock_3_West
+        | SpotId::Irikar__Midwest__Center_Rock_3_East
+        | SpotId::Irikar__Midwest__Tablet_Platform
+        | SpotId::Irikar__Midwest__Center_Small_Rock
+        | SpotId::Irikar__Midwest__The_Long_Rock_West
+        | SpotId::Irikar__Midwest__The_Long_Rock_Middle
+        | SpotId::Irikar__Midwest__The_Long_Rock_East
+        | SpotId::Irikar__Midwest__East_Rock_1
+        | SpotId::Irikar__Midwest__East_Rock_2
+        | SpotId::Irikar__Midwest__East_Rock_3
+        | SpotId::Irikar__Midwest__Lower_East_Platform
         | SpotId::Irikar__Midwest__East_26
         | SpotId::Irikar__Midwest__East_27
-        | SpotId::Irikar__Midwest__East_28 => RegionId::Irikar,
+        | SpotId::Irikar__Midwest__East_28
+        | SpotId::Irikar__Midwest__SE_Rock_West
+        | SpotId::Irikar__Midwest__Ground_Center
+        | SpotId::Irikar__Midwest__Lower_Center_Platform
+        | SpotId::Irikar__Midwest__Lower_Rock_East
+        | SpotId::Irikar__Midwest__Lower_Rock_West
+        | SpotId::Irikar__Midwest__West_Platform
+        | SpotId::Irikar__Midwest__SW_Platform
+        | SpotId::Irikar__Midwest__West_28_Platform
+        | SpotId::Irikar__Midwest__West_28_Ground => RegionId::Irikar,
         SpotId::Irikar__Lamassu__West_28
         | SpotId::Irikar__Lamassu__Bottom_Middle
         | SpotId::Irikar__Lamassu__East_27
@@ -3474,6 +3541,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Lamassu__Northwest
         | SpotId::Irikar__Lamassu__Catwalk_West
         | SpotId::Irikar__Lamassu__Catwalk_Middle => RegionId::Irikar,
+        SpotId::Irikar__Beach_Save__East_28_Platform
+        | SpotId::Irikar__Beach_Save__East_28_Ground => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -3537,7 +3606,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Irikar_Gudam
         | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
         | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
-        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2
+        | SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3943,6 +4013,7 @@ impl world::Accessible for Location {
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => true,
             LocationId::Interior__Tent_Interior__Desk__Note => true,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => true,
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::access_irikar_gudam(ctx, world),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::access_invoke_can_damage(ctx, world),
@@ -3960,6 +4031,9 @@ impl world::Accessible for Location {
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => true,
             LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core => rules::access_invoke_more_refills(ctx, world),
             LocationId::Irikar__Lamassu__Desk__Item => true,
+            LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask => true,
+            LocationId::Irikar__Midwest__Right_Platform_Start__Flask => true,
+            LocationId::Irikar__Midwest__Tablet_Platform__Tablet => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
@@ -6314,10 +6388,56 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => true,
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => rules::access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => rules::access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
             ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
             ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
             ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
+            ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => true,
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => true,
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => rules::access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(ctx, world),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => rules::access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(ctx, world),
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => true,
+            ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => true,
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
@@ -7864,6 +7984,48 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => rules::observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => rules::observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::observe_access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => rules::observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => rules::observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::observe_access_invoke_hover_and_invoke_hook(ctx, world, full_obs),
@@ -9525,6 +9687,48 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => rules::explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => rules::explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::explain_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => rules::explain_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => rules::explain_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(ctx, world, edict),
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Exit_Corridor__North_12__ex__Pillar_1 => rules::explain_invoke_hover_and_invoke_hook(ctx, world, edict),
@@ -10210,6 +10414,10 @@ impl world::Exit for Exit {
             ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
             ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
             ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
+            ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => true,
+            ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => true,
+            ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => true,
+            ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
@@ -10403,6 +10611,9 @@ impl world::Accessible for Action {
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => true,
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world),
+            ActionId::Irikar__Midwest__Save_Point__Save => true,
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
@@ -10514,6 +10725,8 @@ impl world::Accessible for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world, full_obs),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::observe_access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
@@ -11616,6 +11829,27 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
+                let (ret, mut tags) =
+                    rules::explain_irikar__midwest__left_platform_start__hack_and_ride__req(
+                        ctx, world, edict,
+                    );
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Left Platform Dest"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
+                let (ret, mut tags) = rules::explain_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Right Platform Dest"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -11783,6 +12017,9 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::action_irikar__midwest__left_platform_start__hack_and_ride__do(ctx, world),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world),
+            ActionId::Irikar__Midwest__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -11927,6 +12164,12 @@ impl world::Action for Action {
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 SpotId::Irikar__Basement_Portal__Moving_Platform_End
+            }
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
+                SpotId::Irikar__Midwest__Left_Platform_Dest
+            }
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
+                SpotId::Irikar__Midwest__Right_Platform_Dest
             }
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
                 SpotId::Uhrum__Waterfalls__Medium_Rock
@@ -12468,6 +12711,17 @@ impl world::Action for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
             }
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
+                rules::observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
+                    ctx, world, full_obs,
+                );
+            }
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
+                rules::observe_action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Midwest__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -12758,7 +13012,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1815] = [
+static RAW_SPOTS: [SpotId; 1850] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -14196,6 +14450,8 @@ static RAW_SPOTS: [SpotId; 1815] = [
     SpotId::Irikar__Basement_Portal__Portal_Stand,
     SpotId::Irikar__Basement_Portal__West_28,
     SpotId::Irikar__Basement_Portal__Westmost_Platform,
+    SpotId::Irikar__Beach_Save__East_28_Ground,
+    SpotId::Irikar__Beach_Save__East_28_Platform,
     SpotId::Irikar__Boss_Room__Above_Catwalk,
     SpotId::Irikar__Boss_Room__Bulls_Feet,
     SpotId::Irikar__Boss_Room__Catwalk_East,
@@ -14294,6 +14550,13 @@ static RAW_SPOTS: [SpotId; 1815] = [
     SpotId::Irikar__Lamassu__Hidden_Passage_West,
     SpotId::Irikar__Lamassu__Northwest,
     SpotId::Irikar__Lamassu__West_28,
+    SpotId::Irikar__Midwest__Center_Rock_1_East,
+    SpotId::Irikar__Midwest__Center_Rock_1_West,
+    SpotId::Irikar__Midwest__Center_Rock_2_East,
+    SpotId::Irikar__Midwest__Center_Rock_2_West,
+    SpotId::Irikar__Midwest__Center_Rock_3_East,
+    SpotId::Irikar__Midwest__Center_Rock_3_West,
+    SpotId::Irikar__Midwest__Center_Small_Rock,
     SpotId::Irikar__Midwest__East_23,
     SpotId::Irikar__Midwest__East_24_on_Building,
     SpotId::Irikar__Midwest__East_24_on_Floor,
@@ -14301,6 +14564,31 @@ static RAW_SPOTS: [SpotId; 1815] = [
     SpotId::Irikar__Midwest__East_26,
     SpotId::Irikar__Midwest__East_27,
     SpotId::Irikar__Midwest__East_28,
+    SpotId::Irikar__Midwest__East_Rock_1,
+    SpotId::Irikar__Midwest__East_Rock_2,
+    SpotId::Irikar__Midwest__East_Rock_3,
+    SpotId::Irikar__Midwest__Ground_Center,
+    SpotId::Irikar__Midwest__Left_Platform_Dest,
+    SpotId::Irikar__Midwest__Left_Platform_Start,
+    SpotId::Irikar__Midwest__Lower_Center_Platform,
+    SpotId::Irikar__Midwest__Lower_East_Platform,
+    SpotId::Irikar__Midwest__Lower_Rock_East,
+    SpotId::Irikar__Midwest__Lower_Rock_West,
+    SpotId::Irikar__Midwest__NE_Ledge,
+    SpotId::Irikar__Midwest__Right_Platform_Dest,
+    SpotId::Irikar__Midwest__Right_Platform_Start,
+    SpotId::Irikar__Midwest__Save_Ledge,
+    SpotId::Irikar__Midwest__Save_Point,
+    SpotId::Irikar__Midwest__SE_Rock_West,
+    SpotId::Irikar__Midwest__Small_Rooftop,
+    SpotId::Irikar__Midwest__SW_Platform,
+    SpotId::Irikar__Midwest__Tablet_Platform,
+    SpotId::Irikar__Midwest__The_Long_Rock_East,
+    SpotId::Irikar__Midwest__The_Long_Rock_Middle,
+    SpotId::Irikar__Midwest__The_Long_Rock_West,
+    SpotId::Irikar__Midwest__West_28_Ground,
+    SpotId::Irikar__Midwest__West_28_Platform,
+    SpotId::Irikar__Midwest__West_Platform,
     SpotId::Irikar__Sight_Room__Above_Room_East,
     SpotId::Irikar__Sight_Room__Above_Room_North,
     SpotId::Irikar__Sight_Room__Item_Pedestal,
@@ -14438,6 +14726,7 @@ static RAW_SPOTS: [SpotId; 1815] = [
     SpotId::Menu__Kiengir_Map__Irikar_Gudam,
     SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health,
     SpotId::Menu__Kiengir_Map__Irikar_Hub,
+    SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask,
     SpotId::Menu__Kiengir_Map__Irikar_Midwest,
     SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage,
     SpotId::Menu__Kiengir_Map__Irikar_Well,
@@ -15263,6 +15552,10 @@ lazy_static! {
             start: SpotId::Irikar__Basement_Portal__Bottom_Middle.into_usize(),
             end: SpotId::Irikar__Basement_Portal__Westmost_Platform.into_usize() + 1,
         },
+        AreaId::Irikar__Beach_Save => Range {
+            start: SpotId::Irikar__Beach_Save__East_28_Ground.into_usize(),
+            end: SpotId::Irikar__Beach_Save__East_28_Platform.into_usize() + 1,
+        },
         AreaId::Irikar__Boss_Room => Range {
             start: SpotId::Irikar__Boss_Room__Above_Catwalk.into_usize(),
             end: SpotId::Irikar__Boss_Room__West_28.into_usize() + 1,
@@ -15284,8 +15577,8 @@ lazy_static! {
             end: SpotId::Irikar__Lamassu__West_28.into_usize() + 1,
         },
         AreaId::Irikar__Midwest => Range {
-            start: SpotId::Irikar__Midwest__East_23.into_usize(),
-            end: SpotId::Irikar__Midwest__East_28.into_usize() + 1,
+            start: SpotId::Irikar__Midwest__Center_Rock_1_East.into_usize(),
+            end: SpotId::Irikar__Midwest__West_Platform.into_usize() + 1,
         },
         AreaId::Irikar__Sight_Room => Range {
             start: SpotId::Irikar__Sight_Room__Above_Room_East.into_usize(),
@@ -15379,7 +15672,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 203;
+    const NUM_CANON_LOCATIONS: usize = 206;
 
     fn ruleset(&self) -> String {
         format!(
@@ -15436,7 +15729,7 @@ impl world::World for World {
             Item::Forbidden_Knowledge => vec![LocationId::Amagi__East_Lake__Foot__Tablet],
             Item::Defeat_Indra => vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight],
             Item::Annuna_Mirror_Match_Switch => vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch],
-            Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward],
+            Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward, LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask, LocationId::Irikar__Midwest__Right_Platform_Start__Flask],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
             Item::Annuna_East_Bridge_Gate => vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch, LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below],
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
@@ -15517,8 +15810,10 @@ impl world::World for World {
             Item::Royal_Dagger => vec![LocationId::Irikar__Hub__Dagger_Altar__Weapon],
             Item::Irikar_Royal_Storage_Wall => vec![LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall, LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall, LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall],
             Item::Breach_Sight => vec![LocationId::Irikar__Sight_Room__Item_Pedestal__Urn, LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip, LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel],
+            Item::The_Student => vec![LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet],
             Item::Irikar_Gudam => vec![LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam, LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam],
             Item::Heretics_Granddaughter => vec![LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet],
+            Item::Freedom_from_Aansur => vec![LocationId::Irikar__Midwest__Tablet_Platform__Tablet],
             Item::Terminal_Breakthrough_2 => vec![LocationId::Irikar__Lamassu__Desk__Item],
             Item::Health_Upgrade => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1],
             Item::Health_Upgrade_2 => vec![LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2],
@@ -15799,9 +16094,13 @@ impl world::World for World {
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => SpotId::Irikar__Abandoned_Room__Corner_Core,
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe,
+            LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => SpotId::Irikar__Basement_Pipes__High_Pipe,
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => SpotId::Irikar__Boss_Room__Bulls_Feet,
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => SpotId::Irikar__Boss_Room__Healthy_Rooftop,
             LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask => SpotId::Irikar__Midwest__Left_Platform_Dest,
+            LocationId::Irikar__Midwest__Right_Platform_Start__Flask => SpotId::Irikar__Midwest__Right_Platform_Start,
+            LocationId::Irikar__Midwest__Tablet_Platform__Tablet => SpotId::Irikar__Midwest__Tablet_Platform,
             LocationId::Irikar__Lamassu__Desk__Item => SpotId::Irikar__Lamassu__Desk,
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => SpotId::Menu__Upgrade_Menu__Physiology,
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => SpotId::Menu__Upgrade_Menu__Combat,
@@ -16140,6 +16439,13 @@ impl world::World for World {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 SpotId::Irikar__Basement_Portal__Moving_Platform_Start
             }
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
+                SpotId::Irikar__Midwest__Left_Platform_Start
+            }
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
+                SpotId::Irikar__Midwest__Right_Platform_Start
+            }
+            ActionId::Irikar__Midwest__Save_Point__Save => SpotId::Irikar__Midwest__Save_Point,
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 SpotId::Uhrum__West_Entrance__Save_Point
             }
@@ -17241,8 +17547,32 @@ impl world::World for World {
             ExitId::Irikar__East_Rooftops__East_Mid_air__ex__Top_Rooftop_1 | ExitId:: Irikar__East_Rooftops__East_Mid_air__ex__Giguna__Breachable_Wall__West_Mid_air_1 => SpotId::Irikar__East_Rooftops__East_Mid_air,
             ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => SpotId::Irikar__Midwest__East_24_on_Building,
             ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => SpotId::Irikar__Midwest__East_24_on_Floor,
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 | ExitId:: Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => SpotId::Irikar__Midwest__Small_Rooftop,
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => SpotId::Irikar__Midwest__NE_Ledge,
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => SpotId::Irikar__Midwest__Left_Platform_Start,
             ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => SpotId::Irikar__Midwest__East_25,
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 | ExitId:: Irikar__Midwest__Save_Point__ex__East_25_2 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_1 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_2 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => SpotId::Irikar__Midwest__Save_Point,
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 | ExitId:: Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => SpotId::Irikar__Midwest__Center_Rock_1_East,
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => SpotId::Irikar__Midwest__Center_Rock_1_West,
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 | ExitId:: Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => SpotId::Irikar__Midwest__Center_Rock_2_East,
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => SpotId::Irikar__Midwest__Center_Rock_2_West,
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 | ExitId:: Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 | ExitId:: Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => SpotId::Irikar__Midwest__Center_Rock_3_West,
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 | ExitId:: Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => SpotId::Irikar__Midwest__Center_Rock_3_East,
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => SpotId::Irikar__Midwest__Tablet_Platform,
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => SpotId::Irikar__Midwest__Center_Small_Rock,
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => SpotId::Irikar__Midwest__The_Long_Rock_East,
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 | ExitId:: Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => SpotId::Irikar__Midwest__East_Rock_1,
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 | ExitId:: Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => SpotId::Irikar__Midwest__East_Rock_3,
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 | ExitId:: Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 | ExitId:: Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => SpotId::Irikar__Midwest__Lower_East_Platform,
             ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => SpotId::Irikar__Midwest__East_26,
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 | ExitId:: Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => SpotId::Irikar__Midwest__East_27,
+            ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => SpotId::Irikar__Midwest__East_28,
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => SpotId::Irikar__Midwest__Ground_Center,
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 | ExitId:: Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => SpotId::Irikar__Midwest__Lower_Center_Platform,
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => SpotId::Irikar__Midwest__West_Platform,
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => SpotId::Irikar__Midwest__SW_Platform,
+            ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => SpotId::Irikar__Midwest__West_28_Platform,
+            ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => SpotId::Irikar__Midwest__West_28_Ground,
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => SpotId::Irikar__Lamassu__West_28,
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => SpotId::Irikar__Lamassu__East_27,
             ExitId::Irikar__Lamassu__East_26__ex__Uhrum__West_Entrance__West_26_1 => SpotId::Irikar__Lamassu__East_26,
@@ -17421,11 +17751,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 3 {
+                        if ctx.count(Item::Big_Flask) < 4 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 3 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 4 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 3 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 4 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -17508,16 +17838,21 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 15 {
+                        if ctx.count(Item::Flask) < 16 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 15 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 16 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 16 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
                             if !map.contains_key(&Item::Forbidden_Knowledge) {
                                 map.insert(Item::Forbidden_Knowledge, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Freedom_from_Aansur) {
+                            if !map.contains_key(&Item::Freedom_from_Aansur) {
+                                map.insert(Item::Freedom_from_Aansur, 1);
                             }
                         }
                         if !ctx.has(Item::Goodbye) {
@@ -17652,6 +17987,11 @@ impl world::World for World {
                                 map.insert(Item::The_Ideal_Kiengir, 1);
                             }
                         }
+                        if !ctx.has(Item::The_Student) {
+                            if !map.contains_key(&Item::The_Student) {
+                                map.insert(Item::The_Student, 1);
+                            }
+                        }
                         if !ctx.has(Item::Under_Siege) {
                             if !map.contains_key(&Item::Under_Siege) {
                                 map.insert(Item::Under_Siege, 1);
@@ -17756,11 +18096,11 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                     }
-                    if ctx.count(Item::Big_Flask) < 3 {
+                    if ctx.count(Item::Big_Flask) < 4 {
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 3 - ctx.count(Item::Big_Flask));
+                            *val = std::cmp::max(*val, 4 - ctx.count(Item::Big_Flask));
                         } else {
-                            map.insert(Item::Big_Flask, 3 - ctx.count(Item::Big_Flask));
+                            map.insert(Item::Big_Flask, 4 - ctx.count(Item::Big_Flask));
                         }
                     }
                     if !ctx.has(Item::Boomerang) {
@@ -17843,16 +18183,21 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 15 {
+                    if ctx.count(Item::Flask) < 16 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 15 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 16 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 15 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 16 - ctx.count(Item::Flask));
                         }
                     }
                     if !ctx.has(Item::Forbidden_Knowledge) {
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Freedom_from_Aansur) {
+                        if !map.contains_key(&Item::Freedom_from_Aansur) {
+                            map.insert(Item::Freedom_from_Aansur, 1);
                         }
                     }
                     if !ctx.has(Item::Goodbye) {
@@ -17984,6 +18329,11 @@ impl world::World for World {
                             map.insert(Item::The_Ideal_Kiengir, 1);
                         }
                     }
+                    if !ctx.has(Item::The_Student) {
+                        if !map.contains_key(&Item::The_Student) {
+                            map.insert(Item::The_Student, 1);
+                        }
+                    }
                     if !ctx.has(Item::Under_Siege) {
                         if !map.contains_key(&Item::Under_Siege) {
                             map.insert(Item::Under_Siege, 1);
@@ -18098,9 +18448,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 3);
+                            *val = std::cmp::max(*val, 4);
                         } else {
-                            map.insert(Item::Big_Flask, 3);
+                            map.insert(Item::Big_Flask, 4);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -18151,12 +18501,15 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 15);
+                            *val = std::cmp::max(*val, 16);
                         } else {
-                            map.insert(Item::Flask, 15);
+                            map.insert(Item::Flask, 16);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
+                        }
+                        if !map.contains_key(&Item::Freedom_from_Aansur) {
+                            map.insert(Item::Freedom_from_Aansur, 1);
                         }
                         if !map.contains_key(&Item::Goodbye) {
                             map.insert(Item::Goodbye, 1);
@@ -18237,6 +18590,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::The_Ideal_Kiengir) {
                             map.insert(Item::The_Ideal_Kiengir, 1);
                         }
+                        if !map.contains_key(&Item::The_Student) {
+                            map.insert(Item::The_Student, 1);
+                        }
                         if !map.contains_key(&Item::Under_Siege) {
                             map.insert(Item::Under_Siege, 1);
                         }
@@ -18304,9 +18660,9 @@ impl world::World for World {
                         map.insert(Item::Beware_the_Patternmind, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                        *val = std::cmp::max(*val, 3);
+                        *val = std::cmp::max(*val, 4);
                     } else {
-                        map.insert(Item::Big_Flask, 3);
+                        map.insert(Item::Big_Flask, 4);
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
@@ -18357,12 +18713,15 @@ impl world::World for World {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 15);
+                        *val = std::cmp::max(*val, 16);
                     } else {
-                        map.insert(Item::Flask, 15);
+                        map.insert(Item::Flask, 16);
                     }
                     if !map.contains_key(&Item::Forbidden_Knowledge) {
                         map.insert(Item::Forbidden_Knowledge, 1);
+                    }
+                    if !map.contains_key(&Item::Freedom_from_Aansur) {
+                        map.insert(Item::Freedom_from_Aansur, 1);
                     }
                     if !map.contains_key(&Item::Goodbye) {
                         map.insert(Item::Goodbye, 1);
@@ -18442,6 +18801,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::The_Ideal_Kiengir) {
                         map.insert(Item::The_Ideal_Kiengir, 1);
+                    }
+                    if !map.contains_key(&Item::The_Student) {
+                        map.insert(Item::The_Student, 1);
                     }
                     if !map.contains_key(&Item::Under_Siege) {
                         map.insert(Item::Under_Siege, 1);
@@ -20198,8 +20560,54 @@ impl world::World for World {
             ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1 => true,
             ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
             ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => true,
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => true,
             ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => true,
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => true,
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => true,
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => true,
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => true,
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => true,
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => true,
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => true,
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => true,
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => true,
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => true,
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => true,
             ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => true,
+            ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => true,
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => true,
+            ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => true,
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => true,
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => true,
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => true,
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => true,
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => true,
+            ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => true,
+            ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => true,
@@ -21862,6 +22270,8 @@ impl world::World for World {
             SpotId::Irikar__Basement_Portal__West_28 => true,
             SpotId::Irikar__Basement_Portal__Bottom_Middle => true,
             SpotId::Irikar__Basement_Portal__East_28 => true,
+            SpotId::Irikar__Beach_Save__East_28_Platform => true,
+            SpotId::Irikar__Beach_Save__East_28_Ground => true,
             SpotId::Irikar__Boss_Room__West_28 => true,
             SpotId::Irikar__Boss_Room__Bulls_Feet => true,
             SpotId::Irikar__Boss_Room__East_28 => true,
@@ -21963,10 +22373,42 @@ impl world::World for World {
             SpotId::Irikar__Midwest__East_23 => true,
             SpotId::Irikar__Midwest__East_24_on_Building => true,
             SpotId::Irikar__Midwest__East_24_on_Floor => true,
+            SpotId::Irikar__Midwest__Small_Rooftop => true,
+            SpotId::Irikar__Midwest__NE_Ledge => true,
+            SpotId::Irikar__Midwest__Left_Platform_Start => true,
+            SpotId::Irikar__Midwest__Left_Platform_Dest => true,
+            SpotId::Irikar__Midwest__Right_Platform_Start => true,
+            SpotId::Irikar__Midwest__Right_Platform_Dest => true,
             SpotId::Irikar__Midwest__East_25 => true,
+            SpotId::Irikar__Midwest__Save_Point => true,
+            SpotId::Irikar__Midwest__Save_Ledge => true,
+            SpotId::Irikar__Midwest__Center_Rock_1_East => true,
+            SpotId::Irikar__Midwest__Center_Rock_1_West => true,
+            SpotId::Irikar__Midwest__Center_Rock_2_East => true,
+            SpotId::Irikar__Midwest__Center_Rock_2_West => true,
+            SpotId::Irikar__Midwest__Center_Rock_3_West => true,
+            SpotId::Irikar__Midwest__Center_Rock_3_East => true,
+            SpotId::Irikar__Midwest__Tablet_Platform => true,
+            SpotId::Irikar__Midwest__Center_Small_Rock => true,
+            SpotId::Irikar__Midwest__The_Long_Rock_West => true,
+            SpotId::Irikar__Midwest__The_Long_Rock_Middle => true,
+            SpotId::Irikar__Midwest__The_Long_Rock_East => true,
+            SpotId::Irikar__Midwest__East_Rock_1 => true,
+            SpotId::Irikar__Midwest__East_Rock_2 => true,
+            SpotId::Irikar__Midwest__East_Rock_3 => true,
+            SpotId::Irikar__Midwest__Lower_East_Platform => true,
             SpotId::Irikar__Midwest__East_26 => true,
             SpotId::Irikar__Midwest__East_27 => true,
             SpotId::Irikar__Midwest__East_28 => true,
+            SpotId::Irikar__Midwest__SE_Rock_West => true,
+            SpotId::Irikar__Midwest__Ground_Center => true,
+            SpotId::Irikar__Midwest__Lower_Center_Platform => true,
+            SpotId::Irikar__Midwest__Lower_Rock_East => true,
+            SpotId::Irikar__Midwest__Lower_Rock_West => true,
+            SpotId::Irikar__Midwest__West_Platform => true,
+            SpotId::Irikar__Midwest__SW_Platform => true,
+            SpotId::Irikar__Midwest__West_28_Platform => true,
+            SpotId::Irikar__Midwest__West_28_Ground => true,
             SpotId::Irikar__Sight_Room__West_24 => true,
             SpotId::Irikar__Sight_Room__Lower_Ledge => true,
             SpotId::Irikar__Sight_Room__Portal => true,
@@ -22116,6 +22558,7 @@ impl world::World for World {
             SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health => true,
             SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => true,
             SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -22970,6 +23413,7 @@ impl world::World for World {
             | SpotId::Irikar__Abandoned_Room__West
             | SpotId::Irikar__Airy__Middle_South
             | SpotId::Irikar__Basement_Pipes__East_28
+            | SpotId::Irikar__Basement_Pipes__High_Pipe
             | SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
             | SpotId::Irikar__Basement_Pipes__West_27
             | SpotId::Irikar__Basement_Pipes__West_28
@@ -23020,6 +23464,15 @@ impl world::World for World {
             | SpotId::Irikar__Midwest__East_24_on_Floor
             | SpotId::Irikar__Midwest__East_25
             | SpotId::Irikar__Midwest__East_26
+            | SpotId::Irikar__Midwest__East_27
+            | SpotId::Irikar__Midwest__East_28
+            | SpotId::Irikar__Midwest__Left_Platform_Dest
+            | SpotId::Irikar__Midwest__Left_Platform_Start
+            | SpotId::Irikar__Midwest__Right_Platform_Start
+            | SpotId::Irikar__Midwest__Save_Point
+            | SpotId::Irikar__Midwest__Tablet_Platform
+            | SpotId::Irikar__Midwest__West_28_Ground
+            | SpotId::Irikar__Midwest__West_28_Platform
             | SpotId::Irikar__Sight_Room__Above_Room_East
             | SpotId::Irikar__Sight_Room__Item_Pedestal
             | SpotId::Irikar__Sight_Room__Portal
@@ -23099,6 +23552,8 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Irikar_Gudam
             | SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health
             | SpotId::Menu__Kiengir_Map__Irikar_Hub
+            | SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask
+            | SpotId::Menu__Kiengir_Map__Irikar_Midwest
             | SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage
             | SpotId::Menu__Kiengir_Map__Irikar_Well
             | SpotId::Menu__Kiengir_Map__Nanite_Mist
@@ -23241,6 +23696,7 @@ impl World {
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Forbidden_Knowledge
+                            | Item::Freedom_from_Aansur
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -23268,6 +23724,7 @@ impl World {
                             | Item::Terminal_Breakthrough_2
                             | Item::The_Eternal_Arm
                             | Item::The_Ideal_Kiengir
+                            | Item::The_Student
                             | Item::Udusan
                             | Item::Under_Siege
                     )
@@ -23320,6 +23777,7 @@ impl World {
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Forbidden_Knowledge
+                            | Item::Freedom_from_Aansur
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -23347,6 +23805,7 @@ impl World {
                             | Item::Terminal_Breakthrough_2
                             | Item::The_Eternal_Arm
                             | Item::The_Ideal_Kiengir
+                            | Item::The_Student
                             | Item::Udusan
                             | Item::Under_Siege
                     )
@@ -23377,6 +23836,7 @@ impl World {
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Forbidden_Knowledge
+                            | Item::Freedom_from_Aansur
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -23404,6 +23864,7 @@ impl World {
                             | Item::Terminal_Breakthrough_2
                             | Item::The_Eternal_Arm
                             | Item::The_Ideal_Kiengir
+                            | Item::The_Student
                             | Item::Udusan
                             | Item::Under_Siege
                     )
@@ -23458,6 +23919,7 @@ impl World {
                             | Item::Eye_Ring
                             | Item::Family_Tragedy
                             | Item::Forbidden_Knowledge
+                            | Item::Freedom_from_Aansur
                             | Item::Goodbye
                             | Item::Health_Upgrade_5
                             | Item::Heretics_Granddaughter
@@ -23485,6 +23947,7 @@ impl World {
                             | Item::Terminal_Breakthrough_2
                             | Item::The_Eternal_Arm
                             | Item::The_Ideal_Kiengir
+                            | Item::The_Student
                             | Item::Udusan
                             | Item::Under_Siege
                     )
@@ -23514,6 +23977,7 @@ impl World {
                         | Item::Eye_Ring
                         | Item::Family_Tragedy
                         | Item::Forbidden_Knowledge
+                        | Item::Freedom_from_Aansur
                         | Item::Goodbye
                         | Item::Health_Upgrade_5
                         | Item::Heretics_Granddaughter
@@ -23541,6 +24005,7 @@ impl World {
                         | Item::Terminal_Breakthrough_2
                         | Item::The_Eternal_Arm
                         | Item::The_Ideal_Kiengir
+                        | Item::The_Student
                         | Item::Udusan
                         | Item::Under_Siege
                 )
@@ -23574,6 +24039,7 @@ impl World {
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
                         iset.insert(Item::Forbidden_Knowledge);
+                        iset.insert(Item::Freedom_from_Aansur);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -23601,6 +24067,7 @@ impl World {
                         iset.insert(Item::Terminal_Breakthrough_2);
                         iset.insert(Item::The_Eternal_Arm);
                         iset.insert(Item::The_Ideal_Kiengir);
+                        iset.insert(Item::The_Student);
                         iset.insert(Item::Udusan);
                         iset.insert(Item::Under_Siege);
                         iset
@@ -23651,6 +24118,7 @@ impl World {
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
                         iset.insert(Item::Forbidden_Knowledge);
+                        iset.insert(Item::Freedom_from_Aansur);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -23678,6 +24146,7 @@ impl World {
                         iset.insert(Item::Terminal_Breakthrough_2);
                         iset.insert(Item::The_Eternal_Arm);
                         iset.insert(Item::The_Ideal_Kiengir);
+                        iset.insert(Item::The_Student);
                         iset.insert(Item::Udusan);
                         iset.insert(Item::Under_Siege);
                         iset
@@ -23710,6 +24179,7 @@ impl World {
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
                         iset.insert(Item::Forbidden_Knowledge);
+                        iset.insert(Item::Freedom_from_Aansur);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -23737,6 +24207,7 @@ impl World {
                         iset.insert(Item::Terminal_Breakthrough_2);
                         iset.insert(Item::The_Eternal_Arm);
                         iset.insert(Item::The_Ideal_Kiengir);
+                        iset.insert(Item::The_Student);
                         iset.insert(Item::Udusan);
                         iset.insert(Item::Under_Siege);
                         iset
@@ -23789,6 +24260,7 @@ impl World {
                         iset.insert(Item::Eye_Ring);
                         iset.insert(Item::Family_Tragedy);
                         iset.insert(Item::Forbidden_Knowledge);
+                        iset.insert(Item::Freedom_from_Aansur);
                         iset.insert(Item::Goodbye);
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Heretics_Granddaughter);
@@ -23816,6 +24288,7 @@ impl World {
                         iset.insert(Item::Terminal_Breakthrough_2);
                         iset.insert(Item::The_Eternal_Arm);
                         iset.insert(Item::The_Ideal_Kiengir);
+                        iset.insert(Item::The_Student);
                         iset.insert(Item::Udusan);
                         iset.insert(Item::Under_Siege);
                         iset
@@ -23846,6 +24319,7 @@ impl World {
                 set.insert(Item::Eye_Ring);
                 set.insert(Item::Family_Tragedy);
                 set.insert(Item::Forbidden_Knowledge);
+                set.insert(Item::Freedom_from_Aansur);
                 set.insert(Item::Goodbye);
                 set.insert(Item::Health_Upgrade_5);
                 set.insert(Item::Heretics_Granddaughter);
@@ -23873,6 +24347,7 @@ impl World {
                 set.insert(Item::Terminal_Breakthrough_2);
                 set.insert(Item::The_Eternal_Arm);
                 set.insert(Item::The_Ideal_Kiengir);
+                set.insert(Item::The_Student);
                 set.insert(Item::Udusan);
                 set.insert(Item::Under_Siege);
                 set
@@ -26142,6 +26617,15 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             exit_id: None,
             skippable: false,
         },
+        LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => Location {
+            id: LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet,
+            canonical: CanonId::Loc_Irikar__Basement_Pipes__High_Pipe__Tablet,
+            item: Item::The_Student,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+            skippable: false,
+        },
         LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => Location {
             id: LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
             canonical: CanonId::Irikar_Gudam,
@@ -26182,6 +26666,33 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet,
             canonical: CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet,
             item: Item::Heretics_Granddaughter,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask => Location {
+            id: LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask,
+            canonical: CanonId::Irikar_Midwest_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Midwest__Right_Platform_Start__Flask => Location {
+            id: LocationId::Irikar__Midwest__Right_Platform_Start__Flask,
+            canonical: CanonId::Irikar_Midwest_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Midwest__Tablet_Platform__Tablet => Location {
+            id: LocationId::Irikar__Midwest__Tablet_Platform__Tablet,
+            canonical: CanonId::Loc_Irikar__Midwest__Tablet_Platform__Tablet,
+            item: Item::Freedom_from_Aansur,
             price: Currency::Free,
             time: 0,
             exit_id: None,
@@ -39193,6 +39704,48 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1,
+            time: 3508,
+            dest: SpotId::Irikar__Midwest__Left_Platform_Start,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1,
+            time: 14385,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(480),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2,
+            time: 7192,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(243),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1,
+            time: 3333,
+            dest: SpotId::Irikar__Midwest__Left_Platform_Start,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1,
+            time: 7368,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(249),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2,
+            time: 3684,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(127),
+            loc_id: None,
+        },
         ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => Exit {
             id: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1,
             time: 1350,
@@ -39200,10 +39753,290 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => Exit {
+            id: ExitId::Irikar__Midwest__Save_Point__ex__East_25_1,
+            time: 1799,
+            dest: SpotId::Irikar__Midwest__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => Exit {
+            id: ExitId::Irikar__Midwest__Save_Point__ex__East_25_2,
+            time: 1578,
+            dest: SpotId::Irikar__Midwest__East_25,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => Exit {
+            id: ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1,
+            time: 1799,
+            dest: SpotId::Irikar__Midwest__NE_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => Exit {
+            id: ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2,
+            time: 3000,
+            dest: SpotId::Irikar__Midwest__NE_Ledge,
+            price: Currency::Energy(104),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => Exit {
+            id: ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3,
+            time: 1500,
+            dest: SpotId::Irikar__Midwest__NE_Ledge,
+            price: Currency::Energy(55),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1,
+            time: 4400,
+            dest: SpotId::Irikar__Midwest__Left_Platform_Start,
+            price: Currency::Energy(151),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2,
+            time: 2200,
+            dest: SpotId::Irikar__Midwest__Left_Platform_Start,
+            price: Currency::Energy(78),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1,
+            time: 8600,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(289),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2,
+            time: 4300,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(147),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1,
+            time: 9400,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(316),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2,
+            time: 4700,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(161),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1,
+            time: 2999,
+            dest: SpotId::Irikar__Midwest__Save_Point,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1,
+            time: 10200,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(342),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2,
+            time: 5100,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(174),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1,
+            time: 2982,
+            dest: SpotId::Irikar__Midwest__Save_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__Center_Rock_2_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2,
+            time: 600,
+            dest: SpotId::Irikar__Midwest__Center_Rock_2_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1,
+            time: 2807,
+            dest: SpotId::Irikar__Midwest__Save_Ledge,
+            price: Currency::Energy(98),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2,
+            time: 1403,
+            dest: SpotId::Irikar__Midwest__Save_Ledge,
+            price: Currency::Energy(52),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => Exit {
+            id: ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1,
+            time: 11600,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(388),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => Exit {
+            id: ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2,
+            time: 5800,
+            dest: SpotId::Irikar__Midwest__Right_Platform_Start,
+            price: Currency::Energy(197),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => Exit {
+            id: ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__Center_Rock_2_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => Exit {
+            id: ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1,
+            time: 1228,
+            dest: SpotId::Irikar__Midwest__East_Rock_2,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1,
+            time: 2399,
+            dest: SpotId::Irikar__Midwest__Save_Ledge,
+            price: Currency::Energy(85),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => Exit {
+            id: ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2,
+            time: 1199,
+            dest: SpotId::Irikar__Midwest__Save_Ledge,
+            price: Currency::Energy(45),
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__East_Rock_1,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1,
+            time: 600,
+            dest: SpotId::Irikar__Midwest__East_Rock_2,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => Exit {
+            id: ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__The_Long_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => Exit {
+            id: ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2,
+            time: 701,
+            dest: SpotId::Irikar__Midwest__The_Long_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => Exit {
+            id: ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1,
+            time: 600,
+            dest: SpotId::Irikar__Midwest__East_Rock_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => Exit {
             id: ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1,
             time: 1350,
             dest: SpotId::Irikar__Hub__West_26,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1,
+            time: 1929,
+            dest: SpotId::Irikar__Midwest__East_Rock_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Pipes__West_27,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => Exit {
+            id: ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1,
+            time: 1350,
+            dest: SpotId::Irikar__Basement_Pipes__West_28,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => Exit {
+            id: ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__SE_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => Exit {
+            id: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__Lower_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => Exit {
+            id: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2,
+            time: 701,
+            dest: SpotId::Irikar__Midwest__Lower_Rock_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => Exit {
+            id: ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1,
+            time: 4210,
+            dest: SpotId::Irikar__Midwest__The_Long_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => Exit {
+            id: ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1,
+            time: 1200,
+            dest: SpotId::Irikar__Midwest__Lower_Rock_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => Exit {
+            id: ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1,
+            time: 1350,
+            dest: SpotId::Irikar__Beach_Save__East_28_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => Exit {
+            id: ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1,
+            time: 1350,
+            dest: SpotId::Irikar__Beach_Save__East_28_Ground,
             price: Currency::Free,
             loc_id: None,
         },
@@ -41422,6 +42255,21 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => Action {
             id: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
             time: 8000,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => Action {
+            id: ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride,
+            time: 13000,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => Action {
+            id: ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform,
+            time: 20000,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Midwest__Save_Point__Save => Action {
+            id: ActionId::Irikar__Midwest__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
         },
         ActionId::Uhrum__West_Entrance__Save_Point__Save => Action {
@@ -61511,7 +62359,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Irikar__Basement_Pipes__High_Pipe => Spot {
             id: SpotId::Irikar__Basement_Pipes__High_Pipe,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet.into_usize(),
+                end: LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -61788,6 +62637,85 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
+        SpotId::Irikar__Midwest__Small_Rooftop => Spot {
+            id: SpotId::Irikar__Midwest__Small_Rooftop,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__NE_Ledge => Spot {
+            id: SpotId::Irikar__Midwest__NE_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Left_Platform_Start => Spot {
+            id: SpotId::Irikar__Midwest__Left_Platform_Start,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride.into_usize(),
+                end: ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Midwest__Left_Platform_Dest => Spot {
+            id: SpotId::Irikar__Midwest__Left_Platform_Dest,
+            locations: Range {
+                start: LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask.into_usize(),
+                end: LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Right_Platform_Start => Spot {
+            id: SpotId::Irikar__Midwest__Right_Platform_Start,
+            locations: Range {
+                start: LocationId::Irikar__Midwest__Right_Platform_Start__Flask.into_usize(),
+                end: LocationId::Irikar__Midwest__Right_Platform_Start__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform.into_usize(),
+                end: ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Midwest__Right_Platform_Dest => Spot {
+            id: SpotId::Irikar__Midwest__Right_Platform_Dest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
         SpotId::Irikar__Midwest__East_25 => Spot {
             id: SpotId::Irikar__Midwest__East_25,
             locations: Range {
@@ -61796,6 +62724,225 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1.into_usize(),
                 end: ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Save_Point => Spot {
+            id: SpotId::Irikar__Midwest__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Save_Point__ex__East_25_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Irikar__Midwest__Save_Point__Save.into_usize(),
+                end: ActionId::Irikar__Midwest__Save_Point__Save.into_usize() + 1,
+            },
+        },
+        SpotId::Irikar__Midwest__Save_Ledge => Spot {
+            id: SpotId::Irikar__Midwest__Save_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_1_East => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_1_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_1_West => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_1_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_2_East => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_2_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_2_West => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_2_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_3_West => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_3_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Rock_3_East => Spot {
+            id: SpotId::Irikar__Midwest__Center_Rock_3_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Tablet_Platform => Spot {
+            id: SpotId::Irikar__Midwest__Tablet_Platform,
+            locations: Range {
+                start: LocationId::Irikar__Midwest__Tablet_Platform__Tablet.into_usize(),
+                end: LocationId::Irikar__Midwest__Tablet_Platform__Tablet.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Center_Small_Rock => Spot {
+            id: SpotId::Irikar__Midwest__Center_Small_Rock,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__The_Long_Rock_West => Spot {
+            id: SpotId::Irikar__Midwest__The_Long_Rock_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__The_Long_Rock_Middle => Spot {
+            id: SpotId::Irikar__Midwest__The_Long_Rock_Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__The_Long_Rock_East => Spot {
+            id: SpotId::Irikar__Midwest__The_Long_Rock_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1.into_usize(),
+                end: ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_Rock_1 => Spot {
+            id: SpotId::Irikar__Midwest__East_Rock_1,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_Rock_2 => Spot {
+            id: SpotId::Irikar__Midwest__East_Rock_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__East_Rock_3 => Spot {
+            id: SpotId::Irikar__Midwest__East_Rock_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Lower_East_Platform => Spot {
+            id: SpotId::Irikar__Midwest__Lower_East_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61820,7 +62967,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61832,7 +62980,122 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1.into_usize(),
+                end: ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1.into_usize() + 1,
+            },
+            actions: Range {
                 start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__SE_Rock_West => Spot {
+            id: SpotId::Irikar__Midwest__SE_Rock_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Ground_Center => Spot {
+            id: SpotId::Irikar__Midwest__Ground_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Lower_Center_Platform => Spot {
+            id: SpotId::Irikar__Midwest__Lower_Center_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1.into_usize(),
+                end: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Lower_Rock_East => Spot {
+            id: SpotId::Irikar__Midwest__Lower_Rock_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__Lower_Rock_West => Spot {
+            id: SpotId::Irikar__Midwest__Lower_Rock_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__West_Platform => Spot {
+            id: SpotId::Irikar__Midwest__West_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1.into_usize(),
+                end: ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__SW_Platform => Spot {
+            id: SpotId::Irikar__Midwest__SW_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1.into_usize(),
+                end: ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__West_28_Platform => Spot {
+            id: SpotId::Irikar__Midwest__West_28_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1.into_usize(),
+                end: ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Midwest__West_28_Ground => Spot {
+            id: SpotId::Irikar__Midwest__West_28_Ground,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1.into_usize(),
+                end: ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61960,6 +63223,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Desk_1.into_usize(),
                 end: ExitId::Irikar__Lamassu__Catwalk_Middle__ex__Hidden_Passage_West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Beach_Save__East_28_Platform => Spot {
+            id: SpotId::Irikar__Beach_Save__East_28_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Beach_Save__East_28_Ground => Spot {
+            id: SpotId::Irikar__Beach_Save__East_28_Ground,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -62763,6 +64050,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => Spot {
             id: SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask,
             locations: Range {
                 start: 0, end: 0,
             },

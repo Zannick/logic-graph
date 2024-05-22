@@ -559,6 +559,8 @@ areas:
       coord: [15, 25]
     - name: Terminal Breakthrough 2
       coord: [18, 26]
+    - name: Irikar Mid-air Flask
+      coord: [7, 23]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

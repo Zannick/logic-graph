@@ -141,6 +141,8 @@ def treeToString(tree: antlr4.ParserRuleContext):
 
 
 def get_spot_reference_names(target, source):
+    if not target:
+        return []
     local = [source['region'], source.get('area') or source.get('name'),
              source.get('spot') or source.get('name')]
     targ = target.split('>')
@@ -155,7 +157,7 @@ def get_map_reference(tilename, source):
     return construct_id('map', *get_spot_reference_names(tilename, source))
 
 def get_exit_target(ex):
-    return get_spot_reference(ex['to'], ex)
+    return get_spot_reference(ex['to'], ex) if 'to' in ex else None
 
 def get_exit_target_id(ex):
     return construct_spot_id(*get_spot_reference_names(ex['to'], ex))
@@ -359,7 +361,9 @@ class GameLogic(object):
                         dest = eh['to']
                         if not dest:
                             self._errors.append(f'Exit {eh["fullname"]} has no destination')
-                        elif dest.startswith('^'):
+                            continue
+                        
+                        if dest.startswith('^'):
                             if d := spot.get('data', {}).get(dest[1:]):
                                 if self.data_types[dest[1:]] != 'SpotId':
                                     self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')

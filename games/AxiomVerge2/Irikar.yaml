@@ -1238,6 +1238,10 @@ areas:
         - to: Right Vertical Pipe
           thru: [10.85, 27.25]
           jumps: [0, 1]
+      locations:
+        - name: Tablet
+          item: The_Student
+          tags: [standing]
 
 - name: Empty Foyer  # MARK: Empty Foyer
   on_entry: $reset_old_area(^newpos)
@@ -1442,33 +1446,525 @@ areas:
 
 - name: Midwest  # MARK: Midwest
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [9, 24, 10, 25]
+    corner: [7, 22, 8, 23]
+  data:
+    save_point: Save Point
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Irikar Midwest
+      corner: Menu > Kiengir Map > Irikar Mid-air Flask
+  start:
+    _left_platform: false
+    _right_platform: false
   spots:
     - name: East 23
       coord: [9.95, 22.8]  # Arbitrary positioning, just so it's possible to go directly
+      local:
+        - to: Small Rooftop
+        - to: NE Ledge
     - name: East 24 on Building
       coord: [9.95, 23.3]
+      local:
+        - to: Small Rooftop
+        - to: NE Ledge
       exits:
         - to: Hub > West 24 Rooftop
           tags: [xshift]
     - name: East 24 on Floor
       coord: [9.95, 23.7]
+      local:
+        - to: Small Rooftop
+          jumps: 1
+        - to: NE Ledge
+          jumps: 2
       exits:
         - to: Hub > West 24 Ground
           tags: [xshift]
+    - name: Small Rooftop
+      coord: [9.3, 23.6]
+      local:
+        - to: East 24 on Building
+          jumps: 2
+        - to: East 24 on Floor
+          jumps: 1
+        - to: NE Ledge
+          jumps_down: 1
+      exits:
+        - to: Left Platform Start
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Right Platform Start
+          req: not ^_right_platform and Nanite_Mist
+          movement: mist1
+        - to: Right Platform Start
+          req: not ^_right_platform and $mist2
+          movement: mist2
+    - name: NE Ledge
+      coord: [9.25, 23.85]
+      local:
+        - to: East 24 on Floor
+          jumps: 2
+        - to: Small Rooftop
+          jumps: 2
+        - to: Save Ledge
+        - to: Center Rock 1 East
+        - to: Center Rock 3 West
+      exits:
+        - to: Left Platform Start
+          req: $hover and $hook and not ^_left_platform
+          movement: base
+          jumps: 1
+
+    - name: Left Platform Start
+      coord: [8.3, 23.5]
+      local:
+        - to: Center Rock 1 East
+        - to: Center Rock 2 West
+      exits:
+        - to: Right Platform Start
+          req: Nanite_Mist and not ^_right_platform
+          movement: mist1
+        - to: Right Platform Start
+          req: $mist2 and not ^_right_platform
+          movement: mist2
+      actions:
+        - name: Hack and Ride
+          req: not ^_left_platform and $activate
+          to: Left Platform Dest
+          do: ^_left_platform = true
+          time: 13  # ?
+          tags: [hack]
+    - name: Left Platform Dest
+      coord: [7.15, 22.6]
+      local:
+        - to: Right Platform Start
+          jumps: 1
+        - to: Lower East Platform
+        - to: West 28 Platform
+      locations:
+        - name: Shockwave Flask
+          canon: Irikar_Midwest_Flask
+          item: Big_Flask
+          tags: [shockwave]
+    - name: Right Platform Start
+      coord: [7.25, 22.4]
+      local:
+        - to: Lower East Platform
+        - to: West 28 Platform
+        - to: Center Rock 2 East
+        - to: Tablet Platform
+      locations:
+        - name: Flask
+          canon: Irikar_Midwest_Flask
+          item: Big_Flask
+          tags: [flask]
+      actions:
+        - name: Hack and Ride Platform
+          req: not ^_right_platform and $activate
+          to: Right Platform Dest
+          do: ^_right_platform = true
+          time: 20  # ?
+    - name: Right Platform Dest
+      coord: [9.45, 23.2]
+      local:
+        - to: NE Ledge
+          jumps_down: 1
+        - to: Small Rooftop
+        - to: East 24 on Building
+        - to: East 24 on Floor
+
     - name: East 25
       coord: [9.95, 24.25]
+      local:
+        - to: Save Point
       exits:
         - to: Hub > West 25
           tags: [xshift]
+    - name: Save Point
+      coord: [9.5, 24.6]
+      local:
+        - to: Save Ledge
+      exits:
+        - to: East 25
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: East 25
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: NE Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+        - to: NE Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: NE Ledge
+          req: $mist2
+          movement: mist2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Save Ledge
+      coord: [9.3, 24.8]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Center Rock 1 East
+          jumps: 2
+        - to: Center Rock 3 East
+        - to: Center Rock 3 West
+        - to: East Rock 1
+          thru: [9.25, 24.85]
+    - name: Center Rock 1 East
+      coord: [8.8, 24.6]
+      local:
+        - to: Center Rock 1 West
+          jumps: 1
+        - to: Save Ledge
+        - to: East Rock 1
+        - to: The Long Rock East
+      exits:
+        - to: Left Platform Start
+          req: not ^_left_platform and Nanite_Mist
+          movement: mist1
+        - to: Left Platform Start
+          req: not ^_left_platform and $mist2
+          movement: mist2
+    - name: Center Rock 1 West
+      coord: [8.45, 24.55]
+      local:
+        - to: Center Rock 1 East
+        - to: Center Rock 2 East
+      exits:
+        - to: Right Platform Start
+          req: not ^_right_platform and Nanite_Mist
+          movement: mist1
+        - to: Right Platform Start
+          req: not ^_right_platform and $mist2
+          movement: mist2
+    - name: Center Rock 2 East
+      coord: [8.3, 24.75]
+      local:
+        - to: Center Rock 3 West
+        - to: Center Rock 1 West
+          jumps: 1
+        - to: Center Rock 2 West
+        - to: Center Small Rock
+      exits:
+        - to: Right Platform Start
+          req: not ^_right_platform and Nanite_Mist
+          movement: mist1
+        - to: Right Platform Start
+          req: not ^_right_platform and $mist2
+          movement: mist2
+        - to: Save Point
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: Center Rock 2 West
+      coord: [7.85, 24.95]
+      local:
+        - to: Center Rock 2 East
+          jumps: 2
+        - to: Tablet Platform
+      exits:
+        - to: Right Platform Start
+          req: not ^_right_platform and Nanite_Mist
+          movement: mist1
+        - to: Right Platform Start
+          req: not ^_right_platform and $mist2
+          movement: mist2
+    - name: Center Rock 3 West
+      coord: [8.45, 25.05]
+      local:
+        - to: Center Small Rock
+        - to: Center Rock 3 East
+      exits:
+        - to: Save Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Center Rock 2 East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Center Rock 2 East
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Center Rock 3 East
+      coord: [8.9, 25.3]
+      local:
+        - to: Center Rock 3 West
+          jumps: 1
+        - to: East Rock 1
+        - to: The Long Rock East
+      exits:
+        - to: Save Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Save Ledge
+          req: $mist2
+          movement: mist2
+    - name: Tablet Platform
+      coord: [7.65, 25.3]
+      local:
+        - to: West 28 Platform
+        - to: The Long Rock West
+          jumps_down: 1
+        - to: The Long Rock Middle
+      locations:
+        - name: Tablet
+          item: Freedom_from_Aansur
+          tags: [standing]
+      exits:
+        # This is made slightly harder due to enemy aggro, maybe add extra?
+        - to: Right Platform Start
+          req: not ^_right_platform and Nanite_Mist
+          movement: mist1  # this might cost too much?
+        - to: Right Platform Start
+          req: not ^_right_platform and $mist2
+          movement: mist2
+    - name: Center Small Rock
+      coord: [8.35, 25.2]
+      local:
+        - to: The Long Rock East
+        - to: The Long Rock Middle
+        - to: Center Rock 3 West
+          jumps: 1
+      exits:
+        - to: Center Rock 2 East
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: The Long Rock West
+      coord: [8.55, 25.65]
+      local:
+        - to: West Platform
+        - to: West 28 Platform
+        - to: Tablet Platform
+          jumps: 2
+        - to: The Long Rock Middle
+          jumps: 2
+    - name: The Long Rock Middle
+      coord: [9.0, 25.4]
+      local:
+        - to: The Long Rock West
+        - to: Tablet Platform
+          jumps: 2
+        - to: The Long Rock East
+        - to: Center Small Rock
+          jumps: 1
+    - name: The Long Rock East
+      coord: [9.2, 26.0]
+      local:
+        - to: The Long Rock Middle
+          jumps: 5
+        - to: Lower East Platform
+        - to: East Rock 3
+          jumps: 1
+      exits:
+        - to: East Rock 2
+          req: $hook
+          movement: base
+          jumps: 2
+
+    - name: East Rock 1
+      coord: [9.3, 25.4]
+      local:
+        - to: The Long Rock Middle
+          jumps: 4
+        - to: East Rock 2
+        - to: East 27
+      exits:
+        - to: Save Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Save Ledge
+          req: $mist2
+          movement: mist2
+    - name: East Rock 2
+      coord: [9.55, 25.55]
+      local:
+        - to: East Rock 1
+          jumps: 1
+        - to: East 26
+          jumps: 1
+        - to: The Long Rock East
+        - to: East Rock 3
+        - to: East 27
+    - name: East Rock 3
+      coord: [9.4, 25.95]
+      local:
+        - to: The Long Rock East
+        - to: Lower East Platform
+        - to: East 27
+      exits:
+        - to: East Rock 1
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Rock 2
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Lower East Platform
+      coord: [9.4, 26.3]
+      local:
+        - to: East 27
+        - to: SE Rock West
+      exits:
+        - to: The Long Rock East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: The Long Rock East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Rock 3
+          req: $hook
+          movement: base
+          jumps: 1
+
     - name: East 26
       coord: [9.95, 25.35]
+      local:
+        - to: East Rock 2
+        - to: Lower East Platform
       exits:
         - to: Hub > West 26
           tags: [xshift]
     - name: East 27
       coord: [9.95, 26.35]
+      local:
+        - to: Lower East Platform
+          jumps: 3
+        - to: SE Rock West
+      exits:
+        - to: East Rock 3
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Basement Pipes > West 27
+          tags: [xshift]
+
     - name: East 28
       coord: [9.95, 27.6]
+      local:
+        - to: Ground Center
+          jumps: 3
+      exits:
+        - to: Basement Pipes > West 28
+          tags: [xshift]
+    - name: SE Rock West
+      coord: [9.0, 26.75]
+      local:
+        - to: Lower Center Platform
+        - to: East 27
+          jumps: 3
+        - to: Lower East Platform
+          thru: [9.45, 26.45]
+          jumps: [2, 1]
+        - to: Ground Center
+    - name: Ground Center
+      coord: [9.0, 27.4]
+      local:
+        - to: East 28
+          jumps: 2
+        - to: West 28 Ground
+          jumps: 4
+        - to: SW Platform
+          thru: [7.45, 27.45]
+          jumps: [1, 1]
+      exits:
+        - to: SE Rock West
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Lower Center Platform
+      coord: [8.6, 26.9]
+      local:
+        - to: West 28 Ground
+        - to: SW Platform
+          thru: [7.45, 27.45]
+          jumps: [0, 1]
+        - to: SE Rock West
+          jumps: 1
+        - to: Ground Center
+          jumps_down: 1
+      exits:
+        - to: Lower Rock East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Lower Rock East
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Lower Rock East
+      coord: [8.4, 26.55]
+      local:
+        - to: Lower Center Platform
+        - to: SE Rock West
+        - to: Lower Rock West
+          jumps: 3
+    - name: Lower Rock West
+      coord: [7.6, 26.6]
+      local:
+        - to: Lower Rock East
+          jumps: 3
+        - to: West Platform
+          jumps: 1
+        - to: West 28 Ground
+        - to: SW Platform
+    - name: West Platform
+      coord: [7.35, 26.35]
+      local:
+        - to: West 28 Platform
+        - to: Lower Rock West
+        - to: West 28 Ground
+          jumps_down: 1
+      exits:
+        - to: The Long Rock West
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: SW Platform
+      coord: [7.5, 27.2]
+      local:
+        - to: West 28 Ground
+        - to: Ground Center
+      exits:
+        - to: Lower Rock West
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West 28 Platform
+      coord: [7.05, 26.5]
+      local:
+        - to: West Platform
+          jumps: 1
+        - to: SW Platform
+      exits:
+        - to: Beach Save > East 28 Platform
+          tags: [xshift]
+    - name: West 28 Ground
+      coord: [7.05, 27.3]
+      local:
+        - to: SW Platform
+          jumps: 1
+        - to: Ground Center
+      exits:
+        - to: Beach Save > East 28 Ground
+          tags: [xshift]
 
 - name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
@@ -1558,3 +2054,10 @@ areas:
           req: $hover
           movement: base
 
+- name: Beach Save  # MARK: Beach Save
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 28 Platform
+      coord: [6.95, 26.5]
+    - name: East 28 Ground
+      coord: [6.95, 27.3]

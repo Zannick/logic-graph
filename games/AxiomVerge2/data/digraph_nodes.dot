@@ -1869,6 +1869,10 @@
             Irikar__Basement_Portal__East_28 [label = "", pos = "41.85,-46.166667!"];
         }
         {
+            Irikar__Beach_Save__East_28_Platform [label = "", pos = "20.85,-44.166667!"];
+            Irikar__Beach_Save__East_28_Ground [label = "", pos = "20.85,-45.5!"];
+        }
+        {
             Irikar__Boss_Room__West_28 [label = "", pos = "45.15,-46.166667!"];
             Irikar__Boss_Room__Bulls_Feet [label = "", pos = "47.4,-46.166667!"];
             Irikar__Boss_Room__East_28 [label = "", pos = "50.85,-46.166667!"];
@@ -1980,10 +1984,42 @@
             Irikar__Midwest__East_23 [label = "", pos = "29.85,-38.0!"];
             Irikar__Midwest__East_24_on_Building [label = "", pos = "29.85,-38.833333!"];
             Irikar__Midwest__East_24_on_Floor [label = "", pos = "29.85,-39.5!"];
+            Irikar__Midwest__Small_Rooftop [label = "", pos = "27.9,-39.333333!"];
+            Irikar__Midwest__NE_Ledge [label = "", pos = "27.75,-39.75!"];
+            Irikar__Midwest__Left_Platform_Start [label = "", pos = "24.9,-39.166667!"];
+            Irikar__Midwest__Left_Platform_Dest [label = "", pos = "21.45,-37.666667!"];
+            Irikar__Midwest__Right_Platform_Start [label = "", pos = "21.75,-37.333333!"];
+            Irikar__Midwest__Right_Platform_Dest [label = "", pos = "28.35,-38.666667!"];
             Irikar__Midwest__East_25 [label = "", pos = "29.85,-40.416667!"];
+            Irikar__Midwest__Save_Point [label = "", pos = "28.5,-41.0!"];
+            Irikar__Midwest__Save_Ledge [label = "", pos = "27.9,-41.333333!"];
+            Irikar__Midwest__Center_Rock_1_East [label = "", pos = "26.4,-41.0!"];
+            Irikar__Midwest__Center_Rock_1_West [label = "", pos = "25.35,-40.916667!"];
+            Irikar__Midwest__Center_Rock_2_East [label = "", pos = "24.9,-41.25!"];
+            Irikar__Midwest__Center_Rock_2_West [label = "", pos = "23.55,-41.583333!"];
+            Irikar__Midwest__Center_Rock_3_West [label = "", pos = "25.35,-41.75!"];
+            Irikar__Midwest__Center_Rock_3_East [label = "", pos = "26.7,-42.166667!"];
+            Irikar__Midwest__Tablet_Platform [label = "", pos = "22.95,-42.166667!"];
+            Irikar__Midwest__Center_Small_Rock [label = "", pos = "25.05,-42.0!"];
+            Irikar__Midwest__The_Long_Rock_West [label = "", pos = "25.65,-42.75!"];
+            Irikar__Midwest__The_Long_Rock_Middle [label = "", pos = "27.0,-42.333333!"];
+            Irikar__Midwest__The_Long_Rock_East [label = "", pos = "27.6,-43.333333!"];
+            Irikar__Midwest__East_Rock_1 [label = "", pos = "27.9,-42.333333!"];
+            Irikar__Midwest__East_Rock_2 [label = "", pos = "28.65,-42.583333!"];
+            Irikar__Midwest__East_Rock_3 [label = "", pos = "28.2,-43.25!"];
+            Irikar__Midwest__Lower_East_Platform [label = "", pos = "28.2,-43.833333!"];
             Irikar__Midwest__East_26 [label = "", pos = "29.85,-42.25!"];
             Irikar__Midwest__East_27 [label = "", pos = "29.85,-43.916667!"];
             Irikar__Midwest__East_28 [label = "", pos = "29.85,-46.0!"];
+            Irikar__Midwest__SE_Rock_West [label = "", pos = "27.0,-44.583333!"];
+            Irikar__Midwest__Ground_Center [label = "", pos = "27.0,-45.666667!"];
+            Irikar__Midwest__Lower_Center_Platform [label = "", pos = "25.8,-44.833333!"];
+            Irikar__Midwest__Lower_Rock_East [label = "", pos = "25.2,-44.25!"];
+            Irikar__Midwest__Lower_Rock_West [label = "", pos = "22.8,-44.333333!"];
+            Irikar__Midwest__West_Platform [label = "", pos = "22.05,-43.916667!"];
+            Irikar__Midwest__SW_Platform [label = "", pos = "22.5,-45.333333!"];
+            Irikar__Midwest__West_28_Platform [label = "", pos = "21.15,-44.166667!"];
+            Irikar__Midwest__West_28_Ground [label = "", pos = "21.15,-45.5!"];
         }
         {
             Irikar__Sight_Room__West_24 [label = "", pos = "42.15,-40.916667!"];
@@ -2095,6 +2131,7 @@
             Menu__Kiengir_Map__Irikar_Gudam_Health [label = "", pos = "45.0,-45.0!"];
             Menu__Kiengir_Map__Heretics_Granddaughter [label = "", pos = "45.0,-41.666667!"];
             Menu__Kiengir_Map__Terminal_Breakthrough_2 [label = "", pos = "54.0,-43.333333!"];
+            Menu__Kiengir_Map__Irikar_Mid_air_Flask [label = "", pos = "21.0,-38.333333!"];
         }
     }
     {

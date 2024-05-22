@@ -259,6 +259,7 @@ pub enum AreaId {
     Irikar__Airy,
     Irikar__Basement_Pipes,
     Irikar__Basement_Portal,
+    Irikar__Beach_Save,
     Irikar__Boss_Room,
     Irikar__East_Rooftops,
     Irikar__Empty_Foyer,
@@ -484,6 +485,7 @@ impl fmt::Display for AreaId {
             AreaId::Irikar__Airy => write!(f, "{}", "Irikar > Airy"),
             AreaId::Irikar__Basement_Pipes => write!(f, "{}", "Irikar > Basement Pipes"),
             AreaId::Irikar__Basement_Portal => write!(f, "{}", "Irikar > Basement Portal"),
+            AreaId::Irikar__Beach_Save => write!(f, "{}", "Irikar > Beach Save"),
             AreaId::Irikar__Boss_Room => write!(f, "{}", "Irikar > Boss Room"),
             AreaId::Irikar__East_Rooftops => write!(f, "{}", "Irikar > East Rooftops"),
             AreaId::Irikar__Empty_Foyer => write!(f, "{}", "Irikar > Empty Foyer"),
@@ -692,6 +694,7 @@ impl std::str::FromStr for AreaId {
             "Irikar > Airy" => Ok(AreaId::Irikar__Airy),
             "Irikar > Basement Pipes" => Ok(AreaId::Irikar__Basement_Pipes),
             "Irikar > Basement Portal" => Ok(AreaId::Irikar__Basement_Portal),
+            "Irikar > Beach Save" => Ok(AreaId::Irikar__Beach_Save),
             "Irikar > Boss Room" => Ok(AreaId::Irikar__Boss_Room),
             "Irikar > East Rooftops" => Ok(AreaId::Irikar__East_Rooftops),
             "Irikar > Empty Foyer" => Ok(AreaId::Irikar__Empty_Foyer),
@@ -2182,6 +2185,8 @@ pub enum SpotId {
     Irikar__Basement_Portal__Portal_Stand,
     Irikar__Basement_Portal__West_28,
     Irikar__Basement_Portal__Westmost_Platform,
+    Irikar__Beach_Save__East_28_Ground,
+    Irikar__Beach_Save__East_28_Platform,
     Irikar__Boss_Room__Above_Catwalk,
     Irikar__Boss_Room__Bulls_Feet,
     Irikar__Boss_Room__Catwalk_East,
@@ -2280,6 +2285,13 @@ pub enum SpotId {
     Irikar__Lamassu__Hidden_Passage_West,
     Irikar__Lamassu__Northwest,
     Irikar__Lamassu__West_28,
+    Irikar__Midwest__Center_Rock_1_East,
+    Irikar__Midwest__Center_Rock_1_West,
+    Irikar__Midwest__Center_Rock_2_East,
+    Irikar__Midwest__Center_Rock_2_West,
+    Irikar__Midwest__Center_Rock_3_East,
+    Irikar__Midwest__Center_Rock_3_West,
+    Irikar__Midwest__Center_Small_Rock,
     Irikar__Midwest__East_23,
     Irikar__Midwest__East_24_on_Building,
     Irikar__Midwest__East_24_on_Floor,
@@ -2287,6 +2299,31 @@ pub enum SpotId {
     Irikar__Midwest__East_26,
     Irikar__Midwest__East_27,
     Irikar__Midwest__East_28,
+    Irikar__Midwest__East_Rock_1,
+    Irikar__Midwest__East_Rock_2,
+    Irikar__Midwest__East_Rock_3,
+    Irikar__Midwest__Ground_Center,
+    Irikar__Midwest__Left_Platform_Dest,
+    Irikar__Midwest__Left_Platform_Start,
+    Irikar__Midwest__Lower_Center_Platform,
+    Irikar__Midwest__Lower_East_Platform,
+    Irikar__Midwest__Lower_Rock_East,
+    Irikar__Midwest__Lower_Rock_West,
+    Irikar__Midwest__NE_Ledge,
+    Irikar__Midwest__Right_Platform_Dest,
+    Irikar__Midwest__Right_Platform_Start,
+    Irikar__Midwest__Save_Ledge,
+    Irikar__Midwest__Save_Point,
+    Irikar__Midwest__SE_Rock_West,
+    Irikar__Midwest__Small_Rooftop,
+    Irikar__Midwest__SW_Platform,
+    Irikar__Midwest__Tablet_Platform,
+    Irikar__Midwest__The_Long_Rock_East,
+    Irikar__Midwest__The_Long_Rock_Middle,
+    Irikar__Midwest__The_Long_Rock_West,
+    Irikar__Midwest__West_28_Ground,
+    Irikar__Midwest__West_28_Platform,
+    Irikar__Midwest__West_Platform,
     Irikar__Sight_Room__Above_Room_East,
     Irikar__Sight_Room__Above_Room_North,
     Irikar__Sight_Room__Item_Pedestal,
@@ -2424,6 +2461,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Irikar_Gudam,
     Menu__Kiengir_Map__Irikar_Gudam_Health,
     Menu__Kiengir_Map__Irikar_Hub,
+    Menu__Kiengir_Map__Irikar_Mid_air_Flask,
     Menu__Kiengir_Map__Irikar_Midwest,
     Menu__Kiengir_Map__Irikar_Royal_Storage,
     Menu__Kiengir_Map__Irikar_Well,
@@ -6249,6 +6287,12 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Basement_Portal__Westmost_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > Westmost Platform")
             }
+            SpotId::Irikar__Beach_Save__East_28_Ground => {
+                write!(f, "{}", "Irikar > Beach Save > East 28 Ground")
+            }
+            SpotId::Irikar__Beach_Save__East_28_Platform => {
+                write!(f, "{}", "Irikar > Beach Save > East 28 Platform")
+            }
             SpotId::Irikar__Boss_Room__Above_Catwalk => {
                 write!(f, "{}", "Irikar > Boss Room > Above Catwalk")
             }
@@ -6493,6 +6537,27 @@ impl fmt::Display for SpotId {
             }
             SpotId::Irikar__Lamassu__Northwest => write!(f, "{}", "Irikar > Lamassu > Northwest"),
             SpotId::Irikar__Lamassu__West_28 => write!(f, "{}", "Irikar > Lamassu > West 28"),
+            SpotId::Irikar__Midwest__Center_Rock_1_East => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 1 East")
+            }
+            SpotId::Irikar__Midwest__Center_Rock_1_West => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 1 West")
+            }
+            SpotId::Irikar__Midwest__Center_Rock_2_East => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 2 East")
+            }
+            SpotId::Irikar__Midwest__Center_Rock_2_West => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 2 West")
+            }
+            SpotId::Irikar__Midwest__Center_Rock_3_East => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 3 East")
+            }
+            SpotId::Irikar__Midwest__Center_Rock_3_West => {
+                write!(f, "{}", "Irikar > Midwest > Center Rock 3 West")
+            }
+            SpotId::Irikar__Midwest__Center_Small_Rock => {
+                write!(f, "{}", "Irikar > Midwest > Center Small Rock")
+            }
             SpotId::Irikar__Midwest__East_23 => write!(f, "{}", "Irikar > Midwest > East 23"),
             SpotId::Irikar__Midwest__East_24_on_Building => {
                 write!(f, "{}", "Irikar > Midwest > East 24 on Building")
@@ -6504,6 +6569,75 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Midwest__East_26 => write!(f, "{}", "Irikar > Midwest > East 26"),
             SpotId::Irikar__Midwest__East_27 => write!(f, "{}", "Irikar > Midwest > East 27"),
             SpotId::Irikar__Midwest__East_28 => write!(f, "{}", "Irikar > Midwest > East 28"),
+            SpotId::Irikar__Midwest__East_Rock_1 => {
+                write!(f, "{}", "Irikar > Midwest > East Rock 1")
+            }
+            SpotId::Irikar__Midwest__East_Rock_2 => {
+                write!(f, "{}", "Irikar > Midwest > East Rock 2")
+            }
+            SpotId::Irikar__Midwest__East_Rock_3 => {
+                write!(f, "{}", "Irikar > Midwest > East Rock 3")
+            }
+            SpotId::Irikar__Midwest__Ground_Center => {
+                write!(f, "{}", "Irikar > Midwest > Ground Center")
+            }
+            SpotId::Irikar__Midwest__Left_Platform_Dest => {
+                write!(f, "{}", "Irikar > Midwest > Left Platform Dest")
+            }
+            SpotId::Irikar__Midwest__Left_Platform_Start => {
+                write!(f, "{}", "Irikar > Midwest > Left Platform Start")
+            }
+            SpotId::Irikar__Midwest__Lower_Center_Platform => {
+                write!(f, "{}", "Irikar > Midwest > Lower Center Platform")
+            }
+            SpotId::Irikar__Midwest__Lower_East_Platform => {
+                write!(f, "{}", "Irikar > Midwest > Lower East Platform")
+            }
+            SpotId::Irikar__Midwest__Lower_Rock_East => {
+                write!(f, "{}", "Irikar > Midwest > Lower Rock East")
+            }
+            SpotId::Irikar__Midwest__Lower_Rock_West => {
+                write!(f, "{}", "Irikar > Midwest > Lower Rock West")
+            }
+            SpotId::Irikar__Midwest__NE_Ledge => write!(f, "{}", "Irikar > Midwest > NE Ledge"),
+            SpotId::Irikar__Midwest__Right_Platform_Dest => {
+                write!(f, "{}", "Irikar > Midwest > Right Platform Dest")
+            }
+            SpotId::Irikar__Midwest__Right_Platform_Start => {
+                write!(f, "{}", "Irikar > Midwest > Right Platform Start")
+            }
+            SpotId::Irikar__Midwest__Save_Ledge => write!(f, "{}", "Irikar > Midwest > Save Ledge"),
+            SpotId::Irikar__Midwest__Save_Point => write!(f, "{}", "Irikar > Midwest > Save Point"),
+            SpotId::Irikar__Midwest__SE_Rock_West => {
+                write!(f, "{}", "Irikar > Midwest > SE Rock West")
+            }
+            SpotId::Irikar__Midwest__Small_Rooftop => {
+                write!(f, "{}", "Irikar > Midwest > Small Rooftop")
+            }
+            SpotId::Irikar__Midwest__SW_Platform => {
+                write!(f, "{}", "Irikar > Midwest > SW Platform")
+            }
+            SpotId::Irikar__Midwest__Tablet_Platform => {
+                write!(f, "{}", "Irikar > Midwest > Tablet Platform")
+            }
+            SpotId::Irikar__Midwest__The_Long_Rock_East => {
+                write!(f, "{}", "Irikar > Midwest > The Long Rock East")
+            }
+            SpotId::Irikar__Midwest__The_Long_Rock_Middle => {
+                write!(f, "{}", "Irikar > Midwest > The Long Rock Middle")
+            }
+            SpotId::Irikar__Midwest__The_Long_Rock_West => {
+                write!(f, "{}", "Irikar > Midwest > The Long Rock West")
+            }
+            SpotId::Irikar__Midwest__West_28_Ground => {
+                write!(f, "{}", "Irikar > Midwest > West 28 Ground")
+            }
+            SpotId::Irikar__Midwest__West_28_Platform => {
+                write!(f, "{}", "Irikar > Midwest > West 28 Platform")
+            }
+            SpotId::Irikar__Midwest__West_Platform => {
+                write!(f, "{}", "Irikar > Midwest > West Platform")
+            }
             SpotId::Irikar__Sight_Room__Above_Room_East => {
                 write!(f, "{}", "Irikar > Sight Room > Above Room East")
             }
@@ -6878,6 +7012,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Irikar_Hub => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Hub")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Mid-air Flask")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Midwest => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest")
@@ -9862,6 +9999,12 @@ impl std::str::FromStr for SpotId {
             "Irikar > Basement Portal > Westmost Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform)
             }
+            "Irikar > Beach Save > East 28 Ground" => {
+                Ok(SpotId::Irikar__Beach_Save__East_28_Ground)
+            }
+            "Irikar > Beach Save > East 28 Platform" => {
+                Ok(SpotId::Irikar__Beach_Save__East_28_Platform)
+            }
             "Irikar > Boss Room > Above Catwalk" => Ok(SpotId::Irikar__Boss_Room__Above_Catwalk),
             "Irikar > Boss Room > Bull's Feet" => Ok(SpotId::Irikar__Boss_Room__Bulls_Feet),
             "Irikar > Boss Room > Catwalk East" => Ok(SpotId::Irikar__Boss_Room__Catwalk_East),
@@ -10044,6 +10187,27 @@ impl std::str::FromStr for SpotId {
             }
             "Irikar > Lamassu > Northwest" => Ok(SpotId::Irikar__Lamassu__Northwest),
             "Irikar > Lamassu > West 28" => Ok(SpotId::Irikar__Lamassu__West_28),
+            "Irikar > Midwest > Center Rock 1 East" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_1_East)
+            }
+            "Irikar > Midwest > Center Rock 1 West" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_1_West)
+            }
+            "Irikar > Midwest > Center Rock 2 East" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_2_East)
+            }
+            "Irikar > Midwest > Center Rock 2 West" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_2_West)
+            }
+            "Irikar > Midwest > Center Rock 3 East" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_3_East)
+            }
+            "Irikar > Midwest > Center Rock 3 West" => {
+                Ok(SpotId::Irikar__Midwest__Center_Rock_3_West)
+            }
+            "Irikar > Midwest > Center Small Rock" => {
+                Ok(SpotId::Irikar__Midwest__Center_Small_Rock)
+            }
             "Irikar > Midwest > East 23" => Ok(SpotId::Irikar__Midwest__East_23),
             "Irikar > Midwest > East 24 on Building" => {
                 Ok(SpotId::Irikar__Midwest__East_24_on_Building)
@@ -10053,6 +10217,49 @@ impl std::str::FromStr for SpotId {
             "Irikar > Midwest > East 26" => Ok(SpotId::Irikar__Midwest__East_26),
             "Irikar > Midwest > East 27" => Ok(SpotId::Irikar__Midwest__East_27),
             "Irikar > Midwest > East 28" => Ok(SpotId::Irikar__Midwest__East_28),
+            "Irikar > Midwest > East Rock 1" => Ok(SpotId::Irikar__Midwest__East_Rock_1),
+            "Irikar > Midwest > East Rock 2" => Ok(SpotId::Irikar__Midwest__East_Rock_2),
+            "Irikar > Midwest > East Rock 3" => Ok(SpotId::Irikar__Midwest__East_Rock_3),
+            "Irikar > Midwest > Ground Center" => Ok(SpotId::Irikar__Midwest__Ground_Center),
+            "Irikar > Midwest > Left Platform Dest" => {
+                Ok(SpotId::Irikar__Midwest__Left_Platform_Dest)
+            }
+            "Irikar > Midwest > Left Platform Start" => {
+                Ok(SpotId::Irikar__Midwest__Left_Platform_Start)
+            }
+            "Irikar > Midwest > Lower Center Platform" => {
+                Ok(SpotId::Irikar__Midwest__Lower_Center_Platform)
+            }
+            "Irikar > Midwest > Lower East Platform" => {
+                Ok(SpotId::Irikar__Midwest__Lower_East_Platform)
+            }
+            "Irikar > Midwest > Lower Rock East" => Ok(SpotId::Irikar__Midwest__Lower_Rock_East),
+            "Irikar > Midwest > Lower Rock West" => Ok(SpotId::Irikar__Midwest__Lower_Rock_West),
+            "Irikar > Midwest > NE Ledge" => Ok(SpotId::Irikar__Midwest__NE_Ledge),
+            "Irikar > Midwest > Right Platform Dest" => {
+                Ok(SpotId::Irikar__Midwest__Right_Platform_Dest)
+            }
+            "Irikar > Midwest > Right Platform Start" => {
+                Ok(SpotId::Irikar__Midwest__Right_Platform_Start)
+            }
+            "Irikar > Midwest > Save Ledge" => Ok(SpotId::Irikar__Midwest__Save_Ledge),
+            "Irikar > Midwest > Save Point" => Ok(SpotId::Irikar__Midwest__Save_Point),
+            "Irikar > Midwest > SE Rock West" => Ok(SpotId::Irikar__Midwest__SE_Rock_West),
+            "Irikar > Midwest > Small Rooftop" => Ok(SpotId::Irikar__Midwest__Small_Rooftop),
+            "Irikar > Midwest > SW Platform" => Ok(SpotId::Irikar__Midwest__SW_Platform),
+            "Irikar > Midwest > Tablet Platform" => Ok(SpotId::Irikar__Midwest__Tablet_Platform),
+            "Irikar > Midwest > The Long Rock East" => {
+                Ok(SpotId::Irikar__Midwest__The_Long_Rock_East)
+            }
+            "Irikar > Midwest > The Long Rock Middle" => {
+                Ok(SpotId::Irikar__Midwest__The_Long_Rock_Middle)
+            }
+            "Irikar > Midwest > The Long Rock West" => {
+                Ok(SpotId::Irikar__Midwest__The_Long_Rock_West)
+            }
+            "Irikar > Midwest > West 28 Ground" => Ok(SpotId::Irikar__Midwest__West_28_Ground),
+            "Irikar > Midwest > West 28 Platform" => Ok(SpotId::Irikar__Midwest__West_28_Platform),
+            "Irikar > Midwest > West Platform" => Ok(SpotId::Irikar__Midwest__West_Platform),
             "Irikar > Sight Room > Above Room East" => {
                 Ok(SpotId::Irikar__Sight_Room__Above_Room_East)
             }
@@ -10328,6 +10535,9 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Gudam_Health)
             }
             "Menu > Kiengir Map > Irikar Hub" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Hub),
+            "Menu > Kiengir Map > Irikar Mid-air Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask)
+            }
             "Menu > Kiengir Map > Irikar Midwest" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Midwest),
             "Menu > Kiengir Map > Irikar Royal Storage" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage)
@@ -10853,6 +11063,7 @@ pub enum LocationId {
     Interior__Outpost_Interior__Bookshelf__Note,
     Interior__Tent_Interior__Desk__Note,
     Irikar__Abandoned_Room__Corner_Core__Core,
+    Irikar__Basement_Pipes__High_Pipe__Tablet,
     Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
     Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
@@ -10870,6 +11081,9 @@ pub enum LocationId {
     Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
     Irikar__Hub__SW_Building_Top_Platform__Power_Core,
     Irikar__Lamassu__Desk__Item,
+    Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask,
+    Irikar__Midwest__Right_Platform_Start__Flask,
+    Irikar__Midwest__Tablet_Platform__Tablet,
     Irikar__Sight_Room__Item_Pedestal__Urn,
     Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
     Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
@@ -11190,6 +11404,7 @@ impl fmt::Display for LocationId {
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note"),
             LocationId::Interior__Tent_Interior__Desk__Note => write!(f, "{}", "Interior > Tent Interior > Desk > Note"),
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core"),
+            LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => write!(f, "{}", "Irikar > Basement Pipes > High Pipe > Tablet"),
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward"),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam"),
@@ -11207,6 +11422,9 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => write!(f, "{}", "Irikar > Hub > Sat Tower Top Ledge > Tablet"),
             LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core => write!(f, "{}", "Irikar > Hub > SW Building Top Platform > Power Core"),
             LocationId::Irikar__Lamassu__Desk__Item => write!(f, "{}", "Irikar > Lamassu > Desk > Item"),
+            LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask => write!(f, "{}", "Irikar > Midwest > Left Platform Dest > Shockwave Flask"),
+            LocationId::Irikar__Midwest__Right_Platform_Start__Flask => write!(f, "{}", "Irikar > Midwest > Right Platform Start > Flask"),
+            LocationId::Irikar__Midwest__Tablet_Platform__Tablet => write!(f, "{}", "Irikar > Midwest > Tablet Platform > Tablet"),
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn"),
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"),
@@ -11532,6 +11750,7 @@ impl std::str::FromStr for LocationId {
             "Interior > Outpost Interior > Bookshelf > Note" => Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note),
             "Interior > Tent Interior > Desk > Note" => Ok(LocationId::Interior__Tent_Interior__Desk__Note),
             "Irikar > Abandoned Room > Corner Core > Core" => Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core),
+            "Irikar > Basement Pipes > High Pipe > Tablet" => Ok(LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet),
             "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup),
             "Irikar > Boss Room > Bull's Feet > Boss Reward" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward),
             "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam),
@@ -11549,6 +11768,9 @@ impl std::str::FromStr for LocationId {
             "Irikar > Hub > Sat Tower Top Ledge > Tablet" => Ok(LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet),
             "Irikar > Hub > SW Building Top Platform > Power Core" => Ok(LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core),
             "Irikar > Lamassu > Desk > Item" => Ok(LocationId::Irikar__Lamassu__Desk__Item),
+            "Irikar > Midwest > Left Platform Dest > Shockwave Flask" => Ok(LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask),
+            "Irikar > Midwest > Right Platform Start > Flask" => Ok(LocationId::Irikar__Midwest__Right_Platform_Start__Flask),
+            "Irikar > Midwest > Tablet Platform > Tablet" => Ok(LocationId::Irikar__Midwest__Tablet_Platform__Tablet),
             "Irikar > Sight Room > Item Pedestal > Urn" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn),
             "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
             "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => Ok(LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
@@ -13367,10 +13589,56 @@ pub enum ExitId {
     Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1,
     Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1,
     Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1,
+    Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1,
+    Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2,
+    Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2,
+    Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2,
+    Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1,
+    Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2,
+    Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1,
+    Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2,
+    Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1,
+    Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2,
+    Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1,
+    Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1,
     Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1,
     Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1,
     Irikar__Midwest__East_25__ex__Hub__West_25_1,
     Irikar__Midwest__East_26__ex__Hub__West_26_1,
+    Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1,
+    Irikar__Midwest__East_27__ex__East_Rock_3_1,
+    Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1,
+    Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1,
+    Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2,
+    Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1,
+    Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1,
+    Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1,
+    Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2,
+    Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1,
+    Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2,
+    Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1,
+    Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1,
+    Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2,
+    Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1,
+    Irikar__Midwest__Save_Point__ex__East_25_1,
+    Irikar__Midwest__Save_Point__ex__East_25_2,
+    Irikar__Midwest__Save_Point__ex__NE_Ledge_1,
+    Irikar__Midwest__Save_Point__ex__NE_Ledge_2,
+    Irikar__Midwest__Save_Point__ex__NE_Ledge_3,
+    Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1,
+    Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2,
+    Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1,
+    Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1,
+    Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2,
+    Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1,
+    Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1,
+    Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1,
+    Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1,
     Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1,
     Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
     Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
@@ -15356,10 +15624,56 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1 => write!(f, "{}", "Irikar > Lamassu > East 27 ==> Uhrum > West Entrance > West 27 (1)"),
             ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1 => write!(f, "{}", "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)"),
             ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1 => write!(f, "{}", "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 1 East ==> Left Platform Start (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 1 East ==> Left Platform Start (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 1 West ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 1 West ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 2 East ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 2 East ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 2 East ==> Save Point (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 2 West ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 2 West ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 3 East ==> Save Ledge (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 3 East ==> Save Ledge (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 3 West ==> Center Rock 2 East (1)"),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => write!(f, "{}", "Irikar > Midwest > Center Rock 3 West ==> Center Rock 2 East (2)"),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => write!(f, "{}", "Irikar > Midwest > Center Rock 3 West ==> Save Ledge (1)"),
+            ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => write!(f, "{}", "Irikar > Midwest > Center Small Rock ==> Center Rock 2 East (1)"),
             ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => write!(f, "{}", "Irikar > Midwest > East 24 on Building ==> Hub > West 24 Rooftop (1)"),
             ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1 => write!(f, "{}", "Irikar > Midwest > East 24 on Floor ==> Hub > West 24 Ground (1)"),
             ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => write!(f, "{}", "Irikar > Midwest > East 25 ==> Hub > West 25 (1)"),
             ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => write!(f, "{}", "Irikar > Midwest > East 26 ==> Hub > West 26 (1)"),
+            ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => write!(f, "{}", "Irikar > Midwest > East 27 ==> Basement Pipes > West 27 (1)"),
+            ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => write!(f, "{}", "Irikar > Midwest > East 27 ==> East Rock 3 (1)"),
+            ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => write!(f, "{}", "Irikar > Midwest > East 28 ==> Basement Pipes > West 28 (1)"),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => write!(f, "{}", "Irikar > Midwest > East Rock 1 ==> Save Ledge (1)"),
+            ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2 => write!(f, "{}", "Irikar > Midwest > East Rock 1 ==> Save Ledge (2)"),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 => write!(f, "{}", "Irikar > Midwest > East Rock 3 ==> East Rock 1 (1)"),
+            ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => write!(f, "{}", "Irikar > Midwest > East Rock 3 ==> East Rock 2 (1)"),
+            ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => write!(f, "{}", "Irikar > Midwest > Ground Center ==> SE Rock West (1)"),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Left Platform Start ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Left Platform Start ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => write!(f, "{}", "Irikar > Midwest > Lower Center Platform ==> Lower Rock East (1)"),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => write!(f, "{}", "Irikar > Midwest > Lower Center Platform ==> Lower Rock East (2)"),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => write!(f, "{}", "Irikar > Midwest > Lower East Platform ==> East Rock 3 (1)"),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => write!(f, "{}", "Irikar > Midwest > Lower East Platform ==> The Long Rock East (1)"),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => write!(f, "{}", "Irikar > Midwest > Lower East Platform ==> The Long Rock East (2)"),
+            ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > NE Ledge ==> Left Platform Start (1)"),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => write!(f, "{}", "Irikar > Midwest > Save Point ==> East 25 (1)"),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => write!(f, "{}", "Irikar > Midwest > Save Point ==> East 25 (2)"),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => write!(f, "{}", "Irikar > Midwest > Save Point ==> NE Ledge (1)"),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => write!(f, "{}", "Irikar > Midwest > Save Point ==> NE Ledge (2)"),
+            ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => write!(f, "{}", "Irikar > Midwest > Save Point ==> NE Ledge (3)"),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Left Platform Start (1)"),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => write!(f, "{}", "Irikar > Midwest > SW Platform ==> Lower Rock West (1)"),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Tablet Platform ==> Right Platform Start (1)"),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Tablet Platform ==> Right Platform Start (2)"),
+            ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => write!(f, "{}", "Irikar > Midwest > The Long Rock East ==> East Rock 2 (1)"),
+            ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1 => write!(f, "{}", "Irikar > Midwest > West 28 Ground ==> Beach Save > East 28 Ground (1)"),
+            ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => write!(f, "{}", "Irikar > Midwest > West 28 Platform ==> Beach Save > East 28 Platform (1)"),
+            ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => write!(f, "{}", "Irikar > Midwest > West Platform ==> The Long Rock West (1)"),
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => write!(f, "{}", "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)"),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Collection Skip"),
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => write!(f, "{}", "Irikar > Sight Room > Item Pedestal > Urn Fast Travel"),
@@ -17350,10 +17664,56 @@ impl std::str::FromStr for ExitId {
             "Irikar > Lamassu > East 27 ==> Uhrum > West Entrance > West 27 (1)" => Ok(ExitId::Irikar__Lamassu__East_27__ex__Uhrum__West_Entrance__West_27_1),
             "Irikar > Lamassu > Hidden Passage East ==> Uhrum > West Entrance > Hidden Passage West (1)" => Ok(ExitId::Irikar__Lamassu__Hidden_Passage_East__ex__Uhrum__West_Entrance__Hidden_Passage_West_1),
             "Irikar > Lamassu > West 28 ==> Boss Room > East 28 (1)" => Ok(ExitId::Irikar__Lamassu__West_28__ex__Boss_Room__East_28_1),
+            "Irikar > Midwest > Center Rock 1 East ==> Left Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1),
+            "Irikar > Midwest > Center Rock 1 East ==> Left Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_2),
+            "Irikar > Midwest > Center Rock 1 West ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Center Rock 1 West ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > Center Rock 2 East ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Center Rock 2 East ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > Center Rock 2 East ==> Save Point (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1),
+            "Irikar > Midwest > Center Rock 2 West ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Center Rock 2 West ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > Center Rock 3 East ==> Save Ledge (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1),
+            "Irikar > Midwest > Center Rock 3 East ==> Save Ledge (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_2),
+            "Irikar > Midwest > Center Rock 3 West ==> Center Rock 2 East (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1),
+            "Irikar > Midwest > Center Rock 3 West ==> Center Rock 2 East (2)" => Ok(ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2),
+            "Irikar > Midwest > Center Rock 3 West ==> Save Ledge (1)" => Ok(ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1),
+            "Irikar > Midwest > Center Small Rock ==> Center Rock 2 East (1)" => Ok(ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1),
             "Irikar > Midwest > East 24 on Building ==> Hub > West 24 Rooftop (1)" => Ok(ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1),
             "Irikar > Midwest > East 24 on Floor ==> Hub > West 24 Ground (1)" => Ok(ExitId::Irikar__Midwest__East_24_on_Floor__ex__Hub__West_24_Ground_1),
             "Irikar > Midwest > East 25 ==> Hub > West 25 (1)" => Ok(ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1),
             "Irikar > Midwest > East 26 ==> Hub > West 26 (1)" => Ok(ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1),
+            "Irikar > Midwest > East 27 ==> Basement Pipes > West 27 (1)" => Ok(ExitId::Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1),
+            "Irikar > Midwest > East 27 ==> East Rock 3 (1)" => Ok(ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1),
+            "Irikar > Midwest > East 28 ==> Basement Pipes > West 28 (1)" => Ok(ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1),
+            "Irikar > Midwest > East Rock 1 ==> Save Ledge (1)" => Ok(ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1),
+            "Irikar > Midwest > East Rock 1 ==> Save Ledge (2)" => Ok(ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_2),
+            "Irikar > Midwest > East Rock 3 ==> East Rock 1 (1)" => Ok(ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1),
+            "Irikar > Midwest > East Rock 3 ==> East Rock 2 (1)" => Ok(ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1),
+            "Irikar > Midwest > Ground Center ==> SE Rock West (1)" => Ok(ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1),
+            "Irikar > Midwest > Left Platform Start ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Left Platform Start ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > Lower Center Platform ==> Lower Rock East (1)" => Ok(ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1),
+            "Irikar > Midwest > Lower Center Platform ==> Lower Rock East (2)" => Ok(ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2),
+            "Irikar > Midwest > Lower East Platform ==> East Rock 3 (1)" => Ok(ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1),
+            "Irikar > Midwest > Lower East Platform ==> The Long Rock East (1)" => Ok(ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1),
+            "Irikar > Midwest > Lower East Platform ==> The Long Rock East (2)" => Ok(ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2),
+            "Irikar > Midwest > NE Ledge ==> Left Platform Start (1)" => Ok(ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1),
+            "Irikar > Midwest > Save Point ==> East 25 (1)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__East_25_1),
+            "Irikar > Midwest > Save Point ==> East 25 (2)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__East_25_2),
+            "Irikar > Midwest > Save Point ==> NE Ledge (1)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1),
+            "Irikar > Midwest > Save Point ==> NE Ledge (2)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2),
+            "Irikar > Midwest > Save Point ==> NE Ledge (3)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3),
+            "Irikar > Midwest > Small Rooftop ==> Left Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1),
+            "Irikar > Midwest > Small Rooftop ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Small Rooftop ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > SW Platform ==> Lower Rock West (1)" => Ok(ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1),
+            "Irikar > Midwest > Tablet Platform ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1),
+            "Irikar > Midwest > Tablet Platform ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2),
+            "Irikar > Midwest > The Long Rock East ==> East Rock 2 (1)" => Ok(ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1),
+            "Irikar > Midwest > West 28 Ground ==> Beach Save > East 28 Ground (1)" => Ok(ExitId::Irikar__Midwest__West_28_Ground__ex__Beach_Save__East_28_Ground_1),
+            "Irikar > Midwest > West 28 Platform ==> Beach Save > East 28 Platform (1)" => Ok(ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1),
+            "Irikar > Midwest > West Platform ==> The Long Rock West (1)" => Ok(ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1),
             "Irikar > Sight Room > Above Room East ==> East Rooftops > Upper West (1)" => Ok(ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1),
             "Irikar > Sight Room > Item Pedestal > Urn Collection Skip" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
             "Irikar > Sight Room > Item Pedestal > Urn Fast Travel" => Ok(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
@@ -17766,6 +18126,9 @@ pub enum ActionId {
     Irikar__Hub__Collapsed_Column__Shockwave_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
+    Irikar__Midwest__Left_Platform_Start__Hack_and_Ride,
+    Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform,
+    Irikar__Midwest__Save_Point__Save,
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
     Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
     Uhrum__Annuna_Corridor__Save_Point__Save,
@@ -18256,6 +18619,19 @@ impl fmt::Display for ActionId {
             ActionId::Irikar__Hub__Save_Point__Save => {
                 write!(f, "{}", "Irikar > Hub > Save Point > Save")
             }
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => write!(
+                f,
+                "{}",
+                "Irikar > Midwest > Left Platform Start > Hack and Ride"
+            ),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => write!(
+                f,
+                "{}",
+                "Irikar > Midwest > Right Platform Start > Hack and Ride Platform"
+            ),
+            ActionId::Irikar__Midwest__Save_Point__Save => {
+                write!(f, "{}", "Irikar > Midwest > Save Point > Save")
+            }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
                 write!(
                     f,
@@ -18655,6 +19031,15 @@ impl std::str::FromStr for ActionId {
                 Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
             }
             "Irikar > Hub > Save Point > Save" => Ok(ActionId::Irikar__Hub__Save_Point__Save),
+            "Irikar > Midwest > Left Platform Start > Hack and Ride" => {
+                Ok(ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride)
+            }
+            "Irikar > Midwest > Right Platform Start > Hack and Ride Platform" => {
+                Ok(ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform)
+            }
+            "Irikar > Midwest > Save Point > Save" => {
+                Ok(ActionId::Irikar__Midwest__Save_Point__Save)
+            }
             "Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Not As High" => {
                 Ok(ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High)
             }
@@ -18733,6 +19118,7 @@ pub enum CanonId {
     Hammonds_Note,
     Infect,
     Irikar_Gudam,
+    Irikar_Midwest_Flask,
     Irikar_Royal_Storage_Flask,
     Irikar_Royal_Storage_Wall,
     Irikar_Well_Flask,
@@ -18823,6 +19209,7 @@ pub enum CanonId {
     Loc_Interior__Outpost_Interior__Bookshelf__Note,
     Loc_Interior__Tent_Interior__Desk__Note,
     Loc_Irikar__Abandoned_Room__Corner_Core__Core,
+    Loc_Irikar__Basement_Pipes__High_Pipe__Tablet,
     Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
     Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Loc_Irikar__Boss_Room__Healthy_Rooftop__Health,
@@ -18833,6 +19220,7 @@ pub enum CanonId {
     Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
     Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core,
     Loc_Irikar__Lamassu__Desk__Item,
+    Loc_Irikar__Midwest__Tablet_Platform__Tablet,
     Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
     Loc_Irikar_Breach__Hover_Room__Bottom__Item,
     Loc_Irikar_Breach__Worm_Rave__Corner__Item,
@@ -18942,6 +19330,7 @@ impl fmt::Display for CanonId {
             CanonId::Hammonds_Note => write!(f, "{}", "Hammonds_Note"),
             CanonId::Infect => write!(f, "{}", "Infect"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
+            CanonId::Irikar_Midwest_Flask => write!(f, "{}", "Irikar_Midwest_Flask"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
             CanonId::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             CanonId::Irikar_Well_Flask => write!(f, "{}", "Irikar_Well_Flask"),
@@ -19250,6 +19639,9 @@ impl fmt::Display for CanonId {
             CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core => {
                 write!(f, "{}", "Loc_Irikar__Abandoned_Room__Corner_Core__Core")
             }
+            CanonId::Loc_Irikar__Basement_Pipes__High_Pipe__Tablet => {
+                write!(f, "{}", "Loc_Irikar__Basement_Pipes__High_Pipe__Tablet")
+            }
             CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(
                 f,
                 "{}",
@@ -19287,6 +19679,9 @@ impl fmt::Display for CanonId {
             ),
             CanonId::Loc_Irikar__Lamassu__Desk__Item => {
                 write!(f, "{}", "Loc_Irikar__Lamassu__Desk__Item")
+            }
+            CanonId::Loc_Irikar__Midwest__Tablet_Platform__Tablet => {
+                write!(f, "{}", "Loc_Irikar__Midwest__Tablet_Platform__Tablet")
             }
             CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => write!(
                 f,
@@ -19540,6 +19935,7 @@ impl std::str::FromStr for CanonId {
             "Hammonds_Note" => Ok(CanonId::Hammonds_Note),
             "Infect" => Ok(CanonId::Infect),
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
+            "Irikar_Midwest_Flask" => Ok(CanonId::Irikar_Midwest_Flask),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),
             "Irikar_Royal_Storage_Wall" => Ok(CanonId::Irikar_Royal_Storage_Wall),
             "Irikar_Well_Flask" => Ok(CanonId::Irikar_Well_Flask),
@@ -19790,6 +20186,9 @@ impl std::str::FromStr for CanonId {
             "Loc_Irikar__Abandoned_Room__Corner_Core__Core" => {
                 Ok(CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core)
             }
+            "Loc_Irikar__Basement_Pipes__High_Pipe__Tablet" => {
+                Ok(CanonId::Loc_Irikar__Basement_Pipes__High_Pipe__Tablet)
+            }
             "Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup" => {
                 Ok(CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup)
             }
@@ -19818,6 +20217,9 @@ impl std::str::FromStr for CanonId {
                 Ok(CanonId::Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core)
             }
             "Loc_Irikar__Lamassu__Desk__Item" => Ok(CanonId::Loc_Irikar__Lamassu__Desk__Item),
+            "Loc_Irikar__Midwest__Tablet_Platform__Tablet" => {
+                Ok(CanonId::Loc_Irikar__Midwest__Tablet_Platform__Tablet)
+            }
             "Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item" => {
                 Ok(CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)
             }

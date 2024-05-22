@@ -318,10 +318,10 @@ helpers:  # MARK: helpers
      Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
-     Goodbye, Notes_2053_02_27, Forbidden_Knowledge]
+     Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{15}, Big_Flask{3}]
+    [Flask{16}, Big_Flask{4}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{6}]
   $all_weapons:itemList: >
@@ -331,8 +331,8 @@ helpers:  # MARK: helpers
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
-  # To be added: 6 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
-  # 6 Health_Fragment, The_Student, Heretics_Granddaughter
+  # To be added: 5 Flask, 4 Big_Flask, Double_Axe, Royal_Dagger, Udusan
+  # 6 Health_Fragment, Heretics_Granddaughter
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
