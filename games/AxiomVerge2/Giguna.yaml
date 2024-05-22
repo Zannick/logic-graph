@@ -2349,7 +2349,7 @@ areas:
         - name: Enter Combo
           req: not ^_combo_entered
           do: ^_combo_entered = true
-          time: 1.75
+          tags: [combo]
     - name: Upper Platforms Left
       coord: [19.3, 13.65]
       local:

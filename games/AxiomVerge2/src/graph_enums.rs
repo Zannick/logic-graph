@@ -259,6 +259,7 @@ pub enum AreaId {
     Irikar__Airy,
     Irikar__Basement_Pipes,
     Irikar__Basement_Portal,
+    Irikar__Beach,
     Irikar__Beach_Save,
     Irikar__Boss_Room,
     Irikar__East_Rooftops,
@@ -485,6 +486,7 @@ impl fmt::Display for AreaId {
             AreaId::Irikar__Airy => write!(f, "{}", "Irikar > Airy"),
             AreaId::Irikar__Basement_Pipes => write!(f, "{}", "Irikar > Basement Pipes"),
             AreaId::Irikar__Basement_Portal => write!(f, "{}", "Irikar > Basement Portal"),
+            AreaId::Irikar__Beach => write!(f, "{}", "Irikar > Beach"),
             AreaId::Irikar__Beach_Save => write!(f, "{}", "Irikar > Beach Save"),
             AreaId::Irikar__Boss_Room => write!(f, "{}", "Irikar > Boss Room"),
             AreaId::Irikar__East_Rooftops => write!(f, "{}", "Irikar > East Rooftops"),
@@ -694,6 +696,7 @@ impl std::str::FromStr for AreaId {
             "Irikar > Airy" => Ok(AreaId::Irikar__Airy),
             "Irikar > Basement Pipes" => Ok(AreaId::Irikar__Basement_Pipes),
             "Irikar > Basement Portal" => Ok(AreaId::Irikar__Basement_Portal),
+            "Irikar > Beach" => Ok(AreaId::Irikar__Beach),
             "Irikar > Beach Save" => Ok(AreaId::Irikar__Beach_Save),
             "Irikar > Boss Room" => Ok(AreaId::Irikar__Boss_Room),
             "Irikar > East Rooftops" => Ok(AreaId::Irikar__East_Rooftops),
@@ -2185,8 +2188,21 @@ pub enum SpotId {
     Irikar__Basement_Portal__Portal_Stand,
     Irikar__Basement_Portal__West_28,
     Irikar__Basement_Portal__Westmost_Platform,
+    Irikar__Beach__Above_Tunnel,
+    Irikar__Beach__Cache,
+    Irikar__Beach__East,
+    Irikar__Beach__Ivan,
+    Irikar__Beach__Shore,
+    Irikar__Beach__Tunnel_Entrance,
+    Irikar__Beach__Wet_Feet,
+    Irikar__Beach_Save__Center_Platform,
     Irikar__Beach_Save__East_28_Ground,
     Irikar__Beach_Save__East_28_Platform,
+    Irikar__Beach_Save__Partway_Up,
+    Irikar__Beach_Save__Save_Point,
+    Irikar__Beach_Save__Top_Platform,
+    Irikar__Beach_Save__West,
+    Irikar__Beach_Save__West_Slope,
     Irikar__Boss_Room__Above_Catwalk,
     Irikar__Boss_Room__Bulls_Feet,
     Irikar__Boss_Room__Catwalk_East,
@@ -2456,8 +2472,10 @@ pub enum SpotId {
     Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_10_25,
     Menu__Kiengir_Map__Irikar_Abandoned_Room,
+    Menu__Kiengir_Map__Irikar_Beach_Cache,
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Broken_Wall,
+    Menu__Kiengir_Map__Irikar_Fast_Travel,
     Menu__Kiengir_Map__Irikar_Gudam,
     Menu__Kiengir_Map__Irikar_Gudam_Health,
     Menu__Kiengir_Map__Irikar_Hub,
@@ -6287,11 +6305,36 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Basement_Portal__Westmost_Platform => {
                 write!(f, "{}", "Irikar > Basement Portal > Westmost Platform")
             }
+            SpotId::Irikar__Beach__Above_Tunnel => write!(f, "{}", "Irikar > Beach > Above Tunnel"),
+            SpotId::Irikar__Beach__Cache => write!(f, "{}", "Irikar > Beach > Cache"),
+            SpotId::Irikar__Beach__East => write!(f, "{}", "Irikar > Beach > East"),
+            SpotId::Irikar__Beach__Ivan => write!(f, "{}", "Irikar > Beach > Ivan"),
+            SpotId::Irikar__Beach__Shore => write!(f, "{}", "Irikar > Beach > Shore"),
+            SpotId::Irikar__Beach__Tunnel_Entrance => {
+                write!(f, "{}", "Irikar > Beach > Tunnel Entrance")
+            }
+            SpotId::Irikar__Beach__Wet_Feet => write!(f, "{}", "Irikar > Beach > Wet Feet"),
+            SpotId::Irikar__Beach_Save__Center_Platform => {
+                write!(f, "{}", "Irikar > Beach Save > Center Platform")
+            }
             SpotId::Irikar__Beach_Save__East_28_Ground => {
                 write!(f, "{}", "Irikar > Beach Save > East 28 Ground")
             }
             SpotId::Irikar__Beach_Save__East_28_Platform => {
                 write!(f, "{}", "Irikar > Beach Save > East 28 Platform")
+            }
+            SpotId::Irikar__Beach_Save__Partway_Up => {
+                write!(f, "{}", "Irikar > Beach Save > Partway Up")
+            }
+            SpotId::Irikar__Beach_Save__Save_Point => {
+                write!(f, "{}", "Irikar > Beach Save > Save Point")
+            }
+            SpotId::Irikar__Beach_Save__Top_Platform => {
+                write!(f, "{}", "Irikar > Beach Save > Top Platform")
+            }
+            SpotId::Irikar__Beach_Save__West => write!(f, "{}", "Irikar > Beach Save > West"),
+            SpotId::Irikar__Beach_Save__West_Slope => {
+                write!(f, "{}", "Irikar > Beach Save > West Slope")
             }
             SpotId::Irikar__Boss_Room__Above_Catwalk => {
                 write!(f, "{}", "Irikar > Boss Room > Above Catwalk")
@@ -6998,11 +7041,17 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Abandoned Room")
             }
+            SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Cache")
+            }
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Broken Wall")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Fast Travel")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Gudam => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Gudam")
@@ -9999,12 +10048,27 @@ impl std::str::FromStr for SpotId {
             "Irikar > Basement Portal > Westmost Platform" => {
                 Ok(SpotId::Irikar__Basement_Portal__Westmost_Platform)
             }
+            "Irikar > Beach > Above Tunnel" => Ok(SpotId::Irikar__Beach__Above_Tunnel),
+            "Irikar > Beach > Cache" => Ok(SpotId::Irikar__Beach__Cache),
+            "Irikar > Beach > East" => Ok(SpotId::Irikar__Beach__East),
+            "Irikar > Beach > Ivan" => Ok(SpotId::Irikar__Beach__Ivan),
+            "Irikar > Beach > Shore" => Ok(SpotId::Irikar__Beach__Shore),
+            "Irikar > Beach > Tunnel Entrance" => Ok(SpotId::Irikar__Beach__Tunnel_Entrance),
+            "Irikar > Beach > Wet Feet" => Ok(SpotId::Irikar__Beach__Wet_Feet),
+            "Irikar > Beach Save > Center Platform" => {
+                Ok(SpotId::Irikar__Beach_Save__Center_Platform)
+            }
             "Irikar > Beach Save > East 28 Ground" => {
                 Ok(SpotId::Irikar__Beach_Save__East_28_Ground)
             }
             "Irikar > Beach Save > East 28 Platform" => {
                 Ok(SpotId::Irikar__Beach_Save__East_28_Platform)
             }
+            "Irikar > Beach Save > Partway Up" => Ok(SpotId::Irikar__Beach_Save__Partway_Up),
+            "Irikar > Beach Save > Save Point" => Ok(SpotId::Irikar__Beach_Save__Save_Point),
+            "Irikar > Beach Save > Top Platform" => Ok(SpotId::Irikar__Beach_Save__Top_Platform),
+            "Irikar > Beach Save > West" => Ok(SpotId::Irikar__Beach_Save__West),
+            "Irikar > Beach Save > West Slope" => Ok(SpotId::Irikar__Beach_Save__West_Slope),
             "Irikar > Boss Room > Above Catwalk" => Ok(SpotId::Irikar__Boss_Room__Above_Catwalk),
             "Irikar > Boss Room > Bull's Feet" => Ok(SpotId::Irikar__Boss_Room__Bulls_Feet),
             "Irikar > Boss Room > Catwalk East" => Ok(SpotId::Irikar__Boss_Room__Catwalk_East),
@@ -10524,11 +10588,17 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Irikar Abandoned Room" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room)
             }
+            "Menu > Kiengir Map > Irikar Beach Cache" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache)
+            }
             "Menu > Kiengir Map > Irikar Beach Save" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Save)
             }
             "Menu > Kiengir Map > Irikar Broken Wall" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall)
+            }
+            "Menu > Kiengir Map > Irikar Fast Travel" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel)
             }
             "Menu > Kiengir Map > Irikar Gudam" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Gudam),
             "Menu > Kiengir Map > Irikar Gudam Health" => {
@@ -11065,6 +11135,8 @@ pub enum LocationId {
     Irikar__Abandoned_Room__Corner_Core__Core,
     Irikar__Basement_Pipes__High_Pipe__Tablet,
     Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+    Irikar__Beach__Cache__Item,
+    Irikar__Beach_Save__Top_Platform__Urn,
     Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
     Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
@@ -11406,6 +11478,8 @@ impl fmt::Display for LocationId {
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core"),
             LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => write!(f, "{}", "Irikar > Basement Pipes > High Pipe > Tablet"),
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"),
+            LocationId::Irikar__Beach__Cache__Item => write!(f, "{}", "Irikar > Beach > Cache > Item"),
+            LocationId::Irikar__Beach_Save__Top_Platform__Urn => write!(f, "{}", "Irikar > Beach Save > Top Platform > Urn"),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Boss Reward"),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Defeat Gudam"),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => write!(f, "{}", "Irikar > Boss Room > Bull's Feet > Shockwave Gudam"),
@@ -11752,6 +11826,8 @@ impl std::str::FromStr for LocationId {
             "Irikar > Abandoned Room > Corner Core > Core" => Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core),
             "Irikar > Basement Pipes > High Pipe > Tablet" => Ok(LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet),
             "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup),
+            "Irikar > Beach > Cache > Item" => Ok(LocationId::Irikar__Beach__Cache__Item),
+            "Irikar > Beach Save > Top Platform > Urn" => Ok(LocationId::Irikar__Beach_Save__Top_Platform__Urn),
             "Irikar > Boss Room > Bull's Feet > Boss Reward" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward),
             "Irikar > Boss Room > Bull's Feet > Defeat Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam),
             "Irikar > Boss Room > Bull's Feet > Shockwave Gudam" => Ok(LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam),
@@ -13492,6 +13568,15 @@ pub enum ExitId {
     Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1,
     Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1,
     Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1,
+    Irikar__Beach__Above_Tunnel__ex__Tunnel_Entrance_1,
+    Irikar__Beach__Cache__ex__Tunnel_Entrance_1,
+    Irikar__Beach__East__ex__Beach_Save__West_1,
+    Irikar__Beach__Tunnel_Entrance__ex__Cache_1,
+    Irikar__Beach_Save__East_28_Ground__ex__Midwest__West_28_Ground_1,
+    Irikar__Beach_Save__East_28_Platform__ex__Midwest__West_28_Platform_1,
+    Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_1,
+    Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_2,
+    Irikar__Beach_Save__West__ex__Beach__East_1,
     Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1,
     Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1,
     Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1,
@@ -13631,8 +13716,8 @@ pub enum ExitId {
     Irikar__Midwest__Save_Point__ex__NE_Ledge_3,
     Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1,
     Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1,
-    Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2,
     Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1,
+    Irikar__Midwest__Tablet_Platform__ex__Beach_Save__Partway_Up_1,
     Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1,
     Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2,
     Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1,
@@ -13712,7 +13797,9 @@ pub enum ExitId {
     Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1,
     Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1,
     Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1,
+    Menu__Kiengir_Map__Irikar_Beach_Save__ex__Irikar__Beach_Save__Save_Point_1,
     Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1,
+    Menu__Kiengir_Map__Irikar_Midwest__ex__Irikar__Midwest__Save_Point_1,
     Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1,
     Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1,
     Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1,
@@ -15527,6 +15614,15 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)"),
             ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)"),
             ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1 => write!(f, "{}", "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)"),
+            ExitId::Irikar__Beach__Above_Tunnel__ex__Tunnel_Entrance_1 => write!(f, "{}", "Irikar > Beach > Above Tunnel ==> Tunnel Entrance (1)"),
+            ExitId::Irikar__Beach__Cache__ex__Tunnel_Entrance_1 => write!(f, "{}", "Irikar > Beach > Cache ==> Tunnel Entrance (1)"),
+            ExitId::Irikar__Beach__East__ex__Beach_Save__West_1 => write!(f, "{}", "Irikar > Beach > East ==> Beach Save > West (1)"),
+            ExitId::Irikar__Beach__Tunnel_Entrance__ex__Cache_1 => write!(f, "{}", "Irikar > Beach > Tunnel Entrance ==> Cache (1)"),
+            ExitId::Irikar__Beach_Save__East_28_Ground__ex__Midwest__West_28_Ground_1 => write!(f, "{}", "Irikar > Beach Save > East 28 Ground ==> Midwest > West 28 Ground (1)"),
+            ExitId::Irikar__Beach_Save__East_28_Platform__ex__Midwest__West_28_Platform_1 => write!(f, "{}", "Irikar > Beach Save > East 28 Platform ==> Midwest > West 28 Platform (1)"),
+            ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_1 => write!(f, "{}", "Irikar > Beach Save > East 28 Platform ==> Top Platform (1)"),
+            ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_2 => write!(f, "{}", "Irikar > Beach Save > East 28 Platform ==> Top Platform (2)"),
+            ExitId::Irikar__Beach_Save__West__ex__Beach__East_1 => write!(f, "{}", "Irikar > Beach Save > West ==> Beach > East (1)"),
             ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1 => write!(f, "{}", "Irikar > Boss Room > Catwalk East ==> Lamassu > Catwalk West (1)"),
             ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1 => write!(f, "{}", "Irikar > Boss Room > Catwalk West ==> Upper Rooftops (1)"),
             ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1 => write!(f, "{}", "Irikar > Boss Room > East 28 ==> Lamassu > West 28 (1)"),
@@ -15666,8 +15762,8 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3 => write!(f, "{}", "Irikar > Midwest > Save Point ==> NE Ledge (3)"),
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Left Platform Start (1)"),
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Right Platform Start (1)"),
-            ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Small Rooftop ==> Right Platform Start (2)"),
             ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => write!(f, "{}", "Irikar > Midwest > SW Platform ==> Lower Rock West (1)"),
+            ExitId::Irikar__Midwest__Tablet_Platform__ex__Beach_Save__Partway_Up_1 => write!(f, "{}", "Irikar > Midwest > Tablet Platform ==> Beach Save > Partway Up (1)"),
             ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => write!(f, "{}", "Irikar > Midwest > Tablet Platform ==> Right Platform Start (1)"),
             ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2 => write!(f, "{}", "Irikar > Midwest > Tablet Platform ==> Right Platform Start (2)"),
             ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => write!(f, "{}", "Irikar > Midwest > The Long Rock East ==> East Rock 2 (1)"),
@@ -15747,7 +15843,9 @@ impl fmt::Display for ExitId {
             ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top ==> Giguna > Ruins Top > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Irikar_Beach_Save__ex__Irikar__Beach_Save__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Save ==> Irikar > Beach Save > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Irikar Hub ==> Irikar > Hub > Save Point (1)"),
+            ExitId::Menu__Kiengir_Map__Irikar_Midwest__ex__Irikar__Midwest__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Irikar Midwest ==> Irikar > Midwest > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)"),
             ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => write!(f, "{}", "Menu > Kiengir Map > Uhrum West ==> Uhrum > West Entrance > Save Point (1)"),
@@ -17567,6 +17665,15 @@ impl std::str::FromStr for ExitId {
             "Irikar > Basement Portal > Portal Stand ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__Portal_Stand__ex__Moving_Platform_Start_1),
             "Irikar > Basement Portal > West 28 ==> Basement Pipes > East 28 (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Basement_Pipes__East_28_1),
             "Irikar > Basement Portal > West 28 ==> Moving Platform Start (1)" => Ok(ExitId::Irikar__Basement_Portal__West_28__ex__Moving_Platform_Start_1),
+            "Irikar > Beach > Above Tunnel ==> Tunnel Entrance (1)" => Ok(ExitId::Irikar__Beach__Above_Tunnel__ex__Tunnel_Entrance_1),
+            "Irikar > Beach > Cache ==> Tunnel Entrance (1)" => Ok(ExitId::Irikar__Beach__Cache__ex__Tunnel_Entrance_1),
+            "Irikar > Beach > East ==> Beach Save > West (1)" => Ok(ExitId::Irikar__Beach__East__ex__Beach_Save__West_1),
+            "Irikar > Beach > Tunnel Entrance ==> Cache (1)" => Ok(ExitId::Irikar__Beach__Tunnel_Entrance__ex__Cache_1),
+            "Irikar > Beach Save > East 28 Ground ==> Midwest > West 28 Ground (1)" => Ok(ExitId::Irikar__Beach_Save__East_28_Ground__ex__Midwest__West_28_Ground_1),
+            "Irikar > Beach Save > East 28 Platform ==> Midwest > West 28 Platform (1)" => Ok(ExitId::Irikar__Beach_Save__East_28_Platform__ex__Midwest__West_28_Platform_1),
+            "Irikar > Beach Save > East 28 Platform ==> Top Platform (1)" => Ok(ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_1),
+            "Irikar > Beach Save > East 28 Platform ==> Top Platform (2)" => Ok(ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_2),
+            "Irikar > Beach Save > West ==> Beach > East (1)" => Ok(ExitId::Irikar__Beach_Save__West__ex__Beach__East_1),
             "Irikar > Boss Room > Catwalk East ==> Lamassu > Catwalk West (1)" => Ok(ExitId::Irikar__Boss_Room__Catwalk_East__ex__Lamassu__Catwalk_West_1),
             "Irikar > Boss Room > Catwalk West ==> Upper Rooftops (1)" => Ok(ExitId::Irikar__Boss_Room__Catwalk_West__ex__Upper_Rooftops_1),
             "Irikar > Boss Room > East 28 ==> Lamassu > West 28 (1)" => Ok(ExitId::Irikar__Boss_Room__East_28__ex__Lamassu__West_28_1),
@@ -17706,8 +17813,8 @@ impl std::str::FromStr for ExitId {
             "Irikar > Midwest > Save Point ==> NE Ledge (3)" => Ok(ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_3),
             "Irikar > Midwest > Small Rooftop ==> Left Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1),
             "Irikar > Midwest > Small Rooftop ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1),
-            "Irikar > Midwest > Small Rooftop ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_2),
             "Irikar > Midwest > SW Platform ==> Lower Rock West (1)" => Ok(ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1),
+            "Irikar > Midwest > Tablet Platform ==> Beach Save > Partway Up (1)" => Ok(ExitId::Irikar__Midwest__Tablet_Platform__ex__Beach_Save__Partway_Up_1),
             "Irikar > Midwest > Tablet Platform ==> Right Platform Start (1)" => Ok(ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1),
             "Irikar > Midwest > Tablet Platform ==> Right Platform Start (2)" => Ok(ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_2),
             "Irikar > Midwest > The Long Rock East ==> East Rock 2 (1)" => Ok(ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1),
@@ -17787,7 +17894,9 @@ impl std::str::FromStr for ExitId {
             "Menu > Kiengir Map > Giguna Ruins Top ==> Giguna > Ruins Top > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1),
             "Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1),
             "Menu > Kiengir Map > Glacier Revival ==> Glacier > Revival > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1),
+            "Menu > Kiengir Map > Irikar Beach Save ==> Irikar > Beach Save > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Irikar_Beach_Save__ex__Irikar__Beach_Save__Save_Point_1),
             "Menu > Kiengir Map > Irikar Hub ==> Irikar > Hub > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1),
+            "Menu > Kiengir Map > Irikar Midwest ==> Irikar > Midwest > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Irikar_Midwest__ex__Irikar__Midwest__Save_Point_1),
             "Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1),
             "Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1),
             "Menu > Kiengir Map > Uhrum West ==> Uhrum > West Entrance > Save Point (1)" => Ok(ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1),
@@ -18123,6 +18232,7 @@ pub enum ActionId {
     Global__Recall_Fast_Travel,
     Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
+    Irikar__Beach_Save__Save_Point__Save,
     Irikar__Hub__Collapsed_Column__Shockwave_Wall,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
@@ -18608,6 +18718,9 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Irikar > Basement Portal > Moving Platform Start > Activate Platform"
             ),
+            ActionId::Irikar__Beach_Save__Save_Point__Save => {
+                write!(f, "{}", "Irikar > Beach Save > Save Point > Save")
+            }
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
                 write!(f, "{}", "Irikar > Hub > Collapsed Column > Shockwave Wall")
             }
@@ -19024,6 +19137,9 @@ impl std::str::FromStr for ActionId {
             "Irikar > Basement Portal > Moving Platform Start > Activate Platform" => {
                 Ok(ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform)
             }
+            "Irikar > Beach Save > Save Point > Save" => {
+                Ok(ActionId::Irikar__Beach_Save__Save_Point__Save)
+            }
             "Irikar > Hub > Collapsed Column > Shockwave Wall" => {
                 Ok(ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall)
             }
@@ -19211,6 +19327,7 @@ pub enum CanonId {
     Loc_Irikar__Abandoned_Room__Corner_Core__Core,
     Loc_Irikar__Basement_Pipes__High_Pipe__Tablet,
     Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+    Loc_Irikar__Beach__Cache__Item,
     Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
     Loc_Irikar__Boss_Room__Healthy_Rooftop__Health,
     Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet,
@@ -19647,6 +19764,9 @@ impl fmt::Display for CanonId {
                 "{}",
                 "Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup"
             ),
+            CanonId::Loc_Irikar__Beach__Cache__Item => {
+                write!(f, "{}", "Loc_Irikar__Beach__Cache__Item")
+            }
             CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
                 write!(f, "{}", "Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward")
             }
@@ -20192,6 +20312,7 @@ impl std::str::FromStr for CanonId {
             "Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup" => {
                 Ok(CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup)
             }
+            "Loc_Irikar__Beach__Cache__Item" => Ok(CanonId::Loc_Irikar__Beach__Cache__Item),
             "Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward" => {
                 Ok(CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward)
             }

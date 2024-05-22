@@ -1496,9 +1496,7 @@ areas:
           req: $hover
           movement: base
           jumps: 1
-        - to: Right Platform Start
-          req: not ^_right_platform and Nanite_Mist
-          movement: mist1
+        # Mist1 movement not possible: cost = 480
         - to: Right Platform Start
           req: not ^_right_platform and $mist2
           movement: mist2
@@ -1731,6 +1729,10 @@ areas:
         - to: Right Platform Start
           req: not ^_right_platform and $mist2
           movement: mist2
+        - to: Beach Save > Partway Up
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Center Small Rock
       coord: [8.35, 25.2]
       local:
@@ -2056,8 +2058,157 @@ areas:
 
 - name: Beach Save  # MARK: Beach Save
   on_entry: $reset_old_area(^newpos)
+  map:
+    save: [5, 27, 6, 28]
+    urn: [5, 25, 6, 26]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Irikar Beach Save
+      urn: Menu > Kiengir Map > Irikar Fast Travel
   spots:
     - name: East 28 Platform
       coord: [6.95, 26.5]
+      local:
+        - to: Save Point
+        - to: Center Platform
+      exits:
+        - to: Midwest > West 28 Platform
+          tags: [xshift]
+        - to: Top Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Top Platform
+          req: $mist2
+          movement: mist2
     - name: East 28 Ground
       coord: [6.95, 27.3]
+      local:
+        - to: Save Point
+      exits:
+        - to: Midwest > West 28 Ground
+          tags: [xshift]
+    - name: Save Point
+      coord: [5.5, 27.4]
+      local:
+        - to: West Slope
+          jumps: 2
+        - to: East 28 Ground
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: West Slope
+      coord: [4.85, 27.1]
+      local:
+        - to: Partway Up
+          jumps: 4
+        - to: Save Point
+        - to: West
+          jumps: 3
+    - name: Center Platform
+      coord: [5.7, 26.8]
+      local:
+        - to: Save Point
+        - to: West
+          jumps: 6
+        - to: Partway Up
+          jumps: 2
+        - to: East 28 Platform
+          jumps: 5
+        - to: East 28 Ground
+    - name: Partway Up
+      coord: [5.75, 26.4]
+      local:
+        - to: Top Platform
+          jumps: 4
+        - to: West
+        - to: Save Point
+        - to: East 28 Platform
+    - name: Top Platform
+      coord: [5.65, 25.6]
+      local:
+        - to: West
+        - to: East 28 Platform
+        - to: Save Point
+          jumps_down: 1
+      locations:
+        - name: Urn
+          item: Fast_Travel
+          canon: Fast_Travel
+          tags: [urn]
+    - name: West
+      coord: [4.05, 26.55]
+      local:
+        - to: West Slope
+      exits:
+        - to: Beach > East
+          tags: [xshift]
+
+- name: Beach  # MARK: Beach
+  on_entry: $reset_old_area(^newpos)
+  map:
+    shore: [2, 27, 3, 28]
+    cache: [3, 27, 4, 28]
+  datamap:
+    water:
+      shore: true
+      cache: true
+    map_spot:
+      cache: Menu > Kiengir Map > Irikar Beach Cache
+  spots:
+    - name: East
+      coord: [3.95, 26.55]
+      local:
+        - to: Ivan
+          jumps: 2
+      exits:
+        - to: Beach Save > West
+          tags: [xshift]
+    - name: Ivan
+      coord: [3.4, 26.5]
+      local:
+        - to: East
+        - to: Shore
+    - name: Shore
+      coord: [2.95, 26.975]
+      local:
+        - to: Wet Feet
+        - to: Ivan
+          jumps: 2
+    - name: Wet Feet
+      coord: [2.9, 27.0]
+      local:
+        - to: Shore
+          jumps: 0.1
+        - to: Above Tunnel
+    - name: Above Tunnel
+      coord: [2.55, 27.2]
+      local:
+        - to: Wet Feet
+          jumps: 1
+      exits:
+        # Simulate entering the combo without storing it as context
+        - to: Tunnel Entrance
+          movement: base
+          penalty_tags: [combo]
+    - name: Tunnel Entrance
+      coord: [2.55, 27.35]
+      local:
+        - to: Above Tunnel
+          jumps: 1
+      exits:
+        - to: Cache
+          req: ^mode == 'drone'
+          movement: base
+    - name: Cache
+      coord: [3.8, 27.4]
+      locations:
+        - name: Item
+          item: Power_Matrix
+          tags: [standing]
+      exits:
+        - to: Tunnel Entrance
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 1

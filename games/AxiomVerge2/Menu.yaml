@@ -445,11 +445,19 @@ areas:
           req: ^map__glacier__revival__save
           time: 12
           penalties:
-            - when: ^mode == 'drone'
+            - when: ^mode != 'drone'
               add: 2.5
           tags: [warp]
     - name: Irikar Beach Save
       coord: [5, 28]
+      exits:
+        - to: Irikar > Beach Save > Save Point
+          req: ^map__irikar__beach_save__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Irikar Hub
       coord: [12, 23]
       exits:
@@ -462,6 +470,14 @@ areas:
           tags: [warp]
     - name: Irikar Midwest
       coord: [9, 25]
+      exits:
+        - to: Irikar > Midwest > Save Point
+          req: ^map__irikar__midwest__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Uhrum Center
       coord: [25, 27]
       exits:
@@ -561,6 +577,10 @@ areas:
       coord: [18, 26]
     - name: Irikar Mid-air Flask
       coord: [7, 23]
+    - name: Irikar Fast Travel
+      coord: [5, 26]
+    - name: Irikar Beach Cache
+      coord: [3, 28]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

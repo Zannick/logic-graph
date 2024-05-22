@@ -2190,15 +2190,8 @@ pub fn access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
     ctx: &Context,
     world: &graph::World,
 ) -> bool {
-    // Nanite_Mist and not ^_right_platform
-    (ctx.has(Item::Nanite_Mist) && !ctx.irikar__midwest__ctx__right_platform())
-}
-pub fn access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
-    // $mist2 and not ^_right_platform
-    (helper__mist2!(ctx, world) && !ctx.irikar__midwest__ctx__right_platform())
+    // not ^_right_platform and $mist2
+    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
     ctx: &Context,
@@ -2327,9 +2320,17 @@ pub fn access_map__glacier_breach__west_save__save(ctx: &Context, world: &graph:
     // ^map__glacier_breach__west_save__save
     ctx.map__glacier_breach__west_save__save()
 }
+pub fn access_map__irikar__beach_save__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__irikar__beach_save__save
+    ctx.map__irikar__beach_save__save()
+}
 pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar__hub__save
     ctx.map__irikar__hub__save()
+}
+pub fn access_map__irikar__midwest__save(ctx: &Context, world: &graph::World) -> bool {
+    // ^map__irikar__midwest__save
+    ctx.map__irikar__midwest__save()
 }
 pub fn access_map__irikar_breach__gauntlet__save(ctx: &Context, world: &graph::World) -> bool {
     // ^map__irikar_breach__gauntlet__save
@@ -11509,52 +11510,24 @@ pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
     world: &graph::World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Nanite_Mist and not ^_right_platform
+    // not ^_right_platform and $mist2
     {
         let mut left = {
-            let h = ctx.has(Item::Nanite_Mist);
-            edict.insert("Nanite_Mist", format!("{}", h));
-            (h, vec!["Nanite_Mist"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let val = {
-                    let r = ctx.irikar__midwest__ctx__right_platform();
-                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
-                    (r, vec!["^irikar__midwest__ctx__right_platform"])
-                };
-                (!val.0, val.1)
+            let val = {
+                let r = ctx.irikar__midwest__ctx__right_platform();
+                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
+                (r, vec!["^irikar__midwest__ctx__right_platform"])
             };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
-    ctx: &Context,
-    world: &graph::World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2 and not ^_right_platform
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-            edict.insert("$mist2", format!("{:?}", res));
-            refs.push("$mist2");
-            (res, refs)
+            (!val.0, val.1)
         };
         if !left.0 {
             left
         } else {
             let mut right = {
-                let val = {
-                    let r = ctx.irikar__midwest__ctx__right_platform();
-                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
-                    (r, vec!["^irikar__midwest__ctx__right_platform"])
-                };
-                (!val.0, val.1)
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -11942,6 +11915,18 @@ pub fn explain_map__glacier_breach__west_save__save(
         (r, vec!["^map__glacier_breach__west_save__save"])
     }
 }
+pub fn explain_map__irikar__beach_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__irikar__beach_save__save
+    {
+        let r = ctx.map__irikar__beach_save__save();
+        edict.insert("^map__irikar__beach_save__save", format!("{:?}", r));
+        (r, vec!["^map__irikar__beach_save__save"])
+    }
+}
 pub fn explain_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
@@ -11952,6 +11937,18 @@ pub fn explain_map__irikar__hub__save(
         let r = ctx.map__irikar__hub__save();
         edict.insert("^map__irikar__hub__save", format!("{:?}", r));
         (r, vec!["^map__irikar__hub__save"])
+    }
+}
+pub fn explain_map__irikar__midwest__save(
+    ctx: &Context,
+    world: &graph::World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__irikar__midwest__save
+    {
+        let r = ctx.map__irikar__midwest__save();
+        edict.insert("^map__irikar__midwest__save", format!("{:?}", r));
+        (r, vec!["^map__irikar__midwest__save"])
     }
 }
 pub fn explain_map__irikar_breach__gauntlet__save(
@@ -17627,26 +17624,11 @@ pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_1
     world: &graph::World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Nanite_Mist and not ^_right_platform
-    ({
-        full_obs.observe_nanite_mist();
-        ctx.has(Item::Nanite_Mist)
-    } && (!({
+    // not ^_right_platform and $mist2
+    (!({
         full_obs.observe_irikar__midwest__ctx__right_platform();
         ctx.irikar__midwest__ctx__right_platform()
-    })))
-}
-pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_2__req(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2 and not ^_right_platform
-    (hobserve__mist2!(ctx, world, full_obs)
-        && (!({
-            full_obs.observe_irikar__midwest__ctx__right_platform();
-            ctx.irikar__midwest__ctx__right_platform()
-        })))
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
     ctx: &Context,
@@ -17959,6 +17941,17 @@ pub fn observe_access_map__glacier_breach__west_save__save(
         ctx.map__glacier_breach__west_save__save()
     }
 }
+pub fn observe_access_map__irikar__beach_save__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__irikar__beach_save__save
+    {
+        full_obs.observe_map__irikar__beach_save__save();
+        ctx.map__irikar__beach_save__save()
+    }
+}
 pub fn observe_access_map__irikar__hub__save(
     ctx: &Context,
     world: &graph::World,
@@ -17968,6 +17961,17 @@ pub fn observe_access_map__irikar__hub__save(
     {
         full_obs.observe_map__irikar__hub__save();
         ctx.map__irikar__hub__save()
+    }
+}
+pub fn observe_access_map__irikar__midwest__save(
+    ctx: &Context,
+    world: &graph::World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__irikar__midwest__save
+    {
+        full_obs.observe_map__irikar__midwest__save();
+        ctx.map__irikar__midwest__save()
     }
 }
 pub fn observe_access_map__irikar_breach__gauntlet__save(

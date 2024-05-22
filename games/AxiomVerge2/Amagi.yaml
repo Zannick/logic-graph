@@ -116,7 +116,7 @@ areas:
         - name: Key Combo
           req: not ^_combo
           do: ^_combo = true
-          time: 1.75
+          tags: [combo]
       exits:
         - to: Secret Outcropping
           req: ^_combo and ($grab or $climb)

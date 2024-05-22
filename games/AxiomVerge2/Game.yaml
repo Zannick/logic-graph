@@ -134,6 +134,7 @@ time:  # MARK: time
   hack: 0.5
   button: 0.1  # melee button
   susar: 3.0  # caught by susar
+  combo: 1.75  # entering a key combo
   # need to test slingshot charge time
 
   ## Transitions

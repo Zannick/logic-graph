@@ -2014,6 +2014,21 @@ subgraph Irikar
     subgraph Irikar__Beach_Save[Beach Save]
         Irikar__Beach_Save__East_28_Platform(East 28 Platform);
         Irikar__Beach_Save__East_28_Ground(East 28 Ground);
+        Irikar__Beach_Save__Save_Point(Save Point);
+        Irikar__Beach_Save__West_Slope(West Slope);
+        Irikar__Beach_Save__Center_Platform(Center Platform);
+        Irikar__Beach_Save__Partway_Up(Partway Up);
+        Irikar__Beach_Save__Top_Platform(Top Platform);
+        Irikar__Beach_Save__West(West);
+    end
+    subgraph Irikar__Beach[Beach]
+        Irikar__Beach__East(East);
+        Irikar__Beach__Ivan(Ivan);
+        Irikar__Beach__Shore(Shore);
+        Irikar__Beach__Wet_Feet(Wet Feet);
+        Irikar__Beach__Above_Tunnel(Above Tunnel);
+        Irikar__Beach__Tunnel_Entrance(Tunnel Entrance);
+        Irikar__Beach__Cache(Cache);
     end
 end
 subgraph Menu
@@ -2088,6 +2103,8 @@ subgraph Menu
         Menu__Kiengir_Map__Heretics_Granddaughter(Heretic's Granddaughter);
         Menu__Kiengir_Map__Terminal_Breakthrough_2(Terminal Breakthrough 2);
         Menu__Kiengir_Map__Irikar_Mid_air_Flask(Irikar Mid-air Flask);
+        Menu__Kiengir_Map__Irikar_Fast_Travel(Irikar Fast Travel);
+        Menu__Kiengir_Map__Irikar_Beach_Cache(Irikar Beach Cache);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -3303,6 +3320,12 @@ Irikar__Basement_Portal__North <--> Irikar__Hub__Royal_Storage_South
 Irikar__Basement_Portal__Portal_Stand --> Irikar__Basement_Portal__Ledge
 Irikar__Basement_Portal__Portal_Stand --> Irikar__Basement_Portal__Moving_Platform_Start
 Irikar__Basement_Portal__West_28 --> Irikar__Basement_Portal__Moving_Platform_Start
+Irikar__Beach_Save__East_28_Ground <--> Irikar__Midwest__West_28_Ground
+Irikar__Beach_Save__East_28_Platform --> Irikar__Beach_Save__Top_Platform
+Irikar__Beach_Save__East_28_Platform <--> Irikar__Midwest__West_28_Platform
+Irikar__Beach_Save__West <--> Irikar__Beach__East
+Irikar__Beach__Above_Tunnel --> Irikar__Beach__Tunnel_Entrance
+Irikar__Beach__Cache <--> Irikar__Beach__Tunnel_Entrance
 Irikar__Boss_Room__Catwalk_East <--> Irikar__Lamassu__Catwalk_West
 Irikar__Boss_Room__Catwalk_West --> Irikar__Boss_Room__Upper_Rooftops
 Irikar__Boss_Room__East_28 <--> Irikar__Lamassu__West_28
@@ -3391,10 +3414,9 @@ Irikar__Midwest__Save_Point --> Irikar__Midwest__East_25
 Irikar__Midwest__Save_Point --> Irikar__Midwest__NE_Ledge
 Irikar__Midwest__Small_Rooftop --> Irikar__Midwest__Left_Platform_Start
 Irikar__Midwest__Small_Rooftop --> Irikar__Midwest__Right_Platform_Start
+Irikar__Midwest__Tablet_Platform --> Irikar__Beach_Save__Partway_Up
 Irikar__Midwest__Tablet_Platform --> Irikar__Midwest__Right_Platform_Start
 Irikar__Midwest__The_Long_Rock_East --> Irikar__Midwest__East_Rock_2
-Irikar__Midwest__West_28_Ground --> Irikar__Beach_Save__East_28_Ground
-Irikar__Midwest__West_28_Platform --> Irikar__Beach_Save__East_28_Platform
 Irikar__Midwest__West_Platform --> Irikar__Midwest__The_Long_Rock_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
@@ -3426,7 +3448,9 @@ Menu__Kiengir_Map__Giguna_Northeast --> Giguna__Giguna_Northeast__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_Top --> Giguna__Ruins_Top__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_West --> Giguna__Ruins_West__Save_Point
 Menu__Kiengir_Map__Glacier_Revival --> Glacier__Revival__Save_Point
+Menu__Kiengir_Map__Irikar_Beach_Save --> Irikar__Beach_Save__Save_Point
 Menu__Kiengir_Map__Irikar_Hub --> Irikar__Hub__Save_Point
+Menu__Kiengir_Map__Irikar_Midwest --> Irikar__Midwest__Save_Point
 Menu__Kiengir_Map__Uhrum_Center --> Uhrum__Save_Room__Save_Point
 Menu__Kiengir_Map__Uhrum_East --> Uhrum__Annuna_Corridor__Save_Point
 Menu__Kiengir_Map__Uhrum_West --> Uhrum__West_Entrance__Save_Point

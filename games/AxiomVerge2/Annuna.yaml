@@ -549,7 +549,7 @@ areas:
         - name: Enter Combo
           req: not ^_combo
           do: ^_combo = true
-          time: 2  # ?
+          tags: [combo]  # 1.75?
     - name: Tower East Ledge
       coord: [38.65, 22.2]
       local:
@@ -569,7 +569,7 @@ areas:
         - name: Enter Combo
           req: not ^_combo
           do: ^_combo = true
-          time: 2  # ?
+          tags: [combo]  # 1.75?
     - name: Tower Secret
       coord: [38.45, 22.15]
       locations:
@@ -603,7 +603,7 @@ areas:
         - name: Enter Combo
           req: not ^_combo
           do: ^_combo = true
-          time: 2  # ?
+          tags: [combo]  # 1.75?
     - name: Tower Peak
       coord: [38.45, 21.7]
       local:

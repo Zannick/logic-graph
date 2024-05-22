@@ -1869,8 +1869,23 @@
             Irikar__Basement_Portal__East_28 [label = "", pos = "41.85,-46.166667!"];
         }
         {
+            Irikar__Beach__East [label = "", pos = "11.85,-44.25!"];
+            Irikar__Beach__Ivan [label = "", pos = "10.2,-44.166667!"];
+            Irikar__Beach__Shore [label = "", pos = "8.85,-44.958333!"];
+            Irikar__Beach__Wet_Feet [label = "", pos = "8.7,-45.0!"];
+            Irikar__Beach__Above_Tunnel [label = "", pos = "7.65,-45.333333!"];
+            Irikar__Beach__Tunnel_Entrance [label = "", pos = "7.65,-45.583333!"];
+            Irikar__Beach__Cache [label = "", pos = "11.4,-45.666667!"];
+        }
+        {
             Irikar__Beach_Save__East_28_Platform [label = "", pos = "20.85,-44.166667!"];
             Irikar__Beach_Save__East_28_Ground [label = "", pos = "20.85,-45.5!"];
+            Irikar__Beach_Save__Save_Point [label = "", pos = "16.5,-45.666667!"];
+            Irikar__Beach_Save__West_Slope [label = "", pos = "14.55,-45.166667!"];
+            Irikar__Beach_Save__Center_Platform [label = "", pos = "17.1,-44.666667!"];
+            Irikar__Beach_Save__Partway_Up [label = "", pos = "17.25,-44.0!"];
+            Irikar__Beach_Save__Top_Platform [label = "", pos = "16.95,-42.666667!"];
+            Irikar__Beach_Save__West [label = "", pos = "12.15,-44.25!"];
         }
         {
             Irikar__Boss_Room__West_28 [label = "", pos = "45.15,-46.166667!"];
@@ -2132,6 +2147,8 @@
             Menu__Kiengir_Map__Heretics_Granddaughter [label = "", pos = "45.0,-41.666667!"];
             Menu__Kiengir_Map__Terminal_Breakthrough_2 [label = "", pos = "54.0,-43.333333!"];
             Menu__Kiengir_Map__Irikar_Mid_air_Flask [label = "", pos = "21.0,-38.333333!"];
+            Menu__Kiengir_Map__Irikar_Fast_Travel [label = "", pos = "15.0,-43.333333!"];
+            Menu__Kiengir_Map__Irikar_Beach_Cache [label = "", pos = "9.0,-46.666667!"];
         }
     }
     {
