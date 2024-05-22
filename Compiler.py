@@ -471,10 +471,11 @@ class GameLogic(object):
 
     def process_exit_movements(self):
         for spot in self.spots():
-            for exit in spot.get('exits', []) + spot.get('hybrid', []):
+            points = [('exit', e) for e in spot.get('exits', ())] + [('hybrid exit', h) for h in spot.get('hybrid', ())] + [('action', a) for a in spot.get('actions', ())]
+            for (ptype, exit) in points:
                 if 'time' not in exit and 'movement' in exit:
                     if 'to' not in exit:
-                        # check_all will add an error for this
+                        # check_all will add an error for this, if it's not an action that doesn't need a dest
                         continue
                     target = get_exit_target(exit)
                     if target not in self.id_lookup:
@@ -482,10 +483,10 @@ class GameLogic(object):
                         continue
                     dest = self.id_lookup[get_exit_target(exit)]
                     if 'coord' not in spot:
-                        self._errors.append(f'Expected coord for spot {spot["fullname"]} used in exit with movement: {exit["fullname"]}')
+                        self._errors.append(f'Expected coord for spot {spot["fullname"]} used in {ptype} with movement: {exit["fullname"]}')
                         continue
                     elif 'coord' not in dest:
-                        self._errors.append(f'Expected coord for dest {dest["fullname"]} used in exit with movement: {exit["fullname"]}')
+                        self._errors.append(f'Expected coord for dest {dest["fullname"]} used in {ptype} with movement: {exit["fullname"]}')
                         continue
 
                     base = spot['base_movement']
@@ -503,16 +504,16 @@ class GameLogic(object):
                             exit['price'] = int(math.ceil(mvmt['price_per_sec'] * exit['time'] + mvmt.get('base_price', 0)))
                             if costs := mvmt.get('costs'):
                                 if 'costs' in exit and exit['costs'] != costs:
-                                    logging.warning(f'field "costs" in exit {exit["fullname"]} overridden by movement {m!r}: {costs}')
+                                    logging.warning(f'field "costs" in {ptype} {exit["fullname"]} overridden by movement {m!r}: {costs}')
                                 exit['costs'] = costs
                             elif 'costs' in exit:
-                                logging.warning(f'field "costs" in exit {exit["fullname"]} overridden by movement {m!r}: default ({self.default_price_type})')
+                                logging.warning(f'field "costs" in {ptype} {exit["fullname"]} overridden by movement {m!r}: default ({self.default_price_type})')
                                 del exit['costs']
                     else:
-                        self._errors.append(f'Unrecognized movement type in exit {exit["fullname"]}: {m!r}')
+                        self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]}: {m!r}')
                         continue
                     if exit['time'] is None:
-                        self._errors.append(f'Unable to determine movement time for exit {exit["fullname"]} with movement {m!r}: missing jumps?')
+                        self._errors.append(f'Unable to determine movement time for {ptype} {exit["fullname"]} with movement {m!r}: missing jumps?')
 
 
     def process_times(self):
