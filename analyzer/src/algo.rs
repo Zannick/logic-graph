@@ -250,9 +250,11 @@ where
     last_clean: AtomicUsize,
     solves_since_clean: AtomicUsize,
     last_solve: AtomicUsize,
+    next_threshold: AtomicUsize,
     organic_solution: AtomicBool,
     any_solution: AtomicBool,
     organic_level: AtomicUsize,
+    finished: AtomicBool,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -420,9 +422,11 @@ where
             last_clean: 0.into(),
             solves_since_clean: 0.into(),
             last_solve: 0.into(),
+            next_threshold: 0.into(),
             organic_solution: false.into(),
             any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
+            finished: false.into(),
         };
         for w in wins {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
@@ -718,7 +722,6 @@ where
     }
 
     pub fn search(self) -> Result<(), std::io::Error> {
-        let finished = AtomicBool::new(false);
         let workers_done = AtomicUsize::new(0);
         let start = Mutex::new(Instant::now());
         let num_threads = rayon::current_num_threads();
@@ -745,9 +748,11 @@ where
             let mut no_progress = 0;
 
             // Enforce all workers exiting immediately upon one worker exiting (e.g. panic/assert)
-            let _at_exit = AtExit { flag: &finished };
+            let _at_exit = AtExit {
+                flag: &self.finished,
+            };
 
-            while !finished.load(Ordering::Acquire)
+            while !self.finished.load(Ordering::Acquire)
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
                 let iters = self.iters.load(Ordering::Acquire);
@@ -860,7 +865,7 @@ where
                                         let mut r = res.lock().unwrap();
                                         if r.is_ok() {
                                             *r = Err(e);
-                                            finished.store(true, Ordering::Release);
+                                            self.finished.store(true, Ordering::Release);
                                         }
                                         return;
                                     }
@@ -910,7 +915,7 @@ where
                                 log::error!("Thread {} exiting due to error: {:?}", i, e);
                                 if r.is_ok() {
                                     *r = Err(e);
-                                    finished.store(true, Ordering::Release);
+                                    self.finished.store(true, Ordering::Release);
                                 }
                             }
                         }
@@ -920,7 +925,7 @@ where
                         let mut r = res.lock().unwrap();
                         if r.is_ok() {
                             *r = Err(e);
-                            finished.store(true, Ordering::Release);
+                            self.finished.store(true, Ordering::Release);
                         }
                         return;
                     }
@@ -929,7 +934,7 @@ where
             log::info!(
                 "Thread {} exiting: fin={} done={}",
                 i,
-                finished.load(Ordering::Acquire),
+                self.finished.load(Ordering::Acquire),
                 workers_done.load(Ordering::Acquire)
             );
         };
@@ -937,13 +942,13 @@ where
         rayon::scope(|scope| {
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
-                while !finished.load(Ordering::Acquire) {
+                while !self.finished.load(Ordering::Acquire) {
                     let len = self.queue.db_len();
                     if len < 1_000_000 {
                         sleep(sleep_time);
                         continue;
                     }
-                    self.queue.db_cleanup(65_536, &finished).unwrap();
+                    self.queue.db_cleanup(65_536, &self.finished).unwrap();
                 }
             });
 
@@ -954,7 +959,7 @@ where
             });
 
             log::info!("Workers all exited, marking finished");
-            finished.store(true, Ordering::Release);
+            self.finished.store(true, Ordering::Release);
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         log::info!(
@@ -1008,13 +1013,36 @@ where
             if iters % 1_000_000 == 0 {
                 let last_clean = self.last_clean.load(Ordering::Acquire);
                 let solves_since = self.solves_since_clean.load(Ordering::Acquire);
-                if last_clean + 10_000_000 <= iters && solves_since > 0 {
-                    let last_solve = self.last_solve.load(Ordering::Acquire);
-                    if solves_since > 20 || last_solve + 20_000_000 <= iters {
-                        self.solves_since_clean.store(0, Ordering::Release);
-                        self.last_clean.store(iters, Ordering::Release);
-                        self.clean_solutions();
+                if solves_since > 0 {
+                    if last_clean + 10_000_000 <= iters {
+                        let last_solve = self.last_solve.load(Ordering::Acquire);
+                        if solves_since > 20 || last_solve + 20_000_000 <= iters {
+                            self.solves_since_clean.store(0, Ordering::Release);
+                            self.last_clean.store(iters, Ordering::Release);
+                            self.clean_solutions();
+                            self.next_threshold.store(
+                                std::cmp::max(iters + 50_000_000, iters * 2),
+                                Ordering::Release,
+                            );
+                        }
                     }
+                } else if last_clean > 0 && self.next_threshold.load(Ordering::Acquire) <= iters {
+                    // Minimum 250M after the last clean
+                    if iters / last_clean >= 5 {
+                        log::info!(
+                            "No solves in {} attempts since last clean ({}x), giving up.",
+                            iters - last_clean,
+                            iters / last_clean,
+                        );
+                        self.finished.store(true, Ordering::Release);
+                    } else {
+                        log::info!(
+                            "No solves in {} attempts since last clean ({}x)",
+                            iters - last_clean,
+                            iters / last_clean,
+                        );
+                    }
+                    self.next_threshold.fetch_add(last_clean, Ordering::Release);
                 }
             }
         }
