@@ -59,6 +59,7 @@ where
                 if world.should_draw_spot(ctx.get().position()) {
                     recent.push(format!("{}", item));
                     spots.push((format!("{:?}", ctx.get().position()), i, recent.join("\\n")));
+                    i += 1;
                     recent.clear();
                 } else {
                     recent.push(format!("{}", item));
@@ -74,7 +75,7 @@ where
         }
         ctx.replay(world, *h);
         let is_warp = matches!(h, History::W(..));
-        if ctx.get().position() != spot {
+        if ctx.get().position() != spot || matches!(h, History::A(..)) {
             if world.should_draw_spot(spot) {
                 if world.should_draw_spot(ctx.get().position()) {
                     edges.push((
