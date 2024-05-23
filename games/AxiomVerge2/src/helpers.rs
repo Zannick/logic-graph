@@ -2370,11 +2370,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{18}, Big_Flask{6}]
+/// [Flask{20}, Big_Flask{8}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 18 && $ctx.count(Item::Big_Flask) >= 6
+        $ctx.count(Item::Flask) >= 20 && $ctx.count(Item::Big_Flask) >= 8
     }};
 }
 #[macro_export]
@@ -2385,7 +2385,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 18, vec!["Flask count"])
+                (ct >= 20, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2394,7 +2394,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 6, vec!["Big_Flask count"])
+                (ct >= 8, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2405,21 +2405,21 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(18));
-            $ctx.count(Item::Flask) >= 18
+            $full_obs.observe_flask(IntegerObservation::Ge(20));
+            $ctx.count(Item::Flask) >= 20
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(6));
-            $ctx.count(Item::Big_Flask) >= 6
+            $full_obs.observe_big_flask(IntegerObservation::Ge(8));
+            $ctx.count(Item::Big_Flask) >= 8
         })
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node{2}, Health_Fragment{8}]
+/// [Health_Node{2}, Health_Fragment{11}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 8
+        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 11
     }};
 }
 #[macro_export]
@@ -2439,7 +2439,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Fragment);
                 $edict.insert("Health_Fragment count", format!("{}", ct));
-                (ct >= 8, vec!["Health_Fragment count"])
+                (ct >= 11, vec!["Health_Fragment count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2453,8 +2453,8 @@ macro_rules! hobserve__all_health {
             $full_obs.observe_health_node(IntegerObservation::Ge(2));
             $ctx.count(Item::Health_Node) >= 2
         }) && ({
-            $full_obs.observe_health_fragment(IntegerObservation::Ge(8));
-            $ctx.count(Item::Health_Fragment) >= 8
+            $full_obs.observe_health_fragment(IntegerObservation::Ge(11));
+            $ctx.count(Item::Health_Fragment) >= 11
         })
     }};
 }
@@ -2545,7 +2545,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan]
+/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -2555,6 +2555,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Eye_Ring)
             && $ctx.has(Item::Breach_Attractor)
             && $ctx.has(Item::Udusan)
+            && $ctx.has(Item::Carnelian_Ring)
     }};
 }
 #[macro_export]
@@ -2613,6 +2614,15 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Udusan"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Carnelian_Ring);
+                $edict.insert("Carnelian_Ring", format!("{}", h));
+                (h, vec!["Carnelian_Ring"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2638,6 +2648,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_udusan();
             $ctx.has(Item::Udusan)
+        }) && ({
+            $full_obs.observe_carnelian_ring();
+            $ctx.has(Item::Carnelian_Ring)
         })
     }};
 }

@@ -1653,7 +1653,7 @@ areas:
       coord: [11.4, 12.9]  # TODO: yshifts should be at .95/.05 as well!
       exits:
         - to: Helipad > North
-          tags: [yshift]
+          tags: [yfade]
 
 - name: Helipad  # MARK: Helipad
   on_entry: $reset_old_area(^newpos)
@@ -3423,6 +3423,11 @@ areas:
 
 - name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [16, 23, 17, 24]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Breachable Wall Flask
   spots:
     - name: West Mid-air
       coord: [16.05, 24.0]
@@ -3438,9 +3443,73 @@ areas:
           tags: [yshift]
     - name: Above Middle Catwalk
       coord: [17.1, 24.9]
+      exits:
+        - to: Irikar > Lamassu > Northwest
+          tags: [yshift]
 
+    - name: West Ledge
+      coord: [16.45, 23.2]
+      local:
+        - to: Above the Hole
+        - to: West Mid-air
+        - to: Above West Catwalk
+      exits:
+        - to: Irikar > Boss Room > Healthy Rooftop
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+        - to: Cave Mouth West
+          req: $hover
+          movement: base
+        - to: Cave Mouth West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cave Mouth West
+          req: $mist2
+          movement: mist2
+    - name: Above the Hole
+      coord: [16.9, 23.3]
+      local:
+        - to: West Ledge
+          jumps: 1
+      locations:
+        - name: Shockwave Flask
+          item: Big_Flask
+          canon: Giguna_Breachable_Wall_Flask
+          req: $shockwave
+          tags: [shockwave]
     - name: Wall Interior
       coord: [16.9, 23.6]
+      local:
+        - to: Cave Mouth East
+        - to: Above West Catwalk
+      locations:
+        - name: Flask
+          item: Big_Flask
+          canon: Giguna_Breachable_Wall_Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          item: Big_Flask
+          canon: Giguna_Breachable_Wall_Flask
+          req: $shockwave
+          tags: [shockwave]
+    - name: Cave Mouth West
+      coord: [16.7, 23.9]
+      local:
+        - to: Above Middle Catwalk
+      exits:
+        - to: Wall Interior
+          req: Nanite_Mist
+          movement: mist1
+        - to: Wall Interior
+          req: $mist2
+    - name: Cave Mouth East
+      coord: [16.85, 23.9]
+      local:
+        - to: Above Middle Catwalk
+      exits:
+        - to: Irikar > Lamassu > Catwalk Middle
+          movement: base
+          penalty_tags: [yshift, -fall.2]
 
 - name: Separator  # MARK: Separator
   on_entry: $reset_old_area(^newpos)

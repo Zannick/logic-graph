@@ -963,7 +963,11 @@
             Giguna__Breachable_Wall__West_Mid_air [label = "", pos = "48.15,-40.0!"];
             Giguna__Breachable_Wall__Above_West_Catwalk [label = "", pos = "49.65,-41.5!"];
             Giguna__Breachable_Wall__Above_Middle_Catwalk [label = "", pos = "51.3,-41.5!"];
+            Giguna__Breachable_Wall__West_Ledge [label = "", pos = "49.35,-38.666667!"];
+            Giguna__Breachable_Wall__Above_the_Hole [label = "", pos = "50.7,-38.833333!"];
             Giguna__Breachable_Wall__Wall_Interior [label = "", pos = "50.7,-39.333333!"];
+            Giguna__Breachable_Wall__Cave_Mouth_West [label = "", pos = "50.1,-39.833333!"];
+            Giguna__Breachable_Wall__Cave_Mouth_East [label = "", pos = "50.55,-39.833333!"];
         }
         {
             Giguna__Carnelian__East_10 [label = "", pos = "50.85,-15.833333!"];
@@ -1838,7 +1842,14 @@
         }
         {
             Irikar__Airy__Northwest [label = "", pos = "42.15,-34.5!"];
-            Irikar__Airy__Middle_South [label = "", pos = "43.95,-38.166667!"];
+            Irikar__Airy__South_Sight [label = "", pos = "43.95,-38.166667!"];
+            Irikar__Airy__Left_Hover_Throw_End [label = "", pos = "43.2,-34.666667!"];
+            Irikar__Airy__Right_Hover_Throw_End [label = "", pos = "45.15,-35.166667!"];
+            Irikar__Airy__Lower_Throw_End [label = "", pos = "43.2,-37.666667!"];
+            Irikar__Airy__Cavern_Mouth [label = "", pos = "47.1,-35.25!"];
+            Irikar__Airy__Cavern_Side [label = "", pos = "47.4,-35.0!"];
+            Irikar__Airy__Cavern_Cache [label = "", pos = "46.95,-34.75!"];
+            Irikar__Airy__South_Center [label = "", pos = "45.0,-38.166667!"];
         }
         {
             Irikar__Basement_Pipes__East_28 [label = "", pos = "35.85,-45.916667!"];
@@ -2149,6 +2160,8 @@
             Menu__Kiengir_Map__Irikar_Mid_air_Flask [label = "", pos = "21.0,-38.333333!"];
             Menu__Kiengir_Map__Irikar_Fast_Travel [label = "", pos = "15.0,-43.333333!"];
             Menu__Kiengir_Map__Irikar_Beach_Cache [label = "", pos = "9.0,-46.666667!"];
+            Menu__Kiengir_Map__Irikar_Airy_Flask [label = "", pos = "45.0,-35.0!"];
+            Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask [label = "", pos = "48.0,-40.0!"];
         }
     }
     {

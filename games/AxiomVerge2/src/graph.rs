@@ -1128,7 +1128,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Giguna__Breachable_Wall__West_Mid_air
         | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
         | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
-        | SpotId::Giguna__Breachable_Wall__Wall_Interior => AreaId::Giguna__Breachable_Wall,
+        | SpotId::Giguna__Breachable_Wall__West_Ledge
+        | SpotId::Giguna__Breachable_Wall__Above_the_Hole
+        | SpotId::Giguna__Breachable_Wall__Wall_Interior
+        | SpotId::Giguna__Breachable_Wall__Cave_Mouth_West
+        | SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => AreaId::Giguna__Breachable_Wall,
         SpotId::Giguna__Separator__West_23
         | SpotId::Giguna__Separator__West_24
         | SpotId::Giguna__Separator__West_Mid_air
@@ -1574,9 +1578,15 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase
         | SpotId::Irikar__Hub__West_Rooftops_Upper_Middle
         | SpotId::Irikar__Hub__West_Rooftops_Upper_East => AreaId::Irikar__Hub,
-        SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => {
-            AreaId::Irikar__Airy
-        }
+        SpotId::Irikar__Airy__Northwest
+        | SpotId::Irikar__Airy__South_Sight
+        | SpotId::Irikar__Airy__Left_Hover_Throw_End
+        | SpotId::Irikar__Airy__Right_Hover_Throw_End
+        | SpotId::Irikar__Airy__Lower_Throw_End
+        | SpotId::Irikar__Airy__Cavern_Mouth
+        | SpotId::Irikar__Airy__Cavern_Side
+        | SpotId::Irikar__Airy__Cavern_Cache
+        | SpotId::Irikar__Airy__South_Center => AreaId::Irikar__Airy,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
@@ -1762,7 +1772,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2
         | SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask
         | SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel
-        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => AreaId::Menu__Kiengir_Map,
+        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache
+        | SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask
+        | SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => AreaId::Menu__Kiengir_Map,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3021,7 +3033,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Giguna__Breachable_Wall__West_Mid_air
         | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
         | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
-        | SpotId::Giguna__Breachable_Wall__Wall_Interior => RegionId::Giguna,
+        | SpotId::Giguna__Breachable_Wall__West_Ledge
+        | SpotId::Giguna__Breachable_Wall__Above_the_Hole
+        | SpotId::Giguna__Breachable_Wall__Wall_Interior
+        | SpotId::Giguna__Breachable_Wall__Cave_Mouth_West
+        | SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => RegionId::Giguna,
         SpotId::Giguna__Separator__West_23
         | SpotId::Giguna__Separator__West_24
         | SpotId::Giguna__Separator__West_Mid_air
@@ -3455,7 +3471,15 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase
         | SpotId::Irikar__Hub__West_Rooftops_Upper_Middle
         | SpotId::Irikar__Hub__West_Rooftops_Upper_East => RegionId::Irikar,
-        SpotId::Irikar__Airy__Northwest | SpotId::Irikar__Airy__Middle_South => RegionId::Irikar,
+        SpotId::Irikar__Airy__Northwest
+        | SpotId::Irikar__Airy__South_Sight
+        | SpotId::Irikar__Airy__Left_Hover_Throw_End
+        | SpotId::Irikar__Airy__Right_Hover_Throw_End
+        | SpotId::Irikar__Airy__Lower_Throw_End
+        | SpotId::Irikar__Airy__Cavern_Mouth
+        | SpotId::Irikar__Airy__Cavern_Side
+        | SpotId::Irikar__Airy__Cavern_Cache
+        | SpotId::Irikar__Airy__South_Center => RegionId::Irikar,
         SpotId::Irikar__Sight_Room__West_24
         | SpotId::Irikar__Sight_Room__Lower_Ledge
         | SpotId::Irikar__Sight_Room__Portal
@@ -3637,7 +3661,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2
         | SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask
         | SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel
-        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => RegionId::Menu,
+        | SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache
+        | SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask
+        | SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => RegionId::Menu,
         SpotId::Menu__Breach_Map__AGB_Bridge_Lower
         | SpotId::Menu__Breach_Map__AGB_Bridge_Upper
         | SpotId::Menu__Breach_Map__AGB_East
@@ -3937,6 +3963,9 @@ impl world::Accessible for Location {
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::access_invoke_shockwave(ctx, world),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::access_invoke_activate(ctx, world),
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => true,
+            LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask => true,
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Giguna__Carnelian__Vault__Item => true,
             LocationId::Giguna__Clouds__Cache__Item => true,
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::access_invoke_shockwave(ctx, world),
@@ -4043,6 +4072,9 @@ impl world::Accessible for Location {
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => true,
             LocationId::Interior__Tent_Interior__Desk__Note => true,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Irikar__Airy__Cavern_Cache__Flask => true,
+            LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => true,
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
             LocationId::Irikar__Beach__Cache__Item => true,
@@ -4242,6 +4274,8 @@ impl world::Accessible for Location {
             LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall => rules::observe_access_not_ebih_waterfall_wall_and_invoke_mist2(ctx, world, full_obs),
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::observe_access_invoke_activate(ctx, world, full_obs),
+            LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
@@ -4302,6 +4336,8 @@ impl world::Accessible for Location {
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Interior__Garage__Boxes__Under_Boxes => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::observe_access_irikar_gudam(ctx, world, full_obs),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
@@ -4530,6 +4566,8 @@ impl world::Accessible for Location {
             LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall => rules::explain_not_ebih_waterfall_wall_and_invoke_mist2(ctx, world, edict),
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::explain_invoke_activate(ctx, world, edict),
+            LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
@@ -4590,6 +4628,8 @@ impl world::Accessible for Location {
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Interior__Garage__Boxes__Under_Boxes => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => rules::explain_invoke_more_refills(ctx, world, edict),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => rules::explain_irikar_gudam(ctx, world, edict),
             LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => rules::explain_invoke_can_damage(ctx, world, edict),
@@ -5556,7 +5596,15 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => true,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 => true,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => rules::access_giguna__carnelian__door__ex__switch_1__req(ctx, world),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => rules::access_giguna__carnelian__door__ex__vault_1__req(ctx, world),
@@ -6294,7 +6342,22 @@ impl world::Accessible for Exit {
             ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
-            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::access_invoke_hover_and_invoke_hook(ctx, world),
@@ -6354,6 +6417,8 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => true,
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::access_invoke_grab_and_anuman(ctx, world),
@@ -7401,6 +7466,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => rules::observe_access_giguna__carnelian__door__ex__switch_1__req(ctx, world, full_obs),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => rules::observe_access_giguna__carnelian__door__ex__vault_1__req(ctx, world, full_obs),
             ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1 => rules::observe_access_giguna__carnelian__lower_susar__ex__rock_1__req(ctx, world, full_obs),
@@ -7931,6 +8001,14 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::observe_access_invoke_hover_and_invoke_hook(ctx, world, full_obs),
@@ -7970,6 +8048,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::observe_access_invoke_grab_and_anuman(ctx, world, full_obs),
@@ -9124,6 +9203,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => rules::explain_giguna__carnelian__door__ex__switch_1__req(ctx, world, edict),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => rules::explain_giguna__carnelian__door__ex__vault_1__req(ctx, world, edict),
             ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1 => rules::explain_giguna__carnelian__lower_susar__ex__rock_1__req(ctx, world, edict),
@@ -9654,6 +9738,14 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::explain_invoke_hover_and_invoke_hook(ctx, world, edict),
@@ -9693,6 +9785,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::explain_invoke_grab_and_anuman(ctx, world, edict),
@@ -10241,7 +10334,10 @@ impl world::Exit for Exit {
             ExitId::Filter__Upper_Hallway__West__ex__Core__East_1 => true,
             ExitId::Giguna__Antechamber__East_16__ex__East_Caverns__West_16_1 => true,
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => true,
+            ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => true,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => true,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 => true,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => true,
             ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1 => true,
@@ -10449,7 +10545,14 @@ impl world::Exit for Exit {
             ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
-            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => true,
             ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
             ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => true,
             ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => true,
@@ -10470,6 +10573,7 @@ impl world::Exit for Exit {
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => true,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => true,
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1 => true,
@@ -10684,8 +10788,13 @@ impl world::Accessible for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_invoke_activate(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => true,
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world),
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world),
             ActionId::Irikar__Midwest__Save_Point__Save => true,
@@ -10799,7 +10908,12 @@ impl world::Accessible for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world, full_obs),
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::observe_access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
@@ -11892,6 +12006,29 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Airy > Right Hover Throw End"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Airy > South Center"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                 let (ret, mut tags) =
                     rules::explain_not_irikar_royal_storage_wall_and_invoke_shockwave(
@@ -11900,6 +12037,39 @@ impl world::Accessible for Action {
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert(
+                        "dest",
+                        format!("{} ({})", dest, "Airy > Left Hover Throw End"),
+                    );
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Airy > Lower Throw End"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => {
+                let (ret, mut tags) =
+                    rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Airy > South Center"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -12088,6 +12258,11 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
@@ -12237,6 +12412,21 @@ impl world::Action for Action {
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Top
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
+                SpotId::Irikar__Airy__Left_Hover_Throw_End
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => {
+                SpotId::Irikar__Airy__Lower_Throw_End
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => {
+                SpotId::Irikar__Airy__South_Center
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
+                SpotId::Irikar__Airy__Right_Hover_Throw_End
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => {
+                SpotId::Irikar__Airy__South_Center
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 SpotId::Irikar__Basement_Portal__Moving_Platform_End
@@ -12775,6 +12965,21 @@ impl world::Action for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
             ActionId::Irikar__Hub__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -13091,7 +13296,7 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-static RAW_SPOTS: [SpotId; 1865] = [
+static RAW_SPOTS: [SpotId; 1878] = [
     SpotId::None,
     SpotId::Amagi__East_Lake__Arch_East,
     SpotId::Amagi__East_Lake__Arch_West,
@@ -13793,8 +13998,12 @@ static RAW_SPOTS: [SpotId; 1865] = [
     SpotId::Giguna__Antechamber__Statues_Ledge,
     SpotId::Giguna__Antechamber__West_15,
     SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk,
+    SpotId::Giguna__Breachable_Wall__Above_the_Hole,
     SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
+    SpotId::Giguna__Breachable_Wall__Cave_Mouth_East,
+    SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
     SpotId::Giguna__Breachable_Wall__Wall_Interior,
+    SpotId::Giguna__Breachable_Wall__West_Ledge,
     SpotId::Giguna__Breachable_Wall__West_Mid_air,
     SpotId::Giguna__Carnelian__Door,
     SpotId::Giguna__Carnelian__East_10,
@@ -14503,8 +14712,15 @@ static RAW_SPOTS: [SpotId; 1865] = [
     SpotId::Irikar__Abandoned_Room__Corner_Core,
     SpotId::Irikar__Abandoned_Room__Empty_Pedestal,
     SpotId::Irikar__Abandoned_Room__West,
-    SpotId::Irikar__Airy__Middle_South,
+    SpotId::Irikar__Airy__Cavern_Cache,
+    SpotId::Irikar__Airy__Cavern_Mouth,
+    SpotId::Irikar__Airy__Cavern_Side,
+    SpotId::Irikar__Airy__Left_Hover_Throw_End,
+    SpotId::Irikar__Airy__Lower_Throw_End,
     SpotId::Irikar__Airy__Northwest,
+    SpotId::Irikar__Airy__Right_Hover_Throw_End,
+    SpotId::Irikar__Airy__South_Center,
+    SpotId::Irikar__Airy__South_Sight,
     SpotId::Irikar__Basement_Pipes__Brick_Ledge,
     SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
     SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
@@ -14799,6 +15015,7 @@ static RAW_SPOTS: [SpotId; 1865] = [
     SpotId::Menu__Kiengir_Map__Filter_Tablet,
     SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
     SpotId::Menu__Kiengir_Map__Giguna_Base,
+    SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
     SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
     SpotId::Menu__Kiengir_Map__Giguna_Northeast,
     SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
@@ -14813,6 +15030,7 @@ static RAW_SPOTS: [SpotId; 1865] = [
     SpotId::Menu__Kiengir_Map__Infect,
     SpotId::Menu__Kiengir_Map__Irikar_10_25,
     SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
+    SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache,
     SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
     SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall,
@@ -15635,8 +15853,8 @@ lazy_static! {
             end: SpotId::Irikar__Abandoned_Room__West.into_usize() + 1,
         },
         AreaId::Irikar__Airy => Range {
-            start: SpotId::Irikar__Airy__Middle_South.into_usize(),
-            end: SpotId::Irikar__Airy__Northwest.into_usize() + 1,
+            start: SpotId::Irikar__Airy__Cavern_Cache.into_usize(),
+            end: SpotId::Irikar__Airy__South_Sight.into_usize() + 1,
         },
         AreaId::Irikar__Basement_Pipes => Range {
             start: SpotId::Irikar__Basement_Pipes__Brick_Ledge.into_usize(),
@@ -15770,7 +15988,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_CANON_LOCATIONS: usize = 207;
+    const NUM_CANON_LOCATIONS: usize = 209;
 
     fn ruleset(&self) -> String {
         format!(
@@ -15827,7 +16045,7 @@ impl world::World for World {
             Item::Forbidden_Knowledge => vec![LocationId::Amagi__East_Lake__Foot__Tablet],
             Item::Defeat_Indra => vec![LocationId::Annuna__Mirror_Match__Save_Point__Fight],
             Item::Annuna_Mirror_Match_Switch => vec![LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch],
-            Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward, LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask, LocationId::Irikar__Midwest__Right_Platform_Start__Flask],
+            Item::Big_Flask => vec![LocationId::Annuna__Mirror_Match__Plinth__Item, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask, LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask, LocationId::Annuna__Egg_Room__Cache__Flask, LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask, LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside, LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask, LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward, LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask, LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask, LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy, LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel, LocationId::Irikar__Airy__Cavern_Side__Remote_Flask, LocationId::Irikar__Airy__Cavern_Cache__Flask, LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask, LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward, LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask, LocationId::Irikar__Midwest__Right_Platform_Start__Flask],
             Item::Nano_Lattice_2 => vec![LocationId::Annuna__West_Bridge__Plinth__Item],
             Item::Annuna_East_Bridge_Gate => vec![LocationId::Annuna__East_Bridge__Gate_Button__Switch, LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below],
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
@@ -16133,6 +16351,8 @@ impl world::World for World {
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => SpotId::Giguna__Antechamber__Statue_Head,
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => SpotId::Giguna__Gubi_Lair__Center_Platform,
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => SpotId::Giguna__Gubi_Lair__Pedestal,
+            LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => SpotId::Giguna__Breachable_Wall__Above_the_Hole,
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => SpotId::Giguna__Breachable_Wall__Wall_Interior,
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => SpotId::Glacier_Breach__Control__Upper_Corner,
@@ -16188,6 +16408,8 @@ impl world::World for World {
             LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item => SpotId::Irikar__Hub__Ruined_Hallway_Atop_Well,
             LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core => SpotId::Irikar__Hub__SW_Building_Top_Platform,
             LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item => SpotId::Irikar__Hub__Collapsed_Column,
+            LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => SpotId::Irikar__Airy__Cavern_Side,
+            LocationId::Irikar__Airy__Cavern_Cache__Flask | LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => SpotId::Irikar__Airy__Cavern_Cache,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn => SpotId::Irikar__Sight_Room__Item_Pedestal,
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => SpotId::Irikar__Abandoned_Room__Corner_Core,
@@ -16528,6 +16750,15 @@ impl world::World for World {
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 SpotId::Interior__Cave_Behind_Waterfall__Middle
+            }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High
+            | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low
+            | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => {
+                SpotId::Irikar__Hub__West_Rim
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High
+            | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => {
+                SpotId::Irikar__Hub__East_Rim
             }
             ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
@@ -17303,6 +17534,10 @@ impl world::World for World {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_2 | ExitId:: Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3 => SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => SpotId::Giguna__Breachable_Wall__West_Mid_air,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => SpotId::Giguna__Breachable_Wall__Above_West_Catwalk,
+            ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 | ExitId:: Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 | ExitId:: Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 | ExitId:: Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => SpotId::Giguna__Breachable_Wall__West_Ledge,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 | ExitId:: Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => SpotId::Giguna__Breachable_Wall__Cave_Mouth_East,
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => SpotId::Glacier_Breach__South_Save__West,
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => SpotId::Glacier_Breach__South_Save__Save_Point,
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => SpotId::Glacier_Breach__South_Save__Brick_Ledge,
@@ -17574,7 +17809,7 @@ impl world::World for World {
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 | ExitId:: Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => SpotId::Irikar_Breach__Neon_Corridor__West_Basin,
             ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1 => SpotId::Irikar_Breach__Neon_Corridor__West,
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => SpotId::Irikar__Hub__West_Rim,
-            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => SpotId::Irikar__Hub__East_Rim,
+            ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 | ExitId:: Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 | ExitId:: Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => SpotId::Irikar__Hub__East_Rim,
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => SpotId::Irikar__Hub__Bowl_Top_Platform,
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => SpotId::Irikar__Hub__Bowl_Middle_Ledge,
             ExitId::Irikar__Hub__Bowl_Middle_Platform_Center__ex__Bowl_Middle_Ledge_1 => SpotId::Irikar__Hub__Bowl_Middle_Platform_Center,
@@ -17614,7 +17849,12 @@ impl world::World for World {
             ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Hook_Point_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_3 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 | ExitId:: Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_2 => SpotId::Irikar__Hub__West_Small_Middle_Rooftop,
             ExitId::Irikar__Hub__West_23__ex__Midwest__East_23_1 => SpotId::Irikar__Hub__West_23,
             ExitId::Irikar__Hub__West_Rooftops_Upper_Staircase__ex__West_Rooftops_Upper_East_1 => SpotId::Irikar__Hub__West_Rooftops_Upper_Staircase,
-            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => SpotId::Irikar__Airy__Middle_South,
+            ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => SpotId::Irikar__Airy__South_Sight,
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 | ExitId:: Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => SpotId::Irikar__Airy__Left_Hover_Throw_End,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 | ExitId:: Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 | ExitId:: Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 | ExitId:: Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => SpotId::Irikar__Airy__Right_Hover_Throw_End,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 | ExitId:: Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 | ExitId:: Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => SpotId::Irikar__Airy__Lower_Throw_End,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 | ExitId:: Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 | ExitId:: Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 | ExitId:: Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 | ExitId:: Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => SpotId::Irikar__Airy__Cavern_Mouth,
+            ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => SpotId::Irikar__Airy__South_Center,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => SpotId::Irikar__Sight_Room__West_24,
             ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => SpotId::Irikar__Sight_Room__Item_Pedestal,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => SpotId::Irikar__Sight_Room__Above_Room_East,
@@ -17863,11 +18103,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 6 {
+                        if ctx.count(Item::Big_Flask) < 8 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 6 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 8 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 6 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 8 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -17893,6 +18133,11 @@ impl world::World for World {
                         if !ctx.has(Item::Building_of_the_School) {
                             if !map.contains_key(&Item::Building_of_the_School) {
                                 map.insert(Item::Building_of_the_School, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Carnelian_Ring) {
+                            if !map.contains_key(&Item::Carnelian_Ring) {
+                                map.insert(Item::Carnelian_Ring, 1);
                             }
                         }
                         if !ctx.has(Item::Commemorative_Speech) {
@@ -17955,11 +18200,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 18 {
+                        if ctx.count(Item::Flask) < 20 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 18 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 20 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 18 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 20 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -17977,13 +18222,13 @@ impl world::World for World {
                                 map.insert(Item::Goodbye, 1);
                             }
                         }
-                        if ctx.count(Item::Health_Fragment) < 8 {
+                        if ctx.count(Item::Health_Fragment) < 11 {
                             if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                                *val = std::cmp::max(*val, 8 - ctx.count(Item::Health_Fragment));
+                                *val = std::cmp::max(*val, 11 - ctx.count(Item::Health_Fragment));
                             } else {
                                 map.insert(
                                     Item::Health_Fragment,
-                                    8 - ctx.count(Item::Health_Fragment),
+                                    11 - ctx.count(Item::Health_Fragment),
                                 );
                             }
                         }
@@ -18230,11 +18475,11 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                     }
-                    if ctx.count(Item::Big_Flask) < 6 {
+                    if ctx.count(Item::Big_Flask) < 8 {
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 6 - ctx.count(Item::Big_Flask));
+                            *val = std::cmp::max(*val, 8 - ctx.count(Item::Big_Flask));
                         } else {
-                            map.insert(Item::Big_Flask, 6 - ctx.count(Item::Big_Flask));
+                            map.insert(Item::Big_Flask, 8 - ctx.count(Item::Big_Flask));
                         }
                     }
                     if !ctx.has(Item::Boomerang) {
@@ -18260,6 +18505,11 @@ impl world::World for World {
                     if !ctx.has(Item::Building_of_the_School) {
                         if !map.contains_key(&Item::Building_of_the_School) {
                             map.insert(Item::Building_of_the_School, 1);
+                        }
+                    }
+                    if !ctx.has(Item::Carnelian_Ring) {
+                        if !map.contains_key(&Item::Carnelian_Ring) {
+                            map.insert(Item::Carnelian_Ring, 1);
                         }
                     }
                     if !ctx.has(Item::Commemorative_Speech) {
@@ -18322,11 +18572,11 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                     }
-                    if ctx.count(Item::Flask) < 18 {
+                    if ctx.count(Item::Flask) < 20 {
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 18 - ctx.count(Item::Flask));
+                            *val = std::cmp::max(*val, 20 - ctx.count(Item::Flask));
                         } else {
-                            map.insert(Item::Flask, 18 - ctx.count(Item::Flask));
+                            map.insert(Item::Flask, 20 - ctx.count(Item::Flask));
                         }
                     }
                     if !ctx.has(Item::Forbidden_Knowledge) {
@@ -18344,11 +18594,14 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                     }
-                    if ctx.count(Item::Health_Fragment) < 8 {
+                    if ctx.count(Item::Health_Fragment) < 11 {
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 8 - ctx.count(Item::Health_Fragment));
+                            *val = std::cmp::max(*val, 11 - ctx.count(Item::Health_Fragment));
                         } else {
-                            map.insert(Item::Health_Fragment, 8 - ctx.count(Item::Health_Fragment));
+                            map.insert(
+                                Item::Health_Fragment,
+                                11 - ctx.count(Item::Health_Fragment),
+                            );
                         }
                     }
                     if ctx.count(Item::Health_Node) < 2 {
@@ -18604,9 +18857,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 6);
+                            *val = std::cmp::max(*val, 8);
                         } else {
-                            map.insert(Item::Big_Flask, 6);
+                            map.insert(Item::Big_Flask, 8);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -18622,6 +18875,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Building_of_the_School) {
                             map.insert(Item::Building_of_the_School, 1);
+                        }
+                        if !map.contains_key(&Item::Carnelian_Ring) {
+                            map.insert(Item::Carnelian_Ring, 1);
                         }
                         if !map.contains_key(&Item::Commemorative_Speech) {
                             map.insert(Item::Commemorative_Speech, 1);
@@ -18660,9 +18916,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 18);
+                            *val = std::cmp::max(*val, 20);
                         } else {
-                            map.insert(Item::Flask, 18);
+                            map.insert(Item::Flask, 20);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
@@ -18674,9 +18930,9 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 8);
+                            *val = std::cmp::max(*val, 11);
                         } else {
-                            map.insert(Item::Health_Fragment, 8);
+                            map.insert(Item::Health_Fragment, 11);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Node) {
                             *val = std::cmp::max(*val, 2);
@@ -18830,9 +19086,9 @@ impl world::World for World {
                         map.insert(Item::Beware_the_Patternmind, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                        *val = std::cmp::max(*val, 6);
+                        *val = std::cmp::max(*val, 8);
                     } else {
-                        map.insert(Item::Big_Flask, 6);
+                        map.insert(Item::Big_Flask, 8);
                     }
                     if !map.contains_key(&Item::Boomerang) {
                         map.insert(Item::Boomerang, 1);
@@ -18848,6 +19104,9 @@ impl world::World for World {
                     }
                     if !map.contains_key(&Item::Building_of_the_School) {
                         map.insert(Item::Building_of_the_School, 1);
+                    }
+                    if !map.contains_key(&Item::Carnelian_Ring) {
+                        map.insert(Item::Carnelian_Ring, 1);
                     }
                     if !map.contains_key(&Item::Commemorative_Speech) {
                         map.insert(Item::Commemorative_Speech, 1);
@@ -18886,9 +19145,9 @@ impl world::World for World {
                         map.insert(Item::Fast_Travel, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Flask) {
-                        *val = std::cmp::max(*val, 18);
+                        *val = std::cmp::max(*val, 20);
                     } else {
-                        map.insert(Item::Flask, 18);
+                        map.insert(Item::Flask, 20);
                     }
                     if !map.contains_key(&Item::Forbidden_Knowledge) {
                         map.insert(Item::Forbidden_Knowledge, 1);
@@ -18900,9 +19159,9 @@ impl world::World for World {
                         map.insert(Item::Goodbye, 1);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                        *val = std::cmp::max(*val, 8);
+                        *val = std::cmp::max(*val, 11);
                     } else {
-                        map.insert(Item::Health_Fragment, 8);
+                        map.insert(Item::Health_Fragment, 11);
                     }
                     if let Some(val) = map.get_mut(&Item::Health_Node) {
                         *val = std::cmp::max(*val, 2);
@@ -19896,6 +20155,14 @@ impl world::World for World {
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => true,
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => true,
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => true,
+            ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => true,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => true,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => true,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => true,
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => true,
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => true,
             ExitId::Giguna__Carnelian__East_10__ex__Giguna_Northeast__West_10_1 => true,
             ExitId::Giguna__Carnelian__Upper_Susar__ex__East_Cliff_1 => true,
             ExitId::Giguna__Carnelian__Upper_Susar__ex__Middle_Platforms_1 => true,
@@ -20616,7 +20883,22 @@ impl world::World for World {
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => true,
             ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => true,
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => true,
-            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => true,
+            ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => true,
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => true,
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => true,
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 => true,
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 => true,
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => true,
+            ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => true,
             ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
             ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => true,
             ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => true,
@@ -20670,6 +20952,8 @@ impl world::World for World {
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1 => true,
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => true,
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => true,
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => true,
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => true,
             ExitId::Irikar__Hub__Bowl_Middle_Ledge__ex__Bowl_Top_Platform_1 => true,
@@ -21729,7 +22013,11 @@ impl world::World for World {
             SpotId::Giguna__Breachable_Wall__West_Mid_air => true,
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => true,
             SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => true,
+            SpotId::Giguna__Breachable_Wall__West_Ledge => true,
+            SpotId::Giguna__Breachable_Wall__Above_the_Hole => true,
             SpotId::Giguna__Breachable_Wall__Wall_Interior => true,
+            SpotId::Giguna__Breachable_Wall__Cave_Mouth_West => true,
+            SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => true,
             SpotId::Giguna__Carnelian__East_10 => true,
             SpotId::Giguna__Carnelian__East_Cliff => true,
             SpotId::Giguna__Carnelian__Upper_Susar => true,
@@ -22438,7 +22726,14 @@ impl world::World for World {
             SpotId::Irikar__Abandoned_Room__Corner_Core => true,
             SpotId::Irikar__Abandoned_Room__West => true,
             SpotId::Irikar__Airy__Northwest => true,
-            SpotId::Irikar__Airy__Middle_South => true,
+            SpotId::Irikar__Airy__South_Sight => true,
+            SpotId::Irikar__Airy__Left_Hover_Throw_End => true,
+            SpotId::Irikar__Airy__Right_Hover_Throw_End => true,
+            SpotId::Irikar__Airy__Lower_Throw_End => true,
+            SpotId::Irikar__Airy__Cavern_Mouth => true,
+            SpotId::Irikar__Airy__Cavern_Side => true,
+            SpotId::Irikar__Airy__Cavern_Cache => true,
+            SpotId::Irikar__Airy__South_Center => true,
             SpotId::Irikar__Basement_Pipes__East_28 => true,
             SpotId::Irikar__Basement_Pipes__Lower_Pipe_Right => true,
             SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge => true,
@@ -22767,6 +23062,8 @@ impl world::World for World {
             SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask => true,
             SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel => true,
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => true,
+            SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask => true,
+            SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => true,
             SpotId::Uhrum__Annuna_Corridor__West_25 => true,
             SpotId::Uhrum__Annuna_Corridor__Upper_Trees => true,
             SpotId::Uhrum__Annuna_Corridor__Pedestal => true,
@@ -23263,7 +23560,12 @@ impl world::World for World {
             | SpotId::Giguna__Antechamber__East_16
             | SpotId::Giguna__Antechamber__Statue_Head
             | SpotId::Giguna__Antechamber__West_15
+            | SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk
+            | SpotId::Giguna__Breachable_Wall__Above_the_Hole
             | SpotId::Giguna__Breachable_Wall__Above_West_Catwalk
+            | SpotId::Giguna__Breachable_Wall__Cave_Mouth_East
+            | SpotId::Giguna__Breachable_Wall__Wall_Interior
+            | SpotId::Giguna__Breachable_Wall__West_Ledge
             | SpotId::Giguna__Breachable_Wall__West_Mid_air
             | SpotId::Giguna__Carnelian__East_10
             | SpotId::Giguna__Carnelian__Lower_Susar
@@ -23619,7 +23921,13 @@ impl world::World for World {
             | SpotId::Irikar__Abandoned_Room__Corner_Core
             | SpotId::Irikar__Abandoned_Room__Empty_Pedestal
             | SpotId::Irikar__Abandoned_Room__West
-            | SpotId::Irikar__Airy__Middle_South
+            | SpotId::Irikar__Airy__Cavern_Cache
+            | SpotId::Irikar__Airy__Cavern_Mouth
+            | SpotId::Irikar__Airy__Cavern_Side
+            | SpotId::Irikar__Airy__Lower_Throw_End
+            | SpotId::Irikar__Airy__Right_Hover_Throw_End
+            | SpotId::Irikar__Airy__South_Center
+            | SpotId::Irikar__Airy__South_Sight
             | SpotId::Irikar__Basement_Pipes__East_28
             | SpotId::Irikar__Basement_Pipes__High_Pipe
             | SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe
@@ -23652,6 +23960,7 @@ impl world::World for World {
             | SpotId::Irikar__Empty_Foyer__West
             | SpotId::Irikar__Hub__Collapsed_Column
             | SpotId::Irikar__Hub__Dagger_Altar
+            | SpotId::Irikar__Hub__East_Rim
             | SpotId::Irikar__Hub__Portal_Stand
             | SpotId::Irikar__Hub__Royal_Storage_By_Wall
             | SpotId::Irikar__Hub__Royal_Storage_in_Wall
@@ -23669,6 +23978,7 @@ impl world::World for World {
             | SpotId::Irikar__Hub__West_24_Rooftop
             | SpotId::Irikar__Hub__West_25
             | SpotId::Irikar__Hub__West_26
+            | SpotId::Irikar__Hub__West_Rim
             | SpotId::Irikar__Lamassu__Catwalk_West
             | SpotId::Irikar__Lamassu__Desk
             | SpotId::Irikar__Lamassu__East_26
@@ -23752,6 +24062,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Filter_Tablet
             | SpotId::Menu__Kiengir_Map__Forbidden_Knowledge
             | SpotId::Menu__Kiengir_Map__Giguna_Base
+            | SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask
             | SpotId::Menu__Kiengir_Map__Giguna_Northeast
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top
             | SpotId::Menu__Kiengir_Map__Giguna_Ruins_West
@@ -23763,6 +24074,7 @@ impl world::World for World {
             | SpotId::Menu__Kiengir_Map__Heretics_Granddaughter
             | SpotId::Menu__Kiengir_Map__Irikar_10_25
             | SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room
+            | SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask
             | SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache
             | SpotId::Menu__Kiengir_Map__Irikar_Beach_Save
             | SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall
@@ -23953,7 +24265,6 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Bounty_List
-                            | Item::Carnelian_Ring
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Health_Upgrade_5
@@ -24089,7 +24400,6 @@ impl World {
                         Item::Aansur
                             | Item::Amagi_Stronghold_Left_Wall
                             | Item::Bounty_List
-                            | Item::Carnelian_Ring
                             | Item::Drone_Melee_Damage_3
                             | Item::Drone_Melee_Speed_3
                             | Item::Escape
@@ -24287,7 +24597,6 @@ impl World {
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
                         iset.insert(Item::Bounty_List);
-                        iset.insert(Item::Carnelian_Ring);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Health_Upgrade_5);
@@ -24423,7 +24732,6 @@ impl World {
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
                         iset.insert(Item::Bounty_List);
-                        iset.insert(Item::Carnelian_Ring);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Escape);
@@ -26180,6 +26488,33 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             exit_id: None,
             skippable: false,
         },
+        LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => Location {
+            id: LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask,
+            canonical: CanonId::Giguna_Breachable_Wall_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask => Location {
+            id: LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask,
+            canonical: CanonId::Giguna_Breachable_Wall_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => Location {
+            id: LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask,
+            canonical: CanonId::Giguna_Breachable_Wall_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
         LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => Location {
             id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
             canonical: CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item,
@@ -26770,6 +27105,33 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Irikar_Royal_Storage_Flask,
             item: Item::Flask,
             price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => Location {
+            id: LocationId::Irikar__Airy__Cavern_Side__Remote_Flask,
+            canonical: CanonId::Irikar_Airy_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 6500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Airy__Cavern_Cache__Flask => Location {
+            id: LocationId::Irikar__Airy__Cavern_Cache__Flask,
+            canonical: CanonId::Irikar_Airy_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+            skippable: false,
+        },
+        LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => Location {
+            id: LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask,
+            canonical: CanonId::Irikar_Airy_Flask,
+            item: Item::Big_Flask,
+            price: Currency::Free,
             time: 3500,
             exit_id: None,
             skippable: false,
@@ -34851,14 +35213,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1 => Exit {
             id: ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Giguna__West_Caverns__Northwest,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => Exit {
             id: ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1,
-            time: 1000,
+            time: 1500,
             dest: SpotId::Giguna__Helipad__North,
             price: Currency::Free,
             loc_id: None,
@@ -34928,56 +35290,56 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => Exit {
             id: ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Giguna__Clouds__North_Left,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => Exit {
             id: ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Giguna__Clouds__North_Middle,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => Exit {
             id: ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Giguna__Clouds__North_Right,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => Exit {
             id: ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Giguna__Clouds__North_Under_Ledge,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1 => Exit {
             id: ExitId::Giguna__Clouds__Southwest__ex__Irikar__Hub__Northwest_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Hub__Northwest,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1 => Exit {
             id: ExitId::Giguna__Clouds__Straight_Down__ex__Irikar__Hub__North_Above_Portal_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Hub__North_Above_Portal,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1 => Exit {
             id: ExitId::Giguna__Clouds__Pull_Right__ex__Irikar__Hub__Northwest_Above_Bowl_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Hub__Northwest_Above_Bowl,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1 => Exit {
             id: ExitId::Giguna__Clouds__Southeast__ex__Irikar__Hub__Northeast_Above_Bowl_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Hub__Northeast_Above_Bowl,
             price: Currency::Free,
             loc_id: None,
@@ -36076,8 +36438,64 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => Exit {
             id: ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Boss_Room__Above_Catwalk,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1,
+            time: 830,
+            dest: SpotId::Irikar__Lamassu__Northwest,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1,
+            time: 3480,
+            dest: SpotId::Irikar__Boss_Room__Healthy_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1,
+            time: 877,
+            dest: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2,
+            time: 2799,
+            dest: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+            price: Currency::Energy(98),
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3,
+            time: 1399,
+            dest: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+            price: Currency::Energy(52),
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1,
+            time: 1403,
+            dest: SpotId::Giguna__Breachable_Wall__Wall_Interior,
+            price: Currency::Energy(52),
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2,
+            time: 1000,
+            dest: SpotId::Giguna__Breachable_Wall__Wall_Interior,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => Exit {
+            id: ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1,
+            time: 2910,
+            dest: SpotId::Irikar__Lamassu__Catwalk_Middle,
             price: Currency::Free,
             loc_id: None,
         },
@@ -39049,6 +39467,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => Exit {
+            id: ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1,
+            time: 8894,
+            dest: SpotId::Irikar__Airy__Right_Hover_Throw_End,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => Exit {
+            id: ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1,
+            time: 6614,
+            dest: SpotId::Irikar__Airy__Lower_Throw_End,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => Exit {
             id: ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
             time: 700,
@@ -39560,10 +39992,115 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => Exit {
-            id: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
-            time: 1000,
+        ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => Exit {
+            id: ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1,
+            time: 830,
             dest: SpotId::Irikar__Sight_Room__Above_Room_North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => Exit {
+            id: ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1,
+            time: 9122,
+            dest: SpotId::Irikar__Airy__Cavern_Mouth,
+            price: Currency::Energy(307),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => Exit {
+            id: ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2,
+            time: 4561,
+            dest: SpotId::Irikar__Airy__Cavern_Mouth,
+            price: Currency::Energy(156),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => Exit {
+            id: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1,
+            time: 4561,
+            dest: SpotId::Irikar__Airy__Cavern_Mouth,
+            price: Currency::Energy(156),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => Exit {
+            id: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2,
+            time: 2280,
+            dest: SpotId::Irikar__Airy__Cavern_Mouth,
+            price: Currency::Energy(81),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1,
+            time: 4179,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1,
+            time: 6209,
+            dest: SpotId::Irikar__Boss_Room__Healthy_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => Exit {
+            id: ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1,
+            time: 877,
+            dest: SpotId::Irikar__Airy__South_Sight,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 => Exit {
+            id: ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1,
+            time: 3380,
+            dest: SpotId::Irikar__Sight_Room__Portal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => Exit {
+            id: ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1,
+            time: 3630,
+            dest: SpotId::Irikar__Sight_Room__Item_Pedestal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => Exit {
+            id: ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1,
+            time: 1199,
+            dest: SpotId::Irikar__Airy__Cavern_Cache,
+            price: Currency::Energy(45),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => Exit {
+            id: ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2,
+            time: 599,
+            dest: SpotId::Irikar__Airy__Cavern_Cache,
+            price: Currency::Energy(25),
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1,
+            time: 4130,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 => Exit {
+            id: ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1,
+            time: 4380,
+            dest: SpotId::Irikar__East_Rooftops__Off_the_Edge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => Exit {
+            id: ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1,
+            time: 4261,
+            dest: SpotId::Giguna__Breachable_Wall__West_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => Exit {
+            id: ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1,
+            time: 2380,
+            dest: SpotId::Irikar__East_Rooftops__Top_Rooftop,
             price: Currency::Free,
             loc_id: None,
         },
@@ -39835,7 +40372,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1 => Exit {
             id: ExitId::Irikar__Boss_Room__Upper_Rooftops__ex__East_Rooftops__Off_the_Edge_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__East_Rooftops__Off_the_Edge,
             price: Currency::Free,
             loc_id: None,
@@ -39863,7 +40400,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1 => Exit {
             id: ExitId::Irikar__East_Rooftops__Directly_Down__ex__Boss_Room__Northwest_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Boss_Room__Northwest,
             price: Currency::Free,
             loc_id: None,
@@ -39891,7 +40428,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => Exit {
             id: ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1,
-            time: 1000,
+            time: 830,
             dest: SpotId::Irikar__Boss_Room__Upper_Rooftops,
             price: Currency::Free,
             loc_id: None,
@@ -42532,6 +43069,31 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
             id: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
             time: 1100,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => Action {
+            id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High,
+            time: 6600,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => Action {
+            id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low,
+            time: 6600,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => Action {
+            id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low,
+            time: 8100,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => Action {
+            id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High,
+            time: 6725,
+            price: Currency::Free,
+        },
+        ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => Action {
+            id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
+            time: 6599,
             price: Currency::Free,
         },
         ActionId::Irikar__Hub__Save_Point__Save => Action {
@@ -56716,6 +57278,33 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__West_Ledge => Spot {
+            id: SpotId::Giguna__Breachable_Wall__West_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Above_the_Hole => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Above_the_Hole,
+            locations: Range {
+                start: LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask.into_usize(),
+                end: LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
@@ -56725,10 +57314,37 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Breachable_Wall__Wall_Interior => Spot {
             id: SpotId::Giguna__Breachable_Wall__Wall_Interior,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask.into_usize(),
+                end: LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Cave_Mouth_West => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => Spot {
+            id: SpotId::Giguna__Breachable_Wall__Cave_Mouth_East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1.into_usize(),
+                end: ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -61379,7 +61995,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High.into_usize(),
+                end: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__East_Rim => Spot {
@@ -61388,11 +62005,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize(),
+                start: ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1.into_usize(),
                 end: ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High.into_usize(),
+                end: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low.into_usize() + 1,
             },
         },
         SpotId::Irikar__Hub__Bowl_Top_Platform => Spot {
@@ -62224,14 +62842,105 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
         },
-        SpotId::Irikar__Airy__Middle_South => Spot {
-            id: SpotId::Irikar__Airy__Middle_South,
+        SpotId::Irikar__Airy__South_Sight => Spot {
+            id: SpotId::Irikar__Airy__South_Sight,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1.into_usize(),
-                end: ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1.into_usize() + 1,
+                start: ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1.into_usize(),
+                end: ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Left_Hover_Throw_End => Spot {
+            id: SpotId::Irikar__Airy__Left_Hover_Throw_End,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1.into_usize(),
+                end: ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Right_Hover_Throw_End => Spot {
+            id: SpotId::Irikar__Airy__Right_Hover_Throw_End,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1.into_usize(),
+                end: ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Lower_Throw_End => Spot {
+            id: SpotId::Irikar__Airy__Lower_Throw_End,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1.into_usize(),
+                end: ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Cavern_Mouth => Spot {
+            id: SpotId::Irikar__Airy__Cavern_Mouth,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1.into_usize(),
+                end: ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Cavern_Side => Spot {
+            id: SpotId::Irikar__Airy__Cavern_Side,
+            locations: Range {
+                start: LocationId::Irikar__Airy__Cavern_Side__Remote_Flask.into_usize(),
+                end: LocationId::Irikar__Airy__Cavern_Side__Remote_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__Cavern_Cache => Spot {
+            id: SpotId::Irikar__Airy__Cavern_Cache,
+            locations: Range {
+                start: LocationId::Irikar__Airy__Cavern_Cache__Flask.into_usize(),
+                end: LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Irikar__Airy__South_Center => Spot {
+            id: SpotId::Irikar__Airy__South_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1.into_usize(),
+                end: ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -64556,6 +65265,30 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         },
         SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => Spot {
             id: SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask => Spot {
+            id: SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+        },
+        SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => Spot {
+            id: SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
             locations: Range {
                 start: 0, end: 0,
             },

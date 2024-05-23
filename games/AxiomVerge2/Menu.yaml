@@ -581,6 +581,10 @@ areas:
       coord: [5, 26]
     - name: Irikar Beach Cache
       coord: [3, 28]
+    - name: Irikar Airy Flask
+      coord: [15, 21]
+    - name: Giguna Breachable Wall Flask
+      coord: [16, 24]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

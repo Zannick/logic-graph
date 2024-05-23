@@ -1452,8 +1452,12 @@ pub enum SpotId {
     Giguna__Antechamber__Statues_Ledge,
     Giguna__Antechamber__West_15,
     Giguna__Breachable_Wall__Above_Middle_Catwalk,
+    Giguna__Breachable_Wall__Above_the_Hole,
     Giguna__Breachable_Wall__Above_West_Catwalk,
+    Giguna__Breachable_Wall__Cave_Mouth_East,
+    Giguna__Breachable_Wall__Cave_Mouth_West,
     Giguna__Breachable_Wall__Wall_Interior,
+    Giguna__Breachable_Wall__West_Ledge,
     Giguna__Breachable_Wall__West_Mid_air,
     Giguna__Carnelian__Door,
     Giguna__Carnelian__East_10,
@@ -2162,8 +2166,15 @@ pub enum SpotId {
     Irikar__Abandoned_Room__Corner_Core,
     Irikar__Abandoned_Room__Empty_Pedestal,
     Irikar__Abandoned_Room__West,
-    Irikar__Airy__Middle_South,
+    Irikar__Airy__Cavern_Cache,
+    Irikar__Airy__Cavern_Mouth,
+    Irikar__Airy__Cavern_Side,
+    Irikar__Airy__Left_Hover_Throw_End,
+    Irikar__Airy__Lower_Throw_End,
     Irikar__Airy__Northwest,
+    Irikar__Airy__Right_Hover_Throw_End,
+    Irikar__Airy__South_Center,
+    Irikar__Airy__South_Sight,
     Irikar__Basement_Pipes__Brick_Ledge,
     Irikar__Basement_Pipes__Bricks_Under_Pipes,
     Irikar__Basement_Pipes__Double_Pipe_Left,
@@ -2458,6 +2469,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Filter_Tablet,
     Menu__Kiengir_Map__Forbidden_Knowledge,
     Menu__Kiengir_Map__Giguna_Base,
+    Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
     Menu__Kiengir_Map__Giguna_Labyrinth,
     Menu__Kiengir_Map__Giguna_Northeast,
     Menu__Kiengir_Map__Giguna_Ruins_Top,
@@ -2472,6 +2484,7 @@ pub enum SpotId {
     Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_10_25,
     Menu__Kiengir_Map__Irikar_Abandoned_Room,
+    Menu__Kiengir_Map__Irikar_Airy_Flask,
     Menu__Kiengir_Map__Irikar_Beach_Cache,
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Broken_Wall,
@@ -4333,11 +4346,23 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk => {
                 write!(f, "{}", "Giguna > Breachable Wall > Above Middle Catwalk")
             }
+            SpotId::Giguna__Breachable_Wall__Above_the_Hole => {
+                write!(f, "{}", "Giguna > Breachable Wall > Above the Hole")
+            }
             SpotId::Giguna__Breachable_Wall__Above_West_Catwalk => {
                 write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk")
             }
+            SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => {
+                write!(f, "{}", "Giguna > Breachable Wall > Cave Mouth East")
+            }
+            SpotId::Giguna__Breachable_Wall__Cave_Mouth_West => {
+                write!(f, "{}", "Giguna > Breachable Wall > Cave Mouth West")
+            }
             SpotId::Giguna__Breachable_Wall__Wall_Interior => {
                 write!(f, "{}", "Giguna > Breachable Wall > Wall Interior")
+            }
+            SpotId::Giguna__Breachable_Wall__West_Ledge => {
+                write!(f, "{}", "Giguna > Breachable Wall > West Ledge")
             }
             SpotId::Giguna__Breachable_Wall__West_Mid_air => {
                 write!(f, "{}", "Giguna > Breachable Wall > West Mid-air")
@@ -6231,8 +6256,21 @@ impl fmt::Display for SpotId {
             SpotId::Irikar__Abandoned_Room__West => {
                 write!(f, "{}", "Irikar > Abandoned Room > West")
             }
-            SpotId::Irikar__Airy__Middle_South => write!(f, "{}", "Irikar > Airy > Middle South"),
+            SpotId::Irikar__Airy__Cavern_Cache => write!(f, "{}", "Irikar > Airy > Cavern Cache"),
+            SpotId::Irikar__Airy__Cavern_Mouth => write!(f, "{}", "Irikar > Airy > Cavern Mouth"),
+            SpotId::Irikar__Airy__Cavern_Side => write!(f, "{}", "Irikar > Airy > Cavern Side"),
+            SpotId::Irikar__Airy__Left_Hover_Throw_End => {
+                write!(f, "{}", "Irikar > Airy > Left Hover Throw End")
+            }
+            SpotId::Irikar__Airy__Lower_Throw_End => {
+                write!(f, "{}", "Irikar > Airy > Lower Throw End")
+            }
             SpotId::Irikar__Airy__Northwest => write!(f, "{}", "Irikar > Airy > Northwest"),
+            SpotId::Irikar__Airy__Right_Hover_Throw_End => {
+                write!(f, "{}", "Irikar > Airy > Right Hover Throw End")
+            }
+            SpotId::Irikar__Airy__South_Center => write!(f, "{}", "Irikar > Airy > South Center"),
+            SpotId::Irikar__Airy__South_Sight => write!(f, "{}", "Irikar > Airy > South Sight"),
             SpotId::Irikar__Basement_Pipes__Brick_Ledge => {
                 write!(f, "{}", "Irikar > Basement Pipes > Brick Ledge")
             }
@@ -7003,6 +7041,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Giguna_Base => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
             }
+            SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Breachable Wall Flask")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Labyrinth")
             }
@@ -7040,6 +7081,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Abandoned Room")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Airy Flask")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Cache")
@@ -8674,11 +8718,23 @@ impl std::str::FromStr for SpotId {
             "Giguna > Breachable Wall > Above Middle Catwalk" => {
                 Ok(SpotId::Giguna__Breachable_Wall__Above_Middle_Catwalk)
             }
+            "Giguna > Breachable Wall > Above the Hole" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Above_the_Hole)
+            }
             "Giguna > Breachable Wall > Above West Catwalk" => {
                 Ok(SpotId::Giguna__Breachable_Wall__Above_West_Catwalk)
             }
+            "Giguna > Breachable Wall > Cave Mouth East" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Cave_Mouth_East)
+            }
+            "Giguna > Breachable Wall > Cave Mouth West" => {
+                Ok(SpotId::Giguna__Breachable_Wall__Cave_Mouth_West)
+            }
             "Giguna > Breachable Wall > Wall Interior" => {
                 Ok(SpotId::Giguna__Breachable_Wall__Wall_Interior)
+            }
+            "Giguna > Breachable Wall > West Ledge" => {
+                Ok(SpotId::Giguna__Breachable_Wall__West_Ledge)
             }
             "Giguna > Breachable Wall > West Mid-air" => {
                 Ok(SpotId::Giguna__Breachable_Wall__West_Mid_air)
@@ -9992,8 +10048,19 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Irikar__Abandoned_Room__Empty_Pedestal)
             }
             "Irikar > Abandoned Room > West" => Ok(SpotId::Irikar__Abandoned_Room__West),
-            "Irikar > Airy > Middle South" => Ok(SpotId::Irikar__Airy__Middle_South),
+            "Irikar > Airy > Cavern Cache" => Ok(SpotId::Irikar__Airy__Cavern_Cache),
+            "Irikar > Airy > Cavern Mouth" => Ok(SpotId::Irikar__Airy__Cavern_Mouth),
+            "Irikar > Airy > Cavern Side" => Ok(SpotId::Irikar__Airy__Cavern_Side),
+            "Irikar > Airy > Left Hover Throw End" => {
+                Ok(SpotId::Irikar__Airy__Left_Hover_Throw_End)
+            }
+            "Irikar > Airy > Lower Throw End" => Ok(SpotId::Irikar__Airy__Lower_Throw_End),
             "Irikar > Airy > Northwest" => Ok(SpotId::Irikar__Airy__Northwest),
+            "Irikar > Airy > Right Hover Throw End" => {
+                Ok(SpotId::Irikar__Airy__Right_Hover_Throw_End)
+            }
+            "Irikar > Airy > South Center" => Ok(SpotId::Irikar__Airy__South_Center),
+            "Irikar > Airy > South Sight" => Ok(SpotId::Irikar__Airy__South_Sight),
             "Irikar > Basement Pipes > Brick Ledge" => {
                 Ok(SpotId::Irikar__Basement_Pipes__Brick_Ledge)
             }
@@ -10554,6 +10621,9 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Menu__Kiengir_Map__Forbidden_Knowledge)
             }
             "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
+            "Menu > Kiengir Map > Giguna Breachable Wall Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask)
+            }
             "Menu > Kiengir Map > Giguna Labyrinth" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Labyrinth)
             }
@@ -10587,6 +10657,9 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Irikar 10,25" => Ok(SpotId::Menu__Kiengir_Map__Irikar_10_25),
             "Menu > Kiengir Map > Irikar Abandoned Room" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room)
+            }
+            "Menu > Kiengir Map > Irikar Airy Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask)
             }
             "Menu > Kiengir Map > Irikar Beach Cache" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache)
@@ -11027,6 +11100,9 @@ pub enum LocationId {
     Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
     Filter__Core__Terminal_East__Authorize_Hammond,
     Giguna__Antechamber__Statue_Head__Tablet,
+    Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask,
+    Giguna__Breachable_Wall__Wall_Interior__Flask,
+    Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask,
     Giguna__Carnelian__Vault__Item,
     Giguna__Clouds__Cache__Item,
     Giguna__Dual_Path__Base_of_Wall__Break_Wall,
@@ -11133,6 +11209,9 @@ pub enum LocationId {
     Interior__Outpost_Interior__Bookshelf__Note,
     Interior__Tent_Interior__Desk__Note,
     Irikar__Abandoned_Room__Corner_Core__Core,
+    Irikar__Airy__Cavern_Cache__Flask,
+    Irikar__Airy__Cavern_Cache__Shockwave_Flask,
+    Irikar__Airy__Cavern_Side__Remote_Flask,
     Irikar__Basement_Pipes__High_Pipe__Tablet,
     Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
     Irikar__Beach__Cache__Item,
@@ -11370,6 +11449,9 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center > Both Blocks"),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => write!(f, "{}", "Filter > Core > Terminal East > Authorize Hammond"),
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => write!(f, "{}", "Giguna > Antechamber > Statue Head > Tablet"),
+            LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => write!(f, "{}", "Giguna > Breachable Wall > Above the Hole > Shockwave Flask"),
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask => write!(f, "{}", "Giguna > Breachable Wall > Wall Interior > Flask"),
+            LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => write!(f, "{}", "Giguna > Breachable Wall > Wall Interior > Shockwave Flask"),
             LocationId::Giguna__Carnelian__Vault__Item => write!(f, "{}", "Giguna > Carnelian > Vault > Item"),
             LocationId::Giguna__Clouds__Cache__Item => write!(f, "{}", "Giguna > Clouds > Cache > Item"),
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall => write!(f, "{}", "Giguna > Dual Path > Base of Wall > Break Wall"),
@@ -11476,6 +11558,9 @@ impl fmt::Display for LocationId {
             LocationId::Interior__Outpost_Interior__Bookshelf__Note => write!(f, "{}", "Interior > Outpost Interior > Bookshelf > Note"),
             LocationId::Interior__Tent_Interior__Desk__Note => write!(f, "{}", "Interior > Tent Interior > Desk > Note"),
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => write!(f, "{}", "Irikar > Abandoned Room > Corner Core > Core"),
+            LocationId::Irikar__Airy__Cavern_Cache__Flask => write!(f, "{}", "Irikar > Airy > Cavern Cache > Flask"),
+            LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask => write!(f, "{}", "Irikar > Airy > Cavern Cache > Shockwave Flask"),
+            LocationId::Irikar__Airy__Cavern_Side__Remote_Flask => write!(f, "{}", "Irikar > Airy > Cavern Side > Remote Flask"),
             LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => write!(f, "{}", "Irikar > Basement Pipes > High Pipe > Tablet"),
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => write!(f, "{}", "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup"),
             LocationId::Irikar__Beach__Cache__Item => write!(f, "{}", "Irikar > Beach > Cache > Item"),
@@ -11718,6 +11803,9 @@ impl std::str::FromStr for LocationId {
             "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks),
             "Filter > Core > Terminal East > Authorize Hammond" => Ok(LocationId::Filter__Core__Terminal_East__Authorize_Hammond),
             "Giguna > Antechamber > Statue Head > Tablet" => Ok(LocationId::Giguna__Antechamber__Statue_Head__Tablet),
+            "Giguna > Breachable Wall > Above the Hole > Shockwave Flask" => Ok(LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask),
+            "Giguna > Breachable Wall > Wall Interior > Flask" => Ok(LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask),
+            "Giguna > Breachable Wall > Wall Interior > Shockwave Flask" => Ok(LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask),
             "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
             "Giguna > Clouds > Cache > Item" => Ok(LocationId::Giguna__Clouds__Cache__Item),
             "Giguna > Dual Path > Base of Wall > Break Wall" => Ok(LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall),
@@ -11824,6 +11912,9 @@ impl std::str::FromStr for LocationId {
             "Interior > Outpost Interior > Bookshelf > Note" => Ok(LocationId::Interior__Outpost_Interior__Bookshelf__Note),
             "Interior > Tent Interior > Desk > Note" => Ok(LocationId::Interior__Tent_Interior__Desk__Note),
             "Irikar > Abandoned Room > Corner Core > Core" => Ok(LocationId::Irikar__Abandoned_Room__Corner_Core__Core),
+            "Irikar > Airy > Cavern Cache > Flask" => Ok(LocationId::Irikar__Airy__Cavern_Cache__Flask),
+            "Irikar > Airy > Cavern Cache > Shockwave Flask" => Ok(LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask),
+            "Irikar > Airy > Cavern Side > Remote Flask" => Ok(LocationId::Irikar__Airy__Cavern_Side__Remote_Flask),
             "Irikar > Basement Pipes > High Pipe > Tablet" => Ok(LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet),
             "Irikar > Basement Pipes > Left Vertical Pipe > Health Pickup" => Ok(LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup),
             "Irikar > Beach > Cache > Item" => Ok(LocationId::Irikar__Beach__Cache__Item),
@@ -12801,7 +12892,15 @@ pub enum ExitId {
     Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1,
     Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1,
     Giguna__Antechamber__West_15__ex__Small_Bricks_1,
+    Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1,
     Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1,
+    Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1,
+    Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1,
+    Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2,
+    Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1,
+    Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2,
+    Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3,
+    Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1,
     Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1,
     Giguna__Carnelian__Door__ex__Switch_1,
     Giguna__Carnelian__Door__ex__Vault_1,
@@ -13539,7 +13638,22 @@ pub enum ExitId {
     Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1,
     Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1,
     Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1,
-    Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1,
+    Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1,
+    Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2,
+    Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1,
+    Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1,
+    Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1,
+    Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1,
+    Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2,
+    Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1,
+    Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1,
+    Irikar__Airy__Lower_Throw_End__ex__South_Sight_1,
+    Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1,
+    Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1,
+    Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2,
+    Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1,
+    Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1,
+    Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1,
     Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
     Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
     Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1,
@@ -13599,6 +13713,8 @@ pub enum ExitId {
     Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1,
     Irikar__Hub__Collapsed_Column__ex__Lower_Well_1,
     Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1,
+    Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1,
+    Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1,
     Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1,
     Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1,
     Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2,
@@ -14847,7 +14963,15 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1 => write!(f, "{}", "Giguna > Antechamber > Statues Ledge ==> Small Bricks (1)"),
             ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1 => write!(f, "{}", "Giguna > Antechamber > West 15 ==> Gubi Lair > East 15 (1)"),
             ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1 => write!(f, "{}", "Giguna > Antechamber > West 15 ==> Small Bricks (1)"),
+            ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1 => write!(f, "{}", "Giguna > Breachable Wall > Above Middle Catwalk ==> Irikar > Lamassu > Northwest (1)"),
             ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1 => write!(f, "{}", "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)"),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1 => write!(f, "{}", "Giguna > Breachable Wall > Cave Mouth East ==> Irikar > Lamassu > Catwalk Middle (1)"),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => write!(f, "{}", "Giguna > Breachable Wall > Cave Mouth West ==> Wall Interior (1)"),
+            ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2 => write!(f, "{}", "Giguna > Breachable Wall > Cave Mouth West ==> Wall Interior (2)"),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1 => write!(f, "{}", "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (1)"),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => write!(f, "{}", "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (2)"),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3 => write!(f, "{}", "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (3)"),
+            ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1 => write!(f, "{}", "Giguna > Breachable Wall > West Ledge ==> Irikar > Boss Room > Healthy Rooftop (1)"),
             ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1 => write!(f, "{}", "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)"),
             ExitId::Giguna__Carnelian__Door__ex__Switch_1 => write!(f, "{}", "Giguna > Carnelian > Door ==> Switch (1)"),
             ExitId::Giguna__Carnelian__Door__ex__Vault_1 => write!(f, "{}", "Giguna > Carnelian > Door ==> Vault (1)"),
@@ -15585,7 +15709,22 @@ impl fmt::Display for ExitId {
             ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => write!(f, "{}", "Interior > Outpost Interior > Entry ==> Giguna > Giguna Base > Building Entry (1)"),
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Interior > Tent Interior > Entry ==> Ebih > Base Camp > Tent Entry (1)"),
             ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1 => write!(f, "{}", "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)"),
-            ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1 => write!(f, "{}", "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)"),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => write!(f, "{}", "Irikar > Airy > Cavern Mouth ==> Cavern Cache (1)"),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2 => write!(f, "{}", "Irikar > Airy > Cavern Mouth ==> Cavern Cache (2)"),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1 => write!(f, "{}", "Irikar > Airy > Cavern Mouth ==> East Rooftops > Off the Edge (1)"),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1 => write!(f, "{}", "Irikar > Airy > Cavern Mouth ==> East Rooftops > Top Rooftop (1)"),
+            ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => write!(f, "{}", "Irikar > Airy > Cavern Mouth ==> Giguna > Breachable Wall > West Ledge (1)"),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => write!(f, "{}", "Irikar > Airy > Left Hover Throw End ==> Cavern Mouth (1)"),
+            ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2 => write!(f, "{}", "Irikar > Airy > Left Hover Throw End ==> Cavern Mouth (2)"),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1 => write!(f, "{}", "Irikar > Airy > Lower Throw End ==> Sight Room > Item Pedestal (1)"),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1 => write!(f, "{}", "Irikar > Airy > Lower Throw End ==> Sight Room > Portal (1)"),
+            ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => write!(f, "{}", "Irikar > Airy > Lower Throw End ==> South Sight (1)"),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1 => write!(f, "{}", "Irikar > Airy > Right Hover Throw End ==> Boss Room > Healthy Rooftop (1)"),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => write!(f, "{}", "Irikar > Airy > Right Hover Throw End ==> Cavern Mouth (1)"),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2 => write!(f, "{}", "Irikar > Airy > Right Hover Throw End ==> Cavern Mouth (2)"),
+            ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => write!(f, "{}", "Irikar > Airy > Right Hover Throw End ==> East Rooftops > Top Rooftop (1)"),
+            ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => write!(f, "{}", "Irikar > Airy > South Center ==> East Rooftops > Top Rooftop (1)"),
+            ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => write!(f, "{}", "Irikar > Airy > South Sight ==> Sight Room > Above Room North (1)"),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)"),
             ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => write!(f, "{}", "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)"),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => write!(f, "{}", "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)"),
@@ -15645,6 +15784,8 @@ impl fmt::Display for ExitId {
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => write!(f, "{}", "Irikar > Hub > Bowl Top Platform ==> West Rim (1)"),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => write!(f, "{}", "Irikar > Hub > Collapsed Column ==> Lower Well (1)"),
             ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => write!(f, "{}", "Irikar > Hub > Collapsed Column Debris ==> Lower Well (1)"),
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Airy > Lower Throw End (1)"),
+            ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Airy > Right Hover Throw End (1)"),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => write!(f, "{}", "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)"),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (1)"),
             ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => write!(f, "{}", "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (2)"),
@@ -16898,7 +17039,15 @@ impl std::str::FromStr for ExitId {
             "Giguna > Antechamber > Statues Ledge ==> Small Bricks (1)" => Ok(ExitId::Giguna__Antechamber__Statues_Ledge__ex__Small_Bricks_1),
             "Giguna > Antechamber > West 15 ==> Gubi Lair > East 15 (1)" => Ok(ExitId::Giguna__Antechamber__West_15__ex__Gubi_Lair__East_15_1),
             "Giguna > Antechamber > West 15 ==> Small Bricks (1)" => Ok(ExitId::Giguna__Antechamber__West_15__ex__Small_Bricks_1),
+            "Giguna > Breachable Wall > Above Middle Catwalk ==> Irikar > Lamassu > Northwest (1)" => Ok(ExitId::Giguna__Breachable_Wall__Above_Middle_Catwalk__ex__Irikar__Lamassu__Northwest_1),
             "Giguna > Breachable Wall > Above West Catwalk ==> Irikar > Boss Room > Above Catwalk (1)" => Ok(ExitId::Giguna__Breachable_Wall__Above_West_Catwalk__ex__Irikar__Boss_Room__Above_Catwalk_1),
+            "Giguna > Breachable Wall > Cave Mouth East ==> Irikar > Lamassu > Catwalk Middle (1)" => Ok(ExitId::Giguna__Breachable_Wall__Cave_Mouth_East__ex__Irikar__Lamassu__Catwalk_Middle_1),
+            "Giguna > Breachable Wall > Cave Mouth West ==> Wall Interior (1)" => Ok(ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1),
+            "Giguna > Breachable Wall > Cave Mouth West ==> Wall Interior (2)" => Ok(ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_2),
+            "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (1)" => Ok(ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_1),
+            "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (2)" => Ok(ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2),
+            "Giguna > Breachable Wall > West Ledge ==> Cave Mouth West (3)" => Ok(ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3),
+            "Giguna > Breachable Wall > West Ledge ==> Irikar > Boss Room > Healthy Rooftop (1)" => Ok(ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1),
             "Giguna > Breachable Wall > West Mid-air ==> Irikar > East Rooftops > East Mid-air (1)" => Ok(ExitId::Giguna__Breachable_Wall__West_Mid_air__ex__Irikar__East_Rooftops__East_Mid_air_1),
             "Giguna > Carnelian > Door ==> Switch (1)" => Ok(ExitId::Giguna__Carnelian__Door__ex__Switch_1),
             "Giguna > Carnelian > Door ==> Vault (1)" => Ok(ExitId::Giguna__Carnelian__Door__ex__Vault_1),
@@ -17636,7 +17785,22 @@ impl std::str::FromStr for ExitId {
             "Interior > Outpost Interior > Entry ==> Giguna > Giguna Base > Building Entry (1)" => Ok(ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1),
             "Interior > Tent Interior > Entry ==> Ebih > Base Camp > Tent Entry (1)" => Ok(ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1),
             "Irikar > Abandoned Room > West ==> Basement Portal > East 27 (1)" => Ok(ExitId::Irikar__Abandoned_Room__West__ex__Basement_Portal__East_27_1),
-            "Irikar > Airy > Middle South ==> Sight Room > Above Room North (1)" => Ok(ExitId::Irikar__Airy__Middle_South__ex__Sight_Room__Above_Room_North_1),
+            "Irikar > Airy > Cavern Mouth ==> Cavern Cache (1)" => Ok(ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1),
+            "Irikar > Airy > Cavern Mouth ==> Cavern Cache (2)" => Ok(ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_2),
+            "Irikar > Airy > Cavern Mouth ==> East Rooftops > Off the Edge (1)" => Ok(ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Off_the_Edge_1),
+            "Irikar > Airy > Cavern Mouth ==> East Rooftops > Top Rooftop (1)" => Ok(ExitId::Irikar__Airy__Cavern_Mouth__ex__East_Rooftops__Top_Rooftop_1),
+            "Irikar > Airy > Cavern Mouth ==> Giguna > Breachable Wall > West Ledge (1)" => Ok(ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1),
+            "Irikar > Airy > Left Hover Throw End ==> Cavern Mouth (1)" => Ok(ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1),
+            "Irikar > Airy > Left Hover Throw End ==> Cavern Mouth (2)" => Ok(ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_2),
+            "Irikar > Airy > Lower Throw End ==> Sight Room > Item Pedestal (1)" => Ok(ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Item_Pedestal_1),
+            "Irikar > Airy > Lower Throw End ==> Sight Room > Portal (1)" => Ok(ExitId::Irikar__Airy__Lower_Throw_End__ex__Sight_Room__Portal_1),
+            "Irikar > Airy > Lower Throw End ==> South Sight (1)" => Ok(ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1),
+            "Irikar > Airy > Right Hover Throw End ==> Boss Room > Healthy Rooftop (1)" => Ok(ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Boss_Room__Healthy_Rooftop_1),
+            "Irikar > Airy > Right Hover Throw End ==> Cavern Mouth (1)" => Ok(ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1),
+            "Irikar > Airy > Right Hover Throw End ==> Cavern Mouth (2)" => Ok(ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_2),
+            "Irikar > Airy > Right Hover Throw End ==> East Rooftops > Top Rooftop (1)" => Ok(ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1),
+            "Irikar > Airy > South Center ==> East Rooftops > Top Rooftop (1)" => Ok(ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1),
+            "Irikar > Airy > South Sight ==> Sight Room > Above Room North (1)" => Ok(ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1),
             "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (1)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1),
             "Irikar > Basement Pipes > Bricks Under Pipes ==> Double Pipe Right (2)" => Ok(ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2),
             "Irikar > Basement Pipes > Double Pipe Left ==> High Pipe (1)" => Ok(ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1),
@@ -17696,6 +17860,8 @@ impl std::str::FromStr for ExitId {
             "Irikar > Hub > Bowl Top Platform ==> West Rim (1)" => Ok(ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1),
             "Irikar > Hub > Collapsed Column ==> Lower Well (1)" => Ok(ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1),
             "Irikar > Hub > Collapsed Column Debris ==> Lower Well (1)" => Ok(ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1),
+            "Irikar > Hub > East Rim ==> Airy > Lower Throw End (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1),
+            "Irikar > Hub > East Rim ==> Airy > Right Hover Throw End (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1),
             "Irikar > Hub > East Rim ==> Sat Tower Roof West (1)" => Ok(ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1),
             "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (1)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1),
             "Irikar > Hub > Exposed Passage Center ==> Exposed Passage Upper Ledge (2)" => Ok(ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2),
@@ -18234,8 +18400,13 @@ pub enum ActionId {
     Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
     Irikar__Beach_Save__Save_Point__Save,
     Irikar__Hub__Collapsed_Column__Shockwave_Wall,
+    Irikar__Hub__East_Rim__Throw_Drone_Far_East_High,
+    Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
     Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
     Irikar__Hub__Save_Point__Save,
+    Irikar__Hub__West_Rim__Throw_Drone_Far_East_High,
+    Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low,
+    Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low,
     Irikar__Midwest__Left_Platform_Start__Hack_and_Ride,
     Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform,
     Irikar__Midwest__Save_Point__Save,
@@ -18724,6 +18895,16 @@ impl fmt::Display for ActionId {
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
                 write!(f, "{}", "Irikar > Hub > Collapsed Column > Shockwave Wall")
             }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => write!(
+                f,
+                "{}",
+                "Irikar > Hub > East Rim > Throw Drone Far East High"
+            ),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => write!(
+                f,
+                "{}",
+                "Irikar > Hub > East Rim > Throw Drone Far East Low"
+            ),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => write!(
                 f,
                 "{}",
@@ -18732,6 +18913,21 @@ impl fmt::Display for ActionId {
             ActionId::Irikar__Hub__Save_Point__Save => {
                 write!(f, "{}", "Irikar > Hub > Save Point > Save")
             }
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => write!(
+                f,
+                "{}",
+                "Irikar > Hub > West Rim > Throw Drone Far East High"
+            ),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => write!(
+                f,
+                "{}",
+                "Irikar > Hub > West Rim > Throw Drone Far East Low"
+            ),
+            ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => write!(
+                f,
+                "{}",
+                "Irikar > Hub > West Rim > Throw Drone Further East and Low"
+            ),
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => write!(
                 f,
                 "{}",
@@ -19143,10 +19339,25 @@ impl std::str::FromStr for ActionId {
             "Irikar > Hub > Collapsed Column > Shockwave Wall" => {
                 Ok(ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall)
             }
+            "Irikar > Hub > East Rim > Throw Drone Far East High" => {
+                Ok(ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High)
+            }
+            "Irikar > Hub > East Rim > Throw Drone Far East Low" => {
+                Ok(ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low)
+            }
             "Irikar > Hub > Royal Storage By Wall > Shockwave Wall" => {
                 Ok(ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall)
             }
             "Irikar > Hub > Save Point > Save" => Ok(ActionId::Irikar__Hub__Save_Point__Save),
+            "Irikar > Hub > West Rim > Throw Drone Far East High" => {
+                Ok(ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High)
+            }
+            "Irikar > Hub > West Rim > Throw Drone Far East Low" => {
+                Ok(ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low)
+            }
+            "Irikar > Hub > West Rim > Throw Drone Further East and Low" => {
+                Ok(ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low)
+            }
             "Irikar > Midwest > Left Platform Start > Hack and Ride" => {
                 Ok(ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride)
             }
@@ -19220,6 +19431,7 @@ pub enum CanonId {
     Fast_Travel,
     Filter_Teleporter_Flask,
     Giguna_Boulder,
+    Giguna_Breachable_Wall_Flask,
     Giguna_Dual_Path_Switch,
     Giguna_Dual_Path_Wall,
     Giguna_Gateway_Block,
@@ -19233,6 +19445,7 @@ pub enum CanonId {
     Glacier_Sea_Burial_Rock,
     Hammonds_Note,
     Infect,
+    Irikar_Airy_Flask,
     Irikar_Gudam,
     Irikar_Midwest_Flask,
     Irikar_Royal_Storage_Flask,
@@ -19433,6 +19646,9 @@ impl fmt::Display for CanonId {
             CanonId::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             CanonId::Filter_Teleporter_Flask => write!(f, "{}", "Filter_Teleporter_Flask"),
             CanonId::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
+            CanonId::Giguna_Breachable_Wall_Flask => {
+                write!(f, "{}", "Giguna_Breachable_Wall_Flask")
+            }
             CanonId::Giguna_Dual_Path_Switch => write!(f, "{}", "Giguna_Dual_Path_Switch"),
             CanonId::Giguna_Dual_Path_Wall => write!(f, "{}", "Giguna_Dual_Path_Wall"),
             CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
@@ -19446,6 +19662,7 @@ impl fmt::Display for CanonId {
             CanonId::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             CanonId::Hammonds_Note => write!(f, "{}", "Hammonds_Note"),
             CanonId::Infect => write!(f, "{}", "Infect"),
+            CanonId::Irikar_Airy_Flask => write!(f, "{}", "Irikar_Airy_Flask"),
             CanonId::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             CanonId::Irikar_Midwest_Flask => write!(f, "{}", "Irikar_Midwest_Flask"),
             CanonId::Irikar_Royal_Storage_Flask => write!(f, "{}", "Irikar_Royal_Storage_Flask"),
@@ -20041,6 +20258,7 @@ impl std::str::FromStr for CanonId {
             "Fast_Travel" => Ok(CanonId::Fast_Travel),
             "Filter_Teleporter_Flask" => Ok(CanonId::Filter_Teleporter_Flask),
             "Giguna_Boulder" => Ok(CanonId::Giguna_Boulder),
+            "Giguna_Breachable_Wall_Flask" => Ok(CanonId::Giguna_Breachable_Wall_Flask),
             "Giguna_Dual_Path_Switch" => Ok(CanonId::Giguna_Dual_Path_Switch),
             "Giguna_Dual_Path_Wall" => Ok(CanonId::Giguna_Dual_Path_Wall),
             "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
@@ -20054,6 +20272,7 @@ impl std::str::FromStr for CanonId {
             "Glacier_Sea_Burial_Rock" => Ok(CanonId::Glacier_Sea_Burial_Rock),
             "Hammonds_Note" => Ok(CanonId::Hammonds_Note),
             "Infect" => Ok(CanonId::Infect),
+            "Irikar_Airy_Flask" => Ok(CanonId::Irikar_Airy_Flask),
             "Irikar_Gudam" => Ok(CanonId::Irikar_Gudam),
             "Irikar_Midwest_Flask" => Ok(CanonId::Irikar_Midwest_Flask),
             "Irikar_Royal_Storage_Flask" => Ok(CanonId::Irikar_Royal_Storage_Flask),

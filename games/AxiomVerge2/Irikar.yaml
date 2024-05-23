@@ -57,6 +57,25 @@ areas:
         - to: East Rim
           req: $hover
           movement: base
+      actions:
+        - name: Throw Drone Far East High
+          req: $can_deploy and Drone_Hover
+          to: Airy > Left Hover Throw End
+          do: $deploy_drone
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - name: Throw Drone Far East Low
+          req: $can_deploy and Drone_Hover
+          to: Airy > Lower Throw End
+          do: $deploy_drone
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - name: Throw Drone Further East and Low
+          req: $can_deploy and Drone_Hover
+          to: Airy > South Center
+          do: $deploy_drone
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: East Rim
       coord: [12.8, 20.5]
       local:
@@ -70,6 +89,26 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Airy > Right Hover Throw End
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Airy > Lower Throw End
+          movement: base
+          penalty_tags: [xshift, -base.1]
+      actions:
+        - name: Throw Drone Far East High
+          req: $can_deploy and Drone_Hover
+          to: Airy > Right Hover Throw End
+          do: $deploy_drone
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - name: Throw Drone Far East Low
+          req: $can_deploy and Drone_Hover
+          to: Airy > South Center
+          do: $deploy_drone
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Bowl Top Platform
       coord: [12.4, 20.85]
       local:
@@ -850,16 +889,117 @@ areas:
 
 - name: Airy  # MARK: Airy
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [15, 20, 16, 21]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Irikar Airy Flask
   spots:
     - name: Northwest
       coord: [14.05, 20.7]
       local:
-        - to: Middle South
-    - name: Middle South
+        - to: South Sight
+        - to: Lower Throw End
+    - name: South Sight
       coord: [14.65, 22.9]
       exits:
         - to: Sight Room > Above Room North
           tags: [yshift]
+    - name: Left Hover Throw End
+      coord: [14.4, 20.8]
+      local:
+        - to: South Center
+      exits:
+        - to: Cavern Mouth
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cavern Mouth
+          req: $mist2
+          movement: mist2
+    - name: Right Hover Throw End
+      coord: [15.05, 21.1]
+      exits:
+        - to: Cavern Mouth
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cavern Mouth
+          req: $mist2
+          movement: mist2
+        - to: East Rooftops > Top Rooftop
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+        - to: Boss Room > Healthy Rooftop
+          movement: base
+          penalty_tags: [yshift, -fall.2, yshift, -fall.2]
+    - name: Lower Throw End
+      coord: [14.4, 22.6]
+      exits:
+        - to: South Sight
+          req: $hover
+          movement: base
+        - to: Sight Room > Portal
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+        - to: Sight Room > Item Pedestal
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+    - name: Cavern Mouth
+      coord: [15.7, 21.15]
+      local:
+        - to: Cavern Side
+          jumps: 1
+        - to: Cavern Cache
+          jumps: 2
+      exits:
+        - to: Cavern Cache
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cavern Cache
+          req: $mist2
+          movement: mist2
+        - to: East Rooftops > Top Rooftop
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+        - to: East Rooftops > Off the Edge
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+        - to: Giguna > Breachable Wall > West Ledge
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1, yshift, -fall.2]
+    - name: Cavern Side
+      coord: [15.8, 21.0]
+      local:
+        - to: Cavern Mouth
+        - to: Cavern Cache
+          jumps: 1
+      locations:
+        - name: Remote Flask
+          item: Big_Flask
+          canon: Irikar_Airy_Flask
+          req: $boomerang
+          tags: [remote_flask]
+    - name: Cavern Cache
+      coord: [15.65, 20.85]
+      local:
+        - to: Cavern Mouth
+        - to: Cavern Side
+      locations:
+        - name: Flask
+          item: Big_Flask
+          canon: Irikar_Airy_Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          item: Big_Flask
+          canon: Irikar_Airy_Flask
+          req: $shockwave
+          tags: [shockwave]
+    - name: South Center
+      coord: [15.0, 22.9]
+      exits:
+        - to: East Rooftops > Top Rooftop
+          movement: base
+          penalty_tags: [yshift, -fall.2]
 
 - name: Sight Room  # MARK: Sight Room
   on_entry: $reset_old_area(^newpos)

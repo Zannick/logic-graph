@@ -1330,7 +1330,11 @@ subgraph Giguna
         Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
         Giguna__Breachable_Wall__Above_West_Catwalk(Above West Catwalk);
         Giguna__Breachable_Wall__Above_Middle_Catwalk(Above Middle Catwalk);
+        Giguna__Breachable_Wall__West_Ledge(West Ledge);
+        Giguna__Breachable_Wall__Above_the_Hole(Above the Hole);
         Giguna__Breachable_Wall__Wall_Interior(Wall Interior);
+        Giguna__Breachable_Wall__Cave_Mouth_West(Cave Mouth West);
+        Giguna__Breachable_Wall__Cave_Mouth_East(Cave Mouth East);
     end
     subgraph Giguna__Separator[Separator]
         Giguna__Separator__West_23(West 23);
@@ -1890,7 +1894,14 @@ subgraph Irikar
     end
     subgraph Irikar__Airy[Airy]
         Irikar__Airy__Northwest(Northwest);
-        Irikar__Airy__Middle_South(Middle South);
+        Irikar__Airy__South_Sight(South Sight);
+        Irikar__Airy__Left_Hover_Throw_End(Left Hover Throw End);
+        Irikar__Airy__Right_Hover_Throw_End(Right Hover Throw End);
+        Irikar__Airy__Lower_Throw_End(Lower Throw End);
+        Irikar__Airy__Cavern_Mouth(Cavern Mouth);
+        Irikar__Airy__Cavern_Side(Cavern Side);
+        Irikar__Airy__Cavern_Cache(Cavern Cache);
+        Irikar__Airy__South_Center(South Center);
     end
     subgraph Irikar__Sight_Room[Sight Room]
         Irikar__Sight_Room__West_24(West 24);
@@ -2105,6 +2116,8 @@ subgraph Menu
         Menu__Kiengir_Map__Irikar_Mid_air_Flask(Irikar Mid-air Flask);
         Menu__Kiengir_Map__Irikar_Fast_Travel(Irikar Fast Travel);
         Menu__Kiengir_Map__Irikar_Beach_Cache(Irikar Beach Cache);
+        Menu__Kiengir_Map__Irikar_Airy_Flask(Irikar Airy Flask);
+        Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask(Giguna Breachable Wall Flask);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2867,7 +2880,12 @@ Giguna__Antechamber__Small_Bricks --> Giguna__Antechamber__Statue_Head
 Giguna__Antechamber__Statues_Ledge --> Giguna__Antechamber__Small_Bricks
 Giguna__Antechamber__West_15 --> Giguna__Antechamber__Small_Bricks
 Giguna__Antechamber__West_15 <--> Giguna__Gubi_Lair__East_15
+Giguna__Breachable_Wall__Above_Middle_Catwalk --> Irikar__Lamassu__Northwest
 Giguna__Breachable_Wall__Above_West_Catwalk --> Irikar__Boss_Room__Above_Catwalk
+Giguna__Breachable_Wall__Cave_Mouth_East --> Irikar__Lamassu__Catwalk_Middle
+Giguna__Breachable_Wall__Cave_Mouth_West --> Giguna__Breachable_Wall__Wall_Interior
+Giguna__Breachable_Wall__West_Ledge --> Giguna__Breachable_Wall__Cave_Mouth_West
+Giguna__Breachable_Wall__West_Ledge --> Irikar__Boss_Room__Healthy_Rooftop
 Giguna__Breachable_Wall__West_Mid_air <--> Irikar__East_Rooftops__East_Mid_air
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Vault
@@ -3299,7 +3317,19 @@ Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__West
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
 Irikar__Abandoned_Room__West <--> Irikar__Basement_Portal__East_27
-Irikar__Airy__Middle_South --> Irikar__Sight_Room__Above_Room_North
+Irikar__Airy__Cavern_Mouth --> Giguna__Breachable_Wall__West_Ledge
+Irikar__Airy__Cavern_Mouth --> Irikar__Airy__Cavern_Cache
+Irikar__Airy__Cavern_Mouth --> Irikar__East_Rooftops__Off_the_Edge
+Irikar__Airy__Cavern_Mouth --> Irikar__East_Rooftops__Top_Rooftop
+Irikar__Airy__Left_Hover_Throw_End --> Irikar__Airy__Cavern_Mouth
+Irikar__Airy__Lower_Throw_End --> Irikar__Airy__South_Sight
+Irikar__Airy__Lower_Throw_End --> Irikar__Sight_Room__Item_Pedestal
+Irikar__Airy__Lower_Throw_End --> Irikar__Sight_Room__Portal
+Irikar__Airy__Right_Hover_Throw_End --> Irikar__Airy__Cavern_Mouth
+Irikar__Airy__Right_Hover_Throw_End --> Irikar__Boss_Room__Healthy_Rooftop
+Irikar__Airy__Right_Hover_Throw_End --> Irikar__East_Rooftops__Top_Rooftop
+Irikar__Airy__South_Center --> Irikar__East_Rooftops__Top_Rooftop
+Irikar__Airy__South_Sight --> Irikar__Sight_Room__Above_Room_North
 Irikar__Basement_Pipes__Bricks_Under_Pipes --> Irikar__Basement_Pipes__Double_Pipe_Right
 Irikar__Basement_Pipes__Double_Pipe_Left --> Irikar__Basement_Pipes__High_Pipe
 Irikar__Basement_Pipes__East_28 <--> Irikar__Basement_Portal__West_28
@@ -3342,6 +3372,8 @@ Irikar__Hub__Bowl_Platform_3 --> Irikar__Hub__Bowl_Middle_Platform_Center
 Irikar__Hub__Bowl_Top_Platform --> Irikar__Hub__West_Rim
 Irikar__Hub__Collapsed_Column --> Irikar__Hub__Lower_Well
 Irikar__Hub__Collapsed_Column_Debris --> Irikar__Hub__Lower_Well
+Irikar__Hub__East_Rim --> Irikar__Airy__Lower_Throw_End
+Irikar__Hub__East_Rim --> Irikar__Airy__Right_Hover_Throw_End
 Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
 Irikar__Hub__Exposed_Passage_Center --> Irikar__Hub__Exposed_Passage_Upper_Ledge
 Irikar__Hub__Exposed_Passage_Upper_Ledge --> Irikar__Hub__Ruined_Hallway_Gap_Left
