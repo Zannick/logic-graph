@@ -931,7 +931,7 @@ where
                     }
                 };
             }
-            log::info!(
+            log::debug!(
                 "Thread {} exiting: fin={} done={}",
                 i,
                 self.finished.load(Ordering::Acquire),
@@ -958,7 +958,7 @@ where
                 }
             });
 
-            log::info!("Workers all exited, marking finished");
+            log::debug!("Workers all exited, marking finished");
             self.finished.store(true, Ordering::Release);
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
@@ -1028,7 +1028,11 @@ where
                     }
                 } else if last_clean > 0 && self.next_threshold.load(Ordering::Acquire) <= iters {
                     // Minimum 250M after the last clean
-                    if iters / last_clean >= 5 {
+                    if (iters - last_clean)
+                        // threshold step
+                        / (std::cmp::max(last_clean + 50_000_000, last_clean * 2) - last_clean)
+                        >= 5
+                    {
                         log::info!(
                             "No solves in {} attempts since last clean ({}x), giving up.",
                             iters - last_clean,
