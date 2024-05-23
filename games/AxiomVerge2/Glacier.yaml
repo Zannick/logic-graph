@@ -5,6 +5,13 @@ start:
 areas:
 - name: Dock Outside  # MARK: Dock Outside
   on_entry: $reset_old_area(^newpos)
+  map:
+    note: [42, 7, 43, 8]
+    flask: [44, 8, 45, 9]
+  datamap:
+    map_spot:
+      note: Menu > Kiengir Map > Weekly Notes 2/27/2053
+      flask: Menu > Kiengir Map > Glacier Dock Flask
   spots:
     - name: Entry
       coord: [43.475, 8.5]
@@ -184,8 +191,6 @@ areas:
           jumps: 1
     - name: Cave Treasure
       coord: [44.6, 8.5]
-      data:
-        map_spot: Menu > Kiengir Map > Glacier Dock Flask
       locations:
         - name: Item
           canon: Glacier_Dock_Flask
@@ -429,6 +434,8 @@ areas:
 
 - name: Compass Room  # MARK: Compass Room
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Compass
   spots:
     - name: East
       coord: [42.95, 10.8]
@@ -459,13 +466,13 @@ areas:
 
 - name: The Big Drop  # MARK: The Big Drop
   on_entry: $reset_old_area(^newpos)
-  reset:
-    _bridge_open: false
   map:
     bottom: [41, 13, 42, 14]
-  data_map:
+  datamap:
     water:
       bottom: true
+  reset:
+    _bridge_open: false
   spots:
     - name: East
       coord: [41.95, 10.75]
@@ -582,8 +589,15 @@ areas:
 
 - name: Sea Burial  # MARK: Sea Burial
   on_entry: $reset_old_area(^newpos)
+  map:
+    note: [39, 13, 40, 14]
+    health: [40, 13, 41, 14]
   data:
     water: true
+  datamap:
+    map_spot:
+      note: Menu > Kiengir Map > Dr. Gloria
+      health: Menu > Kiengir Map > Glacier Sea Burial Health
   spots:
     - name: Collapsing Ceiling
       coord: [40.95, 12.9]
@@ -805,10 +819,10 @@ areas:
 - name: Grid 39-40,7-9  # MARK: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)
   map:
-    flask: [40, 7, 41, 8]
+    flask: [40, 6, 41, 7]
   datamap:
     map_spot:
-      flask: Menu > Kiengir Map > Glacier 40,8
+      flask: Menu > Kiengir Map > Glacier East Revival Flask
   spots:
     - name: Upper East
       coord: [40.95, 7.95]
@@ -884,7 +898,7 @@ areas:
           req: $melee_cskip
           tags: [cskip]
         - name: Flask Fast Travel
-          to: Menu > Kiengir Map > Glacier 40,8
+          to: Menu > Kiengir Map > Glacier East Revival Flask
           canon: Glacier 40,8 Flask
           item: Flask
           req: Fast_Travel and $melee_cskip
@@ -983,6 +997,11 @@ areas:
 
 - name: Vertical Room  # MARK: Vertical Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [36, 8, 37, 9]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Glacier Vertical Room Flask
   start:
     _upper_gatestone: false
     _lower_gatestones: false
@@ -1434,6 +1453,11 @@ areas:
 
 - name: Boomerang Room  # MARK: Boomerang Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    rang: [40, 11, 41, 12]
+  datamap:
+    map_spot:
+      rang: Menu > Kiengir Map > Boomerang
   spots:
     - name: West
       coord: [39.05, 11.8]
@@ -1510,6 +1534,11 @@ areas:
 
 - name: Ledge Grab Room  # MARK: Ledge Grab Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [33, 10, 34, 11]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Ledge Grab
   spots:
     - name: East 9
       coord: [35.95, 8.75]
@@ -2260,9 +2289,11 @@ areas:
     portal_start: Portal Cage
   map:
     lower: [37, 15, 38, 16]
+    upper: [37, 13, 38, 14]
   datamap:
     map_spot:
       lower: Menu > Kiengir Map > Breach Attractor
+      upper: Menu > Kiengir Map > Bounty List
   spots:
     - name: West
       coord: [37.05, 13.8]
@@ -2405,9 +2436,11 @@ areas:
     portal_start: Upper Portal Stand
   map:
     hammond: [40, 10, 41, 11]
+    health: [39, 10, 40, 11]
   datamap:
     map_spot:
       hammond: Menu > Kiengir Map > Hammond
+      health: Menu > Kiengir Map > Hammond's Health
   spots:
     - name: Upper Grate Left
       coord: [39.9, 9.6]

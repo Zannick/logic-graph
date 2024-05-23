@@ -39,11 +39,13 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [11, 21, 12, 22]
+    flask: [10, 22, 11, 23]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > IB Gauntlet
+      flask: Menu > Breach Map > IB Gauntlet Flask
   spots:
     - name: Save Point
       coord: [11.3, 21.7]
@@ -110,6 +112,11 @@ areas:
 
 - name: Hover Room  # MARK: Hover Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [12, 22, 13, 23]
+  datamap:
+    map_spot:
+      urn: Menu > Breach Map > Drone Hover
   spots:
     - name: West
       coord: [12.1, 21.8]
@@ -284,6 +291,8 @@ areas:
 
 - name: Worm Rave  # MARK: Worm Rave
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > IB Worm Rave Flask
   spots:
     - name: East
       coord: [12.9, 25.3]

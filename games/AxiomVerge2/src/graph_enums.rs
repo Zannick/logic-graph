@@ -2413,11 +2413,16 @@ pub enum SpotId {
     Menu__Breach_Map__AGB_Enclosed,
     Menu__Breach_Map__AGB_North,
     Menu__Breach_Map__AGB_South,
+    Menu__Breach_Map__Drone_Hover,
     Menu__Breach_Map__GlB_Arena,
     Menu__Breach_Map__GlB_Center,
+    Menu__Breach_Map__GlB_Control_Flask,
     Menu__Breach_Map__GlB_East,
+    Menu__Breach_Map__GlB_Grate_Flask,
     Menu__Breach_Map__GlB_South,
     Menu__Breach_Map__GlB_West,
+    Menu__Breach_Map__GSB_Chimney_Flask,
+    Menu__Breach_Map__GSB_Cubby_Health,
     Menu__Breach_Map__GSB_East,
     Menu__Breach_Map__GSB_Emergence,
     Menu__Breach_Map__GSB_Labyrinth,
@@ -2426,10 +2431,13 @@ pub enum SpotId {
     Menu__Breach_Map__GSB_SW_Save,
     Menu__Breach_Map__IB_Basement,
     Menu__Breach_Map__IB_Gauntlet,
+    Menu__Breach_Map__IB_Gauntlet_Flask,
     Menu__Breach_Map__IB_Save_Room,
     Menu__Breach_Map__IB_West,
+    Menu__Breach_Map__IB_Worm_Rave_Flask,
     Menu__Breach_Map__LAB_Center,
     Menu__Breach_Map__LAB_East,
+    Menu__Breach_Map__LAB_East_Health,
     Menu__Breach_Map__LAB_Enclosed,
     Menu__Breach_Map__LAB_Southeast,
     Menu__Breach_Map__LAB_Southwest,
@@ -2437,54 +2445,118 @@ pub enum SpotId {
     Menu__Breach_Map__MEB_Peak,
     Menu__Breach_Map__MEB_Southeast,
     Menu__Breach_Map__MEB_Southwest,
+    Menu__Breach_Map__Slingshot_Hook,
     Menu__Breach_Map__UVB_Center,
     Menu__Breach_Map__UVB_Dead_end,
     Menu__Breach_Map__UVB_East,
     Menu__Breach_Map__UVB_West,
+    Menu__Kiengir_Map__Aansur,
+    Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask,
     Menu__Kiengir_Map__Amagi_East_Lake,
     Menu__Kiengir_Map__Amagi_Isolation,
     Menu__Kiengir_Map__Amagi_Main_Area,
+    Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
+    Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask,
+    Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask,
+    Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
     Menu__Kiengir_Map__Annuna_Center_Save,
+    Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+    Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
+    Menu__Kiengir_Map__Annuna_Egg_Room_SE,
     Menu__Kiengir_Map__Annuna_Factory_Entrance,
     Menu__Kiengir_Map__Annuna_Mirror_Match,
+    Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+    Menu__Kiengir_Map__Annuna_Sniper_Valley_Core,
+    Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask,
+    Menu__Kiengir_Map__Annuna_Spider_Room_Core,
+    Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
     Menu__Kiengir_Map__Annuna_Upper,
+    Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal,
     Menu__Kiengir_Map__Annuna_Vertical_Room,
     Menu__Kiengir_Map__Annuna_West_Bridge,
     Menu__Kiengir_Map__Anuman,
     Menu__Kiengir_Map__Apocalypse,
     Menu__Kiengir_Map__Apocalypse_Cache,
+    Menu__Kiengir_Map__Beware_the_Patternmind,
+    Menu__Kiengir_Map__Boomerang,
+    Menu__Kiengir_Map__Bounty_List,
     Menu__Kiengir_Map__Breach_Attractor,
     Menu__Kiengir_Map__Breach_Sight,
     Menu__Kiengir_Map__Bronze_Axe,
+    Menu__Kiengir_Map__Building_of_the_School,
+    Menu__Kiengir_Map__Carnelian_Ring,
     Menu__Kiengir_Map__Commemorative_Speech,
+    Menu__Kiengir_Map__Compass,
+    Menu__Kiengir_Map__Dangerous_Ideas,
+    Menu__Kiengir_Map__Destruction_Pogrom,
+    Menu__Kiengir_Map__Double_Axe,
+    Menu__Kiengir_Map__Dr_Gloria,
+    Menu__Kiengir_Map__Ebih_Alu_Flask,
+    Menu__Kiengir_Map__Ebih_Alu_Health,
     Menu__Kiengir_Map__Ebih_Base_Camp,
+    Menu__Kiengir_Map__Ebih_Base_Camp_East,
+    Menu__Kiengir_Map__Ebih_Base_Camp_Health,
+    Menu__Kiengir_Map__Ebih_Base_Camp_West,
+    Menu__Kiengir_Map__Ebih_By_Garage_Health,
+    Menu__Kiengir_Map__Ebih_Drone_Pit_Flask,
+    Menu__Kiengir_Map__Ebih_East_Health,
+    Menu__Kiengir_Map__Ebih_East_Waterfall_Flask,
+    Menu__Kiengir_Map__Ebih_Garage,
     Menu__Kiengir_Map__Ebih_Guarded_Health,
     Menu__Kiengir_Map__Ebih_Observatory,
     Menu__Kiengir_Map__Ebih_Truck_Gate,
+    Menu__Kiengir_Map__Ebih_Waterfall_Cave,
+    Menu__Kiengir_Map__Ebih_West_Flask,
     Menu__Kiengir_Map__Ebih_West_Lower,
     Menu__Kiengir_Map__Ebih_West_Mid,
     Menu__Kiengir_Map__Ebih_West_Upper,
+    Menu__Kiengir_Map__Eye_Ring,
+    Menu__Kiengir_Map__Family_Tragedy,
     Menu__Kiengir_Map__Filter_Flask,
     Menu__Kiengir_Map__Filter_Spiders,
-    Menu__Kiengir_Map__Filter_Tablet,
     Menu__Kiengir_Map__Forbidden_Knowledge,
+    Menu__Kiengir_Map__Freedom_from_Aansur,
     Menu__Kiengir_Map__Giguna_Base,
     Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
+    Menu__Kiengir_Map__Giguna_Caverns_Core,
+    Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+    Menu__Kiengir_Map__Giguna_Clouds_Flask,
+    Menu__Kiengir_Map__Giguna_Dual_Path_Health,
+    Menu__Kiengir_Map__Giguna_East_Caverns_Flask,
+    Menu__Kiengir_Map__Giguna_Far_Corner,
+    Menu__Kiengir_Map__Giguna_Gateway_Block,
+    Menu__Kiengir_Map__Giguna_Gateway_Flask,
+    Menu__Kiengir_Map__Giguna_Gubi_Flask,
+    Menu__Kiengir_Map__Giguna_Highest_Flask,
     Menu__Kiengir_Map__Giguna_Labyrinth,
+    Menu__Kiengir_Map__Giguna_Lamassu_Flask,
     Menu__Kiengir_Map__Giguna_Northeast,
+    Menu__Kiengir_Map__Giguna_Northeast_Flask,
+    Menu__Kiengir_Map__Giguna_Northeast_Gate,
     Menu__Kiengir_Map__Giguna_Ruins_Top,
+    Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
+    Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
     Menu__Kiengir_Map__Giguna_Ruins_West,
     Menu__Kiengir_Map__Giguna_Separator,
-    Menu__Kiengir_Map__Glacier_40_8,
+    Menu__Kiengir_Map__Giguna_Wasteland_Core,
+    Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+    Menu__Kiengir_Map__Giguna_Wasteland_Health,
+    Menu__Kiengir_Map__Giguna_Wasteland_Switch,
     Menu__Kiengir_Map__Glacier_Dock_Flask,
+    Menu__Kiengir_Map__Glacier_East_Revival_Flask,
     Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
     Menu__Kiengir_Map__Glacier_Revival,
+    Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+    Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
     Menu__Kiengir_Map__Hammond,
+    Menu__Kiengir_Map__Hammonds_Health,
     Menu__Kiengir_Map__Heretics_Granddaughter,
+    Menu__Kiengir_Map__Heretics_Tablet,
     Menu__Kiengir_Map__Infect,
     Menu__Kiengir_Map__Irikar_10_25,
     Menu__Kiengir_Map__Irikar_Abandoned_Room,
     Menu__Kiengir_Map__Irikar_Airy_Flask,
+    Menu__Kiengir_Map__Irikar_Basement_Core,
     Menu__Kiengir_Map__Irikar_Beach_Cache,
     Menu__Kiengir_Map__Irikar_Beach_Save,
     Menu__Kiengir_Map__Irikar_Broken_Wall,
@@ -2496,15 +2568,41 @@ pub enum SpotId {
     Menu__Kiengir_Map__Irikar_Midwest,
     Menu__Kiengir_Map__Irikar_Royal_Storage,
     Menu__Kiengir_Map__Irikar_Well,
+    Menu__Kiengir_Map__Journal_10_29_2049,
+    Menu__Kiengir_Map__Kari,
+    Menu__Kiengir_Map__Lament_for_Fools,
+    Menu__Kiengir_Map__Ledge_Grab,
+    Menu__Kiengir_Map__MUS_A_M20_Flask,
     Menu__Kiengir_Map__Nanite_Mist,
+    Menu__Kiengir_Map__Nano_Lattice_2,
+    Menu__Kiengir_Map__Plague_of_Thoughts,
     Menu__Kiengir_Map__Remote_Drone,
+    Menu__Kiengir_Map__Royal_Ring,
     Menu__Kiengir_Map__Shockwave,
+    Menu__Kiengir_Map__Storm_Bomb,
+    Menu__Kiengir_Map__Suspension_Bridge,
+    Menu__Kiengir_Map__Terminal_Breakthrough_1,
     Menu__Kiengir_Map__Terminal_Breakthrough_2,
+    Menu__Kiengir_Map__The_Eternal_Arm,
+    Menu__Kiengir_Map__The_Ideal_Kiengir,
     Menu__Kiengir_Map__The_Student,
+    Menu__Kiengir_Map__Udusan,
+    Menu__Kiengir_Map__Uhrum_Annuna_Flask,
     Menu__Kiengir_Map__Uhrum_Center,
     Menu__Kiengir_Map__Uhrum_East,
     Menu__Kiengir_Map__Uhrum_Emergence,
+    Menu__Kiengir_Map__Uhrum_Fast_Travel,
+    Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core,
+    Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health,
+    Menu__Kiengir_Map__Uhrum_Waterfalls_Flask,
     Menu__Kiengir_Map__Uhrum_West,
+    Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
+    Menu__Kiengir_Map__Uhrum_West_Portal_Exit,
+    Menu__Kiengir_Map__Ul_Gishru,
+    Menu__Kiengir_Map__Under_Siege,
+    Menu__Kiengir_Map__Wall_Climb,
+    Menu__Kiengir_Map__Water_Movement,
+    Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -6901,13 +6999,28 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Breach_Map__AGB_North => write!(f, "{}", "Menu > Breach Map > AGB North"),
             SpotId::Menu__Breach_Map__AGB_South => write!(f, "{}", "Menu > Breach Map > AGB South"),
+            SpotId::Menu__Breach_Map__Drone_Hover => {
+                write!(f, "{}", "Menu > Breach Map > Drone Hover")
+            }
             SpotId::Menu__Breach_Map__GlB_Arena => write!(f, "{}", "Menu > Breach Map > GlB Arena"),
             SpotId::Menu__Breach_Map__GlB_Center => {
                 write!(f, "{}", "Menu > Breach Map > GlB Center")
             }
+            SpotId::Menu__Breach_Map__GlB_Control_Flask => {
+                write!(f, "{}", "Menu > Breach Map > GlB Control Flask")
+            }
             SpotId::Menu__Breach_Map__GlB_East => write!(f, "{}", "Menu > Breach Map > GlB East"),
+            SpotId::Menu__Breach_Map__GlB_Grate_Flask => {
+                write!(f, "{}", "Menu > Breach Map > GlB Grate Flask")
+            }
             SpotId::Menu__Breach_Map__GlB_South => write!(f, "{}", "Menu > Breach Map > GlB South"),
             SpotId::Menu__Breach_Map__GlB_West => write!(f, "{}", "Menu > Breach Map > GlB West"),
+            SpotId::Menu__Breach_Map__GSB_Chimney_Flask => {
+                write!(f, "{}", "Menu > Breach Map > GSB Chimney Flask")
+            }
+            SpotId::Menu__Breach_Map__GSB_Cubby_Health => {
+                write!(f, "{}", "Menu > Breach Map > GSB Cubby Health")
+            }
             SpotId::Menu__Breach_Map__GSB_East => write!(f, "{}", "Menu > Breach Map > GSB East"),
             SpotId::Menu__Breach_Map__GSB_Emergence => {
                 write!(f, "{}", "Menu > Breach Map > GSB Emergence")
@@ -6926,14 +7039,23 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Breach_Map__IB_Gauntlet => {
                 write!(f, "{}", "Menu > Breach Map > IB Gauntlet")
             }
+            SpotId::Menu__Breach_Map__IB_Gauntlet_Flask => {
+                write!(f, "{}", "Menu > Breach Map > IB Gauntlet Flask")
+            }
             SpotId::Menu__Breach_Map__IB_Save_Room => {
                 write!(f, "{}", "Menu > Breach Map > IB Save Room")
             }
             SpotId::Menu__Breach_Map__IB_West => write!(f, "{}", "Menu > Breach Map > IB West"),
+            SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask => {
+                write!(f, "{}", "Menu > Breach Map > IB Worm Rave Flask")
+            }
             SpotId::Menu__Breach_Map__LAB_Center => {
                 write!(f, "{}", "Menu > Breach Map > LAB Center")
             }
             SpotId::Menu__Breach_Map__LAB_East => write!(f, "{}", "Menu > Breach Map > LAB East"),
+            SpotId::Menu__Breach_Map__LAB_East_Health => {
+                write!(f, "{}", "Menu > Breach Map > LAB East Health")
+            }
             SpotId::Menu__Breach_Map__LAB_Enclosed => {
                 write!(f, "{}", "Menu > Breach Map > LAB Enclosed")
             }
@@ -6951,6 +7073,9 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Breach_Map__MEB_Southwest => {
                 write!(f, "{}", "Menu > Breach Map > MEB Southwest")
             }
+            SpotId::Menu__Breach_Map__Slingshot_Hook => {
+                write!(f, "{}", "Menu > Breach Map > Slingshot Hook")
+            }
             SpotId::Menu__Breach_Map__UVB_Center => {
                 write!(f, "{}", "Menu > Breach Map > UVB Center")
             }
@@ -6959,6 +7084,10 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Breach_Map__UVB_East => write!(f, "{}", "Menu > Breach Map > UVB East"),
             SpotId::Menu__Breach_Map__UVB_West => write!(f, "{}", "Menu > Breach Map > UVB West"),
+            SpotId::Menu__Kiengir_Map__Aansur => write!(f, "{}", "Menu > Kiengir Map > A'ansur"),
+            SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi Dragon Eye Flask")
+            }
             SpotId::Menu__Kiengir_Map__Amagi_East_Lake => {
                 write!(f, "{}", "Menu > Kiengir Map > Amagi East Lake")
             }
@@ -6968,8 +7097,33 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Amagi_Main_Area => {
                 write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area")
             }
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance => write!(
+                f,
+                "{}",
+                "Menu > Kiengir Map > Amagi Main Area Cave Entrance"
+            ),
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area Cave Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Amagi Main Area Water Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station => write!(
+                f,
+                "{}",
+                "Menu > Kiengir Map > Amagi West Lake Refill Station"
+            ),
             SpotId::Menu__Kiengir_Map__Annuna_Center_Save => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna Center Save")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna East Bridge Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Egg Room Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_SE => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Egg Room SE")
             }
             SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna Factory Entrance")
@@ -6977,8 +7131,26 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna Mirror Match")
             }
+            SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Mirror Match Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Sniper Valley Core")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Sniper Valley Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Spider Room Core")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Twisty Passages Core")
+            }
             SpotId::Menu__Kiengir_Map__Annuna_Upper => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna Upper")
+            }
+            SpotId::Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal => {
+                write!(f, "{}", "Menu > Kiengir Map > Annuna Upper Hallway Portal")
             }
             SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => {
                 write!(f, "{}", "Menu > Kiengir Map > Annuna Vertical Room")
@@ -6993,6 +7165,15 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Apocalypse_Cache => {
                 write!(f, "{}", "Menu > Kiengir Map > Apocalypse Cache")
             }
+            SpotId::Menu__Kiengir_Map__Beware_the_Patternmind => {
+                write!(f, "{}", "Menu > Kiengir Map > Beware the Patternmind")
+            }
+            SpotId::Menu__Kiengir_Map__Boomerang => {
+                write!(f, "{}", "Menu > Kiengir Map > Boomerang")
+            }
+            SpotId::Menu__Kiengir_Map__Bounty_List => {
+                write!(f, "{}", "Menu > Kiengir Map > Bounty List")
+            }
             SpotId::Menu__Kiengir_Map__Breach_Attractor => {
                 write!(f, "{}", "Menu > Kiengir Map > Breach Attractor")
             }
@@ -7002,11 +7183,60 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Bronze_Axe => {
                 write!(f, "{}", "Menu > Kiengir Map > Bronze Axe")
             }
+            SpotId::Menu__Kiengir_Map__Building_of_the_School => {
+                write!(f, "{}", "Menu > Kiengir Map > Building of the School")
+            }
+            SpotId::Menu__Kiengir_Map__Carnelian_Ring => {
+                write!(f, "{}", "Menu > Kiengir Map > Carnelian Ring")
+            }
             SpotId::Menu__Kiengir_Map__Commemorative_Speech => {
                 write!(f, "{}", "Menu > Kiengir Map > Commemorative Speech")
             }
+            SpotId::Menu__Kiengir_Map__Compass => write!(f, "{}", "Menu > Kiengir Map > Compass"),
+            SpotId::Menu__Kiengir_Map__Dangerous_Ideas => {
+                write!(f, "{}", "Menu > Kiengir Map > Dangerous Ideas")
+            }
+            SpotId::Menu__Kiengir_Map__Destruction_Pogrom => {
+                write!(f, "{}", "Menu > Kiengir Map > Destruction Pogrom")
+            }
+            SpotId::Menu__Kiengir_Map__Double_Axe => {
+                write!(f, "{}", "Menu > Kiengir Map > Double Axe")
+            }
+            SpotId::Menu__Kiengir_Map__Dr_Gloria => {
+                write!(f, "{}", "Menu > Kiengir Map > Dr. Gloria")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Alu_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Alu Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Alu_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Alu Health")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_East => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp East")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp Health")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Base Camp West")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih By Garage Health")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Drone Pit Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_East_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih East Health")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih East Waterfall Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_Garage => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Garage")
             }
             SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Guarded Health")
@@ -7017,6 +7247,12 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih Truck Gate")
             }
+            SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih Waterfall Cave")
+            }
+            SpotId::Menu__Kiengir_Map__Ebih_West_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Ebih West Flask")
+            }
             SpotId::Menu__Kiengir_Map__Ebih_West_Lower => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih West Lower")
             }
@@ -7026,17 +7262,21 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Ebih_West_Upper => {
                 write!(f, "{}", "Menu > Kiengir Map > Ebih West Upper")
             }
+            SpotId::Menu__Kiengir_Map__Eye_Ring => write!(f, "{}", "Menu > Kiengir Map > Eye Ring"),
+            SpotId::Menu__Kiengir_Map__Family_Tragedy => {
+                write!(f, "{}", "Menu > Kiengir Map > Family Tragedy")
+            }
             SpotId::Menu__Kiengir_Map__Filter_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Filter Flask")
             }
             SpotId::Menu__Kiengir_Map__Filter_Spiders => {
                 write!(f, "{}", "Menu > Kiengir Map > Filter Spiders")
             }
-            SpotId::Menu__Kiengir_Map__Filter_Tablet => {
-                write!(f, "{}", "Menu > Kiengir Map > Filter Tablet")
-            }
             SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => {
                 write!(f, "{}", "Menu > Kiengir Map > Forbidden Knowledge")
+            }
+            SpotId::Menu__Kiengir_Map__Freedom_from_Aansur => {
+                write!(f, "{}", "Menu > Kiengir Map > Freedom from A'ansur")
             }
             SpotId::Menu__Kiengir_Map__Giguna_Base => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Base")
@@ -7044,14 +7284,59 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Breachable Wall Flask")
             }
+            SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Caverns Core")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Caverns Matrix")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Clouds Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Dual Path Health")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna East Caverns Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Far_Corner => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Far Corner")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Gateway Block")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Gateway Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Gubi Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Highest_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Highest Flask")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Labyrinth")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Lamassu_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Lamassu Flask")
             }
             SpotId::Menu__Kiengir_Map__Giguna_Northeast => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Northeast")
             }
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Northeast Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Northeast Gate")
+            }
             SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins Top Portal")
             }
             SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Ruins West")
@@ -7059,11 +7344,23 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Giguna_Separator => {
                 write!(f, "{}", "Menu > Kiengir Map > Giguna Separator")
             }
-            SpotId::Menu__Kiengir_Map__Glacier_40_8 => {
-                write!(f, "{}", "Menu > Kiengir Map > Glacier 40,8")
+            SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Wasteland Core")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Wasteland Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Wasteland Health")
+            }
+            SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch => {
+                write!(f, "{}", "Menu > Kiengir Map > Giguna Wasteland Switch")
             }
             SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Dock Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier East Revival Flask")
             }
             SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Peak Bird's Eye")
@@ -7071,9 +7368,21 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Glacier_Revival => {
                 write!(f, "{}", "Menu > Kiengir Map > Glacier Revival")
             }
+            SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier Sea Burial Health")
+            }
+            SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Glacier Vertical Room Flask")
+            }
             SpotId::Menu__Kiengir_Map__Hammond => write!(f, "{}", "Menu > Kiengir Map > Hammond"),
+            SpotId::Menu__Kiengir_Map__Hammonds_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Hammond's Health")
+            }
             SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => {
                 write!(f, "{}", "Menu > Kiengir Map > Heretic's Granddaughter")
+            }
+            SpotId::Menu__Kiengir_Map__Heretics_Tablet => {
+                write!(f, "{}", "Menu > Kiengir Map > Heretic's Tablet")
             }
             SpotId::Menu__Kiengir_Map__Infect => write!(f, "{}", "Menu > Kiengir Map > Infect"),
             SpotId::Menu__Kiengir_Map__Irikar_10_25 => {
@@ -7084,6 +7393,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Airy Flask")
+            }
+            SpotId::Menu__Kiengir_Map__Irikar_Basement_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Irikar Basement Core")
             }
             SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Beach Cache")
@@ -7118,20 +7430,61 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Irikar_Well => {
                 write!(f, "{}", "Menu > Kiengir Map > Irikar Well")
             }
+            SpotId::Menu__Kiengir_Map__Journal_10_29_2049 => {
+                write!(f, "{}", "Menu > Kiengir Map > Journal 10/29/2049")
+            }
+            SpotId::Menu__Kiengir_Map__Kari => write!(f, "{}", "Menu > Kiengir Map > Kari"),
+            SpotId::Menu__Kiengir_Map__Lament_for_Fools => {
+                write!(f, "{}", "Menu > Kiengir Map > Lament for Fools")
+            }
+            SpotId::Menu__Kiengir_Map__Ledge_Grab => {
+                write!(f, "{}", "Menu > Kiengir Map > Ledge Grab")
+            }
+            SpotId::Menu__Kiengir_Map__MUS_A_M20_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > MUS A M20 Flask")
+            }
             SpotId::Menu__Kiengir_Map__Nanite_Mist => {
                 write!(f, "{}", "Menu > Kiengir Map > Nanite Mist")
+            }
+            SpotId::Menu__Kiengir_Map__Nano_Lattice_2 => {
+                write!(f, "{}", "Menu > Kiengir Map > Nano Lattice 2")
+            }
+            SpotId::Menu__Kiengir_Map__Plague_of_Thoughts => {
+                write!(f, "{}", "Menu > Kiengir Map > Plague of Thoughts")
             }
             SpotId::Menu__Kiengir_Map__Remote_Drone => {
                 write!(f, "{}", "Menu > Kiengir Map > Remote Drone")
             }
+            SpotId::Menu__Kiengir_Map__Royal_Ring => {
+                write!(f, "{}", "Menu > Kiengir Map > Royal Ring")
+            }
             SpotId::Menu__Kiengir_Map__Shockwave => {
                 write!(f, "{}", "Menu > Kiengir Map > Shockwave")
+            }
+            SpotId::Menu__Kiengir_Map__Storm_Bomb => {
+                write!(f, "{}", "Menu > Kiengir Map > Storm Bomb")
+            }
+            SpotId::Menu__Kiengir_Map__Suspension_Bridge => {
+                write!(f, "{}", "Menu > Kiengir Map > Suspension Bridge")
+            }
+            SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1 => {
+                write!(f, "{}", "Menu > Kiengir Map > Terminal Breakthrough 1")
             }
             SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => {
                 write!(f, "{}", "Menu > Kiengir Map > Terminal Breakthrough 2")
             }
+            SpotId::Menu__Kiengir_Map__The_Eternal_Arm => {
+                write!(f, "{}", "Menu > Kiengir Map > The Eternal Arm")
+            }
+            SpotId::Menu__Kiengir_Map__The_Ideal_Kiengir => {
+                write!(f, "{}", "Menu > Kiengir Map > The Ideal Kiengir")
+            }
             SpotId::Menu__Kiengir_Map__The_Student => {
                 write!(f, "{}", "Menu > Kiengir Map > The Student")
+            }
+            SpotId::Menu__Kiengir_Map__Udusan => write!(f, "{}", "Menu > Kiengir Map > Udusan"),
+            SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Annuna Flask")
             }
             SpotId::Menu__Kiengir_Map__Uhrum_Center => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum Center")
@@ -7142,8 +7495,41 @@ impl fmt::Display for SpotId {
             SpotId::Menu__Kiengir_Map__Uhrum_Emergence => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum Emergence")
             }
+            SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Fast Travel")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Siege Corridor Core")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Siege Corridor Health")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_Waterfalls_Flask => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum Waterfalls Flask")
+            }
             SpotId::Menu__Kiengir_Map__Uhrum_West => {
                 write!(f, "{}", "Menu > Kiengir Map > Uhrum West")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum West Portal Entrance")
+            }
+            SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Exit => {
+                write!(f, "{}", "Menu > Kiengir Map > Uhrum West Portal Exit")
+            }
+            SpotId::Menu__Kiengir_Map__Ul_Gishru => {
+                write!(f, "{}", "Menu > Kiengir Map > Ul Gishru")
+            }
+            SpotId::Menu__Kiengir_Map__Under_Siege => {
+                write!(f, "{}", "Menu > Kiengir Map > Under Siege")
+            }
+            SpotId::Menu__Kiengir_Map__Wall_Climb => {
+                write!(f, "{}", "Menu > Kiengir Map > Wall Climb")
+            }
+            SpotId::Menu__Kiengir_Map__Water_Movement => {
+                write!(f, "{}", "Menu > Kiengir Map > Water Movement")
+            }
+            SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053 => {
+                write!(f, "{}", "Menu > Kiengir Map > Weekly Notes 2/27/2053")
             }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
@@ -10531,11 +10917,22 @@ impl std::str::FromStr for SpotId {
             "Menu > Breach Map > AGB Enclosed" => Ok(SpotId::Menu__Breach_Map__AGB_Enclosed),
             "Menu > Breach Map > AGB North" => Ok(SpotId::Menu__Breach_Map__AGB_North),
             "Menu > Breach Map > AGB South" => Ok(SpotId::Menu__Breach_Map__AGB_South),
+            "Menu > Breach Map > Drone Hover" => Ok(SpotId::Menu__Breach_Map__Drone_Hover),
             "Menu > Breach Map > GlB Arena" => Ok(SpotId::Menu__Breach_Map__GlB_Arena),
             "Menu > Breach Map > GlB Center" => Ok(SpotId::Menu__Breach_Map__GlB_Center),
+            "Menu > Breach Map > GlB Control Flask" => {
+                Ok(SpotId::Menu__Breach_Map__GlB_Control_Flask)
+            }
             "Menu > Breach Map > GlB East" => Ok(SpotId::Menu__Breach_Map__GlB_East),
+            "Menu > Breach Map > GlB Grate Flask" => Ok(SpotId::Menu__Breach_Map__GlB_Grate_Flask),
             "Menu > Breach Map > GlB South" => Ok(SpotId::Menu__Breach_Map__GlB_South),
             "Menu > Breach Map > GlB West" => Ok(SpotId::Menu__Breach_Map__GlB_West),
+            "Menu > Breach Map > GSB Chimney Flask" => {
+                Ok(SpotId::Menu__Breach_Map__GSB_Chimney_Flask)
+            }
+            "Menu > Breach Map > GSB Cubby Health" => {
+                Ok(SpotId::Menu__Breach_Map__GSB_Cubby_Health)
+            }
             "Menu > Breach Map > GSB East" => Ok(SpotId::Menu__Breach_Map__GSB_East),
             "Menu > Breach Map > GSB Emergence" => Ok(SpotId::Menu__Breach_Map__GSB_Emergence),
             "Menu > Breach Map > GSB Labyrinth" => Ok(SpotId::Menu__Breach_Map__GSB_Labyrinth),
@@ -10544,10 +10941,17 @@ impl std::str::FromStr for SpotId {
             "Menu > Breach Map > GSB SW Save" => Ok(SpotId::Menu__Breach_Map__GSB_SW_Save),
             "Menu > Breach Map > IB Basement" => Ok(SpotId::Menu__Breach_Map__IB_Basement),
             "Menu > Breach Map > IB Gauntlet" => Ok(SpotId::Menu__Breach_Map__IB_Gauntlet),
+            "Menu > Breach Map > IB Gauntlet Flask" => {
+                Ok(SpotId::Menu__Breach_Map__IB_Gauntlet_Flask)
+            }
             "Menu > Breach Map > IB Save Room" => Ok(SpotId::Menu__Breach_Map__IB_Save_Room),
             "Menu > Breach Map > IB West" => Ok(SpotId::Menu__Breach_Map__IB_West),
+            "Menu > Breach Map > IB Worm Rave Flask" => {
+                Ok(SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask)
+            }
             "Menu > Breach Map > LAB Center" => Ok(SpotId::Menu__Breach_Map__LAB_Center),
             "Menu > Breach Map > LAB East" => Ok(SpotId::Menu__Breach_Map__LAB_East),
+            "Menu > Breach Map > LAB East Health" => Ok(SpotId::Menu__Breach_Map__LAB_East_Health),
             "Menu > Breach Map > LAB Enclosed" => Ok(SpotId::Menu__Breach_Map__LAB_Enclosed),
             "Menu > Breach Map > LAB Southeast" => Ok(SpotId::Menu__Breach_Map__LAB_Southeast),
             "Menu > Breach Map > LAB Southwest" => Ok(SpotId::Menu__Breach_Map__LAB_Southwest),
@@ -10555,10 +10959,15 @@ impl std::str::FromStr for SpotId {
             "Menu > Breach Map > MEB Peak" => Ok(SpotId::Menu__Breach_Map__MEB_Peak),
             "Menu > Breach Map > MEB Southeast" => Ok(SpotId::Menu__Breach_Map__MEB_Southeast),
             "Menu > Breach Map > MEB Southwest" => Ok(SpotId::Menu__Breach_Map__MEB_Southwest),
+            "Menu > Breach Map > Slingshot Hook" => Ok(SpotId::Menu__Breach_Map__Slingshot_Hook),
             "Menu > Breach Map > UVB Center" => Ok(SpotId::Menu__Breach_Map__UVB_Center),
             "Menu > Breach Map > UVB Dead-end" => Ok(SpotId::Menu__Breach_Map__UVB_Dead_end),
             "Menu > Breach Map > UVB East" => Ok(SpotId::Menu__Breach_Map__UVB_East),
             "Menu > Breach Map > UVB West" => Ok(SpotId::Menu__Breach_Map__UVB_West),
+            "Menu > Kiengir Map > A'ansur" => Ok(SpotId::Menu__Kiengir_Map__Aansur),
+            "Menu > Kiengir Map > Amagi Dragon Eye Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask)
+            }
             "Menu > Kiengir Map > Amagi East Lake" => {
                 Ok(SpotId::Menu__Kiengir_Map__Amagi_East_Lake)
             }
@@ -10568,8 +10977,29 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Amagi Main Area" => {
                 Ok(SpotId::Menu__Kiengir_Map__Amagi_Main_Area)
             }
+            "Menu > Kiengir Map > Amagi Main Area Cave Entrance" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance)
+            }
+            "Menu > Kiengir Map > Amagi Main Area Cave Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask)
+            }
+            "Menu > Kiengir Map > Amagi Main Area Water Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask)
+            }
+            "Menu > Kiengir Map > Amagi West Lake Refill Station" => {
+                Ok(SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station)
+            }
             "Menu > Kiengir Map > Annuna Center Save" => {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_Center_Save)
+            }
+            "Menu > Kiengir Map > Annuna East Bridge Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask)
+            }
+            "Menu > Kiengir Map > Annuna Egg Room Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask)
+            }
+            "Menu > Kiengir Map > Annuna Egg Room SE" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_SE)
             }
             "Menu > Kiengir Map > Annuna Factory Entrance" => {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance)
@@ -10577,7 +11007,25 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Annuna Mirror Match" => {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match)
             }
+            "Menu > Kiengir Map > Annuna Mirror Match Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask)
+            }
+            "Menu > Kiengir Map > Annuna Sniper Valley Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Core)
+            }
+            "Menu > Kiengir Map > Annuna Sniper Valley Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask)
+            }
+            "Menu > Kiengir Map > Annuna Spider Room Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core)
+            }
+            "Menu > Kiengir Map > Annuna Twisty Passages Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core)
+            }
             "Menu > Kiengir Map > Annuna Upper" => Ok(SpotId::Menu__Kiengir_Map__Annuna_Upper),
+            "Menu > Kiengir Map > Annuna Upper Hallway Portal" => {
+                Ok(SpotId::Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal)
+            }
             "Menu > Kiengir Map > Annuna Vertical Room" => {
                 Ok(SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room)
             }
@@ -10589,15 +11037,59 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Apocalypse Cache" => {
                 Ok(SpotId::Menu__Kiengir_Map__Apocalypse_Cache)
             }
+            "Menu > Kiengir Map > Beware the Patternmind" => {
+                Ok(SpotId::Menu__Kiengir_Map__Beware_the_Patternmind)
+            }
+            "Menu > Kiengir Map > Boomerang" => Ok(SpotId::Menu__Kiengir_Map__Boomerang),
+            "Menu > Kiengir Map > Bounty List" => Ok(SpotId::Menu__Kiengir_Map__Bounty_List),
             "Menu > Kiengir Map > Breach Attractor" => {
                 Ok(SpotId::Menu__Kiengir_Map__Breach_Attractor)
             }
             "Menu > Kiengir Map > Breach Sight" => Ok(SpotId::Menu__Kiengir_Map__Breach_Sight),
             "Menu > Kiengir Map > Bronze Axe" => Ok(SpotId::Menu__Kiengir_Map__Bronze_Axe),
+            "Menu > Kiengir Map > Building of the School" => {
+                Ok(SpotId::Menu__Kiengir_Map__Building_of_the_School)
+            }
+            "Menu > Kiengir Map > Carnelian Ring" => Ok(SpotId::Menu__Kiengir_Map__Carnelian_Ring),
             "Menu > Kiengir Map > Commemorative Speech" => {
                 Ok(SpotId::Menu__Kiengir_Map__Commemorative_Speech)
             }
+            "Menu > Kiengir Map > Compass" => Ok(SpotId::Menu__Kiengir_Map__Compass),
+            "Menu > Kiengir Map > Dangerous Ideas" => {
+                Ok(SpotId::Menu__Kiengir_Map__Dangerous_Ideas)
+            }
+            "Menu > Kiengir Map > Destruction Pogrom" => {
+                Ok(SpotId::Menu__Kiengir_Map__Destruction_Pogrom)
+            }
+            "Menu > Kiengir Map > Double Axe" => Ok(SpotId::Menu__Kiengir_Map__Double_Axe),
+            "Menu > Kiengir Map > Dr. Gloria" => Ok(SpotId::Menu__Kiengir_Map__Dr_Gloria),
+            "Menu > Kiengir Map > Ebih Alu Flask" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Alu_Flask),
+            "Menu > Kiengir Map > Ebih Alu Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Alu_Health)
+            }
             "Menu > Kiengir Map > Ebih Base Camp" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp),
+            "Menu > Kiengir Map > Ebih Base Camp East" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_East)
+            }
+            "Menu > Kiengir Map > Ebih Base Camp Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_Health)
+            }
+            "Menu > Kiengir Map > Ebih Base Camp West" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West)
+            }
+            "Menu > Kiengir Map > Ebih By Garage Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health)
+            }
+            "Menu > Kiengir Map > Ebih Drone Pit Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask)
+            }
+            "Menu > Kiengir Map > Ebih East Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_East_Health)
+            }
+            "Menu > Kiengir Map > Ebih East Waterfall Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask)
+            }
+            "Menu > Kiengir Map > Ebih Garage" => Ok(SpotId::Menu__Kiengir_Map__Ebih_Garage),
             "Menu > Kiengir Map > Ebih Guarded Health" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health)
             }
@@ -10607,6 +11099,12 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Ebih Truck Gate" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate)
             }
+            "Menu > Kiengir Map > Ebih Waterfall Cave" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave)
+            }
+            "Menu > Kiengir Map > Ebih West Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Flask)
+            }
             "Menu > Kiengir Map > Ebih West Lower" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Lower)
             }
@@ -10614,24 +11112,73 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Ebih West Upper" => {
                 Ok(SpotId::Menu__Kiengir_Map__Ebih_West_Upper)
             }
+            "Menu > Kiengir Map > Eye Ring" => Ok(SpotId::Menu__Kiengir_Map__Eye_Ring),
+            "Menu > Kiengir Map > Family Tragedy" => Ok(SpotId::Menu__Kiengir_Map__Family_Tragedy),
             "Menu > Kiengir Map > Filter Flask" => Ok(SpotId::Menu__Kiengir_Map__Filter_Flask),
             "Menu > Kiengir Map > Filter Spiders" => Ok(SpotId::Menu__Kiengir_Map__Filter_Spiders),
-            "Menu > Kiengir Map > Filter Tablet" => Ok(SpotId::Menu__Kiengir_Map__Filter_Tablet),
             "Menu > Kiengir Map > Forbidden Knowledge" => {
                 Ok(SpotId::Menu__Kiengir_Map__Forbidden_Knowledge)
+            }
+            "Menu > Kiengir Map > Freedom from A'ansur" => {
+                Ok(SpotId::Menu__Kiengir_Map__Freedom_from_Aansur)
             }
             "Menu > Kiengir Map > Giguna Base" => Ok(SpotId::Menu__Kiengir_Map__Giguna_Base),
             "Menu > Kiengir Map > Giguna Breachable Wall Flask" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask)
             }
+            "Menu > Kiengir Map > Giguna Caverns Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core)
+            }
+            "Menu > Kiengir Map > Giguna Caverns Matrix" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix)
+            }
+            "Menu > Kiengir Map > Giguna Clouds Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Dual Path Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health)
+            }
+            "Menu > Kiengir Map > Giguna East Caverns Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Far Corner" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Far_Corner)
+            }
+            "Menu > Kiengir Map > Giguna Gateway Block" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block)
+            }
+            "Menu > Kiengir Map > Giguna Gateway Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Gubi Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Highest Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Highest_Flask)
+            }
             "Menu > Kiengir Map > Giguna Labyrinth" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Labyrinth)
+            }
+            "Menu > Kiengir Map > Giguna Lamassu Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Lamassu_Flask)
             }
             "Menu > Kiengir Map > Giguna Northeast" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Northeast)
             }
+            "Menu > Kiengir Map > Giguna Northeast Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Northeast Gate" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate)
+            }
             "Menu > Kiengir Map > Giguna Ruins Top" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top)
+            }
+            "Menu > Kiengir Map > Giguna Ruins Top Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Ruins Top Portal" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal)
             }
             "Menu > Kiengir Map > Giguna Ruins West" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Ruins_West)
@@ -10639,9 +11186,23 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Giguna Separator" => {
                 Ok(SpotId::Menu__Kiengir_Map__Giguna_Separator)
             }
-            "Menu > Kiengir Map > Glacier 40,8" => Ok(SpotId::Menu__Kiengir_Map__Glacier_40_8),
+            "Menu > Kiengir Map > Giguna Wasteland Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core)
+            }
+            "Menu > Kiengir Map > Giguna Wasteland Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask)
+            }
+            "Menu > Kiengir Map > Giguna Wasteland Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health)
+            }
+            "Menu > Kiengir Map > Giguna Wasteland Switch" => {
+                Ok(SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch)
+            }
             "Menu > Kiengir Map > Glacier Dock Flask" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask)
+            }
+            "Menu > Kiengir Map > Glacier East Revival Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask)
             }
             "Menu > Kiengir Map > Glacier Peak Bird's Eye" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye)
@@ -10649,9 +11210,21 @@ impl std::str::FromStr for SpotId {
             "Menu > Kiengir Map > Glacier Revival" => {
                 Ok(SpotId::Menu__Kiengir_Map__Glacier_Revival)
             }
+            "Menu > Kiengir Map > Glacier Sea Burial Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health)
+            }
+            "Menu > Kiengir Map > Glacier Vertical Room Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask)
+            }
             "Menu > Kiengir Map > Hammond" => Ok(SpotId::Menu__Kiengir_Map__Hammond),
+            "Menu > Kiengir Map > Hammond's Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Hammonds_Health)
+            }
             "Menu > Kiengir Map > Heretic's Granddaughter" => {
                 Ok(SpotId::Menu__Kiengir_Map__Heretics_Granddaughter)
+            }
+            "Menu > Kiengir Map > Heretic's Tablet" => {
+                Ok(SpotId::Menu__Kiengir_Map__Heretics_Tablet)
             }
             "Menu > Kiengir Map > Infect" => Ok(SpotId::Menu__Kiengir_Map__Infect),
             "Menu > Kiengir Map > Irikar 10,25" => Ok(SpotId::Menu__Kiengir_Map__Irikar_10_25),
@@ -10660,6 +11233,9 @@ impl std::str::FromStr for SpotId {
             }
             "Menu > Kiengir Map > Irikar Airy Flask" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask)
+            }
+            "Menu > Kiengir Map > Irikar Basement Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Irikar_Basement_Core)
             }
             "Menu > Kiengir Map > Irikar Beach Cache" => {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache)
@@ -10686,19 +11262,77 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage)
             }
             "Menu > Kiengir Map > Irikar Well" => Ok(SpotId::Menu__Kiengir_Map__Irikar_Well),
+            "Menu > Kiengir Map > Journal 10/29/2049" => {
+                Ok(SpotId::Menu__Kiengir_Map__Journal_10_29_2049)
+            }
+            "Menu > Kiengir Map > Kari" => Ok(SpotId::Menu__Kiengir_Map__Kari),
+            "Menu > Kiengir Map > Lament for Fools" => {
+                Ok(SpotId::Menu__Kiengir_Map__Lament_for_Fools)
+            }
+            "Menu > Kiengir Map > Ledge Grab" => Ok(SpotId::Menu__Kiengir_Map__Ledge_Grab),
+            "Menu > Kiengir Map > MUS A M20 Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__MUS_A_M20_Flask)
+            }
             "Menu > Kiengir Map > Nanite Mist" => Ok(SpotId::Menu__Kiengir_Map__Nanite_Mist),
+            "Menu > Kiengir Map > Nano Lattice 2" => Ok(SpotId::Menu__Kiengir_Map__Nano_Lattice_2),
+            "Menu > Kiengir Map > Plague of Thoughts" => {
+                Ok(SpotId::Menu__Kiengir_Map__Plague_of_Thoughts)
+            }
             "Menu > Kiengir Map > Remote Drone" => Ok(SpotId::Menu__Kiengir_Map__Remote_Drone),
+            "Menu > Kiengir Map > Royal Ring" => Ok(SpotId::Menu__Kiengir_Map__Royal_Ring),
             "Menu > Kiengir Map > Shockwave" => Ok(SpotId::Menu__Kiengir_Map__Shockwave),
+            "Menu > Kiengir Map > Storm Bomb" => Ok(SpotId::Menu__Kiengir_Map__Storm_Bomb),
+            "Menu > Kiengir Map > Suspension Bridge" => {
+                Ok(SpotId::Menu__Kiengir_Map__Suspension_Bridge)
+            }
+            "Menu > Kiengir Map > Terminal Breakthrough 1" => {
+                Ok(SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1)
+            }
             "Menu > Kiengir Map > Terminal Breakthrough 2" => {
                 Ok(SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2)
             }
+            "Menu > Kiengir Map > The Eternal Arm" => {
+                Ok(SpotId::Menu__Kiengir_Map__The_Eternal_Arm)
+            }
+            "Menu > Kiengir Map > The Ideal Kiengir" => {
+                Ok(SpotId::Menu__Kiengir_Map__The_Ideal_Kiengir)
+            }
             "Menu > Kiengir Map > The Student" => Ok(SpotId::Menu__Kiengir_Map__The_Student),
+            "Menu > Kiengir Map > Udusan" => Ok(SpotId::Menu__Kiengir_Map__Udusan),
+            "Menu > Kiengir Map > Uhrum Annuna Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask)
+            }
             "Menu > Kiengir Map > Uhrum Center" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_Center),
             "Menu > Kiengir Map > Uhrum East" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_East),
             "Menu > Kiengir Map > Uhrum Emergence" => {
                 Ok(SpotId::Menu__Kiengir_Map__Uhrum_Emergence)
             }
+            "Menu > Kiengir Map > Uhrum Fast Travel" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel)
+            }
+            "Menu > Kiengir Map > Uhrum Siege Corridor Core" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core)
+            }
+            "Menu > Kiengir Map > Uhrum Siege Corridor Health" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health)
+            }
+            "Menu > Kiengir Map > Uhrum Waterfalls Flask" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_Waterfalls_Flask)
+            }
             "Menu > Kiengir Map > Uhrum West" => Ok(SpotId::Menu__Kiengir_Map__Uhrum_West),
+            "Menu > Kiengir Map > Uhrum West Portal Entrance" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance)
+            }
+            "Menu > Kiengir Map > Uhrum West Portal Exit" => {
+                Ok(SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Exit)
+            }
+            "Menu > Kiengir Map > Ul Gishru" => Ok(SpotId::Menu__Kiengir_Map__Ul_Gishru),
+            "Menu > Kiengir Map > Under Siege" => Ok(SpotId::Menu__Kiengir_Map__Under_Siege),
+            "Menu > Kiengir Map > Wall Climb" => Ok(SpotId::Menu__Kiengir_Map__Wall_Climb),
+            "Menu > Kiengir Map > Water Movement" => Ok(SpotId::Menu__Kiengir_Map__Water_Movement),
+            "Menu > Kiengir Map > Weekly Notes 2/27/2053" => {
+                Ok(SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053)
+            }
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),

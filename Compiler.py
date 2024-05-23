@@ -738,8 +738,10 @@ class GameLogic(object):
                                 f'(did you mean [{box}] ?)')
         elif not isinstance(box, (list, tuple)) or len(box) != 4:
             self._errors.append(f'Invalid {name}: {box!r}')
-        else:
-            return self._validate_all_numeric(box, name)
+        elif self._validate_all_numeric(box, name):
+            if box[0] == box[2] or box[1] == box[3]:
+                logging.warning(f'Box in {name} may be a line: {box!r}')
+            return True
         return False
 
     def _validate_list(self, t, name):
@@ -1327,7 +1329,7 @@ class GameLogic(object):
             if 'to' not in ex:
                 self._errors.append(f'No destination defined for {ex["fullname"]}')
             elif get_exit_target(ex) not in spot_ids:
-                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}')
+                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}: {ex["to"]}')
         for spot in self.spots():
             for act in spot.get('actions', []):
                 if 'to' in act and not act['to'].startswith('^') and get_exit_target(act) not in spot_ids:
@@ -1620,6 +1622,8 @@ class GameLogic(object):
 
         errors = set()
         def handle_place(c, source, val):
+            if not isinstance(val, str):
+                return val
             if self.data_types[c] == 'SpotId':
                 names = get_spot_reference_names(val, source)
                 sp = ' > '.join(names)
@@ -1634,6 +1638,16 @@ class GameLogic(object):
 
         for r in self.regions:
             for a in r['areas']:
+                if 'data_map' in a:
+                    logging.warning(f'Found parameter "data_map" in {a["fullname"]}; did you mean "datamap"?')
+                if datamap := a.get('datamap'):
+                    if not isinstance(datamap, dict):
+                        errors.add(f'datamap in {a["fullname"]} must be a dict')
+                        continue
+                    for c, v in datamap.items():
+                        if not isinstance(v, dict):
+                            errors.add(f'Expected dict value in {a["fullname"]} datamap at key {c!r}')
+
                 for s in a['spots']:
                     for c, cdict in d.items():
                         if c in s.get('data', {}):

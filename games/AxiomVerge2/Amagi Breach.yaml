@@ -9,11 +9,13 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [37, 15, 38, 16]
+    health: [37, 14, 38, 15]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Breach Map > LAB East
+      health: Menu > Breach Map > LAB East Health
   spots:
     - name: East
       coord: [37.9, 14.75]

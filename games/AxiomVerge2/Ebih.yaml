@@ -3,16 +3,22 @@ short: Ebih
 
 areas:
 - name: Base Camp  # MARK: Base Camp
-  reset:
-    _left_platform_moved: false
   on_entry: $reset_old_area(^newpos)
   map:
     save: [29, 12, 30, 13]
+    west: [28, 12, 29, 13]
+    east: [30, 12, 31, 13]
+    health: [29, 10, 30, 11]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Ebih Base Camp
+      west: Menu > Kiengir Map > Ebih Base Camp West
+      east: Menu > Kiengir Map > Ebih Base Camp East
+      health: Menu > Kiengir Map > Ebih Base Camp Health
+  reset:
+    _left_platform_moved: false
   spots:
     - name: East 11
       coord: [30.95, 10.35]
@@ -201,6 +207,13 @@ areas:
 
 - name: By Garage  # MARK: By Garage
   on_entry: $reset_old_area(^newpos)
+  map:
+    health: [27, 11, 28, 12]
+    garage: [27, 12, 28, 13]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Ebih By Garage Health
+      garage: Menu > Kiengir Map > Ebih Garage
   spots:
     - name: East 13
       coord: [27.95, 12.55]
@@ -398,6 +411,11 @@ areas:
 
 - name: Grid 25,10-12  # MARK: Grid 25,10-12
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [25, 9, 26, 10]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Ebih East Waterfall Flask
   start:
     _door_open: false
   spots:
@@ -550,13 +568,15 @@ areas:
 
 - name: Waterfall  # MARK: Waterfall
   on_entry: $reset_old_area(^newpos)
-  start:
-    _west_door_open: false
   map:
     axe: [22, 10, 23, 11]
+    cave: [22, 8, 23, 9]
   datamap:
     map_spot:
       axe: Menu > Kiengir Map > Bronze Axe
+      cave: Menu > Kiengir Map > Ebih Waterfall Cave
+  start:
+    _west_door_open: false
   spots:
     - name: East 10
       coord: [24.95, 9.7]
@@ -1030,17 +1050,21 @@ areas:
 
 - name: Ebih West  # MARK: Ebih West
   on_entry: $reset_old_area(^newpos)
-  start:
-    _door_open: false
   map:
     mid_save: [20, 9, 21, 10]
     upper_save: [20, 6, 21, 7]
     lower_save: [19, 12, 20, 13]
+    tablet: [19, 9, 20, 10]
+    flask: [19, 5, 20, 6]
   datamap:
     map_spot:
       mid_save: Menu > Kiengir Map > Ebih West Mid
       upper_save: Menu > Kiengir Map > Ebih West Upper
       lower_save: Menu > Kiengir Map > Ebih West Lower
+      tablet: Menu > Kiengir Map > Heretic's Tablet
+      flask: Menu > Kiengir Map > Ebih West Flask
+  start:
+    _door_open: false
   spots:
     - name: East 10
       coord: [20.95, 9.7]
@@ -1440,6 +1464,15 @@ areas:
 
 - name: Ebih East  # MARK: Ebih East
   on_entry: $reset_old_area(^newpos)
+  map:
+    dispenser: [25, 8, 26, 9]
+    urn: [26, 8, 27, 9]
+    note: [26, 7, 27, 8]
+  datamap:
+    map_spot:
+      dispenser: Menu > Kiengir Map > Ebih East Health
+      urn: Menu > Kiengir Map > Infect
+      note: Menu > Kiengir Map > Under Siege
   reset:
     _platform1_moved: false
     _platform2_moved: false
@@ -1515,7 +1548,7 @@ areas:
           canon: Infect
           tags: [urn]
     - name: Dispenser
-      coord: [26.5, 8.8]
+      coord: [25.5, 8.8]
       locations:
         - name: Vend
           item: Health_Fragment
@@ -1618,6 +1651,13 @@ areas:
 
 - name: Boss Room  # MARK: Boss Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [22, 4, 23, 5]
+    health: [23, 4, 24, 5]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Ebih Alu Flask
+      health: Menu > Kiengir Map > Ebih Alu Health
   spots:
     - name: West 6
       coord: [22.05, 5.7]
@@ -1934,6 +1974,11 @@ areas:
 
 - name: Grid 25,2-6  # MARK: Grid 25,2-6
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [25, 5, 26, 6]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Ebih Drone Pit Flask
   spots:
     - name: West 4
       coord: [25.05, 3.75]
@@ -1954,6 +1999,11 @@ areas:
 
 - name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)
+  map:
+    note: [26, 10, 27, 11]
+  datamap:
+    map_spot:
+      note: Menu > Kiengir Map > Terminal Breakthrough 1
   spots:
     - name: West 11
       coord: [26.05, 10.75]

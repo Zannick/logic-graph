@@ -55,6 +55,11 @@ areas:
 
 - name: Grate Work  # MARK: Grate Work
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [39, 12, 40, 13]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GlB Grate Flask
   spots:
     - name: West 14
       coord: [39.1, 13.65]
@@ -278,6 +283,11 @@ areas:
 
 - name: Control  # MARK: Control
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [36, 12, 37, 13]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GlB Control Flask
   spots:
     - name: East
       coord: [36.9, 12.75]

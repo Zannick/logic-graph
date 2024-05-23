@@ -326,7 +326,7 @@ helpers:  # MARK: helpers
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{20}, Big_Flask{8}]
+    [Flask{21}, Big_Flask{9}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{11}]
   $all_weapons:itemList: >
@@ -336,7 +336,7 @@ helpers:  # MARK: helpers
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
-  # To be added: 2 Flask, 2 Big_Flask
+  # To be added: 1 Flask, 1 Big_Flask
   # 2 Health_Fragment
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?

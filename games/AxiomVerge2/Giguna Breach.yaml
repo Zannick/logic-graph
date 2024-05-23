@@ -77,6 +77,11 @@ areas:
 
 - name: Chimney  # MARK: Chimney
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [13, 7, 14, 8]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GSB Chimney Flask
   spots:
     - name: East 7
       coord: [13.9, 6.7]
@@ -184,6 +189,11 @@ areas:
 
 - name: Cubby  # MARK: Cubby
   on_entry: $reset_old_area(^newpos)
+  map:
+    health: [13, 10, 14, 11]
+  datamap:
+    map_spot:
+      health: Menu > Breach Map > GSB Cubby Health
   spots:
     - name: Entrance
       coord: [13.5, 10.2]
@@ -205,8 +215,6 @@ areas:
 
 - name: SW Save  # MARK: SW Save
   on_entry: $reset_old_area(^newpos)
-  start:
-    _door_opened: false
   map:
     save: [12, 11, 13, 12]
   data:
@@ -214,6 +222,8 @@ areas:
   datamap:
     map_spot:
       save: Menu > Breach Map > GSB SW Save
+  start:
+    _door_opened: false
   spots:
     - name: North
       coord: [12.5, 10.2]
@@ -410,6 +420,8 @@ areas:
 
 - name: Slingshot  # MARK: Slingshot
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > Slingshot Hook
   spots:
     - name: West
       coord: [17.1, 10.65]

@@ -11,11 +11,17 @@ areas:
     _combo: false
   map:
     save: [29, 18, 30, 19]
+    cave: [27, 14, 28, 15]
+    upper_flask: [30, 13, 31, 14]
+    lower_flask: [30, 15, 31, 16]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Amagi Main Area
+      cave: Menu > Kiengir Map > Amagi Main Area Cave Entrance
+      upper_flask: Menu > Kiengir Map > Amagi Main Area Cave Flask
+      lower_flask: Menu > Kiengir Map > Amagi Main Area Water Flask
   spots:
     - name: East 15
       coord: [30.95, 14.85]
@@ -312,6 +318,11 @@ areas:
 
 - name: Liru Room  # MARK: Liru Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [33, 20, 34, 21]
+  datamap:
+    map_spot:
+      urn: Menu > Kiengir Map > Water Movement
   spots:
     - name: West 19
       coord: [32.05, 18.7]
@@ -567,9 +578,15 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     urn: [23, 19, 24, 20]
+    refills: [23, 16, 24, 17]
+    flask: [24, 16, 25, 17]
+    mus: [22, 15, 23, 16]
   datamap:
     map_spot:
       urn: Menu > Kiengir Map > Shockwave
+      refills: Menu > Kiengir Map > Amagi West Lake Refill Station
+      flask: Menu > Kiengir Map > Amagi Dragon Eye Flask
+      mus: Menu > Kiengir Map > MUS A M20 Flask
   spots:
     - name: East 15
       coord: [26.95, 14.85]
@@ -1086,7 +1103,7 @@ areas:
 - name: East Lake  # MARK: East Lake
   on_entry: $reset_old_area(^newpos)
   map:
-    save: [34, 18, 35, 19]
+    save: [34, 17, 35, 18]
     surface_east: [35, 14, 36, 15]
     surface_center: [34, 14, 35, 15]
     surface_west: [33, 14, 34, 15]

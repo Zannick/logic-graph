@@ -562,6 +562,9 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Breach_Map__AGB_Enclosed => enums::Realm::Map,
         SpotId::Menu__Breach_Map__AGB_North => enums::Realm::Map,
         SpotId::Menu__Breach_Map__AGB_South => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__Drone_Hover => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__GSB_Chimney_Flask => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__GSB_Cubby_Health => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GSB_East => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GSB_Emergence => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GSB_Labyrinth => enums::Realm::Map,
@@ -570,15 +573,20 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Breach_Map__GSB_South => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GlB_Arena => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GlB_Center => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__GlB_Control_Flask => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GlB_East => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__GlB_Grate_Flask => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GlB_South => enums::Realm::Map,
         SpotId::Menu__Breach_Map__GlB_West => enums::Realm::Map,
         SpotId::Menu__Breach_Map__IB_Basement => enums::Realm::Map,
         SpotId::Menu__Breach_Map__IB_Gauntlet => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__IB_Gauntlet_Flask => enums::Realm::Map,
         SpotId::Menu__Breach_Map__IB_Save_Room => enums::Realm::Map,
         SpotId::Menu__Breach_Map__IB_West => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask => enums::Realm::Map,
         SpotId::Menu__Breach_Map__LAB_Center => enums::Realm::Map,
         SpotId::Menu__Breach_Map__LAB_East => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__LAB_East_Health => enums::Realm::Map,
         SpotId::Menu__Breach_Map__LAB_Enclosed => enums::Realm::Map,
         SpotId::Menu__Breach_Map__LAB_Southeast => enums::Realm::Map,
         SpotId::Menu__Breach_Map__LAB_Southwest => enums::Realm::Map,
@@ -586,54 +594,118 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Breach_Map__MEB_Peak => enums::Realm::Map,
         SpotId::Menu__Breach_Map__MEB_Southeast => enums::Realm::Map,
         SpotId::Menu__Breach_Map__MEB_Southwest => enums::Realm::Map,
+        SpotId::Menu__Breach_Map__Slingshot_Hook => enums::Realm::Map,
         SpotId::Menu__Breach_Map__UVB_Center => enums::Realm::Map,
         SpotId::Menu__Breach_Map__UVB_Dead_end => enums::Realm::Map,
         SpotId::Menu__Breach_Map__UVB_East => enums::Realm::Map,
         SpotId::Menu__Breach_Map__UVB_West => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Aansur => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_East_Lake => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Isolation => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Main_Area => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_Center_Save => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_SE => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Core => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_Upper => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Annuna_West_Bridge => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Anuman => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Apocalypse => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Apocalypse_Cache => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Beware_the_Patternmind => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Boomerang => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Bounty_List => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Breach_Attractor => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Breach_Sight => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Bronze_Axe => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Building_of_the_School => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Carnelian_Ring => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Commemorative_Speech => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Compass => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Dangerous_Ideas => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Destruction_Pogrom => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Double_Axe => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Dr_Gloria => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Alu_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Alu_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Base_Camp => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_East => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_East_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Garage => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Observatory => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ebih_West_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_West_Lower => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_West_Mid => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_West_Upper => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Eye_Ring => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Family_Tragedy => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Filter_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Filter_Spiders => enums::Realm::Map,
-        SpotId::Menu__Kiengir_Map__Filter_Tablet => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Forbidden_Knowledge => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Freedom_from_Aansur => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Base => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Far_Corner => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Highest_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Lamassu_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Northeast => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Ruins_West => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Separator => enums::Realm::Map,
-        SpotId::Menu__Kiengir_Map__Glacier_40_8 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Glacier_Revival => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Hammond => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Hammonds_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Heretics_Granddaughter => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Heretics_Tablet => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Infect => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_10_25 => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Irikar_Basement_Core => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Beach_Save => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Broken_Wall => enums::Realm::Map,
@@ -645,15 +717,41 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Irikar_Midwest => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Royal_Storage => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Irikar_Well => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Journal_10_29_2049 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Kari => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Lament_for_Fools => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ledge_Grab => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__MUS_A_M20_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Nanite_Mist => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Nano_Lattice_2 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Plague_of_Thoughts => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Remote_Drone => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Royal_Ring => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Shockwave => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Storm_Bomb => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Suspension_Bridge => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1 => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_2 => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__The_Eternal_Arm => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__The_Ideal_Kiengir => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__The_Student => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Udusan => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Center => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_East => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Emergence => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_Waterfalls_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_West => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Exit => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ul_Gishru => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Under_Siege => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Wall_Climb => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Water_Movement => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053 => enums::Realm::Map,
         SpotId::Menu__Upgrade_Menu__Combat => enums::Realm::Menu,
         SpotId::Menu__Upgrade_Menu__Drone => enums::Realm::Menu,
         SpotId::Menu__Upgrade_Menu__Infection => enums::Realm::Menu,
@@ -828,6 +926,8 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Glacier__Sea_Burial__West_14 => true,
         SpotId::Glacier__Sea_Burial__West_Basin => true,
         SpotId::Glacier__Sea_Burial__West_Water_Surface => true,
+        SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => true,
+        SpotId::Glacier__The_Big_Drop__West_14 => true,
         SpotId::Glacier__Vertical_Room__East_17 => true,
         SpotId::Glacier__Vertical_Room__East_17_while_hovering => true,
         SpotId::Glacier__Vertical_Room__Lower_Gatestone => true,
@@ -1136,6 +1236,33 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Sight_Room__Northwest => SpotId::Irikar__Sight_Room__Portal,
         SpotId::Irikar__Sight_Room__Portal => SpotId::Irikar__Sight_Room__Portal,
         SpotId::Irikar__Sight_Room__West_24 => SpotId::Irikar__Sight_Room__Portal,
+        SpotId::Uhrum__West_Entrance__Clear_Passage => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__East_26 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__East_28 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Gate_Switch => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_West => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Inner_Dais => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Gap => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Rock => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Lower_Wall_East => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Lower_Wall_West => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Middle_West_Ledge => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Portal_Exit => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Portal_Stand => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Sand => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Save_Point => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__South_Platform => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Southeast_Tree => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Top_West_Ledge => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Upper_Fork => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Upper_Wall_East => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__Upper_Wall_West => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__West_25 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__West_26 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__West_27 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        SpotId::Uhrum__West_Entrance__West_of_Gate => SpotId::Uhrum__West_Entrance__Portal_Stand,
         _ => SpotId::None
     }
 }
@@ -1248,6 +1375,33 @@ pub fn portal_hidden(spot_id: SpotId) -> bool {
         SpotId::Irikar__Sight_Room__Northwest => true,
         SpotId::Irikar__Sight_Room__Portal => true,
         SpotId::Irikar__Sight_Room__West_24 => true,
+        SpotId::Uhrum__West_Entrance__Clear_Passage => true,
+        SpotId::Uhrum__West_Entrance__East_26 => true,
+        SpotId::Uhrum__West_Entrance__East_28 => true,
+        SpotId::Uhrum__West_Entrance__Gate_Switch => true,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => true,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_West => true,
+        SpotId::Uhrum__West_Entrance__Inner_Dais => true,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Gap => true,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Rock => true,
+        SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge => true,
+        SpotId::Uhrum__West_Entrance__Lower_Wall_East => true,
+        SpotId::Uhrum__West_Entrance__Lower_Wall_West => true,
+        SpotId::Uhrum__West_Entrance__Middle_West_Ledge => true,
+        SpotId::Uhrum__West_Entrance__Portal_Exit => true,
+        SpotId::Uhrum__West_Entrance__Portal_Stand => true,
+        SpotId::Uhrum__West_Entrance__Sand => true,
+        SpotId::Uhrum__West_Entrance__Save_Point => true,
+        SpotId::Uhrum__West_Entrance__South_Platform => true,
+        SpotId::Uhrum__West_Entrance__Southeast_Tree => true,
+        SpotId::Uhrum__West_Entrance__Top_West_Ledge => true,
+        SpotId::Uhrum__West_Entrance__Upper_Fork => true,
+        SpotId::Uhrum__West_Entrance__Upper_Wall_East => true,
+        SpotId::Uhrum__West_Entrance__Upper_Wall_West => true,
+        SpotId::Uhrum__West_Entrance__West_25 => true,
+        SpotId::Uhrum__West_Entrance__West_26 => true,
+        SpotId::Uhrum__West_Entrance__West_27 => true,
+        SpotId::Uhrum__West_Entrance__West_of_Gate => true,
         _ => false
     }
 }
@@ -1674,6 +1828,9 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Uhrum__Annuna_Corridor__Wall_Remnant => SpotId::Uhrum__Annuna_Corridor__Save_Point,
         SpotId::Uhrum__Annuna_Corridor__West_25 => SpotId::Uhrum__Annuna_Corridor__Save_Point,
         SpotId::Uhrum__Annuna_Corridor__West_26 => SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        SpotId::Uhrum__Save_Room__East => SpotId::Uhrum__Save_Room__Save_Point,
+        SpotId::Uhrum__Save_Room__Save_Point => SpotId::Uhrum__Save_Room__Save_Point,
+        SpotId::Uhrum__Save_Room__West => SpotId::Uhrum__Save_Room__Save_Point,
         SpotId::Uhrum__West_Entrance__Clear_Passage => SpotId::Uhrum__West_Entrance__Save_Point,
         SpotId::Uhrum__West_Entrance__East_26 => SpotId::Uhrum__West_Entrance__Save_Point,
         SpotId::Uhrum__West_Entrance__East_28 => SpotId::Uhrum__West_Entrance__Save_Point,
@@ -1706,12 +1863,31 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
 }
 pub fn map_spot(spot_id: SpotId) -> SpotId {
     match spot_id {
+        SpotId::Amagi_Breach__East_Entrance__East => SpotId::Menu__Breach_Map__LAB_East_Health,
+        SpotId::Amagi_Breach__East_Entrance__Grate_Left => SpotId::Menu__Breach_Map__LAB_East_Health,
+        SpotId::Amagi_Breach__East_Entrance__Grate_Right => SpotId::Menu__Breach_Map__LAB_East_Health,
         SpotId::Amagi_Breach__East_Entrance__Save_Point => SpotId::Menu__Breach_Map__LAB_East,
+        SpotId::Amagi_Breach__East_Entrance__Upper_Slope => SpotId::Menu__Breach_Map__LAB_East_Health,
         SpotId::Amagi_Breach__East_Entrance__West => SpotId::Menu__Breach_Map__LAB_East,
         SpotId::Amagi__East_Lake__Foot => SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
         SpotId::Amagi__East_Lake__Kum_Abala => SpotId::Menu__Kiengir_Map__Forbidden_Knowledge,
+        SpotId::Amagi__East_Lake__Save_Point => SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        SpotId::Amagi__East_Lake__Southeast_Column => SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        SpotId::Amagi__East_Lake__Southwest_Column_East => SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
+        SpotId::Amagi__Liru_Room__Bottom => SpotId::Menu__Kiengir_Map__Water_Movement,
+        SpotId::Amagi__Liru_Room__Shrine => SpotId::Menu__Kiengir_Map__Water_Movement,
+        SpotId::Amagi__Main_Area__Carving => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
         SpotId::Amagi__Main_Area__Enemy_Side => SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
         SpotId::Amagi__Main_Area__Save_Point => SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
+        SpotId::Amagi__Main_Area__Secret_Outcropping => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
+        SpotId::Amagi__Main_Area__Way_Off_To_The_Side => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask,
+        SpotId::Amagi__Main_Area__West_15 => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
+        SpotId::Amagi__West_Lake__Cavern_Eye => SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask,
+        SpotId::Amagi__West_Lake__Cavern_Front_Pillar => SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
+        SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
+        SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => SpotId::Menu__Kiengir_Map__MUS_A_M20_Flask,
+        SpotId::Amagi__West_Lake__Cavern_Refill_Station => SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
+        SpotId::Amagi__West_Lake__Cavern_Tear_Duct => SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask,
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => SpotId::Menu__Kiengir_Map__Shockwave,
         SpotId::Amagi__West_Lake__Stronghold_Item => SpotId::Menu__Kiengir_Map__Shockwave,
         SpotId::Amagi__West_Lake__Stronghold_Middle_Column => SpotId::Menu__Kiengir_Map__Shockwave,
@@ -1721,13 +1897,35 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Annuna__Center_Save__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
         SpotId::Annuna__Center_Save__West_Catwalk => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
         SpotId::Annuna__Center_Save__West_Floor => SpotId::Menu__Kiengir_Map__Annuna_Center_Save,
+        SpotId::Annuna__East_Bridge__Below_Cavern => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__East_Bridge__Cavern_Cache => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__East_Bridge__Cavern_Foyer => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__East_Bridge__Cavern_Right => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__East_Bridge__Flung_West => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__East_Bridge__Gate_Button_Gap => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_Base_East => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_Base_West => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_Core => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_East_Ledge => SpotId::Menu__Kiengir_Map__Royal_Ring,
+        SpotId::Annuna__East_Bridge__Tower_Gate => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_Opening => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__Tower_Secret => SpotId::Menu__Kiengir_Map__Royal_Ring,
+        SpotId::Annuna__East_Bridge__Tower_West_Ledge => SpotId::Menu__Kiengir_Map__Royal_Ring,
+        SpotId::Annuna__East_Bridge__Upper_West_Partway_East => SpotId::Menu__Kiengir_Map__Lament_for_Fools,
+        SpotId::Annuna__East_Bridge__West_22 => SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        SpotId::Annuna__Egg_Room__Cache => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
+        SpotId::Annuna__Egg_Room__Corner_Platform => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
+        SpotId::Annuna__Egg_Room__East => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
+        SpotId::Annuna__Egg_Room__Passage_Entrance => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
+        SpotId::Annuna__Egg_Room__Second_Egg => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_SE,
+        SpotId::Annuna__Egg_Room__Third_Egg => SpotId::Menu__Kiengir_Map__Annuna_Egg_Room_Flask,
         SpotId::Annuna__Factory_Entrance__East => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
         SpotId::Annuna__Factory_Entrance__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
         SpotId::Annuna__Factory_Entrance__West => SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
         SpotId::Annuna__Filter_Teleporter__Door_Ledge => SpotId::Menu__Kiengir_Map__Filter_Flask,
         SpotId::Annuna__Filter_Teleporter__Egg => SpotId::Menu__Kiengir_Map__Filter_Flask,
-        SpotId::Annuna__Filter_Teleporter__Northeast_Cubby => SpotId::Menu__Kiengir_Map__Filter_Tablet,
-        SpotId::Annuna__Filter_Teleporter__Northeast_Ministair => SpotId::Menu__Kiengir_Map__Filter_Tablet,
+        SpotId::Annuna__Filter_Teleporter__Northeast_Cubby => SpotId::Menu__Kiengir_Map__The_Eternal_Arm,
+        SpotId::Annuna__Filter_Teleporter__Northeast_Ministair => SpotId::Menu__Kiengir_Map__The_Eternal_Arm,
         SpotId::Annuna__Filter_Teleporter__Shaft_Bottom => SpotId::Menu__Kiengir_Map__Filter_Flask,
         SpotId::Annuna__Filter_Teleporter__Shaft_Top => SpotId::Menu__Kiengir_Map__Filter_Spiders,
         SpotId::Annuna__Filter_Teleporter__Stair_Top => SpotId::Menu__Kiengir_Map__Filter_Flask,
@@ -1739,28 +1937,104 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Annuna__Final_Save__Pillar => SpotId::Menu__Kiengir_Map__Apocalypse,
         SpotId::Annuna__Final_Save__Save_Point => SpotId::Menu__Kiengir_Map__Apocalypse,
         SpotId::Annuna__Final_Save__Upper_West => SpotId::Menu__Kiengir_Map__Apocalypse,
+        SpotId::Annuna__Mirror_Match__East_26_Lower => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        SpotId::Annuna__Mirror_Match__East_26_Upper => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        SpotId::Annuna__Mirror_Match__Eastward => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        SpotId::Annuna__Mirror_Match__Plinth => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        SpotId::Annuna__Mirror_Match__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
+        SpotId::Annuna__Mirror_Match__Staircase => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        SpotId::Annuna__Mirror_Match__Waving_Distance => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        SpotId::Annuna__Mirror_Match__West_Gap => SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
         SpotId::Annuna__Siuna_Storage__Cache => SpotId::Menu__Kiengir_Map__Nanite_Mist,
         SpotId::Annuna__Siuna_Storage__Wall_Left => SpotId::Menu__Kiengir_Map__Nanite_Mist,
         SpotId::Annuna__Siuna_Storage__Wall_Right => SpotId::Menu__Kiengir_Map__Nanite_Mist,
         SpotId::Annuna__Siuna_Storage__Within_Range => SpotId::Menu__Kiengir_Map__Nanite_Mist,
+        SpotId::Annuna__Sniper_Valley__Bridge_End => SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Core,
+        SpotId::Annuna__Sniper_Valley__Cavern_Cache => SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask,
+        SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner => SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Flask,
+        SpotId::Annuna__Sniper_Valley__East => SpotId::Menu__Kiengir_Map__Family_Tragedy,
+        SpotId::Annuna__Sniper_Valley__Table => SpotId::Menu__Kiengir_Map__Annuna_Sniper_Valley_Core,
+        SpotId::Annuna__Spider_Room__Center => SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core,
+        SpotId::Annuna__Spider_Room__Healthy_Corner => SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core,
+        SpotId::Annuna__Spider_Room__Northeast_Ledge => SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core,
+        SpotId::Annuna__Spider_Room__Upper_Seam => SpotId::Menu__Kiengir_Map__Annuna_Spider_Room_Core,
+        SpotId::Annuna__Twisty_Passages__Northeast_C => SpotId::Menu__Kiengir_Map__Destruction_Pogrom,
+        SpotId::Annuna__Twisty_Passages__Northeast_D => SpotId::Menu__Kiengir_Map__Destruction_Pogrom,
+        SpotId::Annuna__Twisty_Passages__Northwest_Alcove => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Twisty_Passages__Top => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Twisty_Passages__West => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Twisty_Passages__West_Dip => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Twisty_Passages__West_Hill_Left => SpotId::Menu__Kiengir_Map__Destruction_Pogrom,
+        SpotId::Annuna__Twisty_Passages__West_Hill_Right => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Twisty_Passages__West_Ledge => SpotId::Menu__Kiengir_Map__Annuna_Twisty_Passages_Core,
+        SpotId::Annuna__Upper_Hallway__Behind_Pedestal => SpotId::Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal,
+        SpotId::Annuna__Upper_Hallway__Portal_Stand => SpotId::Menu__Kiengir_Map__Annuna_Upper_Hallway_Portal,
         SpotId::Annuna__Upper_Save__East => SpotId::Menu__Kiengir_Map__Annuna_Upper,
         SpotId::Annuna__Upper_Save__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_Upper,
         SpotId::Annuna__Upper_Save__West => SpotId::Menu__Kiengir_Map__Annuna_Upper,
+        SpotId::Annuna__Vertical_Room__Above_Plinth => SpotId::Menu__Kiengir_Map__Ul_Gishru,
         SpotId::Annuna__Vertical_Room__East_20 => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        SpotId::Annuna__Vertical_Room__East_21 => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__Vertical_Room__Gate_Button => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__Vertical_Room__Gate_Ledge => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__Vertical_Room__Lower_Ministair => SpotId::Menu__Kiengir_Map__Ul_Gishru,
         SpotId::Annuna__Vertical_Room__Middle_Ministair => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
-        SpotId::Annuna__Vertical_Room__Middle_West_Shaft => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        SpotId::Annuna__Vertical_Room__Middle_Overhang => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__Vertical_Room__Middle_West_Shaft => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__Vertical_Room__Plinth => SpotId::Menu__Kiengir_Map__Ul_Gishru,
         SpotId::Annuna__Vertical_Room__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
         SpotId::Annuna__Vertical_Room__Save_Point_Left => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
         SpotId::Annuna__Vertical_Room__Save_Point_Right => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        SpotId::Annuna__Vertical_Room__Upper_Cache => SpotId::Menu__Kiengir_Map__Beware_the_Patternmind,
+        SpotId::Annuna__Vertical_Room__West_17 => SpotId::Menu__Kiengir_Map__Beware_the_Patternmind,
         SpotId::Annuna__Vertical_Room__West_20 => SpotId::Menu__Kiengir_Map__Annuna_Vertical_Room,
+        SpotId::Annuna__Vertical_Room__West_21 => SpotId::Menu__Kiengir_Map__Ul_Gishru,
+        SpotId::Annuna__West_Bridge__Plinth => SpotId::Menu__Kiengir_Map__Nano_Lattice_2,
         SpotId::Annuna__West_Bridge__Save_Point => SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        SpotId::Annuna__West_Climb__Cache => SpotId::Menu__Kiengir_Map__Eye_Ring,
+        SpotId::Annuna__West_Climb__East_20 => SpotId::Menu__Kiengir_Map__Eye_Ring,
+        SpotId::Annuna__West_Climb__Platform_2 => SpotId::Menu__Kiengir_Map__Eye_Ring,
+        SpotId::Annuna__West_Climb__Switch_Ledge => SpotId::Menu__Kiengir_Map__Eye_Ring,
+        SpotId::Ebih__Base_Camp__Behind_Vehicle => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West,
+        SpotId::Ebih__Base_Camp__Building_Entry => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West,
+        SpotId::Ebih__Base_Camp__Bunker_Entry => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_East,
+        SpotId::Ebih__Base_Camp__Lake_Access => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_East,
+        SpotId::Ebih__Base_Camp__Left_Platform_Moved => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_Health,
         SpotId::Ebih__Base_Camp__Save_Point => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp,
+        SpotId::Ebih__Base_Camp__Tent_Entry => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West,
+        SpotId::Ebih__Base_Camp__Top_Platform => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_Health,
+        SpotId::Ebih__Base_Camp__West_13 => SpotId::Menu__Kiengir_Map__Ebih_Base_Camp_West,
+        SpotId::Ebih__Boss_Room__Boss => SpotId::Menu__Kiengir_Map__Ebih_Alu_Flask,
+        SpotId::Ebih__Boss_Room__East_6 => SpotId::Menu__Kiengir_Map__Ebih_Alu_Health,
+        SpotId::Ebih__Boss_Room__East_Ledge => SpotId::Menu__Kiengir_Map__Ebih_Alu_Health,
+        SpotId::Ebih__Boss_Room__High_Platform => SpotId::Menu__Kiengir_Map__Ebih_Alu_Health,
+        SpotId::Ebih__Boss_Room__Lower_Ledge => SpotId::Menu__Kiengir_Map__Ebih_Alu_Health,
+        SpotId::Ebih__Boss_Room__Upper_Tree => SpotId::Menu__Kiengir_Map__Ebih_Alu_Health,
+        SpotId::Ebih__Boss_Room__West_5 => SpotId::Menu__Kiengir_Map__Ebih_Alu_Flask,
+        SpotId::Ebih__By_Garage__Crawlspace => SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health,
+        SpotId::Ebih__By_Garage__Crawlspace_Opening => SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health,
+        SpotId::Ebih__By_Garage__East_12 => SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health,
+        SpotId::Ebih__By_Garage__East_13 => SpotId::Menu__Kiengir_Map__Ebih_Garage,
+        SpotId::Ebih__By_Garage__East_Below_Platforms => SpotId::Menu__Kiengir_Map__Ebih_Garage,
+        SpotId::Ebih__By_Garage__East_Platform => SpotId::Menu__Kiengir_Map__Ebih_Garage,
+        SpotId::Ebih__By_Garage__Garage_Entry => SpotId::Menu__Kiengir_Map__Ebih_Garage,
+        SpotId::Ebih__By_Garage__Outcropping => SpotId::Menu__Kiengir_Map__Ebih_By_Garage_Health,
         SpotId::Ebih__Drone_Room__Item => SpotId::Menu__Kiengir_Map__Remote_Drone,
         SpotId::Ebih__Drone_Room__Middle_Platform => SpotId::Menu__Kiengir_Map__Remote_Drone,
         SpotId::Ebih__Drone_Room__Pit_Left => SpotId::Menu__Kiengir_Map__Remote_Drone,
         SpotId::Ebih__Drone_Room__Portal => SpotId::Menu__Kiengir_Map__Remote_Drone,
         SpotId::Ebih__Drone_Room__West_6 => SpotId::Menu__Kiengir_Map__Remote_Drone,
+        SpotId::Ebih__Ebih_East__Corner => SpotId::Menu__Kiengir_Map__Infect,
+        SpotId::Ebih__Ebih_East__Dispenser => SpotId::Menu__Kiengir_Map__Ebih_East_Health,
+        SpotId::Ebih__Ebih_East__East_9 => SpotId::Menu__Kiengir_Map__Infect,
+        SpotId::Ebih__Ebih_East__East_Hill => SpotId::Menu__Kiengir_Map__Under_Siege,
+        SpotId::Ebih__Ebih_East__East_Ledge => SpotId::Menu__Kiengir_Map__Under_Siege,
+        SpotId::Ebih__Ebih_East__Ledge_End => SpotId::Menu__Kiengir_Map__Ebih_East_Health,
+        SpotId::Ebih__Ebih_East__Lower_Moving_Platform => SpotId::Menu__Kiengir_Map__Infect,
+        SpotId::Ebih__Ebih_West__Above_Alcove => SpotId::Menu__Kiengir_Map__Heretics_Tablet,
         SpotId::Ebih__Ebih_West__Above_Chute => SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
+        SpotId::Ebih__Ebih_West__Alcove => SpotId::Menu__Kiengir_Map__Heretics_Tablet,
+        SpotId::Ebih__Ebih_West__Alcove_Entrance => SpotId::Menu__Kiengir_Map__Heretics_Tablet,
         SpotId::Ebih__Ebih_West__East_10 => SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
         SpotId::Ebih__Ebih_West__East_7 => SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
         SpotId::Ebih__Ebih_West__Lower_Platform => SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
@@ -1769,6 +2043,16 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Ebih__Ebih_West__Mid_Save => SpotId::Menu__Kiengir_Map__Ebih_West_Mid,
         SpotId::Ebih__Ebih_West__Upper_Save => SpotId::Menu__Kiengir_Map__Ebih_West_Upper,
         SpotId::Ebih__Ebih_West__West_13 => SpotId::Menu__Kiengir_Map__Ebih_West_Lower,
+        SpotId::Ebih__Grid_25_10_12__East_10 => SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask,
+        SpotId::Ebih__Grid_25_10_12__Hidden_Bush => SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask,
+        SpotId::Ebih__Grid_25_10_12__West_10 => SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask,
+        SpotId::Ebih__Grid_25_2_6__Pit => SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask,
+        SpotId::Ebih__Grid_26_10_11__Ledge => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        SpotId::Ebih__Grid_26_10_11__Middle_Bottom => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        SpotId::Ebih__Grid_26_10_11__Middle_Platform => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        SpotId::Ebih__Grid_26_10_11__Under_Ledge => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        SpotId::Ebih__Grid_26_10_11__Upper_Platform => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        SpotId::Ebih__Grid_26_10_11__West_11 => SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
         SpotId::Ebih__Guarded_Health__Far_West => SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
         SpotId::Ebih__Guarded_Health__West_Basin => SpotId::Menu__Kiengir_Map__Ebih_Guarded_Health,
         SpotId::Ebih__Truck_Gate__Door => SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate,
@@ -1777,38 +2061,155 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Ebih__Truck_Gate__Switch => SpotId::Menu__Kiengir_Map__Ebih_Truck_Gate,
         SpotId::Ebih__Waterfall__Alcove => SpotId::Menu__Kiengir_Map__Bronze_Axe,
         SpotId::Ebih__Waterfall__Alcove_Left => SpotId::Menu__Kiengir_Map__Bronze_Axe,
+        SpotId::Ebih__Waterfall__Cave_Entrance => SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave,
         SpotId::Ebih__Waterfall__Under_Waterfall => SpotId::Menu__Kiengir_Map__Bronze_Axe,
         SpotId::Ebih__Waterfall__Waterfall_Center_Center => SpotId::Menu__Kiengir_Map__Bronze_Axe,
         SpotId::Ebih__Waterfall__Waterfall_Center_Left => SpotId::Menu__Kiengir_Map__Bronze_Axe,
         SpotId::Ebih__Waterfall__Waterfall_Left => SpotId::Menu__Kiengir_Map__Bronze_Axe,
+        SpotId::Giguna_Breach__Chimney__Cache => SpotId::Menu__Breach_Map__GSB_Chimney_Flask,
+        SpotId::Giguna_Breach__Chimney__East_8 => SpotId::Menu__Breach_Map__GSB_Chimney_Flask,
+        SpotId::Giguna_Breach__Cubby__Entrance => SpotId::Menu__Breach_Map__GSB_Cubby_Health,
+        SpotId::Giguna_Breach__Cubby__Rocks => SpotId::Menu__Breach_Map__GSB_Cubby_Health,
         SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Menu__Breach_Map__GSB_Peak,
         SpotId::Giguna_Breach__SW_Save__East_12 => SpotId::Menu__Breach_Map__GSB_SW_Save,
         SpotId::Giguna_Breach__SW_Save__Lower_Platform => SpotId::Menu__Breach_Map__GSB_SW_Save,
         SpotId::Giguna_Breach__SW_Save__Save_Point => SpotId::Menu__Breach_Map__GSB_SW_Save,
+        SpotId::Giguna_Breach__Slingshot__Column => SpotId::Menu__Breach_Map__Slingshot_Hook,
+        SpotId::Giguna_Breach__Slingshot__Ravine => SpotId::Menu__Breach_Map__Slingshot_Hook,
+        SpotId::Giguna_Breach__Slingshot__West => SpotId::Menu__Breach_Map__Slingshot_Hook,
+        SpotId::Giguna__Antechamber__Middle_Bricks_Left => SpotId::Menu__Kiengir_Map__Dangerous_Ideas,
+        SpotId::Giguna__Antechamber__Middle_Bricks_Right => SpotId::Menu__Kiengir_Map__Dangerous_Ideas,
+        SpotId::Giguna__Antechamber__Statue_Head => SpotId::Menu__Kiengir_Map__Dangerous_Ideas,
+        SpotId::Giguna__Antechamber__West_15 => SpotId::Menu__Kiengir_Map__Dangerous_Ideas,
         SpotId::Giguna__Breachable_Wall__Above_the_Hole => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
         SpotId::Giguna__Breachable_Wall__Cave_Mouth_East => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
         SpotId::Giguna__Breachable_Wall__Cave_Mouth_West => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
         SpotId::Giguna__Breachable_Wall__Wall_Interior => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
         SpotId::Giguna__Breachable_Wall__West_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
         SpotId::Giguna__Breachable_Wall__West_Mid_air => SpotId::Menu__Kiengir_Map__Giguna_Breachable_Wall_Flask,
+        SpotId::Giguna__Carnelian__Door => SpotId::Menu__Kiengir_Map__Carnelian_Ring,
+        SpotId::Giguna__Carnelian__Middle_Platforms => SpotId::Menu__Kiengir_Map__Carnelian_Ring,
+        SpotId::Giguna__Carnelian__Rock => SpotId::Menu__Kiengir_Map__Carnelian_Ring,
+        SpotId::Giguna__Carnelian__Switch => SpotId::Menu__Kiengir_Map__Carnelian_Ring,
+        SpotId::Giguna__Carnelian__Vault => SpotId::Menu__Kiengir_Map__Carnelian_Ring,
+        SpotId::Giguna__Clouds__Cache => SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask,
+        SpotId::Giguna__Clouds__North_Under_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask,
+        SpotId::Giguna__Clouds__Platform_Early_Portal => SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask,
+        SpotId::Giguna__Clouds__Platform_Stop => SpotId::Menu__Kiengir_Map__Giguna_Clouds_Flask,
+        SpotId::Giguna__Dual_Path__Base_of_Wall => SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health,
+        SpotId::Giguna__Dual_Path__In_the_Grass => SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health,
+        SpotId::Giguna__Dual_Path__Wall_Secret => SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health,
+        SpotId::Giguna__Dual_Path__Wall_Top => SpotId::Menu__Kiengir_Map__Giguna_Dual_Path_Health,
+        SpotId::Giguna__East_Caverns__Arc_Passage => SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask,
+        SpotId::Giguna__East_Caverns__Carving => SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask,
+        SpotId::Giguna__East_Caverns__Hidden_Passage_Center => SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask,
+        SpotId::Giguna__East_Caverns__Hidden_Passage_East => SpotId::Menu__Kiengir_Map__Giguna_East_Caverns_Flask,
+        SpotId::Giguna__Far_Corner__East_13 => SpotId::Menu__Kiengir_Map__Giguna_Far_Corner,
+        SpotId::Giguna__Far_Corner__Grass => SpotId::Menu__Kiengir_Map__Giguna_Far_Corner,
+        SpotId::Giguna__Far_Corner__South => SpotId::Menu__Kiengir_Map__Giguna_Far_Corner,
+        SpotId::Giguna__Gateway__Block_Lowered => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block,
+        SpotId::Giguna__Gateway__Block_Right => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block,
+        SpotId::Giguna__Gateway__Button => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block,
+        SpotId::Giguna__Gateway__East_19 => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block,
+        SpotId::Giguna__Gateway__Far_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask,
+        SpotId::Giguna__Gateway__Flask_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask,
+        SpotId::Giguna__Gateway__Left_Platform => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask,
+        SpotId::Giguna__Gateway__One_Jump => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask,
+        SpotId::Giguna__Gateway__Refill_Station => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Block,
+        SpotId::Giguna__Gateway__Right_Platform => SpotId::Menu__Kiengir_Map__Giguna_Gateway_Flask,
+        SpotId::Giguna__Giguna_Base__Building_Entry => SpotId::Menu__Kiengir_Map__Kari,
+        SpotId::Giguna__Giguna_Base__Kari => SpotId::Menu__Kiengir_Map__Kari,
+        SpotId::Giguna__Giguna_Base__Ruin => SpotId::Menu__Kiengir_Map__Wall_Climb,
         SpotId::Giguna__Giguna_Base__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Base,
         SpotId::Giguna__Giguna_Base__Staircase_Bottom => SpotId::Menu__Kiengir_Map__Giguna_Base,
+        SpotId::Giguna__Giguna_Base__Staircase_Top => SpotId::Menu__Kiengir_Map__Wall_Climb,
         SpotId::Giguna__Giguna_Base__Table => SpotId::Menu__Kiengir_Map__Giguna_Base,
+        SpotId::Giguna__Giguna_Base__West_15 => SpotId::Menu__Kiengir_Map__Wall_Climb,
         SpotId::Giguna__Giguna_Base__West_16 => SpotId::Menu__Kiengir_Map__Giguna_Base,
+        SpotId::Giguna__Giguna_Base__West_Grate => SpotId::Menu__Kiengir_Map__Wall_Climb,
+        SpotId::Giguna__Giguna_Northeast__Door => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask,
+        SpotId::Giguna__Giguna_Northeast__Gate_Button => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate,
         SpotId::Giguna__Giguna_Northeast__Gate_Left => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
-        SpotId::Giguna__Giguna_Northeast__Gate_Vent => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        SpotId::Giguna__Giguna_Northeast__Gate_Right => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate,
+        SpotId::Giguna__Giguna_Northeast__Gate_Vent => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Gate,
+        SpotId::Giguna__Giguna_Northeast__Right_Column => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask,
         SpotId::Giguna__Giguna_Northeast__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
         SpotId::Giguna__Giguna_Northeast__Step => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        SpotId::Giguna__Giguna_Northeast__Switch => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask,
+        SpotId::Giguna__Giguna_Northeast__Vault => SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask,
         SpotId::Giguna__Giguna_Northeast__West_10 => SpotId::Menu__Kiengir_Map__Giguna_Northeast,
+        SpotId::Giguna__Gubi_Lair__Center_Platform => SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask,
+        SpotId::Giguna__Gubi_Lair__East_15 => SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask,
+        SpotId::Giguna__Gubi_Lair__East_Tree => SpotId::Menu__Kiengir_Map__Giguna_Gubi_Flask,
+        SpotId::Giguna__Gubi_Lair__Pedestal => SpotId::Menu__Kiengir_Map__Double_Axe,
+        SpotId::Giguna__Hard_Rock__East_17 => SpotId::Menu__Kiengir_Map__Building_of_the_School,
+        SpotId::Giguna__Hard_Rock__Rock_Center => SpotId::Menu__Kiengir_Map__Building_of_the_School,
+        SpotId::Giguna__Hard_Rock__Rock_Left => SpotId::Menu__Kiengir_Map__Building_of_the_School,
+        SpotId::Giguna__Hard_Rock__Rock_Right => SpotId::Menu__Kiengir_Map__Building_of_the_School,
+        SpotId::Giguna__Hard_Rock__West_17 => SpotId::Menu__Kiengir_Map__Building_of_the_School,
+        SpotId::Giguna__Helipad__So_Close => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
+        SpotId::Giguna__Helipad__Tablet_Ledge => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
+        SpotId::Giguna__Helipad__Wall_Bottom => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
+        SpotId::Giguna__Lamassu__Deposit => SpotId::Menu__Kiengir_Map__Giguna_Lamassu_Flask,
+        SpotId::Giguna__Ruins_Center__Center_Top => SpotId::Menu__Kiengir_Map__Aansur,
+        SpotId::Giguna__Ruins_Center__East_8 => SpotId::Menu__Kiengir_Map__Aansur,
+        SpotId::Giguna__Ruins_Center__Tablet => SpotId::Menu__Kiengir_Map__Aansur,
+        SpotId::Giguna__Ruins_East__Way_Up_High => SpotId::Menu__Kiengir_Map__Giguna_Highest_Flask,
+        SpotId::Giguna__Ruins_Top__East_7 => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__East_Door => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__Flask => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
+        SpotId::Giguna__Ruins_Top__Interior_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__Portal => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__Portal_Left => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__Rooftop_East => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
+        SpotId::Giguna__Ruins_Top__Rooftop_Gutter => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
+        SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
         SpotId::Giguna__Ruins_Top__Switch => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_East => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_West => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
+        SpotId::Giguna__Ruins_Top__Upper_Tunnel => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
         SpotId::Giguna__Ruins_Top__West_Pillar => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_West__East_9 => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
         SpotId::Giguna__Ruins_West__Nook => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
         SpotId::Giguna__Ruins_West__Platform => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
         SpotId::Giguna__Ruins_West__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Ruins_West,
+        SpotId::Giguna__Wasteland__Bluff_by_Door => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__Cache_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+        SpotId::Giguna__Wasteland__Door_Left => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__Door_Right => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__East_12 => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch,
+        SpotId::Giguna__Wasteland__East_14 => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__Left_Platform_East => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+        SpotId::Giguna__Wasteland__Left_Platform_West => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+        SpotId::Giguna__Wasteland__Lower_Path_Left => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core,
+        SpotId::Giguna__Wasteland__Lower_Path_Right => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core,
+        SpotId::Giguna__Wasteland__Lower_Platform_East => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__Passage_Cache => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core,
+        SpotId::Giguna__Wasteland__Switch => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch,
+        SpotId::Giguna__Wasteland__Switch_Approach => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch,
+        SpotId::Giguna__Wasteland__Switch_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Switch,
+        SpotId::Giguna__Wasteland__Tiny_Hill => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Health,
+        SpotId::Giguna__Wasteland__Upper_Cache => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+        SpotId::Giguna__Wasteland__West_14 => SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Core,
+        SpotId::Giguna__West_Caverns__Bush => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core,
+        SpotId::Giguna__West_Caverns__Cache => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Caverns__Column_1_Top_Left => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core,
+        SpotId::Giguna__West_Caverns__Column_1_Top_Right => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Caverns__Column_2_Top => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Caverns__Northwest => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core,
+        SpotId::Giguna__West_Caverns__Top_Gap_Left => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Caverns__Top_Gap_Right => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Tower__Top => SpotId::Menu__Kiengir_Map__The_Ideal_Kiengir,
+        SpotId::Glacier_Breach__Control__East => SpotId::Menu__Breach_Map__GlB_Control_Flask,
+        SpotId::Glacier_Breach__Control__Further_In => SpotId::Menu__Breach_Map__GlB_Control_Flask,
+        SpotId::Glacier_Breach__Control__Upper_Corner => SpotId::Menu__Breach_Map__GlB_Control_Flask,
+        SpotId::Glacier_Breach__Control__Upper_Gap => SpotId::Menu__Breach_Map__GlB_Control_Flask,
+        SpotId::Glacier_Breach__Grate_Work__Grate_East => SpotId::Menu__Breach_Map__GlB_Grate_Flask,
+        SpotId::Glacier_Breach__Grate_Work__Grate_Interior => SpotId::Menu__Breach_Map__GlB_Grate_Flask,
+        SpotId::Glacier_Breach__Grate_Work__Grate_West => SpotId::Menu__Breach_Map__GlB_Grate_Flask,
+        SpotId::Glacier_Breach__Grate_Work__West_13 => SpotId::Menu__Breach_Map__GlB_Grate_Flask,
         SpotId::Glacier_Breach__Guarded_Corridor__East => SpotId::Menu__Breach_Map__GlB_Center,
         SpotId::Glacier_Breach__Guarded_Corridor__Past_the_Guards => SpotId::Menu__Breach_Map__GlB_Center,
         SpotId::Glacier_Breach__Guarded_Corridor__Save_Point => SpotId::Menu__Breach_Map__GlB_Center,
@@ -1826,20 +2227,44 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Glacier_Breach__West_Save__Save_Point => SpotId::Menu__Breach_Map__GlB_West,
         SpotId::Glacier_Breach__West_Save__West_Ledge => SpotId::Menu__Breach_Map__GlB_West,
         SpotId::Glacier_Breach__West_Save__West_Nub => SpotId::Menu__Breach_Map__GlB_West,
+        SpotId::Glacier__Boomerang_Room__Center_Ledge => SpotId::Menu__Kiengir_Map__Boomerang,
+        SpotId::Glacier__Boomerang_Room__Pedestal => SpotId::Menu__Kiengir_Map__Boomerang,
+        SpotId::Glacier__Boomerang_Room__Upper_Gate_East => SpotId::Menu__Kiengir_Map__Boomerang,
+        SpotId::Glacier__Compass_Room__Center => SpotId::Menu__Kiengir_Map__Compass,
+        SpotId::Glacier__Compass_Room__East => SpotId::Menu__Kiengir_Map__Compass,
+        SpotId::Glacier__Compass_Room__West => SpotId::Menu__Kiengir_Map__Compass,
         SpotId::Glacier__Crystals__Lower_Corner => SpotId::Menu__Kiengir_Map__Breach_Attractor,
         SpotId::Glacier__Crystals__Lower_Slope => SpotId::Menu__Kiengir_Map__Breach_Attractor,
         SpotId::Glacier__Crystals__Portal_Stand => SpotId::Menu__Kiengir_Map__Breach_Attractor,
+        SpotId::Glacier__Crystals__Top_Corner => SpotId::Menu__Kiengir_Map__Bounty_List,
+        SpotId::Glacier__Crystals__Upper_Ledge => SpotId::Menu__Kiengir_Map__Bounty_List,
+        SpotId::Glacier__Crystals__West => SpotId::Menu__Kiengir_Map__Bounty_List,
+        SpotId::Glacier__Dock_Outside__Above_Ruins => SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
         SpotId::Glacier__Dock_Outside__Cave_Treasure => SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
-        SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform => SpotId::Menu__Kiengir_Map__Glacier_40_8,
-        SpotId::Glacier__Grid_39_40_7_9__Upper_East => SpotId::Menu__Kiengir_Map__Glacier_40_8,
-        SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding => SpotId::Menu__Kiengir_Map__Glacier_40_8,
+        SpotId::Glacier__Dock_Outside__Ruins_Platform => SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
+        SpotId::Glacier__Dock_Outside__Ruins_Stairs => SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
+        SpotId::Glacier__Dock_Outside__Upper_Ledge => SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
+        SpotId::Glacier__Dock_Outside__Upper_West_Hill => SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
+        SpotId::Glacier__Grid_39_40_7_9__Floating_Rock => SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
+        SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge => SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
+        SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform => SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
+        SpotId::Glacier__Hammonds_End__Between_Center_Doors => SpotId::Menu__Kiengir_Map__Hammonds_Health,
+        SpotId::Glacier__Hammonds_End__Center_Door_Left => SpotId::Menu__Kiengir_Map__Hammonds_Health,
         SpotId::Glacier__Hammonds_End__Center_Door_Right => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__Corner => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__East_11_Door => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__Hammond => SpotId::Menu__Kiengir_Map__Hammond,
+        SpotId::Glacier__Hammonds_End__Lower_Grate_Left => SpotId::Menu__Kiengir_Map__Hammonds_Health,
+        SpotId::Glacier__Hammonds_End__Lower_Grate_Right => SpotId::Menu__Kiengir_Map__Hammonds_Health,
         SpotId::Glacier__Hammonds_End__Lower_Pedestal_West => SpotId::Menu__Kiengir_Map__Hammond,
         SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal => SpotId::Menu__Kiengir_Map__Hammond,
+        SpotId::Glacier__Hammonds_End__Switch_Near => SpotId::Menu__Kiengir_Map__Hammonds_Health,
+        SpotId::Glacier__Hammonds_End__Switch_from_Ledge => SpotId::Menu__Kiengir_Map__Hammonds_Health,
         SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air => SpotId::Menu__Kiengir_Map__Hammond,
+        SpotId::Glacier__Hammonds_End__West_11 => SpotId::Menu__Kiengir_Map__Hammonds_Health,
+        SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => SpotId::Menu__Kiengir_Map__Ledge_Grab,
+        SpotId::Glacier__Ledge_Grab_Room__Gate => SpotId::Menu__Kiengir_Map__Ledge_Grab,
+        SpotId::Glacier__Ledge_Grab_Room__Pedestal => SpotId::Menu__Kiengir_Map__Ledge_Grab,
         SpotId::Glacier__Peak__Birds_Eye => SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
         SpotId::Glacier__Peak__South => SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
         SpotId::Glacier__Revival__Just_Thrown => SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -1848,13 +2273,36 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Glacier__Revival__Pillar_Step => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Save_Point => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__West_8 => SpotId::Menu__Kiengir_Map__Glacier_Revival,
+        SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__Deep_Cache => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__East_14 => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__Grate_Ledge => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__Grate_Left => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__Grate_Right => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__Left_Center_Rock => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__Right_Center_Rock => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__Underwater_Passage_Center => SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        SpotId::Glacier__Sea_Burial__West_14 => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__West_Basin => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Sea_Burial__West_Water_Surface => SpotId::Menu__Kiengir_Map__Dr_Gloria,
+        SpotId::Glacier__Vertical_Room__East_9 => SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
+        SpotId::Glacier__Vertical_Room__Mid_9 => SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
+        SpotId::Glacier__Vertical_Room__Peak => SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
+        SpotId::Glacier__Vertical_Room__West_9 => SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
         SpotId::Irikar_Breach__Gauntlet__East_22 => SpotId::Menu__Breach_Map__IB_Gauntlet,
+        SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward => SpotId::Menu__Breach_Map__IB_Gauntlet_Flask,
         SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => SpotId::Menu__Breach_Map__IB_Gauntlet,
         SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Right => SpotId::Menu__Breach_Map__IB_Gauntlet,
         SpotId::Irikar_Breach__Gauntlet__Save_Point => SpotId::Menu__Breach_Map__IB_Gauntlet,
+        SpotId::Irikar_Breach__Hover_Room__Bottom => SpotId::Menu__Breach_Map__Drone_Hover,
         SpotId::Irikar_Breach__Save_Room__Save_Point => SpotId::Menu__Breach_Map__IB_Save_Room,
         SpotId::Irikar_Breach__Save_Room__Upper_Area => SpotId::Menu__Breach_Map__IB_Save_Room,
         SpotId::Irikar_Breach__Save_Room__West => SpotId::Menu__Breach_Map__IB_Save_Room,
+        SpotId::Irikar_Breach__Worm_Rave__Corner => SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask,
+        SpotId::Irikar_Breach__Worm_Rave__East => SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask,
+        SpotId::Irikar_Breach__Worm_Rave__South => SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask,
         SpotId::Irikar__Abandoned_Room__Corner_Core => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
         SpotId::Irikar__Abandoned_Room__Empty_Pedestal => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
         SpotId::Irikar__Abandoned_Room__West => SpotId::Menu__Kiengir_Map__Irikar_Abandoned_Room,
@@ -1862,7 +2310,10 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Airy__Cavern_Side => SpotId::Menu__Kiengir_Map__Irikar_Airy_Flask,
         SpotId::Irikar__Basement_Pipes__Double_Pipe_Left => SpotId::Menu__Kiengir_Map__The_Student,
         SpotId::Irikar__Basement_Pipes__High_Pipe => SpotId::Menu__Kiengir_Map__The_Student,
+        SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => SpotId::Menu__Kiengir_Map__Irikar_Basement_Core,
+        SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => SpotId::Menu__Kiengir_Map__Irikar_Basement_Core,
         SpotId::Irikar__Basement_Pipes__West_27 => SpotId::Menu__Kiengir_Map__The_Student,
+        SpotId::Irikar__Basement_Pipes__West_28 => SpotId::Menu__Kiengir_Map__Irikar_Basement_Core,
         SpotId::Irikar__Beach_Save__Save_Point => SpotId::Menu__Kiengir_Map__Irikar_Beach_Save,
         SpotId::Irikar__Beach_Save__Top_Platform => SpotId::Menu__Kiengir_Map__Irikar_Fast_Travel,
         SpotId::Irikar__Beach__Cache => SpotId::Menu__Kiengir_Map__Irikar_Beach_Cache,
@@ -1901,19 +2352,56 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Midwest__Right_Platform_Start => SpotId::Menu__Kiengir_Map__Irikar_Mid_air_Flask,
         SpotId::Irikar__Midwest__Save_Ledge => SpotId::Menu__Kiengir_Map__Irikar_Midwest,
         SpotId::Irikar__Midwest__Save_Point => SpotId::Menu__Kiengir_Map__Irikar_Midwest,
+        SpotId::Irikar__Midwest__Tablet_Platform => SpotId::Menu__Kiengir_Map__Freedom_from_Aansur,
         SpotId::Irikar__Sight_Room__Item_Pedestal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Irikar__Sight_Room__Portal => SpotId::Menu__Kiengir_Map__Breach_Sight,
         SpotId::Uhrum__Annuna_Corridor__Block_West => SpotId::Menu__Kiengir_Map__Uhrum_East,
+        SpotId::Uhrum__Annuna_Corridor__East_25 => SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask,
+        SpotId::Uhrum__Annuna_Corridor__East_Cubby => SpotId::Menu__Kiengir_Map__Plague_of_Thoughts,
         SpotId::Uhrum__Annuna_Corridor__Pedestal => SpotId::Menu__Kiengir_Map__Anuman,
         SpotId::Uhrum__Annuna_Corridor__Save_Point => SpotId::Menu__Kiengir_Map__Uhrum_East,
+        SpotId::Uhrum__Annuna_Corridor__Statue => SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask,
+        SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => SpotId::Menu__Kiengir_Map__Plague_of_Thoughts,
+        SpotId::Uhrum__Annuna_Corridor__Upper_Platform => SpotId::Menu__Kiengir_Map__Plague_of_Thoughts,
         SpotId::Uhrum__Annuna_Corridor__Upper_Trees => SpotId::Menu__Kiengir_Map__Anuman,
         SpotId::Uhrum__Annuna_Corridor__West_26 => SpotId::Menu__Kiengir_Map__Uhrum_East,
         SpotId::Uhrum__Save_Room__East => SpotId::Menu__Kiengir_Map__Uhrum_Center,
         SpotId::Uhrum__Save_Room__Save_Point => SpotId::Menu__Kiengir_Map__Uhrum_Center,
         SpotId::Uhrum__Save_Room__West => SpotId::Menu__Kiengir_Map__Uhrum_Center,
+        SpotId::Uhrum__Siege_Corridor__Center_Box => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health,
+        SpotId::Uhrum__Siege_Corridor__East_25 => SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel,
+        SpotId::Uhrum__Siege_Corridor__East_Hill => SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel,
+        SpotId::Uhrum__Siege_Corridor__Northwest_Door => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core,
+        SpotId::Uhrum__Siege_Corridor__Northwest_Platform => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core,
+        SpotId::Uhrum__Siege_Corridor__Pond => SpotId::Menu__Kiengir_Map__Storm_Bomb,
+        SpotId::Uhrum__Siege_Corridor__Upper_Rock_East => SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel,
+        SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item => SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel,
+        SpotId::Uhrum__Siege_Corridor__Upper_Rock_West => SpotId::Menu__Kiengir_Map__Uhrum_Fast_Travel,
+        SpotId::Uhrum__Siege_Corridor__West_Loop => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health,
+        SpotId::Uhrum__Siege_Corridor__Western_Cache => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core,
+        SpotId::Uhrum__Siege_Corridor__Western_Rock => SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Core,
+        SpotId::Uhrum__Waterfalls__Ceiling_Cache => SpotId::Menu__Kiengir_Map__Uhrum_Waterfalls_Flask,
+        SpotId::Uhrum__Waterfalls__Island_Water_West => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__Waterfalls__Water_Slope => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__Waterfalls__West_24 => SpotId::Menu__Kiengir_Map__Uhrum_Waterfalls_Flask,
+        SpotId::Uhrum__Waterfalls__West_Shallow_End => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__Waterfalls__West_Water_Ledge => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__Waterfalls__West_Water_Nook => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__Waterfalls__West_Water_Surface => SpotId::Menu__Kiengir_Map__Suspension_Bridge,
+        SpotId::Uhrum__West_Entrance__Clear_Passage => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
+        SpotId::Uhrum__West_Entrance__Gate_Switch => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Exit,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
+        SpotId::Uhrum__West_Entrance__Hidden_Passage_West => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
+        SpotId::Uhrum__West_Entrance__Inner_Dais => SpotId::Menu__Kiengir_Map__Udusan,
+        SpotId::Uhrum__West_Entrance__Portal_Exit => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Exit,
+        SpotId::Uhrum__West_Entrance__Portal_Stand => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
         SpotId::Uhrum__West_Entrance__Sand => SpotId::Menu__Kiengir_Map__Uhrum_West,
         SpotId::Uhrum__West_Entrance__Save_Point => SpotId::Menu__Kiengir_Map__Uhrum_West,
         SpotId::Uhrum__West_Entrance__Southeast_Tree => SpotId::Menu__Kiengir_Map__Uhrum_West,
+        SpotId::Uhrum__West_Entrance__Top_West_Ledge => SpotId::Menu__Kiengir_Map__Udusan,
+        SpotId::Uhrum__West_Entrance__West_25 => SpotId::Menu__Kiengir_Map__Udusan,
+        SpotId::Uhrum__West_Entrance__West_26 => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
+        SpotId::Uhrum__West_Entrance__West_of_Gate => SpotId::Menu__Kiengir_Map__Uhrum_West_Portal_Entrance,
         _ => SpotId::None
     }
 }
@@ -6640,7 +7128,28 @@ impl context::Ctx for Context {
                 SpotId::Amagi__East_Lake__Kum_Abala => {
 
                 }
+                SpotId::Amagi__East_Lake__Save_Point => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
+
+                }
+                SpotId::Amagi__East_Lake__Southeast_Column => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
+
+                }
+                SpotId::Amagi__East_Lake__Southwest_Column_East => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
+
+                }
                 SpotId::Amagi__East_Lake__West_Water_Surface => {
+
+                }
+                SpotId::Amagi__Liru_Room__Bottom => {
+
+                }
+                SpotId::Amagi__Liru_Room__Shrine => {
+
+                }
+                SpotId::Amagi__Main_Area__Carving => {
 
                 }
                 SpotId::Amagi__Main_Area__Enemy_Side => {
@@ -6649,6 +7158,33 @@ impl context::Ctx for Context {
                 }
                 SpotId::Amagi__Main_Area__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
+
+                }
+                SpotId::Amagi__Main_Area__Secret_Outcropping => {
+
+                }
+                SpotId::Amagi__Main_Area__Way_Off_To_The_Side => {
+
+                }
+                SpotId::Amagi__Main_Area__West_15 => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Eye => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Front_Pillar => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Refill_Station => {
+
+                }
+                SpotId::Amagi__West_Lake__Cavern_Tear_Duct => {
 
                 }
                 SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => {
@@ -6666,12 +7202,90 @@ impl context::Ctx for Context {
                 SpotId::Amagi__West_Lake__Stronghold_Top => {
 
                 }
+                SpotId::Amagi_Breach__East_Entrance__East => {
+
+                }
+                SpotId::Amagi_Breach__East_Entrance__Grate_Left => {
+
+                }
+                SpotId::Amagi_Breach__East_Entrance__Grate_Right => {
+
+                }
                 SpotId::Amagi_Breach__East_Entrance__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE);
 
                 }
+                SpotId::Amagi_Breach__East_Entrance__Upper_Slope => {
+
+                }
                 SpotId::Amagi_Breach__East_Entrance__West => {
                     self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE);
+
+                }
+                SpotId::Annuna__East_Bridge__Below_Cavern => {
+
+                }
+                SpotId::Annuna__East_Bridge__Cavern_Cache => {
+
+                }
+                SpotId::Annuna__East_Bridge__Cavern_Foyer => {
+
+                }
+                SpotId::Annuna__East_Bridge__Cavern_Right => {
+
+                }
+                SpotId::Annuna__East_Bridge__Flung_West => {
+
+                }
+                SpotId::Annuna__East_Bridge__Gate_Button_Gap => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Base_East => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Base_West => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Core => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_East_Ledge => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Gate => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Opening => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_Secret => {
+
+                }
+                SpotId::Annuna__East_Bridge__Tower_West_Ledge => {
+
+                }
+                SpotId::Annuna__East_Bridge__Upper_West_Partway_East => {
+
+                }
+                SpotId::Annuna__East_Bridge__West_22 => {
+
+                }
+                SpotId::Annuna__Egg_Room__Cache => {
+
+                }
+                SpotId::Annuna__Egg_Room__Corner_Platform => {
+
+                }
+                SpotId::Annuna__Egg_Room__East => {
+
+                }
+                SpotId::Annuna__Egg_Room__Passage_Entrance => {
+
+                }
+                SpotId::Annuna__Egg_Room__Second_Egg => {
+
+                }
+                SpotId::Annuna__Egg_Room__Third_Egg => {
 
                 }
                 SpotId::Annuna__Filter_Teleporter__Door_Ledge => {
@@ -6704,12 +7318,27 @@ impl context::Ctx for Context {
                 SpotId::Annuna__Filter_Teleporter__West_21 => {
 
                 }
+                SpotId::Annuna__Mirror_Match__East_26_Lower => {
+
+                }
+                SpotId::Annuna__Mirror_Match__East_26_Upper => {
+
+                }
                 SpotId::Annuna__Mirror_Match__Eastward => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
 
                 }
+                SpotId::Annuna__Mirror_Match__Plinth => {
+
+                }
                 SpotId::Annuna__Mirror_Match__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
+
+                }
+                SpotId::Annuna__Mirror_Match__Staircase => {
+
+                }
+                SpotId::Annuna__Mirror_Match__Waving_Distance => {
 
                 }
                 SpotId::Annuna__Mirror_Match__West_Gap => {
@@ -6728,16 +7357,97 @@ impl context::Ctx for Context {
                 SpotId::Annuna__Siuna_Storage__Within_Range => {
 
                 }
+                SpotId::Annuna__Sniper_Valley__Bridge_End => {
+
+                }
+                SpotId::Annuna__Sniper_Valley__Cavern_Cache => {
+
+                }
+                SpotId::Annuna__Sniper_Valley__Cavern_Tight_Corner => {
+
+                }
+                SpotId::Annuna__Sniper_Valley__East => {
+
+                }
+                SpotId::Annuna__Sniper_Valley__Table => {
+
+                }
+                SpotId::Annuna__Spider_Room__Center => {
+
+                }
+                SpotId::Annuna__Spider_Room__Healthy_Corner => {
+
+                }
+                SpotId::Annuna__Spider_Room__Northeast_Ledge => {
+
+                }
+                SpotId::Annuna__Spider_Room__Upper_Seam => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__Northeast_C => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__Northeast_D => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__Northwest_Alcove => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__Top => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__West => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__West_Dip => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__West_Hill_Left => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__West_Hill_Right => {
+
+                }
+                SpotId::Annuna__Twisty_Passages__West_Ledge => {
+
+                }
+                SpotId::Annuna__Upper_Hallway__Behind_Pedestal => {
+
+                }
+                SpotId::Annuna__Upper_Hallway__Portal_Stand => {
+
+                }
+                SpotId::Annuna__Vertical_Room__Above_Plinth => {
+
+                }
                 SpotId::Annuna__Vertical_Room__East_20 => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
+
+                }
+                SpotId::Annuna__Vertical_Room__East_21 => {
+
+                }
+                SpotId::Annuna__Vertical_Room__Gate_Button => {
+
+                }
+                SpotId::Annuna__Vertical_Room__Gate_Ledge => {
+
+                }
+                SpotId::Annuna__Vertical_Room__Lower_Ministair => {
 
                 }
                 SpotId::Annuna__Vertical_Room__Middle_Ministair => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
 
                 }
+                SpotId::Annuna__Vertical_Room__Middle_Overhang => {
+
+                }
                 SpotId::Annuna__Vertical_Room__Middle_West_Shaft => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
+
+                }
+                SpotId::Annuna__Vertical_Room__Plinth => {
 
                 }
                 SpotId::Annuna__Vertical_Room__Save_Point => {
@@ -6752,15 +7462,108 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
 
                 }
+                SpotId::Annuna__Vertical_Room__Upper_Cache => {
+
+                }
+                SpotId::Annuna__Vertical_Room__West_17 => {
+
+                }
                 SpotId::Annuna__Vertical_Room__West_20 => {
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
+
+                }
+                SpotId::Annuna__Vertical_Room__West_21 => {
+
+                }
+                SpotId::Annuna__West_Bridge__Plinth => {
 
                 }
                 SpotId::Annuna__West_Bridge__Save_Point => {
 
                 }
+                SpotId::Annuna__West_Climb__Cache => {
+
+                }
+                SpotId::Annuna__West_Climb__East_20 => {
+
+                }
+                SpotId::Annuna__West_Climb__Platform_2 => {
+
+                }
+                SpotId::Annuna__West_Climb__Switch_Ledge => {
+
+                }
+                SpotId::Ebih__Base_Camp__Behind_Vehicle => {
+
+                }
+                SpotId::Ebih__Base_Camp__Building_Entry => {
+
+                }
+                SpotId::Ebih__Base_Camp__Bunker_Entry => {
+
+                }
+                SpotId::Ebih__Base_Camp__Lake_Access => {
+
+                }
+                SpotId::Ebih__Base_Camp__Left_Platform_Moved => {
+
+                }
                 SpotId::Ebih__Base_Camp__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
+
+                }
+                SpotId::Ebih__Base_Camp__Tent_Entry => {
+
+                }
+                SpotId::Ebih__Base_Camp__Top_Platform => {
+
+                }
+                SpotId::Ebih__Base_Camp__West_13 => {
+
+                }
+                SpotId::Ebih__Boss_Room__Boss => {
+
+                }
+                SpotId::Ebih__Boss_Room__East_6 => {
+
+                }
+                SpotId::Ebih__Boss_Room__East_Ledge => {
+
+                }
+                SpotId::Ebih__Boss_Room__High_Platform => {
+
+                }
+                SpotId::Ebih__Boss_Room__Lower_Ledge => {
+
+                }
+                SpotId::Ebih__Boss_Room__Upper_Tree => {
+
+                }
+                SpotId::Ebih__Boss_Room__West_5 => {
+
+                }
+                SpotId::Ebih__By_Garage__Crawlspace => {
+
+                }
+                SpotId::Ebih__By_Garage__Crawlspace_Opening => {
+
+                }
+                SpotId::Ebih__By_Garage__East_12 => {
+
+                }
+                SpotId::Ebih__By_Garage__East_13 => {
+
+                }
+                SpotId::Ebih__By_Garage__East_Below_Platforms => {
+
+                }
+                SpotId::Ebih__By_Garage__East_Platform => {
+
+                }
+                SpotId::Ebih__By_Garage__Garage_Entry => {
+
+                }
+                SpotId::Ebih__By_Garage__Outcropping => {
 
                 }
                 SpotId::Ebih__Drone_Room__Item => {
@@ -6778,8 +7581,38 @@ impl context::Ctx for Context {
                 SpotId::Ebih__Drone_Room__West_6 => {
 
                 }
+                SpotId::Ebih__Ebih_East__Corner => {
+
+                }
+                SpotId::Ebih__Ebih_East__Dispenser => {
+
+                }
+                SpotId::Ebih__Ebih_East__East_9 => {
+
+                }
+                SpotId::Ebih__Ebih_East__East_Hill => {
+
+                }
+                SpotId::Ebih__Ebih_East__East_Ledge => {
+
+                }
+                SpotId::Ebih__Ebih_East__Ledge_End => {
+
+                }
+                SpotId::Ebih__Ebih_East__Lower_Moving_Platform => {
+
+                }
+                SpotId::Ebih__Ebih_West__Above_Alcove => {
+
+                }
                 SpotId::Ebih__Ebih_West__Above_Chute => {
                     self.cbits1.insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE);
+
+                }
+                SpotId::Ebih__Ebih_West__Alcove => {
+
+                }
+                SpotId::Ebih__Ebih_West__Alcove_Entrance => {
 
                 }
                 SpotId::Ebih__Ebih_West__East_10 => {
@@ -6814,6 +7647,36 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
 
                 }
+                SpotId::Ebih__Grid_25_10_12__East_10 => {
+
+                }
+                SpotId::Ebih__Grid_25_10_12__Hidden_Bush => {
+
+                }
+                SpotId::Ebih__Grid_25_10_12__West_10 => {
+
+                }
+                SpotId::Ebih__Grid_25_2_6__Pit => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__Ledge => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__Middle_Bottom => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__Middle_Platform => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__Under_Ledge => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__Upper_Platform => {
+
+                }
+                SpotId::Ebih__Grid_26_10_11__West_11 => {
+
+                }
                 SpotId::Ebih__Guarded_Health__Far_West => {
 
                 }
@@ -6826,6 +7689,9 @@ impl context::Ctx for Context {
                 SpotId::Ebih__Waterfall__Alcove_Left => {
 
                 }
+                SpotId::Ebih__Waterfall__Cave_Entrance => {
+
+                }
                 SpotId::Ebih__Waterfall__Under_Waterfall => {
 
                 }
@@ -6836,6 +7702,18 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Ebih__Waterfall__Waterfall_Left => {
+
+                }
+                SpotId::Giguna__Antechamber__Middle_Bricks_Left => {
+
+                }
+                SpotId::Giguna__Antechamber__Middle_Bricks_Right => {
+
+                }
+                SpotId::Giguna__Antechamber__Statue_Head => {
+
+                }
+                SpotId::Giguna__Antechamber__West_15 => {
 
                 }
                 SpotId::Giguna__Breachable_Wall__Above_the_Hole => {
@@ -6856,6 +7734,96 @@ impl context::Ctx for Context {
                 SpotId::Giguna__Breachable_Wall__West_Mid_air => {
 
                 }
+                SpotId::Giguna__Carnelian__Door => {
+
+                }
+                SpotId::Giguna__Carnelian__Middle_Platforms => {
+
+                }
+                SpotId::Giguna__Carnelian__Rock => {
+
+                }
+                SpotId::Giguna__Carnelian__Switch => {
+
+                }
+                SpotId::Giguna__Carnelian__Vault => {
+
+                }
+                SpotId::Giguna__Clouds__Cache => {
+
+                }
+                SpotId::Giguna__Clouds__North_Under_Ledge => {
+
+                }
+                SpotId::Giguna__Clouds__Platform_Early_Portal => {
+
+                }
+                SpotId::Giguna__Clouds__Platform_Stop => {
+
+                }
+                SpotId::Giguna__Dual_Path__Base_of_Wall => {
+
+                }
+                SpotId::Giguna__Dual_Path__In_the_Grass => {
+
+                }
+                SpotId::Giguna__Dual_Path__Wall_Secret => {
+
+                }
+                SpotId::Giguna__Dual_Path__Wall_Top => {
+
+                }
+                SpotId::Giguna__East_Caverns__Arc_Passage => {
+
+                }
+                SpotId::Giguna__East_Caverns__Carving => {
+
+                }
+                SpotId::Giguna__East_Caverns__Hidden_Passage_Center => {
+
+                }
+                SpotId::Giguna__East_Caverns__Hidden_Passage_East => {
+
+                }
+                SpotId::Giguna__Gateway__Block_Lowered => {
+
+                }
+                SpotId::Giguna__Gateway__Block_Right => {
+
+                }
+                SpotId::Giguna__Gateway__Button => {
+
+                }
+                SpotId::Giguna__Gateway__East_19 => {
+
+                }
+                SpotId::Giguna__Gateway__Far_Ledge => {
+
+                }
+                SpotId::Giguna__Gateway__Flask_Ledge => {
+
+                }
+                SpotId::Giguna__Gateway__Left_Platform => {
+
+                }
+                SpotId::Giguna__Gateway__One_Jump => {
+
+                }
+                SpotId::Giguna__Gateway__Refill_Station => {
+
+                }
+                SpotId::Giguna__Gateway__Right_Platform => {
+
+                }
+                SpotId::Giguna__Giguna_Base__Building_Entry => {
+
+                }
+                SpotId::Giguna__Giguna_Base__Kari => {
+
+                }
+                SpotId::Giguna__Giguna_Base__Ruin => {
+
+                }
                 SpotId::Giguna__Giguna_Base__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
 
@@ -6864,20 +7832,41 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
 
                 }
+                SpotId::Giguna__Giguna_Base__Staircase_Top => {
+
+                }
                 SpotId::Giguna__Giguna_Base__Table => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
+
+                }
+                SpotId::Giguna__Giguna_Base__West_15 => {
 
                 }
                 SpotId::Giguna__Giguna_Base__West_16 => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
 
                 }
+                SpotId::Giguna__Giguna_Base__West_Grate => {
+
+                }
+                SpotId::Giguna__Giguna_Northeast__Door => {
+
+                }
+                SpotId::Giguna__Giguna_Northeast__Gate_Button => {
+
+                }
                 SpotId::Giguna__Giguna_Northeast__Gate_Left => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
 
                 }
+                SpotId::Giguna__Giguna_Northeast__Gate_Right => {
+
+                }
                 SpotId::Giguna__Giguna_Northeast__Gate_Vent => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
+
+                }
+                SpotId::Giguna__Giguna_Northeast__Right_Column => {
 
                 }
                 SpotId::Giguna__Giguna_Northeast__Save_Point => {
@@ -6888,12 +7877,84 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
 
                 }
+                SpotId::Giguna__Giguna_Northeast__Switch => {
+
+                }
+                SpotId::Giguna__Giguna_Northeast__Vault => {
+
+                }
                 SpotId::Giguna__Giguna_Northeast__West_10 => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
 
                 }
+                SpotId::Giguna__Gubi_Lair__Center_Platform => {
+
+                }
+                SpotId::Giguna__Gubi_Lair__East_15 => {
+
+                }
+                SpotId::Giguna__Gubi_Lair__East_Tree => {
+
+                }
+                SpotId::Giguna__Gubi_Lair__Pedestal => {
+
+                }
+                SpotId::Giguna__Helipad__So_Close => {
+
+                }
+                SpotId::Giguna__Helipad__Tablet_Ledge => {
+
+                }
+                SpotId::Giguna__Helipad__Wall_Bottom => {
+
+                }
+                SpotId::Giguna__Lamassu__Deposit => {
+
+                }
+                SpotId::Giguna__Ruins_Center__Center_Top => {
+
+                }
+                SpotId::Giguna__Ruins_Center__East_8 => {
+
+                }
+                SpotId::Giguna__Ruins_Center__Tablet => {
+
+                }
+                SpotId::Giguna__Ruins_East__Way_Up_High => {
+
+                }
+                SpotId::Giguna__Ruins_Top__East_7 => {
+
+                }
+                SpotId::Giguna__Ruins_Top__East_Door => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Flask => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Interior_Ledge => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Portal => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Portal_Left => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Rooftop_East => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Rooftop_Gutter => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Rooftop_West => {
+
+                }
                 SpotId::Giguna__Ruins_Top__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+
+                }
+                SpotId::Giguna__Ruins_Top__Small_Ledge => {
 
                 }
                 SpotId::Giguna__Ruins_Top__Switch => {
@@ -6906,6 +7967,9 @@ impl context::Ctx for Context {
                 }
                 SpotId::Giguna__Ruins_Top__Turret_Balcony_West => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+
+                }
+                SpotId::Giguna__Ruins_Top__Upper_Tunnel => {
 
                 }
                 SpotId::Giguna__Ruins_Top__West_Pillar => {
@@ -6928,6 +7992,99 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE);
 
                 }
+                SpotId::Giguna__Wasteland__Bluff_by_Door => {
+
+                }
+                SpotId::Giguna__Wasteland__Cache_Ledge => {
+
+                }
+                SpotId::Giguna__Wasteland__Door_Left => {
+
+                }
+                SpotId::Giguna__Wasteland__Door_Right => {
+
+                }
+                SpotId::Giguna__Wasteland__East_12 => {
+
+                }
+                SpotId::Giguna__Wasteland__East_14 => {
+
+                }
+                SpotId::Giguna__Wasteland__Left_Platform_East => {
+
+                }
+                SpotId::Giguna__Wasteland__Left_Platform_West => {
+
+                }
+                SpotId::Giguna__Wasteland__Lower_Path_Left => {
+
+                }
+                SpotId::Giguna__Wasteland__Lower_Path_Right => {
+
+                }
+                SpotId::Giguna__Wasteland__Lower_Platform_East => {
+
+                }
+                SpotId::Giguna__Wasteland__Passage_Cache => {
+
+                }
+                SpotId::Giguna__Wasteland__Switch => {
+
+                }
+                SpotId::Giguna__Wasteland__Switch_Approach => {
+
+                }
+                SpotId::Giguna__Wasteland__Switch_Ledge => {
+
+                }
+                SpotId::Giguna__Wasteland__Tiny_Hill => {
+
+                }
+                SpotId::Giguna__Wasteland__Upper_Cache => {
+
+                }
+                SpotId::Giguna__Wasteland__West_14 => {
+
+                }
+                SpotId::Giguna__West_Caverns__Bush => {
+
+                }
+                SpotId::Giguna__West_Caverns__Cache => {
+
+                }
+                SpotId::Giguna__West_Caverns__Column_1_Top_Left => {
+
+                }
+                SpotId::Giguna__West_Caverns__Column_1_Top_Right => {
+
+                }
+                SpotId::Giguna__West_Caverns__Column_2_Top => {
+
+                }
+                SpotId::Giguna__West_Caverns__Northwest => {
+
+                }
+                SpotId::Giguna__West_Caverns__Top_Gap_Left => {
+
+                }
+                SpotId::Giguna__West_Caverns__Top_Gap_Right => {
+
+                }
+                SpotId::Giguna__West_Tower__Top => {
+
+                }
+                SpotId::Giguna_Breach__Chimney__Cache => {
+
+                }
+                SpotId::Giguna_Breach__Chimney__East_8 => {
+
+                }
+                SpotId::Giguna_Breach__Cubby__Entrance => {
+
+                }
+                SpotId::Giguna_Breach__Cubby__Rocks => {
+
+                }
                 SpotId::Giguna_Breach__Peak__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE);
 
@@ -6944,6 +8101,15 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE);
 
                 }
+                SpotId::Glacier__Boomerang_Room__Center_Ledge => {
+
+                }
+                SpotId::Glacier__Boomerang_Room__Pedestal => {
+
+                }
+                SpotId::Glacier__Boomerang_Room__Upper_Gate_East => {
+
+                }
                 SpotId::Glacier__Crystals__Lower_Corner => {
 
                 }
@@ -6953,13 +8119,46 @@ impl context::Ctx for Context {
                 SpotId::Glacier__Crystals__Portal_Stand => {
 
                 }
-                SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform => {
+                SpotId::Glacier__Crystals__Top_Corner => {
 
                 }
-                SpotId::Glacier__Grid_39_40_7_9__Upper_East => {
+                SpotId::Glacier__Crystals__Upper_Ledge => {
 
                 }
-                SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding => {
+                SpotId::Glacier__Crystals__West => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Above_Ruins => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Cave_Treasure => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Ruins_Platform => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Ruins_Stairs => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Upper_Ledge => {
+
+                }
+                SpotId::Glacier__Dock_Outside__Upper_West_Hill => {
+
+                }
+                SpotId::Glacier__Grid_39_40_7_9__Floating_Rock => {
+
+                }
+                SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge => {
+
+                }
+                SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform => {
+
+                }
+                SpotId::Glacier__Hammonds_End__Between_Center_Doors => {
+
+                }
+                SpotId::Glacier__Hammonds_End__Center_Door_Left => {
 
                 }
                 SpotId::Glacier__Hammonds_End__Center_Door_Right => {
@@ -6974,13 +8173,37 @@ impl context::Ctx for Context {
                 SpotId::Glacier__Hammonds_End__Hammond => {
 
                 }
+                SpotId::Glacier__Hammonds_End__Lower_Grate_Left => {
+
+                }
+                SpotId::Glacier__Hammonds_End__Lower_Grate_Right => {
+
+                }
                 SpotId::Glacier__Hammonds_End__Lower_Pedestal_West => {
 
                 }
                 SpotId::Glacier__Hammonds_End__Lower_Right_Pedestal => {
 
                 }
+                SpotId::Glacier__Hammonds_End__Switch_from_Ledge => {
+
+                }
+                SpotId::Glacier__Hammonds_End__Switch_Near => {
+
+                }
                 SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air => {
+
+                }
+                SpotId::Glacier__Hammonds_End__West_11 => {
+
+                }
+                SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => {
+
+                }
+                SpotId::Glacier__Ledge_Grab_Room__Gate => {
+
+                }
+                SpotId::Glacier__Ledge_Grab_Room__Pedestal => {
 
                 }
                 SpotId::Glacier__Revival__Just_Thrown => {
@@ -7007,6 +8230,48 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
 
                 }
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Deep_Cache => {
+
+                }
+                SpotId::Glacier__Sea_Burial__East_14 => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Grate_Ledge => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Grate_Left => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Grate_Right => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Inside_the_Grate => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Left_Center_Rock => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Right_Center_Rock => {
+
+                }
+                SpotId::Glacier__Sea_Burial__Underwater_Passage_Center => {
+
+                }
+                SpotId::Glacier__Sea_Burial__West_14 => {
+
+                }
+                SpotId::Glacier__Sea_Burial__West_Basin => {
+
+                }
+                SpotId::Glacier__Sea_Burial__West_Water_Surface => {
+
+                }
                 SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => {
 
                 }
@@ -7019,6 +8284,42 @@ impl context::Ctx for Context {
                 }
                 SpotId::Glacier__The_Big_Drop__West_Unstable_Footing => {
                     self.cbits1.insert(flags::ContextBits1::GLACIER__THE_BIG_DROP__CTX__BRIDGE_OPEN);
+
+                }
+                SpotId::Glacier__Vertical_Room__East_9 => {
+
+                }
+                SpotId::Glacier__Vertical_Room__Mid_9 => {
+
+                }
+                SpotId::Glacier__Vertical_Room__Peak => {
+
+                }
+                SpotId::Glacier__Vertical_Room__West_9 => {
+
+                }
+                SpotId::Glacier_Breach__Control__East => {
+
+                }
+                SpotId::Glacier_Breach__Control__Further_In => {
+
+                }
+                SpotId::Glacier_Breach__Control__Upper_Corner => {
+
+                }
+                SpotId::Glacier_Breach__Control__Upper_Gap => {
+
+                }
+                SpotId::Glacier_Breach__Grate_Work__Grate_East => {
+
+                }
+                SpotId::Glacier_Breach__Grate_Work__Grate_Interior => {
+
+                }
+                SpotId::Glacier_Breach__Grate_Work__Grate_West => {
+
+                }
+                SpotId::Glacier_Breach__Grate_Work__West_13 => {
 
                 }
                 SpotId::Glacier_Breach__Guarded_Corridor__East => {
@@ -7081,7 +8382,16 @@ impl context::Ctx for Context {
                 SpotId::Irikar__Basement_Pipes__High_Pipe => {
 
                 }
+                SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => {
+
+                }
+                SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe => {
+
+                }
                 SpotId::Irikar__Basement_Pipes__West_27 => {
+
+                }
+                SpotId::Irikar__Basement_Pipes__West_28 => {
 
                 }
                 SpotId::Irikar__Beach__Above_Tunnel => {
@@ -7216,6 +8526,9 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR__MIDWEST__SAVE);
 
                 }
+                SpotId::Irikar__Midwest__Tablet_Platform => {
+
+                }
                 SpotId::Irikar__Sight_Room__Item_Pedestal => {
 
                 }
@@ -7229,6 +8542,9 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
 
                 }
+                SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward => {
+
+                }
                 SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry => {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
 
@@ -7239,6 +8555,9 @@ impl context::Ctx for Context {
                 }
                 SpotId::Irikar_Breach__Gauntlet__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
+
+                }
+                SpotId::Irikar_Breach__Hover_Room__Bottom => {
 
                 }
                 SpotId::Irikar_Breach__Save_Room__Save_Point => {
@@ -7257,11 +8576,26 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
 
                 }
+                SpotId::Uhrum__Annuna_Corridor__East_25 => {
+
+                }
+                SpotId::Uhrum__Annuna_Corridor__East_Cubby => {
+
+                }
                 SpotId::Uhrum__Annuna_Corridor__Pedestal => {
 
                 }
                 SpotId::Uhrum__Annuna_Corridor__Save_Point => {
                     self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
+
+                }
+                SpotId::Uhrum__Annuna_Corridor__Statue => {
+
+                }
+                SpotId::Uhrum__Annuna_Corridor__Upper_Ledge => {
+
+                }
+                SpotId::Uhrum__Annuna_Corridor__Upper_Platform => {
 
                 }
                 SpotId::Uhrum__Annuna_Corridor__Upper_Trees => {
@@ -7271,8 +8605,89 @@ impl context::Ctx for Context {
                     self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
 
                 }
+                SpotId::Uhrum__Siege_Corridor__Center_Box => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__East_25 => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__East_Hill => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Northwest_Door => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Northwest_Platform => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Pond => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Upper_Rock_East => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Upper_Rock_West => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__West_Loop => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Western_Cache => {
+
+                }
+                SpotId::Uhrum__Siege_Corridor__Western_Rock => {
+
+                }
+                SpotId::Uhrum__Waterfalls__Ceiling_Cache => {
+
+                }
+                SpotId::Uhrum__Waterfalls__Island_Water_West => {
+
+                }
+                SpotId::Uhrum__Waterfalls__Water_Slope => {
+
+                }
+                SpotId::Uhrum__Waterfalls__West_24 => {
+
+                }
+                SpotId::Uhrum__Waterfalls__West_Shallow_End => {
+
+                }
+                SpotId::Uhrum__Waterfalls__West_Water_Ledge => {
+
+                }
+                SpotId::Uhrum__Waterfalls__West_Water_Nook => {
+
+                }
+                SpotId::Uhrum__Waterfalls__West_Water_Surface => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Clear_Passage => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Gate_Switch => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Hidden_Passage_West => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Inner_Dais => {
+
+                }
                 SpotId::Uhrum__West_Entrance__Lower_Wall_West => {
                     self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
+
+                }
+                SpotId::Uhrum__West_Entrance__Portal_Exit => {
+
+                }
+                SpotId::Uhrum__West_Entrance__Portal_Stand => {
 
                 }
                 SpotId::Uhrum__West_Entrance__Sand => {
@@ -7285,6 +8700,18 @@ impl context::Ctx for Context {
                 }
                 SpotId::Uhrum__West_Entrance__Southeast_Tree => {
                     self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
+
+                }
+                SpotId::Uhrum__West_Entrance__Top_West_Ledge => {
+
+                }
+                SpotId::Uhrum__West_Entrance__West_25 => {
+
+                }
+                SpotId::Uhrum__West_Entrance__West_26 => {
+
+                }
+                SpotId::Uhrum__West_Entrance__West_of_Gate => {
 
                 }
                 _ => (),

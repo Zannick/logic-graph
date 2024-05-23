@@ -1261,9 +1261,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     tablet: [10, 26, 11, 27]
+    core: [10, 27, 11, 28]
   datamap:
     map_spot:
       tablet: Menu > Kiengir Map > The Student
+      core: Menu > Kiengir Map > Irikar Basement Core
   spots:
     - name: East 28
       coord: [11.95, 27.55]
@@ -1589,12 +1591,14 @@ areas:
   map:
     save: [9, 24, 10, 25]
     corner: [7, 22, 8, 23]
+    tablet: [7, 25, 8, 26]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Irikar Midwest
       corner: Menu > Kiengir Map > Irikar Mid-air Flask
+      tablet: Menu > Kiengir Map > Freedom from A'ansur
   start:
     _left_platform: false
     _right_platform: false

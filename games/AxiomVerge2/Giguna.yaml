@@ -8,11 +8,15 @@ areas:
     _door_opened: false
   map:
     save: [17, 9, 18, 10]
+    gate: [18, 9, 19, 10]
+    vault: [17, 10, 18, 11]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Northeast
+      gate: Menu > Kiengir Map > Giguna Northeast Gate
+      vault: Menu > Kiengir Map > Giguna Northeast Flask
   spots:
     - name: East 9
       coord: [18.95, 8.75]
@@ -198,6 +202,11 @@ areas:
 
 - name: Carnelian  # MARK: Carnelian
   on_entry: $reset_old_area(^newpos)
+  map:
+    vault: [16, 10, 17, 11]
+  datamap:
+    map_spot:
+      vault: Menu > Kiengir Map > Carnelian Ring
   start:
     _door_opened: false
   reset:
@@ -347,6 +356,13 @@ areas:
 
 - name: West Caverns  # MARK: West Caverns
   on_entry: $reset_old_area(^newpos)
+  map:
+    matrix: [13, 9, 14, 10]
+    core: [12, 9, 13, 10]
+  datamap:
+    map_spot:
+      matrix: Menu > Kiengir Map > Giguna Caverns Matrix
+      core: Menu > Kiengir Map > Giguna Caverns Core
   reset:
     _east_susar: false
   spots:
@@ -554,6 +570,17 @@ areas:
 
 - name: Wasteland  # MARK: Wasteland
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [16, 11, 17, 12]
+    core: [15, 13, 16, 14]
+    switch: [18, 11, 19, 12]
+    door: [18, 13, 19, 14]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Wasteland Flask
+      core: Menu > Kiengir Map > Giguna Wasteland Core
+      switch: Menu > Kiengir Map > Giguna Wasteland Switch
+      door: Menu > Kiengir Map > Giguna Wasteland Health
   spots:
     - name: West 12
       coord: [15.05, 11.75]
@@ -844,11 +871,15 @@ areas:
     _door_open: false
   map:
     save: [13, 15, 14, 16]
+    urn: [13, 14, 14, 15]
+    kari: [14, 15, 15, 16]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Base
+      urn: Menu > Kiengir Map > Wall Climb
+      kari: Menu > Kiengir Map > Kari
   spots:
     - name: East 14
       coord: [14.95, 13.7]
@@ -1133,6 +1164,11 @@ areas:
 
 - name: Ruins East  # MARK: Ruins East
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [16, 5, 17, 6]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Highest Flask
   spots:
     - name: East 9
       coord: [16.95, 8.8]
@@ -1235,6 +1271,11 @@ areas:
 
 - name: Ruins Center  # MARK: Ruins Center
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [15, 7, 16, 8]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > A'ansur
   spots:
     - name: East 8
       coord: [15.95, 7.5]
@@ -1407,9 +1448,13 @@ areas:
     save_point: Save Point
   map:
     save: [14, 5, 15, 6]
+    flask: [15, 5, 16, 6]
+    portal: [15, 6, 16, 7]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Ruins Top
+      flask: Menu > Kiengir Map > Giguna Ruins Top Flask
+      portal: Menu > Kiengir Map > Giguna Ruins Top Portal
   start:
     _doors_open: false
   spots:
@@ -1614,6 +1659,11 @@ areas:
     
 - name: West Tower  # MARK: West Tower
   on_entry: $reset_old_area(^newpos)
+  map:
+    top: [12, 7, 13, 8]
+  datamap:
+    map_spot:
+      top: Menu > Kiengir Map > The Ideal Kiengir
   spots:
     - name: East 7
       coord: [12.95, 6.3]
@@ -1636,6 +1686,8 @@ areas:
 
 - name: Far Corner  # MARK: Far Corner
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Giguna Far Corner
   spots:
     - name: East 13
       coord: [11.95, 12.3]
@@ -1657,6 +1709,11 @@ areas:
 
 - name: Helipad  # MARK: Helipad
   on_entry: $reset_old_area(^newpos)
+  map:
+    journal: [11, 16, 12, 17]
+  datamap:
+    map_spot:
+      journal: Menu > Kiengir Map > Journal 10/29/2049
   spots:
     - name: East 15
       coord: [12.95, 14.75]
@@ -1782,9 +1839,14 @@ areas:
 
 - name: Clouds  # MARK: Clouds
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [12, 18, 13, 19]
   data:
     portal_start: Cache
     portal_hidden: true
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Clouds Flask
   reset:
     _platform: false
   spots:
@@ -1871,6 +1933,11 @@ areas:
 
 - name: Lamassu  # MARK: Lamassu
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [15, 19, 16, 20]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Lamassu Flask
   spots:
     - name: West 18
       coord: [13.05, 17.4]
@@ -1984,6 +2051,11 @@ areas:
 
 - name: Dual Path  # MARK: Dual Path
   on_entry: $reset_old_area(^newpos)
+  map:
+    health: [17, 17, 18, 18]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Giguna Dual Path Health
   spots:
     - name: West 18
       coord: [16.05, 17.5]
@@ -2244,6 +2316,8 @@ areas:
 
 - name: Hard Rock  # MARK: Hard Rock
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Building of the School
   spots:
     - name: East 17
       coord: [15.95, 16.85]
@@ -2328,6 +2402,11 @@ areas:
 
 - name: East Caverns  # MARK: East Caverns
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [20, 15, 21, 16]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna East Caverns Flask
   start:
     _door_opened: false
   load:
@@ -2817,6 +2896,13 @@ areas:
 
 - name: Gateway  # MARK: Gateway
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [20, 17, 21, 18]
+    block: [20, 18, 21, 19]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Gateway Flask
+      block: Menu > Kiengir Map > Giguna Gateway Block
   reset:
     _door_opened: false
   spots:
@@ -3166,6 +3252,11 @@ areas:
 
 - name: Antechamber  # MARK: Antechamber
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [18, 14, 19, 15]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Dangerous Ideas
   spots:
     - name: East 16
       coord: [18.95, 15.45]
@@ -3284,6 +3375,13 @@ areas:
 
 - name: Gubi Lair  # MARK: Gubi Lair
   on_entry: $reset_old_area(^newpos)
+  map:
+    gubi: [17, 14, 18, 15]
+    axe: [15, 14, 16, 15]
+  datamap:
+    map_spot:
+      gubi: Menu > Kiengir Map > Giguna Gubi Flask
+      axe: Menu > Kiengir Map > Double Axe
   spots:
     - name: East 15
       coord: [17.95, 14.65]

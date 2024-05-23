@@ -6,11 +6,19 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     save_point: Save Point
+    portal_start: Portal Stand
+    portal_hidden: true
   map:
     save: [19, 27, 20, 28]
+    portal: [19, 25, 20, 26]
+    dais: [19, 24, 20, 25]
+    exit: [20, 24, 21, 25]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Uhrum West
+      portal: Menu > Kiengir Map > Uhrum West Portal Entrance
+      dais: Menu > Kiengir Map > Udusan
+      exit: Menu > Kiengir Map > Uhrum West Portal Exit
   spots:
     - name: West 27
       coord: [19.05, 26.8]
@@ -465,6 +473,17 @@ areas:
 
 - name: Siege Corridor  # MARK: Siege Corridor
   on_entry: $reset_old_area(^newpos)
+  map:
+    health: [23, 25, 24, 26]
+    urn: [25, 24, 26, 25]
+    tablet: [25, 25, 26, 26]
+    core: [21, 24, 22, 25]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Uhrum Siege Corridor Health
+      urn: Menu > Kiengir Map > Uhrum Fast Travel
+      tablet: Menu > Kiengir Map > Storm Bomb
+      core: Menu > Kiengir Map > Uhrum Siege Corridor Core
   spots:
     - name: West 26
       coord: [21.05, 25.8]
@@ -769,6 +788,13 @@ areas:
 
 - name: Waterfalls  # MARK: Waterfalls
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [26, 27, 27, 28]
+    flask: [26, 23, 27, 24]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Suspension Bridge
+      flask: Menu > Kiengir Map > Uhrum Waterfalls Flask
   spots:
     - name: West 25
       coord: [26.05, 24.75]
@@ -1356,10 +1382,9 @@ areas:
 
 - name: Save Room  # MARK: Save Room
   on_entry: $reset_old_area(^newpos)
-  data:
-    save_point: Save Point
   map: save
   data:
+    save_point: Save Point
     map_spot: Menu > Kiengir Map > Uhrum Center
   spots:
     - name: East
@@ -1406,15 +1431,19 @@ areas:
 
 - name: Annuna Corridor  # MARK: Annuna Corridor
   on_entry: $reset_old_area(^newpos)
-  data:
-    save_point: Save Point
   map:
     save: [28, 25, 29, 26]
     urn: [29, 24, 30, 25]
+    tablet: [30, 24, 31, 25]
+    flask: [31, 24, 32, 25]
+  data:
+    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Uhrum East
       urn: Menu > Kiengir Map > Anuman
+      tablet: Menu > Kiengir Map > Plague of Thoughts
+      flask: Menu > Kiengir Map > Uhrum Annuna Flask
   spots:
     - name: West 25
       coord: [28.05, 24.75]

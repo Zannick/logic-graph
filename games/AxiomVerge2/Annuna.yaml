@@ -6,8 +6,13 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [32, 25, 33, 26]
+    flask: [33, 25, 34, 26]
   data:
     save_point: Save Point
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Annuna Mirror Match
+      flask: Menu > Kiengir Map > Annuna Mirror Match Flask
   spots:
     #region Main area
     - name: West 25
@@ -34,6 +39,7 @@ areas:
         - name: Save
           req: Defeat_Indra
           do: $save
+          tags: [save]
     - name: Eastward
       coord: [32.95, 25.4]
       local:
@@ -176,11 +182,13 @@ areas:
     _doors_opened: false
   map:
     save: [36, 26, 37, 27]
+    lattice: [35, 24, 36, 25]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna West Bridge
+      lattice: Menu > Kiengir Map > Nano Lattice 2
   spots:
     #region Main Corridor
     - name: West 25 Lower
@@ -269,6 +277,15 @@ areas:
 
 - name: East Bridge  # MARK: East Bridge
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [38, 23, 39, 24]
+    ring: [38, 22, 39, 23]
+    flask: [37, 21, 38, 22]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Lament for Fools
+      ring: Menu > Kiengir Map > Royal Ring
+      flask: Menu > Kiengir Map > Annuna East Bridge Flask
   load:
     _combo: false
   spots:
@@ -793,6 +810,15 @@ areas:
 
 - name: Sniper Valley  # MARK: Sniper Valley
   on_entry: $reset_old_area(^newpos)
+  map:
+    core: [41, 24, 42, 25]
+    note: [42, 24, 43, 25]
+    flask: [42, 22, 43, 23]
+  datamap:
+    map_spot:
+      core: Menu > Kiengir Map > Annuna Sniper Valley Core
+      note: Menu > Kiengir Map > Family Tragedy
+      flask: Menu > Kiengir Map > Annuna Sniper Valley Flask
   spots:
     #region Lower
     - name: West 25 Upper
@@ -1023,11 +1049,15 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     save: [40, 19, 41, 20]
+    boom: [40, 20, 41, 21]
+    note: [40, 16, 41, 17]
   data:
     save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna Vertical Room
+      boom: Menu > Kiengir Map > Ul Gishru
+      note: Menu > Kiengir Map > Beware the Patternmind
   start:
     _door_opened: false
   spots:
@@ -1445,6 +1475,11 @@ areas:
 
 - name: Upper Hallway  # MARK: Upper Hallway
   on_entry: $reset_old_area(^newpos)
+  map:
+    portal: [42, 19, 43, 20]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Annuna Upper Hallway Portal
   spots:
     - name: West
       coord: [41.05, 19.6]
@@ -1751,7 +1786,7 @@ areas:
   datamap:
     map_spot:
       flask: Menu > Kiengir Map > Filter Flask
-      tablet: Menu > Kiengir Map > Filter Tablet
+      tablet: Menu > Kiengir Map > The Eternal Arm
       spiders: Menu > Kiengir Map > Filter Spiders
   spots:
     - name: West 21
@@ -1944,6 +1979,11 @@ areas:
 
 - name: Spider Room  # MARK: Spider Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    core: [42, 17, 43, 18]
+  datamap:
+    map_spot:
+      core: Menu > Kiengir Map > Annuna Spider Room Core
   spots:
     - name: East 
       coord: [42.95, 18.8]
@@ -2396,6 +2436,13 @@ areas:
 
 - name: Twisty Passages  # MARK: Twisty Passages
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [38, 19, 39, 20]
+    core: [37, 19, 38, 20]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Destruction Pogrom
+      core: Menu > Kiengir Map > Annuna Twisty Passages Core
   spots:
     - name: East Floor
       coord: [38.95, 20.75]
@@ -2609,6 +2656,11 @@ areas:
 
 - name: West Climb  # MARK: West Climb
   on_entry: $reset_old_area(^newpos)
+  map:
+    ring: [36, 19, 37, 20]
+  datamap:
+    map_spot:
+      ring: Menu > Kiengir Map > Eye Ring
   start:
     _door_opened: false
   spots:
@@ -2737,6 +2789,13 @@ areas:
 
 - name: Egg Room  # MARK: Egg Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [38, 17, 39, 18]
+    se: [38, 18, 39, 19]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Annuna Egg Room Flask
+      se: Menu > Kiengir Map > Annuna Egg Room SE
   spots:
     - name: West
       coord: [37.05, 18.75]

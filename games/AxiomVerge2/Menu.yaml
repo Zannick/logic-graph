@@ -525,11 +525,11 @@ areas:
     - name: Anuman
       coord: [29, 25]
     - name: Bronze Axe
-      coord: [22, 10]
+      coord: [22, 11]
 
     - name: Filter Flask
       coord: [43, 21]
-    - name: Filter Tablet
+    - name: The Eternal Arm
       coord: [44, 19]
     - name: Filter Spiders
       coord: [43, 19]
@@ -543,8 +543,6 @@ areas:
       coord: [42, 16]
     - name: Glacier Dock Flask
       coord: [44, 9]
-    - name: Glacier 40,8
-      coord: [40, 8]
     - name: Glacier Peak Bird's Eye
       coord: [34, 8]
     - name: Forbidden Knowledge
@@ -585,6 +583,191 @@ areas:
       coord: [15, 21]
     - name: Giguna Breachable Wall Flask
       coord: [16, 24]
+    - name: Freedom from A'ansur
+      coord: [7, 26]
+    - name: Irikar Basement Core
+      coord: [10, 28]
+
+    - name: Amagi Main Area Cave Entrance
+      coord: [27, 15]
+    - name: Amagi Main Area Cave Flask
+      coord: [30, 14]
+    - name: Amagi Main Area Water Flask
+      coord: [30, 16]
+    - name: Water Movement
+      coord: [33, 21]
+    - name: Amagi West Lake Refill Station
+      coord: [23, 17]
+    - name: Amagi Dragon Eye Flask
+      coord: [24, 17]
+    - name: MUS A M20 Flask
+      coord: [22, 16]
+
+    - name: Annuna Mirror Match Flask
+      coord: [33, 26]
+    - name: Nano Lattice 2
+      coord: [35, 25]
+    - name: Lament for Fools
+      coord: [38, 24]
+    - name: Royal Ring
+      coord: [38, 23]
+    - name: Annuna East Bridge Flask
+      coord: [37, 22]
+    - name: Annuna Sniper Valley Core
+      coord: [41, 25]
+    - name: Family Tragedy
+      coord: [42, 25]
+    - name: Annuna Sniper Valley Flask
+      coord: [42, 23]
+    - name: Ul Gishru
+      coord: [40, 21]
+    - name: Beware the Patternmind
+      coord: [40, 17]
+    - name: Annuna Upper Hallway Portal
+      coord: [42, 20]
+    - name: Annuna Spider Room Core
+      coord: [42, 18]
+    - name: Destruction Pogrom
+      coord: [38, 20]
+    - name: Annuna Twisty Passages Core
+      coord: [37, 20]
+    - name: Eye Ring
+      coord: [36, 20]
+    - name: Annuna Egg Room Flask
+      coord: [38, 18]
+    - name: Annuna Egg Room SE
+      coord: [38, 19]
+
+    - name: Ebih Base Camp West
+      coord: [28, 13]
+    - name: Ebih Base Camp East
+      coord: [30, 13]
+    - name: Ebih Base Camp Health
+      coord: [29, 11]
+    - name: Ebih By Garage Health
+      coord: [27, 12]
+    - name: Ebih Garage
+      coord: [27, 13]
+    - name: Ebih East Waterfall Flask
+      coord: [25, 10]
+    - name: Ebih Waterfall Cave
+      coord: [22, 9]
+    - name: Heretic's Tablet
+      coord: [19, 10]
+    - name: Ebih West Flask
+      coord: [19, 6]
+    - name: Ebih East Health
+      coord: [25, 9]
+    - name: Under Siege
+      coord: [26, 8]
+    - name: Ebih Alu Flask
+      coord: [22, 5]
+    - name: Ebih Alu Health
+      coord: [23, 5]
+    - name: Ebih Drone Pit Flask
+      coord: [25, 6]
+    - name: Terminal Breakthrough 1
+      coord: [26, 11]
+    - name: Weekly Notes 2/27/2053
+      coord: [42, 8]
+    - name: Compass
+      coord: [42, 11]
+    - name: Dr. Gloria
+      coord: [39, 14]
+    - name: Glacier Sea Burial Health
+      coord: [40, 14]
+    - name: Glacier East Revival Flask
+      coord: [40, 7]
+    - name: Glacier Vertical Room Flask
+      coord: [36, 9]
+    - name: Boomerang
+      coord: [40, 12]
+    - name: Ledge Grab
+      coord: [33, 11]
+    - name: Bounty List
+      coord: [37, 14]
+    - name: Hammond's Health
+      coord: [39, 11]
+
+    - name: Carnelian Ring
+      coord: [16, 11]
+    - name: Giguna Northeast Gate
+      coord: [18, 10]
+    - name: Giguna Northeast Flask
+      coord: [17, 11]
+    - name: Giguna Caverns Matrix
+      coord: [13, 10]
+    - name: Giguna Caverns Core
+      coord: [12, 10]
+    - name: Giguna Wasteland Flask
+      coord: [16, 12]
+    - name: Giguna Wasteland Core
+      coord: [15, 14]
+    - name: Giguna Wasteland Switch
+      coord: [18, 12]
+    - name: Giguna Wasteland Health
+      coord: [18, 14]
+    - name: Wall Climb
+      coord: [13, 15]
+    - name: Kari
+      coord: [14, 16]
+    - name: Giguna Highest Flask
+      coord: [16, 6]
+    - name: A'ansur
+      coord: [15, 8]
+    - name: Giguna Ruins Top Flask
+      coord: [15, 6]
+    - name: Giguna Ruins Top Portal
+      coord: [15, 7]
+    - name: The Ideal Kiengir
+      coord: [12, 8]
+    - name: Giguna Far Corner
+      coord: [11, 13]
+    - name: Journal 10/29/2049
+      coord: [11, 17]
+    - name: Giguna Clouds Flask
+      coord: [12, 19]
+    - name: Giguna Lamassu Flask
+      coord: [15, 20]
+    - name: Giguna Dual Path Health
+      coord: [17, 18]
+    - name: Building of the School
+      coord: [15, 17]
+    - name: Giguna East Caverns Flask
+      coord: [20, 16]
+    - name: Giguna Gateway Flask
+      coord: [20, 18]
+    - name: Giguna Gateway Block
+      coord: [20, 19]
+    - name: Dangerous Ideas
+      coord: [18, 15]
+    - name: Giguna Gubi Flask
+      coord: [17, 15]
+    - name: Double Axe
+      coord: [15, 15]
+
+    - name: Uhrum West Portal Entrance
+      coord: [19, 26]
+    - name: Uhrum West Portal Exit
+      coord: [20, 25]
+    - name: Udusan
+      coord: [19, 25]
+    - name: Uhrum Siege Corridor Health
+      coord: [23, 26]
+    - name: Uhrum Siege Corridor Core
+      coord: [21, 25]
+    - name: Uhrum Fast Travel
+      coord: [25, 25]
+    - name: Storm Bomb
+      coord: [25, 26]
+    - name: Suspension Bridge
+      coord: [26, 28]
+    - name: Uhrum Waterfalls Flask
+      coord: [26, 24]
+    - name: Uhrum Annuna Flask
+      coord: [31, 25]
+    - name: Plague of Thoughts
+      coord: [30, 25]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map
@@ -756,4 +939,22 @@ areas:
     #endregion
 
     #region Breach other entry points
+    - name: LAB East Health
+      coord: [37, 15]
+    - name: GSB Chimney Flask
+      coord: [13, 8]
+    - name: GSB Cubby Health
+      coord: [13, 11]
+    - name: Slingshot Hook
+      coord: [17, 11]
+    - name: GlB Grate Flask
+      coord: [39, 13]
+    - name: GlB Control Flask
+      coord: [36, 13]
+    - name: IB Gauntlet Flask
+      coord: [10, 23]
+    - name: Drone Hover
+      coord: [12, 23]
+    - name: IB Worm Rave Flask
+      coord: [12, 26]
     #endregion
