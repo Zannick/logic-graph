@@ -528,6 +528,41 @@ impl world::World for World {
     type Warp = Warp;
     const NUM_CANON_LOCATIONS: usize = {{ gl.canon_places|count }};
 
+    fn new() -> Box<Self> {
+        let mut world: Box<Self> = bytemuck::zeroed_box();
+
+%% for rule in rules
+        world.rule_{{ rule|construct_id }} = Rule{{ rule[1:]|camelize }}::default();
+%% endfor
+%% for s, info in settings.items()
+        world.{{ s }} = {% if info.default %}{{ info.default|str_to_rusttype(info.type) }}{% else %}Default::default(){% endif %};
+%% endfor
+
+        world.global_actions = Range {
+            {% if global_actions -%}
+            start: ActionId::{{ global_actions|map(attribute='id')|min }}.into_usize(),
+            end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
+            {%- else %}start: 0, end: 0,{% endif %}
+        };
+        world.min_warp_time = {% if warps.values()|selectattr('base_movement', 'false')|first -%}
+            {%- if global_actions|selectattr('to')|first -%}
+            std::cmp::min({{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }},
+                {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }})
+            {%- else -%}
+                {{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }}
+            {%- endif -%}
+            {%- elif global_actions|selectattr('to')|first -%}
+                {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }}
+            {%- else %}0{% endif %};
+
+        world.build_locations();
+        world.build_exits();
+        world.build_actions();
+        world.build_warps();
+        world.build_spots();
+        world
+    }
+
     fn ruleset(&self) -> String {
         format!(
             "[{% for rule in rules %}{% if not loop.first %}, {% endif %}{{ rule }}: {}{% endfor %}]",
@@ -809,43 +844,15 @@ impl world::World for World {
     }
 }
 
-impl Default for World {
-    fn default() -> World {
-        World::new()
-    }
-}
+unsafe impl bytemuck::Zeroable for World {}
 
 impl World {
-    pub fn new() -> World {
-        World {
-%% for rule in rules
-            rule_{{ rule|construct_id }}: Rule{{ rule[1:]|camelize }}::default(),
-%% endfor
-%% for s, info in settings.items()
-            {{ s }}: {% if info.default %}{{ info.default|str_to_rusttype(info.type) }}{% else %}Default::default(){% endif %},
-%% endfor
-            locations: build_locations(),
-            exits: build_exits(),
-            actions: build_actions(),
-            warps: build_warps(),
-            spots: build_spots(),
-            global_actions: Range {
-                {% if global_actions -%}
-                start: ActionId::{{ global_actions|map(attribute='id')|min }}.into_usize(),
-                end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
-                {%- else %}start: 0, end: 0,{% endif %}
-            },
-            min_warp_time: {% if warps.values()|selectattr('base_movement', 'false')|first -%}
-                {%- if global_actions|selectattr('to')|first -%}
-                std::cmp::min({{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }},
-                    {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }})
-                {%- else -%}
-                    {{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }}
-                {%- endif -%}
-                {%- elif global_actions|selectattr('to')|first -%}
-                    {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }}
-                {% else %}0{% endif %},
-            condensed: None,
+    pub fn update_skippable_locations(&mut self) {
+        let unused_items = self.get_unused_items();
+        for loc in self.locations.values_mut() {
+            let item = world::Location::item(loc);
+            let skippable = unused_item(item) || unused_items.contains(&item);
+            loc.set_skippable(skippable);
         }
     }
 
@@ -898,26 +905,15 @@ impl World {
         }
     }
 
-    pub fn update_skippable_locations(&mut self) {
-        let unused_items = self.get_unused_items();
-        for loc in self.locations.values_mut() {
-            let item = world::Location::item(loc);
-            let skippable = unused_item(item) || unused_items.contains(&item);
-            loc.set_skippable(skippable);
-        }
-    }
-}
-
 %% macro price(price, costs)
 price: Currency::{% if price and price > 0 -%}
     {{ (costs or default_price_type)|camelize }}({{ price }})
     {%- else %}Free{% endif %},
 %%- endmacro
 
-pub fn build_locations() -> EnumMap<LocationId, Location> {
-    enum_map! {
+    fn build_locations(&mut self) {
 %% for loc in gl.locations()
-        LocationId::{{ loc.id }} => Location {
+        self.locations[LocationId::{{ loc.id }}] = Location {
             id: LocationId::{{ loc.id }},
             canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
             item: Item::{{ loc.item or 'None' }},
@@ -925,45 +921,39 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
             skippable: false,
-        },
+        };
 %% endfor
     }
-}
 
-pub fn build_exits() -> EnumMap<ExitId, Exit> {
-    enum_map! {
+    fn build_exits(&mut self) {
 %% for ex in gl.exits()
-        ExitId::{{ ex.id }} => Exit {
+        self.exits[ExitId::{{ ex.id }}] = Exit {
             id: ExitId::{{ ex.id }},
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
             {{ price(ex.price, ex.costs) }}
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
-        },
+        };
 %% endfor
     }
-}
 
-pub fn build_actions() -> EnumMap<ActionId, Action> {
-    enum_map! {
+    fn build_actions(&mut self) {
 %% for a in gl.actions()
-        ActionId::{{ a.id }} => Action {
+        self.actions[ActionId::{{ a.id }}] = Action {
             id: ActionId::{{ a.id }},
             time: {{ (a.time * 1000)|int }},
             price: Currency::{% if a.price and a.price > 0 -%}
                 {{ (a.costs or default_price_type)|camelize }}({{ a.price }})
                 {%- else %}Free{% endif %},
-        },
+        };
 %% endfor
     }
-}
 
-pub fn build_spots() -> EnumMap<SpotId, Spot> {
-    enum_map! {
-        SpotId::None => Spot::default(),
+    fn build_spots(&mut self) {
+        self.spots[SpotId::None] = Spot::default();
 %% for area in gl.areas()
 %% for sp in area.spots
-        SpotId::{{ sp.id }} => Spot {
+        self.spots[SpotId::{{ sp.id }}] = Spot {
             id: SpotId::{{ sp.id }},
             locations: Range {
                 {% if sp.loc_ids -%}
@@ -983,23 +973,21 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             },
-        },
+        };
 %% endfor
 %% endfor
     }
-}
 
-pub fn build_warps() -> EnumMap<WarpId, Warp> {
-    enum_map! {
+    fn build_warps(&mut self) {
 %% for w in warps.values()|sort(attribute='id')
-        WarpId::{{ w.id }} => Warp {
+        self.warps[WarpId::{{ w.id }}] = Warp {
             id: WarpId::{{ w.id }},
             dest: SpotId::None,
             time: {{ (w.time * 1000)|int }},
             price: Currency::{% if w.price and w.price > 0 -%}
                 {{ (w.costs or default_price_type)|camelize }}({{ w.price }})
                 {%- else %}Free{% endif %},
-        },
+        };
 %% endfor
     }
 }

@@ -16,7 +16,7 @@ use zstd::stream::write::Encoder;
 
 #[test]
 fn test_name() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -36,7 +36,7 @@ fn test_name() {
 
 #[test]
 fn test_route() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -60,7 +60,7 @@ fn test_route() {
 
 #[test]
 fn test_obtain() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -81,7 +81,7 @@ fn test_obtain() {
 
 #[test]
 fn test_require() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 30;
@@ -110,7 +110,7 @@ fn test_require() {
 #[ignore]
 #[test]
 fn search() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
@@ -146,7 +146,7 @@ fn serde_pass<T: Ctx>(ctx: &ContextWrapper<T>) -> Vec<u8> {
 
 #[test]
 fn asserde_true() {
-    let mut world = Box::<graph::World>::default();
+    let mut world = graph::World::new();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;

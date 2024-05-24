@@ -1,18 +1,19 @@
 %% include 'header.rs.jinja'
 
 use crate::context::Context;
-use crate::graph::World;
+use crate::graph;
 use analyzer::context::ContextWrapper;
 use analyzer::estimates::ContextScorer;
 use analyzer::route::route_from_yaml_string;
 use analyzer::settings::*;
+use analyzer::world::World;
 use std::fs::File;
 use std::io::Read;
 use std::path::PathBuf;
 use yaml_rust::{Yaml, YamlLoader};
 
 fn read_key_value(
-    world: &mut World,
+    world: &mut graph::World,
     key: &Yaml,
     val: &Yaml,
 ) -> Result<(), String> {
@@ -41,9 +42,9 @@ fn read_key_value(
     Ok(())
 }
 
-pub fn load_settings(filename: Option<&PathBuf>) -> (Box<World>, Context, Vec<ContextWrapper<Context>>) {
-    let mut world: Box<World> = Box::default();
-    analyzer::world::World::condense_graph(world.as_mut());
+pub fn load_settings(filename: Option<&PathBuf>) -> (Box<graph::World>, Context, Vec<ContextWrapper<Context>>) {
+    let mut world: Box<graph::World> = graph::World::new();
+    World::condense_graph(world.as_mut());
     let ctx = Context::default();
     let mut vec = Vec::new();
     let route_key = Yaml::String(String::from("routes"));

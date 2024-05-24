@@ -1843,7 +1843,7 @@ class GameLogic(object):
             for tname in fnames:
                 template = env.get_template(tname + '.jinja')
                 name = os.path.join(self.game_dir, dirname, tname)
-                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs'):
+                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs', 'graph.rs'):
                     rustfiles.append(name)
                 with open(name, 'w', encoding='utf-8') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))

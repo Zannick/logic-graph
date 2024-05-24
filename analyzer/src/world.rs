@@ -149,7 +149,7 @@ pub trait Warp: Accessible {
     );
 }
 
-pub trait World: Sync + Default {
+pub trait World: Sync {
     type Location: Location;
     type Exit: Exit<
         ExitId = <Self::Location as Location>::ExitId,
@@ -168,6 +168,8 @@ pub trait World: Sync + Default {
         Currency = <Self::Location as Accessible>::Currency,
     >;
     const NUM_CANON_LOCATIONS: usize;
+
+    fn new() -> Box<Self>;
 
     fn ruleset(&self) -> String;
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;

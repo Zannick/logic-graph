@@ -15,6 +15,7 @@ path = "bin/main.rs"
 [dependencies]
 analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
+bytemuck = { version = "1.*", features = ["extern_crate_alloc", "min_const_generics"] }
 clap = { version = "4.*", features = ["derive"] }
 enum-map = { version = ">=2.7.2", features = ["serde"] }
 lazy_static = "*"
