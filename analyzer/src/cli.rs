@@ -5,7 +5,7 @@ use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
 use crate::minimize::{mutate_spot_revisits, trie_minimize};
-use crate::observer::{record_observations, Observer};
+use crate::observer::{debug_observations, record_observations, Observer};
 use crate::route::*;
 use crate::solutions::write_graph;
 use crate::world::*;
@@ -78,6 +78,13 @@ pub enum Commands {
 
     /// Creates a graph file of the given route (must be a winning route)
     Draw {
+        /// text file with winning route
+        #[arg(value_name = "FILE")]
+        route: PathBuf,
+    },
+
+    /// Outputs debug info about observations between steps
+    Observe {
         /// text file with winning route
         #[arg(value_name = "FILE")]
         route: PathBuf,
@@ -258,6 +265,20 @@ where
                     .unwrap();
 
             write_graph(world, &startctx, ctx.recent_history()).unwrap();
+            Ok(())
+        }
+        Commands::Observe { route } => {
+            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+            let ctx =
+                route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
+                    .unwrap();
+            if !world.won(ctx.get()) {
+                let left = world.items_needed(ctx.get());
+                println!("Route did not win: still need {:?}", left);
+                return Ok(());
+            }
+            let solution = ctx.to_solution();
+            debug_observations(&startctx, world, solution, 1);
             Ok(())
         }
         Commands::Info => {

@@ -119,3 +119,66 @@ pub fn record_observations<W, T, L, E, Wp>(
         prev = state;
     }
 }
+
+/// Outputs (in reverse order) a route's steps and observations.
+pub fn debug_observations<W, T, L, E, Wp>(
+    startctx: &T,
+    world: &W,
+    solution: Arc<Solution<T>>,
+    min_relevant: usize,
+) where
+    W: World<Location = L, Exit = E, Warp = Wp>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+{
+    let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
+    // The history entries are the steps "in between" the states in full_history, so we should have
+    // one more state than history steps.
+    assert!(full_history.len() == solution.history.len() + 1);
+    let mut prev = full_history.last().unwrap();
+    let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
+
+    let mut pcount = 0;
+    let skippable = if min_relevant > 1 {
+        solution
+            .history
+            .iter()
+            .position(|h| match h {
+                History::G(..) | History::H(..) => {
+                    pcount += 1;
+                    pcount == min_relevant
+                }
+                _ => false,
+            })
+            .unwrap_or(1)
+    } else {
+        solution
+            .history
+            .iter()
+            .position(|h| matches!(h, History::G(..) | History::H(..)))
+            .unwrap_or(1)
+    };
+
+    for (idx, (step, state)) in solution
+        .history
+        .iter()
+        .zip(full_history.iter())
+        .enumerate()
+        .skip(skippable)
+        .rev()
+    {
+        // Basic process of iterating backwards:
+        // 1. Update the existing observations for changes.
+        solve.update(prev, state);
+
+        // 2. Observe the history step requirements/effects itself.
+        state.observe_replay(world, *step, &mut solve);
+
+        // 3. Output what we have.
+        println!("{}. {}\n{:?}\n\n", idx, step, solve.to_vec(state));
+
+        prev = state;
+    }
+}

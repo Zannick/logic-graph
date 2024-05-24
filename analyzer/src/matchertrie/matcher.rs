@@ -23,7 +23,7 @@ use std::sync::{Arc, Mutex};
 
 /// Trait that marks the associated property-and-value type for observations.
 pub trait Observable {
-    type PropertyObservation;
+    type PropertyObservation: Debug;
 }
 
 /// This is a trait to be implemented on enums with individual matcher types
@@ -40,13 +40,7 @@ pub trait MatcherDispatch {
     fn clear(&mut self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
-    fn lookup(
-        &self,
-        val: &Self::Struct,
-    ) -> (
-        Option<Arc<Mutex<Self::Node>>>,
-        Vec<Self::Value>,
-    );
+    fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Vec<Self::Value>);
 
     /// Creates a new node in the individual matcher.
     ///
@@ -266,17 +260,17 @@ where
         self.false_values.clear();
     }
 
-    fn lookup(
-        &self,
-        obs: bool,
-    ) -> (
-        Option<Arc<Mutex<NodeType>>>,
-        Vec<ValueType>,
-    ) {
+    fn lookup(&self, obs: bool) -> (Option<Arc<Mutex<NodeType>>>, Vec<ValueType>) {
         if obs {
-            (self.true_node.clone(), self.true_values.iter().cloned().collect())
+            (
+                self.true_node.clone(),
+                self.true_values.iter().cloned().collect(),
+            )
         } else {
-            (self.false_node.clone(), self.false_values.iter().cloned().collect())
+            (
+                self.false_node.clone(),
+                self.false_values.iter().cloned().collect(),
+            )
         }
     }
 
