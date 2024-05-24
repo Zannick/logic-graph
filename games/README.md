@@ -377,6 +377,6 @@ You can check whether a certain **Place** variable is inside of another **Place*
 
 * `p1` must be a **reference**, or it may be omitted, in which case the current position is used.
 * If `p1` is omitted, `p2` may be either a **Place** literal in backticks, or a tuple (surrounded with `()`) of **Place** literals separated by commas.
-* If `p1` is a reference, `p2` may be a **Place** literal, another reference, or a **function invocation** of type **Place**.
+* If `p1` is a reference, `p2` may be a **Place** literal, a tuple of **Place** literals, another reference, or a **function invocation** of type **Place**.
 
 These cases could be changed in the future if needs arise.

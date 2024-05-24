@@ -319,6 +319,34 @@ class RustVisitor(RustBaseVisitor):
             else:
                 get = f'get_{ptype[:-2].lower()}({get})'
         return f'{get} {eq}= {val}'
+    
+    def visitRefInPlaceList(self, ctx):
+        eq = '!' if ctx.NOT() else '='
+        get = self.visit(ctx.ref())
+        places = [str(pl)[1:-1] for pl in ctx.PLACE()]
+        ptypes = [getPlaceType(pl) for pl in places]
+        vals = [construct_spot_id(*place_to_names(pl))
+                    if ptype == 'SpotId'
+                    else f'{ptype}::{construct_id(pl)}'
+                for (pl, ptype) in zip(places, ptypes)]
+        all_types = set(ptypes)
+        precheck = ''
+        if len(all_types) == 1:
+            ptype = all_types.pop()
+            if ptype != 'SpotId':
+                if self._isRefSpotId(ctx.ref()):
+                    precheck = f'{get} != SpotId::None && '
+                get = f'get_{ptype[:-2].lower()}({get})'
+            return f'{precheck}{"!" if ctx.NOT() else ""}matches!({get}, {" | ".join(vals)})'
+        
+        if self._isRefSpotId(ctx.ref()):
+            precheck = f'{get} != SpotId::None && '
+        return f'{precheck}{" && ".join(
+            f"get_{ptype[:-2].lower()}({get}) {eq}= {val}"
+                if ptype != "SpotId"
+                else f"{get} {eq}= {val}"
+            for (val, ptype) in zip(vals, ptypes)
+        )}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
@@ -812,6 +840,39 @@ class RustExplainerVisitor(RustBaseVisitor):
             else:
                 lines.append(f'(get_{ptype[:-2].lower()}(r.0) {eq}= {val}, r.1)')
         return f'{{ {"; ".join(lines)} }}'
+    
+    def visitRefInPlaceList(self, ctx):
+        eq = '!' if ctx.NOT() else '='
+        lines = [
+            f'let r = {self.visit(ctx.ref())}',
+        ]
+        places = [str(pl)[1:-1] for pl in ctx.PLACE()]
+        ptypes = [getPlaceType(pl) for pl in places]
+        vals = [construct_spot_id(*place_to_names(pl))
+                    if ptype == 'SpotId'
+                    else f'{ptype}::{construct_id(pl)}'
+                for (pl, ptype) in zip(places, ptypes)]
+        all_ptypes = set(ptypes)
+        precheck = ''
+        if len(all_ptypes) == 1:
+            ptype = all_ptypes.pop()
+            if ptype == 'SpotId':
+                lines.append(f'({"!" if ctx.NOT() else ""}matches!(r.0, {" | ".join(vals)}), r.1)')
+                return f'{{ {"; ".join(lines)} }}'
+            if self._isRefSpotId(ctx.ref()):
+                precheck = 'r.0 != SpotId::None && '
+            lines.append(f'({precheck}{"!" if ctx.NOT() else ""}matches!(get_{ptype[:-2].lower()}(r.0), {" | ".join(vals)}), r.1)')
+        else:
+            if self._isRefSpotId(ctx.ref()):
+                precheck = f'r.0 != SpotId::None && '
+            lines.append(f'({precheck}{" && ".join(
+                f"get_{ptype[:-2].lower()}(r.0) {eq}= {val}"
+                    if ptype != "SpotId"
+                    else f"r.0 {eq}= {val}"
+                for (val, ptype) in zip(vals, ptypes)
+            )}, r.1)')
+
+        return f'{{ {"; ".join(lines)} }}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
@@ -1134,86 +1195,14 @@ class RustObservationVisitor(RustBaseVisitor):
     # TODO: move unchanged functions to common class
 
     # unchanged
-    def visitStr(self, ctx):
-        if ctx.LIT() and self.rettype:
-            return f'{self.rettype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
-        return super().visitStr(ctx)
-
-    def visitPerRefStr(self, ctx):
-        ref = str(ctx.ref().REF()[-1])
-        enum = self._getRefEnum(ref[1:])
-        cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
-        results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
-        match = (f'match {self.visit(ctx.ref())} {{ '
-                 + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
-                 + f' }}')
-        return match
-
-    # unchanged
-    def visitSomewhere(self, ctx):
-        places = defaultdict(list)
-        for pl in ctx.PLACE():
-            pl = str(pl)[1:-1]
-            places[getPlaceType(pl)].append(pl)
-        matchcase, elsecase = ('false', 'true') if ctx.NOT() else ('true', 'false')
-        per_type = [('(match ctx.position()' if pt == 'SpotId' else f'(match get_{pt.lower()[:-2]}(ctx.position())')
-                    + f' {{'
-                    + ' | '.join(construct_place_id(pl) for pl in plist)
-                    + f' => {matchcase}, _ => {elsecase} }})'
-                    for pt, plist in places.items()
-                    ]
-        return ' || '.join(per_type)
-
-    def visitRefInPlaceRef(self, ctx):
-        ptype = self._getRefType(ctx.ref(1))
-        eq = '!' if ctx.NOT() else '='
-        get1 = self.visit(ctx.ref(0))
-        get2 = self.visit(ctx.ref(1))
-        if ptype != 'SpotId':
-            if self._isRefSpotId(ctx.ref(0)):
-                get1 = f'{get1} != SpotId::None && get_{ptype[:-2].lower()}({get1})'
-            else:
-                get1 = f'get_{ptype[:-2].lower()}({get1})'
-        return f'{get1} {eq}= {get2}'
-
-    def visitRefInPlaceName(self, ctx):
-        pl = str(ctx.PLACE())[1:-1]
-        ptype = getPlaceType(pl)
-        eq = '!' if ctx.NOT() else '='
-        get = self.visit(ctx.ref())
-        if ptype == 'SpotId':
-            val = construct_spot_id(*place_to_names(pl))
-        else:
-            val = f'{ptype}::{construct_id(pl)}'
-            if self._isRefSpotId(ctx.ref()):
-                get = f'{get} != SpotId::None && get_{ptype[:-2].lower()}({get})'
-            else:
-                get = f'get_{ptype[:-2].lower()}({get})'
-        return f'{get} {eq}= {val}'
-
-    def visitRefInFunc(self, ctx):
-        func = str(ctx.invoke().FUNC())[1:]
-        assert func in ('default', 'get_area', 'get_region')
-        eq = '!' if ctx.NOT() else '='
-        get = self.visit(ctx.ref())
-        if func == 'default':
-            res = f'{get} {eq}= {self.visit(ctx.invoke())}'
-            return res
-        if self._isRefSpotId(ctx.ref()):
-            check = f'{get} != SpotId::None && '
-        else:
-            check = ''
-        inv = f'{check}{func}({get}) {eq}= {self.visit(ctx.invoke())}'
-        return inv
-
-    # unchanged
-    def visitFuncNum(self, ctx):
-        func, args = self._getFuncAndArgs(str(ctx.FUNC()))
-        if ctx.ITEM():
-            args.append(f'Item::{ctx.ITEM()}')
-        elif ctx.num():
-            args.extend(str(self.visit(n)) for n in ctx.num())
-        return f'{func}({", ".join(args)})'
+    visitStr = RustVisitor.visitStr
+    visitPerRefStr = RustVisitor.visitPerRefStr
+    visitSomewhere = RustVisitor.visitSomewhere
+    visitRefInPlaceRef = RustVisitor.visitRefInPlaceRef
+    visitRefInPlaceName = RustVisitor.visitRefInPlaceName
+    visitRefInPlaceList = RustVisitor.visitRefInPlaceList
+    visitRefInFunc = RustVisitor.visitRefInFunc
+    visitFuncNum = RustVisitor.visitFuncNum
 
     ## Action-specific
     # We have to eliminate all the ctx mutations, we're only interested in conditions

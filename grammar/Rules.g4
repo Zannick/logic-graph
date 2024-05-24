@@ -158,6 +158,7 @@ somewhere : NOT? WITHIN PLACE
 
 refSomewhere : ref NOT? WITHIN ref      # RefInPlaceRef
              | ref NOT? WITHIN PLACE    # RefInPlaceName
+             | ref NOT? WITHIN '(' PLACE (',' PLACE)* ')'  # RefInPlaceList
              | ref NOT? WITHIN invoke   # RefInFunc
              ;
 

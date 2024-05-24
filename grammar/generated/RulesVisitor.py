@@ -234,6 +234,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#RefInPlaceList.
+    def visitRefInPlaceList(self, ctx:RulesParser.RefInPlaceListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#RefInFunc.
     def visitRefInFunc(self, ctx:RulesParser.RefInFuncContext):
         return self.visitChildren(ctx)
