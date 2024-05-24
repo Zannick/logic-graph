@@ -177,7 +177,7 @@ pub fn debug_observations<W, T, L, E, Wp>(
         state.observe_replay(world, *step, &mut solve);
 
         // 3. Output what we have.
-        println!("{}. {}\n{:?}\n\n", idx, step, solve.to_vec(state));
+        println!("{}. {}\n{:?}\n", idx, step, solve.to_vec(state));
 
         prev = state;
     }

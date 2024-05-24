@@ -121,13 +121,13 @@ pub struct FullObservation {
     health_node: IntegerObservation<i8>,
     power_matrix: IntegerObservation<i8>,
     // bitflags: optionally a mask
-    cbits1: Option<flags::ContextBits1>,
-    cbits2: Option<flags::ContextBits2>,
-    cbits3: Option<flags::ContextBits3>,
-    cbits4: Option<flags::ContextBits4>,
-    cbits5: Option<flags::ContextBits5>,
-    cbits6: Option<flags::ContextBits6>,
-    cbits7: Option<flags::ContextBits7>,
+    cbits1: flags::ContextBits1,
+    cbits2: flags::ContextBits2,
+    cbits3: flags::ContextBits3,
+    cbits4: flags::ContextBits4,
+    cbits5: flags::ContextBits5,
+    cbits6: flags::ContextBits6,
+    cbits7: flags::ContextBits7,
     pub strict: bool,
 }
 
@@ -1908,46 +1908,46 @@ impl Observer for FullObservation {
                 ctx.power_matrix >= lo && ctx.power_matrix <= hi,
             )),
         }
-        if let Some(mask) = self.cbits1 {
+        if !self.cbits1.is_empty() {
             vec.push(OneObservation::CBits1 {
-                mask,
-                result: mask & ctx.cbits1,
+                mask: self.cbits1,
+                result: self.cbits1 & ctx.cbits1,
             });
         }
-        if let Some(mask) = self.cbits2 {
+        if !self.cbits2.is_empty() {
             vec.push(OneObservation::CBits2 {
-                mask,
-                result: mask & ctx.cbits2,
+                mask: self.cbits2,
+                result: self.cbits2 & ctx.cbits2,
             });
         }
-        if let Some(mask) = self.cbits3 {
+        if !self.cbits3.is_empty() {
             vec.push(OneObservation::CBits3 {
-                mask,
-                result: mask & ctx.cbits3,
+                mask: self.cbits3,
+                result: self.cbits3 & ctx.cbits3,
             });
         }
-        if let Some(mask) = self.cbits4 {
+        if !self.cbits4.is_empty() {
             vec.push(OneObservation::CBits4 {
-                mask,
-                result: mask & ctx.cbits4,
+                mask: self.cbits4,
+                result: self.cbits4 & ctx.cbits4,
             });
         }
-        if let Some(mask) = self.cbits5 {
+        if !self.cbits5.is_empty() {
             vec.push(OneObservation::CBits5 {
-                mask,
-                result: mask & ctx.cbits5,
+                mask: self.cbits5,
+                result: self.cbits5 & ctx.cbits5,
             });
         }
-        if let Some(mask) = self.cbits6 {
+        if !self.cbits6.is_empty() {
             vec.push(OneObservation::CBits6 {
-                mask,
-                result: mask & ctx.cbits6,
+                mask: self.cbits6,
+                result: self.cbits6 & ctx.cbits6,
             });
         }
-        if let Some(mask) = self.cbits7 {
+        if !self.cbits7.is_empty() {
             vec.push(OneObservation::CBits7 {
-                mask,
-                result: mask & ctx.cbits7,
+                mask: self.cbits7,
+                result: self.cbits7 & ctx.cbits7,
             });
         }
         vec
@@ -2008,25 +2008,25 @@ impl FullObservation {
         if self.power_matrix != IntegerObservation::Unknown {
             fields += 1;
         }
-        if self.cbits1.is_some() {
+        if !self.cbits1.is_empty() {
             fields += 1;
         }
-        if self.cbits2.is_some() {
+        if !self.cbits2.is_empty() {
             fields += 1;
         }
-        if self.cbits3.is_some() {
+        if !self.cbits3.is_empty() {
             fields += 1;
         }
-        if self.cbits4.is_some() {
+        if !self.cbits4.is_empty() {
             fields += 1;
         }
-        if self.cbits5.is_some() {
+        if !self.cbits5.is_empty() {
             fields += 1;
         }
-        if self.cbits6.is_some() {
+        if !self.cbits6.is_empty() {
             fields += 1;
         }
-        if self.cbits7.is_some() {
+        if !self.cbits7.is_empty() {
             fields += 1;
         }
         fields
@@ -2035,12 +2035,18 @@ impl FullObservation {
     pub fn observe_position(&mut self) {
         self.position = true;
     }
+    pub fn clear_position(&mut self) {
+        self.position = false;
+    }
     pub fn observe_energy(&mut self, obs: IntegerObservation<i16>) {
         if self.strict {
             self.energy = IntegerObservation::Exact;
         } else {
             self.energy = self.energy.combine(obs);
         }
+    }
+    pub fn clear_energy(&mut self) {
+        self.energy = IntegerObservation::Unknown;
     }
     pub fn observe_flasks(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -2049,6 +2055,9 @@ impl FullObservation {
             self.flasks = self.flasks.combine(obs);
         }
     }
+    pub fn clear_flasks(&mut self) {
+        self.flasks = IntegerObservation::Unknown;
+    }
     pub fn observe_refills(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
             self.refills = IntegerObservation::Exact;
@@ -2056,356 +2065,710 @@ impl FullObservation {
             self.refills = self.refills.combine(obs);
         }
     }
+    pub fn clear_refills(&mut self) {
+        self.refills = IntegerObservation::Unknown;
+    }
     pub fn observe_mode(&mut self) {
         self.mode = true;
+    }
+    pub fn clear_mode(&mut self) {
+        self.mode = false;
     }
     pub fn observe_save(&mut self) {
         self.save = true;
     }
+    pub fn clear_save(&mut self) {
+        self.save = false;
+    }
     pub fn observe_breach_save(&mut self) {
         self.breach_save = true;
+    }
+    pub fn clear_breach_save(&mut self) {
+        self.breach_save = false;
     }
     pub fn observe_indra(&mut self) {
         self.indra = true;
     }
+    pub fn clear_indra(&mut self) {
+        self.indra = false;
+    }
     pub fn observe_last(&mut self) {
         self.last = true;
+    }
+    pub fn clear_last(&mut self) {
+        self.last = false;
     }
     pub fn observe_portal(&mut self) {
         self.portal = true;
     }
+    pub fn clear_portal(&mut self) {
+        self.portal = false;
+    }
     pub fn observe_prev_portal(&mut self) {
         self.prev_portal = true;
     }
+    pub fn clear_prev_portal(&mut self) {
+        self.prev_portal = false;
+    }
     pub fn observe_prev_area(&self) {}
+    pub fn clear_prev_area(&self) {}
     pub fn observe_map__amagi_breach__east_entrance__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE);
+    }
+    pub fn clear_map__amagi_breach__east_entrance__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE);
     }
     pub fn observe_map__amagi__main_area__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
     }
+    pub fn clear_map__amagi__main_area__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
+    }
     pub fn observe_map__amagi__east_lake__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
+    }
+    pub fn clear_map__amagi__east_lake__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__AMAGI__EAST_LAKE__SAVE);
     }
     pub fn observe_map__annuna__mirror_match__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
     }
+    pub fn clear_map__annuna__mirror_match__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__ANNUNA__MIRROR_MATCH__SAVE);
+    }
     pub fn observe_map__annuna__vertical_room__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
+    }
+    pub fn clear_map__annuna__vertical_room__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__ANNUNA__VERTICAL_ROOM__SAVE);
     }
     pub fn observe_map__annuna__factory_entrance__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
     }
+    pub fn clear_map__annuna__factory_entrance__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__ANNUNA__FACTORY_ENTRANCE__SAVE);
+    }
     pub fn observe_map__annuna__upper_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE);
+    }
+    pub fn clear_map__annuna__upper_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__ANNUNA__UPPER_SAVE__SAVE);
     }
     pub fn observe_map__annuna__center_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE);
     }
+    pub fn clear_map__annuna__center_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__ANNUNA__CENTER_SAVE__SAVE);
+    }
     pub fn observe_map__ebih__base_camp__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
+    }
+    pub fn clear_map__ebih__base_camp__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__EBIH__BASE_CAMP__SAVE);
     }
     pub fn observe_map__ebih__ebih_west__mid_save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE);
     }
+    pub fn clear_map__ebih__ebih_west__mid_save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__EBIH__EBIH_WEST__MID_SAVE);
+    }
     pub fn observe_map__ebih__ebih_west__upper_save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE);
+    }
+    pub fn clear_map__ebih__ebih_west__upper_save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__EBIH__EBIH_WEST__UPPER_SAVE);
     }
     pub fn observe_map__ebih__ebih_west__lower_save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
     }
+    pub fn clear_map__ebih__ebih_west__lower_save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__EBIH__EBIH_WEST__LOWER_SAVE);
+    }
     pub fn observe_map__giguna_breach__peak__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE);
+    }
+    pub fn clear_map__giguna_breach__peak__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA_BREACH__PEAK__SAVE);
     }
     pub fn observe_map__giguna_breach__sw_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE);
     }
+    pub fn clear_map__giguna_breach__sw_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA_BREACH__SW_SAVE__SAVE);
+    }
     pub fn observe_map__giguna__giguna_northeast__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
+    }
+    pub fn clear_map__giguna__giguna_northeast__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE);
     }
     pub fn observe_map__giguna__giguna_base__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
     }
+    pub fn clear_map__giguna__giguna_base__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA__GIGUNA_BASE__SAVE);
+    }
     pub fn observe_map__giguna__ruins_west__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE);
+    }
+    pub fn clear_map__giguna__ruins_west__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA__RUINS_WEST__SAVE);
     }
     pub fn observe_map__giguna__ruins_top__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
     }
+    pub fn clear_map__giguna__ruins_top__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+    }
     pub fn observe_map__glacier_breach__south_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE);
+    }
+    pub fn clear_map__glacier_breach__south_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE);
     }
     pub fn observe_map__glacier_breach__west_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER_BREACH__WEST_SAVE__SAVE);
     }
+    pub fn clear_map__glacier_breach__west_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER_BREACH__WEST_SAVE__SAVE);
+    }
     pub fn observe_map__glacier_breach__guarded_corridor__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE);
+    }
+    pub fn clear_map__glacier_breach__guarded_corridor__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE);
     }
     pub fn observe_map__glacier_breach__save_and_exit__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE);
     }
+    pub fn clear_map__glacier_breach__save_and_exit__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE);
+    }
     pub fn observe_map__glacier_breach__hammonds_breach__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER_BREACH__HAMMONDS_BREACH__SAVE);
+    }
+    pub fn clear_map__glacier_breach__hammonds_breach__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER_BREACH__HAMMONDS_BREACH__SAVE);
     }
     pub fn observe_map__glacier__revival__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
     }
+    pub fn clear_map__glacier__revival__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
+    }
     pub fn observe_map__irikar_breach__save_room__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
+    }
+    pub fn clear_map__irikar_breach__save_room__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE);
     }
     pub fn observe_map__irikar_breach__gauntlet__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
     }
+    pub fn clear_map__irikar_breach__gauntlet__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__IRIKAR_BREACH__GAUNTLET__SAVE);
+    }
     pub fn observe_map__irikar__hub__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
+    }
+    pub fn clear_map__irikar__hub__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__IRIKAR__HUB__SAVE);
     }
     pub fn observe_map__irikar__midwest__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR__MIDWEST__SAVE);
     }
+    pub fn clear_map__irikar__midwest__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__IRIKAR__MIDWEST__SAVE);
+    }
     pub fn observe_map__irikar__beach_save__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__IRIKAR__BEACH_SAVE__SAVE);
+    }
+    pub fn clear_map__irikar__beach_save__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__IRIKAR__BEACH_SAVE__SAVE);
     }
     pub fn observe_map__uhrum__west_entrance__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
     }
+    pub fn clear_map__uhrum__west_entrance__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__UHRUM__WEST_ENTRANCE__SAVE);
+    }
     pub fn observe_map__uhrum__save_room__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE);
+    }
+    pub fn clear_map__uhrum__save_room__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__UHRUM__SAVE_ROOM__SAVE);
     }
     pub fn observe_map__uhrum__annuna_corridor__save(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
     }
+    pub fn clear_map__uhrum__annuna_corridor__save(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
+    }
     pub fn observe_glacier__ctx__hammonds_doors(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS);
+    }
+    pub fn clear_glacier__ctx__hammonds_doors(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS);
     }
     pub fn observe_amagi__main_area__ctx__combo(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
     }
+    pub fn clear_amagi__main_area__ctx__combo(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
+    }
     pub fn observe_annuna__west_bridge__ctx__doors_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
+    }
+    pub fn clear_annuna__west_bridge__ctx__doors_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
     }
     pub fn observe_annuna__east_bridge__ctx__combo(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
     }
+    pub fn clear_annuna__east_bridge__ctx__combo(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
+    }
     pub fn observe_annuna__vertical_room__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED);
+    }
+    pub fn clear_annuna__vertical_room__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED);
     }
     pub fn observe_annuna__west_climb__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED);
     }
+    pub fn clear_annuna__west_climb__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED);
+    }
     pub fn observe_ebih__base_camp__ctx__left_platform_moved(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
+    }
+    pub fn clear_ebih__base_camp__ctx__left_platform_moved(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
     }
     pub fn observe_ebih__truck_gate__ctx__door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__TRUCK_GATE__CTX__DOOR_OPEN);
     }
+    pub fn clear_ebih__truck_gate__ctx__door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__TRUCK_GATE__CTX__DOOR_OPEN);
+    }
     pub fn observe_ebih__grid_25_10_12__ctx__door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
+    }
+    pub fn clear_ebih__grid_25_10_12__ctx__door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
     }
     pub fn observe_ebih__waterfall__ctx__west_door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
     }
+    pub fn clear_ebih__waterfall__ctx__west_door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+    }
     pub fn observe_ebih__ebih_west__ctx__door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
+    }
+    pub fn clear_ebih__ebih_west__ctx__door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
     }
     pub fn observe_ebih__ebih_east__ctx__platform1_moved(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
     }
+    pub fn clear_ebih__ebih_east__ctx__platform1_moved(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+    }
     pub fn observe_ebih__ebih_east__ctx__platform2_moved(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
+    }
+    pub fn clear_ebih__ebih_east__ctx__platform2_moved(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
     }
     pub fn observe_ebih__drone_room__ctx__platform_moved(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
     }
+    pub fn clear_ebih__drone_room__ctx__platform_moved(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
+    }
     pub fn observe_ebih__vertical_interchange__ctx__door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
+    }
+    pub fn clear_ebih__vertical_interchange__ctx__door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
     }
     pub fn observe_giguna_breach__sw_save__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
     }
+    pub fn clear_giguna_breach__sw_save__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
+    }
     pub fn observe_giguna__giguna_northeast__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
+    }
+    pub fn clear_giguna__giguna_northeast__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
     }
     pub fn observe_giguna__carnelian__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
     }
+    pub fn clear_giguna__carnelian__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
+    }
     pub fn observe_giguna__carnelian__ctx__upper_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
+    }
+    pub fn clear_giguna__carnelian__ctx__upper_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
     }
     pub fn observe_giguna__carnelian__ctx__lower_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
     }
+    pub fn clear_giguna__carnelian__ctx__lower_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
+    }
     pub fn observe_giguna__west_caverns__ctx__east_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+    }
+    pub fn clear_giguna__west_caverns__ctx__east_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
     }
     pub fn observe_giguna__giguna_base__ctx__door_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
     }
+    pub fn clear_giguna__giguna_base__ctx__door_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
+    }
     pub fn observe_giguna__ruins_west__ctx__kishib_handled(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+    }
+    pub fn clear_giguna__ruins_west__ctx__kishib_handled(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
     }
     pub fn observe_giguna__ruins_top__ctx__doors_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
     }
+    pub fn clear_giguna__ruins_top__ctx__doors_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
+    }
     pub fn observe_giguna__clouds__ctx__platform(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM);
+    }
+    pub fn clear_giguna__clouds__ctx__platform(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM);
     }
     pub fn observe_giguna__east_caverns__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED);
     }
+    pub fn clear_giguna__east_caverns__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED);
+    }
     pub fn observe_giguna__east_caverns__ctx__combo_entered(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
+    }
+    pub fn clear_giguna__east_caverns__ctx__combo_entered(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
     }
     pub fn observe_giguna__east_caverns__ctx__upper_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
     }
+    pub fn clear_giguna__east_caverns__ctx__upper_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
+    }
     pub fn observe_giguna__east_caverns__ctx__mid_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
+    }
+    pub fn clear_giguna__east_caverns__ctx__mid_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR);
     }
     pub fn observe_giguna__east_caverns__ctx__lower_susar(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
     }
+    pub fn clear_giguna__east_caverns__ctx__lower_susar(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR);
+    }
     pub fn observe_giguna__gateway__ctx__door_opened(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
+    }
+    pub fn clear_giguna__gateway__ctx__door_opened(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__GATEWAY__CTX__DOOR_OPENED);
     }
     pub fn observe_glacier__the_big_drop__ctx__bridge_open(&mut self) {
         self.cbits1
             .insert(flags::ContextBits1::GLACIER__THE_BIG_DROP__CTX__BRIDGE_OPEN);
     }
+    pub fn clear_glacier__the_big_drop__ctx__bridge_open(&mut self) {
+        self.cbits1
+            .remove(flags::ContextBits1::GLACIER__THE_BIG_DROP__CTX__BRIDGE_OPEN);
+    }
     pub fn observe_glacier__vertical_room__ctx__upper_gatestone(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE);
+    }
+    pub fn clear_glacier__vertical_room__ctx__upper_gatestone(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE);
     }
     pub fn observe_glacier__vertical_room__ctx__lower_gatestones(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES);
     }
+    pub fn clear_glacier__vertical_room__ctx__lower_gatestones(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES);
+    }
     pub fn observe_irikar__basement_portal__ctx__platform_moved(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
+    }
+    pub fn clear_irikar__basement_portal__ctx__platform_moved(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED);
     }
     pub fn observe_irikar__midwest__ctx__left_platform(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::IRIKAR__MIDWEST__CTX__LEFT_PLATFORM);
     }
+    pub fn clear_irikar__midwest__ctx__left_platform(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::IRIKAR__MIDWEST__CTX__LEFT_PLATFORM);
+    }
     pub fn observe_irikar__midwest__ctx__right_platform(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::IRIKAR__MIDWEST__CTX__RIGHT_PLATFORM);
+    }
+    pub fn clear_irikar__midwest__ctx__right_platform(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::IRIKAR__MIDWEST__CTX__RIGHT_PLATFORM);
     }
     pub fn observe_amagi_dragon_eye_passage(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_DRAGON_EYE_PASSAGE);
     }
+    pub fn clear_amagi_dragon_eye_passage(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_DRAGON_EYE_PASSAGE);
+    }
     pub fn observe_amagi_stronghold_boulder_1(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_1);
+    }
+    pub fn clear_amagi_stronghold_boulder_1(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_1);
     }
     pub fn observe_amagi_stronghold_boulder_2(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_2);
     }
+    pub fn clear_amagi_stronghold_boulder_2(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_STRONGHOLD_BOULDER_2);
+    }
     pub fn observe_amagi_stronghold_wall_1(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_1);
+    }
+    pub fn clear_amagi_stronghold_wall_1(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_1);
     }
     pub fn observe_amagi_stronghold_wall_2(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
     }
+    pub fn clear_amagi_stronghold_wall_2(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
+    }
     pub fn observe_amagi_west_lake_surface_wall(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
     }
+    pub fn clear_amagi_west_lake_surface_wall(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
+    }
     pub fn observe_amashilama(&mut self) {
         self.cbits2.insert(flags::ContextBits2::AMASHILAMA);
+    }
+    pub fn clear_amashilama(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::AMASHILAMA);
     }
     pub fn observe_annuna_east_bridge_gate(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::ANNUNA_EAST_BRIDGE_GATE);
     }
+    pub fn clear_annuna_east_bridge_gate(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::ANNUNA_EAST_BRIDGE_GATE);
+    }
     pub fn observe_annuna_mirror_match_switch(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::ANNUNA_MIRROR_MATCH_SWITCH);
+    }
+    pub fn clear_annuna_mirror_match_switch(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::ANNUNA_MIRROR_MATCH_SWITCH);
     }
     pub fn observe_annuna_vertical_room_gate(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::ANNUNA_VERTICAL_ROOM_GATE);
     }
+    pub fn clear_annuna_vertical_room_gate(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::ANNUNA_VERTICAL_ROOM_GATE);
+    }
     pub fn observe_anuman(&mut self) {
         self.cbits2.insert(flags::ContextBits2::ANUMAN);
     }
+    pub fn clear_anuman(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::ANUMAN);
+    }
     pub fn observe_apocalypse_bomb(&mut self) {
         self.cbits2.insert(flags::ContextBits2::APOCALYPSE_BOMB);
+    }
+    pub fn clear_apocalypse_bomb(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::APOCALYPSE_BOMB);
     }
     pub fn observe_apocalypse_seals_wall(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::APOCALYPSE_SEALS_WALL);
     }
+    pub fn clear_apocalypse_seals_wall(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::APOCALYPSE_SEALS_WALL);
+    }
     pub fn observe_beware_the_patternmind(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
+    }
+    pub fn clear_beware_the_patternmind(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
     }
     pub fn observe_big_flask(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -2414,125 +2777,248 @@ impl FullObservation {
             self.big_flask = self.big_flask.combine(obs);
         }
     }
+    pub fn clear_big_flask(&mut self, obs: IntegerObservation<i8>) {
+        self.big_flask = IntegerObservation::Unknown;
+    }
     pub fn observe_boomerang(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BOOMERANG);
+    }
+    pub fn clear_boomerang(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BOOMERANG);
     }
     pub fn observe_boomerang_upgrade(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BOOMERANG_UPGRADE);
     }
+    pub fn clear_boomerang_upgrade(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BOOMERANG_UPGRADE);
+    }
     pub fn observe_breach_attractor(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BREACH_ATTRACTOR);
+    }
+    pub fn clear_breach_attractor(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BREACH_ATTRACTOR);
     }
     pub fn observe_breach_sight(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BREACH_SIGHT);
     }
+    pub fn clear_breach_sight(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BREACH_SIGHT);
+    }
     pub fn observe_bronze_axe(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
+    }
+    pub fn clear_bronze_axe(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BRONZE_AXE);
     }
     pub fn observe_building_of_the_school(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
     }
+    pub fn clear_building_of_the_school(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
+    }
     pub fn observe_carnelian_ring(&mut self) {
         self.cbits2.insert(flags::ContextBits2::CARNELIAN_RING);
+    }
+    pub fn clear_carnelian_ring(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::CARNELIAN_RING);
     }
     pub fn observe_commemorative_speech(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::COMMEMORATIVE_SPEECH);
     }
+    pub fn clear_commemorative_speech(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::COMMEMORATIVE_SPEECH);
+    }
     pub fn observe_companies_layoff(&mut self) {
         self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
+    }
+    pub fn clear_companies_layoff(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::COMPANIES_LAYOFF);
     }
     pub fn observe_compass(&mut self) {
         self.cbits2.insert(flags::ContextBits2::COMPASS);
     }
+    pub fn clear_compass(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::COMPASS);
+    }
     pub fn observe_dangerous_ideas(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DANGEROUS_IDEAS);
+    }
+    pub fn clear_dangerous_ideas(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DANGEROUS_IDEAS);
     }
     pub fn observe_dear_ernest(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
     }
+    pub fn clear_dear_ernest(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DEAR_ERNEST);
+    }
     pub fn observe_defeat_indra(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DEFEAT_INDRA);
+    }
+    pub fn clear_defeat_indra(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DEFEAT_INDRA);
     }
     pub fn observe_defeat_mus_a_m20(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
     }
+    pub fn clear_defeat_mus_a_m20(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DEFEAT_MUS_A_M20);
+    }
     pub fn observe_destruction_pogrom(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DESTRUCTION_POGROM);
+    }
+    pub fn clear_destruction_pogrom(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DESTRUCTION_POGROM);
     }
     pub fn observe_double_axe(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DOUBLE_AXE);
     }
+    pub fn clear_double_axe(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DOUBLE_AXE);
+    }
     pub fn observe_dr_gloria(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DR_GLORIA);
+    }
+    pub fn clear_dr_gloria(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DR_GLORIA);
     }
     pub fn observe_drone_hover(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
     }
+    pub fn clear_drone_hover(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DRONE_HOVER);
+    }
     pub fn observe_drone_melee_damage(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_DAMAGE);
+    }
+    pub fn clear_drone_melee_damage(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DRONE_MELEE_DAMAGE);
     }
     pub fn observe_drone_melee_damage_2(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::DRONE_MELEE_DAMAGE_2);
     }
+    pub fn clear_drone_melee_damage_2(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::DRONE_MELEE_DAMAGE_2);
+    }
     pub fn observe_drone_melee_speed(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED);
+    }
+    pub fn clear_drone_melee_speed(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DRONE_MELEE_SPEED);
     }
     pub fn observe_drone_melee_speed_2(&mut self) {
         self.cbits2.insert(flags::ContextBits2::DRONE_MELEE_SPEED_2);
     }
+    pub fn clear_drone_melee_speed_2(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::DRONE_MELEE_SPEED_2);
+    }
     pub fn observe_ebih_alu(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_ALU);
+    }
+    pub fn clear_ebih_alu(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EBIH_ALU);
     }
     pub fn observe_ebih_interchange_block(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
     }
+    pub fn clear_ebih_interchange_block(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+    }
     pub fn observe_ebih_interchange_gate(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+    }
+    pub fn clear_ebih_interchange_gate(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
     }
     pub fn observe_ebih_walled_off_wall(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_WALLED_OFF_WALL);
     }
+    pub fn clear_ebih_walled_off_wall(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_WALLED_OFF_WALL);
+    }
     pub fn observe_ebih_wasteland_door(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+    }
+    pub fn clear_ebih_wasteland_door(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EBIH_WASTELAND_DOOR);
     }
     pub fn observe_ebih_wasteland_passage_h(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
     }
+    pub fn clear_ebih_wasteland_passage_h(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
+    }
     pub fn observe_ebih_waterfall_block_left(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
+    }
+    pub fn clear_ebih_waterfall_block_left(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
     }
     pub fn observe_ebih_waterfall_block_right(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
     }
+    pub fn clear_ebih_waterfall_block_right(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
+    }
     pub fn observe_ebih_waterfall_wall(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_WALL);
+    }
+    pub fn clear_ebih_waterfall_wall(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EBIH_WATERFALL_WALL);
     }
     pub fn observe_ebih_west_block(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
     }
+    pub fn clear_ebih_west_block(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EBIH_WEST_BLOCK);
+    }
     pub fn observe_escape(&mut self) {
         self.cbits2.insert(flags::ContextBits2::ESCAPE);
+    }
+    pub fn clear_escape(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::ESCAPE);
     }
     pub fn observe_exit_breach(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
     }
+    pub fn clear_exit_breach(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EXIT_BREACH);
+    }
     pub fn observe_eye_ring(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EYE_RING);
+    }
+    pub fn clear_eye_ring(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EYE_RING);
     }
     pub fn observe_family_tragedy(&mut self) {
         self.cbits2.insert(flags::ContextBits2::FAMILY_TRAGEDY);
     }
+    pub fn clear_family_tragedy(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::FAMILY_TRAGEDY);
+    }
     pub fn observe_fast_travel(&mut self) {
         self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
+    }
+    pub fn clear_fast_travel(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::FAST_TRAVEL);
     }
     pub fn observe_flask(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -2541,50 +3027,98 @@ impl FullObservation {
             self.flask = self.flask.combine(obs);
         }
     }
+    pub fn clear_flask(&mut self, obs: IntegerObservation<i8>) {
+        self.flask = IntegerObservation::Unknown;
+    }
     pub fn observe_forbidden_knowledge(&mut self) {
         self.cbits2.insert(flags::ContextBits2::FORBIDDEN_KNOWLEDGE);
+    }
+    pub fn clear_forbidden_knowledge(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::FORBIDDEN_KNOWLEDGE);
     }
     pub fn observe_freedom_from_aansur(&mut self) {
         self.cbits2.insert(flags::ContextBits2::FREEDOM_FROM_AANSUR);
     }
+    pub fn clear_freedom_from_aansur(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::FREEDOM_FROM_AANSUR);
+    }
     pub fn observe_giguna_boulder(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
+    }
+    pub fn clear_giguna_boulder(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::GIGUNA_BOULDER);
     }
     pub fn observe_giguna_dual_path_switch(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
     }
+    pub fn clear_giguna_dual_path_switch(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
+    }
     pub fn observe_giguna_dual_path_wall(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
+    }
+    pub fn clear_giguna_dual_path_wall(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
     }
     pub fn observe_giguna_gateway_block(&mut self) {
         self.cbits2
             .insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
     }
+    pub fn clear_giguna_gateway_block(&mut self) {
+        self.cbits2
+            .remove(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+    }
     pub fn observe_giguna_gateway_gate(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
     }
+    pub fn clear_giguna_gateway_gate(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
+    }
     pub fn observe_giguna_gubi(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
+    }
+    pub fn clear_giguna_gubi(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::GIGUNA_GUBI);
     }
     pub fn observe_giguna_northeast_gate(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
     }
+    pub fn clear_giguna_northeast_gate(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::GIGUNA_NORTHEAST_GATE);
+    }
     pub fn observe_glacier_big_drop_rock(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::GLACIER_BIG_DROP_ROCK);
+    }
+    pub fn clear_glacier_big_drop_rock(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::GLACIER_BIG_DROP_ROCK);
     }
     pub fn observe_glacier_sea_burial_rock(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::GLACIER_SEA_BURIAL_ROCK);
     }
+    pub fn clear_glacier_sea_burial_rock(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::GLACIER_SEA_BURIAL_ROCK);
+    }
     pub fn observe_goodbye(&mut self) {
         self.cbits3.insert(flags::ContextBits3::GOODBYE);
     }
+    pub fn clear_goodbye(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::GOODBYE);
+    }
     pub fn observe_hammond_auth(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HAMMOND_AUTH);
+    }
+    pub fn clear_hammond_auth(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HAMMOND_AUTH);
     }
     pub fn observe_health_fragment(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -2593,6 +3127,9 @@ impl FullObservation {
             self.health_fragment = self.health_fragment.combine(obs);
         }
     }
+    pub fn clear_health_fragment(&mut self, obs: IntegerObservation<i8>) {
+        self.health_fragment = IntegerObservation::Unknown;
+    }
     pub fn observe_health_node(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
             self.health_node = IntegerObservation::Exact;
@@ -2600,100 +3137,198 @@ impl FullObservation {
             self.health_node = self.health_node.combine(obs);
         }
     }
+    pub fn clear_health_node(&mut self, obs: IntegerObservation<i8>) {
+        self.health_node = IntegerObservation::Unknown;
+    }
     pub fn observe_health_upgrade(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HEALTH_UPGRADE);
+    }
+    pub fn clear_health_upgrade(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HEALTH_UPGRADE);
     }
     pub fn observe_health_upgrade_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HEALTH_UPGRADE_2);
     }
+    pub fn clear_health_upgrade_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HEALTH_UPGRADE_2);
+    }
     pub fn observe_health_upgrade_3(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HEALTH_UPGRADE_3);
     }
+    pub fn clear_health_upgrade_3(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HEALTH_UPGRADE_3);
+    }
     pub fn observe_health_upgrade_4(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HEALTH_UPGRADE_4);
+    }
+    pub fn clear_health_upgrade_4(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HEALTH_UPGRADE_4);
     }
     pub fn observe_heretics_granddaughter(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::HERETICS_GRANDDAUGHTER);
     }
+    pub fn clear_heretics_granddaughter(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::HERETICS_GRANDDAUGHTER);
+    }
     pub fn observe_heretics_tablet(&mut self) {
         self.cbits3.insert(flags::ContextBits3::HERETICS_TABLET);
+    }
+    pub fn clear_heretics_tablet(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::HERETICS_TABLET);
     }
     pub fn observe_ice_axe(&mut self) {
         self.cbits3.insert(flags::ContextBits3::ICE_AXE);
     }
+    pub fn clear_ice_axe(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::ICE_AXE);
+    }
     pub fn observe_infect(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECT);
+    }
+    pub fn clear_infect(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECT);
     }
     pub fn observe_infect_l1(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECT_L1);
     }
+    pub fn clear_infect_l1(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECT_L1);
+    }
     pub fn observe_infect_l2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECT_L2);
+    }
+    pub fn clear_infect_l2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECT_L2);
     }
     pub fn observe_infect_l3(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECT_L3);
     }
+    pub fn clear_infect_l3(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECT_L3);
+    }
     pub fn observe_infection_range(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE);
+    }
+    pub fn clear_infection_range(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECTION_RANGE);
     }
     pub fn observe_infection_range_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE_2);
     }
+    pub fn clear_infection_range_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECTION_RANGE_2);
+    }
     pub fn observe_infection_range_3(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECTION_RANGE_3);
+    }
+    pub fn clear_infection_range_3(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECTION_RANGE_3);
     }
     pub fn observe_infection_speed(&mut self) {
         self.cbits3.insert(flags::ContextBits3::INFECTION_SPEED);
     }
+    pub fn clear_infection_speed(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::INFECTION_SPEED);
+    }
     pub fn observe_irikar_gudam(&mut self) {
         self.cbits3.insert(flags::ContextBits3::IRIKAR_GUDAM);
+    }
+    pub fn clear_irikar_gudam(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::IRIKAR_GUDAM);
     }
     pub fn observe_irikar_royal_storage_wall(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL);
     }
+    pub fn clear_irikar_royal_storage_wall(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::IRIKAR_ROYAL_STORAGE_WALL);
+    }
     pub fn observe_lament_for_fools(&mut self) {
         self.cbits3.insert(flags::ContextBits3::LAMENT_FOR_FOOLS);
+    }
+    pub fn clear_lament_for_fools(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::LAMENT_FOR_FOOLS);
     }
     pub fn observe_ledge_grab(&mut self) {
         self.cbits3.insert(flags::ContextBits3::LEDGE_GRAB);
     }
+    pub fn clear_ledge_grab(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::LEDGE_GRAB);
+    }
     pub fn observe_letter_from_trace(&mut self) {
         self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
+    }
+    pub fn clear_letter_from_trace(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::LETTER_FROM_TRACE);
     }
     pub fn observe_melee_damage(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE);
     }
+    pub fn clear_melee_damage(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MELEE_DAMAGE);
+    }
     pub fn observe_melee_damage_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE_2);
+    }
+    pub fn clear_melee_damage_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MELEE_DAMAGE_2);
     }
     pub fn observe_melee_speed(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MELEE_SPEED);
     }
+    pub fn clear_melee_speed(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MELEE_SPEED);
+    }
     pub fn observe_melee_speed_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MELEE_SPEED_2);
+    }
+    pub fn clear_melee_speed_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MELEE_SPEED_2);
     }
     pub fn observe_mist_upgrade(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MIST_UPGRADE);
     }
+    pub fn clear_mist_upgrade(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MIST_UPGRADE);
+    }
     pub fn observe_nanite_mist(&mut self) {
         self.cbits3.insert(flags::ContextBits3::NANITE_MIST);
+    }
+    pub fn clear_nanite_mist(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::NANITE_MIST);
     }
     pub fn observe_nano_lattice_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::NANO_LATTICE_2);
     }
+    pub fn clear_nano_lattice_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::NANO_LATTICE_2);
+    }
     pub fn observe_nano_points(&mut self) {
         self.cbits3.insert(flags::ContextBits3::NANO_POINTS);
+    }
+    pub fn clear_nano_points(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::NANO_POINTS);
     }
     pub fn observe_nano_points_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::NANO_POINTS_2);
     }
+    pub fn clear_nano_points_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::NANO_POINTS_2);
+    }
     pub fn observe_notes_2053_02_27(&mut self) {
         self.cbits3.insert(flags::ContextBits3::NOTES_2053_02_27);
     }
+    pub fn clear_notes_2053_02_27(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::NOTES_2053_02_27);
+    }
     pub fn observe_plague_of_thoughts(&mut self) {
         self.cbits3.insert(flags::ContextBits3::PLAGUE_OF_THOUGHTS);
+    }
+    pub fn clear_plague_of_thoughts(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::PLAGUE_OF_THOUGHTS);
     }
     pub fn observe_power_matrix(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -2702,126 +3337,250 @@ impl FullObservation {
             self.power_matrix = self.power_matrix.combine(obs);
         }
     }
+    pub fn clear_power_matrix(&mut self, obs: IntegerObservation<i8>) {
+        self.power_matrix = IntegerObservation::Unknown;
+    }
     pub fn observe_ranged_damage(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE);
+    }
+    pub fn clear_ranged_damage(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RANGED_DAMAGE);
     }
     pub fn observe_ranged_damage_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RANGED_DAMAGE_2);
     }
+    pub fn clear_ranged_damage_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RANGED_DAMAGE_2);
+    }
     pub fn observe_ranged_speed(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RANGED_SPEED);
+    }
+    pub fn clear_ranged_speed(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RANGED_SPEED);
     }
     pub fn observe_ranged_speed_2(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RANGED_SPEED_2);
     }
+    pub fn clear_ranged_speed_2(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RANGED_SPEED_2);
+    }
     pub fn observe_record_losses(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RECORD_LOSSES);
+    }
+    pub fn clear_record_losses(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RECORD_LOSSES);
     }
     pub fn observe_remote_boomerang(&mut self) {
         self.cbits3.insert(flags::ContextBits3::REMOTE_BOOMERANG);
     }
+    pub fn clear_remote_boomerang(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::REMOTE_BOOMERANG);
+    }
     pub fn observe_remote_drone(&mut self) {
         self.cbits3.insert(flags::ContextBits3::REMOTE_DRONE);
+    }
+    pub fn clear_remote_drone(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::REMOTE_DRONE);
     }
     pub fn observe_researchers_missing(&mut self) {
         self.cbits3.insert(flags::ContextBits3::RESEARCHERS_MISSING);
     }
+    pub fn clear_researchers_missing(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::RESEARCHERS_MISSING);
+    }
     pub fn observe_royal_dagger(&mut self) {
         self.cbits3.insert(flags::ContextBits3::ROYAL_DAGGER);
+    }
+    pub fn clear_royal_dagger(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::ROYAL_DAGGER);
     }
     pub fn observe_separation(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SEPARATION);
     }
+    pub fn clear_separation(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SEPARATION);
+    }
     pub fn observe_shockwave(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
+    }
+    pub fn clear_shockwave(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SHOCKWAVE);
     }
     pub fn observe_siuna_storage_wall(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SIUNA_STORAGE_WALL);
     }
+    pub fn clear_siuna_storage_wall(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SIUNA_STORAGE_WALL);
+    }
     pub fn observe_slingshot_charge(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SLINGSHOT_CHARGE);
+    }
+    pub fn clear_slingshot_charge(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SLINGSHOT_CHARGE);
     }
     pub fn observe_slingshot_hook(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SLINGSHOT_HOOK);
     }
+    pub fn clear_slingshot_hook(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SLINGSHOT_HOOK);
+    }
     pub fn observe_slingshot_weapon(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SLINGSHOT_WEAPON);
+    }
+    pub fn clear_slingshot_weapon(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SLINGSHOT_WEAPON);
     }
     pub fn observe_sniper_valley_rock_1(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_1);
     }
+    pub fn clear_sniper_valley_rock_1(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::SNIPER_VALLEY_ROCK_1);
+    }
     pub fn observe_sniper_valley_rock_2(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::SNIPER_VALLEY_ROCK_2);
     }
+    pub fn clear_sniper_valley_rock_2(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::SNIPER_VALLEY_ROCK_2);
+    }
     pub fn observe_station_power(&mut self) {
         self.cbits3.insert(flags::ContextBits3::STATION_POWER);
+    }
+    pub fn clear_station_power(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::STATION_POWER);
     }
     pub fn observe_storm_bomb(&mut self) {
         self.cbits3.insert(flags::ContextBits3::STORM_BOMB);
     }
+    pub fn clear_storm_bomb(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::STORM_BOMB);
+    }
     pub fn observe_suspension_bridge(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SUSPENSION_BRIDGE);
+    }
+    pub fn clear_suspension_bridge(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SUSPENSION_BRIDGE);
     }
     pub fn observe_switch_36_11(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SWITCH_36_11);
     }
+    pub fn clear_switch_36_11(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SWITCH_36_11);
+    }
     pub fn observe_switch_40_12(&mut self) {
         self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
+    }
+    pub fn clear_switch_40_12(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::SWITCH_40_12);
     }
     pub fn observe_terminal_breakthrough_1(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
     }
+    pub fn clear_terminal_breakthrough_1(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
+    }
     pub fn observe_terminal_breakthrough_2(&mut self) {
         self.cbits3
             .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_2);
     }
+    pub fn clear_terminal_breakthrough_2(&mut self) {
+        self.cbits3
+            .remove(flags::ContextBits3::TERMINAL_BREAKTHROUGH_2);
+    }
     pub fn observe_the_eternal_arm(&mut self) {
         self.cbits3.insert(flags::ContextBits3::THE_ETERNAL_ARM);
+    }
+    pub fn clear_the_eternal_arm(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::THE_ETERNAL_ARM);
     }
     pub fn observe_the_ideal_kiengir(&mut self) {
         self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
     }
+    pub fn clear_the_ideal_kiengir(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::THE_IDEAL_KIENGIR);
+    }
     pub fn observe_the_student(&mut self) {
         self.cbits3.insert(flags::ContextBits3::THE_STUDENT);
     }
+    pub fn clear_the_student(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::THE_STUDENT);
+    }
     pub fn observe_udusan(&mut self) {
         self.cbits3.insert(flags::ContextBits3::UDUSAN);
+    }
+    pub fn clear_udusan(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::UDUSAN);
     }
     pub fn observe_uhrum_annuna_corridor_block(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_ANNUNA_CORRIDOR_BLOCK);
     }
+    pub fn clear_uhrum_annuna_corridor_block(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_ANNUNA_CORRIDOR_BLOCK);
+    }
     pub fn observe_uhrum_waterfall_wall(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_WATERFALL_WALL);
+    }
+    pub fn clear_uhrum_waterfall_wall(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_WATERFALL_WALL);
     }
     pub fn observe_uhrum_waterfalls_block(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_WATERFALLS_BLOCK);
     }
+    pub fn clear_uhrum_waterfalls_block(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_WATERFALLS_BLOCK);
+    }
     pub fn observe_uhrum_west_entrance_gate(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_WEST_ENTRANCE_GATE);
+    }
+    pub fn clear_uhrum_west_entrance_gate(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_WEST_ENTRANCE_GATE);
     }
     pub fn observe_uhrum_west_entrance_lower_wall(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_WEST_ENTRANCE_LOWER_WALL);
     }
+    pub fn clear_uhrum_west_entrance_lower_wall(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_WEST_ENTRANCE_LOWER_WALL);
+    }
     pub fn observe_uhrum_west_entrance_upper_wall(&mut self) {
         self.cbits4
             .insert(flags::ContextBits4::UHRUM_WEST_ENTRANCE_UPPER_WALL);
     }
+    pub fn clear_uhrum_west_entrance_upper_wall(&mut self) {
+        self.cbits4
+            .remove(flags::ContextBits4::UHRUM_WEST_ENTRANCE_UPPER_WALL);
+    }
     pub fn observe_under_siege(&mut self) {
         self.cbits4.insert(flags::ContextBits4::UNDER_SIEGE);
+    }
+    pub fn clear_under_siege(&mut self) {
+        self.cbits4.remove(flags::ContextBits4::UNDER_SIEGE);
     }
     pub fn observe_underwater_movement(&mut self) {
         self.cbits4.insert(flags::ContextBits4::UNDERWATER_MOVEMENT);
     }
+    pub fn clear_underwater_movement(&mut self) {
+        self.cbits4.remove(flags::ContextBits4::UNDERWATER_MOVEMENT);
+    }
     pub fn observe_wall_climb(&mut self) {
         self.cbits4.insert(flags::ContextBits4::WALL_CLIMB);
+    }
+    pub fn clear_wall_climb(&mut self) {
+        self.cbits4.remove(flags::ContextBits4::WALL_CLIMB);
     }
     pub fn swap_portal__prev_portal(&mut self) {
         std::mem::swap(&mut self.portal, &mut self.prev_portal);

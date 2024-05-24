@@ -1211,15 +1211,19 @@ class RustObservationVisitor(RustBaseVisitor):
 
     def visitSet(self, ctx):
         var = str(ctx.REF())[1:]
+        # Setting to a specific value means it does not matter what the value was before.
+        reset = f'full_obs.clear_{self.ctxdict[var]}();'
         if ctx.num():
             val = self.visit(ctx.num())
         elif ctx.str_():
             val = self.visit(ctx.str_(), self._getRefEnum(var))
         else:
-            return ''
+            return reset
         if 'full_obs' not in val:
-            return ''
-        return f'{{ let _set = {val}; }}'
+            return reset
+        # Since the set value could depend on other things, reset the observed ref first,
+        # then apply the other observations.
+        return f'{{ {reset} let _set = {val}; }}'
 
     def visitAlter(self, ctx):
         val = self.visit(ctx.num())
@@ -1232,8 +1236,7 @@ class RustObservationVisitor(RustBaseVisitor):
         ref2 = str(ctx.REF(1))[1:]
         if ref2 < ref1:
             ref1, ref2 = ref2, ref1
-        val = self.code_writer.visit(ctx)
-        return f'full_obs.swap_{ref1}__{ref2}()'
+        return f'full_obs.swap_{ref1}__{ref2}();'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'

@@ -64,7 +64,7 @@ pub struct FullObservation {
 %% endfor
     // bitflags: optionally a mask
 %% for group in bfp.flag_groups
-    cbits{{ loop.index }}: Option<flags::ContextBits{{ loop.index }}>,
+    cbits{{ loop.index }}: flags::ContextBits{{ loop.index }},
 %% endfor
     pub strict: bool,
 }
@@ -193,8 +193,8 @@ impl Observer for FullObservation {
             }
 %% endfor
 %% for group in bfp.flag_groups
-            if let Some(mask) = self.cbits{{ loop.index }} {
-                vec.push(OneObservation::CBits{{ loop.index }}{ mask, result: mask & ctx.cbits{{ loop.index }} });
+            if !self.cbits{{ loop.index }}.is_empty() {
+                vec.push(OneObservation::CBits{{ loop.index }}{ mask: self.cbits{{ loop.index }}, result: self.cbits{{ loop.index }} & ctx.cbits{{ loop.index }} });
             }
 %% endfor
         vec
@@ -215,7 +215,7 @@ impl FullObservation {
         if self.{{ item|lower }} != IntegerObservation::Unknown { fields += 1; }
 %% endfor
 %% for group in bfp.flag_groups
-        if self.cbits{{ loop.index }}.is_some() { fields += 1; }
+        if !self.cbits{{ loop.index }}.is_empty() { fields += 1; }
 %% endfor
         fields
     }
@@ -223,9 +223,13 @@ impl FullObservation {
 %% for ctx, t in context_types.items() if ctx not in unused_map_tiles
 %% if ctx in special.ignore_observations
     pub fn observe_{{ ctx }}(&self) {}
+    pub fn clear_{{ ctx }}(&self) {}
 %% elif ctx in bfp.varmap
     pub fn observe_{{ ctx }}(&mut self) {
         self.cbits{{ bfp.varmap[ctx] }}.insert(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
+    }
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[ctx] }}.remove(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
     }
 %% elif t in int_types
     pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
@@ -235,9 +239,15 @@ impl FullObservation {
             self.{{ ctx }} = self.{{ ctx }}.combine(obs);
         }
     }
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.{{ ctx }} = IntegerObservation::Unknown;
+    }
 %% else
     pub fn observe_{{ ctx }}(&mut self) {
         self.{{ ctx }} = true;
+    }
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.{{ ctx }} = false;
     }
 %% endif
 %% endfor
@@ -247,6 +257,9 @@ impl FullObservation {
     pub fn observe_{{ ctx }}(&mut self) {
         self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
     }
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[item] }}.remove(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+    }
 %% else
     pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
         if self.strict {
@@ -254,6 +267,9 @@ impl FullObservation {
         } else {
             self.{{ ctx }} = self.{{ ctx }}.combine(obs);
         }
+    }
+    pub fn clear_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
+        self.{{ ctx }} = IntegerObservation::Unknown;
     }
 %% endif
 %% endfor

@@ -18905,6 +18905,10 @@ pub fn observe_action_amagi__main_area__carving__key_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_amagi__main_area__ctx__combo();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &Context,
@@ -18912,6 +18916,10 @@ pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__east_bridge__ctx__combo();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
     ctx: &Context,
@@ -18919,6 +18927,10 @@ pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__east_bridge__ctx__combo();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     ctx: &Context,
@@ -18926,6 +18938,10 @@ pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__east_bridge__ctx__combo();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
     ctx: &Context,
@@ -18933,6 +18949,10 @@ pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__vertical_room__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     ctx: &Context,
@@ -18940,6 +18960,10 @@ pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__west_climb__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &Context,
@@ -18947,6 +18971,10 @@ pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__base_camp__ctx__left_platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
     ctx: &Context,
@@ -18954,6 +18982,10 @@ pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform_
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__base_camp__ctx__left_platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
     ctx: &Context,
@@ -18961,6 +18993,10 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__drone_room__ctx__platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(
     ctx: &Context,
@@ -18968,6 +19004,10 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_earl
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__drone_room__ctx__platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
     ctx: &Context,
@@ -18975,6 +19015,10 @@ pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__drone_room__ctx__platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
     ctx: &Context,
@@ -18982,6 +19026,10 @@ pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform2_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     ctx: &Context,
@@ -18989,6 +19037,10 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform2_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     ctx: &Context,
@@ -18996,6 +19048,10 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform2_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
     ctx: &Context,
@@ -19003,6 +19059,10 @@ pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_platform1_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform1_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     ctx: &Context,
@@ -19012,11 +19072,14 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_ebih__ebih_west__ctx__door_open();
     if {
         full_obs.observe_indra();
         ctx.indra()
     } == SpotId::Ebih__Ebih_West__Above_Door
-    {};
+    {
+        full_obs.clear_indra();
+    };
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
@@ -19027,11 +19090,14 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_ebih__ebih_west__ctx__door_open();
     if {
         full_obs.observe_indra();
         ctx.indra()
     } == SpotId::Ebih__Ebih_West__Above_Door
-    {};
+    {
+        full_obs.clear_indra();
+    };
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
@@ -19040,6 +19106,10 @@ pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__grid_25_10_12__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
     ctx: &Context,
@@ -19047,6 +19117,10 @@ pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__grid_25_10_12__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
     ctx: &Context,
@@ -19054,6 +19128,10 @@ pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__truck_gate__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__truck_gate__switch__open_door__do(
     ctx: &Context,
@@ -19061,6 +19139,10 @@ pub fn observe_action_ebih__truck_gate__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__truck_gate__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     ctx: &Context,
@@ -19068,6 +19150,10 @@ pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__vertical_interchange__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     ctx: &Context,
@@ -19075,6 +19161,10 @@ pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__west_door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     ctx: &Context,
@@ -19082,6 +19172,10 @@ pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__west_door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_flasks_incr_1(
     ctx: &Context,
@@ -19103,6 +19197,10 @@ pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__lower_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
     ctx: &Context,
@@ -19110,6 +19208,10 @@ pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__lower_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__switch__open_door__do(
     ctx: &Context,
@@ -19117,6 +19219,10 @@ pub fn observe_action_giguna__carnelian__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
     ctx: &Context,
@@ -19124,6 +19230,10 @@ pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     ctx: &Context,
@@ -19131,6 +19241,10 @@ pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(
     ctx: &Context,
@@ -19138,6 +19252,10 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &Context,
@@ -19147,13 +19265,17 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
     if {
         full_obs.observe_indra();
         ctx.indra()
     } == {
         full_obs.observe_position();
         ctx.position()
-    } {};
+    } {
+        full_obs.clear_indra();
+        full_obs.clear_portal();
+    };
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
@@ -19164,6 +19286,8 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
+    full_obs.clear_portal();
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
     full_obs.strict = old_strict;
 }
@@ -19173,6 +19297,10 @@ pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__lower_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
     ctx: &Context,
@@ -19180,6 +19308,10 @@ pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__lower_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
     ctx: &Context,
@@ -19187,6 +19319,10 @@ pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__mid_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     ctx: &Context,
@@ -19194,6 +19330,10 @@ pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__mid_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
     ctx: &Context,
@@ -19201,6 +19341,10 @@ pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__switch__open_door__do(
     ctx: &Context,
@@ -19208,6 +19352,10 @@ pub fn observe_action_giguna__east_caverns__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
     ctx: &Context,
@@ -19215,6 +19363,10 @@ pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(
     ctx: &Context,
@@ -19222,6 +19374,10 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(
     ctx: &Context,
@@ -19229,6 +19385,10 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     ctx: &Context,
@@ -19236,6 +19396,10 @@ pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__upper_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
     ctx: &Context,
@@ -19243,6 +19407,10 @@ pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo_entered = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__combo_entered();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
     ctx: &Context,
@@ -19250,6 +19418,10 @@ pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
     ctx: &Context,
@@ -19257,6 +19429,10 @@ pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__gateway__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__gateway__one_jump__open_door__do(
     ctx: &Context,
@@ -19264,6 +19440,10 @@ pub fn observe_action_giguna__gateway__one_jump__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__gateway__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
     ctx: &Context,
@@ -19271,6 +19451,10 @@ pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_base__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
     ctx: &Context,
@@ -19278,6 +19462,10 @@ pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_base__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
     ctx: &Context,
@@ -19285,6 +19473,10 @@ pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_base__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
     ctx: &Context,
@@ -19292,6 +19484,10 @@ pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_base__ctx__door_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afar__do(
     ctx: &Context,
@@ -19299,6 +19495,10 @@ pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afa
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_northeast__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     ctx: &Context,
@@ -19306,6 +19506,10 @@ pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_northeast__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
     ctx: &Context,
@@ -19313,6 +19517,10 @@ pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_doors_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__ruins_top__ctx__doors_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     ctx: &Context,
@@ -19320,6 +19528,10 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__ruins_west__ctx__kishib_handled();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
     ctx: &Context,
@@ -19327,6 +19539,10 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__ruins_west__ctx__kishib_handled();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
     ctx: &Context,
@@ -19334,6 +19550,10 @@ pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__west_caverns__ctx__east_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
     ctx: &Context,
@@ -19341,6 +19561,10 @@ pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__west_caverns__ctx__east_susar();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     ctx: &Context,
@@ -19348,6 +19572,10 @@ pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna_breach__sw_save__ctx__door_opened();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
     ctx: &Context,
@@ -19355,6 +19583,10 @@ pub fn observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__ctx__hammonds_doors();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__hammonds_end__switch_near__open_doors__do(
     ctx: &Context,
@@ -19362,6 +19594,10 @@ pub fn observe_action_glacier__hammonds_end__switch_near__open_doors__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__ctx__hammonds_doors();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__hammonds_end__west_11__open_doors__do(
     ctx: &Context,
@@ -19369,6 +19605,10 @@ pub fn observe_action_glacier__hammonds_end__west_11__open_doors__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__ctx__hammonds_doors();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
     ctx: &Context,
@@ -19376,6 +19616,10 @@ pub fn observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_bridge_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__the_big_drop__ctx__bridge_open();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(
     ctx: &Context,
@@ -19383,6 +19627,10 @@ pub fn observe_action_glacier__vertical_room__lower_switch__open_lower_gatestone
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_gatestones = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__vertical_room__ctx__lower_gatestones();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
     ctx: &Context,
@@ -19390,6 +19638,10 @@ pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_gatestone = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__vertical_room__ctx__upper_gatestone();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_indra_set_invoke_default(
     ctx: &Context,
@@ -19397,6 +19649,10 @@ pub fn observe_action_indra_set_invoke_default(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_indra();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
     ctx: &Context,
@@ -19406,6 +19662,7 @@ pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
     // ^indra = $default; $refill_energy
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_indra();
     hobserve__refill_energy!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
@@ -19625,6 +19882,10 @@ pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_p
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__basement_portal__ctx__platform_moved();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
     ctx: &Context,
@@ -19632,6 +19893,10 @@ pub fn observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__midwest__ctx__left_platform();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(
     ctx: &Context,
@@ -19639,6 +19904,10 @@ pub fn observe_action_irikar__midwest__right_platform_start__hack_and_ride_platf
     full_obs: &mut FullObservation,
 ) {
     // ^_right_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__midwest__ctx__right_platform();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_last_set_invoke_default(
     ctx: &Context,
@@ -19646,6 +19915,10 @@ pub fn observe_action_last_set_invoke_default(
     full_obs: &mut FullObservation,
 ) {
     // ^last = $default
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_last();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_last_set_position(
     ctx: &Context,
@@ -19653,6 +19926,10 @@ pub fn observe_action_last_set_position(
     full_obs: &mut FullObservation,
 ) {
     // ^last = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_last();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_drone(
     ctx: &Context,
@@ -19660,6 +19937,10 @@ pub fn observe_action_mode_set_drone(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_drone_indra_set_position(
     ctx: &Context,
@@ -19667,6 +19948,11 @@ pub fn observe_action_mode_set_drone_indra_set_position(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'; ^indra = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    full_obs.clear_indra();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_indra(
     ctx: &Context,
@@ -19674,6 +19960,10 @@ pub fn observe_action_mode_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_indra_last_set_indra(
     ctx: &Context,
@@ -19681,6 +19971,11 @@ pub fn observe_action_mode_set_indra_last_set_indra(
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    full_obs.clear_last();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
     ctx: &Context,
@@ -19688,6 +19983,10 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch East`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
     ctx: &Context,
@@ -19695,6 +19994,10 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch West`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &Context,
@@ -19702,6 +20005,10 @@ pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platfor
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Second Platform`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
     ctx: &Context,
@@ -19709,6 +20016,10 @@ pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Top Platform`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
     ctx: &Context,
@@ -19716,6 +20027,10 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Corner`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
     ctx: &Context,
@@ -19723,6 +20038,10 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Hammond`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     ctx: &Context,
@@ -19730,6 +20049,10 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_refills_incr_1(
     ctx: &Context,
@@ -19744,4 +20067,8 @@ pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    full_obs.strict = old_strict;
 }
