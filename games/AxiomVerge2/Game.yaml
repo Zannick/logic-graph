@@ -372,7 +372,7 @@ helpers:  # MARK: helpers
             };
             ^prev_area = $get_area(^position);
             ^last = $default;
-    } ELSE IF (^position WITHIN `Menu > Warp Only`
+    } ELSE IF (^position WITHIN (`Menu > Warp Only`, `Menu > Kiengir Map`, `Menu > Breach Map`)
                AND ^last NOT WITHIN ^prev_area
                AND ^newpos NOT WITHIN $get_area(^last)) {
                   IF (^newpos NOT WITHIN ^prev_area) {
