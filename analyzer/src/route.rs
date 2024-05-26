@@ -9,6 +9,17 @@ use std::str::FromStr;
 use std::time::{Instant, Duration};
 use yaml_rust::Yaml;
 
+static IN_FULL: &str = "\nin full:\n";
+
+pub(crate) fn find_route_in_solution_string(solution: &str) -> &str {
+    if solution.starts_with("Solution") {
+        if let Some(idx) = solution.find(IN_FULL) {
+            return &solution[idx + IN_FULL.len()..];
+        }
+    }
+    solution
+}
+
 pub(crate) fn hist_from_string<W, T, L>(route: &str) -> Result<Vec<HistoryAlias<T>>, String>
 where
     W: World<Location = L>,
@@ -16,6 +27,7 @@ where
     L: Location<Context = T>,
 {
     let mut hist: Vec<HistoryAlias<T>> = Vec::new();
+    let route = find_route_in_solution_string(route);
     for line in route.lines() {
         let line = line.trim();
         if !line.is_empty() && !line.starts_with('#') {
@@ -34,6 +46,7 @@ where
     L: Location<Context = T>,
 {
     let mut hist: Vec<(HistoryAlias<T>, &str)> = Vec::new();
+    let route = find_route_in_solution_string(route);
     for line in route.lines() {
         let line = line.trim();
         if !line.is_empty() && !line.starts_with('#') {
