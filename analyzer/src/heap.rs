@@ -27,9 +27,10 @@ pub(crate) struct HeapElement<T: Ctx> {
     pub(crate) el: ContextWrapper<T>,
 }
 
+pub(crate) type Score = (u32, u32);
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     // TODO: Make the bucket element just T.
-    queue: Mutex<BucketQueue<Segment<T, u32>>>,
+    queue: Mutex<BucketQueue<Segment<T, Score>>>,
     db: HeapDB<'w, W, T>,
     capacity: usize,
     iskips: AtomicUsize,
@@ -139,7 +140,7 @@ where
         self.db.db_bests()
     }
 
-    pub fn heap_bests(&self) -> Vec<Option<u32>> {
+    pub fn heap_bests(&self) -> Vec<Option<Score>> {
         let queue = self.queue.lock().unwrap();
         queue.peek_all_buckets_min()
     }
@@ -150,7 +151,7 @@ where
     }
 
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
-        self.db.score(ctx)
+        self.db.total_estimate(ctx)
     }
 
     pub fn estimated_remaining_time(&self, ctx: &ContextWrapper<T>) -> u32 {
@@ -205,11 +206,12 @@ where
             return Ok(());
         }
 
-        let est_complete = self.db.score(&el);
-        if est_complete > self.db.max_time() {
+        let total_estimate = self.db.total_estimate(&el);
+        if total_estimate > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         };
+        let score = (el.time_since_visit(), total_estimate);
         let progress = el.get().count_visits();
         let mut evicted = None;
         {
@@ -220,10 +222,10 @@ where
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
                     .ok_or(anyhow!("queue at capacity with no elements"))?;
-                let elapsed = self.db.get_best_elapsed(ctx)?;
-                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= elapsed) {
+                let (elapsed, ..) = self.db.get_best_times(ctx)?;
+                if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
-                    self.db.push_from_queue(el, est_complete)?;
+                    self.db.push_from_queue(el, total_estimate)?;
                 } else {
                     let evictions = std::cmp::min(
                         self.max_evictions,
@@ -231,10 +233,10 @@ where
                     );
                     // New item is better, evict some old_items.
                     evicted = Some(Self::evict_internal(&mut queue, evictions));
-                    queue.push(el.into_inner(), progress, est_complete);
+                    queue.push(el.into_inner(), progress, score);
                 }
             } else {
-                queue.push(el.into_inner(), progress, est_complete);
+                queue.push(el.into_inner(), progress, score);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
@@ -248,7 +250,7 @@ where
         Ok(())
     }
 
-    fn evict_to_db(&self, ev: Vec<(T, u32)>, category: &str) -> Result<()> {
+    fn evict_to_db(&self, ev: Vec<(T, Score)>, category: &str) -> Result<()> {
         let start = Instant::now();
         self.db.extend_from_queue(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
@@ -260,9 +262,9 @@ where
     /// Removes elements from the max end of each segment in the queue until we reach
     /// the minimum desired evictions.
     fn evict_internal(
-        queue: &mut MutexGuard<BucketQueue<Segment<T, u32>>>,
+        queue: &mut MutexGuard<BucketQueue<Segment<T, Score>>>,
         min_evictions: usize,
-    ) -> Vec<(T, u32)> {
+    ) -> Vec<(T, Score)> {
         let mut evicted = queue.pop_likely_useless();
         if !evicted.is_empty() {
             log::debug!("Evicted {} useless states", evicted.len());
@@ -281,7 +283,7 @@ where
         segment: usize,
         num: usize,
         score_limit: u32,
-    ) -> Result<Vec<(T, usize, u32)>> {
+    ) -> Result<Vec<(T, usize, Score)>> {
         log::debug!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -293,9 +295,9 @@ where
             .db
             .retrieve(segment, num, score_limit)?
             .into_iter()
-            .map(|(el, elapsed, est)| {
+            .map(|(el, elapsed, time_since, est)| {
                 let progress = el.count_visits();
-                (el, progress, elapsed + est)
+                (el, progress, (time_since, elapsed + est))
             })
             .collect();
 
@@ -308,12 +310,11 @@ where
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((el, &est_completion)) = queue.peek_min() {
+            while let Some((el, &min_score)) = queue.peek_min() {
                 let progress = el.count_visits();
                 let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
-                if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
-                {
+                if !self.db.is_empty() && db_best < u32::MAX && min_score.0 > db_best * 101 / 100 {
                     queue = self.maybe_reshuffle(
                         progress,
                         self.min_reshuffle,
@@ -324,7 +325,7 @@ where
                 let (ctx, _) = queue.pop_min().unwrap();
 
                 // Retrieve the best elapsed time.
-                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                 let est = self.db.estimated_remaining_time(&ctx);
 
                 let max_time = self.db.max_time();
@@ -337,7 +338,11 @@ where
                     continue;
                 }
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                return Ok(Some(ContextWrapper::with_elapsed(ctx, elapsed)));
+                return Ok(Some(ContextWrapper::with_times(
+                    ctx,
+                    elapsed,
+                    time_since_visit,
+                )));
             }
             // Retrieve some from db
             if !self.db.is_empty() {
@@ -345,10 +350,10 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return Ok(self.db.pop(0)?.map(|(el, elapsed)| {
+                    return Ok(self.db.pop(0)?.map(|(el, elapsed, time_since_visit)| {
                         let progress = el.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                        ContextWrapper::with_elapsed(el, elapsed)
+                        ContextWrapper::with_times(el, elapsed, time_since_visit)
                     }));
                 }
             }
@@ -361,8 +366,8 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
             let num_buckets = queue.approx_num_buckets();
@@ -377,7 +382,7 @@ where
             let len = queue.len();
             let score_limit =
                 if let Some((lower, upper)) = queue.peek_segment_priority_range(progress) {
-                    (*lower + *upper) / 2
+                    (lower.0 + upper.0) / 2
                 } else {
                     self.max_time()
                 };
@@ -406,18 +411,21 @@ where
 
     fn maybe_fetch_for_empty_buckets<'a>(
         &'a self,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
         // Runs over all the buckets
-        let Some(min_score) = queue.peek_min().map(|p| *p.1) else {
+        let Some((min_score, _)) = queue.peek_min().map(|p| *p.1) else {
             return Ok(queue);
         };
-        // threshold is 1/8 the difference between min score and max score, plus a small buffer for when min gets really close
-        let threshold = (self.max_time() - min_score) / 8 + (min_score / 1024);
+        // threshold is 1/8 the difference between min score and a reasonable upper bound,
+        // plus a small buffer for when min gets really close
+        // the reasonable upper bound is max_time / max number of visits
+        let threshold =
+            (self.max_time() / W::NUM_CANON_LOCATIONS as u32 - min_score) / 8 + (min_score / 1024);
 
         // We retrieve if the difference between the db best and the min score is more than the threshold.
-        // An alternate way to look at this is min_score - threshold = ms * 9/8 - ms / 1024 - max_time
-        // or db_best < min_score * 1151 / 1024 - max_time
+        // An alternate way to look at this is min_score - threshold = ms * 9/8 - ms / 1024 - upper bound
+        // or db_best < min_score * 1151 / 1024 - upper bound
         // Since this could underflow, we add a short-circuit
         let db_threshold = if threshold < min_score {
             min_score - threshold
@@ -453,8 +461,8 @@ where
     fn do_retrieve_and_insert<'a>(
         &'a self,
         segment: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, u32>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score>>>> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -474,14 +482,14 @@ where
 
     fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
-        F: Fn(&mut MutexGuard<BucketQueue<Segment<T, u32>>>) -> Option<(T, u32)>,
+        F: Fn(&mut MutexGuard<BucketQueue<Segment<T, Score>>>) -> Option<(T, Score)>,
     {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
                 // Retrieve the best elapsed time.
-                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                 let est = self.db.estimated_remaining_time(&ctx);
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + est > max_time {
@@ -495,7 +503,7 @@ where
                 let progress = ctx.count_visits();
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
 
-                vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                 if vec.len() == n {
                     return Ok(vec);
                 }
@@ -505,10 +513,10 @@ where
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
-                } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
+                } else if let Some((ctx, elapsed, time_since_visit)) = self.db.pop(0)? {
                     let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                    vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                 } else {
                     return Ok(vec);
                 }
@@ -519,7 +527,7 @@ where
 
     fn pop_special_multi<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
-        F: Fn(usize, &mut MutexGuard<BucketQueue<Segment<T, u32>>>) -> Vec<(T, u32)>,
+        F: Fn(usize, &mut MutexGuard<BucketQueue<Segment<T, Score>>>) -> Vec<(T, Score)>,
     {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
@@ -531,7 +539,7 @@ where
                 }
                 for (ctx, _) in values.into_iter() {
                     // Retrieve the best elapsed time.
-                    let elapsed = self.db.get_best_elapsed(&ctx)?;
+                    let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                     let est = self.db.estimated_remaining_time(&ctx);
                     let max_time = self.db.max_time();
                     if elapsed > max_time || elapsed + est > max_time {
@@ -545,7 +553,7 @@ where
                     let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
 
-                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                    vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                 }
                 if vec.len() >= n {
                     return Ok(vec);
@@ -556,10 +564,10 @@ where
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
-                } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
+                } else if let Some((ctx, elapsed, time_since_visit)) = self.db.pop(0)? {
                     let progress = ctx.count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                    vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                 } else {
                     return Ok(vec);
                 }
@@ -615,7 +623,7 @@ where
                 if higher < lower {
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                         // Retrieve the best elapsed time.
-                        let elapsed = self.db.get_best_elapsed(&ctx)?;
+                        let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                         let est = self.db.estimated_remaining_time(&ctx);
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + est > max_time {
@@ -628,7 +636,7 @@ where
                         }
                         let progress = ctx.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                        vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                        vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                         continue 'next;
                     }
                 }
@@ -663,7 +671,7 @@ where
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
                             // Retrieve the best elapsed time.
-                            let elapsed = self.db.get_best_elapsed(&ctx)?;
+                            let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                             let est = self.db.estimated_remaining_time(&ctx);
                             let max_time = self.db.max_time();
 
@@ -687,7 +695,7 @@ where
 
                             let progress = ctx.count_visits();
                             self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                            vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                            vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                             continue 'next;
                         }
                         if db_best < u32::MAX {
@@ -701,7 +709,7 @@ where
                             // Just grab the next one
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                                 // Retrieve the best elapsed time.
-                                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
                                 let est = self.db.estimated_remaining_time(&ctx);
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + est > max_time {
@@ -714,7 +722,11 @@ where
                                 }
                                 let progress = ctx.count_visits();
                                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                                vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                                vec.push(ContextWrapper::with_times(
+                                    ctx,
+                                    elapsed,
+                                    time_since_visit,
+                                ));
                                 continue 'next;
                             }
                         }
@@ -739,10 +751,14 @@ where
                     if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                         queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
-                    } else if let Some((el, elapsed)) = self.db.pop(0)? {
+                    } else if let Some((el, elapsed, time_since_visit)) = self.db.pop(0)? {
                         let progress = el.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                        return Ok(vec![ContextWrapper::with_elapsed(el, elapsed)]);
+                        return Ok(vec![ContextWrapper::with_times(
+                            el,
+                            elapsed,
+                            time_since_visit,
+                        )]);
                     }
                 }
             }
@@ -800,7 +816,7 @@ where
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been processed before. Of the ones remaining, the one with
-    /// lowest priority is returned instead of being added to the queue.
+    /// highest progress/lowest score is returned instead of being added to the queue.
     ///
     /// All elements must have the same prior state (supplied in prev).
     pub fn extend_get_best<I>(&self, iter: I, prev: &Option<T>) -> Result<Option<ContextWrapper<T>>>
@@ -817,12 +833,16 @@ where
         if let Some((mi, _)) = vec
             .iter()
             .enumerate()
-            .min_by_key(|(_, (_, p, priority))| (W::NUM_CANON_LOCATIONS - p, priority))
+            .min_by_key(|(_, (_, p, (score, total)))| (W::NUM_CANON_LOCATIONS - p, score, total))
         {
-            let (ctx, _, priority) = vec.swap_remove(mi);
-            let elapsed = priority - self.db.estimated_remaining_time(&ctx);
+            let (ctx, ..) = vec.swap_remove(mi);
+            let (elapsed, time_since_visit) = self.db.get_best_times(&ctx).unwrap();
             self.internal_extend(vec)?;
-            Ok(Some(ContextWrapper::with_elapsed(ctx, elapsed)))
+            Ok(Some(ContextWrapper::with_times(
+                ctx,
+                elapsed,
+                time_since_visit,
+            )))
         } else {
             Ok(None)
         }
@@ -845,28 +865,29 @@ where
         &self,
         mut vec: Vec<ContextWrapper<T>>,
         prev: &Option<T>,
-    ) -> Result<Vec<(T, usize, u32)>> {
+    ) -> Result<Vec<(T, usize, (u32, u32))>> {
         let mut iskips = 0;
         let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
         // TODO: Is it inefficient to deconstruct the wrapper here,
         // and then reconstruct the wrapper for the one element we keep,
         // or can we extract it first somehow?
-        let vec: Vec<(T, usize, u32)> = vec
+        let vec: Vec<(T, usize, (u32, u32))> = vec
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if self.world.won(el.get()) {
                     None
                 } else if el.elapsed() > self.db.max_time()
-                    || self.db.score(&el) > self.db.max_time()
+                    || self.db.total_estimate(&el) > self.db.max_time()
                 {
                     iskips += 1;
                     None
                 } else if keep {
-                    let priority = self.db.score(&el);
                     let progress = el.get().count_visits();
-                    Some((el.into_inner(), progress, priority))
+                    let score = el.time_since_visit();
+                    let total = self.db.total_estimate(&el);
+                    Some((el.into_inner(), progress, (score, total)))
                 } else {
                     None
                 }
@@ -877,7 +898,7 @@ where
         Ok(vec)
     }
 
-    fn internal_extend(&self, vec: Vec<(T, usize, u32)>) -> Result<()>
+    fn internal_extend(&self, vec: Vec<(T, usize, (u32, u32))>) -> Result<()>
     where
         T: Ctx<World = W>,
     {
@@ -936,19 +957,20 @@ where
         }
         let mut progresses = Vec::new();
         let mut prog_score = Vec::new();
-        for (progress, _, score) in queue.iter() {
-            let score: f64 = (*score).into();
-            let progress: u32 = progress.try_into().unwrap();
-            let progress: f64 = progress.into();
+        let mut prog_estimates = Vec::new();
+        for (progress, _, (time_since, total_estimate)) in queue.iter() {
+            let time_since = *time_since as f64;
+            let total_estimate = *total_estimate as f64;
+            let progress = progress as f64;
             progresses.push(progress);
-            prog_score.push((progress, score));
+            prog_score.push((progress, time_since));
+            prog_estimates.push((progress, total_estimate));
         }
         let queue_buckets = queue.bucket_sizes();
         let queue_caps = queue.bucket_capacities();
         let mut processed: Vec<f64> = Vec::new();
         for (progress, x) in self.processed_counts.iter().enumerate() {
-            let progress: u32 = progress.try_into().unwrap();
-            let progress: f64 = progress.into();
+            let progress = progress as f64;
             processed.extend(std::iter::repeat(progress).take(x.swap(0, Ordering::AcqRel)));
         }
         // unlock
@@ -979,6 +1001,18 @@ where
             .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
         println!(
             "Heap scores by progress level:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+
+        let p =
+            Plot::new(prog_estimates).point_style(PointStyle::new().marker(PointMarker::Circle));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("progress")
+            .y_label("total estimate")
+            .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
+        println!(
+            "Heap total estimates by progress level:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
 

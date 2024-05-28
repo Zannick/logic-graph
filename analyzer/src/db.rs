@@ -3,6 +3,7 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
+use crate::heap::Score;
 use crate::solutions::Solution;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
@@ -52,6 +53,7 @@ type NextData = (u32, Vec<u8>);
 struct StateData<I, S, L, E, A, Wp> {
     // Ordering is important here, since min_merge will sort by serialized bytes.
     elapsed: u32,
+    time_since_visit: u32,
     hist: Vec<History<I, S, L, E, A, Wp>>,
     // This is mainly going to be used for performing another lookup, no point
     // in deserializing just to reserialize
@@ -68,7 +70,7 @@ type StateDataAlias<T> = StateData<
 >;
 
 pub struct HeapDB<'w, W: World, T: Ctx> {
-    scorer: ContextScorer<
+    estimator: ContextScorer<
         'w,
         W,
         <<W as World>::Exit as Exit>::SpotId,
@@ -268,7 +270,7 @@ where
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
         Ok(HeapDB {
-            scorer,
+            estimator: scorer,
             db,
             statedb,
             _cache: cache,
@@ -307,7 +309,7 @@ where
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {
-        &self.scorer
+        &self.estimator
     }
 
     /// Returns the number of elements in the heap (tracked separately from the db).
@@ -332,7 +334,7 @@ where
     /// Returns the number of unique states we've estimated remaining time for.
     /// Winning states aren't counted in this.
     pub fn estimates(&self) -> usize {
-        self.scorer.estimates()
+        self.estimator.estimates()
     }
 
     pub fn db_best(&self, progress: usize) -> u32 {
@@ -355,7 +357,7 @@ where
     /// Returns the number of cache hits for estimated remaining time.
     /// Winning states aren't counted in this.
     pub fn cached_estimates(&self) -> usize {
-        self.scorer.cached_estimates()
+        self.estimator.cached_estimates()
     }
 
     pub fn background_deletes(&self) -> usize {
@@ -400,19 +402,19 @@ where
     /// The key for a ContextWrapper<T> in the queue is:
     /// the progress (4 bytes)
     /// the score (4 bytes),
-    /// the elapsed time (4 bytes),
+    /// the total time estimate (4 bytes),
     /// a sequence number (4 bytes)
     fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; 16] {
-        self.get_heap_key(el.get(), el.elapsed())
+        self.get_heap_key(el.get(), el.time_since_visit(), el.elapsed())
     }
 
-    fn get_heap_key(&self, el: &T, elapsed: u32) -> [u8; 16] {
+    fn get_heap_key(&self, el: &T, score: u32, elapsed: u32) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
         let progress: u32 = el.count_visits() as u32;
         let est = self.estimated_remaining_time(el);
         key[0..4].copy_from_slice(&progress.to_be_bytes());
-        key[4..8].copy_from_slice(&(elapsed + est).to_be_bytes());
-        key[8..12].copy_from_slice(&elapsed.to_be_bytes());
+        key[4..8].copy_from_slice(&score.to_be_bytes());
+        key[8..12].copy_from_slice(&(elapsed + est).to_be_bytes());
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
@@ -420,16 +422,26 @@ where
     fn get_score_from_heap_key(key: &[u8]) -> u32 {
         u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
+    fn get_total_estimate_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[8..12].try_into().unwrap())
+    }
 
-    fn new_heap_key(&self, old_key: &[u8], old_elapsed: u32, new_elapsed: u32) -> [u8; 16] {
-        let old_score = Self::get_score_from_heap_key(old_key);
-        let new_score = old_score - old_elapsed + new_elapsed;
+    fn new_heap_key(
+        &self,
+        old_key: &[u8],
+        new_score: u32,
+        old_elapsed: u32,
+        new_elapsed: u32,
+    ) -> [u8; 16] {
+        // This works because the total is an estimated time (requiring deserialization)
+        // plus the actual elapsed time; we can just adjust by the difference in elapsed time
+        let old_total = Self::get_total_estimate_from_heap_key(old_key);
+        let new_total = old_total - old_elapsed + new_elapsed;
+
         let mut key: [u8; 16] = [0; 16];
         key[0..4].copy_from_slice(&old_key[0..4]);
-        // This works because score is an estimated time (requiring deserialization)
-        // plus the actual elapsed time
         key[4..8].copy_from_slice(&new_score.to_be_bytes());
-        key[8..12].copy_from_slice(&new_elapsed.to_be_bytes());
+        key[8..12].copy_from_slice(&new_total.to_be_bytes());
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
@@ -467,7 +479,11 @@ where
         let sd = self
             .get_deserialize_state_data(value)?
             .expect("Got unrecognized state from db!");
-        Ok(ContextWrapper::with_elapsed(ctx, sd.elapsed))
+        Ok(ContextWrapper::with_times(
+            ctx,
+            sd.elapsed,
+            sd.time_since_visit,
+        ))
     }
 
     fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
@@ -527,7 +543,10 @@ where
 
     /// Estimates the remaining time to the goal.
     pub fn estimated_remaining_time(&self, ctx: &T) -> u32 {
-        self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
+        self.estimator
+            .estimate_remaining_time(ctx)
+            .try_into()
+            .unwrap()
     }
 
     pub fn estimate_time_to_get(
@@ -539,7 +558,7 @@ where
             i16,
         )>,
     ) -> u32 {
-        self.scorer
+        self.estimator
             .estimate_time_to_get(ctx, required, subsets)
             .try_into()
             .unwrap()
@@ -548,7 +567,7 @@ where
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
-    pub fn score<R>(&self, el: &R) -> u32
+    pub fn total_estimate<R>(&self, el: &R) -> u32
     where
         R: Wrapper<T>,
     {
@@ -565,7 +584,7 @@ where
         if !self.record_one(&mut el, prev, false)? {
             return Ok(());
         }
-        if el.elapsed() > max_time || self.score(&el) > max_time {
+        if el.elapsed() > max_time || self.total_estimate(&el) > max_time {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
@@ -586,7 +605,7 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<(T, u32)>> {
+    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<(T, u32, u32)>> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
@@ -619,7 +638,7 @@ where
             }
 
             let el = Self::deserialize_state(&value)?;
-            let elapsed = self.get_best_elapsed_raw(&value)?;
+            let (elapsed, time_since) = self.get_best_times_raw(&value)?;
             if elapsed > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
@@ -643,7 +662,7 @@ where
 
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
-            return Ok(Some((el, elapsed)));
+            return Ok(Some((el, elapsed, time_since)));
         }
 
         self.reset_estimates_in_range_unbounded(start_progress);
@@ -653,7 +672,7 @@ where
 
     pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
     where
-        I: IntoIterator<Item = (T, u32)>,
+        I: IntoIterator<Item = (T, Score)>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
@@ -664,8 +683,8 @@ where
         mins.resize(W::NUM_CANON_LOCATIONS, u32::MAX);
 
         for (el, score) in iter {
-            let elapsed = self.get_best_elapsed(&el)?;
-            if elapsed > max_time || score > max_time {
+            let (elapsed, time_since) = self.get_best_times(&el)?;
+            if elapsed > max_time || score.1 > max_time {
                 skips += 1;
                 continue;
             }
@@ -678,8 +697,8 @@ where
             }
 
             let progress = el.count_visits();
-            mins[progress] = std::cmp::min(mins[progress], score);
-            let key = self.get_heap_key(&el, elapsed);
+            mins[progress] = std::cmp::min(mins[progress], time_since);
+            let key = self.get_heap_key(&el, time_since, elapsed);
             batch.put(key, val);
         }
         let new = batch.len();
@@ -732,12 +751,13 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
+    /// Elements are returned as a tuple (T, elapsed time, score, estimated remaining time)
     pub fn retrieve(
         &self,
         start_progress: usize,
         count: usize,
         score_limit: u32,
-    ) -> Result<Vec<(T, u32, u32)>, Error> {
+    ) -> Result<Vec<(T, u32, u32, u32)>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -763,16 +783,17 @@ where
         batch.delete(key);
 
         let el = Self::deserialize_state(&value)?;
-        let elapsed = self.get_best_elapsed_raw(&value)?;
+        let (elapsed, time_since) = self.get_best_times_raw(&value)?;
         let est = self.estimated_remaining_time(&el);
         let max_time = self.max_time();
         if elapsed > max_time || elapsed + est > max_time {
             pskips += 1;
+        // TODO: Not sure if we need a score limit when score is time_since?
         } else if score > score_limit {
-            res.push((el, elapsed, est));
+            res.push((el, elapsed, time_since, est));
             return Ok(res);
         } else {
-            res.push((el, elapsed, est));
+            res.push((el, elapsed, time_since, est));
         }
 
         let start = Instant::now();
@@ -785,7 +806,7 @@ where
                     pops += 1;
 
                     let el = Self::deserialize_state(&value)?;
-                    let elapsed = self.get_best_elapsed_raw(&value)?;
+                    let (elapsed, time_since) = self.get_best_times_raw(&value)?;
                     let est = self.estimated_remaining_time(&el);
                     let max_time = self.max_time();
                     if elapsed > max_time || elapsed + est > max_time {
@@ -797,7 +818,7 @@ where
                         continue;
                     }
 
-                    res.push((el, elapsed, est));
+                    res.push((el, elapsed, time_since, est));
                     if res.len() == count {
                         break 'outer;
                     }
@@ -816,8 +837,8 @@ where
             pops
         );
 
-        if let Some((el, elapsed, est)) = res.last() {
-            self.reset_estimates_in_range(start_progress, el.count_visits(), elapsed + est);
+        if let Some((el, _, time_since, _)) = res.last() {
+            self.reset_estimates_in_range(start_progress, el.count_visits(), *time_since);
         } else {
             self.reset_estimates_in_range_unbounded(start_progress);
         }
@@ -853,16 +874,16 @@ where
         self.dup_pskips.fetch_add(1, Ordering::Release);
     }
 
-    pub fn get_best_elapsed(&self, el: &T) -> Result<u32, Error> {
+    pub fn get_best_times(&self, el: &T) -> Result<(u32, u32), Error> {
         let state_key = Self::serialize_state(el);
-        self.get_best_elapsed_raw(&state_key)
+        self.get_best_times_raw(&state_key)
     }
 
-    fn get_best_elapsed_raw(&self, state_key: &[u8]) -> Result<u32, Error> {
+    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<(u32, u32), Error> {
         let sd = self
             .get_deserialize_state_data(state_key)?
             .expect("Didn't find state data!");
-        Ok(sd.elapsed)
+        Ok((sd.elapsed, sd.time_since_visit))
     }
 
     fn record_one_internal(
@@ -870,7 +891,8 @@ where
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
         prev: &Vec<u8>,
-        // In case the route looped back on itself, we use the best previous time
+        // In case the route looped back on itself, we use the best previous times
+        best_since_visit: u32,
         best_elapsed: u32,
         next_entries: &mut Vec<NextData>,
     ) {
@@ -891,6 +913,7 @@ where
                 &state_key,
                 Self::serialize_data(StateData {
                     elapsed: best_elapsed,
+                    time_since_visit: best_since_visit,
                     hist,
                     prev: prev.clone(),
                 }),
@@ -898,29 +921,36 @@ where
             )
             .unwrap();
 
-        let mut to_adjust: Vec<_> = vec![(best_elapsed, state_key)];
+        let mut to_adjust: Vec<_> = vec![(best_elapsed, best_since_visit, state_key)];
 
-        while let Some((prev_elapsed, state_key)) = to_adjust.pop() {
+        while let Some((prev_elapsed, prev_since_visit, state_key)) = to_adjust.pop() {
             // Get all the children of state_key
             // these are (dur, state) pairs that indicate states you get after el
             // and how long the transition to that state takes
             for (new_dur, new_ctx_key) in self.get_deserialize_next_data(&state_key).unwrap() {
                 // new_dur = time after el
                 let new_elapsed = prev_elapsed + new_dur;
+                let new_time_since_visit = prev_since_visit + new_dur;
                 // each child points back at the prev and includes the hist step(s)
                 if let Some(StateData {
                     elapsed,
+                    time_since_visit,
                     hist,
                     prev,
                 }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
                 {
                     if new_elapsed < elapsed {
+                        // If this state had a visit, its value (time_since_visit) will be smaller (usually 0).
+                        // We want to store (and propagate downward) this value if so.
+                        let time_since_visit =
+                            std::cmp::min(time_since_visit, new_time_since_visit);
                         self.statedb
                             .merge_cf_opt(
                                 self.best_cf(),
                                 &new_ctx_key,
                                 Self::serialize_data(StateData {
                                     elapsed: new_elapsed,
+                                    time_since_visit,
                                     // hist and prev don't change
                                     hist,
                                     prev,
@@ -951,7 +981,7 @@ where
 
                         // It doesn't really matter the order in which we update,
                         // but we shouldn't load everything all at once.
-                        to_adjust.push((new_elapsed, new_ctx_key));
+                        to_adjust.push((new_elapsed, time_since_visit, new_ctx_key));
                     }
                 }
                 // We don't know what to write in the else case
@@ -1001,7 +1031,7 @@ where
 
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
-        self.record_one_internal(state_key, el, &prev_key, best_elapsed, &mut next_entries);
+        self.record_one_internal(state_key, el, &prev_key, 0, best_elapsed, &mut next_entries);
 
         if let Some(p) = prev {
             if !state_only {
@@ -1039,13 +1069,13 @@ where
         let mut new_seen = 0;
         let cf = self.best_cf();
 
-        let (prev_key, prev_elapsed) = if let Some(c) = prev {
+        let (prev_key, prev_scoreinfo) = if let Some(c) = prev {
             let prev_key = Self::serialize_state(c);
-            let elapsed = self
+            let scoreinfo = self
                 .get_deserialize_state_data(&prev_key)
                 .unwrap()
-                .map(|sd| sd.elapsed);
-            (prev_key, elapsed)
+                .map(|sd| (sd.time_since_visit, sd.elapsed));
+            (prev_key, scoreinfo)
         } else {
             (Vec::new(), None)
         };
@@ -1062,11 +1092,22 @@ where
             .zip(seeing.into_iter())
             .zip(seen_values.into_iter())
         {
-            let best_elapsed = if let Some(p_elapsed) = prev_elapsed {
-                p_elapsed + el.recent_dur()
-            } else {
-                el.elapsed()
-            };
+            let (best_since_visit, best_elapsed) =
+                if let Some((p_since_visit, p_elapsed)) = prev_scoreinfo {
+                    (
+                        // If recent_dur is larger than time_since_visit, then it means
+                        // that we had a visit in the recent history.
+                        // Otherwise, we didn't, so we can just add the recent_dur.
+                        if el.time_since_visit() < el.recent_dur() {
+                            el.time_since_visit()
+                        } else {
+                            p_since_visit + el.recent_dur()
+                        },
+                        p_elapsed + el.recent_dur(),
+                    )
+                } else {
+                    (el.time_since_visit(), el.elapsed())
+                };
             if let Some(StateData { elapsed, .. }) = seen_val {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
                 if elapsed <= best_elapsed {
@@ -1079,7 +1120,14 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_internal(state_key, el, &prev_key, best_elapsed, &mut next_entries);
+            self.record_one_internal(
+                state_key,
+                el,
+                &prev_key,
+                best_since_visit,
+                best_elapsed,
+                &mut next_entries,
+            );
             results.push(true);
         }
 
@@ -1141,7 +1189,11 @@ where
                         continue;
                     }
 
-                    let StateData { elapsed, .. } = self
+                    let StateData {
+                        elapsed,
+                        time_since_visit,
+                        ..
+                    } = self
                         .get_deserialize_state_data(&value)?
                         .expect("Bg thread found unrecognized state in the db!");
                     let max_time = self.max_time();
@@ -1157,7 +1209,7 @@ where
                             .unwrap(),
                     );
                     if known > elapsed {
-                        let new_key = self.new_heap_key(&key, known, elapsed);
+                        let new_key = self.new_heap_key(&key, time_since_visit, known, elapsed);
                         batch.put(new_key, value);
                         batch.delete(&key);
                         rescores += 1;
@@ -1331,7 +1383,7 @@ where
             let (_, value) = item?;
             let el = self.get_queue_entry_wrapper(&value)?;
             times.push(el.elapsed().into());
-            time_scores.push((el.elapsed().into(), self.score(&el).into()));
+            time_scores.push((el.elapsed().into(), self.total_estimate(&el).into()));
         }
 
         let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));

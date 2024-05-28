@@ -429,12 +429,14 @@ pub type HistoryAlias<T> = History<
 pub trait Wrapper<T> {
     fn get(&self) -> &T;
     fn elapsed(&self) -> u32;
+    fn time_since_visit(&self) -> u32;
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
+    time_since_visit: u32,
     hist_dur: u32,
     hist: Vec<History<I, S, L, E, A, Wp>>,
 }
@@ -456,6 +458,9 @@ impl<T: Ctx> Wrapper<T> for ContextWrapper<T> {
     fn elapsed(&self) -> u32 {
         self.elapsed
     }
+    fn time_since_visit(&self) -> u32 {
+        self.time_since_visit
+    }
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -463,6 +468,7 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
+            time_since_visit: 0,
             hist_dur: 0,
             hist: Vec::new(),
         }
@@ -486,10 +492,11 @@ impl<T: Ctx> ContextWrapper<T> {
         })
     }
 
-    pub fn with_elapsed(ctx: T, elapsed: u32) -> ContextWrapper<T> {
+    pub fn with_times(ctx: T, elapsed: u32, time_since_visit: u32) -> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed,
+            time_since_visit,
             hist_dur: 0,
             hist: Vec::new(),
         }
@@ -516,11 +523,9 @@ impl<T: Ctx> ContextWrapper<T> {
         (r, hist_dur)
     }
 
-    pub fn elapse(&mut self, t: u32) {
+    fn elapse(&mut self, t: u32) {
         self.elapsed += t;
-    }
-    pub fn set_elapsed(&mut self, t: u32) {
-        self.elapsed = t;
+        self.time_since_visit += t;
     }
 
     pub fn get_mut(&mut self) -> &mut T {
@@ -538,6 +543,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.collect(loc.item(), world);
         self.ctx.spend(loc.price());
         self.elapse(dur);
+        self.time_since_visit = 0;
         self.append_history(History::G(loc.item(), loc.id()), dur);
     }
 
@@ -624,6 +630,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest(), world);
         self.elapse(exit_dur);
+        self.time_since_visit = 0;
 
         self.append_history(History::H(loc.item(), exit.id()), loc_dur + exit_dur);
     }
@@ -931,10 +938,11 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
-            "At {}ms (elapsed={} est. left={}), visited={}\nNow: {} after {}",
+            "At {}ms (elapsed={} est. left={}, since visit={}), visited={}\nNow: {} after {}",
             self.elapsed + est,
             self.elapsed,
             est,
+            self.time_since_visit,
             self.get().count_visits(),
             self.ctx.position(),
             if let Some(val) = last {

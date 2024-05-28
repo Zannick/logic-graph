@@ -497,7 +497,7 @@ where
         let iters = self.iters.load(Ordering::Acquire);
 
         let history = self.queue.db().get_history(ctx.get()).unwrap();
-        let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
+        let (elapsed, ..) = self.queue.db().get_best_times(ctx.get()).unwrap();
 
         let solution = Arc::new(Solution { elapsed, history });
 
@@ -677,6 +677,7 @@ where
             } else {
                 let prev = Some(ctx.get().clone());
                 let elapsed = ctx.elapsed();
+                let time_since_visit = ctx.time_since_visit();
                 let next = self.recreate_step(ctx);
                 if let Some((ci, _)) = next
                     .iter()
@@ -692,7 +693,7 @@ where
                     // We didn't find the desired state.
                     // Check whether this is a no-op. If so, we can skip pushing states into the queue,
                     // since next iteration will regenerate them.
-                    ctx = ContextWrapper::with_elapsed(prev.unwrap(), elapsed);
+                    ctx = ContextWrapper::with_times(prev.unwrap(), elapsed, time_since_visit);
                     if ctx.can_replay(self.world, *hist) {
                         let c = ctx.get().clone();
                         ctx.replay(self.world, *hist);
@@ -1124,7 +1125,7 @@ where
             heap_bests
                 .into_iter()
                 .map(|n| match n {
-                    Some(n) => n.to_string(),
+                    Some((n, ..)) => n.to_string(),
                     None => String::from("-"),
                 })
                 .collect::<Vec<_>>()
