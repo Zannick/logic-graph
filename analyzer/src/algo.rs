@@ -478,6 +478,7 @@ where
 
         let min_progress = self.min_progress();
         let res = sols.insert_solution(solution.clone(), self.world);
+        drop(sols); // release before recording observations/minimizing
         if res.accepted() {
             if res == SolutionResult::IsUnique {
                 log::info!(
@@ -500,7 +501,6 @@ where
                 .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
 
-        drop(sols); // release before minimizing
         let min_ctx = if mode != SearchMode::Minimized {
             trie_minimize(
                 self.world,
@@ -535,6 +535,7 @@ where
             if res == SolutionResult::IsUnique {
                 log::info!("Minimized({:?}) found new unique solution", mode);
             }
+            drop(sols);
             if res.accepted() {
                 record_observations(
                     self.startctx.get(),
@@ -545,7 +546,6 @@ where
                 );
             }
 
-            drop(sols);
             self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
                 .unwrap();
         }
