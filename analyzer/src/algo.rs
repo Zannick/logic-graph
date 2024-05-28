@@ -3,7 +3,7 @@ use crate::context::*;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
-use crate::minimize::{mutate_spot_revisits, trie_minimize, trie_search};
+use crate::minimize::{trie_minimize, trie_search};
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
@@ -33,7 +33,6 @@ enum SearchMode {
     Mode(usize),
     Unknown,
     Similar,
-    Mutate,
 }
 
 fn mode_by_index(index: usize) -> SearchMode {
@@ -321,7 +320,7 @@ where
                     record_observations(startctx.get(), world, sol.clone(), 1, &solve_trie);
                 }
                 // Try trie-minimization; if successful, insert and record that solution.
-                let improved = if let Some(solution) =
+                if let Some(solution) =
                     trie_minimize(world, startctx.get(), sol.clone(), &solve_trie)
                         .map(|c| c.into_solution())
                 {
@@ -336,49 +335,6 @@ where
                             1,
                             &solve_trie,
                         );
-                    }
-                    solution
-                } else {
-                    sol
-                };
-                // Try revisit mutation on the improved solution or the base one.
-                // This may produce more solutions; try to trie-minimize those as well.
-                // Any that aren't solutions will be additional routes.
-                let vec = mutate_spot_revisits(world, startctx.get(), improved);
-                for c in vec {
-                    if world.won(c.get()) {
-                        let solution = c.into_solution();
-                        if solutions
-                            .insert_solution(solution.clone(), world)
-                            .accepted()
-                        {
-                            record_observations(
-                                startctx.get(),
-                                world,
-                                solution.clone(),
-                                1,
-                                &solve_trie,
-                            );
-                        }
-                        if let Some(solution) =
-                            trie_minimize(world, startctx.get(), solution.clone(), &solve_trie)
-                                .map(|c| c.into_solution())
-                        {
-                            if solutions
-                                .insert_solution(solution.clone(), world)
-                                .accepted()
-                            {
-                                record_observations(
-                                    startctx.get(),
-                                    world,
-                                    solution,
-                                    1,
-                                    &solve_trie,
-                                );
-                            }
-                        }
-                    } else {
-                        others.push(c);
                     }
                 }
             }
@@ -591,20 +547,6 @@ where
 
             drop(sols);
             self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
-                .unwrap();
-            if mode != SearchMode::Mutate {
-                self.mutate_solution(solution);
-            }
-        } else if !matches!(mode, SearchMode::Minimized | SearchMode::Mutate) {
-            drop(sols);
-            self.mutate_solution(solution);
-        }
-    }
-
-    fn mutate_solution(&self, solution: Arc<Solution<T>>) {
-        let vec = mutate_spot_revisits(self.world, self.startctx.get(), solution);
-        for mut c in vec {
-            self.recreate_store(&self.startctx, &c.remove_history().0, SearchMode::Mutate)
                 .unwrap();
         }
     }
