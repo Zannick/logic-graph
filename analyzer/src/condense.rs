@@ -130,6 +130,7 @@ where
 pub struct CondensedEdge<T: Ctx, S, E> {
     pub dst: S,
     pub time: u32,
+    pub index: usize,
     reqs: Requirements<T, E>,
 }
 
@@ -218,12 +219,14 @@ where
 
         for (dst, (path, time)) in best {
             if !path.is_empty() && world.spot_of_interest(dst) {
-                let ce = CondensedEdge {
+                let mut ce = CondensedEdge {
                     dst,
                     time,
+                    index: 0,
                     reqs: Requirements::default(),
                 };
                 if let Some(v) = condensed.get_mut(&start) {
+                    ce.index = v.len();
                     v.push(ce);
                 } else {
                     condensed.insert(start, vec![ce]);
@@ -267,9 +270,10 @@ where
             if world.spot_of_interest(cur) && !path.is_empty() {
                 let has_exit = path.iter().any(|he| matches!(he, HeapEdge::Exit(_)));
 
-                let ce = CondensedEdge {
+                let mut ce = CondensedEdge {
                     dst: cur,
                     time: t,
+                    index: 0,
                     reqs,
                 };
                 if let Some(vec) = condensed.get_mut(&start) {
@@ -283,6 +287,7 @@ where
                             .filter(|c| c.dst == cur)
                             .any(|c| c.reqs.is_subset_of(&ce.reqs) && c.time < t)
                         {
+                            ce.index = vec.len();
                             vec.push(ce);
                         }
                     } else if has_exit {
@@ -295,6 +300,7 @@ where
                             }
                             continue;
                         }
+                        ce.index = vec.len();
                         vec.push(ce);
                     }
                 } else {

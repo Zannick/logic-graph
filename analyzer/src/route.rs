@@ -144,7 +144,7 @@ where
                 )
             });
         }
-        History::L(spot_id) | History::C(spot_id) => {
+        History::L(spot_id) | History::C(spot_id, ..) => {
             ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
                 panic!(
                     "Could not complete route step {}: couldn't reach {} from {}\n{}",

@@ -226,13 +226,12 @@ pub trait Ctx:
                     false
                 }
             }
-            History::C(spot_id) => {
+            History::C(spot_id, idx) => {
                 let movement_state = self.observe_movement_state(world, observer);
                 let edges = world.get_condensed_edges_from(self.position());
-                if edges.iter().any(|edge| {
-                    edge.dst == spot_id
-                        && edge.observe_access(world, self, movement_state, observer)
-                }) {
+                let edge = &edges[idx];
+                if edge.dst == spot_id && edge.observe_access(world, self, movement_state, observer)
+                {
                     observer.observe_on_entry(self, spot_id, world);
                     true
                 } else {
@@ -258,7 +257,7 @@ pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
     // Action
     A(ActionId),
     // Condensed local movement
-    C(SpotId),
+    C(SpotId, usize),
 }
 
 impl<I, S, L, E, A, Wp> Copy for History<I, S, L, E, A, Wp>
@@ -291,7 +290,7 @@ where
             }
             History::L(spot) => write!(f, "  Move to {}", spot),
             History::A(action) => write!(f, "! Do {}", action),
-            History::C(spot) => write!(f, "  Move... to {}", spot),
+            History::C(spot, ..) => write!(f, "  Move... to {}", spot),
         }
     }
 }
@@ -322,8 +321,12 @@ where
                 item.hash(state);
                 exit.hash(state);
             }
-            History::L(spot) | History::C(spot) => {
+            History::L(spot) => {
                 spot.hash(state);
+            }
+            History::C(spot, idx) => {
+                spot.hash(state);
+                idx.hash(state);
             }
             History::A(action) => {
                 action.hash(state);
@@ -582,7 +585,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(edge.dst, world);
         self.elapse(edge.time);
-        self.append_history(History::C(edge.dst), edge.time);
+        self.append_history(History::C(edge.dst, edge.index), edge.time);
     }
 
     pub fn warp<W, E, Wp>(&mut self, world: &W, warp: &Wp)
@@ -704,12 +707,12 @@ impl<T: Ctx> ContextWrapper<T> {
                 (world.is_global_action(act_id) || self.ctx.position() == spot_id)
                     && action.can_access(&self.ctx, world)
             }
-            History::C(spot_id) => {
+            History::C(spot_id, idx) => {
                 let movement_state = self.ctx.get_movement_state(world);
                 let edges = world.get_condensed_edges_from(self.ctx.position());
-                edges.iter().any(|edge| {
-                    edge.dst == spot_id && edge.can_access(world, &self.ctx, movement_state)
-                })
+                idx < edges.len()
+                    && edges[idx].dst == spot_id
+                    && edges[idx].can_access(world, &self.ctx, movement_state)
             }
         }
     }
@@ -771,20 +774,25 @@ impl<T: Ctx> ContextWrapper<T> {
                 let action = world.get_action(act_id);
                 self.activate(world, action);
             }
-            History::C(spot) => {
+            History::C(spot, idx) => {
                 let vce = world.get_condensed_edges_from(self.ctx.position());
                 // Find the minimum of these edges that goes to spot that we can take
                 // The list is pre-sorted in ascending order (not including penalties), so we can just take the first one.
-                let ce = vce
-                    .iter()
-                    .find(|&c| {
-                        c.dst == spot
-                            && c.can_access(world, self.get(), self.ctx.get_movement_state(world))
-                    });
-                self.move_condensed_edge(
-                    world,
-                    ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),
+                assert!(
+                    idx < vce.len(),
+                    "Invalid replay: move-condensed {:?} index={} len={})",
+                    spot,
+                    idx,
+                    vce.len()
                 );
+                let ce = &vce[idx];
+                assert!(
+                    ce.dst == spot
+                        && ce.can_access(world, self.get(), self.ctx.get_movement_state(world)),
+                    "Invalid replay: move-condensed {:?}",
+                    spot
+                );
+                self.move_condensed_edge(world, ce);
             }
         }
     }
@@ -819,20 +827,18 @@ impl<T: Ctx> ContextWrapper<T> {
                 }
             }
             History::A(act_id) => world.get_action(act_id).explain(self.get(), world),
-            History::C(spot_id) => {
-                let vce: Vec<_> = world
-                    .get_condensed_edges_from(self.ctx.position())
-                    .iter()
-                    .filter(|&c| c.dst == spot_id)
-                    .collect();
-                let mut exp = Vec::new();
+            History::C(spot_id, idx) => {
+                let vce = world.get_condensed_edges_from(self.ctx.position());
                 let mvs = self.ctx.get_movement_state(world);
-                for ce in vce {
-                    if !ce.can_access(world, self.get(), mvs) {
-                        exp.push(ce.explain(world, self.get(), mvs));
-                    }
+                if idx >= vce.len() {
+                    format!("Invalid CE index {} vs len {} at {}", idx, vce.len(), self.ctx.position())
+                } else if vce[idx].dst != spot_id {
+                    format!("CE index {} is spot {} and not {}", idx, vce[idx].dst, spot_id)
+                } else if !vce[idx].can_access(world, self.get(), mvs) {
+                    vce[idx].explain(world, self.get(), mvs)
+                } else {
+                    String::from("")
                 }
-                exp.join("\n")
             }
         }
     }
@@ -916,11 +922,7 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns true and replays if all steps are valid in the order presented, or false if any step failed.
     /// This mutates the object, so use a clone if you want to keep a copy of the original.
-    pub fn maybe_replay_all<W, L, E, Wp>(
-        &mut self,
-        world: &W,
-        steps: &[HistoryAlias<T>],
-    ) -> bool
+    pub fn maybe_replay_all<W, L, E, Wp>(&mut self, world: &W, steps: &[HistoryAlias<T>]) -> bool
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
@@ -987,8 +989,8 @@ where
             if let Some(lh) = v.last_mut() {
                 match (*lh, h) {
                     (
-                        History::E(..) | History::L(..) | History::C(_),
-                        History::E(..) | History::L(..) | History::C(_),
+                        History::E(..) | History::L(..) | History::C(..),
+                        History::E(..) | History::L(..) | History::C(..),
                     ) => *lh = h,
                     _ => v.push(h),
                 }
@@ -1001,7 +1003,7 @@ where
         .map(|h| match h {
             History::G(..) | History::H(..) | History::A(..) => h.to_string(),
             History::E(e) => format!("  Move... to {}", e),
-            History::L(s) | History::C(s) => {
+            History::L(s) | History::C(s, ..) => {
                 format!("  Move... to {}", s)
             }
             History::W(w, s) => {
