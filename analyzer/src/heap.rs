@@ -303,7 +303,7 @@ where
                 let progress = el.count_visits();
                 let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
-                if !self.db.is_empty() && db_best < u32::MAX && min_score.0 > db_best * 101 / 100 {
+                if !self.db.is_empty() && db_best < u32::MAX && min_score.0 > db_best * 11 / 10 {
                     queue = self.maybe_reshuffle(
                         progress,
                         self.min_reshuffle,
@@ -375,6 +375,9 @@ where
                 } else {
                     self.max_time()
                 };
+            if score_limit < self.db.db_best(progress) {
+                return Ok(queue);
+            }
             if self.capacity - len < num_to_restore {
                 // evict at least twice that much.
                 let evicted = Self::evict_internal(
