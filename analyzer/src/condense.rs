@@ -127,7 +127,7 @@ where
         String::from("CE Success")
     }
 
-    pub fn time<W>(&self, world: &W, ctx: &T) -> u32
+    pub fn penalty_time<W>(&self, world: &W, ctx: &T) -> u32
     where
         W: World,
         T: Ctx<World = W>,
@@ -136,7 +136,10 @@ where
     {
         self.reqs
             .iter()
-            .map(|e| world.get_exit(*e).time(ctx, world))
+            .map(|e| {
+                let ex = world.get_exit(*e);
+                ex.time(ctx, world) - ex.base_time()
+            })
             .sum()
     }
 
@@ -210,7 +213,7 @@ where
         W::Exit: Exit<ExitId = E>,
         W::Location: Location<Context = T>,
     {
-        self.reqs.time(world, ctx)
+        self.reqs.penalty_time(world, ctx) + self.time
     }
 }
 
