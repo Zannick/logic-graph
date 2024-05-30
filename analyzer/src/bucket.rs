@@ -398,6 +398,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     /// Finds the lowest segment S and the highest corresponding segment S' below S
     /// where S-min > S'-max, and evicts all elements below S' with priority > S-max.
+    /// Requires that priorities trend to increase as segment increases.
     fn pop_likely_useless(&mut self) -> Vec<(B::Item, P)>
     where
         P: Copy + std::fmt::Debug,

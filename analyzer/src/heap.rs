@@ -265,14 +265,7 @@ where
         queue: &mut MutexGuard<BucketQueue<Segment<T, Score>>>,
         min_evictions: usize,
     ) -> Vec<(T, Score)> {
-        let mut evicted = queue.pop_likely_useless();
-        if !evicted.is_empty() {
-            log::debug!("Evicted {} useless states", evicted.len());
-        }
-        let more = min_evictions.saturating_sub(evicted.len());
-        if more > 0 {
-            evicted.extend(queue.pop_max_proportionally(more));
-        }
+        let evicted = queue.pop_max_proportionally(min_evictions);
         queue.shrink_to_fit();
         evicted
     }
