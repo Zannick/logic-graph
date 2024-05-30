@@ -774,13 +774,13 @@ impl<T: Ctx> ContextWrapper<T> {
             History::C(spot) => {
                 let vce = world.get_condensed_edges_from(self.ctx.position());
                 // Find the minimum of these edges that goes to spot that we can take
+                // The list is pre-sorted in ascending order (not including penalties), so we can just take the first one.
                 let ce = vce
                     .iter()
-                    .filter(|&c| {
+                    .find(|&c| {
                         c.dst == spot
                             && c.can_access(world, self.get(), self.ctx.get_movement_state(world))
-                    })
-                    .min_by_key(|c| c.time);
+                    });
                 self.move_condensed_edge(
                     world,
                     ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),

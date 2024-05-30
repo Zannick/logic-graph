@@ -276,7 +276,7 @@ where
                     if !ce.reqs.is_empty() {
                         // If none of the existing edges for this connection are both:
                         // a. a subset of this connection's reqs
-                        // b. a better time
+                        // b. a better time (it's guaranteed <= thanks to the heap)
                         // then we can save the edge
                         if !vec
                             .iter()
