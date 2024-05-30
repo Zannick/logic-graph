@@ -582,10 +582,12 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Exit = E>,
         T: Ctx<World = W>,
         E: Exit<Context = T>,
+        W::Location: Location<Context = T>,
     {
         self.ctx.set_position(edge.dst, world);
-        self.elapse(edge.time);
-        self.append_history(History::C(edge.dst, edge.index), edge.time);
+        let time = edge.time(world, self.get());
+        self.elapse(time);
+        self.append_history(History::C(edge.dst, edge.index), time);
     }
 
     pub fn warp<W, E, Wp>(&mut self, world: &W, warp: &Wp)

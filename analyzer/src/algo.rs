@@ -178,7 +178,9 @@ where
     let movement_state = ctx.get().get_movement_state(world);
     let mut results = Vec::new();
     for ce in world.get_condensed_edges_from(ctx.get().position()) {
-        if ce.time + ctx.elapsed() <= max_time && ce.can_access(world, ctx.get(), movement_state) {
+        if ce.time(world, ctx.get()) + ctx.elapsed() <= max_time
+            && ce.can_access(world, ctx.get(), movement_state)
+        {
             let mut newctx = ctx.clone();
             newctx.move_condensed_edge(world, ce);
             results.push(newctx);

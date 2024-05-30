@@ -7214,6 +7214,39 @@ impl world::Exit for Exit {
             _ => false,
         }
     }
+    fn has_penalties(id: ExitId) -> bool {
+        match id {
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => true,
+            ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => true,
+            ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => true,
+            ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => true,
+            ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => true,
+            ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Annuna_Upper__ex__Annuna__Upper_Save__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => true,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => true,
+            ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => true,
+            ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Irikar_Beach_Save__ex__Irikar__Beach_Save__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Irikar_Midwest__ex__Irikar__Midwest__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => true,
+            ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => true,
+            _ => false,
+
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]

@@ -80,7 +80,13 @@ where
             .all(|&e| world.get_exit(e).can_access(ctx, world))
     }
 
-    pub fn observe_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState, observer: &mut T::Observer) -> bool
+    pub fn observe_access<W>(
+        &self,
+        world: &W,
+        ctx: &T,
+        movements: T::MovementState,
+        observer: &mut T::Observer,
+    ) -> bool
     where
         W: World,
         T: Ctx<World = W>,
@@ -121,6 +127,28 @@ where
         String::from("CE Success")
     }
 
+    pub fn time<W>(&self, world: &W, ctx: &T) -> u32
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs
+            .iter()
+            .map(|e| world.get_exit(*e).time(ctx, world))
+            .sum()
+    }
+
+    pub fn has_penalties<W>(&self) -> bool
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+    {
+        self.reqs.iter().any(|e| W::Exit::has_penalties(*e))
+    }
+
     pub fn is_empty(&self) -> bool {
         self.movement.is_none() && self.reqs.is_empty()
     }
@@ -129,7 +157,7 @@ where
 #[derive(Clone, Debug)]
 pub struct CondensedEdge<T: Ctx, S, E> {
     pub dst: S,
-    pub time: u32,
+    time: u32,
     pub index: usize,
     reqs: Requirements<T, E>,
 }
@@ -149,7 +177,13 @@ where
         self.reqs.can_access(world, ctx, movements)
     }
 
-    pub fn observe_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState, observer: &mut T::Observer) -> bool
+    pub fn observe_access<W>(
+        &self,
+        world: &W,
+        ctx: &T,
+        movements: T::MovementState,
+        observer: &mut T::Observer,
+    ) -> bool
     where
         W: World,
         T: Ctx<World = W>,
@@ -167,6 +201,16 @@ where
         W::Location: Location<Context = T>,
     {
         self.reqs.explain(world, ctx, movements)
+    }
+
+    pub fn time<W>(&self, world: &W, ctx: &T) -> u32
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs.time(world, ctx)
     }
 }
 
@@ -280,13 +324,12 @@ where
                     if !ce.reqs.is_empty() {
                         // If none of the existing edges for this connection are both:
                         // a. a subset of this connection's reqs
-                        // b. a better time (it's guaranteed <= thanks to the heap)
+                        // b. a strictly better time (it's guaranteed <= thanks to the heap) with no penalties
+                        //    (TODO: or a better time with all penalties added)
                         // then we can save the edge
-                        if !vec
-                            .iter()
-                            .filter(|c| c.dst == cur)
-                            .any(|c| c.reqs.is_subset_of(&ce.reqs) && c.time < t)
-                        {
+                        if !vec.iter().filter(|c| c.dst == cur).any(|c| {
+                            c.reqs.is_subset_of(&ce.reqs) && c.time < t && !c.reqs.has_penalties()
+                        }) {
                             ce.index = vec.len();
                             vec.push(ce);
                         }

@@ -115,6 +115,7 @@ pub trait Exit: Accessible {
     fn connect(&mut self, dest: Self::SpotId);
     fn loc_id(&self) -> &Option<Self::LocId>;
     fn always(id: Self::ExitId) -> bool;
+    fn has_penalties(id: Self::ExitId) -> bool;
 }
 
 pub trait Action: Accessible {

@@ -209,6 +209,17 @@ impl world::Exit for Exit {
             _ => false,
         }
     }
+    fn has_penalties(id: ExitId) -> bool {
+        match id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.penalties
+            ExitId::{{ ex.id }} => true,
+%% endif
+%% endfor
+            _ => false,
+
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
