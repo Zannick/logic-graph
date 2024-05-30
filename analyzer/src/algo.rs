@@ -554,25 +554,45 @@ where
     fn extract_solutions(
         &self,
         states: Vec<ContextWrapper<T>>,
+    ) -> (Vec<ContextWrapper<T>>, Vec<ContextWrapper<T>>) {
+        let max_time = self.queue.max_time();
+        let mut solutions = Vec::new();
+        (
+            states
+                .into_iter()
+                .filter_map(|ctx| {
+                    if ctx.elapsed() > max_time {
+                        None
+                    } else if self.world.won(ctx.get()) {
+                        solutions.push(ctx);
+                        None
+                    } else {
+                        Some(ctx)
+                    }
+                })
+                .collect(),
+            solutions,
+        )
+    }
+
+    fn extend_and_handle_solutions(
+        &self,
+        states: Vec<ContextWrapper<T>>,
         prev: &Option<T>,
         mode: SearchMode,
-    ) -> Vec<ContextWrapper<T>> {
-        let max_time = self.queue.max_time();
-        states
-            .into_iter()
-            .filter_map(|mut ctx| {
-                if ctx.elapsed() > max_time {
-                    None
-                } else if self.world.won(ctx.get()) {
-                    self.handle_solution(&mut ctx, prev, mode);
+    ) -> anyhow::Result<()> {
+        let (next, solutions) = self.extract_solutions(states);
+        rayon::join(
+            move || self.queue.extend(next, prev),
+            move || {
+                for mut ctx in solutions {
                     // The state is added to the db in handle_solution
                     // and the ctx no longer has history attached.
-                    None
-                } else {
-                    Some(ctx)
+                    self.handle_solution(&mut ctx, prev, mode)
                 }
-            })
-            .collect()
+            },
+        )
+        .0
     }
 
     fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
@@ -660,8 +680,7 @@ where
         }
         let prev = Some(ctx.get().clone());
         let next = self.recreate_step(ctx);
-        let next = self.extract_solutions(next, &prev, mode);
-        self.queue.extend(next, &prev)
+        self.extend_and_handle_solutions(next, &prev, mode)
     }
 
     pub fn search(self) -> Result<(), std::io::Error> {
@@ -835,8 +854,9 @@ where
                                                 .fetch_max(visits + 1, Ordering::Release);
                                         }
 
-                                        let next = self.extract_solutions(vec, &prev, mode);
-                                        if let Err(e) = self.queue.extend(next, &prev) {
+                                        if let Err(e) =
+                                            self.extend_and_handle_solutions(vec, &prev, mode)
+                                        {
                                             let mut r = res.lock().unwrap();
                                             log::error!(
                                                 "Thread {} exiting due to error: {:?}",
