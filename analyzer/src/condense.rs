@@ -281,7 +281,7 @@ where
                         if !vec
                             .iter()
                             .filter(|c| c.dst == cur)
-                            .any(|c| c.reqs.is_subset_of(&ce.reqs) && ce.time < t)
+                            .any(|c| c.reqs.is_subset_of(&ce.reqs) && c.time < t)
                         {
                             vec.push(ce);
                         }
