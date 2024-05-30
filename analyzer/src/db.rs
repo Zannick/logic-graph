@@ -791,6 +791,7 @@ where
         // TODO: Not sure if we need a score limit when score is time_since?
         } else if score > score_limit {
             res.push((el, elapsed, time_since, est));
+            log::debug!("Returning immediately with one element (score {} > limit {})", score, score_limit);
             return Ok(res);
         } else {
             res.push((el, elapsed, time_since, est));

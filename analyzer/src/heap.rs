@@ -283,7 +283,6 @@ where
             segment,
             self.db.len()
         );
-        let start = Instant::now();
         let res: Vec<_> = self
             .db
             .retrieve(segment, num, score_limit)?
@@ -293,9 +292,6 @@ where
                 (el, progress, (time_since, elapsed + est))
             })
             .collect();
-
-        log::debug!("Retrieve from db took {:?}", start.elapsed());
-        log::trace!("{}", self.db.get_memory_usage_stats().unwrap());
 
         Ok(res)
     }
@@ -393,11 +389,13 @@ where
             }
             let res = self.retrieve(progress, num_to_restore, score_limit)?;
             self.retrievals.fetch_add(1, Ordering::Release);
-            log::debug!("Reshuffle took total {:?}", start.elapsed());
             queue = self.queue.lock().unwrap();
-            queue.extend(res);
-            assert!(!queue.is_empty(), "Queue should have data after retrieve");
-            self.retrieving.store(false, Ordering::Release);
+            if !res.is_empty() {
+                queue.extend(res);
+                log::debug!("Reshuffle took total {:?}", start.elapsed());
+                assert!(!queue.is_empty(), "Queue should have data after retrieve");
+                self.retrieving.store(false, Ordering::Release);
+            }
         }
         Ok(queue)
     }
