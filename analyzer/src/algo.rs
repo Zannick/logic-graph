@@ -744,10 +744,10 @@ where
                         if current_mode == SearchMode::Greedy
                             || current_mode == SearchMode::GreedyMax
                         {
-                            for ctx in items {
+                            items.into_par_iter().for_each(|ctx| {
                                 self.held.fetch_sub(1, Ordering::Release);
                                 if self.queue.db().remember_processed(ctx.get()).unwrap() {
-                                    continue;
+                                    return;
                                 }
                                 let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
                                 self.check_status_update(&start, iters, &ctx);
@@ -813,7 +813,7 @@ where
                                         return;
                                     }
                                 }
-                            }
+                            });
                         } else {
                             let results: Vec<_> = items
                                 .into_par_iter()
@@ -834,7 +834,23 @@ where
                                             self.organic_level
                                                 .fetch_max(visits + 1, Ordering::Release);
                                         }
-                                        Some((prev, vec))
+
+                                        let next = self.extract_solutions(vec, &prev, mode);
+                                        if let Err(e) = self.queue.extend(next, &prev) {
+                                            let mut r = res.lock().unwrap();
+                                            log::error!(
+                                                "Thread {} exiting due to error: {:?}",
+                                                i,
+                                                e
+                                            );
+                                            if r.is_ok() {
+                                                *r = Err(e);
+                                                self.finished.store(true, Ordering::Release);
+                                            }
+                                            None
+                                        } else {
+                                            Some(())
+                                        }
                                     } else {
                                         None
                                     }
@@ -851,16 +867,6 @@ where
                             }
 
                             no_progress = 0;
-                            if let Err(e) = self.queue.extend_groups(results.into_iter().map(
-                                |(prev, nexts)| (self.extract_solutions(nexts, &prev, mode), prev),
-                            )) {
-                                let mut r = res.lock().unwrap();
-                                log::error!("Thread {} exiting due to error: {:?}", i, e);
-                                if r.is_ok() {
-                                    *r = Err(e);
-                                    self.finished.store(true, Ordering::Release);
-                                }
-                            }
                         }
                     }
                     Err(e) => {
