@@ -414,8 +414,9 @@ where
         // threshold is 1/8 the difference between min score and a reasonable upper bound,
         // plus a small buffer for when min gets really close
         // the reasonable upper bound is max_time / max number of visits
-        let threshold =
-            (self.max_time() / W::NUM_CANON_LOCATIONS as u32 - min_score) / 8 + (min_score / 1024);
+        let bound = self.max_time() / W::NUM_CANON_LOCATIONS as u32;
+        // if bound is LESS THAN min_score, then we very much should retrieve with even a small difference
+        let threshold = (bound.saturating_sub(min_score)) / 8 + (min_score / 1024);
 
         // We retrieve if the difference between the db best and the min score is more than the threshold.
         // An alternate way to look at this is min_score - threshold = ms * 9/8 - ms / 1024 - upper bound
@@ -673,9 +674,12 @@ where
                             if !did_retrieve
                                 && !self.db.is_empty()
                                 && db_best < u32::MAX
-                                && elapsed + est > db_best + max_time / 128
+                                && time_since_visit
+                                    > db_best
+                                        + max_time
+                                            / std::cmp::max(128, W::NUM_CANON_LOCATIONS as u32)
                             {
-                                diffs.push((segment, elapsed + est - db_best));
+                                diffs.push((segment, time_since_visit - db_best));
                             }
 
                             if elapsed > max_time || elapsed + est > max_time {
