@@ -3,6 +3,7 @@ use crate::context::*;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
+use crate::minimize::pinpoint_minimize;
 use crate::minimize::{trie_minimize, trie_search};
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
@@ -503,15 +504,17 @@ where
                 .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
 
-        let min_ctx = if mode != SearchMode::Minimized {
-            trie_minimize(
+        let min_ctx = match mode {
+            SearchMode::Similar => {
+                pinpoint_minimize(self.world, self.startctx.get(), solution.clone())
+            }
+            SearchMode::Minimized => None,
+            _ => trie_minimize(
                 self.world,
                 self.startctx.get(),
                 solution.clone(),
                 &self.solve_trie,
-            )
-        } else {
-            None
+            ),
         };
 
         let mut sols = self.solutions.lock().unwrap();
