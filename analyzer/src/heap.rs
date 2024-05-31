@@ -376,6 +376,7 @@ where
                     self.max_time()
                 };
             if score_limit < self.db.db_best(progress) {
+                self.retrieving.store(false, Ordering::Release);
                 return Ok(queue);
             }
             if self.capacity - len < num_to_restore {
