@@ -398,8 +398,8 @@ where
                 queue.extend(res);
                 log::debug!("Reshuffle took total {:?}", start.elapsed());
                 assert!(!queue.is_empty(), "Queue should have data after retrieve");
-                self.retrieving.store(false, Ordering::Release);
             }
+            self.retrieving.store(false, Ordering::Release);
         }
         Ok(queue)
     }
