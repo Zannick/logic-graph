@@ -1,0 +1,46 @@
+%% include 'header.rs.jinja'
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use crate::graph::enums::*;
+use enum_map::{Enum, EnumMap};
+use std::ops::Range;
+
+#[derive(Clone, Debug, Default)]
+pub struct Spot {
+    pub id: SpotId,
+    pub locations: Range<usize>,
+    pub exits: Range<usize>,
+    pub actions: Range<usize>,
+}
+
+pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
+    spots[SpotId::None] = Spot::default();
+%% for area in gl.areas()
+%% for sp in area.spots
+    spots[SpotId::{{ sp.id }}] = Spot {
+        id: SpotId::{{ sp.id }},
+        locations: Range {
+            {% if sp.loc_ids -%}
+            start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
+            end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
+        exits: Range {
+            {% if sp.exit_ids -%}
+            start: ExitId::{{ sp.exit_ids|min }}.into_usize(),
+            end: ExitId::{{ sp.exit_ids|max }}.into_usize() + 1,
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
+        actions: Range {
+            {% if sp.action_ids -%}
+            start: ActionId::{{ sp.action_ids|min }}.into_usize(),
+            end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
+    };
+%% endfor
+%% endfor
+}

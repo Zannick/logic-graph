@@ -1,0 +1,125 @@
+%% include 'header.rs.jinja'
+%% from 'macros.jinja' import price
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use crate::context::*;
+use crate::graph::{World, enums::*};
+use crate::observe::FullObservation;
+use crate::prices::Currency;
+use crate::rules;
+use analyzer::context::Ctx;
+use analyzer::world;
+use enum_map::EnumMap;
+use rustc_hash::FxHashMap;
+use std::option::Option;
+
+#[derive(Copy, Clone, Debug)]
+pub struct Exit {
+    id: ExitId,
+    time: u32,
+    dest: SpotId,
+    price: Currency,
+    loc_id: Option<LocationId>,
+}
+
+impl world::Accessible for Exit {
+    type Context = Context;
+    type Currency = Currency;
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
+        ctx.can_afford(&self.price) && match self.id {
+%% for ex in gl.exits()|sort(attribute='id')
+            ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(ctx, world)
+                {%- else %}true{% endif %},
+%% endfor
+        }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+%% for ex in gl.exits()|selectattr('access_id')|sort(attribute='id')
+            ExitId::{{ ex.id }} => rules::observe_access_{{ ex.access_id }}(ctx, world, full_obs),
+%% endfor
+            _ => true,
+        }
+    }
+    fn base_time(&self) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
+        self.time
+            + match self.id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.penalties and not ex.item
+                ExitId::{{ ex.id }} => {
+%% for pen in ex.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
+    fn price(&self) -> &Currency { &self.price }
+    
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
+        match self.id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.access_id
+            ExitId::{{ ex.id }} => rules::explain_{{ ex.access_id }}(ctx, world, edict),
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
+}
+
+impl world::Exit for Exit {
+    type ExitId = ExitId;
+    type SpotId = SpotId;
+    type LocId = LocationId;
+
+    fn id(&self) -> ExitId { self.id }
+    fn dest(&self) -> SpotId { self.dest }
+    fn connect(&mut self, dest: SpotId) { self.dest = dest; }
+    fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
+
+    fn always(id: ExitId) -> bool {
+        match id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if not ex.price and not ex.item_price and not ex.access_id
+            ExitId::{{ ex.id }} => true,
+%% endif
+%% endfor
+            _ => false,
+        }
+    }
+    fn has_penalties(id: ExitId) -> bool {
+        match id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if ex.penalties
+            ExitId::{{ ex.id }} => true,
+%% endif
+%% endfor
+            _ => false,
+
+        }
+    }
+}
+
+pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
+%% for ex in gl.exits()
+    exits[ExitId::{{ ex.id }}] = Exit {
+        id: ExitId::{{ ex.id }},
+        time: {{ (ex.time * 1000)|int }},
+        dest: SpotId::{{ ex|get_exit_target }},
+        {{ price(ex.price, ex.costs or default_price_type) }}
+        loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
+    };
+%% endfor
+}

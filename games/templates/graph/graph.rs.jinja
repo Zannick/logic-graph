@@ -1,12 +1,11 @@
 %% include 'header.rs.jinja'
-%% from 'macros.jinja' import price
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{enums::*, location::*};
+use crate::graph::{action::*, enums::*, exit::*, location::*, spot::*, warp::*};
 use crate::items::*;
 use crate::movements;
 use crate::observe::FullObservation;
@@ -15,6 +14,7 @@ use crate::rules;
 use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
+use analyzer::world::Location as _;
 use enum_map::{enum_map, Enum, EnumMap};
 use lazy_static::lazy_static;
 use rustc_hash::{FxHashMap, FxHashSet};
@@ -38,365 +38,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
 %% endfor
 %% endfor
     }
-}
-
-
-#[derive(Copy, Clone, Debug)]
-pub struct Exit {
-    id: ExitId,
-    time: u32,
-    dest: SpotId,
-    price: Currency,
-    loc_id: Option<LocationId>,
-}
-
-impl world::Accessible for Exit {
-    type Context = Context;
-    type Currency = Currency;
-    fn can_access(&self, ctx: &Context, world: &World) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-%% for ex in gl.exits()|sort(attribute='id')
-            ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(ctx, world)
-                {%- else %}true{% endif %},
-%% endfor
-        }
-    }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
-        match self.id {
-%% for ex in gl.exits()|selectattr('access_id')|sort(attribute='id')
-            ExitId::{{ ex.id }} => rules::observe_access_{{ ex.access_id }}(ctx, world, full_obs),
-%% endfor
-            _ => true,
-        }
-    }
-    fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 {
-        self.time
-            + match self.id {
-%% for ex in gl.exits()|sort(attribute='id')
-%% if ex.penalties and not ex.item
-                ExitId::{{ ex.id }} => {
-%% for pen in ex.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
-                }
-%% endif
-%% endfor
-            _ => 0,
-        }
-    }
-    fn price(&self) -> &Currency { &self.price }
-    
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
-        match self.id {
-%% for ex in gl.exits()|sort(attribute='id')
-%% if ex.access_id
-            ExitId::{{ ex.id }} => rules::explain_{{ ex.access_id }}(ctx, world, edict),
-%% endif
-%% endfor
-            _ => (true, vec![])
-        }
-    }
-}
-
-impl world::Exit for Exit {
-    type ExitId = ExitId;
-    type SpotId = SpotId;
-    type LocId = LocationId;
-
-    fn id(&self) -> ExitId { self.id }
-    fn dest(&self) -> SpotId { self.dest }
-    fn connect(&mut self, dest: SpotId) { self.dest = dest; }
-    fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
-
-    fn always(id: ExitId) -> bool {
-        match id {
-%% for ex in gl.exits()|sort(attribute='id')
-%% if not ex.price and not ex.item_price and not ex.access_id
-            ExitId::{{ ex.id }} => true,
-%% endif
-%% endfor
-            _ => false,
-        }
-    }
-    fn has_penalties(id: ExitId) -> bool {
-        match id {
-%% for ex in gl.exits()|sort(attribute='id')
-%% if ex.penalties
-            ExitId::{{ ex.id }} => true,
-%% endif
-%% endfor
-            _ => false,
-
-        }
-    }
-}
-
-#[derive(Copy, Clone, Debug)]
-pub struct Action {
-    id: ActionId,
-    time: u32,
-    price: Currency,
-}
-
-impl world::Accessible for Action {
-    type Context = Context;
-    type Currency = Currency;
-    fn can_access(&self, ctx: &Context, world: &World) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-%% for act in gl.actions()|sort(attribute='id')
-            ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(ctx, world)
-                {%- else %}true{% endif %},
-%% endfor
-        }
-    }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
-        match self.id {
-%% for act in gl.actions()|selectattr('access_id')|sort(attribute='id')
-            ActionId::{{ act.id }} => rules::observe_access_{{ act.access_id }}(ctx, world, full_obs),
-%% endfor
-            _ => true,
-        }
-    }
-    fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 { 
-        self.time
-            + match self.id {
-%% for act in gl.actions()|sort(attribute='id')
-%% if act.penalties
-                ActionId::{{ act.id }} => {
-%% for pen in act.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
-                }
-%% endif
-%% endfor
-            _ => 0,
-        }
-    }
-    fn price(&self) -> &Currency { &self.price }
-
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
-        match self.id {
-%% for act in gl.actions()|sort(attribute='id')
-%% if act.access_id
-            ActionId::{{ act.id }} => {
-                let (ret, mut tags) = rules::explain_{{ act.access_id }}(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, "{{ act.to }}"));
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
-%% endif
-%% endfor
-            _ => (true, vec![])
-        }
-    }
-}
-impl world::Action for Action {
-    type ActionId = ActionId;
-    type SpotId = SpotId;
-    fn id(&self) -> ActionId { self.id }
-    fn perform(&self, ctx: &mut Context, world: &World) {
-        match self.id {
-%% for act in gl.actions()
-            ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx, world),
-%% endfor
-        };
-        let dest = self.dest(ctx, world);
-        if dest != SpotId::None {
-            ctx.set_position(dest, world);
-        }
-        match self.id {
-%% for act in gl.actions()
-%% if act.act_post or act.tiles
-            ActionId::{{ act.id }} => {
-%% if act.act_post
-                rules::action_{{ act.after_id }}(ctx, world);
-%% endif
-%% for tile in act.tiles
-%% if tile in used_map_tiles
-                ctx.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
-%% endif
-%% endfor
-            }
-%% endif
-%% endfor
-            _ => (),
-        };
-    }
-    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
-        match self.id {
-%% for act in gl.actions()
-%% if act.to
-            ActionId::{{ act.id }} => {% if act.to.startswith('^') -%}
-            {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% else -%}
-            ctx.{{ act.to[1:]|translate_ctx(act) }}(){% endif -%}
-            {%- else -%}
-            SpotId::{{ act|get_exit_target }}
-            {%- endif -%},
-%% endif
-%% endfor
-            _ => SpotId::None,
-        }
-    }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
-        match self.id {
-%% for act in gl.actions()
-            ActionId::{{ act.id }} => {
-                rules::observe_action_{{ act.action_id }}(ctx, world, full_obs);
-%% if act.act_post
-                rules::observe_action_{{ act.after_id }}(ctx, world, full_obs);
-%% endif
-            }
-%% endfor
-        }
-    }
-}
-
-#[derive(Copy, Clone, Debug)]
-pub struct Warp {
-    id: WarpId,
-    dest: SpotId,
-    time: u32,
-    price: Currency,
-}
-impl world::Accessible for Warp {
-    type Context = Context;
-    type Currency = Currency;
-
-    fn can_access(&self, ctx: &Context, world: &World) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-%% for w in warps.values()|sort(attribute='id')
-            WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(ctx, world)
-                {%- else %}true{% endif %},
-%% endfor
-        }
-    }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
-        match self.id {
-%% for w in warps.values()|selectattr('access_id')|sort(attribute='id')
-            WarpId::{{ w.id }} => rules::observe_access_{{ w.access_id }}(ctx, world, full_obs),
-%% endfor
-            _ => true,
-        }
-    }
-    fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 {
-        self.time
-            + match self.id {
-%% for w in warps.values()|sort(attribute='id')
-%% if w.penalties
-                WarpId::{{ w.id }} => {
-%% for pen in w.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
-                }
-%% endif
-%% endfor
-            _ => 0,
-        }
-    }
-    fn price(&self) -> &Currency { &self.price }
-
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
-        match self.id {
-%% for w in warps.values()|sort(attribute='id')
-%% if w.access_id
-            WarpId::{{ w.id }} => {
-                let (ret, mut tags) = rules::explain_{{ w.access_id }}(ctx, world, edict);
-                let dest = world::Warp::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, "{{ w.target_id }}"));
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
-%% endif
-%% endfor
-            _ => (true, vec![])
-        }
-    }
-}
-impl world::Warp for Warp {
-    type WarpId = WarpId;
-    type SpotId = SpotId;
-
-    fn id(&self) -> WarpId { self.id }
-    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
-        if self.dest == SpotId::None {
-            match self.id {
-%% for w in warps.values()|sort(attribute='id')
-                WarpId::{{ w.id }} => {{ w.target_id }},
-%% endfor
-            }
-        } else {
-            self.dest
-        }
-    }
-    fn connect(&mut self, dest: SpotId) { self.dest = dest; }
-    fn prewarp(&self, ctx: &mut Context, world: &World) {
-        match self.id {
-%% for w in warps.values()|selectattr('before_id')|sort(attribute='id')
-            WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx, world),
-%% endfor
-            _ => (),
-        }
-    }
-    fn postwarp(&self, ctx: &mut Context, world: &World) {
-        match self.id {
-%% for w in warps.values()|selectattr('after_id')|sort(attribute='id')
-            WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx, world),
-%% endfor
-            _ => (),
-        }
-    }
-    fn should_reload(&self) -> bool {
-        match self.id {
-%% for w in warps.values()|sort(attribute='id')
-            WarpId::{{ w.id }} => {{ 'true' if w.loads else 'false' }},
-%% endfor
-        }
-    }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
-        match self.id {
-%% for w in warps.values()|sort(attribute='id')
-            WarpId::{{ w.id }} => {
-%% if 'before_id' in w
-                rules::observe_action_{{ w.before_id }}(ctx, world, full_obs);
-%% endif
-%% if 'after_id' in w
-                rules::observe_action_{{ w.after_id }}(ctx, world, full_obs);
-%% endif
-            }
-%% endfor
-        }
-    }
-}
-
-#[derive(Clone, Debug, Default)]
-pub struct Spot {
-    pub id: SpotId,
-    pub locations: Range<usize>,
-    pub exits: Range<usize>,
-    pub actions: Range<usize>,
 }
 
 static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
@@ -482,10 +123,10 @@ impl world::World for World {
             {%- else %}0{% endif %};
 
         build_locations(&mut world.locations);
-        world.build_exits();
-        world.build_actions();
-        world.build_warps();
-        world.build_spots();
+        build_exits(&mut world.exits);
+        build_actions(&mut world.actions);
+        build_warps(&mut world.warps);
+        build_spots(&mut world.spots);
         world
     }
 
@@ -686,10 +327,10 @@ impl world::World for World {
         let mut map = FxHashMap::default();
         let mut canons_seen = FxHashSet::default();
         for loc in self.locations.values() {
-            let cid = world::Location::canon_id(loc);
+            let cid = loc.canon_id();
             if ctx.todo(loc) && !canons_seen.contains(&cid) {
                 canons_seen.insert(cid);
-                let item = world::Location::item(loc);
+                let item = loc.item();
                 if let Some(val) = map.get_mut(&item) {
                     *val = *val + 1;
                 } else {
@@ -776,7 +417,7 @@ impl World {
     pub fn update_skippable_locations(&mut self) {
         let unused_items = self.get_unused_items();
         for loc in self.locations.values_mut() {
-            let item = world::Location::item(loc);
+            let item = loc.item();
             let skippable = unused_item(item) || unused_items.contains(&item);
             loc.set_skippable(skippable);
         }
@@ -829,67 +470,5 @@ impl World {
             }
 %% endfor
         }
-    }
-
-    fn build_exits(&mut self) {
-%% for ex in gl.exits()
-        self.exits[ExitId::{{ ex.id }}] = Exit {
-            id: ExitId::{{ ex.id }},
-            time: {{ (ex.time * 1000)|int }},
-            dest: SpotId::{{ ex|get_exit_target }},
-            {{ price(ex.price, ex.costs or default_price_type) }}
-            loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
-        };
-%% endfor
-    }
-
-    fn build_actions(&mut self) {
-%% for a in gl.actions()
-        self.actions[ActionId::{{ a.id }}] = Action {
-            id: ActionId::{{ a.id }},
-            time: {{ (a.time * 1000)|int }},
-            {{ price(a.price, a.costs or default_price_type) }}
-        };
-%% endfor
-    }
-
-    fn build_spots(&mut self) {
-        self.spots[SpotId::None] = Spot::default();
-%% for area in gl.areas()
-%% for sp in area.spots
-        self.spots[SpotId::{{ sp.id }}] = Spot {
-            id: SpotId::{{ sp.id }},
-            locations: Range {
-                {% if sp.loc_ids -%}
-                start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
-                end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
-                {%- else %}start: 0, end: 0,{% endif %}
-            },
-            exits: Range {
-                {% if sp.exit_ids -%}
-                start: ExitId::{{ sp.exit_ids|min }}.into_usize(),
-                end: ExitId::{{ sp.exit_ids|max }}.into_usize() + 1,
-                {%- else %}start: 0, end: 0,{% endif %}
-            },
-            actions: Range {
-                {% if sp.action_ids -%}
-                start: ActionId::{{ sp.action_ids|min }}.into_usize(),
-                end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
-                {%- else %}start: 0, end: 0,{% endif %}
-            },
-        };
-%% endfor
-%% endfor
-    }
-
-    fn build_warps(&mut self) {
-%% for w in warps.values()|sort(attribute='id')
-        self.warps[WarpId::{{ w.id }}] = Warp {
-            id: WarpId::{{ w.id }},
-            dest: SpotId::None,
-            time: {{ (w.time * 1000)|int }},
-            {{ price(w.price, w.costs or default_price_type) }}
-        };
-%% endfor
     }
 }

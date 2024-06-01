@@ -104,7 +104,7 @@ impl Location {
     }
 }
 
-pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
+pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
 %% for loc in gl.locations()
     locations[LocationId::{{ loc.id }}] = Location {
         id: LocationId::{{ loc.id }},

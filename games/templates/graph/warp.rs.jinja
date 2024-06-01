@@ -1,0 +1,153 @@
+%% include 'header.rs.jinja'
+%% from 'macros.jinja' import price
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use crate::context::*;
+use crate::graph::{World, enums::*};
+use crate::observe::FullObservation;
+use crate::prices::Currency;
+use crate::rules;
+use analyzer::context::Ctx;
+use analyzer::world;
+use enum_map::EnumMap;
+use rustc_hash::FxHashMap;
+use std::option::Option;
+
+#[derive(Copy, Clone, Debug)]
+pub struct Warp {
+    id: WarpId,
+    dest: SpotId,
+    time: u32,
+    price: Currency,
+}
+impl world::Accessible for Warp {
+    type Context = Context;
+    type Currency = Currency;
+
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
+        ctx.can_afford(&self.price) && match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(ctx, world)
+                {%- else %}true{% endif %},
+%% endfor
+        }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+%% for w in warps.values()|selectattr('access_id')|sort(attribute='id')
+            WarpId::{{ w.id }} => rules::observe_access_{{ w.access_id }}(ctx, world, full_obs),
+%% endfor
+            _ => true,
+        }
+    }
+    fn base_time(&self) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 {
+        self.time
+            + match self.id {
+%% for w in warps.values()|sort(attribute='id')
+%% if w.penalties
+                WarpId::{{ w.id }} => {
+%% for pen in w.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
+    fn price(&self) -> &Currency { &self.price }
+
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+%% if w.access_id
+            WarpId::{{ w.id }} => {
+                let (ret, mut tags) = rules::explain_{{ w.access_id }}(ctx, world, edict);
+                let dest = world::Warp::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "{{ w.target_id }}"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
+}
+impl world::Warp for Warp {
+    type WarpId = WarpId;
+    type SpotId = SpotId;
+
+    fn id(&self) -> WarpId { self.id }
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
+        if self.dest == SpotId::None {
+            match self.id {
+%% for w in warps.values()|sort(attribute='id')
+                WarpId::{{ w.id }} => {{ w.target_id }},
+%% endfor
+            }
+        } else {
+            self.dest
+        }
+    }
+    fn connect(&mut self, dest: SpotId) { self.dest = dest; }
+    fn prewarp(&self, ctx: &mut Context, world: &World) {
+        match self.id {
+%% for w in warps.values()|selectattr('before_id')|sort(attribute='id')
+            WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx, world),
+%% endfor
+            _ => (),
+        }
+    }
+    fn postwarp(&self, ctx: &mut Context, world: &World) {
+        match self.id {
+%% for w in warps.values()|selectattr('after_id')|sort(attribute='id')
+            WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx, world),
+%% endfor
+            _ => (),
+        }
+    }
+    fn should_reload(&self) -> bool {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {{ 'true' if w.loads else 'false' }},
+%% endfor
+        }
+    }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {
+%% if 'before_id' in w
+                rules::observe_action_{{ w.before_id }}(ctx, world, full_obs);
+%% endif
+%% if 'after_id' in w
+                rules::observe_action_{{ w.after_id }}(ctx, world, full_obs);
+%% endif
+            }
+%% endfor
+        }
+    }
+}
+
+pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
+%% for w in warps.values()|sort(attribute='id')
+    warps[WarpId::{{ w.id }}] = Warp {
+        id: WarpId::{{ w.id }},
+        dest: SpotId::None,
+        time: {{ (w.time * 1000)|int }},
+        {{ price(w.price, w.costs or default_price_type) }}
+    };
+%% endfor
+}

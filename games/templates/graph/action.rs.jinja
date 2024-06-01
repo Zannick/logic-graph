@@ -1,0 +1,155 @@
+%% include 'header.rs.jinja'
+%% from 'macros.jinja' import price
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use crate::context::*;
+use crate::graph::{World, enums::*};
+use crate::observe::FullObservation;
+use crate::prices::Currency;
+use crate::rules;
+use analyzer::context::Ctx;
+use analyzer::world;
+use enum_map::EnumMap;
+use rustc_hash::FxHashMap;
+
+#[derive(Copy, Clone, Debug)]
+pub struct Action {
+    id: ActionId,
+    time: u32,
+    price: Currency,
+}
+
+impl world::Accessible for Action {
+    type Context = Context;
+    type Currency = Currency;
+    fn can_access(&self, ctx: &Context, world: &World) -> bool {
+        ctx.can_afford(&self.price) && match self.id {
+%% for act in gl.actions()|sort(attribute='id')
+            ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(ctx, world)
+                {%- else %}true{% endif %},
+%% endfor
+        }
+    }
+    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+        ctx.observe_afford(&self.price, full_obs);
+        match self.id {
+%% for act in gl.actions()|selectattr('access_id')|sort(attribute='id')
+            ActionId::{{ act.id }} => rules::observe_access_{{ act.access_id }}(ctx, world, full_obs),
+%% endfor
+            _ => true,
+        }
+    }
+    fn base_time(&self) -> u32 { self.time }
+    fn time(&self, ctx: &Context, world: &World) -> u32 { 
+        self.time
+            + match self.id {
+%% for act in gl.actions()|sort(attribute='id')
+%% if act.penalties
+                ActionId::{{ act.id }} => {
+%% for pen in act.penalties
+                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
+                        {{ (pen.add * 1000)|int }}
+%% endfor
+                    } else {
+                        0
+                    }
+                }
+%% endif
+%% endfor
+            _ => 0,
+        }
+    }
+    fn price(&self) -> &Currency { &self.price }
+
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
+        match self.id {
+%% for act in gl.actions()|sort(attribute='id')
+%% if act.access_id
+            ActionId::{{ act.id }} => {
+                let (ret, mut tags) = rules::explain_{{ act.access_id }}(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "{{ act.to }}"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+%% endif
+%% endfor
+            _ => (true, vec![])
+        }
+    }
+}
+impl world::Action for Action {
+    type ActionId = ActionId;
+    type SpotId = SpotId;
+    fn id(&self) -> ActionId { self.id }
+    fn perform(&self, ctx: &mut Context, world: &World) {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx, world),
+%% endfor
+        };
+        let dest = self.dest(ctx, world);
+        if dest != SpotId::None {
+            ctx.set_position(dest, world);
+        }
+        match self.id {
+%% for act in gl.actions()
+%% if act.act_post or act.tiles
+            ActionId::{{ act.id }} => {
+%% if act.act_post
+                rules::action_{{ act.after_id }}(ctx, world);
+%% endif
+%% for tile in act.tiles
+%% if tile in used_map_tiles
+                ctx.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
+%% endfor
+            }
+%% endif
+%% endfor
+            _ => (),
+        };
+    }
+    fn dest(&self, ctx: &Context, world: &World) -> SpotId {
+        match self.id {
+%% for act in gl.actions()
+%% if act.to
+            ActionId::{{ act.id }} => {% if act.to.startswith('^') -%}
+            {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% else -%}
+            ctx.{{ act.to[1:]|translate_ctx(act) }}(){% endif -%}
+            {%- else -%}
+            SpotId::{{ act|get_exit_target }}
+            {%- endif -%},
+%% endif
+%% endfor
+            _ => SpotId::None,
+        }
+    }
+    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => {
+                rules::observe_action_{{ act.action_id }}(ctx, world, full_obs);
+%% if act.act_post
+                rules::observe_action_{{ act.after_id }}(ctx, world, full_obs);
+%% endif
+            }
+%% endfor
+        }
+    }
+}
+
+pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
+%% for a in gl.actions()
+    actions[ActionId::{{ a.id }}] = Action {
+        id: ActionId::{{ a.id }},
+        time: {{ (a.time * 1000)|int }},
+        {{ price(a.price, a.costs or default_price_type) }}
+    };
+%% endfor
+}

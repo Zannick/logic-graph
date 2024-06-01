@@ -4,10 +4,18 @@
 #![allow(non_snake_case)]
 #![allow(unused)]
 
+mod action;
 mod enums;
+mod exit;
 mod graph;
 mod location;
+mod spot;
+mod warp;
 
+pub use action::*;
 pub use enums::*;
+pub use exit::*;
 pub use graph::*;
 pub use location::*;
+pub use spot::*;
+pub use warp::*;

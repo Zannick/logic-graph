@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{enums::*, World};
+use crate::graph::{World, enums::*};
 use crate::items::*;
 use crate::observe::FullObservation;
 use crate::prices::Currency;
@@ -15,6 +15,9 @@ use analyzer::world;
 use enum_map::EnumMap;
 use rustc_hash::FxHashMap;
 use std::option::Option;
+
+
+
 
 #[derive(Copy, Clone, Debug)]
 pub struct Location {
@@ -606,9 +609,7 @@ impl world::Accessible for Location {
             _ => true,
         }
     }
-    fn base_time(&self) -> u32 {
-        self.time
-    }
+    fn base_time(&self) -> u32 { self.time }
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
@@ -661,19 +662,12 @@ impl world::Accessible for Location {
                         0
                     }
                 }
-                _ => 0,
-            }
+            _ => 0,
+        }
     }
-    fn price(&self) -> &Currency {
-        &self.price
-    }
+    fn price(&self) -> &Currency { &self.price }
 
-    fn explain_rule(
-        &self,
-        ctx: &Self::Context,
-        world: &World,
-        edict: &mut FxHashMap<&'static str, String>,
-    ) -> (bool, Vec<&'static str>) {
+    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::explain_defeat_mus_a_m20(ctx, world, edict),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -905,21 +899,11 @@ impl world::Location for Location {
     type CanonId = CanonId;
     type ExitId = ExitId;
 
-    fn id(&self) -> LocationId {
-        self.id
-    }
-    fn item(&self) -> Item {
-        self.item
-    }
-    fn canon_id(&self) -> CanonId {
-        self.canonical
-    }
-    fn exit_id(&self) -> &Option<ExitId> {
-        &self.exit_id
-    }
-    fn skippable(&self) -> bool {
-        self.skippable
-    }
+    fn id(&self) -> LocationId { self.id }
+    fn item(&self) -> Item { self.item }
+    fn canon_id(&self) -> CanonId { self.canonical }
+    fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
+    fn skippable(&self) -> bool { self.skippable }
 }
 
 impl Location {
@@ -928,7 +912,7 @@ impl Location {
     }
 }
 
-pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
+pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     locations[LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item] = Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -1046,27 +1030,24 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder] =
-        Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-            canonical:
-                CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-            item: Item::Amagi_Stronghold_Boulder_1,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder] =
-        Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
-            canonical: CanonId::Amagi_Stronghold_Boulder_2,
-            item: Item::Amagi_Stronghold_Boulder_2,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
+    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder] = Location {
+        id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
+        canonical: CanonId::Loc_Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
+        item: Item::Amagi_Stronghold_Boulder_1,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder] = Location {
+        id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
+        canonical: CanonId::Amagi_Stronghold_Boulder_2,
+        item: Item::Amagi_Stronghold_Boulder_2,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
     locations[LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall,
         canonical: CanonId::Amagi_Stronghold_Wall_2,
@@ -1229,16 +1210,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall] =
-        Location {
-            id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
-            canonical: CanonId::Sniper_Valley_Rock_1,
-            item: Item::Sniper_Valley_Rock_1,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall] = Location {
+        id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
+        canonical: CanonId::Sniper_Valley_Rock_1,
+        item: Item::Sniper_Valley_Rock_1,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall,
         canonical: CanonId::Sniper_Valley_Rock_1,
@@ -1248,16 +1228,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall),
         skippable: false,
     };
-    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall] =
-        Location {
-            id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
-            canonical: CanonId::Sniper_Valley_Rock_1,
-            item: Item::Sniper_Valley_Rock_1,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall] = Location {
+        id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
+        canonical: CanonId::Sniper_Valley_Rock_1,
+        item: Item::Sniper_Valley_Rock_1,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall,
         canonical: CanonId::Sniper_Valley_Rock_1,
@@ -1267,16 +1246,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall),
         skippable: false,
     };
-    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall] =
-        Location {
-            id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
-            canonical: CanonId::Sniper_Valley_Rock_2,
-            item: Item::Sniper_Valley_Rock_2,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall] = Location {
+        id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
+        canonical: CanonId::Sniper_Valley_Rock_2,
+        item: Item::Sniper_Valley_Rock_2,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall,
         canonical: CanonId::Sniper_Valley_Rock_2,
@@ -1286,16 +1264,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall),
         skippable: false,
     };
-    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall] =
-        Location {
-            id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
-            canonical: CanonId::Sniper_Valley_Rock_2,
-            item: Item::Sniper_Valley_Rock_2,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall] = Location {
+        id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
+        canonical: CanonId::Sniper_Valley_Rock_2,
+        item: Item::Sniper_Valley_Rock_2,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall,
         canonical: CanonId::Sniper_Valley_Rock_2,
@@ -1467,38 +1444,33 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
-            skippable: false,
-        };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
-            skippable: false,
-        };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra] = Location {
         id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra,
         canonical: CanonId::Siuna_Storage_Wall,
@@ -1517,36 +1489,33 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
-            skippable: false,
-        };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
-            skippable: false,
-        };
-    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
-            skippable: false,
-        };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
+        skippable: false,
+    };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel] = Location {
         id: LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
         canonical: CanonId::Nanite_Mist,
@@ -2177,28 +2146,24 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] =
-        Location {
-            id: LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
-            canonical: CanonId::Ebih_Wasteland_Passage_H,
-            item: Item::Ebih_Wasteland_Passage_H,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
-            ),
-            skippable: false,
-        };
-    locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] =
-        Location {
-            id: LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
-            canonical: CanonId::Ebih_Wasteland_Passage_H,
-            item: Item::Ebih_Wasteland_Passage_H,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
-            skippable: false,
-        };
+    locations[LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] = Location {
+        id: LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
+        canonical: CanonId::Ebih_Wasteland_Passage_H,
+        item: Item::Ebih_Wasteland_Passage_H,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] = Location {
+        id: LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
+        canonical: CanonId::Ebih_Wasteland_Passage_H,
+        item: Item::Ebih_Wasteland_Passage_H,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
+        skippable: false,
+    };
     locations[LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage,
         canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2208,30 +2173,24 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage),
         skippable: false,
     };
-    locations[LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] =
-        Location {
-            id: LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
-            canonical: CanonId::Ebih_Wasteland_Passage_H,
-            item: Item::Ebih_Wasteland_Passage_H,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
-            ),
-            skippable: false,
-        };
-    locations[LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] =
-        Location {
-            id: LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
-            canonical: CanonId::Ebih_Wasteland_Passage_H,
-            item: Item::Ebih_Wasteland_Passage_H,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] = Location {
+        id: LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
+        canonical: CanonId::Ebih_Wasteland_Passage_H,
+        item: Item::Ebih_Wasteland_Passage_H,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] = Location {
+        id: LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
+        canonical: CanonId::Ebih_Wasteland_Passage_H,
+        item: Item::Ebih_Wasteland_Passage_H,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
+        skippable: false,
+    };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage,
         canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2610,16 +2569,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump] =
-        Location {
-            id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
-            canonical: CanonId::Sync_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 5500,
-            exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
-            skippable: false,
-        };
+    locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump] = Location {
+        id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
+        canonical: CanonId::Sync_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
+        skippable: false,
+    };
     locations[LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note] = Location {
         id: LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note,
         canonical: CanonId::Notes_2053_02_27,
@@ -2737,16 +2695,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
         skippable: false,
     };
-    locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster] =
-        Location {
-            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
-            canonical: CanonId::Glacier_Big_Drop_Rock,
-            item: Item::Glacier_Big_Drop_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
-            skippable: false,
-        };
+    locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster] = Location {
+        id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
+        canonical: CanonId::Glacier_Big_Drop_Rock,
+        item: Item::Glacier_Big_Drop_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+        skippable: false,
+    };
     locations[LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown] = Location {
         id: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
         canonical: CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
@@ -2783,26 +2740,24 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
         skippable: false,
     };
-    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster] =
-        Location {
-            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
-            canonical: CanonId::Glacier_Sea_Burial_Rock,
-            item: Item::Glacier_Sea_Burial_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
-            skippable: false,
-        };
-    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping] =
-        Location {
-            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
-            canonical: CanonId::Glacier_Sea_Burial_Rock,
-            item: Item::Glacier_Sea_Burial_Rock,
-            price: Currency::Free,
-            time: 4000,
-            exit_id: None,
-            skippable: false,
-        };
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster] = Location {
+        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
+        canonical: CanonId::Glacier_Sea_Burial_Rock,
+        item: Item::Glacier_Sea_Burial_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping] = Location {
+        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
+        canonical: CanonId::Glacier_Sea_Burial_Rock,
+        item: Item::Glacier_Sea_Burial_Rock,
+        price: Currency::Free,
+        time: 4000,
+        exit_id: None,
+        skippable: false,
+    };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through] = Location {
         id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
         canonical: CanonId::Glacier_Sea_Burial_Rock,
@@ -2812,16 +2767,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
         skippable: false,
     };
-    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster] =
-        Location {
-            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
-            canonical: CanonId::Glacier_Sea_Burial_Rock,
-            item: Item::Glacier_Sea_Burial_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
-            skippable: false,
-        };
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster] = Location {
+        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
+        canonical: CanonId::Glacier_Sea_Burial_Rock,
+        item: Item::Glacier_Sea_Burial_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+        skippable: false,
+    };
     locations[LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes] = Location {
         id: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes,
         canonical: CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes,
@@ -2858,16 +2812,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: None,
         skippable: false,
     };
-    locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip] =
-        Location {
-            id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
-            canonical: CanonId::Glacier_40_8_Flask,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
-            skippable: false,
-        };
+    locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip] = Location {
+        id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
+        canonical: CanonId::Glacier_40_8_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+        skippable: false,
+    };
     locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel] = Location {
         id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
         canonical: CanonId::Glacier_40_8_Flask,
@@ -3714,18 +3667,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
         skippable: false,
     };
-    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall] = Location {
         id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
         canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
@@ -3753,18 +3703,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
         skippable: false,
     };
-    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall] = Location {
         id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
         canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
@@ -3792,18 +3739,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
         skippable: false,
     };
-    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall] = Location {
         id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
         canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
@@ -3831,18 +3775,15 @@ pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
         skippable: false,
     };
-    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(
-                ExitId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall,
-            ),
-            skippable: false,
-        };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
     locations[LocationId::Uhrum__West_Entrance__Sand__Refill] = Location {
         id: LocationId::Uhrum__West_Entrance__Sand__Refill,
         canonical: CanonId::Loc_Uhrum__West_Entrance__Sand__Refill,
