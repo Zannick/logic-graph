@@ -4,26 +4,51 @@ This directory contains the per-game graph definitions. The folder `sample` is c
 
 ## Main concepts
 
-The world of the game is represented by these main components:
-*   **Item**: A permanent upgrade that can be collected or a permanent change to the world (sometimes called an "event"). Some speedrun categories require collecting specific ones before beating the game.
-*   **Places**: representations of pieces of the world
+The world of the game is represented by these main components.
+
+### The Graph
+
+*   **Movements**: predetermined speeds of player movement. These allow the compiler to calculate the time taken to move around the graph for many connections, rather than require that you measure everything.
+*   **Places**: representations of pieces of the world. These form the nodes of the graph.
     *   **Location**: the Place that contains an **Item**, and a rule restricting when the player is allowed to acquire that item. Can also be given a **canonical** name in case there are multiple ways or places that can access the in-game item. Can only be visited once.
     *   **Spot**: the main graph node type, representing a place the player can be. Can contain **Locations**, **Exits** to other Spots, **Local** movement connections to other Spots, and **Actions** that the player can perform.
     *   **Area**: a collection of **Spots**, which share a relative coordinate system used for determining movement time (so that it's not required to time every possible pair of Spots).
     *   **Region**: a collection of **Areas**. This mostly serves an organizational purpose.
-*   **Exit**: a graph edge detailing what a player needs to move from one **Spot** to another and how long it takes to move in that way.
-*   **Hybrid**: an **Exit** that contains a **Location**, essentially an edge that can be traversed multiple times where the player collects an **Item** on the first traversal.
-*   **Local connection**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
+*   **Connections**: representations of how to get around in the world. These form the edges of the graph.
+    *   **Exit**: a graph edge detailing what a player needs to move from one **Spot** to another and how long it takes to move in that way.
+    *   **Local connection**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
+    *   **Warp**: a travel option that can be initiated from anywhere under certain conditions to a fixed or changeable **Spot**.
+*   **Hybrid**: describes both a **Location** and an **Exit**. Essentially an edge that can be traversed multiple times where the player collects an **Item** on the first traversal.
 *   **Action**: a thing the player can do that makes temporary changes to the player or the world, and can be done multiple times (resources and abilities permitting). Some of these can be done anywhere, but most will be defined inside a **Spot**.
-*   **Warp**: a travel option that can be initiated from anywhere under certain conditions to a fixed or changeable **Spot**.
 
-And finally,
-*   **context**: the temporary state of the game, such as whether doors are opened or closed, where the last save was, whether the player is young or old, small or big, etc. This gets combined with the permanent state (items collected, locations visited, etc) to form the full point-in-time state of a playthrough (which is called **Context** throughout the Rust code).
+### The State
+
+*   **Item**: A permanent upgrade that can be collected or a permanent change to the world (sometimes called an "event"). Some speedrun categories require collecting specific ones before beating the game.
+*   **context**: the temporary state of the game, such as whether doors are opened or closed, where the last save was, whether the player is young or old, small or big, etc. This gets combined with the permanent state (items collected, locations visited, etc) to form the full point-in-time state of a playthrough (which is called **Context** throughout the Rust code). Any integer values in the context may be used as **Currency** for setting prices for certain Places and Connections.
 *   **data**: miscellaneous information that can be used like **context** but is constant based on the player position (Place).
+
+### Common attributes
+
+The main components of the graph each will be defined by many common attributes, though not all common attributes apply to every type of component. For example, Spots, Areas, and Regions are merely structural and do not contain any attributes used for accessibility checks.
+
+The common attributes include:
+*   **name**: The name of the component being defined. Exits and local connections don't have names. Warps' names are dictionary keys rather than the value of a key `name:`.
+*   **req**: The logic rule defining the requirements to access or traverse the component, which must evaluate to true or false (a `boolExpr`). Full details of the possible forms of rules are given in the [Logic grammar reference](#logic-grammar-reference) below.
+*   **price**: The numerical value of the **Currency** required to be spent. If unset, accessing the component is considered free.
+*   **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
+*   **time**: The base time it takes to access or traverse the component, as an integer or float amount in seconds. Not used for local connections or Exits that use movement to determine it.
+*   **tags**: A list of string tags for the component, which may be used to set a default access/traversal time (by listing the tag with a value in the `Game.yaml` `time` section), or to mark certain groups of components. If multiple tags have times associated with them, the largest is chosen by default. Warps may have tags but do not use them to set a default time. Local connections do not have tags.
+*   **penalty_tags**: A list of string tags for the component, each of which must appear in the `Game.yaml` `time` section. The sum of the times associated with each tag in this list is added to the base time. Tags in this list may be preceded by a `-` to subtract that time constant instead of adding it, but the total penalty cannot drop below 0. Can be used anywhere **tags** are used in a similar way, except that it's mainly useful for Exits that calculate the base time based on movement and need to add transition penalties.
+*   **penalties**: A list of specialized time adjustments on top of the base time. Usable as a shorter version of redefining additional alternative versions of the entire component with minor adjustments. Each adjustment will have further attributes:
+    *   **when**: A logic rule detailing when the penalty applies, which must evaluate to true or false. If omitted, is considered true.
+    *   **add**: The time to add on top of the base time when the `when` rule is true.
+    *   **calc**: A logic rule returning the time to add as a float number of seconds. (The engine will round this number up to the next millisecond.)
+
+See the full list of attributes for each component in its own section.
 
 ## Folder organization
 
-Generally, there are 6 folders inside your game folder to be aware of: the top-level, `tests`, `benches`, `bin`, `data`, and `src`. The first two will contain files that you edit yourself, the latter four contain only generated files.
+Generally, there are 7 folders inside your game folder to be aware of: the top-level, `tests`, `benches`, `bin`, `data`, `src`, and `solutions`. The first two will contain files that you edit yourself, the remainder contain only generated files (`data` and `solutions` will eventually contain solution data from running the main program).
 
 You may also wish to create a folder to hold your settings files, since these are also yaml files, but the Compiler.py script will interpret all yaml files at the top-level to be part of the graph definition. Commonly the folder name is `settings`.
 
@@ -39,7 +64,7 @@ The script will create a `Cargo.toml` file at the top-level directory for your g
 
 The `src` directory will contain Rust files that implement the graph for your specific game. The `bin` directory contains the main program starting point used with `cargo run`. The `benches` directory contains the benchmark program used with `cargo bench` that will run some generic tests on your graph.
 
-The `data` directory will contain diagram files for your game, currently a graphviz (dot) file and a mermaid file. GitHub can automatically render the mermaid file, but the interface may be a little tough to use with the typical graph size. The graphviz file can be rendered with `neato` to produce a 2D map of your spots based on their coordinates; you may have to adjust the Game's `graph_scale_factor` and some regions' `graph_offset` to make some spots visible. You can then re-scale and overlay the produced image onto a map image with [GraphicsMagick](http://graphicsmagick.org), e.g. `gm composite -geometry 5801x -geometry +241+168 digraph.png map.png digraph-map.png` (you'll have to calculate your sizes and offsets).
+The `data` directory will contain diagram files for your game, currently a graphviz (dot) file and a mermaid file. GitHub can automatically render the mermaid file, but the interface may be a little tough to use with the typical graph size. The graphviz file can be rendered with `neato` to produce a 2D map of your spots based on their coordinates; you may have to adjust the Game's `graph_scale_factor` and some regions' `graph_offset` to make some spots visible. You can then re-scale and overlay the produced image onto a map image with [GraphicsMagick](http://graphicsmagick.org), e.g. `gm composite -geometry 5801x -geometry +241+168 digraph.png map.png digraph-map.png` (you'll have to calculate your sizes and offsets). A convenience script for this is generated in the `data` folder.
 
 Finally, there will be a `tests` directory with a `unittest.rs` file. This test file will run any YAML test cases you put in that directory.
 
@@ -154,7 +179,7 @@ Lastly, *Exit movements* are movements that are only used explicitly by **Exits*
 
 Warps are always defined globally in `Game.yaml` and are available from any **Spot** (though they can be restricted using **requirements**). They are defined as a dictionary keyed on their **name** and may have the following fields:
 
-* **time**: The time it takes to execute the Warp, in seconds. **Required**; Warps don't presently support tags.
+* **time**: The time it takes to execute the Warp, in seconds. **Required**; Warps don't presently support using tags to define times.
 * **req**: The **requirements** to execute the Warp, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **price**: The numerical value of the **Currency** required to be spent. If unset, executing the Warp is considered free.
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
@@ -163,6 +188,7 @@ Warps are always defined globally in `Game.yaml` and are available from any **Sp
 * **after**: An optional effect that occurs after the player's position is changed, as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **loads**: If true, after executing this Warp, all context **load** rules will be executed.
 * **base_movement**: If true, this Warp is treated as though it is always available for the purposes of time remaining estimation. Only recommended for Menu Warps that are the only method of accessing some locations.
+* **penalties**: Additional time penalties in certain cases; see [Common attributes](#common-attributes).
 
 ### Local connections
 
@@ -186,6 +212,7 @@ Locations are always defined in a **Spot**. They may have the following fields:
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
 * **time**: The time it takes to access the Location.
 * **tags**: A list of string tags for the Location, which may be used to set a default time, or to mark certain groups of Locations. If multiple tags have times associated with them, the largest is chosen by default.
+* **penalties**: Additional time penalties in certain cases; see [Common attributes](#common-attributes).
 
 ### Exits
 
@@ -199,7 +226,9 @@ Exits are always defined in a **Spot**. They may have the following fields:
 * **tags**: A list of string tags for the Exit, which may be used to set a default time, or to mark certain groups of Exits. If multiple tags have times associated with them, the largest is chosen by default.
 * **movement**: A single movement type (or `base`), which is used to calculate the time as though the exit is a local movement between the two spots. Does not currently support **thru**. If **time** is set, this has no effect.
 * **jumps**: Similar to **jumps** for [local connections](#local-connections), a single number used to calculate as the number of jumps necessary to traverse the **y** distance. Only considered when using **movement** to set time.
-* **jumps**: Similar to **jumps_down** for [local connections](#local-connections), a single number used as a delay factor for falling down the **y** distance. Only considered when using **movement** to set time.
+* **jumps_down**: Similar to **jumps_down** for [local connections](#local-connections), a single number used as a delay factor for falling down the **y** distance. Only considered when using **movement** to set time.
+* **penalty_tags**: A list of string tags for the Exit that each modify the base time. Mostly useful if the base time is determined by `movement`. Tags can be subtracted by prefixing them with a `-`, but the total penalty must be at least 0.
+* **penalties**: Additional time penalties in certain cases; see [Common attributes](#common-attributes).
 
 ### Hybrids
 
@@ -213,15 +242,25 @@ Hybrids are always defined in a **Spot**. They have the same fields as both Loca
 
 ### Actions
 
-Actions are always defined in a **Spot**. They may have the following fields:
+Actions are always defined either in a **Spot** or globally in `Game.yaml`. They may have the following fields:
 
 * **name**: The name of the Action. Action names must be unique within a Spot. **Required**.
 * **req**: The **requirements** to perform the Action, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
-* **do**: The **effect** of the Action, as a logic rule of type `action`. **Required** (else why have the action?). See the [Logic grammar reference](#logic-grammar-reference) below.
+* **do**: The **effect** of the Action, as a logic rule of type `action`. **Required** (else why have the action?). See the [Logic grammar reference](#logic-grammar-reference) below. The effect must not include changing the player's position; instead use the `to` field as described below.
+* **after**: An optional effect that occurs after the main effect and after the player's position is changed (if it would be), as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **price**: The numerical value of the **Currency** required to be spent. If unset, accessing the Location is considered free.
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
 * **time**: The time it takes to execute the Action.
 * **tags**: A list of string tags for the Action, which may be used to set a default time, or to mark certain groups of Actions. If multiple tags have times associated with them, the largest is chosen by default.
+* **penalties**: Additional time penalties in certain cases; see [Common attributes](#common-attributes).
+
+If the action moves the player, it may have the following fields:
+
+* **to**: The destination must be set here rather than in the `do` effect.
+* **movement**: A single movement type (or `base`), which is used to calculate the time as though the action is a local movement between the two spots. Does not currently support **thru**. If **time** is set, this has no effect.
+* **jumps**: Similar to **jumps** for [local connections](#local-connections), a single number used to calculate as the number of jumps necessary to traverse the **y** distance. Only considered when using **movement** to set time.
+* **jumps_down**: Similar to **jumps_down** for [local connections](#local-connections), a single number used as a delay factor for falling down the **y** distance. Only considered when using **movement** to set time.
+* **penalty_tags**: A list of string tags that each modify the base time. Mostly useful if the base time is determined by `movement`. Tags can be subtracted by prefixing them with a `-`, but the total penalty must be at least 0.
 
 ## Logic grammar reference
 
@@ -273,9 +312,9 @@ A **value** expression is either a **setting**, a **reference**, or a **helper a
 
 #### num
 
-A **num** primitive is either a integer literal or a **value** expression.
+A **num** expression is either a numeric literal (integer or float) or a **value** expression.
 
-Two expressions of type **num** can be combined with a binary operation of `+`, `-`, `*`, or `/`. Division on integral types is always integer division.
+Two expressions of type **num** can be combined with a binary operation of `+`, `-`, `*`, or `/`. Division on integral types is always integer division. Note that floats aren't presently compatible with very much.
 
 #### str
 
@@ -283,7 +322,7 @@ The grammar does not support building or modifying strings. Instead, to save spa
 
 The grammar does not presently support a way to reference a specific enum. Instead it accepts string literals, and the enum type is inferred from where the literal is assigned or what it is compared against.
 
-A **str** primitive is either a string literal or a **value** expression.
+A **str** expression is either a string literal or a **value** expression.
 
 #### action
 
@@ -342,6 +381,7 @@ If you simply want to check whether a **reference** is one of several options, a
 #### Function invocations
 
 Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** and **rules** defined in `Game.yaml`, and the following built-in functions:
+
 * **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
 * **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
 * **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to or comparing against `SpotId::None` which is not otherwise recognized in this grammar.
@@ -364,6 +404,7 @@ Function invocations of type **boolExpr** may additionally be negated.
 
 Functions of type **num** may currently accept any one of these argument sets (no mixing and matching):
 * A single **Item**.
+* Any number of **ref** expressions and **Place** literals.
 * Any number of **num** expressions.
 * Nothing.
 
