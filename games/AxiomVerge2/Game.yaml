@@ -316,6 +316,7 @@ helpers:  # MARK: helpers
 
   # TODO: this is a temporary hack around the attract issue #131
   $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
+  $attract_time:num: $spot_distance(^position, ^portal) * 2.0
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,

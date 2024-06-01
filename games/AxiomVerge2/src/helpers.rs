@@ -1985,6 +1985,45 @@ macro_rules! hobserve__attract {
     }};
 }
 
+/// $attract_time (  )
+/// $spot_distance(^position, ^portal) * 2.0
+#[macro_export]
+macro_rules! helper__attract_time {
+    ($ctx:expr, $world:expr) => {{
+        spot_distance($ctx.position(), $ctx.portal()) * 2.0
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__attract_time {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let f = spot_distance($ctx.position(), $ctx.portal());
+                $edict.insert("$spot_distance(^position,^portal)", format!("{}", f));
+                (f, vec!["$spot_distance(^position,^portal)"])
+            };
+            let mut right = (2.0, vec![]);
+            left.1.append(&mut right.1);
+            (left * right, left.1)
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__attract_time {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        spot_distance(
+            {
+                $full_obs.observe_position();
+                $ctx.position()
+            },
+            {
+                $full_obs.observe_portal();
+                $ctx.portal()
+            },
+        ) * 2.0
+    }};
+}
+
 /// $all_notes (  )
 /// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
 #[macro_export]

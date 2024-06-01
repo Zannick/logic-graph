@@ -1,4 +1,4 @@
-# Generated from Rules.g4 by ANTLR 4.13.1
+# Generated from c:/Users/bswolf/Documents/GitHub/logic-graph/grammar/Rules.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RulesParser import RulesParser
@@ -176,6 +176,11 @@ class RulesVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by RulesParser#baseNum.
     def visitBaseNum(self, ctx:RulesParser.BaseNumContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#place.
+    def visitPlace(self, ctx:RulesParser.PlaceContext):
         return self.visitChildren(ctx)
 
 

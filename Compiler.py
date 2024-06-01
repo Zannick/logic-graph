@@ -1834,7 +1834,8 @@ class GameLogic(object):
                     'observe.rs', 'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs',
                     # These have to match the structure in templates/
                     'graph/mod.rs', 'graph/enums.rs', 'graph/location.rs', 'graph/exit.rs',
-                    'graph/action.rs', 'graph/warp.rs', 'graph/spot.rs', 'graph/graph.rs'],
+                    'graph/action.rs', 'graph/warp.rs', 'graph/spot.rs', 'graph/graph.rs',
+                    'graph/coord.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
             'solutions': [],
@@ -1865,7 +1866,7 @@ class GameLogic(object):
 if __name__ == '__main__':
     cmd = argparse.ArgumentParser()
     cmd.add_argument('game', help='Which game to build the graph for')
-    cmd.add_argument('--noparse', action='store_true')
+    cmd.add_argument('--norender', action='store_true')
     args = cmd.parse_args()
 
     gl = GameLogic(args.game)
@@ -1877,7 +1878,7 @@ if __name__ == '__main__':
     if gl.undefined_items:
         logging.warning(f'Unplaced items: {", ".join(sorted(gl.undefined_items))}')
 
-    if not args.noparse:
+    if not args.norender:
         logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
                     f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations '
                     f'({len(gl.canon_places)} canon locations), '

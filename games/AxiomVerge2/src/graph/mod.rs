@@ -5,6 +5,7 @@
 #![allow(unused)]
 
 mod action;
+mod coord;
 mod enums;
 mod exit;
 mod graph;
@@ -13,6 +14,7 @@ mod spot;
 mod warp;
 
 pub use action::*;
+pub use coord::*;
 pub use enums::*;
 pub use exit::*;
 pub use graph::*;

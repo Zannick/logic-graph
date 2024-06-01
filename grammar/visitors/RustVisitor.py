@@ -209,6 +209,11 @@ class RustVisitor(RustBaseVisitor):
             return f'data::{ref}({construct_place_id(str(ctx.PLACE()))[1:-1]})'
         return self._getRefGetter(ref)
 
+    def visitPlace(self, ctx):
+        if ctx.PLACE():
+            return construct_place_id(str(ctx.PLACE())[1:-1])
+        return self.visit(ctx.ref())
+
     def visitItemCount(self, ctx):
         if ctx.INT():
             val = str(ctx.INT())
@@ -235,8 +240,8 @@ class RustVisitor(RustBaseVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
-        if ctx.ref():
-            return self.visit(ctx.ref())
+        if ctx.FLOAT():
+            return str(ctx.FLOAT())
         if ctx.SETTING():
             return f'ctx.{ctx::SETTING()}()'
         # TODO: constants
@@ -368,6 +373,8 @@ class RustVisitor(RustBaseVisitor):
             args.append(f'Item::{ctx.ITEM()}')
         elif ctx.num():
             args.extend(str(self.visit(n)) for n in ctx.num())
+        elif ctx.place():
+            args.extend(str(self.visit(n)) for n in ctx.place())
         return f'{func}({", ".join(args)})'
 
     ## Action-specific
@@ -666,6 +673,11 @@ class RustExplainerVisitor(RustBaseVisitor):
             return f'{{ let r = {getter}; {exp}; (r, vec!["{tag}"]) }}'
         return f'({getter}, vec![])'
 
+    def visitPlace(self, ctx):
+        if ctx.PLACE():
+            return f'({construct_place_id(str(ctx.PLACE())[1:-1])}, vec![])'
+        return self.visit(ctx.ref())
+
     def visitItemCount(self, ctx):
         vstr = f'{ctx.ITEM()} count'
         lines = [
@@ -722,6 +734,8 @@ class RustExplainerVisitor(RustBaseVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return f'({ctx.INT()}, vec![])'
+        if ctx.FLOAT():
+            return f'({ctx.FLOAT()}, vec![])'
         if ctx.SETTING():
             sstr = str(ctx.SETTING())
             lines = [
@@ -737,7 +751,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         lines = [
             f'let mut left = {self.visit(ctx.baseNum())}',
             f'let mut right = {self.visit(ctx.num())}',
-            'left.1.append(&mut right)',
+            'left.1.append(&mut right.1)',
             f'(left {ctx.BINOP()} right, left.1)'
         ]
         return f'{{ {"; ".join(lines)} }}'
@@ -898,6 +912,8 @@ class RustExplainerVisitor(RustBaseVisitor):
             args.append(f'Item::{ctx.ITEM()}')
         elif ctx.num():
             args.extend(str(self.code_writer.visit(n)) for n in ctx.num())
+        elif ctx.place():
+            args.extend(str(self.code_writer.visit(n)) for n in ctx.place())
         tag = ctx.getText()
         lines = [
             f'let f = {func}({", ".join(args)})',
@@ -1126,6 +1142,11 @@ class RustObservationVisitor(RustBaseVisitor):
             return f'{{ {obs} {getter} }}'
         return getter
 
+    def visitPlace(self, ctx):
+        if ctx.PLACE():
+            return construct_place_id(str(ctx.PLACE())[1:-1])
+        return self.visit(ctx.ref())
+
     def visitItemCount(self, ctx):
         if ctx.INT():
             val = str(ctx.INT())
@@ -1159,14 +1180,6 @@ class RustObservationVisitor(RustBaseVisitor):
         items = [f'({self.visit(item)})' for item in ctx.item()]
         return f'{" && ".join(items + helpers)}'
 
-    def visitBaseNum(self, ctx):
-        if ctx.INT():
-            return str(ctx.INT())
-        if ctx.SETTING():
-            return f'ctx.{ctx::SETTING()}()'
-        # TODO: constants
-        return self.visitChildren(ctx)
-
     def visitMathNum(self, ctx):
         return f'{self.visit(ctx.baseNum())} {ctx.BINOP()} {self.visit(ctx.num())}'
 
@@ -1195,6 +1208,7 @@ class RustObservationVisitor(RustBaseVisitor):
     # TODO: move unchanged functions to common class
 
     # unchanged
+    visitBaseNum = RustVisitor.visitBaseNum
     visitStr = RustVisitor.visitStr
     visitPerRefStr = RustVisitor.visitPerRefStr
     visitSomewhere = RustVisitor.visitSomewhere

@@ -17,6 +17,7 @@ BUILTINS = {
     '$reset_area': 'ctx.reset_area',
     '$get_region': 'get_region',
     '$get_area': 'get_area',
+    '$spot_distance': 'spot_distance',
     # TODO: Add a collect_from builtin. Note we need the world for this.
     # TODO: $todo as a spot func
     '$visit': 'ctx.visit',
@@ -40,6 +41,7 @@ OPS = {
     r'\+=': 'incr',
     '-': 'sub',
     '-=': 'decr',
+    r'\*': 'mul',
     r'\$': 'invoke_',
 }
 

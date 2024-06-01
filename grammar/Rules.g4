@@ -126,7 +126,9 @@ refEq   : ( ref '==' ( ITEM | SETTING )
         ;
 
 // Specifically where a function is expected to return an integer
+// TODO: genericize? so we can allow arbitrary helpers and define the args for builtins
 funcNum : FUNC '(' ITEM ')'
+        | FUNC '(' place ( ',' place )* ')'
         | FUNC '(' num ( ',' num )* ')'
         | FUNC ('(' ')')?
         ;
@@ -135,7 +137,9 @@ mathNum : baseNum BINOP num ;
 
 num : baseNum | mathNum ;
 
-baseNum : INT | CONST | SETTING | ref | value | switchNum | funcNum | condNum ;
+baseNum : INT | FLOAT | CONST | SETTING | ref | value | switchNum | funcNum | condNum ;
+
+place : PLACE | ref;
 
 value   : SETTING ('[' ( LIT | ITEM ) ']')?     # Setting
         | ref                                   # Argument
