@@ -1832,6 +1832,7 @@ class GameLogic(object):
             'data': ['digraph.mmd', 'graph_map.sh', 'digraph_nodes.dot', 'full_graph.m4'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'context.rs',
                     'observe.rs', 'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs',
+                    # These have to match the structure in templates/
                     'graph/mod.rs', 'graph/enums.rs', 'graph/location.rs', 'graph/exit.rs',
                     'graph/action.rs', 'graph/warp.rs', 'graph/spot.rs', 'graph/graph.rs'],
             'benches': ['bench.rs'],
@@ -1839,7 +1840,12 @@ class GameLogic(object):
             'solutions': [],
             'tests': ['unittest.rs'],
         }
-        rustfiles = []
+        reformat = [
+            'items.rs',
+            'helpers.rs',
+            'rules.rs',
+        ]
+        reformat_files = []
         for dirname, fnames in files.items():
             os.makedirs(os.path.join(self.game_dir, dirname), exist_ok=True)
             for tname in fnames:
@@ -1847,12 +1853,12 @@ class GameLogic(object):
                 name = os.path.join(self.game_dir, dirname, tname)
                 if '/' in name:
                     os.makedirs(os.path.dirname(name), exist_ok=True)
-                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs') and not tname.startswith('graph'):
-                    rustfiles.append(name)
+                if tname in reformat:
+                    reformat_files.append(name)
                 with open(name, 'w', encoding='utf-8') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))
 
-        cmd = ['rustfmt'] + rustfiles
+        cmd = ['rustfmt'] + reformat_files
         subprocess.run(cmd)
 
 

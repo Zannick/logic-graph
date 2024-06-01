@@ -28,14 +28,10 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     world.condense_graph();
     world.update_skippable_locations();
     let mut ctx = Context::default();
-    c.bench_function("can_win_from_scratch", |b| {
-        b.iter(|| can_win(&*world, &ctx, u32::MAX))
-    });
+    c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&*world, &ctx, u32::MAX)));
 
     let ctx = ContextWrapper::new(Context::default());
-    c.bench_function("greedy search", |b| {
-        b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2))
-    });
+    c.bench_function("greedy search", |b| b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2)));
 
     let mut dir = PathBuf::from(file!());
     dir.pop();
@@ -53,19 +49,14 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     if !routes.is_empty() {
         let shortest_paths = ContextScorer::shortest_paths_tree_only(&*world, ctx.get());
         c.bench_function("load routes", |b| {
-            b.iter(|| {
-                for rstr in &routes {
-                    route_from_string(&*world, ctx.get(), rstr, &shortest_paths).unwrap();
-                }
+            b.iter(|| for rstr in &routes {
+                route_from_string(&*world, ctx.get(), rstr, &shortest_paths).unwrap();
             })
         });
     }
 
     if let Ok(win) = greedy_search(&*world, &ctx, u32::MAX, 2) {
-        let sol = Arc::new(Solution {
-            elapsed: win.elapsed(),
-            history: win.recent_history().to_vec(),
-        });
+        let sol = Arc::new(Solution { elapsed: win.elapsed(), history: win.recent_history().to_vec() });
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
                 || MatcherTrie::<ObservationMatcher>::default(),

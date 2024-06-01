@@ -11,25 +11,18 @@ use std::path::PathBuf;
 fn main() -> Result<(), std::io::Error> {
     let args = Cli::parse();
     log4rs::init_file(
-        args.logconfig()
-            .unwrap_or(&PathBuf::from("settings/log4rs.yml")),
-        Default::default(),
-    )
-    .unwrap();
-    let (world, context, routes) = settings::load_settings(args.settings_file());
+        args.logconfig().unwrap_or(&PathBuf::from("settings/log4rs.yml")),
+        Default::default()
+    ).unwrap();
+    let (world, context, routes) =
+        settings::load_settings(args.settings_file());
     if let Err(items) = can_win_just_items(world.as_ref(), &context) {
-        panic!(
-            "Available items not enough to complete ruleset {}: missing {:?}",
-            world.ruleset(),
-            items
-        );
+        panic!("Available items not enough to complete ruleset {}: missing {:?}",
+               world.ruleset(), items);
     }
     if let Err(items) = can_win_just_locations(world.as_ref(), &context) {
-        panic!(
-            "Unable to complete ruleset {} with only location checks: missing {:?}",
-            world.ruleset(),
-            items
-        );
+        panic!("Unable to complete ruleset {} with only location checks: missing {:?}",
+               world.ruleset(), items);
     }
     run(world.as_ref(), context, routes, &args)
 }

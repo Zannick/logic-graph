@@ -12,7 +12,11 @@ use std::io::Read;
 use std::path::PathBuf;
 use yaml_rust::{Yaml, YamlLoader};
 
-fn read_key_value(world: &mut graph::World, key: &Yaml, val: &Yaml) -> Result<(), String> {
+fn read_key_value(
+    world: &mut graph::World,
+    key: &Yaml,
+    val: &Yaml,
+) -> Result<(), String> {
     match key.as_str() {
         Some("rules") => {
             for (rkey, rval) in val.as_hash().expect("rules YAML should be a key-value map") {
@@ -23,12 +27,7 @@ fn read_key_value(world: &mut graph::World, key: &Yaml, val: &Yaml) -> Result<()
                     Some("$objective" | "objective") => {
                         world.rule_objective = parse_str_into(rkey, rval)?
                     }
-                    _ => {
-                        return Err(format!(
-                            "Unrecognized or unparseable rule key: '{:?}'",
-                            rkey
-                        ))
-                    }
+                    _ => return Err(format!("Unrecognized or unparseable rule key: '{:?}'", rkey)),
                 }
             }
         }
@@ -54,17 +53,14 @@ fn read_key_value(world: &mut graph::World, key: &Yaml, val: &Yaml) -> Result<()
     Ok(())
 }
 
-pub fn load_settings(
-    filename: Option<&PathBuf>,
-) -> (Box<graph::World>, Context, Vec<ContextWrapper<Context>>) {
+pub fn load_settings(filename: Option<&PathBuf>) -> (Box<graph::World>, Context, Vec<ContextWrapper<Context>>) {
     let mut world: Box<graph::World> = graph::World::new();
     World::condense_graph(world.as_mut());
     let ctx = Context::default();
     let mut vec = Vec::new();
     let route_key = Yaml::String(String::from("routes"));
     if let Some(filename) = filename {
-        let mut file = File::open(filename)
-            .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
+        let mut file = File::open(filename).unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
         let mut settings = String::new();
         file.read_to_string(&mut settings)
             .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
@@ -79,10 +75,7 @@ pub fn load_settings(
                 if let Some(v) = value.as_vec() {
                     route_strs.extend(v.iter());
                 } else {
-                    errs.push(format!(
-                        "routes must be list of strings, but was {:?}",
-                        value
-                    ));
+                    errs.push(format!("routes must be list of strings, but was {:?}", value));
                 }
             } else if let Err(e) = read_key_value(world.as_mut(), key, value) {
                 errs.push(e);
@@ -99,11 +92,7 @@ pub fn load_settings(
             }
         }
         if !errs.is_empty() {
-            panic!(
-                "Errors reading YAML file: {}\n{} total errors",
-                errs.join("\n"),
-                errs.len()
-            );
+            panic!("Errors reading YAML file: {}\n{} total errors", errs.join("\n"), errs.len());
         }
     }
     world.update_skippable_locations();

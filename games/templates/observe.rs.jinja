@@ -130,7 +130,7 @@ impl Observer for FullObservation {
 %% for s in context_position_watchers['spot']|sort
 %% set spot = id_lookup[s]
 %# Reset rules would go here if we want them.
-%% if spot.action_id
+%%- if spot.action_id
                 SpotId::{{ s }} => {
                     rules::observe_action_{{ spot.action_id }}(cur, world, dest, self);
                 }
