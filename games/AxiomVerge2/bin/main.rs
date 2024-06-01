@@ -4,7 +4,7 @@ use analyzer::access::*;
 use analyzer::cli::*;
 use analyzer::world::World;
 use clap::Parser;
-use libaxiom_verge2::*;
+use libaxiom_verge2::settings;
 use log4rs;
 use std::path::PathBuf;
 

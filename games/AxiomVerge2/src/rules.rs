@@ -5,8 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{self, *};
-use crate::graph_enums::*;
+use crate::graph::{self, enums::*, graph::*};
 use crate::items::Item;
 use crate::observe::*;
 use crate::prices::Currency;

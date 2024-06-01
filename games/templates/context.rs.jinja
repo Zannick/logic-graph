@@ -3,8 +3,7 @@
 #![allow(non_snake_case)]
 #![allow(unused)]
 
-use crate::graph::{self, *};
-use crate::graph_enums::*;
+use crate::graph::{self, enums::*, graph::*};
 use crate::items::Item;
 use crate::movements;
 use crate::observe::*;
@@ -45,7 +44,7 @@ pub enum Expectation {
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
-    use crate::graph_enums::*;
+    use crate::graph::enums::*;
 %% for c, overrides in data_values.items()
 pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
     match spot_id {

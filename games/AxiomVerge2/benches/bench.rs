@@ -16,7 +16,7 @@ use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion
 use enum_map::EnumMap;
 use libaxiom_verge2::context::Context;
 use libaxiom_verge2::graph;
-use libaxiom_verge2::graph_enums::RuleVictory;
+use libaxiom_verge2::graph::RuleVictory;
 use libaxiom_verge2::items::Item;
 use libaxiom_verge2::observe::ObservationMatcher;
 use rustc_hash::FxHashSet;
