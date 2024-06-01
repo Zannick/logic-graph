@@ -12,6 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
+use enum_map::EnumMap;
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -927,8 +928,8 @@ impl Location {
     }
 }
 
-pub(crate) fn build_locations(world: &mut World) {
-    world.locations[LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item] = Location {
+pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
+    locations[LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item] = Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
         item: Item::Health_Fragment,
@@ -937,7 +938,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {
+    locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {
         id: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item,
         canonical: CanonId::Loc_Amagi__Main_Area__Way_Off_To_The_Side__Item,
         item: Item::Flask,
@@ -946,7 +947,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__Liru_Room__Shrine__Item] = Location {
+    locations[LocationId::Amagi__Liru_Room__Shrine__Item] = Location {
         id: LocationId::Amagi__Liru_Room__Shrine__Item,
         canonical: CanonId::Loc_Amagi__Liru_Room__Shrine__Item,
         item: Item::Underwater_Movement,
@@ -955,7 +956,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
         canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
         item: Item::Amagi_Dragon_Eye_Passage,
@@ -964,17 +965,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20] =
-        Location {
-            id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
-            canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
-            item: Item::Defeat_MUS_A_M20,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
-            skippable: false,
-        };
-    world.locations[LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask] = Location {
+    locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20] = Location {
+        id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
+        canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
+        item: Item::Defeat_MUS_A_M20,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
+        skippable: false,
+    };
+    locations[LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask] = Location {
         id: LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
         canonical: CanonId::Amagi_Dragon_Eye_Flask,
         item: Item::Flask,
@@ -983,7 +983,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Cavern_Eye__Item] = Location {
+    locations[LocationId::Amagi__West_Lake__Cavern_Eye__Item] = Location {
         id: LocationId::Amagi__West_Lake__Cavern_Eye__Item,
         canonical: CanonId::Amagi_Dragon_Eye_Flask,
         item: Item::Flask,
@@ -992,7 +992,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward] = Location {
+    locations[LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward] = Location {
         id: LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
         canonical: CanonId::Loc_Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
         item: Item::Flask,
@@ -1001,7 +1001,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn] = Location {
+    locations[LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn,
         canonical: CanonId::Shockwave,
         item: Item::Shockwave,
@@ -1010,7 +1010,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Item__Item] = Location {
+    locations[LocationId::Amagi__West_Lake__Stronghold_Item__Item] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Item__Item,
         canonical: CanonId::Shockwave,
         item: Item::Shockwave,
@@ -1019,7 +1019,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall,
         canonical: CanonId::Amagi_Stronghold_Wall_1,
         item: Item::Amagi_Stronghold_Wall_And_Boulder_1,
@@ -1028,28 +1028,25 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall] =
-        Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall,
-            canonical: CanonId::Amagi_Stronghold_Left_Wall,
-            item: Item::Amagi_Stronghold_Left_Wall,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall] =
-        Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall,
-            canonical: CanonId::Amagi_Stronghold_Wall_1,
-            item: Item::Amagi_Stronghold_Wall_1,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations
-        [LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder] =
+    locations[LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall] = Location {
+        id: LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall,
+        canonical: CanonId::Amagi_Stronghold_Left_Wall,
+        item: Item::Amagi_Stronghold_Left_Wall,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall] = Location {
+        id: LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall,
+        canonical: CanonId::Amagi_Stronghold_Wall_1,
+        item: Item::Amagi_Stronghold_Wall_1,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder] =
         Location {
             id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
             canonical:
@@ -1060,8 +1057,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: None,
             skippable: false,
         };
-    world.locations
-        [LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder] =
+    locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder] =
         Location {
             id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
             canonical: CanonId::Amagi_Stronghold_Boulder_2,
@@ -1071,7 +1067,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: None,
             skippable: false,
         };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall,
         canonical: CanonId::Amagi_Stronghold_Wall_2,
         item: Item::Amagi_Stronghold_Wall_2,
@@ -1080,7 +1076,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall,
         canonical: CanonId::Amagi_Stronghold_Wall_2,
         item: Item::Amagi_Stronghold_Boulder_And_Wall_2,
@@ -1089,7 +1085,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
         canonical: CanonId::Amagi_West_Lake_Surface_Wall,
         item: Item::Amagi_West_Lake_Surface_Wall,
@@ -1098,7 +1094,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall] = Location {
+    locations[LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall] = Location {
         id: LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
         canonical: CanonId::Amagi_West_Lake_Surface_Wall,
         item: Item::Amagi_West_Lake_Surface_Wall,
@@ -1107,7 +1103,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Amagi__East_Lake__Foot__Tablet] = Location {
+    locations[LocationId::Amagi__East_Lake__Foot__Tablet] = Location {
         id: LocationId::Amagi__East_Lake__Foot__Tablet,
         canonical: CanonId::Loc_Amagi__East_Lake__Foot__Tablet,
         item: Item::Forbidden_Knowledge,
@@ -1116,7 +1112,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Mirror_Match__Save_Point__Fight] = Location {
+    locations[LocationId::Annuna__Mirror_Match__Save_Point__Fight] = Location {
         id: LocationId::Annuna__Mirror_Match__Save_Point__Fight,
         canonical: CanonId::Loc_Annuna__Mirror_Match__Save_Point__Fight,
         item: Item::Defeat_Indra,
@@ -1125,7 +1121,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch] = Location {
+    locations[LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch] = Location {
         id: LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch,
         canonical: CanonId::Loc_Annuna__Mirror_Match__Below_Switch__Hit_Switch,
         item: Item::Annuna_Mirror_Match_Switch,
@@ -1134,7 +1130,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Mirror_Match__Plinth__Item] = Location {
+    locations[LocationId::Annuna__Mirror_Match__Plinth__Item] = Location {
         id: LocationId::Annuna__Mirror_Match__Plinth__Item,
         canonical: CanonId::Annuna_Mirror_Match_Flask,
         item: Item::Big_Flask,
@@ -1143,17 +1139,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask] =
-        Location {
-            id: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
-            canonical: CanonId::Annuna_Mirror_Match_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask] = Location {
+    locations[LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask] = Location {
+        id: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
+        canonical: CanonId::Annuna_Mirror_Match_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask] = Location {
         id: LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask,
         canonical: CanonId::Annuna_Mirror_Match_Flask,
         item: Item::Big_Flask,
@@ -1162,7 +1157,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask] = Location {
+    locations[LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask] = Location {
         id: LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask,
         canonical: CanonId::Annuna_Mirror_Match_Flask,
         item: Item::Big_Flask,
@@ -1171,7 +1166,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__West_Bridge__Plinth__Item] = Location {
+    locations[LocationId::Annuna__West_Bridge__Plinth__Item] = Location {
         id: LocationId::Annuna__West_Bridge__Plinth__Item,
         canonical: CanonId::Loc_Annuna__West_Bridge__Plinth__Item,
         item: Item::Nano_Lattice_2,
@@ -1180,7 +1175,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__East_Bridge__Gate_Button__Switch] = Location {
+    locations[LocationId::Annuna__East_Bridge__Gate_Button__Switch] = Location {
         id: LocationId::Annuna__East_Bridge__Gate_Button__Switch,
         canonical: CanonId::Annuna_East_Bridge_Gate,
         item: Item::Annuna_East_Bridge_Gate,
@@ -1189,17 +1184,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below] =
-        Location {
-            id: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
-            canonical: CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
-            item: Item::Annuna_East_Bridge_Gate,
-            price: Currency::Free,
-            time: 250,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__East_Bridge__Tower_Gate__Tablet] = Location {
+    locations[LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below] = Location {
+        id: LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
+        canonical: CanonId::Loc_Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below,
+        item: Item::Annuna_East_Bridge_Gate,
+        price: Currency::Free,
+        time: 250,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__East_Bridge__Tower_Gate__Tablet] = Location {
         id: LocationId::Annuna__East_Bridge__Tower_Gate__Tablet,
         canonical: CanonId::Loc_Annuna__East_Bridge__Tower_Gate__Tablet,
         item: Item::Lament_for_Fools,
@@ -1208,7 +1202,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__East_Bridge__Tower_Secret__Item] = Location {
+    locations[LocationId::Annuna__East_Bridge__Tower_Secret__Item] = Location {
         id: LocationId::Annuna__East_Bridge__Tower_Secret__Item,
         canonical: CanonId::Loc_Annuna__East_Bridge__Tower_Secret__Item,
         item: Item::Royal_Ring,
@@ -1217,7 +1211,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup] = Location {
         id: LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
         canonical: CanonId::Loc_Annuna__Sniper_Valley__Bridge_End__Health_Pickup,
         item: Item::Power_Core,
@@ -1226,7 +1220,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Table__Item] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Table__Item] = Location {
         id: LocationId::Annuna__Sniper_Valley__Table__Item,
         canonical: CanonId::Loc_Annuna__Sniper_Valley__Table__Item,
         item: Item::Family_Tragedy,
@@ -1235,7 +1229,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall] =
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall] =
         Location {
             id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall,
             canonical: CanonId::Sniper_Valley_Rock_1,
@@ -1245,7 +1239,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall,
         canonical: CanonId::Sniper_Valley_Rock_1,
         item: Item::Sniper_Valley_Rock_1,
@@ -1254,7 +1248,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall] =
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall] =
         Location {
             id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall,
             canonical: CanonId::Sniper_Valley_Rock_1,
@@ -1264,7 +1258,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall,
         canonical: CanonId::Sniper_Valley_Rock_1,
         item: Item::Sniper_Valley_Rock_1,
@@ -1273,7 +1267,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall] =
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall] =
         Location {
             id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall,
             canonical: CanonId::Sniper_Valley_Rock_2,
@@ -1283,7 +1277,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall,
         canonical: CanonId::Sniper_Valley_Rock_2,
         item: Item::Sniper_Valley_Rock_2,
@@ -1292,7 +1286,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall] =
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall] =
         Location {
             id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall,
             canonical: CanonId::Sniper_Valley_Rock_2,
@@ -1302,7 +1296,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall,
         canonical: CanonId::Sniper_Valley_Rock_2,
         item: Item::Sniper_Valley_Rock_2,
@@ -1311,7 +1305,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item] = Location {
+    locations[LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item] = Location {
         id: LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item,
         canonical: CanonId::Loc_Annuna__Sniper_Valley__Cavern_Cache__Item,
         item: Item::Big_Flask,
@@ -1320,7 +1314,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Vertical_Room__Plinth__Item] = Location {
+    locations[LocationId::Annuna__Vertical_Room__Plinth__Item] = Location {
         id: LocationId::Annuna__Vertical_Room__Plinth__Item,
         canonical: CanonId::Loc_Annuna__Vertical_Room__Plinth__Item,
         item: Item::Boomerang_Upgrade,
@@ -1329,7 +1323,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button] = Location {
+    locations[LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button] = Location {
         id: LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button,
         canonical: CanonId::Loc_Annuna__Vertical_Room__Gate_Button__Hit_Button,
         item: Item::Annuna_Vertical_Room_Gate,
@@ -1338,7 +1332,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet] = Location {
+    locations[LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet] = Location {
         id: LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet,
         canonical: CanonId::Loc_Annuna__Vertical_Room__Upper_Cache__Tablet,
         item: Item::Beware_the_Patternmind,
@@ -1347,7 +1341,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup] = Location {
+    locations[LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup] = Location {
         id: LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
         canonical: CanonId::Loc_Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup,
         item: Item::Power_Core,
@@ -1356,17 +1350,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask] =
-        Location {
-            id: LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask,
-            canonical: CanonId::Filter_Teleporter_Flask,
-            item: Item::Flask,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask] = Location {
+    locations[LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask] = Location {
+        id: LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask,
+        canonical: CanonId::Filter_Teleporter_Flask,
+        item: Item::Flask,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask] = Location {
         id: LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask,
         canonical: CanonId::Filter_Teleporter_Flask,
         item: Item::Flask,
@@ -1375,7 +1368,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet] = Location {
+    locations[LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet] = Location {
         id: LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
         canonical: CanonId::Loc_Annuna__Filter_Teleporter__Northeast_Cubby__Tablet,
         item: Item::The_Eternal_Arm,
@@ -1384,7 +1377,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill] = Location {
+    locations[LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill] = Location {
         id: LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill,
         canonical: CanonId::Loc_Annuna__Spider_Room__Healthy_Corner__Health_Refill,
         item: Item::Power_Core,
@@ -1393,7 +1386,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Twisty_Passages__Top__Tablet] = Location {
+    locations[LocationId::Annuna__Twisty_Passages__Top__Tablet] = Location {
         id: LocationId::Annuna__Twisty_Passages__Top__Tablet,
         canonical: CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet,
         item: Item::Destruction_Pogrom,
@@ -1402,7 +1395,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill] = Location {
+    locations[LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill] = Location {
         id: LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill,
         canonical: CanonId::Loc_Annuna__Twisty_Passages__Northwest_Alcove__Refill,
         item: Item::Power_Core,
@@ -1411,7 +1404,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__West_Climb__Cache__Item] = Location {
+    locations[LocationId::Annuna__West_Climb__Cache__Item] = Location {
         id: LocationId::Annuna__West_Climb__Cache__Item,
         canonical: CanonId::Loc_Annuna__West_Climb__Cache__Item,
         item: Item::Eye_Ring,
@@ -1420,7 +1413,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask] = Location {
+    locations[LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask] = Location {
         id: LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask,
         canonical: CanonId::Egg_Room_Flask,
         item: Item::Big_Flask,
@@ -1429,7 +1422,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Egg_Room__Cache__Flask] = Location {
+    locations[LocationId::Annuna__Egg_Room__Cache__Flask] = Location {
         id: LocationId::Annuna__Egg_Room__Cache__Flask,
         canonical: CanonId::Egg_Room_Flask,
         item: Item::Big_Flask,
@@ -1438,7 +1431,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask] = Location {
+    locations[LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask] = Location {
         id: LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask,
         canonical: CanonId::Egg_Room_Flask,
         item: Item::Big_Flask,
@@ -1447,37 +1440,34 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside] =
-        Location {
-            id: LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
-            canonical: CanonId::Egg_Room_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask] =
-        Location {
-            id: LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
-            canonical: CanonId::Egg_Room_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 9500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra,
-            canonical: CanonId::Siuna_Storage_Wall,
-            item: Item::Siuna_Storage_Wall,
-            price: Currency::Free,
-            time: 900,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone] =
+    locations[LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside] = Location {
+        id: LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside,
+        canonical: CanonId::Egg_Room_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask] = Location {
+        id: LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask,
+        canonical: CanonId::Egg_Room_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 9500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra,
+        canonical: CanonId::Siuna_Storage_Wall,
+        item: Item::Siuna_Storage_Wall,
+        price: Currency::Free,
+        time: 900,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1487,7 +1477,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist] =
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1497,8 +1487,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
             skippable: false,
         };
-    world.locations
-        [LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2] =
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1510,7 +1499,7 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra] = Location {
         id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra,
         canonical: CanonId::Siuna_Storage_Wall,
         item: Item::Siuna_Storage_Wall,
@@ -1519,7 +1508,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn] = Location {
         id: LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn,
         canonical: CanonId::Nanite_Mist,
         item: Item::Nanite_Mist,
@@ -1528,7 +1517,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone] =
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1538,7 +1527,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist] =
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1548,7 +1537,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2] =
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2] =
         Location {
             id: LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2,
             canonical: CanonId::Siuna_Storage_Wall,
@@ -1558,17 +1547,16 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
             skippable: false,
         };
-    world.locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
-            canonical: CanonId::Nanite_Mist,
-            item: Item::Nanite_Mist,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel,
+        canonical: CanonId::Nanite_Mist,
+        item: Item::Nanite_Mist,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn] = Location {
         id: LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn,
         canonical: CanonId::Nanite_Mist,
         item: Item::Nanite_Mist,
@@ -1577,17 +1565,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel] =
-        Location {
-            id: LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
-            canonical: CanonId::Nanite_Mist,
-            item: Item::Nanite_Mist,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Siuna_Storage__Cache__Urn] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel] = Location {
+        id: LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel,
+        canonical: CanonId::Nanite_Mist,
+        item: Item::Nanite_Mist,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Siuna_Storage__Cache__Urn] = Location {
         id: LocationId::Annuna__Siuna_Storage__Cache__Urn,
         canonical: CanonId::Nanite_Mist,
         item: Item::Nanite_Mist,
@@ -1596,7 +1583,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip] = Location {
         id: LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip,
         canonical: CanonId::Nanite_Mist,
         item: Item::Nanite_Mist,
@@ -1605,7 +1592,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel] = Location {
+    locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel] = Location {
         id: LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel,
         canonical: CanonId::Nanite_Mist,
         item: Item::Nanite_Mist,
@@ -1614,7 +1601,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall] = Location {
+    locations[LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall] = Location {
         id: LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall,
         canonical: CanonId::Apocalypse_Seals_Wall,
         item: Item::Apocalypse_Seals_Wall,
@@ -1623,7 +1610,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall] = Location {
+    locations[LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall] = Location {
         id: LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall,
         canonical: CanonId::Apocalypse_Seals_Wall,
         item: Item::Apocalypse_Seals_Wall,
@@ -1632,17 +1619,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall] =
-        Location {
-            id: LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
-            canonical: CanonId::Apocalypse_Seals_Wall,
-            item: Item::Apocalypse_Seals_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight] = Location {
+    locations[LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall] = Location {
+        id: LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall,
+        canonical: CanonId::Apocalypse_Seals_Wall,
+        item: Item::Apocalypse_Seals_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight] = Location {
         id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
         canonical: CanonId::Apocalypse_Bomb,
         item: Item::Apocalypse_Bomb,
@@ -1651,7 +1637,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
         skippable: false,
     };
-    world.locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up] = Location {
+    locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up] = Location {
         id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up,
         canonical: CanonId::Apocalypse_Bomb,
         item: Item::Apocalypse_Bomb,
@@ -1660,7 +1646,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
         skippable: false,
     };
-    world.locations[LocationId::Antarctica__Shed__Interior__Shelf] = Location {
+    locations[LocationId::Antarctica__Shed__Interior__Shelf] = Location {
         id: LocationId::Antarctica__Shed__Interior__Shelf,
         canonical: CanonId::Loc_Antarctica__Shed__Interior__Shelf,
         item: Item::Ice_Axe,
@@ -1669,7 +1655,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Antarctica__Building_2__Behind_Boxes__Note] = Location {
+    locations[LocationId::Antarctica__Building_2__Behind_Boxes__Note] = Location {
         id: LocationId::Antarctica__Building_2__Behind_Boxes__Note,
         canonical: CanonId::Notes_2053_02_27,
         item: Item::Notes_2053_02_27,
@@ -1678,7 +1664,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Antarctica__Power_Room__Switch__Flip] = Location {
+    locations[LocationId::Antarctica__Power_Room__Switch__Flip] = Location {
         id: LocationId::Antarctica__Power_Room__Switch__Flip,
         canonical: CanonId::Loc_Antarctica__Power_Room__Switch__Flip,
         item: Item::Station_Power,
@@ -1687,17 +1673,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side] =
-        Location {
-            id: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
-            canonical: CanonId::Ebih_Base_Camp_Fragment,
-            item: Item::Health_Fragment,
-            price: Currency::Free,
-            time: 1000,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Base_Camp__Top_Platform__Item] = Location {
+    locations[LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side] = Location {
+        id: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+        canonical: CanonId::Ebih_Base_Camp_Fragment,
+        item: Item::Health_Fragment,
+        price: Currency::Free,
+        time: 1000,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Base_Camp__Top_Platform__Item] = Location {
         id: LocationId::Ebih__Base_Camp__Top_Platform__Item,
         canonical: CanonId::Ebih_Base_Camp_Fragment,
         item: Item::Health_Fragment,
@@ -1706,7 +1691,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__By_Garage__Crawlspace__Fragment] = Location {
+    locations[LocationId::Ebih__By_Garage__Crawlspace__Fragment] = Location {
         id: LocationId::Ebih__By_Garage__Crawlspace__Fragment,
         canonical: CanonId::Loc_Ebih__By_Garage__Crawlspace__Fragment,
         item: Item::Health_Fragment,
@@ -1715,7 +1700,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush] = Location {
+    locations[LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush] = Location {
         id: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
         canonical: CanonId::Ebih_Bush_Flask,
         item: Item::Flask,
@@ -1724,7 +1709,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush] = Location {
+    locations[LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush] = Location {
         id: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
         canonical: CanonId::Ebih_Bush_Flask,
         item: Item::Flask,
@@ -1733,7 +1718,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Alcove_Right__Block_Right] = Location {
+    locations[LocationId::Ebih__Waterfall__Alcove_Right__Block_Right] = Location {
         id: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
         canonical: CanonId::Ebih_Waterfall_Block_Right,
         item: Item::Ebih_Waterfall_Block_Right,
@@ -1742,7 +1727,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks] = Location {
+    locations[LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks] = Location {
         id: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
         canonical: CanonId::Loc_Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
         item: Item::Ebih_Waterfall_Both_Blocks,
@@ -1751,7 +1736,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Alcove_Left__Block_Left] = Location {
+    locations[LocationId::Ebih__Waterfall__Alcove_Left__Block_Left] = Location {
         id: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
         canonical: CanonId::Ebih_Waterfall_Block_Left,
         item: Item::Ebih_Waterfall_Block_Left,
@@ -1760,7 +1745,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Alcove__Pedestal] = Location {
+    locations[LocationId::Ebih__Waterfall__Alcove__Pedestal] = Location {
         id: LocationId::Ebih__Waterfall__Alcove__Pedestal,
         canonical: CanonId::Loc_Ebih__Waterfall__Alcove__Pedestal,
         item: Item::Bronze_Axe,
@@ -1769,7 +1754,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Alcove__Block_Right] = Location {
+    locations[LocationId::Ebih__Waterfall__Alcove__Block_Right] = Location {
         id: LocationId::Ebih__Waterfall__Alcove__Block_Right,
         canonical: CanonId::Ebih_Waterfall_Block_Right,
         item: Item::Ebih_Waterfall_Block_Right,
@@ -1778,7 +1763,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Alcove__Block_Left] = Location {
+    locations[LocationId::Ebih__Waterfall__Alcove__Block_Left] = Location {
         id: LocationId::Ebih__Waterfall__Alcove__Block_Left,
         canonical: CanonId::Ebih_Waterfall_Block_Left,
         item: Item::Ebih_Waterfall_Block_Left,
@@ -1787,7 +1772,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Wall] = Location {
+    locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Wall] = Location {
         id: LocationId::Ebih__Waterfall__Wall_Right__Break_Wall,
         canonical: CanonId::Ebih_Waterfall_Wall,
         item: Item::Ebih_Waterfall_Wall,
@@ -1796,7 +1781,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall] = Location {
+    locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall] = Location {
         id: LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall,
         canonical: CanonId::Ebih_Waterfall_Wall,
         item: Item::Ebih_Waterfall_Wall,
@@ -1805,17 +1790,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Right__Break_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall] =
-        Location {
-            id: LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall,
-            canonical: CanonId::Ebih_Waterfall_Wall,
-            item: Item::Ebih_Waterfall_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Wall] = Location {
+    locations[LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall] = Location {
+        id: LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall,
+        canonical: CanonId::Ebih_Waterfall_Wall,
+        item: Item::Ebih_Waterfall_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Wall] = Location {
         id: LocationId::Ebih__Waterfall__Wall_Left__Break_Wall,
         canonical: CanonId::Ebih_Waterfall_Wall,
         item: Item::Ebih_Waterfall_Wall,
@@ -1824,7 +1808,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall] = Location {
+    locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall] = Location {
         id: LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall,
         canonical: CanonId::Ebih_Waterfall_Wall,
         item: Item::Ebih_Waterfall_Wall,
@@ -1833,17 +1817,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Left__Break_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall] =
-        Location {
-            id: LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall,
-            canonical: CanonId::Ebih_Waterfall_Wall,
-            item: Item::Ebih_Waterfall_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Ebih_West__Alcove__Tablet] = Location {
+    locations[LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall] = Location {
+        id: LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall,
+        canonical: CanonId::Ebih_Waterfall_Wall,
+        item: Item::Ebih_Waterfall_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Ebih_West__Alcove__Tablet] = Location {
         id: LocationId::Ebih__Ebih_West__Alcove__Tablet,
         canonical: CanonId::Loc_Ebih__Ebih_West__Alcove__Tablet,
         item: Item::Heretics_Tablet,
@@ -1852,7 +1835,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_West__Block_Left__Break_Block] = Location {
+    locations[LocationId::Ebih__Ebih_West__Block_Left__Break_Block] = Location {
         id: LocationId::Ebih__Ebih_West__Block_Left__Break_Block,
         canonical: CanonId::Ebih_West_Block,
         item: Item::Ebih_West_Block,
@@ -1861,7 +1844,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_West__Block_Right__Break_Block] = Location {
+    locations[LocationId::Ebih__Ebih_West__Block_Right__Break_Block] = Location {
         id: LocationId::Ebih__Ebih_West__Block_Right__Break_Block,
         canonical: CanonId::Ebih_West_Block,
         item: Item::Ebih_West_Block,
@@ -1870,7 +1853,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn] = Location {
+    locations[LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn] = Location {
         id: LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
         canonical: CanonId::Infect,
         item: Item::Infect,
@@ -1879,7 +1862,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_East__Corner__Urn] = Location {
+    locations[LocationId::Ebih__Ebih_East__Corner__Urn] = Location {
         id: LocationId::Ebih__Ebih_East__Corner__Urn,
         canonical: CanonId::Infect,
         item: Item::Infect,
@@ -1888,7 +1871,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_East__Dispenser__Vend] = Location {
+    locations[LocationId::Ebih__Ebih_East__Dispenser__Vend] = Location {
         id: LocationId::Ebih__Ebih_East__Dispenser__Vend,
         canonical: CanonId::Loc_Ebih__Ebih_East__Dispenser__Vend,
         item: Item::Health_Fragment,
@@ -1897,7 +1880,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Ebih_East__East_Ledge__Note] = Location {
+    locations[LocationId::Ebih__Ebih_East__East_Ledge__Note] = Location {
         id: LocationId::Ebih__Ebih_East__East_Ledge__Note,
         canonical: CanonId::Loc_Ebih__Ebih_East__East_Ledge__Note,
         item: Item::Under_Siege,
@@ -1906,7 +1889,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Boss_Room__Boss__Hack_Alu] = Location {
+    locations[LocationId::Ebih__Boss_Room__Boss__Hack_Alu] = Location {
         id: LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
         canonical: CanonId::Ebih_Alu,
         item: Item::Ebih_Alu,
@@ -1915,7 +1898,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Boss_Room__Boss__Fight_Alu] = Location {
+    locations[LocationId::Ebih__Boss_Room__Boss__Fight_Alu] = Location {
         id: LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
         canonical: CanonId::Ebih_Alu,
         item: Item::Ebih_Alu,
@@ -1924,7 +1907,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Boss_Room__Boss__Boss_Reward] = Location {
+    locations[LocationId::Ebih__Boss_Room__Boss__Boss_Reward] = Location {
         id: LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
         canonical: CanonId::Loc_Ebih__Boss_Room__Boss__Boss_Reward,
         item: Item::Flask,
@@ -1933,7 +1916,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Boss_Room__East_Ledge__Item] = Location {
+    locations[LocationId::Ebih__Boss_Room__East_Ledge__Item] = Location {
         id: LocationId::Ebih__Boss_Room__East_Ledge__Item,
         canonical: CanonId::Loc_Ebih__Boss_Room__East_Ledge__Item,
         item: Item::Health_Node,
@@ -1942,7 +1925,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Drone_Room__Item__Urn] = Location {
+    locations[LocationId::Ebih__Drone_Room__Item__Urn] = Location {
         id: LocationId::Ebih__Drone_Room__Item__Urn,
         canonical: CanonId::Remote_Drone,
         item: Item::Remote_Drone,
@@ -1951,7 +1934,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip] = Location {
+    locations[LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip] = Location {
         id: LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip,
         canonical: CanonId::Remote_Drone,
         item: Item::Remote_Drone,
@@ -1960,7 +1943,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel] = Location {
+    locations[LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel] = Location {
         id: LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel,
         canonical: CanonId::Remote_Drone,
         item: Item::Remote_Drone,
@@ -1969,7 +1952,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab] = Location {
+    locations[LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab] = Location {
         id: LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
         canonical: CanonId::Remote_Drone,
         item: Item::Remote_Drone,
@@ -1978,7 +1961,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Grid_25_2_6__Pit__Item] = Location {
+    locations[LocationId::Ebih__Grid_25_2_6__Pit__Item] = Location {
         id: LocationId::Ebih__Grid_25_2_6__Pit__Item,
         canonical: CanonId::Loc_Ebih__Grid_25_2_6__Pit__Item,
         item: Item::Flask,
@@ -1987,7 +1970,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Grid_26_10_11__Ledge__Note] = Location {
+    locations[LocationId::Ebih__Grid_26_10_11__Ledge__Note] = Location {
         id: LocationId::Ebih__Grid_26_10_11__Ledge__Note,
         canonical: CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note,
         item: Item::Terminal_Breakthrough_1,
@@ -1996,17 +1979,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block] =
-        Location {
-            id: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
-            canonical: CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
-            item: Item::Ebih_Interchange_Block,
-            price: Currency::Energy(100),
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch] = Location {
+    locations[LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block] = Location {
+        id: LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
+        canonical: CanonId::Loc_Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block,
+        item: Item::Ebih_Interchange_Block,
+        price: Currency::Energy(100),
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch] = Location {
         id: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch,
         canonical: CanonId::Loc_Ebih__Vertical_Interchange__Switch__Activate_Switch,
         item: Item::Ebih_Interchange_Gate,
@@ -2015,7 +1997,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall] = Location {
+    locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall] = Location {
         id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall,
         canonical: CanonId::Ebih_Walled_Off_Wall,
         item: Item::Ebih_Walled_Off_Wall,
@@ -2024,7 +2006,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall] = Location {
+    locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall] = Location {
         id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall,
         canonical: CanonId::Ebih_Walled_Off_Wall,
         item: Item::Ebih_Walled_Off_Wall,
@@ -2033,17 +2015,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster] =
-        Location {
-            id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
-            canonical: CanonId::Ebih_Walled_Off_Wall,
-            item: Item::Ebih_Walled_Off_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall] = Location {
+    locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster] = Location {
+        id: LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster,
+        canonical: CanonId::Ebih_Walled_Off_Wall,
+        item: Item::Ebih_Walled_Off_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall] = Location {
         id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall,
         canonical: CanonId::Ebih_Walled_Off_Wall,
         item: Item::Ebih_Walled_Off_Wall,
@@ -2052,7 +2033,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall] = Location {
+    locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall] = Location {
         id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall,
         canonical: CanonId::Ebih_Walled_Off_Wall,
         item: Item::Ebih_Walled_Off_Wall,
@@ -2061,17 +2042,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster] =
-        Location {
-            id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
-            canonical: CanonId::Ebih_Walled_Off_Wall,
-            item: Item::Ebih_Walled_Off_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
-            skippable: false,
-        };
-    world.locations[LocationId::Ebih__Guarded_Health__West_Basin__Health] = Location {
+    locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster] = Location {
+        id: LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster,
+        canonical: CanonId::Ebih_Walled_Off_Wall,
+        item: Item::Ebih_Walled_Off_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+        skippable: false,
+    };
+    locations[LocationId::Ebih__Guarded_Health__West_Basin__Health] = Location {
         id: LocationId::Ebih__Guarded_Health__West_Basin__Health,
         canonical: CanonId::Loc_Ebih__Guarded_Health__West_Basin__Health,
         item: Item::Health_Fragment,
@@ -2080,7 +2060,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Ebih__Guarded_Health__Far_West__Refill] = Location {
+    locations[LocationId::Ebih__Guarded_Health__Far_West__Refill] = Location {
         id: LocationId::Ebih__Guarded_Health__Far_West__Refill,
         canonical: CanonId::Loc_Ebih__Guarded_Health__Far_West__Refill,
         item: Item::Power_Core,
@@ -2089,7 +2069,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Filter__Core__Terminal_East__Authorize_Hammond] = Location {
+    locations[LocationId::Filter__Core__Terminal_East__Authorize_Hammond] = Location {
         id: LocationId::Filter__Core__Terminal_East__Authorize_Hammond,
         canonical: CanonId::Loc_Filter__Core__Terminal_East__Authorize_Hammond,
         item: Item::Hammond_Auth,
@@ -2098,7 +2078,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna_Breach__Chimney__Cache__Flask] = Location {
+    locations[LocationId::Giguna_Breach__Chimney__Cache__Flask] = Location {
         id: LocationId::Giguna_Breach__Chimney__Cache__Flask,
         canonical: CanonId::Loc_Giguna_Breach__Chimney__Cache__Flask,
         item: Item::Flask,
@@ -2107,7 +2087,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna_Breach__Cubby__Rocks__Health] = Location {
+    locations[LocationId::Giguna_Breach__Cubby__Rocks__Health] = Location {
         id: LocationId::Giguna_Breach__Cubby__Rocks__Health,
         canonical: CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health,
         item: Item::Health_Fragment,
@@ -2116,7 +2096,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna_Breach__Slingshot__Ravine__Urn] = Location {
+    locations[LocationId::Giguna_Breach__Slingshot__Ravine__Urn] = Location {
         id: LocationId::Giguna_Breach__Slingshot__Ravine__Urn,
         canonical: CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn,
         item: Item::Slingshot_Hook,
@@ -2125,7 +2105,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate] = Location {
+    locations[LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate] = Location {
         id: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
         canonical: CanonId::Giguna_Northeast_Gate,
         item: Item::Giguna_Northeast_Gate,
@@ -2134,7 +2114,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button] = Location {
+    locations[LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button] = Location {
         id: LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
         canonical: CanonId::Giguna_Northeast_Gate,
         item: Item::Giguna_Northeast_Gate,
@@ -2143,7 +2123,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask] = Location {
+    locations[LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask] = Location {
         id: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
         canonical: CanonId::Giguna_Northeast_Flask,
         item: Item::Flask,
@@ -2152,7 +2132,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Northeast__Vault__Item] = Location {
+    locations[LocationId::Giguna__Giguna_Northeast__Vault__Item] = Location {
         id: LocationId::Giguna__Giguna_Northeast__Vault__Item,
         canonical: CanonId::Giguna_Northeast_Flask,
         item: Item::Flask,
@@ -2161,7 +2141,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Carnelian__Vault__Item] = Location {
+    locations[LocationId::Giguna__Carnelian__Vault__Item] = Location {
         id: LocationId::Giguna__Carnelian__Vault__Item,
         canonical: CanonId::Loc_Giguna__Carnelian__Vault__Item,
         item: Item::Carnelian_Ring,
@@ -2170,7 +2150,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__West_Caverns__Cache__Item] = Location {
+    locations[LocationId::Giguna__West_Caverns__Cache__Item] = Location {
         id: LocationId::Giguna__West_Caverns__Cache__Item,
         canonical: CanonId::Loc_Giguna__West_Caverns__Cache__Item,
         item: Item::Power_Matrix,
@@ -2179,7 +2159,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__West_Caverns__Bush__Item] = Location {
+    locations[LocationId::Giguna__West_Caverns__Bush__Item] = Location {
         id: LocationId::Giguna__West_Caverns__Bush__Item,
         canonical: CanonId::Loc_Giguna__West_Caverns__Bush__Item,
         item: Item::Power_Core,
@@ -2188,7 +2168,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Wasteland__Door_Right__Health] = Location {
+    locations[LocationId::Giguna__Wasteland__Door_Right__Health] = Location {
         id: LocationId::Giguna__Wasteland__Door_Right__Health,
         canonical: CanonId::Loc_Giguna__Wasteland__Door_Right__Health,
         item: Item::Health_Fragment,
@@ -2197,8 +2177,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations
-        [LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] =
+    locations[LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] =
         Location {
             id: LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
             canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2210,7 +2189,7 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] =
+    locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] =
         Location {
             id: LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
             canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2220,7 +2199,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
             skippable: false,
         };
-    world.locations[LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage] = Location {
+    locations[LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage,
         canonical: CanonId::Ebih_Wasteland_Passage_H,
         item: Item::Ebih_Wasteland_Passage_H,
@@ -2229,8 +2208,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage),
         skippable: false,
     };
-    world.locations
-        [LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] =
+    locations[LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] =
         Location {
             id: LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
             canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2242,8 +2220,7 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations
-        [LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] =
+    locations[LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] =
         Location {
             id: LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
             canonical: CanonId::Ebih_Wasteland_Passage_H,
@@ -2255,7 +2232,7 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage] = Location {
+    locations[LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage,
         canonical: CanonId::Ebih_Wasteland_Passage_H,
         item: Item::Ebih_Wasteland_Passage_H,
@@ -2264,7 +2241,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage),
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Base__Ruin__Item] = Location {
+    locations[LocationId::Giguna__Giguna_Base__Ruin__Item] = Location {
         id: LocationId::Giguna__Giguna_Base__Ruin__Item,
         canonical: CanonId::Loc_Giguna__Giguna_Base__Ruin__Item,
         item: Item::Wall_Climb,
@@ -2273,7 +2250,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Giguna_Base__Table__News] = Location {
+    locations[LocationId::Giguna__Giguna_Base__Table__News] = Location {
         id: LocationId::Giguna__Giguna_Base__Table__News,
         canonical: CanonId::Loc_Giguna__Giguna_Base__Table__News,
         item: Item::Researchers_Missing,
@@ -2282,7 +2259,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Ruins_East__Way_Up_High__Item] = Location {
+    locations[LocationId::Giguna__Ruins_East__Way_Up_High__Item] = Location {
         id: LocationId::Giguna__Ruins_East__Way_Up_High__Item,
         canonical: CanonId::Loc_Giguna__Ruins_East__Way_Up_High__Item,
         item: Item::Flask,
@@ -2291,7 +2268,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Ruins_Center__Tablet__Item] = Location {
+    locations[LocationId::Giguna__Ruins_Center__Tablet__Item] = Location {
         id: LocationId::Giguna__Ruins_Center__Tablet__Item,
         canonical: CanonId::Loc_Giguna__Ruins_Center__Tablet__Item,
         item: Item::Aansur,
@@ -2300,7 +2277,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask] = Location {
+    locations[LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask] = Location {
         id: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
         canonical: CanonId::Giguna_Top_Flask,
         item: Item::Flask,
@@ -2309,7 +2286,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Ruins_Top__Flask__Flask] = Location {
+    locations[LocationId::Giguna__Ruins_Top__Flask__Flask] = Location {
         id: LocationId::Giguna__Ruins_Top__Flask__Flask,
         canonical: CanonId::Giguna_Top_Flask,
         item: Item::Flask,
@@ -2318,7 +2295,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__West_Tower__Top__Tablet] = Location {
+    locations[LocationId::Giguna__West_Tower__Top__Tablet] = Location {
         id: LocationId::Giguna__West_Tower__Top__Tablet,
         canonical: CanonId::Loc_Giguna__West_Tower__Top__Tablet,
         item: Item::The_Ideal_Kiengir,
@@ -2327,7 +2304,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Far_Corner__Grass__Obscured_Item] = Location {
+    locations[LocationId::Giguna__Far_Corner__Grass__Obscured_Item] = Location {
         id: LocationId::Giguna__Far_Corner__Grass__Obscured_Item,
         canonical: CanonId::Loc_Giguna__Far_Corner__Grass__Obscured_Item,
         item: Item::Flask,
@@ -2336,7 +2313,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Helipad__Tablet_Ledge__Tablet] = Location {
+    locations[LocationId::Giguna__Helipad__Tablet_Ledge__Tablet] = Location {
         id: LocationId::Giguna__Helipad__Tablet_Ledge__Tablet,
         canonical: CanonId::Loc_Giguna__Helipad__Tablet_Ledge__Tablet,
         item: Item::Journal_2049_10_29,
@@ -2345,7 +2322,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Clouds__Cache__Item] = Location {
+    locations[LocationId::Giguna__Clouds__Cache__Item] = Location {
         id: LocationId::Giguna__Clouds__Cache__Item,
         canonical: CanonId::Loc_Giguna__Clouds__Cache__Item,
         item: Item::Big_Flask,
@@ -2354,7 +2331,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Lamassu__Deposit__Flask] = Location {
+    locations[LocationId::Giguna__Lamassu__Deposit__Flask] = Location {
         id: LocationId::Giguna__Lamassu__Deposit__Flask,
         canonical: CanonId::Loc_Giguna__Lamassu__Deposit__Flask,
         item: Item::Flask,
@@ -2363,7 +2340,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch] = Location {
+    locations[LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch] = Location {
         id: LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch,
         canonical: CanonId::Giguna_Dual_Path_Switch,
         item: Item::Giguna_Dual_Path_Switch,
@@ -2372,7 +2349,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch] = Location {
+    locations[LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch] = Location {
         id: LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch,
         canonical: CanonId::Giguna_Dual_Path_Switch,
         item: Item::Giguna_Dual_Path_Switch,
@@ -2381,7 +2358,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall] = Location {
+    locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall] = Location {
         id: LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall,
         canonical: CanonId::Giguna_Dual_Path_Wall,
         item: Item::Giguna_Dual_Path_Wall,
@@ -2390,7 +2367,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall] = Location {
+    locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall] = Location {
         id: LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall,
         canonical: CanonId::Giguna_Dual_Path_Wall,
         item: Item::Giguna_Dual_Path_Wall,
@@ -2399,17 +2376,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall] =
-        Location {
-            id: LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall,
-            canonical: CanonId::Giguna_Dual_Path_Wall,
-            item: Item::Giguna_Dual_Path_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Giguna__Dual_Path__Wall_Secret__Health] = Location {
+    locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall] = Location {
+        id: LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall,
+        canonical: CanonId::Giguna_Dual_Path_Wall,
+        item: Item::Giguna_Dual_Path_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Dual_Path__Wall_Secret__Health] = Location {
         id: LocationId::Giguna__Dual_Path__Wall_Secret__Health,
         canonical: CanonId::Loc_Giguna__Dual_Path__Wall_Secret__Health,
         item: Item::Health_Fragment,
@@ -2418,7 +2394,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch] = Location {
+    locations[LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch] = Location {
         id: LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
         canonical: CanonId::Giguna_Dual_Path_Switch,
         item: Item::Giguna_Dual_Path_Switch,
@@ -2427,7 +2403,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch] = Location {
+    locations[LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch] = Location {
         id: LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
         canonical: CanonId::Giguna_Dual_Path_Switch,
         item: Item::Giguna_Dual_Path_Switch,
@@ -2436,7 +2412,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder] = Location {
         id: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
         canonical: CanonId::Giguna_Boulder,
         item: Item::Giguna_Boulder,
@@ -2445,7 +2421,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist] = Location {
         id: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
         canonical: CanonId::Giguna_Boulder,
         item: Item::Giguna_Boulder,
@@ -2454,17 +2430,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist] =
-        Location {
-            id: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist,
-            canonical: CanonId::Giguna_Boulder,
-            item: Item::Giguna_Boulder,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist),
-            skippable: false,
-        };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Center__Tablet] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist] = Location {
+        id: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist,
+        canonical: CanonId::Giguna_Boulder,
+        item: Item::Giguna_Boulder,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Hard_Rock__Rock_Center__Tablet] = Location {
         id: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet,
         canonical: CanonId::Loc_Giguna__Hard_Rock__Rock_Center__Tablet,
         item: Item::Building_of_the_School,
@@ -2473,7 +2448,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder] = Location {
         id: LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
         canonical: CanonId::Giguna_Boulder,
         item: Item::Giguna_Boulder,
@@ -2482,7 +2457,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist] = Location {
         id: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
         canonical: CanonId::Giguna_Boulder,
         item: Item::Giguna_Boulder,
@@ -2491,27 +2466,25 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist] =
-        Location {
-            id: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist,
-            canonical: CanonId::Giguna_Boulder,
-            item: Item::Giguna_Boulder,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist),
-            skippable: false,
-        };
-    world.locations[LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask] =
-        Location {
-            id: LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
-            canonical: CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 5500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Giguna__Gateway__Block_Left__Shockwave] = Location {
+    locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist] = Location {
+        id: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist,
+        canonical: CanonId::Giguna_Boulder,
+        item: Item::Giguna_Boulder,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask] = Location {
+        id: LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
+        canonical: CanonId::Loc_Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Gateway__Block_Left__Shockwave] = Location {
         id: LocationId::Giguna__Gateway__Block_Left__Shockwave,
         canonical: CanonId::Giguna_Gateway_Block,
         item: Item::Giguna_Gateway_Block,
@@ -2520,7 +2493,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gateway__Block_Right__Shockwave] = Location {
+    locations[LocationId::Giguna__Gateway__Block_Right__Shockwave] = Location {
         id: LocationId::Giguna__Gateway__Block_Right__Shockwave,
         canonical: CanonId::Giguna_Gateway_Block,
         item: Item::Giguna_Gateway_Block,
@@ -2529,7 +2502,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gateway__Flask_Ledge__Item] = Location {
+    locations[LocationId::Giguna__Gateway__Flask_Ledge__Item] = Location {
         id: LocationId::Giguna__Gateway__Flask_Ledge__Item,
         canonical: CanonId::Loc_Giguna__Gateway__Flask_Ledge__Item,
         item: Item::Flask,
@@ -2538,7 +2511,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gateway__Button__Hit_Switch] = Location {
+    locations[LocationId::Giguna__Gateway__Button__Hit_Switch] = Location {
         id: LocationId::Giguna__Gateway__Button__Hit_Switch,
         canonical: CanonId::Loc_Giguna__Gateway__Button__Hit_Switch,
         item: Item::Giguna_Gateway_Gate,
@@ -2547,7 +2520,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Antechamber__Statue_Head__Tablet] = Location {
+    locations[LocationId::Giguna__Antechamber__Statue_Head__Tablet] = Location {
         id: LocationId::Giguna__Antechamber__Statue_Head__Tablet,
         canonical: CanonId::Loc_Giguna__Antechamber__Statue_Head__Tablet,
         item: Item::Dangerous_Ideas,
@@ -2556,7 +2529,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi] = Location {
+    locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi] = Location {
         id: LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi,
         canonical: CanonId::Giguna_Gubi,
         item: Item::Giguna_Gubi,
@@ -2565,7 +2538,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi] = Location {
+    locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi] = Location {
         id: LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
         canonical: CanonId::Giguna_Gubi,
         item: Item::Giguna_Gubi,
@@ -2574,7 +2547,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward] = Location {
+    locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward] = Location {
         id: LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
         canonical: CanonId::Loc_Giguna__Gubi_Lair__Center_Platform__Boss_Reward,
         item: Item::Big_Flask,
@@ -2583,7 +2556,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Gubi_Lair__Pedestal__Axe] = Location {
+    locations[LocationId::Giguna__Gubi_Lair__Pedestal__Axe] = Location {
         id: LocationId::Giguna__Gubi_Lair__Pedestal__Axe,
         canonical: CanonId::Loc_Giguna__Gubi_Lair__Pedestal__Axe,
         item: Item::Double_Axe,
@@ -2592,17 +2565,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask] =
-        Location {
-            id: LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask,
-            canonical: CanonId::Giguna_Breachable_Wall_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask] = Location {
+    locations[LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask] = Location {
+        id: LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask,
+        canonical: CanonId::Giguna_Breachable_Wall_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask] = Location {
         id: LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask,
         canonical: CanonId::Giguna_Breachable_Wall_Flask,
         item: Item::Big_Flask,
@@ -2611,17 +2583,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask] =
-        Location {
-            id: LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask,
-            canonical: CanonId::Giguna_Breachable_Wall_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 3500,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item] = Location {
+    locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask] = Location {
+        id: LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask,
+        canonical: CanonId::Giguna_Breachable_Wall_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 3500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item] = Location {
         id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
         canonical: CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item,
         item: Item::Flask,
@@ -2630,7 +2601,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy] = Location {
+    locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy] = Location {
         id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy,
         canonical: CanonId::Sync_Flask,
         item: Item::Big_Flask,
@@ -2639,7 +2610,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump] =
+    locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump] =
         Location {
             id: LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump,
             canonical: CanonId::Sync_Flask,
@@ -2649,7 +2620,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
             skippable: false,
         };
-    world.locations[LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note] = Location {
+    locations[LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note] = Location {
         id: LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note,
         canonical: CanonId::Notes_2053_02_27,
         item: Item::Notes_2053_02_27,
@@ -2658,7 +2629,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Item] = Location {
+    locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Item] = Location {
         id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Item,
         canonical: CanonId::Glacier_Dock_Flask,
         item: Item::Big_Flask,
@@ -2667,27 +2638,25 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip] =
-        Location {
-            id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
-            canonical: CanonId::Glacier_Dock_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel] =
-        Location {
-            id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
-            canonical: CanonId::Glacier_Dock_Flask,
-            item: Item::Big_Flask,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Revival__Pillar__Health] = Location {
+    locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip] = Location {
+        id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip,
+        canonical: CanonId::Glacier_Dock_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel] = Location {
+        id: LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel,
+        canonical: CanonId::Glacier_Dock_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Revival__Pillar__Health] = Location {
         id: LocationId::Glacier__Revival__Pillar__Health,
         canonical: CanonId::Revival_Health_Node,
         item: Item::Health_Node,
@@ -2696,17 +2665,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab] =
-        Location {
-            id: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
-            canonical: CanonId::Revival_Health_Node,
-            item: Item::Health_Node,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab] = Location {
+    locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab] = Location {
+        id: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab,
+        canonical: CanonId::Revival_Health_Node,
+        item: Item::Health_Node,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab] = Location {
         id: LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab,
         canonical: CanonId::Revival_Health_Node,
         item: Item::Health_Node,
@@ -2715,7 +2683,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Compass_Room__Center__Table] = Location {
+    locations[LocationId::Glacier__Compass_Room__Center__Table] = Location {
         id: LocationId::Glacier__Compass_Room__Center__Table,
         canonical: CanonId::Loc_Glacier__Compass_Room__Center__Table,
         item: Item::Compass,
@@ -2724,7 +2692,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__The_Big_Drop__West_14__Break_Rock] = Location {
+    locations[LocationId::Glacier__The_Big_Drop__West_14__Break_Rock] = Location {
         id: LocationId::Glacier__The_Big_Drop__West_14__Break_Rock,
         canonical: CanonId::Glacier_Big_Drop_Rock,
         item: Item::Glacier_Big_Drop_Rock,
@@ -2733,7 +2701,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through] = Location {
+    locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through] = Location {
         id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
         canonical: CanonId::Glacier_Big_Drop_Rock,
         item: Item::Glacier_Big_Drop_Rock,
@@ -2742,7 +2710,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster] = Location {
+    locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster] = Location {
         id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
         canonical: CanonId::Glacier_Big_Drop_Rock,
         item: Item::Glacier_Big_Drop_Rock,
@@ -2751,27 +2719,25 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock] =
-        Location {
-            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
-            canonical: CanonId::Glacier_Big_Drop_Rock,
-            item: Item::Glacier_Big_Drop_Rock,
-            price: Currency::Free,
-            time: 2000,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through] =
-        Location {
-            id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
-            canonical: CanonId::Glacier_Big_Drop_Rock,
-            item: Item::Glacier_Big_Drop_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster] =
+    locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock] = Location {
+        id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock,
+        canonical: CanonId::Glacier_Big_Drop_Rock,
+        item: Item::Glacier_Big_Drop_Rock,
+        price: Currency::Free,
+        time: 2000,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through] = Location {
+        id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through,
+        canonical: CanonId::Glacier_Big_Drop_Rock,
+        item: Item::Glacier_Big_Drop_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster] =
         Location {
             id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
             canonical: CanonId::Glacier_Big_Drop_Rock,
@@ -2781,7 +2747,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
             skippable: false,
         };
-    world.locations[LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown] = Location {
+    locations[LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown] = Location {
         id: LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
         canonical: CanonId::Loc_Glacier__Sea_Burial__Collapsing_Ceiling__Drown,
         item: Item::Amashilama,
@@ -2790,7 +2756,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Sea_Burial__Deep_Cache__Health] = Location {
+    locations[LocationId::Glacier__Sea_Burial__Deep_Cache__Health] = Location {
         id: LocationId::Glacier__Sea_Burial__Deep_Cache__Health,
         canonical: CanonId::Loc_Glacier__Sea_Burial__Deep_Cache__Health,
         item: Item::Health_Fragment,
@@ -2799,7 +2765,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock] = Location {
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock] = Location {
         id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock,
         canonical: CanonId::Glacier_Sea_Burial_Rock,
         item: Item::Glacier_Sea_Burial_Rock,
@@ -2808,17 +2774,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through] =
-        Location {
-            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
-            canonical: CanonId::Glacier_Sea_Burial_Rock,
-            item: Item::Glacier_Sea_Burial_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster] =
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through] = Location {
+        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through,
+        canonical: CanonId::Glacier_Sea_Burial_Rock,
+        item: Item::Glacier_Sea_Burial_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster] =
         Location {
             id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
             canonical: CanonId::Glacier_Sea_Burial_Rock,
@@ -2828,8 +2793,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
             skippable: false,
         };
-    world.locations
-        [LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping] =
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping] =
         Location {
             id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping,
             canonical: CanonId::Glacier_Sea_Burial_Rock,
@@ -2839,17 +2803,16 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: None,
             skippable: false,
         };
-    world.locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through] =
-        Location {
-            id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
-            canonical: CanonId::Glacier_Sea_Burial_Rock,
-            item: Item::Glacier_Sea_Burial_Rock,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster] =
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through] = Location {
+        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
+        canonical: CanonId::Glacier_Sea_Burial_Rock,
+        item: Item::Glacier_Sea_Burial_Rock,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster] =
         Location {
             id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
             canonical: CanonId::Glacier_Sea_Burial_Rock,
@@ -2859,7 +2822,7 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
             skippable: false,
         };
-    world.locations[LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes] = Location {
+    locations[LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes] = Location {
         id: LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes,
         canonical: CanonId::Loc_Glacier__Sea_Burial__Inside_the_Grate__Notes,
         item: Item::Dr_Gloria,
@@ -2868,7 +2831,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress] = Location {
+    locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress] = Location {
         id: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress,
         canonical: CanonId::Glacier_40_8_Flask,
         item: Item::Flask,
@@ -2877,7 +2840,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress] = Location {
+    locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress] = Location {
         id: LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress,
         canonical: CanonId::Glacier_40_8_Flask,
         item: Item::Flask,
@@ -2886,7 +2849,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item] = Location {
+    locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item] = Location {
         id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item,
         canonical: CanonId::Glacier_40_8_Flask,
         item: Item::Flask,
@@ -2895,7 +2858,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip] =
+    locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip] =
         Location {
             id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip,
             canonical: CanonId::Glacier_40_8_Flask,
@@ -2905,17 +2868,16 @@ pub(crate) fn build_locations(world: &mut World) {
             exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
             skippable: false,
         };
-    world.locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel] =
-        Location {
-            id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
-            canonical: CanonId::Glacier_40_8_Flask,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
-            skippable: false,
-        };
-    world.locations[LocationId::Glacier__Vertical_Room__Under_Switch__Switch] = Location {
+    locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel] = Location {
+        id: LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel,
+        canonical: CanonId::Glacier_40_8_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Glacier__Vertical_Room__Under_Switch__Switch] = Location {
         id: LocationId::Glacier__Vertical_Room__Under_Switch__Switch,
         canonical: CanonId::Loc_Glacier__Vertical_Room__Under_Switch__Switch,
         item: Item::Switch_36_11,
@@ -2924,7 +2886,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Vertical_Room__Peak__Flask] = Location {
+    locations[LocationId::Glacier__Vertical_Room__Peak__Flask] = Location {
         id: LocationId::Glacier__Vertical_Room__Peak__Flask,
         canonical: CanonId::Loc_Glacier__Vertical_Room__Peak__Flask,
         item: Item::Flask,
@@ -2933,7 +2895,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Boomerang_Room__Pedestal__Item] = Location {
+    locations[LocationId::Glacier__Boomerang_Room__Pedestal__Item] = Location {
         id: LocationId::Glacier__Boomerang_Room__Pedestal__Item,
         canonical: CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Item,
         item: Item::Boomerang,
@@ -2942,7 +2904,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Boomerang_Room__Pedestal__Switch] = Location {
+    locations[LocationId::Glacier__Boomerang_Room__Pedestal__Switch] = Location {
         id: LocationId::Glacier__Boomerang_Room__Pedestal__Switch,
         canonical: CanonId::Loc_Glacier__Boomerang_Room__Pedestal__Switch,
         item: Item::Switch_40_12,
@@ -2951,7 +2913,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab] = Location {
+    locations[LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab] = Location {
         id: LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
         canonical: CanonId::Ledge_Grab,
         item: Item::Ledge_Grab,
@@ -2960,7 +2922,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item] = Location {
+    locations[LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item] = Location {
         id: LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
         canonical: CanonId::Ledge_Grab,
         item: Item::Ledge_Grab,
@@ -2969,7 +2931,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Peak__Birds_Eye__Item] = Location {
+    locations[LocationId::Glacier__Peak__Birds_Eye__Item] = Location {
         id: LocationId::Glacier__Peak__Birds_Eye__Item,
         canonical: CanonId::Loc_Glacier__Peak__Birds_Eye__Item,
         item: Item::Health_Fragment,
@@ -2978,7 +2940,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape] = Location {
+    locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape] = Location {
         id: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
         canonical: CanonId::Escape,
         item: Item::Escape,
@@ -2987,7 +2949,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape] = Location {
+    locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape] = Location {
         id: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape,
         canonical: CanonId::Escape,
         item: Item::Escape,
@@ -2996,7 +2958,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Crystals__Top_Corner__Tablet] = Location {
+    locations[LocationId::Glacier__Crystals__Top_Corner__Tablet] = Location {
         id: LocationId::Glacier__Crystals__Top_Corner__Tablet,
         canonical: CanonId::Loc_Glacier__Crystals__Top_Corner__Tablet,
         item: Item::Bounty_List,
@@ -3005,7 +2967,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Crystals__Lower_Corner__Item] = Location {
+    locations[LocationId::Glacier__Crystals__Lower_Corner__Item] = Location {
         id: LocationId::Glacier__Crystals__Lower_Corner__Item,
         canonical: CanonId::Loc_Glacier__Crystals__Lower_Corner__Item,
         item: Item::Breach_Attractor,
@@ -3014,7 +2976,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Hammonds_End__Hammond__Note] = Location {
+    locations[LocationId::Glacier__Hammonds_End__Hammond__Note] = Location {
         id: LocationId::Glacier__Hammonds_End__Hammond__Note,
         canonical: CanonId::Hammonds_Note,
         item: Item::Goodbye,
@@ -3023,7 +2985,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Hammonds_End__Corner__Quick_Note] = Location {
+    locations[LocationId::Glacier__Hammonds_End__Corner__Quick_Note] = Location {
         id: LocationId::Glacier__Hammonds_End__Corner__Quick_Note,
         canonical: CanonId::Hammonds_Note,
         item: Item::Goodbye,
@@ -3032,7 +2994,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health] = Location {
+    locations[LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health] = Location {
         id: LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health,
         canonical: CanonId::Loc_Glacier__Hammonds_End__Between_Center_Doors__Health,
         item: Item::Health_Fragment,
@@ -3041,7 +3003,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Bunker_Interior__Desk__Note] = Location {
+    locations[LocationId::Interior__Bunker_Interior__Desk__Note] = Location {
         id: LocationId::Interior__Bunker_Interior__Desk__Note,
         canonical: CanonId::Loc_Interior__Bunker_Interior__Desk__Note,
         item: Item::Dear_Ernest,
@@ -3050,7 +3012,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Building_Interior__Entry__Remote_Urn] = Location {
+    locations[LocationId::Interior__Building_Interior__Entry__Remote_Urn] = Location {
         id: LocationId::Interior__Building_Interior__Entry__Remote_Urn,
         canonical: CanonId::Melee_Charge,
         item: Item::Melee_Charge,
@@ -3059,17 +3021,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip] =
-        Location {
-            id: LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
-            canonical: CanonId::Melee_Charge,
-            item: Item::Melee_Charge,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
-            skippable: false,
-        };
-    world.locations[LocationId::Interior__Building_Interior__Corner__Urn] = Location {
+    locations[LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip] = Location {
+        id: LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip,
+        canonical: CanonId::Melee_Charge,
+        item: Item::Melee_Charge,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Interior__Building_Interior__Corner__Urn] = Location {
         id: LocationId::Interior__Building_Interior__Corner__Urn,
         canonical: CanonId::Melee_Charge,
         item: Item::Melee_Charge,
@@ -3078,7 +3039,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Tent_Interior__Desk__Note] = Location {
+    locations[LocationId::Interior__Tent_Interior__Desk__Note] = Location {
         id: LocationId::Interior__Tent_Interior__Desk__Note,
         canonical: CanonId::Loc_Interior__Tent_Interior__Desk__Note,
         item: Item::Companies_Layoff,
@@ -3087,7 +3048,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Garage__Boxes__Under_Boxes] = Location {
+    locations[LocationId::Interior__Garage__Boxes__Under_Boxes] = Location {
         id: LocationId::Interior__Garage__Boxes__Under_Boxes,
         canonical: CanonId::Loc_Interior__Garage__Boxes__Under_Boxes,
         item: Item::Record_Losses,
@@ -3096,7 +3057,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Ebih_Cave__Entry__Health] = Location {
+    locations[LocationId::Interior__Ebih_Cave__Entry__Health] = Location {
         id: LocationId::Interior__Ebih_Cave__Entry__Health,
         canonical: CanonId::Loc_Interior__Ebih_Cave__Entry__Health,
         item: Item::Health_Fragment,
@@ -3105,7 +3066,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Interior__Outpost_Interior__Bookshelf__Note] = Location {
+    locations[LocationId::Interior__Outpost_Interior__Bookshelf__Note] = Location {
         id: LocationId::Interior__Outpost_Interior__Bookshelf__Note,
         canonical: CanonId::Loc_Interior__Outpost_Interior__Bookshelf__Note,
         item: Item::Letter_from_Trace,
@@ -3114,7 +3075,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item] = Location {
+    locations[LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item] = Location {
         id: LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
         canonical: CanonId::Loc_Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item,
         item: Item::Flask,
@@ -3123,7 +3084,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar_Breach__Hover_Room__Bottom__Item] = Location {
+    locations[LocationId::Irikar_Breach__Hover_Room__Bottom__Item] = Location {
         id: LocationId::Irikar_Breach__Hover_Room__Bottom__Item,
         canonical: CanonId::Loc_Irikar_Breach__Hover_Room__Bottom__Item,
         item: Item::Drone_Hover,
@@ -3132,7 +3093,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar_Breach__Worm_Rave__Corner__Item] = Location {
+    locations[LocationId::Irikar_Breach__Worm_Rave__Corner__Item] = Location {
         id: LocationId::Irikar_Breach__Worm_Rave__Corner__Item,
         canonical: CanonId::Loc_Irikar_Breach__Worm_Rave__Corner__Item,
         item: Item::Flask,
@@ -3141,7 +3102,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet] = Location {
+    locations[LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet] = Location {
         id: LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
         canonical: CanonId::Loc_Irikar__Hub__Sat_Tower_Top_Ledge__Tablet,
         item: Item::Commemorative_Speech,
@@ -3150,7 +3111,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Dagger_Altar__Weapon] = Location {
+    locations[LocationId::Irikar__Hub__Dagger_Altar__Weapon] = Location {
         id: LocationId::Irikar__Hub__Dagger_Altar__Weapon,
         canonical: CanonId::Loc_Irikar__Hub__Dagger_Altar__Weapon,
         item: Item::Royal_Dagger,
@@ -3159,7 +3120,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall] = Location {
+    locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall] = Location {
         id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
         canonical: CanonId::Irikar_Royal_Storage_Wall,
         item: Item::Irikar_Royal_Storage_Wall,
@@ -3168,7 +3129,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall] = Location {
+    locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall] = Location {
         id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
         canonical: CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall,
         item: Item::Irikar_Royal_Storage_Wall,
@@ -3177,17 +3138,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall] =
-        Location {
-            id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
-            canonical: CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
-            item: Item::Irikar_Royal_Storage_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item] = Location {
+    locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall] = Location {
+        id: LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
+        canonical: CanonId::Loc_Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall,
+        item: Item::Irikar_Royal_Storage_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item] = Location {
         id: LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
         canonical: CanonId::Irikar_Royal_Storage_Flask,
         item: Item::Flask,
@@ -3196,7 +3156,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well] = Location {
+    locations[LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well] = Location {
         id: LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well,
         canonical: CanonId::Irikar_Well_Flask,
         item: Item::Flask,
@@ -3205,7 +3165,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item] = Location {
+    locations[LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item] = Location {
         id: LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item,
         canonical: CanonId::Irikar_Well_Flask,
         item: Item::Flask,
@@ -3214,7 +3174,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core] = Location {
+    locations[LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core] = Location {
         id: LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core,
         canonical: CanonId::Loc_Irikar__Hub__SW_Building_Top_Platform__Power_Core,
         item: Item::Power_Core,
@@ -3223,7 +3183,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item] = Location {
+    locations[LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item] = Location {
         id: LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item,
         canonical: CanonId::Irikar_Royal_Storage_Flask,
         item: Item::Flask,
@@ -3232,7 +3192,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Airy__Cavern_Side__Remote_Flask] = Location {
+    locations[LocationId::Irikar__Airy__Cavern_Side__Remote_Flask] = Location {
         id: LocationId::Irikar__Airy__Cavern_Side__Remote_Flask,
         canonical: CanonId::Irikar_Airy_Flask,
         item: Item::Big_Flask,
@@ -3241,7 +3201,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Airy__Cavern_Cache__Flask] = Location {
+    locations[LocationId::Irikar__Airy__Cavern_Cache__Flask] = Location {
         id: LocationId::Irikar__Airy__Cavern_Cache__Flask,
         canonical: CanonId::Irikar_Airy_Flask,
         item: Item::Big_Flask,
@@ -3250,7 +3210,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask] = Location {
+    locations[LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask] = Location {
         id: LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask,
         canonical: CanonId::Irikar_Airy_Flask,
         item: Item::Big_Flask,
@@ -3259,7 +3219,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn] = Location {
+    locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn] = Location {
         id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn,
         canonical: CanonId::Breach_Sight,
         item: Item::Breach_Sight,
@@ -3268,17 +3228,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip] =
-        Location {
-            id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
-            canonical: CanonId::Breach_Sight,
-            item: Item::Breach_Sight,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
-            skippable: false,
-        };
-    world.locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel] = Location {
+    locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip] = Location {
+        id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip,
+        canonical: CanonId::Breach_Sight,
+        item: Item::Breach_Sight,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel] = Location {
         id: LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel,
         canonical: CanonId::Breach_Sight,
         item: Item::Breach_Sight,
@@ -3287,7 +3246,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Abandoned_Room__Corner_Core__Core] = Location {
+    locations[LocationId::Irikar__Abandoned_Room__Corner_Core__Core] = Location {
         id: LocationId::Irikar__Abandoned_Room__Corner_Core__Core,
         canonical: CanonId::Loc_Irikar__Abandoned_Room__Corner_Core__Core,
         item: Item::Power_Core,
@@ -3296,17 +3255,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup] =
-        Location {
-            id: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
-            canonical: CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
-            item: Item::Power_Core,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-            skippable: false,
-        };
-    world.locations[LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet] = Location {
+    locations[LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup] = Location {
+        id: LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+        canonical: CanonId::Loc_Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup,
+        item: Item::Power_Core,
+        price: Currency::Free,
+        time: 0,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet] = Location {
         id: LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet,
         canonical: CanonId::Loc_Irikar__Basement_Pipes__High_Pipe__Tablet,
         item: Item::The_Student,
@@ -3315,7 +3273,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam] = Location {
+    locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam] = Location {
         id: LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam,
         canonical: CanonId::Irikar_Gudam,
         item: Item::Irikar_Gudam,
@@ -3324,7 +3282,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam] = Location {
+    locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam] = Location {
         id: LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam,
         canonical: CanonId::Irikar_Gudam,
         item: Item::Irikar_Gudam,
@@ -3333,7 +3291,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward] = Location {
+    locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward] = Location {
         id: LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
         canonical: CanonId::Loc_Irikar__Boss_Room__Bulls_Feet__Boss_Reward,
         item: Item::Big_Flask,
@@ -3342,7 +3300,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health] = Location {
+    locations[LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health] = Location {
         id: LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health,
         canonical: CanonId::Loc_Irikar__Boss_Room__Healthy_Rooftop__Health,
         item: Item::Health_Fragment,
@@ -3351,7 +3309,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet] = Location {
+    locations[LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet] = Location {
         id: LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet,
         canonical: CanonId::Loc_Irikar__East_Rooftops__Top_Rooftop__Tablet,
         item: Item::Heretics_Granddaughter,
@@ -3360,7 +3318,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask] = Location {
+    locations[LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask] = Location {
         id: LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask,
         canonical: CanonId::Irikar_Midwest_Flask,
         item: Item::Big_Flask,
@@ -3369,7 +3327,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Midwest__Right_Platform_Start__Flask] = Location {
+    locations[LocationId::Irikar__Midwest__Right_Platform_Start__Flask] = Location {
         id: LocationId::Irikar__Midwest__Right_Platform_Start__Flask,
         canonical: CanonId::Irikar_Midwest_Flask,
         item: Item::Big_Flask,
@@ -3378,7 +3336,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Midwest__Tablet_Platform__Tablet] = Location {
+    locations[LocationId::Irikar__Midwest__Tablet_Platform__Tablet] = Location {
         id: LocationId::Irikar__Midwest__Tablet_Platform__Tablet,
         canonical: CanonId::Loc_Irikar__Midwest__Tablet_Platform__Tablet,
         item: Item::Freedom_from_Aansur,
@@ -3387,7 +3345,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Lamassu__Desk__Item] = Location {
+    locations[LocationId::Irikar__Lamassu__Desk__Item] = Location {
         id: LocationId::Irikar__Lamassu__Desk__Item,
         canonical: CanonId::Loc_Irikar__Lamassu__Desk__Item,
         item: Item::Terminal_Breakthrough_2,
@@ -3396,7 +3354,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Beach_Save__Top_Platform__Urn] = Location {
+    locations[LocationId::Irikar__Beach_Save__Top_Platform__Urn] = Location {
         id: LocationId::Irikar__Beach_Save__Top_Platform__Urn,
         canonical: CanonId::Fast_Travel,
         item: Item::Fast_Travel,
@@ -3405,7 +3363,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Irikar__Beach__Cache__Item] = Location {
+    locations[LocationId::Irikar__Beach__Cache__Item] = Location {
         id: LocationId::Irikar__Beach__Cache__Item,
         canonical: CanonId::Loc_Irikar__Beach__Cache__Item,
         item: Item::Power_Matrix,
@@ -3414,7 +3372,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
         item: Item::Health_Upgrade,
@@ -3423,7 +3381,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
         item: Item::Health_Upgrade_2,
@@ -3432,7 +3390,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
         item: Item::Health_Upgrade_3,
@@ -3441,7 +3399,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
         item: Item::Health_Upgrade_4,
@@ -3450,7 +3408,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
         item: Item::Health_Upgrade_5,
@@ -3459,7 +3417,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade] = Location {
         id: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
         item: Item::Mist_Upgrade,
@@ -3468,7 +3426,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_1,
         item: Item::Melee_Damage,
@@ -3477,7 +3435,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_2,
         item: Item::Melee_Damage_2,
@@ -3486,7 +3444,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Damage_3,
         item: Item::Melee_Damage_3,
@@ -3495,7 +3453,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_1,
         item: Item::Melee_Speed,
@@ -3504,7 +3462,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_2,
         item: Item::Melee_Speed_2,
@@ -3513,7 +3471,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Melee_Speed_3,
         item: Item::Melee_Speed_3,
@@ -3522,7 +3480,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
         item: Item::Ranged_Damage,
@@ -3531,7 +3489,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
         item: Item::Ranged_Damage_2,
@@ -3540,7 +3498,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
         item: Item::Ranged_Damage_3,
@@ -3549,7 +3507,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
         item: Item::Ranged_Speed,
@@ -3558,7 +3516,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
         item: Item::Ranged_Speed_2,
@@ -3567,7 +3525,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
         item: Item::Ranged_Speed_3,
@@ -3576,7 +3534,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_1,
         item: Item::Infect_L1,
@@ -3585,7 +3543,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_2,
         item: Item::Infect_L2,
@@ -3594,7 +3552,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Level_3,
         item: Item::Infect_L3,
@@ -3603,7 +3561,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_1,
         item: Item::Nano_Points,
@@ -3612,7 +3570,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_2,
         item: Item::Nano_Points_2,
@@ -3621,7 +3579,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Nano_Points_3,
         item: Item::Nano_Points_3,
@@ -3630,7 +3588,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_1,
         item: Item::Infection_Speed,
@@ -3639,7 +3597,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Speed_2,
         item: Item::Infection_Speed_2,
@@ -3648,7 +3606,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_1,
         item: Item::Infection_Range,
@@ -3657,7 +3615,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_2,
         item: Item::Infection_Range_2,
@@ -3666,7 +3624,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Infection__Infection_Range_3,
         item: Item::Infection_Range_3,
@@ -3675,7 +3633,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
         item: Item::Drone_Melee_Damage,
@@ -3684,7 +3642,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
         item: Item::Drone_Melee_Damage_2,
@@ -3693,7 +3651,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
         item: Item::Drone_Melee_Damage_3,
@@ -3702,7 +3660,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
         item: Item::Drone_Melee_Speed,
@@ -3711,7 +3669,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
         item: Item::Drone_Melee_Speed_2,
@@ -3720,7 +3678,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3] = Location {
+    locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3] = Location {
         id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
         canonical: CanonId::Loc_Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
         item: Item::Drone_Melee_Speed_3,
@@ -3729,7 +3687,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__West_Entrance__Inner_Dais__Item] = Location {
+    locations[LocationId::Uhrum__West_Entrance__Inner_Dais__Item] = Location {
         id: LocationId::Uhrum__West_Entrance__Inner_Dais__Item,
         canonical: CanonId::Loc_Uhrum__West_Entrance__Inner_Dais__Item,
         item: Item::Udusan,
@@ -3738,7 +3696,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate] = Location {
+    locations[LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate] = Location {
         id: LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate,
         canonical: CanonId::Loc_Uhrum__West_Entrance__Gate_Switch__Open_Gate,
         item: Item::Uhrum_West_Entrance_Gate,
@@ -3747,18 +3705,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations
-        [LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall] =
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall] =
         Location {
             id: LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall,
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
@@ -3770,38 +3726,34 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
-            item: Item::Uhrum_West_Entrance_Upper_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations
-        [LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall] =
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
+        item: Item::Uhrum_West_Entrance_Upper_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall] =
         Location {
             id: LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall,
             canonical: CanonId::Uhrum_West_Entrance_Upper_Wall,
@@ -3813,38 +3765,34 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations
-        [LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall] =
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall] =
         Location {
             id: LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall,
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
@@ -3856,38 +3804,34 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
-            canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
-            item: Item::Uhrum_West_Entrance_Lower_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations
-        [LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall] =
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall,
+        canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
+        item: Item::Uhrum_West_Entrance_Lower_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall] =
         Location {
             id: LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall,
             canonical: CanonId::Uhrum_West_Entrance_Lower_Wall,
@@ -3899,7 +3843,7 @@ pub(crate) fn build_locations(world: &mut World) {
             ),
             skippable: false,
         };
-    world.locations[LocationId::Uhrum__West_Entrance__Sand__Refill] = Location {
+    locations[LocationId::Uhrum__West_Entrance__Sand__Refill] = Location {
         id: LocationId::Uhrum__West_Entrance__Sand__Refill,
         canonical: CanonId::Loc_Uhrum__West_Entrance__Sand__Refill,
         item: Item::Power_Core,
@@ -3908,7 +3852,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Siege_Corridor__Western_Cache__Core] = Location {
+    locations[LocationId::Uhrum__Siege_Corridor__Western_Cache__Core] = Location {
         id: LocationId::Uhrum__Siege_Corridor__Western_Cache__Core,
         canonical: CanonId::Loc_Uhrum__Siege_Corridor__Western_Cache__Core,
         item: Item::Power_Core,
@@ -3917,7 +3861,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Siege_Corridor__Center_Box__Box] = Location {
+    locations[LocationId::Uhrum__Siege_Corridor__Center_Box__Box] = Location {
         id: LocationId::Uhrum__Siege_Corridor__Center_Box__Box,
         canonical: CanonId::Loc_Uhrum__Siege_Corridor__Center_Box__Box,
         item: Item::Health_Fragment,
@@ -3926,7 +3870,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn] = Location {
+    locations[LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn] = Location {
         id: LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn,
         canonical: CanonId::Fast_Travel,
         item: Item::Fast_Travel,
@@ -3935,7 +3879,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Siege_Corridor__Pond__Item] = Location {
+    locations[LocationId::Uhrum__Siege_Corridor__Pond__Item] = Location {
         id: LocationId::Uhrum__Siege_Corridor__Pond__Item,
         canonical: CanonId::Loc_Uhrum__Siege_Corridor__Pond__Item,
         item: Item::Storm_Bomb,
@@ -3944,7 +3888,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask] = Location {
         id: LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask,
         canonical: CanonId::Loc_Uhrum__Waterfalls__Ceiling_Cache__Flask,
         item: Item::Flask,
@@ -3953,7 +3897,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -3962,7 +3906,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -3971,7 +3915,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -3980,17 +3924,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_Waterfall_Wall,
-            item: Item::Uhrum_Waterfall_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_Waterfall_Wall,
+        item: Item::Uhrum_Waterfall_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -3999,7 +3942,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -4008,7 +3951,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall] = Location {
         id: LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall,
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
@@ -4017,17 +3960,16 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall] =
-        Location {
-            id: LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall,
-            canonical: CanonId::Uhrum_Waterfall_Wall,
-            item: Item::Uhrum_Waterfall_Wall,
-            price: Currency::Free,
-            time: 0,
-            exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall),
-            skippable: false,
-        };
-    world.locations[LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall] = Location {
+        id: LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall,
+        canonical: CanonId::Uhrum_Waterfall_Wall,
+        item: Item::Uhrum_Waterfall_Wall,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall),
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block] = Location {
         id: LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block,
         canonical: CanonId::Uhrum_Waterfalls_Block,
         item: Item::Uhrum_Waterfalls_Block,
@@ -4036,7 +3978,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__Above_Block__Block] = Location {
+    locations[LocationId::Uhrum__Waterfalls__Above_Block__Block] = Location {
         id: LocationId::Uhrum__Waterfalls__Above_Block__Block,
         canonical: CanonId::Uhrum_Waterfalls_Block,
         item: Item::Uhrum_Waterfalls_Block,
@@ -4045,7 +3987,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__East_26__Block] = Location {
+    locations[LocationId::Uhrum__Waterfalls__East_26__Block] = Location {
         id: LocationId::Uhrum__Waterfalls__East_26__Block,
         canonical: CanonId::Uhrum_Waterfalls_Block,
         item: Item::Uhrum_Waterfalls_Block,
@@ -4054,7 +3996,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet] = Location {
+    locations[LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet] = Location {
         id: LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet,
         canonical: CanonId::Loc_Uhrum__Waterfalls__West_Water_Nook__Tablet,
         item: Item::Suspension_Bridge,
@@ -4063,7 +4005,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn,
         canonical: CanonId::Anuman,
         item: Item::Anuman,
@@ -4072,7 +4014,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn,
         canonical: CanonId::Anuman,
         item: Item::Anuman,
@@ -4081,7 +4023,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip,
         canonical: CanonId::Anuman,
         item: Item::Anuman,
@@ -4090,7 +4032,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel,
         canonical: CanonId::Anuman,
         item: Item::Anuman,
@@ -4099,7 +4041,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block,
         canonical: CanonId::Uhrum_Annuna_Corridor_Block,
         item: Item::Uhrum_Annuna_Corridor_Block,
@@ -4108,7 +4050,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block,
         canonical: CanonId::Uhrum_Annuna_Corridor_Block,
         item: Item::Uhrum_Annuna_Corridor_Block,
@@ -4117,7 +4059,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet,
         canonical: CanonId::Loc_Uhrum__Annuna_Corridor__East_Cubby__Tablet,
         item: Item::Plague_of_Thoughts,
@@ -4126,7 +4068,7 @@ pub(crate) fn build_locations(world: &mut World) {
         exit_id: None,
         skippable: false,
     };
-    world.locations[LocationId::Uhrum__Annuna_Corridor__Statue__Item] = Location {
+    locations[LocationId::Uhrum__Annuna_Corridor__Statue__Item] = Location {
         id: LocationId::Uhrum__Annuna_Corridor__Statue__Item,
         canonical: CanonId::Loc_Uhrum__Annuna_Corridor__Statue__Item,
         item: Item::Flask,

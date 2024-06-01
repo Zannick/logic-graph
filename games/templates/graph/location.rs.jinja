@@ -13,6 +13,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
+use enum_map::EnumMap;
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -103,9 +104,9 @@ impl Location {
     }
 }
 
-pub(crate) fn build_locations(world: &mut World) {
+pub(crate) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
 %% for loc in gl.locations()
-    world.locations[LocationId::{{ loc.id }}] = Location {
+    locations[LocationId::{{ loc.id }}] = Location {
         id: LocationId::{{ loc.id }},
         canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
         item: Item::{{ loc.item or 'None' }},

@@ -11289,7 +11289,7 @@ pub struct World {
     // For entrance rando, we would need to have a layer of indirection:
     // list_index: EnumMap<EnumType, usize>,
     // list: EnumArray<ObjType>,
-    pub(super) locations: EnumMap<LocationId, Location>,
+    locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
@@ -11324,7 +11324,7 @@ impl world::World for World {
         };
         world.min_warp_time = 2000;
 
-        build_locations(&mut world);
+        build_locations(&mut world.locations);
         world.build_exits();
         world.build_actions();
         world.build_warps();
