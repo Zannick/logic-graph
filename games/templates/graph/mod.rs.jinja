@@ -4,8 +4,10 @@
 #![allow(non_snake_case)]
 #![allow(unused)]
 
-pub mod enums;
-pub mod graph;
+mod enums;
+mod graph;
+mod location;
 
 pub use enums::*;
 pub use graph::*;
+pub use location::*;

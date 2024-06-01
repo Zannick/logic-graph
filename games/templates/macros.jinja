@@ -1,0 +1,4 @@
+
+%% macro price(value, costs)
+price: Currency::{% if value and value > 0 %}{{ costs|camelize }}({{ value }}){% else %}Free{% endif %},
+%%- endmacro

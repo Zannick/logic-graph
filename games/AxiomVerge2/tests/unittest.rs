@@ -2,7 +2,7 @@
 
 use analyzer::unittest::*;
 use libaxiom_verge2::context::Context;
-use libaxiom_verge2::graph;
+use libaxiom_verge2::graph::World;
 use std::path::PathBuf;
 
 fn main() {
@@ -16,5 +16,5 @@ fn main() {
         Default::default(),
     )
     .unwrap();
-    run_all_tests_in_dir::<graph::World, Context>(&dir, Some(&routedir));
+    run_all_tests_in_dir::<World, Context>(&dir, Some(&routedir));
 }

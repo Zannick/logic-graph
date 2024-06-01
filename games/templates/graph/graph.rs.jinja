@@ -1,11 +1,12 @@
 %% include 'header.rs.jinja'
+%% from 'macros.jinja' import price
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::enums::*;
+use crate::graph::{enums::*, location::*};
 use crate::items::*;
 use crate::movements;
 use crate::observe::FullObservation;
@@ -39,92 +40,6 @@ pub fn get_region(spot: SpotId) -> RegionId {
     }
 }
 
-%# All of this is going in unchanged--perhaps it should be a library type
-%# with generics? But that kind of mostly negates the use of traits with
-%# associated types... Maybe a macro...
-#[derive(Copy, Clone, Debug)]
-pub struct Location {
-    id: LocationId,
-    item: Item,
-    canonical: CanonId,
-    time: u32,
-    exit_id: Option<ExitId>,
-    price: Currency,
-    skippable: bool,
-}
-
-impl world::Accessible for Location {
-    type Context = Context;
-    type Currency = Currency;
-
-    fn can_access(&self, ctx: &Context, world: &World) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-%% for loc in gl.locations()|sort(attribute='id')
-            LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(ctx, world)
-                {%- else %}true{% endif %},
-%% endfor
-        }
-    }
-    fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
-        match self.id {
-%% for loc in gl.locations()|selectattr('access_id')|sort(attribute='id')
-            LocationId::{{ loc.id }} => rules::observe_access_{{ loc.access_id }}(ctx, world, full_obs),
-%% endfor
-            _ => true,
-        }
-    }
-    fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 {
-        self.time
-            + match self.id {
-%% for loc in gl.locations()|sort(attribute='id')
-%% if loc.penalties
-                LocationId::{{ loc.id }} => {
-%% for pen in loc.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
-                }
-%% endif
-%% endfor
-            _ => 0,
-        }
-    }
-    fn price(&self) -> &Currency { &self.price }
-
-    fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
-        match self.id {
-%% for loc in gl.locations()|sort(attribute='id')
-%% if loc.access_id
-            LocationId::{{ loc.id }} => rules::explain_{{ loc.access_id }}(ctx, world, edict),
-%% endif
-%% endfor
-            _ => (true, vec![])
-        }
-    }
-}
-
-impl world::Location for Location {
-    type LocId = LocationId;
-    type CanonId = CanonId;
-    type ExitId = ExitId;
-
-    fn id(&self) -> LocationId { self.id }
-    fn item(&self) -> Item { self.item }
-    fn canon_id(&self) -> CanonId { self.canonical }
-    fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
-    fn skippable(&self) -> bool { self.skippable }
-}
-
-impl Location {
-    pub fn set_skippable(&mut self, skippable: bool) {
-        self.skippable = skippable;
-    }
-}
 
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
@@ -520,7 +435,7 @@ pub struct World {
     // For entrance rando, we would need to have a layer of indirection:
     // list_index: EnumMap<EnumType, usize>,
     // list: EnumArray<ObjType>,
-    locations: EnumMap<LocationId, Location>,
+    pub(super) locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
@@ -566,7 +481,7 @@ impl world::World for World {
                 {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }}
             {%- else %}0{% endif %};
 
-        world.build_locations();
+        build_locations(&mut world);
         world.build_exits();
         world.build_actions();
         world.build_warps();
@@ -916,33 +831,13 @@ impl World {
         }
     }
 
-%% macro price(price, costs)
-price: Currency::{% if price and price > 0 -%}
-    {{ (costs or default_price_type)|camelize }}({{ price }})
-    {%- else %}Free{% endif %},
-%%- endmacro
-
-    fn build_locations(&mut self) {
-%% for loc in gl.locations()
-        self.locations[LocationId::{{ loc.id }}] = Location {
-            id: LocationId::{{ loc.id }},
-            canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
-            item: Item::{{ loc.item or 'None' }},
-            {% if loc.to is defined %}{{ price(loc.item_price, loc.item_costs) }}{% else %}{{ price(loc.price, loc.costs) }}{% endif %}
-            time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
-            exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
-            skippable: false,
-        };
-%% endfor
-    }
-
     fn build_exits(&mut self) {
 %% for ex in gl.exits()
         self.exits[ExitId::{{ ex.id }}] = Exit {
             id: ExitId::{{ ex.id }},
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
-            {{ price(ex.price, ex.costs) }}
+            {{ price(ex.price, ex.costs or default_price_type) }}
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
         };
 %% endfor
@@ -953,9 +848,7 @@ price: Currency::{% if price and price > 0 -%}
         self.actions[ActionId::{{ a.id }}] = Action {
             id: ActionId::{{ a.id }},
             time: {{ (a.time * 1000)|int }},
-            price: Currency::{% if a.price and a.price > 0 -%}
-                {{ (a.costs or default_price_type)|camelize }}({{ a.price }})
-                {%- else %}Free{% endif %},
+            {{ price(a.price, a.costs or default_price_type) }}
         };
 %% endfor
     }
@@ -995,9 +888,7 @@ price: Currency::{% if price and price > 0 -%}
             id: WarpId::{{ w.id }},
             dest: SpotId::None,
             time: {{ (w.time * 1000)|int }},
-            price: Currency::{% if w.price and w.price > 0 -%}
-                {{ (w.costs or default_price_type)|camelize }}({{ w.price }})
-                {%- else %}Free{% endif %},
+            {{ price(w.price, w.costs or default_price_type) }}
         };
 %% endfor
     }

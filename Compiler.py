@@ -1832,7 +1832,7 @@ class GameLogic(object):
             'data': ['digraph.mmd', 'graph_map.sh', 'digraph_nodes.dot', 'full_graph.m4'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'context.rs',
                     'observe.rs', 'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs',
-                    'graph/mod.rs', 'graph/graph.rs', 'graph/enums.rs'],
+                    'graph/mod.rs', 'graph/enums.rs', 'graph/location.rs', 'graph/graph.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
             'solutions': [],
@@ -1846,7 +1846,7 @@ class GameLogic(object):
                 name = os.path.join(self.game_dir, dirname, tname)
                 if '/' in name:
                     os.makedirs(os.path.dirname(name), exist_ok=True)
-                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs', 'graph/graph.rs'):
+                if name.endswith('.rs') and tname not in ('lib.rs', 'context.rs', 'graph/graph.rs', 'graph/mod.rs'):
                     rustfiles.append(name)
                 with open(name, 'w', encoding='utf-8') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))
