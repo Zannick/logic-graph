@@ -105,9 +105,11 @@ where
             }
             if item == Default::default() {
                 let item = world.get_location(loc_id).item();
-                ctx.try_replay(world, History::G(item, loc_id))?;
+                ctx.try_replay(world, History::G(item, loc_id))
+                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
             } else {
-                ctx.try_replay(world, h)?;
+                ctx.try_replay(world, h)
+                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
             }
         }
         History::H(item, exit_id) => {
@@ -125,12 +127,16 @@ where
                 let exit = world.get_exit(exit_id);
                 if let Some(loc_id) = exit.loc_id() {
                     let item = world.get_location(*loc_id).item();
-                    ctx.try_replay(world, History::H(item, exit_id))?;
+                    ctx.try_replay(world, History::H(item, exit_id))
+                        .map_err(|s| {
+                            format!("Could not complete route step {} {}:\n{}", i, h, s)
+                        })?;
                 } else {
                     return Err(format!("Not a hybrid exit: {}", exit_id));
                 }
             } else {
-                ctx.try_replay(world, h)?;
+                ctx.try_replay(world, h)
+                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
             }
         }
         History::E(exit_id) => {
@@ -153,7 +159,8 @@ where
             })?;
         }
         History::W(..) => {
-            ctx.try_replay(world, h)?;
+            ctx.try_replay(world, h)
+                .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
         }
         History::A(action_id) => {
             let spot_id = world.get_action_spot(action_id);
@@ -165,7 +172,8 @@ where
                     )
                 })?;
             }
-            ctx.try_replay(world, h)?;
+            ctx.try_replay(world, h)
+                .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
         }
     }
     let elapsed = start.elapsed();
