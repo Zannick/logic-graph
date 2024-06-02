@@ -1882,13 +1882,14 @@ macro_rules! hobserve__melee_cskip {
 }
 
 /// $attract (  )
-/// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
+/// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
 #[macro_export]
 macro_rules! helper__attract {
     ($ctx:expr, $world:expr) => {{
         ($ctx.has(Item::Breach_Attractor)
-            && (($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
-                || $ctx.indra() == $ctx.position()))
+            && ((($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
+                || $ctx.indra() == $ctx.position())
+                || data::realm($ctx.position()) == enums::Realm::Breach))
     }};
 }
 #[macro_export]
@@ -1906,24 +1907,46 @@ macro_rules! hexplain__attract {
                 let mut right = ({
                     let mut left = {
                         let mut left = {
-                            let h = $ctx.has(Item::Anuman);
-                            $edict.insert("Anuman", format!("{}", h));
-                            (h, vec!["Anuman"])
+                            let mut left = {
+                                let h = $ctx.has(Item::Anuman);
+                                $edict.insert("Anuman", format!("{}", h));
+                                (h, vec!["Anuman"])
+                            };
+                            if left.0 {
+                                left
+                            } else {
+                                let mut right = {
+                                    let mut refs = vec!["^mode"];
+                                    let mut left = {
+                                        let r = $ctx.mode();
+                                        $edict.insert("^mode", format!("{:?}", r));
+                                        (r, vec!["^mode"])
+                                    };
+                                    let right = enums::Mode::Drone;
+                                    $edict.insert("^mode", format!("{}", left.0));
+                                    refs.append(&mut left.1);
+                                    (left.0 != right, refs)
+                                };
+                                left.1.append(&mut right.1);
+                                (right.0, left.1)
+                            }
                         };
                         if left.0 {
                             left
                         } else {
                             let mut right = {
-                                let mut refs = vec!["^mode"];
                                 let mut left = {
-                                    let r = $ctx.mode();
-                                    $edict.insert("^mode", format!("{:?}", r));
-                                    (r, vec!["^mode"])
+                                    let r = $ctx.indra();
+                                    $edict.insert("^indra", format!("{:?}", r));
+                                    (r, vec!["^indra"])
                                 };
-                                let right = enums::Mode::Drone;
-                                $edict.insert("^mode", format!("{}", left.0));
-                                refs.append(&mut left.1);
-                                (left.0 != right, refs)
+                                let mut right = {
+                                    let r = $ctx.position();
+                                    $edict.insert("^position", format!("{:?}", r));
+                                    (r, vec!["^position"])
+                                };
+                                left.1.append(&mut right.1);
+                                (left.0 == right.0, left.1)
                             };
                             left.1.append(&mut right.1);
                             (right.0, left.1)
@@ -1933,18 +1956,16 @@ macro_rules! hexplain__attract {
                         left
                     } else {
                         let mut right = {
+                            let mut refs = vec!["^realm"];
                             let mut left = {
-                                let r = $ctx.indra();
-                                $edict.insert("^indra", format!("{:?}", r));
-                                (r, vec!["^indra"])
+                                let r = data::realm($ctx.position());
+                                $edict.insert("^realm", format!("{:?}", r));
+                                (r, vec!["^realm"])
                             };
-                            let mut right = {
-                                let r = $ctx.position();
-                                $edict.insert("^position", format!("{:?}", r));
-                                (r, vec!["^position"])
-                            };
-                            left.1.append(&mut right.1);
-                            (left.0 == right.0, left.1)
+                            let right = enums::Realm::Breach;
+                            $edict.insert("^realm", format!("{}", left.0));
+                            refs.append(&mut left.1);
+                            (left.0 == right, refs)
                         };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
@@ -1962,7 +1983,7 @@ macro_rules! hobserve__attract {
         ({
             $full_obs.observe_breach_attractor();
             $ctx.has(Item::Breach_Attractor)
-        } && (({
+        } && ((({
             $full_obs.observe_anuman();
             $ctx.has(Item::Anuman)
         } || {
@@ -1981,46 +2002,10 @@ macro_rules! hobserve__attract {
                 $ctx.position()
             };
             left == right
+        }) || {
+            let v = data::realm($ctx.position());
+            v == enums::Realm::Breach
         }))
-    }};
-}
-
-/// $attract_time (  )
-/// $spot_distance(^position, ^portal) * 2.0
-#[macro_export]
-macro_rules! helper__attract_time {
-    ($ctx:expr, $world:expr) => {{
-        spot_distance($ctx.position(), $ctx.portal()) * 2.0
-    }};
-}
-#[macro_export]
-macro_rules! hexplain__attract_time {
-    ($ctx:expr, $world:expr, $edict:expr) => {{
-        {
-            let mut left = {
-                let f = spot_distance($ctx.position(), $ctx.portal());
-                $edict.insert("$spot_distance(^position,^portal)", format!("{}", f));
-                (f, vec!["$spot_distance(^position,^portal)"])
-            };
-            let mut right = (2.0, vec![]);
-            left.1.append(&mut right.1);
-            (left * right, left.1)
-        }
-    }};
-}
-#[macro_export]
-macro_rules! hobserve__attract_time {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        spot_distance(
-            {
-                $full_obs.observe_position();
-                $ctx.position()
-            },
-            {
-                $full_obs.observe_portal();
-                $ctx.portal()
-            },
-        ) * 2.0
     }};
 }
 

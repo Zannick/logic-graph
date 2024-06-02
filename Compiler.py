@@ -206,6 +206,7 @@ class GameLogic(object):
         self.allowed_funcs = self.helpers.keys() | self.rules.keys() | BUILTINS.keys()
         self.access_funcs = {}
         self.action_funcs = {}
+        self.num_funcs = {}
         for typed_rule in self.rules.values():
             for details in typed_rule.variants.values():
                 details['func_id'] = self.make_funcid(details)
@@ -453,9 +454,16 @@ class GameLogic(object):
             penaltyname = f'penalty{i + 1}'
             infoname = info['fullname'] if 'fullname' in info else info['name']
             pen['id'] = construct_id(info['id'], penaltyname)
-            pen['pr'] = _parseExpression(
-                pen['when'], f'{infoname} ({penaltyname})', category, ': ')
-            pen['access_id'] = self.make_funcid_from(info, pen['pr'])
+            if 'when' in pen:
+                pen['pr'] = _parseExpression(
+                    pen['when'], f'{infoname} ({penaltyname})', category, ': ')
+                pen['access_id'] = self.make_funcid_from(info, pen['pr'], 'when')
+            if 'calc' in pen:
+                pen['cpr'] = _parseExpression(
+                    pen['calc'], f'{infoname} ({penaltyname})', category, ': ', rule='num')
+                pen['calc_id'] = self.make_funcid_from(info, pen['cpr'], field='calc', ret='f32')
+            elif 'add' not in pen:
+                self._errors.append(f'{infoname} {penaltyname} requires add or calc')
 
 
     def process_canon(self):
@@ -614,6 +622,8 @@ class GameLogic(object):
                 act['act_post'] = parseAction(
                         act['after'], name=f'{act["name"]}:after')
                 act['after_id'] = self.make_funcid(act, 'act_post', 'after')
+            if 'penalties' in act:
+                self._handle_penalties(act, 'actions')
 
 
     def process_area_maps(self):
@@ -1105,13 +1115,13 @@ class GameLogic(object):
     def make_funcid(self, info, prkey:str='pr', field:str='req', extra_fields=None):
         return self.make_funcid_from(info, info[prkey], field=field, extra_fields=extra_fields)
 
-    def make_funcid_from(self, info, pr, field:str='req', extra_fields=None):
+    def make_funcid_from(self, info, pr, field:str='req', extra_fields=None, **kwargs):
         ruletype = pr.parser.ruleNames[pr.tree.getRuleIndex()]
-        d = self.action_funcs if ruletype == 'actions' else self.access_funcs
+        d = self.action_funcs if ruletype == 'actions' else self.num_funcs if ruletype == 'num' else self.access_funcs
         if '^_' in str(pr.text):
             id = construct_id(info['id'].lower(), field)
             assert id not in d, f'trying to generate multiple functions named {id}: {info}'
-            d[id] = {ruletype: pr, 'region': info['region']}
+            d[id] = {ruletype: pr, 'region': info['region'], **kwargs}
             if 'area' in info:
                 d[id]['area'] = info['area']
             if extra_fields:
@@ -1120,7 +1130,7 @@ class GameLogic(object):
 
         id = construct_id(str(pr.name) if '^_' in str(pr.text) else escape_ops(str(pr.text))).lower()
         if id not in d:
-            d[id] = {ruletype: pr}
+            d[id] = {ruletype: pr, **kwargs}
             if extra_fields:
                 d[id]['args'] = extra_fields
             return id
@@ -1133,7 +1143,7 @@ class GameLogic(object):
                          f'this pr = {pr.text!r}')
             id = id + '__' + str(sum(1 for k in d if k.startswith(id)))
             assert id not in d, f'duplicate even after counting: {id}'
-            d[id] = {ruletype: pr}
+            d[id] = {ruletype: pr, **kwargs}
             if extra_fields:
                 d[id]['args'] = extra_fields
         return id

@@ -2,3 +2,14 @@
 %% macro price(value, costs)
 price: Currency::{% if value and value > 0 %}{{ costs|camelize }}({{ value }}){% else %}Free{% endif %},
 %%- endmacro
+
+%%- macro penalties(penalties)
+%% for pen in penalties
+                    {%- if not loop.first -%} } else {% endif %}if {% if pen.access_id %}rules::access_{{ pen.access_id }}(ctx, world){% else %}true{% endif %} {
+                        {% if pen.add %}{{ (pen.add * 1000)|int }}{% endif %}
+                        {%- if pen.add and pen.calc_id %} + {% endif %}{% if pen.calc_id %}(rules::num_{{ pen.calc_id }}(ctx, world) * 1000.0).ceil() as u32{% endif %}
+%% endfor
+                    } else {
+                        0
+                    }
+%%- endmacro

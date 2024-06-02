@@ -19933,3 +19933,7 @@ pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     full_obs.clear_save();
     full_obs.strict = old_strict;
 }
+pub fn num_invoke_spot_distance__position_portal_mul_2_0(ctx: &Context, world: &World) -> f32 {
+    // $spot_distance(^position, ^portal) * 2.0
+    spot_distance(ctx.position(), ctx.portal()) * 2.0
+}

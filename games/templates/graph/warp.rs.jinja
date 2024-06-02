@@ -1,5 +1,5 @@
 %% include 'header.rs.jinja'
-%% from 'macros.jinja' import price
+%% from 'macros.jinja' import price, penalties
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -51,13 +51,7 @@ impl world::Accessible for Warp {
 %% for w in warps.values()|sort(attribute='id')
 %% if w.penalties
                 WarpId::{{ w.id }} => {
-%% for pen in w.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
+                    {{ penalties(w.penalties) }}
                 }
 %% endif
 %% endfor

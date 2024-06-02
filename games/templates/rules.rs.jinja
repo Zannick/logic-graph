@@ -58,3 +58,9 @@ pub fn observe_action_{{ id }}(ctx: &Context, world: &World{% for k, t in (info.
 }
 %% endfor
 
+%% for id, info in num_funcs.items()|sort
+pub fn num_{{ id }}(ctx: &Context, world: &World) -> {{ info.ret or 'u32' }} {
+    // {{ info.num.text.strip() }}
+    {{ info.num|prToRust(info) }}
+}
+%% endfor

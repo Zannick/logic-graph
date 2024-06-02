@@ -145,6 +145,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Drone => rules::access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world),
             ActionId::Global__Become_Indra => rules::access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world),
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_invoke_can_deploy(ctx, world),
+            ActionId::Global__Move_Portal_Here => rules::access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(ctx, world),
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world),
             ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
@@ -266,6 +267,7 @@ impl world::Accessible for Action {
             ActionId::Global__Become_Drone => rules::observe_access_not_within_menu_and_anuman_and_mode_ne_drone(ctx, world, full_obs),
             ActionId::Global__Become_Indra => rules::observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(ctx, world, full_obs),
             ActionId::Global__Deploy_Drone => rules::observe_access_not_within_menu_and_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Global__Move_Portal_Here => rules::observe_access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(ctx, world, full_obs),
             ActionId::Global__Recall_Drone => rules::observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world, full_obs),
             ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
@@ -289,6 +291,13 @@ impl world::Accessible for Action {
     fn time(&self, ctx: &Context, world: &World) -> u32 { 
         self.time
             + match self.id {
+                ActionId::Global__Move_Portal_Here => {
+                    if true {
+                        (rules::num_invoke_spot_distance__position_portal_mul_2_0(ctx, world) * 1000.0).ceil() as u32
+                    } else {
+                        0
+                    }
+                }
             _ => 0,
         }
     }
@@ -1142,6 +1151,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Global__Move_Portal_Here => {
+                let (ret, mut tags) = rules::explain_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Global__Recall_Drone => {
                 let (ret, mut tags) = rules::explain_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1301,6 +1319,7 @@ impl world::Action for Action {
             ActionId::Global__Deploy_Drone => rules::action_mode_set_drone_indra_set_position(ctx, world),
             ActionId::Global__Become_Drone => rules::action_mode_set_drone(ctx, world),
             ActionId::Global__Become_Indra => rules::action_mode_set_indra(ctx, world),
+            ActionId::Global__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1527,6 +1546,9 @@ impl world::Action for Action {
             }
             ActionId::Global__Become_Indra => {
                 rules::observe_action_mode_set_indra(ctx, world, full_obs);
+            }
+            ActionId::Global__Move_Portal_Here => {
+                rules::observe_action_portal_set_position(ctx, world, full_obs);
             }
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -1963,6 +1985,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
     actions[ActionId::Global__Become_Indra] = Action {
         id: ActionId::Global__Become_Indra,
+        time: 100,
+        price: Currency::Free,
+    };
+    actions[ActionId::Global__Move_Portal_Here] = Action {
+        id: ActionId::Global__Move_Portal_Here,
         time: 100,
         price: Currency::Free,
     };

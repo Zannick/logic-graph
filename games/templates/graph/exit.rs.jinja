@@ -1,5 +1,5 @@
 %% include 'header.rs.jinja'
-%% from 'macros.jinja' import price
+%% from 'macros.jinja' import price, penalties
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -52,13 +52,7 @@ impl world::Accessible for Exit {
 %% for ex in gl.exits()|sort(attribute='id')
 %% if ex.penalties and not ex.item
                 ExitId::{{ ex.id }} => {
-%% for pen in ex.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
+                    {{ penalties(ex.penalties) }}
                 }
 %% endif
 %% endfor

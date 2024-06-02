@@ -255,6 +255,13 @@ actions:  # MARK: actions
     req: NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
     do: ^mode = 'Indra'
     time: 0.1
+  - name: Move Portal Here
+    req: NOT WITHIN `Menu` and $attract and ^portal != $default and ^portal != ^position
+    do: ^portal = ^position
+    time: 0.1
+    penalties:
+      # TODO: measure portal speed
+      - calc: $spot_distance(^position, ^portal) * 2.0
 
 helpers:  # MARK: helpers
   $melee: Ice_Axe or ^mode == 'drone'
@@ -315,8 +322,7 @@ helpers:  # MARK: helpers
   $melee_cskip: (Ice_Axe and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
-  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
-  $attract_time:num: $spot_distance(^position, ^portal) * 2.0
+  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
@@ -327,7 +333,7 @@ helpers:  # MARK: helpers
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{21}, Big_Flask{8}]
+    [Flask{22}, Big_Flask{8}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{11}]
   $all_weapons:itemList: >
@@ -337,7 +343,7 @@ helpers:  # MARK: helpers
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
-  # To be added: 1 Flask, 2 Big_Flask
+  # To be added: 2 Big_Flask
   # 2 Health_Fragment
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?

@@ -1,11 +1,11 @@
 #![allow(unused)]
 
 use analyzer::context::{ContextWrapper, Ctx, History, Wrapper};
-use analyzer::world::*;
+use analyzer::world::{Accessible, Action, Exit, Location, Warp, World as _};
 use analyzer::*;
+use lazy_static::lazy_static;
 use libaxiom_verge2::context::Context;
-use libaxiom_verge2::graph::{self, *};
-use libaxiom_verge2::graph_enums::*;
+use libaxiom_verge2::graph::*;
 use libaxiom_verge2::items::Item;
 use rmp_serde::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
@@ -14,10 +14,16 @@ use std::io::Write;
 use zstd::stream::read::Decoder;
 use zstd::stream::write::Encoder;
 
+lazy_static! {
+    static ref WORLD: Box<World> = {
+        let mut world = World::new();
+        world.condense_graph();
+        world
+    };
+}
+
 #[test]
 fn test_name() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
@@ -26,7 +32,7 @@ fn test_name() {
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_no_route!(
-        &*world,
+        &**WORLD,
         ctx,
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
@@ -36,8 +42,6 @@ fn test_name() {
 
 #[test]
 fn test_route() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
@@ -47,7 +51,7 @@ fn test_route() {
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_this_route!(
-        &*world,
+        &**WORLD,
         ctx,
         SpotId::Glacier__Vertical_Room__Mid_9,
         vec![
@@ -60,14 +64,13 @@ fn test_route() {
 
 #[test]
 fn test_obtain() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
     ctx.flasks = 1;
     ctx.add_item(Item::Amashilama);
     ctx.add_item(Item::Ice_Axe);
+    let mut world = WORLD.clone();
     world.major_glitches = true;
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
@@ -81,8 +84,6 @@ fn test_obtain() {
 
 #[test]
 fn test_require() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 30;
     ctx.flasks = 1;
@@ -90,6 +91,7 @@ fn test_require() {
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
+    let mut world = WORLD.clone();
     expect_not_obtainable!(
         &*world,
         ctx.clone(),
@@ -107,11 +109,26 @@ fn test_require() {
     );
 }
 
+#[test]
+fn test_penalty() {
+    let mut ctx = Context::default();
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Anuman);
+    ctx.add_item(Item::Remote_Drone);
+    ctx.add_item(Item::Breach_Attractor);
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.set_position(SpotId::Amagi__East_Lake__Arch_West, &**WORLD);
+    ctx.portal = SpotId::Amagi__East_Lake__Portal_Stand;
+    let mut wrapper = ContextWrapper::new(ctx);
+
+    let action = *WORLD.get_action(ActionId::Global__Move_Portal_Here);
+    assert!(action.time(wrapper.get(), &**WORLD) > action.base_time(), "Penalty not calculated for portal attract");
+    assert!(action.can_access(wrapper.get(), &**WORLD), "{}", action.explain(wrapper.get(), &**WORLD));
+}
+
 #[ignore]
 #[test]
 fn search() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;
@@ -128,7 +145,7 @@ fn search() {
     };
 
     expect_eventually_requires_to_obtain!(
-        &*world,
+        &**WORLD,
         ctx,
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
@@ -146,8 +163,6 @@ fn serde_pass<T: Ctx>(ctx: &ContextWrapper<T>) -> Vec<u8> {
 
 #[test]
 fn asserde_true() {
-    let mut world = graph::World::new();
-    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;

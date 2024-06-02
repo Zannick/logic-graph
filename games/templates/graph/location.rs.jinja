@@ -1,5 +1,5 @@
 %% include 'header.rs.jinja'
-%% from 'macros.jinja' import price
+%% from 'macros.jinja' import price, penalties
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -59,13 +59,7 @@ impl world::Accessible for Location {
 %% for loc in gl.locations()|sort(attribute='id')
 %% if loc.penalties
                 LocationId::{{ loc.id }} => {
-%% for pen in loc.penalties
-                    {% if not loop.first -%} } else {% endif %}if rules::access_{{ pen.access_id }}(ctx, world) {
-                        {{ (pen.add * 1000)|int }}
-%% endfor
-                    } else {
-                        0
-                    }
+                    {{ penalties(loc.penalties) }}
                 }
 %% endif
 %% endfor
