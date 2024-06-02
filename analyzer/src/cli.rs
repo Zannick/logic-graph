@@ -128,7 +128,7 @@ where
                 match route_from_string(world, &startctx, &rstr, scorer.get_algo()) {
                     Ok(r) => r,
                     Err((r, e)) => {
-                        log::error!("{}", e);
+                        log::error!("Using partial route from {:?}: {}", route, e);
                         r
                     }
                 }
