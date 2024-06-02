@@ -6,7 +6,7 @@ use crate::steiner::*;
 use crate::world::{Exit, Location, World};
 use lazy_static::lazy_static;
 use std::str::FromStr;
-use std::time::{Instant, Duration};
+use std::time::{Duration, Instant};
 use yaml_rust::Yaml;
 
 static IN_FULL: &str = "\nin full:\n";
@@ -96,76 +96,76 @@ where
         History::G(item, loc_id) => {
             let spot_id = world.get_location_spot(loc_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
-                    panic!(
+                ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
+                    format!(
                         "Could not complete route step {}: couldn't reach {} from {}\n{}",
                         i, spot_id, pos, s
                     )
-                });
+                })?;
             }
             if item == Default::default() {
                 let item = world.get_location(loc_id).item();
-                ctx.assert_and_replay(world, History::G(item, loc_id));
+                ctx.try_replay(world, History::G(item, loc_id))?;
             } else {
-                ctx.assert_and_replay(world, h);
+                ctx.try_replay(world, h)?;
             }
         }
         History::H(item, exit_id) => {
             let spot_id = world.get_exit_spot(exit_id);
             if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
-                    panic!(
+                ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
+                    format!(
                         "Could not complete route step {}: couldn't reach {} from {}\n{}",
                         i, spot_id, pos, s
                     )
-                });
+                })?;
             }
 
             if item == Default::default() {
                 let exit = world.get_exit(exit_id);
                 if let Some(loc_id) = exit.loc_id() {
                     let item = world.get_location(*loc_id).item();
-                    ctx.assert_and_replay(world, History::H(item, exit_id));
+                    ctx.try_replay(world, History::H(item, exit_id))?;
                 } else {
                     return Err(format!("Not a hybrid exit: {}", exit_id));
                 }
             } else {
-                ctx.assert_and_replay(world, h);
+                ctx.try_replay(world, h)?;
             }
         }
         History::E(exit_id) => {
             let exit = world.get_exit(exit_id);
-            ctx = move_to(world, ctx, exit.dest(), shortest_paths).unwrap_or_else(|s| {
-                panic!(
+            ctx = move_to(world, ctx, exit.dest(), shortest_paths).map_err(|s| {
+                format!(
                     "Could not complete route step {}: couldn't reach {}\n{}",
                     i,
                     exit.dest(),
                     s
                 )
-            });
+            })?;
         }
         History::L(spot_id) | History::C(spot_id, ..) => {
-            ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
-                panic!(
+            ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
+                format!(
                     "Could not complete route step {}: couldn't reach {} from {}\n{}",
                     i, spot_id, pos, s
                 )
-            });
+            })?;
         }
         History::W(..) => {
-            ctx.assert_and_replay(world, h);
+            ctx.try_replay(world, h)?;
         }
         History::A(action_id) => {
             let spot_id = world.get_action_spot(action_id);
             if spot_id != Default::default() && pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).unwrap_or_else(|s| {
-                    panic!(
+                ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
+                    format!(
                         "Could not complete route step {}: couldn't reach {} from {}\n{}",
                         i, spot_id, pos, s
                     )
-                });
+                })?;
             }
-            ctx.assert_and_replay(world, h);
+            ctx.try_replay(world, h)?;
         }
     }
     let elapsed = start.elapsed();
@@ -183,16 +183,16 @@ pub fn route_from_string<W, T, L>(
     startctx: &T,
     route: &str,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Result<ContextWrapper<T>, String>
+) -> Result<ContextWrapper<T>, (ContextWrapper<T>, String)>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
 {
-    let hist = hist_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
+    let hist = hist_from_string::<W, T, L>(route).map_err(|e| (ctx.clone(), e))?;
     for (i, h) in hist.into_iter().enumerate() {
-        ctx = step_from_route(ctx, i, h, world, shortest_paths)?;
+        ctx = step_from_route(ctx.clone(), i, h, world, shortest_paths).map_err(|e| (ctx, e))?;
     }
     Ok(ctx)
 }
@@ -209,7 +209,7 @@ where
     L: Location<Context = T>,
 {
     match route {
-        Yaml::String(s) => route_from_string(world, startctx, s, shortest_paths),
+        Yaml::String(s) => route_from_string(world, startctx, s, shortest_paths).map_err(|e| e.1),
         _ => Err(format!("Value for route is not str: {:?}", route)),
     }
 }
@@ -260,6 +260,10 @@ where
             world.items_needed(ctx.get())
         ));
     }
-    log::info!("Completed route in {:?} (average {:?})", start.elapsed(), start.elapsed() / steps as u32);
+    log::info!(
+        "Completed route in {:?} (average {:?})",
+        start.elapsed(),
+        start.elapsed() / steps as u32
+    );
     Ok(output.join("\n"))
 }

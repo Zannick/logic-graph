@@ -125,7 +125,13 @@ where
 
             route_ctxs.extend(routes.into_iter().map(|route| {
                 let rstr = read_from_file(route);
-                route_from_string(world, &startctx, &rstr, scorer.get_algo()).unwrap()
+                match route_from_string(world, &startctx, &rstr, scorer.get_algo()) {
+                    Ok(r) => r,
+                    Err((r, e)) => {
+                        log::error!("{}", e);
+                        r
+                    }
+                }
             }));
             let search = Search::new(
                 world,
