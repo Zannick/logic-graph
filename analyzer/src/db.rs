@@ -791,7 +791,11 @@ where
         // TODO: Not sure if we need a score limit when score is time_since?
         } else if score > score_limit {
             res.push((el, elapsed, time_since, est));
-            log::debug!("Returning immediately with one element (score {} > limit {})", score, score_limit);
+            log::debug!(
+                "Returning immediately with one element (score {} > limit {})",
+                score,
+                score_limit
+            );
             return Ok(res);
         } else {
             res.push((el, elapsed, time_since, est));
@@ -1287,20 +1291,23 @@ where
     }
 
     fn detect_cycle(&self, mut state_key: Vec<u8>) -> Result<(), Error> {
-        let mut states_found: HashMap<Vec<u8>, i32, CommonHasher> = new_hashmap();
+        let mut states_found: HashMap<Vec<u8>, usize, CommonHasher> = new_hashmap();
         let mut depth = 0;
+        let mut hist_vec = Vec::new();
         loop {
             states_found.insert(state_key.clone(), depth);
             if let Some(StateData { hist, prev, .. }) =
                 self.get_deserialize_state_data(&state_key)?
             {
+                hist_vec.push(hist);
                 depth += 1;
                 if let Some(existing_depth) = states_found.get(&prev) {
+                    let hist = &hist_vec[*existing_depth..depth];
                     panic!(
-                        "Cycle of length {} found ending at depth {}: last:{:?}\nstate: {:?}",
+                        "Cycle of length {} found ending at depth {}:\n{:?}\nstate: {:?}",
                         depth - existing_depth,
                         existing_depth,
-                        hist,
+                        hist.into_iter().rev().collect::<Vec<_>>(),
                         Self::deserialize_state(&state_key)
                             .expect("Failed to deserialize while reporting an error")
                     );
