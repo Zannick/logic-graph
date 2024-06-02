@@ -5,48 +5,48 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{self, *};
+use crate::graph::*;
 use crate::items::Item;
 use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
 use analyzer::matchertrie::IntegerObservation;
-use analyzer::world::{self, World};
+use analyzer::world::World as _;
 use rustc_hash::FxHashMap;
 
-pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool { true }
+pub fn access_default(_ctx: &Context, _world: &World) -> bool { true }
 
 %% for id, info in access_funcs.items()|sort
-pub fn access_{{ id }}(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_{{ id }}(ctx: &Context, world: &World) -> bool {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRust(info) }}
 }
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn action_{{ id }}(ctx: &mut Context, world: &graph::World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
+pub fn action_{{ id }}(ctx: &mut Context, world: &World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
     // {{ info.actions.text.strip() }}
     {{ info.actions|prToRust(info, id) }}
 }
 %% endfor
 
 %% for id, info in access_funcs.items()|sort
-pub fn explain_{{ id }}(ctx: &Context, world: &graph::World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
+pub fn explain_{{ id }}(ctx: &Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRustExplain(info) }}
 }
 %% endfor
 
 %% for id, info in access_funcs.items()|sort
-pub fn observe_access_{{ id }}(ctx: &Context, world: &graph::World, full_obs: &mut FullObservation) -> bool {
+pub fn observe_access_{{ id }}(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
     // {{ (info.boolExpr or info.itemList).text|string|trim }}
     {{ (info.boolExpr or info.itemList)|prToRustObserve(info) }}
 }
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn observe_action_{{ id }}(ctx: &Context, world: &graph::World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}, full_obs: &mut FullObservation) {
+pub fn observe_action_{{ id }}(ctx: &Context, world: &World{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}, full_obs: &mut FullObservation) {
     // {{ info.actions.text.strip() }}
 %% set body = info.actions|prToRustObserve(info, id)|trim(' \n;')
 %% if body

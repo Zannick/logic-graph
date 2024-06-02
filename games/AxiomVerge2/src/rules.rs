@@ -5,38 +5,35 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{self, *};
+use crate::graph::*;
 use crate::items::Item;
 use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
 use analyzer::matchertrie::IntegerObservation;
-use analyzer::world::{self, World};
+use analyzer::world::World as _;
 use rustc_hash::FxHashMap;
 
-pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
+pub fn access_default(_ctx: &Context, _world: &World) -> bool {
     true
 }
 
-pub fn access___escape_apocalypse_bomb_invoke_objective(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access___escape_apocalypse_bomb_invoke_objective(ctx: &Context, world: &World) -> bool {
     // [Escape, Apocalypse_Bomb, $objective]
     ctx.has(Item::Escape) && ctx.has(Item::Apocalypse_Bomb) && rule__objective!(ctx, world)
 }
-pub fn access___infect_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___infect_nanite_mist(ctx: &Context, world: &World) -> bool {
     // [Infect, Nanite_Mist]
     ctx.has(Item::Infect) && ctx.has(Item::Nanite_Mist)
 }
-pub fn access___invoke_all_urns(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___invoke_all_urns(ctx: &Context, world: &World) -> bool {
     // [$all_urns]
     helper__all_urns!(ctx, world)
 }
 pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
     helper__all_urns!(ctx, world)
@@ -48,7 +45,7 @@ pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all
 }
 pub fn access___invoke_grab_or_invoke_climb_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ($grab or $climb) and Underwater_Movement
     ((helper__grab!(ctx, world) || helper__climb!(ctx, world))
@@ -56,23 +53,23 @@ pub fn access___invoke_grab_or_invoke_climb_and_underwater_movement(
 }
 pub fn access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ($grab or $climb or $hook) and Underwater_Movement
     (((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
         && ctx.has(Item::Underwater_Movement))
 }
-pub fn access___invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___invoke_objective(ctx: &Context, world: &World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
 }
-pub fn access___remote_drone_flask__6(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___remote_drone_flask__6(ctx: &Context, world: &World) -> bool {
     // [Remote_Drone, Flask{6}]
     ctx.has(Item::Remote_Drone) && ctx.count(Item::Flask) >= 6
 }
 pub fn access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
     ((world.allow_warps && helper__ft_breach!(ctx, world))
@@ -81,7 +78,7 @@ pub fn access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_bre
 }
 pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
     ((world.allow_warps && helper__ft_main!(ctx, world))
@@ -90,7 +87,7 @@ pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kieng
 }
 pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     ((((world.allow_warps
@@ -104,7 +101,7 @@ pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_
 }
 pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // allow_warps and ^realm == 'breach' and ^breach_save != $default
     ((world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
@@ -112,7 +109,7 @@ pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
 }
 pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
     ((world.allow_warps
@@ -122,7 +119,7 @@ pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
         ))
         && ctx.has(Item::Amashilama))
 }
-pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &World) -> bool {
     // allow_warps and WITHIN `Antarctica`
     (world.allow_warps
         && (match get_region(ctx.position()) {
@@ -132,7 +129,7 @@ pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &graph::Wo
 }
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo and ($grab or $climb)
     (ctx.amagi__main_area__ctx__combo()
@@ -140,321 +137,312 @@ pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(
 }
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo and $hook
     (ctx.amagi__main_area__ctx__combo() && helper__hook!(ctx, world))
 }
-pub fn access_amagi__main_area__carving__key_combo__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context, world: &World) -> bool {
     // not ^_combo
     !ctx.amagi__main_area__ctx__combo()
 }
-pub fn access_amagi_dragon_eye_passage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_dragon_eye_passage(ctx: &Context, world: &World) -> bool {
     // Amagi_Dragon_Eye_Passage
     ctx.has(Item::Amagi_Dragon_Eye_Passage)
 }
-pub fn access_amagi_stronghold_boulder_1(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_stronghold_boulder_1(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Boulder_1
     ctx.has(Item::Amagi_Stronghold_Boulder_1)
 }
 pub fn access_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
     ((ctx.has(Item::Amagi_Stronghold_Boulder_1) && ctx.has(Item::Underwater_Movement))
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
-pub fn access_amagi_stronghold_boulder_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_stronghold_boulder_2(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Boulder_2
     ctx.has(Item::Amagi_Stronghold_Boulder_2)
 }
-pub fn access_amagi_stronghold_boulder_2_and_invoke_grab(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_amagi_stronghold_boulder_2_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Boulder_2 and $grab
     (ctx.has(Item::Amagi_Stronghold_Boulder_2) && helper__grab!(ctx, world))
 }
-pub fn access_amagi_stronghold_wall_1(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_stronghold_wall_1(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Wall_1
     ctx.has(Item::Amagi_Stronghold_Wall_1)
 }
-pub fn access_amagi_stronghold_wall_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_stronghold_wall_2(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Wall_2
     ctx.has(Item::Amagi_Stronghold_Wall_2)
 }
-pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &World) -> bool {
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
 }
 pub fn access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_combo
     !ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_combo
     !ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo and $grab
     (ctx.annuna__east_bridge__ctx__combo() && helper__grab!(ctx, world))
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo and $hook
     (ctx.annuna__east_bridge__ctx__combo() && helper__hook!(ctx, world))
 }
 pub fn access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_combo
     !ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
 pub fn access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and ^_door_opened
     (helper__hook!(ctx, world) && ctx.annuna__vertical_room__ctx__door_opened())
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
 pub fn access_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__west_climb__ctx__door_opened()
 }
 pub fn access_annuna__west_climb__switch_ledge__ex__cache_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.annuna__west_climb__ctx__door_opened()
 }
 pub fn access_annuna__west_climb__switch_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $unlock4 and not ^_door_opened
     (helper__unlock4!(ctx, world) && !ctx.annuna__west_climb__ctx__door_opened())
 }
-pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_East_Bridge_Gate
     ctx.has(Item::Annuna_East_Bridge_Gate)
 }
-pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &World) -> bool {
     // Annuna_Mirror_Match_Switch
     ctx.has(Item::Annuna_Mirror_Match_Switch)
 }
-pub fn access_annuna_vertical_room_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_annuna_vertical_room_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_Vertical_Room_Gate
     ctx.has(Item::Annuna_Vertical_Room_Gate)
 }
-pub fn access_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_anuman(ctx: &Context, world: &World) -> bool {
     // Anuman
     ctx.has(Item::Anuman)
 }
-pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
 }
-pub fn access_anuman_and_slingshot_hook_and_drone_hover(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_anuman_and_slingshot_hook_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // Anuman and Slingshot_Hook and Drone_Hover
     ((ctx.has(Item::Anuman) && ctx.has(Item::Slingshot_Hook)) && ctx.has(Item::Drone_Hover))
 }
-pub fn access_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
 }
-pub fn access_apocalypse_bomb_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_apocalypse_bomb_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Apocalypse_Bomb and $hook
     (ctx.has(Item::Apocalypse_Bomb) && helper__hook!(ctx, world))
 }
-pub fn access_boomerang(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_boomerang(ctx: &Context, world: &World) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
-pub fn access_breach_attractor(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_breach_attractor(ctx: &Context, world: &World) -> bool {
     // Breach_Attractor
     ctx.has(Item::Breach_Attractor)
 }
-pub fn access_breach_attractor_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_breach_attractor_and_anuman(ctx: &Context, world: &World) -> bool {
     // Breach_Attractor and Anuman
     (ctx.has(Item::Breach_Attractor) && ctx.has(Item::Anuman))
 }
 pub fn access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
     ((ctx.has(Item::Breach_Attractor) && ctx.mode() == enums::Mode::Drone)
         && ctx.indra() == SpotId::Annuna__Filter_Teleporter__Shaft_Top)
 }
-pub fn access_defeat_indra(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_defeat_indra(ctx: &Context, world: &World) -> bool {
     // Defeat_Indra
     ctx.has(Item::Defeat_Indra)
 }
-pub fn access_defeat_mus_a_m20(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_defeat_mus_a_m20(ctx: &Context, world: &World) -> bool {
     // Defeat_MUS_A_M20
     ctx.has(Item::Defeat_MUS_A_M20)
 }
-pub fn access_drone_melee_damage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_drone_melee_damage(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Damage
     ctx.has(Item::Drone_Melee_Damage)
 }
-pub fn access_drone_melee_damage_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_drone_melee_damage_2(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Damage_2
     ctx.has(Item::Drone_Melee_Damage_2)
 }
-pub fn access_drone_melee_speed(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_drone_melee_speed(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Speed
     ctx.has(Item::Drone_Melee_Speed)
 }
-pub fn access_drone_melee_speed_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_drone_melee_speed_2(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Speed_2
     ctx.has(Item::Drone_Melee_Speed_2)
 }
 pub fn access_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $activate and not ^_left_platform_moved
     (helper__activate!(ctx, world) && !ctx.ebih__base_camp__ctx__left_platform_moved())
 }
 pub fn access_ebih__base_camp__left_platform_moved__reset_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $activate and ^_left_platform_moved
     (helper__activate!(ctx, world) && ctx.ebih__base_camp__ctx__left_platform_moved())
 }
 pub fn access_ebih__base_camp__top_platform__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and not ^_left_platform_moved
     (helper__hover!(ctx, world) && !ctx.ebih__base_camp__ctx__left_platform_moved())
 }
 pub fn access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_left_platform_moved
     ctx.ebih__base_camp__ctx__left_platform_moved()
 }
 pub fn access_ebih__base_camp__west_11__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $platform and $hook and not ^_left_platform_moved
     ((helper__platform!(ctx, world) && helper__hook!(ctx, world))
@@ -462,71 +450,65 @@ pub fn access_ebih__base_camp__west_11__ex__left_platform_1__req(
 }
 pub fn access_ebih__base_camp__west_11__ex__left_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and not ^_left_platform_moved
     (helper__hover!(ctx, world) && !ctx.ebih__base_camp__ctx__left_platform_moved())
 }
-pub fn access_ebih__drone_room__pit_left__activate_lift__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__drone_room__pit_left__activate_lift__req(ctx: &Context, world: &World) -> bool {
     // Infect and ^_platform_moved
     (ctx.has(Item::Infect) && ctx.ebih__drone_room__ctx__platform_moved())
 }
 pub fn access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and ^_platform_moved
     (ctx.has(Item::Infect) && ctx.ebih__drone_room__ctx__platform_moved())
 }
 pub fn access_ebih__drone_room__portal_exit__activate_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and not ^_platform_moved
     (ctx.has(Item::Infect) && !ctx.ebih__drone_room__ctx__platform_moved())
 }
 pub fn access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and not ^_platform_moved
     (ctx.has(Item::Infect) && !ctx.ebih__drone_room__ctx__platform_moved())
 }
 pub fn access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and not ^_platform_moved
     (helper__hook!(ctx, world) && !ctx.ebih__drone_room__ctx__platform_moved())
 }
-pub fn access_ebih__ebih_east__dispenser__activate_lift__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__ebih_east__dispenser__activate_lift__req(ctx: &Context, world: &World) -> bool {
     // Infect and ^_platform2_moved and ($grab or $hook)
     ((ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved())
         && (helper__grab!(ctx, world) || helper__hook!(ctx, world)))
 }
 pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $grab and not ^_platform2_moved
     (helper__grab!(ctx, world) && !ctx.ebih__ebih_east__ctx__platform2_moved())
 }
 pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and not ^_platform2_moved
     (helper__hook!(ctx, world) && !ctx.ebih__ebih_east__ctx__platform2_moved())
 }
 pub fn access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and $grab and not ^_platform2_moved
     ((ctx.has(Item::Infect) && helper__grab!(ctx, world))
@@ -534,14 +516,14 @@ pub fn access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
 }
 pub fn access_ebih__ebih_east__lower_moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and not ^_platform2_moved
     (ctx.has(Item::Infect) && !ctx.ebih__ebih_east__ctx__platform2_moved())
 }
 pub fn access_ebih__ebih_east__moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Infect and $grab and not ^_platform1_moved
     ((ctx.has(Item::Infect) && helper__grab!(ctx, world))
@@ -549,202 +531,184 @@ pub fn access_ebih__ebih_east__moving_platform__activate_ride__req(
 }
 pub fn access_ebih__ebih_west__above_door__ex__below_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__ebih_west__ctx__door_open()
 }
 pub fn access_ebih__ebih_west__above_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_door_open or $grab
     (!ctx.ebih__ebih_west__ctx__door_open() || helper__grab!(ctx, world))
 }
 pub fn access_ebih__ebih_west__above_door__ex__small_gap_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_door_open
     !ctx.ebih__ebih_west__ctx__door_open()
 }
 pub fn access_ebih__ebih_west__below_door__ex__above_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $grab and ^_door_open
     (helper__grab!(ctx, world) && ctx.ebih__ebih_west__ctx__door_open())
 }
 pub fn access_ebih__ebih_west__below_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and ^_door_open
     (helper__hook!(ctx, world) && ctx.ebih__ebih_west__ctx__door_open())
 }
 pub fn access_ebih__grid_25_10_12__door__ex__door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
-pub fn access_ebih__grid_25_10_12__door__ex__east_11_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__grid_25_10_12__door__ex__east_11_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
 pub fn access_ebih__grid_25_10_12__door_left__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
-pub fn access_ebih__grid_25_10_12__east_11__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__grid_25_10_12__east_11__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
 pub fn access_ebih__truck_gate__door__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
-pub fn access_ebih__truck_gate__door__ex__switch_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__truck_gate__door__ex__switch_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
 pub fn access_ebih__truck_gate__portal_stand__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
 pub fn access_ebih__truck_gate__portal_stand__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
-pub fn access_ebih__truck_gate__portal_stand__open_door__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__truck_gate__portal_stand__open_door__req(ctx: &Context, world: &World) -> bool {
     // not ^_door_open and $open and $range1
     ((!ctx.ebih__truck_gate__ctx__door_open() && helper__open!(ctx, world))
         && helper__range1!(ctx, world))
 }
-pub fn access_ebih__truck_gate__switch__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__truck_gate__switch__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
 pub fn access_ebih__truck_gate__switch__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__truck_gate__ctx__door_open()
 }
-pub fn access_ebih__truck_gate__switch__open_door__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_ebih__truck_gate__switch__open_door__req(ctx: &Context, world: &World) -> bool {
     // not ^_door_open and $open
     (!ctx.ebih__truck_gate__ctx__door_open() && helper__open!(ctx, world))
 }
 pub fn access_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__vertical_interchange__ctx__door_open()
 }
 pub fn access_ebih__vertical_interchange__door__ex__door_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__vertical_interchange__ctx__door_open()
 }
 pub fn access_ebih__vertical_interchange__door_east__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__vertical_interchange__ctx__door_open()
 }
 pub fn access_ebih__vertical_interchange__door_west__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.ebih__vertical_interchange__ctx__door_open()
 }
 pub fn access_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $open and not ^_door_open
     (helper__open!(ctx, world) && !ctx.ebih__vertical_interchange__ctx__door_open())
 }
 pub fn access_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
 pub fn access_ebih__waterfall__west_door__ex__west_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
 pub fn access_ebih__waterfall__west_door_left__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
 pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
-pub fn access_ebih_alu(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
 }
-pub fn access_ebih_interchange_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_interchange_block(ctx: &Context, world: &World) -> bool {
     // Ebih_Interchange_Block
     ctx.has(Item::Ebih_Interchange_Block)
 }
-pub fn access_ebih_interchange_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_interchange_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Interchange_Gate
     ctx.has(Item::Ebih_Interchange_Gate)
 }
 pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
     ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
@@ -752,7 +716,7 @@ pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
 }
 pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
     ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
@@ -760,7 +724,7 @@ pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
 }
 pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
     ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
@@ -768,159 +732,132 @@ pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_gr
 }
 pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
     ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
         && helper__hook!(ctx, world))
 }
-pub fn access_ebih_walled_off_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_walled_off_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_Walled_Off_Wall
     ctx.has(Item::Ebih_Walled_Off_Wall)
 }
-pub fn access_ebih_wasteland_door(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_wasteland_door(ctx: &Context, world: &World) -> bool {
     // Ebih_Wasteland_Door
     ctx.has(Item::Ebih_Wasteland_Door)
 }
-pub fn access_ebih_waterfall_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_waterfall_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_Waterfall_Wall
     ctx.has(Item::Ebih_Waterfall_Wall)
 }
-pub fn access_ebih_west_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ebih_west_block(ctx: &Context, world: &World) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
-pub fn access_fast_travel(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_fast_travel(ctx: &Context, world: &World) -> bool {
     // Fast_Travel
     ctx.has(Item::Fast_Travel)
 }
-pub fn access_fast_travel_and_invoke_boomerang(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_fast_travel_and_invoke_boomerang(ctx: &Context, world: &World) -> bool {
     // Fast_Travel and $boomerang
     (ctx.has(Item::Fast_Travel) && helper__boomerang!(ctx, world))
 }
-pub fn access_fast_travel_and_invoke_boomerang2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_fast_travel_and_invoke_boomerang2(ctx: &Context, world: &World) -> bool {
     // Fast_Travel and $boomerang2
     (ctx.has(Item::Fast_Travel) && helper__boomerang2!(ctx, world))
 }
-pub fn access_fast_travel_and_invoke_melee_cskip(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_fast_travel_and_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
     // Fast_Travel and $melee_cskip
     (ctx.has(Item::Fast_Travel) && helper__melee_cskip!(ctx, world))
 }
-pub fn access_giguna__carnelian__door__ex__switch_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
-pub fn access_giguna__carnelian__door__ex__vault_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__door__ex__vault_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
-pub fn access_giguna__carnelian__lower_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__lower_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar
     !ctx.giguna__carnelian__ctx__lower_susar()
 }
 pub fn access_giguna__carnelian__lower_susar__ex__rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_susar
     ctx.giguna__carnelian__ctx__lower_susar()
 }
 pub fn access_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_susar and $grab
     (ctx.giguna__carnelian__ctx__lower_susar() && helper__grab!(ctx, world))
 }
 pub fn access_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_susar and $hook
     (ctx.giguna__carnelian__ctx__lower_susar() && helper__hook!(ctx, world))
 }
-pub fn access_giguna__carnelian__lower_susar__hack__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__lower_susar__hack__req(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar and $allegiance1
     (!ctx.giguna__carnelian__ctx__lower_susar() && helper__allegiance1!(ctx, world))
 }
-pub fn access_giguna__carnelian__switch__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__switch__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
-pub fn access_giguna__carnelian__switch__open_door__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__switch__open_door__req(ctx: &Context, world: &World) -> bool {
     // $unlock3 and not ^_door_opened
     (helper__unlock3!(ctx, world) && !ctx.giguna__carnelian__ctx__door_opened())
 }
-pub fn access_giguna__carnelian__upper_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__upper_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_upper_susar
     !ctx.giguna__carnelian__ctx__upper_susar()
 }
 pub fn access_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__carnelian__ctx__upper_susar()
 }
 pub fn access_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__carnelian__ctx__upper_susar()
 }
 pub fn access_giguna__carnelian__upper_susar__ex__upper_path_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__carnelian__ctx__upper_susar()
 }
-pub fn access_giguna__carnelian__upper_susar__hack__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__upper_susar__hack__req(ctx: &Context, world: &World) -> bool {
     // not ^_upper_susar and $allegiance1
     (!ctx.giguna__carnelian__ctx__upper_susar() && helper__allegiance1!(ctx, world))
 }
-pub fn access_giguna__carnelian__vault__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
 pub fn access_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_platform and $activate
     (!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
 }
 pub fn access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
     ((((!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
@@ -930,7 +867,7 @@ pub fn access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
 }
 pub fn access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
     ((((!ctx.giguna__clouds__ctx__platform() && helper__activate!(ctx, world))
@@ -940,7 +877,7 @@ pub fn access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
 }
 pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
@@ -948,7 +885,7 @@ pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
 }
 pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
@@ -956,91 +893,79 @@ pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
 }
 pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and ^_combo_entered
     (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
 }
 pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and ^_combo_entered
     (helper__hook!(ctx, world) && ctx.giguna__east_caverns__ctx__combo_entered())
 }
-pub fn access_giguna__east_caverns__lower_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__lower_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar
     !ctx.giguna__east_caverns__ctx__lower_susar()
 }
 pub fn access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_susar
     ctx.giguna__east_caverns__ctx__lower_susar()
 }
 pub fn access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_susar
     ctx.giguna__east_caverns__ctx__lower_susar()
 }
-pub fn access_giguna__east_caverns__lower_susar__hack__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__lower_susar__hack__req(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar and $allegiance1
     (!ctx.giguna__east_caverns__ctx__lower_susar() && helper__allegiance1!(ctx, world))
 }
-pub fn access_giguna__east_caverns__mid_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__mid_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_mid_susar
     !ctx.giguna__east_caverns__ctx__mid_susar()
 }
 pub fn access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $grab and ^_mid_susar
     (helper__grab!(ctx, world) && ctx.giguna__east_caverns__ctx__mid_susar())
 }
 pub fn access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and ^_mid_susar
     (helper__hook!(ctx, world) && ctx.giguna__east_caverns__ctx__mid_susar())
 }
 pub fn access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_mid_susar
     ctx.giguna__east_caverns__ctx__mid_susar()
 }
-pub fn access_giguna__east_caverns__mid_susar__hack__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__mid_susar__hack__req(ctx: &Context, world: &World) -> bool {
     // not ^_mid_susar and $allegiance1
     (!ctx.giguna__east_caverns__ctx__mid_susar() && helper__allegiance1!(ctx, world))
 }
 pub fn access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and ^_combo_entered
     (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
 }
 pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and $hook and ^_combo_entered
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
@@ -1048,7 +973,7 @@ pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__re
 }
 pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
@@ -1056,7 +981,7 @@ pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__re
 }
 pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
@@ -1064,7 +989,7 @@ pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__re
 }
 pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and $hook and ^_combo_entered
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
@@ -1072,7 +997,7 @@ pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__re
 }
 pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
@@ -1080,7 +1005,7 @@ pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__re
 }
 pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
@@ -1088,156 +1013,138 @@ pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_3__re
 }
 pub fn access_giguna__east_caverns__statues_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_door_opened and $unlock2 and $range1
     ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__unlock2!(ctx, world))
         && helper__range1!(ctx, world))
 }
-pub fn access_giguna__east_caverns__switch__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__switch__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__east_caverns__ctx__door_opened()
 }
-pub fn access_giguna__east_caverns__switch__open_door__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__switch__open_door__req(ctx: &Context, world: &World) -> bool {
     // not ^_door_opened and $unlock2
     (!ctx.giguna__east_caverns__ctx__door_opened() && helper__unlock2!(ctx, world))
 }
-pub fn access_giguna__east_caverns__upper_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__upper_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_upper_susar
     !ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_upper_susar
     !ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_upper_susar and $allegiance1
     (!ctx.giguna__east_caverns__ctx__upper_susar() && helper__allegiance1!(ctx, world))
 }
 pub fn access_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_susar
     ctx.giguna__east_caverns__ctx__upper_susar()
 }
 pub fn access_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_upper_susar and $allegiance1
     (!ctx.giguna__east_caverns__ctx__upper_susar() && helper__allegiance1!(ctx, world))
 }
 pub fn access_giguna__east_caverns__west_14__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_combo_entered
     !ctx.giguna__east_caverns__ctx__combo_entered()
 }
-pub fn access_giguna__east_caverns__west_16__ex__door_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__west_16__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__east_caverns__ctx__door_opened()
 }
-pub fn access_giguna__east_caverns__west_16__open_door__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__east_caverns__west_16__open_door__req(ctx: &Context, world: &World) -> bool {
     // not ^_door_opened and $open and $range2
     ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx, world))
         && helper__range2!(ctx, world))
 }
-pub fn access_giguna__gateway__door__ex__block_left_1__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__gateway__door__ex__block_left_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
 }
 pub fn access_giguna__gateway__door__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
 }
 pub fn access_giguna__gateway__door__ex__passage_entry_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
 }
 pub fn access_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
 }
 pub fn access_giguna__giguna_base__below_gate__ex__kari_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open and $grab and $climb
     ((ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx, world))
@@ -1245,14 +1152,14 @@ pub fn access_giguna__giguna_base__below_gate__ex__kari_1__req(
 }
 pub fn access_giguna__giguna_base__below_gate__ex__kari_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open and $hook
     (ctx.giguna__giguna_base__ctx__door_open() && helper__hook!(ctx, world))
 }
 pub fn access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open and $grab and $climb
     ((ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx, world))
@@ -1260,35 +1167,35 @@ pub fn access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
 }
 pub fn access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open and $hook
     (ctx.giguna__giguna_base__ctx__door_open() && helper__hook!(ctx, world))
 }
 pub fn access_giguna__giguna_base__kari__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.giguna__giguna_base__ctx__door_open()
 }
 pub fn access_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_open
     ctx.giguna__giguna_base__ctx__door_open()
 }
 pub fn access_giguna__giguna_northeast__right_column__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
 pub fn access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $unlock3 and Infection_Range_3 and not ^_door_opened
     ((helper__unlock3!(ctx, world) && ctx.has(Item::Infection_Range_3))
@@ -1296,7 +1203,7 @@ pub fn access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
 }
 pub fn access_giguna__giguna_northeast__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened and ($grab or $hook)
     (ctx.giguna__giguna_northeast__ctx__door_opened()
@@ -1304,246 +1211,237 @@ pub fn access_giguna__giguna_northeast__switch__ex__door_1__req(
 }
 pub fn access_giguna__giguna_northeast__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $unlock3 and not ^_door_opened
     (helper__unlock3!(ctx, world) && !ctx.giguna__giguna_northeast__ctx__door_opened())
 }
 pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
 pub fn access_giguna__giguna_northeast__vault__ex__door_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened and $hook
     (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx, world))
 }
 pub fn access_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__east_door__ex__east_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__east_door__ex__portal_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__entryway__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__portal__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__west_7__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__west_door__ex__entryway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_top__west_door__ex__west_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()
 }
 pub fn access_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_kishib_handled and $shockwave
     (!ctx.giguna__ruins_west__ctx__kishib_handled() && helper__shockwave!(ctx, world))
 }
 pub fn access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $grab and ^_kishib_handled
     (helper__grab!(ctx, world) && ctx.giguna__ruins_west__ctx__kishib_handled())
 }
 pub fn access_giguna__ruins_west__lower_ledge__hack_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_kishib_handled and $allegiance1
     (!ctx.giguna__ruins_west__ctx__kishib_handled() && helper__allegiance1!(ctx, world))
 }
-pub fn access_giguna__west_caverns__east_susar__caught__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__west_caverns__east_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_east_susar
     !ctx.giguna__west_caverns__ctx__east_susar()
 }
 pub fn access_giguna__west_caverns__east_susar__ex__east_12_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_east_susar
     ctx.giguna__west_caverns__ctx__east_susar()
 }
 pub fn access_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_east_susar
     ctx.giguna__west_caverns__ctx__east_susar()
 }
-pub fn access_giguna__west_caverns__east_susar__hack__req(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna__west_caverns__east_susar__hack__req(ctx: &Context, world: &World) -> bool {
     // not ^_east_susar and $allegiance1
     (!ctx.giguna__west_caverns__ctx__east_susar() && helper__allegiance1!(ctx, world))
 }
-pub fn access_giguna_boulder(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_boulder(ctx: &Context, world: &World) -> bool {
     // Giguna_Boulder
     ctx.has(Item::Giguna_Boulder)
 }
 pub fn access_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna_breach__sw_save__ctx__door_opened()
 }
 pub fn access_giguna_breach__sw_save__west_11__ex__side_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_door_opened
     ctx.giguna_breach__sw_save__ctx__door_opened()
 }
 pub fn access_giguna_breach__sw_save__west_11__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_door_opened
     !ctx.giguna_breach__sw_save__ctx__door_opened()
 }
-pub fn access_giguna_dual_path_switch(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_dual_path_switch(ctx: &Context, world: &World) -> bool {
     // Giguna_Dual_Path_Switch
     ctx.has(Item::Giguna_Dual_Path_Switch)
 }
 pub fn access_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
     (ctx.has(Item::Giguna_Dual_Path_Switch)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
-pub fn access_giguna_dual_path_switch_and_invoke_climb(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_giguna_dual_path_switch_and_invoke_climb(ctx: &Context, world: &World) -> bool {
     // Giguna_Dual_Path_Switch and $climb
     (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__climb!(ctx, world))
 }
-pub fn access_giguna_dual_path_switch_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_dual_path_switch_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Giguna_Dual_Path_Switch and $hook
     (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__hook!(ctx, world))
 }
-pub fn access_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // Giguna_Gateway_Block
     ctx.has(Item::Giguna_Gateway_Block)
 }
-pub fn access_giguna_gateway_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_gateway_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Gateway_Gate
     ctx.has(Item::Giguna_Gateway_Gate)
 }
-pub fn access_giguna_gubi(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_gubi(ctx: &Context, world: &World) -> bool {
     // Giguna_Gubi
     ctx.has(Item::Giguna_Gubi)
 }
-pub fn access_giguna_northeast_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_giguna_northeast_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
 }
 pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and $hover and ^_upper_gatestone
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
@@ -1551,14 +1449,14 @@ pub fn access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
 }
 pub fn access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
 }
 pub fn access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Underwater_Movement and $hook and ^_lower_gatestones
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
@@ -1566,302 +1464,293 @@ pub fn access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
 }
 pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
 }
 pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
 }
 pub fn access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Underwater_Movement and ^_lower_gatestones
     (ctx.has(Item::Underwater_Movement) && ctx.glacier__vertical_room__ctx__lower_gatestones())
 }
 pub fn access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_gatestone
     ctx.glacier__vertical_room__ctx__upper_gatestone()
 }
 pub fn access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_gatestone
     ctx.glacier__vertical_room__ctx__upper_gatestone()
 }
 pub fn access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_upper_gatestone
     ctx.glacier__vertical_room__ctx__upper_gatestone()
 }
-pub fn access_glacier_big_drop_rock(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_glacier_big_drop_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Big_Drop_Rock
     ctx.has(Item::Glacier_Big_Drop_Rock)
 }
-pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Sea_Burial_Rock
     ctx.has(Item::Glacier_Sea_Burial_Rock)
 }
-pub fn access_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_hammond_auth(ctx: &Context, world: &World) -> bool {
     // Hammond_Auth
     ctx.has(Item::Hammond_Auth)
 }
-pub fn access_health_upgrade(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_health_upgrade(ctx: &Context, world: &World) -> bool {
     // Health_Upgrade
     ctx.has(Item::Health_Upgrade)
 }
-pub fn access_health_upgrade_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_health_upgrade_2(ctx: &Context, world: &World) -> bool {
     // Health_Upgrade_2
     ctx.has(Item::Health_Upgrade_2)
 }
-pub fn access_health_upgrade_3(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_health_upgrade_3(ctx: &Context, world: &World) -> bool {
     // Health_Upgrade_3
     ctx.has(Item::Health_Upgrade_3)
 }
-pub fn access_health_upgrade_4(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_health_upgrade_4(ctx: &Context, world: &World) -> bool {
     // Health_Upgrade_4
     ctx.has(Item::Health_Upgrade_4)
 }
-pub fn access_infect(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infect(ctx: &Context, world: &World) -> bool {
     // Infect
     ctx.has(Item::Infect)
 }
-pub fn access_infect_and_anuman_and_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infect_and_anuman_and_invoke_objective(ctx: &Context, world: &World) -> bool {
     // Infect and Anuman and $objective
     ((ctx.has(Item::Infect) && ctx.has(Item::Anuman)) && rule__objective!(ctx, world))
 }
-pub fn access_infect_and_not_anuman_and_invoke_objective(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_infect_and_not_anuman_and_invoke_objective(ctx: &Context, world: &World) -> bool {
     // Infect and not Anuman and $objective
     ((ctx.has(Item::Infect) && !ctx.has(Item::Anuman)) && rule__objective!(ctx, world))
 }
-pub fn access_infect_l1(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infect_l1(ctx: &Context, world: &World) -> bool {
     // Infect_L1
     ctx.has(Item::Infect_L1)
 }
-pub fn access_infect_l2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infect_l2(ctx: &Context, world: &World) -> bool {
     // Infect_L2
     ctx.has(Item::Infect_L2)
 }
-pub fn access_infection_range(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infection_range(ctx: &Context, world: &World) -> bool {
     // Infection_Range
     ctx.has(Item::Infection_Range)
 }
-pub fn access_infection_range_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infection_range_2(ctx: &Context, world: &World) -> bool {
     // Infection_Range_2
     ctx.has(Item::Infection_Range_2)
 }
-pub fn access_infection_speed(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_infection_speed(ctx: &Context, world: &World) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
 }
-pub fn access_invoke_activate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_activate(ctx: &Context, world: &World) -> bool {
     // $activate
     helper__activate!(ctx, world)
 }
 pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Left
     (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
 }
 pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Right
     (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
 pub fn access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
     (helper__block_clip_escape!(ctx, world) && !ctx.has(Item::Uhrum_Annuna_Corridor_Block))
 }
-pub fn access_invoke_boomerang(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_boomerang(ctx: &Context, world: &World) -> bool {
     // $boomerang
     helper__boomerang!(ctx, world)
 }
-pub fn access_invoke_boomerang2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_boomerang2(ctx: &Context, world: &World) -> bool {
     // $boomerang2
     helper__boomerang2!(ctx, world)
 }
-pub fn access_invoke_bs(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_bs(ctx: &Context, world: &World) -> bool {
     // $bs
     helper__bs!(ctx, world)
 }
-pub fn access_invoke_can_damage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_damage(ctx: &Context, world: &World) -> bool {
     // $can_damage
     helper__can_damage!(ctx, world)
 }
-pub fn access_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
     // $can_deploy
     helper__can_deploy!(ctx, world)
 }
-pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // $can_deploy and Drone_Hover
     (helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
 }
-pub fn access_invoke_can_deploy_and_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_deploy_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $can_deploy and $hover
     (helper__can_deploy!(ctx, world) && helper__hover!(ctx, world))
 }
-pub fn access_invoke_can_deploy_and_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_deploy_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // $can_deploy and Slingshot_Hook
     (helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $can_deploy and Slingshot_Hook and Drone_Hover
     ((helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
 }
-pub fn access_invoke_charge(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_charge(ctx: &Context, world: &World) -> bool {
     // $charge
     helper__charge!(ctx, world)
 }
-pub fn access_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $climb
     helper__climb!(ctx, world)
 }
-pub fn access_invoke_climb_and_annuna_east_bridge_gate(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_climb_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // $climb and Annuna_East_Bridge_Gate
     (helper__climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
 pub fn access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
     (((helper__climb!(ctx, world) && helper__can_deploy!(ctx, world))
         && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Slingshot_Hook))
 }
-pub fn access_invoke_climb_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_climb_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // $climb and $grab
     (helper__climb!(ctx, world) && helper__grab!(ctx, world))
 }
-pub fn access_invoke_climb_and_invoke_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_climb_and_invoke_grab_and_anuman(ctx: &Context, world: &World) -> bool {
     // $climb and $grab and Anuman
     ((helper__climb!(ctx, world) && helper__grab!(ctx, world)) && ctx.has(Item::Anuman))
 }
-pub fn access_invoke_climb_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_climb_and_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $climb and Underwater_Movement
     (helper__climb!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
-pub fn access_invoke_climb_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_climb_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $climb or $hook
     (helper__climb!(ctx, world) || helper__hook!(ctx, world))
 }
-pub fn access_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab(ctx: &Context, world: &World) -> bool {
     // $grab
     helper__grab!(ctx, world)
 }
-pub fn access_invoke_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // $grab and Annuna_East_Bridge_Gate
     (helper__grab!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_invoke_grab_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_anuman(ctx: &Context, world: &World) -> bool {
     // $grab and Anuman
     (helper__grab!(ctx, world) && ctx.has(Item::Anuman))
 }
-pub fn access_invoke_grab_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $grab and Giguna_Gateway_Block
     (helper__grab!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
 }
-pub fn access_invoke_grab_and_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
     // $grab and $can_deploy
     (helper__grab!(ctx, world) && helper__can_deploy!(ctx, world))
 }
-pub fn access_invoke_grab_and_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $grab and $climb
     (helper__grab!(ctx, world) && helper__climb!(ctx, world))
 }
-pub fn access_invoke_grab_and_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_switch_40_12(ctx: &Context, world: &World) -> bool {
     // $grab and Switch_40_12
     (helper__grab!(ctx, world) && ctx.has(Item::Switch_40_12))
 }
-pub fn access_invoke_grab_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_and_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $grab and Underwater_Movement
     (helper__grab!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
-pub fn access_invoke_grab_or_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_or_anuman(ctx: &Context, world: &World) -> bool {
     // $grab or Anuman
     (helper__grab!(ctx, world) || ctx.has(Item::Anuman))
 }
-pub fn access_invoke_grab_or_invoke_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_or_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $grab or $climb
     (helper__grab!(ctx, world) || helper__climb!(ctx, world))
 }
-pub fn access_invoke_grab_or_invoke_climb_or_invoke_hook(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_grab_or_invoke_climb_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $grab or $climb or $hook
     ((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
 }
-pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $grab or $hook
     (helper__grab!(ctx, world) || helper__hook!(ctx, world))
 }
-pub fn access_invoke_grab_or_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_grab_or_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $grab or Underwater_Movement
     (helper__grab!(ctx, world) || ctx.has(Item::Underwater_Movement))
 }
-pub fn access_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hook
     helper__hook!(ctx, world)
 }
-pub fn access_invoke_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // $hook and Annuna_East_Bridge_Gate
     (helper__hook!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $hook and Giguna_Gateway_Block
     (helper__hook!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
 }
-pub fn access_invoke_hook_and_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hook and $hover
     (helper__hook!(ctx, world) && helper__hover!(ctx, world))
 }
 pub fn access_invoke_hook_and_invoke_hover_and_slingshot_charge(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and $hover and Slingshot_Charge
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world)) && ctx.has(Item::Slingshot_Charge))
 }
 pub fn access_invoke_hook_and_invoke_hover_and_slingshot_weapon(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and $hover and Slingshot_Weapon
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world)) && ctx.has(Item::Slingshot_Weapon))
 }
 pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and $hover and Underwater_Movement
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
@@ -1869,7 +1758,7 @@ pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement(
 }
 pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
     (((((helper__hook!(ctx, world) && helper__hover!(ctx, world))
@@ -1878,62 +1767,53 @@ pub fn access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_at
         && ctx.has(Item::Anuman))
         && ctx.portal() == data::portal_start(ctx.position()))
 }
-pub fn access_invoke_hook_and_not_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_hook_and_not_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
     // $hook and not Ebih_Waterfall_Block_Left
     (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
 }
-pub fn access_invoke_hook_and_not_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_hook_and_not_ebih_waterfall_block_right(ctx: &Context, world: &World) -> bool {
     // $hook and not Ebih_Waterfall_Block_Right
     (helper__hook!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
-pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
-pub fn access_invoke_hook_or_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hook_or_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hook or $hover
     (helper__hook!(ctx, world) || helper__hover!(ctx, world))
 }
-pub fn access_invoke_hover(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hover
     helper__hover!(ctx, world)
 }
-pub fn access_invoke_hover_and_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_and_anuman(ctx: &Context, world: &World) -> bool {
     // $hover and Anuman
     (helper__hover!(ctx, world) && ctx.has(Item::Anuman))
 }
-pub fn access_invoke_hover_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hover and $hook
     (helper__hover!(ctx, world) && helper__hook!(ctx, world))
 }
-pub fn access_invoke_hover_and_invoke_hook_and_invoke_mist2(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_hover_and_invoke_hook_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $hover and $hook and $mist2
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world)) && helper__mist2!(ctx, world))
 }
-pub fn access_invoke_hover_and_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $hover and $mist2
     (helper__hover!(ctx, world) && helper__mist2!(ctx, world))
 }
-pub fn access_invoke_hover_and_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // $hover and Nanite_Mist
     (helper__hover!(ctx, world) && ctx.has(Item::Nanite_Mist))
 }
-pub fn access_invoke_hover_and_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_and_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $hover and Underwater_Movement
     (helper__hover!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
 pub fn access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
     ((((helper__hover!(ctx, world) && ctx.has(Item::Underwater_Movement))
@@ -1941,238 +1821,232 @@ pub fn access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anum
         && ctx.has(Item::Anuman))
         && ctx.portal() == data::portal_start(ctx.position()))
 }
-pub fn access_invoke_hover_or_anuman(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_or_anuman(ctx: &Context, world: &World) -> bool {
     // $hover or Anuman
     (helper__hover!(ctx, world) || ctx.has(Item::Anuman))
 }
-pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hover or $hook
     (helper__hover!(ctx, world) || helper__hook!(ctx, world))
 }
-pub fn access_invoke_hover_or_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_hover_or_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $hover or $mist2
     (helper__hover!(ctx, world) || helper__mist2!(ctx, world))
 }
-pub fn access_invoke_infinite_climb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_infinite_climb(ctx: &Context, world: &World) -> bool {
     // $infinite_climb
     helper__infinite_climb!(ctx, world)
 }
 pub fn access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $infinite_climb and Annuna_East_Bridge_Gate
     (helper__infinite_climb!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
 pub fn access_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $infinite_climb and not Annuna_East_Bridge_Gate
     (helper__infinite_climb!(ctx, world) && !ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_invoke_infinite_climb_and_slingshot_hook(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_infinite_climb_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // $infinite_climb and Slingshot_Hook
     (helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
     ((helper__infinite_climb!(ctx, world) && ctx.has(Item::Slingshot_Hook))
         && !ctx.has(Item::Annuna_East_Bridge_Gate))
 }
-pub fn access_invoke_melee(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_melee(ctx: &Context, world: &World) -> bool {
     // $melee
     helper__melee!(ctx, world)
 }
-pub fn access_invoke_melee_cskip(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
     // $melee_cskip
     helper__melee_cskip!(ctx, world)
 }
-pub fn access_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $mist2
     helper__mist2!(ctx, world)
 }
-pub fn access_invoke_mist2_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_mist2_and_mode_eq_drone(ctx: &Context, world: &World) -> bool {
     // $mist2 and ^mode == 'drone'
     (helper__mist2!(ctx, world) && ctx.mode() == enums::Mode::Drone)
 }
-pub fn access_invoke_more_refills(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_more_refills(ctx: &Context, world: &World) -> bool {
     // $more_refills
     helper__more_refills!(ctx, world)
 }
-pub fn access_invoke_offset(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_offset(ctx: &Context, world: &World) -> bool {
     // $offset
     helper__offset!(ctx, world)
 }
-pub fn access_invoke_open(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_open(ctx: &Context, world: &World) -> bool {
     // $open
     helper__open!(ctx, world)
 }
-pub fn access_invoke_open_and_invoke_range1(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_open_and_invoke_range1(ctx: &Context, world: &World) -> bool {
     // $open and $range1
     (helper__open!(ctx, world) && helper__range1!(ctx, world))
 }
-pub fn access_invoke_open_and_invoke_range2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_open_and_invoke_range2(ctx: &Context, world: &World) -> bool {
     // $open and $range2
     (helper__open!(ctx, world) && helper__range2!(ctx, world))
 }
-pub fn access_invoke_open_and_invoke_range3(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_open_and_invoke_range3(ctx: &Context, world: &World) -> bool {
     // $open and $range3
     (helper__open!(ctx, world) && helper__range3!(ctx, world))
 }
-pub fn access_invoke_overheat(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_overheat(ctx: &Context, world: &World) -> bool {
     // $overheat
     helper__overheat!(ctx, world)
 }
-pub fn access_invoke_overheat_and_invoke_can_damage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_overheat_and_invoke_can_damage(ctx: &Context, world: &World) -> bool {
     // $overheat and $can_damage
     (helper__overheat!(ctx, world) && helper__can_damage!(ctx, world))
 }
 pub fn access_invoke_platform_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $platform and $hook and $hover
     ((helper__platform!(ctx, world) && helper__hook!(ctx, world)) && helper__hover!(ctx, world))
 }
-pub fn access_invoke_remote_boomerang(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_remote_boomerang(ctx: &Context, world: &World) -> bool {
     // $remote_boomerang
     helper__remote_boomerang!(ctx, world)
 }
-pub fn access_invoke_shockwave(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_shockwave(ctx: &Context, world: &World) -> bool {
     // $shockwave
     helper__shockwave!(ctx, world)
 }
-pub fn access_invoke_shockwave_and_not_defeat_mus_a_m20(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_shockwave_and_not_defeat_mus_a_m20(ctx: &Context, world: &World) -> bool {
     // $shockwave and not Defeat_MUS_A_M20
     (helper__shockwave!(ctx, world) && !ctx.has(Item::Defeat_MUS_A_M20))
 }
-pub fn access_invoke_slow(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_slow(ctx: &Context, world: &World) -> bool {
     // $slow
     helper__slow!(ctx, world)
 }
-pub fn access_invoke_spin(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_spin(ctx: &Context, world: &World) -> bool {
     // $spin
     helper__spin!(ctx, world)
 }
-pub fn access_invoke_sync(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_sync(ctx: &Context, world: &World) -> bool {
     // $sync
     helper__sync!(ctx, world)
 }
-pub fn access_invoke_sync_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_sync_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $sync and $hook
     (helper__sync!(ctx, world) && helper__hook!(ctx, world))
 }
 pub fn access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_platform_moved
     !ctx.irikar__basement_portal__ctx__platform_moved()
 }
 pub fn access_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_platform_moved and $hook
     (ctx.irikar__basement_portal__ctx__platform_moved() && helper__hook!(ctx, world))
 }
 pub fn access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_platform_moved
     !ctx.irikar__basement_portal__ctx__platform_moved()
 }
 pub fn access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_left_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__left_platform() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_left_platform and $mist2
     (!ctx.irikar__midwest__ctx__left_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Nanite_Mist and not ^_right_platform
     (ctx.has(Item::Nanite_Mist) && !ctx.irikar__midwest__ctx__right_platform())
 }
 pub fn access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $mist2 and not ^_right_platform
     (helper__mist2!(ctx, world) && !ctx.irikar__midwest__ctx__right_platform())
 }
 pub fn access_irikar__midwest__left_platform_start__hack_and_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_left_platform and $activate
     (!ctx.irikar__midwest__ctx__left_platform() && helper__activate!(ctx, world))
 }
 pub fn access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $hover and $hook and not ^_left_platform
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
@@ -2180,331 +2054,301 @@ pub fn access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
 }
 pub fn access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $activate
     (!ctx.irikar__midwest__ctx__right_platform() && helper__activate!(ctx, world))
 }
 pub fn access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
 pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
-pub fn access_irikar_gudam(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_irikar_gudam(ctx: &Context, world: &World) -> bool {
     // Irikar_Gudam
     ctx.has(Item::Irikar_Gudam)
 }
-pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &World) -> bool {
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
 }
-pub fn access_map__amagi__east_lake__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__amagi__east_lake__save(ctx: &Context, world: &World) -> bool {
     // ^map__amagi__east_lake__save
     ctx.map__amagi__east_lake__save()
 }
-pub fn access_map__amagi__main_area__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__amagi__main_area__save(ctx: &Context, world: &World) -> bool {
     // ^map__amagi__main_area__save
     ctx.map__amagi__main_area__save()
 }
-pub fn access_map__amagi_breach__east_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__amagi_breach__east_entrance__save(ctx: &Context, world: &World) -> bool {
     // ^map__amagi_breach__east_entrance__save
     ctx.map__amagi_breach__east_entrance__save()
 }
-pub fn access_map__annuna__center_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__annuna__center_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__center_save__save
     ctx.map__annuna__center_save__save()
 }
-pub fn access_map__annuna__factory_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__annuna__factory_entrance__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__factory_entrance__save
     ctx.map__annuna__factory_entrance__save()
 }
-pub fn access_map__annuna__mirror_match__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__annuna__mirror_match__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__mirror_match__save
     ctx.map__annuna__mirror_match__save()
 }
-pub fn access_map__annuna__upper_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__annuna__upper_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__upper_save__save
     ctx.map__annuna__upper_save__save()
 }
-pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__vertical_room__save
     ctx.map__annuna__vertical_room__save()
 }
-pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__base_camp__save
     ctx.map__ebih__base_camp__save()
 }
-pub fn access_map__ebih__ebih_west__lower_save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__ebih__ebih_west__lower_save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__ebih_west__lower_save
     ctx.map__ebih__ebih_west__lower_save()
 }
-pub fn access_map__ebih__ebih_west__mid_save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__ebih__ebih_west__mid_save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__ebih_west__mid_save
     ctx.map__ebih__ebih_west__mid_save()
 }
-pub fn access_map__ebih__ebih_west__upper_save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__ebih__ebih_west__upper_save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__ebih_west__upper_save
     ctx.map__ebih__ebih_west__upper_save()
 }
-pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__giguna_base__save
     ctx.map__giguna__giguna_base__save()
 }
-pub fn access_map__giguna__giguna_northeast__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna__giguna_northeast__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__giguna_northeast__save
     ctx.map__giguna__giguna_northeast__save()
 }
-pub fn access_map__giguna__ruins_top__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna__ruins_top__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__ruins_top__save
     ctx.map__giguna__ruins_top__save()
 }
-pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__ruins_west__save
     ctx.map__giguna__ruins_west__save()
 }
-pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__peak__save
     ctx.map__giguna_breach__peak__save()
 }
-pub fn access_map__giguna_breach__sw_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__giguna_breach__sw_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__sw_save__save
     ctx.map__giguna_breach__sw_save__save()
 }
-pub fn access_map__glacier__revival__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__glacier__revival__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier__revival__save
     ctx.map__glacier__revival__save()
 }
-pub fn access_map__glacier_breach__guarded_corridor__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_map__glacier_breach__guarded_corridor__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier_breach__guarded_corridor__save
     ctx.map__glacier_breach__guarded_corridor__save()
 }
-pub fn access_map__glacier_breach__hammonds_breach__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_map__glacier_breach__hammonds_breach__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier_breach__hammonds_breach__save
     ctx.map__glacier_breach__hammonds_breach__save()
 }
-pub fn access_map__glacier_breach__save_and_exit__save(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_map__glacier_breach__save_and_exit__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier_breach__save_and_exit__save
     ctx.map__glacier_breach__save_and_exit__save()
 }
-pub fn access_map__glacier_breach__south_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__glacier_breach__south_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier_breach__south_save__save
     ctx.map__glacier_breach__south_save__save()
 }
-pub fn access_map__glacier_breach__west_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__glacier_breach__west_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__glacier_breach__west_save__save
     ctx.map__glacier_breach__west_save__save()
 }
-pub fn access_map__irikar__beach_save__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__irikar__beach_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar__beach_save__save
     ctx.map__irikar__beach_save__save()
 }
-pub fn access_map__irikar__hub__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__irikar__hub__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar__hub__save
     ctx.map__irikar__hub__save()
 }
-pub fn access_map__irikar__midwest__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__irikar__midwest__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar__midwest__save
     ctx.map__irikar__midwest__save()
 }
-pub fn access_map__irikar_breach__gauntlet__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__irikar_breach__gauntlet__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar_breach__gauntlet__save
     ctx.map__irikar_breach__gauntlet__save()
 }
-pub fn access_map__irikar_breach__save_room__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__irikar_breach__save_room__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar_breach__save_room__save
     ctx.map__irikar_breach__save_room__save()
 }
-pub fn access_map__uhrum__annuna_corridor__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__uhrum__annuna_corridor__save(ctx: &Context, world: &World) -> bool {
     // ^map__uhrum__annuna_corridor__save
     ctx.map__uhrum__annuna_corridor__save()
 }
-pub fn access_map__uhrum__save_room__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__uhrum__save_room__save(ctx: &Context, world: &World) -> bool {
     // ^map__uhrum__save_room__save
     ctx.map__uhrum__save_room__save()
 }
-pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &World) -> bool {
     // ^map__uhrum__west_entrance__save
     ctx.map__uhrum__west_entrance__save()
 }
-pub fn access_melee_damage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_melee_damage(ctx: &Context, world: &World) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
 }
-pub fn access_melee_damage_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_melee_damage_2(ctx: &Context, world: &World) -> bool {
     // Melee_Damage_2
     ctx.has(Item::Melee_Damage_2)
 }
-pub fn access_melee_speed(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_melee_speed(ctx: &Context, world: &World) -> bool {
     // Melee_Speed
     ctx.has(Item::Melee_Speed)
 }
-pub fn access_melee_speed_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_melee_speed_2(ctx: &Context, world: &World) -> bool {
     // Melee_Speed_2
     ctx.has(Item::Melee_Speed_2)
 }
-pub fn access_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
-pub fn access_mode_eq_drone_and_apocalypse_seals_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_apocalypse_seals_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Apocalypse_Seals_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Apocalypse_Seals_Wall))
 }
-pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Wasteland_Passage_H))
 }
-pub fn access_mode_eq_drone_and_ebih_waterfall_block_left(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_mode_eq_drone_and_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Left))
 }
-pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
-pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
 }
-pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and $mist2
     (ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
 }
-pub fn access_mode_eq_drone_and_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Nanite_Mist
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
     (((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
         && data::flipside(ctx.position()) != Default::default())
         && (!data::portal_hidden(ctx.position()) || ctx.has(Item::Breach_Sight)))
 }
-pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Sniper_Valley_Rock_2))
 }
-pub fn access_mode_ne_drone(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // ^mode != 'drone'
     ctx.mode() != enums::Mode::Drone
 }
-pub fn access_mode_ne_drone_and_ice_axe(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_mode_ne_drone_and_ice_axe(ctx: &Context, world: &World) -> bool {
     // ^mode != 'drone' and Ice_Axe
     (ctx.mode() != enums::Mode::Drone && ctx.has(Item::Ice_Axe))
 }
-pub fn access_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_nanite_mist(ctx: &Context, world: &World) -> bool {
     // Nanite_Mist
     ctx.has(Item::Nanite_Mist)
 }
-pub fn access_nanite_mist_and_mode_eq_drone(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_nanite_mist_and_mode_eq_drone(ctx: &Context, world: &World) -> bool {
     // Nanite_Mist and ^mode == 'drone'
     (ctx.has(Item::Nanite_Mist) && ctx.mode() == enums::Mode::Drone)
 }
-pub fn access_nano_points(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_nano_points(ctx: &Context, world: &World) -> bool {
     // Nano_Points
     ctx.has(Item::Nano_Points)
 }
-pub fn access_nano_points_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_nano_points_2(ctx: &Context, world: &World) -> bool {
     // Nano_Points_2
     ctx.has(Item::Nano_Points_2)
 }
-pub fn access_not_amashilama(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_amashilama(ctx: &Context, world: &World) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
-pub fn access_not_apocalypse_bomb(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // not Apocalypse_Bomb
     !ctx.has(Item::Apocalypse_Bomb)
 }
-pub fn access_not_ebih_interchange_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_ebih_interchange_block(ctx: &Context, world: &World) -> bool {
     // not Ebih_Interchange_Block
     !ctx.has(Item::Ebih_Interchange_Block)
 }
-pub fn access_not_ebih_waterfall_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_not_ebih_waterfall_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // not Ebih_Waterfall_Wall and $mist2
     (!ctx.has(Item::Ebih_Waterfall_Wall) && helper__mist2!(ctx, world))
 }
-pub fn access_not_ebih_waterfall_wall_and_nanite_mist(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_ebih_waterfall_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // not Ebih_Waterfall_Wall and Nanite_Mist
     (!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist))
 }
-pub fn access_not_hammond_auth(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_hammond_auth(ctx: &Context, world: &World) -> bool {
     // not Hammond_Auth
     !ctx.has(Item::Hammond_Auth)
 }
-pub fn access_not_irikar_royal_storage_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_not_irikar_royal_storage_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // not Irikar_Royal_Storage_Wall and $mist2
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__mist2!(ctx, world))
 }
 pub fn access_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // not Irikar_Royal_Storage_Wall and $shockwave
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx, world))
 }
-pub fn access_not_irikar_royal_storage_wall_and_nanite_mist(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_not_irikar_royal_storage_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // not Irikar_Royal_Storage_Wall and Nanite_Mist
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && ctx.has(Item::Nanite_Mist))
 }
-pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &World) -> bool {
     // NOT Separation or Defeat_Indra
     (!ctx.has(Item::Separation) || ctx.has(Item::Defeat_Indra))
 }
-pub fn access_not_slingshot_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // not Slingshot_Hook
     !ctx.has(Item::Slingshot_Hook)
 }
-pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     (((match get_region(ctx.position()) {
         RegionId::Menu => false,
@@ -2512,14 +2356,26 @@ pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(
     }) && ctx.has(Item::Anuman))
         && ctx.mode() != enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_within_menu_and_flasks_gt_0(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     ((match get_region(ctx.position()) {
         RegionId::Menu => false,
         _ => true,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_invoke_can_deploy(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // NOT WITHIN `Menu` and $attract and ^portal != $default and ^portal != ^position
+    ((((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && helper__attract!(ctx, world))
+        && ctx.portal() != Default::default())
+        && ctx.portal() != ctx.position())
+}
+pub fn access_not_within_menu_and_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
     ((match get_region(ctx.position()) {
         RegionId::Menu => false,
@@ -2528,7 +2384,7 @@ pub fn access_not_within_menu_and_invoke_can_deploy(ctx: &Context, world: &graph
 }
 pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
     ((((match get_region(ctx.position()) {
@@ -2540,7 +2396,7 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
 }
 pub fn access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
     (((match get_region(ctx.position()) {
@@ -2549,347 +2405,314 @@ pub fn access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     }) && data::realm(ctx.position()) != enums::Realm::Breach)
         && helper__can_recall!(ctx, world))
 }
-pub fn access_portal_eq_position(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_portal_eq_position(ctx: &Context, world: &World) -> bool {
     // ^portal == ^position
     ctx.portal() == ctx.position()
 }
-pub fn access_ranged_damage(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ranged_damage(ctx: &Context, world: &World) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
 }
-pub fn access_ranged_damage_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ranged_damage_2(ctx: &Context, world: &World) -> bool {
     // Ranged_Damage_2
     ctx.has(Item::Ranged_Damage_2)
 }
-pub fn access_ranged_speed(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ranged_speed(ctx: &Context, world: &World) -> bool {
     // Ranged_Speed
     ctx.has(Item::Ranged_Speed)
 }
-pub fn access_ranged_speed_2(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_ranged_speed_2(ctx: &Context, world: &World) -> bool {
     // Ranged_Speed_2
     ctx.has(Item::Ranged_Speed_2)
 }
 pub fn access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^realm == 'breach' and Exit_Breach and ^flipside != $default
     ((data::realm(ctx.position()) == enums::Realm::Breach && ctx.has(Item::Exit_Breach))
         && data::flipside(ctx.position()) != Default::default())
 }
-pub fn access_remote_drone(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_remote_drone(ctx: &Context, world: &World) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
-pub fn access_separation(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_separation(ctx: &Context, world: &World) -> bool {
     // Separation
     ctx.has(Item::Separation)
 }
 pub fn access_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Separation and NOT Defeat_Indra and $mist2
     ((ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) && helper__mist2!(ctx, world))
 }
 pub fn access_separation_and_not_defeat_indra_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Separation and NOT Defeat_Indra and Nanite_Mist
     ((ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) && ctx.has(Item::Nanite_Mist))
 }
-pub fn access_siuna_storage_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_siuna_storage_wall(ctx: &Context, world: &World) -> bool {
     // Siuna_Storage_Wall
     ctx.has(Item::Siuna_Storage_Wall)
 }
-pub fn access_sniper_valley_rock_1(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_sniper_valley_rock_1(ctx: &Context, world: &World) -> bool {
     // Sniper_Valley_Rock_1
     ctx.has(Item::Sniper_Valley_Rock_1)
 }
-pub fn access_station_power(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_station_power(ctx: &Context, world: &World) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
 }
-pub fn access_switch_36_11(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_switch_36_11(ctx: &Context, world: &World) -> bool {
     // Switch_36_11
     ctx.has(Item::Switch_36_11)
 }
-pub fn access_switch_40_12(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_switch_40_12(ctx: &Context, world: &World) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
 }
-pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
 }
-pub fn access_uhrum_waterfall_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfall_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfall_Wall
     ctx.has(Item::Uhrum_Waterfall_Wall)
 }
-pub fn access_uhrum_waterfalls_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfalls_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfalls_Block
     ctx.has(Item::Uhrum_Waterfalls_Block)
 }
-pub fn access_uhrum_waterfalls_block_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfalls_block_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfalls_Block and $grab
     (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__grab!(ctx, world))
 }
-pub fn access_uhrum_waterfalls_block_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_waterfalls_block_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfalls_Block and $hook
     (ctx.has(Item::Uhrum_Waterfalls_Block) && helper__hook!(ctx, world))
 }
-pub fn access_uhrum_west_entrance_gate(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_west_entrance_gate(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Gate
     ctx.has(Item::Uhrum_West_Entrance_Gate)
 }
-pub fn access_uhrum_west_entrance_gate_and_invoke_hover(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_uhrum_west_entrance_gate_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
     (ctx.has(Item::Uhrum_West_Entrance_Gate) && helper__hover!(ctx, world))
 }
-pub fn access_uhrum_west_entrance_lower_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_west_entrance_lower_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Lower_Wall
     ctx.has(Item::Uhrum_West_Entrance_Lower_Wall)
 }
-pub fn access_uhrum_west_entrance_upper_wall(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_uhrum_west_entrance_upper_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Upper_Wall
     ctx.has(Item::Uhrum_West_Entrance_Upper_Wall)
 }
-pub fn access_underwater_movement(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement
     ctx.has(Item::Underwater_Movement)
 }
 pub fn access_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Underwater_Movement and ($grab or $climb)
     (ctx.has(Item::Underwater_Movement)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
-pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $grab
     (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
 }
-pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
 }
 pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Underwater_Movement and $hook and $hover
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && helper__hover!(ctx, world))
 }
-pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
     (match get_area(ctx.position()) {
         AreaId::Menu__Upgrade_Menu => true,
         _ => false,
     })
 }
-pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context, world: &World) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
 }
 pub fn action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
 }
-pub fn action_annuna__east_bridge__tower_secret__enter_combo__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_annuna__east_bridge__tower_secret__enter_combo__do(ctx: &mut Context, world: &World) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
 }
 pub fn action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
 }
-pub fn action_annuna__vertical_room__door_switch__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_annuna__vertical_room__door_switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_annuna__vertical_room__ctx__door_opened(true);
 }
-pub fn action_annuna__west_climb__switch_ledge__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_annuna__west_climb__switch_ledge__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_annuna__west_climb__ctx__door_opened(true);
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_left_platform_moved = true
     ctx.set_ebih__base_camp__ctx__left_platform_moved(true);
 }
 pub fn action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_left_platform_moved = false
     ctx.set_ebih__base_camp__ctx__left_platform_moved(false);
 }
-pub fn action_ebih__drone_room__pit_left__activate_lift__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__drone_room__pit_left__activate_lift__do(ctx: &mut Context, world: &World) {
     // ^_platform_moved = false
     ctx.set_ebih__drone_room__ctx__platform_moved(false);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform_moved = false
     ctx.set_ebih__drone_room__ctx__platform_moved(false);
 }
 pub fn action_ebih__drone_room__portal_exit__activate_platform__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform_moved = true
     ctx.set_ebih__drone_room__ctx__platform_moved(true);
 }
-pub fn action_ebih__ebih_east__dispenser__activate_lift__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__ebih_east__dispenser__activate_lift__do(ctx: &mut Context, world: &World) {
     // ^_platform2_moved = false
     ctx.set_ebih__ebih_east__ctx__platform2_moved(false);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform2_moved = true
     ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform2_moved = true
     ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
 }
 pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform1_moved = true
     ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
 }
-pub fn action_ebih__ebih_west__below_door__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_ebih__ebih_west__below_door__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     ctx.set_ebih__ebih_west__ctx__door_open(true);
     if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
         ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
     }
 }
-pub fn action_ebih__ebih_west__left_of_switch__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__ebih_west__left_of_switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     ctx.set_ebih__ebih_west__ctx__door_open(true);
     if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
         ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
     }
 }
-pub fn action_ebih__grid_25_10_12__door_left__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__grid_25_10_12__door_left__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
 }
-pub fn action_ebih__grid_25_10_12__east_11__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_ebih__grid_25_10_12__east_11__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
 }
-pub fn action_ebih__truck_gate__portal_stand__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__truck_gate__portal_stand__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__truck_gate__ctx__door_open(true);
 }
-pub fn action_ebih__truck_gate__switch__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_ebih__truck_gate__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__truck_gate__ctx__door_open(true);
 }
-pub fn action_ebih__vertical_interchange__west_13__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__vertical_interchange__west_13__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__vertical_interchange__ctx__door_open(true);
 }
-pub fn action_ebih__waterfall__below_left_switch__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
-pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context, world: &World) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
-pub fn action_flasks_incr_1(ctx: &mut Context, world: &graph::World) {
+pub fn action_flasks_incr_1(ctx: &mut Context, world: &World) {
     // ^flasks += 1
     ctx.flasks += 1;
 }
-pub fn action_flasks_incr_2(ctx: &mut Context, world: &graph::World) {
+pub fn action_flasks_incr_2(ctx: &mut Context, world: &World) {
     // ^flasks += 2
     ctx.flasks += 2;
 }
-pub fn action_giguna__carnelian__lower_susar__caught__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__carnelian__lower_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_lower_susar = true
     ctx.set_giguna__carnelian__ctx__lower_susar(true);
 }
-pub fn action_giguna__carnelian__lower_susar__hack__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__carnelian__lower_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_lower_susar = true
     ctx.set_giguna__carnelian__ctx__lower_susar(true);
 }
-pub fn action_giguna__carnelian__switch__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__carnelian__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__carnelian__ctx__door_opened(true);
 }
-pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
 }
-pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
 }
 pub fn action_giguna__clouds__platform_start__hack_and_get_off_early__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform = true
     ctx.set_giguna__clouds__ctx__platform(true);
 }
 pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
     ctx.set_giguna__clouds__ctx__platform(true);
@@ -2900,232 +2723,196 @@ pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
 }
 pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     ctx.set_giguna__clouds__ctx__platform(true);
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop);
 }
-pub fn action_giguna__east_caverns__lower_susar__caught__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__east_caverns__lower_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_lower_susar = true
     ctx.set_giguna__east_caverns__ctx__lower_susar(true);
 }
-pub fn action_giguna__east_caverns__lower_susar__hack__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__east_caverns__lower_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_lower_susar = true
     ctx.set_giguna__east_caverns__ctx__lower_susar(true);
 }
-pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_mid_susar = true
     ctx.set_giguna__east_caverns__ctx__mid_susar(true);
 }
-pub fn action_giguna__east_caverns__mid_susar__hack__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__east_caverns__mid_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_mid_susar = true
     ctx.set_giguna__east_caverns__ctx__mid_susar(true);
 }
-pub fn action_giguna__east_caverns__statues_ledge__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__east_caverns__statues_ledge__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__east_caverns__ctx__door_opened(true);
 }
-pub fn action_giguna__east_caverns__switch__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__east_caverns__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__east_caverns__ctx__door_opened(true);
 }
-pub fn action_giguna__east_caverns__upper_susar__caught__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__east_caverns__upper_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_upper_susar = true
     ctx.set_giguna__east_caverns__ctx__upper_susar(true);
 }
 pub fn action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_upper_susar = true
     ctx.set_giguna__east_caverns__ctx__upper_susar(true);
 }
 pub fn action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_upper_susar = true
     ctx.set_giguna__east_caverns__ctx__upper_susar(true);
 }
 pub fn action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_upper_susar = true
     ctx.set_giguna__east_caverns__ctx__upper_susar(true);
 }
-pub fn action_giguna__east_caverns__west_14__enter_combo__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__east_caverns__west_14__enter_combo__do(ctx: &mut Context, world: &World) {
     // ^_combo_entered = true
     ctx.set_giguna__east_caverns__ctx__combo_entered(true);
 }
-pub fn action_giguna__east_caverns__west_16__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__east_caverns__west_16__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__east_caverns__ctx__door_opened(true);
 }
-pub fn action_giguna__gateway__flask_ledge__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__gateway__flask_ledge__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__gateway__ctx__door_opened(true);
 }
-pub fn action_giguna__gateway__one_jump__open_door__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__gateway__one_jump__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__gateway__ctx__door_opened(true);
 }
 pub fn action_giguna__giguna_base__switch_distance_1__open_door__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_door_open = true
     ctx.set_giguna__giguna_base__ctx__door_open(true);
 }
 pub fn action_giguna__giguna_base__switch_distance_2__open_door__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_door_open = true
     ctx.set_giguna__giguna_base__ctx__door_open(true);
 }
 pub fn action_giguna__giguna_base__switch_distance_3__open_door__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_door_open = true
     ctx.set_giguna__giguna_base__ctx__door_open(true);
 }
 pub fn action_giguna__giguna_base__switch_distance_4__open_door__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_door_open = true
     ctx.set_giguna__giguna_base__ctx__door_open(true);
 }
 pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
 }
-pub fn action_giguna__giguna_northeast__switch__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
 }
-pub fn action_giguna__ruins_top__switch__open_doors__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__ruins_top__switch__open_doors__do(ctx: &mut Context, world: &World) {
     // ^_doors_open = true
     ctx.set_giguna__ruins_top__ctx__doors_open(true);
 }
 pub fn action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_kishib_handled = true
     ctx.set_giguna__ruins_west__ctx__kishib_handled(true);
 }
-pub fn action_giguna__ruins_west__lower_ledge__hack_kishib__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx: &mut Context, world: &World) {
     // ^_kishib_handled = true
     ctx.set_giguna__ruins_west__ctx__kishib_handled(true);
 }
-pub fn action_giguna__west_caverns__east_susar__caught__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna__west_caverns__east_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_east_susar = true
     ctx.set_giguna__west_caverns__ctx__east_susar(true);
 }
-pub fn action_giguna__west_caverns__east_susar__hack__do(ctx: &mut Context, world: &graph::World) {
+pub fn action_giguna__west_caverns__east_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_east_susar = true
     ctx.set_giguna__west_caverns__ctx__east_susar(true);
 }
-pub fn action_giguna_breach__sw_save__west_11__open_door__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_giguna_breach__sw_save__west_11__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
 }
 pub fn action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_hammonds_doors = true
     ctx.set_glacier__ctx__hammonds_doors(true);
 }
-pub fn action_glacier__hammonds_end__switch_near__open_doors__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_glacier__hammonds_end__switch_near__open_doors__do(ctx: &mut Context, world: &World) {
     // ^_hammonds_doors = true
     ctx.set_glacier__ctx__hammonds_doors(true);
 }
-pub fn action_glacier__hammonds_end__west_11__open_doors__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_glacier__hammonds_end__west_11__open_doors__do(ctx: &mut Context, world: &World) {
     // ^_hammonds_doors = true
     ctx.set_glacier__ctx__hammonds_doors(true);
 }
 pub fn action_glacier__the_big_drop__solid_rock__careful_break__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_bridge_open = true
     ctx.set_glacier__the_big_drop__ctx__bridge_open(true);
 }
 pub fn action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_lower_gatestones = true
     ctx.set_glacier__vertical_room__ctx__lower_gatestones(true);
 }
 pub fn action_glacier__vertical_room__upper_switch__open_gate__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_upper_gatestone = true
     ctx.set_glacier__vertical_room__ctx__upper_gatestone(true);
 }
-pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &graph::World) {
+pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
-pub fn action_indra_set_invoke_default_invoke_refill_energy(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_indra_set_invoke_default_invoke_refill_energy(ctx: &mut Context, world: &World) {
     // ^indra = $default; $refill_energy
     ctx.set_indra(Default::default());
     helper__refill_energy!(ctx, world);
 }
-pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &graph::World) {
+pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &World) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
 }
 pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
     ctx.collect(Item::Irikar_Royal_Storage_Wall, world);
@@ -3133,86 +2920,82 @@ pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_in
     ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
     ctx.visit(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall);
 }
-pub fn action_invoke_deploy_drone(ctx: &mut Context, world: &graph::World) {
+pub fn action_invoke_deploy_drone(ctx: &mut Context, world: &World) {
     // $deploy_drone
     helper__deploy_drone!(ctx, world);
 }
 pub fn action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Center_Corridor);
 }
 pub fn action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Tower_Base_East);
 }
 pub fn action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Drone_Room__Tree);
 }
 pub fn action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Ebih_West__Alcove_Entrance);
 }
 pub fn action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari);
 }
 pub fn action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Ruins_Top__West_7);
 }
 pub fn action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Wasteland__Middle_Path);
 }
-pub fn action_invoke_post_portal_save_update(ctx: &mut Context, world: &graph::World) {
+pub fn action_invoke_post_portal_save_update(ctx: &mut Context, world: &World) {
     // $post_portal_save_update
     helper__post_portal_save_update!(ctx, world);
 }
-pub fn action_invoke_refill_energy(ctx: &mut Context, world: &graph::World) {
+pub fn action_invoke_refill_energy(ctx: &mut Context, world: &World) {
     // $refill_energy
     helper__refill_energy!(ctx, world);
 }
-pub fn action_invoke_reset_old_area__newpos(
-    ctx: &mut Context,
-    world: &graph::World,
-    newpos: SpotId,
-) {
+pub fn action_invoke_reset_old_area__newpos(ctx: &mut Context, world: &World, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, world, newpos);
 }
-pub fn action_invoke_save(ctx: &mut Context, world: &graph::World) {
+pub fn action_invoke_save(ctx: &mut Context, world: &World) {
     // $save
     helper__save!(ctx, world);
 }
-pub fn action_invoke_save_last(ctx: &mut Context, world: &graph::World, newpos: SpotId) {
+pub fn action_invoke_save_last(ctx: &mut Context, world: &World, newpos: SpotId) {
     // $save_last
     helper__save_last!(ctx, world);
 }
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
     ctx.visit(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
@@ -3220,7 +3003,7 @@ pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break
 }
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
     ctx.visit(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
@@ -3229,7 +3012,7 @@ pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_kno
 }
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
     ctx.visit(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
@@ -3238,7 +3021,7 @@ pub fn action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_kn
 }
 pub fn action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
     ctx.visit(LocationId::Ebih__Waterfall__Alcove__Block_Left);
@@ -3248,105 +3031,103 @@ pub fn action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_vis
 }
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_platform_moved = true
     ctx.set_irikar__basement_portal__ctx__platform_moved(true);
 }
 pub fn action_irikar__midwest__left_platform_start__hack_and_ride__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_left_platform = true
     ctx.set_irikar__midwest__ctx__left_platform(true);
 }
 pub fn action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^_right_platform = true
     ctx.set_irikar__midwest__ctx__right_platform(true);
 }
-pub fn action_last_set_invoke_default(ctx: &mut Context, world: &graph::World) {
+pub fn action_last_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^last = $default
     ctx.set_last(Default::default());
 }
-pub fn action_last_set_position(ctx: &mut Context, world: &graph::World) {
+pub fn action_last_set_position(ctx: &mut Context, world: &World) {
     // ^last = ^position
     ctx.set_last(ctx.position());
 }
-pub fn action_mode_set_drone(ctx: &mut Context, world: &graph::World) {
+pub fn action_mode_set_drone(ctx: &mut Context, world: &World) {
     // ^mode = 'drone'
     ctx.set_mode(enums::Mode::Drone);
 }
-pub fn action_mode_set_drone_indra_set_position(ctx: &mut Context, world: &graph::World) {
+pub fn action_mode_set_drone_indra_set_position(ctx: &mut Context, world: &World) {
     // ^mode = 'drone'; ^indra = ^position
     ctx.set_mode(enums::Mode::Drone);
     ctx.set_indra(ctx.position());
 }
-pub fn action_mode_set_indra(ctx: &mut Context, world: &graph::World) {
+pub fn action_mode_set_indra(ctx: &mut Context, world: &World) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
-pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &graph::World) {
+pub fn action_mode_set_indra_last_set_indra(ctx: &mut Context, world: &World) {
     // ^mode = 'Indra'; ^last = ^indra
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_last(ctx.indra());
 }
-pub fn action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx: &mut Context, world: &graph::World) {
+pub fn action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx: &mut Context, world: &World) {
     // ^portal = `Amagi > East Lake > Arch East`
     ctx.set_portal(SpotId::Amagi__East_Lake__Arch_East);
 }
-pub fn action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx: &mut Context, world: &graph::World) {
+pub fn action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx: &mut Context, world: &World) {
     // ^portal = `Amagi > East Lake > Arch West`
     ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
 }
 pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Second Platform`
     ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Second_Platform);
 }
 pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Top Platform`
     ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Top_Platform);
 }
-pub fn action_portal_set_glacier_gt_hammonds_end_gt_corner(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_portal_set_glacier_gt_hammonds_end_gt_corner(ctx: &mut Context, world: &World) {
     // ^portal = `Glacier > Hammond's End > Corner`
     ctx.set_portal(SpotId::Glacier__Hammonds_End__Corner);
 }
-pub fn action_portal_set_glacier_gt_hammonds_end_gt_hammond(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx: &mut Context, world: &World) {
     // ^portal = `Glacier > Hammond's End > Hammond`
     ctx.set_portal(SpotId::Glacier__Hammonds_End__Hammond);
 }
 pub fn action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
     ctx.set_portal(SpotId::Glacier__Hammonds_End__Lower_Pedestal_West);
 }
-pub fn action_refills_incr_1(ctx: &mut Context, world: &graph::World) {
+pub fn action_portal_set_position(ctx: &mut Context, world: &World) {
+    // ^portal = ^position
+    ctx.set_portal(ctx.position());
+}
+pub fn action_refills_incr_1(ctx: &mut Context, world: &World) {
     // ^refills += 1
     ctx.refills += 1;
 }
-pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &graph::World) {
+pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &World) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
 pub fn explain___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Escape, Apocalypse_Bomb, $objective]
@@ -3377,7 +3158,7 @@ pub fn explain___escape_apocalypse_bomb_invoke_objective(
 }
 pub fn explain___infect_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Infect, Nanite_Mist]
@@ -3403,7 +3184,7 @@ pub fn explain___infect_nanite_mist(
 }
 pub fn explain___invoke_all_urns(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [$all_urns]
@@ -3416,7 +3197,7 @@ pub fn explain___invoke_all_urns(
 }
 pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
@@ -3454,7 +3235,7 @@ pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_al
 }
 pub fn explain___invoke_grab_or_invoke_climb_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ($grab or $climb) and Underwater_Movement
@@ -3494,7 +3275,7 @@ pub fn explain___invoke_grab_or_invoke_climb_and_underwater_movement(
 }
 pub fn explain___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ($grab or $climb or $hook) and Underwater_Movement
@@ -3548,7 +3329,7 @@ pub fn explain___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movem
 }
 pub fn explain___invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [$objective]
@@ -3561,7 +3342,7 @@ pub fn explain___invoke_objective(
 }
 pub fn explain___remote_drone_flask__6(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Remote_Drone, Flask{6}]
@@ -3587,7 +3368,7 @@ pub fn explain___remote_drone_flask__6(
 }
 pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
@@ -3632,7 +3413,7 @@ pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_br
 }
 pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
@@ -3677,7 +3458,7 @@ pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kien
 }
 pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
@@ -3754,7 +3535,7 @@ pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can
 }
 pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and ^realm == 'breach' and ^breach_save != $default
@@ -3804,7 +3585,7 @@ pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default
 }
 pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
@@ -3851,7 +3632,7 @@ pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama
 }
 pub fn explain_allow_warps_and_within_antarctica(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // allow_warps and WITHIN `Antarctica`
@@ -3882,7 +3663,7 @@ pub fn explain_allow_warps_and_within_antarctica(
 }
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo and ($grab or $climb)
@@ -3922,7 +3703,7 @@ pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
 }
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo and $hook
@@ -3948,7 +3729,7 @@ pub fn explain_amagi__main_area__carving__ex__secret_outcropping_2__req(
 }
 pub fn explain_amagi__main_area__carving__key_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_combo
@@ -3963,7 +3744,7 @@ pub fn explain_amagi__main_area__carving__key_combo__req(
 }
 pub fn explain_amagi_dragon_eye_passage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Dragon_Eye_Passage
@@ -3975,7 +3756,7 @@ pub fn explain_amagi_dragon_eye_passage(
 }
 pub fn explain_amagi_stronghold_boulder_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_1
@@ -3987,7 +3768,7 @@ pub fn explain_amagi_stronghold_boulder_1(
 }
 pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
@@ -4040,7 +3821,7 @@ pub fn explain_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_g
 }
 pub fn explain_amagi_stronghold_boulder_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2
@@ -4052,7 +3833,7 @@ pub fn explain_amagi_stronghold_boulder_2(
 }
 pub fn explain_amagi_stronghold_boulder_2_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Boulder_2 and $grab
@@ -4078,7 +3859,7 @@ pub fn explain_amagi_stronghold_boulder_2_and_invoke_grab(
 }
 pub fn explain_amagi_stronghold_wall_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_1
@@ -4090,7 +3871,7 @@ pub fn explain_amagi_stronghold_wall_1(
 }
 pub fn explain_amagi_stronghold_wall_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_Stronghold_Wall_2
@@ -4102,7 +3883,7 @@ pub fn explain_amagi_stronghold_wall_2(
 }
 pub fn explain_amagi_west_lake_surface_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Amagi_West_Lake_Surface_Wall
@@ -4114,7 +3895,7 @@ pub fn explain_amagi_west_lake_surface_wall(
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_combo
@@ -4129,7 +3910,7 @@ pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4141,7 +3922,7 @@ pub fn explain_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4153,7 +3934,7 @@ pub fn explain_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_combo
@@ -4168,7 +3949,7 @@ pub fn explain_annuna__east_bridge__tower_secret__enter_combo__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4180,7 +3961,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4192,7 +3973,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4204,7 +3985,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo and $grab
@@ -4230,7 +4011,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo and $hook
@@ -4256,7 +4037,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
 }
 pub fn explain_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4268,7 +4049,7 @@ pub fn explain_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
 }
 pub fn explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_combo
@@ -4283,7 +4064,7 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(
 }
 pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_combo
@@ -4295,7 +4076,7 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
 }
 pub fn explain_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and ^_door_opened
@@ -4324,7 +4105,7 @@ pub fn explain_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__re
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4339,7 +4120,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4354,7 +4135,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4369,7 +4150,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__re
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4384,7 +4165,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4399,7 +4180,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req
 }
 pub fn explain_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4414,7 +4195,7 @@ pub fn explain_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
 }
 pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4426,7 +4207,7 @@ pub fn explain_annuna__west_climb__cache__ex__switch_ledge_1__req(
 }
 pub fn explain_annuna__west_climb__switch_ledge__ex__cache_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -4438,7 +4219,7 @@ pub fn explain_annuna__west_climb__switch_ledge__ex__cache_1__req(
 }
 pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $unlock4 and not ^_door_opened
@@ -4467,7 +4248,7 @@ pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
 }
 pub fn explain_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Annuna_East_Bridge_Gate
@@ -4479,7 +4260,7 @@ pub fn explain_annuna_east_bridge_gate(
 }
 pub fn explain_annuna_mirror_match_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Annuna_Mirror_Match_Switch
@@ -4491,7 +4272,7 @@ pub fn explain_annuna_mirror_match_switch(
 }
 pub fn explain_annuna_vertical_room_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Annuna_Vertical_Room_Gate
@@ -4503,7 +4284,7 @@ pub fn explain_annuna_vertical_room_gate(
 }
 pub fn explain_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Anuman
@@ -4515,7 +4296,7 @@ pub fn explain_anuman(
 }
 pub fn explain_anuman_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Anuman and $grab
@@ -4541,7 +4322,7 @@ pub fn explain_anuman_and_invoke_grab(
 }
 pub fn explain_anuman_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Anuman and Slingshot_Hook and Drone_Hover
@@ -4579,7 +4360,7 @@ pub fn explain_anuman_and_slingshot_hook_and_drone_hover(
 }
 pub fn explain_apocalypse_bomb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Apocalypse_Bomb
@@ -4591,7 +4372,7 @@ pub fn explain_apocalypse_bomb(
 }
 pub fn explain_apocalypse_bomb_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Apocalypse_Bomb and $hook
@@ -4617,7 +4398,7 @@ pub fn explain_apocalypse_bomb_and_invoke_hook(
 }
 pub fn explain_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Boomerang
@@ -4629,7 +4410,7 @@ pub fn explain_boomerang(
 }
 pub fn explain_breach_attractor(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Breach_Attractor
@@ -4641,7 +4422,7 @@ pub fn explain_breach_attractor(
 }
 pub fn explain_breach_attractor_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Breach_Attractor and Anuman
@@ -4666,7 +4447,7 @@ pub fn explain_breach_attractor_and_anuman(
 }
 pub fn explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
@@ -4714,7 +4495,7 @@ pub fn explain_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_fil
 }
 pub fn explain_defeat_indra(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Defeat_Indra
@@ -4726,7 +4507,7 @@ pub fn explain_defeat_indra(
 }
 pub fn explain_defeat_mus_a_m20(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Defeat_MUS_A_M20
@@ -4738,7 +4519,7 @@ pub fn explain_defeat_mus_a_m20(
 }
 pub fn explain_drone_melee_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage
@@ -4750,7 +4531,7 @@ pub fn explain_drone_melee_damage(
 }
 pub fn explain_drone_melee_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Damage_2
@@ -4762,7 +4543,7 @@ pub fn explain_drone_melee_damage_2(
 }
 pub fn explain_drone_melee_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed
@@ -4774,7 +4555,7 @@ pub fn explain_drone_melee_speed(
 }
 pub fn explain_drone_melee_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Drone_Melee_Speed_2
@@ -4786,7 +4567,7 @@ pub fn explain_drone_melee_speed_2(
 }
 pub fn explain_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $activate and not ^_left_platform_moved
@@ -4818,7 +4599,7 @@ pub fn explain_ebih__base_camp__left_platform__move_left_platform__req(
 }
 pub fn explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $activate and ^_left_platform_moved
@@ -4847,7 +4628,7 @@ pub fn explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(
 }
 pub fn explain_ebih__base_camp__top_platform__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and not ^_left_platform_moved
@@ -4879,7 +4660,7 @@ pub fn explain_ebih__base_camp__top_platform__ex__left_platform_1__req(
 }
 pub fn explain_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_left_platform_moved
@@ -4894,7 +4675,7 @@ pub fn explain_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
 }
 pub fn explain_ebih__base_camp__west_11__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $platform and $hook and not ^_left_platform_moved
@@ -4940,7 +4721,7 @@ pub fn explain_ebih__base_camp__west_11__ex__left_platform_1__req(
 }
 pub fn explain_ebih__base_camp__west_11__ex__left_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and not ^_left_platform_moved
@@ -4972,7 +4753,7 @@ pub fn explain_ebih__base_camp__west_11__ex__left_platform_2__req(
 }
 pub fn explain_ebih__drone_room__pit_left__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
@@ -4997,7 +4778,7 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift__req(
 }
 pub fn explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform_moved
@@ -5022,7 +4803,7 @@ pub fn explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
 }
 pub fn explain_ebih__drone_room__portal_exit__activate_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
@@ -5050,7 +4831,7 @@ pub fn explain_ebih__drone_room__portal_exit__activate_platform__req(
 }
 pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform_moved
@@ -5078,7 +4859,7 @@ pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
 }
 pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and not ^_platform_moved
@@ -5107,7 +4888,7 @@ pub fn explain_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
 }
 pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and ^_platform2_moved and ($grab or $hook)
@@ -5160,7 +4941,7 @@ pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
 }
 pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and not ^_platform2_moved
@@ -5189,7 +4970,7 @@ pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
 }
 pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and not ^_platform2_moved
@@ -5218,7 +4999,7 @@ pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
 }
 pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and $grab and not ^_platform2_moved
@@ -5260,7 +5041,7 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
 }
 pub fn explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and not ^_platform2_moved
@@ -5288,7 +5069,7 @@ pub fn explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(
 }
 pub fn explain_ebih__ebih_east__moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and $grab and not ^_platform1_moved
@@ -5330,7 +5111,7 @@ pub fn explain_ebih__ebih_east__moving_platform__activate_ride__req(
 }
 pub fn explain_ebih__ebih_west__above_door__ex__below_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5342,7 +5123,7 @@ pub fn explain_ebih__ebih_west__above_door__ex__below_door_1__req(
 }
 pub fn explain_ebih__ebih_west__above_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_open or $grab
@@ -5371,7 +5152,7 @@ pub fn explain_ebih__ebih_west__above_door__ex__refill_station_1__req(
 }
 pub fn explain_ebih__ebih_west__above_door__ex__small_gap_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_open
@@ -5386,7 +5167,7 @@ pub fn explain_ebih__ebih_west__above_door__ex__small_gap_1__req(
 }
 pub fn explain_ebih__ebih_west__below_door__ex__above_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and ^_door_open
@@ -5412,7 +5193,7 @@ pub fn explain_ebih__ebih_west__below_door__ex__above_door_1__req(
 }
 pub fn explain_ebih__ebih_west__below_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and ^_door_open
@@ -5438,7 +5219,7 @@ pub fn explain_ebih__ebih_west__below_door__ex__refill_station_1__req(
 }
 pub fn explain_ebih__grid_25_10_12__door__ex__door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5450,7 +5231,7 @@ pub fn explain_ebih__grid_25_10_12__door__ex__door_left_1__req(
 }
 pub fn explain_ebih__grid_25_10_12__door__ex__east_11_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5462,7 +5243,7 @@ pub fn explain_ebih__grid_25_10_12__door__ex__east_11_1__req(
 }
 pub fn explain_ebih__grid_25_10_12__door_left__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5474,7 +5255,7 @@ pub fn explain_ebih__grid_25_10_12__door_left__ex__door_1__req(
 }
 pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5486,7 +5267,7 @@ pub fn explain_ebih__grid_25_10_12__east_11__ex__door_1__req(
 }
 pub fn explain_ebih__truck_gate__door__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5498,7 +5279,7 @@ pub fn explain_ebih__truck_gate__door__ex__portal_stand_1__req(
 }
 pub fn explain_ebih__truck_gate__door__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5510,7 +5291,7 @@ pub fn explain_ebih__truck_gate__door__ex__switch_1__req(
 }
 pub fn explain_ebih__truck_gate__portal_stand__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5522,7 +5303,7 @@ pub fn explain_ebih__truck_gate__portal_stand__ex__door_1__req(
 }
 pub fn explain_ebih__truck_gate__portal_stand__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5534,7 +5315,7 @@ pub fn explain_ebih__truck_gate__portal_stand__ex__switch_1__req(
 }
 pub fn explain_ebih__truck_gate__portal_stand__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_open and $open and $range1
@@ -5577,7 +5358,7 @@ pub fn explain_ebih__truck_gate__portal_stand__open_door__req(
 }
 pub fn explain_ebih__truck_gate__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5589,7 +5370,7 @@ pub fn explain_ebih__truck_gate__switch__ex__door_1__req(
 }
 pub fn explain_ebih__truck_gate__switch__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5601,7 +5382,7 @@ pub fn explain_ebih__truck_gate__switch__ex__portal_stand_1__req(
 }
 pub fn explain_ebih__truck_gate__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_open and $open
@@ -5630,7 +5411,7 @@ pub fn explain_ebih__truck_gate__switch__open_door__req(
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5645,7 +5426,7 @@ pub fn explain_ebih__vertical_interchange__door__ex__door_east_1__req(
 }
 pub fn explain_ebih__vertical_interchange__door__ex__door_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5660,7 +5441,7 @@ pub fn explain_ebih__vertical_interchange__door__ex__door_west_1__req(
 }
 pub fn explain_ebih__vertical_interchange__door_east__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5675,7 +5456,7 @@ pub fn explain_ebih__vertical_interchange__door_east__ex__door_1__req(
 }
 pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -5690,7 +5471,7 @@ pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
 }
 pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $open and not ^_door_open
@@ -5722,7 +5503,7 @@ pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
 }
 pub fn explain_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
@@ -5734,7 +5515,7 @@ pub fn explain_ebih__waterfall__west_door__ex__west_door_left_1__req(
 }
 pub fn explain_ebih__waterfall__west_door__ex__west_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
@@ -5746,7 +5527,7 @@ pub fn explain_ebih__waterfall__west_door__ex__west_door_right_1__req(
 }
 pub fn explain_ebih__waterfall__west_door_left__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
@@ -5758,7 +5539,7 @@ pub fn explain_ebih__waterfall__west_door_left__ex__west_door_1__req(
 }
 pub fn explain_ebih__waterfall__west_door_right__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_west_door_open
@@ -5770,7 +5551,7 @@ pub fn explain_ebih__waterfall__west_door_right__ex__west_door_1__req(
 }
 pub fn explain_ebih_alu(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Alu
@@ -5782,7 +5563,7 @@ pub fn explain_ebih_alu(
 }
 pub fn explain_ebih_interchange_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Block
@@ -5794,7 +5575,7 @@ pub fn explain_ebih_interchange_block(
 }
 pub fn explain_ebih_interchange_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate
@@ -5806,7 +5587,7 @@ pub fn explain_ebih_interchange_gate(
 }
 pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
@@ -5845,7 +5626,7 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
 }
 pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
@@ -5884,7 +5665,7 @@ pub fn explain_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
 }
 pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
@@ -5923,7 +5704,7 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_g
 }
 pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
@@ -5962,7 +5743,7 @@ pub fn explain_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_h
 }
 pub fn explain_ebih_walled_off_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Walled_Off_Wall
@@ -5974,7 +5755,7 @@ pub fn explain_ebih_walled_off_wall(
 }
 pub fn explain_ebih_wasteland_door(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Wasteland_Door
@@ -5986,7 +5767,7 @@ pub fn explain_ebih_wasteland_door(
 }
 pub fn explain_ebih_waterfall_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_Waterfall_Wall
@@ -5998,7 +5779,7 @@ pub fn explain_ebih_waterfall_wall(
 }
 pub fn explain_ebih_west_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ebih_West_Block
@@ -6010,7 +5791,7 @@ pub fn explain_ebih_west_block(
 }
 pub fn explain_fast_travel(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Fast_Travel
@@ -6022,7 +5803,7 @@ pub fn explain_fast_travel(
 }
 pub fn explain_fast_travel_and_invoke_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Fast_Travel and $boomerang
@@ -6048,7 +5829,7 @@ pub fn explain_fast_travel_and_invoke_boomerang(
 }
 pub fn explain_fast_travel_and_invoke_boomerang2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Fast_Travel and $boomerang2
@@ -6074,7 +5855,7 @@ pub fn explain_fast_travel_and_invoke_boomerang2(
 }
 pub fn explain_fast_travel_and_invoke_melee_cskip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Fast_Travel and $melee_cskip
@@ -6100,7 +5881,7 @@ pub fn explain_fast_travel_and_invoke_melee_cskip(
 }
 pub fn explain_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -6112,7 +5893,7 @@ pub fn explain_giguna__carnelian__door__ex__switch_1__req(
 }
 pub fn explain_giguna__carnelian__door__ex__vault_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -6124,7 +5905,7 @@ pub fn explain_giguna__carnelian__door__ex__vault_1__req(
 }
 pub fn explain_giguna__carnelian__lower_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar
@@ -6139,7 +5920,7 @@ pub fn explain_giguna__carnelian__lower_susar__caught__req(
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
@@ -6151,7 +5932,7 @@ pub fn explain_giguna__carnelian__lower_susar__ex__rock_1__req(
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar and $grab
@@ -6177,7 +5958,7 @@ pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
 }
 pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar and $hook
@@ -6203,7 +5984,7 @@ pub fn explain_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
 }
 pub fn explain_giguna__carnelian__lower_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar and $allegiance1
@@ -6232,7 +6013,7 @@ pub fn explain_giguna__carnelian__lower_susar__hack__req(
 }
 pub fn explain_giguna__carnelian__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -6244,7 +6025,7 @@ pub fn explain_giguna__carnelian__switch__ex__door_1__req(
 }
 pub fn explain_giguna__carnelian__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $unlock3 and not ^_door_opened
@@ -6273,7 +6054,7 @@ pub fn explain_giguna__carnelian__switch__open_door__req(
 }
 pub fn explain_giguna__carnelian__upper_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
@@ -6288,7 +6069,7 @@ pub fn explain_giguna__carnelian__upper_susar__caught__req(
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -6300,7 +6081,7 @@ pub fn explain_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -6312,7 +6093,7 @@ pub fn explain_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
 }
 pub fn explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -6324,7 +6105,7 @@ pub fn explain_giguna__carnelian__upper_susar__ex__upper_path_1__req(
 }
 pub fn explain_giguna__carnelian__upper_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
@@ -6353,7 +6134,7 @@ pub fn explain_giguna__carnelian__upper_susar__hack__req(
 }
 pub fn explain_giguna__carnelian__vault__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -6365,7 +6146,7 @@ pub fn explain_giguna__carnelian__vault__ex__door_1__req(
 }
 pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_platform and $activate
@@ -6394,7 +6175,7 @@ pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
 }
 pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
@@ -6463,7 +6244,7 @@ pub fn explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
 }
 pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
@@ -6533,7 +6314,7 @@ pub fn explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
 }
 pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -6581,7 +6362,7 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
 }
 pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
@@ -6630,7 +6411,7 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
 }
 pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
@@ -6665,7 +6446,7 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req
 }
 pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and ^_combo_entered
@@ -6694,7 +6475,7 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req
 }
 pub fn explain_giguna__east_caverns__lower_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar
@@ -6712,7 +6493,7 @@ pub fn explain_giguna__east_caverns__lower_susar__caught__req(
 }
 pub fn explain_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
@@ -6727,7 +6508,7 @@ pub fn explain_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
 }
 pub fn explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_susar
@@ -6742,7 +6523,7 @@ pub fn explain_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
 }
 pub fn explain_giguna__east_caverns__lower_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_lower_susar and $allegiance1
@@ -6774,7 +6555,7 @@ pub fn explain_giguna__east_caverns__lower_susar__hack__req(
 }
 pub fn explain_giguna__east_caverns__mid_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_mid_susar
@@ -6789,7 +6570,7 @@ pub fn explain_giguna__east_caverns__mid_susar__caught__req(
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and ^_mid_susar
@@ -6815,7 +6596,7 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and ^_mid_susar
@@ -6841,7 +6622,7 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
 }
 pub fn explain_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_mid_susar
@@ -6853,7 +6634,7 @@ pub fn explain_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
 }
 pub fn explain_giguna__east_caverns__mid_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_mid_susar and $allegiance1
@@ -6882,7 +6663,7 @@ pub fn explain_giguna__east_caverns__mid_susar__hack__req(
 }
 pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^_combo_entered
@@ -6917,7 +6698,7 @@ pub fn explain_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req
 }
 pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $hook and ^_combo_entered
@@ -6960,7 +6741,7 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__r
 }
 pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -7008,7 +6789,7 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__r
 }
 pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
@@ -7057,7 +6838,7 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__r
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $hook and ^_combo_entered
@@ -7100,7 +6881,7 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__r
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -7148,7 +6929,7 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__r
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
@@ -7196,7 +6977,7 @@ pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_3__r
 }
 pub fn explain_giguna__east_caverns__statues_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $unlock2 and $range1
@@ -7242,7 +7023,7 @@ pub fn explain_giguna__east_caverns__statues_ledge__open_door__req(
 }
 pub fn explain_giguna__east_caverns__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7257,7 +7038,7 @@ pub fn explain_giguna__east_caverns__switch__ex__door_1__req(
 }
 pub fn explain_giguna__east_caverns__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $unlock2
@@ -7289,7 +7070,7 @@ pub fn explain_giguna__east_caverns__switch__open_door__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
@@ -7307,7 +7088,7 @@ pub fn explain_giguna__east_caverns__upper_susar__caught__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7322,7 +7103,7 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7337,7 +7118,7 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7352,7 +7133,7 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7367,7 +7148,7 @@ pub fn explain_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__r
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar
@@ -7385,7 +7166,7 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7400,7 +7181,7 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledg
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7415,7 +7196,7 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_led
 }
 pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
@@ -7447,7 +7228,7 @@ pub fn explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
 }
 pub fn explain_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_susar
@@ -7462,7 +7243,7 @@ pub fn explain_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1_
 }
 pub fn explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_upper_susar and $allegiance1
@@ -7494,7 +7275,7 @@ pub fn explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(
 }
 pub fn explain_giguna__east_caverns__west_14__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_combo_entered
@@ -7512,7 +7293,7 @@ pub fn explain_giguna__east_caverns__west_14__enter_combo__req(
 }
 pub fn explain_giguna__east_caverns__west_16__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7527,7 +7308,7 @@ pub fn explain_giguna__east_caverns__west_16__ex__door_1__req(
 }
 pub fn explain_giguna__east_caverns__west_16__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_opened and $open and $range2
@@ -7573,7 +7354,7 @@ pub fn explain_giguna__east_caverns__west_16__open_door__req(
 }
 pub fn explain_giguna__gateway__door__ex__block_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7585,7 +7366,7 @@ pub fn explain_giguna__gateway__door__ex__block_left_1__req(
 }
 pub fn explain_giguna__gateway__door__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7597,7 +7378,7 @@ pub fn explain_giguna__gateway__door__ex__left_platform_1__req(
 }
 pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7609,7 +7390,7 @@ pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
 }
 pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7621,7 +7402,7 @@ pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__kari_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open and $grab and $climb
@@ -7661,7 +7442,7 @@ pub fn explain_giguna__giguna_base__below_gate__ex__kari_1__req(
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__kari_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open and $hook
@@ -7687,7 +7468,7 @@ pub fn explain_giguna__giguna_base__below_gate__ex__kari_2__req(
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open and $grab and $climb
@@ -7727,7 +7508,7 @@ pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
 }
 pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open and $hook
@@ -7753,7 +7534,7 @@ pub fn explain_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
 }
 pub fn explain_giguna__giguna_base__kari__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -7765,7 +7546,7 @@ pub fn explain_giguna__giguna_base__kari__ex__below_gate_1__req(
 }
 pub fn explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_open
@@ -7777,7 +7558,7 @@ pub fn explain_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
 }
 pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7792,7 +7573,7 @@ pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
 }
 pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $unlock3 and Infection_Range_3 and not ^_door_opened
@@ -7837,7 +7618,7 @@ pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
 }
 pub fn explain_giguna__giguna_northeast__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened and ($grab or $hook)
@@ -7880,7 +7661,7 @@ pub fn explain_giguna__giguna_northeast__switch__ex__door_1__req(
 }
 pub fn explain_giguna__giguna_northeast__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $unlock3 and not ^_door_opened
@@ -7912,7 +7693,7 @@ pub fn explain_giguna__giguna_northeast__switch__open_door__req(
 }
 pub fn explain_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -7927,7 +7708,7 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_1__req(
 }
 pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened and $hook
@@ -7956,7 +7737,7 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
 }
 pub fn explain_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -7968,7 +7749,7 @@ pub fn explain_giguna__ruins_top__east_7__ex__east_door_1__req(
 }
 pub fn explain_giguna__ruins_top__east_door__ex__east_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -7980,7 +7761,7 @@ pub fn explain_giguna__ruins_top__east_door__ex__east_7_1__req(
 }
 pub fn explain_giguna__ruins_top__east_door__ex__portal_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -7992,7 +7773,7 @@ pub fn explain_giguna__ruins_top__east_door__ex__portal_1__req(
 }
 pub fn explain_giguna__ruins_top__entryway__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -8004,7 +7785,7 @@ pub fn explain_giguna__ruins_top__entryway__ex__west_door_1__req(
 }
 pub fn explain_giguna__ruins_top__portal__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -8016,7 +7797,7 @@ pub fn explain_giguna__ruins_top__portal__ex__east_door_1__req(
 }
 pub fn explain_giguna__ruins_top__west_7__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -8028,7 +7809,7 @@ pub fn explain_giguna__ruins_top__west_7__ex__west_door_1__req(
 }
 pub fn explain_giguna__ruins_top__west_door__ex__entryway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -8040,7 +7821,7 @@ pub fn explain_giguna__ruins_top__west_door__ex__entryway_1__req(
 }
 pub fn explain_giguna__ruins_top__west_door__ex__west_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_doors_open
@@ -8052,7 +7833,7 @@ pub fn explain_giguna__ruins_top__west_door__ex__west_7_1__req(
 }
 pub fn explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_kishib_handled and $shockwave
@@ -8084,7 +7865,7 @@ pub fn explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(
 }
 pub fn explain_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and ^_kishib_handled
@@ -8113,7 +7894,7 @@ pub fn explain_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
 }
 pub fn explain_giguna__ruins_west__lower_ledge__hack_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_kishib_handled and $allegiance1
@@ -8145,7 +7926,7 @@ pub fn explain_giguna__ruins_west__lower_ledge__hack_kishib__req(
 }
 pub fn explain_giguna__west_caverns__east_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_east_susar
@@ -8160,7 +7941,7 @@ pub fn explain_giguna__west_caverns__east_susar__caught__req(
 }
 pub fn explain_giguna__west_caverns__east_susar__ex__east_12_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_east_susar
@@ -8172,7 +7953,7 @@ pub fn explain_giguna__west_caverns__east_susar__ex__east_12_1__req(
 }
 pub fn explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_east_susar
@@ -8184,7 +7965,7 @@ pub fn explain_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
 }
 pub fn explain_giguna__west_caverns__east_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_east_susar and $allegiance1
@@ -8213,7 +7994,7 @@ pub fn explain_giguna__west_caverns__east_susar__hack__req(
 }
 pub fn explain_giguna_boulder(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Boulder
@@ -8225,7 +8006,7 @@ pub fn explain_giguna_boulder(
 }
 pub fn explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -8240,7 +8021,7 @@ pub fn explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(
 }
 pub fn explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_door_opened
@@ -8255,7 +8036,7 @@ pub fn explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(
 }
 pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_door_opened
@@ -8273,7 +8054,7 @@ pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
 }
 pub fn explain_giguna_dual_path_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch
@@ -8285,7 +8066,7 @@ pub fn explain_giguna_dual_path_switch(
 }
 pub fn explain_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
@@ -8325,7 +8106,7 @@ pub fn explain_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
 }
 pub fn explain_giguna_dual_path_switch_and_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $climb
@@ -8351,7 +8132,7 @@ pub fn explain_giguna_dual_path_switch_and_invoke_climb(
 }
 pub fn explain_giguna_dual_path_switch_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Dual_Path_Switch and $hook
@@ -8377,7 +8158,7 @@ pub fn explain_giguna_dual_path_switch_and_invoke_hook(
 }
 pub fn explain_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Block
@@ -8389,7 +8170,7 @@ pub fn explain_giguna_gateway_block(
 }
 pub fn explain_giguna_gateway_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gateway_Gate
@@ -8401,7 +8182,7 @@ pub fn explain_giguna_gateway_gate(
 }
 pub fn explain_giguna_gubi(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Gubi
@@ -8413,7 +8194,7 @@ pub fn explain_giguna_gubi(
 }
 pub fn explain_giguna_northeast_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Giguna_Northeast_Gate
@@ -8425,7 +8206,7 @@ pub fn explain_giguna_northeast_gate(
 }
 pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8437,7 +8218,7 @@ pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_left
 }
 pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8449,7 +8230,7 @@ pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_righ
 }
 pub fn explain_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8461,7 +8242,7 @@ pub fn explain_glacier__hammonds_end__center_door_left__ex__between_center_doors
 }
 pub fn explain_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8473,7 +8254,7 @@ pub fn explain_glacier__hammonds_end__center_door_right__ex__between_center_door
 }
 pub fn explain_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8485,7 +8266,7 @@ pub fn explain_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_do
 }
 pub fn explain_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8497,7 +8278,7 @@ pub fn explain_glacier__hammonds_end__upper_portal_stand__ex__between_center_doo
 }
 pub fn explain_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_hammonds_doors
@@ -8509,7 +8290,7 @@ pub fn explain_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_do
 }
 pub fn explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover and ^_upper_gatestone
@@ -8552,7 +8333,7 @@ pub fn explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
 }
 pub fn explain_glacier__vertical_room__lower_gatestone__ex__south_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_gatestones
@@ -8567,7 +8348,7 @@ pub fn explain_glacier__vertical_room__lower_gatestone__ex__south_1__req(
 }
 pub fn explain_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $hook and ^_lower_gatestones
@@ -8609,7 +8390,7 @@ pub fn explain_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req
 }
 pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_gatestones
@@ -8624,7 +8405,7 @@ pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__
 }
 pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_lower_gatestones
@@ -8639,7 +8420,7 @@ pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req
 }
 pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and ^_lower_gatestones
@@ -8667,7 +8448,7 @@ pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
 }
 pub fn explain_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_gatestone
@@ -8682,7 +8463,7 @@ pub fn explain_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
 }
 pub fn explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_gatestone
@@ -8697,7 +8478,7 @@ pub fn explain_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1
 }
 pub fn explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_upper_gatestone
@@ -8712,7 +8493,7 @@ pub fn explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
 }
 pub fn explain_glacier_big_drop_rock(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Glacier_Big_Drop_Rock
@@ -8724,7 +8505,7 @@ pub fn explain_glacier_big_drop_rock(
 }
 pub fn explain_glacier_sea_burial_rock(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Glacier_Sea_Burial_Rock
@@ -8736,7 +8517,7 @@ pub fn explain_glacier_sea_burial_rock(
 }
 pub fn explain_hammond_auth(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Hammond_Auth
@@ -8748,7 +8529,7 @@ pub fn explain_hammond_auth(
 }
 pub fn explain_health_upgrade(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade
@@ -8760,7 +8541,7 @@ pub fn explain_health_upgrade(
 }
 pub fn explain_health_upgrade_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_2
@@ -8772,7 +8553,7 @@ pub fn explain_health_upgrade_2(
 }
 pub fn explain_health_upgrade_3(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_3
@@ -8784,7 +8565,7 @@ pub fn explain_health_upgrade_3(
 }
 pub fn explain_health_upgrade_4(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Health_Upgrade_4
@@ -8796,7 +8577,7 @@ pub fn explain_health_upgrade_4(
 }
 pub fn explain_infect(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect
@@ -8808,7 +8589,7 @@ pub fn explain_infect(
 }
 pub fn explain_infect_and_anuman_and_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and Anuman and $objective
@@ -8847,7 +8628,7 @@ pub fn explain_infect_and_anuman_and_invoke_objective(
 }
 pub fn explain_infect_and_not_anuman_and_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect and not Anuman and $objective
@@ -8886,7 +8667,7 @@ pub fn explain_infect_and_not_anuman_and_invoke_objective(
 }
 pub fn explain_infect_l1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect_L1
@@ -8898,7 +8679,7 @@ pub fn explain_infect_l1(
 }
 pub fn explain_infect_l2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infect_L2
@@ -8910,7 +8691,7 @@ pub fn explain_infect_l2(
 }
 pub fn explain_infection_range(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Range
@@ -8922,7 +8703,7 @@ pub fn explain_infection_range(
 }
 pub fn explain_infection_range_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Range_2
@@ -8934,7 +8715,7 @@ pub fn explain_infection_range_2(
 }
 pub fn explain_infection_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Infection_Speed
@@ -8946,7 +8727,7 @@ pub fn explain_infection_speed(
 }
 pub fn explain_invoke_activate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $activate
@@ -8959,7 +8740,7 @@ pub fn explain_invoke_activate(
 }
 pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $block_clip and not Ebih_Waterfall_Block_Left
@@ -8985,7 +8766,7 @@ pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_left(
 }
 pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $block_clip and not Ebih_Waterfall_Block_Right
@@ -9011,7 +8792,7 @@ pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_right(
 }
 pub fn explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
@@ -9037,7 +8818,7 @@ pub fn explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
 }
 pub fn explain_invoke_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $boomerang
@@ -9050,7 +8831,7 @@ pub fn explain_invoke_boomerang(
 }
 pub fn explain_invoke_boomerang2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $boomerang2
@@ -9063,7 +8844,7 @@ pub fn explain_invoke_boomerang2(
 }
 pub fn explain_invoke_bs(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $bs
@@ -9076,7 +8857,7 @@ pub fn explain_invoke_bs(
 }
 pub fn explain_invoke_can_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_damage
@@ -9089,7 +8870,7 @@ pub fn explain_invoke_can_damage(
 }
 pub fn explain_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_deploy
@@ -9102,7 +8883,7 @@ pub fn explain_invoke_can_deploy(
 }
 pub fn explain_invoke_can_deploy_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_deploy and Drone_Hover
@@ -9128,7 +8909,7 @@ pub fn explain_invoke_can_deploy_and_drone_hover(
 }
 pub fn explain_invoke_can_deploy_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_deploy and $hover
@@ -9155,7 +8936,7 @@ pub fn explain_invoke_can_deploy_and_invoke_hover(
 }
 pub fn explain_invoke_can_deploy_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_deploy and Slingshot_Hook
@@ -9181,7 +8962,7 @@ pub fn explain_invoke_can_deploy_and_slingshot_hook(
 }
 pub fn explain_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_deploy and Slingshot_Hook and Drone_Hover
@@ -9220,7 +9001,7 @@ pub fn explain_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
 }
 pub fn explain_invoke_charge(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $charge
@@ -9233,7 +9014,7 @@ pub fn explain_invoke_charge(
 }
 pub fn explain_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb
@@ -9246,7 +9027,7 @@ pub fn explain_invoke_climb(
 }
 pub fn explain_invoke_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb and Annuna_East_Bridge_Gate
@@ -9272,7 +9053,7 @@ pub fn explain_invoke_climb_and_annuna_east_bridge_gate(
 }
 pub fn explain_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
@@ -9325,7 +9106,7 @@ pub fn explain_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_
 }
 pub fn explain_invoke_climb_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb and $grab
@@ -9352,7 +9133,7 @@ pub fn explain_invoke_climb_and_invoke_grab(
 }
 pub fn explain_invoke_climb_and_invoke_grab_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb and $grab and Anuman
@@ -9392,7 +9173,7 @@ pub fn explain_invoke_climb_and_invoke_grab_and_anuman(
 }
 pub fn explain_invoke_climb_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb and Underwater_Movement
@@ -9418,7 +9199,7 @@ pub fn explain_invoke_climb_and_underwater_movement(
 }
 pub fn explain_invoke_climb_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $climb or $hook
@@ -9445,7 +9226,7 @@ pub fn explain_invoke_climb_or_invoke_hook(
 }
 pub fn explain_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab
@@ -9458,7 +9239,7 @@ pub fn explain_invoke_grab(
 }
 pub fn explain_invoke_grab_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and Annuna_East_Bridge_Gate
@@ -9484,7 +9265,7 @@ pub fn explain_invoke_grab_and_annuna_east_bridge_gate(
 }
 pub fn explain_invoke_grab_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and Anuman
@@ -9510,7 +9291,7 @@ pub fn explain_invoke_grab_and_anuman(
 }
 pub fn explain_invoke_grab_and_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and Giguna_Gateway_Block
@@ -9536,7 +9317,7 @@ pub fn explain_invoke_grab_and_giguna_gateway_block(
 }
 pub fn explain_invoke_grab_and_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and $can_deploy
@@ -9563,7 +9344,7 @@ pub fn explain_invoke_grab_and_invoke_can_deploy(
 }
 pub fn explain_invoke_grab_and_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and $climb
@@ -9590,7 +9371,7 @@ pub fn explain_invoke_grab_and_invoke_climb(
 }
 pub fn explain_invoke_grab_and_switch_40_12(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and Switch_40_12
@@ -9616,7 +9397,7 @@ pub fn explain_invoke_grab_and_switch_40_12(
 }
 pub fn explain_invoke_grab_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab and Underwater_Movement
@@ -9642,7 +9423,7 @@ pub fn explain_invoke_grab_and_underwater_movement(
 }
 pub fn explain_invoke_grab_or_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab or Anuman
@@ -9668,7 +9449,7 @@ pub fn explain_invoke_grab_or_anuman(
 }
 pub fn explain_invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab or $climb
@@ -9695,7 +9476,7 @@ pub fn explain_invoke_grab_or_invoke_climb(
 }
 pub fn explain_invoke_grab_or_invoke_climb_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab or $climb or $hook
@@ -9736,7 +9517,7 @@ pub fn explain_invoke_grab_or_invoke_climb_or_invoke_hook(
 }
 pub fn explain_invoke_grab_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab or $hook
@@ -9763,7 +9544,7 @@ pub fn explain_invoke_grab_or_invoke_hook(
 }
 pub fn explain_invoke_grab_or_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $grab or Underwater_Movement
@@ -9789,7 +9570,7 @@ pub fn explain_invoke_grab_or_underwater_movement(
 }
 pub fn explain_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook
@@ -9802,7 +9583,7 @@ pub fn explain_invoke_hook(
 }
 pub fn explain_invoke_hook_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and Annuna_East_Bridge_Gate
@@ -9828,7 +9609,7 @@ pub fn explain_invoke_hook_and_annuna_east_bridge_gate(
 }
 pub fn explain_invoke_hook_and_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and Giguna_Gateway_Block
@@ -9854,7 +9635,7 @@ pub fn explain_invoke_hook_and_giguna_gateway_block(
 }
 pub fn explain_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover
@@ -9881,7 +9662,7 @@ pub fn explain_invoke_hook_and_invoke_hover(
 }
 pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_charge(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover and Slingshot_Charge
@@ -9921,7 +9702,7 @@ pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_charge(
 }
 pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_weapon(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover and Slingshot_Weapon
@@ -9961,7 +9742,7 @@ pub fn explain_invoke_hook_and_invoke_hover_and_slingshot_weapon(
 }
 pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover and Underwater_Movement
@@ -10001,7 +9782,7 @@ pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement(
 }
 pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
@@ -10089,7 +9870,7 @@ pub fn explain_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_a
 }
 pub fn explain_invoke_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and not Ebih_Waterfall_Block_Left
@@ -10115,7 +9896,7 @@ pub fn explain_invoke_hook_and_not_ebih_waterfall_block_left(
 }
 pub fn explain_invoke_hook_and_not_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and not Ebih_Waterfall_Block_Right
@@ -10141,7 +9922,7 @@ pub fn explain_invoke_hook_and_not_ebih_waterfall_block_right(
 }
 pub fn explain_invoke_hook_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook and Underwater_Movement
@@ -10167,7 +9948,7 @@ pub fn explain_invoke_hook_and_underwater_movement(
 }
 pub fn explain_invoke_hook_or_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hook or $hover
@@ -10194,7 +9975,7 @@ pub fn explain_invoke_hook_or_invoke_hover(
 }
 pub fn explain_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover
@@ -10207,7 +9988,7 @@ pub fn explain_invoke_hover(
 }
 pub fn explain_invoke_hover_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and Anuman
@@ -10233,7 +10014,7 @@ pub fn explain_invoke_hover_and_anuman(
 }
 pub fn explain_invoke_hover_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $hook
@@ -10260,7 +10041,7 @@ pub fn explain_invoke_hover_and_invoke_hook(
 }
 pub fn explain_invoke_hover_and_invoke_hook_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $hook and $mist2
@@ -10301,7 +10082,7 @@ pub fn explain_invoke_hover_and_invoke_hook_and_invoke_mist2(
 }
 pub fn explain_invoke_hover_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $mist2
@@ -10328,7 +10109,7 @@ pub fn explain_invoke_hover_and_invoke_mist2(
 }
 pub fn explain_invoke_hover_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and Nanite_Mist
@@ -10354,7 +10135,7 @@ pub fn explain_invoke_hover_and_nanite_mist(
 }
 pub fn explain_invoke_hover_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and Underwater_Movement
@@ -10380,7 +10161,7 @@ pub fn explain_invoke_hover_and_underwater_movement(
 }
 pub fn explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
@@ -10454,7 +10235,7 @@ pub fn explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anu
 }
 pub fn explain_invoke_hover_or_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover or Anuman
@@ -10480,7 +10261,7 @@ pub fn explain_invoke_hover_or_anuman(
 }
 pub fn explain_invoke_hover_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover or $hook
@@ -10507,7 +10288,7 @@ pub fn explain_invoke_hover_or_invoke_hook(
 }
 pub fn explain_invoke_hover_or_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover or $mist2
@@ -10534,7 +10315,7 @@ pub fn explain_invoke_hover_or_invoke_mist2(
 }
 pub fn explain_invoke_infinite_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $infinite_climb
@@ -10547,7 +10328,7 @@ pub fn explain_invoke_infinite_climb(
 }
 pub fn explain_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Annuna_East_Bridge_Gate
@@ -10573,7 +10354,7 @@ pub fn explain_invoke_infinite_climb_and_annuna_east_bridge_gate(
 }
 pub fn explain_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $infinite_climb and not Annuna_East_Bridge_Gate
@@ -10599,7 +10380,7 @@ pub fn explain_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
 }
 pub fn explain_invoke_infinite_climb_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Slingshot_Hook
@@ -10625,7 +10406,7 @@ pub fn explain_invoke_infinite_climb_and_slingshot_hook(
 }
 pub fn explain_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
@@ -10664,7 +10445,7 @@ pub fn explain_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_brid
 }
 pub fn explain_invoke_melee(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $melee
@@ -10677,7 +10458,7 @@ pub fn explain_invoke_melee(
 }
 pub fn explain_invoke_melee_cskip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $melee_cskip
@@ -10690,7 +10471,7 @@ pub fn explain_invoke_melee_cskip(
 }
 pub fn explain_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $mist2
@@ -10703,7 +10484,7 @@ pub fn explain_invoke_mist2(
 }
 pub fn explain_invoke_mist2_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $mist2 and ^mode == 'drone'
@@ -10736,7 +10517,7 @@ pub fn explain_invoke_mist2_and_mode_eq_drone(
 }
 pub fn explain_invoke_more_refills(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $more_refills
@@ -10749,7 +10530,7 @@ pub fn explain_invoke_more_refills(
 }
 pub fn explain_invoke_offset(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $offset
@@ -10762,7 +10543,7 @@ pub fn explain_invoke_offset(
 }
 pub fn explain_invoke_open(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $open
@@ -10775,7 +10556,7 @@ pub fn explain_invoke_open(
 }
 pub fn explain_invoke_open_and_invoke_range1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $open and $range1
@@ -10802,7 +10583,7 @@ pub fn explain_invoke_open_and_invoke_range1(
 }
 pub fn explain_invoke_open_and_invoke_range2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $open and $range2
@@ -10829,7 +10610,7 @@ pub fn explain_invoke_open_and_invoke_range2(
 }
 pub fn explain_invoke_open_and_invoke_range3(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $open and $range3
@@ -10856,7 +10637,7 @@ pub fn explain_invoke_open_and_invoke_range3(
 }
 pub fn explain_invoke_overheat(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $overheat
@@ -10869,7 +10650,7 @@ pub fn explain_invoke_overheat(
 }
 pub fn explain_invoke_overheat_and_invoke_can_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $overheat and $can_damage
@@ -10896,7 +10677,7 @@ pub fn explain_invoke_overheat_and_invoke_can_damage(
 }
 pub fn explain_invoke_platform_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $platform and $hook and $hover
@@ -10937,7 +10718,7 @@ pub fn explain_invoke_platform_and_invoke_hook_and_invoke_hover(
 }
 pub fn explain_invoke_remote_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $remote_boomerang
@@ -10950,7 +10731,7 @@ pub fn explain_invoke_remote_boomerang(
 }
 pub fn explain_invoke_shockwave(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $shockwave
@@ -10963,7 +10744,7 @@ pub fn explain_invoke_shockwave(
 }
 pub fn explain_invoke_shockwave_and_not_defeat_mus_a_m20(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $shockwave and not Defeat_MUS_A_M20
@@ -10989,7 +10770,7 @@ pub fn explain_invoke_shockwave_and_not_defeat_mus_a_m20(
 }
 pub fn explain_invoke_slow(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $slow
@@ -11002,7 +10783,7 @@ pub fn explain_invoke_slow(
 }
 pub fn explain_invoke_spin(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $spin
@@ -11015,7 +10796,7 @@ pub fn explain_invoke_spin(
 }
 pub fn explain_invoke_sync(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $sync
@@ -11028,7 +10809,7 @@ pub fn explain_invoke_sync(
 }
 pub fn explain_invoke_sync_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $sync and $hook
@@ -11055,7 +10836,7 @@ pub fn explain_invoke_sync_and_invoke_hook(
 }
 pub fn explain_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_platform_moved
@@ -11073,7 +10854,7 @@ pub fn explain_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
 }
 pub fn explain_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_platform_moved and $hook
@@ -11102,7 +10883,7 @@ pub fn explain_irikar__basement_portal__middle_platform__ex__moving_platform_end
 }
 pub fn explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_platform_moved
@@ -11120,7 +10901,7 @@ pub fn explain_irikar__basement_portal__portal_stand__ex__moving_platform_start_
 }
 pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_left_platform and Nanite_Mist
@@ -11148,7 +10929,7 @@ pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__r
 }
 pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_left_platform and $mist2
@@ -11177,7 +10958,7 @@ pub fn explain_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__r
 }
 pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and Nanite_Mist
@@ -11205,7 +10986,7 @@ pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__
 }
 pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $mist2
@@ -11234,7 +11015,7 @@ pub fn explain_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__
 }
 pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and Nanite_Mist
@@ -11262,7 +11043,7 @@ pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__
 }
 pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $mist2
@@ -11291,7 +11072,7 @@ pub fn explain_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__
 }
 pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and Nanite_Mist
@@ -11319,7 +11100,7 @@ pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__
 }
 pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $mist2
@@ -11348,7 +11129,7 @@ pub fn explain_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__
 }
 pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nanite_Mist and not ^_right_platform
@@ -11376,7 +11157,7 @@ pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_1_
 }
 pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $mist2 and not ^_right_platform
@@ -11405,7 +11186,7 @@ pub fn explain_irikar__midwest__left_platform_start__ex__right_platform_start_2_
 }
 pub fn explain_irikar__midwest__left_platform_start__hack_and_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_left_platform and $activate
@@ -11434,7 +11215,7 @@ pub fn explain_irikar__midwest__left_platform_start__hack_and_ride__req(
 }
 pub fn explain_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $hover and $hook and not ^_left_platform
@@ -11477,7 +11258,7 @@ pub fn explain_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
 }
 pub fn explain_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $activate
@@ -11506,7 +11287,7 @@ pub fn explain_irikar__midwest__right_platform_start__hack_and_ride_platform__re
 }
 pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $mist2
@@ -11535,7 +11316,7 @@ pub fn explain_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
 }
 pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and Nanite_Mist
@@ -11563,7 +11344,7 @@ pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_1__req
 }
 pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not ^_right_platform and $mist2
@@ -11592,7 +11373,7 @@ pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_2__req
 }
 pub fn explain_irikar_gudam(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Irikar_Gudam
@@ -11604,7 +11385,7 @@ pub fn explain_irikar_gudam(
 }
 pub fn explain_irikar_royal_storage_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Irikar_Royal_Storage_Wall
@@ -11616,7 +11397,7 @@ pub fn explain_irikar_royal_storage_wall(
 }
 pub fn explain_map__amagi__east_lake__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__amagi__east_lake__save
@@ -11628,7 +11409,7 @@ pub fn explain_map__amagi__east_lake__save(
 }
 pub fn explain_map__amagi__main_area__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__amagi__main_area__save
@@ -11640,7 +11421,7 @@ pub fn explain_map__amagi__main_area__save(
 }
 pub fn explain_map__amagi_breach__east_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__amagi_breach__east_entrance__save
@@ -11655,7 +11436,7 @@ pub fn explain_map__amagi_breach__east_entrance__save(
 }
 pub fn explain_map__annuna__center_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__center_save__save
@@ -11667,7 +11448,7 @@ pub fn explain_map__annuna__center_save__save(
 }
 pub fn explain_map__annuna__factory_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__factory_entrance__save
@@ -11679,7 +11460,7 @@ pub fn explain_map__annuna__factory_entrance__save(
 }
 pub fn explain_map__annuna__mirror_match__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__mirror_match__save
@@ -11691,7 +11472,7 @@ pub fn explain_map__annuna__mirror_match__save(
 }
 pub fn explain_map__annuna__upper_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__upper_save__save
@@ -11703,7 +11484,7 @@ pub fn explain_map__annuna__upper_save__save(
 }
 pub fn explain_map__annuna__vertical_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__annuna__vertical_room__save
@@ -11715,7 +11496,7 @@ pub fn explain_map__annuna__vertical_room__save(
 }
 pub fn explain_map__ebih__base_camp__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__base_camp__save
@@ -11727,7 +11508,7 @@ pub fn explain_map__ebih__base_camp__save(
 }
 pub fn explain_map__ebih__ebih_west__lower_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__lower_save
@@ -11739,7 +11520,7 @@ pub fn explain_map__ebih__ebih_west__lower_save(
 }
 pub fn explain_map__ebih__ebih_west__mid_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__mid_save
@@ -11751,7 +11532,7 @@ pub fn explain_map__ebih__ebih_west__mid_save(
 }
 pub fn explain_map__ebih__ebih_west__upper_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__ebih__ebih_west__upper_save
@@ -11763,7 +11544,7 @@ pub fn explain_map__ebih__ebih_west__upper_save(
 }
 pub fn explain_map__giguna__giguna_base__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_base__save
@@ -11775,7 +11556,7 @@ pub fn explain_map__giguna__giguna_base__save(
 }
 pub fn explain_map__giguna__giguna_northeast__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__giguna_northeast__save
@@ -11787,7 +11568,7 @@ pub fn explain_map__giguna__giguna_northeast__save(
 }
 pub fn explain_map__giguna__ruins_top__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_top__save
@@ -11799,7 +11580,7 @@ pub fn explain_map__giguna__ruins_top__save(
 }
 pub fn explain_map__giguna__ruins_west__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna__ruins_west__save
@@ -11811,7 +11592,7 @@ pub fn explain_map__giguna__ruins_west__save(
 }
 pub fn explain_map__giguna_breach__peak__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__peak__save
@@ -11823,7 +11604,7 @@ pub fn explain_map__giguna_breach__peak__save(
 }
 pub fn explain_map__giguna_breach__sw_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__giguna_breach__sw_save__save
@@ -11835,7 +11616,7 @@ pub fn explain_map__giguna_breach__sw_save__save(
 }
 pub fn explain_map__glacier__revival__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier__revival__save
@@ -11847,7 +11628,7 @@ pub fn explain_map__glacier__revival__save(
 }
 pub fn explain_map__glacier_breach__guarded_corridor__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier_breach__guarded_corridor__save
@@ -11862,7 +11643,7 @@ pub fn explain_map__glacier_breach__guarded_corridor__save(
 }
 pub fn explain_map__glacier_breach__hammonds_breach__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier_breach__hammonds_breach__save
@@ -11877,7 +11658,7 @@ pub fn explain_map__glacier_breach__hammonds_breach__save(
 }
 pub fn explain_map__glacier_breach__save_and_exit__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier_breach__save_and_exit__save
@@ -11892,7 +11673,7 @@ pub fn explain_map__glacier_breach__save_and_exit__save(
 }
 pub fn explain_map__glacier_breach__south_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier_breach__south_save__save
@@ -11904,7 +11685,7 @@ pub fn explain_map__glacier_breach__south_save__save(
 }
 pub fn explain_map__glacier_breach__west_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__glacier_breach__west_save__save
@@ -11916,7 +11697,7 @@ pub fn explain_map__glacier_breach__west_save__save(
 }
 pub fn explain_map__irikar__beach_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar__beach_save__save
@@ -11928,7 +11709,7 @@ pub fn explain_map__irikar__beach_save__save(
 }
 pub fn explain_map__irikar__hub__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar__hub__save
@@ -11940,7 +11721,7 @@ pub fn explain_map__irikar__hub__save(
 }
 pub fn explain_map__irikar__midwest__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar__midwest__save
@@ -11952,7 +11733,7 @@ pub fn explain_map__irikar__midwest__save(
 }
 pub fn explain_map__irikar_breach__gauntlet__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__gauntlet__save
@@ -11964,7 +11745,7 @@ pub fn explain_map__irikar_breach__gauntlet__save(
 }
 pub fn explain_map__irikar_breach__save_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__irikar_breach__save_room__save
@@ -11976,7 +11757,7 @@ pub fn explain_map__irikar_breach__save_room__save(
 }
 pub fn explain_map__uhrum__annuna_corridor__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__annuna_corridor__save
@@ -11988,7 +11769,7 @@ pub fn explain_map__uhrum__annuna_corridor__save(
 }
 pub fn explain_map__uhrum__save_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__save_room__save
@@ -12000,7 +11781,7 @@ pub fn explain_map__uhrum__save_room__save(
 }
 pub fn explain_map__uhrum__west_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^map__uhrum__west_entrance__save
@@ -12012,7 +11793,7 @@ pub fn explain_map__uhrum__west_entrance__save(
 }
 pub fn explain_melee_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Damage
@@ -12024,7 +11805,7 @@ pub fn explain_melee_damage(
 }
 pub fn explain_melee_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Damage_2
@@ -12036,7 +11817,7 @@ pub fn explain_melee_damage_2(
 }
 pub fn explain_melee_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Speed
@@ -12048,7 +11829,7 @@ pub fn explain_melee_speed(
 }
 pub fn explain_melee_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Melee_Speed_2
@@ -12060,7 +11841,7 @@ pub fn explain_melee_speed_2(
 }
 pub fn explain_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone'
@@ -12079,7 +11860,7 @@ pub fn explain_mode_eq_drone(
 }
 pub fn explain_mode_eq_drone_and_apocalypse_seals_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Apocalypse_Seals_Wall
@@ -12111,7 +11892,7 @@ pub fn explain_mode_eq_drone_and_apocalypse_seals_wall(
 }
 pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
@@ -12143,7 +11924,7 @@ pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
 }
 pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
@@ -12175,7 +11956,7 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
 }
 pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
@@ -12207,7 +11988,7 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
 }
 pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
@@ -12239,7 +12020,7 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
 }
 pub fn explain_mode_eq_drone_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and $mist2
@@ -12272,7 +12053,7 @@ pub fn explain_mode_eq_drone_and_invoke_mist2(
 }
 pub fn explain_mode_eq_drone_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Nanite_Mist
@@ -12304,7 +12085,7 @@ pub fn explain_mode_eq_drone_and_nanite_mist(
 }
 pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
@@ -12392,7 +12173,7 @@ pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_defau
 }
 pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
@@ -12424,7 +12205,7 @@ pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
 }
 pub fn explain_mode_ne_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode != 'drone'
@@ -12443,7 +12224,7 @@ pub fn explain_mode_ne_drone(
 }
 pub fn explain_mode_ne_drone_and_ice_axe(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^mode != 'drone' and Ice_Axe
@@ -12475,7 +12256,7 @@ pub fn explain_mode_ne_drone_and_ice_axe(
 }
 pub fn explain_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nanite_Mist
@@ -12487,7 +12268,7 @@ pub fn explain_nanite_mist(
 }
 pub fn explain_nanite_mist_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nanite_Mist and ^mode == 'drone'
@@ -12519,7 +12300,7 @@ pub fn explain_nanite_mist_and_mode_eq_drone(
 }
 pub fn explain_nano_points(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nano_Points
@@ -12531,7 +12312,7 @@ pub fn explain_nano_points(
 }
 pub fn explain_nano_points_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Nano_Points_2
@@ -12543,7 +12324,7 @@ pub fn explain_nano_points_2(
 }
 pub fn explain_not_amashilama(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT Amashilama
@@ -12555,7 +12336,7 @@ pub fn explain_not_amashilama(
 }
 pub fn explain_not_apocalypse_bomb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Apocalypse_Bomb
@@ -12567,7 +12348,7 @@ pub fn explain_not_apocalypse_bomb(
 }
 pub fn explain_not_ebih_interchange_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Ebih_Interchange_Block
@@ -12579,7 +12360,7 @@ pub fn explain_not_ebih_interchange_block(
 }
 pub fn explain_not_ebih_waterfall_wall_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Ebih_Waterfall_Wall and $mist2
@@ -12605,7 +12386,7 @@ pub fn explain_not_ebih_waterfall_wall_and_invoke_mist2(
 }
 pub fn explain_not_ebih_waterfall_wall_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Ebih_Waterfall_Wall and Nanite_Mist
@@ -12630,7 +12411,7 @@ pub fn explain_not_ebih_waterfall_wall_and_nanite_mist(
 }
 pub fn explain_not_hammond_auth(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Hammond_Auth
@@ -12642,7 +12423,7 @@ pub fn explain_not_hammond_auth(
 }
 pub fn explain_not_irikar_royal_storage_wall_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and $mist2
@@ -12668,7 +12449,7 @@ pub fn explain_not_irikar_royal_storage_wall_and_invoke_mist2(
 }
 pub fn explain_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and $shockwave
@@ -12694,7 +12475,7 @@ pub fn explain_not_irikar_royal_storage_wall_and_invoke_shockwave(
 }
 pub fn explain_not_irikar_royal_storage_wall_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Irikar_Royal_Storage_Wall and Nanite_Mist
@@ -12719,7 +12500,7 @@ pub fn explain_not_irikar_royal_storage_wall_and_nanite_mist(
 }
 pub fn explain_not_separation_or_defeat_indra(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT Separation or Defeat_Indra
@@ -12744,7 +12525,7 @@ pub fn explain_not_separation_or_defeat_indra(
 }
 pub fn explain_not_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // not Slingshot_Hook
@@ -12756,7 +12537,7 @@ pub fn explain_not_slingshot_hook(
 }
 pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
@@ -12807,7 +12588,7 @@ pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
 }
 pub fn explain_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^flasks > 0
@@ -12845,9 +12626,81 @@ pub fn explain_not_within_menu_and_flasks_gt_0(
         }
     }
 }
+pub fn explain_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // NOT WITHIN `Menu` and $attract and ^portal != $default and ^portal != ^position
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let r = ctx.position();
+                    edict.insert("^position", format!("{:?}", r));
+                    (
+                        match get_region(r) {
+                            RegionId::Menu => false,
+                            _ => true,
+                        },
+                        vec!["^position"],
+                    )
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__attract!(ctx, world, edict);
+                        edict.insert("$attract", format!("{:?}", res));
+                        refs.push("$attract");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut left = {
+                        let r = ctx.portal();
+                        edict.insert("^portal", format!("{:?}", r));
+                        (r, vec!["^portal"])
+                    };
+                    let mut right = (Default::default(), vec![]);
+                    left.1.append(&mut right.1);
+                    (left.0 != right.0, left.1)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut left = {
+                    let r = ctx.portal();
+                    edict.insert("^portal", format!("{:?}", r));
+                    (r, vec!["^portal"])
+                };
+                let mut right = {
+                    let r = ctx.position();
+                    edict.insert("^position", format!("{:?}", r));
+                    (r, vec!["^position"])
+                };
+                left.1.append(&mut right.1);
+                (left.0 != right.0, left.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_not_within_menu_and_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and $can_deploy
@@ -12879,7 +12732,7 @@ pub fn explain_not_within_menu_and_invoke_can_deploy(
 }
 pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
@@ -12950,7 +12803,7 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
 }
 pub fn explain_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
@@ -13002,7 +12855,7 @@ pub fn explain_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
 }
 pub fn explain_portal_eq_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^portal == ^position
@@ -13023,7 +12876,7 @@ pub fn explain_portal_eq_position(
 }
 pub fn explain_ranged_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Damage
@@ -13035,7 +12888,7 @@ pub fn explain_ranged_damage(
 }
 pub fn explain_ranged_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Damage_2
@@ -13047,7 +12900,7 @@ pub fn explain_ranged_damage_2(
 }
 pub fn explain_ranged_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Speed
@@ -13059,7 +12912,7 @@ pub fn explain_ranged_speed(
 }
 pub fn explain_ranged_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Ranged_Speed_2
@@ -13071,7 +12924,7 @@ pub fn explain_ranged_speed_2(
 }
 pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^realm == 'breach' and Exit_Breach and ^flipside != $default
@@ -13121,7 +12974,7 @@ pub fn explain_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
 }
 pub fn explain_remote_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Remote_Drone
@@ -13133,7 +12986,7 @@ pub fn explain_remote_drone(
 }
 pub fn explain_separation(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Separation
@@ -13145,7 +12998,7 @@ pub fn explain_separation(
 }
 pub fn explain_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Separation and NOT Defeat_Indra and $mist2
@@ -13184,7 +13037,7 @@ pub fn explain_separation_and_not_defeat_indra_and_invoke_mist2(
 }
 pub fn explain_separation_and_not_defeat_indra_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Separation and NOT Defeat_Indra and Nanite_Mist
@@ -13222,7 +13075,7 @@ pub fn explain_separation_and_not_defeat_indra_and_nanite_mist(
 }
 pub fn explain_siuna_storage_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Siuna_Storage_Wall
@@ -13234,7 +13087,7 @@ pub fn explain_siuna_storage_wall(
 }
 pub fn explain_sniper_valley_rock_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Sniper_Valley_Rock_1
@@ -13246,7 +13099,7 @@ pub fn explain_sniper_valley_rock_1(
 }
 pub fn explain_station_power(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Station_Power
@@ -13258,7 +13111,7 @@ pub fn explain_station_power(
 }
 pub fn explain_switch_36_11(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Switch_36_11
@@ -13270,7 +13123,7 @@ pub fn explain_switch_36_11(
 }
 pub fn explain_switch_40_12(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Switch_40_12
@@ -13282,7 +13135,7 @@ pub fn explain_switch_40_12(
 }
 pub fn explain_uhrum_annuna_corridor_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Annuna_Corridor_Block
@@ -13294,7 +13147,7 @@ pub fn explain_uhrum_annuna_corridor_block(
 }
 pub fn explain_uhrum_waterfall_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfall_Wall
@@ -13306,7 +13159,7 @@ pub fn explain_uhrum_waterfall_wall(
 }
 pub fn explain_uhrum_waterfalls_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block
@@ -13318,7 +13171,7 @@ pub fn explain_uhrum_waterfalls_block(
 }
 pub fn explain_uhrum_waterfalls_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $grab
@@ -13344,7 +13197,7 @@ pub fn explain_uhrum_waterfalls_block_and_invoke_grab(
 }
 pub fn explain_uhrum_waterfalls_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_Waterfalls_Block and $hook
@@ -13370,7 +13223,7 @@ pub fn explain_uhrum_waterfalls_block_and_invoke_hook(
 }
 pub fn explain_uhrum_west_entrance_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate
@@ -13382,7 +13235,7 @@ pub fn explain_uhrum_west_entrance_gate(
 }
 pub fn explain_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Gate and $hover
@@ -13408,7 +13261,7 @@ pub fn explain_uhrum_west_entrance_gate_and_invoke_hover(
 }
 pub fn explain_uhrum_west_entrance_lower_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Lower_Wall
@@ -13420,7 +13273,7 @@ pub fn explain_uhrum_west_entrance_lower_wall(
 }
 pub fn explain_uhrum_west_entrance_upper_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Uhrum_West_Entrance_Upper_Wall
@@ -13432,7 +13285,7 @@ pub fn explain_uhrum_west_entrance_upper_wall(
 }
 pub fn explain_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement
@@ -13444,7 +13297,7 @@ pub fn explain_underwater_movement(
 }
 pub fn explain_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and ($grab or $climb)
@@ -13484,7 +13337,7 @@ pub fn explain_underwater_movement_and___invoke_grab_or_invoke_climb(
 }
 pub fn explain_underwater_movement_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $grab
@@ -13510,7 +13363,7 @@ pub fn explain_underwater_movement_and_invoke_grab(
 }
 pub fn explain_underwater_movement_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $hook
@@ -13536,7 +13389,7 @@ pub fn explain_underwater_movement_and_invoke_hook(
 }
 pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Underwater_Movement and $hook and $hover
@@ -13576,7 +13429,7 @@ pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
 }
 pub fn explain_within_menu_gt_upgrade_menu(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // WITHIN `Menu > Upgrade Menu`
@@ -13594,7 +13447,7 @@ pub fn explain_within_menu_gt_upgrade_menu(
 }
 pub fn observe_access___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Escape, Apocalypse_Bomb, $objective]
@@ -13608,7 +13461,7 @@ pub fn observe_access___escape_apocalypse_bomb_invoke_objective(
 }
 pub fn observe_access___infect_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Infect, Nanite_Mist]
@@ -13622,7 +13475,7 @@ pub fn observe_access___infect_nanite_mist(
 }
 pub fn observe_access___invoke_all_urns(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [$all_urns]
@@ -13630,7 +13483,7 @@ pub fn observe_access___invoke_all_urns(
 }
 pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all_notes_invoke_all_health_invoke_all_flasks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
@@ -13643,7 +13496,7 @@ pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_in
 }
 pub fn observe_access___invoke_grab_or_invoke_climb_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ($grab or $climb) and Underwater_Movement
@@ -13655,7 +13508,7 @@ pub fn observe_access___invoke_grab_or_invoke_climb_and_underwater_movement(
 }
 pub fn observe_access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ($grab or $climb or $hook) and Underwater_Movement
@@ -13668,7 +13521,7 @@ pub fn observe_access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwate
 }
 pub fn observe_access___invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [$objective]
@@ -13676,7 +13529,7 @@ pub fn observe_access___invoke_objective(
 }
 pub fn observe_access___remote_drone_flask__6(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Remote_Drone, Flask{6}]
@@ -13690,7 +13543,7 @@ pub fn observe_access___remote_drone_flask__6(
 }
 pub fn observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
@@ -13700,7 +13553,7 @@ pub fn observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_men
 }
 pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
@@ -13710,7 +13563,7 @@ pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_
 }
 pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
@@ -13729,7 +13582,7 @@ pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_inv
 }
 pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and ^realm == 'breach' and ^breach_save != $default
@@ -13749,7 +13602,7 @@ pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_
 }
 pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
@@ -13765,7 +13618,7 @@ pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_ama
 }
 pub fn observe_access_allow_warps_and_within_antarctica(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // allow_warps and WITHIN `Antarctica`
@@ -13777,7 +13630,7 @@ pub fn observe_access_allow_warps_and_within_antarctica(
 }
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo and ($grab or $climb)
@@ -13788,7 +13641,7 @@ pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_1__req(
 }
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo and $hook
@@ -13799,7 +13652,7 @@ pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_2__req(
 }
 pub fn observe_access_amagi__main_area__carving__key_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_combo
@@ -13810,7 +13663,7 @@ pub fn observe_access_amagi__main_area__carving__key_combo__req(
 }
 pub fn observe_access_amagi_dragon_eye_passage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Dragon_Eye_Passage
@@ -13821,7 +13674,7 @@ pub fn observe_access_amagi_dragon_eye_passage(
 }
 pub fn observe_access_amagi_stronghold_boulder_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Boulder_1
@@ -13832,7 +13685,7 @@ pub fn observe_access_amagi_stronghold_boulder_1(
 }
 pub fn observe_access_amagi_stronghold_boulder_1_and_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
@@ -13846,7 +13699,7 @@ pub fn observe_access_amagi_stronghold_boulder_1_and_underwater_movement_and___i
 }
 pub fn observe_access_amagi_stronghold_boulder_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Boulder_2
@@ -13857,7 +13710,7 @@ pub fn observe_access_amagi_stronghold_boulder_2(
 }
 pub fn observe_access_amagi_stronghold_boulder_2_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Boulder_2 and $grab
@@ -13868,7 +13721,7 @@ pub fn observe_access_amagi_stronghold_boulder_2_and_invoke_grab(
 }
 pub fn observe_access_amagi_stronghold_wall_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Wall_1
@@ -13879,7 +13732,7 @@ pub fn observe_access_amagi_stronghold_wall_1(
 }
 pub fn observe_access_amagi_stronghold_wall_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_Stronghold_Wall_2
@@ -13890,7 +13743,7 @@ pub fn observe_access_amagi_stronghold_wall_2(
 }
 pub fn observe_access_amagi_west_lake_surface_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Amagi_West_Lake_Surface_Wall
@@ -13901,7 +13754,7 @@ pub fn observe_access_amagi_west_lake_surface_wall(
 }
 pub fn observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_combo
@@ -13912,7 +13765,7 @@ pub fn observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
 }
 pub fn observe_access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -13923,7 +13776,7 @@ pub fn observe_access_annuna__east_bridge__tower_east_ledge__ex__tower_secret_1_
 }
 pub fn observe_access_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -13934,7 +13787,7 @@ pub fn observe_access_annuna__east_bridge__tower_mid_air_west__ex__tower_secret_
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_combo
@@ -13945,7 +13798,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__enter_combo__req(
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -13956,7 +13809,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_east_ledge_1_
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -13967,7 +13820,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_east_
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -13978,7 +13831,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_mid_air_west_
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo and $grab
@@ -13989,7 +13842,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_1__req(
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo and $hook
@@ -14000,7 +13853,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_peak_2__req(
 }
 pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -14011,7 +13864,7 @@ pub fn observe_access_annuna__east_bridge__tower_secret__ex__tower_west_ledge_1_
 }
 pub fn observe_access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_combo
@@ -14022,7 +13875,7 @@ pub fn observe_access_annuna__east_bridge__tower_west_ledge__enter_combo__req(
 }
 pub fn observe_access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_combo
@@ -14033,7 +13886,7 @@ pub fn observe_access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1_
 }
 pub fn observe_access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and ^_door_opened
@@ -14045,7 +13898,7 @@ pub fn observe_access_annuna__vertical_room__middle_platform_2__ex__upper_doorwa
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14056,7 +13909,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__east_20_1__req(
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_ministair_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14067,7 +13920,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_ministair
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_platform_2_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14078,7 +13931,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__middle_platform_
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14089,7 +13942,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_left_
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14100,7 +13953,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__save_point_right
 }
 pub fn observe_access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14111,7 +13964,7 @@ pub fn observe_access_annuna__vertical_room__upper_doorway__ex__west_20_1__req(
 }
 pub fn observe_access_annuna__west_climb__cache__ex__switch_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14122,7 +13975,7 @@ pub fn observe_access_annuna__west_climb__cache__ex__switch_ledge_1__req(
 }
 pub fn observe_access_annuna__west_climb__switch_ledge__ex__cache_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -14133,7 +13986,7 @@ pub fn observe_access_annuna__west_climb__switch_ledge__ex__cache_1__req(
 }
 pub fn observe_access_annuna__west_climb__switch_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $unlock4 and not ^_door_opened
@@ -14145,7 +13998,7 @@ pub fn observe_access_annuna__west_climb__switch_ledge__open_door__req(
 }
 pub fn observe_access_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Annuna_East_Bridge_Gate
@@ -14156,7 +14009,7 @@ pub fn observe_access_annuna_east_bridge_gate(
 }
 pub fn observe_access_annuna_mirror_match_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Annuna_Mirror_Match_Switch
@@ -14167,7 +14020,7 @@ pub fn observe_access_annuna_mirror_match_switch(
 }
 pub fn observe_access_annuna_vertical_room_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Annuna_Vertical_Room_Gate
@@ -14176,11 +14029,7 @@ pub fn observe_access_annuna_vertical_room_gate(
         ctx.has(Item::Annuna_Vertical_Room_Gate)
     }
 }
-pub fn observe_access_anuman(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
+pub fn observe_access_anuman(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
     // Anuman
     {
         full_obs.observe_anuman();
@@ -14189,7 +14038,7 @@ pub fn observe_access_anuman(
 }
 pub fn observe_access_anuman_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Anuman and $grab
@@ -14200,7 +14049,7 @@ pub fn observe_access_anuman_and_invoke_grab(
 }
 pub fn observe_access_anuman_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Anuman and Slingshot_Hook and Drone_Hover
@@ -14217,7 +14066,7 @@ pub fn observe_access_anuman_and_slingshot_hook_and_drone_hover(
 }
 pub fn observe_access_apocalypse_bomb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Apocalypse_Bomb
@@ -14228,7 +14077,7 @@ pub fn observe_access_apocalypse_bomb(
 }
 pub fn observe_access_apocalypse_bomb_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Apocalypse_Bomb and $hook
@@ -14239,7 +14088,7 @@ pub fn observe_access_apocalypse_bomb_and_invoke_hook(
 }
 pub fn observe_access_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Boomerang
@@ -14250,7 +14099,7 @@ pub fn observe_access_boomerang(
 }
 pub fn observe_access_breach_attractor(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Breach_Attractor
@@ -14261,7 +14110,7 @@ pub fn observe_access_breach_attractor(
 }
 pub fn observe_access_breach_attractor_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Breach_Attractor and Anuman
@@ -14275,7 +14124,7 @@ pub fn observe_access_breach_attractor_and_anuman(
 }
 pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN `Annuna > Filter Teleporter > Shaft Top`
@@ -14295,7 +14144,7 @@ pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna
 }
 pub fn observe_access_defeat_indra(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Defeat_Indra
@@ -14306,7 +14155,7 @@ pub fn observe_access_defeat_indra(
 }
 pub fn observe_access_defeat_mus_a_m20(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Defeat_MUS_A_M20
@@ -14317,7 +14166,7 @@ pub fn observe_access_defeat_mus_a_m20(
 }
 pub fn observe_access_drone_melee_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Drone_Melee_Damage
@@ -14328,7 +14177,7 @@ pub fn observe_access_drone_melee_damage(
 }
 pub fn observe_access_drone_melee_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Drone_Melee_Damage_2
@@ -14339,7 +14188,7 @@ pub fn observe_access_drone_melee_damage_2(
 }
 pub fn observe_access_drone_melee_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Drone_Melee_Speed
@@ -14350,7 +14199,7 @@ pub fn observe_access_drone_melee_speed(
 }
 pub fn observe_access_drone_melee_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Drone_Melee_Speed_2
@@ -14361,7 +14210,7 @@ pub fn observe_access_drone_melee_speed_2(
 }
 pub fn observe_access_ebih__base_camp__left_platform__move_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $activate and not ^_left_platform_moved
@@ -14373,7 +14222,7 @@ pub fn observe_access_ebih__base_camp__left_platform__move_left_platform__req(
 }
 pub fn observe_access_ebih__base_camp__left_platform_moved__reset_left_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $activate and ^_left_platform_moved
@@ -14385,7 +14234,7 @@ pub fn observe_access_ebih__base_camp__left_platform_moved__reset_left_platform_
 }
 pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and not ^_left_platform_moved
@@ -14397,7 +14246,7 @@ pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_1__req(
 }
 pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_left_platform_moved
@@ -14408,7 +14257,7 @@ pub fn observe_access_ebih__base_camp__top_platform__ex__left_platform_moved_1__
 }
 pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $platform and $hook and not ^_left_platform_moved
@@ -14420,7 +14269,7 @@ pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_1__req(
 }
 pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and not ^_left_platform_moved
@@ -14432,7 +14281,7 @@ pub fn observe_access_ebih__base_camp__west_11__ex__left_platform_2__req(
 }
 pub fn observe_access_ebih__drone_room__pit_left__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and ^_platform_moved
@@ -14446,7 +14295,7 @@ pub fn observe_access_ebih__drone_room__pit_left__activate_lift__req(
 }
 pub fn observe_access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and ^_platform_moved
@@ -14460,7 +14309,7 @@ pub fn observe_access_ebih__drone_room__pit_left__activate_lift_but_get_off_earl
 }
 pub fn observe_access_ebih__drone_room__portal_exit__activate_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and not ^_platform_moved
@@ -14474,7 +14323,7 @@ pub fn observe_access_ebih__drone_room__portal_exit__activate_platform__req(
 }
 pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and not ^_platform_moved
@@ -14488,7 +14337,7 @@ pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(
 }
 pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and not ^_platform_moved
@@ -14500,7 +14349,7 @@ pub fn observe_access_ebih__drone_room__portal_exit__ex__moving_platform_2__req(
 }
 pub fn observe_access_ebih__ebih_east__dispenser__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and ^_platform2_moved and ($grab or $hook)
@@ -14514,7 +14363,7 @@ pub fn observe_access_ebih__ebih_east__dispenser__activate_lift__req(
 }
 pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and not ^_platform2_moved
@@ -14526,7 +14375,7 @@ pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__r
 }
 pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and not ^_platform2_moved
@@ -14538,7 +14387,7 @@ pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__r
 }
 pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and $grab and not ^_platform2_moved
@@ -14553,7 +14402,7 @@ pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_lift__req
 }
 pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and not ^_platform2_moved
@@ -14567,7 +14416,7 @@ pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_ride__req
 }
 pub fn observe_access_ebih__ebih_east__moving_platform__activate_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and $grab and not ^_platform1_moved
@@ -14582,7 +14431,7 @@ pub fn observe_access_ebih__ebih_east__moving_platform__activate_ride__req(
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__below_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14593,7 +14442,7 @@ pub fn observe_access_ebih__ebih_west__above_door__ex__below_door_1__req(
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_open or $grab
@@ -14604,7 +14453,7 @@ pub fn observe_access_ebih__ebih_west__above_door__ex__refill_station_1__req(
 }
 pub fn observe_access_ebih__ebih_west__above_door__ex__small_gap_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_open
@@ -14615,7 +14464,7 @@ pub fn observe_access_ebih__ebih_west__above_door__ex__small_gap_1__req(
 }
 pub fn observe_access_ebih__ebih_west__below_door__ex__above_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and ^_door_open
@@ -14627,7 +14476,7 @@ pub fn observe_access_ebih__ebih_west__below_door__ex__above_door_1__req(
 }
 pub fn observe_access_ebih__ebih_west__below_door__ex__refill_station_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and ^_door_open
@@ -14639,7 +14488,7 @@ pub fn observe_access_ebih__ebih_west__below_door__ex__refill_station_1__req(
 }
 pub fn observe_access_ebih__grid_25_10_12__door__ex__door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14650,7 +14499,7 @@ pub fn observe_access_ebih__grid_25_10_12__door__ex__door_left_1__req(
 }
 pub fn observe_access_ebih__grid_25_10_12__door__ex__east_11_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14661,7 +14510,7 @@ pub fn observe_access_ebih__grid_25_10_12__door__ex__east_11_1__req(
 }
 pub fn observe_access_ebih__grid_25_10_12__door_left__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14672,7 +14521,7 @@ pub fn observe_access_ebih__grid_25_10_12__door_left__ex__door_1__req(
 }
 pub fn observe_access_ebih__grid_25_10_12__east_11__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14683,7 +14532,7 @@ pub fn observe_access_ebih__grid_25_10_12__east_11__ex__door_1__req(
 }
 pub fn observe_access_ebih__truck_gate__door__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14694,7 +14543,7 @@ pub fn observe_access_ebih__truck_gate__door__ex__portal_stand_1__req(
 }
 pub fn observe_access_ebih__truck_gate__door__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14705,7 +14554,7 @@ pub fn observe_access_ebih__truck_gate__door__ex__switch_1__req(
 }
 pub fn observe_access_ebih__truck_gate__portal_stand__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14716,7 +14565,7 @@ pub fn observe_access_ebih__truck_gate__portal_stand__ex__door_1__req(
 }
 pub fn observe_access_ebih__truck_gate__portal_stand__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14727,7 +14576,7 @@ pub fn observe_access_ebih__truck_gate__portal_stand__ex__switch_1__req(
 }
 pub fn observe_access_ebih__truck_gate__portal_stand__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_open and $open and $range1
@@ -14739,7 +14588,7 @@ pub fn observe_access_ebih__truck_gate__portal_stand__open_door__req(
 }
 pub fn observe_access_ebih__truck_gate__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14750,7 +14599,7 @@ pub fn observe_access_ebih__truck_gate__switch__ex__door_1__req(
 }
 pub fn observe_access_ebih__truck_gate__switch__ex__portal_stand_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14761,7 +14610,7 @@ pub fn observe_access_ebih__truck_gate__switch__ex__portal_stand_1__req(
 }
 pub fn observe_access_ebih__truck_gate__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_open and $open
@@ -14772,7 +14621,7 @@ pub fn observe_access_ebih__truck_gate__switch__open_door__req(
 }
 pub fn observe_access_ebih__vertical_interchange__door__ex__door_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14783,7 +14632,7 @@ pub fn observe_access_ebih__vertical_interchange__door__ex__door_east_1__req(
 }
 pub fn observe_access_ebih__vertical_interchange__door__ex__door_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14794,7 +14643,7 @@ pub fn observe_access_ebih__vertical_interchange__door__ex__door_west_1__req(
 }
 pub fn observe_access_ebih__vertical_interchange__door_east__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14805,7 +14654,7 @@ pub fn observe_access_ebih__vertical_interchange__door_east__ex__door_1__req(
 }
 pub fn observe_access_ebih__vertical_interchange__door_west__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -14816,7 +14665,7 @@ pub fn observe_access_ebih__vertical_interchange__door_west__ex__door_1__req(
 }
 pub fn observe_access_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $open and not ^_door_open
@@ -14828,7 +14677,7 @@ pub fn observe_access_ebih__vertical_interchange__west_13__open_door__req(
 }
 pub fn observe_access_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_west_door_open
@@ -14839,7 +14688,7 @@ pub fn observe_access_ebih__waterfall__west_door__ex__west_door_left_1__req(
 }
 pub fn observe_access_ebih__waterfall__west_door__ex__west_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_west_door_open
@@ -14850,7 +14699,7 @@ pub fn observe_access_ebih__waterfall__west_door__ex__west_door_right_1__req(
 }
 pub fn observe_access_ebih__waterfall__west_door_left__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_west_door_open
@@ -14861,7 +14710,7 @@ pub fn observe_access_ebih__waterfall__west_door_left__ex__west_door_1__req(
 }
 pub fn observe_access_ebih__waterfall__west_door_right__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_west_door_open
@@ -14872,7 +14721,7 @@ pub fn observe_access_ebih__waterfall__west_door_right__ex__west_door_1__req(
 }
 pub fn observe_access_ebih_alu(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Alu
@@ -14883,7 +14732,7 @@ pub fn observe_access_ebih_alu(
 }
 pub fn observe_access_ebih_interchange_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Block
@@ -14894,7 +14743,7 @@ pub fn observe_access_ebih_interchange_block(
 }
 pub fn observe_access_ebih_interchange_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Gate
@@ -14905,7 +14754,7 @@ pub fn observe_access_ebih_interchange_gate(
 }
 pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
@@ -14919,7 +14768,7 @@ pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invok
 }
 pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
@@ -14933,7 +14782,7 @@ pub fn observe_access_ebih_interchange_gate_and_ebih_interchange_block_and_invok
 }
 pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
@@ -14947,7 +14796,7 @@ pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_i
 }
 pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
@@ -14961,7 +14810,7 @@ pub fn observe_access_ebih_interchange_gate_and_not_ebih_interchange_block_and_i
 }
 pub fn observe_access_ebih_walled_off_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Walled_Off_Wall
@@ -14972,7 +14821,7 @@ pub fn observe_access_ebih_walled_off_wall(
 }
 pub fn observe_access_ebih_wasteland_door(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Wasteland_Door
@@ -14983,7 +14832,7 @@ pub fn observe_access_ebih_wasteland_door(
 }
 pub fn observe_access_ebih_waterfall_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_Waterfall_Wall
@@ -14994,7 +14843,7 @@ pub fn observe_access_ebih_waterfall_wall(
 }
 pub fn observe_access_ebih_west_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ebih_West_Block
@@ -15005,7 +14854,7 @@ pub fn observe_access_ebih_west_block(
 }
 pub fn observe_access_fast_travel(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Fast_Travel
@@ -15016,7 +14865,7 @@ pub fn observe_access_fast_travel(
 }
 pub fn observe_access_fast_travel_and_invoke_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Fast_Travel and $boomerang
@@ -15027,7 +14876,7 @@ pub fn observe_access_fast_travel_and_invoke_boomerang(
 }
 pub fn observe_access_fast_travel_and_invoke_boomerang2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Fast_Travel and $boomerang2
@@ -15038,7 +14887,7 @@ pub fn observe_access_fast_travel_and_invoke_boomerang2(
 }
 pub fn observe_access_fast_travel_and_invoke_melee_cskip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Fast_Travel and $melee_cskip
@@ -15049,7 +14898,7 @@ pub fn observe_access_fast_travel_and_invoke_melee_cskip(
 }
 pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15060,7 +14909,7 @@ pub fn observe_access_giguna__carnelian__door__ex__switch_1__req(
 }
 pub fn observe_access_giguna__carnelian__door__ex__vault_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15071,7 +14920,7 @@ pub fn observe_access_giguna__carnelian__door__ex__vault_1__req(
 }
 pub fn observe_access_giguna__carnelian__lower_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_lower_susar
@@ -15082,7 +14931,7 @@ pub fn observe_access_giguna__carnelian__lower_susar__caught__req(
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_susar
@@ -15093,7 +14942,7 @@ pub fn observe_access_giguna__carnelian__lower_susar__ex__rock_1__req(
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_susar and $grab
@@ -15104,7 +14953,7 @@ pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_1__req(
 }
 pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_susar and $hook
@@ -15115,7 +14964,7 @@ pub fn observe_access_giguna__carnelian__lower_susar__ex__west_ledge_2__req(
 }
 pub fn observe_access_giguna__carnelian__lower_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_lower_susar and $allegiance1
@@ -15126,7 +14975,7 @@ pub fn observe_access_giguna__carnelian__lower_susar__hack__req(
 }
 pub fn observe_access_giguna__carnelian__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15137,7 +14986,7 @@ pub fn observe_access_giguna__carnelian__switch__ex__door_1__req(
 }
 pub fn observe_access_giguna__carnelian__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $unlock3 and not ^_door_opened
@@ -15149,7 +14998,7 @@ pub fn observe_access_giguna__carnelian__switch__open_door__req(
 }
 pub fn observe_access_giguna__carnelian__upper_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar
@@ -15160,7 +15009,7 @@ pub fn observe_access_giguna__carnelian__upper_susar__caught__req(
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15171,7 +15020,7 @@ pub fn observe_access_giguna__carnelian__upper_susar__ex__east_cliff_1__req(
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15182,7 +15031,7 @@ pub fn observe_access_giguna__carnelian__upper_susar__ex__middle_platforms_1__re
 }
 pub fn observe_access_giguna__carnelian__upper_susar__ex__upper_path_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15193,7 +15042,7 @@ pub fn observe_access_giguna__carnelian__upper_susar__ex__upper_path_1__req(
 }
 pub fn observe_access_giguna__carnelian__upper_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar and $allegiance1
@@ -15204,7 +15053,7 @@ pub fn observe_access_giguna__carnelian__upper_susar__hack__req(
 }
 pub fn observe_access_giguna__carnelian__vault__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15215,7 +15064,7 @@ pub fn observe_access_giguna__carnelian__vault__ex__door_1__req(
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_and_get_off_early__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_platform and $activate
@@ -15226,7 +15075,7 @@ pub fn observe_access_giguna__clouds__platform_start__hack_and_get_off_early__re
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
@@ -15246,7 +15095,7 @@ pub fn observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__r
 }
 pub fn observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_platform and $activate and $can_deploy and $attract and Breach_Sight
@@ -15263,7 +15112,7 @@ pub fn observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal
 }
 pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -15283,7 +15132,7 @@ pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1
 }
 pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
@@ -15301,7 +15150,7 @@ pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2
 }
 pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and ^_combo_entered
@@ -15318,7 +15167,7 @@ pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west
 }
 pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and ^_combo_entered
@@ -15330,7 +15179,7 @@ pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_lower_susar
@@ -15341,7 +15190,7 @@ pub fn observe_access_giguna__east_caverns__lower_susar__caught__req(
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_susar
@@ -15352,7 +15201,7 @@ pub fn observe_access_giguna__east_caverns__lower_susar__ex__east_grass_1__req(
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_susar
@@ -15363,7 +15212,7 @@ pub fn observe_access_giguna__east_caverns__lower_susar__ex__under_lower_ledge_1
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_lower_susar and $allegiance1
@@ -15374,7 +15223,7 @@ pub fn observe_access_giguna__east_caverns__lower_susar__hack__req(
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_mid_susar
@@ -15385,7 +15234,7 @@ pub fn observe_access_giguna__east_caverns__mid_susar__caught__req(
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and ^_mid_susar
@@ -15397,7 +15246,7 @@ pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and ^_mid_susar
@@ -15409,7 +15258,7 @@ pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_mid_susar
@@ -15420,7 +15269,7 @@ pub fn observe_access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(
 }
 pub fn observe_access_giguna__east_caverns__mid_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_mid_susar and $allegiance1
@@ -15431,7 +15280,7 @@ pub fn observe_access_giguna__east_caverns__mid_susar__hack__req(
 }
 pub fn observe_access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and ^_combo_entered
@@ -15448,7 +15297,7 @@ pub fn observe_access_giguna__east_caverns__middle_rock__ex__hidden_passage_east
 }
 pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $hook and ^_combo_entered
@@ -15460,7 +15309,7 @@ pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -15480,7 +15329,7 @@ pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and $mist2 and ^_combo_entered
@@ -15498,7 +15347,7 @@ pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $hook and ^_combo_entered
@@ -15510,7 +15359,7 @@ pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist and ^_combo_entered
@@ -15530,7 +15379,7 @@ pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_3__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
@@ -15550,7 +15399,7 @@ pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_we
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_opened and $unlock2 and $range1
@@ -15562,7 +15411,7 @@ pub fn observe_access_giguna__east_caverns__statues_ledge__open_door__req(
 }
 pub fn observe_access_giguna__east_caverns__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15573,7 +15422,7 @@ pub fn observe_access_giguna__east_caverns__switch__ex__door_1__req(
 }
 pub fn observe_access_giguna__east_caverns__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_opened and $unlock2
@@ -15584,7 +15433,7 @@ pub fn observe_access_giguna__east_caverns__switch__open_door__req(
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar
@@ -15595,7 +15444,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar__caught__req(
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15606,7 +15455,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15617,7 +15466,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__r
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15628,7 +15477,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1
 }
 pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15639,7 +15488,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar__ex__upper_platforms_rig
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar
@@ -15650,7 +15499,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__caught__
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15661,7 +15510,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__midd
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15672,7 +15521,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__ex__midw
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar and $allegiance1
@@ -15683,7 +15532,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_jump_from_east__hack__re
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_susar
@@ -15694,7 +15543,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_s
 }
 pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_upper_susar and $allegiance1
@@ -15705,7 +15554,7 @@ pub fn observe_access_giguna__east_caverns__upper_susar_mid_jump__hack__req(
 }
 pub fn observe_access_giguna__east_caverns__west_14__enter_combo__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_combo_entered
@@ -15716,7 +15565,7 @@ pub fn observe_access_giguna__east_caverns__west_14__enter_combo__req(
 }
 pub fn observe_access_giguna__east_caverns__west_16__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15727,7 +15576,7 @@ pub fn observe_access_giguna__east_caverns__west_16__ex__door_1__req(
 }
 pub fn observe_access_giguna__east_caverns__west_16__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_opened and $open and $range2
@@ -15739,7 +15588,7 @@ pub fn observe_access_giguna__east_caverns__west_16__open_door__req(
 }
 pub fn observe_access_giguna__gateway__door__ex__block_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15750,7 +15599,7 @@ pub fn observe_access_giguna__gateway__door__ex__block_left_1__req(
 }
 pub fn observe_access_giguna__gateway__door__ex__left_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15761,7 +15610,7 @@ pub fn observe_access_giguna__gateway__door__ex__left_platform_1__req(
 }
 pub fn observe_access_giguna__gateway__door__ex__passage_entry_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15772,7 +15621,7 @@ pub fn observe_access_giguna__gateway__door__ex__passage_entry_1__req(
 }
 pub fn observe_access_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15783,7 +15632,7 @@ pub fn observe_access_giguna__gateway__passage_entry__ex__door_1__req(
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open and $grab and $climb
@@ -15795,7 +15644,7 @@ pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_1__req(
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open and $hook
@@ -15806,7 +15655,7 @@ pub fn observe_access_giguna__giguna_base__below_gate__ex__kari_2__req(
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open and $grab and $climb
@@ -15818,7 +15667,7 @@ pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_1__re
 }
 pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open and $hook
@@ -15829,7 +15678,7 @@ pub fn observe_access_giguna__giguna_base__below_gate__ex__middle_platform_2__re
 }
 pub fn observe_access_giguna__giguna_base__kari__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -15840,7 +15689,7 @@ pub fn observe_access_giguna__giguna_base__kari__ex__below_gate_1__req(
 }
 pub fn observe_access_giguna__giguna_base__middle_platform__ex__below_gate_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_open
@@ -15851,7 +15700,7 @@ pub fn observe_access_giguna__giguna_base__middle_platform__ex__below_gate_1__re
 }
 pub fn observe_access_giguna__giguna_northeast__right_column__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15862,7 +15711,7 @@ pub fn observe_access_giguna__giguna_northeast__right_column__ex__door_1__req(
 }
 pub fn observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $unlock3 and Infection_Range_3 and not ^_door_opened
@@ -15878,7 +15727,7 @@ pub fn observe_access_giguna__giguna_northeast__right_column__open_door_from_afa
 }
 pub fn observe_access_giguna__giguna_northeast__switch__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened and ($grab or $hook)
@@ -15889,7 +15738,7 @@ pub fn observe_access_giguna__giguna_northeast__switch__ex__door_1__req(
 }
 pub fn observe_access_giguna__giguna_northeast__switch__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $unlock3 and not ^_door_opened
@@ -15901,7 +15750,7 @@ pub fn observe_access_giguna__giguna_northeast__switch__open_door__req(
 }
 pub fn observe_access_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -15912,7 +15761,7 @@ pub fn observe_access_giguna__giguna_northeast__vault__ex__door_1__req(
 }
 pub fn observe_access_giguna__giguna_northeast__vault__ex__door_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened and $hook
@@ -15923,7 +15772,7 @@ pub fn observe_access_giguna__giguna_northeast__vault__ex__door_2__req(
 }
 pub fn observe_access_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15934,7 +15783,7 @@ pub fn observe_access_giguna__ruins_top__east_7__ex__east_door_1__req(
 }
 pub fn observe_access_giguna__ruins_top__east_door__ex__east_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15945,7 +15794,7 @@ pub fn observe_access_giguna__ruins_top__east_door__ex__east_7_1__req(
 }
 pub fn observe_access_giguna__ruins_top__east_door__ex__portal_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15956,7 +15805,7 @@ pub fn observe_access_giguna__ruins_top__east_door__ex__portal_1__req(
 }
 pub fn observe_access_giguna__ruins_top__entryway__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15967,7 +15816,7 @@ pub fn observe_access_giguna__ruins_top__entryway__ex__west_door_1__req(
 }
 pub fn observe_access_giguna__ruins_top__portal__ex__east_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15978,7 +15827,7 @@ pub fn observe_access_giguna__ruins_top__portal__ex__east_door_1__req(
 }
 pub fn observe_access_giguna__ruins_top__west_7__ex__west_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -15989,7 +15838,7 @@ pub fn observe_access_giguna__ruins_top__west_7__ex__west_door_1__req(
 }
 pub fn observe_access_giguna__ruins_top__west_door__ex__entryway_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -16000,7 +15849,7 @@ pub fn observe_access_giguna__ruins_top__west_door__ex__entryway_1__req(
 }
 pub fn observe_access_giguna__ruins_top__west_door__ex__west_7_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_doors_open
@@ -16011,7 +15860,7 @@ pub fn observe_access_giguna__ruins_top__west_door__ex__west_7_1__req(
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_kishib_handled and $shockwave
@@ -16022,7 +15871,7 @@ pub fn observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and ^_kishib_handled
@@ -16034,7 +15883,7 @@ pub fn observe_access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(
 }
 pub fn observe_access_giguna__ruins_west__lower_ledge__hack_kishib__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_kishib_handled and $allegiance1
@@ -16045,7 +15894,7 @@ pub fn observe_access_giguna__ruins_west__lower_ledge__hack_kishib__req(
 }
 pub fn observe_access_giguna__west_caverns__east_susar__caught__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_east_susar
@@ -16056,7 +15905,7 @@ pub fn observe_access_giguna__west_caverns__east_susar__caught__req(
 }
 pub fn observe_access_giguna__west_caverns__east_susar__ex__east_12_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_east_susar
@@ -16067,7 +15916,7 @@ pub fn observe_access_giguna__west_caverns__east_susar__ex__east_12_1__req(
 }
 pub fn observe_access_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_east_susar
@@ -16078,7 +15927,7 @@ pub fn observe_access_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(
 }
 pub fn observe_access_giguna__west_caverns__east_susar__hack__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_east_susar and $allegiance1
@@ -16089,7 +15938,7 @@ pub fn observe_access_giguna__west_caverns__east_susar__hack__req(
 }
 pub fn observe_access_giguna_boulder(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Boulder
@@ -16100,7 +15949,7 @@ pub fn observe_access_giguna_boulder(
 }
 pub fn observe_access_giguna_breach__sw_save__side_door__ex__west_11_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -16111,7 +15960,7 @@ pub fn observe_access_giguna_breach__sw_save__side_door__ex__west_11_1__req(
 }
 pub fn observe_access_giguna_breach__sw_save__west_11__ex__side_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_door_opened
@@ -16122,7 +15971,7 @@ pub fn observe_access_giguna_breach__sw_save__west_11__ex__side_door_1__req(
 }
 pub fn observe_access_giguna_breach__sw_save__west_11__open_door__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_door_opened
@@ -16133,7 +15982,7 @@ pub fn observe_access_giguna_breach__sw_save__west_11__open_door__req(
 }
 pub fn observe_access_giguna_dual_path_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Dual_Path_Switch
@@ -16144,7 +15993,7 @@ pub fn observe_access_giguna_dual_path_switch(
 }
 pub fn observe_access_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Dual_Path_Switch and ($grab or $climb)
@@ -16155,7 +16004,7 @@ pub fn observe_access_giguna_dual_path_switch_and___invoke_grab_or_invoke_climb(
 }
 pub fn observe_access_giguna_dual_path_switch_and_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Dual_Path_Switch and $climb
@@ -16166,7 +16015,7 @@ pub fn observe_access_giguna_dual_path_switch_and_invoke_climb(
 }
 pub fn observe_access_giguna_dual_path_switch_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Dual_Path_Switch and $hook
@@ -16177,7 +16026,7 @@ pub fn observe_access_giguna_dual_path_switch_and_invoke_hook(
 }
 pub fn observe_access_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Gateway_Block
@@ -16188,7 +16037,7 @@ pub fn observe_access_giguna_gateway_block(
 }
 pub fn observe_access_giguna_gateway_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Gateway_Gate
@@ -16199,7 +16048,7 @@ pub fn observe_access_giguna_gateway_gate(
 }
 pub fn observe_access_giguna_gubi(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Gubi
@@ -16210,7 +16059,7 @@ pub fn observe_access_giguna_gubi(
 }
 pub fn observe_access_giguna_northeast_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Giguna_Northeast_Gate
@@ -16221,7 +16070,7 @@ pub fn observe_access_giguna_northeast_gate(
 }
 pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16232,7 +16081,7 @@ pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_do
 }
 pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_right_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16243,7 +16092,7 @@ pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_do
 }
 pub fn observe_access_glacier__hammonds_end__center_door_left__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16254,7 +16103,7 @@ pub fn observe_access_glacier__hammonds_end__center_door_left__ex__between_cente
 }
 pub fn observe_access_glacier__hammonds_end__center_door_right__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16265,7 +16114,7 @@ pub fn observe_access_glacier__hammonds_end__center_door_right__ex__between_cent
 }
 pub fn observe_access_glacier__hammonds_end__east_11_door__ex__the_big_drop__west_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16276,7 +16125,7 @@ pub fn observe_access_glacier__hammonds_end__east_11_door__ex__the_big_drop__wes
 }
 pub fn observe_access_glacier__hammonds_end__upper_portal_stand__ex__between_center_doors_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16287,7 +16136,7 @@ pub fn observe_access_glacier__hammonds_end__upper_portal_stand__ex__between_cen
 }
 pub fn observe_access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_hammonds_doors
@@ -16298,7 +16147,7 @@ pub fn observe_access_glacier__the_big_drop__west_11_door__ex__hammonds_end__eas
 }
 pub fn observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover and ^_upper_gatestone
@@ -16310,7 +16159,7 @@ pub fn observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_
 }
 pub fn observe_access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_gatestones
@@ -16321,7 +16170,7 @@ pub fn observe_access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
 }
 pub fn observe_access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and $hook and ^_lower_gatestones
@@ -16336,7 +16185,7 @@ pub fn observe_access_glacier__vertical_room__lower_switch__ex__middle_gatestone
 }
 pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_gatestones
@@ -16347,7 +16196,7 @@ pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatest
 }
 pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_lower_gatestones
@@ -16358,7 +16207,7 @@ pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch
 }
 pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and ^_lower_gatestones
@@ -16372,7 +16221,7 @@ pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
 }
 pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_gatestone
@@ -16383,7 +16232,7 @@ pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__above_switch_
 }
 pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_gatestone
@@ -16394,7 +16243,7 @@ pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__below_upper_s
 }
 pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_upper_gatestone
@@ -16405,7 +16254,7 @@ pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_
 }
 pub fn observe_access_glacier_big_drop_rock(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Glacier_Big_Drop_Rock
@@ -16416,7 +16265,7 @@ pub fn observe_access_glacier_big_drop_rock(
 }
 pub fn observe_access_glacier_sea_burial_rock(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Glacier_Sea_Burial_Rock
@@ -16427,7 +16276,7 @@ pub fn observe_access_glacier_sea_burial_rock(
 }
 pub fn observe_access_hammond_auth(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Hammond_Auth
@@ -16438,7 +16287,7 @@ pub fn observe_access_hammond_auth(
 }
 pub fn observe_access_health_upgrade(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Health_Upgrade
@@ -16449,7 +16298,7 @@ pub fn observe_access_health_upgrade(
 }
 pub fn observe_access_health_upgrade_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Health_Upgrade_2
@@ -16460,7 +16309,7 @@ pub fn observe_access_health_upgrade_2(
 }
 pub fn observe_access_health_upgrade_3(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Health_Upgrade_3
@@ -16471,7 +16320,7 @@ pub fn observe_access_health_upgrade_3(
 }
 pub fn observe_access_health_upgrade_4(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Health_Upgrade_4
@@ -16480,11 +16329,7 @@ pub fn observe_access_health_upgrade_4(
         ctx.has(Item::Health_Upgrade_4)
     }
 }
-pub fn observe_access_infect(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
+pub fn observe_access_infect(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
     // Infect
     {
         full_obs.observe_infect();
@@ -16493,7 +16338,7 @@ pub fn observe_access_infect(
 }
 pub fn observe_access_infect_and_anuman_and_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and Anuman and $objective
@@ -16507,7 +16352,7 @@ pub fn observe_access_infect_and_anuman_and_invoke_objective(
 }
 pub fn observe_access_infect_and_not_anuman_and_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect and not Anuman and $objective
@@ -16521,7 +16366,7 @@ pub fn observe_access_infect_and_not_anuman_and_invoke_objective(
 }
 pub fn observe_access_infect_l1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect_L1
@@ -16532,7 +16377,7 @@ pub fn observe_access_infect_l1(
 }
 pub fn observe_access_infect_l2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infect_L2
@@ -16543,7 +16388,7 @@ pub fn observe_access_infect_l2(
 }
 pub fn observe_access_infection_range(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infection_Range
@@ -16554,7 +16399,7 @@ pub fn observe_access_infection_range(
 }
 pub fn observe_access_infection_range_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infection_Range_2
@@ -16565,7 +16410,7 @@ pub fn observe_access_infection_range_2(
 }
 pub fn observe_access_infection_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Infection_Speed
@@ -16576,7 +16421,7 @@ pub fn observe_access_infection_speed(
 }
 pub fn observe_access_invoke_activate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $activate
@@ -16584,7 +16429,7 @@ pub fn observe_access_invoke_activate(
 }
 pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Left
@@ -16596,7 +16441,7 @@ pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_left(
 }
 pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $block_clip and not Ebih_Waterfall_Block_Right
@@ -16608,7 +16453,7 @@ pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_right(
 }
 pub fn observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
@@ -16620,7 +16465,7 @@ pub fn observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_blo
 }
 pub fn observe_access_invoke_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $boomerang
@@ -16628,7 +16473,7 @@ pub fn observe_access_invoke_boomerang(
 }
 pub fn observe_access_invoke_boomerang2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $boomerang2
@@ -16636,7 +16481,7 @@ pub fn observe_access_invoke_boomerang2(
 }
 pub fn observe_access_invoke_bs(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $bs
@@ -16644,7 +16489,7 @@ pub fn observe_access_invoke_bs(
 }
 pub fn observe_access_invoke_can_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_damage
@@ -16652,7 +16497,7 @@ pub fn observe_access_invoke_can_damage(
 }
 pub fn observe_access_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_deploy
@@ -16660,7 +16505,7 @@ pub fn observe_access_invoke_can_deploy(
 }
 pub fn observe_access_invoke_can_deploy_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_deploy and Drone_Hover
@@ -16672,7 +16517,7 @@ pub fn observe_access_invoke_can_deploy_and_drone_hover(
 }
 pub fn observe_access_invoke_can_deploy_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_deploy and $hover
@@ -16680,7 +16525,7 @@ pub fn observe_access_invoke_can_deploy_and_invoke_hover(
 }
 pub fn observe_access_invoke_can_deploy_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_deploy and Slingshot_Hook
@@ -16692,7 +16537,7 @@ pub fn observe_access_invoke_can_deploy_and_slingshot_hook(
 }
 pub fn observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_deploy and Slingshot_Hook and Drone_Hover
@@ -16708,7 +16553,7 @@ pub fn observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
 }
 pub fn observe_access_invoke_charge(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $charge
@@ -16716,7 +16561,7 @@ pub fn observe_access_invoke_charge(
 }
 pub fn observe_access_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb
@@ -16724,7 +16569,7 @@ pub fn observe_access_invoke_climb(
 }
 pub fn observe_access_invoke_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb and Annuna_East_Bridge_Gate
@@ -16736,7 +16581,7 @@ pub fn observe_access_invoke_climb_and_annuna_east_bridge_gate(
 }
 pub fn observe_access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb and $can_deploy and Drone_Hover and Slingshot_Hook
@@ -16752,7 +16597,7 @@ pub fn observe_access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_sli
 }
 pub fn observe_access_invoke_climb_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb and $grab
@@ -16760,7 +16605,7 @@ pub fn observe_access_invoke_climb_and_invoke_grab(
 }
 pub fn observe_access_invoke_climb_and_invoke_grab_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb and $grab and Anuman
@@ -16772,7 +16617,7 @@ pub fn observe_access_invoke_climb_and_invoke_grab_and_anuman(
 }
 pub fn observe_access_invoke_climb_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb and Underwater_Movement
@@ -16784,7 +16629,7 @@ pub fn observe_access_invoke_climb_and_underwater_movement(
 }
 pub fn observe_access_invoke_climb_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $climb or $hook
@@ -16792,7 +16637,7 @@ pub fn observe_access_invoke_climb_or_invoke_hook(
 }
 pub fn observe_access_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab
@@ -16800,7 +16645,7 @@ pub fn observe_access_invoke_grab(
 }
 pub fn observe_access_invoke_grab_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and Annuna_East_Bridge_Gate
@@ -16812,7 +16657,7 @@ pub fn observe_access_invoke_grab_and_annuna_east_bridge_gate(
 }
 pub fn observe_access_invoke_grab_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and Anuman
@@ -16824,7 +16669,7 @@ pub fn observe_access_invoke_grab_and_anuman(
 }
 pub fn observe_access_invoke_grab_and_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and Giguna_Gateway_Block
@@ -16836,7 +16681,7 @@ pub fn observe_access_invoke_grab_and_giguna_gateway_block(
 }
 pub fn observe_access_invoke_grab_and_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and $can_deploy
@@ -16844,7 +16689,7 @@ pub fn observe_access_invoke_grab_and_invoke_can_deploy(
 }
 pub fn observe_access_invoke_grab_and_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and $climb
@@ -16852,7 +16697,7 @@ pub fn observe_access_invoke_grab_and_invoke_climb(
 }
 pub fn observe_access_invoke_grab_and_switch_40_12(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and Switch_40_12
@@ -16864,7 +16709,7 @@ pub fn observe_access_invoke_grab_and_switch_40_12(
 }
 pub fn observe_access_invoke_grab_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab and Underwater_Movement
@@ -16876,7 +16721,7 @@ pub fn observe_access_invoke_grab_and_underwater_movement(
 }
 pub fn observe_access_invoke_grab_or_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab or Anuman
@@ -16887,7 +16732,7 @@ pub fn observe_access_invoke_grab_or_anuman(
 }
 pub fn observe_access_invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab or $climb
@@ -16895,7 +16740,7 @@ pub fn observe_access_invoke_grab_or_invoke_climb(
 }
 pub fn observe_access_invoke_grab_or_invoke_climb_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab or $climb or $hook
@@ -16904,7 +16749,7 @@ pub fn observe_access_invoke_grab_or_invoke_climb_or_invoke_hook(
 }
 pub fn observe_access_invoke_grab_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab or $hook
@@ -16912,7 +16757,7 @@ pub fn observe_access_invoke_grab_or_invoke_hook(
 }
 pub fn observe_access_invoke_grab_or_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $grab or Underwater_Movement
@@ -16923,7 +16768,7 @@ pub fn observe_access_invoke_grab_or_underwater_movement(
 }
 pub fn observe_access_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook
@@ -16931,7 +16776,7 @@ pub fn observe_access_invoke_hook(
 }
 pub fn observe_access_invoke_hook_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and Annuna_East_Bridge_Gate
@@ -16943,7 +16788,7 @@ pub fn observe_access_invoke_hook_and_annuna_east_bridge_gate(
 }
 pub fn observe_access_invoke_hook_and_giguna_gateway_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and Giguna_Gateway_Block
@@ -16955,7 +16800,7 @@ pub fn observe_access_invoke_hook_and_giguna_gateway_block(
 }
 pub fn observe_access_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover
@@ -16963,7 +16808,7 @@ pub fn observe_access_invoke_hook_and_invoke_hover(
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover and Slingshot_Charge
@@ -16975,7 +16820,7 @@ pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_weapon(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover and Slingshot_Weapon
@@ -16987,7 +16832,7 @@ pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_weapon(
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover and Underwater_Movement
@@ -16999,7 +16844,7 @@ pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
@@ -17027,7 +16872,7 @@ pub fn observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_b
 }
 pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and not Ebih_Waterfall_Block_Left
@@ -17039,7 +16884,7 @@ pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_left(
 }
 pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and not Ebih_Waterfall_Block_Right
@@ -17051,7 +16896,7 @@ pub fn observe_access_invoke_hook_and_not_ebih_waterfall_block_right(
 }
 pub fn observe_access_invoke_hook_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook and Underwater_Movement
@@ -17063,7 +16908,7 @@ pub fn observe_access_invoke_hook_and_underwater_movement(
 }
 pub fn observe_access_invoke_hook_or_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hook or $hover
@@ -17071,7 +16916,7 @@ pub fn observe_access_invoke_hook_or_invoke_hover(
 }
 pub fn observe_access_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover
@@ -17079,7 +16924,7 @@ pub fn observe_access_invoke_hover(
 }
 pub fn observe_access_invoke_hover_and_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and Anuman
@@ -17091,7 +16936,7 @@ pub fn observe_access_invoke_hover_and_anuman(
 }
 pub fn observe_access_invoke_hover_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $hook
@@ -17099,7 +16944,7 @@ pub fn observe_access_invoke_hover_and_invoke_hook(
 }
 pub fn observe_access_invoke_hover_and_invoke_hook_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $hook and $mist2
@@ -17108,7 +16953,7 @@ pub fn observe_access_invoke_hover_and_invoke_hook_and_invoke_mist2(
 }
 pub fn observe_access_invoke_hover_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $mist2
@@ -17116,7 +16961,7 @@ pub fn observe_access_invoke_hover_and_invoke_mist2(
 }
 pub fn observe_access_invoke_hover_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and Nanite_Mist
@@ -17128,7 +16973,7 @@ pub fn observe_access_invoke_hover_and_nanite_mist(
 }
 pub fn observe_access_invoke_hover_and_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and Underwater_Movement
@@ -17140,7 +16985,7 @@ pub fn observe_access_invoke_hover_and_underwater_movement(
 }
 pub fn observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and Underwater_Movement and Breach_Attractor and Anuman and ^portal == ^portal_start
@@ -17168,7 +17013,7 @@ pub fn observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_
 }
 pub fn observe_access_invoke_hover_or_anuman(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover or Anuman
@@ -17179,7 +17024,7 @@ pub fn observe_access_invoke_hover_or_anuman(
 }
 pub fn observe_access_invoke_hover_or_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover or $hook
@@ -17187,7 +17032,7 @@ pub fn observe_access_invoke_hover_or_invoke_hook(
 }
 pub fn observe_access_invoke_hover_or_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover or $mist2
@@ -17195,7 +17040,7 @@ pub fn observe_access_invoke_hover_or_invoke_mist2(
 }
 pub fn observe_access_invoke_infinite_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $infinite_climb
@@ -17203,7 +17048,7 @@ pub fn observe_access_invoke_infinite_climb(
 }
 pub fn observe_access_invoke_infinite_climb_and_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $infinite_climb and Annuna_East_Bridge_Gate
@@ -17215,7 +17060,7 @@ pub fn observe_access_invoke_infinite_climb_and_annuna_east_bridge_gate(
 }
 pub fn observe_access_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $infinite_climb and not Annuna_East_Bridge_Gate
@@ -17227,7 +17072,7 @@ pub fn observe_access_invoke_infinite_climb_and_not_annuna_east_bridge_gate(
 }
 pub fn observe_access_invoke_infinite_climb_and_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $infinite_climb and Slingshot_Hook
@@ -17239,7 +17084,7 @@ pub fn observe_access_invoke_infinite_climb_and_slingshot_hook(
 }
 pub fn observe_access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_east_bridge_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
@@ -17255,7 +17100,7 @@ pub fn observe_access_invoke_infinite_climb_and_slingshot_hook_and_not_annuna_ea
 }
 pub fn observe_access_invoke_melee(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $melee
@@ -17263,7 +17108,7 @@ pub fn observe_access_invoke_melee(
 }
 pub fn observe_access_invoke_melee_cskip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $melee_cskip
@@ -17271,7 +17116,7 @@ pub fn observe_access_invoke_melee_cskip(
 }
 pub fn observe_access_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $mist2
@@ -17279,7 +17124,7 @@ pub fn observe_access_invoke_mist2(
 }
 pub fn observe_access_invoke_mist2_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $mist2 and ^mode == 'drone'
@@ -17294,7 +17139,7 @@ pub fn observe_access_invoke_mist2_and_mode_eq_drone(
 }
 pub fn observe_access_invoke_more_refills(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $more_refills
@@ -17302,7 +17147,7 @@ pub fn observe_access_invoke_more_refills(
 }
 pub fn observe_access_invoke_offset(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $offset
@@ -17310,7 +17155,7 @@ pub fn observe_access_invoke_offset(
 }
 pub fn observe_access_invoke_open(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $open
@@ -17318,7 +17163,7 @@ pub fn observe_access_invoke_open(
 }
 pub fn observe_access_invoke_open_and_invoke_range1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $open and $range1
@@ -17326,7 +17171,7 @@ pub fn observe_access_invoke_open_and_invoke_range1(
 }
 pub fn observe_access_invoke_open_and_invoke_range2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $open and $range2
@@ -17334,7 +17179,7 @@ pub fn observe_access_invoke_open_and_invoke_range2(
 }
 pub fn observe_access_invoke_open_and_invoke_range3(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $open and $range3
@@ -17342,7 +17187,7 @@ pub fn observe_access_invoke_open_and_invoke_range3(
 }
 pub fn observe_access_invoke_overheat(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $overheat
@@ -17350,7 +17195,7 @@ pub fn observe_access_invoke_overheat(
 }
 pub fn observe_access_invoke_overheat_and_invoke_can_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $overheat and $can_damage
@@ -17358,7 +17203,7 @@ pub fn observe_access_invoke_overheat_and_invoke_can_damage(
 }
 pub fn observe_access_invoke_platform_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $platform and $hook and $hover
@@ -17367,7 +17212,7 @@ pub fn observe_access_invoke_platform_and_invoke_hook_and_invoke_hover(
 }
 pub fn observe_access_invoke_remote_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $remote_boomerang
@@ -17375,7 +17220,7 @@ pub fn observe_access_invoke_remote_boomerang(
 }
 pub fn observe_access_invoke_shockwave(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $shockwave
@@ -17383,7 +17228,7 @@ pub fn observe_access_invoke_shockwave(
 }
 pub fn observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $shockwave and not Defeat_MUS_A_M20
@@ -17395,7 +17240,7 @@ pub fn observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(
 }
 pub fn observe_access_invoke_slow(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $slow
@@ -17403,7 +17248,7 @@ pub fn observe_access_invoke_slow(
 }
 pub fn observe_access_invoke_spin(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $spin
@@ -17411,7 +17256,7 @@ pub fn observe_access_invoke_spin(
 }
 pub fn observe_access_invoke_sync(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $sync
@@ -17419,7 +17264,7 @@ pub fn observe_access_invoke_sync(
 }
 pub fn observe_access_invoke_sync_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $sync and $hook
@@ -17427,7 +17272,7 @@ pub fn observe_access_invoke_sync_and_invoke_hook(
 }
 pub fn observe_access_irikar__basement_portal__ledge__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_platform_moved
@@ -17438,7 +17283,7 @@ pub fn observe_access_irikar__basement_portal__ledge__ex__moving_platform_start_
 }
 pub fn observe_access_irikar__basement_portal__middle_platform__ex__moving_platform_end_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_platform_moved and $hook
@@ -17449,7 +17294,7 @@ pub fn observe_access_irikar__basement_portal__middle_platform__ex__moving_platf
 }
 pub fn observe_access_irikar__basement_portal__portal_stand__ex__moving_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_platform_moved
@@ -17460,7 +17305,7 @@ pub fn observe_access_irikar__basement_portal__portal_stand__ex__moving_platform
 }
 pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_left_platform and Nanite_Mist
@@ -17474,7 +17319,7 @@ pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_sta
 }
 pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_left_platform and $mist2
@@ -17485,7 +17330,7 @@ pub fn observe_access_irikar__midwest__center_rock_1_east__ex__left_platform_sta
 }
 pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
@@ -17499,7 +17344,7 @@ pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $mist2
@@ -17510,7 +17355,7 @@ pub fn observe_access_irikar__midwest__center_rock_1_west__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
@@ -17524,7 +17369,7 @@ pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $mist2
@@ -17535,7 +17380,7 @@ pub fn observe_access_irikar__midwest__center_rock_2_east__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
@@ -17549,7 +17394,7 @@ pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $mist2
@@ -17560,7 +17405,7 @@ pub fn observe_access_irikar__midwest__center_rock_2_west__ex__right_platform_st
 }
 pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Nanite_Mist and not ^_right_platform
@@ -17574,7 +17419,7 @@ pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_s
 }
 pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $mist2 and not ^_right_platform
@@ -17586,7 +17431,7 @@ pub fn observe_access_irikar__midwest__left_platform_start__ex__right_platform_s
 }
 pub fn observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_left_platform and $activate
@@ -17597,7 +17442,7 @@ pub fn observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(
 }
 pub fn observe_access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $hover and $hook and not ^_left_platform
@@ -17609,7 +17454,7 @@ pub fn observe_access_irikar__midwest__ne_ledge__ex__left_platform_start_1__req(
 }
 pub fn observe_access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $activate
@@ -17620,7 +17465,7 @@ pub fn observe_access_irikar__midwest__right_platform_start__hack_and_ride_platf
 }
 pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $mist2
@@ -17631,7 +17476,7 @@ pub fn observe_access_irikar__midwest__small_rooftop__ex__right_platform_start_1
 }
 pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
@@ -17645,7 +17490,7 @@ pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start
 }
 pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not ^_right_platform and $mist2
@@ -17656,7 +17501,7 @@ pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start
 }
 pub fn observe_access_irikar_gudam(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Irikar_Gudam
@@ -17667,7 +17512,7 @@ pub fn observe_access_irikar_gudam(
 }
 pub fn observe_access_irikar_royal_storage_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Irikar_Royal_Storage_Wall
@@ -17678,7 +17523,7 @@ pub fn observe_access_irikar_royal_storage_wall(
 }
 pub fn observe_access_map__amagi__east_lake__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__amagi__east_lake__save
@@ -17689,7 +17534,7 @@ pub fn observe_access_map__amagi__east_lake__save(
 }
 pub fn observe_access_map__amagi__main_area__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__amagi__main_area__save
@@ -17700,7 +17545,7 @@ pub fn observe_access_map__amagi__main_area__save(
 }
 pub fn observe_access_map__amagi_breach__east_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__amagi_breach__east_entrance__save
@@ -17711,7 +17556,7 @@ pub fn observe_access_map__amagi_breach__east_entrance__save(
 }
 pub fn observe_access_map__annuna__center_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__annuna__center_save__save
@@ -17722,7 +17567,7 @@ pub fn observe_access_map__annuna__center_save__save(
 }
 pub fn observe_access_map__annuna__factory_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__annuna__factory_entrance__save
@@ -17733,7 +17578,7 @@ pub fn observe_access_map__annuna__factory_entrance__save(
 }
 pub fn observe_access_map__annuna__mirror_match__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__annuna__mirror_match__save
@@ -17744,7 +17589,7 @@ pub fn observe_access_map__annuna__mirror_match__save(
 }
 pub fn observe_access_map__annuna__upper_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__annuna__upper_save__save
@@ -17755,7 +17600,7 @@ pub fn observe_access_map__annuna__upper_save__save(
 }
 pub fn observe_access_map__annuna__vertical_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__annuna__vertical_room__save
@@ -17766,7 +17611,7 @@ pub fn observe_access_map__annuna__vertical_room__save(
 }
 pub fn observe_access_map__ebih__base_camp__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__ebih__base_camp__save
@@ -17777,7 +17622,7 @@ pub fn observe_access_map__ebih__base_camp__save(
 }
 pub fn observe_access_map__ebih__ebih_west__lower_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__ebih__ebih_west__lower_save
@@ -17788,7 +17633,7 @@ pub fn observe_access_map__ebih__ebih_west__lower_save(
 }
 pub fn observe_access_map__ebih__ebih_west__mid_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__ebih__ebih_west__mid_save
@@ -17799,7 +17644,7 @@ pub fn observe_access_map__ebih__ebih_west__mid_save(
 }
 pub fn observe_access_map__ebih__ebih_west__upper_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__ebih__ebih_west__upper_save
@@ -17810,7 +17655,7 @@ pub fn observe_access_map__ebih__ebih_west__upper_save(
 }
 pub fn observe_access_map__giguna__giguna_base__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna__giguna_base__save
@@ -17821,7 +17666,7 @@ pub fn observe_access_map__giguna__giguna_base__save(
 }
 pub fn observe_access_map__giguna__giguna_northeast__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna__giguna_northeast__save
@@ -17832,7 +17677,7 @@ pub fn observe_access_map__giguna__giguna_northeast__save(
 }
 pub fn observe_access_map__giguna__ruins_top__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna__ruins_top__save
@@ -17843,7 +17688,7 @@ pub fn observe_access_map__giguna__ruins_top__save(
 }
 pub fn observe_access_map__giguna__ruins_west__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna__ruins_west__save
@@ -17854,7 +17699,7 @@ pub fn observe_access_map__giguna__ruins_west__save(
 }
 pub fn observe_access_map__giguna_breach__peak__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna_breach__peak__save
@@ -17865,7 +17710,7 @@ pub fn observe_access_map__giguna_breach__peak__save(
 }
 pub fn observe_access_map__giguna_breach__sw_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__giguna_breach__sw_save__save
@@ -17876,7 +17721,7 @@ pub fn observe_access_map__giguna_breach__sw_save__save(
 }
 pub fn observe_access_map__glacier__revival__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier__revival__save
@@ -17887,7 +17732,7 @@ pub fn observe_access_map__glacier__revival__save(
 }
 pub fn observe_access_map__glacier_breach__guarded_corridor__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier_breach__guarded_corridor__save
@@ -17898,7 +17743,7 @@ pub fn observe_access_map__glacier_breach__guarded_corridor__save(
 }
 pub fn observe_access_map__glacier_breach__hammonds_breach__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier_breach__hammonds_breach__save
@@ -17909,7 +17754,7 @@ pub fn observe_access_map__glacier_breach__hammonds_breach__save(
 }
 pub fn observe_access_map__glacier_breach__save_and_exit__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier_breach__save_and_exit__save
@@ -17920,7 +17765,7 @@ pub fn observe_access_map__glacier_breach__save_and_exit__save(
 }
 pub fn observe_access_map__glacier_breach__south_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier_breach__south_save__save
@@ -17931,7 +17776,7 @@ pub fn observe_access_map__glacier_breach__south_save__save(
 }
 pub fn observe_access_map__glacier_breach__west_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__glacier_breach__west_save__save
@@ -17942,7 +17787,7 @@ pub fn observe_access_map__glacier_breach__west_save__save(
 }
 pub fn observe_access_map__irikar__beach_save__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__irikar__beach_save__save
@@ -17953,7 +17798,7 @@ pub fn observe_access_map__irikar__beach_save__save(
 }
 pub fn observe_access_map__irikar__hub__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__irikar__hub__save
@@ -17964,7 +17809,7 @@ pub fn observe_access_map__irikar__hub__save(
 }
 pub fn observe_access_map__irikar__midwest__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__irikar__midwest__save
@@ -17975,7 +17820,7 @@ pub fn observe_access_map__irikar__midwest__save(
 }
 pub fn observe_access_map__irikar_breach__gauntlet__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__irikar_breach__gauntlet__save
@@ -17986,7 +17831,7 @@ pub fn observe_access_map__irikar_breach__gauntlet__save(
 }
 pub fn observe_access_map__irikar_breach__save_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__irikar_breach__save_room__save
@@ -17997,7 +17842,7 @@ pub fn observe_access_map__irikar_breach__save_room__save(
 }
 pub fn observe_access_map__uhrum__annuna_corridor__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__uhrum__annuna_corridor__save
@@ -18008,7 +17853,7 @@ pub fn observe_access_map__uhrum__annuna_corridor__save(
 }
 pub fn observe_access_map__uhrum__save_room__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__uhrum__save_room__save
@@ -18019,7 +17864,7 @@ pub fn observe_access_map__uhrum__save_room__save(
 }
 pub fn observe_access_map__uhrum__west_entrance__save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^map__uhrum__west_entrance__save
@@ -18030,7 +17875,7 @@ pub fn observe_access_map__uhrum__west_entrance__save(
 }
 pub fn observe_access_melee_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Melee_Damage
@@ -18041,7 +17886,7 @@ pub fn observe_access_melee_damage(
 }
 pub fn observe_access_melee_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Melee_Damage_2
@@ -18052,7 +17897,7 @@ pub fn observe_access_melee_damage_2(
 }
 pub fn observe_access_melee_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Melee_Speed
@@ -18063,7 +17908,7 @@ pub fn observe_access_melee_speed(
 }
 pub fn observe_access_melee_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Melee_Speed_2
@@ -18074,7 +17919,7 @@ pub fn observe_access_melee_speed_2(
 }
 pub fn observe_access_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone'
@@ -18088,7 +17933,7 @@ pub fn observe_access_mode_eq_drone(
 }
 pub fn observe_access_mode_eq_drone_and_apocalypse_seals_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Apocalypse_Seals_Wall
@@ -18105,7 +17950,7 @@ pub fn observe_access_mode_eq_drone_and_apocalypse_seals_wall(
 }
 pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Ebih_Wasteland_Passage_H
@@ -18122,7 +17967,7 @@ pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
 }
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
@@ -18139,7 +17984,7 @@ pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_left(
 }
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_right(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
@@ -18156,7 +18001,7 @@ pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_right(
 }
 pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
@@ -18173,7 +18018,7 @@ pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
 }
 pub fn observe_access_mode_eq_drone_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and $mist2
@@ -18187,7 +18032,7 @@ pub fn observe_access_mode_eq_drone_and_invoke_mist2(
 }
 pub fn observe_access_mode_eq_drone_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Nanite_Mist
@@ -18204,7 +18049,7 @@ pub fn observe_access_mode_eq_drone_and_nanite_mist(
 }
 pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
@@ -18235,7 +18080,7 @@ pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invok
 }
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
@@ -18252,7 +18097,7 @@ pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
 }
 pub fn observe_access_mode_ne_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode != 'drone'
@@ -18266,7 +18111,7 @@ pub fn observe_access_mode_ne_drone(
 }
 pub fn observe_access_mode_ne_drone_and_ice_axe(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^mode != 'drone' and Ice_Axe
@@ -18283,7 +18128,7 @@ pub fn observe_access_mode_ne_drone_and_ice_axe(
 }
 pub fn observe_access_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Nanite_Mist
@@ -18294,7 +18139,7 @@ pub fn observe_access_nanite_mist(
 }
 pub fn observe_access_nanite_mist_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Nanite_Mist and ^mode == 'drone'
@@ -18311,7 +18156,7 @@ pub fn observe_access_nanite_mist_and_mode_eq_drone(
 }
 pub fn observe_access_nano_points(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Nano_Points
@@ -18322,7 +18167,7 @@ pub fn observe_access_nano_points(
 }
 pub fn observe_access_nano_points_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Nano_Points_2
@@ -18333,7 +18178,7 @@ pub fn observe_access_nano_points_2(
 }
 pub fn observe_access_not_amashilama(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT Amashilama
@@ -18344,7 +18189,7 @@ pub fn observe_access_not_amashilama(
 }
 pub fn observe_access_not_apocalypse_bomb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Apocalypse_Bomb
@@ -18355,7 +18200,7 @@ pub fn observe_access_not_apocalypse_bomb(
 }
 pub fn observe_access_not_ebih_interchange_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Ebih_Interchange_Block
@@ -18366,7 +18211,7 @@ pub fn observe_access_not_ebih_interchange_block(
 }
 pub fn observe_access_not_ebih_waterfall_wall_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Ebih_Waterfall_Wall and $mist2
@@ -18377,7 +18222,7 @@ pub fn observe_access_not_ebih_waterfall_wall_and_invoke_mist2(
 }
 pub fn observe_access_not_ebih_waterfall_wall_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Ebih_Waterfall_Wall and Nanite_Mist
@@ -18391,7 +18236,7 @@ pub fn observe_access_not_ebih_waterfall_wall_and_nanite_mist(
 }
 pub fn observe_access_not_hammond_auth(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Hammond_Auth
@@ -18402,7 +18247,7 @@ pub fn observe_access_not_hammond_auth(
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Irikar_Royal_Storage_Wall and $mist2
@@ -18413,7 +18258,7 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_mist2(
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Irikar_Royal_Storage_Wall and $shockwave
@@ -18424,7 +18269,7 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Irikar_Royal_Storage_Wall and Nanite_Mist
@@ -18438,7 +18283,7 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_nanite_mist(
 }
 pub fn observe_access_not_separation_or_defeat_indra(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT Separation or Defeat_Indra
@@ -18452,7 +18297,7 @@ pub fn observe_access_not_separation_or_defeat_indra(
 }
 pub fn observe_access_not_slingshot_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // not Slingshot_Hook
@@ -18463,7 +18308,7 @@ pub fn observe_access_not_slingshot_hook(
 }
 pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
@@ -18483,7 +18328,7 @@ pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
 }
 pub fn observe_access_not_within_menu_and_flasks_gt_0(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
@@ -18496,9 +18341,39 @@ pub fn observe_access_not_within_menu_and_flasks_gt_0(
         i32::from(ctx.flasks()) > n
     }))
 }
+pub fn observe_access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // NOT WITHIN `Menu` and $attract and ^portal != $default and ^portal != ^position
+    ((((match get_region(ctx.position()) {
+        RegionId::Menu => false,
+        _ => true,
+    }) && (hobserve__attract!(ctx, world, full_obs)))
+        && ({
+            let left = {
+                full_obs.observe_portal();
+                ctx.portal()
+            };
+            let right = Default::default();
+            left != right
+        }))
+        && ({
+            let left = {
+                full_obs.observe_portal();
+                ctx.portal()
+            };
+            let right = {
+                full_obs.observe_position();
+                ctx.position()
+            };
+            left != right
+        }))
+}
 pub fn observe_access_not_within_menu_and_invoke_can_deploy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
@@ -18509,7 +18384,7 @@ pub fn observe_access_not_within_menu_and_invoke_can_deploy(
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and Anuman and ^mode == 'drone'
@@ -18532,7 +18407,7 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_anuman_and_mode_eq
 }
 pub fn observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // NOT WITHIN `Menu` and ^realm != 'breach' and $can_recall
@@ -18546,7 +18421,7 @@ pub fn observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(
 }
 pub fn observe_access_portal_eq_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^portal == ^position
@@ -18564,7 +18439,7 @@ pub fn observe_access_portal_eq_position(
 }
 pub fn observe_access_ranged_damage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ranged_Damage
@@ -18575,7 +18450,7 @@ pub fn observe_access_ranged_damage(
 }
 pub fn observe_access_ranged_damage_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ranged_Damage_2
@@ -18586,7 +18461,7 @@ pub fn observe_access_ranged_damage_2(
 }
 pub fn observe_access_ranged_speed(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ranged_Speed
@@ -18597,7 +18472,7 @@ pub fn observe_access_ranged_speed(
 }
 pub fn observe_access_ranged_speed_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Ranged_Speed_2
@@ -18608,7 +18483,7 @@ pub fn observe_access_ranged_speed_2(
 }
 pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^realm == 'breach' and Exit_Breach and ^flipside != $default
@@ -18626,7 +18501,7 @@ pub fn observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_def
 }
 pub fn observe_access_remote_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Remote_Drone
@@ -18637,7 +18512,7 @@ pub fn observe_access_remote_drone(
 }
 pub fn observe_access_separation(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Separation
@@ -18648,7 +18523,7 @@ pub fn observe_access_separation(
 }
 pub fn observe_access_separation_and_not_defeat_indra_and_invoke_mist2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Separation and NOT Defeat_Indra and $mist2
@@ -18662,7 +18537,7 @@ pub fn observe_access_separation_and_not_defeat_indra_and_invoke_mist2(
 }
 pub fn observe_access_separation_and_not_defeat_indra_and_nanite_mist(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Separation and NOT Defeat_Indra and Nanite_Mist
@@ -18679,7 +18554,7 @@ pub fn observe_access_separation_and_not_defeat_indra_and_nanite_mist(
 }
 pub fn observe_access_siuna_storage_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Siuna_Storage_Wall
@@ -18690,7 +18565,7 @@ pub fn observe_access_siuna_storage_wall(
 }
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Sniper_Valley_Rock_1
@@ -18701,7 +18576,7 @@ pub fn observe_access_sniper_valley_rock_1(
 }
 pub fn observe_access_station_power(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Station_Power
@@ -18712,7 +18587,7 @@ pub fn observe_access_station_power(
 }
 pub fn observe_access_switch_36_11(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Switch_36_11
@@ -18723,7 +18598,7 @@ pub fn observe_access_switch_36_11(
 }
 pub fn observe_access_switch_40_12(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Switch_40_12
@@ -18734,7 +18609,7 @@ pub fn observe_access_switch_40_12(
 }
 pub fn observe_access_uhrum_annuna_corridor_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_Annuna_Corridor_Block
@@ -18745,7 +18620,7 @@ pub fn observe_access_uhrum_annuna_corridor_block(
 }
 pub fn observe_access_uhrum_waterfall_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_Waterfall_Wall
@@ -18756,7 +18631,7 @@ pub fn observe_access_uhrum_waterfall_wall(
 }
 pub fn observe_access_uhrum_waterfalls_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_Waterfalls_Block
@@ -18767,7 +18642,7 @@ pub fn observe_access_uhrum_waterfalls_block(
 }
 pub fn observe_access_uhrum_waterfalls_block_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_Waterfalls_Block and $grab
@@ -18778,7 +18653,7 @@ pub fn observe_access_uhrum_waterfalls_block_and_invoke_grab(
 }
 pub fn observe_access_uhrum_waterfalls_block_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_Waterfalls_Block and $hook
@@ -18789,7 +18664,7 @@ pub fn observe_access_uhrum_waterfalls_block_and_invoke_hook(
 }
 pub fn observe_access_uhrum_west_entrance_gate(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_West_Entrance_Gate
@@ -18800,7 +18675,7 @@ pub fn observe_access_uhrum_west_entrance_gate(
 }
 pub fn observe_access_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
@@ -18811,7 +18686,7 @@ pub fn observe_access_uhrum_west_entrance_gate_and_invoke_hover(
 }
 pub fn observe_access_uhrum_west_entrance_lower_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_West_Entrance_Lower_Wall
@@ -18822,7 +18697,7 @@ pub fn observe_access_uhrum_west_entrance_lower_wall(
 }
 pub fn observe_access_uhrum_west_entrance_upper_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Uhrum_West_Entrance_Upper_Wall
@@ -18833,7 +18708,7 @@ pub fn observe_access_uhrum_west_entrance_upper_wall(
 }
 pub fn observe_access_underwater_movement(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement
@@ -18844,7 +18719,7 @@ pub fn observe_access_underwater_movement(
 }
 pub fn observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and ($grab or $climb)
@@ -18855,7 +18730,7 @@ pub fn observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(
 }
 pub fn observe_access_underwater_movement_and_invoke_grab(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and $grab
@@ -18866,7 +18741,7 @@ pub fn observe_access_underwater_movement_and_invoke_grab(
 }
 pub fn observe_access_underwater_movement_and_invoke_hook(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and $hook
@@ -18877,7 +18752,7 @@ pub fn observe_access_underwater_movement_and_invoke_hook(
 }
 pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Underwater_Movement and $hook and $hover
@@ -18889,7 +18764,7 @@ pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -18900,7 +18775,7 @@ pub fn observe_access_within_menu_gt_upgrade_menu(
 }
 pub fn observe_action_amagi__main_area__carving__key_combo__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
@@ -18911,7 +18786,7 @@ pub fn observe_action_amagi__main_area__carving__key_combo__do(
 }
 pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
@@ -18922,7 +18797,7 @@ pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
 }
 pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
@@ -18933,7 +18808,7 @@ pub fn observe_action_annuna__east_bridge__tower_secret__enter_combo__do(
 }
 pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
@@ -18944,7 +18819,7 @@ pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
 }
 pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -18955,7 +18830,7 @@ pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
 }
 pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -18966,7 +18841,7 @@ pub fn observe_action_annuna__west_climb__switch_ledge__open_door__do(
 }
 pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = true
@@ -18977,7 +18852,7 @@ pub fn observe_action_ebih__base_camp__left_platform__move_left_platform__do(
 }
 pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = false
@@ -18988,7 +18863,7 @@ pub fn observe_action_ebih__base_camp__left_platform_moved__reset_left_platform_
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
@@ -18999,7 +18874,7 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift__do(
 }
 pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
@@ -19010,7 +18885,7 @@ pub fn observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_earl
 }
 pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
@@ -19021,7 +18896,7 @@ pub fn observe_action_ebih__drone_room__portal_exit__activate_platform__do(
 }
 pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = false
@@ -19032,7 +18907,7 @@ pub fn observe_action_ebih__ebih_east__dispenser__activate_lift__do(
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
@@ -19043,7 +18918,7 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(
 }
 pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
@@ -19054,7 +18929,7 @@ pub fn observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(
 }
 pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform1_moved = true
@@ -19065,7 +18940,7 @@ pub fn observe_action_ebih__ebih_east__moving_platform__activate_ride__do(
 }
 pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
@@ -19083,7 +18958,7 @@ pub fn observe_action_ebih__ebih_west__below_door__open_door__do(
 }
 pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
@@ -19101,7 +18976,7 @@ pub fn observe_action_ebih__ebih_west__left_of_switch__open_door__do(
 }
 pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19112,7 +18987,7 @@ pub fn observe_action_ebih__grid_25_10_12__door_left__open_door__do(
 }
 pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19123,7 +18998,7 @@ pub fn observe_action_ebih__grid_25_10_12__east_11__open_door__do(
 }
 pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19134,7 +19009,7 @@ pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
 }
 pub fn observe_action_ebih__truck_gate__switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19145,7 +19020,7 @@ pub fn observe_action_ebih__truck_gate__switch__open_door__do(
 }
 pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19156,7 +19031,7 @@ pub fn observe_action_ebih__vertical_interchange__west_13__open_door__do(
 }
 pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
@@ -19167,7 +19042,7 @@ pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
 }
 pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
@@ -19176,23 +19051,15 @@ pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     full_obs.clear_ebih__waterfall__ctx__west_door_open();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_flasks_incr_1(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
+pub fn observe_action_flasks_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^flasks += 1
 }
-pub fn observe_action_flasks_incr_2(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
+pub fn observe_action_flasks_incr_2(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^flasks += 2
 }
 pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
@@ -19203,7 +19070,7 @@ pub fn observe_action_giguna__carnelian__lower_susar__caught__do(
 }
 pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
@@ -19214,7 +19081,7 @@ pub fn observe_action_giguna__carnelian__lower_susar__hack__do(
 }
 pub fn observe_action_giguna__carnelian__switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19225,7 +19092,7 @@ pub fn observe_action_giguna__carnelian__switch__open_door__do(
 }
 pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19236,7 +19103,7 @@ pub fn observe_action_giguna__carnelian__upper_susar__caught__do(
 }
 pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19247,7 +19114,7 @@ pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true
@@ -19258,7 +19125,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
@@ -19279,7 +19146,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
@@ -19292,7 +19159,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
@@ -19303,7 +19170,7 @@ pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
 }
 pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
@@ -19314,7 +19181,7 @@ pub fn observe_action_giguna__east_caverns__lower_susar__hack__do(
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
@@ -19325,7 +19192,7 @@ pub fn observe_action_giguna__east_caverns__mid_susar__caught__do(
 }
 pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
@@ -19336,7 +19203,7 @@ pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
 }
 pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19347,7 +19214,7 @@ pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(
 }
 pub fn observe_action_giguna__east_caverns__switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19358,7 +19225,7 @@ pub fn observe_action_giguna__east_caverns__switch__open_door__do(
 }
 pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19369,7 +19236,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar__caught__do(
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19380,7 +19247,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19391,7 +19258,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do
 }
 pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
@@ -19402,7 +19269,7 @@ pub fn observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(
 }
 pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo_entered = true
@@ -19413,7 +19280,7 @@ pub fn observe_action_giguna__east_caverns__west_14__enter_combo__do(
 }
 pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19424,7 +19291,7 @@ pub fn observe_action_giguna__east_caverns__west_16__open_door__do(
 }
 pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19435,7 +19302,7 @@ pub fn observe_action_giguna__gateway__flask_ledge__open_door__do(
 }
 pub fn observe_action_giguna__gateway__one_jump__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19446,7 +19313,7 @@ pub fn observe_action_giguna__gateway__one_jump__open_door__do(
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19457,7 +19324,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_1__open_door__do(
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19468,7 +19335,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_2__open_door__do(
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19479,7 +19346,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_3__open_door__do(
 }
 pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
@@ -19490,7 +19357,7 @@ pub fn observe_action_giguna__giguna_base__switch_distance_4__open_door__do(
 }
 pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afar__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19501,7 +19368,7 @@ pub fn observe_action_giguna__giguna_northeast__right_column__open_door_from_afa
 }
 pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19512,7 +19379,7 @@ pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
 }
 pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_doors_open = true
@@ -19523,7 +19390,7 @@ pub fn observe_action_giguna__ruins_top__switch__open_doors__do(
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
@@ -19534,7 +19401,7 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(
 }
 pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
@@ -19545,7 +19412,7 @@ pub fn observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(
 }
 pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
@@ -19556,7 +19423,7 @@ pub fn observe_action_giguna__west_caverns__east_susar__caught__do(
 }
 pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
@@ -19567,7 +19434,7 @@ pub fn observe_action_giguna__west_caverns__east_susar__hack__do(
 }
 pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
@@ -19578,7 +19445,7 @@ pub fn observe_action_giguna_breach__sw_save__west_11__open_door__do(
 }
 pub fn observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
@@ -19589,7 +19456,7 @@ pub fn observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(
 }
 pub fn observe_action_glacier__hammonds_end__switch_near__open_doors__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
@@ -19600,7 +19467,7 @@ pub fn observe_action_glacier__hammonds_end__switch_near__open_doors__do(
 }
 pub fn observe_action_glacier__hammonds_end__west_11__open_doors__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
@@ -19611,7 +19478,7 @@ pub fn observe_action_glacier__hammonds_end__west_11__open_doors__do(
 }
 pub fn observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_bridge_open = true
@@ -19622,7 +19489,7 @@ pub fn observe_action_glacier__the_big_drop__solid_rock__careful_break__do(
 }
 pub fn observe_action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_gatestones = true
@@ -19633,7 +19500,7 @@ pub fn observe_action_glacier__vertical_room__lower_switch__open_lower_gatestone
 }
 pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_gatestone = true
@@ -19644,7 +19511,7 @@ pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
 }
 pub fn observe_action_indra_set_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
@@ -19655,7 +19522,7 @@ pub fn observe_action_indra_set_invoke_default(
 }
 pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default; $refill_energy
@@ -19667,7 +19534,7 @@ pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
 }
 pub fn observe_action_invoke_clear_breach_save(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $clear_breach_save
@@ -19678,7 +19545,7 @@ pub fn observe_action_invoke_clear_breach_save(
 }
 pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
@@ -19689,7 +19556,7 @@ pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__
 }
 pub fn observe_action_invoke_deploy_drone(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone
@@ -19700,7 +19567,7 @@ pub fn observe_action_invoke_deploy_drone(
 }
 pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Center Corridor`)
@@ -19716,7 +19583,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_cen
 }
 pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
@@ -19732,7 +19599,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tow
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
@@ -19743,7 +19610,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
@@ -19759,7 +19626,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
@@ -19770,7 +19637,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kar
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
@@ -19781,7 +19648,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
@@ -19792,7 +19659,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middl
 }
 pub fn observe_action_invoke_post_portal_save_update(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $post_portal_save_update
@@ -19803,7 +19670,7 @@ pub fn observe_action_invoke_post_portal_save_update(
 }
 pub fn observe_action_invoke_refill_energy(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $refill_energy
@@ -19814,7 +19681,7 @@ pub fn observe_action_invoke_refill_energy(
 }
 pub fn observe_action_invoke_reset_old_area__newpos(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     newpos: SpotId,
     full_obs: &mut FullObservation,
 ) {
@@ -19824,11 +19691,7 @@ pub fn observe_action_invoke_reset_old_area__newpos(
     hobserve__reset_old_area!(ctx, world, newpos, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_save(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
+pub fn observe_action_invoke_save(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // $save
     let old_strict = full_obs.strict;
     full_obs.strict = true;
@@ -19837,7 +19700,7 @@ pub fn observe_action_invoke_save(
 }
 pub fn observe_action_invoke_save_last(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     newpos: SpotId,
     full_obs: &mut FullObservation,
 ) {
@@ -19849,35 +19712,35 @@ pub fn observe_action_invoke_save_last(
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
 }
 pub fn observe_action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
@@ -19888,7 +19751,7 @@ pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_p
 }
 pub fn observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform = true
@@ -19899,7 +19762,7 @@ pub fn observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(
 }
 pub fn observe_action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_right_platform = true
@@ -19910,7 +19773,7 @@ pub fn observe_action_irikar__midwest__right_platform_start__hack_and_ride_platf
 }
 pub fn observe_action_last_set_invoke_default(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^last = $default
@@ -19921,7 +19784,7 @@ pub fn observe_action_last_set_invoke_default(
 }
 pub fn observe_action_last_set_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^last = ^position
@@ -19930,11 +19793,7 @@ pub fn observe_action_last_set_position(
     full_obs.clear_last();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_mode_set_drone(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
+pub fn observe_action_mode_set_drone(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^mode = 'drone'
     let old_strict = full_obs.strict;
     full_obs.strict = true;
@@ -19943,7 +19802,7 @@ pub fn observe_action_mode_set_drone(
 }
 pub fn observe_action_mode_set_drone_indra_set_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'; ^indra = ^position
@@ -19953,11 +19812,7 @@ pub fn observe_action_mode_set_drone_indra_set_position(
     full_obs.clear_indra();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_mode_set_indra(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) {
+pub fn observe_action_mode_set_indra(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^mode = 'Indra'
     let old_strict = full_obs.strict;
     full_obs.strict = true;
@@ -19966,7 +19821,7 @@ pub fn observe_action_mode_set_indra(
 }
 pub fn observe_action_mode_set_indra_last_set_indra(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
@@ -19978,7 +19833,7 @@ pub fn observe_action_mode_set_indra_last_set_indra(
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch East`
@@ -19989,7 +19844,7 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch West`
@@ -20000,7 +19855,7 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Second Platform`
@@ -20011,7 +19866,7 @@ pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platfor
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Top Platform`
@@ -20022,7 +19877,7 @@ pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Corner`
@@ -20033,7 +19888,7 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Hammond`
@@ -20044,7 +19899,7 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
@@ -20053,16 +19908,23 @@ pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
     full_obs.clear_portal();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_refills_incr_1(
+pub fn observe_action_portal_set_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
+    // ^portal = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_refills_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^refills += 1
 }
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
