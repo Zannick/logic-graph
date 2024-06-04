@@ -5185,11 +5185,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 8 {
+                        if ctx.count(Item::Big_Flask) < 9 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 8 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 9 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 8 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 9 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -5265,6 +5265,11 @@ impl world::World for World {
                         if !ctx.has(Item::Drone_Hover) {
                             if !map.contains_key(&Item::Drone_Hover) {
                                 map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Exit_Breach) {
+                            if !map.contains_key(&Item::Exit_Breach) {
+                                map.insert(Item::Exit_Breach, 1);
                             }
                         }
                         if !ctx.has(Item::Eye_Ring) {
@@ -5480,6 +5485,11 @@ impl world::World for World {
                         if !ctx.has(Item::Drone_Hover) {
                             if !map.contains_key(&Item::Drone_Hover) {
                                 map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Exit_Breach) {
+                            if !map.contains_key(&Item::Exit_Breach) {
+                                map.insert(Item::Exit_Breach, 1);
                             }
                         }
                         if !ctx.has(Item::Fast_Travel) {
@@ -5555,11 +5565,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 8 {
+                        if ctx.count(Item::Big_Flask) < 9 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 8 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 9 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 8 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 9 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -5635,6 +5645,11 @@ impl world::World for World {
                         if !ctx.has(Item::Drone_Hover) {
                             if !map.contains_key(&Item::Drone_Hover) {
                                 map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Exit_Breach) {
+                            if !map.contains_key(&Item::Exit_Breach) {
+                                map.insert(Item::Exit_Breach, 1);
                             }
                         }
                         if !ctx.has(Item::Eye_Ring) {
@@ -5850,6 +5865,11 @@ impl world::World for World {
                         if !ctx.has(Item::Drone_Hover) {
                             if !map.contains_key(&Item::Drone_Hover) {
                                 map.insert(Item::Drone_Hover, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Exit_Breach) {
+                            if !map.contains_key(&Item::Exit_Breach) {
+                                map.insert(Item::Exit_Breach, 1);
                             }
                         }
                         if !ctx.has(Item::Fast_Travel) {
@@ -5935,9 +5955,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 8);
+                            *val = std::cmp::max(*val, 9);
                         } else {
-                            map.insert(Item::Big_Flask, 8);
+                            map.insert(Item::Big_Flask, 9);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -5983,6 +6003,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Exit_Breach) {
+                            map.insert(Item::Exit_Breach, 1);
                         }
                         if !map.contains_key(&Item::Eye_Ring) {
                             map.insert(Item::Eye_Ring, 1);
@@ -6116,6 +6139,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Exit_Breach) {
+                            map.insert(Item::Exit_Breach, 1);
                         }
                         if !map.contains_key(&Item::Fast_Travel) {
                             map.insert(Item::Fast_Travel, 1);
@@ -6165,9 +6191,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 8);
+                            *val = std::cmp::max(*val, 9);
                         } else {
-                            map.insert(Item::Big_Flask, 8);
+                            map.insert(Item::Big_Flask, 9);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -6213,6 +6239,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Exit_Breach) {
+                            map.insert(Item::Exit_Breach, 1);
                         }
                         if !map.contains_key(&Item::Eye_Ring) {
                             map.insert(Item::Eye_Ring, 1);
@@ -6346,6 +6375,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Drone_Hover) {
                             map.insert(Item::Drone_Hover, 1);
+                        }
+                        if !map.contains_key(&Item::Exit_Breach) {
+                            map.insert(Item::Exit_Breach, 1);
                         }
                         if !map.contains_key(&Item::Fast_Travel) {
                             map.insert(Item::Fast_Travel, 1);

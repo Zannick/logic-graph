@@ -2394,11 +2394,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{22}, Big_Flask{8}]
+/// [Flask{22}, Big_Flask{9}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 22 && $ctx.count(Item::Big_Flask) >= 8
+        $ctx.count(Item::Flask) >= 22 && $ctx.count(Item::Big_Flask) >= 9
     }};
 }
 #[macro_export]
@@ -2418,7 +2418,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 8, vec!["Big_Flask count"])
+                (ct >= 9, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2432,8 +2432,8 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(22));
             $ctx.count(Item::Flask) >= 22
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(8));
-            $ctx.count(Item::Big_Flask) >= 8
+            $full_obs.observe_big_flask(IntegerObservation::Ge(9));
+            $ctx.count(Item::Big_Flask) >= 9
         })
     }};
 }
@@ -2680,7 +2680,7 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -2696,6 +2696,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Fast_Travel)
             && $ctx.has(Item::Anuman)
             && $ctx.has(Item::Nanite_Mist)
+            && $ctx.has(Item::Exit_Breach)
     }};
 }
 #[macro_export]
@@ -2808,6 +2809,15 @@ macro_rules! hexplain__all_urns {
                 (h, vec!["Nanite_Mist"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Exit_Breach);
+                $edict.insert("Exit_Breach", format!("{}", h));
+                (h, vec!["Exit_Breach"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2851,6 +2861,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_nanite_mist();
             $ctx.has(Item::Nanite_Mist)
+        }) && ({
+            $full_obs.observe_exit_breach();
+            $ctx.has(Item::Exit_Breach)
         })
     }};
 }
