@@ -14,6 +14,39 @@ subgraph Amagi_Breach
         Amagi_Breach__East_Connector__East(East);
         Amagi_Breach__East_Connector__West(West);
     end
+    subgraph Amagi_Breach__East_Ruins[East Ruins]
+        Amagi_Breach__East_Ruins__West(West);
+        Amagi_Breach__East_Ruins__West_Bubbly_Pillar(West Bubbly Pillar);
+        Amagi_Breach__East_Ruins__West_Bubbly_Platform(West Bubbly Platform);
+        Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West(Left Rocky Pillar West);
+        Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East(Left Rocky Pillar East);
+        Amagi_Breach__East_Ruins__South(South);
+        Amagi_Breach__East_Ruins__Little_Rock(Little Rock);
+        Amagi_Breach__East_Ruins__Center_Rock_West(Center Rock West);
+        Amagi_Breach__East_Ruins__Save_Point(Save Point);
+        Amagi_Breach__East_Ruins__Center_Rock_East(Center Rock East);
+        Amagi_Breach__East_Ruins__Under_the_Rock(Under the Rock);
+        Amagi_Breach__East_Ruins__Small_Column_West(Small Column West);
+        Amagi_Breach__East_Ruins__High_Rock_West(High Rock West);
+        Amagi_Breach__East_Ruins__High_Rock_Middle_Ledge(High Rock Middle Ledge);
+        Amagi_Breach__East_Ruins__High_Rock_East_Ledge(High Rock East Ledge);
+        Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge(High Rock Lower Ledge);
+        Amagi_Breach__East_Ruins__Northeast_Bubbles_Center(Northeast Bubbles Center);
+        Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast(Northeast Bubbles Southeast);
+        Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access(Northeast Bubbles Corner Access);
+        Amagi_Breach__East_Ruins__Northeast_Corner(Northeast Corner);
+        Amagi_Breach__East_Ruins__Arch_West(Arch West);
+        Amagi_Breach__East_Ruins__Arch_East(Arch East);
+        Amagi_Breach__East_Ruins__Plinth(Plinth);
+        Amagi_Breach__East_Ruins__Small_Column_East(Small Column East);
+        Amagi_Breach__East_Ruins__Southeast_Rock_Wall(Southeast Rock Wall);
+    end
+    subgraph Amagi_Breach__Center_Ruins[Center Ruins]
+        Amagi_Breach__Center_Ruins__East_18(East 18);
+    end
+    subgraph Amagi_Breach__Upper_Hallway[Upper Hallway]
+        Amagi_Breach__Upper_Hallway__North(North);
+    end
 end
 subgraph Amagi
     subgraph Amagi__Main_Area[Main Area]
@@ -2243,7 +2276,6 @@ subgraph Menu
         Menu__Breach_Map__UVB_Dead_end(UVB Dead-end);
         Menu__Breach_Map__UVB_East(UVB East);
         Menu__Breach_Map__UVB_West(UVB West);
-        Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__GSB_Chimney_Flask(GSB Chimney Flask);
         Menu__Breach_Map__GSB_Cubby_Health(GSB Cubby Health);
         Menu__Breach_Map__Slingshot_Hook(Slingshot Hook);
@@ -2252,6 +2284,9 @@ subgraph Menu
         Menu__Breach_Map__IB_Gauntlet_Flask(IB Gauntlet Flask);
         Menu__Breach_Map__Drone_Hover(Drone Hover);
         Menu__Breach_Map__IB_Worm_Rave_Flask(IB Worm Rave Flask);
+        Menu__Breach_Map__LAB_East_Health(LAB East Health);
+        Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
+        Menu__Breach_Map__Exit_Breach(Exit Breach);
     end
 end
 subgraph Uhrum
@@ -2396,6 +2431,24 @@ Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
 Amagi_Breach__East_Entrance__Grate_Left --> Amagi_Breach__East_Entrance__Upper_Slope
 Amagi_Breach__East_Entrance__West --> Amagi_Breach__East_Connector__East
+Amagi_Breach__East_Ruins__Arch_West --> Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge
+Amagi_Breach__East_Ruins__Arch_West --> Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access
+Amagi_Breach__East_Ruins__Center_Rock_West --> Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East
+Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
+Amagi_Breach__East_Ruins__Northeast_Bubbles_Center --> Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access
+Amagi_Breach__East_Ruins__Northeast_Corner --> Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast
+Amagi_Breach__East_Ruins__Northeast_Corner --> Menu__Breach_Map__LAB_East_Ruins_Flask
+Amagi_Breach__East_Ruins__Northeast_Corner --> Menu__Warp_Only__Breach
+Amagi_Breach__East_Ruins__Plinth --> Amagi_Breach__East_Ruins__Small_Column_East
+Amagi_Breach__East_Ruins__Plinth --> Amagi_Breach__East_Ruins__Southeast_Rock_Wall
+Amagi_Breach__East_Ruins__Plinth --> Menu__Breach_Map__Exit_Breach
+Amagi_Breach__East_Ruins__Plinth --> Menu__Warp_Only__Breach
+Amagi_Breach__East_Ruins__Small_Column_West --> Amagi_Breach__East_Ruins__Center_Rock_East
+Amagi_Breach__East_Ruins__South --> Amagi_Breach__Upper_Hallway__North
+Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch_East
+Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
+Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
+Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
 Amagi__East_Lake__Arch_East --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__Arch_West <--> Amagi__East_Lake__Portal_Ledge
 Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Arch_West
@@ -3561,6 +3614,7 @@ Menu__Breach_Map__GlB_South --> Glacier_Breach__South_Save__Save_Point
 Menu__Breach_Map__GlB_West --> Glacier_Breach__West_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
+Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point

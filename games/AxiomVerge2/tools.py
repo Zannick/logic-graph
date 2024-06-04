@@ -48,9 +48,16 @@ def same_coordinates_no_flipside():
         by_coord[tuple(spot['coord'])].append(spot)
     dups = [
         [s['fullname'] for s in same] for same in by_coord.values()
-        if len(same) > 1 and any(s['all_data']['flipside'] == 'SpotId::None' for s in same)
+        # Include all spots that don't have flipside set to default
+        # explicitly setting it to default will exclude it so we can mark the passage deliberately one-way
+        if len(same) > 1 and any(s['all_data']['flipside'] == 'SpotId::None'
+                                 and 'flipside' not in s.get('data', {}) for s in same)
     ]
     pprint(dups)
+
+# TODO: can we find nearby coordinates in the other realm to include in this?
+# TODO: breach spots with non-event locations should have flipsides if possible
+# TODO: confirm flipsides have each other as flipsides
 
 
 if __name__ == '__main__':

@@ -6,6 +6,9 @@
     {
         node[fillcolor="6"];
         {
+            Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
+        }
+        {
             Amagi_Breach__East_Connector__East [label = "", pos = "110.7,-76.25!"];
             Amagi_Breach__East_Connector__West [label = "", pos = "108.3,-76.25!"];
         }
@@ -16,6 +19,36 @@
             Amagi_Breach__East_Entrance__Upper_Slope [label = "", pos = "111.9,-74.333333!"];
             Amagi_Breach__East_Entrance__Save_Point [label = "", pos = "112.425,-76.0!"];
             Amagi_Breach__East_Entrance__West [label = "", pos = "111.3,-76.25!"];
+        }
+        {
+            Amagi_Breach__East_Ruins__West [label = "", pos = "93.3,-79.583333!"];
+            Amagi_Breach__East_Ruins__West_Bubbly_Pillar [label = "", pos = "94.2,-78.666667!"];
+            Amagi_Breach__East_Ruins__West_Bubbly_Platform [label = "", pos = "94.8,-77.5!"];
+            Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West [label = "", pos = "95.25,-76.833333!"];
+            Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East [label = "", pos = "97.35,-76.333333!"];
+            Amagi_Breach__East_Ruins__South [label = "", pos = "97.5,-79.666667!"];
+            Amagi_Breach__East_Ruins__Little_Rock [label = "", pos = "97.95,-78.5!"];
+            Amagi_Breach__East_Ruins__Center_Rock_West [label = "", pos = "98.4,-77.916667!"];
+            Amagi_Breach__East_Ruins__Save_Point [label = "", pos = "100.425,-77.166667!"];
+            Amagi_Breach__East_Ruins__Center_Rock_East [label = "", pos = "101.4,-77.5!"];
+            Amagi_Breach__East_Ruins__Under_the_Rock [label = "", pos = "99.6,-79.583333!"];
+            Amagi_Breach__East_Ruins__Small_Column_West [label = "", pos = "101.7,-78.5!"];
+            Amagi_Breach__East_Ruins__High_Rock_West [label = "", pos = "99.9,-75.833333!"];
+            Amagi_Breach__East_Ruins__High_Rock_Middle_Ledge [label = "", pos = "100.95,-75.833333!"];
+            Amagi_Breach__East_Ruins__High_Rock_East_Ledge [label = "", pos = "102.3,-76.25!"];
+            Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge [label = "", pos = "102.6,-76.666667!"];
+            Amagi_Breach__East_Ruins__Northeast_Bubbles_Center [label = "", pos = "103.2,-76.0!"];
+            Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast [label = "", pos = "104.1,-76.666667!"];
+            Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access [label = "", pos = "104.4,-75.416667!"];
+            Amagi_Breach__East_Ruins__Northeast_Corner [label = "", pos = "104.7,-75.416667!"];
+            Amagi_Breach__East_Ruins__Arch_West [label = "", pos = "103.05,-78.0!"];
+            Amagi_Breach__East_Ruins__Arch_East [label = "", pos = "103.95,-78.0!"];
+            Amagi_Breach__East_Ruins__Plinth [label = "", pos = "103.5,-79.333333!"];
+            Amagi_Breach__East_Ruins__Small_Column_East [label = "", pos = "102.45,-78.5!"];
+            Amagi_Breach__East_Ruins__Southeast_Rock_Wall [label = "", pos = "104.4,-78.5!"];
+        }
+        {
+            Amagi_Breach__Upper_Hallway__North [label = "", pos = "97.5,-80.333333!"];
         }
     }
     {
@@ -2095,7 +2128,6 @@
             Menu__Breach_Map__UVB_Dead_end [label = "", pos = "93.0,-93.333333!"];
             Menu__Breach_Map__UVB_East [label = "", pos = "93.0,-95.0!"];
             Menu__Breach_Map__UVB_West [label = "", pos = "57.0,-93.333333!"];
-            Menu__Breach_Map__LAB_East_Health [label = "", pos = "111.0,-75.0!"];
             Menu__Breach_Map__GSB_Chimney_Flask [label = "", pos = "39.0,-63.333333!"];
             Menu__Breach_Map__GSB_Cubby_Health [label = "", pos = "39.0,-68.333333!"];
             Menu__Breach_Map__Slingshot_Hook [label = "", pos = "51.0,-68.333333!"];
@@ -2104,6 +2136,9 @@
             Menu__Breach_Map__IB_Gauntlet_Flask [label = "", pos = "30.0,-88.333333!"];
             Menu__Breach_Map__Drone_Hover [label = "", pos = "36.0,-88.333333!"];
             Menu__Breach_Map__IB_Worm_Rave_Flask [label = "", pos = "36.0,-93.333333!"];
+            Menu__Breach_Map__LAB_East_Health [label = "", pos = "111.0,-75.0!"];
+            Menu__Breach_Map__LAB_East_Ruins_Flask [label = "", pos = "102.0,-76.666667!"];
+            Menu__Breach_Map__Exit_Breach [label = "", pos = "102.0,-80.0!"];
         }
         {
             node[shape=doublecircle, fillcolor="8"];

@@ -3116,7 +3116,7 @@ areas:
           item: Nanite_Mist
           canon: Nanite_Mist
           req: Fast_Travel and $boomerang2
-          to: Menu > Kiengir Map > Nanite Mist
+          to: ^map_spot
           tags: [cskip]
           penalties:
             - when: Anuman
@@ -3140,7 +3140,7 @@ areas:
           item: Nanite_Mist
           canon: Nanite_Mist
           req: Fast_Travel and $boomerang
-          to: Menu > Kiengir Map > Nanite Mist
+          to: ^map_spot
           tags: [cskip]
           penalties:
             - when: Anuman
@@ -3171,7 +3171,7 @@ areas:
           item: Nanite_Mist
           canon: Nanite_Mist
           req: Fast_Travel and $melee_cskip
-          to: Menu > Kiengir Map > Nanite Mist
+          to: ^map_spot
           tags: [cskip]
           penalties:
             - when: Anuman

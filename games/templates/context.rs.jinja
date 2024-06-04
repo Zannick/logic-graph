@@ -327,7 +327,7 @@ impl context::Ctx for Context {
 %% if place.action_id
                     rules::action_{{ place.action_id }}(self, world, pos);
 %% endif
-%% for tile in place.tiles
+%% for tile in place._tiles
 %% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
 %% endif
@@ -345,7 +345,7 @@ impl context::Ctx for Context {
 %% for s in context_position_watchers['spot']|sort
 %% set spot = id_lookup[s]
                 SpotId::{{ s }} => {
-%% for tile in spot.tiles
+%% for tile in spot._tiles
 %% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
 %% endif

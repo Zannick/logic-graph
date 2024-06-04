@@ -905,6 +905,11 @@ areas:
       coord: [9, 26]
     - name: LAB Center
       coord: [33, 17]
+      exits:
+        - to: Amagi Breach > East Ruins > Save Point
+          req: ^map__amagi_breach__east_ruins__save
+          time: 12
+          tags: [warp]
     - name: LAB East
       coord: [37, 16]
       exits:
@@ -939,8 +944,6 @@ areas:
     #endregion
 
     #region Breach other entry points
-    - name: LAB East Health
-      coord: [37, 15]
     - name: GSB Chimney Flask
       coord: [13, 8]
     - name: GSB Cubby Health
@@ -957,4 +960,11 @@ areas:
       coord: [12, 23]
     - name: IB Worm Rave Flask
       coord: [12, 26]
+
+    - name: LAB East Health
+      coord: [37, 15]
+    - name: LAB East Ruins Flask
+      coord: [34, 16]
+    - name: Exit Breach
+      coord: [34, 18]
     #endregion

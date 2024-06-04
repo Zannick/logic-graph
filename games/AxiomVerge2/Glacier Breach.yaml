@@ -24,6 +24,8 @@ areas:
           tags: [xdoor]
     - name: Save Point
       coord: [38.475, 14.6]
+      data:
+        flipside: Annuna > Lamassu > Portal Stand
       local:
         - to: West
       exits:
@@ -37,6 +39,8 @@ areas:
           tags: [save]
     - name: Brick Ledge
       coord: [38.75, 14.2]
+      data:
+        flipside: Annuna > Lamassu > Upper Brick Ledge
       local:
         - to: Save Point
       exits:
@@ -46,6 +50,8 @@ areas:
           jumps: 2
     - name: East
       coord: [38.9, 13.65]
+      data:
+        flipside: Annuna > Lamassu > East 14
       local:
         - to: Save Point
         - to: West

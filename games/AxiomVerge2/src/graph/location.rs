@@ -56,6 +56,12 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::access_invoke_shockwave(ctx, world),
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => true,
+            LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item => true,
+            LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip => true,
+            LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Amagi_Breach__East_Ruins__Plinth__Urn => true,
+            LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip => true,
+            LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => true,
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::access_invoke_boomerang(ctx, world),
@@ -400,6 +406,7 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
@@ -683,6 +690,7 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::explain_invoke_boomerang(ctx, world, edict),
@@ -920,6 +928,60 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item,
+        canonical: CanonId::LAB_East_Ruins_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip,
+        canonical: CanonId::LAB_East_Ruins_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel,
+        canonical: CanonId::LAB_East_Ruins_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Plinth__Urn,
+        canonical: CanonId::Exit_Breach,
+        item: Item::Exit_Breach,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip,
+        canonical: CanonId::Exit_Breach,
+        item: Item::Exit_Breach,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel] = Location {
+        id: LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel,
+        canonical: CanonId::Exit_Breach,
+        item: Item::Exit_Breach,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel),
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {

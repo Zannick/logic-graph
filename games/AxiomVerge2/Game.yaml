@@ -72,13 +72,13 @@ movements:  # MARK: movements
   water:
     x: .285
     req: Underwater_Movement
-  # TODO: drone slingshot+hover is faster x movement but is pretty circumstantial
-  # *and* limited
-  # But with just throw + hover, can cover about 2.5 in ~6s / 1 in 2.5s
-  # aka ~.4-.416 speed in one direction for around 6s max
   # TODO: anuman "movement" of constantly changing form?
 
 exit_movements:  # MARK: exit_movements
+  # drone slingshot+hover is faster x movement but is pretty circumstantial
+  # *and* limited
+  # But with just throw + hover, can cover about 2.5 in ~6s / 1 in 2.5s
+  # aka ~.4-.416 speed in one direction for around 6s max
   fast_hover:
     x: .4
   fling:
@@ -107,6 +107,12 @@ exit_movements:  # MARK: exit_movements
     x: .138
     # y: .3  ?  TODO: Re-measure more accurately
     # technically uses xy (ortho) movement but x!=y
+  bubbles:
+    # Breaking bubbles while falling as drone
+    fall: 0.9  # ?
+  water_bubbles:
+    x: .285
+    fall: 0.9
 
 time:  # MARK: time
   default: 1
@@ -333,7 +339,7 @@ helpers:  # MARK: helpers
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{22}, Big_Flask{8}]
+    [Flask{22}, Big_Flask{9}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{11}]
   $all_weapons:itemList: >
@@ -342,7 +348,7 @@ helpers:  # MARK: helpers
     [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
-     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist]
+     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach]
   # To be added: 2 Big_Flask
   # 2 Health_Fragment
 
@@ -456,6 +462,6 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Exit_Breach, Remote_Boomerang, Separation, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
+  unplaced_items: [Remote_Boomerang, Separation, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
   ignore_observations:
     - prev_area

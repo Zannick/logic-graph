@@ -66,3 +66,21 @@ tests:
       - Breach_Attractor
       - Underwater_Movement
     can_reach: Amagi > East Lake > West 17
+
+  - name: Get Breach Exit
+    start: Amagi > East Lake > Arch West
+    context:
+      mode: drone
+      portal: Amagi > East Lake > Portal Stand
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+      - Breach_Attractor
+      - Underwater_Movement
+      - Anuman
+    route: |
+      ! Do Move Portal Here
+        PortalWarp
+        Move... to Amagi Breach > East Ruins > Plinth
+      * Collect Breach_Exit from Amagi Breach > East Ruins > Plinth > Urn
+        ExitBreachWarp

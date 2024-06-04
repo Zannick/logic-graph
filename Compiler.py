@@ -246,7 +246,6 @@ class GameLogic(object):
         self.process_regions()
         self.process_canon()
         self.process_context()
-        self.process_area_maps()
         self.process_warps()
         self.process_global_actions()
         self._errors.extend(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
@@ -305,6 +304,7 @@ class GameLogic(object):
                         area['action_id'] = self.make_funcid(area, 'act', 'on_entry', ON_ENTRY_ARGS)
                     if c := area.get('graph_offset'):
                         self._validate_pair(c, f'graph offset for {area["fullname"]}')
+                self.process_area_map(area)
 
                 for spot in area['spots']:
                     if 'name' not in spot:
@@ -315,6 +315,8 @@ class GameLogic(object):
                     fullname = f'{rname} > {aname} > {sname}'
                     unexp = spot.keys() - SPOT_FIELDS
                     for uk in unexp:
+                        if uk.startswith('_'):
+                            continue
                         if uk in SPOT_NON_FIELDS:
                             logging.warning(f'Unknown field {uk!r} in {fullname} (did you mean {SPOT_NON_FIELDS[uk]!r}?)')
                         else:
@@ -331,6 +333,7 @@ class GameLogic(object):
                         spot['exit_ids'] = []
                         spot['action_ids'] = []
                         spot['all_data'] = dict(area['all_data'])
+                        self.update_tile_data(area, spot)
                         spot['all_data'].update(spot.get('data', {}))
                         spot['base_movement'] = self.spot_base_movement(spot['all_data'])
                         if 'on_entry' in spot:
@@ -369,7 +372,18 @@ class GameLogic(object):
                             if 'penalties' in loc:
                                 self._handle_penalties(loc, spot['fullname'])
                             if 'maps' in loc:
-                                loc['tiles'] = [get_map_reference(tilename, loc) for tilename in loc['maps']]
+                                loc['_tiles'] = [get_map_reference(tilename, loc) for tilename in loc['maps']]
+                            if dest := loc.get('to'):
+                                if dest.startswith('^'):
+                                    if d := spot['all_data'].get(dest[1:]):
+                                        if self.data_types[dest[1:]] != 'SpotId':
+                                            self._errors.append(f'Hybrid exit {eh["fullname"]} exits to non-spot data: {dest}')
+                                        else:
+                                            loc['raw_to'] = dest
+                                            loc['to'] = d
+                                    else:
+                                        self._errors.append(f'Hybrid exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
+
                     # We need a counter for exits in case of alternates
                     ec = Counter()
                     for eh in spot.get('exits', []):
@@ -380,19 +394,20 @@ class GameLogic(object):
                         eh['spot'] = sname
                         eh['area'] = aname
                         eh['region'] = rname
-                        ec[eh['to']] += 1
-                        eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
+                        ec[dest] += 1
+                        eh['fullname'] = f'{spot["fullname"]} ==> {dest} ({ec[dest]})'
                         with processcontext(eh['fullname']):
                             eh['id'] = construct_id(rname, aname, sname, 'ex',
-                                                    f'{eh["to"]}_{ec[eh["to"]]}')
+                                                    f'{dest}_{ec[dest]}')
                             self.id_lookup[eh['id']] = eh
                             spot['exit_ids'].append(eh['id'])
                             
                             if dest.startswith('^'):
-                                if d := spot.get('data', {}).get(dest[1:]):
+                                if d := spot['all_data'].get(dest[1:]):
                                     if self.data_types[dest[1:]] != 'SpotId':
                                         self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')
                                     else:
+                                        eh['raw_to'] = dest
                                         dest = d
                                 else:
                                     self._errors.append(f'Exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
@@ -406,7 +421,7 @@ class GameLogic(object):
                             if 'penalties' in eh:
                                 self._handle_penalties(eh, spot['fullname'])
                             if 'maps' in eh:
-                                eh['tiles'] = [get_map_reference(tilename, eh) for tilename in eh['maps']]
+                                eh['_tiles'] = [get_map_reference(tilename, eh) for tilename in eh['maps']]
                             eh['to'] = dest
                     for act in spot.get('actions', ()):
                         if 'name' not in act:
@@ -428,7 +443,7 @@ class GameLogic(object):
                             if 'penalties' in act:
                                 self._handle_penalties(act, spot['fullname'])
                             if 'maps' in act:
-                                act['tiles'] = [get_map_reference(tilename, act) for tilename in act['maps']]
+                                act['_tiles'] = [get_map_reference(tilename, act) for tilename in act['maps']]
                             act['act'] = parseAction(
                                     act['do'], name=f'{act["fullname"]}:do')
                             act['action_id'] = self.make_funcid(act, 'act', 'do')
@@ -436,13 +451,13 @@ class GameLogic(object):
                                 act['act_post'] = parseAction(
                                         act['after'], name=f'{act["name"]}:after')
                                 act['after_id'] = self.make_funcid(act, 'act_post', 'after')
-                            if 'to' in act:
-                                dest = act['to']
+                            if dest := act.get('to'):
                                 if dest.startswith('^'):
-                                    if d := spot.get('data', {}).get(dest[1:]):
+                                    if d := spot['all_data'].get(dest[1:]):
                                         if self.data_types[dest[1:]] != 'SpotId':
                                             self._errors.append(f'Action {act["fullname"]} moves to non-spot data: {dest}')
                                         else:
+                                            act['raw_to'] = dest
                                             act['to'] = d
 
             num_locs += len(region['loc_ids'])
@@ -626,39 +641,49 @@ class GameLogic(object):
                 self._handle_penalties(act, 'actions')
 
 
-    def process_area_maps(self):
-        for area in self.areas():
-            if 'map' not in area:
-                continue
-            map_defs = area['map']
-            if isinstance(map_defs, str):
-                area['tiles'] = [construct_id('map', area['id'].lower(), map_defs)]
-                continue
-            elif isinstance(map_defs, (list, tuple)):
-                area['tiles'] = [construct_id('map', area['id'].lower(), tile) for tile in map_defs]
-                continue
-            elif not isinstance(map_defs, dict):
-                self._errors.append(f'Invalid map entry for {area["fullname"]}: must be dict')
-                continue
+    def process_area_map(self, area):
+        if 'map' not in area:
+            return
+        map_defs = area['map']
+        if isinstance(map_defs, str):
+            area['_tiles'] = [construct_id('map', area['id'].lower(), map_defs)]
+            return
+        elif isinstance(map_defs, (list, tuple)):
+            area['_tiles'] = [construct_id('map', area['id'].lower(), tile) for tile in map_defs]
+            return
+        elif not isinstance(map_defs, dict):
+            self._errors.append(f'Invalid map entry for {area["fullname"]}: must be dict')
+            return
 
-            tile_defs = []
-            for tile, box in map_defs.items():
-                if self._validate_box(box, f'{area["fullname"]} map tile "{tile}"'):
-                    tile_defs.append((construct_id('map', area['id'].lower(), tile), tile, box))
+        tile_defs = []
+        for tile, box in map_defs.items():
+            if self._validate_box(box, f'{area["fullname"]} map tile "{tile}"'):
+                tile_defs.append((construct_id('map', area['id'].lower(), tile), tile, box))
 
-            for spot in area['spots']:
-                if 'coord' not in spot:
-                    continue
-                c1, c2 = spot['coord']
-                tiles = []
-                short_names = []
-                for (tile, tsname, box) in tile_defs:
-                    if box[0] <= c1 <= box[2] and box[1] <= c2 <= box[3]:
-                        tiles.append(tile)
-                        short_names.append(tsname)
-                if tiles:
-                    spot['tiles'] = sorted(tiles)
-                    spot['tilenames'] = sorted(short_names)
+        for spot in area['spots']:
+            if 'coord' not in spot:
+                continue
+            c1, c2 = spot['coord']
+            tiles = []
+            short_names = []
+            for (tile, tsname, box) in tile_defs:
+                if box[0] <= c1 <= box[2] and box[1] <= c2 <= box[3]:
+                    tiles.append(tile)
+                    short_names.append(tsname)
+            if tiles:
+                spot['_tiles'] = sorted(tiles)
+                spot['_tilenames'] = sorted(short_names)
+
+
+    def update_tile_data(self, area, spot):
+        if 'datamap' not in area or '_tilenames' not in spot:
+            return
+        for key, valuemap in area['datamap'].items():
+            # Only applies the first one
+            for tilename in spot['_tilenames']:
+                if tilename in valuemap:
+                    spot['all_data'][key] = valuemap[tilename]
+                    break
 
 
     def process_parsed_code(self):
@@ -1339,11 +1364,17 @@ class GameLogic(object):
             if 'to' not in ex:
                 self._errors.append(f'No destination defined for {ex["fullname"]}')
             elif get_exit_target(ex) not in spot_ids:
-                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}: {ex["to"]}')
+                dest = f'{ex["to"]}'
+                if 'raw_to' in ex:
+                    dest += f' (from {ex["raw_to"]})'
+                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}: {dest}')
         for spot in self.spots():
             for act in spot.get('actions', []):
-                if 'to' in act and not act['to'].startswith('^') and get_exit_target(act) not in spot_ids:
-                    self._errors.append(f'Unrecognized destination in action {act["fullname"]}: {act["to"]}')
+                if 'to' in act and get_exit_target(act) not in spot_ids:
+                    dest = f'{act["to"]}'
+                    if 'raw_to' in act:
+                        dest += f' (from {act["raw_to"]})'
+                    self._errors.append(f'Unrecognized destination in action {act["fullname"]}: {dest}')
         for item in self.collect:
             if item != construct_id(item):
                 self._errors.append(f'Invalid item name {item!r} as collect rule; '
@@ -1625,8 +1656,8 @@ class GameLogic(object):
     def data_values(self):
         # data name -> spot id -> value
         d = {c: {} for c in self.data_defaults}
-        def get_first(datamap, tilenames):
-            for tile in tilenames:
+        def get_first(datamap, _tilenames):
+            for tile in _tilenames:
                 if tile in datamap:
                     return datamap[tile]
 
@@ -1663,8 +1694,8 @@ class GameLogic(object):
                         if c in s.get('data', {}):
                             cdict[s['id']] = handle_place(c, s, s['data'][c])
                             continue
-                        elif c in a.get('datamap', {}) and 'tilenames' in s:
-                            val = get_first(a['datamap'][c], s['tilenames'])
+                        elif c in a.get('datamap', {}) and '_tilenames' in s:
+                            val = get_first(a['datamap'][c], s['_tilenames'])
                             if val is not None:
                                 cdict[s['id']] = handle_place(c, s, val)
                                 continue
@@ -1742,9 +1773,9 @@ class GameLogic(object):
         d['spot'].update(self.context_trigger_rules['enter']['spot'].keys())
         d['region'].update(self.context_resetters['region'].keys())
         d['area'].update(self.context_resetters['area'].keys())
-        d['region'].update(r['id'] for r in self.regions if 'act' in r or 'tiles' in r)
-        d['area'].update(a['id'] for a in self.areas() if 'act' in a or 'tiles' in a)
-        d['spot'].update(s['id'] for s in self.spots() if 'act' in s or 'tiles' in s)
+        d['region'].update(r['id'] for r in self.regions if 'act' in r or '_tiles' in r)
+        d['area'].update(a['id'] for a in self.areas() if 'act' in a or '_tiles' in a)
+        d['spot'].update(s['id'] for s in self.spots() if 'act' in s or '_tiles' in s)
         return d
 
     

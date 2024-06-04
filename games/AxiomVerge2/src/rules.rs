@@ -2100,6 +2100,10 @@ pub fn access_map__amagi_breach__east_entrance__save(ctx: &Context, world: &Worl
     // ^map__amagi_breach__east_entrance__save
     ctx.map__amagi_breach__east_entrance__save()
 }
+pub fn access_map__amagi_breach__east_ruins__save(ctx: &Context, world: &World) -> bool {
+    // ^map__amagi_breach__east_ruins__save
+    ctx.map__amagi_breach__east_ruins__save()
+}
 pub fn access_map__annuna__center_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__center_save__save
     ctx.map__annuna__center_save__save()
@@ -2459,6 +2463,10 @@ pub fn access_siuna_storage_wall(ctx: &Context, world: &World) -> bool {
     // Siuna_Storage_Wall
     ctx.has(Item::Siuna_Storage_Wall)
 }
+pub fn access_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // Slingshot_Hook
+    ctx.has(Item::Slingshot_Hook)
+}
 pub fn access_sniper_valley_rock_1(ctx: &Context, world: &World) -> bool {
     // Sniper_Valley_Rock_1
     ctx.has(Item::Sniper_Valley_Rock_1)
@@ -2523,6 +2531,14 @@ pub fn access_underwater_movement_and___invoke_grab_or_invoke_climb(
     (ctx.has(Item::Underwater_Movement)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
+pub fn access_underwater_movement_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Drone_Hover and Slingshot_Hook
+    ((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Drone_Hover))
+        && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $grab
     (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
@@ -2538,6 +2554,10 @@ pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
     // Underwater_Movement and $hook and $hover
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && helper__hover!(ctx, world))
+}
+pub fn access_underwater_movement_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and Slingshot_Hook
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -11434,6 +11454,18 @@ pub fn explain_map__amagi_breach__east_entrance__save(
         (r, vec!["^map__amagi_breach__east_entrance__save"])
     }
 }
+pub fn explain_map__amagi_breach__east_ruins__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__amagi_breach__east_ruins__save
+    {
+        let r = ctx.map__amagi_breach__east_ruins__save();
+        edict.insert("^map__amagi_breach__east_ruins__save", format!("{:?}", r));
+        (r, vec!["^map__amagi_breach__east_ruins__save"])
+    }
+}
 pub fn explain_map__annuna__center_save__save(
     ctx: &Context,
     world: &World,
@@ -13085,6 +13117,18 @@ pub fn explain_siuna_storage_wall(
         (h, vec!["Siuna_Storage_Wall"])
     }
 }
+pub fn explain_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook
+    {
+        let h = ctx.has(Item::Slingshot_Hook);
+        edict.insert("Slingshot_Hook", format!("{}", h));
+        (h, vec!["Slingshot_Hook"])
+    }
+}
 pub fn explain_sniper_valley_rock_1(
     ctx: &Context,
     world: &World,
@@ -13335,6 +13379,44 @@ pub fn explain_underwater_movement_and___invoke_grab_or_invoke_climb(
         }
     }
 }
+pub fn explain_underwater_movement_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Drone_Hover and Slingshot_Hook
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_invoke_grab(
     ctx: &Context,
     world: &World,
@@ -13421,6 +13503,31 @@ pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
                 edict.insert("$hover", format!("{:?}", res));
                 refs.push("$hover");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -17554,6 +17661,17 @@ pub fn observe_access_map__amagi_breach__east_entrance__save(
         ctx.map__amagi_breach__east_entrance__save()
     }
 }
+pub fn observe_access_map__amagi_breach__east_ruins__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__amagi_breach__east_ruins__save
+    {
+        full_obs.observe_map__amagi_breach__east_ruins__save();
+        ctx.map__amagi_breach__east_ruins__save()
+    }
+}
 pub fn observe_access_map__annuna__center_save__save(
     ctx: &Context,
     world: &World,
@@ -18563,6 +18681,17 @@ pub fn observe_access_siuna_storage_wall(
         ctx.has(Item::Siuna_Storage_Wall)
     }
 }
+pub fn observe_access_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook
+    {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }
+}
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,
     world: &World,
@@ -18728,6 +18857,23 @@ pub fn observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
+pub fn observe_access_underwater_movement_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Drone_Hover and Slingshot_Hook
+    (({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })) && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
 pub fn observe_access_underwater_movement_and_invoke_grab(
     ctx: &Context,
     world: &World,
@@ -18761,6 +18907,20 @@ pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
         && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Slingshot_Hook
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,

@@ -346,7 +346,7 @@ fn extract_match<'c, 's>(c: &'c Captures<'s>, g: &'s str, s: &'s str) -> Result<
 impl<I, S, L, E, A, Wp> FromStr for History<I, S, L, E, A, Wp>
 where
     I: FromStr<Err = String> + Default,
-    S: FromStr<Err = String>,
+    S: FromStr<Err = String> + Default,
     L: FromStr<Err = String>,
     E: FromStr<Err = String>,
     A: FromStr<Err = String>,
@@ -359,7 +359,7 @@ where
             static ref WARP: Regex = Regex::new(
                 // Warp
                 //   EarthSavewarp to Antarctica > West > Helipad
-                r"(?P<warp>[^:]+)[Ww]arp to (?P<spot>.*$)").unwrap();
+                r"(?P<warp>[^:]+)[Ww]arp(?: to (?P<spot>.*$))?").unwrap();
             static ref GET: Regex = Regex::new(
                 // Get
                 // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
@@ -384,10 +384,13 @@ where
         }
         if let Some(cap) = WARP.captures(s) {
             let warp = extract_match(&cap, "warp", s)?;
-            let spot = extract_match(&cap, "spot", s)?;
+
             Ok(History::W(
                 <Wp as FromStr>::from_str(warp)?,
-                <S as FromStr>::from_str(spot)?,
+                match extract_match(&cap, "spot", s) {
+                    Ok(spot) => <S as FromStr>::from_str(spot)?,
+                    Err(_) => S::default(),
+                },
             ))
         } else if let Some(cap) = GET.captures(s) {
             let item = extract_match(&cap, "item", s).unwrap_or_default();
@@ -664,7 +667,8 @@ impl<T: Ctx> ContextWrapper<T> {
         match step {
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
-                warp.dest(&self.ctx, world) == dest && warp.can_access(&self.ctx, world)
+                (dest == Default::default() || warp.dest(&self.ctx, world) == dest)
+                    && warp.can_access(&self.ctx, world)
             }
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
@@ -732,11 +736,13 @@ impl<T: Ctx> ContextWrapper<T> {
         match step {
             History::W(wp, dest) => {
                 self.warp(world, world.get_warp(wp));
-                assert!(
-                    self.get().position() == dest,
-                    "Invalid replay: warp {:?}",
-                    wp
-                );
+                if dest != Default::default() {
+                    assert!(
+                        self.get().position() == dest,
+                        "Invalid replay: warp {:?}",
+                        wp
+                    );
+                }
             }
             History::G(item, loc_id) => {
                 let loc = world.get_location(loc_id);
@@ -833,9 +839,17 @@ impl<T: Ctx> ContextWrapper<T> {
                 let vce = world.get_condensed_edges_from(self.ctx.position());
                 let mvs = self.ctx.get_movement_state(world);
                 if idx >= vce.len() {
-                    format!("Invalid CE index {} vs len {} at {}", idx, vce.len(), self.ctx.position())
+                    format!(
+                        "Invalid CE index {} vs len {} at {}",
+                        idx,
+                        vce.len(),
+                        self.ctx.position()
+                    )
                 } else if vce[idx].dst != spot_id {
-                    format!("CE index {} is spot {} and not {}", idx, vce[idx].dst, spot_id)
+                    format!(
+                        "CE index {} is spot {} and not {}",
+                        idx, vce[idx].dst, spot_id
+                    )
                 } else if !vce[idx].can_access(world, self.get(), mvs) {
                     vce[idx].explain(world, self.get(), mvs)
                 } else {
@@ -1009,7 +1023,11 @@ where
                 format!("  Move... to {}", s)
             }
             History::W(w, s) => {
-                format!("  {}warp to {}", w, s)
+                if s == Default::default() {
+                    format!("  {}warp", w)
+                } else {
+                    format!("  {}warp to {}", w, s)
+                }
             }
         })
         .collect();

@@ -120,6 +120,346 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Amagi_Breach__East_Ruins__West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__South] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Little_Rock] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Little_Rock,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Center_Rock_West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Center_Rock_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Save_Point] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Amagi_Breach__East_Ruins__Save_Point__Save.into_usize(),
+            end: ActionId::Amagi_Breach__East_Ruins__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Center_Rock_East] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Center_Rock_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Under_the_Rock] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Under_the_Rock,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Small_Column_West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Small_Column_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__High_Rock_West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__High_Rock_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__High_Rock_Middle_Ledge] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__High_Rock_Middle_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__High_Rock_East_Ledge] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__High_Rock_East_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
+        locations: Range {
+            start: LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item.into_usize(),
+            end: LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Northeast_Corner] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Northeast_Corner,
+        locations: Range {
+            start: LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip.into_usize(),
+            end: LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Arch_West] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Arch_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Arch_East] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Arch_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Plinth] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Plinth,
+        locations: Range {
+            start: LocationId::Amagi_Breach__East_Ruins__Plinth__Urn.into_usize(),
+            end: LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Small_Column_East] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Small_Column_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall] = Spot {
+        id: SpotId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Center_Ruins__East_18] = Spot {
+        id: SpotId::Amagi_Breach__Center_Ruins__East_18,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Hallway__North] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Hallway__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Amagi__Main_Area__East_15] = Spot {
         id: SpotId::Amagi__Main_Area__East_15,
         locations: Range {
@@ -23480,7 +23820,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -23631,18 +23972,6 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
-    spots[SpotId::Menu__Breach_Map__LAB_East_Health] = Spot {
-        id: SpotId::Menu__Breach_Map__LAB_East_Health,
-        locations: Range {
-            start: 0, end: 0,
-        },
-        exits: Range {
-            start: 0, end: 0,
-        },
-        actions: Range {
-            start: 0, end: 0,
-        },
-    };
     spots[SpotId::Menu__Breach_Map__GSB_Chimney_Flask] = Spot {
         id: SpotId::Menu__Breach_Map__GSB_Chimney_Flask,
         locations: Range {
@@ -23729,6 +24058,42 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask] = Spot {
         id: SpotId::Menu__Breach_Map__IB_Worm_Rave_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__LAB_East_Health] = Spot {
+        id: SpotId::Menu__Breach_Map__LAB_East_Health,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__LAB_East_Ruins_Flask] = Spot {
+        id: SpotId::Menu__Breach_Map__LAB_East_Ruins_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__Exit_Breach] = Spot {
+        id: SpotId::Menu__Breach_Map__Exit_Breach,
         locations: Range {
             start: 0, end: 0,
         },

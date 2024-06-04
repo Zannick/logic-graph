@@ -179,6 +179,32 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::access_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::access_underwater_movement(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip => true,
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip => true,
+            ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => true,
+            ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::access_underwater_movement(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::access_invoke_mist2(ctx, world),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::access_nanite_mist(ctx, world),
@@ -1884,6 +1910,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
+            ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::access_map__amagi_breach__east_ruins__save(ctx, world),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::access_map__amagi__east_lake__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
@@ -2230,6 +2257,24 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::observe_access_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::observe_access_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::observe_access_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -3471,6 +3516,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::observe_access_map__amagi_breach__east_ruins__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::observe_access_map__amagi__east_lake__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
@@ -3958,6 +4004,24 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::explain_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::explain_underwater_movement(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::explain_underwater_movement(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -5199,6 +5263,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::explain_map__amagi_breach__east_ruins__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::explain_map__amagi__east_lake__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
@@ -5420,6 +5485,14 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => true,
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip => true,
+            ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip => true,
+            ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => true,
+            ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 => true,
             ExitId::Annuna__Apocalypse__West__ex__Final_Save__East_1 => true,
             ExitId::Annuna__Apocalypse_Hallway__Lower_East__ex__Glacier__Apocalypse_Entry__West_15_Lower_1 => true,
             ExitId::Annuna__Apocalypse_Hallway__Upper_East__ex__Glacier__Apocalypse_Entry__West_15_Upper_1 => true,
@@ -6001,6 +6074,188 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
+    exits[ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1,
+        time: 1600,
+        dest: SpotId::Amagi_Breach__Center_Ruins__East_18,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1,
+        time: 900,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2,
+        time: 701,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3,
+        time: 2799,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Energy(98),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4,
+        time: 1399,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Energy(52),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1,
+        time: 1576,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2,
+        time: 1228,
+        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1,
+        time: 1600,
+        dest: SpotId::Amagi_Breach__Upper_Hallway__North,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1,
+        time: 3000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2,
+        time: 3799,
+        dest: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
+        price: Currency::Energy(131),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3,
+        time: 1899,
+        dest: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
+        price: Currency::Energy(68),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1,
+        time: 2456,
+        dest: SpotId::Amagi_Breach__East_Ruins__Small_Column_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1,
+        time: 1000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Center_Rock_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1,
+        time: 2807,
+        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
+        price: Currency::Energy(98),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2,
+        time: 1403,
+        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
+        price: Currency::Energy(52),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1,
+        time: 900,
+        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Southeast,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip),
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__LAB_East_Ruins_Flask,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel),
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1,
+        time: 2000,
+        dest: SpotId::Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1,
+        time: 6200,
+        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
+        price: Currency::Energy(210),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2,
+        time: 3100,
+        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
+        price: Currency::Energy(108),
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1,
+        time: 2000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Small_Column_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1,
+        time: 3000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip),
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__Exit_Breach,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel),
+    };
+    exits[ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1,
+        time: 1000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Arch_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
     exits[ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1] = Exit {
         id: ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1,
         time: 1350,
@@ -6507,14 +6762,14 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1] = Exit {
         id: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Lower_Platform_East_1,
-        time: 4504,
+        time: 3508,
         dest: SpotId::Amagi__East_Lake__Center_Lower_Platform_East,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1] = Exit {
         id: ExitId::Amagi__East_Lake__East_Hill__ex__Center_Northeast_Platform_1,
-        time: 4279,
+        time: 3333,
         dest: SpotId::Amagi__East_Lake__Center_Northeast_Platform,
         price: Currency::Free,
         loc_id: None,
@@ -6619,7 +6874,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1] = Exit {
         id: ExitId::Amagi__East_Lake__Center_Lower_Platform_East__ex__East_Hill_1,
-        time: 4504,
+        time: 3508,
         dest: SpotId::Amagi__East_Lake__East_Hill,
         price: Currency::Free,
         loc_id: None,
@@ -6647,21 +6902,21 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1] = Exit {
         id: ExitId::Amagi__East_Lake__Center_Northeast_Platform__ex__East_Hill_1,
-        time: 4279,
+        time: 3333,
         dest: SpotId::Amagi__East_Lake__East_Hill,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1] = Exit {
         id: ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1,
-        time: 3828,
+        time: 2982,
         dest: SpotId::Amagi__East_Lake__Far_West_Water_Surface,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1] = Exit {
         id: ExitId::Amagi__East_Lake__West_Water_Surface__ex__Center_West_Platform_1,
-        time: 1576,
+        time: 1228,
         dest: SpotId::Amagi__East_Lake__Center_West_Platform,
         price: Currency::Free,
         loc_id: None,
@@ -15404,7 +15659,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1] = Exit {
         id: ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1,
-        time: 526,
+        time: 675,
         dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         price: Currency::Free,
         loc_id: None,
@@ -15425,7 +15680,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1] = Exit {
         id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1,
-        time: 526,
+        time: 675,
         dest: SpotId::Glacier__The_Big_Drop__West_14,
         price: Currency::Free,
         loc_id: None,
@@ -18862,14 +19117,14 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Irikar__Beach__Tunnel_Entrance__ex__Cache_1] = Exit {
         id: ExitId::Irikar__Beach__Tunnel_Entrance__ex__Cache_1,
-        time: 4385,
+        time: 5630,
         dest: SpotId::Irikar__Beach__Cache,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Irikar__Beach__Cache__ex__Tunnel_Entrance_1] = Exit {
         id: ExitId::Irikar__Beach__Cache__ex__Tunnel_Entrance_1,
-        time: 4385,
+        time: 5630,
         dest: SpotId::Irikar__Beach__Tunnel_Entrance,
         price: Currency::Free,
         loc_id: None,
@@ -19172,6 +19427,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1,
         time: 12000,
         dest: SpotId::Irikar_Breach__Save_Room__Save_Point,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1] = Exit {
+        id: ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1,
+        time: 12000,
+        dest: SpotId::Amagi_Breach__East_Ruins__Save_Point,
         price: Currency::Free,
         loc_id: None,
     };

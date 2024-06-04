@@ -1578,6 +1578,8 @@ areas:
 
     - name: Portal Stand
       coord: [33.475, 16.3]
+      data:
+        flipside: Amagi Breach > East Ruins > Save Point
       local:
         - to: West 17
         - to: Portal Ledge
@@ -1644,6 +1646,8 @@ areas:
 
     - name: Save Point
       coord: [34.5, 17.6]
+      data:
+        flipside: Amagi Breach > East Ruins > Plinth
       exits:
         - to: Southwest Column East
           req: $climb and Underwater_Movement
@@ -1667,6 +1671,8 @@ areas:
           tags: [save]
     - name: Southeast Column
       coord: [34.8, 17.1]
+      data:
+        flipside: Amagi Breach > East Ruins > Southeast Rock Wall
       local:
         - to: Save Point
         - to: Kum Abala
@@ -1693,6 +1699,8 @@ areas:
           movement: fast_hover
     - name: Arch East
       coord: [34.65, 16.8]
+      data:
+        flipside: Amagi Breach > East Ruins > Arch East
       local:
         - to: Arch West
         - to: Save Point
@@ -1706,6 +1714,8 @@ areas:
           jumps: 4
     - name: Arch West
       coord: [34.35, 16.8]
+      data:
+        flipside: Amagi Breach > East Ruins > Arch West
       local:
         - to: Arch East
         - to: Save Point
@@ -1719,6 +1729,8 @@ areas:
           jumps: 1
     - name: Southwest Column East
       coord: [34.15, 17.1]
+      data:
+        flipside: Amagi Breach > East Ruins > Small Column East
       local:
         - to: Save Point
         - to: Arch West
