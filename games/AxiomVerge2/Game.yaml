@@ -184,7 +184,7 @@ warps:  # MARK: warps
     loads: true
   main_save:
     time: 10.5  # IGT goes backward due to the fadeout not counting
-    req: allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    req: allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama and not Apocalypse_Bomb
     to: ^save
     after: $refill_energy
     loads: true
@@ -193,7 +193,7 @@ warps:  # MARK: warps
         add: 2.5
   breach_save:
     time: 10.5
-    req: allow_warps and ^realm == 'breach' and ^breach_save != $default
+    req: allow_warps and ^realm == 'breach' and ^breach_save != $default and not Apocalypse_Bomb
     to: ^breach_save
     after: $refill_energy
     loads: true
@@ -220,16 +220,16 @@ warps:  # MARK: warps
   # Fast travel isn't possible across realms: main/kiengir, breach, emergence, filter, interior(!)
   fast_travel_kiengir:
     time: 0.1
-    req: allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    req: allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
     to: ^map_spot
     after: $refill_energy
   fast_travel_breach:
     time: 0.1
-    req: allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
+    req: allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`) and not Apocalypse_Bomb
     to: ^map_spot
     after: $refill_energy
   portal:
-    req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
+    req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight) and not Apocalypse_Bomb
     to: ^flipside
     after: $post_portal_save_update
     time: 3.6

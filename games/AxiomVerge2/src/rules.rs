@@ -67,23 +67,25 @@ pub fn access___remote_drone_flask__6(ctx: &Context, world: &World) -> bool {
     // [Remote_Drone, Flask{6}]
     ctx.has(Item::Remote_Drone) && ctx.count(Item::Flask) >= 6
 }
-pub fn access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
-    ((world.allow_warps && helper__ft_breach!(ctx, world))
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`) and not Apocalypse_Bomb
+    (((world.allow_warps && helper__ft_breach!(ctx, world))
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
-pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    ((world.allow_warps && helper__ft_main!(ctx, world))
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
+    (((world.allow_warps && helper__ft_main!(ctx, world))
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
 pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
@@ -99,25 +101,27 @@ pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_
         && helper__can_recall!(ctx, world))
         && data::map_spot(ctx.position()) != Default::default())
 }
-pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
+pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // allow_warps and ^realm == 'breach' and ^breach_save != $default
-    ((world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default and not Apocalypse_Bomb
+    (((world.allow_warps && data::realm(ctx.position()) == enums::Realm::Breach)
         && ctx.breach_save() != Default::default())
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
-pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+pub fn access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    ((world.allow_warps
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama and not Apocalypse_Bomb
+    (((world.allow_warps
         && matches!(
             data::realm(ctx.position()),
             enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
         ))
         && ctx.has(Item::Amashilama))
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
 pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &World) -> bool {
     // allow_warps and WITHIN `Antarctica`
@@ -2268,14 +2272,15 @@ pub fn access_mode_eq_drone_and_nanite_mist(ctx: &Context, world: &World) -> boo
     // ^mode == 'drone' and Nanite_Mist
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Nanite_Mist))
 }
-pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
+pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
-    (((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight) and not Apocalypse_Bomb
+    ((((ctx.mode() == enums::Mode::Drone && ctx.portal() == ctx.position())
         && data::flipside(ctx.position()) != Default::default())
         && (!data::portal_hidden(ctx.position()) || ctx.has(Item::Breach_Sight)))
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
 pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
@@ -3386,28 +3391,47 @@ pub fn explain___remote_drone_flask__6(
         (h.0, refs)
     }
 }
-pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`) and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
-                let s = world.allow_warps;
-                edict.insert("allow_warps", format!("{}", s));
-                (s, vec!["allow_warps"])
+                let mut left = {
+                    let s = world.allow_warps;
+                    edict.insert("allow_warps", format!("{}", s));
+                    (s, vec!["allow_warps"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__ft_breach!(ctx, world, edict);
+                        edict.insert("$ft_breach", format!("{:?}", res));
+                        refs.push("$ft_breach");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__ft_breach!(ctx, world, edict);
-                    edict.insert("$ft_breach", format!("{:?}", res));
-                    refs.push("$ft_breach");
-                    (res, refs)
-                };
+                let mut right = ({
+                    let r = {
+                        let r = data::map_spot(ctx.position());
+                        edict.insert("^map_spot", format!("{:?}", r));
+                        (r, vec!["^map_spot"])
+                    };
+                    (
+                        r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Breach_Map,
+                        r.1,
+                    )
+                });
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -3415,44 +3439,57 @@ pub fn explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_br
         if !left.0 {
             left
         } else {
-            let mut right = ({
-                let r = {
-                    let r = data::map_spot(ctx.position());
-                    edict.insert("^map_spot", format!("{:?}", r));
-                    (r, vec!["^map_spot"])
-                };
-                (
-                    r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Breach_Map,
-                    r.1,
-                )
-            });
+            let mut right = {
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
     }
 }
-pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
-                let s = world.allow_warps;
-                edict.insert("allow_warps", format!("{}", s));
-                (s, vec!["allow_warps"])
+                let mut left = {
+                    let s = world.allow_warps;
+                    edict.insert("allow_warps", format!("{}", s));
+                    (s, vec!["allow_warps"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                        edict.insert("$ft_main", format!("{:?}", res));
+                        refs.push("$ft_main");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
-                    edict.insert("$ft_main", format!("{:?}", res));
-                    refs.push("$ft_main");
-                    (res, refs)
-                };
+                let mut right = ({
+                    let r = {
+                        let r = data::map_spot(ctx.position());
+                        edict.insert("^map_spot", format!("{:?}", r));
+                        (r, vec!["^map_spot"])
+                    };
+                    (
+                        r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Kiengir_Map,
+                        r.1,
+                    )
+                });
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -3460,17 +3497,11 @@ pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kien
         if !left.0 {
             left
         } else {
-            let mut right = ({
-                let r = {
-                    let r = data::map_spot(ctx.position());
-                    edict.insert("^map_spot", format!("{:?}", r));
-                    (r, vec!["^map_spot"])
-                };
-                (
-                    r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Kiengir_Map,
-                    r.1,
-                )
-            });
+            let mut right = {
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -3553,33 +3584,51 @@ pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can
         }
     }
 }
-pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
+pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and ^realm == 'breach' and ^breach_save != $default
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
-                let s = world.allow_warps;
-                edict.insert("allow_warps", format!("{}", s));
-                (s, vec!["allow_warps"])
+                let mut left = {
+                    let s = world.allow_warps;
+                    edict.insert("allow_warps", format!("{}", s));
+                    (s, vec!["allow_warps"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let mut refs = vec!["^realm"];
+                        let mut left = {
+                            let r = data::realm(ctx.position());
+                            edict.insert("^realm", format!("{:?}", r));
+                            (r, vec!["^realm"])
+                        };
+                        let right = enums::Realm::Breach;
+                        edict.insert("^realm", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 == right, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
                 let mut right = {
-                    let mut refs = vec!["^realm"];
                     let mut left = {
-                        let r = data::realm(ctx.position());
-                        edict.insert("^realm", format!("{:?}", r));
-                        (r, vec!["^realm"])
+                        let r = ctx.breach_save();
+                        edict.insert("^breach_save", format!("{:?}", r));
+                        (r, vec!["^breach_save"])
                     };
-                    let right = enums::Realm::Breach;
-                    edict.insert("^realm", format!("{}", left.0));
-                    refs.append(&mut left.1);
-                    (left.0 == right, refs)
+                    let mut right = (Default::default(), vec![]);
+                    left.1.append(&mut right.1);
+                    (left.0 != right.0, left.1)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -3589,49 +3638,59 @@ pub fn explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default
             left
         } else {
             let mut right = {
-                let mut left = {
-                    let r = ctx.breach_save();
-                    edict.insert("^breach_save", format!("{:?}", r));
-                    (r, vec!["^breach_save"])
-                };
-                let mut right = (Default::default(), vec![]);
-                left.1.append(&mut right.1);
-                (left.0 != right.0, left.1)
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
     }
 }
-pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
-                let s = world.allow_warps;
-                edict.insert("allow_warps", format!("{}", s));
-                (s, vec!["allow_warps"])
+                let mut left = {
+                    let s = world.allow_warps;
+                    edict.insert("allow_warps", format!("{}", s));
+                    (s, vec!["allow_warps"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let r = {
+                            let r = data::realm(ctx.position());
+                            edict.insert("^realm", format!("{:?}", r));
+                            (r, vec!["^realm"])
+                        };
+                        (
+                            matches!(
+                                r.0,
+                                enums::Realm::Main
+                                    | enums::Realm::Interior
+                                    | enums::Realm::Emergence
+                            ),
+                            r.1,
+                        )
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
                 let mut right = {
-                    let r = {
-                        let r = data::realm(ctx.position());
-                        edict.insert("^realm", format!("{:?}", r));
-                        (r, vec!["^realm"])
-                    };
-                    (
-                        matches!(
-                            r.0,
-                            enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
-                        ),
-                        r.1,
-                    )
+                    let h = ctx.has(Item::Amashilama);
+                    edict.insert("Amashilama", format!("{}", h));
+                    (h, vec!["Amashilama"])
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -3641,9 +3700,9 @@ pub fn explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama
             left
         } else {
             let mut right = {
-                let h = ctx.has(Item::Amashilama);
-                edict.insert("Amashilama", format!("{}", h));
-                (h, vec!["Amashilama"])
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12115,43 +12174,61 @@ pub fn explain_mode_eq_drone_and_nanite_mist(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
+pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight) and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
                 let mut left = {
-                    let mut refs = vec!["^mode"];
                     let mut left = {
-                        let r = ctx.mode();
-                        edict.insert("^mode", format!("{:?}", r));
-                        (r, vec!["^mode"])
+                        let mut refs = vec!["^mode"];
+                        let mut left = {
+                            let r = ctx.mode();
+                            edict.insert("^mode", format!("{:?}", r));
+                            (r, vec!["^mode"])
+                        };
+                        let right = enums::Mode::Drone;
+                        edict.insert("^mode", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 == right, refs)
                     };
-                    let right = enums::Mode::Drone;
-                    edict.insert("^mode", format!("{}", left.0));
-                    refs.append(&mut left.1);
-                    (left.0 == right, refs)
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let mut left = {
+                                let r = ctx.portal();
+                                edict.insert("^portal", format!("{:?}", r));
+                                (r, vec!["^portal"])
+                            };
+                            let mut right = {
+                                let r = ctx.position();
+                                edict.insert("^position", format!("{:?}", r));
+                                (r, vec!["^position"])
+                            };
+                            left.1.append(&mut right.1);
+                            (left.0 == right.0, left.1)
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
                 };
                 if !left.0 {
                     left
                 } else {
                     let mut right = {
                         let mut left = {
-                            let r = ctx.portal();
-                            edict.insert("^portal", format!("{:?}", r));
-                            (r, vec!["^portal"])
+                            let r = data::flipside(ctx.position());
+                            edict.insert("^flipside", format!("{:?}", r));
+                            (r, vec!["^flipside"])
                         };
-                        let mut right = {
-                            let r = ctx.position();
-                            edict.insert("^position", format!("{:?}", r));
-                            (r, vec!["^position"])
-                        };
+                        let mut right = (Default::default(), vec![]);
                         left.1.append(&mut right.1);
-                        (left.0 == right.0, left.1)
+                        (left.0 != right.0, left.1)
                     };
                     left.1.append(&mut right.1);
                     (right.0, left.1)
@@ -12160,16 +12237,27 @@ pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_defau
             if !left.0 {
                 left
             } else {
-                let mut right = {
+                let mut right = ({
                     let mut left = {
-                        let r = data::flipside(ctx.position());
-                        edict.insert("^flipside", format!("{:?}", r));
-                        (r, vec!["^flipside"])
+                        let val = {
+                            let r = data::portal_hidden(ctx.position());
+                            edict.insert("^portal_hidden", format!("{:?}", r));
+                            (r, vec!["^portal_hidden"])
+                        };
+                        (!val.0, val.1)
                     };
-                    let mut right = (Default::default(), vec![]);
-                    left.1.append(&mut right.1);
-                    (left.0 != right.0, left.1)
-                };
+                    if left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Breach_Sight);
+                            edict.insert("Breach_Sight", format!("{}", h));
+                            (h, vec!["Breach_Sight"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                });
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -12177,27 +12265,11 @@ pub fn explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_defau
         if !left.0 {
             left
         } else {
-            let mut right = ({
-                let mut left = {
-                    let val = {
-                        let r = data::portal_hidden(ctx.position());
-                        edict.insert("^portal_hidden", format!("{:?}", r));
-                        (r, vec!["^portal_hidden"])
-                    };
-                    (!val.0, val.1)
-                };
-                if left.0 {
-                    left
-                } else {
-                    let mut right = {
-                        let h = ctx.has(Item::Breach_Sight);
-                        edict.insert("Breach_Sight", format!("{}", h));
-                        (h, vec!["Breach_Sight"])
-                    };
-                    left.1.append(&mut right.1);
-                    (right.0, left.1)
-                }
-            });
+            let mut right = {
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -13648,25 +13720,33 @@ pub fn observe_access___remote_drone_flask__6(
         ctx.count(Item::Flask) >= 6
     })
 }
-pub fn observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(
+pub fn observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`)
-    ((world.allow_warps && (hobserve__ft_breach!(ctx, world, full_obs)))
+    // allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`) and not Apocalypse_Bomb
+    (((world.allow_warps && (hobserve__ft_breach!(ctx, world, full_obs)))
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Breach_Map))
+        && ({
+            full_obs.observe_apocalypse_bomb();
+            !ctx.has(Item::Apocalypse_Bomb)
+        }))
 }
-pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(
+pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`)
-    ((world.allow_warps && (hobserve__ft_main!(ctx, world, full_obs)))
+    // allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
+    (((world.allow_warps && (hobserve__ft_main!(ctx, world, full_obs)))
         && (data::map_spot(ctx.position()) != SpotId::None
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+        && ({
+            full_obs.observe_apocalypse_bomb();
+            !ctx.has(Item::Apocalypse_Bomb)
+        }))
 }
 pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
     ctx: &Context,
@@ -13687,13 +13767,13 @@ pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_inv
             left != right
         }))
 }
-pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(
+pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and ^realm == 'breach' and ^breach_save != $default
-    ((world.allow_warps
+    // allow_warps and ^realm == 'breach' and ^breach_save != $default and not Apocalypse_Bomb
+    (((world.allow_warps
         && ({
             let v = data::realm(ctx.position());
             v == enums::Realm::Breach
@@ -13706,14 +13786,18 @@ pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_
             let right = Default::default();
             left != right
         }))
+        && ({
+            full_obs.observe_apocalypse_bomb();
+            !ctx.has(Item::Apocalypse_Bomb)
+        }))
 }
-pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(
+pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama
-    ((world.allow_warps
+    // allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama and not Apocalypse_Bomb
+    (((world.allow_warps
         && (matches!(
             data::realm(ctx.position()),
             enums::Realm::Main | enums::Realm::Interior | enums::Realm::Emergence
@@ -13721,6 +13805,10 @@ pub fn observe_access_allow_warps_and_realm_in___main_interior_emergence_and_ama
         && ({
             full_obs.observe_amashilama();
             ctx.has(Item::Amashilama)
+        }))
+        && ({
+            full_obs.observe_apocalypse_bomb();
+            !ctx.has(Item::Apocalypse_Bomb)
         }))
 }
 pub fn observe_access_allow_warps_and_within_antarctica(
@@ -18165,13 +18253,13 @@ pub fn observe_access_mode_eq_drone_and_nanite_mist(
         ctx.has(Item::Nanite_Mist)
     }))
 }
-pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(
+pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight)
-    ((({
+    // ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight) and not Apocalypse_Bomb
+    (((({
         let v = {
             full_obs.observe_mode();
             ctx.mode()
@@ -18194,6 +18282,9 @@ pub fn observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invok
     })) && (!(data::portal_hidden(ctx.position())) || {
         full_obs.observe_breach_sight();
         ctx.has(Item::Breach_Sight)
+    })) && ({
+        full_obs.observe_apocalypse_bomb();
+        !ctx.has(Item::Apocalypse_Bomb)
     }))
 }
 pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(

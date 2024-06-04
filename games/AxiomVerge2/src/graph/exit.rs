@@ -1276,6 +1276,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::access_apocalypse_bomb(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::access_not_apocalypse_bomb(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::access_invoke_grab(ctx, world),
@@ -3061,6 +3062,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -4808,6 +4810,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -16900,6 +16903,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1,
         time: 1350,
         dest: SpotId::Glacier__Grid_43_10_11__East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1] = Exit {
+        id: ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1,
+        time: 1200,
+        dest: SpotId::Glacier__Apocalypse_Entry__Terminal,
         price: Currency::Free,
         loc_id: None,
     };

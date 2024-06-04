@@ -2200,6 +2200,11 @@ areas:
       coord: [44.65, 10.2]
       local:
         - to: Above Grate
+      exits:
+        - to: Terminal
+          req: not Apocalypse_Bomb
+          movement: base
+          jumps: 2
       hybrid:
         - name: Escape
           canon: Escape

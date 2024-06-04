@@ -28,29 +28,29 @@ impl world::Accessible for Warp {
 
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(ctx, world),
+            WarpId::BreachSave => rules::access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(ctx, world),
             WarpId::EarthSave => rules::access_allow_warps_and_within_antarctica(ctx, world),
             WarpId::ExitBreach => rules::access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(ctx, world),
             WarpId::ExitMenu => rules::access_within_menu_gt_upgrade_menu(ctx, world),
-            WarpId::FastTravelBreach => rules::access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world),
-            WarpId::FastTravelKiengir => rules::access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world),
-            WarpId::MainSave => rules::access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world),
+            WarpId::FastTravelBreach => rules::access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(ctx, world),
+            WarpId::FastTravelKiengir => rules::access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world),
+            WarpId::MainSave => rules::access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(ctx, world),
             WarpId::Menu => rules::access_not_within_menu_and_flasks_gt_0(ctx, world),
-            WarpId::Portal => rules::access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(ctx, world),
+            WarpId::Portal => rules::access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(ctx, world),
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(ctx, world, full_obs),
+            WarpId::BreachSave => rules::observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(ctx, world, full_obs),
             WarpId::EarthSave => rules::observe_access_allow_warps_and_within_antarctica(ctx, world, full_obs),
             WarpId::ExitBreach => rules::observe_access_realm_eq_breach_and_exit_breach_and_flipside_ne_invoke_default(ctx, world, full_obs),
             WarpId::ExitMenu => rules::observe_access_within_menu_gt_upgrade_menu(ctx, world, full_obs),
-            WarpId::FastTravelBreach => rules::observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world, full_obs),
-            WarpId::FastTravelKiengir => rules::observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, full_obs),
-            WarpId::MainSave => rules::observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, full_obs),
+            WarpId::FastTravelBreach => rules::observe_access_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(ctx, world, full_obs),
+            WarpId::FastTravelKiengir => rules::observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world, full_obs),
+            WarpId::MainSave => rules::observe_access_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(ctx, world, full_obs),
             WarpId::Menu => rules::observe_access_not_within_menu_and_flasks_gt_0(ctx, world, full_obs),
-            WarpId::Portal => rules::observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(ctx, world, full_obs),
+            WarpId::Portal => rules::observe_access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -73,7 +73,7 @@ impl world::Accessible for Warp {
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
             WarpId::BreachSave => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "ctx.breach_save()"));
@@ -109,7 +109,7 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::FastTravelBreach => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_invoke_ft_breach_and___map_spot_within_menu_gt_breach_map_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "data::map_spot(ctx.position())"));
@@ -118,7 +118,7 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::FastTravelKiengir => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "data::map_spot(ctx.position())"));
@@ -127,7 +127,7 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::MainSave => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_realm_in___main_interior_emergence_and_amashilama_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "ctx.save()"));
@@ -145,7 +145,7 @@ impl world::Accessible for Warp {
                 (ret, tags)
             }
             WarpId::Portal => {
-                let (ret, mut tags) = rules::explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_default_and___not_portal_hidden_or_breach_sight_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Warp::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "data::flipside(ctx.position())"));

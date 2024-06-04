@@ -17743,7 +17743,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape.into_usize() + 1,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1.into_usize(),
+            end: ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
