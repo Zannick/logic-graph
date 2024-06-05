@@ -919,6 +919,11 @@ areas:
           tags: [warp]
     - name: LAB Enclosed
       coord: [34, 15]
+      exits:
+        - to: Amagi Breach > Upper Lake > Save Point
+          req: ^map__amagi_breach__upper_lake__save
+          time: 12
+          tags: [warp]
     - name: LAB Southeast
       coord: [35, 21]
     - name: LAB Southwest
@@ -967,4 +972,6 @@ areas:
       coord: [34, 16]
     - name: Exit Breach
       coord: [34, 18]
+    - name: LAB Upper Lake Health
+      coord: [33, 15]
     #endregion

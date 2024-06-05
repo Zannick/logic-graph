@@ -12,7 +12,13 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__East_Connector[East Connector]
         Amagi_Breach__East_Connector__East(East);
+        Amagi_Breach__East_Connector__Center_Right(Center Right);
+        Amagi_Breach__East_Connector__Center_Left(Center Left);
+        Amagi_Breach__East_Connector__Outcrop(Outcrop);
         Amagi_Breach__East_Connector__West(West);
+    end
+    subgraph Amagi_Breach__East_Column[East Column]
+        Amagi_Breach__East_Column__East(East);
     end
     subgraph Amagi_Breach__East_Ruins[East Ruins]
         Amagi_Breach__East_Ruins__West(West);
@@ -46,6 +52,14 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__Upper_Hallway[Upper Hallway]
         Amagi_Breach__Upper_Hallway__North(North);
+    end
+    subgraph Amagi_Breach__Upper_Lake[Upper Lake]
+        Amagi_Breach__Upper_Lake__Save_Point(Save Point);
+        Amagi_Breach__Upper_Lake__Portal_Stand(Portal Stand);
+        Amagi_Breach__Upper_Lake__Center_of_Platform(Center of Platform);
+        Amagi_Breach__Upper_Lake__Middle(Middle);
+        Amagi_Breach__Upper_Lake__Near_Column(Near Column);
+        Amagi_Breach__Upper_Lake__Column(Column);
     end
 end
 subgraph Amagi
@@ -174,6 +188,8 @@ subgraph Amagi
         Amagi__East_Lake__Center_Upper_Platform(Center Upper Platform);
         Amagi__East_Lake__Center_West_Platform(Center West Platform);
         Amagi__East_Lake__Center_West_Water_Surface(Center West Water Surface);
+        Amagi__East_Lake__Center_Above(Center Above);
+        Amagi__East_Lake__Far_West_Above(Far West Above);
         Amagi__East_Lake__West_Water_Surface(West Water Surface);
         Amagi__East_Lake__Far_West_Water_Surface(Far West Water Surface);
         Amagi__East_Lake__West_Platform_1_West(West Platform 1 West);
@@ -1600,6 +1616,8 @@ subgraph Glacier
         Glacier__Vertical_Room__West_15_Lower(West 15 Lower);
         Glacier__Vertical_Room__Waters_Ledge(Water's Ledge);
         Glacier__Vertical_Room__Middle_Gatestone(Middle Gatestone);
+        Glacier__Vertical_Room__Middle_Gatestone_Left(Middle Gatestone Left);
+        Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone(Outcrop by Middle Gatestone);
         Glacier__Vertical_Room__Lower_Switch(Lower Switch);
         Glacier__Vertical_Room__East_17(East 17);
         Glacier__Vertical_Room__East_17_while_hovering(East 17 while hovering);
@@ -2287,6 +2305,7 @@ subgraph Menu
         Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
+        Menu__Breach_Map__LAB_Upper_Lake_Health(LAB Upper Lake Health);
     end
 end
 subgraph Uhrum
@@ -2427,10 +2446,11 @@ subgraph Uhrum
         Uhrum__Artillery_Practice__East_24(East 24);
     end
 end
+Amagi_Breach__East_Connector__East <--> Amagi_Breach__East_Entrance__West
+Amagi_Breach__East_Connector__West --> Amagi_Breach__East_Column__East
 Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
 Amagi_Breach__East_Entrance__Grate_Left --> Amagi_Breach__East_Entrance__Upper_Slope
-Amagi_Breach__East_Entrance__West --> Amagi_Breach__East_Connector__East
 Amagi_Breach__East_Ruins__Arch_West --> Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge
 Amagi_Breach__East_Ruins__Arch_West --> Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access
 Amagi_Breach__East_Ruins__Center_Rock_West --> Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East
@@ -2449,6 +2469,8 @@ Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch
 Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
 Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
+Amagi_Breach__Upper_Lake__Near_Column --> Amagi_Breach__Upper_Lake__Column
+Amagi_Breach__Upper_Lake__Portal_Stand --> Amagi_Breach__Upper_Lake__Near_Column
 Amagi__East_Lake__Arch_East --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__Arch_West <--> Amagi__East_Lake__Portal_Ledge
 Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Arch_West
@@ -2480,6 +2502,8 @@ Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__Southwest_Brick
 Amagi__East_Lake__East_15_Upper_Hover --> Amagi__East_Lake__West_Platform_3
 Amagi__East_Lake__East_Water_Surface --> Amagi__East_Lake__Arch_East
 Amagi__East_Lake__East_Water_Surface --> Amagi__East_Lake__Arch_West
+Amagi__East_Lake__Far_West_Above --> Amagi__East_Lake__Center_West_Platform
+Amagi__East_Lake__Far_West_Above --> Amagi__East_Lake__West_Water_Surface
 Amagi__East_Lake__Kum_Abala <--> Amagi__East_Lake__Southeast_Column
 Amagi__East_Lake__Kum_Abala --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__Portal_Ledge <--> Amagi__East_Lake__Portal_Stand
@@ -3424,7 +3448,9 @@ Glacier__Vertical_Room__Lower_Switch <--> Glacier__Vertical_Room__Middle_Gatesto
 Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Middle_Gatestone --> Glacier__Vertical_Room__Lower_Gatestone
-Glacier__Vertical_Room__Middle_Gatestone --> Glacier__Vertical_Room__Waters_Ledge
+Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_Gatestone
+Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_Switch
+Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone --> Glacier__Vertical_Room__Waters_Ledge
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
@@ -3616,6 +3642,7 @@ Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
 Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
+Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point

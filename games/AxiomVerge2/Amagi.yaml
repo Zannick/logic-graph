@@ -1411,6 +1411,28 @@ areas:
         - to: Southwest Column West
           thru: [34.15, 16.3]
 
+    - name: Center Above
+      coord: [34.475, 14.5]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Center Upper Platform
+        - to: Center Northeast Platform
+        - to: Center Lower Platform East
+          jumps_down: 1
+    - name: Far West Above
+      coord: [33.5, 14.5]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Far West Water Surface
+        - to: West Platform 1 West Hook
+      exits:
+        - to: West Water Surface
+          req: $hover
+        - to: Center West Platform
+          req: $hover
+
     - name: West Water Surface
       coord: [33.8, 15.0]
       exits:
@@ -1419,7 +1441,7 @@ areas:
           movement: base
           jumps: 1
     - name: Far West Water Surface
-      coord: [33.3, 15.0]
+      coord: [33.35, 15.0]
       data:
         water: true
       local:
@@ -1577,7 +1599,7 @@ areas:
           jumps: 1
 
     - name: Portal Stand
-      coord: [33.475, 16.3]
+      coord: [33.45, 16.3]
       data:
         flipside: Amagi Breach > East Ruins > Save Point
       local:

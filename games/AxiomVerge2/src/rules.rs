@@ -1473,12 +1473,54 @@ pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__r
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
 }
+pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    (ctx.glacier__vertical_room__ctx__lower_gatestones() && ctx.has(Item::Underwater_Movement))
+}
 pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    (ctx.glacier__vertical_room__ctx__lower_gatestones() && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones
+    ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    (ctx.glacier__vertical_room__ctx__lower_gatestones() && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones
+    ctx.glacier__vertical_room__ctx__lower_gatestones()
+}
+pub fn access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    (ctx.glacier__vertical_room__ctx__lower_gatestones() && ctx.has(Item::Underwater_Movement))
 }
 pub fn access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
@@ -2108,6 +2150,10 @@ pub fn access_map__amagi_breach__east_ruins__save(ctx: &Context, world: &World) 
     // ^map__amagi_breach__east_ruins__save
     ctx.map__amagi_breach__east_ruins__save()
 }
+pub fn access_map__amagi_breach__upper_lake__save(ctx: &Context, world: &World) -> bool {
+    // ^map__amagi_breach__upper_lake__save
+    ctx.map__amagi_breach__upper_lake__save()
+}
 pub fn access_map__annuna__center_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna__center_save__save
     ctx.map__annuna__center_save__save()
@@ -2563,6 +2609,14 @@ pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
 pub fn access_underwater_movement_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and Slingshot_Hook
     (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
 }
 pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -8482,6 +8536,34 @@ pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__
         (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
     }
 }
+pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones and Underwater_Movement
+    {
+        let mut left = {
+            let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+            edict.insert(
+                "^glacier__vertical_room__ctx__lower_gatestones",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
     world: &World,
@@ -8495,6 +8577,120 @@ pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req
             format!("{:?}", r),
         );
         (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones and Underwater_Movement
+    {
+        let mut left = {
+            let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+            edict.insert(
+                "^glacier__vertical_room__ctx__lower_gatestones",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones
+    {
+        let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+        edict.insert(
+            "^glacier__vertical_room__ctx__lower_gatestones",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones and Underwater_Movement
+    {
+        let mut left = {
+            let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+            edict.insert(
+                "^glacier__vertical_room__ctx__lower_gatestones",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones
+    {
+        let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+        edict.insert(
+            "^glacier__vertical_room__ctx__lower_gatestones",
+            format!("{:?}", r),
+        );
+        (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+    }
+}
+pub fn explain_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_lower_gatestones and Underwater_Movement
+    {
+        let mut left = {
+            let r = ctx.glacier__vertical_room__ctx__lower_gatestones();
+            edict.insert(
+                "^glacier__vertical_room__ctx__lower_gatestones",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__vertical_room__ctx__lower_gatestones"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
@@ -11525,6 +11721,18 @@ pub fn explain_map__amagi_breach__east_ruins__save(
         (r, vec!["^map__amagi_breach__east_ruins__save"])
     }
 }
+pub fn explain_map__amagi_breach__upper_lake__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__amagi_breach__upper_lake__save
+    {
+        let r = ctx.map__amagi_breach__upper_lake__save();
+        edict.insert("^map__amagi_breach__upper_lake__save", format!("{:?}", r));
+        (r, vec!["^map__amagi_breach__upper_lake__save"])
+    }
+}
 pub fn explain_map__annuna__center_save__save(
     ctx: &Context,
     world: &World,
@@ -13600,6 +13808,44 @@ pub fn explain_underwater_movement_and_slingshot_hook(
                 let h = ctx.has(Item::Slingshot_Hook);
                 edict.insert("Slingshot_Hook", format!("{}", h));
                 (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16389,6 +16635,20 @@ pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatest
         ctx.glacier__vertical_room__ctx__lower_gatestones()
     }
 }
+pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    ({
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
+}
 pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(
     ctx: &Context,
     world: &World,
@@ -16399,6 +16659,70 @@ pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch
         full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
         ctx.glacier__vertical_room__ctx__lower_gatestones()
     }
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    ({
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones
+    {
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    ({
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones
+    {
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    }
+}
+pub fn observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_lower_gatestones and Underwater_Movement
+    ({
+        full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
+        ctx.glacier__vertical_room__ctx__lower_gatestones()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
 }
 pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
@@ -17760,6 +18084,17 @@ pub fn observe_access_map__amagi_breach__east_ruins__save(
         ctx.map__amagi_breach__east_ruins__save()
     }
 }
+pub fn observe_access_map__amagi_breach__upper_lake__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__amagi_breach__upper_lake__save
+    {
+        full_obs.observe_map__amagi_breach__upper_lake__save();
+        ctx.map__amagi_breach__upper_lake__save()
+    }
+}
 pub fn observe_access_map__annuna__center_save__save(
     ctx: &Context,
     world: &World,
@@ -19011,6 +19346,23 @@ pub fn observe_access_underwater_movement_and_slingshot_hook(
     } && ({
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
+    }))
+}
+pub fn observe_access_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
     }))
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(

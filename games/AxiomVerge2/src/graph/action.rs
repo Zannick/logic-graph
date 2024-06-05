@@ -35,6 +35,7 @@ impl world::Accessible for Action {
             ActionId::Amagi__Main_Area__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => true,
+            ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => true,
             ActionId::Annuna__Center_Save__Save_Point__Save => true,
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
@@ -1323,6 +1324,7 @@ impl world::Action for Action {
             ActionId::Global__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
@@ -1556,6 +1558,9 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
@@ -2005,6 +2010,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
     actions[ActionId::Amagi_Breach__East_Ruins__Save_Point__Save] = Action {
         id: ActionId::Amagi_Breach__East_Ruins__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save] = Action {
+        id: ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     };

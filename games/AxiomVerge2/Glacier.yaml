@@ -999,9 +999,12 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [36, 8, 37, 9]
+    midgatestone: [36, 15, 37, 16]
   datamap:
     map_spot:
       flask: Menu > Kiengir Map > Glacier Vertical Room Flask
+    water:
+      midgatestone: true
   start:
     _upper_gatestone: false
     _lower_gatestones: false
@@ -1290,21 +1293,60 @@ areas:
           movement: fast_hover
           jumps: 1
           penalty_tags: [xshift, -fast_hover.1]
+
+
     - name: Middle Gatestone
       coord: [36.6, 15.75]
       data:
-        water: true
+        flipside: Amagi Breach > East Connector > Center Right
+      local:
+        - to: Outcrop by Middle Gatestone
+          jumps: 1
+          jump_mvmt: water
       exits:
-        - to: Water's Ledge
-          req: Underwater_Movement and $hook
-          movement: base
-          jumps: 3
         - to: Lower Switch
           req: ^_lower_gatestones
           movement: base
         - to: Lower Gatestone
           req: ^_lower_gatestones
           movement: base
+        - to: Lower Switch
+          req: ^_lower_gatestones and Underwater_Movement
+          movement: water
+        - to: Lower Gatestone
+          req: ^_lower_gatestones and Underwater_Movement
+          movement: water
+    - name: Middle Gatestone Left
+      coord: [36.45, 15.75]
+      data:
+        flipside: Amagi Breach > East Connector > Center Left
+      local:
+        - to: Middle Gatestone
+      exits:
+        - to: Lower Switch
+          req: ^_lower_gatestones
+          movement: base
+        - to: Lower Gatestone
+          req: ^_lower_gatestones
+          movement: base
+        - to: Lower Switch
+          req: ^_lower_gatestones and Underwater_Movement
+          movement: water
+        - to: Lower Gatestone
+          req: ^_lower_gatestones and Underwater_Movement
+          movement: water
+    - name: Outcrop by Middle Gatestone
+      coord: [36.75, 15.4]
+      data:
+        flipside: Amagi Breach > East Connector > Outcrop
+      local:
+        - to: Middle Gatestone
+      exits:
+        - to: Water's Ledge
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 2
+
     - name: Lower Switch
       coord: [36.5, 16.5]
       data:

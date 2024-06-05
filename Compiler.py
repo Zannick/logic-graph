@@ -1666,6 +1666,8 @@ class GameLogic(object):
             if not isinstance(val, str):
                 return val
             if self.data_types[c] == 'SpotId':
+                if val == 'SpotId::None':
+                    return val
                 names = get_spot_reference_names(val, source)
                 sp = ' > '.join(names)
                 if construct_id(sp) not in self.id_lookup:

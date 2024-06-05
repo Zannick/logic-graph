@@ -62,6 +62,7 @@ impl world::Accessible for Location {
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn => true,
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip => true,
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => true,
+            LocationId::Amagi_Breach__Upper_Lake__Column__Health => true,
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::access_invoke_boomerang(ctx, world),
@@ -982,6 +983,15 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Amagi_Breach__Upper_Lake__Column__Health] = Location {
+        id: LocationId::Amagi_Breach__Upper_Lake__Column__Health,
+        canonical: CanonId::Loc_Amagi_Breach__Upper_Lake__Column__Health,
+        item: Item::Health_Fragment,
+        price: Currency::Free,
+        time: 0,
+        exit_id: None,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {

@@ -102,6 +102,43 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
+            start: ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Connector__Center_Right] = Spot {
+        id: SpotId::Amagi_Breach__East_Connector__Center_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Connector__Center_Left] = Spot {
+        id: SpotId::Amagi_Breach__East_Connector__Center_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Connector__Outcrop] = Spot {
+        id: SpotId::Amagi_Breach__East_Connector__Outcrop,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
             start: 0, end: 0,
         },
         actions: Range {
@@ -110,6 +147,19 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Amagi_Breach__East_Connector__West] = Spot {
         id: SpotId::Amagi_Breach__East_Connector__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1.into_usize(),
+            end: ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__East_Column__East] = Spot {
+        id: SpotId::Amagi_Breach__East_Column__East,
         locations: Range {
             start: 0, end: 0,
         },
@@ -452,6 +502,82 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         id: SpotId::Amagi_Breach__Upper_Hallway__North,
         locations: Range {
             start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Save_Point] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save.into_usize(),
+            end: ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Portal_Stand] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Portal_Stand,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1.into_usize(),
+            end: ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Center_of_Platform] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Center_of_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Middle] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Near_Column] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Near_Column,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1.into_usize(),
+            end: ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__Upper_Lake__Column] = Spot {
+        id: SpotId::Amagi_Breach__Upper_Lake__Column,
+        locations: Range {
+            start: LocationId::Amagi_Breach__Upper_Lake__Column__Health.into_usize(),
+            end: LocationId::Amagi_Breach__Upper_Lake__Column__Health.into_usize() + 1,
         },
         exits: Range {
             start: 0, end: 0,
@@ -1897,6 +2023,31 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__East_Lake__Center_Above] = Spot {
+        id: SpotId::Amagi__East_Lake__Center_Above,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__East_Lake__Far_West_Above] = Spot {
+        id: SpotId::Amagi__East_Lake__Far_West_Above,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1.into_usize(),
+            end: ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -16753,7 +16904,33 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1.into_usize(),
-            end: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1.into_usize() + 1,
+            end: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Glacier__Vertical_Room__Middle_Gatestone_Left] = Spot {
+        id: SpotId::Glacier__Vertical_Room__Middle_Gatestone_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1.into_usize(),
+            end: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone] = Spot {
+        id: SpotId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1.into_usize(),
+            end: ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -23847,7 +24024,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -24095,6 +24273,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Breach_Map__Exit_Breach] = Spot {
         id: SpotId::Menu__Breach_Map__Exit_Breach,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__LAB_Upper_Lake_Health] = Spot {
+        id: SpotId::Menu__Breach_Map__LAB_Upper_Lake_Health,
         locations: Range {
             start: 0, end: 0,
         },

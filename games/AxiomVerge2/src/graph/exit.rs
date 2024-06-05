@@ -64,6 +64,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::access_invoke_hover(ctx, world),
@@ -172,6 +174,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(ctx, world),
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
+            ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1 => true,
+            ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1 => true,
             ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => true,
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => rules::access_invoke_mist2(ctx, world),
@@ -205,6 +209,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::access_underwater_movement(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1 => rules::access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::access_nanite_mist(ctx, world),
@@ -1530,8 +1536,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(ctx, world),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::access_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(ctx, world),
+            ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::access_switch_36_11(ctx, world),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::access_invoke_grab(ctx, world),
@@ -1913,6 +1925,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::access_map__irikar_breach__save_room__save(ctx, world),
             ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::access_map__amagi_breach__east_ruins__save(ctx, world),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::access_map__amagi_breach__east_entrance__save(ctx, world),
+            ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::access_map__amagi_breach__upper_lake__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::access_map__amagi__east_lake__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(ctx, world),
@@ -2162,6 +2175,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -2276,6 +2291,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::observe_access_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1 => rules::observe_access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -3257,8 +3274,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::observe_access_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::observe_access_switch_36_11(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -3520,6 +3543,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::observe_access_map__irikar_breach__save_room__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::observe_access_map__amagi_breach__east_ruins__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::observe_access_map__amagi_breach__east_entrance__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::observe_access_map__amagi_breach__upper_lake__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::observe_access_map__amagi__east_lake__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::observe_access_map__annuna__center_save__save(ctx, world, full_obs),
@@ -3910,6 +3934,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__East_Lake__Kum_Abala__ex__Underwater_Hill_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -4024,6 +4050,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::explain_underwater_movement(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1 => rules::explain_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
             ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -5005,8 +5033,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_2__req(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_1__req(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::explain_glacier__vertical_room__middle_gatestone__ex__lower_switch_2__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::explain_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_1__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::explain_glacier__vertical_room__middle_gatestone_left__ex__lower_gatestone_2__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::explain_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_1__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::explain_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2__req(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::explain_switch_36_11(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::explain_invoke_hook(ctx, world, edict),
@@ -5268,6 +5302,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1 => rules::explain_map__irikar_breach__save_room__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__LAB_Center__ex__Amagi_Breach__East_Ruins__Save_Point_1 => rules::explain_map__amagi_breach__east_ruins__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1 => rules::explain_map__amagi_breach__east_entrance__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::explain_map__amagi_breach__upper_lake__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::explain_map__amagi__east_lake__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
@@ -5486,6 +5521,8 @@ impl world::Exit for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__West_15__ex__Ebih__Vertical_Interchange__East_15_1 => true,
+            ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1 => true,
+            ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1 => true,
             ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => true,
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
             ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 => true,
@@ -6077,6 +6114,20 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
+    exits[ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1,
+        time: 1600,
+        dest: SpotId::Amagi_Breach__East_Entrance__West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1] = Exit {
+        id: ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1,
+        time: 1600,
+        dest: SpotId::Amagi_Breach__East_Column__East,
+        price: Currency::Free,
+        loc_id: None,
+    };
     exits[ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1] = Exit {
         id: ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1,
         time: 1600,
@@ -6256,6 +6307,20 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1,
         time: 1000,
         dest: SpotId::Amagi_Breach__East_Ruins__Arch_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1] = Exit {
+        id: ExitId::Amagi_Breach__Upper_Lake__Portal_Stand__ex__Near_Column_1,
+        time: 2375,
+        dest: SpotId::Amagi_Breach__Upper_Lake__Near_Column,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1] = Exit {
+        id: ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1,
+        time: 1351,
+        dest: SpotId::Amagi_Breach__Upper_Lake__Column,
         price: Currency::Free,
         loc_id: None,
     };
@@ -6912,8 +6977,22 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1] = Exit {
         id: ExitId::Amagi__East_Lake__Center_West_Platform__ex__Far_West_Water_Surface_1,
-        time: 2982,
+        time: 2807,
         dest: SpotId::Amagi__East_Lake__Far_West_Water_Surface,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1] = Exit {
+        id: ExitId::Amagi__East_Lake__Far_West_Above__ex__West_Water_Surface_1,
+        time: 1000,
+        dest: SpotId::Amagi__East_Lake__West_Water_Surface,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1] = Exit {
+        id: ExitId::Amagi__East_Lake__Far_West_Above__ex__Center_West_Platform_1,
+        time: 1000,
+        dest: SpotId::Amagi__East_Lake__Center_West_Platform,
         price: Currency::Free,
         loc_id: None,
     };
@@ -7059,7 +7138,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1] = Exit {
         id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1,
-        time: 1013,
+        time: 1126,
         dest: SpotId::Amagi__East_Lake__West_Platform_3,
         price: Currency::Free,
         loc_id: None,
@@ -7080,28 +7159,28 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1] = Exit {
         id: ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1,
-        time: 1062,
+        time: 1000,
         dest: SpotId::Amagi__East_Lake__West_17,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1] = Exit {
         id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1,
-        time: 812,
+        time: 874,
         dest: SpotId::Amagi__East_Lake__Portal_Ledge,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1] = Exit {
         id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Save_Point_1,
-        time: 2562,
+        time: 2624,
         dest: SpotId::Amagi__East_Lake__Save_Point,
         price: Currency::Free,
         loc_id: None,
     };
     exits[ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1] = Exit {
         id: ExitId::Amagi__East_Lake__Portal_Stand__ex__Kum_Abala_1,
-        time: 4312,
+        time: 4375,
         dest: SpotId::Amagi__East_Lake__Kum_Abala,
         price: Currency::Free,
         loc_id: None,
@@ -16227,13 +16306,6 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
-    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1] = Exit {
-        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Waters_Ledge_1,
-        time: 3000,
-        dest: SpotId::Glacier__Vertical_Room__Waters_Ledge,
-        price: Currency::Free,
-        loc_id: None,
-    };
     exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1] = Exit {
         id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1,
         time: 750,
@@ -16245,6 +16317,55 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1,
         time: 1250,
         dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2,
+        time: 750,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2,
+        time: 1250,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1,
+        time: 750,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1,
+        time: 1250,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2,
+        time: 750,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2,
+        time: 1250,
+        dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1] = Exit {
+        id: ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1,
+        time: 2000,
+        dest: SpotId::Glacier__Vertical_Room__Waters_Ledge,
         price: Currency::Free,
         loc_id: None,
     };
@@ -19451,6 +19572,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Menu__Breach_Map__LAB_East__ex__Amagi_Breach__East_Entrance__Save_Point_1,
         time: 12000,
         dest: SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1] = Exit {
+        id: ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1,
+        time: 12000,
+        dest: SpotId::Amagi_Breach__Upper_Lake__Save_Point,
         price: Currency::Free,
         loc_id: None,
     };

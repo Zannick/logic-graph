@@ -9,7 +9,13 @@
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
         {
+            Amagi_Breach__East_Column__East [label = "", pos = "107.7,-76.25!"];
+        }
+        {
             Amagi_Breach__East_Connector__East [label = "", pos = "110.7,-76.25!"];
+            Amagi_Breach__East_Connector__Center_Right [label = "", pos = "109.8,-76.25!"];
+            Amagi_Breach__East_Connector__Center_Left [label = "", pos = "109.35,-76.25!"];
+            Amagi_Breach__East_Connector__Outcrop [label = "", pos = "110.25,-75.666667!"];
             Amagi_Breach__East_Connector__West [label = "", pos = "108.3,-76.25!"];
         }
         {
@@ -29,7 +35,7 @@
             Amagi_Breach__East_Ruins__South [label = "", pos = "97.5,-79.666667!"];
             Amagi_Breach__East_Ruins__Little_Rock [label = "", pos = "97.95,-78.5!"];
             Amagi_Breach__East_Ruins__Center_Rock_West [label = "", pos = "98.4,-77.916667!"];
-            Amagi_Breach__East_Ruins__Save_Point [label = "", pos = "100.425,-77.166667!"];
+            Amagi_Breach__East_Ruins__Save_Point [label = "", pos = "100.35,-77.166667!"];
             Amagi_Breach__East_Ruins__Center_Rock_East [label = "", pos = "101.4,-77.5!"];
             Amagi_Breach__East_Ruins__Under_the_Rock [label = "", pos = "99.6,-79.583333!"];
             Amagi_Breach__East_Ruins__Small_Column_West [label = "", pos = "101.7,-78.5!"];
@@ -49,6 +55,14 @@
         }
         {
             Amagi_Breach__Upper_Hallway__North [label = "", pos = "97.5,-80.333333!"];
+        }
+        {
+            Amagi_Breach__Upper_Lake__Save_Point [label = "", pos = "103.425,-74.166667!"];
+            Amagi_Breach__Upper_Lake__Portal_Stand [label = "", pos = "104.25,-74.5!"];
+            Amagi_Breach__Upper_Lake__Center_of_Platform [label = "", pos = "103.2,-74.416667!"];
+            Amagi_Breach__Upper_Lake__Middle [label = "", pos = "102.45,-74.583333!"];
+            Amagi_Breach__Upper_Lake__Near_Column [label = "", pos = "101.4,-74.583333!"];
+            Amagi_Breach__Upper_Lake__Column [label = "", pos = "100.5,-74.166667!"];
         }
     }
     {
@@ -70,8 +84,10 @@
             Amagi__East_Lake__Center_Upper_Platform [label = "", pos = "103.2,-24.416667!"];
             Amagi__East_Lake__Center_West_Platform [label = "", pos = "102.45,-24.583333!"];
             Amagi__East_Lake__Center_West_Water_Surface [label = "", pos = "102.3,-25.0!"];
+            Amagi__East_Lake__Center_Above [label = "", pos = "103.425,-24.166667!"];
+            Amagi__East_Lake__Far_West_Above [label = "", pos = "100.5,-24.166667!"];
             Amagi__East_Lake__West_Water_Surface [label = "", pos = "101.4,-25.0!"];
-            Amagi__East_Lake__Far_West_Water_Surface [label = "", pos = "99.9,-25.0!"];
+            Amagi__East_Lake__Far_West_Water_Surface [label = "", pos = "100.05,-25.0!"];
             Amagi__East_Lake__West_Platform_1_West [label = "", pos = "101.25,-25.083333!"];
             Amagi__East_Lake__West_Platform_1_West_Hook [label = "", pos = "100.95,-25.166667!"];
             Amagi__East_Lake__West_Platform_1_East [label = "", pos = "102.15,-25.083333!"];
@@ -79,7 +95,7 @@
             Amagi__East_Lake__West_Platform_2_East [label = "", pos = "100.95,-25.75!"];
             Amagi__East_Lake__West_Platform_3 [label = "", pos = "101.1,-26.583333!"];
             Amagi__East_Lake__West_Platform_3_Hook [label = "", pos = "100.8,-26.666667!"];
-            Amagi__East_Lake__Portal_Stand [label = "", pos = "100.425,-27.166667!"];
+            Amagi__East_Lake__Portal_Stand [label = "", pos = "100.35,-27.166667!"];
             Amagi__East_Lake__Portal_Ledge [label = "", pos = "101.4,-27.416667!"];
             Amagi__East_Lake__West_17 [label = "", pos = "99.15,-27.666667!"];
             Amagi__East_Lake__Save_Point [label = "", pos = "103.5,-29.333333!"];
@@ -1746,6 +1762,8 @@
             Glacier__Vertical_Room__West_15_Lower [label = "", pos = "108.15,-24.5!"];
             Glacier__Vertical_Room__Waters_Ledge [label = "", pos = "109.5,-24.666667!"];
             Glacier__Vertical_Room__Middle_Gatestone [label = "", pos = "109.8,-26.25!"];
+            Glacier__Vertical_Room__Middle_Gatestone_Left [label = "", pos = "109.35,-26.25!"];
+            Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone [label = "", pos = "110.25,-25.666667!"];
             Glacier__Vertical_Room__Lower_Switch [label = "", pos = "109.5,-27.5!"];
             Glacier__Vertical_Room__East_17 [label = "", pos = "110.7,-27.916667!"];
             Glacier__Vertical_Room__East_17_while_hovering [label = "", pos = "110.7,-27.75!"];
@@ -2139,6 +2157,7 @@
             Menu__Breach_Map__LAB_East_Health [label = "", pos = "111.0,-75.0!"];
             Menu__Breach_Map__LAB_East_Ruins_Flask [label = "", pos = "102.0,-76.666667!"];
             Menu__Breach_Map__Exit_Breach [label = "", pos = "102.0,-80.0!"];
+            Menu__Breach_Map__LAB_Upper_Lake_Health [label = "", pos = "99.0,-75.0!"];
         }
         {
             node[shape=doublecircle, fillcolor="8"];
