@@ -1483,6 +1483,14 @@ class GameLogic(object):
         return self.all_items - self.item_locations.keys() - set(self.special.get('unplaced_items', ()))
 
 
+    @cached_property
+    def placed_item_counts(self):
+        d = defaultdict(int)
+        for places in self.canon_places.values():
+            item = places[0]['item']
+            d[item] += 1
+        return d
+
     def process_context(self):
         def _check_types(v1, v2, ctx, category, *names, local=False):
             t1 = typenameof(v1)
