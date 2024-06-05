@@ -191,8 +191,6 @@ impl world::Warp for Warp {
             WarpId::BreachSave => rules::action_invoke_refill_energy(ctx, world),
             WarpId::ExitBreach => rules::action_invoke_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_invoke_default(ctx, world),
-            WarpId::FastTravelBreach => rules::action_invoke_refill_energy(ctx, world),
-            WarpId::FastTravelKiengir => rules::action_invoke_refill_energy(ctx, world),
             WarpId::MainSave => rules::action_invoke_refill_energy(ctx, world),
             WarpId::Portal => rules::action_invoke_post_portal_save_update(ctx, world),
             _ => (),
@@ -225,10 +223,8 @@ impl world::Warp for Warp {
                 rules::observe_action_last_set_invoke_default(ctx, world, full_obs);
             }
             WarpId::FastTravelBreach => {
-                rules::observe_action_invoke_refill_energy(ctx, world, full_obs);
             }
             WarpId::FastTravelKiengir => {
-                rules::observe_action_invoke_refill_energy(ctx, world, full_obs);
             }
             WarpId::MainSave => {
                 rules::observe_action_invoke_refill_energy(ctx, world, full_obs);

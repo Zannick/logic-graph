@@ -744,10 +744,12 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Amagi__Main_Area__Platform_3__ex__West_18_Hook_Point_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Platform_3__ex__West_18_Hook_Point_2.into_usize() + 1,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East.into_usize(),
+            end: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West.into_usize() + 1,
         },
     };
     spots[SpotId::Amagi__Main_Area__Catwalk_Center] = Spot {
@@ -757,10 +759,11 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1.into_usize(),
-            end: ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1.into_usize() + 1,
+            end: ExitId::Amagi__Main_Area__Catwalk_Center__ex__West_18_Hook_Point_2.into_usize() + 1,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East.into_usize(),
+            end: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West.into_usize() + 1,
         },
     };
     spots[SpotId::Amagi__Main_Area__Catwalk_Broken_Part] = Spot {
@@ -781,7 +784,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Amagi__Main_Area__Catwalk_East_Edge__ex__Broken_Catwalk_Far_Side_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Catwalk_East_Edge__ex__Southeast_Ledge_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -837,6 +841,122 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Amagi__Main_Area__Broken_Catwalk_Far_Side] = Spot {
+        id: SpotId::Amagi__Main_Area__Broken_Catwalk_Far_Side,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__Broken_Catwalk_Far_Side__ex__Catwalk_East_Edge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Broken_Catwalk_Far_Side__ex__Catwalk_East_Edge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Catwalk_Far_East] = Spot {
+        id: SpotId::Amagi__Main_Area__Catwalk_Far_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__Catwalk_Far_East__ex__Cache_Ledge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Catwalk_Far_East__ex__Gated_Community__Platform_2_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Southeast_Ledge] = Spot {
+        id: SpotId::Amagi__Main_Area__Southeast_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__East_18] = Spot {
+        id: SpotId::Amagi__Main_Area__East_18,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__East_18__ex__Cache_Ledge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__East_18__ex__Gated_Community__West_18_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Northeast_Ledge] = Spot {
+        id: SpotId::Amagi__Main_Area__Northeast_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__Northeast_Ledge__ex__Cache_Ledge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Northeast_Ledge__ex__Cache_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__East_16] = Spot {
+        id: SpotId::Amagi__Main_Area__East_16,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__East_16__ex__Cache_Ledge_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__East_16__ex__Cache_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Cache_Ledge] = Spot {
+        id: SpotId::Amagi__Main_Area__Cache_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Cache_Jump] = Spot {
+        id: SpotId::Amagi__Main_Area__Cache_Jump,
+        locations: Range {
+            start: LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask.into_usize(),
+            end: LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__Cache] = Spot {
+        id: SpotId::Amagi__Main_Area__Cache,
+        locations: Range {
+            start: LocationId::Amagi__Main_Area__Cache__Item.into_usize(),
+            end: LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Amagi__Main_Area__Broken_Wall] = Spot {
         id: SpotId::Amagi__Main_Area__Broken_Wall,
         locations: Range {
@@ -846,7 +966,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West.into_usize(),
+            end: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West.into_usize() + 1,
         },
     };
     spots[SpotId::Amagi__Main_Area__Wall_Stuck_Spot] = Spot {
@@ -858,7 +979,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West.into_usize(),
+            end: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West.into_usize() + 1,
         },
     };
     spots[SpotId::Amagi__Main_Area__Half_Pillar] = Spot {
@@ -879,7 +1001,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Amagi__Main_Area__Flat_Ruin__ex__West_18_Hook_Point_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__Flat_Ruin__ex__West_18_Hook_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -905,6 +1028,19 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         exits: Range {
             start: ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1.into_usize(),
             end: ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Main_Area__West_18_Hook_Point] = Spot {
+        id: SpotId::Amagi__Main_Area__West_18_Hook_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1.into_usize(),
+            end: ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -957,6 +1093,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         exits: Range {
             start: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize(),
             end: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Grid_31_19__Center] = Spot {
+        id: SpotId::Amagi__Grid_31_19__Center,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
         },
         actions: Range {
             start: 0, end: 0,
@@ -2364,6 +2512,42 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Amagi__Gated_Community__East_18] = Spot {
         id: SpotId::Amagi__Gated_Community__East_18,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Gated_Community__West_18] = Spot {
+        id: SpotId::Amagi__Gated_Community__West_18,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Gated_Community__West_16] = Spot {
+        id: SpotId::Amagi__Gated_Community__West_16,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi__Gated_Community__Platform_2_West] = Spot {
+        id: SpotId::Amagi__Gated_Community__Platform_2_West,
         locations: Range {
             start: 0, end: 0,
         },

@@ -31,8 +31,14 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => true,
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__req(ctx, world),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => true,
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => true,
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => true,
@@ -179,7 +185,13 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, full_obs),
@@ -343,11 +355,65 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "West 18 Hook Point"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 let (ret, mut tags) = rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Grid 31,19 > Center"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "West 18 Hook Point"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Grid 31,19 > Center"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "West 18 Hook Point"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "West 18 Hook Point"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -1326,7 +1392,13 @@ impl world::Action for Action {
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
@@ -1479,6 +1551,12 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => ctx.indra(),
             ActionId::Global__Recall_Fast_Travel => data::map_spot(ctx.position()),
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => SpotId::Amagi__Main_Area__West_18_Hook_Point,
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => SpotId::Amagi__Grid_31_19__Center,
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => SpotId::Amagi__Main_Area__West_18_Hook_Point,
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => SpotId::Amagi__Grid_31_19__Center,
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => SpotId::Amagi__Main_Area__West_18_Hook_Point,
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => SpotId::Amagi__Main_Area__West_18_Hook_Point,
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__Arch_East,
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__Arch_East,
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__Arch_West,
@@ -1566,8 +1644,26 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 rules::observe_action_amagi__main_area__carving__key_combo__do(ctx, world, full_obs);
             }
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world, full_obs);
@@ -2023,9 +2119,39 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 1750,
         price: Currency::Free,
     };
+    actions[ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West] = Action {
+        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West,
+        time: 2000,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East] = Action {
+        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East,
+        time: 9724,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West] = Action {
+        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West,
+        time: 2750,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East] = Action {
+        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East,
+        time: 8974,
+        price: Currency::Free,
+    };
     actions[ActionId::Amagi__Main_Area__Save_Point__Save] = Action {
         id: ActionId::Amagi__Main_Area__Save_Point__Save,
         time: 1200,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West] = Action {
+        id: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West,
+        time: 3062,
+        price: Currency::Free,
+    };
+    actions[ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West] = Action {
+        id: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West,
+        time: 2999,
         price: Currency::Free,
     };
     actions[ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch] = Action {

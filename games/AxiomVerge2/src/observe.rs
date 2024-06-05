@@ -140,6 +140,9 @@ impl Observer for FullObservation {
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn | LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip | LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_EXIT_BREACH);
             }
+            LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask | LocationId::Amagi__Main_Area__Cache__Item | LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip | LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => {
+                self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI_MAIN_AREA_WATER_FLASK);
+            }
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask | LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_AMAGI_DRAGON_EYE_FLASK);
             }
@@ -336,7 +339,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM);
             }
             LocationId::Amagi__Liru_Room__Shrine__Item => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM);
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL);
@@ -492,7 +495,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
             }
             LocationId::Giguna__West_Tower__Top__Tablet => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
             }
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM);
@@ -705,7 +708,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_3);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_1);
@@ -1666,12 +1669,12 @@ impl Observer for FullObservation {
             }
             AreaId::Menu__Breach_Map => {
                 if get_area(cur.position) != area {
-                    rules::observe_action_invoke_save_last(cur, world, dest, self);
+                    rules::observe_action_invoke_save_last_invoke_refill_energy(cur, world, dest, self);
                 }
             }
             AreaId::Menu__Kiengir_Map => {
                 if get_area(cur.position) != area {
-                    rules::observe_action_invoke_save_last(cur, world, dest, self);
+                    rules::observe_action_invoke_save_last_invoke_refill_energy(cur, world, dest, self);
                 }
             }
             AreaId::Menu__Warp_Only => {

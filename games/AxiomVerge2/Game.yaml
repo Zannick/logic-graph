@@ -222,12 +222,10 @@ warps:  # MARK: warps
     time: 0.1
     req: allow_warps and $ft_main and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
     to: ^map_spot
-    after: $refill_energy
   fast_travel_breach:
     time: 0.1
     req: allow_warps and $ft_breach and (^map_spot WITHIN `Menu > Breach Map`) and not Apocalypse_Bomb
     to: ^map_spot
-    after: $refill_energy
   portal:
     req: ^mode == 'drone' and ^portal == ^position and ^flipside != $default and (not ^portal_hidden or Breach_Sight) and not Apocalypse_Bomb
     to: ^flipside
@@ -339,9 +337,9 @@ helpers:  # MARK: helpers
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter]
   # TODO: can we check canon visits rather than reserve an i8?
   $all_flasks:itemList: >
-    [Flask{22}, Big_Flask{9}]
+    [Flask{24}, Big_Flask{10}]
   $all_health:itemList: >
-    [Health_Node{2}, Health_Fragment{11}]
+    [Health_Node{2}, Health_Fragment{13}]
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
   $other_items:itemList: >
@@ -349,8 +347,6 @@ helpers:  # MARK: helpers
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach]
-  # To be added: 2 Big_Flask
-  # 2 Health_Fragment
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy

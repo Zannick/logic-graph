@@ -38,6 +38,10 @@ impl world::Accessible for Location {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Amagi__East_Lake__Foot__Tablet => true,
             LocationId::Amagi__Liru_Room__Shrine__Item => true,
+            LocationId::Amagi__Main_Area__Cache__Item => true,
+            LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
+            LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => true,
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => true,
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::access_defeat_mus_a_m20(ctx, world),
@@ -393,6 +397,9 @@ impl world::Accessible for Location {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
+            LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::observe_access_defeat_mus_a_m20(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::observe_access_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world, full_obs),
@@ -677,6 +684,9 @@ impl world::Accessible for Location {
 
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
+            LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => rules::explain_defeat_mus_a_m20(ctx, world, edict),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => rules::explain_invoke_shockwave_and_not_defeat_mus_a_m20(ctx, world, edict),
@@ -992,6 +1002,42 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask] = Location {
+        id: LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask,
+        canonical: CanonId::Amagi_Main_Area_Water_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 6000,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__Main_Area__Cache__Item] = Location {
+        id: LocationId::Amagi__Main_Area__Cache__Item,
+        canonical: CanonId::Amagi_Main_Area_Water_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip] = Location {
+        id: LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip,
+        canonical: CanonId::Amagi_Main_Area_Water_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi__Main_Area__Cache__Item_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel] = Location {
+        id: LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel,
+        canonical: CanonId::Amagi_Main_Area_Water_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Amagi__Main_Area__Cache__Item_Fast_Travel),
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {

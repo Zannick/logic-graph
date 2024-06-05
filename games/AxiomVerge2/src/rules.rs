@@ -1659,6 +1659,14 @@ pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &World) ->
     // $can_deploy and Drone_Hover
     (helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
 }
+pub fn access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $can_deploy and Drone_Hover and Slingshot_Hook
+    ((helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
+        && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_invoke_can_deploy_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $can_deploy and $hover
     (helper__can_deploy!(ctx, world) && helper__hover!(ctx, world))
@@ -2606,6 +2614,18 @@ pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && helper__hover!(ctx, world))
 }
+pub fn access_underwater_movement_and_invoke_hover(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and $hover
+    (ctx.has(Item::Underwater_Movement) && helper__hover!(ctx, world))
+}
+pub fn access_underwater_movement_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and $mist2
+    (ctx.has(Item::Underwater_Movement) && helper__mist2!(ctx, world))
+}
+pub fn access_underwater_movement_and_nanite_mist(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and Nanite_Mist
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Nanite_Mist))
+}
 pub fn access_underwater_movement_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and Slingshot_Hook
     (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Slingshot_Hook))
@@ -3071,6 +3091,15 @@ pub fn action_invoke_save(ctx: &mut Context, world: &World) {
 pub fn action_invoke_save_last(ctx: &mut Context, world: &World, newpos: SpotId) {
     // $save_last
     helper__save_last!(ctx, world);
+}
+pub fn action_invoke_save_last_invoke_refill_energy(
+    ctx: &mut Context,
+    world: &World,
+    newpos: SpotId,
+) {
+    // $save_last; $refill_energy
+    helper__save_last!(ctx, world);
+    helper__refill_energy!(ctx, world);
 }
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
@@ -9182,6 +9211,45 @@ pub fn explain_invoke_can_deploy_and_drone_hover(
         }
     }
 }
+pub fn explain_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and Drone_Hover and Slingshot_Hook
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_can_deploy_and_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -13789,6 +13857,83 @@ pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
         }
     }
 }
+pub fn explain_underwater_movement_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $mist2
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Nanite_Mist
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -17034,6 +17179,22 @@ pub fn observe_access_invoke_can_deploy_and_drone_hover(
             ctx.has(Item::Drone_Hover)
         }))
 }
+pub fn observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and Drone_Hover and Slingshot_Hook
+    ((hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        }))
+        && ({
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
+}
 pub fn observe_access_invoke_can_deploy_and_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -19334,6 +19495,42 @@ pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
     } && (hobserve__hook!(ctx, world, full_obs)))
         && (hobserve__hover!(ctx, world, full_obs)))
 }
+pub fn observe_access_underwater_movement_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $hover
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $mist2
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Nanite_Mist
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
 pub fn observe_access_underwater_movement_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -20311,6 +20508,19 @@ pub fn observe_action_invoke_save_last(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     hobserve__save_last!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_save_last_invoke_refill_energy(
+    ctx: &Context,
+    world: &World,
+    newpos: SpotId,
+    full_obs: &mut FullObservation,
+) {
+    // $save_last; $refill_energy
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__save_last!(ctx, world, full_obs);
+    hobserve__refill_energy!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(

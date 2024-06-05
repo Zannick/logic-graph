@@ -113,9 +113,13 @@
         {
             Amagi__Gated_Community__East_17 [label = "", pos = "98.85,-27.666667!"];
             Amagi__Gated_Community__East_18 [label = "", pos = "98.85,-29.5!"];
+            Amagi__Gated_Community__West_18 [label = "", pos = "93.15,-29.583333!"];
+            Amagi__Gated_Community__West_16 [label = "", pos = "93.15,-26.666667!"];
+            Amagi__Gated_Community__Platform_2_West [label = "", pos = "93.3,-27.833333!"];
         }
         {
             Amagi__Grid_31_19__West [label = "", pos = "93.15,-31.166667!"];
+            Amagi__Grid_31_19__Center [label = "", pos = "94.35,-31.25!"];
             Amagi__Grid_31_19__East [label = "", pos = "95.85,-31.166667!"];
         }
         {
@@ -162,12 +166,22 @@
             Amagi__Main_Area__Enemy_Side [label = "", pos = "89.4,-31.0!"];
             Amagi__Main_Area__Small_Cliff [label = "", pos = "91.2,-30.916667!"];
             Amagi__Main_Area__East_19 [label = "", pos = "92.85,-31.166667!"];
+            Amagi__Main_Area__Broken_Catwalk_Far_Side [label = "", pos = "90.45,-28.5!"];
+            Amagi__Main_Area__Catwalk_Far_East [label = "", pos = "91.5,-28.5!"];
+            Amagi__Main_Area__Southeast_Ledge [label = "", pos = "92.4,-29.666667!"];
+            Amagi__Main_Area__East_18 [label = "", pos = "92.85,-29.666667!"];
+            Amagi__Main_Area__Northeast_Ledge [label = "", pos = "92.4,-26.666667!"];
+            Amagi__Main_Area__East_16 [label = "", pos = "92.85,-26.666667!"];
+            Amagi__Main_Area__Cache_Ledge [label = "", pos = "92.1,-26.166667!"];
+            Amagi__Main_Area__Cache_Jump [label = "", pos = "91.5,-25.916667!"];
+            Amagi__Main_Area__Cache [label = "", pos = "90.9,-26.333333!"];
             Amagi__Main_Area__Broken_Wall [label = "", pos = "85.275,-28.916667!"];
             Amagi__Main_Area__Wall_Stuck_Spot [label = "", pos = "85.2,-29.666667!"];
             Amagi__Main_Area__Half_Pillar [label = "", pos = "84.0,-30.25!"];
             Amagi__Main_Area__Flat_Ruin [label = "", pos = "82.5,-30.25!"];
             Amagi__Main_Area__West_Mini_Hill [label = "", pos = "83.4,-30.833333!"];
             Amagi__Main_Area__West_18 [label = "", pos = "81.15,-28.916667!"];
+            Amagi__Main_Area__West_18_Hook_Point [label = "", pos = "81.6,-29.083333!"];
             Amagi__Main_Area__West_19 [label = "", pos = "81.15,-31.166667!"];
             Amagi__Main_Area__Secret_Waterfall [label = "", pos = "82.2,-22.25!"];
             Amagi__Main_Area__Way_Off_To_The_Side [label = "", pos = "91.2,-22.166667!"];
@@ -209,7 +223,7 @@
             Amagi__West_Lake__Stronghold_Ceiling_Right [label = "", pos = "72.3,-31.833333!"];
             Amagi__West_Lake__Stronghold_Front_Room [label = "", pos = "73.2,-32.833333!"];
             Amagi__West_Lake__Stronghold_Front_Door [label = "", pos = "74.1,-33.0!"];
-            Amagi__West_Lake__Some_Rock [label = "", pos = "75.0,-31.5!"];
+            Amagi__West_Lake__Some_Rock [label = "", pos = "75.0,-31.583333!"];
             Amagi__West_Lake__Small_Hill [label = "", pos = "75.9,-32.25!"];
             Amagi__West_Lake__Tentacle_Gap [label = "", pos = "78.75,-31.166667!"];
             Amagi__West_Lake__Left_of_Enemy [label = "", pos = "78.3,-33.0!"];

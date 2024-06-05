@@ -235,7 +235,7 @@ areas:
 # there's a similar trick opening the map as you die, you can fast travel in the middle of your respawn
 # that's only useful for changing your active/passive room? bleh
 - name: Kiengir Map  # MARK: Kiengir Map
-  on_entry: $save_last
+  on_entry: $save_last; $refill_energy
   data:
     realm: map
   tags: [map]
@@ -771,7 +771,7 @@ areas:
     #endregion
 
 - name: Breach Map  # MARK: Breach Map
-  on_entry: $save_last
+  on_entry: $save_last; $refill_energy
   data:
     realm: map
   tags: [map]
