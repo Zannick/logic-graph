@@ -354,7 +354,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER);
             }
             LocationId::Amagi__East_Lake__Foot__Tablet => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET);
+                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET);
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT);
@@ -474,7 +474,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM);
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
@@ -705,7 +705,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_2);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_3);
@@ -2525,6 +2525,12 @@ impl FullObservation {
     pub fn clear_boomerang_upgrade(&mut self) {
         self.cbits2.remove(flags::ContextBits2::BOOMERANG_UPGRADE);
     }
+    pub fn observe_bounty_list(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::BOUNTY_LIST);
+    }
+    pub fn clear_bounty_list(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::BOUNTY_LIST);
+    }
     pub fn observe_breach_attractor(&mut self) {
         self.cbits2.insert(flags::ContextBits2::BREACH_ATTRACTOR);
     }
@@ -2776,10 +2782,10 @@ impl FullObservation {
         self.cbits2.remove(flags::ContextBits2::GIGUNA_DUAL_PATH_WALL);
     }
     pub fn observe_giguna_gateway_block(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+        self.cbits3.insert(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
     }
     pub fn clear_giguna_gateway_block(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+        self.cbits3.remove(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
     }
     pub fn observe_giguna_gateway_gate(&mut self) {
         self.cbits3.insert(flags::ContextBits3::GIGUNA_GATEWAY_GATE);
@@ -3190,10 +3196,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::THE_ETERNAL_ARM);
     }
     pub fn observe_the_ideal_kiengir(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
+        self.cbits4.insert(flags::ContextBits4::THE_IDEAL_KIENGIR);
     }
     pub fn clear_the_ideal_kiengir(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::THE_IDEAL_KIENGIR);
+        self.cbits4.remove(flags::ContextBits4::THE_IDEAL_KIENGIR);
     }
     pub fn observe_the_student(&mut self) {
         self.cbits4.insert(flags::ContextBits4::THE_STUDENT);

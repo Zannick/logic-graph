@@ -5255,16 +5255,21 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 10 {
+                        if ctx.count(Item::Big_Flask) < 11 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 10 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 11 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 10 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 11 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
                             if !map.contains_key(&Item::Boomerang) {
                                 map.insert(Item::Boomerang, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Bounty_List) {
+                            if !map.contains_key(&Item::Bounty_List) {
+                                map.insert(Item::Bounty_List, 1);
                             }
                         }
                         if !ctx.has(Item::Breach_Attractor) {
@@ -5357,11 +5362,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 24 {
+                        if ctx.count(Item::Flask) < 25 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 24 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 25 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 24 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 25 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -5379,11 +5384,11 @@ impl world::World for World {
                                 map.insert(Item::Goodbye, 1);
                             }
                         }
-                        if ctx.count(Item::Health_Fragment) < 13 {
+                        if ctx.count(Item::Health_Fragment) < 15 {
                             if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                                *val = std::cmp::max(*val, 13 - ctx.count(Item::Health_Fragment));
+                                *val = std::cmp::max(*val, 15 - ctx.count(Item::Health_Fragment));
                             } else {
-                                map.insert(Item::Health_Fragment, 13 - ctx.count(Item::Health_Fragment));
+                                map.insert(Item::Health_Fragment, 15 - ctx.count(Item::Health_Fragment));
                             }
                         }
                         if ctx.count(Item::Health_Node) < 2 {
@@ -5635,16 +5640,21 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 10 {
+                        if ctx.count(Item::Big_Flask) < 11 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 10 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 11 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 10 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 11 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
                             if !map.contains_key(&Item::Boomerang) {
                                 map.insert(Item::Boomerang, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Bounty_List) {
+                            if !map.contains_key(&Item::Bounty_List) {
+                                map.insert(Item::Bounty_List, 1);
                             }
                         }
                         if !ctx.has(Item::Breach_Attractor) {
@@ -5737,11 +5747,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 24 {
+                        if ctx.count(Item::Flask) < 25 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 24 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 25 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 24 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 25 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -5759,11 +5769,11 @@ impl world::World for World {
                                 map.insert(Item::Goodbye, 1);
                             }
                         }
-                        if ctx.count(Item::Health_Fragment) < 13 {
+                        if ctx.count(Item::Health_Fragment) < 15 {
                             if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                                *val = std::cmp::max(*val, 13 - ctx.count(Item::Health_Fragment));
+                                *val = std::cmp::max(*val, 15 - ctx.count(Item::Health_Fragment));
                             } else {
-                                map.insert(Item::Health_Fragment, 13 - ctx.count(Item::Health_Fragment));
+                                map.insert(Item::Health_Fragment, 15 - ctx.count(Item::Health_Fragment));
                             }
                         }
                         if ctx.count(Item::Health_Node) < 2 {
@@ -6025,12 +6035,15 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 10);
+                            *val = std::cmp::max(*val, 11);
                         } else {
-                            map.insert(Item::Big_Flask, 10);
+                            map.insert(Item::Big_Flask, 11);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
+                        }
+                        if !map.contains_key(&Item::Bounty_List) {
+                            map.insert(Item::Bounty_List, 1);
                         }
                         if !map.contains_key(&Item::Breach_Attractor) {
                             map.insert(Item::Breach_Attractor, 1);
@@ -6087,9 +6100,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 24);
+                            *val = std::cmp::max(*val, 25);
                         } else {
-                            map.insert(Item::Flask, 24);
+                            map.insert(Item::Flask, 25);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
@@ -6101,9 +6114,9 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 13);
+                            *val = std::cmp::max(*val, 15);
                         } else {
-                            map.insert(Item::Health_Fragment, 13);
+                            map.insert(Item::Health_Fragment, 15);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Node) {
                             *val = std::cmp::max(*val, 2);
@@ -6261,12 +6274,15 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 10);
+                            *val = std::cmp::max(*val, 11);
                         } else {
-                            map.insert(Item::Big_Flask, 10);
+                            map.insert(Item::Big_Flask, 11);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
+                        }
+                        if !map.contains_key(&Item::Bounty_List) {
+                            map.insert(Item::Bounty_List, 1);
                         }
                         if !map.contains_key(&Item::Breach_Attractor) {
                             map.insert(Item::Breach_Attractor, 1);
@@ -6323,9 +6339,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 24);
+                            *val = std::cmp::max(*val, 25);
                         } else {
-                            map.insert(Item::Flask, 24);
+                            map.insert(Item::Flask, 25);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
@@ -6337,9 +6353,9 @@ impl world::World for World {
                             map.insert(Item::Goodbye, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Fragment) {
-                            *val = std::cmp::max(*val, 13);
+                            *val = std::cmp::max(*val, 15);
                         } else {
-                            map.insert(Item::Health_Fragment, 13);
+                            map.insert(Item::Health_Fragment, 15);
                         }
                         if let Some(val) = map.get_mut(&Item::Health_Node) {
                             *val = std::cmp::max(*val, 2);
@@ -10641,7 +10657,7 @@ impl World {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Bounty_List | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
@@ -10654,7 +10670,7 @@ impl World {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Bounty_List | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
@@ -10730,7 +10746,6 @@ impl World {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
-                        iset.insert(Item::Bounty_List);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Health_Upgrade_5);
@@ -10865,7 +10880,6 @@ impl World {
                         let mut iset = FxHashSet::default();
                         iset.insert(Item::Aansur);
                         iset.insert(Item::Amagi_Stronghold_Left_Wall);
-                        iset.insert(Item::Bounty_List);
                         iset.insert(Item::Drone_Melee_Damage_3);
                         iset.insert(Item::Drone_Melee_Speed_3);
                         iset.insert(Item::Escape);
