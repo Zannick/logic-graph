@@ -1589,6 +1589,8 @@ areas:
         - to: West Platform 3
     - name: Center Northeast Platform
       coord: [34.75, 14.7]
+      data:
+        flipside: Amagi Breach > Upper Lake > Portal Stand
       local:
         - to: Center Upper Platform
           jumps: 1
@@ -1604,6 +1606,8 @@ areas:
           movement: base
     - name: Center Upper Platform
       coord: [34.4, 14.65]
+      data:
+        flipside: Amagi Breach > Upper Lake > Center of Platform
       local:
         - to: Center West Platform
         - to: Center Water Below Platform West
@@ -1613,6 +1617,8 @@ areas:
           jumps_down: 1
     - name: Center West Platform
       coord: [34.15, 14.75]
+      data:
+        flipside: Amagi Breach > Upper Lake > Middle
       local:
         - to: West Platform 1 West
         - to: Center West Water Surface
@@ -1993,6 +1999,8 @@ areas:
           jumps: 2
     - name: Southwest Column West
       coord: [33.9, 17.1]
+      data:
+        flipside: Amagi Breach > East Ruins > Small Column West
       local:
         - to: Southwest Column East
         - to: Southwest Column Base

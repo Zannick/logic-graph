@@ -69,3 +69,18 @@ tests:
       - Slingshot_Hook
       - Drone_Hover
     can_reach: Giguna > Wasteland > Door Right
+
+  - name: Cloud Flask
+    start: Giguna > Clouds > Platform Stop
+    context:
+      giguna__clouds__ctx__platform: true
+      mode: drone
+      portal: Giguna > Clouds > Platform Stop
+    with:
+      - Breach_Sight
+      - Breach_Attractor
+      - Exit_Breach
+      - Remote_Drone
+      - Anuman
+      - Drone_Hover
+    can_reach: Giguna > Clouds > Cache

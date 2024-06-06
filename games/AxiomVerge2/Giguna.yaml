@@ -1890,6 +1890,8 @@ areas:
 
     - name: Platform Early
       coord: [12.5, 19.5]
+      data:
+        flipside: Giguna Breach > Pink Clouds > Quick Entry
       local:
         - to: Southeast
     - name: Platform Stop

@@ -104,6 +104,8 @@ areas:
           tags: [xdoor]
     - name: Center Right
       coord: [36.6, 15.75]
+      data:
+        flipside: Glacier > Vertical Room > Middle Gatestone
       local:
         - to: Center Left
         - to: East
@@ -112,11 +114,15 @@ areas:
           jump_mvmt: water
     - name: Center Left
       coord: [36.45, 15.75]
+      data:
+        flipside: Glacier > Vertical Room > Middle Gatestone Left
       local:
         - to: West
         - to: Center Right
     - name: Outcrop
       coord: [36.75, 15.4]
+      data:
+        flipside: Glacier > Vertical Room > Outcrop by Middle Gatestone
       local:
         - to: Center Left
         - to: East
@@ -273,6 +279,8 @@ areas:
           jumps: 2
     - name: Small Column West
       coord: [33.9, 17.1]
+      data:
+        flipside: Amagi > East Lake > Southwest Column West
       local:
         - to: Under the Rock
       exits:

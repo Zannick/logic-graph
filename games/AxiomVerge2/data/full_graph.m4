@@ -1295,9 +1295,15 @@ digraph AxiomVerge2 {
     Glacier__Dock_Outside__Lower_Mid_air -> Glacier__Dock_Outside__Upper_Ledge;
     Glacier__Dock_Outside__Ruins_Platform -> Glacier__Dock_Outside__High_Toward_Cave;
     Glacier__Dock_Outside__Above_Ruins -> Glacier__Dock_Outside__Cave_Mouth;
+    Glacier__Dock_Outside__Above_Ruins -> Glacier__Dock_Outside__Cave_Mouth;
+    Glacier__Dock_Outside__Above_Ruins -> Glacier__Dock_Outside__Cave_Mouth;
     Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar;
     Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar;
     Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar_Step;
+    Glacier__Dock_Outside__High_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;
+    Glacier__Dock_Outside__High_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;
+    Glacier__Dock_Outside__Mid_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;
+    Glacier__Dock_Outside__Mid_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;
     Glacier__Dock_Outside__Cave_Mouth -> Glacier__Dock_Outside__Above_Ruins;
     Glacier__Dock_Outside__Cave_Mouth -> Glacier__Dock_Outside__Ruins_Stairs;
     Glacier__Dock_Outside__Cave_Gullet -> Glacier__Dock_Outside__Cave_Throat;
@@ -3538,6 +3544,7 @@ digraph AxiomVerge2 {
     Giguna_Breach__Ascent__Top -> Giguna_Breach__Ascent__West_6;
     Giguna_Breach__Ascent__West_6 -> Giguna_Breach__Ascent__Top;
     Giguna_Breach__Pink_Clouds__Normal_Entry -> Giguna_Breach__Pink_Clouds__Corner;
+    Giguna_Breach__Pink_Clouds__Quick_Entry -> Giguna_Breach__Pink_Clouds__Corner;
     Giguna_Breach__Pink_Clouds__Corner -> Giguna_Breach__Pink_Clouds__Normal_Entry;
     Giguna__Giguna_Northeast__Inner_Wall -> Giguna__Giguna_Northeast__East_9;
     Giguna__Giguna_Northeast__Inner_Wall -> Giguna__Giguna_Northeast__Crow_Eating;
@@ -4152,6 +4159,7 @@ digraph AxiomVerge2 {
     Glacier__Dock_Outside__Upper_Ledge -> Glacier__Dock_Outside__Lower_Mid_air;
     Glacier__Dock_Outside__Upper_Ledge -> Glacier__Dock_Outside__Ruins_Stairs;
     Glacier__Dock_Outside__Upper_Ledge -> Glacier__Dock_Outside__Ruins_Platform;
+    Glacier__Dock_Outside__Upper_Ledge -> Glacier__Dock_Outside__Mid_Toward_Cave;
     Glacier__Dock_Outside__Ruins_Stairs -> Glacier__Dock_Outside__Upper_Ledge;
     Glacier__Dock_Outside__Ruins_Stairs -> Glacier__Dock_Outside__Ruins_Platform;
     Glacier__Dock_Outside__Ruins_Stairs -> Glacier__Dock_Outside__Upper_West_Hill;

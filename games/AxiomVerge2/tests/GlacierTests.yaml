@@ -1,0 +1,31 @@
+name: GlacierTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Drone_Hover
+    - Ledge_Grab
+    - Infect
+    - Infect_L1
+    - Infect_L2
+    - Remote_Drone
+    - Shockwave
+    - Slingshot_Hook
+    - Underwater_Movement
+  context:
+    save: Glacier > Revival > Save Point
+    energy: 300
+  visited:
+    - Glacier > Sea Burial > Collapsing Ceiling > Drown
+
+tests:
+  - name: Dock Flask
+    with:
+      - Nanite_Mist
+      - Mist_Upgrade
+      - Anuman
+    context:
+      mode: drone
+    start: Glacier > Dock Outside > Ruins Stairs
+    can_reach: Glacier > Dock Outside > Cave Treasure

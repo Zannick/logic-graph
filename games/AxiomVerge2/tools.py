@@ -42,10 +42,14 @@ def notable_spots_without_map_spot():
 
 def same_coordinates_no_flipside():
     by_coord = defaultdict(list)
-    for spot in AV2.spots():
-        if 'coord' not in spot or spot['region'] in ('Interior', 'Menu'):
+    for region in AV2.regions:
+        if region['name'] in ('Antarctica', 'Interior', 'Menu'):
             continue
-        by_coord[tuple(spot['coord'])].append(spot)
+        for area in region['areas']:
+            for spot in area['spots']:
+                if 'coord' not in spot:
+                    continue
+                by_coord[tuple(spot['coord'])].append(spot)
     dups = [
         [s['fullname'] for s in same] for same in by_coord.values()
         # Include all spots that don't have flipside set to default

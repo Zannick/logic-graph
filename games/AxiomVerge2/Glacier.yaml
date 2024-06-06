@@ -75,6 +75,8 @@ areas:
         - to: Ruins Platform
           jumps: 1
         - to: Ruins Stairs
+        - to: Mid Toward Cave
+          jumps: 1
     - name: Ruins Stairs
       coord: [42.85, 7.8]
       local:
@@ -117,6 +119,12 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Cave Mouth
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cave Mouth
+          req: $mist2
+          movement: mist2
     - name: Upper West Hill
       coord: [42.1, 7.7]
       local:
@@ -144,12 +152,25 @@ areas:
       local:
         - to: Entry
         - to: Lower Mid-air
-      # TODO: auto-priced mist movements
+      exits:
+        - to: Cave Mouth
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cave Mouth
+          req: $mist2
+          movement: mist2
     - name: Mid Toward Cave
       coord: [43.1, 7.6]
       local:
         - to: Entry
         - to: Lower Mid-air
+      exits:
+        - to: Cave Mouth
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cave Mouth
+          req: $mist2
+          movement: mist2
     - name: Cave Mouth
       coord: [43.3, 7.2]
       local:
@@ -2402,6 +2423,8 @@ areas:
           jumps: 2
     - name: Grate Left
       coord: [37.75, 14.7]
+      data:
+        flipside: SpotId::None
       local:
         - to: Portal Stand
         - to: Lower Corner

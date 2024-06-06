@@ -591,6 +591,11 @@ areas:
           jumps: 2
     - name: Quick Entry
       coord: [12.5, 18.85]
+      data:
+        flipside: Giguna > Clouds > Platform Early
+      local:
+        - to: Corner
+          jumps: 2
     - name: Corner
       coord: [12.9, 18.3]
       data:

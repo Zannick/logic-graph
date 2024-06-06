@@ -15968,7 +15968,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1.into_usize(),
-            end: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1.into_usize() + 1,
+            end: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -15993,7 +15993,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1.into_usize(),
+            end: ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -16005,7 +16006,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1.into_usize(),
+            end: ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

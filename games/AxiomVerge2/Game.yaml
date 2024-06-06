@@ -337,9 +337,9 @@ helpers:  # MARK: helpers
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,
      Bounty_List]
   # TODO: can we check canon visits rather than reserve an i8?
-  # Pending Big_Flask: Giguna Clouds, Annuna Mirror Match
+  # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{25}, Big_Flask{10}]
+    [Flask{25}, Big_Flask{11}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{15}]
   $all_weapons:itemList: >

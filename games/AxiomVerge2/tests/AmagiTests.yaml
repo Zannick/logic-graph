@@ -84,3 +84,24 @@ tests:
         Move... to Amagi Breach > East Ruins > Plinth
       * Collect Breach_Exit from Amagi Breach > East Ruins > Plinth > Urn
         ExitBreachWarp
+
+  - name: Upper Lake health
+    start: Amagi > East Lake > East 15 Flat
+    context:
+      mode: drone
+      portal: Amagi > East Lake > Portal Stand
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+      - Breach_Attractor
+      - Underwater_Movement
+      - Anuman
+      - Exit_Breach
+    route: |
+      Move... to Amagi > East Lake > Center Northeast Platform
+      ! Do Move Portal Here
+        Portalwarp
+        Move... to Amagi Breach > Upper Lake > Column
+      * Collect Health_Fragment from Amagi Breach > Upper Lake > Column > Health
+        ExitBreachWarp
+        Move... to Amagi > East Lake > West 17
