@@ -164,6 +164,8 @@ areas:
           movement: base
     - name: Switch
       coord: [17.7, 10.8]
+      data:
+        flipside: Giguna Breach > Slingshot > Ravine
       exits:
         - to: Door
           req: ^_door_opened and ($grab or $hook)
@@ -175,6 +177,8 @@ areas:
           do: ^_door_opened = true
     - name: Door
       coord: [17.5, 10.5]
+      data:
+        flipside: Giguna Breach > Slingshot > Column
       local:
         - to: Right Column
         - to: Vault
@@ -472,6 +476,8 @@ areas:
         - to: Column 1 Top Left
     - name: Column 1 Top Left
       coord: [13, 9.3]
+      data:
+        flipside: Giguna Breach > Below Chimney > West Passage
       local:
         - to: Column 1 Top Right
         - to: Cache
@@ -489,6 +495,8 @@ areas:
           tags: [standing]
     - name: Bush
       coord: [12.5, 9.8]
+      data:
+        flipside: Giguna Breach > Below Chimney > Southwest
       local:
         - to: Cache
         - to: Column 1 Top Left
@@ -1180,6 +1188,8 @@ areas:
           tags: [xshift]
     - name: Bottom Rock
       coord: [16.3, 8.5]
+      data:
+        flipside: Giguna Breach > Ascent > Bottom
       local:
         - to: East 9
         - to: West 9
@@ -1376,6 +1386,8 @@ areas:
           tags: [save]
     - name: Platform
       coord: [13.5, 8.35]
+      data:
+        flipside: Giguna Breach > Chimney > Middle Platform
       local:
         - to: Save Point
           jumps_down: 2
@@ -1412,6 +1424,8 @@ areas:
           tags: [shockwave, event]
     - name: Upper Ledge
       coord: [13.6, 6.35]
+      data:
+        flipside: Giguna Breach > Chimney > Top
       local:
         - to: Lower Ledge
         - to: Platform
@@ -1872,7 +1886,7 @@ areas:
       actions:
         - name: Hack and Ride to Portal
           req: not ^_platform and $activate and $attract and Breach_Sight and Remote_Drone
-          do: ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
+          do: ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; }; ^portal = `Giguna > Clouds > Platform Stop`;
           to: Platform Stop
           time: 12  # estimate includes changing active item twice
         - name: Hack, Deploy, Ride to Portal
@@ -1881,19 +1895,28 @@ areas:
           to: Platform Stop
           time: 12  # it's not really additional time
         # Early portal gives us about .5s savings, is that worth modeling?
-        # TODO: early platform exit to jump to the Irikar Hub Sat Tower
-        - name: Hack and Get Off Early
+        # early platform exit to jump to the Irikar Hub Sat Tower
+        - name: Hack and Maybe Get Off Early
           req: not ^_platform and $activate
           do: ^_platform = true
           to: Platform Early
-          time: 9
+          movement: platform
 
     - name: Platform Early
       coord: [12.5, 19.5]
-      data:
-        flipside: Giguna Breach > Pink Clouds > Quick Entry
       local:
         - to: Southeast
+      actions:
+        - name: Continue to Early Portal
+          req: ^_platform and $attract and Breach_Sight and Remote_Drone
+          do: if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Early Portal`; }; ^portal = `Giguna > Clouds > Platform Early Portal`;
+          to: Platform Early Portal
+          movement: platform
+        - name: Deploy and Continue to Early Portal
+          req: ^_platform and $attract and $can_deploy and Breach_Sight
+          do: ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+          to: Platform Early Portal
+          movement: platform
     - name: Platform Stop
       coord: [12.5, 18.7]
       data:
@@ -1912,6 +1935,8 @@ areas:
           tags: [flask]
     - name: Platform Early Portal
       coord: [12.5, 18.85]
+      data:
+        flipside: Giguna Breach > Pink Clouds > Quick Entry
     - name: Southwest
       coord: [11.0, 19.9]
       exits:

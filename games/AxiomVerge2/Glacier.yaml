@@ -714,6 +714,8 @@ areas:
           movement: base
     - name: Right Center Rock
       coord: [40.2, 13.0]
+      data:
+        flipside: Glacier Breach > Grate Work > East Hill
       local:
         - to: Left Center Rock
         - to: Deep Cache
@@ -807,6 +809,8 @@ areas:
 
     - name: West 14
       coord: [39.1, 13.65]
+      data:
+        flipside: Glacier Breach > Grate Work > West 14
       local:
         - to: Inside the Grate
         - to: Grate Left
@@ -816,6 +820,8 @@ areas:
           tags: [xdoor]
     - name: Inside the Grate
       coord: [39.5, 13.65]
+      data:
+        flipside: Glacier Breach > Grate Work > Below Grate
       local:
         - to: West 14
         - to: Grate Left
@@ -2522,6 +2528,8 @@ areas:
           movement: base
     - name: Upper Grate Right
       coord: [40.05, 9.6]
+      data:
+        flipside: Glacier Breach > Save and Exit > Halfway
       local:
         - to: Upper Floor
         - to: Upper Right Pedestal
@@ -2648,6 +2656,8 @@ areas:
 
     - name: Upper Portal Stand
       coord: [39.475, 9.6]
+      data:
+        flipside: Glacier Breach > Save and Exit > Save Point
       local:
         - to: West 10
         - to: Upper Stair

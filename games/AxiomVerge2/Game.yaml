@@ -105,7 +105,7 @@ exit_movements:  # MARK: exit_movements
   platform:
     ignore_base: true
     x: .138
-    # y: .3  ?  TODO: Re-measure more accurately
+    y: .24
     # technically uses xy (ortho) movement but x!=y
   bubbles:
     # Breaking bubbles while falling as drone

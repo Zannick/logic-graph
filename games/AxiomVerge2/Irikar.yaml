@@ -157,6 +157,8 @@ areas:
           time: 1.2
     - name: Save Point
       coord: [12.5, 22.75]
+      data:
+        flipside: Irikar Breach > Hover Room > Bottom
       local:
         - to: Bowl Platform 3
           jumps: 3
@@ -246,6 +248,8 @@ areas:
         - to: Sat Tower Long Ledge
     - name: Sat Tower Long Ledge
       coord: [13.1, 24.2]
+      data:
+        flipside: Irikar Breach > Flappy Drone > Passage Corner
       local:
         - to: Sat Tower Bottom
     - name: Sat Tower Bottom
@@ -353,6 +357,8 @@ areas:
     #region Royal Storage
     - name: Royal Storage South
       coord: [13.5, 25.8]
+      data:
+        flipside: Irikar Breach > Four-way > South
       local:
         - to: Dagger Altar
           jumps: 1
@@ -370,6 +376,8 @@ areas:
           tags: [standing]
     - name: Royal Storage By Wall
       coord: [12.2, 25.7]
+      data:
+        flipside: Irikar Breach > Worm Rave > Corner
       local:
         - to: Dagger Altar
           jumps: 1
@@ -1081,6 +1089,8 @@ areas:
   spots:
     - name: Empty Pedestal
       coord: [14.525, 26.7]
+      data:
+        flipside: Irikar Breach > Exit Corridor > Portal Stand
       local:
         - to: Corner Core
         - to: West
@@ -1198,6 +1208,8 @@ areas:
         - to: Ledge
     - name: North
       coord: [13.5, 26.2]
+      data:
+        flipside: SpotId::None
       local:
         - to: East Platform
         - to: Ledge

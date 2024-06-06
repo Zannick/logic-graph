@@ -69,6 +69,8 @@ areas:
   spots:
     - name: West 14
       coord: [39.1, 13.65]
+      data:
+        flipside: Glacier > Sea Burial > West 14
       local:
         - to: Below Grate
       exits:
@@ -146,6 +148,8 @@ areas:
           movement: mist2
     - name: Below Grate
       coord: [39.5, 13.65]
+      data:
+        flipside: Glacier > Sea Burial > Inside the Grate
       local:
         - to: West 14
       exits:
@@ -197,6 +201,8 @@ areas:
 
     - name: East Hill
       coord: [40.2, 13.0]
+      data:
+        flipside: Glacier > Sea Burial > Right Center Rock
       local:
         - to: Grate Southeast
         - to: Southeast

@@ -88,7 +88,9 @@ impl world::Accessible for Action {
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_giguna__carnelian__switch__open_door__req(ctx, world),
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::access_giguna__carnelian__upper_susar__caught__req(ctx, world),
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::access_giguna__carnelian__upper_susar__hack__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::access_giguna__clouds__platform_start__hack_and_get_off_early__req(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::access_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world),
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::access_giguna__east_caverns__lower_susar__caught__req(ctx, world),
@@ -229,7 +231,9 @@ impl world::Accessible for Action {
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::observe_access_giguna__carnelian__switch__open_door__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::observe_access_giguna__carnelian__upper_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::observe_access_giguna__carnelian__upper_susar__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::observe_access_giguna__clouds__platform_start__hack_and_get_off_early__req(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::observe_access_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::observe_access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::observe_access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world, full_obs),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world, full_obs),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::observe_access_giguna__east_caverns__lower_susar__caught__req(ctx, world, full_obs),
@@ -751,8 +755,26 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_start__hack_and_get_off_early__req(ctx, world, edict);
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => {
+                let (ret, mut tags) = rules::explain_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Platform Early Portal"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => {
+                let (ret, mut tags) = rules::explain_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Platform Early Portal"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => {
+                let (ret, mut tags) = rules::explain_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Early"));
@@ -1475,7 +1497,9 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => rules::action_giguna__clouds__platform_start__hack_and_get_off_early__do(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world),
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__upper_susar__caught__do(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx, world),
@@ -1584,7 +1608,9 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => SpotId::Giguna__Clouds__Platform_Stop,
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => SpotId::Giguna__Clouds__Platform_Stop,
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => SpotId::Giguna__Clouds__Platform_Early,
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => SpotId::Giguna__Clouds__Platform_Early,
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => SpotId::Giguna__Clouds__Platform_Early_Portal,
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => SpotId::Giguna__Clouds__Platform_Early_Portal,
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
@@ -1893,8 +1919,14 @@ impl world::Action for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 rules::observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world, full_obs);
             }
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early => {
-                rules::observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(ctx, world, full_obs);
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => {
+                rules::observe_action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => {
+                rules::observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => {
+                rules::observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
                 rules::observe_action_giguna__east_caverns__west_14__enter_combo__do(ctx, world, full_obs);
@@ -2534,9 +2566,19 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 12000,
         price: Currency::Free,
     };
-    actions[ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early] = Action {
-        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early,
-        time: 9000,
+    actions[ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early] = Action {
+        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early,
+        time: 8695,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal] = Action {
+        id: ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal,
+        time: 2708,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal] = Action {
+        id: ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal,
+        time: 2708,
         price: Currency::Free,
     };
     actions[ActionId::Giguna__East_Caverns__West_14__Enter_Combo] = Action {

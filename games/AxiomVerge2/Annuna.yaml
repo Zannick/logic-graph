@@ -2265,6 +2265,8 @@ areas:
 
     - name: Lower Brick Ledge
       coord: [38.65, 14.9]
+      data:
+        flipside: Glacier Breach > South Save > Brick Ledge
       local:
         - to: Ledge By Grate
         - to: Portal Stand
@@ -2299,6 +2301,8 @@ areas:
           tags: [xshift]
     - name: Upper Brick Ledge
       coord: [38.75, 14.2]
+      data:
+        flipside: Glacier Breach > South Save > Brick Ledge
       local:
         - to: Portal Stand
         - to: Lower Brick Ledge
@@ -2314,6 +2318,8 @@ areas:
           jumps: 2
     - name: East 14
       coord: [38.9, 13.65]
+      data:
+        flipside: Glacier Breach > South Save > East
       local:
         - to: Upper Brick Ledge
         - to: Portal Stand
@@ -2995,6 +3001,8 @@ areas:
           jumps: 2
     - name: Portal Entry
       coord: [40.525, 15.7]
+      data:
+        flipside: Glacier Breach > Angry Lions > Portal Stand
       local:
         - to: West
           jumps: 2
@@ -3014,6 +3022,8 @@ areas:
           jumps: 1
     - name: Second Platform
       coord: [40.55, 14.8]
+      data:
+        flipside: Glacier Breach > Angry Lions > Second Platform
       local:
         - to: West
         - to: Third Platform
@@ -3028,6 +3038,8 @@ areas:
           jumps: 2
     - name: Top Platform
       coord: [40.4, 14.4]
+      data:
+        flipside: Glacier Breach > Angry Lions > Top Platform
       local:
         - to: West
         - to: Upper Ledge

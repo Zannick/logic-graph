@@ -5302,6 +5302,8 @@ digraph AxiomVerge2 {
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Early;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Stop;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Stop;
+    Giguna__Clouds__Platform_Early -> Giguna__Clouds__Platform_Early_Portal;
+    Giguna__Clouds__Platform_Early -> Giguna__Clouds__Platform_Early_Portal;
     Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Upper_Cliff;
     Giguna__Giguna_Northeast__Gate_Left -> Giguna__Giguna_Northeast__Gate_Vent;
     Giguna__Ruins_Top__Turret_Balcony_West -> Giguna__Ruins_West__Rooftop_East_Edge;

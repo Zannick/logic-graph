@@ -12771,7 +12771,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         actions: Range {
-            start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Get_Off_Early.into_usize(),
+            start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early.into_usize(),
             end: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal.into_usize() + 1,
         },
     };
@@ -12784,7 +12784,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal.into_usize(),
+            end: ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal.into_usize() + 1,
         },
     };
     spots[SpotId::Giguna__Clouds__Platform_Stop] = Spot {

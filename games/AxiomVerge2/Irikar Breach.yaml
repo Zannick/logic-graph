@@ -130,6 +130,8 @@ areas:
           tags: [xdoor]
     - name: Bottom
       coord: [12.5, 22.75]
+      data:
+        flipside: Irikar > Hub > Save Point
       locations:
         - name: Item
           item: Drone_Hover
@@ -212,6 +214,8 @@ areas:
         - to: Passage Corner
     - name: Passage Corner
       coord: [13.1, 24.2]
+      data:
+        flipside: Irikar > Hub > Sat Tower Long Ledge
       local:
         - to: Side
         - to: Zigzag Bottom
@@ -246,6 +250,8 @@ areas:
           tags: [ydoor]
     - name: South
       coord: [13.5, 25.8]
+      data:
+        flipside: Irikar > Hub > Royal Storage South
       local:
         - to: East
           jumps: 1
@@ -318,6 +324,8 @@ areas:
           tags: [ydoor]
     - name: Corner
       coord: [12.2, 25.7]
+      data:
+        flipside: Irikar > Hub > Royal Storage By Wall
       local:
         - to: South
       locations:
@@ -364,6 +372,8 @@ areas:
          - to: Passage
     - name: North 13
       coord: [13.5, 26.2]
+      data:
+        flipside: SpotId::None
       local:
         - to: Passage
       exits:
@@ -459,3 +469,5 @@ areas:
   spots:
     - name: Save Point
       coord: [12.525, 27.5]
+      data:
+        flipside: Irikar > Basement Portal > Portal Stand

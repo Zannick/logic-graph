@@ -93,11 +93,15 @@ areas:
           tags: [xdoor]
     - name: Top
       coord: [13.6, 6.35]
+      data:
+        flipside: Giguna > Ruins West > Upper Ledge
       local:
         - to: East 7
         - to: Middle Platform
     - name: Middle Platform
       coord: [13.5, 8.35]
+      data:
+        flipside: Giguna > Ruins West > Platform
       local:
         - to: Top
           jumps: 12
@@ -175,11 +179,15 @@ areas:
           tags: [ydoor]
     - name: West Passage
       coord: [13.0, 9.3]
+      data:
+        flipside: Giguna > West Caverns > Column 1 Top Left
       local:
         - to: Passage Lip
         - to: Southwest
     - name: Southwest
       coord: [12.5, 9.8]
+      data:
+        flipside: Giguna > West Caverns > Bush
       local:
         - to: West Passage
           jumps: 3
@@ -433,11 +441,15 @@ areas:
           tags: [xdoor]
     - name: Column
       coord: [17.5, 10.5]
+      data:
+        flipside: Giguna > Giguna Northeast > Door
       local:
         - to: West
         - to: Ravine
     - name: Ravine
       coord: [17.7, 10.8]
+      data:
+        flipside: Giguna > Giguna Northeast > Switch
       locations:
         - name: Urn
           item: Slingshot_Hook
@@ -554,6 +566,8 @@ areas:
           tags: [xdoor]
     - name: Bottom
       coord: [16.3, 8.5]
+      data:
+        flipside: Giguna > Ruins East > Bottom Rock
       local:
         - to: West 9
       exits:
@@ -592,7 +606,7 @@ areas:
     - name: Quick Entry
       coord: [12.5, 18.85]
       data:
-        flipside: Giguna > Clouds > Platform Early
+        flipside: Giguna > Clouds > Platform Early Portal
       local:
         - to: Corner
           jumps: 2

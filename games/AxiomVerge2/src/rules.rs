@@ -852,7 +852,25 @@ pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context, world: &W
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
-pub fn access_giguna__clouds__platform_start__hack_and_get_off_early__req(
+pub fn access_giguna__clouds__platform_early__continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_platform and $attract and Breach_Sight and Remote_Drone
+    (((ctx.giguna__clouds__ctx__platform() && helper__attract!(ctx, world))
+        && ctx.has(Item::Breach_Sight))
+        && ctx.has(Item::Remote_Drone))
+}
+pub fn access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_platform and $attract and $can_deploy and Breach_Sight
+    (((ctx.giguna__clouds__ctx__platform() && helper__attract!(ctx, world))
+        && helper__can_deploy!(ctx, world))
+        && ctx.has(Item::Breach_Sight))
+}
+pub fn access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
@@ -2802,7 +2820,7 @@ pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context, world:
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
 }
-pub fn action_giguna__clouds__platform_start__hack_and_get_off_early__do(
+pub fn action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(
     ctx: &mut Context,
     world: &World,
 ) {
@@ -2813,12 +2831,12 @@ pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(
     ctx: &mut Context,
     world: &World,
 ) {
-    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
+    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; }; ^portal = `Giguna > Clouds > Platform Stop`;
     ctx.set_giguna__clouds__ctx__platform(true);
     if ctx.indra() == ctx.position() {
         ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
-        ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     }
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
 }
 pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx: &mut Context,
@@ -2995,6 +3013,16 @@ pub fn action_glacier__vertical_room__upper_switch__open_gate__do(
 ) {
     // ^_upper_gatestone = true
     ctx.set_glacier__vertical_room__ctx__upper_gatestone(true);
+}
+pub fn action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Early Portal`; }; ^portal = `Giguna > Clouds > Platform Early Portal`;
+    if ctx.indra() == ctx.position() {
+        ctx.set_indra(SpotId::Giguna__Clouds__Platform_Early_Portal);
+    }
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
 }
 pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
@@ -3191,6 +3219,14 @@ pub fn action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx: &mut Context, worl
 pub fn action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx: &mut Context, world: &World) {
     // ^portal = `Amagi > East Lake > Arch West`
     ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
+}
+pub fn action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Early_Portal);
 }
 pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &mut Context,
@@ -6306,7 +6342,112 @@ pub fn explain_giguna__carnelian__vault__ex__door_1__req(
         (r, vec!["^giguna__carnelian__ctx__door_opened"])
     }
 }
-pub fn explain_giguna__clouds__platform_start__hack_and_get_off_early__req(
+pub fn explain_giguna__clouds__platform_early__continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_platform and $attract and Breach_Sight and Remote_Drone
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let r = ctx.giguna__clouds__ctx__platform();
+                    edict.insert("^giguna__clouds__ctx__platform", format!("{:?}", r));
+                    (r, vec!["^giguna__clouds__ctx__platform"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__attract!(ctx, world, edict);
+                        edict.insert("$attract", format!("{:?}", res));
+                        refs.push("$attract");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Breach_Sight);
+                    edict.insert("Breach_Sight", format!("{}", h));
+                    (h, vec!["Breach_Sight"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Remote_Drone);
+                edict.insert("Remote_Drone", format!("{}", h));
+                (h, vec!["Remote_Drone"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_platform and $attract and $can_deploy and Breach_Sight
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let r = ctx.giguna__clouds__ctx__platform();
+                    edict.insert("^giguna__clouds__ctx__platform", format!("{:?}", r));
+                    (r, vec!["^giguna__clouds__ctx__platform"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__attract!(ctx, world, edict);
+                        edict.insert("$attract", format!("{:?}", res));
+                        refs.push("$attract");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                    edict.insert("$can_deploy", format!("{:?}", res));
+                    refs.push("$can_deploy");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Breach_Sight);
+                edict.insert("Breach_Sight", format!("{}", h));
+                (h, vec!["Breach_Sight"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -15648,7 +15789,42 @@ pub fn observe_access_giguna__carnelian__vault__ex__door_1__req(
         ctx.giguna__carnelian__ctx__door_opened()
     }
 }
-pub fn observe_access_giguna__clouds__platform_start__hack_and_get_off_early__req(
+pub fn observe_access_giguna__clouds__platform_early__continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_platform and $attract and Breach_Sight and Remote_Drone
+    ((({
+        full_obs.observe_giguna__clouds__ctx__platform();
+        ctx.giguna__clouds__ctx__platform()
+    } && (hobserve__attract!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_breach_sight();
+            ctx.has(Item::Breach_Sight)
+        }))
+        && ({
+            full_obs.observe_remote_drone();
+            ctx.has(Item::Remote_Drone)
+        }))
+}
+pub fn observe_access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_platform and $attract and $can_deploy and Breach_Sight
+    ((({
+        full_obs.observe_giguna__clouds__ctx__platform();
+        ctx.giguna__clouds__ctx__platform()
+    } && (hobserve__attract!(ctx, world, full_obs)))
+        && (hobserve__can_deploy!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_breach_sight();
+            ctx.has(Item::Breach_Sight)
+        }))
+}
+pub fn observe_access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
@@ -19912,7 +20088,7 @@ pub fn observe_action_giguna__carnelian__upper_susar__hack__do(
     full_obs.clear_giguna__carnelian__ctx__upper_susar();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_giguna__clouds__platform_start__hack_and_get_off_early__do(
+pub fn observe_action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
@@ -19928,7 +20104,7 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
     world: &World,
     full_obs: &mut FullObservation,
 ) {
-    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; ^portal = `Giguna > Clouds > Platform Stop`; }
+    // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; }; ^portal = `Giguna > Clouds > Platform Stop`;
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_giguna__clouds__ctx__platform();
@@ -19940,8 +20116,8 @@ pub fn observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__d
         ctx.position()
     } {
         full_obs.clear_indra();
-        full_obs.clear_portal();
-    };
+    }
+    full_obs.clear_portal();
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
@@ -20309,6 +20485,26 @@ pub fn observe_action_glacier__vertical_room__upper_switch__open_gate__do(
     full_obs.clear_glacier__vertical_room__ctx__upper_gatestone();
     full_obs.strict = old_strict;
 }
+pub fn observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Early Portal`; }; ^portal = `Giguna > Clouds > Platform Early Portal`;
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    if {
+        full_obs.observe_indra();
+        ctx.indra()
+    } == {
+        full_obs.observe_position();
+        ctx.position()
+    } {
+        full_obs.clear_indra();
+    }
+    full_obs.clear_portal();
+    full_obs.strict = old_strict;
+}
 pub fn observe_action_indra_set_invoke_default(
     ctx: &Context,
     world: &World,
@@ -20664,6 +20860,23 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_portal();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Giguna__Clouds__Platform_Early_Portal,
+        full_obs
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
