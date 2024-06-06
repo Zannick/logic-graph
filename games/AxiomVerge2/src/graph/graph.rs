@@ -5255,11 +5255,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 11 {
+                        if ctx.count(Item::Big_Flask) < 10 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 11 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 10 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 11 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 10 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -5640,11 +5640,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 11 {
+                        if ctx.count(Item::Big_Flask) < 10 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 11 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 10 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 11 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 10 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -6035,9 +6035,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 11);
+                            *val = std::cmp::max(*val, 10);
                         } else {
-                            map.insert(Item::Big_Flask, 11);
+                            map.insert(Item::Big_Flask, 10);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -6274,9 +6274,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 11);
+                            *val = std::cmp::max(*val, 10);
                         } else {
-                            map.insert(Item::Big_Flask, 11);
+                            map.insert(Item::Big_Flask, 10);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
