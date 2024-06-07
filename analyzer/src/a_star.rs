@@ -6,7 +6,7 @@ use sort_by_derive::SortBy;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashSet};
 
-pub trait SortableCtxWrapper<T: Ctx, P: Ord>: std::fmt::Debug + Ord {
+pub trait SortableCtxWrapper<T: Ctx, P: Ord>: Ord {
     fn ctx(&self) -> &ContextWrapper<T>;
     fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self;
     fn new_incr(&self, newctx: ContextWrapper<T>, score: P) -> Self;
@@ -28,18 +28,22 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for HeapElement<T> {
 }
 
 #[derive(Debug, SortBy)]
-pub struct ScoredCtxWithActionCounter<T: Ctx> {
+pub struct ScoredCtxWithActionCounter<T: Ctx, P: Ord + std::hash::Hash> {
     #[sort_by]
-    pub(crate) score: u32,
+    pub(crate) score: P,
     pub(crate) el: ContextWrapper<T>,
     pub(crate) counter: usize,
 }
 
-impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithActionCounter<T> {
+impl<T, P> SortableCtxWrapper<T, P> for ScoredCtxWithActionCounter<T, P>
+where
+    T: Ctx,
+    P: Ord + std::hash::Hash,
+{
     fn ctx(&self) -> &ContextWrapper<T> {
         &self.el
     }
-    fn copy_update(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
+    fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self {
         let counter = if matches!(newctx.recent_history().last(), Some(History::A(..))) {
             self.counter + 1
         } else {
@@ -51,7 +55,7 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithActionCounter<T> {
             counter,
         }
     }
-    fn new_incr(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
+    fn new_incr(&self, newctx: ContextWrapper<T>, score: P) -> Self {
         ScoredCtxWithActionCounter {
             score,
             el: newctx,
@@ -63,19 +67,20 @@ impl<T: Ctx> SortableCtxWrapper<T, u32> for ScoredCtxWithActionCounter<T> {
     }
 }
 
-pub fn expand_exits_astar<W, T, E, H>(
+pub fn expand_exits_astar<W, T, E, H, P>(
     world: &W,
     el: &H,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<H>>,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    H: SortableCtxWrapper<T, u32>,
+    H: SortableCtxWrapper<T, P>,
+    P: Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for exit in world.get_spot_exits(ctx.get().position()) {
@@ -92,19 +97,20 @@ pub fn expand_exits_astar<W, T, E, H>(
     }
 }
 
-pub fn expand_actions_astar<W, T, E, H>(
+pub fn expand_actions_astar<W, T, E, H, P>(
     world: &W,
     el: &H,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<H>>,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    H: SortableCtxWrapper<T, u32>,
+    H: SortableCtxWrapper<T, P>,
+    P: Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for act in world
@@ -126,21 +132,22 @@ pub fn expand_actions_astar<W, T, E, H>(
 }
 
 // This is mainly for move_to.
-pub fn expand_local_astar<W, T, E, Wp, H>(
+pub fn expand_local_astar<W, T, E, Wp, H, P>(
     world: &W,
     el: &H,
     movement_state: T::MovementState,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<H>>,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    H: SortableCtxWrapper<T, u32>,
+    H: SortableCtxWrapper<T, P>,
+    P: Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for &dest in world.get_area_spots(ctx.get().position()) {
@@ -158,13 +165,13 @@ pub fn expand_local_astar<W, T, E, Wp, H>(
     }
 }
 
-pub fn expand_astar<W, T, E, Wp, H>(
+pub fn expand_astar<W, T, E, Wp, H, P>(
     world: &W,
     el: &H,
     states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<H>>,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<u32>,
+    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
     allow_local: bool,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -172,7 +179,8 @@ pub fn expand_astar<W, T, E, Wp, H>(
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    H: SortableCtxWrapper<T, u32>,
+    H: SortableCtxWrapper<T, P>,
+    P: Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     let movement_state = ctx.get().get_movement_state(world);

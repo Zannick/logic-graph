@@ -9,6 +9,7 @@ use crate::steiner::SteinerAlgo;
 use crate::steiner::{loc_to_graph_node, EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::{new_hashmap, new_hashset, CommonHasher};
+use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
 
@@ -424,7 +425,10 @@ where
     }
 
     let goal = loc_to_graph_node(world, loc_id);
-    let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+    let goal_spot = world.get_location_spot(loc_id);
+
+    type DistanceScore = (u32, OrderedFloat<f32>);
+    let score_func = |ctx: &ContextWrapper<T>| -> Option<DistanceScore> {
         if !shortest_paths
             .graph()
             .node_index_map
@@ -435,9 +439,14 @@ where
         if !shortest_paths.graph().node_index_map.contains_key(&goal) {
             panic!("SP Graph missing goal: {}", loc_id);
         }
-        let mut scores: Vec<Option<u32>> = vec![shortest_paths
+        let mut scores: Vec<Option<DistanceScore>> = vec![shortest_paths
             .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
-            .map(|u| u.try_into().unwrap())];
+            .map(|u| {
+                (
+                    u.try_into().unwrap(),
+                    OrderedFloat(W::spot_distance(ctx.get().position(), goal_spot)),
+                )
+            })];
         // We need to take into account contextual warps which aren't otherwise part
         // of a normal shortest paths graph. We do that by measuring the shortest path
         // from their destination and adding in the warp time.
@@ -447,7 +456,11 @@ where
                 shortest_paths
                     .min_distance(ExternalNodeId::Spot(warp.dest(ctx.get(), world)), goal)
                     .map(|u| {
-                        warp.time(ctx.get(), world) + <u64 as TryInto<u32>>::try_into(u).unwrap()
+                        (
+                            warp.time(ctx.get(), world)
+                                + <u64 as TryInto<u32>>::try_into(u).unwrap(),
+                            OrderedFloat(W::spot_distance(ctx.get().position(), goal_spot)),
+                        )
                     }),
             );
         }
@@ -455,7 +468,7 @@ where
             .into_iter()
             .filter_map(|u| u)
             .min()
-            .map(|u| u + ctx.elapsed())
+            .map(|(u, f)| (u + ctx.elapsed(), f))
     };
 
     // Using A* and allowing backtracking
