@@ -84,3 +84,28 @@ tests:
       - Anuman
       - Drone_Hover
     can_reach: Giguna > Clouds > Cache
+
+  - name: Separator Bricks
+    start: Uhrum > West Entrance > Save Point
+    context:
+      mode: drone
+    with:
+      - Remote_Drone
+      - Drone_Hover
+      - Slingshot_Hook
+      - Nanite_Mist
+      - Mist_Upgrade
+    can_obtain: Giguna_Separator_Bricks
+
+  - name: Separator Cache Health
+    start: Uhrum > West Entrance > Save Point
+    context:
+      mode: drone
+    with:
+      - Remote_Drone
+      - Drone_Hover
+      - Slingshot_Hook
+      - Nanite_Mist
+      - Mist_Upgrade
+      - Giguna_Separator_Bricks
+    can_access: Giguna > Cache > Pit > Item
