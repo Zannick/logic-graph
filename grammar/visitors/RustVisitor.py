@@ -175,6 +175,8 @@ class RustVisitor(RustBaseVisitor):
         ref = self.visit(ctx.ref())
         if ctx.ITEM():
             return f'{ref} {ctx.getChild(1)} Item::{ctx.ITEM()}'
+        if ctx.PLACE():
+            return f'{ref} {ctx.getChild(1)} {construct_place_id(str(ctx.PLACE()))}'
         return f'{ref} {ctx.getChild(1)} ctx.{ctx.SETTING()}()'
 
     def _refEq(self, val1, val2, op, coerce=False):
@@ -206,12 +208,12 @@ class RustVisitor(RustBaseVisitor):
         if len(ctx.REF()) == 2:
             return f'data::{ref}({self._getRefGetter(str(ctx.REF(0))[1:])})'
         if ctx.PLACE():
-            return f'data::{ref}({construct_place_id(str(ctx.PLACE()))[1:-1]})'
+            return f'data::{ref}({construct_place_id(str(ctx.PLACE()))})'
         return self._getRefGetter(ref)
 
     def visitPlace(self, ctx):
         if ctx.PLACE():
-            return construct_place_id(str(ctx.PLACE())[1:-1])
+            return construct_place_id(str(ctx.PLACE()))
         return self.visit(ctx.ref())
 
     def visitItemCount(self, ctx):
@@ -604,7 +606,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRefEqSimple(self, ctx):
-        rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else f'ctx.{ctx.SETTING()}()'
+        rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else construct_place_id(str(ctx.PLACE())) if ctx.PLACE() else f'ctx.{ctx.SETTING()}()'
         lines = [
             f'let left = {self.visit(ctx.ref())}',
             f'(left.0 {ctx.getChild(1)} {rval}, left.1)',
@@ -661,7 +663,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             return f'{{ {"; ".join(lines)} }}'
         if ctx.PLACE():
             lines = [
-                f'let d = data::{ref[1:]}({construct_place_id(str(ctx.PLACE()))[1:-1]})',
+                f'let d = data::{ref[1:]}({construct_place_id(str(ctx.PLACE()))})',
                 f'edict.insert("{ctx.getText()}", format!("{{}}", d))',
                 f'(d, vec!["{ctx.getText()}"])',
             ]
@@ -675,7 +677,7 @@ class RustExplainerVisitor(RustBaseVisitor):
 
     def visitPlace(self, ctx):
         if ctx.PLACE():
-            return f'({construct_place_id(str(ctx.PLACE())[1:-1])}, vec![])'
+            return f'({construct_place_id(str(ctx.PLACE()))}, vec![])'
         return self.visit(ctx.ref())
 
     def visitItemCount(self, ctx):
@@ -1111,6 +1113,8 @@ class RustObservationVisitor(RustBaseVisitor):
         getter = self.visit(ctx.ref())
         if ctx.ITEM():
             return f'{{ let left = {getter}; left {ctx.getChild(1)} Item::{ctx.ITEM()} }}'
+        elif ctx.PLACE():
+            return f'{{ let left = {getter}; left {ctx.getChild(1)} {construct_place_id(str(ctx.PLACE()))} }}'
         else:
             return f'{{ let left = {getter}; left {ctx.getChild(1)} ctx.{ctx.SETTING()}() }}'
 
@@ -1144,7 +1148,7 @@ class RustObservationVisitor(RustBaseVisitor):
 
     def visitPlace(self, ctx):
         if ctx.PLACE():
-            return construct_place_id(str(ctx.PLACE())[1:-1])
+            return construct_place_id(str(ctx.PLACE()))
         return self.visit(ctx.ref())
 
     def visitItemCount(self, ctx):

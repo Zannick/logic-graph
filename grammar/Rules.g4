@@ -114,8 +114,8 @@ cmpStr  : value '==' LIT
         ;
 
 flagMatch : value '&' num ;
-refEq   : ( ref '==' ( ITEM | SETTING )
-          | ref '!=' ( ITEM | SETTING )
+refEq   : ( ref '==' ( ITEM | SETTING | PLACE )
+          | ref '!=' ( ITEM | SETTING | PLACE )
           )                             # RefEqSimple
         | ( ref '==' ref
           | ref '!=' ref
