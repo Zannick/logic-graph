@@ -245,7 +245,7 @@ actions:  # MARK: actions
     req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
     do: ^mode = 'Indra'; ^last = ^indra
     to: ^map_spot  # Starts map movement in a different place
-    after: ^indra = $default; $refill_energy
+    after: ^indra = $default
     time: 2  # Slight bonus to time for starting map movement immediately, but actually can't be less than recall time
   - name: Deploy Drone
     req: NOT WITHIN `Menu` and $can_deploy
@@ -281,7 +281,7 @@ helpers:  # MARK: helpers
   $spin: ^mode == 'drone' and Slingshot_Hook and Slingshot_Weapon
 
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
-  $can_recall: ^mode == 'drone' and not Anuman
+  $can_recall: ^mode == 'drone' and not Anuman and not Separation
   $shockwave: ^mode != 'drone' and Shockwave
 
   $open: Infect
@@ -326,7 +326,7 @@ helpers:  # MARK: helpers
   $melee_cskip: (Ice_Axe and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
-  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
+  $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
@@ -340,14 +340,12 @@ helpers:  # MARK: helpers
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
     [Flask{25}, Big_Flask{11}]
-  # Pending Health fragment: Giguna Cache
   $all_health:itemList: >
-    [Health_Node{2}, Health_Fragment{15}]
+    [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
-  # Pending: Nano_Lattice_1
   $other_items:itemList: >
-    [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring]
+    [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach]
@@ -438,6 +436,10 @@ collect:  # MARK: collect
   Defeat_MUS_A_M20:
     $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
     $add_item(Amagi_Dragon_Eye_Passage);
+  Separation:
+    $visit(`Giguna > Separator > Upper Brick > Break Bricks`);
+    $add_item(Giguna_Separator_Bricks);
+    ^indra = $default;
 
 settings:  # MARK: settings
   boomerang_steering:
@@ -462,6 +464,6 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Remote_Boomerang, Separation, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
+  unplaced_items: [Remote_Boomerang, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
   ignore_observations:
     - prev_area

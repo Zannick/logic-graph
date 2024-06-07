@@ -126,6 +126,8 @@ impl world::Accessible for Action {
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::access_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => true,
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world),
+            ActionId::Giguna__Separator__Save_Point__Save => true,
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::access_giguna__west_caverns__east_susar__caught__req(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::access_giguna__west_caverns__east_susar__hack__req(ctx, world),
@@ -267,6 +269,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_grab_and_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, full_obs),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world, full_obs),
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::observe_access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::observe_access_giguna__west_caverns__east_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_giguna__west_caverns__east_susar__hack__req(ctx, world, full_obs),
@@ -1057,6 +1060,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Switch"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_slingshot_hook(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1540,6 +1552,8 @@ impl world::Action for Action {
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::action_giguna__labyrinth__door_ledge__open_door__do(ctx, world),
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world),
             ActionId::Giguna__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Giguna__Separator__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1592,7 +1606,7 @@ impl world::Action for Action {
                 rules::action_indra_set_invoke_default(ctx, world);
             }
             ActionId::Global__Recall_Fast_Travel => {
-                rules::action_indra_set_invoke_default_invoke_refill_energy(ctx, world);
+                rules::action_indra_set_invoke_default(ctx, world);
             }
             _ => (),
         };
@@ -1637,6 +1651,7 @@ impl world::Action for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => SpotId::Giguna__Clouds__Platform_Early,
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => SpotId::Giguna__Clouds__Platform_Early_Portal,
             ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => SpotId::Giguna__Clouds__Platform_Early_Portal,
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => SpotId::Giguna__Separator__Switch,
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => SpotId::Glacier_Breach__Angry_Lions__Top_Platform,
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
@@ -1670,7 +1685,7 @@ impl world::Action for Action {
             }
             ActionId::Global__Recall_Fast_Travel => {
                 rules::observe_action_mode_set_indra_last_set_indra(ctx, world, full_obs);
-                rules::observe_action_indra_set_invoke_default_invoke_refill_energy(ctx, world, full_obs);
+                rules::observe_action_indra_set_invoke_default(ctx, world, full_obs);
             }
             ActionId::Global__Deploy_Drone => {
                 rules::observe_action_mode_set_drone_indra_set_position(ctx, world, full_obs);
@@ -2003,6 +2018,12 @@ impl world::Action for Action {
                 rules::observe_action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world, full_obs);
             }
             ActionId::Giguna__Labyrinth__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Separator__Platform__Deploy_to_Switch => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Separator__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
@@ -2698,6 +2719,16 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
     actions[ActionId::Giguna__Labyrinth__Save_Point__Save] = Action {
         id: ActionId::Giguna__Labyrinth__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Separator__Platform__Deploy_to_Switch] = Action {
+        id: ActionId::Giguna__Separator__Platform__Deploy_to_Switch,
+        time: 1312,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Separator__Save_Point__Save] = Action {
+        id: ActionId::Giguna__Separator__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     };

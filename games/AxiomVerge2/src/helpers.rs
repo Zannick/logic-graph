@@ -722,11 +722,12 @@ macro_rules! hobserve__can_deploy {
 }
 
 /// $can_recall (  )
-/// ^mode == 'drone' and not Anuman
+/// ^mode == 'drone' and not Anuman and not Separation
 #[macro_export]
 macro_rules! helper__can_recall {
     ($ctx:expr, $world:expr) => {{
-        ($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
+        (($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
+            && !$ctx.has(Item::Separation))
     }};
 }
 #[macro_export]
@@ -734,24 +735,37 @@ macro_rules! hexplain__can_recall {
     ($ctx:expr, $world:expr, $edict:expr) => {{
         {
             let mut left = {
-                let mut refs = vec!["^mode"];
                 let mut left = {
-                    let r = $ctx.mode();
-                    $edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
                 };
-                let right = enums::Mode::Drone;
-                $edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Anuman);
+                        $edict.insert("Anuman", format!("{}", h));
+                        (!h, vec!["Anuman"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
             };
             if !left.0 {
                 left
             } else {
                 let mut right = {
-                    let h = $ctx.has(Item::Anuman);
-                    $edict.insert("Anuman", format!("{}", h));
-                    (!h, vec!["Anuman"])
+                    let h = $ctx.has(Item::Separation);
+                    $edict.insert("Separation", format!("{}", h));
+                    (!h, vec!["Separation"])
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -762,7 +776,7 @@ macro_rules! hexplain__can_recall {
 #[macro_export]
 macro_rules! hobserve__can_recall {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ({
+        (({
             let v = {
                 $full_obs.observe_mode();
                 $ctx.mode()
@@ -771,6 +785,9 @@ macro_rules! hobserve__can_recall {
         } && ({
             $full_obs.observe_anuman();
             !$ctx.has(Item::Anuman)
+        })) && ({
+            $full_obs.observe_separation();
+            !$ctx.has(Item::Separation)
         }))
     }};
 }
@@ -1882,12 +1899,13 @@ macro_rules! hobserve__melee_cskip {
 }
 
 /// $attract (  )
-/// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
+/// Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
 #[macro_export]
 macro_rules! helper__attract {
     ($ctx:expr, $world:expr) => {{
         ($ctx.has(Item::Breach_Attractor)
-            && ((($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
+            && (((($ctx.has(Item::Anuman) || $ctx.has(Item::Separation))
+                || $ctx.mode() != enums::Mode::Drone)
                 || $ctx.indra() == $ctx.position())
                 || data::realm($ctx.position()) == enums::Realm::Breach))
     }};
@@ -1908,9 +1926,22 @@ macro_rules! hexplain__attract {
                     let mut left = {
                         let mut left = {
                             let mut left = {
-                                let h = $ctx.has(Item::Anuman);
-                                $edict.insert("Anuman", format!("{}", h));
-                                (h, vec!["Anuman"])
+                                let mut left = {
+                                    let h = $ctx.has(Item::Anuman);
+                                    $edict.insert("Anuman", format!("{}", h));
+                                    (h, vec!["Anuman"])
+                                };
+                                if left.0 {
+                                    left
+                                } else {
+                                    let mut right = {
+                                        let h = $ctx.has(Item::Separation);
+                                        $edict.insert("Separation", format!("{}", h));
+                                        (h, vec!["Separation"])
+                                    };
+                                    left.1.append(&mut right.1);
+                                    (right.0, left.1)
+                                }
                             };
                             if left.0 {
                                 left
@@ -1983,10 +2014,13 @@ macro_rules! hobserve__attract {
         ({
             $full_obs.observe_breach_attractor();
             $ctx.has(Item::Breach_Attractor)
-        } && ((({
+        } && (((({
             $full_obs.observe_anuman();
             $ctx.has(Item::Anuman)
         } || {
+            $full_obs.observe_separation();
+            $ctx.has(Item::Separation)
+        }) || {
             let v = {
                 $full_obs.observe_mode();
                 $ctx.mode()
@@ -2452,11 +2486,11 @@ macro_rules! hobserve__all_flasks {
 }
 
 /// $all_health (  )
-/// [Health_Node{2}, Health_Fragment{15}]
+/// [Health_Node{2}, Health_Fragment{16}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 15
+        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 16
     }};
 }
 #[macro_export]
@@ -2476,7 +2510,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Fragment);
                 $edict.insert("Health_Fragment count", format!("{}", ct));
-                (ct >= 15, vec!["Health_Fragment count"])
+                (ct >= 16, vec!["Health_Fragment count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2490,8 +2524,8 @@ macro_rules! hobserve__all_health {
             $full_obs.observe_health_node(IntegerObservation::Ge(2));
             $ctx.count(Item::Health_Node) >= 2
         }) && ({
-            $full_obs.observe_health_fragment(IntegerObservation::Ge(15));
-            $ctx.count(Item::Health_Fragment) >= 15
+            $full_obs.observe_health_fragment(IntegerObservation::Ge(16));
+            $ctx.count(Item::Health_Fragment) >= 16
         })
     }};
 }
@@ -2582,7 +2616,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring]
+/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -2593,6 +2627,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Breach_Attractor)
             && $ctx.has(Item::Udusan)
             && $ctx.has(Item::Carnelian_Ring)
+            && $ctx.has(Item::Nano_Lattice_1)
     }};
 }
 #[macro_export]
@@ -2660,6 +2695,15 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Carnelian_Ring"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nano_Lattice_1);
+                $edict.insert("Nano_Lattice_1", format!("{}", h));
+                (h, vec!["Nano_Lattice_1"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2688,6 +2732,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_carnelian_ring();
             $ctx.has(Item::Carnelian_Ring)
+        }) && ({
+            $full_obs.observe_nano_lattice_1();
+            $ctx.has(Item::Nano_Lattice_1)
         })
     }};
 }

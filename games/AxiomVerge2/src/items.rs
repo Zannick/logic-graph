@@ -92,6 +92,7 @@ pub enum Item {
     Giguna_Gateway_Gate,
     Giguna_Gubi,
     Giguna_Northeast_Gate,
+    Giguna_Separator_Bricks,
     Glacier_Big_Drop_Rock,
     Glacier_Sea_Burial_Rock,
     Goodbye,
@@ -258,6 +259,7 @@ impl fmt::Display for Item {
             Item::Giguna_Gateway_Gate => write!(f, "{}", "Giguna_Gateway_Gate"),
             Item::Giguna_Gubi => write!(f, "{}", "Giguna_Gubi"),
             Item::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
+            Item::Giguna_Separator_Bricks => write!(f, "{}", "Giguna_Separator_Bricks"),
             Item::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
             Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Goodbye => write!(f, "{}", "Goodbye"),
@@ -428,6 +430,7 @@ impl std::str::FromStr for Item {
             "Giguna_Gateway_Gate" => Ok(Item::Giguna_Gateway_Gate),
             "Giguna_Gubi" => Ok(Item::Giguna_Gubi),
             "Giguna_Northeast_Gate" => Ok(Item::Giguna_Northeast_Gate),
+            "Giguna_Separator_Bricks" => Ok(Item::Giguna_Separator_Bricks),
             "Glacier_Big_Drop_Rock" => Ok(Item::Glacier_Big_Drop_Rock),
             "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Goodbye" => Ok(Item::Goodbye),
@@ -534,7 +537,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Melee_Charge
             | Item::Melee_Damage_3
             | Item::Melee_Speed_3
-            | Item::Nano_Lattice_1
             | Item::Nano_Points_3
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3

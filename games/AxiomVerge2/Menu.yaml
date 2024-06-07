@@ -265,7 +265,7 @@ areas:
       - to: Giguna Northeast
       - to: Giguna Ruins Top
       - to: Giguna Ruins West
-      - to: Giguna Separator
+      - to: Giguna Separator Save
       - to: Glacier Revival
       - to: Irikar Beach Save
       - to: Irikar Hub
@@ -413,6 +413,7 @@ areas:
           penalties:
             - when: ^mode != 'drone'
               add: 2.5
+          tags: [warp]
     - name: Giguna Northeast
       coord: [17, 10]
       exits:
@@ -443,8 +444,16 @@ areas:
             - when: ^mode != 'drone'
               add: 2.5
           tags: [warp]
-    - name: Giguna Separator
+    - name: Giguna Separator Save
       coord: [18, 25]
+      exits:
+        - to: Giguna > Separator > Save Point
+          req: ^map__giguna__separator__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Glacier Revival
       coord: [41, 8]
       exits:
@@ -759,6 +768,8 @@ areas:
       coord: [16, 21]
     - name: Giguna Cache
       coord: [18, 22]
+    - name: Giguna Separator
+      coord: [18, 23]
 
     - name: Uhrum West Portal Entrance
       coord: [19, 26]

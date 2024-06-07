@@ -3847,6 +3847,9 @@ areas:
 
 - name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Entry  # Needs confirmation
+    portal_hidden: true
   map:
     flask: [16, 23, 17, 24]
   datamap:
@@ -3935,16 +3938,196 @@ areas:
           movement: base
           penalty_tags: [yshift, -fall.2]
 
+    - name: East 24
+      coord: [17.95, 23.55]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Separator > West 24
+          tags: [xshift]
+    - name: East Ledge
+      coord: [17.825, 23.55]
+      local:
+        - to: East 24
+        - to: Portal Entry
+        - to: East 25
+      exits:
+        - to: Separator > Lower Brick
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Separator > Save Point
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Separator > Save Point
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Portal Entry
+      coord: [17.5, 23.75]
+      local:
+        - to: East Ledge
+          jumps: 1
+        - to: East 25
+      exits:
+        - to: Separator > Save Point
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: East 25
+      coord: [17.95, 24.5]
+      exits:
+        - to: Separator > West 25
+          tags: [xshift]
+        - to: Portal Entry
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Portal Entry
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: East Ledge
+          req: $grab
+          movement: base
+          jumps: 5
+        - to: East Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+
 - name: Separator  # MARK: Separator
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [18, 24, 19, 25]
+    sep: [18, 22, 19, 23]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Giguna Separator Save
+      sep: Menu > Kiengir Map > Giguna Separator
   spots:
     - name: West 23
       coord: [18.05, 22.8]
+      local:
+        - to: Platform
+          jumps: 2
+      exits:
+        - to: Labyrinth > East 23
+          tags: [xshift]
+    - name: Platform
+      coord: [18.225, 22.4]
+      local:
+        - to: West 23
+        - to: Upper Brick
+      exits:
+        - to: Switch
+          req: $hover
+          movement: base
+      actions:
+        - name: Deploy to Switch
+          req: $can_deploy and (Drone_Hover or Slingshot_Hook)
+          do: $deploy_drone
+          to: Switch
+          movement: fast_hover
+    - name: Upper Brick
+      coord: [18.45, 22.8]
+      local:
+        - to: Platform
+          jumps: 2
+        - to: Switch
+          jumps: 1
+      exits:
+        - to: Lower Brick
+          req: Giguna_Separator_Bricks
+          movement: base
+      hybrid:
+        - name: Break Bricks
+          req: Nanite_Mist
+          item: Giguna_Separator_Bricks
+          canon: Giguna_Separator_Bricks
+          to: Lower Brick
+          movement: mist1
+        - name: Break Bricks Faster
+          req: $mist2
+          item: Giguna_Separator_Bricks
+          canon: Giguna_Separator_Bricks
+          to: Lower Brick
+          movement: mist2
+        # Might be possible with Slingshot_Charge but may be difficult
+    - name: Switch
+      coord: [18.75, 22.6]
+      local:
+        - to: Lower Brick
+      locations:
+        - name: Separation
+          item: Separation
+          req: ^mode == 'drone' and ^indra == `Giguna > Separator > Platform`
+          time: 10  # ? Needs measurement
+          tags: [event]
+      exits:
+        - to: Platform
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Lower Brick
+      coord: [18.4, 23.4]
+      local:
+        - to: West 24
+      exits:
+        - to: Upper Brick
+          req: Giguna_Separator_Bricks
+          movement: base
+          jumps: 3
+        - to: Upper Brick
+          req: Giguna_Separator_Bricks and $hook
+          movement: base
+          jumps: 1.5
+      hybrid:
+        - name: Break Bricks
+          req: Nanite_Mist
+          item: Giguna_Separator_Bricks
+          canon: Giguna_Separator_Bricks
+          to: Upper Brick
+          movement: mist1
+        - name: Break Bricks Faster
+          req: $mist2
+          item: Giguna_Separator_Bricks
+          canon: Giguna_Separator_Bricks
+          to: Upper Brick
+          movement: mist2
     - name: West 24
       coord: [18.05, 23.55]
-    - name: West Mid-air
-      coord: [18.05, 24.0]
+      local:
+        - to: Lower Brick
+          jumps: 1
+      exits:
+        - to: Breachable Wall > East 24
+          tags: [xshift]
     - name: West 25
       coord: [18.05, 24.5]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Breachable Wall > East 25
+          tags: [xshift]
+    - name: Save Point
+      coord: [18.5, 24.6]
+      local:
+        - to: West 25
+          jumps: 3
+        - to: East 25
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: East 25
       coord: [18.95, 24.75]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Uhrum > West Entrance > West 25
+          tags: [xshift]

@@ -1431,12 +1431,20 @@ subgraph Giguna
         Giguna__Breachable_Wall__Wall_Interior(Wall Interior);
         Giguna__Breachable_Wall__Cave_Mouth_West(Cave Mouth West);
         Giguna__Breachable_Wall__Cave_Mouth_East(Cave Mouth East);
+        Giguna__Breachable_Wall__East_24(East 24);
+        Giguna__Breachable_Wall__East_Ledge(East Ledge);
+        Giguna__Breachable_Wall__Portal_Entry(Portal Entry);
+        Giguna__Breachable_Wall__East_25(East 25);
     end
     subgraph Giguna__Separator[Separator]
         Giguna__Separator__West_23(West 23);
+        Giguna__Separator__Platform(Platform);
+        Giguna__Separator__Upper_Brick(Upper Brick);
+        Giguna__Separator__Switch(Switch);
+        Giguna__Separator__Lower_Brick(Lower Brick);
         Giguna__Separator__West_24(West 24);
-        Giguna__Separator__West_Mid_air(West Mid-air);
         Giguna__Separator__West_25(West 25);
+        Giguna__Separator__Save_Point(Save Point);
         Giguna__Separator__East_25(East 25);
     end
 end
@@ -2172,7 +2180,7 @@ subgraph Menu
         Menu__Kiengir_Map__Giguna_Northeast(Giguna Northeast);
         Menu__Kiengir_Map__Giguna_Ruins_Top(Giguna Ruins Top);
         Menu__Kiengir_Map__Giguna_Ruins_West(Giguna Ruins West);
-        Menu__Kiengir_Map__Giguna_Separator(Giguna Separator);
+        Menu__Kiengir_Map__Giguna_Separator_Save(Giguna Separator Save);
         Menu__Kiengir_Map__Glacier_Revival(Glacier Revival);
         Menu__Kiengir_Map__Irikar_Beach_Save(Irikar Beach Save);
         Menu__Kiengir_Map__Irikar_Hub(Irikar Hub);
@@ -2297,6 +2305,7 @@ subgraph Menu
         Menu__Kiengir_Map__Giguna_Labyrinth_Empty_Plinth(Giguna Labyrinth Empty Plinth);
         Menu__Kiengir_Map__Nano_Lattice_1(Nano Lattice 1);
         Menu__Kiengir_Map__Giguna_Cache(Giguna Cache);
+        Menu__Kiengir_Map__Giguna_Separator(Giguna Separator);
         Menu__Kiengir_Map__Uhrum_West_Portal_Entrance(Uhrum West Portal Entrance);
         Menu__Kiengir_Map__Uhrum_West_Portal_Exit(Uhrum West Portal Exit);
         Menu__Kiengir_Map__Udusan(Udusan);
@@ -3127,6 +3136,13 @@ Giguna__Breachable_Wall__Above_Middle_Catwalk --> Irikar__Lamassu__Northwest
 Giguna__Breachable_Wall__Above_West_Catwalk --> Irikar__Boss_Room__Above_Catwalk
 Giguna__Breachable_Wall__Cave_Mouth_East --> Irikar__Lamassu__Catwalk_Middle
 Giguna__Breachable_Wall__Cave_Mouth_West --> Giguna__Breachable_Wall__Wall_Interior
+Giguna__Breachable_Wall__East_24 <--> Giguna__Separator__West_24
+Giguna__Breachable_Wall__East_25 --> Giguna__Breachable_Wall__East_Ledge
+Giguna__Breachable_Wall__East_25 --> Giguna__Breachable_Wall__Portal_Entry
+Giguna__Breachable_Wall__East_25 <--> Giguna__Separator__West_25
+Giguna__Breachable_Wall__East_Ledge --> Giguna__Separator__Lower_Brick
+Giguna__Breachable_Wall__East_Ledge --> Giguna__Separator__Save_Point
+Giguna__Breachable_Wall__Portal_Entry --> Giguna__Separator__Save_Point
 Giguna__Breachable_Wall__West_Ledge --> Giguna__Breachable_Wall__Cave_Mouth_West
 Giguna__Breachable_Wall__West_Ledge --> Irikar__Boss_Room__Healthy_Rooftop
 Giguna__Breachable_Wall__West_Mid_air <--> Irikar__East_Rooftops__East_Mid_air
@@ -3265,7 +3281,7 @@ Giguna__Labyrinth_East__Middle_West <--> Giguna__Labyrinth__Middle_East
 Giguna__Labyrinth_East__Top_West <--> Giguna__Labyrinth__Top_East
 Giguna__Labyrinth__Door <--> Giguna__Labyrinth__Middle_Brick
 Giguna__Labyrinth__Door_Ledge --> Giguna__Labyrinth__Door
-Giguna__Labyrinth__East_23 --> Giguna__Separator__West_23
+Giguna__Labyrinth__East_23 <--> Giguna__Separator__West_23
 Giguna__Labyrinth__Empty_Plinth --> Giguna__Labyrinth__Upper_Level_Ledge
 Giguna__Labyrinth__First_Pillar --> Giguna__Labyrinth__Rooftop_East
 Giguna__Labyrinth__Ledge_22 <--> Giguna__Labyrinth__Rocky_Stair
@@ -3311,6 +3327,9 @@ Giguna__Ruins_West__East_7 --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Lower_Ledge --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Nook --> Giguna__Ruins_West__Lower_Ledge
 Giguna__Ruins_West__West_7 --> Giguna__West_Tower__East_7
+Giguna__Separator__East_25 <--> Uhrum__West_Entrance__West_25
+Giguna__Separator__Lower_Brick <--> Giguna__Separator__Upper_Brick
+Giguna__Separator__Platform <--> Giguna__Separator__Switch
 Giguna__Wasteland__Bluff_by_Door --> Giguna__Wasteland__Door_Left
 Giguna__Wasteland__Center_Plains --> Giguna__Wasteland__Steeper_Hill
 Giguna__Wasteland__Door_Left <--> Giguna__Wasteland__Door_Right
@@ -3746,6 +3765,7 @@ Menu__Kiengir_Map__Giguna_Labyrinth --> Giguna__Labyrinth__Save_Point
 Menu__Kiengir_Map__Giguna_Northeast --> Giguna__Giguna_Northeast__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_Top --> Giguna__Ruins_Top__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_West --> Giguna__Ruins_West__Save_Point
+Menu__Kiengir_Map__Giguna_Separator_Save --> Giguna__Separator__Save_Point
 Menu__Kiengir_Map__Glacier_Revival --> Glacier__Revival__Save_Point
 Menu__Kiengir_Map__Irikar_Beach_Save --> Irikar__Beach_Save__Save_Point
 Menu__Kiengir_Map__Irikar_Hub --> Irikar__Hub__Save_Point
@@ -3850,6 +3870,5 @@ Uhrum__West_Entrance__Top_West_Ledge <--> Uhrum__West_Entrance__West_of_Gate
 Uhrum__West_Entrance__Upper_Fork --> Uhrum__West_Entrance__Upper_Wall_East
 Uhrum__West_Entrance__Upper_Wall_East <--> Uhrum__West_Entrance__Upper_Wall_West
 Uhrum__West_Entrance__Upper_Wall_West --> Uhrum__West_Entrance__Portal_Exit
-Uhrum__West_Entrance__West_25 --> Giguna__Separator__East_25
 Uhrum__West_Entrance__West_26 --> Uhrum__West_Entrance__Hidden_Passage_Entry
 Uhrum__West_Entrance__West_26 --> Uhrum__West_Entrance__Portal_Stand

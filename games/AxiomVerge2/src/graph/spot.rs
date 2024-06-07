@@ -15244,13 +15244,122 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Giguna__Breachable_Wall__East_24] = Spot {
+        id: SpotId::Giguna__Breachable_Wall__East_24,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Breachable_Wall__East_24__ex__Separator__West_24_1.into_usize(),
+            end: ExitId::Giguna__Breachable_Wall__East_24__ex__Separator__West_24_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Breachable_Wall__East_Ledge] = Spot {
+        id: SpotId::Giguna__Breachable_Wall__East_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Lower_Brick_1.into_usize(),
+            end: ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Save_Point_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Breachable_Wall__Portal_Entry] = Spot {
+        id: SpotId::Giguna__Breachable_Wall__Portal_Entry,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Breachable_Wall__Portal_Entry__ex__Separator__Save_Point_1.into_usize(),
+            end: ExitId::Giguna__Breachable_Wall__Portal_Entry__ex__Separator__Save_Point_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Breachable_Wall__East_25] = Spot {
+        id: SpotId::Giguna__Breachable_Wall__East_25,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Breachable_Wall__East_25__ex__East_Ledge_1.into_usize(),
+            end: ExitId::Giguna__Breachable_Wall__East_25__ex__Separator__West_25_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Giguna__Separator__West_23] = Spot {
         id: SpotId::Giguna__Separator__West_23,
         locations: Range {
             start: 0, end: 0,
         },
         exits: Range {
+            start: ExitId::Giguna__Separator__West_23__ex__Labyrinth__East_23_1.into_usize(),
+            end: ExitId::Giguna__Separator__West_23__ex__Labyrinth__East_23_1.into_usize() + 1,
+        },
+        actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Separator__Platform] = Spot {
+        id: SpotId::Giguna__Separator__Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Separator__Platform__ex__Switch_1.into_usize(),
+            end: ExitId::Giguna__Separator__Platform__ex__Switch_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Giguna__Separator__Platform__Deploy_to_Switch.into_usize(),
+            end: ActionId::Giguna__Separator__Platform__Deploy_to_Switch.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Giguna__Separator__Upper_Brick] = Spot {
+        id: SpotId::Giguna__Separator__Upper_Brick,
+        locations: Range {
+            start: LocationId::Giguna__Separator__Upper_Brick__Break_Bricks.into_usize(),
+            end: LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Separator__Upper_Brick__ex__Lower_Brick_1.into_usize(),
+            end: ExitId::Giguna__Separator__Upper_Brick__ex__Lower_Brick_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Separator__Switch] = Spot {
+        id: SpotId::Giguna__Separator__Switch,
+        locations: Range {
+            start: LocationId::Giguna__Separator__Switch__Separation.into_usize(),
+            end: LocationId::Giguna__Separator__Switch__Separation.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Separator__Switch__ex__Platform_1.into_usize(),
+            end: ExitId::Giguna__Separator__Switch__ex__Platform_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Separator__Lower_Brick] = Spot {
+        id: SpotId::Giguna__Separator__Lower_Brick,
+        locations: Range {
+            start: LocationId::Giguna__Separator__Lower_Brick__Break_Bricks.into_usize(),
+            end: LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1.into_usize(),
+            end: ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_2.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -15262,19 +15371,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
-        },
-        actions: Range {
-            start: 0, end: 0,
-        },
-    };
-    spots[SpotId::Giguna__Separator__West_Mid_air] = Spot {
-        id: SpotId::Giguna__Separator__West_Mid_air,
-        locations: Range {
-            start: 0, end: 0,
-        },
-        exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Separator__West_24__ex__Breachable_Wall__East_24_1.into_usize(),
+            end: ExitId::Giguna__Separator__West_24__ex__Breachable_Wall__East_24_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -15286,10 +15384,24 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Separator__West_25__ex__Breachable_Wall__East_25_1.into_usize(),
+            end: ExitId::Giguna__Separator__West_25__ex__Breachable_Wall__East_25_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna__Separator__Save_Point] = Spot {
+        id: SpotId::Giguna__Separator__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Giguna__Separator__Save_Point__Save.into_usize(),
+            end: ActionId::Giguna__Separator__Save_Point__Save.into_usize() + 1,
         },
     };
     spots[SpotId::Giguna__Separator__East_25] = Spot {
@@ -15298,7 +15410,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Separator__East_25__ex__Uhrum__West_Entrance__West_25_1.into_usize(),
+            end: ExitId::Giguna__Separator__East_25__ex__Uhrum__West_Entrance__West_25_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -22688,13 +22801,14 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
-    spots[SpotId::Menu__Kiengir_Map__Giguna_Separator] = Spot {
-        id: SpotId::Menu__Kiengir_Map__Giguna_Separator,
+    spots[SpotId::Menu__Kiengir_Map__Giguna_Separator_Save] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Giguna_Separator_Save,
         locations: Range {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Kiengir_Map__Giguna_Separator_Save__ex__Giguna__Separator__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Kiengir_Map__Giguna_Separator_Save__ex__Giguna__Separator__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -24185,6 +24299,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Kiengir_Map__Giguna_Cache] = Spot {
         id: SpotId::Menu__Kiengir_Map__Giguna_Cache,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Giguna_Separator] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Giguna_Separator,
         locations: Range {
             start: 0, end: 0,
         },

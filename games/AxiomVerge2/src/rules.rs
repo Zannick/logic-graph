@@ -1430,6 +1430,14 @@ pub fn access_giguna_northeast_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
 }
+pub fn access_giguna_separator_bricks(ctx: &Context, world: &World) -> bool {
+    // Giguna_Separator_Bricks
+    ctx.has(Item::Giguna_Separator_Bricks)
+}
+pub fn access_giguna_separator_bricks_and_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // Giguna_Separator_Bricks and $hook
+    (ctx.has(Item::Giguna_Separator_Bricks) && helper__hook!(ctx, world))
+}
 pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -1690,6 +1698,14 @@ pub fn access_invoke_can_damage(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
     // $can_deploy
     helper__can_deploy!(ctx, world)
+}
+pub fn access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $can_deploy and (Drone_Hover or Slingshot_Hook)
+    (helper__can_deploy!(ctx, world)
+        && (ctx.has(Item::Drone_Hover) || ctx.has(Item::Slingshot_Hook)))
 }
 pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // $can_deploy and Drone_Hover
@@ -2254,6 +2270,10 @@ pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &World) -> boo
     // ^map__giguna__ruins_west__save
     ctx.map__giguna__ruins_west__save()
 }
+pub fn access_map__giguna__separator__save(ctx: &Context, world: &World) -> bool {
+    // ^map__giguna__separator__save
+    ctx.map__giguna__separator__save()
+}
 pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__peak__save
     ctx.map__giguna_breach__peak__save()
@@ -2357,6 +2377,13 @@ pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(ctx: &Context, world:
 pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
+}
+pub fn access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^mode == 'drone' and ^indra == `Giguna > Separator > Platform`
+    (ctx.mode() == enums::Mode::Drone && ctx.indra() == SpotId::Giguna__Separator__Platform)
 }
 pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and $mist2
@@ -3058,11 +3085,6 @@ pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
-pub fn action_indra_set_invoke_default_invoke_refill_energy(ctx: &mut Context, world: &World) {
-    // ^indra = $default; $refill_energy
-    ctx.set_indra(Default::default());
-    helper__refill_energy!(ctx, world);
-}
 pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &World) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
@@ -3194,6 +3216,15 @@ pub fn action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_vis
     ctx.visit(LocationId::Ebih__Waterfall__Alcove__Block_Right);
     ctx.add_item(Item::Ebih_Waterfall_Block_Right);
     ctx.add_item(Item::Ebih_Waterfall_Block_Left);
+}
+pub fn action_invoke_visit__giguna_gt_separator_gt_upper_brick_gt_break_bricks_invoke_add_item__giguna_separator_bricks_indra_set_invoke_default(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $visit(`Giguna > Separator > Upper Brick > Break Bricks`); $add_item(Giguna_Separator_Bricks); ^indra = $default;
+    ctx.visit(LocationId::Giguna__Separator__Upper_Brick__Break_Bricks);
+    ctx.add_item(Item::Giguna_Separator_Bricks);
+    ctx.set_indra(Default::default());
 }
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
@@ -8573,6 +8604,44 @@ pub fn explain_giguna_northeast_gate(
         (h, vec!["Giguna_Northeast_Gate"])
     }
 }
+pub fn explain_giguna_separator_bricks(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Separator_Bricks
+    {
+        let h = ctx.has(Item::Giguna_Separator_Bricks);
+        edict.insert("Giguna_Separator_Bricks", format!("{}", h));
+        (h, vec!["Giguna_Separator_Bricks"])
+    }
+}
+pub fn explain_giguna_separator_bricks_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Separator_Bricks and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Separator_Bricks);
+            edict.insert("Giguna_Separator_Bricks", format!("{}", h));
+            (h, vec!["Giguna_Separator_Bricks"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -9390,6 +9459,45 @@ pub fn explain_invoke_can_deploy(
         edict.insert("$can_deploy", format!("{:?}", res));
         refs.push("$can_deploy");
         (res, refs)
+    }
+}
+pub fn explain_invoke_can_deploy_and___drone_hover_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and (Drone_Hover or Slingshot_Hook)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+            edict.insert("$can_deploy", format!("{:?}", res));
+            refs.push("$can_deploy");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Slingshot_Hook);
+                        edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_invoke_can_deploy_and_drone_hover(
@@ -12176,6 +12284,18 @@ pub fn explain_map__giguna__ruins_west__save(
         (r, vec!["^map__giguna__ruins_west__save"])
     }
 }
+pub fn explain_map__giguna__separator__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__giguna__separator__save
+    {
+        let r = ctx.map__giguna__separator__save();
+        edict.insert("^map__giguna__separator__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__separator__save"])
+    }
+}
 pub fn explain_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &World,
@@ -12598,6 +12718,41 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
                 let h = ctx.has(Item::Giguna_Dual_Path_Wall);
                 edict.insert("Giguna_Dual_Path_Wall", format!("{}", h));
                 (h, vec!["Giguna_Dual_Path_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and ^indra == `Giguna > Separator > Platform`
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let left = {
+                    let r = ctx.indra();
+                    edict.insert("^indra", format!("{:?}", r));
+                    (r, vec!["^indra"])
+                };
+                (left.0 == SpotId::Giguna__Separator__Platform, left.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16941,6 +17096,28 @@ pub fn observe_access_giguna_northeast_gate(
         ctx.has(Item::Giguna_Northeast_Gate)
     }
 }
+pub fn observe_access_giguna_separator_bricks(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Separator_Bricks
+    {
+        full_obs.observe_giguna_separator_bricks();
+        ctx.has(Item::Giguna_Separator_Bricks)
+    }
+}
+pub fn observe_access_giguna_separator_bricks_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Separator_Bricks and $hook
+    ({
+        full_obs.observe_giguna_separator_bricks();
+        ctx.has(Item::Giguna_Separator_Bricks)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
 pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -17453,6 +17630,21 @@ pub fn observe_access_invoke_can_deploy(
 ) -> bool {
     // $can_deploy
     hobserve__can_deploy!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and (Drone_Hover or Slingshot_Hook)
+    (hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        } || {
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
 }
 pub fn observe_access_invoke_can_deploy_and_drone_hover(
     ctx: &Context,
@@ -18697,6 +18889,17 @@ pub fn observe_access_map__giguna__ruins_west__save(
         ctx.map__giguna__ruins_west__save()
     }
 }
+pub fn observe_access_map__giguna__separator__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__giguna__separator__save
+    {
+        full_obs.observe_map__giguna__separator__save();
+        ctx.map__giguna__separator__save()
+    }
+}
 pub fn observe_access_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &World,
@@ -19014,6 +19217,26 @@ pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
     } && ({
         full_obs.observe_giguna_dual_path_wall();
         ctx.has(Item::Giguna_Dual_Path_Wall)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and ^indra == `Giguna > Separator > Platform`
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        let left = {
+            full_obs.observe_indra();
+            ctx.indra()
+        };
+        left == SpotId::Giguna__Separator__Platform
     }))
 }
 pub fn observe_access_mode_eq_drone_and_invoke_mist2(
@@ -20660,18 +20883,6 @@ pub fn observe_action_indra_set_invoke_default(
     full_obs.clear_indra();
     full_obs.strict = old_strict;
 }
-pub fn observe_action_indra_set_invoke_default_invoke_refill_energy(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // ^indra = $default; $refill_energy
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    full_obs.clear_indra();
-    hobserve__refill_energy!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_invoke_clear_breach_save(
     ctx: &Context,
     world: &World,
@@ -20890,6 +21101,17 @@ pub fn observe_action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_in
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+}
+pub fn observe_action_invoke_visit__giguna_gt_separator_gt_upper_brick_gt_break_bricks_invoke_add_item__giguna_separator_bricks_indra_set_invoke_default(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $visit(`Giguna > Separator > Upper Brick > Break Bricks`); $add_item(Giguna_Separator_Bricks); ^indra = $default;
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_indra();
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,

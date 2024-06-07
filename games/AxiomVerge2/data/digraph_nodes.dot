@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="5"];
+        node[fillcolor="6"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -592,7 +592,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="1"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -1018,7 +1018,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -1040,6 +1040,10 @@
             Giguna__Breachable_Wall__Wall_Interior [label = "", pos = "50.7,-39.333333!"];
             Giguna__Breachable_Wall__Cave_Mouth_West [label = "", pos = "50.1,-39.833333!"];
             Giguna__Breachable_Wall__Cave_Mouth_East [label = "", pos = "50.55,-39.833333!"];
+            Giguna__Breachable_Wall__East_24 [label = "", pos = "53.85,-39.25!"];
+            Giguna__Breachable_Wall__East_Ledge [label = "", pos = "53.475,-39.25!"];
+            Giguna__Breachable_Wall__Portal_Entry [label = "", pos = "52.5,-39.583333!"];
+            Giguna__Breachable_Wall__East_25 [label = "", pos = "53.85,-40.833333!"];
         }
         {
             Giguna__Cache__West [label = "", pos = "54.15,-35.333333!"];
@@ -1356,9 +1360,13 @@
         }
         {
             Giguna__Separator__West_23 [label = "", pos = "54.15,-38.0!"];
+            Giguna__Separator__Platform [label = "", pos = "54.675,-37.333333!"];
+            Giguna__Separator__Upper_Brick [label = "", pos = "55.35,-38.0!"];
+            Giguna__Separator__Switch [label = "", pos = "56.25,-37.666667!"];
+            Giguna__Separator__Lower_Brick [label = "", pos = "55.2,-39.0!"];
             Giguna__Separator__West_24 [label = "", pos = "54.15,-39.25!"];
-            Giguna__Separator__West_Mid_air [label = "", pos = "54.15,-40.0!"];
             Giguna__Separator__West_25 [label = "", pos = "54.15,-40.833333!"];
+            Giguna__Separator__Save_Point [label = "", pos = "55.5,-41.0!"];
             Giguna__Separator__East_25 [label = "", pos = "56.85,-41.25!"];
         }
         {
@@ -1451,7 +1459,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="5"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -1819,7 +1827,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="7"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -2156,7 +2164,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="4"];
         {
             node[shape=doublecircle, fillcolor="8"];
             Menu__Breach_Map__AGB_Bridge_Lower [label = "", pos = "105.0,-91.666667!"];
@@ -2228,7 +2236,7 @@
             Menu__Kiengir_Map__Giguna_Northeast [label = "", pos = "51.0,-16.666667!"];
             Menu__Kiengir_Map__Giguna_Ruins_Top [label = "", pos = "42.0,-10.0!"];
             Menu__Kiengir_Map__Giguna_Ruins_West [label = "", pos = "39.0,-15.0!"];
-            Menu__Kiengir_Map__Giguna_Separator [label = "", pos = "54.0,-41.666667!"];
+            Menu__Kiengir_Map__Giguna_Separator_Save [label = "", pos = "54.0,-41.666667!"];
             Menu__Kiengir_Map__Glacier_Revival [label = "", pos = "123.0,-13.333333!"];
             Menu__Kiengir_Map__Irikar_Beach_Save [label = "", pos = "15.0,-46.666667!"];
             Menu__Kiengir_Map__Irikar_Hub [label = "", pos = "36.0,-38.333333!"];
@@ -2353,6 +2361,7 @@
             Menu__Kiengir_Map__Giguna_Labyrinth_Empty_Plinth [label = "", pos = "48.0,-33.333333!"];
             Menu__Kiengir_Map__Nano_Lattice_1 [label = "", pos = "48.0,-35.0!"];
             Menu__Kiengir_Map__Giguna_Cache [label = "", pos = "54.0,-36.666667!"];
+            Menu__Kiengir_Map__Giguna_Separator [label = "", pos = "54.0,-38.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Entrance [label = "", pos = "57.0,-43.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Exit [label = "", pos = "60.0,-41.666667!"];
             Menu__Kiengir_Map__Udusan [label = "", pos = "57.0,-41.666667!"];
