@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{action::*, enums::*, exit::*, location::*, spot::*, warp::*};
+use crate::graph::{action::*, coord::*, enums::*, exit::*, location::*, spot::*, warp::*};
 use crate::items::*;
 use crate::movements;
 use analyzer::condense::{condense_graph, CondensedEdge};
@@ -388,6 +388,10 @@ impl world::World for World {
 
     fn min_warp_time(&self) -> u32 {
         self.min_warp_time
+    }
+
+    fn spot_distance(a: SpotId, b: SpotId) -> f32 {
+        spot_distance_or_inf(a, b)
     }
 
     fn spot_of_interest(&self, sp: SpotId) -> bool {

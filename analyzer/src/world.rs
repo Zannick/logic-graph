@@ -265,6 +265,9 @@ pub trait World: Sync {
     );
 
     fn min_warp_time(&self) -> u32;
+    /// Returns the Euclidean straight-line distance between spots' coordinates,
+    /// or infinity if either has no coordinate.
+    fn spot_distance(a: <Self::Exit as Exit>::SpotId, b: <Self::Exit as Exit>::SpotId) -> f32;
     fn spot_of_interest(&self, sp: <Self::Exit as Exit>::SpotId) -> bool;
 
     fn condense_graph(&mut self);

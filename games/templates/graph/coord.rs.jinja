@@ -6,14 +6,14 @@
 
 use crate::graph::enums::*;
 
-pub fn coordinate(spot: SpotId) -> (f32, f32) {
+pub fn coordinate(spot: SpotId) -> Result<(f32, f32), String> {
     match spot {
 %% for area in gl.areas()
 %% for sp in area.spots|selectattr('coord', 'defined')
-        SpotId::{{ sp.id }} => ({{ sp.coord[0]|float }}, {{ sp.coord[1]|float }}),
+        SpotId::{{ sp.id }} => Ok(({{ sp.coord[0]|float }}, {{ sp.coord[1]|float }})),
 %% endfor
 %% endfor
-        _ => panic!("Spot has no coordinate: {}", spot),
+        _ => Err(format!("Spot has no coordinate: {}", spot)),
     }
 }
 
@@ -22,5 +22,12 @@ pub fn distance(a: (f32, f32), b: (f32, f32)) -> f32 {
 }
 
 pub fn spot_distance(a: SpotId, b: SpotId) -> f32 {
-    distance(coordinate(a), coordinate(b))
+    distance(coordinate(a).unwrap(), coordinate(b).unwrap())
+}
+
+pub fn spot_distance_or_inf(a: SpotId, b: SpotId) -> f32 {
+    match (coordinate(a), coordinate(b)) {
+        (Ok(c1), Ok(c2)) => distance(c1, c2),
+        _ => f32::INFINITY,
+    }
 }
