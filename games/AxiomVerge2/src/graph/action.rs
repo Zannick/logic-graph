@@ -117,6 +117,9 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => true,
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::access_giguna__giguna_northeast__switch__open_door__req(ctx, world),
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
+            ActionId::Giguna__Labyrinth__Save_Point__Save => true,
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_invoke_grab_and_invoke_can_deploy(ctx, world),
@@ -258,6 +261,8 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::observe_access_giguna__giguna_northeast__switch__open_door__req(ctx, world, full_obs),
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_grab_and_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, full_obs),
@@ -998,6 +1003,24 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_invoke_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1514,6 +1537,9 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__lower_susar__caught__do(ctx, world),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::action_giguna__labyrinth__door_ledge__open_door__do(ctx, world),
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world),
+            ActionId::Giguna__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1969,6 +1995,15 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
                 rules::observe_action_giguna__gateway__flask_ledge__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => {
+                rules::observe_action_giguna__labyrinth__door_ledge__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => {
+                rules::observe_action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__Labyrinth__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2649,6 +2684,21 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     actions[ActionId::Giguna__Gateway__Flask_Ledge__Open_Door] = Action {
         id: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door,
         time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door] = Action {
+        id: ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door] = Action {
+        id: ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__Labyrinth__Save_Point__Save] = Action {
+        id: ActionId::Giguna__Labyrinth__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
     };
     actions[ActionId::Glacier_Breach__South_Save__Save_Point__Save] = Action {

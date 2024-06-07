@@ -130,6 +130,7 @@ pub enum Item {
     Melee_Speed_3,
     Mist_Upgrade,
     Nanite_Mist,
+    Nano_Lattice_1,
     Nano_Lattice_2,
     Nano_Points,
     Nano_Points_2,
@@ -295,6 +296,7 @@ impl fmt::Display for Item {
             Item::Melee_Speed_3 => write!(f, "{}", "Melee_Speed_3"),
             Item::Mist_Upgrade => write!(f, "{}", "Mist_Upgrade"),
             Item::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
+            Item::Nano_Lattice_1 => write!(f, "{}", "Nano_Lattice_1"),
             Item::Nano_Lattice_2 => write!(f, "{}", "Nano_Lattice_2"),
             Item::Nano_Points => write!(f, "{}", "Nano_Points"),
             Item::Nano_Points_2 => write!(f, "{}", "Nano_Points_2"),
@@ -464,6 +466,7 @@ impl std::str::FromStr for Item {
             "Melee_Speed_3" => Ok(Item::Melee_Speed_3),
             "Mist_Upgrade" => Ok(Item::Mist_Upgrade),
             "Nanite_Mist" => Ok(Item::Nanite_Mist),
+            "Nano_Lattice_1" => Ok(Item::Nano_Lattice_1),
             "Nano_Lattice_2" => Ok(Item::Nano_Lattice_2),
             "Nano_Points" => Ok(Item::Nano_Points),
             "Nano_Points_2" => Ok(Item::Nano_Points_2),
@@ -531,6 +534,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Melee_Charge
             | Item::Melee_Damage_3
             | Item::Melee_Speed_3
+            | Item::Nano_Lattice_1
             | Item::Nano_Points_3
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3

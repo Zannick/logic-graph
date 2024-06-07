@@ -340,10 +340,12 @@ helpers:  # MARK: helpers
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
     [Flask{25}, Big_Flask{11}]
+  # Pending Health fragment: Giguna Cache
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{15}]
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
+  # Pending: Nano_Lattice_1
   $other_items:itemList: >
     [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring]
   $all_urns:itemList: >

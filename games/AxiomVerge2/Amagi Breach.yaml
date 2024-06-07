@@ -140,6 +140,52 @@ areas:
   spots:
     - name: East
       coord: [35.9, 15.75]
+      local:
+        - to: Top
+      exits:
+        - to: East Connector > West
+          tags: [xdoor]
+    - name: Top
+      coord: [35.65, 15.75]
+      local:
+        - to: East
+        - to: Upper
+    - name: Upper
+      coord: [35.5, 16.1]
+      local:
+        - to: Top
+          jumps: 1
+        - to: Middle
+    - name: Middle
+      coord: [35.35, 16.65]
+      local:
+        - to: Lower Side
+        - to: Lower
+          thru: [35.3, 17.0]
+        - to: Upper
+          jumps: 2
+          jump_mvmt: water
+    - name: Lower Side
+      coord: [35.1, 17.15]
+      local:
+        - to: Lower
+        - to: Middle
+          jumps: 1
+          jump_mvmt: water
+    - name: Lower
+      coord: [35.35, 17.35]
+      local:
+        - to: Lower Side
+          jumps: 1
+        - to: South
+    - name: South
+      coord: [35.5, 17.8]
+      local:
+        - to: Lower
+          jumps: 2
+      exits:
+        - to: Fishy Secrets > North
+          tags: [ydoor]
 
 - name: East Ruins  # MARK: East Ruins
   on_entry: $reset_old_area(^newpos)
@@ -538,3 +584,9 @@ areas:
         - name: Health
           item: Health_Fragment
           tags: [standing]
+
+- name: Fishy Secrets  # MARK: Fishy Secrets
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [35.5, 18.2]

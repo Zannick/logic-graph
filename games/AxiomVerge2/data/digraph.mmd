@@ -19,6 +19,12 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__East_Column[East Column]
         Amagi_Breach__East_Column__East(East);
+        Amagi_Breach__East_Column__Top(Top);
+        Amagi_Breach__East_Column__Upper(Upper);
+        Amagi_Breach__East_Column__Middle(Middle);
+        Amagi_Breach__East_Column__Lower_Side(Lower Side);
+        Amagi_Breach__East_Column__Lower(Lower);
+        Amagi_Breach__East_Column__South(South);
     end
     subgraph Amagi_Breach__East_Ruins[East Ruins]
         Amagi_Breach__East_Ruins__West(West);
@@ -60,6 +66,9 @@ subgraph Amagi_Breach
         Amagi_Breach__Upper_Lake__Middle(Middle);
         Amagi_Breach__Upper_Lake__Near_Column(Near Column);
         Amagi_Breach__Upper_Lake__Column(Column);
+    end
+    subgraph Amagi_Breach__Fishy_Secrets[Fishy Secrets]
+        Amagi_Breach__Fishy_Secrets__North(North);
     end
 end
 subgraph Amagi
@@ -1333,10 +1342,34 @@ subgraph Giguna
     end
     subgraph Giguna__Labyrinth[Labyrinth]
         Giguna__Labyrinth__Top_East(Top East);
+        Giguna__Labyrinth__First_Pillar(First Pillar);
+        Giguna__Labyrinth__Rooftop_East(Rooftop East);
+        Giguna__Labyrinth__Rooftop_Bush(Rooftop Bush);
+        Giguna__Labyrinth__Rooftop_West(Rooftop West);
+        Giguna__Labyrinth__Upper_Level_Ledge(Upper Level Ledge);
+        Giguna__Labyrinth__Empty_Plinth(Empty Plinth);
+        Giguna__Labyrinth__Second_Tier_Upper(Second Tier Upper);
+        Giguna__Labyrinth__Second_Tier_Lower(Second Tier Lower);
         Giguna__Labyrinth__Middle_East(Middle East);
         Giguna__Labyrinth__Lower_East(Lower East);
+        Giguna__Labyrinth__Lower_Tier_West(Lower Tier West);
+        Giguna__Labyrinth__Middle_Brick(Middle Brick);
+        Giguna__Labyrinth__Portal_Stand(Portal Stand);
+        Giguna__Labyrinth__Door(Door);
+        Giguna__Labyrinth__Door_Ledge(Door Ledge);
+        Giguna__Labyrinth__Switch_Ledge(Switch Ledge);
+        Giguna__Labyrinth__Behind_Switch(Behind Switch);
+        Giguna__Labyrinth__Rocky_Stair(Rocky Stair);
+        Giguna__Labyrinth__Ledge_22(Ledge 22);
         Giguna__Labyrinth__East_22(East 22);
+        Giguna__Labyrinth__Save_Point(Save Point);
+        Giguna__Labyrinth__Save_Ledge(Save Ledge);
         Giguna__Labyrinth__East_23(East 23);
+    end
+    subgraph Giguna__Cache[Cache]
+        Giguna__Cache__West(West);
+        Giguna__Cache__Upper_Ledge(Upper Ledge);
+        Giguna__Cache__Pit(Pit);
     end
     subgraph Giguna__Vertical_Interchange[Vertical Interchange]
         Giguna__Vertical_Interchange__West_17(West 17);
@@ -2261,6 +2294,9 @@ subgraph Menu
         Menu__Kiengir_Map__Dangerous_Ideas(Dangerous Ideas);
         Menu__Kiengir_Map__Giguna_Gubi_Flask(Giguna Gubi Flask);
         Menu__Kiengir_Map__Double_Axe(Double Axe);
+        Menu__Kiengir_Map__Giguna_Labyrinth_Empty_Plinth(Giguna Labyrinth Empty Plinth);
+        Menu__Kiengir_Map__Nano_Lattice_1(Nano Lattice 1);
+        Menu__Kiengir_Map__Giguna_Cache(Giguna Cache);
         Menu__Kiengir_Map__Uhrum_West_Portal_Entrance(Uhrum West Portal Entrance);
         Menu__Kiengir_Map__Uhrum_West_Portal_Exit(Uhrum West Portal Exit);
         Menu__Kiengir_Map__Udusan(Udusan);
@@ -2460,8 +2496,9 @@ subgraph Uhrum
         Uhrum__Artillery_Practice__East_24(East 24);
     end
 end
+Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
+Amagi_Breach__East_Column__South --> Amagi_Breach__Fishy_Secrets__North
 Amagi_Breach__East_Connector__East <--> Amagi_Breach__East_Entrance__West
-Amagi_Breach__East_Connector__West --> Amagi_Breach__East_Column__East
 Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
 Amagi_Breach__East_Entrance__Grate_Left --> Amagi_Breach__East_Entrance__Upper_Slope
@@ -3093,6 +3130,8 @@ Giguna__Breachable_Wall__Cave_Mouth_West --> Giguna__Breachable_Wall__Wall_Inter
 Giguna__Breachable_Wall__West_Ledge --> Giguna__Breachable_Wall__Cave_Mouth_West
 Giguna__Breachable_Wall__West_Ledge --> Irikar__Boss_Room__Healthy_Rooftop
 Giguna__Breachable_Wall__West_Mid_air <--> Irikar__East_Rooftops__East_Mid_air
+Giguna__Cache__Pit --> Giguna__Cache__Upper_Ledge
+Giguna__Cache__West <--> Giguna__Labyrinth__East_22
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Vault
 Giguna__Carnelian__East_10 <--> Giguna__Giguna_Northeast__West_10
@@ -3221,9 +3260,24 @@ Giguna__Helipad__South_Middle --> Giguna__Clouds__North_Middle
 Giguna__Helipad__South_Right --> Giguna__Clouds__North_Right
 Giguna__Labyrinth_East__East_20 --> Giguna__Mural__West_20
 Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Tree
-Giguna__Labyrinth_East__Lower_West --> Giguna__Labyrinth__Lower_East
-Giguna__Labyrinth_East__Middle_West --> Giguna__Labyrinth__Middle_East
-Giguna__Labyrinth_East__Top_West --> Giguna__Labyrinth__Top_East
+Giguna__Labyrinth_East__Lower_West <--> Giguna__Labyrinth__Lower_East
+Giguna__Labyrinth_East__Middle_West <--> Giguna__Labyrinth__Middle_East
+Giguna__Labyrinth_East__Top_West <--> Giguna__Labyrinth__Top_East
+Giguna__Labyrinth__Door <--> Giguna__Labyrinth__Middle_Brick
+Giguna__Labyrinth__Door_Ledge --> Giguna__Labyrinth__Door
+Giguna__Labyrinth__East_23 --> Giguna__Separator__West_23
+Giguna__Labyrinth__Empty_Plinth --> Giguna__Labyrinth__Upper_Level_Ledge
+Giguna__Labyrinth__First_Pillar --> Giguna__Labyrinth__Rooftop_East
+Giguna__Labyrinth__Ledge_22 <--> Giguna__Labyrinth__Rocky_Stair
+Giguna__Labyrinth__Middle_Brick --> Giguna__Labyrinth__Lower_Tier_West
+Giguna__Labyrinth__Portal_Stand --> Giguna__Labyrinth__Door
+Giguna__Labyrinth__Portal_Stand --> Giguna__Labyrinth__Lower_Tier_West
+Giguna__Labyrinth__Portal_Stand --> Giguna__Labyrinth__Middle_Brick
+Giguna__Labyrinth__Rocky_Stair --> Giguna__Labyrinth__Door_Ledge
+Giguna__Labyrinth__Rocky_Stair --> Giguna__Labyrinth__Switch_Ledge
+Giguna__Labyrinth__Save_Point --> Giguna__Labyrinth__Ledge_22
+Giguna__Labyrinth__Save_Point --> Giguna__Labyrinth__Rocky_Stair
+Giguna__Labyrinth__Second_Tier_Lower --> Giguna__Labyrinth__Second_Tier_Upper
 Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
 Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
 Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
@@ -3688,6 +3742,7 @@ Menu__Kiengir_Map__Ebih_West_Lower --> Ebih__Ebih_West__Lower_Save
 Menu__Kiengir_Map__Ebih_West_Mid --> Ebih__Ebih_West__Mid_Save
 Menu__Kiengir_Map__Ebih_West_Upper --> Ebih__Ebih_West__Upper_Save
 Menu__Kiengir_Map__Giguna_Base --> Giguna__Giguna_Base__Save_Point
+Menu__Kiengir_Map__Giguna_Labyrinth --> Giguna__Labyrinth__Save_Point
 Menu__Kiengir_Map__Giguna_Northeast --> Giguna__Giguna_Northeast__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_Top --> Giguna__Ruins_Top__Save_Point
 Menu__Kiengir_Map__Giguna_Ruins_West --> Giguna__Ruins_West__Save_Point

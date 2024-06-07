@@ -1252,6 +1252,24 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_2__req(
     // ^_door_opened and $hook
     (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx, world))
 }
+pub fn access_giguna__labyrinth__door_ledge__ex__door_1__req(ctx: &Context, world: &World) -> bool {
+    // ^_door
+    ctx.giguna__labyrinth__ctx__door()
+}
+pub fn access_giguna__labyrinth__middle_brick__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door
+    ctx.giguna__labyrinth__ctx__door()
+}
+pub fn access_giguna__labyrinth__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door
+    ctx.giguna__labyrinth__ctx__door()
+}
 pub fn access_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
     world: &World,
@@ -2224,6 +2242,10 @@ pub fn access_map__giguna__giguna_northeast__save(ctx: &Context, world: &World) 
     // ^map__giguna__giguna_northeast__save
     ctx.map__giguna__giguna_northeast__save()
 }
+pub fn access_map__giguna__labyrinth__save(ctx: &Context, world: &World) -> bool {
+    // ^map__giguna__labyrinth__save
+    ctx.map__giguna__labyrinth__save()
+}
 pub fn access_map__giguna__ruins_top__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__ruins_top__save
     ctx.map__giguna__ruins_top__save()
@@ -2950,6 +2972,14 @@ pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(
 pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
+}
+pub fn action_giguna__labyrinth__door_ledge__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_door = true
+    ctx.set_giguna__labyrinth__ctx__door(true);
+}
+pub fn action_giguna__labyrinth__switch_ledge__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_door = true
+    ctx.set_giguna__labyrinth__ctx__door(true);
 }
 pub fn action_giguna__ruins_top__switch__open_doors__do(ctx: &mut Context, world: &World) {
     // ^_doors_open = true
@@ -8038,6 +8068,42 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
         }
     }
 }
+pub fn explain_giguna__labyrinth__door_ledge__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.giguna__labyrinth__ctx__door();
+        edict.insert("^giguna__labyrinth__ctx__door", format!("{:?}", r));
+        (r, vec!["^giguna__labyrinth__ctx__door"])
+    }
+}
+pub fn explain_giguna__labyrinth__middle_brick__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.giguna__labyrinth__ctx__door();
+        edict.insert("^giguna__labyrinth__ctx__door", format!("{:?}", r));
+        (r, vec!["^giguna__labyrinth__ctx__door"])
+    }
+}
+pub fn explain_giguna__labyrinth__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.giguna__labyrinth__ctx__door();
+        edict.insert("^giguna__labyrinth__ctx__door", format!("{:?}", r));
+        (r, vec!["^giguna__labyrinth__ctx__door"])
+    }
+}
 pub fn explain_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
     world: &World,
@@ -12072,6 +12138,18 @@ pub fn explain_map__giguna__giguna_northeast__save(
         let r = ctx.map__giguna__giguna_northeast__save();
         edict.insert("^map__giguna__giguna_northeast__save", format!("{:?}", r));
         (r, vec!["^map__giguna__giguna_northeast__save"])
+    }
+}
+pub fn explain_map__giguna__labyrinth__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__giguna__labyrinth__save
+    {
+        let r = ctx.map__giguna__labyrinth__save();
+        edict.insert("^map__giguna__labyrinth__save", format!("{:?}", r));
+        (r, vec!["^map__giguna__labyrinth__save"])
     }
 }
 pub fn explain_map__giguna__ruins_top__save(
@@ -16532,6 +16610,39 @@ pub fn observe_access_giguna__giguna_northeast__vault__ex__door_2__req(
         ctx.giguna__giguna_northeast__ctx__door_opened()
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
+pub fn observe_access_giguna__labyrinth__door_ledge__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_giguna__labyrinth__ctx__door();
+        ctx.giguna__labyrinth__ctx__door()
+    }
+}
+pub fn observe_access_giguna__labyrinth__middle_brick__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_giguna__labyrinth__ctx__door();
+        ctx.giguna__labyrinth__ctx__door()
+    }
+}
+pub fn observe_access_giguna__labyrinth__portal_stand__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_giguna__labyrinth__ctx__door();
+        ctx.giguna__labyrinth__ctx__door()
+    }
+}
 pub fn observe_access_giguna__ruins_top__east_7__ex__east_door_1__req(
     ctx: &Context,
     world: &World,
@@ -18553,6 +18664,17 @@ pub fn observe_access_map__giguna__giguna_northeast__save(
         ctx.map__giguna__giguna_northeast__save()
     }
 }
+pub fn observe_access_map__giguna__labyrinth__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__giguna__labyrinth__save
+    {
+        full_obs.observe_map__giguna__labyrinth__save();
+        ctx.map__giguna__labyrinth__save()
+    }
+}
 pub fn observe_access_map__giguna__ruins_top__save(
     ctx: &Context,
     world: &World,
@@ -20351,6 +20473,28 @@ pub fn observe_action_giguna__giguna_northeast__switch__open_door__do(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_giguna__giguna_northeast__ctx__door_opened();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_giguna__labyrinth__door_ledge__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__labyrinth__ctx__door();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_giguna__labyrinth__switch_ledge__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__labyrinth__ctx__door();
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_top__switch__open_doors__do(

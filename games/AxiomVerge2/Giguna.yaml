@@ -3213,18 +3213,317 @@ areas:
 
 - name: Labyrinth  # MARK: Labyrinth
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    save_point: Save Point
+  map:
+    save: [17, 21, 18, 22]
+    portal: [16, 20, 17, 21]
+    plinth: [16, 19, 17, 20]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Giguna Labyrinth
+      portal: Menu > Kiengir Map > Nano Lattice 1
+      plinth: Menu > Kiengir Map > Giguna Labyrinth Empty Plinth
+  start:
+    _door: false
   spots:
     - name: Top East
       coord: [17.95, 19.1]
+      local:
+        - to: First Pillar
+          jumps: 1
+      exits:
+        - to: Labyrinth East > Top West
+          tags: [xshift]
+    - name: First Pillar
+      coord: [17.85, 18.9]
+      local:
+        - to: Top East
+      exits:
+        - to: Rooftop East
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Rooftop East
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Rooftop East
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Rooftop East
+      coord: [17.3, 18.5]
+      local:
+        - to: First Pillar
+          jumps: 1
+        - to: Rooftop Bush
+          jumps: 1
+    - name: Rooftop Bush
+      coord: [17.1, 18.35]
+      local:
+        - to: Rooftop East
+        - to: Rooftop West
+    - name: Rooftop West
+      coord: [16.95, 18.5]
+      local:
+        - to: Rooftop Bush
+          jumps: 1
+        - to: Upper Level Ledge
+    - name: Upper Level Ledge
+      coord: [16.6, 18.65]
+      local:
+        - to: Rooftop West
+          jumps: 2
+        - to: Empty Plinth
+        - to: Second Tier Upper
+          thru: [16.6, 18.9]
+
+    - name: Empty Plinth
+      coord: [16.525, 19.1]
+      local:
+        - to: Second Tier Upper
+      exits:
+        - to: Upper Level Ledge
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Upper Level Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Second Tier Upper
+      coord: [16.85, 19.1]
+      local:
+        - to: Empty Plinth
+        - to: Second Tier Lower
+    - name: Second Tier Lower
+      coord: [17.35, 19.45]
+      local:
+        - to: Second Tier Upper
+          thru: [16.875, 19.3]
+          jumps: [1, 1]
+        - to: Middle East
+      exits:
+        - to: Second Tier Upper
+          req: $hook and $hover
+          movement: base
+          jumps: 1
     - name: Middle East
       coord: [17.95, 19.7]
+      local:
+        - to: Second Tier Lower
+          jumps: 3
+      exits:
+        - to: Labyrinth East > Middle West
+          tags: [xshift]
+
     - name: Lower East
       coord: [17.95, 20.1]
+      local:
+        - to: Lower Tier West
+          jumps: 4
+      exits:
+        - to: Labyrinth East > Lower West
+          tags: [xshift]
+    - name: Lower Tier West
+      coord: [16.7, 19.65]
+      local:
+        - to: Lower East
+        - to: Portal Stand
+        - to: Middle Brick
+    - name: Middle Brick
+      coord: [16.6, 20.2]
+      local:
+        - to: Portal Stand
+        - to: Lower Tier West
+          jumps: 3
+      exits:
+        - to: Lower Tier West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Door
+          req: ^_door
+          movement: base
+    - name: Portal Stand
+      coord: [16.525, 20.7]
+      exits:
+        - to: Middle Brick
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Middle Brick
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Tier West
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Door
+          req: ^_door
+          movement: base
+    - name: Door
+      coord: [16.8, 20.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Door Ledge
+      exits:
+        - to: Middle Brick
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Door Ledge
+      coord: [16.9, 20.8]
+      local:
+        - to: Switch Ledge
+        - to: Rocky Stair
+      locations:
+        - name: Item
+          item: Nano_Lattice_1
+          tags: [standing]
+      exits:
+        - to: Door
+          req: ^_door
+          movement: base
+      actions:
+        - name: Open Door
+          req: $open and $range2
+          do: ^_door = true
+          tags: [hack]
+    - name: Switch Ledge
+      coord: [17.1, 20.8]
+      local:
+        - to: Behind Switch
+          jumps: 1
+        - to: Door Ledge
+        - to: Rocky Stair
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door = true
+          tags: [hack]
+    - name: Behind Switch
+      coord: [17.5, 20.75]
+      local:
+        - to: Switch Ledge
     
+    - name: Rocky Stair
+      coord: [17.05, 21.4]
+      local:
+        - to: Door Ledge
+          jumps: 3
+        - to: Save Point
+        - to: Save Ledge
+        - to: East 23
+      exits:
+        - to: Door Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Switch Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Ledge 22
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+
+    - name: Ledge 22
+      coord: [17.55, 21.3]
+      local:
+        - to: East 22
+          jumps: 1
+        - to: Save Point
+        - to: Save Ledge
+      exits:
+        - to: Rocky Stair
+          req: $hover
+          movement: base
     - name: East 22
       coord: [17.95, 21.2]
+      local:
+        - to: Ledge 22
+      exits:
+        - to: Cache > West
+          tags: [xshift]
+    - name: Save Point
+      coord: [17.5, 21.75]
+      local:
+        - to: Save Ledge
+      exits:
+        - to: Ledge 22
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Rocky Stair
+          req: $hover
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Save Ledge
+      coord: [17.35, 21.9]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Rocky Stair
+          jumps: 3
+        - to: East 23
+          thru: [17.3, 22.0]
     - name: East 23
       coord: [17.95, 22.8]
+      local:
+        - to: Save Ledge
+          thru: [17.3, 22.1]
+          jumps: [4, 1]
+        - to: Rocky Stair
+          thru: [17.3, 22.1]
+          jumps: [4, 3]
+      exits:
+        - to: Separator > West 23
+          tags: [xshift]
+
+- name: Cache  # MARK: Cache
+  on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Giguna Cache
+  spots:
+    - name: West
+      coord: [18.05, 21.2]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Labyrinth > East 22
+          tags: [xshift]
+    - name: Upper Ledge
+      coord: [18.3, 21.2]
+      local:
+        - to: Pit
+        - to: West
+    - name: Pit
+      coord: [18.5, 21.9]
+      locations:
+        - name: Item
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
 
 - name: Vertical Interchange  # MARK: Vertical Interchange
   on_entry: $reset_old_area(^newpos)

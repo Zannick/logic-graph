@@ -406,6 +406,13 @@ areas:
           tags: [warp]
     - name: Giguna Labyrinth
       coord: [17, 22]
+      exits:
+        - to: Giguna > Labyrinth > Save Point
+          req: ^map__giguna__labyrinth__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
     - name: Giguna Northeast
       coord: [17, 10]
       exits:
@@ -668,6 +675,7 @@ areas:
       coord: [25, 6]
     - name: Terminal Breakthrough 1
       coord: [26, 11]
+
     - name: Weekly Notes 2/27/2053
       coord: [42, 8]
     - name: Compass
@@ -745,6 +753,12 @@ areas:
       coord: [17, 15]
     - name: Double Axe
       coord: [15, 15]
+    - name: Giguna Labyrinth Empty Plinth
+      coord: [16, 20]
+    - name: Nano Lattice 1
+      coord: [16, 21]
+    - name: Giguna Cache
+      coord: [18, 22]
 
     - name: Uhrum West Portal Entrance
       coord: [19, 26]
