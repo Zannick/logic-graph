@@ -985,6 +985,27 @@
         }
         {
             Giguna_Breach__Labyrinth__South [label = "", pos = "52.5,-84.666667!"];
+            Giguna_Breach__Labyrinth__Button [label = "", pos = "51.6,-84.666667!"];
+            Giguna_Breach__Labyrinth__Save_Point [label = "", pos = "49.575,-84.5!"];
+            Giguna_Breach__Labyrinth__Middle_Brick [label = "", pos = "49.8,-83.666667!"];
+            Giguna_Breach__Labyrinth__Lower_Tier_West [label = "", pos = "50.1,-82.75!"];
+            Giguna_Breach__Labyrinth__Lower_Tier_Middle [label = "", pos = "51.9,-83.333333!"];
+            Giguna_Breach__Labyrinth__Lower_Tier_East [label = "", pos = "55.2,-83.5!"];
+            Giguna_Breach__Labyrinth__Pipe_Entrance [label = "", pos = "55.65,-83.333333!"];
+            Giguna_Breach__Labyrinth__Pipe_Cache [label = "", pos = "54.6,-84.833333!"];
+            Giguna_Breach__Labyrinth__Middle_Tier_Ledge [label = "", pos = "55.5,-82.833333!"];
+            Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East [label = "", pos = "55.8,-82.833333!"];
+            Giguna_Breach__Labyrinth__East_20 [label = "", pos = "56.7,-82.916667!"];
+            Giguna_Breach__Labyrinth__Middle_Tier_Middle [label = "", pos = "52.05,-82.333333!"];
+            Giguna_Breach__Labyrinth__Middle_Tier_Upper [label = "", pos = "50.55,-81.833333!"];
+            Giguna_Breach__Labyrinth__Plinth_Approach [label = "", pos = "49.8,-81.833333!"];
+            Giguna_Breach__Labyrinth__Plinth [label = "", pos = "49.575,-81.833333!"];
+            Giguna_Breach__Labyrinth__Upper_Tier_West [label = "", pos = "49.8,-81.083333!"];
+            Giguna_Breach__Labyrinth__Rooftop_West [label = "", pos = "50.55,-80.583333!"];
+            Giguna_Breach__Labyrinth__Rooftop_East [label = "", pos = "52.05,-80.583333!"];
+            Giguna_Breach__Labyrinth__Upper_Column_1 [label = "", pos = "52.65,-81.25!"];
+            Giguna_Breach__Labyrinth__Upper_Box [label = "", pos = "55.5,-81.666667!"];
+            Giguna_Breach__Labyrinth__East_19 [label = "", pos = "56.7,-81.25!"];
         }
         {
             Giguna_Breach__Lower_Machinery__West [label = "", pos = "57.3,-86.25!"];
@@ -1013,6 +1034,9 @@
             Giguna_Breach__Pink_Clouds__Corner [label = "", pos = "38.7,-80.5!"];
         }
         {
+            Giguna_Breach__Portal_Exchange__West [label = "", pos = "57.3,-82.916667!"];
+        }
+        {
             Giguna_Breach__Robopede__West [label = "", pos = "39.3,-69.25!"];
             Giguna_Breach__Robopede__Center [label = "", pos = "42.3,-69.25!"];
             Giguna_Breach__Robopede__North [label = "", pos = "43.5,-68.666667!"];
@@ -1029,6 +1053,9 @@
             Giguna_Breach__SW_Save__West_11 [label = "", pos = "36.3,-67.916667!"];
             Giguna_Breach__SW_Save__Save_Point [label = "", pos = "37.5,-69.333333!"];
             Giguna_Breach__SW_Save__East_12 [label = "", pos = "38.7,-69.25!"];
+        }
+        {
+            Giguna_Breach__Upper_Machinery__West [label = "", pos = "57.3,-81.25!"];
         }
         {
             Giguna_Breach__White_Clouds__Entry [label = "", pos = "52.5,-89.583333!"];
@@ -2226,6 +2253,8 @@
             Menu__Breach_Map__GSB_Chimney_Flask [label = "", pos = "39.0,-63.333333!"];
             Menu__Breach_Map__GSB_Cubby_Health [label = "", pos = "39.0,-68.333333!"];
             Menu__Breach_Map__Slingshot_Hook [label = "", pos = "51.0,-68.333333!"];
+            Menu__Breach_Map__Drone_Melee_Charge [label = "", pos = "48.0,-83.333333!"];
+            Menu__Breach_Map__GSB_Labyrinth_Flask [label = "", pos = "54.0,-85.0!"];
             Menu__Breach_Map__GlB_Grate_Flask [label = "", pos = "117.0,-71.666667!"];
             Menu__Breach_Map__GlB_Control_Flask [label = "", pos = "108.0,-71.666667!"];
             Menu__Breach_Map__IB_Gauntlet_Flask [label = "", pos = "30.0,-88.333333!"];

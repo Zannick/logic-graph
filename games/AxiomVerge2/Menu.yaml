@@ -894,6 +894,11 @@ areas:
       coord: [10, 9]
     - name: GSB Labyrinth
       coord: [16, 21]
+      exits:
+        - to: Giguna Breach > Labyrinth > Save Point
+          req: ^map__giguna_breach__labyrinth__save
+          time: 12
+          tags: [warp]
     - name: GSB Peak
       coord: [15, 7]
       exits:
@@ -980,10 +985,16 @@ areas:
       coord: [13, 11]
     - name: Slingshot Hook
       coord: [17, 11]
+    - name: Drone Melee Charge
+      coord: [16, 20]
+    - name: GSB Labyrinth Flask
+      coord: [18, 21]
+
     - name: GlB Grate Flask
       coord: [39, 13]
     - name: GlB Control Flask
       coord: [36, 13]
+
     - name: IB Gauntlet Flask
       coord: [10, 23]
     - name: Drone Hover

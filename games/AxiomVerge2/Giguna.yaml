@@ -3195,12 +3195,16 @@ areas:
           tags: [xshift]
     - name: Middle Drop
       coord: [18.5, 19.7]
+      data:
+        flipside: Giguna Breach > Labyrinth > Middle Tier Ledge
       local:
         - to: Middle West
         - to: Middle Tree
         - to: Lower Middle
     - name: Middle Tree
       coord: [18.6, 19.7]
+      data:
+        flipside: Giguna Breach > Labyrinth > Middle Tier Ledge East
       local:
         - to: Middle Drop
         - to: Lower Middle
@@ -3216,6 +3220,8 @@ areas:
 
     - name: Lower Middle
       coord: [18.4, 20.1]
+      data:
+        flipside: Giguna Breach > Labyrinth > Lower Tier East
       local:
         - to: Lower West
       exits:
@@ -3224,6 +3230,14 @@ areas:
           movement: base
           jumps: 1
         - to: Middle Tree
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Middle Drop
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Middle Drop
           req: $grab
           movement: base
           jumps: 3
@@ -3297,6 +3311,8 @@ areas:
         - to: Upper Level Ledge
     - name: Upper Level Ledge
       coord: [16.6, 18.65]
+      data:
+        flipside: Giguna Breach > Labyrinth > Upper Tier West
       local:
         - to: Rooftop West
           jumps: 2
@@ -3306,6 +3322,8 @@ areas:
 
     - name: Empty Plinth
       coord: [16.525, 19.1]
+      data:
+        flipside: Giguna Breach > Labyrinth > Plinth
       local:
         - to: Second Tier Upper
       exits:
@@ -3319,6 +3337,8 @@ areas:
           jumps: 2
     - name: Second Tier Upper
       coord: [16.85, 19.1]
+      data:
+        flipside: Giguna Breach > Labyrinth > Middle Tier Upper
       local:
         - to: Empty Plinth
         - to: Second Tier Lower
@@ -3353,12 +3373,16 @@ areas:
           tags: [xshift]
     - name: Lower Tier West
       coord: [16.7, 19.65]
+      data:
+        flipside: Giguna Breach > Labyrinth > Lower Tier West
       local:
         - to: Lower East
         - to: Portal Stand
         - to: Middle Brick
     - name: Middle Brick
       coord: [16.6, 20.2]
+      data:
+        flipside: Giguna Breach > Labyrinth > Middle Brick
       local:
         - to: Portal Stand
         - to: Lower Tier West
@@ -3373,6 +3397,8 @@ areas:
           movement: base
     - name: Portal Stand
       coord: [16.525, 20.7]
+      data:
+        flipside: Giguna Breach > Labyrinth > Save Point
       exits:
         - to: Middle Brick
           req: $grab

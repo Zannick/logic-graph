@@ -10576,7 +10576,280 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1.into_usize() + 1,
+        },
+        actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Button] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Button,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate.into_usize(),
+            end: LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Save_Point] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Giguna_Breach__Labyrinth__Save_Point__Save.into_usize(),
+            end: ActionId::Giguna_Breach__Labyrinth__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Middle_Brick] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Middle_Brick,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Lower_Tier_West] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Lower_Tier_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Lower_Tier_Middle] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Lower_Tier_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Lower_Tier_East] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Lower_Tier_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Pipe_Cache] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Pipe_Cache,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask.into_usize(),
+            end: LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__East_20] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__East_20,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Middle] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Plinth_Approach] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Plinth_Approach,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn.into_usize(),
+            end: LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Plinth] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Plinth,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Labyrinth__Plinth__Urn.into_usize(),
+            end: LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Upper_Tier_West] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Upper_Tier_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Rooftop_West] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Rooftop_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Rooftop_East] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Rooftop_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Upper_Column_1] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Upper_Column_1,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__Upper_Box] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__Upper_Box,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__East_19] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__East_19,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -10660,6 +10933,30 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Giguna_Breach__Lower_Machinery__West] = Spot {
         id: SpotId::Giguna_Breach__Lower_Machinery__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Portal_Exchange__West] = Spot {
+        id: SpotId::Giguna_Breach__Portal_Exchange__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Upper_Machinery__West] = Spot {
+        id: SpotId::Giguna_Breach__Upper_Machinery__West,
         locations: Range {
             start: 0, end: 0,
         },
@@ -14417,7 +14714,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1.into_usize(),
+            start: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1.into_usize(),
             end: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2.into_usize() + 1,
         },
         actions: Range {
@@ -24797,7 +25094,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -25076,6 +25374,30 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Breach_Map__Slingshot_Hook] = Spot {
         id: SpotId::Menu__Breach_Map__Slingshot_Hook,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__Drone_Melee_Charge] = Spot {
+        id: SpotId::Menu__Breach_Map__Drone_Melee_Charge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask] = Spot {
+        id: SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
         locations: Range {
             start: 0, end: 0,
         },

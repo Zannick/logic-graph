@@ -2441,11 +2441,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{25}, Big_Flask{11}]
+/// [Flask{26}, Big_Flask{11}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 25 && $ctx.count(Item::Big_Flask) >= 11
+        $ctx.count(Item::Flask) >= 26 && $ctx.count(Item::Big_Flask) >= 11
     }};
 }
 #[macro_export]
@@ -2456,7 +2456,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 25, vec!["Flask count"])
+                (ct >= 26, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2476,8 +2476,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(25));
-            $ctx.count(Item::Flask) >= 25
+            $full_obs.observe_flask(IntegerObservation::Ge(26));
+            $ctx.count(Item::Flask) >= 26
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(11));
             $ctx.count(Item::Big_Flask) >= 11
@@ -2740,7 +2740,7 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -2757,6 +2757,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Anuman)
             && $ctx.has(Item::Nanite_Mist)
             && $ctx.has(Item::Exit_Breach)
+            && $ctx.has(Item::Drone_Melee_Charge)
     }};
 }
 #[macro_export]
@@ -2878,6 +2879,15 @@ macro_rules! hexplain__all_urns {
                 (h, vec!["Exit_Breach"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Drone_Melee_Charge);
+                $edict.insert("Drone_Melee_Charge", format!("{}", h));
+                (h, vec!["Drone_Melee_Charge"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2924,6 +2934,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_exit_breach();
             $ctx.has(Item::Exit_Breach)
+        }) && ({
+            $full_obs.observe_drone_melee_charge();
+            $ctx.has(Item::Drone_Melee_Charge)
         })
     }};
 }

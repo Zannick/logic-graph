@@ -670,13 +670,305 @@ areas:
         - to: Bottom
 
 
-- name: Labyrinth
+- name: Labyrinth  # MARK: Labyrinth
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [16, 20, 17, 21]
+    urn: [16, 19, 17, 20]
+    flask: [18, 20, 19, 21]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GSB Labyrinth
+      urn: Menu > Breach Map > Drone Melee Charge
+      flask: Menu > Breach Map > GSB Labyrinth Flask
   spots:
     - name: South
       coord: [17.5, 20.8]
+      local:
+        - to: Button
+      exits:
+        - to: Lower Portal > North
+          tags: [ydoor]
+    - name: Button
+      coord: [17.2, 20.8]
+      local:
+        - to: South
+      locations:
+        - name: Open Gate
+          item: Giguna_Labyrinth_Gate
+          tags: [button, event]
+      exits:
+        - to: Save Point
+          req: Giguna_Labyrinth_Gate
+          movement: base
+          jumps: 1
+    - name: Save Point
+      coord: [16.525, 20.7]
+      data:
+        flipside: Giguna > Labyrinth > Portal Stand
+      exits:
+        - to: Button
+          req: Giguna_Labyrinth_Gate
+          movement: base
+        - to: Middle Brick
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Lower Tier West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Middle Brick
+      coord: [16.6, 20.2]
+      data:
+        flipside: Giguna > Labyrinth > Middle Brick
+      local:
+        - to: Save Point
+      exits:
+        - to: Button
+          req: Giguna_Labyrinth_Gate
+          movement: base
+        - to: Lower Tier West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Lower Tier West
+      coord: [16.7, 19.65]
+      data:
+        flipside: Giguna > Labyrinth > Lower Tier West
+      local:
+        - to: Middle Brick
+        - to: Save Point
+        - to: Lower Tier Middle
+    - name: Lower Tier Middle
+      coord: [17.3, 20.0]
+      local:
+        - to: Lower Tier West
+          jumps: 3
+        - to: Lower Tier East
+    - name: Lower Tier East
+      coord: [18.4, 20.1]
+      data:
+        flipside: Giguna > Labyrinth East > Lower Middle
+      local:
+        - to: Lower Tier West
+          jumps: 1
+        - to: Pipe Entrance
+          jumps: 1
+      exits:
+        - to: Middle Tier Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Middle Tier Ledge East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Pipe Entrance
+      coord: [18.55, 20.0]
+      local:
+        - to: Lower Tier East
+        - to: Pipe Cache
+          thru: [[18.85, 20.05], [18.85, 20.25], [18.95, 20.25], [18.95, 20.45], [18.85, 20.45],
+                 [18.85, 20.65], [18.95, 20.65], [18.95, 20.85]]
+      exits:
+        - to: Middle Tier Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Middle Tier Ledge East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    # TODO: Can you Exit from the lower corner of the pipe?
+    - name: Pipe Cache
+      coord: [18.2, 20.9]
+      local:
+        - to: Pipe Entrance
+          thru: [[18.95, 20.85], [18.95, 20.65], [18.85, 20.65], [18.85, 20.45], [18.95, 20.45],
+                 [18.95, 20.25], [18.85, 20.25], [18.85, 20.05]]
+          jumps: [1, 1, 0, 1, 0, 1, 0, 1, 1]
+      locations:
+        - name: Flask
+          canon: Giguna_Labyrinth_Flask
+          item: Flask
+          tags: [flask]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Giguna_Labyrinth_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Labyrinth_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Middle Tier Ledge
+      coord: [18.5, 19.7]
+      data:
+        flipside: Giguna > Labyrinth East > Middle Drop
+      local:
+        - to: Middle Tier Ledge East
+        - to: Lower Tier East
+        - to: Pipe Entrance
+        - to: Middle Tier Middle
+          jumps: 4
+      exits:
+        - to: Middle Tier Middle
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Middle Tier Ledge East
+      coord: [18.6, 19.7]
+      data:
+        flipside: Giguna > Labyrinth East > Middle Tree
+      local:
+        - to: Middle Tier Ledge
+        - to: Lower Tier East
+        - to: Pipe Entrance
+          thru: [18.55, 19.7]
+    - name: East 20
+      coord: [18.9, 19.75]
+      local:
+        - to: Middle Tier Ledge East
+          jumps: 1
+      exits:
+        - to: Portal Exchange > West
+          tags: [xdoor]
 
-- name: Lower Portal
+    - name: Middle Tier Middle
+      coord: [17.35, 19.4]
+      local:
+        - to: Middle Tier Ledge
+        - to: Middle Tier Upper
+          jumps: 3
+      exits:
+        - to: Middle Tier Upper
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Plinth Approach
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Middle Tier Upper
+      coord: [16.85, 19.1]
+      data:
+        flipside: Giguna > Labyrinth > Second Tier Upper
+      local:
+        - to: Plinth Approach
+        - to: Plinth
+          jumps: 1
+    - name: Plinth Approach
+      coord: [16.6, 19.1]
+      local:
+        - to: Plinth
+        - to: Middle Tier Upper
+      locations:
+        - name: Mid-air Urn
+          canon: Drone_Melee_Charge
+          item: Drone_Melee_Charge
+          tags: [urn]
+      exits:
+        - to: Upper Tier West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Plinth
+      coord: [16.525, 19.1]
+      data:
+        flipside: Giguna > Labyrinth > Empty Plinth
+      local:
+        - to: Middle Tier Upper
+      locations:
+        - name: Urn
+          canon: Drone_Melee_Charge
+          item: Drone_Melee_Charge
+          tags: [urn]
+      exits:
+        - to: Upper Tier West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+      hybrid:
+        - name: Urn Collection Skip
+          canon: Drone_Melee_Charge
+          item: Drone_Melee_Charge
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Urn Fast Travel
+          canon: Drone_Melee_Charge
+          item: Drone_Melee_Charge
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Upper Tier West
+      coord: [16.6, 18.65]
+      data:
+        flipside: Giguna > Labyrinth > Upper Level Ledge
+      local:
+        - to: Plinth
+        - to: Plinth Approach
+        - to: Middle Tier Upper
+          thru: [16.6, 18.9]
+        - to: Rooftop West
+          jumps: 2
+    - name: Rooftop West
+      coord: [16.85, 18.35]
+      local:
+        - to: Upper Tier West
+        - to: Rooftop East
+      exits:
+        - to: Rooftop East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Rooftop East
+      coord: [17.35, 18.35]
+      local:
+        - to: Rooftop West
+        - to: Upper Column 1
+      exits:
+        - to: Rooftop West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Upper Column 1
+      coord: [17.55, 18.75]
+      local:
+        - to: Upper Box
+      exits:
+        - to: Rooftop East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Upper Box
+      coord: [18.5, 19.0]
+      local:
+        - to: Upper Column 1
+          jumps: 4
+        - to: East 19
+          jumps: 3
+      exits:
+        - to: Rooftop East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 4
+    - name: East 19
+      coord: [18.9, 18.75]
+      local:
+        - to: Upper Box
+      exits:
+        - to: Upper Machinery > West
+          tags: [xdoor]
+
+- name: Lower Portal  # MARK: Lower Portal
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Dais
@@ -751,8 +1043,20 @@ areas:
           movement: base
           jumps: 2
 
-- name: Lower Machinery
+- name: Lower Machinery  # MARK: Lower Machinery
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [19.1, 21.75]
+
+- name: Portal Exchange  # MARK: Portal Exchange
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 19.75]
+
+- name: Upper Machinery  # MARK: Upper Machinery
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 18.75]

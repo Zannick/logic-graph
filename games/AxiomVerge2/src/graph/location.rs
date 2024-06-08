@@ -235,6 +235,14 @@ impl world::Accessible for Location {
             LocationId::Giguna__West_Tower__Top__Tablet => true,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
+            LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate => true,
+            LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask => true,
+            LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip => true,
+            LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Giguna_Breach__Labyrinth__Plinth__Urn => true,
+            LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip => true,
+            LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn => true,
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
@@ -530,6 +538,8 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
@@ -822,6 +832,8 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::explain_boomerang(ctx, world, edict),
@@ -2207,6 +2219,78 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate,
+        canonical: CanonId::Loc_Giguna_Breach__Labyrinth__Button__Open_Gate,
+        item: Item::Giguna_Labyrinth_Gate,
+        price: Currency::Free,
+        time: 100,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask,
+        canonical: CanonId::Giguna_Labyrinth_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip,
+        canonical: CanonId::Giguna_Labyrinth_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel,
+        canonical: CanonId::Giguna_Labyrinth_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel),
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn,
+        canonical: CanonId::Drone_Melee_Charge,
+        item: Item::Drone_Melee_Charge,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Plinth__Urn,
+        canonical: CanonId::Drone_Melee_Charge,
+        item: Item::Drone_Melee_Charge,
+        price: Currency::Free,
+        time: 5500,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip,
+        canonical: CanonId::Drone_Melee_Charge,
+        item: Item::Drone_Melee_Charge,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip),
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel] = Location {
+        id: LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel,
+        canonical: CanonId::Drone_Melee_Charge,
+        item: Item::Drone_Melee_Charge,
+        price: Currency::Free,
+        time: 0,
+        exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel),
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate] = Location {

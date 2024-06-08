@@ -1426,6 +1426,10 @@ pub fn access_giguna_gubi(ctx: &Context, world: &World) -> bool {
     // Giguna_Gubi
     ctx.has(Item::Giguna_Gubi)
 }
+pub fn access_giguna_labyrinth_gate(ctx: &Context, world: &World) -> bool {
+    // Giguna_Labyrinth_Gate
+    ctx.has(Item::Giguna_Labyrinth_Gate)
+}
 pub fn access_giguna_northeast_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
@@ -2274,6 +2278,10 @@ pub fn access_map__giguna__separator__save(ctx: &Context, world: &World) -> bool
     // ^map__giguna__separator__save
     ctx.map__giguna__separator__save()
 }
+pub fn access_map__giguna_breach__labyrinth__save(ctx: &Context, world: &World) -> bool {
+    // ^map__giguna_breach__labyrinth__save
+    ctx.map__giguna_breach__labyrinth__save()
+}
 pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__peak__save
     ctx.map__giguna_breach__peak__save()
@@ -2596,6 +2604,10 @@ pub fn access_siuna_storage_wall(ctx: &Context, world: &World) -> bool {
 pub fn access_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook
     ctx.has(Item::Slingshot_Hook)
+}
+pub fn access_slingshot_hook_and_drone_hover(ctx: &Context, world: &World) -> bool {
+    // Slingshot_Hook and Drone_Hover
+    (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
 }
 pub fn access_sniper_valley_rock_1(ctx: &Context, world: &World) -> bool {
     // Sniper_Valley_Rock_1
@@ -8596,6 +8608,18 @@ pub fn explain_giguna_gubi(
         (h, vec!["Giguna_Gubi"])
     }
 }
+pub fn explain_giguna_labyrinth_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Labyrinth_Gate
+    {
+        let h = ctx.has(Item::Giguna_Labyrinth_Gate);
+        edict.insert("Giguna_Labyrinth_Gate", format!("{}", h));
+        (h, vec!["Giguna_Labyrinth_Gate"])
+    }
+}
 pub fn explain_giguna_northeast_gate(
     ctx: &Context,
     world: &World,
@@ -12300,6 +12324,18 @@ pub fn explain_map__giguna__separator__save(
         (r, vec!["^map__giguna__separator__save"])
     }
 }
+pub fn explain_map__giguna_breach__labyrinth__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__giguna_breach__labyrinth__save
+    {
+        let r = ctx.map__giguna_breach__labyrinth__save();
+        edict.insert("^map__giguna_breach__labyrinth__save", format!("{:?}", r));
+        (r, vec!["^map__giguna_breach__labyrinth__save"])
+    }
+}
 pub fn explain_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &World,
@@ -13865,6 +13901,31 @@ pub fn explain_slingshot_hook(
         let h = ctx.has(Item::Slingshot_Hook);
         edict.insert("Slingshot_Hook", format!("{}", h));
         (h, vec!["Slingshot_Hook"])
+    }
+}
+pub fn explain_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_sniper_valley_rock_1(
@@ -17101,6 +17162,17 @@ pub fn observe_access_giguna_gubi(
         ctx.has(Item::Giguna_Gubi)
     }
 }
+pub fn observe_access_giguna_labyrinth_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Labyrinth_Gate
+    {
+        full_obs.observe_giguna_labyrinth_gate();
+        ctx.has(Item::Giguna_Labyrinth_Gate)
+    }
+}
 pub fn observe_access_giguna_northeast_gate(
     ctx: &Context,
     world: &World,
@@ -18916,6 +18988,17 @@ pub fn observe_access_map__giguna__separator__save(
         ctx.map__giguna__separator__save()
     }
 }
+pub fn observe_access_map__giguna_breach__labyrinth__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__giguna_breach__labyrinth__save
+    {
+        full_obs.observe_map__giguna_breach__labyrinth__save();
+        ctx.map__giguna_breach__labyrinth__save()
+    }
+}
 pub fn observe_access_map__giguna_breach__peak__save(
     ctx: &Context,
     world: &World,
@@ -19823,6 +19906,20 @@ pub fn observe_access_slingshot_hook(
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
     }
+}
+pub fn observe_access_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_sniper_valley_rock_1(
     ctx: &Context,

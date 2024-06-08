@@ -1196,6 +1196,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Labyrinth__Top_East__ex__Labyrinth_East__Top_West_1 => true,
             ExitId::Giguna__Labyrinth_East__East_19__ex__Gateway__West_19_1 => true,
             ExitId::Giguna__Labyrinth_East__East_20__ex__Mural__West_20_1 => true,
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_2 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__Labyrinth_East__Lower_West__ex__Labyrinth__Lower_East_1 => true,
@@ -1346,6 +1348,32 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1 => rules::access_giguna_labyrinth_gate(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1 => rules::access_giguna_labyrinth_gate(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip => true,
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip => true,
+            ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1 => rules::access_giguna_labyrinth_gate(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Lower_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::access_invoke_mist2(ctx, world),
@@ -2019,6 +2047,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::access_map__glacier_breach__hammonds_breach__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::access_map__glacier_breach__south_save__save(ctx, world),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::access_map__glacier_breach__west_save__save(ctx, world),
+            ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1 => rules::access_map__giguna_breach__labyrinth__save(ctx, world),
             ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::access_map__giguna_breach__peak__save(ctx, world),
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::access_map__giguna_breach__sw_save__save(ctx, world),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::access_map__irikar_breach__gauntlet__save(ctx, world),
@@ -3141,6 +3170,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Labyrinth__Save_Point__ex__Ledge_22_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth__Save_Point__ex__Rocky_Stair_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth__Second_Tier_Lower__ex__Second_Tier_Upper_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -3234,6 +3265,27 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1 => rules::observe_access_giguna_labyrinth_gate(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1 => rules::observe_access_giguna_labyrinth_gate(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1 => rules::observe_access_giguna_labyrinth_gate(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Lower_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
@@ -3719,6 +3771,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::observe_access_map__glacier_breach__hammonds_breach__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__south_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::observe_access_map__glacier_breach__west_save__save(ctx, world, full_obs),
+            ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1 => rules::observe_access_map__giguna_breach__labyrinth__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::observe_access_map__giguna_breach__peak__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::observe_access_map__giguna_breach__sw_save__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::observe_access_map__irikar_breach__gauntlet__save(ctx, world, full_obs),
@@ -4996,6 +5049,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Labyrinth__Save_Point__ex__Ledge_22_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Labyrinth__Save_Point__ex__Rocky_Stair_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Labyrinth__Second_Tier_Lower__ex__Second_Tier_Upper_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_2 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Lamassu__Broken_Pillar__ex__Staircase_Landing_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -5089,6 +5144,27 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1 => rules::explain_giguna_labyrinth_gate(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1 => rules::explain_giguna_labyrinth_gate(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1 => rules::explain_giguna_labyrinth_gate(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Lower_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
@@ -5574,6 +5650,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => rules::explain_map__glacier_breach__hammonds_breach__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1 => rules::explain_map__glacier_breach__south_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1 => rules::explain_map__glacier_breach__west_save__save(ctx, world, edict),
+            ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1 => rules::explain_map__giguna_breach__labyrinth__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GSB_Peak__ex__Giguna_Breach__Peak__Save_Point_1 => rules::explain_map__giguna_breach__peak__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__GSB_SW_Save__ex__Giguna_Breach__SW_Save__Save_Point_1 => rules::explain_map__giguna_breach__sw_save__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__IB_Gauntlet__ex__Irikar_Breach__Gauntlet__Save_Point_1 => rules::explain_map__irikar_breach__gauntlet__save(ctx, world, edict),
@@ -6109,6 +6186,11 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1 => true,
+            ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip => true,
+            ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip => true,
+            ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1 => true,
             ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1 => true,
             ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1 => true,
             ExitId::Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1 => true,
@@ -12996,6 +13078,188 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
+    exits[ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__South__ex__Lower_Portal__North_1,
+        time: 1600,
+        dest: SpotId::Giguna_Breach__Lower_Portal__North,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Button__ex__Save_Point_1,
+        time: 2368,
+        dest: SpotId::Giguna_Breach__Labyrinth__Save_Point,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Button_1,
+        time: 2368,
+        dest: SpotId::Giguna_Breach__Labyrinth__Button,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Middle_Brick_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Brick,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Lower_Tier_West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Save_Point__ex__Lower_Tier_West_1,
+        time: 1799,
+        dest: SpotId::Giguna_Breach__Labyrinth__Lower_Tier_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Button_1,
+        time: 2105,
+        dest: SpotId::Giguna_Breach__Labyrinth__Button,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Labyrinth__Lower_Tier_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_1,
+        time: 600,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Lower_Tier_East__ex__Middle_Tier_Ledge_East_1,
+        time: 701,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1,
+        time: 600,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1,
+        time: 600,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip),
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel),
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1,
+        time: 2874,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Middle,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__East_20__ex__Portal_Exchange__West_1,
+        time: 1600,
+        dest: SpotId::Giguna_Breach__Portal_Exchange__West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1,
+        time: 1250,
+        dest: SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Plinth_Approach_1,
+        time: 1875,
+        dest: SpotId::Giguna_Breach__Labyrinth__Plinth_Approach,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Plinth_Approach__ex__Upper_Tier_West_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Labyrinth__Upper_Tier_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Plinth__ex__Upper_Tier_West_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Labyrinth__Upper_Tier_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip),
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__Drone_Melee_Charge,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel),
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1,
+        time: 1250,
+        dest: SpotId::Giguna_Breach__Labyrinth__Rooftop_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1,
+        time: 1250,
+        dest: SpotId::Giguna_Breach__Labyrinth__Rooftop_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Upper_Column_1__ex__Rooftop_East_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Labyrinth__Rooftop_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__Upper_Box__ex__Rooftop_East_1,
+        time: 2874,
+        dest: SpotId::Giguna_Breach__Labyrinth__Rooftop_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1] = Exit {
+        id: ExitId::Giguna_Breach__Labyrinth__East_19__ex__Upper_Machinery__West_1,
+        time: 1600,
+        dest: SpotId::Giguna_Breach__Upper_Machinery__West,
+        price: Currency::Free,
+        loc_id: None,
+    };
     exits[ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1] = Exit {
         id: ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1,
         time: 1600,
@@ -15128,6 +15392,20 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2,
         time: 1799,
         dest: SpotId::Giguna__Labyrinth_East__Middle_Tree,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1] = Exit {
+        id: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1,
+        time: 600,
+        dest: SpotId::Giguna__Labyrinth_East__Middle_Drop,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_2] = Exit {
+        id: ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_2,
+        time: 1799,
+        dest: SpotId::Giguna__Labyrinth_East__Middle_Drop,
         price: Currency::Free,
         loc_id: None,
     };
@@ -20546,6 +20824,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Menu__Breach_Map__GlB_West__ex__Glacier_Breach__West_Save__Save_Point_1,
         time: 12000,
         dest: SpotId::Glacier_Breach__West_Save__Save_Point,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1] = Exit {
+        id: ExitId::Menu__Breach_Map__GSB_Labyrinth__ex__Giguna_Breach__Labyrinth__Save_Point_1,
+        time: 12000,
+        dest: SpotId::Giguna_Breach__Labyrinth__Save_Point,
         price: Currency::Free,
         loc_id: None,
     };

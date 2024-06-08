@@ -1017,6 +1017,27 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Labyrinth[Labyrinth]
         Giguna_Breach__Labyrinth__South(South);
+        Giguna_Breach__Labyrinth__Button(Button);
+        Giguna_Breach__Labyrinth__Save_Point(Save Point);
+        Giguna_Breach__Labyrinth__Middle_Brick(Middle Brick);
+        Giguna_Breach__Labyrinth__Lower_Tier_West(Lower Tier West);
+        Giguna_Breach__Labyrinth__Lower_Tier_Middle(Lower Tier Middle);
+        Giguna_Breach__Labyrinth__Lower_Tier_East(Lower Tier East);
+        Giguna_Breach__Labyrinth__Pipe_Entrance(Pipe Entrance);
+        Giguna_Breach__Labyrinth__Pipe_Cache(Pipe Cache);
+        Giguna_Breach__Labyrinth__Middle_Tier_Ledge(Middle Tier Ledge);
+        Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East(Middle Tier Ledge East);
+        Giguna_Breach__Labyrinth__East_20(East 20);
+        Giguna_Breach__Labyrinth__Middle_Tier_Middle(Middle Tier Middle);
+        Giguna_Breach__Labyrinth__Middle_Tier_Upper(Middle Tier Upper);
+        Giguna_Breach__Labyrinth__Plinth_Approach(Plinth Approach);
+        Giguna_Breach__Labyrinth__Plinth(Plinth);
+        Giguna_Breach__Labyrinth__Upper_Tier_West(Upper Tier West);
+        Giguna_Breach__Labyrinth__Rooftop_West(Rooftop West);
+        Giguna_Breach__Labyrinth__Rooftop_East(Rooftop East);
+        Giguna_Breach__Labyrinth__Upper_Column_1(Upper Column 1);
+        Giguna_Breach__Labyrinth__Upper_Box(Upper Box);
+        Giguna_Breach__Labyrinth__East_19(East 19);
     end
     subgraph Giguna_Breach__Lower_Portal[Lower Portal]
         Giguna_Breach__Lower_Portal__East(East);
@@ -1028,6 +1049,12 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Lower_Machinery[Lower Machinery]
         Giguna_Breach__Lower_Machinery__West(West);
+    end
+    subgraph Giguna_Breach__Portal_Exchange[Portal Exchange]
+        Giguna_Breach__Portal_Exchange__West(West);
+    end
+    subgraph Giguna_Breach__Upper_Machinery[Upper Machinery]
+        Giguna_Breach__Upper_Machinery__West(West);
     end
 end
 subgraph Giguna
@@ -2378,6 +2405,8 @@ subgraph Menu
         Menu__Breach_Map__GSB_Chimney_Flask(GSB Chimney Flask);
         Menu__Breach_Map__GSB_Cubby_Health(GSB Cubby Health);
         Menu__Breach_Map__Slingshot_Hook(Slingshot Hook);
+        Menu__Breach_Map__Drone_Melee_Charge(Drone Melee Charge);
+        Menu__Breach_Map__GSB_Labyrinth_Flask(GSB Labyrinth Flask);
         Menu__Breach_Map__GlB_Grate_Flask(GlB Grate Flask);
         Menu__Breach_Map__GlB_Control_Flask(GlB Control Flask);
         Menu__Breach_Map__IB_Gauntlet_Flask(IB Gauntlet Flask);
@@ -3134,9 +3163,32 @@ Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__West_10
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
+Giguna_Breach__Labyrinth__Button <--> Giguna_Breach__Labyrinth__Save_Point
+Giguna_Breach__Labyrinth__East_19 --> Giguna_Breach__Upper_Machinery__West
+Giguna_Breach__Labyrinth__East_20 --> Giguna_Breach__Portal_Exchange__West
+Giguna_Breach__Labyrinth__Lower_Tier_East --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge
+Giguna_Breach__Labyrinth__Lower_Tier_East --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East
+Giguna_Breach__Labyrinth__Middle_Brick --> Giguna_Breach__Labyrinth__Button
+Giguna_Breach__Labyrinth__Middle_Brick --> Giguna_Breach__Labyrinth__Lower_Tier_West
+Giguna_Breach__Labyrinth__Middle_Tier_Ledge --> Giguna_Breach__Labyrinth__Middle_Tier_Middle
+Giguna_Breach__Labyrinth__Middle_Tier_Middle --> Giguna_Breach__Labyrinth__Middle_Tier_Upper
+Giguna_Breach__Labyrinth__Middle_Tier_Middle --> Giguna_Breach__Labyrinth__Plinth_Approach
+Giguna_Breach__Labyrinth__Pipe_Cache --> Menu__Breach_Map__GSB_Labyrinth_Flask
+Giguna_Breach__Labyrinth__Pipe_Cache --> Menu__Warp_Only__Breach
+Giguna_Breach__Labyrinth__Pipe_Entrance --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge
+Giguna_Breach__Labyrinth__Pipe_Entrance --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East
+Giguna_Breach__Labyrinth__Plinth --> Giguna_Breach__Labyrinth__Upper_Tier_West
+Giguna_Breach__Labyrinth__Plinth --> Menu__Breach_Map__Drone_Melee_Charge
+Giguna_Breach__Labyrinth__Plinth --> Menu__Warp_Only__Breach
+Giguna_Breach__Labyrinth__Plinth_Approach --> Giguna_Breach__Labyrinth__Upper_Tier_West
+Giguna_Breach__Labyrinth__Rooftop_East <--> Giguna_Breach__Labyrinth__Rooftop_West
+Giguna_Breach__Labyrinth__Save_Point --> Giguna_Breach__Labyrinth__Lower_Tier_West
+Giguna_Breach__Labyrinth__Save_Point --> Giguna_Breach__Labyrinth__Middle_Brick
+Giguna_Breach__Labyrinth__South <--> Giguna_Breach__Lower_Portal__North
+Giguna_Breach__Labyrinth__Upper_Box --> Giguna_Breach__Labyrinth__Rooftop_East
+Giguna_Breach__Labyrinth__Upper_Column_1 --> Giguna_Breach__Labyrinth__Rooftop_East
 Giguna_Breach__Lower_Portal__Bottom --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
 Giguna_Breach__Lower_Portal__East --> Giguna_Breach__Lower_Machinery__West
-Giguna_Breach__Lower_Portal__North --> Giguna_Breach__Labyrinth__South
 Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
 Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
@@ -3304,6 +3356,7 @@ Giguna__Helipad__South_Left --> Giguna__Clouds__North_Left
 Giguna__Helipad__South_Middle --> Giguna__Clouds__North_Middle
 Giguna__Helipad__South_Right --> Giguna__Clouds__North_Right
 Giguna__Labyrinth_East__East_20 --> Giguna__Mural__West_20
+Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Drop
 Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Tree
 Giguna__Labyrinth_East__Lower_West <--> Giguna__Labyrinth__Lower_East
 Giguna__Labyrinth_East__Middle_West <--> Giguna__Labyrinth__Middle_East
@@ -3769,6 +3822,7 @@ Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Item_Pedestal --> Menu__Kiengir_Map__Breach_Sight
 Irikar__Sight_Room__Item_Pedestal --> Menu__Warp_Only__Kiengir
 Irikar__Sight_Room__Northwest --> Irikar__Sight_Room__Above_Room_East
+Menu__Breach_Map__GSB_Labyrinth --> Giguna_Breach__Labyrinth__Save_Point
 Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GSB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
 Menu__Breach_Map__GlB_Arena --> Glacier_Breach__Save_and_Exit__Save_Point
