@@ -5,10 +5,10 @@ from pprint import pprint
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-import Compiler
+from Compiler import GameLogic, treeToString
 from Utils import construct_id
 
-AV2 = Compiler.GameLogic('AxiomVerge2')
+AV2 = GameLogic('AxiomVerge2')
 
 UNFLIPPABLE = ('Antarctica', 'Interior', 'Menu')
 

@@ -2539,6 +2539,10 @@ pub fn access_portal_eq_position(ctx: &Context, world: &World) -> bool {
     // ^portal == ^position
     ctx.portal() == ctx.position()
 }
+pub fn access_portal_hidden(ctx: &Context, world: &World) -> bool {
+    // ^portal_hidden
+    data::portal_hidden(ctx.position())
+}
 pub fn access_ranged_damage(ctx: &Context, world: &World) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
@@ -13628,6 +13632,18 @@ pub fn explain_portal_eq_position(
         (left.0 == right.0, left.1)
     }
 }
+pub fn explain_portal_hidden(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^portal_hidden
+    {
+        let r = data::portal_hidden(ctx.position());
+        edict.insert("^portal_hidden", format!("{:?}", r));
+        (r, vec!["^portal_hidden"])
+    }
+}
 pub fn explain_ranged_damage(
     ctx: &Context,
     world: &World,
@@ -19662,6 +19678,14 @@ pub fn observe_access_portal_eq_position(
         };
         left == right
     }
+}
+pub fn observe_access_portal_hidden(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^portal_hidden
+    data::portal_hidden(ctx.position())
 }
 pub fn observe_access_ranged_damage(
     ctx: &Context,

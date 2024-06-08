@@ -616,3 +616,143 @@ areas:
         flipside: Giguna > Clouds > Cache
       local:
         - to: Normal Entry
+
+- name: White Clouds  # MARK: White Clouds
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [17.5, 23.75]
+      data:
+        flipside: Giguna > Breachable Wall > Portal Entry
+      exits:
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: East Ledge
+      coord: [17.2, 23.35]
+      local:
+        - to: Entry
+        - to: Upper Middle
+          jumps: 1
+    - name: Upper Middle
+      coord: [16.9, 23.3]
+      data:
+        flipside: Giguna > Breachable Wall > Above the Hole
+      local:
+        - to: East Ledge
+        - to: West Ledge
+          jumps: 1
+    - name: West Ledge
+      coord: [16.45, 23.15]
+      data:
+        flipside: Giguna > Breachable Wall > West Ledge
+      local:
+        - to: Upper Middle
+        - to: Bottom
+    - name: Bottom
+      coord: [16.7, 23.9]
+      data:
+        flipside: Giguna > Breachable Wall > Cave Mouth West
+      local:
+        - to: West Ledge
+          jumps: 4
+      exits:
+        - to: Exit
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Exit
+      coord: [16.9, 23.6]
+      data:
+        flipside: Giguna > Breachable Wall > Wall Interior
+      local:
+        - to: Bottom
+
+
+- name: Labyrinth
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: South
+      coord: [17.5, 20.8]
+
+- name: Lower Portal
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Dais
+  spots:
+    - name: East
+      coord: [18.9, 21.75]
+      local:
+        - to: Bottom
+      exits:
+        - to: Lower Machinery > West
+          tags: [xdoor]
+    - name: Bottom
+      coord: [18.5, 21.9]
+      data:
+        flipside: Giguna > Cache > Pit
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: East Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: East Upper Ledge
+      coord: [18.3, 21.2]
+      data:
+        flipside: Giguna > Cache > Upper Ledge
+      local:
+        - to: West Ledge
+        - to: Bottom
+        - to: East
+        - to: North
+          jumps: 1
+    - name: West Ledge
+      coord: [17.5, 21.3]
+      data:
+        flipside: Giguna > Labyrinth > Ledge 22
+      local:
+        - to: East Upper Ledge
+          jumps: 1
+        - to: North
+          jumps: 1
+        - to: Portal Dais
+          thru: [17.45, 21.3]
+    - name: North
+      coord: [17.5, 21.2]
+      local:
+        - to: East Upper Ledge
+        - to: Portal Dais
+          thru: [17.45, 21.3]
+        - to: East Upper Ledge
+      exits:
+        - to: Labyrinth > South
+          tags: [ydoor]
+    - name: Portal Dais
+      coord: [17.5, 21.75]
+      data:
+        flipside: Giguna > Labyrinth > Save Point
+      exits:
+        - to: East Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: North
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+
+- name: Lower Machinery
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 21.75]

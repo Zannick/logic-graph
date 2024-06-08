@@ -517,9 +517,10 @@ class GameLogic(object):
                     tx, ty = dest['coord']
                     jumps = exit.get('jumps', 0)
                     jumps_down = exit.get('jumps_down', 0)
+                    m = exit['movement']
                     if exit['movement'] == 'base':
                         exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
-                    elif (m := exit['movement']) in self.all_movements:
+                    elif m in self.all_movements:
                         mvmt = self.all_movements[m]
                         exit['time'] = self.movement_time([m], None if mvmt.get('ignore_base') else base,
                                                           abs(tx - sx), ty - sy, jumps, jumps_down)

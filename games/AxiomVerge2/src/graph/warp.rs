@@ -65,6 +65,13 @@ impl world::Accessible for Warp {
                         0
                     }
                 }
+                WarpId::Portal => {
+                    if rules::access_portal_hidden(ctx, world) {
+                        250
+                    } else {
+                        0
+                    }
+                }
             _ => 0,
         }
     }

@@ -1666,6 +1666,7 @@ areas:
         - to: Ruins East > Way Up High
           req: $hover
           movement: base
+          jumps: 1
           penalty_tags: [xshift, -base.1]
         - to: Ruins East > Pillar
           movement: base
@@ -3458,6 +3459,8 @@ areas:
 
     - name: Ledge 22
       coord: [17.55, 21.3]
+      data:
+        flipside: Giguna Breach > Lower Portal > West Ledge
       local:
         - to: East 22
           jumps: 1
@@ -3476,6 +3479,8 @@ areas:
           tags: [xshift]
     - name: Save Point
       coord: [17.5, 21.75]
+      data:
+        flipside: Giguna Breach > Lower Portal > Portal Dais
       local:
         - to: Save Ledge
       exits:
@@ -3527,11 +3532,15 @@ areas:
           tags: [xshift]
     - name: Upper Ledge
       coord: [18.3, 21.2]
+      data:
+        flipside: Giguna Breach > Lower Portal > East Upper Ledge
       local:
         - to: Pit
         - to: West
     - name: Pit
       coord: [18.5, 21.9]
+      data:
+        flipside: Giguna Breach > Lower Portal > Bottom
       locations:
         - name: Item
           item: Health_Fragment
@@ -3898,7 +3907,9 @@ areas:
           tags: [yshift]
 
     - name: West Ledge
-      coord: [16.45, 23.2]
+      coord: [16.45, 23.15]
+      data:
+        flipside: Giguna Breach > White Clouds > West Ledge
       local:
         - to: Above the Hole
         - to: West Mid-air
@@ -3918,6 +3929,8 @@ areas:
           movement: mist2
     - name: Above the Hole
       coord: [16.9, 23.3]
+      data:
+        flipside: Giguna Breach > White Clouds > Upper Middle
       local:
         - to: West Ledge
           jumps: 1
@@ -3929,6 +3942,8 @@ areas:
           tags: [shockwave]
     - name: Wall Interior
       coord: [16.9, 23.6]
+      data:
+        flipside: Giguna Breach > White Clouds > Exit
       local:
         - to: Cave Mouth East
         - to: Above West Catwalk
@@ -3944,6 +3959,8 @@ areas:
           tags: [shockwave]
     - name: Cave Mouth West
       coord: [16.7, 23.9]
+      data:
+        flipside: SpotId::None
       local:
         - to: Above Middle Catwalk
       exits:
@@ -3989,6 +4006,8 @@ areas:
           penalty_tags: [xshift, -fast_hover.1]
     - name: Portal Entry
       coord: [17.5, 23.75]
+      data:
+        flipside: Giguna Breach > White Clouds > Entry
       local:
         - to: East Ledge
           jumps: 1

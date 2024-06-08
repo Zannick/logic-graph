@@ -1320,6 +1320,21 @@ impl Observer for FullObservation {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
+            AreaId::Giguna_Breach__Labyrinth => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Lower_Machinery => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Lower_Portal => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
@@ -1341,6 +1356,11 @@ impl Observer for FullObservation {
                 }
             }
             AreaId::Giguna_Breach__SW_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__White_Clouds => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }

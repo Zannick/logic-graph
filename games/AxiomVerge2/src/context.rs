@@ -444,6 +444,14 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => enums::Realm::Breach,
         SpotId::Giguna_Breach__Grid_14_10_11__North => enums::Realm::Breach,
         SpotId::Giguna_Breach__Grid_14_10_11__South => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Labyrinth__South => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Machinery__West => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__Bottom => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__East => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__North => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__Portal_Dais => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Lower_Portal__West_Ledge => enums::Realm::Breach,
         SpotId::Giguna_Breach__Peak__Column => enums::Realm::Breach,
         SpotId::Giguna_Breach__Peak__East_6 => enums::Realm::Breach,
         SpotId::Giguna_Breach__Peak__East_Passage => enums::Realm::Breach,
@@ -467,6 +475,12 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Giguna_Breach__Slingshot__Column => enums::Realm::Breach,
         SpotId::Giguna_Breach__Slingshot__Ravine => enums::Realm::Breach,
         SpotId::Giguna_Breach__Slingshot__West => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__Bottom => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__East_Ledge => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__Entry => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__Exit => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__Upper_Middle => enums::Realm::Breach,
+        SpotId::Giguna_Breach__White_Clouds__West_Ledge => enums::Realm::Breach,
         SpotId::Glacier_Breach__Angry_Lions__North => enums::Realm::Breach,
         SpotId::Glacier_Breach__Angry_Lions__Portal_Stand => enums::Realm::Breach,
         SpotId::Glacier_Breach__Angry_Lions__Second_Platform => enums::Realm::Breach,
@@ -1117,6 +1131,10 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Below_Chimney__West_Passage => SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         SpotId::Giguna_Breach__Chimney__Middle_Platform => SpotId::Giguna__Ruins_West__Platform,
         SpotId::Giguna_Breach__Chimney__Top => SpotId::Giguna__Ruins_West__Upper_Ledge,
+        SpotId::Giguna_Breach__Lower_Portal__Bottom => SpotId::Giguna__Cache__Pit,
+        SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge => SpotId::Giguna__Cache__Upper_Ledge,
+        SpotId::Giguna_Breach__Lower_Portal__Portal_Dais => SpotId::Giguna__Labyrinth__Save_Point,
+        SpotId::Giguna_Breach__Lower_Portal__West_Ledge => SpotId::Giguna__Labyrinth__Ledge_22,
         SpotId::Giguna_Breach__Peak__Portal => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna_Breach__Peak__Save_Point => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna_Breach__Pink_Clouds__Corner => SpotId::Giguna__Clouds__Cache,
@@ -1124,11 +1142,25 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => SpotId::Giguna__Clouds__Platform_Early_Portal,
         SpotId::Giguna_Breach__Slingshot__Column => SpotId::Giguna__Giguna_Northeast__Door,
         SpotId::Giguna_Breach__Slingshot__Ravine => SpotId::Giguna__Giguna_Northeast__Switch,
+        SpotId::Giguna_Breach__White_Clouds__Bottom => SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
+        SpotId::Giguna_Breach__White_Clouds__Entry => SpotId::Giguna__Breachable_Wall__Portal_Entry,
+        SpotId::Giguna_Breach__White_Clouds__Exit => SpotId::Giguna__Breachable_Wall__Wall_Interior,
+        SpotId::Giguna_Breach__White_Clouds__Upper_Middle => SpotId::Giguna__Breachable_Wall__Above_the_Hole,
+        SpotId::Giguna_Breach__White_Clouds__West_Ledge => SpotId::Giguna__Breachable_Wall__West_Ledge,
+        SpotId::Giguna__Breachable_Wall__Above_the_Hole => SpotId::Giguna_Breach__White_Clouds__Upper_Middle,
+        SpotId::Giguna__Breachable_Wall__Cave_Mouth_West => SpotId::None,
+        SpotId::Giguna__Breachable_Wall__Portal_Entry => SpotId::Giguna_Breach__White_Clouds__Entry,
+        SpotId::Giguna__Breachable_Wall__Wall_Interior => SpotId::Giguna_Breach__White_Clouds__Exit,
+        SpotId::Giguna__Breachable_Wall__West_Ledge => SpotId::Giguna_Breach__White_Clouds__West_Ledge,
+        SpotId::Giguna__Cache__Pit => SpotId::Giguna_Breach__Lower_Portal__Bottom,
+        SpotId::Giguna__Cache__Upper_Ledge => SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
         SpotId::Giguna__Clouds__Cache => SpotId::Giguna_Breach__Pink_Clouds__Corner,
         SpotId::Giguna__Clouds__Platform_Early_Portal => SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
         SpotId::Giguna__Clouds__Platform_Stop => SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
         SpotId::Giguna__Giguna_Northeast__Door => SpotId::Giguna_Breach__Slingshot__Column,
         SpotId::Giguna__Giguna_Northeast__Switch => SpotId::Giguna_Breach__Slingshot__Ravine,
+        SpotId::Giguna__Labyrinth__Ledge_22 => SpotId::Giguna_Breach__Lower_Portal__West_Ledge,
+        SpotId::Giguna__Labyrinth__Save_Point => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
         SpotId::Giguna__Ruins_East__Bottom_Rock => SpotId::Giguna_Breach__Ascent__Bottom,
         SpotId::Giguna__Ruins_Top__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna_Breach__Peak__Portal,
@@ -1266,6 +1298,12 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Ebih__Truck_Gate__East => SpotId::Ebih__Truck_Gate__Portal_Stand,
         SpotId::Ebih__Truck_Gate__Portal_Stand => SpotId::Ebih__Truck_Gate__Portal_Stand,
         SpotId::Ebih__Truck_Gate__Switch => SpotId::Ebih__Truck_Gate__Portal_Stand,
+        SpotId::Giguna_Breach__Lower_Portal__Bottom => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        SpotId::Giguna_Breach__Lower_Portal__East => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        SpotId::Giguna_Breach__Lower_Portal__North => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        SpotId::Giguna_Breach__Lower_Portal__Portal_Dais => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        SpotId::Giguna_Breach__Lower_Portal__West_Ledge => SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
         SpotId::Giguna_Breach__Peak__Column => SpotId::Giguna_Breach__Peak__Portal,
         SpotId::Giguna_Breach__Peak__East_6 => SpotId::Giguna_Breach__Peak__Portal,
         SpotId::Giguna_Breach__Peak__East_Passage => SpotId::Giguna_Breach__Peak__Portal,
@@ -7166,6 +7204,21 @@ impl context::Ctx for Context {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }
             }
+            AreaId::Giguna_Breach__Labyrinth => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Lower_Machinery => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Lower_Portal => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
@@ -7187,6 +7240,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna_Breach__SW_Save => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Giguna_Breach__White_Clouds => {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }

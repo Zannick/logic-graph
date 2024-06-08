@@ -984,6 +984,20 @@
             Giguna_Breach__Grid_14_10_11__North [label = "", pos = "43.5,-65.333333!"];
         }
         {
+            Giguna_Breach__Labyrinth__South [label = "", pos = "52.5,-84.666667!"];
+        }
+        {
+            Giguna_Breach__Lower_Machinery__West [label = "", pos = "57.3,-86.25!"];
+        }
+        {
+            Giguna_Breach__Lower_Portal__East [label = "", pos = "56.7,-86.25!"];
+            Giguna_Breach__Lower_Portal__Bottom [label = "", pos = "55.5,-86.5!"];
+            Giguna_Breach__Lower_Portal__East_Upper_Ledge [label = "", pos = "54.9,-85.333333!"];
+            Giguna_Breach__Lower_Portal__West_Ledge [label = "", pos = "52.5,-85.5!"];
+            Giguna_Breach__Lower_Portal__North [label = "", pos = "52.5,-85.333333!"];
+            Giguna_Breach__Lower_Portal__Portal_Dais [label = "", pos = "52.5,-86.25!"];
+        }
+        {
             Giguna_Breach__Peak__Save_Point [label = "", pos = "46.425,-61.0!"];
             Giguna_Breach__Peak__East_Passage [label = "", pos = "43.5,-61.25!"];
             Giguna_Breach__Peak__Column [label = "", pos = "42.9,-59.916667!"];
@@ -1016,6 +1030,14 @@
             Giguna_Breach__SW_Save__Save_Point [label = "", pos = "37.5,-69.333333!"];
             Giguna_Breach__SW_Save__East_12 [label = "", pos = "38.7,-69.25!"];
         }
+        {
+            Giguna_Breach__White_Clouds__Entry [label = "", pos = "52.5,-89.583333!"];
+            Giguna_Breach__White_Clouds__East_Ledge [label = "", pos = "51.6,-88.916667!"];
+            Giguna_Breach__White_Clouds__Upper_Middle [label = "", pos = "50.7,-88.833333!"];
+            Giguna_Breach__White_Clouds__West_Ledge [label = "", pos = "49.35,-88.583333!"];
+            Giguna_Breach__White_Clouds__Bottom [label = "", pos = "50.1,-89.833333!"];
+            Giguna_Breach__White_Clouds__Exit [label = "", pos = "50.7,-89.333333!"];
+        }
     }
     {
         node[fillcolor="1"];
@@ -1035,7 +1057,7 @@
             Giguna__Breachable_Wall__West_Mid_air [label = "", pos = "48.15,-40.0!"];
             Giguna__Breachable_Wall__Above_West_Catwalk [label = "", pos = "49.65,-41.5!"];
             Giguna__Breachable_Wall__Above_Middle_Catwalk [label = "", pos = "51.3,-41.5!"];
-            Giguna__Breachable_Wall__West_Ledge [label = "", pos = "49.35,-38.666667!"];
+            Giguna__Breachable_Wall__West_Ledge [label = "", pos = "49.35,-38.583333!"];
             Giguna__Breachable_Wall__Above_the_Hole [label = "", pos = "50.7,-38.833333!"];
             Giguna__Breachable_Wall__Wall_Interior [label = "", pos = "50.7,-39.333333!"];
             Giguna__Breachable_Wall__Cave_Mouth_West [label = "", pos = "50.1,-39.833333!"];

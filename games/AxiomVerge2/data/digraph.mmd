@@ -1007,6 +1007,28 @@ subgraph Giguna_Breach
         Giguna_Breach__Pink_Clouds__Quick_Entry(Quick Entry);
         Giguna_Breach__Pink_Clouds__Corner(Corner);
     end
+    subgraph Giguna_Breach__White_Clouds[White Clouds]
+        Giguna_Breach__White_Clouds__Entry(Entry);
+        Giguna_Breach__White_Clouds__East_Ledge(East Ledge);
+        Giguna_Breach__White_Clouds__Upper_Middle(Upper Middle);
+        Giguna_Breach__White_Clouds__West_Ledge(West Ledge);
+        Giguna_Breach__White_Clouds__Bottom(Bottom);
+        Giguna_Breach__White_Clouds__Exit(Exit);
+    end
+    subgraph Giguna_Breach__Labyrinth[Labyrinth]
+        Giguna_Breach__Labyrinth__South(South);
+    end
+    subgraph Giguna_Breach__Lower_Portal[Lower Portal]
+        Giguna_Breach__Lower_Portal__East(East);
+        Giguna_Breach__Lower_Portal__Bottom(Bottom);
+        Giguna_Breach__Lower_Portal__East_Upper_Ledge(East Upper Ledge);
+        Giguna_Breach__Lower_Portal__West_Ledge(West Ledge);
+        Giguna_Breach__Lower_Portal__North(North);
+        Giguna_Breach__Lower_Portal__Portal_Dais(Portal Dais);
+    end
+    subgraph Giguna_Breach__Lower_Machinery[Lower Machinery]
+        Giguna_Breach__Lower_Machinery__West(West);
+    end
 end
 subgraph Giguna
     subgraph Giguna__Giguna_Northeast[Giguna Northeast]
@@ -3112,6 +3134,11 @@ Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__West_10
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
+Giguna_Breach__Lower_Portal__Bottom --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
+Giguna_Breach__Lower_Portal__East --> Giguna_Breach__Lower_Machinery__West
+Giguna_Breach__Lower_Portal__North --> Giguna_Breach__Labyrinth__South
+Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
+Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
 Giguna_Breach__Peak__Portal --> Giguna_Breach__Peak__Upper_West
 Giguna_Breach__Pink_Clouds__Normal_Entry --> Giguna_Breach__Pink_Clouds__Corner
@@ -3121,6 +3148,8 @@ Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door
 Giguna_Breach__SW_Save__Save_Point --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Side_Door <--> Giguna_Breach__SW_Save__West_11
 Giguna_Breach__Slingshot__Ravine --> Giguna_Breach__Slingshot__Column
+Giguna_Breach__White_Clouds__Bottom --> Giguna_Breach__White_Clouds__Exit
+Giguna_Breach__White_Clouds__Entry --> Giguna_Breach__White_Clouds__East_Ledge
 Giguna__Antechamber__Bottom --> Giguna__Antechamber__Left_Wall_Lower
 Giguna__Antechamber__East_16 <--> Giguna__East_Caverns__West_16
 Giguna__Antechamber__Left_Wall_Lower --> Giguna__Antechamber__Left_Wall_Mid
@@ -3308,6 +3337,7 @@ Giguna__Ruins_East__Cliff --> Giguna__Ruins_East__Ledge
 Giguna__Ruins_East__Ledge --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__Ledge <--> Giguna__Ruins_East__Small_Passage
 Giguna__Ruins_East__Pillar --> Giguna__Ruins_East__Way_Up_High
+Giguna__Ruins_East__Way_Up_High <--> Giguna__Ruins_Top__Rooftop_Gutter
 Giguna__Ruins_East__West_7 --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__West_7 <--> Giguna__Ruins_Top__East_7
 Giguna__Ruins_Top__East_7 <--> Giguna__Ruins_Top__East_Door
@@ -3316,6 +3346,8 @@ Giguna__Ruins_Top__Entryway <--> Giguna__Ruins_Top__West_Door
 Giguna__Ruins_Top__Interior_Ledge <--> Giguna__Ruins_Top__Portal
 Giguna__Ruins_Top__Interior_Ledge --> Giguna__Ruins_Top__Upper_Tunnel
 Giguna__Ruins_Top__Portal_Left --> Giguna__Ruins_Top__Small_Ledge
+Giguna__Ruins_Top__Rooftop_East --> Giguna__Ruins_East__Way_Up_High
+Giguna__Ruins_Top__Rooftop_Gutter --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_Top__Rooftop_West <--> Giguna__Ruins_Top__Turret_Balcony_East
 Giguna__Ruins_Top__Small_Ledge --> Giguna__Ruins_Top__Interior_Ledge
 Giguna__Ruins_Top__Switch --> Giguna__Ruins_Top__Rooftop_West

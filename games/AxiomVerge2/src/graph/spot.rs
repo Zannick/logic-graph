@@ -10496,6 +10496,180 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Giguna_Breach__White_Clouds__Entry] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__Entry,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__White_Clouds__East_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__East_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__White_Clouds__Upper_Middle] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__Upper_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__White_Clouds__West_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__West_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__White_Clouds__Bottom] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__Bottom,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1.into_usize(),
+            end: ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__White_Clouds__Exit] = Spot {
+        id: SpotId::Giguna_Breach__White_Clouds__Exit,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Labyrinth__South] = Spot {
+        id: SpotId::Giguna_Breach__Labyrinth__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__East] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__Bottom] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__Bottom,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__West_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__West_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__North] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1.into_usize(),
+            end: ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Portal__Portal_Dais] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Portal__Portal_Dais,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Lower_Machinery__West] = Spot {
+        id: SpotId::Giguna_Breach__Lower_Machinery__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Giguna__Giguna_Northeast__East_9] = Spot {
         id: SpotId::Giguna__Giguna_Northeast__East_9,
         locations: Range {
@@ -12029,7 +12203,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1.into_usize(),
+            end: ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -12477,7 +12652,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1.into_usize(),
+            end: ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -12489,7 +12665,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1.into_usize(),
+            end: ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

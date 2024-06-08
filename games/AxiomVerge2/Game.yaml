@@ -232,6 +232,9 @@ warps:  # MARK: warps
     after: $post_portal_save_update
     time: 3.6
     tags: [portal]
+    penalties:
+      - when: ^portal_hidden
+        add: 0.25
 
 actions:  # MARK: actions
   - name: Recall Drone

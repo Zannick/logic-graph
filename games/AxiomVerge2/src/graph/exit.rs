@@ -1221,6 +1221,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1 => true,
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
@@ -1235,6 +1236,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::access_giguna__ruins_top__portal__ex__east_door_1__req(ctx, world),
             ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1 => true,
+            ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::access_invoke_grab(ctx, world),
@@ -1340,6 +1346,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1 => true,
+            ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1 => true,
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1 => true,
             ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => rules::access_invoke_hook(ctx, world),
@@ -1356,6 +1369,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::access_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx, world),
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::access_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world),
+            ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::access_apocalypse_bomb(ctx, world),
@@ -3142,6 +3157,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => rules::observe_access_giguna__ruins_top__east_7__ex__east_door_1__req(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => rules::observe_access_giguna__ruins_top__east_door__ex__east_7_1__req(ctx, world, full_obs),
@@ -3152,6 +3168,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::observe_access_giguna__ruins_top__portal__ex__east_door_1__req(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -3214,6 +3234,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -3223,6 +3248,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::observe_access_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx, world, full_obs),
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::observe_access_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world, full_obs),
+            ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
@@ -4985,6 +5012,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => rules::explain_giguna__ruins_top__east_7__ex__east_door_1__req(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => rules::explain_giguna__ruins_top__east_door__ex__east_7_1__req(ctx, world, edict),
@@ -4995,6 +5023,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::explain_giguna__ruins_top__portal__ex__east_door_1__req(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -5057,6 +5089,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__West_10_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -5066,6 +5103,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::explain_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx, world, edict),
             ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::explain_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx, world, edict),
+            ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
@@ -6026,6 +6065,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => true,
             ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => true,
+            ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1 => true,
             ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => true,
             ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => true,
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => true,
@@ -6069,6 +6109,8 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
             ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1 => true,
+            ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1 => true,
             ExitId::Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1 => true,
             ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => true,
             ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => true,
@@ -12940,6 +12982,69 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
+    exits[ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1] = Exit {
+        id: ExitId::Giguna_Breach__White_Clouds__Entry__ex__East_Ledge_1,
+        time: 1052,
+        dest: SpotId::Giguna_Breach__White_Clouds__East_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1] = Exit {
+        id: ExitId::Giguna_Breach__White_Clouds__Bottom__ex__Exit_1,
+        time: 701,
+        dest: SpotId::Giguna_Breach__White_Clouds__Exit,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__East__ex__Lower_Machinery__West_1,
+        time: 1600,
+        dest: SpotId::Giguna_Breach__Lower_Machinery__West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2,
+        time: 2799,
+        dest: SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
+        price: Currency::Energy(98),
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_3,
+        time: 1399,
+        dest: SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
+        price: Currency::Energy(52),
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__North__ex__Labyrinth__South_1,
+        time: 1600,
+        dest: SpotId::Giguna_Breach__Labyrinth__South,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__East_Upper_Ledge_1,
+        time: 2807,
+        dest: SpotId::Giguna_Breach__Lower_Portal__East_Upper_Ledge,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1] = Exit {
+        id: ExitId::Giguna_Breach__Lower_Portal__Portal_Dais__ex__North_1,
+        time: 1200,
+        dest: SpotId::Giguna_Breach__Lower_Portal__North,
+        price: Currency::Free,
+        loc_id: None,
+    };
     exits[ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1] = Exit {
         id: ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1,
         time: 1350,
@@ -13745,6 +13850,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         price: Currency::Free,
         loc_id: None,
     };
+    exits[ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1] = Exit {
+        id: ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1,
+        time: 3543,
+        dest: SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+        price: Currency::Free,
+        loc_id: None,
+    };
     exits[ExitId::Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1] = Exit {
         id: ExitId::Giguna__Ruins_Center__East_8__ex__Ruins_East__West_8_1,
         time: 1350,
@@ -13952,6 +14064,41 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1,
         time: 1052,
         dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1] = Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1,
+        time: 4333,
+        dest: SpotId::Giguna__Ruins_East__Way_Up_High,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2] = Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2,
+        time: 7666,
+        dest: SpotId::Giguna__Ruins_East__Way_Up_High,
+        price: Currency::Energy(226),
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3] = Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_3,
+        time: 4333,
+        dest: SpotId::Giguna__Ruins_East__Way_Up_High,
+        price: Currency::Energy(116),
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1] = Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1,
+        time: 3543,
+        dest: SpotId::Giguna__Ruins_East__Way_Up_High,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1] = Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1,
+        time: 2491,
+        dest: SpotId::Giguna__Ruins_East__Pillar,
         price: Currency::Free,
         loc_id: None,
     };
@@ -15406,7 +15553,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1] = Exit {
         id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Irikar__Boss_Room__Healthy_Rooftop_1,
-        time: 3480,
+        time: 3530,
         dest: SpotId::Irikar__Boss_Room__Healthy_Rooftop,
         price: Currency::Free,
         loc_id: None,
@@ -15420,16 +15567,16 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2] = Exit {
         id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2,
-        time: 2799,
+        time: 3000,
         dest: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
-        price: Currency::Energy(98),
+        price: Currency::Energy(104),
         loc_id: None,
     };
     exits[ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3] = Exit {
         id: ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_3,
-        time: 1399,
+        time: 1500,
         dest: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
-        price: Currency::Energy(52),
+        price: Currency::Energy(55),
         loc_id: None,
     };
     exits[ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1] = Exit {
