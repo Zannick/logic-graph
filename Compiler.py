@@ -1049,8 +1049,8 @@ class GameLogic(object):
                     impossible[k] += 1
         for k, val in impossible.items():
             if val == 2 ** len(self.non_default_movements):
-                logging.warning(f'Base movement is not possible: {self.id_lookup[k[0]]["fullname"]}'
-                                f' --> {self.id_lookup[k[1]]["name"]}')
+                self._errors.append(f'Base movement is not possible: {self.id_lookup[k[0]]["fullname"]}'
+                                    f' --> {self.id_lookup[k[1]]["name"]}')
         return table
 
     def iter_movement_set_keys(self):
@@ -1391,6 +1391,7 @@ class GameLogic(object):
         self.local_distances
         self.context_resetters
         self.context_trigger_rules
+        self.movement_tables
 
         return self._errors
 
@@ -1872,7 +1873,6 @@ class GameLogic(object):
         self.context_types
         self.default_price_type
         self.price_types
-        self.movement_tables
         self.movements_rev_lookup
         self.base_distances
         self.context_trigger_rules
