@@ -1277,7 +1277,11 @@ areas:
         - name: Item
           item: Flask
           tags: [flask]
-      # TODO: exits toward Ruins Top?
+      exits:
+        - to: Ruins Top > Rooftop Gutter
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
 
 - name: Ruins Center  # MARK: Ruins Center
   on_entry: $reset_old_area(^newpos)
@@ -1639,14 +1643,33 @@ areas:
       local:
         - to: Rooftop West
         - to: Rooftop Gutter
-      # TODO: Movement to the high flask
+      exits:
+        - to: Ruins East > Way Up High
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins East > Way Up High
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins East > Way Up High
+          req: $mist2
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
     - name: Rooftop Gutter
       coord: [15.825, 5.55]
       local:
         - to: Rooftop East
           jumps: 2
         - to: East 7
-      # TODO: movement to the high flask and the pillar
+      exits:
+        - to: Ruins East > Way Up High
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins East > Pillar
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Turret Balcony East
       coord: [14.8, 5.2]
       local:
