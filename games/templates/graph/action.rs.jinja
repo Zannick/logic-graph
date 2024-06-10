@@ -147,3 +147,14 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
 %% endfor
 }
+
+pub fn get_action_spot(act_id: ActionId) -> SpotId {
+    match act_id {
+%% for spot in gl.spots()
+%% if spot.actions
+        ActionId::{{ spot.actions|map(attribute='id')|sort|join(' | ActionId::') }} => SpotId::{{ spot.id }},
+%% endif
+%% endfor
+        _ => SpotId::None,
+    }
+}

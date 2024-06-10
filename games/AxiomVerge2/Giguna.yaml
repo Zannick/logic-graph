@@ -2661,6 +2661,14 @@ areas:
           req: $hook
           movement: base
           jumps: 1
+        - to: Hidden Passage East
+          req: ^mode == 'drone' and ^_combo_entered
+          movement: base
+      actions:
+        - name: Enter Combo
+          req: not ^_combo_entered
+          do: ^_combo_entered = true
+          tags: [combo]
 
     - name: Middle Ledge
       coord: [19.85, 14.25]
@@ -2806,6 +2814,10 @@ areas:
           req: not ^_door_opened and $unlock2 and $range1
           do: ^_door_opened = true
           tags: [hack]
+        - name: Enter Combo
+          req: not ^_combo_entered
+          do: ^_combo_entered = true
+          tags: [combo]
 
     - name: Switch
       coord: [19.3, 15.5]
@@ -2871,6 +2883,11 @@ areas:
         - to: Hidden Passage West
           req: $hook and ^_combo_entered
           time: 1.2  # ?
+      actions:
+        - name: Enter Combo
+          req: not ^_combo_entered
+          do: ^_combo_entered = true
+          tags: [combo]
     - name: Lower Ledge
       coord: [19.55, 16.25]
       local:

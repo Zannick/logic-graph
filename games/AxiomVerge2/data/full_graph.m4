@@ -971,6 +971,7 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__East_Side -> Giguna__East_Caverns__Middle_Rock;
     Giguna__East_Caverns__Carving -> Giguna__East_Caverns__East_Side;
     Giguna__East_Caverns__Carving -> Giguna__East_Caverns__East_Side;
+    Giguna__East_Caverns__Carving -> Giguna__East_Caverns__Hidden_Passage_East;
     Giguna__East_Caverns__Carving -> Giguna__East_Caverns__Middle_Rock;
     Giguna__East_Caverns__Carving -> Giguna__East_Caverns__Middle_Rock;
     Giguna__East_Caverns__Middle_Ledge -> Giguna__East_Caverns__Upper_Floor_Ledge;

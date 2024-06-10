@@ -1017,6 +1017,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2 => rules::access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(ctx, world),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__East_Caverns__Carving__ex__Hidden_Passage_East_1 => rules::access_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(ctx, world),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__East_Caverns__East_17__ex__Vertical_Interchange__West_17_1 => true,
@@ -3026,6 +3027,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2 => rules::observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__East_Caverns__Carving__ex__Hidden_Passage_East_1 => rules::observe_access_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -4905,6 +4907,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2 => rules::explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(ctx, world, edict),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__East_Caverns__Carving__ex__East_Side_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__East_Caverns__Carving__ex__Hidden_Passage_East_1 => rules::explain_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(ctx, world, edict),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__East_Caverns__East_Grass__ex__East_17_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -14930,6 +14933,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Giguna__East_Caverns__Carving__ex__East_Side_2,
         time: 600,
         dest: SpotId::Giguna__East_Caverns__East_Side,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__East_Caverns__Carving__ex__Hidden_Passage_East_1] = Exit {
+        id: ExitId::Giguna__East_Caverns__Carving__ex__Hidden_Passage_East_1,
+        time: 701,
+        dest: SpotId::Giguna__East_Caverns__Hidden_Passage_East,
         price: Currency::Free,
         loc_id: None,
     };

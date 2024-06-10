@@ -14142,7 +14142,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2.into_usize() + 1,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Giguna__East_Caverns__Carving__Enter_Combo.into_usize(),
+            end: ActionId::Giguna__East_Caverns__Carving__Enter_Combo.into_usize() + 1,
         },
     };
     spots[SpotId::Giguna__East_Caverns__Middle_Ledge] = Spot {
@@ -14247,7 +14248,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2.into_usize() + 1,
         },
         actions: Range {
-            start: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize(),
+            start: ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo.into_usize(),
             end: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door.into_usize() + 1,
         },
     };
@@ -14314,7 +14315,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2.into_usize() + 1,
         },
         actions: Range {
-            start: 0, end: 0,
+            start: ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo.into_usize(),
+            end: ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo.into_usize() + 1,
         },
     };
     spots[SpotId::Giguna__East_Caverns__Lower_Ledge] = Spot {

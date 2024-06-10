@@ -111,3 +111,16 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
 %% endfor
 }
+
+pub fn get_location_spot(loc_id: LocationId) -> SpotId {
+    match loc_id {
+%% for spot in gl.spots()
+%% if spot.locations
+        LocationId::{{ spot.locations|map(attribute='id')|sort|join(' | LocationId::') }} => SpotId::{{ spot.id }},
+%% endif
+%% if spot.hybrid
+        LocationId::{{ spot.hybrid|map(attribute='id')|sort|join(' | LocationId::') }} => SpotId::{{ spot.id }},
+%% endif
+%% endfor
+    }
+}

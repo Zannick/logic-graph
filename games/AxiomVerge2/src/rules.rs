@@ -913,6 +913,13 @@ pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
     ((ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
         && ctx.giguna__east_caverns__ctx__combo_entered())
 }
+pub fn access_giguna__east_caverns__arc_passage__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo_entered
+    !ctx.giguna__east_caverns__ctx__combo_entered()
+}
 pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &World,
@@ -926,6 +933,20 @@ pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
 ) -> bool {
     // $hook and ^_combo_entered
     (helper__hook!(ctx, world) && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__carving__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo_entered
+    !ctx.giguna__east_caverns__ctx__combo_entered()
+}
+pub fn access_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^mode == 'drone' and ^_combo_entered
+    (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
 }
 pub fn access_giguna__east_caverns__lower_susar__caught__req(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar
@@ -1008,6 +1029,13 @@ pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__re
     // ^mode == 'drone' and $mist2 and ^_combo_entered
     ((ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
         && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__statues_ledge__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_combo_entered
+    !ctx.giguna__east_caverns__ctx__combo_entered()
 }
 pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
@@ -2912,6 +2940,14 @@ pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop);
 }
+pub fn action_giguna__east_caverns__arc_passage__enter_combo__do(ctx: &mut Context, world: &World) {
+    // ^_combo_entered = true
+    ctx.set_giguna__east_caverns__ctx__combo_entered(true);
+}
+pub fn action_giguna__east_caverns__carving__enter_combo__do(ctx: &mut Context, world: &World) {
+    // ^_combo_entered = true
+    ctx.set_giguna__east_caverns__ctx__combo_entered(true);
+}
 pub fn action_giguna__east_caverns__lower_susar__caught__do(ctx: &mut Context, world: &World) {
     // ^_lower_susar = true
     ctx.set_giguna__east_caverns__ctx__lower_susar(true);
@@ -2927,6 +2963,13 @@ pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context, wor
 pub fn action_giguna__east_caverns__mid_susar__hack__do(ctx: &mut Context, world: &World) {
     // ^_mid_susar = true
     ctx.set_giguna__east_caverns__ctx__mid_susar(true);
+}
+pub fn action_giguna__east_caverns__statues_ledge__enter_combo__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_combo_entered = true
+    ctx.set_giguna__east_caverns__ctx__combo_entered(true);
 }
 pub fn action_giguna__east_caverns__statues_ledge__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
@@ -6789,6 +6832,24 @@ pub fn explain_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2__req(
         }
     }
 }
+pub fn explain_giguna__east_caverns__arc_passage__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_combo_entered
+    {
+        let val = {
+            let r = ctx.giguna__east_caverns__ctx__combo_entered();
+            edict.insert(
+                "^giguna__east_caverns__ctx__combo_entered",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
+        };
+        (!val.0, val.1)
+    }
+}
 pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &World,
@@ -6836,6 +6897,59 @@ pub fn explain_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req
             edict.insert("$hook", format!("{:?}", res));
             refs.push("$hook");
             (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.giguna__east_caverns__ctx__combo_entered();
+                edict.insert(
+                    "^giguna__east_caverns__ctx__combo_entered",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna__east_caverns__carving__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_combo_entered
+    {
+        let val = {
+            let r = ctx.giguna__east_caverns__ctx__combo_entered();
+            edict.insert(
+                "^giguna__east_caverns__ctx__combo_entered",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
+        };
+        (!val.0, val.1)
+    }
+}
+pub fn explain_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and ^_combo_entered
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
         };
         if !left.0 {
             left
@@ -7214,6 +7328,24 @@ pub fn explain_giguna__east_caverns__midwest_ledge__ex__hidden_passage_west_3__r
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_giguna__east_caverns__statues_ledge__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_combo_entered
+    {
+        let val = {
+            let r = ctx.giguna__east_caverns__ctx__combo_entered();
+            edict.insert(
+                "^giguna__east_caverns__ctx__combo_entered",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
+        };
+        (!val.0, val.1)
     }
 }
 pub fn explain_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
@@ -16220,6 +16352,17 @@ pub fn observe_access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_2
             ctx.giguna__east_caverns__ctx__combo_entered()
         }))
 }
+pub fn observe_access_giguna__east_caverns__arc_passage__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_combo_entered
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
+}
 pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
     ctx: &Context,
     world: &World,
@@ -16248,6 +16391,34 @@ pub fn observe_access_giguna__east_caverns__arc_passage__ex__hidden_passage_west
             full_obs.observe_giguna__east_caverns__ctx__combo_entered();
             ctx.giguna__east_caverns__ctx__combo_entered()
         }))
+}
+pub fn observe_access_giguna__east_caverns__carving__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_combo_entered
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
+}
+pub fn observe_access_giguna__east_caverns__carving__ex__hidden_passage_east_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and ^_combo_entered
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    }))
 }
 pub fn observe_access_giguna__east_caverns__lower_susar__caught__req(
     ctx: &Context,
@@ -16416,6 +16587,17 @@ pub fn observe_access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_we
             full_obs.observe_giguna__east_caverns__ctx__combo_entered();
             ctx.giguna__east_caverns__ctx__combo_entered()
         }))
+}
+pub fn observe_access_giguna__east_caverns__statues_ledge__enter_combo__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_combo_entered
+    !({
+        full_obs.observe_giguna__east_caverns__ctx__combo_entered();
+        ctx.giguna__east_caverns__ctx__combo_entered()
+    })
 }
 pub fn observe_access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
@@ -20599,6 +20781,28 @@ pub fn observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
     full_obs.strict = old_strict;
 }
+pub fn observe_action_giguna__east_caverns__arc_passage__enter_combo__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_combo_entered = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__combo_entered();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_giguna__east_caverns__carving__enter_combo__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_combo_entered = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__combo_entered();
+    full_obs.strict = old_strict;
+}
 pub fn observe_action_giguna__east_caverns__lower_susar__caught__do(
     ctx: &Context,
     world: &World,
@@ -20641,6 +20845,17 @@ pub fn observe_action_giguna__east_caverns__mid_susar__hack__do(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_giguna__east_caverns__ctx__mid_susar();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_giguna__east_caverns__statues_ledge__enter_combo__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_combo_entered = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__combo_entered();
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__statues_ledge__open_door__do(

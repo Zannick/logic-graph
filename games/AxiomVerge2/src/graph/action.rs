@@ -93,10 +93,13 @@ impl world::Accessible for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::access_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::access_giguna__east_caverns__carving__enter_combo__req(ctx, world),
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::access_giguna__east_caverns__lower_susar__caught__req(ctx, world),
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::access_giguna__east_caverns__lower_susar__hack__req(ctx, world),
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::access_giguna__east_caverns__mid_susar__caught__req(ctx, world),
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::access_giguna__east_caverns__mid_susar__hack__req(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::access_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world),
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::access_giguna__east_caverns__statues_ledge__open_door__req(ctx, world),
             ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::access_giguna__east_caverns__switch__open_door__req(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::access_giguna__east_caverns__upper_susar__caught__req(ctx, world),
@@ -242,10 +245,13 @@ impl world::Accessible for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::observe_access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world, full_obs),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world, full_obs),
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::observe_access_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::observe_access_giguna__east_caverns__carving__enter_combo__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::observe_access_giguna__east_caverns__lower_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::observe_access_giguna__east_caverns__lower_susar__hack__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::observe_access_giguna__east_caverns__mid_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::observe_access_giguna__east_caverns__mid_susar__hack__req(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::observe_access_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::observe_access_giguna__east_caverns__statues_ledge__open_door__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::observe_access_giguna__east_caverns__switch__open_door__req(ctx, world, full_obs),
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::observe_access_giguna__east_caverns__upper_susar__caught__req(ctx, world, full_obs),
@@ -809,6 +815,24 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => {
+                let (ret, mut tags) = rules::explain_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => {
+                let (ret, mut tags) = rules::explain_giguna__east_caverns__carving__enter_combo__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
                 let (ret, mut tags) = rules::explain_giguna__east_caverns__lower_susar__caught__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -838,6 +862,15 @@ impl world::Accessible for Action {
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
                 let (ret, mut tags) = rules::explain_giguna__east_caverns__mid_susar__hack__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => {
+                let (ret, mut tags) = rules::explain_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1542,11 +1575,14 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx, world),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::action_giguna__east_caverns__carving__enter_combo__do(ctx, world),
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::action_giguna__east_caverns__mid_susar__hack__do(ctx, world),
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::action_giguna__east_caverns__mid_susar__caught__do(ctx, world),
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::action_giguna__east_caverns__statues_ledge__open_door__do(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::action_giguna__east_caverns__statues_ledge__enter_combo__do(ctx, world),
             ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::action_giguna__east_caverns__switch__open_door__do(ctx, world),
             ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::action_giguna__east_caverns__west_16__open_door__do(ctx, world),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::action_giguna__east_caverns__arc_passage__enter_combo__do(ctx, world),
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::action_giguna__east_caverns__lower_susar__hack__do(ctx, world),
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__lower_susar__caught__do(ctx, world),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
@@ -1989,6 +2025,9 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
                 rules::observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx, world, full_obs);
             }
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => {
+                rules::observe_action_giguna__east_caverns__carving__enter_combo__do(ctx, world, full_obs);
+            }
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
                 rules::observe_action_giguna__east_caverns__mid_susar__hack__do(ctx, world, full_obs);
             }
@@ -1998,11 +2037,17 @@ impl world::Action for Action {
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
                 rules::observe_action_giguna__east_caverns__statues_ledge__open_door__do(ctx, world, full_obs);
             }
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => {
+                rules::observe_action_giguna__east_caverns__statues_ledge__enter_combo__do(ctx, world, full_obs);
+            }
             ActionId::Giguna__East_Caverns__Switch__Open_Door => {
                 rules::observe_action_giguna__east_caverns__switch__open_door__do(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
                 rules::observe_action_giguna__east_caverns__west_16__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => {
+                rules::observe_action_giguna__east_caverns__arc_passage__enter_combo__do(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
                 rules::observe_action_giguna__east_caverns__lower_susar__hack__do(ctx, world, full_obs);
@@ -2672,6 +2717,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 3000,
         price: Currency::Free,
     };
+    actions[ActionId::Giguna__East_Caverns__Carving__Enter_Combo] = Action {
+        id: ActionId::Giguna__East_Caverns__Carving__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    };
     actions[ActionId::Giguna__East_Caverns__Mid_Susar__Hack] = Action {
         id: ActionId::Giguna__East_Caverns__Mid_Susar__Hack,
         time: 500,
@@ -2687,6 +2737,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 500,
         price: Currency::Free,
     };
+    actions[ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo] = Action {
+        id: ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    };
     actions[ActionId::Giguna__East_Caverns__Switch__Open_Door] = Action {
         id: ActionId::Giguna__East_Caverns__Switch__Open_Door,
         time: 500,
@@ -2695,6 +2750,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     actions[ActionId::Giguna__East_Caverns__West_16__Open_Door] = Action {
         id: ActionId::Giguna__East_Caverns__West_16__Open_Door,
         time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo] = Action {
+        id: ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo,
+        time: 1750,
         price: Currency::Free,
     };
     actions[ActionId::Giguna__East_Caverns__Lower_Susar__Hack] = Action {
@@ -2952,4 +3012,142 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 1000,
         price: Currency::Free,
     };
+}
+
+pub fn get_action_spot(act_id: ActionId) -> SpotId {
+    match act_id {
+        ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => SpotId::Amagi_Breach__East_Entrance__Save_Point,
+        ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => SpotId::Amagi_Breach__East_Ruins__Save_Point,
+        ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => SpotId::Amagi_Breach__Upper_Lake__Save_Point,
+        ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
+        ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East | ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => SpotId::Amagi__Main_Area__Platform_3,
+        ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East | ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => SpotId::Amagi__Main_Area__Catwalk_Center,
+        ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
+        ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => SpotId::Amagi__Main_Area__Broken_Wall,
+        ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Flat,
+        ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower,
+        ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Upper_Hover,
+        ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower_Hover,
+        ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
+        ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
+        ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_West,
+        ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_East,
+        ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => SpotId::Annuna__East_Bridge__Tower_Opening,
+        ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => SpotId::Annuna__East_Bridge__Tower_West_Ledge,
+        ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => SpotId::Annuna__East_Bridge__Tower_East_Ledge,
+        ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => SpotId::Annuna__East_Bridge__Tower_Secret,
+        ActionId::Annuna__Vertical_Room__Save_Point__Save => SpotId::Annuna__Vertical_Room__Save_Point,
+        ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => SpotId::Annuna__Vertical_Room__Door_Switch,
+        ActionId::Annuna__Factory_Entrance__Save_Point__Save => SpotId::Annuna__Factory_Entrance__Save_Point,
+        ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => SpotId::Annuna__Filter_Teleporter__Shaft_Top,
+        ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
+        ActionId::Annuna__Upper_Save__Save_Point__Save => SpotId::Annuna__Upper_Save__Save_Point,
+        ActionId::Annuna__Center_Save__Save_Point__Save => SpotId::Annuna__Center_Save__Save_Point,
+        ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => SpotId::Annuna__West_Climb__Switch_Ledge,
+        ActionId::Annuna__Final_Save__Save_Point__Save => SpotId::Annuna__Final_Save__Save_Point,
+        ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
+        ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
+        ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+        ActionId::Ebih__Truck_Gate__Switch__Open_Door => SpotId::Ebih__Truck_Gate__Switch,
+        ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => SpotId::Ebih__Truck_Gate__Portal_Stand,
+        ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => SpotId::Ebih__Grid_25_10_12__Door_Left,
+        ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => SpotId::Ebih__Grid_25_10_12__East_11,
+        ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => SpotId::Ebih__Waterfall__Ledge_Below_Hole,
+        ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => SpotId::Ebih__Waterfall__Below_Left_Switch,
+        ActionId::Ebih__Waterfall__West_8__Open_Door => SpotId::Ebih__Waterfall__West_8,
+        ActionId::Ebih__Ebih_West__Mid_Save__Save => SpotId::Ebih__Ebih_West__Mid_Save,
+        ActionId::Ebih__Ebih_West__Upper_Save__Save => SpotId::Ebih__Ebih_West__Upper_Save,
+        ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => SpotId::Ebih__Ebih_West__Medium_High_Platform,
+        ActionId::Ebih__Ebih_West__Below_Door__Open_Door => SpotId::Ebih__Ebih_West__Below_Door,
+        ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => SpotId::Ebih__Ebih_West__Left_of_Switch,
+        ActionId::Ebih__Ebih_West__Lower_Save__Save => SpotId::Ebih__Ebih_West__Lower_Save,
+        ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => SpotId::Ebih__Ebih_East__Moving_Platform,
+        ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift | ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => SpotId::Ebih__Ebih_East__Dispenser,
+        ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift | ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => SpotId::Ebih__Drone_Room__Pit_Left,
+        ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => SpotId::Ebih__Drone_Room__Portal_Exit,
+        ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => SpotId::Ebih__Drone_Room__Moving_Platform,
+        ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => SpotId::Ebih__Vertical_Interchange__West_13,
+        ActionId::Giguna_Breach__Peak__Save_Point__Save => SpotId::Giguna_Breach__Peak__Save_Point,
+        ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => SpotId::Giguna_Breach__SW_Save__West_11,
+        ActionId::Giguna_Breach__SW_Save__Save_Point__Save => SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => SpotId::Giguna_Breach__Labyrinth__Save_Point,
+        ActionId::Giguna__Giguna_Northeast__Save_Point__Save => SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => SpotId::Giguna__Giguna_Northeast__Switch,
+        ActionId::Giguna__Carnelian__Upper_Susar__Caught | ActionId::Giguna__Carnelian__Upper_Susar__Hack => SpotId::Giguna__Carnelian__Upper_Susar,
+        ActionId::Giguna__Carnelian__Switch__Open_Door => SpotId::Giguna__Carnelian__Switch,
+        ActionId::Giguna__Carnelian__Lower_Susar__Caught | ActionId::Giguna__Carnelian__Lower_Susar__Hack => SpotId::Giguna__Carnelian__Lower_Susar,
+        ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => SpotId::Giguna__West_Caverns__Small_Platform,
+        ActionId::Giguna__West_Caverns__East_Susar__Caught | ActionId::Giguna__West_Caverns__East_Susar__Hack => SpotId::Giguna__West_Caverns__East_Susar,
+        ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => SpotId::Giguna__Wasteland__Middle_Cliff,
+        ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => SpotId::Giguna__Giguna_Base__Stone_Knob,
+        ActionId::Giguna__Giguna_Base__Save_Point__Save => SpotId::Giguna__Giguna_Base__Save_Point,
+        ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ActionId::Giguna__Ruins_West__Save_Point__Save => SpotId::Giguna__Ruins_West__Save_Point,
+        ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib | ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => SpotId::Giguna__Ruins_West__Lower_Ledge,
+        ActionId::Giguna__Ruins_Top__Save_Point__Save => SpotId::Giguna__Ruins_Top__Save_Point,
+        ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
+        ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early | ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal | ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => SpotId::Giguna__Clouds__Platform_Start,
+        ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal | ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => SpotId::Giguna__Clouds__Platform_Early,
+        ActionId::Giguna__East_Caverns__West_14__Enter_Combo => SpotId::Giguna__East_Caverns__West_14,
+        ActionId::Giguna__East_Caverns__Upper_Susar__Caught => SpotId::Giguna__East_Caverns__Upper_Susar,
+        ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
+        ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught | ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
+        ActionId::Giguna__East_Caverns__Carving__Enter_Combo => SpotId::Giguna__East_Caverns__Carving,
+        ActionId::Giguna__East_Caverns__Mid_Susar__Caught | ActionId::Giguna__East_Caverns__Mid_Susar__Hack => SpotId::Giguna__East_Caverns__Mid_Susar,
+        ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo | ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => SpotId::Giguna__East_Caverns__Statues_Ledge,
+        ActionId::Giguna__East_Caverns__Switch__Open_Door => SpotId::Giguna__East_Caverns__Switch,
+        ActionId::Giguna__East_Caverns__West_16__Open_Door => SpotId::Giguna__East_Caverns__West_16,
+        ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => SpotId::Giguna__East_Caverns__Arc_Passage,
+        ActionId::Giguna__East_Caverns__Lower_Susar__Caught | ActionId::Giguna__East_Caverns__Lower_Susar__Hack => SpotId::Giguna__East_Caverns__Lower_Susar,
+        ActionId::Giguna__Gateway__One_Jump__Open_Door => SpotId::Giguna__Gateway__One_Jump,
+        ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => SpotId::Giguna__Gateway__Flask_Ledge,
+        ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => SpotId::Giguna__Labyrinth__Door_Ledge,
+        ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => SpotId::Giguna__Labyrinth__Switch_Ledge,
+        ActionId::Giguna__Labyrinth__Save_Point__Save => SpotId::Giguna__Labyrinth__Save_Point,
+        ActionId::Giguna__Separator__Platform__Deploy_to_Switch => SpotId::Giguna__Separator__Platform,
+        ActionId::Giguna__Separator__Save_Point__Save => SpotId::Giguna__Separator__Save_Point,
+        ActionId::Glacier_Breach__South_Save__Save_Point__Save => SpotId::Glacier_Breach__South_Save__Save_Point,
+        ActionId::Glacier_Breach__West_Save__Save_Point__Save => SpotId::Glacier_Breach__West_Save__Save_Point,
+        ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => SpotId::Glacier_Breach__Guarded_Corridor__Save_Point,
+        ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => SpotId::Glacier_Breach__Save_and_Exit__Save_Point,
+        ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save => SpotId::Glacier_Breach__Hammonds_Breach__Save_Point,
+        ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform | ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => SpotId::Glacier_Breach__Angry_Lions__North,
+        ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => SpotId::Glacier__Dock_Outside__Lower_Platforms,
+        ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => SpotId::Glacier__Dock_Outside__Ruins_Platform,
+        ActionId::Glacier__Revival__Save_Point__Save | ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => SpotId::Glacier__Revival__Save_Point,
+        ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => SpotId::Glacier__The_Big_Drop__Solid_Rock,
+        ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => SpotId::Glacier__Vertical_Room__Upper_Switch,
+        ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => SpotId::Glacier__Vertical_Room__Lower_Switch,
+        ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West | ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => SpotId::Glacier__Hammonds_End__Upper_Floor,
+        ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West | ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => SpotId::Glacier__Hammonds_End__Upper_Right_Pedestal,
+        ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
+        ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
+        ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_Near,
+        ActionId::Glacier__Hammonds_End__West_11__Open_Doors => SpotId::Glacier__Hammonds_End__West_11,
+        ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Hub__West_Rim,
+        ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Hub__East_Rim,
+        ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
+        ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
+        ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => SpotId::Irikar__Hub__Collapsed_Column,
+        ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
+        ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => SpotId::Irikar__Midwest__Left_Platform_Start,
+        ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => SpotId::Irikar__Midwest__Right_Platform_Start,
+        ActionId::Irikar__Midwest__Save_Point__Save => SpotId::Irikar__Midwest__Save_Point,
+        ActionId::Irikar__Beach_Save__Save_Point__Save => SpotId::Irikar__Beach_Save__Save_Point,
+        ActionId::Uhrum__West_Entrance__Save_Point__Save => SpotId::Uhrum__West_Entrance__Save_Point,
+        ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => SpotId::Uhrum__Waterfalls__Center_Island_Middle,
+        ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,
+        ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => SpotId::Uhrum__Annuna_Corridor__Save_Point,
+        ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High | ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        _ => SpotId::None,
+    }
 }
