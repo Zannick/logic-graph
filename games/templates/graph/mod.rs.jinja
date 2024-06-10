@@ -6,6 +6,7 @@
 
 mod action;
 mod coord;
+mod community;
 mod enums;
 mod exit;
 mod graph;
@@ -15,6 +16,7 @@ mod warp;
 
 pub use action::*;
 pub use coord::*;
+pub use community::*;
 pub use enums::*;
 pub use exit::*;
 pub use graph::*;

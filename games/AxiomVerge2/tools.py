@@ -129,9 +129,7 @@ def notable_breach_exits_without_flipside():
     ])
 
 def make_igraph():
-    # exclude the upgrades in the menu, since that's connected to everything
-    edges = [(x, y, w) for ((x, y), w) in AV2.base_distances.items()
-             if x != y and not x.startswith('Menu__Upgrade_Menu') ^ y.startswith('Menu__Upgrade_Menu')]
+    edges = [(x, y, w) for ((x, y), w) in AV2.basic_distances.items()]
     g = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
     for v in g.vs:
         name = v.attributes()['name']
@@ -163,15 +161,29 @@ PARTITION_OPTIONS = {
     'rber.5': (la.RBERVertexPartition, {'resolution_parameter': 0.5}),
 }
 
-def partition(g, p, **kwargs):
-    part = la.find_partition(g, p, **kwargs)
+def sglist_from_partition(part):
     subgraphs = [subgraph(sg) for sg in part.subgraphs()]
     sglist = []
     for sg in subgraphs:
         vs = [v.attributes()['name'] for v in sg.vs]
-        if vs:
+        if len(vs) > 1:
             sglist.append(vs)
+    return sglist
+
+def partition(g, p, **kwargs):
+    part = la.find_partition(g, p, n_iterations=-1, **kwargs)
+    sglist = sglist_from_partition(part)
     return part, sglist
+
+def optimize(p, part, **kwargs):
+    part2 = p.FromPartition(part, **kwargs)
+    opt = la.Optimiser()
+    fixed = {v.attributes()['name']
+             for i, sg in enumerate(part.subgraphs())
+             for v in sg.vs if part.total_weight_in_comm(i) < 1000}
+    opt.optimise_partition(part2, n_iterations=-1,
+                           is_membership_fixed=[v.attributes()['name'] in fixed for v in part2.graph.vs])
+    return part2, sglist_from_partition(part2)
 
 def partition_and_show_sub(g, p, filename='data/part.png', **kwargs):
     part, sglist = partition(g, p, **kwargs)

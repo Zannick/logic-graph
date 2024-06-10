@@ -16,8 +16,10 @@ import yaml
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
 import antlr4
+import igraph as ig
 import inflection
 import jinja2
+import leidenalg as la
 
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
@@ -1076,9 +1078,10 @@ class GameLogic(object):
                     table[k][1].append((mkey, t))
         return table
 
-    
+
     @cached_property
-    def base_distances(self):
+    def basic_distances(self):
+        """Fixed distances from movements, exits, and exit-like warps and actions."""
         # initial conditions: (x,y) -> t according to the best movement
         table = {k: sum(t)
                  for k, t in self.movement_tables[tuple(True for _ in self.non_default_movements)].items()}
@@ -1090,17 +1093,13 @@ class GameLogic(object):
                 table[key] = val
 
         # every exit
-        # every warp with base_movement: true
         # every action with a "to" field
         # every warp/global action with a "to" field to a data value that's a valid spot
-        warp_dests = []
         data_dests = []
         examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
                                    self.data_types, self.data_defaults, self.data_values)
         for w in self.warps.values():
-            if w.get('base_movement') and w['to'][0] != '^':
-                warp_dests.append((construct_id(w['to']), w['time']))
-            elif w['to'][0] == '^' and w['to'][1:] in self.data_values:
+            if w['to'][0] == '^' and w['to'][1:] in self.data_values:
                 data_dests.append((w['to'][1:], w))
         for act in self.global_actions:
             if 'to' in act and act['to'][0] == '^' and act['to'][1:] in self.data_values:
@@ -1122,12 +1121,6 @@ class GameLogic(object):
                             if dest != 'SpotId::None' and dest != s['fullname']:
                                 key = (s['id'], construct_id(dest))
                                 _update(key, act['time'])
-            for w, t in warp_dests:
-                if s['id'] == w:
-                    continue
-                if 'pr' not in w or examiner.examine(w['pr'].tree, s['id'], w['name']):
-                    key = (s['id'], w)
-                    _update(key, t)
             for d, info in data_dests:
                 if dest := self.data_values[d].get(s['id']):
                     if (dest != 'SpotId::None' and dest != s['fullname'] and
@@ -1136,6 +1129,64 @@ class GameLogic(object):
                         _update(key, info['time'])
 
         return table
+
+
+    @cached_property
+    def base_distances(self):
+        """Fully-connected distances, including 'base_movement' warps"""
+        table = dict(self.basic_distances)
+
+        def _update(key, val):
+            if key in table:
+                table[key] = min(table[key], val)
+            else:
+                table[key] = val
+
+        # every warp with base_movement: true
+        warp_dests = []
+        examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
+                                   self.data_types, self.data_defaults, self.data_values)
+        for w in self.warps.values():
+            if w.get('base_movement') and w['to'][0] != '^':
+                warp_dests.append((construct_id(w['to']), w['time']))
+        for s in self.spots():
+            for w, t in warp_dests:
+                if s['id'] == w:
+                    continue
+                if 'pr' not in w or examiner.examine(w['pr'].tree, s['id'], w['name']):
+                    key = (s['id'], w)
+                    _update(key, t)
+
+        return table
+
+
+    @cached_property
+    def spots_with_items(self):
+        return [spot for spot in self.spots()
+                if ('locations' in spot and any('event' not in loc.get('tags', ()) for loc in spot['locations']))
+                or ('hybrid' in spot and any('event' not in h.get('tags', ()) for h in spot['hybrid']))
+                or ('actions' in spot and any('$visit' in a['do'] for a in spot['actions']))]
+
+    @cached_property
+    def notable_spot_communities(self):
+        edges = [(x, y, w) for ((x, y), w) in self.basic_distances.items()]
+        G = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
+        part = la.find_partition(G, la.RBERVertexPartition, n_iterations=-1, seed=1, resolution_parameter=0.5)
+        part2 = la.SurpriseVertexPartition.FromPartition(part)
+        opt = la.Optimiser()
+        fixed = {v.attributes()['name']
+                for i, sg in enumerate(part.subgraphs())
+                for v in sg.vs if part.total_weight_in_comm(i) < 1000}
+        opt.optimise_partition(part2, n_iterations=-1,
+                               is_membership_fixed=[v.attributes()['name'] in fixed for v in part2.graph.vs])
+        
+        sglist = []
+        spotids = {spot['id'] for spot in self.spots_with_items}
+        for sg in part2.subgraphs():
+            vs = sorted({v.attributes()['name'] for v in sg.vs} & spotids)
+            if len(vs) > 1:
+                sglist.append(vs)
+        return sglist
 
 
     def make_funcid(self, info, prkey:str='pr', field:str='req', extra_fields=None):
@@ -1875,6 +1926,7 @@ class GameLogic(object):
         self.price_types
         self.movements_rev_lookup
         self.base_distances
+        self.notable_spot_communities
         self.context_trigger_rules
         self.context_position_watchers
         self.all_connections
@@ -1887,7 +1939,7 @@ class GameLogic(object):
                     # These have to match the structure in templates/
                     'graph/mod.rs', 'graph/enums.rs', 'graph/location.rs', 'graph/exit.rs',
                     'graph/action.rs', 'graph/warp.rs', 'graph/spot.rs', 'graph/graph.rs',
-                    'graph/coord.rs'],
+                    'graph/coord.rs', 'graph/community.rs'],
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
             'solutions': [],

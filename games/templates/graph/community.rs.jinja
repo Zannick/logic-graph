@@ -1,0 +1,52 @@
+%% include 'header.rs.jinja'
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused)]
+
+use crate::context::*;
+use crate::graph::{action::*, enums::*, location::*};
+use lazy_static::lazy_static;
+use rustc_hash::{FxHashMap, FxHashSet};
+
+lazy_static! {
+static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
+    FxHashSet::default(),
+%% for comm in notable_spot_communities
+    FxHashSet::from_iter([
+%% for spotid in comm
+        SpotId::{{ spotid }},
+%% endfor
+    ]),
+%% endfor
+];
+}
+
+pub fn spot_community(spot_id: SpotId) -> usize {
+    match spot_id {
+%% for comm in notable_spot_communities
+%% set i = loop.index
+%% for spotid in comm
+        SpotId::{{ spotid }} => {{ i }},
+%% endfor
+%% endfor
+        _ => 0,
+    }
+}
+
+pub fn location_community(loc_id: LocationId) -> usize {
+    spot_community(get_location_spot(loc_id))
+}
+
+pub fn action_community(act_id: ActionId) -> usize {
+    spot_community(get_action_spot(act_id))
+}
+
+pub fn same_community(spot1: SpotId, spot2: SpotId) -> bool {
+    let c1 = spot_community(spot1);
+    c1 != 0 && c1 == spot_community(spot2)
+}
+
+pub fn get_community(spot: SpotId) -> &'static FxHashSet<SpotId> {
+    &COMMUNITIES[spot_community(spot)]
+}
