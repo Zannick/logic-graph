@@ -197,6 +197,7 @@ where
     file: File,
     count: usize,
     best: u32,
+    pending: bool,
 }
 
 impl<T> SolutionCollector<T>
@@ -225,6 +226,7 @@ where
             best_file,
             count: 0,
             best: 0,
+            pending: false,
         })
     }
 
@@ -269,9 +271,10 @@ where
                 }
             })
             .collect();
-        if self.count == 0 || solution.elapsed < self.best {
+        let best = if self.count == 0 || solution.elapsed < self.best {
             self.best = solution.elapsed;
             write_graph(world, &self.startctx, &solution.history).unwrap();
+            true
         } else if solution.elapsed - self.best > self.best / 10 {
             log::info!(
                 "Excluding solution as too slow: {} > 1.1 * {}",
@@ -279,24 +282,33 @@ where
                 self.best
             );
             return SolutionResult::TooSlow;
-        }
+        } else {
+            false
+        };
 
         self.count += 1;
+        self.pending = true;
         if let Some(set) = self.map.get_mut(&loc_history) {
             if set.contains(&solution) {
                 SolutionResult::Duplicate
             } else {
                 set.insert(solution);
-                self.write_previews().unwrap();
-                self.write_best().unwrap();
+                if best {
+                    self.write_previews().unwrap();
+                    self.write_best().unwrap();
+                    self.pending = false;
+                }
                 SolutionResult::Included
             }
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
             self.map.insert(loc_history, new_hashset_with(solution));
-            self.write_previews().unwrap();
-            self.write_best().unwrap();
+            if best {
+                self.write_previews().unwrap();
+                self.write_best().unwrap();
+                self.pending = false;
+            }
             SolutionResult::IsUnique
         }
     }
@@ -397,10 +409,22 @@ where
             .filter_map(|set| set.iter().min_by_key(|sol| sol.elapsed))
             .collect();
         vec.sort_by_key(|c| c.elapsed);
-        for (i, c) in vec.iter().enumerate() {
+        let len = vec.len();
+        for (i, c) in vec.into_iter().enumerate() {
             Self::write_one_preview(&mut file, i, c, self.best)?;
         }
+        log::debug!("Wrote {} solution previews into {}", len, self.previews);
         Ok(())
+    }
+
+    pub fn write_previews_if_pending(&mut self) -> io::Result<()> {
+        if self.pending {
+            self.pending = false;
+            self.write_best().unwrap();
+            self.write_previews()
+        } else {
+            Ok(())
+        }
     }
 
     pub fn write_best(&mut self) -> io::Result<()> {

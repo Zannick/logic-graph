@@ -1048,6 +1048,15 @@ where
     }
 
     fn check_status_update(&self, start: &Mutex<Instant>, iters: usize, ctx: &ContextWrapper<T>) {
+        let last_solve = self.last_solve.load(Ordering::Acquire);
+        static PREVIEWS_RATE: usize = 4_096;
+        if iters % PREVIEWS_RATE == 0 && last_solve + PREVIEWS_RATE <= iters {
+            self.solutions
+                .lock()
+                .unwrap()
+                .write_previews_if_pending()
+                .unwrap();
+        }
         if iters % 100_000 == 0 {
             self.print_status_update(start, iters, 100_000, ctx);
 
@@ -1056,7 +1065,6 @@ where
                 let solves_since = self.solves_since_clean.load(Ordering::Acquire);
                 if solves_since > 0 {
                     if last_clean + 10_000_000 <= iters {
-                        let last_solve = self.last_solve.load(Ordering::Acquire);
                         if solves_since > 20 || last_solve + 20_000_000 <= iters {
                             self.solves_since_clean.store(0, Ordering::Release);
                             self.last_clean.store(iters, Ordering::Release);
