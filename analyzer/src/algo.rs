@@ -488,13 +488,13 @@ where
         drop(sols); // release before recording observations/minimizing
         if res.accepted() {
             if res == SolutionResult::IsUnique {
-                log::info!(
+                log::debug!(
                     "Recording new unique solution from {:?} mode: {}ms",
                     mode,
                     elapsed
                 );
             } else {
-                log::info!("Recording solution from {:?} mode: {}ms", mode, elapsed);
+                log::debug!("Recording solution from {:?} mode: {}ms", mode, elapsed);
             }
             record_observations(
                 self.startctx.get(),
