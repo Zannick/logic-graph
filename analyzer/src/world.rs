@@ -1,7 +1,7 @@
 use crate::condense::CondensedEdge;
 use crate::context::Ctx;
 use crate::new_hashset;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
 use std::hash::Hash;
@@ -269,6 +269,15 @@ pub trait World: Sync {
     /// or infinity if either has no coordinate.
     fn spot_distance(a: <Self::Exit as Exit>::SpotId, b: <Self::Exit as Exit>::SpotId) -> f32;
     fn spot_of_interest(&self, sp: <Self::Exit as Exit>::SpotId) -> bool;
+
+    fn spot_community(spot_id: <Self::Exit as Exit>::SpotId) -> usize;
+    fn location_community(loc_id: <Self::Location as Location>::LocId) -> usize;
+    fn action_community(act_id: <Self::Action as Action>::ActionId) -> usize;
+    fn same_community(
+        spot1: <Self::Exit as Exit>::SpotId,
+        spot2: <Self::Exit as Exit>::SpotId,
+    ) -> bool;
+    fn get_community(spot: <Self::Exit as Exit>::SpotId) -> &'static FxHashSet<<Self::Exit as Exit>::SpotId>;
 
     fn condense_graph(&mut self);
     fn get_condensed_edges_from(

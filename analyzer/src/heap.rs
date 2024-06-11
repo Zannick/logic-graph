@@ -965,7 +965,7 @@ where
             prog_score.push((progress, time_since));
             prog_estimates.push((progress, total_estimate));
         }
-        let queue_buckets = queue.bucket_sizes();
+        let queue_len = queue.len();
         let queue_caps = queue.bucket_capacities();
         let mut processed: Vec<f64> = Vec::new();
         for (progress, x) in self.processed_counts.iter().enumerate() {
@@ -983,13 +983,12 @@ where
             .add(h)
             .x_label("progress")
             .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
-        let s: usize = queue_caps.iter().sum();
+        let cap: usize = queue_caps.into_iter().sum();
         println!(
-            "Current heap contents:\n{}\nS: {:?}\nC: {:?} = {:?}",
+            "Current heap contents (len={}, total capacity={}):\n{}",
+            queue_len,
+            cap,
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
-            queue_buckets,
-            queue_caps,
-            s
         );
 
         let p = Plot::new(prog_score).point_style(PointStyle::new().marker(PointMarker::Circle));

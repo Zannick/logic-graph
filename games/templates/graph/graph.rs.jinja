@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{action::*, coord::*, enums::*, exit::*, location::*, spot::*, warp::*};
+use crate::graph::{action::*, community::*, coord::*, enums::*, exit::*, location::*, spot::*, warp::*};
 use crate::items::*;
 use crate::movements;
 use analyzer::condense::{condense_graph, CondensedEdge};
@@ -383,6 +383,26 @@ impl world::World for World {
             SpotId::{{ gl.interesting_spots()|map(attribute='id')|sort|join(' | SpotId::') }} => true,
             _ => false,
         }
+    }
+
+    fn spot_community(spot_id: SpotId) -> usize {
+        spot_community(spot_id)
+    }
+
+    fn location_community(loc_id: LocationId) -> usize {
+        location_community(loc_id)
+    }
+
+    fn action_community(act_id: ActionId) -> usize {
+        action_community(act_id)
+    }
+
+    fn same_community(spot1: SpotId, spot2: SpotId) -> bool {
+        same_community(spot1, spot2)
+    }
+
+    fn get_community(spot: SpotId) -> &'static FxHashSet<SpotId> {
+        get_community(spot)
     }
 
     fn condense_graph(&mut self) {

@@ -248,6 +248,8 @@ where
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
+    greedy_in_comm: AtomicUsize,
+    greedy_out_comm: AtomicUsize,
     held: AtomicUsize,
     last_clean: AtomicUsize,
     solves_since_clean: AtomicUsize,
@@ -378,6 +380,8 @@ where
             deadends: 0.into(),
             held: 0.into(),
             greedies: 0.into(),
+            greedy_in_comm: 0.into(),
+            greedy_out_comm: 0.into(),
             last_clean: 0.into(),
             solves_since_clean: 0.into(),
             last_solve: 0.into(),
@@ -719,6 +723,22 @@ where
                 flag: &self.finished,
             };
 
+            let greedy_error = |e| {
+                log::error!("Thread greedy exiting due to error: {:?}", e);
+                let mut r = res.lock().unwrap();
+                if r.is_ok() {
+                    *r = Err(e);
+                    self.finished.store(true, Ordering::Release);
+                }
+            };
+            let incr_organic = |progress| {
+                let org = self.organic_level.load(Ordering::Acquire);
+                if org == progress || Some(org) <= self.queue.min_progress() {
+                    self.organic_level
+                        .fetch_max(progress + 1, Ordering::Release);
+                }
+            };
+
             while !self.finished.load(Ordering::Acquire)
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
@@ -768,7 +788,7 @@ where
                         if current_mode == SearchMode::Greedy
                             || current_mode == SearchMode::GreedyMax
                         {
-                            items.into_par_iter().for_each(|ctx| {
+                            items.into_par_iter().for_each(|mut ctx| {
                                 self.held.fetch_sub(1, Ordering::Release);
                                 if self.queue.db().remember_processed(ctx.get()).unwrap() {
                                     return;
@@ -782,61 +802,75 @@ where
                                     .world
                                     .get_all_locations()
                                     .into_iter()
-                                    .filter_map(|loc| {
-                                        if ctx.get().todo(loc) {
-                                            Some(loc.id())
-                                        } else {
-                                            None
-                                        }
-                                    })
+                                    .filter(|loc| ctx.get().todo(loc))
                                     .collect();
+                                if remaining.is_empty() {
+                                    if self.world.won(ctx.get()) {
+                                        self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
+                                    } else {
+                                        self.deadends.fetch_add(1, Ordering::Release);
+                                    }
+                                    return;
+                                }
+                                let comm = W::location_community(
+                                    nearest_location_by_heuristic(
+                                        self.world,
+                                        ctx.get(),
+                                        remaining.iter().copied(),
+                                        self.queue.db().scorer().get_algo(),
+                                    )
+                                    .unwrap()
+                                    .id(),
+                                );
+                                let (in_comm, out_comm) =
+                                    remaining.into_iter().partition::<Vec<_>, _>(|loc| {
+                                        W::location_community(loc.id()) == comm
+                                    });
 
                                 let max_time = self.queue.max_time();
 
-                                let results: Vec<_> = remaining
-                                    .into_par_iter()
-                                    .filter_map(|loc_id| {
-                                        access_location_after_actions(
-                                            self.world,
-                                            ctx.clone(),
-                                            loc_id,
-                                            max_time,
-                                            if current_mode == SearchMode::GreedyMax {
-                                                9
-                                            } else {
-                                                4
-                                            },
-                                            self.queue.db().scorer().get_algo(),
-                                        )
-                                        .map_or_else(|(c, _)| c, |c| Some(c))
-                                    })
-                                    .collect();
+                                rayon::join(
+                                    || {
+                                        let ct = in_comm.len();
+                                        in_comm.into_par_iter().for_each(|loc| {
+                                            match self.process_one_greedy(
+                                                &ctx,
+                                                loc,
+                                                max_time,
+                                                current_mode,
+                                            ) {
+                                                Ok(true) => incr_organic(progress),
+                                                Err(e) => greedy_error(e),
+                                                _ => (),
+                                            }
+                                        });
+                                        self.greedy_in_comm.fetch_add(ct, Ordering::AcqRel);
+                                    },
+                                    || {
+                                        let ct = out_comm
+                                            .into_par_iter()
+                                            .filter_map(|loc| {
+                                                match self.process_one_greedy(
+                                                    &ctx,
+                                                    loc,
+                                                    max_time,
+                                                    current_mode,
+                                                ) {
+                                                    Ok(true) => Some(incr_organic(progress)),
+                                                    Err(e) => {
+                                                        greedy_error(e);
+                                                        None
+                                                    }
+                                                    _ => None,
+                                                }
+                                            })
+                                            .take_any(2)
+                                            .count();
+                                        self.greedy_out_comm.fetch_add(ct, Ordering::AcqRel);
+                                    },
+                                );
 
                                 self.greedies.fetch_add(1, Ordering::Release);
-                                let org = self.organic_level.load(Ordering::Acquire);
-                                if !results.is_empty()
-                                    && (org == progress || Some(org) <= self.queue.min_progress())
-                                {
-                                    self.organic_level
-                                        .fetch_max(progress + 1, Ordering::Release);
-                                }
-
-                                for mut c in results {
-                                    let hist = c.remove_history().0;
-                                    if hist.is_empty() {
-                                        continue;
-                                    }
-
-                                    if let Err(e) = self.recreate_store(&ctx, &hist, current_mode) {
-                                        log::error!("Thread greedy exiting due to error: {:?}", e);
-                                        let mut r = res.lock().unwrap();
-                                        if r.is_ok() {
-                                            *r = Err(e);
-                                            self.finished.store(true, Ordering::Release);
-                                        }
-                                        return;
-                                    }
-                                }
                             });
                         } else {
                             let results: Vec<_> = items
@@ -905,7 +939,7 @@ where
                     }
                 };
             }
-            log::debug!(
+            log::trace!(
                 "Thread {} exiting: fin={} done={}",
                 i,
                 self.finished.load(Ordering::Acquire),
@@ -951,6 +985,39 @@ where
         );
         self.queue.print_queue_histogram();
         self.solutions.lock().unwrap().export()
+    }
+
+    fn process_one_greedy(
+        &self,
+        ctx: &ContextWrapper<T>,
+        loc: &L,
+        max_time: u32,
+        current_mode: SearchMode,
+    ) -> anyhow::Result<bool> {
+        let res = access_location_after_actions(
+            self.world,
+            ctx.clone(),
+            loc.id(),
+            max_time,
+            if current_mode == SearchMode::GreedyMax {
+                9
+            } else {
+                4
+            },
+            self.queue.db().scorer().get_algo(),
+        );
+        let found = res.is_ok();
+        match res {
+            Ok(mut c) | Err((Some(mut c), _)) => {
+                let hist = c.remove_history().0;
+                if !hist.is_empty() {
+                    self.recreate_store(&ctx, &hist, current_mode).map(|_| true)
+                } else {
+                    Ok(found)
+                }
+            }
+            _ => Ok(false),
+        }
     }
 
     fn process_one(
@@ -1059,9 +1126,10 @@ where
         let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
         println!(
-            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms, greedy={}, org={}) ---\n\
+            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
+            Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
@@ -1073,8 +1141,6 @@ where
             self.deadends.load(Ordering::Acquire),
             max_time,
             sols.best(),
-            self.greedies.load(Ordering::Acquire),
-            self.organic_level.load(Ordering::Acquire),
             self.queue.heap_len(),
             pending,
             self.queue.db_len(),
@@ -1088,6 +1154,10 @@ where
             self.queue.cached_estimates(),
             self.queue.evictions(),
             self.queue.retrievals(),
+            self.organic_level.load(Ordering::Acquire),
+            self.greedies.load(Ordering::Acquire),
+            self.greedy_in_comm.load(Ordering::Acquire),
+            self.greedy_out_comm.load(Ordering::Acquire),
             iskips,
             dskips,
             pskips,

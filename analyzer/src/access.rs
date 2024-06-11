@@ -282,6 +282,52 @@ where
     Err(explain_unused_links(world, &states_seen))
 }
 
+pub fn nearest_location_by_heuristic<'w, W, T, L, E, I>(
+    world: &W,
+    ctx: &T,
+    locs: I,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<&'w L>
+where
+    W: World<Exit = E, Location = L>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = L::Currency>,
+    L: Location<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
+    I: Iterator<Item = &'w L>,
+{
+    let mut origins = new_hashmap();
+    origins.insert(ExternalNodeId::Spot(ctx.position()), 0);
+    // We need to take into account contextual warps which aren't otherwise part
+    // of a normal shortest paths graph. We do that by measuring the shortest path
+    // from their destination and adding in the warp time.
+    // TODO: Only do this on contextual warps.
+    for warp in world.get_warps() {
+        let dst = ExternalNodeId::Spot(warp.dest(ctx, world));
+        let time = warp.time(ctx, world);
+        if (!origins.contains_key(&dst) || time < origins[&dst]) && warp.can_access(ctx, world) {
+            origins.insert(dst, time);
+        }
+    }
+
+    locs.min_by_key(|loc| {
+        let mut min = None;
+        for (origin, warp_time) in &origins {
+            let goal = ExternalNodeId::Canon(loc.canon_id());
+            let time: Option<u32> = shortest_paths
+                .min_distance(*origin, goal)
+                .map(|u| u as u32 + loc.base_time() + warp_time);
+            min = match (min, time) {
+                (Some(m), Some(t)) => Some(std::cmp::min(m, t)),
+                (None, Some(_)) => time,
+                (_, None) => min,
+            }
+        }
+
+        min.unwrap_or(u32::MAX)
+    })
+}
+
 pub fn find_nearest_location_with_actions<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
