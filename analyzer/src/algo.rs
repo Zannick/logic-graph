@@ -541,9 +541,6 @@ where
 
             let solution = ctx.into_solution();
             let res = sols.insert_solution(solution.clone(), self.world);
-            if res == SolutionResult::IsUnique {
-                log::info!("Minimized({:?}) found new unique solution", mode);
-            }
             drop(sols);
             if res.accepted() {
                 record_observations(
