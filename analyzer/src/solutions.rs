@@ -287,7 +287,6 @@ where
         };
 
         self.count += 1;
-        self.pending = true;
         if let Some(set) = self.map.get_mut(&loc_history) {
             if set.contains(&solution) {
                 SolutionResult::Duplicate
@@ -308,6 +307,8 @@ where
                 self.write_previews().unwrap();
                 self.write_best().unwrap();
                 self.pending = false;
+            } else {
+                self.pending = true;
             }
             SolutionResult::IsUnique
         }
