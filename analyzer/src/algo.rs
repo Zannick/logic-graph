@@ -485,6 +485,11 @@ where
 
         let min_progress = self.min_progress();
         let res = sols.insert_solution(solution.clone(), self.world);
+        if res.accepted() {
+            self.solves_since_clean.fetch_add(1, Ordering::Release);
+            self.last_solve
+                .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
+        }
         drop(sols); // release before recording observations/minimizing
         if res.accepted() {
             if res == SolutionResult::IsUnique {
@@ -503,9 +508,6 @@ where
                 min_progress,
                 &self.solve_trie,
             );
-            self.solves_since_clean.fetch_add(1, Ordering::Release);
-            self.last_solve
-                .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
         }
 
         let min_ctx = match mode {
@@ -1048,11 +1050,12 @@ where
         let last_solve = self.last_solve.load(Ordering::Acquire);
         static PREVIEWS_RATE: usize = 4_096;
         if iters % PREVIEWS_RATE == 0 && last_solve + PREVIEWS_RATE <= iters {
-            self.solutions
-                .lock()
-                .unwrap()
-                .write_previews_if_pending()
-                .unwrap();
+            let mut sols = self.solutions.lock().unwrap();
+            // Recheck after the lock is acquired.
+            let last_solve = self.last_solve.load(Ordering::Acquire);
+            if last_solve + PREVIEWS_RATE <= iters {
+                sols.write_previews_if_pending().unwrap();
+            }
         }
         if iters % 100_000 == 0 {
             self.print_status_update(start, iters, 100_000, ctx);
