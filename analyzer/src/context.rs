@@ -1034,6 +1034,20 @@ where
     vec.join("\n")
 }
 
+pub fn collection_history<T, W, L, I>(history: I) -> impl Iterator<Item = HistoryAlias<T>>
+where
+    W: World<Location = L>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    I: Iterator<Item = HistoryAlias<T>>,
+{
+    history.filter(|h| match h {
+        History::G(..) | History::H(..) => true,
+        History::A(act_id) => W::action_has_visit(*act_id),
+        _ => false,
+    })
+}
+
 pub fn history_to_full_series<T, W, L, E, Wp, I>(startctx: &T, world: &W, history: I) -> Vec<T>
 where
     W: World<Location = L, Exit = E, Warp = Wp>,

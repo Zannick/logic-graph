@@ -260,17 +260,8 @@ where
         E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
-        let loc_history: Vec<HistoryAlias<T>> = solution
-            .history
-            .iter()
-            .filter_map(|h| {
-                if matches!(h, History::G(_, _) | History::H(_, _)) {
-                    Some(*h)
-                } else {
-                    None
-                }
-            })
-            .collect();
+        let loc_history: Vec<HistoryAlias<T>> =
+            collection_history::<T, W, L, _>(solution.history.iter().copied()).collect();
         let best = if self.count == 0 || solution.elapsed < self.best {
             self.best = solution.elapsed;
             write_graph(world, &self.startctx, &solution.history).unwrap();
