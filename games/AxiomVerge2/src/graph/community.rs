@@ -14,9 +14,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
     FxHashSet::default(),
     FxHashSet::from_iter([
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
-        SpotId::Glacier_Breach__Control__Upper_Corner,
         SpotId::Glacier__Crystals__Lower_Corner,
-        SpotId::Glacier__Sea_Burial__Inside_the_Grate,
     ]),
     FxHashSet::from_iter([
         SpotId::Irikar__Basement_Pipes__High_Pipe,
@@ -203,6 +201,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         SpotId::Glacier__Sea_Burial__Deep_Cache,
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate,
         SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         SpotId::Glacier__The_Big_Drop__West_14,
     ]),
@@ -222,8 +221,6 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
     FxHashSet::from_iter([
         SpotId::Giguna_Breach__Slingshot__Ravine,
         SpotId::Giguna__Giguna_Northeast__Door,
-        SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        SpotId::Giguna__Giguna_Northeast__Gate_Right,
         SpotId::Giguna__Giguna_Northeast__Vault,
     ]),
     FxHashSet::from_iter([
@@ -282,8 +279,8 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
         SpotId::Annuna__Vertical_Room__Plinth,
     ]),
     FxHashSet::from_iter([
-        SpotId::Annuna__Filter_Teleporter__Door_Ledge,
-        SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+        SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        SpotId::Giguna__Giguna_Northeast__Gate_Right,
     ]),
 ];
 }
@@ -291,9 +288,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
 pub fn spot_community(spot_id: SpotId) -> usize {
     match spot_id {
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope => 1,
-        SpotId::Glacier_Breach__Control__Upper_Corner => 1,
         SpotId::Glacier__Crystals__Lower_Corner => 1,
-        SpotId::Glacier__Sea_Burial__Inside_the_Grate => 1,
         SpotId::Irikar__Basement_Pipes__High_Pipe => 2,
         SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => 2,
         SpotId::Irikar__Beach_Save__Top_Platform => 2,
@@ -438,6 +433,7 @@ pub fn spot_community(spot_id: SpotId) -> usize {
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => 22,
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => 22,
         SpotId::Glacier__Sea_Burial__Deep_Cache => 22,
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate => 22,
         SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => 22,
         SpotId::Glacier__The_Big_Drop__West_14 => 22,
         SpotId::Ebih__Guarded_Health__Far_West => 23,
@@ -451,8 +447,6 @@ pub fn spot_community(spot_id: SpotId) -> usize {
         SpotId::Ebih__Grid_25_2_6__Pit => 24,
         SpotId::Giguna_Breach__Slingshot__Ravine => 25,
         SpotId::Giguna__Giguna_Northeast__Door => 25,
-        SpotId::Giguna__Giguna_Northeast__Gate_Button => 25,
-        SpotId::Giguna__Giguna_Northeast__Gate_Right => 25,
         SpotId::Giguna__Giguna_Northeast__Vault => 25,
         SpotId::Annuna__Mirror_Match__Below_Switch => 26,
         SpotId::Annuna__Mirror_Match__Save_Point => 26,
@@ -487,8 +481,8 @@ pub fn spot_community(spot_id: SpotId) -> usize {
         SpotId::Menu__Upgrade_Menu__Physiology => 35,
         SpotId::Annuna__Vertical_Room__Gate_Button => 36,
         SpotId::Annuna__Vertical_Room__Plinth => 36,
-        SpotId::Annuna__Filter_Teleporter__Door_Ledge => 37,
-        SpotId::Annuna__Filter_Teleporter__Northeast_Cubby => 37,
+        SpotId::Giguna__Giguna_Northeast__Gate_Button => 37,
+        SpotId::Giguna__Giguna_Northeast__Gate_Right => 37,
         _ => 0,
     }
 }

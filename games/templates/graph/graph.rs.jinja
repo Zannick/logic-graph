@@ -204,6 +204,10 @@ impl world::World for World {
         RAW_SPOTS.as_slice()
     }
 
+    fn action_has_visit(act_id: ActionId) -> bool {
+        action_has_visit(act_id)
+    }
+
     fn won(&self, ctx: &Context) -> bool {
         crate::rule__victory!(ctx, self)
     }

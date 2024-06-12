@@ -3151,3 +3151,11 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         _ => SpotId::None,
     }
 }
+
+pub fn action_has_visit(act_id: ActionId) -> bool {
+    match act_id {
+        ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => true,
+        ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => true,
+        _ => false,
+    }
+}

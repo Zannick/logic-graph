@@ -208,6 +208,7 @@ pub trait World: Sync {
     fn is_global_action(&self, act_id: <Self::Action as Action>::ActionId) -> bool {
         self.get_action_spot(act_id) == <Self::Exit as Exit>::SpotId::default()
     }
+    fn action_has_visit(act_id: <Self::Action as Action>::ActionId) -> bool;
 
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
     fn items_needed(
