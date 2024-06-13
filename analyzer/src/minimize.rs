@@ -276,21 +276,25 @@ where
         if comm == 0 {
             continue;
         }
-        let Some(coll_bi) = collection_hist[coll_ai + 1..]
+        let Some(mut coll_bi) = collection_hist[coll_ai + 1..]
             .iter()
             .position(|(.., bcomm)| *bcomm != comm)
         else {
             // ignore if we don't find anything outside the community
             continue;
         };
+        // index is 0-based from slice start
+        coll_bi += coll_ai + 1;
 
         let mut reorder_just_a = Some(replay.clone());
         let mut reorder_full = Some(replay.clone());
         let mut cprev_justa = coll_ai + 1;
         let mut cprev_full = coll_bi;
 
-        // For just 3+4 above, we can start at bci + 1.
-        for (coll_ci, &(.., ccomm)) in collection_hist[coll_bi + 1..].iter().enumerate() {
+        // For just 3+4 above, we can start at B + 1.
+        for (mut coll_ci, &(.., ccomm)) in collection_hist[coll_bi + 1..].iter().enumerate() {
+            // index is 0-based from slice start
+            coll_ci += coll_bi + 1;
             if ccomm != comm {
                 continue;
             }
