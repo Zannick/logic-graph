@@ -4,7 +4,7 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
-use crate::minimize::{mutate_spot_revisits, trie_minimize};
+use crate::minimize::{mutate_collection_steps, mutate_spot_revisits, trie_minimize};
 use crate::observer::{debug_observations, record_observations, Observer};
 use crate::route::*;
 use crate::solutions::write_graph;
@@ -230,6 +230,35 @@ where
                     trie.num_values(),
                 );
                 for sol in mutations {
+                    if let Some(better) = trie_minimize(world, &startctx, sol, &trie) {
+                        improvements.push(better);
+                    }
+                }
+            }
+
+            let reorders: Vec<_> = mutate_collection_steps(
+                world,
+                &startctx,
+                solution.elapsed,
+                4,
+                solution.clone(),
+                scorer.get_algo(),
+            )
+            .into_iter()
+            .map(|m| m.into_solution())
+            .collect();
+            if !reorders.is_empty() {
+                println!("Reordering collections got {} solutions", reorders.len(),);
+                for sol in &reorders {
+                    record_observations(&startctx, world, sol.clone(), 0, &mut trie);
+                }
+                println!(
+                    "After observing new routes, trie has: size {} depth {} and num values {}",
+                    trie.size(),
+                    trie.max_depth(),
+                    trie.num_values(),
+                );
+                for sol in reorders {
                     if let Some(better) = trie_minimize(world, &startctx, sol, &trie) {
                         improvements.push(better);
                     }
