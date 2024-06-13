@@ -112,10 +112,10 @@ where
 {
     let mut hybrids = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
-        if let Some(e) = loc.exit_id() {
-            hybrids.push((loc, world.get_exit(*e)));
-        } else {
-            if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
+        if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
+            if let Some(e) = loc.exit_id() {
+                hybrids.push((loc, world.get_exit(*e)));
+            } else {
                 ctx.visit(world, loc);
             }
         }
@@ -123,11 +123,6 @@ where
 
     if let Some((loc, exit)) = hybrids
         .into_iter()
-        .filter(|(loc, exit)| {
-            ctx.get().todo(loc)
-                && loc.can_access(ctx.get(), world)
-                && exit.can_access(ctx.get(), world)
-        })
         .min_by_key(|(loc, exit)| loc.time(ctx.get(), world) + exit.time(ctx.get(), world))
     {
         ctx.visit_exit(world, loc, exit);

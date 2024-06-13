@@ -622,6 +622,21 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::W(warp.id(), dest), dur);
     }
 
+    pub fn visit_maybe_exit<W, L, E>(&mut self, world: &W, loc: &L)
+    where
+        W: World<Exit = E, Location = L>,
+        T: Ctx<World = W>,
+        L: Location<Context = T>,
+        E: Exit<Context = T, Currency = L::Currency, ExitId = L::ExitId>,
+    {
+        if let Some(exit_id) = loc.exit_id() {
+            let exit = world.get_exit(*exit_id);
+            self.visit_exit(world, loc, exit);
+        } else {
+            self.visit(world, loc);
+        }
+    }
+
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
     where
         W: World<Exit = E, Location = L>,
@@ -1048,7 +1063,9 @@ where
     })
 }
 
-pub fn enumerated_collection_history<T, W, L, I>(history: I) -> impl Iterator<Item = (usize, HistoryAlias<T>)>
+pub fn enumerated_collection_history<T, W, L, I>(
+    history: I,
+) -> impl Iterator<Item = (usize, HistoryAlias<T>)>
 where
     W: World<Location = L>,
     L: Location<Context = T>,

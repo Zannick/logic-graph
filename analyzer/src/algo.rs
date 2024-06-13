@@ -77,25 +77,12 @@ where
 {
     let mut result = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
-        if let Some(e) = loc.exit_id() {
-            // hybrid case
-            let exit = world.get_exit(*e);
-            if ctx.get().todo(loc)
-                && loc.can_access(ctx.get(), world)
-                && exit.can_access(ctx.get(), world)
-            {
-                // Get the item and move along the exit.
-                let mut newctx = ctx.clone();
-                newctx.visit_exit(world, loc, exit);
-                result.push(newctx);
-            }
-        } else {
-            if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
-                // Get the item and mark the location visited.
-                let mut newctx = ctx.clone();
-                newctx.visit(world, loc);
-                result.push(newctx);
-            }
+        if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
+            // Get the item and mark the location visited.
+            // If it's a hybrid, also move along the exit.
+            let mut newctx = ctx.clone();
+            newctx.visit_maybe_exit(world, loc);
+            result.push(newctx);
         }
     }
     result

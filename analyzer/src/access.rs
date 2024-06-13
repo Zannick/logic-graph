@@ -460,7 +460,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = L>,
+    W::Location: Location<Context = T, LocId = L, ExitId = E::ExitId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     L: Id,
@@ -534,7 +534,7 @@ where
         let ctx = &el.el;
         if ctx.get().position() == spot && loc.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.visit(world, loc);
+            newctx.visit_maybe_exit(world, loc);
             return Ok(newctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
