@@ -262,20 +262,23 @@ where
     // 2 discontinuous cliques of size m and n will see 2n rearrangements in 3+4 (plus the m^2 and n^2 in 1+2)
     // Let's remove the n^2 factor of rearranging within a clique, let search do that.
     let mut previ = 0;
-    for &(ai, _, comm) in collection_hist[..collection_hist.len() - 1].iter() {
+    for (coll_ai, &(step_ai, _, comm)) in collection_hist[..collection_hist.len() - 1]
+        .iter()
+        .enumerate()
+    {
         assert!(
-            replay.maybe_replay_all(world, &solution.history[previ..ai]),
+            replay.maybe_replay_all(world, &solution.history[previ..step_ai]),
             "Could not replay base solution history range {}..{}",
             previ,
-            ai,
+            step_ai,
         );
-        previ = ai;
+        previ = step_ai;
         if comm == 0 {
             continue;
         }
-        let Some(&(bi, ..)) = collection_hist[ai + 1..]
+        let Some(coll_bi) = collection_hist[coll_ai + 1..]
             .iter()
-            .find(|(.., bcomm)| *bcomm != comm)
+            .position(|(.., bcomm)| *bcomm != comm)
         else {
             // ignore if we don't find anything outside the community
             continue;
@@ -283,18 +286,18 @@ where
 
         let mut reorder_just_a = Some(replay.clone());
         let mut reorder_full = Some(replay.clone());
-        let mut prev_justa = ai + 1;
-        let mut prev_full = bi;
+        let mut cprev_justa = coll_ai + 1;
+        let mut cprev_full = coll_bi;
 
-        // For just 3+4 above, we can start at bi + 1.
-        for &(ci, _, ccomm) in collection_hist[bi + 1..].iter() {
+        // For just 3+4 above, we can start at bci + 1.
+        for (coll_ci, &(.., ccomm)) in collection_hist[coll_bi + 1..].iter().enumerate() {
             if ccomm != comm {
                 continue;
             }
             reorder_just_a = rediscover_wrapped(
                 world,
                 reorder_just_a,
-                collection_hist[prev_justa..ci].iter(),
+                collection_hist[cprev_justa..coll_ci].iter(),
                 max_time,
                 max_depth,
                 shortest_paths,
@@ -302,13 +305,13 @@ where
             reorder_full = rediscover_wrapped(
                 world,
                 reorder_full,
-                collection_hist[prev_full..ci].iter(),
+                collection_hist[cprev_full..coll_ci].iter(),
                 max_time,
                 max_depth,
                 shortest_paths,
             );
-            prev_justa = ci;
-            prev_full = ci;
+            cprev_justa = coll_ci;
+            cprev_full = coll_ci;
             // early exit if replays already broke.
             if matches!((&reorder_just_a, &reorder_full), (&None, &None)) {
                 break;
@@ -318,9 +321,9 @@ where
                 if let Some(reordered) = rediscover_routes(
                     world,
                     reorder_a,
-                    collection_hist[ai..=ai]
+                    collection_hist[coll_ai..=coll_ai]
                         .iter()
-                        .chain(&collection_hist[ci..]),
+                        .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
                     shortest_paths,
@@ -332,7 +335,9 @@ where
                 if let Some(reordered) = rediscover_routes(
                     world,
                     reorder_full,
-                    collection_hist[ai..bi].iter().chain(&collection_hist[ci..]),
+                    collection_hist[coll_ai..coll_bi]
+                        .iter()
+                        .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
                     shortest_paths,
