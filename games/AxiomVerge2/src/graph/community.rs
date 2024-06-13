@@ -5,7 +5,7 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{action::*, enums::*, location::*};
+use crate::graph::{action::*, enums::*, exit::*, location::*};
 use lazy_static::lazy_static;
 use rustc_hash::{FxHashMap, FxHashSet};
 
@@ -14,6 +14,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
     FxHashSet::default(),
     FxHashSet::from_iter([
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
+        SpotId::Glacier_Breach__Control__Upper_Corner,
         SpotId::Glacier__Crystals__Lower_Corner,
         SpotId::Glacier__Sea_Burial__Inside_the_Grate,
     ]),
@@ -288,6 +289,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
 pub fn spot_community(spot_id: SpotId) -> usize {
     match spot_id {
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope => 1,
+        SpotId::Glacier_Breach__Control__Upper_Corner => 1,
         SpotId::Glacier__Crystals__Lower_Corner => 1,
         SpotId::Glacier__Sea_Burial__Inside_the_Grate => 1,
         SpotId::Irikar__Basement_Pipes__High_Pipe => 2,

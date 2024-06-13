@@ -187,17 +187,7 @@ impl world::World for World {
     }
 
     fn get_exit_spot(&self, exit_id: ExitId) -> SpotId {
-        match exit_id {
-%% for spot in gl.spots()
-%% if spot.exit_ids
-            ExitId::{{ spot.exit_ids|join(' | ExitId:: ') }} => SpotId::{{ spot.id }},
-%% endif
-%% if spot.hybrid
-            ExitId::{{ spot.hybrid|map(attribute='id')|sort|join(' | ExitId::') }} => SpotId::{{ spot.id }},
-%% endif
-%% endfor
-            _ => SpotId::None,
-        }
+        get_exit_spot(exit_id)
     }
 
     fn get_all_spots(&self) -> &[SpotId] {

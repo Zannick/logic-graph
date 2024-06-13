@@ -117,3 +117,17 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
 %% endfor
 }
+
+pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
+    match exit_id {
+%% for spot in gl.spots()
+%% if spot.exit_ids
+        ExitId::{{ spot.exit_ids|join(' | ExitId:: ') }} => SpotId::{{ spot.id }},
+%% endif
+%% if spot.hybrid
+        ExitId::{{ spot.hybrid|map(attribute='id')|sort|join(' | ExitId::') }} => SpotId::{{ spot.id }},
+%% endif
+%% endfor
+        _ => SpotId::None,
+    }
+}

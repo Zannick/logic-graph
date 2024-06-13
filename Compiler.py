@@ -1174,6 +1174,7 @@ class GameLogic(object):
         part = la.find_partition(G, la.RBERVertexPartition, n_iterations=-1, seed=1, resolution_parameter=0.5)
         part2 = la.SurpriseVertexPartition.FromPartition(part)
         opt = la.Optimiser()
+        opt.set_rng_seed(1)
         fixed = {v.attributes()['name']
                 for i, sg in enumerate(part.subgraphs())
                 for v in sg.vs if part.total_weight_in_comm(i) < 1000}
