@@ -1,8 +1,10 @@
+use crate::access::{access_location_after_actions, move_to};
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
 use crate::observer::{record_observations, Observer};
 use crate::solutions::Solution;
+use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::CommonHasher;
 use std::collections::{HashMap, VecDeque};
@@ -138,6 +140,204 @@ where
             vec.push(swapped);
         } else if swapped.recent_history().len() > replay.recent_history().len() {
             vec.push(swapped);
+        }
+    }
+
+    vec
+}
+
+fn rediscover_routes<'a, W, T, L, I>(
+    world: &W,
+    mut rreplay: ContextWrapper<T>,
+    iter: I,
+    max_time: u32,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+    I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
+{
+    for &(_, step, _) in iter {
+        if let History::A(act_id) = step {
+            // TODO: this needs to allow for other actions, potentially a perform_action_after_actions
+            if let Ok(mut ctx) = move_to(
+                world,
+                rreplay,
+                world.get_action_spot(act_id),
+                shortest_paths,
+            ) {
+                if !ctx.maybe_replay(world, step) {
+                    return None;
+                }
+                rreplay = ctx;
+            } else {
+                return None;
+            }
+        } else {
+            if let Ok(ctx) = access_location_after_actions(
+                world,
+                rreplay,
+                match step {
+                    History::G(.., loc_id) => loc_id,
+                    History::H(.., exit_id) => world.get_exit(exit_id).loc_id().unwrap(),
+                    _ => return None,
+                },
+                max_time,
+                4,
+                shortest_paths,
+            ) {
+                rreplay = ctx;
+            } else {
+                return None;
+            }
+        }
+    }
+    Some(rreplay)
+}
+
+fn rediscover_wrapped<'a, W, T, L, I>(
+    world: &W,
+    rreplay: Option<ContextWrapper<T>>,
+    iter: I,
+    max_time: u32,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+    I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
+{
+    if let Some(rreplay) = rreplay {
+        rediscover_routes(world, rreplay, iter, max_time, shortest_paths)
+    } else {
+        None
+    }
+}
+
+pub fn mutate_collection_steps<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    max_time: u32,
+    solution: Arc<Solution<T>>,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    // [(history index, history step, community)]
+    // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
+    let collection_hist: Vec<_> =
+        enumerated_collection_history::<T, W, L, _>(solution.history.iter().copied())
+            .map(|(i, h)| {
+                (
+                    i,
+                    h,
+                    match h {
+                        History::G(_, loc_id) => W::location_community(loc_id),
+                        History::H(_, exit_id) => W::exit_community(exit_id),
+                        History::A(act_id) => W::action_community(act_id),
+                        _ => 0,
+                    },
+                )
+            })
+            .collect();
+    let mut vec = Vec::new();
+    let mut replay = ContextWrapper::new(startctx.clone());
+
+    // for i, A in collection history[..-1]
+    // find the first B after A not in the same community
+    // for every C after A in the same community
+    // if C is before B, try reordering:
+    // 1. just A: (A..C)AC (if A is not right before C)
+    // 2. just A after C: (A..C]A (if B is right after C)
+    // otherwise, try reordering:
+    // 3. just A: (A..B)[B..C)AC
+    // 4. all of A's community: [B..C)[A..B)C
+    // how many reordering attempts is this?
+    // a contiguous clique of size k will see O(k^2) (k^2-3k+2)/2 rearrangements in 1, k-1 in 2
+    // 2 discontinuous cliques of size m and n will see 2n rearrangements in 3+4 (plus the m^2 and n^2 in 1+2)
+    // Let's remove the n^2 factor of rearranging within a clique, let search do that.
+    let mut previ = 0;
+    for &(ai, _, comm) in collection_hist[..collection_hist.len() - 1].iter() {
+        assert!(
+            replay.maybe_replay_all(world, &solution.history[previ..ai]),
+            "Could not replay base solution history range {}..{}",
+            previ,
+            ai,
+        );
+        previ = ai;
+        if comm == 0 {
+            continue;
+        }
+        let Some(&(bi, ..)) = collection_hist[ai + 1..]
+            .iter()
+            .find(|(.., bcomm)| *bcomm != comm)
+        else {
+            // ignore if we don't find anything outside the community
+            continue;
+        };
+
+        let mut reorder_just_a = Some(replay.clone());
+        let mut reorder_full = Some(replay.clone());
+        let mut prev_justa = ai + 1;
+        let mut prev_full = bi;
+
+        // For just 3+4 above, we can start at bi + 1.
+        for &(ci, _, ccomm) in collection_hist[bi + 1..].iter() {
+            if ccomm != comm {
+                continue;
+            }
+            reorder_just_a = rediscover_wrapped(
+                world,
+                reorder_just_a,
+                collection_hist[prev_justa..ci].iter(),
+                max_time,
+                shortest_paths,
+            );
+            reorder_full = rediscover_wrapped(
+                world,
+                reorder_full,
+                collection_hist[prev_full..ci].iter(),
+                max_time,
+                shortest_paths,
+            );
+            prev_justa = ci;
+            prev_full = ci;
+            // early exit if replays already broke.
+            if matches!((&reorder_just_a, &reorder_full), (&None, &None)) {
+                break;
+            }
+
+            if let Some(reorder_a) = reorder_just_a.clone() {
+                if let Some(reordered) = rediscover_routes(
+                    world,
+                    reorder_a,
+                    collection_hist[ai..=ai]
+                        .iter()
+                        .chain(&collection_hist[ci..]),
+                    max_time,
+                    shortest_paths,
+                ) {
+                    vec.push(reordered);
+                }
+            }
+            if let Some(reorder_full) = reorder_full.clone() {
+                if let Some(reordered) = rediscover_routes(
+                    world,
+                    reorder_full,
+                    collection_hist[ai..bi].iter().chain(&collection_hist[ci..]),
+                    max_time,
+                    shortest_paths,
+                ) {
+                    vec.push(reordered);
+                }
+            }
         }
     }
 

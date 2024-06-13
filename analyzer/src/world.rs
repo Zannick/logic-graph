@@ -274,11 +274,14 @@ pub trait World: Sync {
     fn spot_community(spot_id: <Self::Exit as Exit>::SpotId) -> usize;
     fn location_community(loc_id: <Self::Location as Location>::LocId) -> usize;
     fn action_community(act_id: <Self::Action as Action>::ActionId) -> usize;
+    fn exit_community(exit_id: <Self::Exit as Exit>::ExitId) -> usize;
     fn same_community(
         spot1: <Self::Exit as Exit>::SpotId,
         spot2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
-    fn get_community(spot: <Self::Exit as Exit>::SpotId) -> &'static FxHashSet<<Self::Exit as Exit>::SpotId>;
+    fn get_community(
+        spot: <Self::Exit as Exit>::SpotId,
+    ) -> &'static FxHashSet<<Self::Exit as Exit>::SpotId>;
 
     fn condense_graph(&mut self);
     fn get_condensed_edges_from(

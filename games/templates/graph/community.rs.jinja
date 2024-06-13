@@ -42,6 +42,10 @@ pub fn action_community(act_id: ActionId) -> usize {
     spot_community(get_action_spot(act_id))
 }
 
+pub fn exit_community(exit_id: ExitId) -> usize {
+    spot_community(get_exit_spot(exit_id))
+}
+
 pub fn same_community(spot1: SpotId, spot2: SpotId) -> bool {
     let c1 = spot_community(spot1);
     c1 != 0 && c1 == spot_community(spot2)

@@ -401,6 +401,10 @@ impl world::World for World {
         action_community(act_id)
     }
 
+    fn exit_community(exit_id: ExitId) -> usize {
+        exit_community(exit_id)
+    }
+
     fn same_community(spot1: SpotId, spot2: SpotId) -> bool {
         same_community(spot1, spot2)
     }

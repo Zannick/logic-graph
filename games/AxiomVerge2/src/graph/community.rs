@@ -15,6 +15,7 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
     FxHashSet::from_iter([
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope,
         SpotId::Glacier__Crystals__Lower_Corner,
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate,
     ]),
     FxHashSet::from_iter([
         SpotId::Irikar__Basement_Pipes__High_Pipe,
@@ -201,7 +202,6 @@ static ref COMMUNITIES: Vec<FxHashSet<SpotId>> = vec![
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         SpotId::Glacier__Sea_Burial__Deep_Cache,
-        SpotId::Glacier__Sea_Burial__Inside_the_Grate,
         SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         SpotId::Glacier__The_Big_Drop__West_14,
     ]),
@@ -289,6 +289,7 @@ pub fn spot_community(spot_id: SpotId) -> usize {
     match spot_id {
         SpotId::Amagi_Breach__East_Entrance__Upper_Slope => 1,
         SpotId::Glacier__Crystals__Lower_Corner => 1,
+        SpotId::Glacier__Sea_Burial__Inside_the_Grate => 1,
         SpotId::Irikar__Basement_Pipes__High_Pipe => 2,
         SpotId::Irikar__Basement_Pipes__Left_Vertical_Pipe => 2,
         SpotId::Irikar__Beach_Save__Top_Platform => 2,
@@ -433,7 +434,6 @@ pub fn spot_community(spot_id: SpotId) -> usize {
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Left => 22,
         SpotId::Glacier__Sea_Burial__Breakable_Rock_Right => 22,
         SpotId::Glacier__Sea_Burial__Deep_Cache => 22,
-        SpotId::Glacier__Sea_Burial__Inside_the_Grate => 22,
         SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right => 22,
         SpotId::Glacier__The_Big_Drop__West_14 => 22,
         SpotId::Ebih__Guarded_Health__Far_West => 23,
@@ -493,6 +493,10 @@ pub fn location_community(loc_id: LocationId) -> usize {
 
 pub fn action_community(act_id: ActionId) -> usize {
     spot_community(get_action_spot(act_id))
+}
+
+pub fn exit_community(exit_id: ExitId) -> usize {
+    spot_community(get_exit_spot(exit_id))
 }
 
 pub fn same_community(spot1: SpotId, spot2: SpotId) -> bool {
