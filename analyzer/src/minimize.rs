@@ -1,4 +1,4 @@
-use crate::access::{access_location_after_actions, move_to};
+use crate::access::{access_action_after_actions, access_location_after_actions};
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
@@ -151,6 +151,7 @@ fn rediscover_routes<'a, W, T, L, I>(
     mut rreplay: ContextWrapper<T>,
     iter: I,
     max_time: u32,
+    max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
@@ -160,39 +161,34 @@ where
     I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
 {
     for &(_, step, _) in iter {
-        if let History::A(act_id) = step {
-            // TODO: this needs to allow for other actions, potentially a perform_action_after_actions
-            if let Ok(mut ctx) = move_to(
+        rreplay = match step {
+            History::A(act_id) => access_action_after_actions(
                 world,
                 rreplay,
-                world.get_action_spot(act_id),
-                shortest_paths,
-            ) {
-                if !ctx.maybe_replay(world, step) {
-                    return None;
-                }
-                rreplay = ctx;
-            } else {
-                return None;
-            }
-        } else {
-            if let Ok(ctx) = access_location_after_actions(
-                world,
-                rreplay,
-                match step {
-                    History::G(.., loc_id) => loc_id,
-                    History::H(.., exit_id) => world.get_exit(exit_id).loc_id().unwrap(),
-                    _ => return None,
-                },
+                act_id,
                 max_time,
-                4,
+                max_depth,
                 shortest_paths,
-            ) {
-                rreplay = ctx;
-            } else {
-                return None;
-            }
+            ),
+            History::G(.., loc_id) => access_location_after_actions(
+                world,
+                rreplay,
+                loc_id,
+                max_time,
+                max_depth,
+                shortest_paths,
+            ),
+            History::H(.., exit_id) => access_location_after_actions(
+                world,
+                rreplay,
+                world.get_exit(exit_id).loc_id().unwrap(),
+                max_time,
+                max_depth,
+                shortest_paths,
+            ),
+            _ => return None,
         }
+        .ok()?;
     }
     Some(rreplay)
 }
@@ -202,6 +198,7 @@ fn rediscover_wrapped<'a, W, T, L, I>(
     rreplay: Option<ContextWrapper<T>>,
     iter: I,
     max_time: u32,
+    max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
@@ -211,7 +208,7 @@ where
     I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
 {
     if let Some(rreplay) = rreplay {
-        rediscover_routes(world, rreplay, iter, max_time, shortest_paths)
+        rediscover_routes(world, rreplay, iter, max_time, max_depth, shortest_paths)
     } else {
         None
     }
@@ -221,6 +218,7 @@ pub fn mutate_collection_steps<W, T, L, E>(
     world: &W,
     startctx: &T,
     max_time: u32,
+    max_depth: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Vec<ContextWrapper<T>>
@@ -298,6 +296,7 @@ where
                 reorder_just_a,
                 collection_hist[prev_justa..ci].iter(),
                 max_time,
+                max_depth,
                 shortest_paths,
             );
             reorder_full = rediscover_wrapped(
@@ -305,6 +304,7 @@ where
                 reorder_full,
                 collection_hist[prev_full..ci].iter(),
                 max_time,
+                max_depth,
                 shortest_paths,
             );
             prev_justa = ci;
@@ -322,6 +322,7 @@ where
                         .iter()
                         .chain(&collection_hist[ci..]),
                     max_time,
+                    max_depth,
                     shortest_paths,
                 ) {
                     vec.push(reordered);
@@ -333,6 +334,7 @@ where
                     reorder_full,
                     collection_hist[ai..bi].iter().chain(&collection_hist[ci..]),
                     max_time,
+                    max_depth,
                     shortest_paths,
                 ) {
                     vec.push(reordered);

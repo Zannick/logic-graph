@@ -5,7 +5,7 @@ use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
 use crate::steiner::graph::ExternalNodeId;
-use crate::steiner::{loc_to_graph_node, EdgeId, NodeId, ShortestPaths, SteinerAlgo};
+use crate::steiner::{EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use crate::world::*;
 use crate::{new_hashmap, new_hashset, CommonHasher};
 use ordered_float::OrderedFloat;
@@ -448,10 +448,12 @@ where
     Err(explain_unused_links(world, &states_seen))
 }
 
-pub fn access_location_after_actions<W, T, E, L>(
+fn access_check_after_actions<W, T, E, A, F>(
     world: &W,
     ctx: ContextWrapper<T>,
-    loc_id: L,
+    spot: E::SpotId,
+    check: &A,
+    access: F,
     max_time: u32,
     max_depth: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
@@ -460,17 +462,13 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = L, ExitId = E::ExitId>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    L: Id,
+    A: Accessible<Context = T>,
+    F: FnOnce(&mut ContextWrapper<T>, &W, &A),
 {
-    if ctx.get().visited(loc_id) {
-        return Ok(ctx);
-    }
-
-    let goal = loc_to_graph_node(world, loc_id);
-    let goal_spot = world.get_location_spot(loc_id);
+    let goal = ExternalNodeId::Spot(spot);
 
     type DistanceScore = (u32, OrderedFloat<f32>);
     let score_func = |ctx: &ContextWrapper<T>| -> Option<DistanceScore> {
@@ -482,14 +480,14 @@ where
             panic!("SP Graph missing position: {}", ctx.get().position());
         }
         if !shortest_paths.graph().node_index_map.contains_key(&goal) {
-            panic!("SP Graph missing goal: {}", loc_id);
+            panic!("SP Graph missing goal: {}", spot);
         }
         let mut scores: Vec<Option<DistanceScore>> = vec![shortest_paths
             .min_distance(ExternalNodeId::Spot(ctx.get().position()), goal)
             .map(|u| {
                 (
                     u.try_into().unwrap(),
-                    OrderedFloat(W::spot_distance(ctx.get().position(), goal_spot)),
+                    OrderedFloat(W::spot_distance(ctx.get().position(), spot)),
                 )
             })];
         // We need to take into account contextual warps which aren't otherwise part
@@ -504,7 +502,7 @@ where
                         (
                             warp.time(ctx.get(), world)
                                 + <u64 as TryInto<u32>>::try_into(u).unwrap(),
-                            OrderedFloat(W::spot_distance(ctx.get().position(), goal_spot)),
+                            OrderedFloat(W::spot_distance(ctx.get().position(), spot)),
                         )
                     }),
             );
@@ -528,13 +526,11 @@ where
         }));
     }
 
-    let spot = world.get_location_spot(loc_id);
-    let loc = world.get_location(loc_id);
     while let Some(Reverse(el)) = spot_heap.pop() {
         let ctx = &el.el;
-        if ctx.get().position() == spot && loc.can_access(ctx.get(), world) {
+        if ctx.get().position() == spot && check.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
-            newctx.visit_maybe_exit(world, loc);
+            access(&mut newctx, world, check);
             return Ok(newctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
@@ -574,6 +570,78 @@ where
     }
 
     Err((None, explain_unused_links(world, &states_seen)))
+}
+
+pub fn access_location_after_actions<W, T, E, L>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    loc_id: L,
+    max_time: u32,
+    max_depth: usize,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T, LocId = L, ExitId = E::ExitId>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    L: Id,
+{
+    if ctx.get().visited(loc_id) {
+        return Ok(ctx);
+    }
+
+    let spot = world.get_location_spot(loc_id);
+    let loc = world.get_location(loc_id);
+
+    access_check_after_actions(
+        world,
+        ctx,
+        spot,
+        loc,
+        ContextWrapper::visit_maybe_exit,
+        max_time,
+        max_depth,
+        shortest_paths,
+    )
+}
+
+pub fn access_action_after_actions<W, T, E, A>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    act_id: A,
+    max_time: u32,
+    max_depth: usize,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    W::Action: Action<Context=T, ActionId = A, SpotId = E::SpotId>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    A: Id,
+{
+    let spot = world.get_action_spot(act_id);
+    assert!(
+        spot != Default::default(),
+        "access_after_actions not suitable for global actions"
+    );
+
+    access_check_after_actions(
+        world,
+        ctx,
+        spot,
+        world.get_action(act_id),
+        ContextWrapper::activate,
+        max_time,
+        max_depth,
+        shortest_paths,
+    )
 }
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
