@@ -195,10 +195,11 @@ impl world::Warp for Warp {
     }
     fn postwarp(&self, ctx: &mut Context, world: &World) {
         match self.id {
-            WarpId::BreachSave => rules::action_invoke_refill_energy(ctx, world),
+            WarpId::BreachSave => rules::action_invoke_reload(ctx, world),
+            WarpId::EarthSave => rules::action_invoke_reload(ctx, world),
             WarpId::ExitBreach => rules::action_invoke_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_invoke_default(ctx, world),
-            WarpId::MainSave => rules::action_invoke_refill_energy(ctx, world),
+            WarpId::MainSave => rules::action_invoke_reload(ctx, world),
             WarpId::Portal => rules::action_invoke_post_portal_save_update(ctx, world),
             _ => (),
         }
@@ -219,9 +220,10 @@ impl world::Warp for Warp {
     fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             WarpId::BreachSave => {
-                rules::observe_action_invoke_refill_energy(ctx, world, full_obs);
+                rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::EarthSave => {
+                rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::ExitBreach => {
                 rules::observe_action_invoke_clear_breach_save(ctx, world, full_obs);
@@ -234,7 +236,7 @@ impl world::Warp for Warp {
             WarpId::FastTravelKiengir => {
             }
             WarpId::MainSave => {
-                rules::observe_action_invoke_refill_energy(ctx, world, full_obs);
+                rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::Menu => {
                 rules::observe_action_last_set_position(ctx, world, full_obs);

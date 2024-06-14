@@ -3237,6 +3237,33 @@ macro_rules! hobserve__clear_breach_save {
     }};
 }
 
+/// $reload (  )
+/// ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy
+#[macro_export]
+macro_rules! helper__reload {
+    ($ctx:expr, $world:expr) => {{
+        $ctx.set_prev_area(get_area($ctx.position()));
+        $ctx.set_portal(data::portal_start($ctx.position()));
+        $ctx.set_prev_portal($ctx.portal());
+        helper__refill_energy!($ctx, $world);
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__reload {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.clear_prev_area();
+            let _set = get_area({
+                $full_obs.observe_position();
+                $ctx.position()
+            });
+        }
+        $full_obs.clear_portal();
+        $full_obs.clear_prev_portal();
+        hobserve__refill_energy!($ctx, $world, $full_obs);
+    }};
+}
+
 /// Rule $victory
 #[macro_export]
 macro_rules! rule__victory {

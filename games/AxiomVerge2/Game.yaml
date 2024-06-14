@@ -20,12 +20,9 @@ start:  # MARK: start
   indra: SpotId::None
   last: SpotId::None
   portal: SpotId::None
-  # This should be a load effect? prev_area = $get_area(^position) ?
+  prev_portal: SpotId::None
   prev_area: Antarctica > West
   # TODO: Destination spot for glitches
-
-load:
-  prev_portal: SpotId::None
 
 data:  # MARK: data
   realm: main
@@ -183,12 +180,13 @@ warps:  # MARK: warps
     time: 3  # IGT goes backward due to the fadeout not counting
     req: allow_warps and WITHIN `Antarctica`
     to: ^save
+    after: $reload
     loads: true
   main_save:
     time: 10.5  # IGT goes backward due to the fadeout not counting
     req: allow_warps and ^realm IN ['main', 'interior', 'emergence'] and Amashilama and not Apocalypse_Bomb
     to: ^save
-    after: $refill_energy
+    after: $reload
     loads: true
     penalties:
       - when: ^mode != 'drone'
@@ -197,7 +195,7 @@ warps:  # MARK: warps
     time: 10.5
     req: allow_warps and ^realm == 'breach' and ^breach_save != $default and not Apocalypse_Bomb
     to: ^breach_save
-    after: $refill_energy
+    after: $reload
     loads: true
   menu:
     time: 1
@@ -415,6 +413,7 @@ helpers:  # MARK: helpers
         }
     }
   $clear_breach_save:action: ^breach_save = $default
+  $reload:action: ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy
 
 collect:  # MARK: collect
   Amashilama: ^save = `Glacier > Revival > Save Point`

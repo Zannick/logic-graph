@@ -3219,6 +3219,10 @@ pub fn action_invoke_refill_energy(ctx: &mut Context, world: &World) {
     // $refill_energy
     helper__refill_energy!(ctx, world);
 }
+pub fn action_invoke_reload(ctx: &mut Context, world: &World) {
+    // $reload
+    helper__reload!(ctx, world);
+}
 pub fn action_invoke_reset_old_area__newpos(ctx: &mut Context, world: &World, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, world, newpos);
@@ -21364,6 +21368,13 @@ pub fn observe_action_invoke_refill_energy(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     hobserve__refill_energy!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_reload(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    // $reload
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__reload!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_reset_old_area__newpos(

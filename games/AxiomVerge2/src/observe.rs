@@ -38,8 +38,8 @@ pub enum OneObservation {
     Indra(SpotId),
     Last(SpotId),
     Portal(SpotId),
-    PrevArea(AreaId),
     PrevPortal(SpotId),
+    PrevArea(AreaId),
     // items
     BigFlaskExact(i8),
     BigFlaskEq(i8, bool),
@@ -92,8 +92,8 @@ pub struct FullObservation {
     indra: bool,
     last: bool,
     portal: bool,
-    prev_area: bool,
     prev_portal: bool,
+    prev_area: bool,
     // items
     big_flask: IntegerObservation<i8>,
     flask: IntegerObservation<i8>,
@@ -1874,11 +1874,11 @@ impl Observer for FullObservation {
             if self.portal {
                 vec.push(OneObservation::Portal(ctx.portal));
             }
-            if self.prev_area {
-                vec.push(OneObservation::PrevArea(ctx.prev_area));
-            }
             if self.prev_portal {
                 vec.push(OneObservation::PrevPortal(ctx.prev_portal));
+            }
+            if self.prev_area {
+                vec.push(OneObservation::PrevArea(ctx.prev_area));
             }
             match self.big_flask {
                 IntegerObservation::Unknown => (),
@@ -1958,8 +1958,8 @@ impl FullObservation {
         if self.indra { fields += 1; }
         if self.last { fields += 1; }
         if self.portal { fields += 1; }
-        if self.prev_area { fields += 1; }
         if self.prev_portal { fields += 1; }
+        if self.prev_area { fields += 1; }
         if self.big_flask != IntegerObservation::Unknown { fields += 1; }
         if self.flask != IntegerObservation::Unknown { fields += 1; }
         if self.health_fragment != IntegerObservation::Unknown { fields += 1; }
@@ -2046,6 +2046,12 @@ impl FullObservation {
     }
     pub fn clear_portal(&mut self) {
         self.portal = false;
+    }
+    pub fn observe_prev_portal(&mut self) {
+        self.prev_portal = true;
+    }
+    pub fn clear_prev_portal(&mut self) {
+        self.prev_portal = false;
     }
     pub fn observe_prev_area(&self) {}
     pub fn clear_prev_area(&self) {}
@@ -2270,12 +2276,6 @@ impl FullObservation {
     }
     pub fn clear_map__uhrum__annuna_corridor__save(&mut self) {
         self.cbits1.remove(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
-    }
-    pub fn observe_prev_portal(&mut self) {
-        self.prev_portal = true;
-    }
-    pub fn clear_prev_portal(&mut self) {
-        self.prev_portal = false;
     }
     pub fn observe_glacier__ctx__hammonds_doors(&mut self) {
         self.cbits1.insert(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS);
@@ -3445,8 +3445,8 @@ pub enum ObservationMatcher {
     IndraLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     LastLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
     PortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
     PrevPortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
+    PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
     // items
     BigFlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
     BigFlaskEq {
@@ -3669,13 +3669,13 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::PortalLookup(m))
             }
-            &OneObservation::PrevArea(v) => {
-                let (node, m) = LookupMatcher::new_with(v);
-                (node, ObservationMatcher::PrevAreaLookup(m))
-            }
             &OneObservation::PrevPortal(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
                 (node, ObservationMatcher::PrevPortalLookup(m))
+            }
+            &OneObservation::PrevArea(v) => {
+                let (node, m) = LookupMatcher::new_with(v);
+                (node, ObservationMatcher::PrevAreaLookup(m))
             }
             &OneObservation::BigFlaskExact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -3832,8 +3832,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::IndraLookup(m) => m.clear(),
             Self::LastLookup(m) => m.clear(),
             Self::PortalLookup(m) => m.clear(),
-            Self::PrevAreaLookup(m) => m.clear(),
             Self::PrevPortalLookup(m) => m.clear(),
+            Self::PrevAreaLookup(m) => m.clear(),
             Self::BigFlaskLookup(m) => m.clear(),
             Self::BigFlaskEq { matcher, .. } => matcher.clear(),
             Self::BigFlaskGe { matcher, .. } => matcher.clear(),
@@ -3893,8 +3893,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::IndraLookup(m) => m.lookup(val.indra),
             Self::LastLookup(m) => m.lookup(val.last),
             Self::PortalLookup(m) => m.lookup(val.portal),
-            Self::PrevAreaLookup(m) => m.lookup(val.prev_area),
             Self::PrevPortalLookup(m) => m.lookup(val.prev_portal),
+            Self::PrevAreaLookup(m) => m.lookup(val.prev_area),
             Self::BigFlaskLookup(m) => m.lookup(val.big_flask),
             Self::BigFlaskEq { eq, matcher } => matcher.lookup(val.big_flask == *eq),
             Self::BigFlaskGe { lo, matcher } => matcher.lookup(val.big_flask >= *lo),
@@ -3954,8 +3954,8 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::IndraLookup(m), OneObservation::Indra(v)) => Some(m.insert(*v)),
             (Self::LastLookup(m), OneObservation::Last(v)) => Some(m.insert(*v)),
             (Self::PortalLookup(m), OneObservation::Portal(v)) => Some(m.insert(*v)),
-            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => Some(m.insert(*v)),
             (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => Some(m.insert(*v)),
+            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => Some(m.insert(*v)),
             (Self::BigFlaskLookup(m), OneObservation::BigFlaskExact(v)) => Some(m.insert(*v)),
             (Self::BigFlaskEq { eq, matcher }, OneObservation::BigFlaskEq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
             (Self::BigFlaskGe { lo, matcher }, OneObservation::BigFlaskGe(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
@@ -4016,8 +4016,8 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::IndraLookup(m), OneObservation::Indra(v)) => m.add_value(*v, value),
             (Self::LastLookup(m), OneObservation::Last(v)) => m.add_value(*v, value),
             (Self::PortalLookup(m), OneObservation::Portal(v)) => m.add_value(*v, value),
-            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.add_value(*v, value),
             (Self::PrevPortalLookup(m), OneObservation::PrevPortal(v)) => m.add_value(*v, value),
+            (Self::PrevAreaLookup(m), OneObservation::PrevArea(v)) => m.add_value(*v, value),
             (Self::BigFlaskLookup(m), OneObservation::BigFlaskExact(v)) => m.add_value(*v, value),
             (Self::BigFlaskEq { eq, matcher }, OneObservation::BigFlaskEq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
             (Self::BigFlaskGe { lo, matcher }, OneObservation::BigFlaskGe(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
@@ -4078,8 +4078,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::IndraLookup(m) => m.nodes(),
             Self::LastLookup(m) => m.nodes(),
             Self::PortalLookup(m) => m.nodes(),
-            Self::PrevAreaLookup(m) => m.nodes(),
             Self::PrevPortalLookup(m) => m.nodes(),
+            Self::PrevAreaLookup(m) => m.nodes(),
             Self::BigFlaskLookup(m) => m.nodes(),
             Self::BigFlaskEq { matcher, .. } => matcher.nodes(),
             Self::BigFlaskGe { matcher, .. } => matcher.nodes(),
@@ -4139,8 +4139,8 @@ impl MatcherDispatch for ObservationMatcher {
             Self::IndraLookup(m) => m.num_values(),
             Self::LastLookup(m) => m.num_values(),
             Self::PortalLookup(m) => m.num_values(),
-            Self::PrevAreaLookup(m) => m.num_values(),
             Self::PrevPortalLookup(m) => m.num_values(),
+            Self::PrevAreaLookup(m) => m.num_values(),
             Self::BigFlaskLookup(m) => m.num_values(),
             Self::BigFlaskEq { matcher, .. } => matcher.num_values(),
             Self::BigFlaskGe { matcher, .. } => matcher.num_values(),
