@@ -216,8 +216,9 @@ where
             let mutations: Vec<_> = mutations.into_iter().map(|m| m.into_solution()).collect();
             if !mutations.is_empty() {
                 println!(
-                    "Route swapping got {} solutions and {} partials",
+                    "Route swapping got {} solutions (best={}ms) and {} partials",
                     mutations.len(),
+                    mutations.iter().map(|sol| sol.elapsed).min().unwrap(),
                     old_len - mutations.len()
                 );
                 for sol in &mutations {
