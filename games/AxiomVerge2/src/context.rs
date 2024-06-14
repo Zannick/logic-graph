@@ -103,7 +103,6 @@ pub enum Expectation {
     Indra(SpotId),
     Last(SpotId),
     Portal(SpotId),
-    PrevPortal(SpotId),
     PrevArea(AreaId),
     MapAmagiBreachEastEntranceSave(bool),
     MapAmagiBreachEastRuinsSave(bool),
@@ -142,6 +141,7 @@ pub enum Expectation {
     MapUhrumWestEntranceSave(bool),
     MapUhrumSaveRoomSave(bool),
     MapUhrumAnnunaCorridorSave(bool),
+    PrevPortal(SpotId),
     GlacierCtxHammondsDoors(bool),
     AmagiMainAreaCtxCombo(bool),
     AnnunaWestBridgeCtxDoorsOpened(bool),
@@ -3388,8 +3388,8 @@ pub struct Context {
     pub indra: SpotId,
     pub last: SpotId,
     pub portal: SpotId,
-    pub prev_portal: SpotId,
     pub prev_area: AreaId,
+    pub prev_portal: SpotId,
     // items
     pub big_flask: i8,
     pub flask: i8,
@@ -3415,12 +3415,12 @@ impl Default for Context {
             indra: SpotId::None,
             last: SpotId::None,
             portal: SpotId::None,
-            prev_portal: SpotId::None,
             prev_area: AreaId::Antarctica__West,
             energy: 0,
             flasks: 0,
             refills: 0,
             mode: enums::Mode::Indra,
+            prev_portal: SpotId::None,
             // items
             big_flask: Default::default(),
             flask: Default::default(),
@@ -4650,8 +4650,6 @@ impl context::Ctx for Context {
             ("last", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("portal", Yaml::String(s)) => self.set_portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
             ("portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("prev_portal", Yaml::String(s)) => self.set_prev_portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
-            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("prev_area", Yaml::String(s)) => self.set_prev_area(AreaId::from_str(s).map_err(|e| format!("{}", e))?),
             ("prev_area", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__east_entrance__save", Yaml::Boolean(b)) => self.set_map__amagi_breach__east_entrance__save(*b),
@@ -4728,6 +4726,8 @@ impl context::Ctx for Context {
             ("map__uhrum__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__annuna_corridor__save", Yaml::Boolean(b)) => self.set_map__uhrum__annuna_corridor__save(*b),
             ("map__uhrum__annuna_corridor__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("prev_portal", Yaml::String(s)) => self.set_prev_portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("glacier__ctx__hammonds_doors", Yaml::Boolean(b)) => self.set_glacier__ctx__hammonds_doors(*b),
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => self.set_amagi__main_area__ctx__combo(*b),
@@ -4831,8 +4831,6 @@ impl context::Ctx for Context {
             ("last", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("portal", Yaml::String(s)) => Expectation::Portal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
             ("portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("prev_portal", Yaml::String(s)) => Expectation::PrevPortal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
-            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("prev_area", Yaml::String(s)) => Expectation::PrevArea(AreaId::from_str(s).map_err(|e| format!("{}", e))?),
             ("prev_area", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__east_entrance__save", Yaml::Boolean(b)) => Expectation::MapAmagiBreachEastEntranceSave(*b),
@@ -4909,6 +4907,8 @@ impl context::Ctx for Context {
             ("map__uhrum__save_room__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__uhrum__annuna_corridor__save", Yaml::Boolean(b)) => Expectation::MapUhrumAnnunaCorridorSave(*b),
             ("map__uhrum__annuna_corridor__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("prev_portal", Yaml::String(s)) => Expectation::PrevPortal(SpotId::from_str(s).map_err(|e| format!("{}", e))?),
+            ("prev_portal", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("glacier__ctx__hammonds_doors", Yaml::Boolean(b)) => Expectation::GlacierCtxHammondsDoors(*b),
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => Expectation::AmagiMainAreaCtxCombo(*b),
@@ -5474,12 +5474,6 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "portal", e, v));
                     }
                 }
-                Expectation::PrevPortal(e) => {
-                    let v = self.prev_portal();
-                    if v != *e {
-                        errs.push(format!("Expected {} = {}, got: {}", "prev_portal", e, v));
-                    }
-                }
                 Expectation::PrevArea(e) => {
                     let v = self.prev_area();
                     if v != *e {
@@ -5706,6 +5700,12 @@ impl context::Ctx for Context {
                     let v = self.map__uhrum__annuna_corridor__save();
                     if v != *e {
                         errs.push(format!("Expected {} = {}, got: {}", "map__uhrum__annuna_corridor__save", e, v));
+                    }
+                }
+                Expectation::PrevPortal(e) => {
+                    let v = self.prev_portal();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "prev_portal", e, v));
                     }
                 }
                 Expectation::GlacierCtxHammondsDoors(e) => {
@@ -9626,6 +9626,7 @@ impl context::Ctx for Context {
 
     fn reload_game(&mut self, world: &World) {
         self.reset_all(world);
+        self.prev_portal = SpotId::None;
         self.cbits1.remove(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
         self.cbits1.remove(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
         self.cbits1.remove(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
@@ -12242,11 +12243,11 @@ impl context::Ctx for Context {
         if old.portal != self.portal {
             list.push(format!("portal: {:?} → {:?}", old.portal, self.portal));
         }
-        if old.prev_portal != self.prev_portal {
-            list.push(format!("prev_portal: {:?} → {:?}", old.prev_portal, self.prev_portal));
-        }
         if old.prev_area != self.prev_area {
             list.push(format!("prev_area: {:?} → {:?}", old.prev_area, self.prev_area));
+        }
+        if old.prev_portal != self.prev_portal {
+            list.push(format!("prev_portal: {:?} → {:?}", old.prev_portal, self.prev_portal));
         }
         if old.big_flask != self.big_flask {
             list.push(format!("Big_Flask: {:+}", self.big_flask - old.big_flask));
@@ -14490,12 +14491,6 @@ impl Context {
     pub fn set_portal(&mut self, val: SpotId) {
         self.portal = val;
     }
-    pub fn prev_portal(&self) -> SpotId {
-        self.prev_portal
-    }
-    pub fn set_prev_portal(&mut self, val: SpotId) {
-        self.prev_portal = val;
-    }
     pub fn prev_area(&self) -> AreaId {
         self.prev_area
     }
@@ -14723,6 +14718,12 @@ impl Context {
     }
     pub fn set_map__uhrum__annuna_corridor__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE, val);
+    }
+    pub fn prev_portal(&self) -> SpotId {
+        self.prev_portal
+    }
+    pub fn set_prev_portal(&mut self, val: SpotId) {
+        self.prev_portal = val;
     }
     pub fn glacier__ctx__hammonds_doors(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS)

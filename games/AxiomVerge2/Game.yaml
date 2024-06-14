@@ -20,10 +20,12 @@ start:  # MARK: start
   indra: SpotId::None
   last: SpotId::None
   portal: SpotId::None
-  prev_portal: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
   # TODO: Destination spot for glitches
+
+load:
+  prev_portal: SpotId::None
 
 data:  # MARK: data
   realm: main

@@ -372,6 +372,13 @@ impl context::Ctx for Context {
 
     fn reload_game(&mut self, world: &World) {
         self.reset_all(world);
+%% for c, val in context_trigger_rules.load.global.items()
+%% if c in bfp.varmap
+        self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
+        self.{{ c }} = {{ val }};
+%% endif
+%% endfor
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.load[pltype|lower].values()
 %% for c, val in ctxs.items()

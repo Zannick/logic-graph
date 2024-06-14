@@ -40,6 +40,7 @@ LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 TRIGGER_RULES = ['enter', 'load', 'reset']
+GLOBAL_TRIGGER_RULES = ['load']
 
 ON_ENTRY_ARGS = {'newpos': 'SpotId'}
 
@@ -1630,6 +1631,10 @@ class GameLogic(object):
             else:
                 gc[ctx] = val
 
+        for trigger in GLOBAL_TRIGGER_RULES:
+            for ctx, val in self._info.get(trigger, {}).items():
+                _handle_triggers(ctx, val, trigger, 'global')
+
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
                 _handle_start(ctx, val, 'start', region['name'])
@@ -1791,6 +1796,12 @@ class GameLogic(object):
                 _add_rules(a, 'area')
                 for s in a['spots']:
                     _add_rules(s, 'spot')
+
+        for trigger in GLOBAL_TRIGGER_RULES:
+            gdict = d[trigger]['global'] = {}
+            if e := self._info.get(trigger):
+                for k, v in e.items():
+                    gdict[k] = str_to_rusttype(v, self.context_types[k])
 
         return d
 
