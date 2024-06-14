@@ -8,6 +8,7 @@ use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
+use std::ops::RangeInclusive;
 use std::str::FromStr;
 use std::sync::Arc;
 use yaml_rust::Yaml;
@@ -1076,6 +1077,37 @@ where
         History::G(..) | History::H(..) => true,
         History::A(act_id) => W::action_has_visit(act_id),
         _ => false,
+    })
+}
+
+// Produces an iterator of collection steps paired with the index range of all the steps
+// since the last collection.
+pub fn collection_history_with_range_info<T, W, L, I>(
+    history: I,
+) -> impl Iterator<Item = (RangeInclusive<usize>, HistoryAlias<T>)>
+where
+    W: World<Location = L>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    I: Iterator<Item = HistoryAlias<T>>,
+{
+    let mut previ = 0;
+    history.enumerate().filter_map(move |(i, h)| match h {
+        History::G(..) | History::H(..) => {
+            let r = previ..=i;
+            previ = i + 1;
+            Some((r, h))
+        }
+        History::A(act_id) => {
+            if W::action_has_visit(act_id) {
+                let r = previ..=i;
+                previ = i + 1;
+                Some((r, h))
+            } else {
+                None
+            }
+        }
+        _ => None,
     })
 }
 

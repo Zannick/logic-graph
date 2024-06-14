@@ -8,6 +8,7 @@ use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::CommonHasher;
 use std::collections::{HashMap, VecDeque};
+use std::ops::RangeInclusive;
 use std::sync::Arc;
 
 /// Attempts to create better solutions by removing sections of the route
@@ -152,20 +153,27 @@ fn rediscover_routes<'a, W, T, L, I>(
     iter: I,
     max_time: u32,
     max_depth: usize,
+    history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
+    I: Iterator<Item = &'a (RangeInclusive<usize>, HistoryAlias<T>, usize)>,
 {
-    for &(_, step, _) in iter {
+    for (range, step, _) in iter {
+        // Attempt to reuse the same direct path if possible.
+        let mut ctx = rreplay.clone();
+        if ctx.maybe_replay_all(world, &history[range.clone()]) {
+            rreplay = ctx;
+            continue;
+        }
         rreplay = match step {
             History::A(act_id) => access_action_after_actions(
                 world,
                 rreplay,
-                act_id,
+                *act_id,
                 max_time,
                 max_depth,
                 shortest_paths,
@@ -173,7 +181,7 @@ where
             History::G(.., loc_id) => access_location_after_actions(
                 world,
                 rreplay,
-                loc_id,
+                *loc_id,
                 max_time,
                 max_depth,
                 shortest_paths,
@@ -181,7 +189,7 @@ where
             History::H(.., exit_id) => access_location_after_actions(
                 world,
                 rreplay,
-                world.get_exit(exit_id).loc_id().unwrap(),
+                world.get_exit(*exit_id).loc_id().unwrap(),
                 max_time,
                 max_depth,
                 shortest_paths,
@@ -199,16 +207,25 @@ fn rediscover_wrapped<'a, W, T, L, I>(
     iter: I,
     max_time: u32,
     max_depth: usize,
+    history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a (usize, HistoryAlias<T>, usize)>,
+    I: Iterator<Item = &'a (RangeInclusive<usize>, HistoryAlias<T>, usize)>,
 {
     if let Some(rreplay) = rreplay {
-        rediscover_routes(world, rreplay, iter, max_time, max_depth, shortest_paths)
+        rediscover_routes(
+            world,
+            rreplay,
+            iter,
+            max_time,
+            max_depth,
+            history,
+            shortest_paths,
+        )
     } else {
         None
     }
@@ -231,10 +248,10 @@ where
     // [(history index, history step, community)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
-        enumerated_collection_history::<T, W, L, _>(solution.history.iter().copied())
-            .map(|(i, h)| {
+        collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
+            .map(|(r, h)| {
                 (
-                    i,
+                    r,
                     h,
                     match h {
                         History::G(_, loc_id) => W::location_community(loc_id),
@@ -261,24 +278,21 @@ where
     // a contiguous clique of size k will see O(k^2) (k^2-3k+2)/2 rearrangements in 1, k-1 in 2
     // 2 discontinuous cliques of size m and n will see 2n rearrangements in 3+4 (plus the m^2 and n^2 in 1+2)
     // Let's remove the n^2 factor of rearranging within a clique, let search do that.
-    let mut previ = 0;
-    for (coll_ai, &(step_ai, _, comm)) in collection_hist[..collection_hist.len() - 1]
+    for (coll_ai, (range_a, _, comm)) in collection_hist[..collection_hist.len() - 1]
         .iter()
         .enumerate()
     {
         assert!(
-            replay.maybe_replay_all(world, &solution.history[previ..step_ai]),
-            "Could not replay base solution history range {}..{}",
-            previ,
-            step_ai,
+            replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
+            "Could not replay base solution history range {:?}",
+            range_a,
         );
-        previ = step_ai;
-        if comm == 0 {
+        if *comm == 0 {
             continue;
         }
         let Some(mut coll_bi) = collection_hist[coll_ai + 1..]
             .iter()
-            .position(|(.., bcomm)| *bcomm != comm)
+            .position(|(.., bcomm)| bcomm != comm)
         else {
             // ignore if we don't find anything outside the community
             continue;
@@ -292,7 +306,9 @@ where
         let mut cprev_full = coll_bi;
 
         // For just 3+4 above, we can start at B + 1.
-        for (mut coll_ci, &(.., ccomm)) in collection_hist[coll_bi + 1..].iter().enumerate() {
+        for (mut coll_ci, (.., ccomm)) in
+            collection_hist[coll_bi + 1..].iter().enumerate()
+        {
             // index is 0-based from slice start
             coll_ci += coll_bi + 1;
             if ccomm != comm {
@@ -304,6 +320,7 @@ where
                 collection_hist[cprev_justa..coll_ci].iter(),
                 max_time,
                 max_depth,
+                &solution.history,
                 shortest_paths,
             );
             reorder_full = rediscover_wrapped(
@@ -312,6 +329,7 @@ where
                 collection_hist[cprev_full..coll_ci].iter(),
                 max_time,
                 max_depth,
+                &solution.history,
                 shortest_paths,
             );
             cprev_justa = coll_ci;
@@ -330,9 +348,12 @@ where
                         .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
+                    &solution.history,
                     shortest_paths,
                 ) {
-                    vec.push(reordered);
+                    if world.won(reordered.get()) {
+                        vec.push(reordered);
+                    }
                 }
             }
             if let Some(reorder_full) = reorder_full.clone() {
@@ -344,9 +365,12 @@ where
                         .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
+                    &solution.history,
                     shortest_paths,
                 ) {
-                    vec.push(reordered);
+                    if world.won(reordered.get()) {
+                        vec.push(reordered);
+                    }
                 }
             }
         }

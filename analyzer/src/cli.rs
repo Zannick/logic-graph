@@ -248,7 +248,11 @@ where
             .map(|m| m.into_solution())
             .collect();
             if !reorders.is_empty() {
-                println!("Reordering collections got {} solutions", reorders.len(),);
+                println!(
+                    "Reordering collections got {} solutions, best={}ms",
+                    reorders.len(),
+                    reorders.iter().map(|sol| sol.elapsed).min().unwrap()
+                );
                 for sol in &reorders {
                     record_observations(&startctx, world, sol.clone(), 0, &mut trie);
                 }
