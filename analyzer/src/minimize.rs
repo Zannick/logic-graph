@@ -397,10 +397,9 @@ where
     let mut best_elapsed = best_solution.elapsed;
     let mut best = None;
     while index < best_solution.history.len() {
-        replay.assert_and_replay(world, best_solution.history[index]);
-        index += 1;
         let mut queue = VecDeque::from(trie.lookup(replay.get()));
         'q: while let Some(suffix) = queue.pop_front() {
+            // Don't bother with the attempt if it's the same as our current best.
             if suffix.suffix() == &best_solution.history[index..] {
                 continue;
             }
@@ -422,6 +421,8 @@ where
                 best = Some(r2);
             }
         }
+        replay.assert_and_replay(world, best_solution.history[index]);
+        index += 1;
     }
     best
 }
