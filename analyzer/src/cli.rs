@@ -272,10 +272,13 @@ where
             }
 
             if improvements.len() > 1 {
-                println!(
-                    "Found improved routes: {:?}",
-                    improvements.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
-                );
+                println!("Found improved routes:");
+                for ctx in &improvements {
+                    println!(
+                        "{}: {:?}, {:?}",
+                        ctx.elapsed(), ctx.recent_history()[0], ctx.recent_history()[1],
+                    );
+                }
             }
 
             if let Some(best) = improvements.into_iter().min_by_key(|c| c.elapsed()) {
