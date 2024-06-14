@@ -192,7 +192,8 @@ where
             let orig = solution.clone();
             record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             println!(
-                "Initial solution of length {} produces trie of size {} depth {} and num values {}",
+                "Initial solution ({}ms) of length {} produces trie of size {} depth {} and num values {}",
+                solution.elapsed,
                 solution.history.len(),
                 trie.size(),
                 trie.max_depth(),
