@@ -12,12 +12,10 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
+use analyzer::world::World as _;
 use enum_map::EnumMap;
 use rustc_hash::FxHashMap;
 use std::option::Option;
-
-
-
 
 #[derive(Copy, Clone, Debug)]
 pub struct Location {
@@ -407,6 +405,10 @@ impl world::Accessible for Location {
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+        } && if let Some(exit_id) = self.exit_id {
+            ctx.can_afford(world.get_exit(exit_id).price())
+        } else {
+            true
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
