@@ -216,10 +216,11 @@ where
             mutations.retain(|c| world.won(c.get()));
             let mutations: Vec<_> = mutations.into_iter().map(|m| m.into_solution()).collect();
             if !mutations.is_empty() {
+                let min = mutations.iter().min_by_key(|sol| sol.elapsed).unwrap();
                 println!(
                     "Route swapping got {} solutions (best={}ms) and {} partials",
                     mutations.len(),
-                    mutations.iter().map(|sol| sol.elapsed).min().unwrap(),
+                    min.elapsed,
                     old_len - mutations.len()
                 );
                 for sol in &mutations {
@@ -231,10 +232,8 @@ where
                     trie.max_depth(),
                     trie.num_values(),
                 );
-                for sol in mutations {
-                    if let Some(better) = trie_minimize(world, &startctx, sol, &trie) {
-                        improvements.push(better);
-                    }
+                if let Some(better) = trie_minimize(world, &startctx, min.clone(), &trie) {
+                    improvements.push(better);
                 }
             }
 
@@ -250,10 +249,11 @@ where
             .map(|m| m.into_solution())
             .collect();
             if !reorders.is_empty() {
+                let min = reorders.iter().min_by_key(|sol| sol.elapsed).unwrap();
                 println!(
                     "Reordering collections got {} solutions, best={}ms",
                     reorders.len(),
-                    reorders.iter().map(|sol| sol.elapsed).min().unwrap()
+                    min.elapsed,
                 );
                 for sol in &reorders {
                     record_observations(&startctx, world, sol.clone(), 0, &mut trie);
@@ -264,10 +264,8 @@ where
                     trie.max_depth(),
                     trie.num_values(),
                 );
-                for sol in reorders {
-                    if let Some(better) = trie_minimize(world, &startctx, sol, &trie) {
-                        improvements.push(better);
-                    }
+                if let Some(better) = trie_minimize(world, &startctx, min.clone(), &trie) {
+                    improvements.push(better);
                 }
             }
 
