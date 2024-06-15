@@ -238,7 +238,7 @@ pub fn mutate_collection_steps<W, T, L, E>(
     max_depth: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Vec<ContextWrapper<T>>
+) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -262,7 +262,6 @@ where
                 )
             })
             .collect();
-    let mut vec = Vec::new();
     let mut replay = ContextWrapper::new(startctx.clone());
 
     // for i, A in collection history[..-1]
@@ -352,7 +351,7 @@ where
                     shortest_paths,
                 ) {
                     if world.won(reordered.get()) {
-                        vec.push(reordered);
+                        return Some(reordered);
                     }
                 }
             }
@@ -369,14 +368,14 @@ where
                     shortest_paths,
                 ) {
                     if world.won(reordered.get()) {
-                        vec.push(reordered);
+                        return Some(reordered);
                     }
                 }
             }
         }
     }
 
-    vec
+    None
 }
 
 /// Use a matcher trie to minimize a solution

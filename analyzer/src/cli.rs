@@ -237,46 +237,32 @@ where
                 }
             }
 
-            let reorders: Vec<_> = mutate_collection_steps(
+            let mut reorders = 0;
+            while let Some(reordered) = mutate_collection_steps(
                 world,
                 &startctx,
                 solution.elapsed,
                 4,
                 solution.clone(),
                 scorer.get_algo(),
-            )
-            .into_iter()
-            .map(|m| m.into_solution())
-            .collect();
-            if !reorders.is_empty() {
-                let min = reorders.iter().min_by_key(|sol| sol.elapsed).unwrap();
+            ) {
+                reorders += 1;
                 println!(
-                    "Reordering collections got {} solutions, best={}ms",
-                    reorders.len(),
-                    min.elapsed,
+                    "Reorder got an improvement #{}: {}ms",
+                    reorders,
+                    reordered.elapsed()
                 );
-                for sol in &reorders {
-                    record_observations(&startctx, world, sol.clone(), 0, &mut trie);
-                }
-                println!(
-                    "After observing new routes, trie has: size {} depth {} and num values {}",
-                    trie.size(),
-                    trie.max_depth(),
-                    trie.num_values(),
-                );
-                if let Some(better) = trie_minimize(world, &startctx, min.clone(), &trie) {
-                    improvements.push(better);
-                }
+                solution = reordered.to_solution();
+                record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             }
-
-            if improvements.len() > 1 {
-                println!("Found improved routes:");
-                for ctx in &improvements {
-                    println!(
-                        "{}: {:?}, {:?}",
-                        ctx.elapsed(), ctx.recent_history()[0], ctx.recent_history()[1],
-                    );
-                }
+            println!(
+                "After observing new routes, trie has: size {} depth {} and num values {}",
+                trie.size(),
+                trie.max_depth(),
+                trie.num_values(),
+            );
+            if let Some(better) = trie_minimize(world, &startctx, solution.clone(), &trie) {
+                improvements.push(better);
             }
 
             if let Some(best) = improvements.into_iter().min_by_key(|c| c.elapsed()) {
