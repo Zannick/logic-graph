@@ -964,12 +964,17 @@ where
                         drop(sols);
                         let revisits =
                             mutate_spot_revisits(self.world, self.startctx.get(), sol.clone());
-                        for mut revisit in revisits {
+                        for revisit in revisits {
                             if revisit.elapsed() < sol.elapsed {
-                                self.handle_solution(&mut revisit, &None, SearchMode::MutateSpots);
+                                self.recreate_store(
+                                    &self.startctx,
+                                    revisit.recent_history(),
+                                    SearchMode::MutateSpots,
+                                )
+                                .unwrap();
                             }
                         }
-                        if let Some(mut reordered) = mutate_collection_steps(
+                        if let Some(reordered) = mutate_collection_steps(
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
@@ -978,11 +983,12 @@ where
                             sol,
                             self.queue.db().scorer().get_algo(),
                         ) {
-                            self.handle_solution(
-                                &mut reordered,
-                                &None,
+                            self.recreate_store(
+                                &self.startctx,
+                                reordered.recent_history(),
                                 SearchMode::MutateCollections,
-                            );
+                            )
+                            .unwrap();
                         }
                         self.mutated.fetch_add(1, Ordering::Release);
                         sols = self.solutions.lock().unwrap();
