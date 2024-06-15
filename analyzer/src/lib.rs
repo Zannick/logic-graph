@@ -15,7 +15,7 @@ extern crate yaml_rust;
 
 mod a_star;
 pub mod access;
-pub mod algo;
+pub mod search;
 pub mod bucket;
 pub mod cli;
 pub mod condense;
@@ -677,7 +677,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not find {} in the iteration limit", $item);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
@@ -703,7 +703,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not reach {} in the iteration limit", $spot);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
@@ -732,7 +732,7 @@ pub mod testlib {
                         if count == 0 {
                             panic!("Did not visit {} in the iteration limit", $loc_id);
                         }
-                        heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                        heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                         count -= 1;
                     }
                 }
@@ -759,7 +759,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not activate {} in the iteration limit", $act_id);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
@@ -799,7 +799,7 @@ pub mod testlib {
                         );
                         done = true;
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                    heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                     count -= 1;
                 }
             }
@@ -840,7 +840,7 @@ pub mod testlib {
                     done = true;
                     break;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
@@ -880,7 +880,7 @@ pub mod testlib {
                     done = true;
                     break;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
@@ -919,7 +919,7 @@ pub mod testlib {
                         done = true;
                         break;
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                    heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                     count -= 1;
                 }
             }
@@ -963,7 +963,7 @@ pub mod testlib {
                     done = true;
                     break;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                heap.extend($crate::search::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
             if !done {
