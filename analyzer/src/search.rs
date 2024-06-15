@@ -962,6 +962,7 @@ where
 
             // Background solution mutator.
             scope.spawn(|_| {
+                let max_wait_time = Duration::from_secs(300);
                 let mut sols = self.solutions.lock().unwrap();
                 while !self.finished.load(Ordering::Acquire) {
                     while let Some(sol) = sols.next_unprocessed() {
@@ -1004,7 +1005,7 @@ where
                             return;
                         }
                     }
-                    sols = self.solution_cvar.wait(sols).unwrap();
+                    (sols, _) = self.solution_cvar.wait_timeout(sols, max_wait_time).unwrap();
                     if self.finished.load(Ordering::Acquire) {
                         return;
                     }
