@@ -990,6 +990,7 @@ where
             } else {
                 4
             },
+            4_096,
             self.queue.db().scorer().get_algo(),
         );
         let found = res.is_ok();

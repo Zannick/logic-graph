@@ -153,6 +153,7 @@ fn rediscover_routes<'a, W, T, L, I>(
     iter: I,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
@@ -176,6 +177,7 @@ where
                 *act_id,
                 max_time,
                 max_depth,
+                max_states,
                 shortest_paths,
             ),
             History::G(.., loc_id) => access_location_after_actions(
@@ -184,6 +186,7 @@ where
                 *loc_id,
                 max_time,
                 max_depth,
+                max_states,
                 shortest_paths,
             ),
             History::H(.., exit_id) => access_location_after_actions(
@@ -192,6 +195,7 @@ where
                 world.get_exit(*exit_id).loc_id().unwrap(),
                 max_time,
                 max_depth,
+                max_states,
                 shortest_paths,
             ),
             _ => return None,
@@ -207,6 +211,7 @@ fn rediscover_wrapped<'a, W, T, L, I>(
     iter: I,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
@@ -223,6 +228,7 @@ where
             iter,
             max_time,
             max_depth,
+            max_states,
             history,
             shortest_paths,
         )
@@ -236,6 +242,7 @@ pub fn mutate_collection_steps<W, T, L, E>(
     startctx: &T,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
@@ -319,6 +326,7 @@ where
                 collection_hist[cprev_justa..coll_ci].iter(),
                 max_time,
                 max_depth,
+                max_states,
                 &solution.history,
                 shortest_paths,
             );
@@ -328,6 +336,7 @@ where
                 collection_hist[cprev_full..coll_ci].iter(),
                 max_time,
                 max_depth,
+                max_states,
                 &solution.history,
                 shortest_paths,
             );
@@ -347,6 +356,7 @@ where
                         .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
+                    max_states,
                     &solution.history,
                     shortest_paths,
                 ) {
@@ -364,6 +374,7 @@ where
                         .chain(&collection_hist[coll_ci..]),
                     max_time,
                     max_depth,
+                    max_states,
                     &solution.history,
                     shortest_paths,
                 ) {

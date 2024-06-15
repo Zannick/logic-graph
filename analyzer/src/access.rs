@@ -456,6 +456,7 @@ fn access_check_after_actions<W, T, E, A, F>(
     access: F,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
 where
@@ -557,7 +558,7 @@ where
             );
         }
 
-        if states_seen.len() > world.get_all_spots().len() * (max_depth + 1) {
+        if states_seen.len() > max_states {
             return Err((
                 spot_heap.pop().map(|rel| rel.0.el),
                 format!(
@@ -578,6 +579,7 @@ pub fn access_location_after_actions<W, T, E, L>(
     loc_id: L,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
 where
@@ -604,6 +606,7 @@ where
         ContextWrapper::visit_maybe_exit,
         max_time,
         max_depth,
+        max_states,
         shortest_paths,
     )
 }
@@ -614,6 +617,7 @@ pub fn access_action_after_actions<W, T, E, A>(
     act_id: A,
     max_time: u32,
     max_depth: usize,
+    max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
 where
@@ -640,6 +644,7 @@ where
         ContextWrapper::activate,
         max_time,
         max_depth,
+        max_states,
         shortest_paths,
     )
 }
