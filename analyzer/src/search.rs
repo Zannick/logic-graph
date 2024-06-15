@@ -961,6 +961,10 @@ where
                 let mut sols = self.solutions.lock().unwrap();
                 while !self.finished.load(Ordering::Acquire) {
                     while let Some(sol) = sols.next_unprocessed() {
+                        if sol.elapsed > self.queue.max_time() {
+                            // We should have dropped these from the collector already.
+                            continue;
+                        }
                         drop(sols);
                         let revisits =
                             mutate_spot_revisits(self.world, self.startctx.get(), sol.clone());
