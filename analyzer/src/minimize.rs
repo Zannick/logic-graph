@@ -350,7 +350,7 @@ where
                     &solution.history,
                     shortest_paths,
                 ) {
-                    if world.won(reordered.get()) {
+                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
                         return Some(reordered);
                     }
                 }
@@ -367,7 +367,7 @@ where
                     &solution.history,
                     shortest_paths,
                 ) {
-                    if world.won(reordered.get()) {
+                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
                         return Some(reordered);
                     }
                 }
