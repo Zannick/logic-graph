@@ -3,8 +3,7 @@ use crate::context::*;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
-use crate::minimize::pinpoint_minimize;
-use crate::minimize::{trie_minimize, trie_search};
+use crate::minimize::*;
 use crate::observer::{record_observations, Observer};
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
@@ -14,8 +13,7 @@ use rayon::prelude::*;
 use std::fmt::Debug;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
-use std::sync::Arc;
-use std::sync::Mutex;
+use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
@@ -32,6 +30,8 @@ enum SearchMode {
     Start,
     Minimized,
     Mode(usize),
+    MutateSpots,
+    MutateCollections,
     Unknown,
     Similar,
 }
@@ -232,6 +232,7 @@ where
     solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
+    solution_cvar: Condvar,
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
@@ -245,6 +246,7 @@ where
     organic_solution: AtomicBool,
     any_solution: AtomicBool,
     organic_level: AtomicUsize,
+    mutated: AtomicUsize,
     finished: AtomicBool,
 }
 
@@ -363,6 +365,7 @@ where
             solve_trie,
             solutions,
             queue,
+            solution_cvar: Condvar::new(),
             iters: 0.into(),
             deadends: 0.into(),
             held: 0.into(),
@@ -376,6 +379,7 @@ where
             organic_solution: false.into(),
             any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
+            mutated: 0.into(),
             finished: false.into(),
         };
         for w in wins {
@@ -476,6 +480,7 @@ where
             self.solves_since_clean.fetch_add(1, Ordering::Release);
             self.last_solve
                 .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
+            self.solution_cvar.notify_one();
         }
         drop(sols); // release before recording observations/minimizing
         if res.accepted() {
@@ -532,6 +537,10 @@ where
             let res = sols.insert_solution(solution.clone(), self.world);
             drop(sols);
             if res.accepted() {
+                self.solves_since_clean.fetch_add(1, Ordering::Release);
+                self.last_solve
+                    .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
+                self.solution_cvar.notify_one();
                 record_observations(
                     self.startctx.get(),
                     self.world,
@@ -934,6 +943,7 @@ where
         };
 
         rayon::scope(|scope| {
+            // Background db cleanup thread
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
                 while !self.finished.load(Ordering::Acquire) {
@@ -946,6 +956,47 @@ where
                 }
             });
 
+            // Background solution mutator.
+            scope.spawn(|_| {
+                let mut sols = self.solutions.lock().unwrap();
+                while !self.finished.load(Ordering::Acquire) {
+                    while let Some(sol) = sols.next_unprocessed() {
+                        drop(sols);
+                        let revisits =
+                            mutate_spot_revisits(self.world, self.startctx.get(), sol.clone());
+                        for mut revisit in revisits {
+                            if revisit.elapsed() < sol.elapsed {
+                                self.handle_solution(&mut revisit, &None, SearchMode::MutateSpots);
+                            }
+                        }
+                        if let Some(mut reordered) = mutate_collection_steps(
+                            self.world,
+                            self.startctx.get(),
+                            self.queue.max_time(),
+                            2,
+                            2_048,
+                            sol,
+                            self.queue.db().scorer().get_algo(),
+                        ) {
+                            self.handle_solution(
+                                &mut reordered,
+                                &None,
+                                SearchMode::MutateCollections,
+                            );
+                        }
+                        self.mutated.fetch_add(1, Ordering::Release);
+                        sols = self.solutions.lock().unwrap();
+                        if self.finished.load(Ordering::Acquire) {
+                            return;
+                        }
+                    }
+                    sols = self.solution_cvar.wait(sols).unwrap();
+                    if self.finished.load(Ordering::Acquire) {
+                        return;
+                    }
+                }
+            });
+
             rayon::scope(|sc2| {
                 for i in 0..num_workers {
                     sc2.spawn(move |_| run_worker(i));
@@ -954,6 +1005,7 @@ where
 
             log::debug!("Workers all exited, marking finished");
             self.finished.store(true, Ordering::Release);
+            self.solution_cvar.notify_all();
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         log::info!(
@@ -1122,8 +1174,8 @@ where
         let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
         println!(
-            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, best={}ms) ---\n\
-            Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
+            "--- Round {} (solutions={}, unique={}, mut={}, limit={}ms, best={}ms) ---\n\
+            Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
@@ -1134,7 +1186,7 @@ where
             iters,
             sols.len(),
             sols.unique(),
-            self.deadends.load(Ordering::Acquire),
+            self.mutated.load(Ordering::Acquire),
             max_time,
             sols.best(),
             self.queue.heap_len(),
@@ -1143,6 +1195,7 @@ where
             pending + self.queue.len(),
             self.queue.seen(),
             self.queue.db().processed(),
+            self.deadends.load(Ordering::Acquire),
             self.solve_trie.size(),
             self.solve_trie.max_depth(),
             self.solve_trie.num_values(),

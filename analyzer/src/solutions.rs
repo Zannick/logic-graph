@@ -4,7 +4,8 @@ use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use lazy_static::lazy_static;
 use log;
-use serde::Serialize;
+use priority_queue::PriorityQueue;
+use std::cmp::Reverse;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
@@ -132,7 +133,7 @@ where
     Ok(path)
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
+#[derive(Debug, Eq, PartialEq, Hash)]
 pub struct Solution<T: Ctx> {
     pub elapsed: u32,
     pub history: Vec<HistoryAlias<T>>,
@@ -190,6 +191,7 @@ where
     T: Ctx,
 {
     map: HashMap<Vec<HistoryAlias<T>>, HashSet<Arc<Solution<T>>, CommonHasher>, CommonHasher>,
+    processing_queue: PriorityQueue<Arc<Solution<T>>, Reverse<u32>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     best_file: &'static str,
@@ -219,6 +221,7 @@ where
         }
         Ok(SolutionCollector {
             map: new_hashmap(),
+            processing_queue: PriorityQueue::default(),
             file: File::create(sols_file)?,
             path: sols_file,
             previews: previews_file,
@@ -282,6 +285,7 @@ where
             if set.contains(&solution) {
                 SolutionResult::Duplicate
             } else {
+                self.processing_queue.push(solution.clone(), Reverse(solution.elapsed));
                 set.insert(solution);
                 if best {
                     self.write_previews().unwrap();
@@ -293,6 +297,7 @@ where
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
+            self.processing_queue.push(solution.clone(), Reverse(solution.elapsed));
             self.map.insert(loc_history, new_hashset_with(solution));
             if best {
                 self.write_previews().unwrap();
@@ -330,6 +335,14 @@ where
                 }
             })
             .collect()
+    }
+
+    pub fn next_unprocessed(&mut self) -> Option<Arc<Solution<T>>> {
+        self.processing_queue.pop().map(|x| x.0)
+    }
+
+    pub fn has_unprocessed(&self) -> bool {
+        self.processing_queue.is_empty()
     }
 
     pub fn iter(&self) -> impl Iterator<Item = Arc<Solution<T>>> + '_ {
