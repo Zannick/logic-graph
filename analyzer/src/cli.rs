@@ -253,6 +253,7 @@ where
                     reordered.elapsed()
                 );
                 solution = reordered.to_solution();
+                improvements.push(reordered);
                 record_observations(&startctx, world, solution.clone(), 0, &mut trie);
             }
             println!(
