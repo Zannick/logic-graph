@@ -1,4 +1,4 @@
-use crate::algo::Search;
+use crate::search::Search;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
