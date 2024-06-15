@@ -4,6 +4,7 @@ use crate::a_star::*;
 use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
+use crate::priority::LimitedPriorityQueue;
 use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use crate::world::*;
@@ -11,6 +12,10 @@ use crate::{new_hashmap, new_hashset, CommonHasher};
 use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
+
+static INITIAL_CAPACITY: usize = 1_024;
+static MAX_STATES_FOR_SPOTS: usize = 16_384;
+static MAX_STATES_FOR_LOCS: usize = 16_384;
 
 /// Check whether there are available locations at this position.
 pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
@@ -253,13 +258,14 @@ where
 
     // Using A* and allowing backtracking
     let mut states_seen = new_hashset();
-    let mut spot_heap = BinaryHeap::new();
+    let mut spot_heap =
+        LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_SPOTS);
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(Reverse(HeapElement { score, el: ctx }));
+        spot_heap.push(HeapElement { score, el: ctx }, score);
     }
 
-    while let Some(Reverse(el)) = spot_heap.pop() {
+    while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
         if ctx.get().position() == spot {
             return Ok(el.el);
@@ -401,17 +407,21 @@ where
 
     // Using A* and allowing backtracking
     let mut states_seen = new_hashset();
-    let mut spot_heap = BinaryHeap::new();
+    let mut spot_heap =
+        LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_LOCS);
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(Reverse(ScoredCtxWithActionCounter {
+        spot_heap.push(
+            ScoredCtxWithActionCounter {
+                score,
+                el: ctx,
+                counter: 0,
+            },
             score,
-            el: ctx,
-            counter: 0,
-        }));
+        );
     }
 
-    while let Some(Reverse(el)) = spot_heap.pop() {
+    while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
         if world
             .get_spot_locations(ctx.get().position())
@@ -458,7 +468,7 @@ fn access_check_after_actions<W, T, E, A, F>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
+) -> Result<ContextWrapper<T>, String>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -517,17 +527,23 @@ where
 
     // Using A* and allowing backtracking
     let mut states_seen = new_hashset();
-    let mut spot_heap = BinaryHeap::new();
+    let mut spot_heap = LimitedPriorityQueue::with_capacity_and_limit(
+        std::cmp::min(INITIAL_CAPACITY, max_states),
+        max_states,
+    );
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(Reverse(ScoredCtxWithActionCounter {
+        spot_heap.push(
+            ScoredCtxWithActionCounter {
+                score,
+                el: ctx,
+                counter: 0,
+            },
             score,
-            el: ctx,
-            counter: 0,
-        }));
+        );
     }
 
-    while let Some(Reverse(el)) = spot_heap.pop() {
+    while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
         if ctx.get().position() == spot && check.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
@@ -558,19 +574,15 @@ where
             );
         }
 
-        if states_seen.len() > max_states {
-            return Err((
-                spot_heap.pop().map(|rel| rel.0.el),
-                format!(
-                    "Excessive A* search stopping at {} states explored, {} left in queue",
-                    states_seen.len(),
-                    spot_heap.len()
-                ),
+        if spot_heap.is_expired() {
+            return Err(format!(
+                "Excessive A* search stopping at {} states explored",
+                states_seen.len()
             ));
         }
     }
 
-    Err((None, explain_unused_links(world, &states_seen)))
+    Err(explain_unused_links(world, &states_seen))
 }
 
 pub fn access_location_after_actions<W, T, E, L>(
@@ -581,7 +593,7 @@ pub fn access_location_after_actions<W, T, E, L>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
+) -> Result<ContextWrapper<T>, String>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -619,13 +631,13 @@ pub fn access_action_after_actions<W, T, E, A>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Result<ContextWrapper<T>, (Option<ContextWrapper<T>>, String)>
+) -> Result<ContextWrapper<T>, String>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Action: Action<Context=T, ActionId = A, SpotId = E::SpotId>,
+    W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Id,

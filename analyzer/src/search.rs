@@ -982,8 +982,8 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            2,
-                            2_048,
+                            4,
+                            4_096,
                             sol,
                             self.queue.db().scorer().get_algo(),
                         ) {
@@ -1057,7 +1057,7 @@ where
         );
         let found = res.is_ok();
         match res {
-            Ok(mut c) | Err((Some(mut c), _)) => {
+            Ok(mut c) => {
                 let hist = c.remove_history().0;
                 if !hist.is_empty() {
                     self.recreate_store(&ctx, &hist, current_mode).map(|_| true)

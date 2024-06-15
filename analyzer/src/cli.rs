@@ -243,7 +243,7 @@ where
                 &startctx,
                 solution.elapsed,
                 4,
-                4_096,
+                8_192,
                 solution.clone(),
                 scorer.get_algo(),
             ) {
