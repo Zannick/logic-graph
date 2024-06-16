@@ -223,7 +223,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T>,
+    W::Location: Location<Context = T, LocId = E::LocId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
@@ -344,7 +344,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T>,
+    W::Location: Location<Context = T, LocId = E::LocId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
@@ -472,7 +472,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T>,
+    W::Location: Location<Context = T, LocId = E::LocId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Accessible<Context = T>,
@@ -595,7 +595,7 @@ pub fn access_location_after_actions<W, T, E, L>(
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency, LocId = L>,
     W::Location: Location<Context = T, LocId = L, ExitId = E::ExitId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
@@ -634,7 +634,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T>,
+    W::Location: Location<Context = T, LocId = E::LocId>,
     W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
