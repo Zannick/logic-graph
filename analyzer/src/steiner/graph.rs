@@ -202,7 +202,12 @@ where
             let s = world.get_location_spot(loc.id());
             let t = ExternalNodeId::Canon(loc.canon_id());
             let id = ExternalEdgeId::Canon(s, loc.canon_id());
-            let wt = loc.base_time().try_into().unwrap();
+            let wt = loc.base_time() as u64
+                + if let Some(exit_id) = loc.exit_id() {
+                    world.get_exit(*exit_id).base_time() as u64
+                } else {
+                    0
+                };
             edges.push(Edge {
                 id,
                 src: node_index_map[&ExternalNodeId::Spot(s)],
