@@ -1,63 +1,56 @@
 use crate::context::*;
-use crate::heap::HeapElement;
 use crate::priority::LimitedPriorityQueue;
 use crate::world::*;
 use crate::CommonHasher;
-use sort_by_derive::SortBy;
 use std::collections::HashSet;
 
-pub trait SortableCtxWrapper<T: Ctx, P: Ord>: Eq + Ord + std::hash::Hash {
+pub trait CtxWrapper<T: Ctx>: Eq + std::hash::Hash {
     fn ctx(&self) -> &ContextWrapper<T>;
-    fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self;
-    fn new_incr(&self, newctx: ContextWrapper<T>, score: P) -> Self;
+    fn copy_update(&self, newctx: ContextWrapper<T>) -> Self;
+    fn new_incr(&self, newctx: ContextWrapper<T>) -> Self;
     fn can_continue(&self, _max_depth: usize) -> bool {
         true
     }
 }
 
-impl<T: Ctx> SortableCtxWrapper<T, u32> for HeapElement<T> {
+impl<T: Ctx> CtxWrapper<T> for ContextWrapper<T> {
     fn ctx(&self) -> &ContextWrapper<T> {
-        &self.el
+        self
     }
-    fn copy_update(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
-        HeapElement { score, el: newctx }
+    fn copy_update(&self, newctx: ContextWrapper<T>) -> Self {
+        newctx
     }
-    fn new_incr(&self, newctx: ContextWrapper<T>, score: u32) -> Self {
-        HeapElement { score, el: newctx }
+    fn new_incr(&self, newctx: ContextWrapper<T>) -> Self {
+        newctx
     }
 }
 
-#[derive(Debug, SortBy)]
-pub struct ScoredCtxWithActionCounter<T: Ctx, P: Ord + std::hash::Hash> {
-    #[sort_by]
-    pub(crate) score: P,
+#[derive(Debug, Eq, Hash, PartialEq)]
+pub struct CtxWithActionCounter<T: Ctx> {
     pub(crate) el: ContextWrapper<T>,
     pub(crate) counter: usize,
 }
 
-impl<T, P> SortableCtxWrapper<T, P> for ScoredCtxWithActionCounter<T, P>
+impl<T> CtxWrapper<T> for CtxWithActionCounter<T>
 where
     T: Ctx,
-    P: Ord + std::hash::Hash,
 {
     fn ctx(&self) -> &ContextWrapper<T> {
         &self.el
     }
-    fn copy_update(&self, newctx: ContextWrapper<T>, score: P) -> Self {
+    fn copy_update(&self, newctx: ContextWrapper<T>) -> Self {
         let counter = if matches!(newctx.recent_history().last(), Some(History::A(..))) {
             self.counter + 1
         } else {
             self.counter
         };
-        ScoredCtxWithActionCounter {
-            score,
+        CtxWithActionCounter {
             el: newctx,
             counter,
         }
     }
-    fn new_incr(&self, newctx: ContextWrapper<T>, score: P) -> Self {
-        ScoredCtxWithActionCounter {
-            score,
+    fn new_incr(&self, newctx: ContextWrapper<T>) -> Self {
+        CtxWithActionCounter {
             el: newctx,
             counter: self.counter + 1,
         }
@@ -79,18 +72,19 @@ pub fn expand_exits_astar<W, T, E, H, P>(
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    H: SortableCtxWrapper<T, P>,
-    P: Clone + Ord + std::hash::Hash,
+    H: CtxWrapper<T>,
+    P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for exit in world.get_spot_exits(ctx.get().position()) {
         if exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
+            // TODO: disallow unvisited hybrid exits
             newctx.exit(world, exit);
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx, score.clone()), score);
+                    spot_heap.push(el.copy_update(newctx), score);
                 }
             }
         }
@@ -109,7 +103,7 @@ pub fn expand_actions_astar<W, T, E, H, P>(
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    H: SortableCtxWrapper<T, P>,
+    H: CtxWrapper<T>,
     P: Clone + Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
@@ -124,7 +118,7 @@ pub fn expand_actions_astar<W, T, E, H, P>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.new_incr(newctx, score.clone()), score);
+                    spot_heap.push(el.new_incr(newctx), score);
                 }
             }
         }
@@ -146,8 +140,8 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    H: SortableCtxWrapper<T, P>,
-    P: Clone + Ord + std::hash::Hash,
+    H: CtxWrapper<T>,
+    P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for &dest in world.get_area_spots(ctx.get().position()) {
@@ -158,7 +152,7 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx, score.clone()), score);
+                    spot_heap.push(el.copy_update(newctx), score);
                 }
             }
         }
@@ -179,8 +173,8 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    H: SortableCtxWrapper<T, P>,
-    P: Clone + Ord + std::hash::Hash,
+    H: CtxWrapper<T>,
+    P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     let movement_state = ctx.get().get_movement_state(world);
@@ -193,7 +187,7 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
                 let elapsed = newctx.elapsed();
                 if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
-                        spot_heap.push(el.copy_update(newctx, score.clone()), score);
+                        spot_heap.push(el.copy_update(newctx), score);
                     }
                 }
             }
@@ -230,7 +224,7 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
             let elapsed = newctx.elapsed();
             if !states_seen.contains(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx, score.clone()), score);
+                    spot_heap.push(el.copy_update(newctx), score);
                 }
             }
         }

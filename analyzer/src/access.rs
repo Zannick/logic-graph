@@ -262,21 +262,21 @@ where
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_SPOTS);
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(HeapElement { score, el: ctx }, score);
+        spot_heap.push(ctx, score);
     }
 
-    while let Some((el, _)) = spot_heap.pop() {
-        let ctx = &el.el;
+    while let Some((ctx, _)) = spot_heap.pop() {
         if ctx.get().position() == spot {
-            return Ok(el.el);
+            return Ok(ctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
+            println!("State previously seen");
             continue;
         }
         expand_astar(
             world,
-            &el,
-            &mut states_seen,
+            &ctx,
+            &states_seen,
             u32::MAX,
             &mut spot_heap,
             &score_func,
@@ -412,8 +412,7 @@ where
 
     if let Some(score) = score_func(&ctx) {
         spot_heap.push(
-            ScoredCtxWithActionCounter {
-                score,
+            CtxWithActionCounter {
                 el: ctx,
                 counter: 0,
             },
@@ -534,8 +533,7 @@ where
 
     if let Some(score) = score_func(&ctx) {
         spot_heap.push(
-            ScoredCtxWithActionCounter {
-                score,
+            CtxWithActionCounter {
                 el: ctx,
                 counter: 0,
             },
