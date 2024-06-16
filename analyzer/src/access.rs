@@ -270,7 +270,6 @@ where
             return Ok(ctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
-            println!("State previously seen");
             continue;
         }
         expand_astar(
