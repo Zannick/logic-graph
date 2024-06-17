@@ -450,8 +450,7 @@ where
         let mut old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
 
-        let history = self.queue.db().get_history(ctx.get()).unwrap();
-        let (elapsed, ..) = self.queue.db().get_best_times(ctx.get()).unwrap();
+        let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
 
         let solution = Arc::new(Solution { elapsed, history });
 
@@ -1005,7 +1004,10 @@ where
                             return;
                         }
                     }
-                    (sols, _) = self.solution_cvar.wait_timeout(sols, max_wait_time).unwrap();
+                    (sols, _) = self
+                        .solution_cvar
+                        .wait_timeout(sols, max_wait_time)
+                        .unwrap();
                     if self.finished.load(Ordering::Acquire) {
                         return;
                     }

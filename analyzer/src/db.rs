@@ -968,7 +968,7 @@ where
                         if self.world.won(&ctx) {
                             let sol = Arc::new(Solution {
                                 elapsed: new_elapsed,
-                                history: self.get_history_raw(new_ctx_key.clone()).unwrap(),
+                                history: self.get_history_raw(new_ctx_key.clone()).unwrap().0,
                             });
                             if self
                                 .solutions
@@ -1319,34 +1319,48 @@ where
         }
     }
 
-    fn get_history_raw(&self, mut state_key: Vec<u8>) -> Result<Vec<HistoryAlias<T>>, Error> {
+    fn get_history_raw(
+        &self,
+        mut state_key: Vec<u8>,
+    ) -> Result<(Vec<HistoryAlias<T>>, u32), Error> {
         assert!(self.quick_detect_2cycle(&state_key).is_ok());
         let mut vec = Vec::new();
-        loop {
-            if let Some(StateData { hist, prev, .. }) =
-                self.get_deserialize_state_data(&state_key)?
-            {
-                if !prev.is_empty() {
-                    assert!(
-                        hist.len() < TOO_MANY_STEPS,
-                        "History entry found in statedb way too long: {}. Last 24:\n{:?}",
-                        hist.len(),
-                        hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
-                    );
-                    if vec.len() >= TOO_MANY_STEPS {
-                        assert!(self.detect_cycle(state_key).is_ok());
-                    }
-                    assert!(
-                        vec.len() < TOO_MANY_STEPS,
-                        "Raw history found in statedb way too long ({}), possible loop. Last 24:\n{:?}",
-                        vec.len(),
-                        vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
-                    );
-                    state_key = prev;
-                    vec.push(hist);
-                } else {
-                    break;
-                }
+        let Some(StateData {
+            elapsed,
+            mut hist,
+            mut prev,
+            ..
+        }) = self.get_deserialize_state_data(&state_key)?
+        else {
+            return Err(Error {
+                message: format!(
+                    "Could not find state entry for {:?}",
+                    Self::deserialize_state(&state_key)
+                        .expect("Failed to deserialize while reporting an error")
+                ),
+            });
+        };
+        while !prev.is_empty() {
+            assert!(
+                hist.len() < TOO_MANY_STEPS,
+                "History entry found in statedb way too long: {}. Last 24:\n{:?}",
+                hist.len(),
+                hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
+            );
+            if vec.len() >= TOO_MANY_STEPS {
+                assert!(self.detect_cycle(state_key).is_ok());
+            }
+            assert!(
+                vec.len() < TOO_MANY_STEPS,
+                "Raw history found in statedb way too long ({}), possible loop. Last 24:\n{:?}",
+                vec.len(),
+                vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
+            );
+            state_key = prev;
+            vec.push(hist);
+            if let Some(next) = self.get_deserialize_state_data(&state_key)? {
+                hist = next.hist;
+                prev = next.prev;
             } else {
                 return Err(Error {
                     message: format!(
@@ -1357,11 +1371,12 @@ where
                 });
             }
         }
+
         vec.reverse();
-        Ok(vec.into_iter().flatten().collect())
+        Ok((vec.into_iter().flatten().collect(), elapsed))
     }
 
-    pub fn get_history(&self, ctx: &T) -> Result<Vec<HistoryAlias<T>>, Error> {
+    pub fn get_history(&self, ctx: &T) -> Result<(Vec<HistoryAlias<T>>, u32), Error> {
         let state_key = Self::serialize_state(ctx);
         self.get_history_raw(state_key)
     }
