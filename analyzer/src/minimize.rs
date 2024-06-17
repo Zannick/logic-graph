@@ -312,9 +312,7 @@ where
         let mut cprev_full = coll_bi;
 
         // For just 3+4 above, we can start at B + 1.
-        for (mut coll_ci, (.., ccomm)) in
-            collection_hist[coll_bi + 1..].iter().enumerate()
-        {
+        for (mut coll_ci, (.., ccomm)) in collection_hist[coll_bi + 1..].iter().enumerate() {
             // index is 0-based from slice start
             coll_ci += coll_bi + 1;
             if ccomm != comm {
@@ -368,10 +366,28 @@ where
             if let Some(reorder_full) = reorder_full.clone() {
                 if let Some(reordered) = rediscover_routes(
                     world,
-                    reorder_full,
+                    reorder_full.clone(),
                     collection_hist[coll_ai..coll_bi]
                         .iter()
                         .chain(&collection_hist[coll_ci..]),
+                    max_time,
+                    max_depth,
+                    max_states,
+                    &solution.history,
+                    shortest_paths,
+                ) {
+                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                        return Some(reordered);
+                    }
+                }
+                // Just after C
+                if let Some(reordered) = rediscover_routes(
+                    world,
+                    reorder_full,
+                    collection_hist[coll_ci..=coll_ci]
+                        .iter()
+                        .chain(&collection_hist[coll_ai..coll_bi])
+                        .chain(&collection_hist[coll_ci + 1..]),
                     max_time,
                     max_depth,
                     max_states,
