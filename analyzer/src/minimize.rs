@@ -284,7 +284,7 @@ where
     // a contiguous clique of size k will see O(k^2) (k^2-3k+2)/2 rearrangements in 1, k-1 in 2
     // 2 discontinuous cliques of size m and n will see 2n rearrangements in 3+4 (plus the m^2 and n^2 in 1+2)
     // Let's remove the n^2 factor of rearranging within a clique, let search do that.
-    for (coll_ai, (range_a, _, comm)) in collection_hist[..collection_hist.len() - 1]
+    'next_a: for (coll_ai, (range_a, _, comm)) in collection_hist[..collection_hist.len() - 1]
         .iter()
         .enumerate()
     {
@@ -342,7 +342,7 @@ where
             cprev_full = coll_ci;
             // early exit if replays already broke.
             if matches!((&reorder_just_a, &reorder_full), (&None, &None)) {
-                break;
+                continue 'next_a;
             }
 
             if let Some(reorder_a) = reorder_just_a.clone() {
@@ -397,6 +397,41 @@ where
                     if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
                         return Some(reordered);
                     }
+                }
+            }
+        }
+
+        // If we've managed to reroute almost everything, then we can try the last bit, in which case
+        // A was unnecessary
+        if let Some(all_but_a) = reorder_just_a {
+            if let Some(reordered) = rediscover_routes(
+                world,
+                all_but_a,
+                collection_hist[cprev_justa..].iter(),
+                max_time,
+                max_depth,
+                max_states,
+                &solution.history,
+                shortest_paths,
+            ) {
+                if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                    return Some(reordered);
+                }
+            }
+        }
+        if let Some(all_but_comm) = reorder_full {
+            if let Some(reordered) = rediscover_routes(
+                world,
+                all_but_comm,
+                collection_hist[cprev_full..].iter(),
+                max_time,
+                max_depth,
+                max_states,
+                &solution.history,
+                shortest_paths,
+            ) {
+                if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                    return Some(reordered);
                 }
             }
         }
