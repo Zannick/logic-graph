@@ -965,7 +965,7 @@ where
                 let mut sols = self.solutions.lock().unwrap();
                 while !self.finished.load(Ordering::Acquire) {
                     while let Some(sol) = sols.next_unprocessed() {
-                        if sol.elapsed > self.queue.max_time() {
+                        if sol.elapsed > sols.cutoff() {
                             // We should have dropped these from the collector already.
                             continue;
                         }

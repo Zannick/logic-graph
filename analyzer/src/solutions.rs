@@ -249,6 +249,10 @@ where
         self.best
     }
 
+    pub fn cutoff(&self) -> u32 {
+        self.best + self.best / 10
+    }
+
     /// Inserts a solution into the collection and returns a status detailing
     /// whether this solution was accepted and if it's unique.
     pub fn insert_solution<W, L, E, Wp>(
@@ -269,7 +273,7 @@ where
             self.best = solution.elapsed;
             write_graph(world, &self.startctx, &solution.history).unwrap();
             true
-        } else if solution.elapsed - self.best > self.best / 10 {
+        } else if solution.elapsed > self.cutoff() {
             log::info!(
                 "Excluding solution as too slow: {} > 1.1 * {}",
                 solution.elapsed,
@@ -440,6 +444,7 @@ where
 
     pub fn clean(&mut self) {
         let mut keys_to_drop = Vec::new();
+        let cutoff = self.cutoff();
         if let Some(min) = self
             .map
             .values()
@@ -448,7 +453,7 @@ where
             .min()
         {
             for (key, set) in self.map.iter_mut() {
-                set.retain(|sol| sol.elapsed - self.best <= self.best / 10);
+                set.retain(|sol| sol.elapsed <= cutoff);
                 if set.is_empty() {
                     keys_to_drop.push(key.clone());
                 }
