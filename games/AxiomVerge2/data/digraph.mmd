@@ -627,6 +627,33 @@ subgraph Antarctica
         Antarctica__Freight_Elevator__Controls(Controls);
     end
 end
+subgraph Ebih_Breach
+    subgraph Ebih_Breach__Portals_101[Portals 101]
+        Ebih_Breach__Portals_101__Save_Point(Save Point);
+        Ebih_Breach__Portals_101__East_6(East 6);
+        Ebih_Breach__Portals_101__West_Lower_Ledge(West Lower Ledge);
+        Ebih_Breach__Portals_101__West_Nook(West Nook);
+        Ebih_Breach__Portals_101__East_4(East 4);
+        Ebih_Breach__Portals_101__Portal_Stand(Portal Stand);
+        Ebih_Breach__Portals_101__Middle_Gap_East(Middle Gap East);
+        Ebih_Breach__Portals_101__Middle_Gap_West(Middle Gap West);
+        Ebih_Breach__Portals_101__West_Slope(West Slope);
+        Ebih_Breach__Portals_101__West_4(West 4);
+    end
+    subgraph Ebih_Breach__Drone_Tutorial[Drone Tutorial]
+        Ebih_Breach__Drone_Tutorial__West_6(West 6);
+        Ebih_Breach__Drone_Tutorial__Bottom(Bottom);
+        Ebih_Breach__Drone_Tutorial__First_Rocks(First Rocks);
+        Ebih_Breach__Drone_Tutorial__Second_Rocks(Second Rocks);
+        Ebih_Breach__Drone_Tutorial__Above_Rocks(Above Rocks);
+        Ebih_Breach__Drone_Tutorial__Upper_Mid_way(Upper Mid-way);
+        Ebih_Breach__Drone_Tutorial__Top(Top);
+        Ebih_Breach__Drone_Tutorial__West_4(West 4);
+    end
+    subgraph Ebih_Breach__Snowy_Rocks[Snowy Rocks]
+        Ebih_Breach__Snowy_Rocks__East_4(East 4);
+    end
+end
 subgraph Ebih
     subgraph Ebih__Base_Camp[Base Camp]
         Ebih__Base_Camp__East_11(East 11);
@@ -810,6 +837,12 @@ subgraph Ebih
     subgraph Ebih__Grid_25_2_6[Grid 25,2-6]
         Ebih__Grid_25_2_6__West_4(West 4);
         Ebih__Grid_25_2_6__Pit(Pit);
+        Ebih__Grid_25_2_6__Bush_Left(Bush Left);
+        Ebih__Grid_25_2_6__First_Rocks(First Rocks);
+        Ebih__Grid_25_2_6__Second_Rocks(Second Rocks);
+        Ebih__Grid_25_2_6__Above_Rocks(Above Rocks);
+        Ebih__Grid_25_2_6__Upper_Mid_way(Upper Mid-way);
+        Ebih__Grid_25_2_6__Top(Top);
     end
     subgraph Ebih__Grid_26_10_11[Grid 26,10-11]
         Ebih__Grid_26_10_11__West_11(West 11);
@@ -2992,6 +3025,19 @@ Antarctica__Freight_Elevator__Controls --> Interior__Dock_Elevator__Elevator
 Antarctica__Power_Room__Entry <--> Antarctica__Top__Power_Entry
 Antarctica__Shed__Interior <--> Antarctica__West__Shed_Entry
 Antarctica__West__Shed_Entry --> Antarctica__West__Helipad
+Ebih_Breach__Drone_Tutorial__Above_Rocks --> Ebih_Breach__Drone_Tutorial__Upper_Mid_way
+Ebih_Breach__Drone_Tutorial__Bottom --> Ebih_Breach__Drone_Tutorial__First_Rocks
+Ebih_Breach__Drone_Tutorial__Upper_Mid_way --> Ebih_Breach__Drone_Tutorial__Top
+Ebih_Breach__Drone_Tutorial__West_4 <--> Ebih_Breach__Portals_101__East_4
+Ebih_Breach__Drone_Tutorial__West_6 <--> Ebih_Breach__Portals_101__East_6
+Ebih_Breach__Portals_101__East_4 <--> Ebih_Breach__Portals_101__West_4
+Ebih_Breach__Portals_101__Portal_Stand --> Ebih_Breach__Portals_101__West_Slope
+Ebih_Breach__Portals_101__Save_Point --> Ebih_Breach__Portals_101__West_Lower_Ledge
+Ebih_Breach__Portals_101__West_4 --> Ebih_Breach__Snowy_Rocks__East_4
+Ebih_Breach__Portals_101__West_Lower_Ledge --> Ebih_Breach__Portals_101__West_Nook
+Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_East
+Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_West
+Ebih_Breach__Portals_101__West_Slope --> Ebih_Breach__Portals_101__West_4
 Ebih__Base_Camp__Building_Entry <--> Interior__Building_Interior__Entry
 Ebih__Base_Camp__Bunker_Entry <--> Interior__Bunker_Interior__Entry
 Ebih__Base_Camp__East_11 --> Ebih__Base_Camp__Top_Platform
@@ -3027,7 +3073,6 @@ Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__Middle_Platform
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__West_6
-Ebih__Drone_Room__Portal --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Portal_Exit --> Ebih__Drone_Room__Moving_Platform
 Ebih__Ebih_East__Dispenser --> Ebih__Ebih_East__Lower_Moving_Platform
 Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
@@ -3078,6 +3123,12 @@ Ebih__Grid_25_10_12__Top_Platform --> Ebih__Grid_25_10_12__West_10
 Ebih__Grid_25_10_12__West_10 <--> Ebih__Waterfall__East_10
 Ebih__Grid_25_10_12__West_11 <--> Ebih__Waterfall__East_11
 Ebih__Grid_25_10_12__West_12 <--> Ebih__Walled_Off__East_12
+Ebih__Grid_25_2_6__Above_Rocks --> Ebih__Grid_25_2_6__Upper_Mid_way
+Ebih__Grid_25_2_6__Bush_Left --> Ebih__Grid_25_2_6__First_Rocks
+Ebih__Grid_25_2_6__Pit --> Ebih__Grid_25_2_6__First_Rocks
+Ebih__Grid_25_2_6__Pit --> Menu__Kiengir_Map__Ebih_Drone_Pit_Flask
+Ebih__Grid_25_2_6__Pit --> Menu__Warp_Only__Kiengir
+Ebih__Grid_25_2_6__Upper_Mid_way --> Ebih__Grid_25_2_6__Top
 Ebih__Grid_25_2_6__West_4 --> Ebih__Grid_25_2_6__Pit
 Ebih__Grid_26_10_11__East_10 <--> Ebih__Observation_Tower_Room__West_10
 Ebih__Grid_26_10_11__Ledge --> Ebih__Grid_26_10_11__Upper_Platform
@@ -3900,6 +3951,7 @@ Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
 Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
+Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point

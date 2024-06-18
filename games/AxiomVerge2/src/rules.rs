@@ -2013,6 +2013,10 @@ pub fn access_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
     // $melee_cskip
     helper__melee_cskip!(ctx, world)
 }
+pub fn access_invoke_melee_cskip_and_fast_travel(ctx: &Context, world: &World) -> bool {
+    // $melee_cskip and Fast_Travel
+    (helper__melee_cskip!(ctx, world) && ctx.has(Item::Fast_Travel))
+}
 pub fn access_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $mist2
     helper__mist2!(ctx, world)
@@ -2285,6 +2289,10 @@ pub fn access_map__ebih__ebih_west__mid_save(ctx: &Context, world: &World) -> bo
 pub fn access_map__ebih__ebih_west__upper_save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__ebih_west__upper_save
     ctx.map__ebih__ebih_west__upper_save()
+}
+pub fn access_map__ebih_breach__portals_101__save(ctx: &Context, world: &World) -> bool {
+    // ^map__ebih_breach__portals_101__save
+    ctx.map__ebih_breach__portals_101__save()
 }
 pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__giguna_base__save
@@ -11307,6 +11315,32 @@ pub fn explain_invoke_melee_cskip(
         (res, refs)
     }
 }
+pub fn explain_invoke_melee_cskip_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee_cskip and Fast_Travel
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__melee_cskip!(ctx, world, edict);
+            edict.insert("$melee_cskip", format!("{:?}", res));
+            refs.push("$melee_cskip");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Fast_Travel);
+                edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_mist2(
     ctx: &Context,
     world: &World,
@@ -12402,6 +12436,18 @@ pub fn explain_map__ebih__ebih_west__upper_save(
         let r = ctx.map__ebih__ebih_west__upper_save();
         edict.insert("^map__ebih__ebih_west__upper_save", format!("{:?}", r));
         (r, vec!["^map__ebih__ebih_west__upper_save"])
+    }
+}
+pub fn explain_map__ebih_breach__portals_101__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__ebih_breach__portals_101__save
+    {
+        let r = ctx.map__ebih_breach__portals_101__save();
+        edict.insert("^map__ebih_breach__portals_101__save", format!("{:?}", r));
+        (r, vec!["^map__ebih_breach__portals_101__save"])
     }
 }
 pub fn explain_map__giguna__giguna_base__save(
@@ -18574,6 +18620,18 @@ pub fn observe_access_invoke_melee_cskip(
     // $melee_cskip
     hobserve__melee_cskip!(ctx, world, full_obs)
 }
+pub fn observe_access_invoke_melee_cskip_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee_cskip and Fast_Travel
+    (hobserve__melee_cskip!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_fast_travel();
+            ctx.has(Item::Fast_Travel)
+        }))
+}
 pub fn observe_access_invoke_mist2(
     ctx: &Context,
     world: &World,
@@ -19133,6 +19191,17 @@ pub fn observe_access_map__ebih__ebih_west__upper_save(
     {
         full_obs.observe_map__ebih__ebih_west__upper_save();
         ctx.map__ebih__ebih_west__upper_save()
+    }
+}
+pub fn observe_access_map__ebih_breach__portals_101__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__ebih_breach__portals_101__save
+    {
+        full_obs.observe_map__ebih_breach__portals_101__save();
+        ctx.map__ebih_breach__portals_101__save()
     }
 }
 pub fn observe_access_map__giguna__giguna_base__save(

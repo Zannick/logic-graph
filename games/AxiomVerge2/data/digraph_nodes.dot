@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="6"];
+        node[fillcolor="7"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -75,7 +75,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="3"];
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -247,7 +247,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="4"];
         {
             Annuna__Apocalypse__West [label = "", pos = "129.15,-27.916667!"];
             Annuna__Apocalypse__Northwest_Mid_air [label = "", pos = "130.05,-27.083333!"];
@@ -592,7 +592,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="2"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -634,7 +634,35 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="1"];
+        {
+            Ebih_Breach__Drone_Tutorial__West_6 [label = "", pos = "75.3,-59.333333!"];
+            Ebih_Breach__Drone_Tutorial__Bottom [label = "", pos = "75.6,-59.5!"];
+            Ebih_Breach__Drone_Tutorial__First_Rocks [label = "", pos = "76.35,-58.666667!"];
+            Ebih_Breach__Drone_Tutorial__Second_Rocks [label = "", pos = "76.8,-58.333333!"];
+            Ebih_Breach__Drone_Tutorial__Above_Rocks [label = "", pos = "76.5,-58.0!"];
+            Ebih_Breach__Drone_Tutorial__Upper_Mid_way [label = "", pos = "73.2,-57.375!"];
+            Ebih_Breach__Drone_Tutorial__Top [label = "", pos = "72.9,-56.25!"];
+            Ebih_Breach__Drone_Tutorial__West_4 [label = "", pos = "75.3,-56.25!"];
+        }
+        {
+            Ebih_Breach__Portals_101__Save_Point [label = "", pos = "73.575,-59.333333!"];
+            Ebih_Breach__Portals_101__East_6 [label = "", pos = "74.7,-59.333333!"];
+            Ebih_Breach__Portals_101__West_Lower_Ledge [label = "", pos = "72.6,-59.0!"];
+            Ebih_Breach__Portals_101__West_Nook [label = "", pos = "72.3,-58.333333!"];
+            Ebih_Breach__Portals_101__East_4 [label = "", pos = "74.7,-56.25!"];
+            Ebih_Breach__Portals_101__Portal_Stand [label = "", pos = "73.575,-57.333333!"];
+            Ebih_Breach__Portals_101__Middle_Gap_East [label = "", pos = "73.2,-57.583333!"];
+            Ebih_Breach__Portals_101__Middle_Gap_West [label = "", pos = "72.75,-57.583333!"];
+            Ebih_Breach__Portals_101__West_Slope [label = "", pos = "72.3,-57.0!"];
+            Ebih_Breach__Portals_101__West_4 [label = "", pos = "72.3,-56.25!"];
+        }
+        {
+            Ebih_Breach__Snowy_Rocks__East_4 [label = "", pos = "71.7,-56.25!"];
+        }
+    }
+    {
+        node[fillcolor="7"];
         {
             Ebih__Base_Camp__East_11 [label = "", pos = "92.85,-17.25!"];
             Ebih__Base_Camp__East_12 [label = "", pos = "92.85,-19.5!"];
@@ -686,10 +714,10 @@
             Ebih__Drone_Room__West_6 [label = "", pos = "72.15,-8.333333!"];
             Ebih__Drone_Room__West_4 [label = "", pos = "72.15,-6.25!"];
             Ebih__Drone_Room__Pit_Left [label = "", pos = "72.6,-9.0!"];
-            Ebih__Drone_Room__Portal [label = "", pos = "73.5,-9.333333!"];
+            Ebih__Drone_Room__Portal [label = "", pos = "73.575,-9.333333!"];
             Ebih__Drone_Room__Item [label = "", pos = "74.1,-9.5!"];
             Ebih__Drone_Room__Middle_Platform [label = "", pos = "73.2,-8.5!"];
-            Ebih__Drone_Room__Portal_Exit [label = "", pos = "73.5,-7.416667!"];
+            Ebih__Drone_Room__Portal_Exit [label = "", pos = "73.575,-7.375!"];
             Ebih__Drone_Room__Moving_Platform [label = "", pos = "73.5,-6.666667!"];
             Ebih__Drone_Room__Left_Platform [label = "", pos = "72.9,-6.666667!"];
             Ebih__Drone_Room__Tree [label = "", pos = "74.1,-7.666667!"];
@@ -775,6 +803,12 @@
         {
             Ebih__Grid_25_2_6__West_4 [label = "", pos = "75.15,-6.25!"];
             Ebih__Grid_25_2_6__Pit [label = "", pos = "75.9,-9.5!"];
+            Ebih__Grid_25_2_6__Bush_Left [label = "", pos = "75.6,-9.5!"];
+            Ebih__Grid_25_2_6__First_Rocks [label = "", pos = "76.35,-8.666667!"];
+            Ebih__Grid_25_2_6__Second_Rocks [label = "", pos = "76.8,-8.333333!"];
+            Ebih__Grid_25_2_6__Above_Rocks [label = "", pos = "76.5,-8.0!"];
+            Ebih__Grid_25_2_6__Upper_Mid_way [label = "", pos = "73.2,-7.375!"];
+            Ebih__Grid_25_2_6__Top [label = "", pos = "72.9,-6.25!"];
         }
         {
             Ebih__Grid_26_10_11__West_11 [label = "", pos = "78.15,-17.916667!"];
@@ -887,7 +921,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="2"];
         {
             Filter__Core__East [label = "", pos = "14.85,-26.25!"];
             Filter__Core__Bottom [label = "", pos = "13.05,-26.25!"];
@@ -923,7 +957,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="3"];
         {
             Giguna_Breach__Antechamber__North [label = "", pos = "49.5,-68.666667!"];
             Giguna_Breach__Antechamber__Middle [label = "", pos = "49.2,-69.166667!"];
@@ -1081,7 +1115,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="2"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -1526,7 +1560,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="6"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -1636,7 +1670,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="6"];
         {
             Glacier__Apocalypse_Entry__West_10 [label = "", pos = "132.15,-16.666667!"];
             Glacier__Apocalypse_Entry__Terminal [label = "", pos = "133.8,-16.666667!"];
@@ -1894,7 +1928,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="1"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -1933,7 +1967,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="4"];
         {
             Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
         }
@@ -2007,7 +2041,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="5"];
         {
             Irikar__Abandoned_Room__Empty_Pedestal [label = "", pos = "43.575,-44.5!"];
             Irikar__Abandoned_Room__Corner_Core [label = "", pos = "44.4,-44.5!"];
@@ -2231,7 +2265,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="5"];
         {
             node[shape=doublecircle, fillcolor="8"];
             Menu__Breach_Map__AGB_Bridge_Lower [label = "", pos = "105.0,-91.666667!"];
@@ -2445,7 +2479,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="1"];
         {
             Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
             Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];

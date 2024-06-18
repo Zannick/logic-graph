@@ -1849,15 +1849,11 @@ areas:
           to: Ebih > Drone Room > West 6
           time: 1.4
     - name: Portal
-      coord: [24.5, 5.6]
+      coord: [24.525, 5.6]
       local:
         - to: Pit Left
           jumps: 2
         - to: Item
-      exits:
-        - to: Portal Exit
-          req: ^mode == 'drone'
-          time: 300  # TODO: do breach area
     - name: Item
       coord: [24.7, 5.7]
       local:
@@ -1904,7 +1900,7 @@ areas:
           time: 1
           item_tags: [nearby_urn]
     - name: Portal Exit
-      coord: [24.5, 4.45]
+      coord: [24.525, 4.425]
       local:
         - to: West 6
           thru: [24.25, 4.7]
@@ -1998,9 +1994,108 @@ areas:
       coord: [25.3, 5.7]
       locations:
         - name: Item
+          canon: Ebih_Drone_Pit_Flask
           item: Flask
           tags: [flask]
-      # Exit back up may be possible with slingshot?
+        - name: Shockwave Flask
+          canon: Ebih_Drone_Pit_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+      exits:
+        - to: First Rocks
+          req: $hook
+          movement: base
+          jumps: 2
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_Drone_Pit_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Drone_Pit_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: [cskip]
+    - name: Bush Left
+      coord: [25.2, 5.7]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > Bottom
+      local:
+        - to: Pit
+      locations:
+        - name: Item
+          canon: Ebih_Drone_Pit_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Ebih_Drone_Pit_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+      exits:
+        - to: First Rocks
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: First Rocks
+      coord: [25.45, 5.2]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > First Rocks
+      local:
+        - to: Pit
+        - to: Bush Left
+        - to: Second Rocks
+          jumps: 3
+    - name: Second Rocks
+      coord: [25.6, 5.0]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > Second Rocks
+      local:
+        - to: First Rocks
+          thru: [25.5, 5.0]
+          jumps_down: [0, 6]
+        - to: Above Rocks
+          jumps: 3
+    - name: Above Rocks
+      coord: [25.5, 4.8]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > Above Rocks
+      local:
+        - to: Second Rocks
+          thru: [25.6, 4.8]
+          jumps_down: [0, 4]
+        - to: Upper Mid-way
+          jumps: 2
+      exits:
+        - to: Upper Mid-way
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1.25
+    - name: Upper Mid-way
+      coord: [24.4, 4.425]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > Upper Mid-way
+      local:
+        - to: Above Rocks
+        - to: Top
+          jumps: 4
+      exits:
+        - to: Top
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Top
+      coord: [24.3, 3.75]
+      data:
+        flipside: Ebih Breach > Drone Tutorial > Top
+      local:
+        - to: Upper Mid-way
+        - to: West 4
+
 
 - name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)

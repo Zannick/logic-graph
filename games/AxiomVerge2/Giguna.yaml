@@ -949,6 +949,8 @@ areas:
           movement: base
     - name: Mid-air Near Cache
       coord: [16.5, 12.2]
+      data:
+        flipside: SpotId::None
       local:
         - to: West Plains
       exits:

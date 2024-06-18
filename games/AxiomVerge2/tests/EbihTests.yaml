@@ -178,3 +178,15 @@ tests:
     route: |
       * Take hybrid exit Ebih > Drone Room > Item > Urn Fast Travel, collecting Remote_Drone
         Move to Menu > Kiengir Map > Giguna Ruins West ==> Giguna > Ruins West > Save Point (1)
+
+  - name: drone_tutorial
+    start: Ebih > Drone Room > Item
+    with:
+      - Remote_Drone
+    context:
+      indra: Ebih > Drone Room > Item
+      save: Ebih > Ebih West > Upper Save
+      portal: Ebih > Drone Room > Portal
+    can_reach: Ebih > Drone Room > Portal Exit
+    expect:
+      prev_area: Ebih Breach > Portals 101

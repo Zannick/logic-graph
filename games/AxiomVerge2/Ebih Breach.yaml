@@ -1,0 +1,211 @@
+name: Ebih Breach
+graph_offset: [0, 30]
+data:
+  realm: breach
+
+areas:
+- name: Portals 101  # MARK: Portals 101
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Stand
+  map:
+    save: [24, 5, 25, 6]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > MEB Drone
+  spots:
+    - name: Save Point
+      coord: [24.525, 5.6]
+      data:
+        flipside: Ebih > Drone Room > Portal
+      local:
+        - to: East 6
+          jumps: 1
+      exits:
+        - to: West Lower Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East 6
+      coord: [24.9, 5.6]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Drone Tutorial > West 6
+          tags: [xdoor]
+
+    - name: West Lower Ledge
+      coord: [24.2, 5.4]
+      local:
+        - to: Save Point
+      exits:
+        - to: West Nook
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West Nook
+      coord: [24.1, 5.0]
+      local:
+        - to: Save Point
+        - to: West Lower Ledge
+      exits:
+        - to: Middle Gap West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Middle Gap East
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+
+    - name: East 4
+      coord: [24.9, 3.75]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Drone Tutorial > West 4
+          tags: [xdoor]
+        - to: West 4
+          req: Drone_Hover
+          movement: base
+    - name: Portal Stand
+      coord: [24.525, 4.4]
+      data:
+        flipside: Ebih > Drone Room > Portal Exit
+      local:
+        - to: Middle Gap East
+        - to: Middle Gap West
+      exits:
+        - to: West Slope
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Middle Gap East
+      coord: [24.4, 4.55]
+      local:
+        - to: Save Point
+        - to: Middle Gap West
+        - to: Portal Stand
+          jumps: 1
+    - name: Middle Gap West
+      coord: [24.25, 4.55]
+      local:
+        - to: Middle Gap East
+        - to: Save Point
+        - to: West Slope
+          jumps: 2
+    - name: West Slope
+      coord: [24.1, 4.2]
+      local:
+        - to: Middle Gap West
+      exits:
+        - to: West 4
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+    - name: West 4
+      coord: [24.1, 3.75]
+      local:
+        - to: Middle Gap East
+        - to: Save Point
+      exits:
+        - to: Snowy Rocks > East 4
+          tags: [xdoor]
+        - to: East 4
+          req: Drone_Hover
+
+- name: Drone Tutorial  # MARK: Drone Tutorial
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 6
+      coord: [25.1, 5.6]
+      local:
+        - to: Bottom
+      exits:
+        - to: Portals 101 > East 6
+          tags: [xdoor]
+    - name: Bottom
+      coord: [25.2, 5.7]
+      data:
+        flipside: Ebih > Grid 25,2-6 > Bush Left
+      local:
+        - to: West 6
+          jumps: 1
+        - to: First Rocks
+          jumps: 3
+      exits:
+        - to: First Rocks
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: First Rocks
+      coord: [25.45, 5.2]
+      data:
+        flipside: Ebih > Grid 25,2-6 > First Rocks
+      local:
+        - to: West 6
+        - to: Bottom
+        - to: Second Rocks
+          jumps: 3
+    - name: Second Rocks
+      coord: [25.6, 5.0]
+      data:
+        flipside: Ebih > Grid 25,2-6 > Second Rocks
+      local:
+        - to: First Rocks
+          thru: [25.5, 5.0]
+        - to: Above Rocks
+          jumps: 3
+    - name: Above Rocks
+      coord: [25.5, 4.8]
+      data:
+        flipside: Ebih > Grid 25,2-6 > Above Rocks
+      local:
+        - to: Second Rocks
+          thru: [25.6, 4.8]
+        - to: Upper Mid-way
+          jumps: 2
+      exits:
+        - to: Upper Mid-way
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1.25
+    - name: Upper Mid-way
+      coord: [24.4, 4.425]
+      data:
+        flipside: Ebih > Grid 25,2-6 > Upper Mid-way
+      local:
+        - to: Above Rocks
+        - to: Top
+          jumps: 4
+      exits:
+        - to: Top
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Top
+      coord: [24.3, 3.75]
+      data:
+        flipside: Ebih > Grid 25,2-6 > Top
+      local:
+        - to: Upper Mid-way
+        - to: West 4
+    - name: West 4
+      coord: [25.1, 3.75]
+      local:
+        - to: Top
+      exits:
+        - to: Portals 101 > East 4
+          tags: [xdoor]
+
+- name: Snowy Rocks  # MARK: Snowy Rocks
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 4
+      coord: [23.9, 3.75]

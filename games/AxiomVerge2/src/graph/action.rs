@@ -83,6 +83,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_giguna__carnelian__lower_susar__caught__req(ctx, world),
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::access_giguna__carnelian__lower_susar__hack__req(ctx, world),
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_giguna__carnelian__switch__open_door__req(ctx, world),
@@ -1511,6 +1512,7 @@ impl world::Action for Action {
             ActionId::Annuna__Center_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__switch_ledge__open_door__do(ctx, world),
             ActionId::Annuna__Final_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Ebih_Breach__Portals_101__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -1831,6 +1833,9 @@ impl world::Action for Action {
                 rules::observe_action_annuna__west_climb__switch_ledge__open_door__do(ctx, world, full_obs);
             }
             ActionId::Annuna__Final_Save__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih_Breach__Portals_101__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
@@ -2394,6 +2399,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
     actions[ActionId::Annuna__Final_Save__Save_Point__Save] = Action {
         id: ActionId::Annuna__Final_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih_Breach__Portals_101__Save_Point__Save] = Action {
+        id: ActionId::Ebih_Breach__Portals_101__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     };
@@ -3046,6 +3056,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Annuna__Center_Save__Save_Point__Save => SpotId::Annuna__Center_Save__Save_Point,
         ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => SpotId::Annuna__West_Climb__Switch_Ledge,
         ActionId::Annuna__Final_Save__Save_Point__Save => SpotId::Annuna__Final_Save__Save_Point,
+        ActionId::Ebih_Breach__Portals_101__Save_Point__Save => SpotId::Ebih_Breach__Portals_101__Save_Point,
         ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
         ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
         ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,

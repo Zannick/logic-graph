@@ -6585,6 +6585,248 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Ebih_Breach__Portals_101__Save_Point] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__Save_Point__ex__West_Lower_Ledge_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__Save_Point__ex__West_Lower_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Ebih_Breach__Portals_101__Save_Point__Save.into_usize(),
+            end: ActionId::Ebih_Breach__Portals_101__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__East_6] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__East_6,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__East_6__ex__Drone_Tutorial__West_6_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__East_6__ex__Drone_Tutorial__West_6_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__West_Lower_Ledge] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__West_Lower_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__West_Lower_Ledge__ex__West_Nook_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__West_Lower_Ledge__ex__West_Nook_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__West_Nook] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__West_Nook,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__East_4] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__East_4,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__East_4__ex__Drone_Tutorial__West_4_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__East_4__ex__West_4_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__Portal_Stand] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__Portal_Stand,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__Portal_Stand__ex__West_Slope_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__Portal_Stand__ex__West_Slope_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__Middle_Gap_East] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__Middle_Gap_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__Middle_Gap_West] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__Middle_Gap_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__West_Slope] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__West_Slope,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Portals_101__West_4] = Spot {
+        id: SpotId::Ebih_Breach__Portals_101__West_4,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Portals_101__West_4__ex__East_4_1.into_usize(),
+            end: ExitId::Ebih_Breach__Portals_101__West_4__ex__Snowy_Rocks__East_4_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__West_6] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__West_6,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Drone_Tutorial__West_6__ex__Portals_101__East_6_1.into_usize(),
+            end: ExitId::Ebih_Breach__Drone_Tutorial__West_6__ex__Portals_101__East_6_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__Bottom] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__Bottom,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Drone_Tutorial__Bottom__ex__First_Rocks_1.into_usize(),
+            end: ExitId::Ebih_Breach__Drone_Tutorial__Bottom__ex__First_Rocks_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__First_Rocks] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__First_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__Second_Rocks] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__Second_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__Above_Rocks] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__Above_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Drone_Tutorial__Above_Rocks__ex__Upper_Mid_way_1.into_usize(),
+            end: ExitId::Ebih_Breach__Drone_Tutorial__Above_Rocks__ex__Upper_Mid_way_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__Upper_Mid_way] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__Upper_Mid_way,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Drone_Tutorial__Upper_Mid_way__ex__Top_1.into_usize(),
+            end: ExitId::Ebih_Breach__Drone_Tutorial__Upper_Mid_way__ex__Top_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__Top] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__Top,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Drone_Tutorial__West_4] = Spot {
+        id: SpotId::Ebih_Breach__Drone_Tutorial__West_4,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Drone_Tutorial__West_4__ex__Portals_101__East_4_1.into_usize(),
+            end: ExitId::Ebih_Breach__Drone_Tutorial__West_4__ex__Portals_101__East_4_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Snowy_Rocks__East_4] = Spot {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__East_4,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Ebih__Base_Camp__East_11] = Spot {
         id: SpotId::Ebih__Base_Camp__East_11,
         locations: Range {
@@ -8548,8 +8790,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1.into_usize(),
-            end: ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1.into_usize() + 1,
+            start: 0, end: 0,
         },
         actions: Range {
             start: 0, end: 0,
@@ -8662,8 +8903,85 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     spots[SpotId::Ebih__Grid_25_2_6__Pit] = Spot {
         id: SpotId::Ebih__Grid_25_2_6__Pit,
         locations: Range {
-            start: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize(),
-            end: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize() + 1,
+            start: LocationId::Ebih__Grid_25_2_6__Pit__Flask_Collection_Skip.into_usize(),
+            end: LocationId::Ebih__Grid_25_2_6__Pit__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Grid_25_2_6__Pit__ex__First_Rocks_1.into_usize(),
+            end: ExitId::Ebih__Grid_25_2_6__Pit__ex__First_Rocks_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__Bush_Left] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__Bush_Left,
+        locations: Range {
+            start: LocationId::Ebih__Grid_25_2_6__Bush_Left__Item.into_usize(),
+            end: LocationId::Ebih__Grid_25_2_6__Bush_Left__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Grid_25_2_6__Bush_Left__ex__First_Rocks_1.into_usize(),
+            end: ExitId::Ebih__Grid_25_2_6__Bush_Left__ex__First_Rocks_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__First_Rocks] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__First_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__Second_Rocks] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__Second_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__Above_Rocks] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__Above_Rocks,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Grid_25_2_6__Above_Rocks__ex__Upper_Mid_way_1.into_usize(),
+            end: ExitId::Ebih__Grid_25_2_6__Above_Rocks__ex__Upper_Mid_way_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__Upper_Mid_way] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__Upper_Mid_way,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Grid_25_2_6__Upper_Mid_way__ex__Top_1.into_usize(),
+            end: ExitId::Ebih__Grid_25_2_6__Upper_Mid_way__ex__Top_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_25_2_6__Top] = Spot {
+        id: SpotId::Ebih__Grid_25_2_6__Top,
+        locations: Range {
+            start: 0, end: 0,
         },
         exits: Range {
             start: 0, end: 0,
@@ -25454,7 +25772,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Breach_Map__MEB_Drone__ex__Ebih_Breach__Portals_101__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Breach_Map__MEB_Drone__ex__Ebih_Breach__Portals_101__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

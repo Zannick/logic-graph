@@ -1185,3 +1185,5 @@ areas:
   spots:
     - name: North
       coord: [16.5, 12.2]
+      data:
+        flipside: Giguna > Wasteland > Mid-air Near Cache

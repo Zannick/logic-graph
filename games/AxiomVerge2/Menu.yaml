@@ -961,6 +961,11 @@ areas:
 
     - name: MEB Drone
       coord: [24, 6]
+      exits:
+        - to: Ebih Breach > Portals 101 > Save Point
+          req: ^map__ebih_breach__portals_101__save
+          time: 12
+          tags: [warp]
     - name: MEB Peak
       coord: [24, 3]
     - name: MEB Southeast
