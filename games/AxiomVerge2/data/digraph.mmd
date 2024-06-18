@@ -974,6 +974,12 @@ subgraph Giguna_Breach
         Giguna_Breach__Fire_Room__East_11(East 11);
         Giguna_Breach__Fire_Room__West_Plateau(West Plateau);
         Giguna_Breach__Fire_Room__West_10(West 10);
+        Giguna_Breach__Fire_Room__High_Platform(High Platform);
+        Giguna_Breach__Fire_Room__Highest_Fire_West(Highest Fire West);
+        Giguna_Breach__Fire_Room__Highest_Fire_East(Highest Fire East);
+        Giguna_Breach__Fire_Room__Northeast_Lower_Ledge(Northeast Lower Ledge);
+        Giguna_Breach__Fire_Room__Northeast_Upper_Ledge(Northeast Upper Ledge);
+        Giguna_Breach__Fire_Room__East_10(East 10);
     end
     subgraph Giguna_Breach__Slingshot[Slingshot]
         Giguna_Breach__Slingshot__West(West);
@@ -982,6 +988,8 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Antechamber[Antechamber]
         Giguna_Breach__Antechamber__North(North);
+        Giguna_Breach__Antechamber__Middle(Middle);
+        Giguna_Breach__Antechamber__South(South);
     end
     subgraph Giguna_Breach__Central[Central]
         Giguna_Breach__Central__West_9(West 9);
@@ -1056,9 +1064,16 @@ subgraph Giguna_Breach
     subgraph Giguna_Breach__Upper_Machinery[Upper Machinery]
         Giguna_Breach__Upper_Machinery__West(West);
     end
+    subgraph Giguna_Breach__Gate_and_Wall[Gate and Wall]
+        Giguna_Breach__Gate_and_Wall__West_10(West 10);
+    end
+    subgraph Giguna_Breach__Crab_Rave[Crab Rave]
+        Giguna_Breach__Crab_Rave__North(North);
+    end
 end
 subgraph Giguna
     subgraph Giguna__Giguna_Northeast[Giguna Northeast]
+        Giguna__Giguna_Northeast__Portal_Hole(Portal Hole);
         Giguna__Giguna_Northeast__East_9(East 9);
         Giguna__Giguna_Northeast__Inner_Wall(Inner Wall);
         Giguna__Giguna_Northeast__Crow_Eating(Crow Eating);
@@ -1126,6 +1141,7 @@ subgraph Giguna
         Giguna__Wasteland__West_14(West 14);
         Giguna__Wasteland__East_12(East 12);
         Giguna__Wasteland__East_13(East 13);
+        Giguna__Wasteland__East_Bricks(East Bricks);
         Giguna__Wasteland__East_14(East 14);
         Giguna__Wasteland__East_Ledge(East Ledge);
         Giguna__Wasteland__Door_Left(Door Left);
@@ -1140,6 +1156,8 @@ subgraph Giguna
         Giguna__Wasteland__Westward_Hill(Westward Hill);
         Giguna__Wasteland__Upper_Cache(Upper Cache);
         Giguna__Wasteland__Cache_Ledge(Cache Ledge);
+        Giguna__Wasteland__Mid_air_Near_Cache(Mid-air Near Cache);
+        Giguna__Wasteland__Upper_Mid_air_Near_Cache(Upper Mid-air Near Cache);
         Giguna__Wasteland__Left_Platform_West(Left Platform West);
         Giguna__Wasteland__Left_Platform_East(Left Platform East);
         Giguna__Wasteland__Center_Platform_West(Center Platform West);
@@ -3138,6 +3156,8 @@ Filter__Scaffolding__Upper_West <--> Filter__Upper_Hallway__East
 Filter__Upper_Hallway__Corner --> Filter__Core__Bottom
 Filter__Upper_Hallway__West --> Filter__Core__East
 Giguna_Breach__Antechamber__North <--> Giguna_Breach__Fire_Room__South
+Giguna_Breach__Antechamber__South --> Giguna_Breach__Antechamber__North
+Giguna_Breach__Antechamber__South --> Giguna_Breach__Crab_Rave__North
 Giguna_Breach__Ascent__Bottom --> Giguna_Breach__Ascent__Top
 Giguna_Breach__Ascent__West_6 <--> Giguna_Breach__Peak__East_6
 Giguna_Breach__Ascent__West_9 <--> Giguna_Breach__Central__East_9
@@ -3155,11 +3175,22 @@ Giguna_Breach__Central__West_8 <--> Giguna_Breach__Chimney__East_8
 Giguna_Breach__Central__West_9 --> Giguna_Breach__Central__Wall
 Giguna_Breach__Central__West_9 <--> Giguna_Breach__Chimney__East_9
 Giguna_Breach__Chimney__East_7 <--> Giguna_Breach__Peak__West_7
+Giguna_Breach__Fire_Room__Cuesta --> Giguna_Breach__Fire_Room__Northeast_Lower_Ledge
+Giguna_Breach__Fire_Room__East_10 --> Giguna_Breach__Gate_and_Wall__West_10
 Giguna_Breach__Fire_Room__East_11 <--> Giguna_Breach__Slingshot__West
 Giguna_Breach__Fire_Room__First_Fire --> Giguna_Breach__Fire_Room__West_Plateau
+Giguna_Breach__Fire_Room__High_Platform <--> Giguna_Breach__Fire_Room__Highest_Fire_East
+Giguna_Breach__Fire_Room__High_Platform --> Giguna_Breach__Fire_Room__Northeast_Upper_Ledge
+Giguna_Breach__Fire_Room__Highest_Fire_East <--> Giguna_Breach__Fire_Room__Northeast_Upper_Ledge
+Giguna_Breach__Fire_Room__Highest_Fire_West --> Giguna_Breach__Fire_Room__West_10
+Giguna_Breach__Fire_Room__Northeast_Lower_Ledge --> Giguna_Breach__Fire_Room__East_10
+Giguna_Breach__Fire_Room__Northeast_Lower_Ledge --> Giguna_Breach__Fire_Room__Highest_Fire_East
+Giguna_Breach__Fire_Room__Northeast_Lower_Ledge --> Giguna_Breach__Fire_Room__West_10
 Giguna_Breach__Fire_Room__South --> Giguna_Breach__Fire_Room__Cuesta
+Giguna_Breach__Fire_Room__West_10 --> Giguna_Breach__Fire_Room__High_Platform
 Giguna_Breach__Fire_Room__West_10 <--> Giguna_Breach__Grid_14_10_11__East_10
 Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
+Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__Highest_Fire_West
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__West_10
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
@@ -3417,14 +3448,47 @@ Giguna__Separator__East_25 <--> Uhrum__West_Entrance__West_25
 Giguna__Separator__Lower_Brick <--> Giguna__Separator__Upper_Brick
 Giguna__Separator__Platform <--> Giguna__Separator__Switch
 Giguna__Wasteland__Bluff_by_Door --> Giguna__Wasteland__Door_Left
+Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Center_Plains
+Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Lower_Platform_West
+Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Upper_Cache
 Giguna__Wasteland__Center_Plains --> Giguna__Wasteland__Steeper_Hill
+Giguna__Wasteland__Center_Platform_East --> Giguna__Wasteland__Passage_East
+Giguna__Wasteland__Center_Platform_East <--> Giguna__Wasteland__Switch_Ledge
+Giguna__Wasteland__Center_Platform_West <--> Giguna__Wasteland__Left_Platform_East
+Giguna__Wasteland__Center_Platform_West --> Giguna__Wasteland__Switch_Approach
 Giguna__Wasteland__Door_Left <--> Giguna__Wasteland__Door_Right
+Giguna__Wasteland__Door_Left --> Giguna__Wasteland__Lower_Platform_East
+Giguna__Wasteland__East_Bricks --> Giguna__Wasteland__East_Ledge
+Giguna__Wasteland__East_Bricks --> Giguna__Wasteland__Ladder_Ledge
+Giguna__Wasteland__East_Bricks <--> Giguna__Wasteland__Lower_Platform_East
 Giguna__Wasteland__East_Ledge --> Giguna__Wasteland__East_12
+Giguna__Wasteland__Ladder_Ledge --> Giguna__Wasteland__Door_Left
+Giguna__Wasteland__Ladder_Ledge --> Giguna__Wasteland__Right_Platform_East
+Giguna__Wasteland__Left_Platform_East --> Giguna__Wasteland__Lower_Platform_West
+Giguna__Wasteland__Left_Platform_West --> Giguna__Wasteland__Center_Platform_West
+Giguna__Wasteland__Left_Platform_West --> Giguna__Wasteland__Door_Left
+Giguna__Wasteland__Left_Platform_West --> Giguna__Wasteland__Upper_Cache
 Giguna__Wasteland__Lower_Cliff --> Giguna__Wasteland__Middle_Cliff
 Giguna__Wasteland__Lower_Path_Right --> Giguna__Wasteland__Lower_Cliff
+Giguna__Wasteland__Lower_Platform_East --> Giguna__Wasteland__Ladder_Ledge
+Giguna__Wasteland__Lower_Platform_West --> Giguna__Wasteland__Ladder_Ledge
+Giguna__Wasteland__Lower_Platform_West <--> Giguna__Wasteland__Steeper_Hill
+Giguna__Wasteland__Mid_air_Near_Cache --> Giguna__Wasteland__Center_Platform_West
+Giguna__Wasteland__Mid_air_Near_Cache --> Giguna__Wasteland__Upper_Mid_air_Near_Cache
 Giguna__Wasteland__Middle_Cliff --> Giguna__Wasteland__Upper_Cliff
 Giguna__Wasteland__Passage_Cache --> Giguna__Wasteland__Lower_Path_Left
 Giguna__Wasteland__Passage_Cache <--> Giguna__Wasteland__Passage_East
+Giguna__Wasteland__Right_Platform_East --> Giguna__Wasteland__Switch_Ledge
+Giguna__Wasteland__Right_Platform_West --> Giguna__Wasteland__Center_Platform_East
+Giguna__Wasteland__Right_Platform_West --> Giguna__Wasteland__Passage_East
+Giguna__Wasteland__Right_Platform_West --> Giguna__Wasteland__Switch_Ledge
+Giguna__Wasteland__Steeper_Hill --> Giguna__Wasteland__Left_Platform_East
+Giguna__Wasteland__Switch_Ledge --> Giguna__Wasteland__Center_Platform_West
+Giguna__Wasteland__Tiny_Hill --> Giguna__Wasteland__Door_Left
+Giguna__Wasteland__Tiny_Hill --> Giguna__Wasteland__Lower_Platform_West
+Giguna__Wasteland__Upper_Mid_air_Near_Cache --> Giguna__Wasteland__Cache_Ledge
+Giguna__Wasteland__Upper_Mid_air_Near_Cache --> Giguna__Wasteland__Left_Platform_West
+Giguna__Wasteland__Upper_Mid_air_Near_Cache --> Giguna__Wasteland__Upper_Cache
 Giguna__Wasteland__West_12 <--> Giguna__West_Caverns__East_12
 Giguna__Wasteland__West_13 <--> Giguna__West_Caverns__East_13
 Giguna__West_Caverns__East_10 --> Giguna__West_Caverns__Column_2_Top

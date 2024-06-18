@@ -1627,6 +1627,9 @@ areas:
 
 - name: Grid 21,2-6  # MARK: Grid 21,2-6
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    portal_hidden: true
   spots:
     - name: West 6
       coord: [21.05, 5.6]
@@ -1783,6 +1786,8 @@ areas:
   on_entry: $reset_old_area(^newpos)
   reset:
     _platform_moved: false
+  data:
+    portal_start: Portal
   map:
     urn: [24, 5, 25, 6]
   datamap:
@@ -1852,7 +1857,7 @@ areas:
       exits:
         - to: Portal Exit
           req: ^mode == 'drone'
-          time: 300
+          time: 300  # TODO: do breach area
     - name: Item
       coord: [24.7, 5.7]
       local:

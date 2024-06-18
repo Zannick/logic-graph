@@ -12,12 +12,15 @@ areas:
     vault: [17, 10, 18, 11]
   data:
     save_point: Save Point
+    portal_start: Portal Hole
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Northeast
       gate: Menu > Kiengir Map > Giguna Northeast Gate
       vault: Menu > Kiengir Map > Giguna Northeast Flask
   spots:
+    - name: Portal Hole
+      coord: [18.475, 10.4]
     - name: East 9
       coord: [18.95, 8.75]
       exits:
@@ -681,12 +684,29 @@ areas:
     - name: East 13
       coord: [18.95, 12.7]
       local:
-        - to: Door Left
-        - to: Bluff by Door
-        - to: Tiny Hill
+        - to: East Bricks
       exits:
         - to: Ebih > Ebih West > West 13
           tags: [xshift]
+    - name: East Bricks
+      coord: [18.6, 12.7]
+      local:
+        - to: Door Left
+        - to: Bluff by Door
+        - to: Tiny Hill
+        - to: East 13
+      exits:
+        - to: East Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Platform East
+          req: $hook or $hover
+          movement: base
+        - to: Ladder Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 3
     - name: East 14
       coord: [18.95, 13.6]
       local:
@@ -717,8 +737,12 @@ areas:
         - to: Tiny Hill
       exits:
         - to: Door Right
-          req: Ebih_Wasteland_Door
+          req: Giguna_Wasteland_Door
           movement: base
+        - to: Lower Platform East
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Door Right
       coord: [18.65, 13.2]
       local:
@@ -729,7 +753,7 @@ areas:
           tags: [standing]
       exits:
         - to: Door Left
-          req: Ebih_Wasteland_Door
+          req: Giguna_Wasteland_Door
           movement: base
     - name: Bluff by Door
       coord: [18.4, 13.6]
@@ -749,11 +773,31 @@ areas:
       local:
         - to: Bluff by Door
         - to: Center Plains
+      exits:
+        - to: Door Left
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Platform West
+          req: $hook and $hover
+          movement: base
+          jumps: 4
     - name: Steeper Hill
       coord: [17.2, 13.3]
       local:
         - to: Center Plains
         - to: West Plains
+      exits:
+        - to: Lower Platform West
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+        - to: Left Platform East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Left Platform East
+          req: $mist2
+          movement: mist2
     - name: Center Plains
       coord: [17.4, 13.6]
       local:
@@ -780,25 +824,25 @@ areas:
           jumps: 2
       exits:
         - to: Passage Cache
-          req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and Giguna_Wasteland_Passage_H
           movement: base
       hybrid:
         - name: Clear Horizontal Passage Manually
           to: Passage Cache
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone'
           time: 15  # ?
         - name: Mist through Horizontal Passage
           to: Passage Cache
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and Nanite_Mist
           movement: mist1
         - name: Upgraded Mist through Horizontal Passage
           to: Passage Cache
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and $mist2
           movement: mist2
 
@@ -806,7 +850,7 @@ areas:
       coord: [15.4, 13.6]
       exits:
         - to: Passage East
-          req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and Giguna_Wasteland_Passage_H
           movement: base
         - to: Lower Path Left
           req: $grab
@@ -819,20 +863,20 @@ areas:
       hybrid:
         - name: Clear Horizontal Passage Manually
           to: Passage East
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone'
           time: 15  # ?
         - name: Mist through Horizontal Passage
           to: Passage East
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and Nanite_Mist
           movement: mist1
         - name: Upgraded Mist through Horizontal Passage
           to: Passage East
-          item: Ebih_Wasteland_Passage_H
-          canon: Ebih_Wasteland_Passage_H
+          item: Giguna_Wasteland_Passage_H
+          canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and $mist2
           movement: mist2
     - name: Westward Hill
@@ -846,32 +890,273 @@ areas:
     # Upper portion
     - name: Upper Cache
       coord: [16.4, 11.5]
+      data:
+        flipside: Giguna Breach > Antechamber > Middle
+        local:
+          - to: Cache Ledge
+          - to: West Plains
+        locations:
+          - name: Flask
+            canon: Giguna_Wasteland_Flask
+            item: Flask
+            tags: [flask]
+        exits:
+          - to: Left Platform West
+            req: $hover
+            movement: base
+          - to: Center Plains
+            req: $hover
+            movement: base
+        hybrid:
+          - name: Flask Collection Skip
+            canon: Giguna_Wasteland_Flask
+            item: Flask
+            to: Menu > Warp Only > Kiengir
+            req: $melee_cskip
+            tags: [cskip]
+          - name: Flask Fast Travel
+            canon: Giguna_Wasteland_Flask
+            item: Flask
+            to: ^map_spot
+            req: $melee_cskip and Fast_Travel
+            tags: [cskip]
     - name: Cache Ledge
       coord: [16.5, 11.8]
+      data:
+        flipside: Giguna Breach > Antechamber > South
+      local:
+        - to: Upper Cache
+          thru: [16.4, 11.7]
+          jumps: [1, 1]
+        - to: Upper Mid-air Near Cache
+        - to: Left Platform West
+        - to: West Plains
+        - to: Passage East
+      exits:
+        - to: Upper Cache
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Upper Cache
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Center Plains
+          req: $hover
+          movement: base
+        - to: Lower Platform West
+          req: $hook and $hover
+          movement: base
+    - name: Mid-air Near Cache
+      coord: [16.5, 12.2]
+      local:
+        - to: West Plains
+      exits:
+        - to: Upper Mid-air Near Cache
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Mid-air Near Cache
+          req: $mist2
+          movement: mist2
+        - to: Center Platform West
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Upper Mid-air Near Cache
+      coord: [16.5, 12.0]
+      local:
+        - to: Lower Cliff
+        - to: West Plains
+      exits:
+        - to: Cache Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Cache Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Cache
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Cache
+          req: $mist2
+          movement: mist2
+        - to: Left Platform West
+          req: $hook and $hover
+          movement: base
+          jumps: 1
     - name: Left Platform West
       coord: [16.75, 11.9]
+      local:
+        - to: Lower Cliff
+        - to: Cache Ledge
+          jumps: 1
+        - to: Left Platform East
+      exits:
+        - to: Upper Cache
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Center Platform West
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Door Left
+          req: $hook and $hover
+          movement: fast_hover
     - name: Left Platform East
       coord: [17.0, 12.0]
+      local:
+        - to: West Plains
+        - to: Steeper Hill
+      exits:
+        - to: Center Platform West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Platform West
+          req: $hover
+          movement: base
     - name: Center Platform West
       coord: [17.25, 11.7]
+      local:
+        - to: Center Platform East
+        - to: Passage East
+      exits:
+        - to: Left Platform East
+          req: $hook
+          movement: base
+        - to: Switch Approach
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
     - name: Center Platform East
       coord: [17.5, 11.8]
+      local:
+        - to: Center Platform West
+          jumps: 1
+        - to: Right Platform West
+        - to: Lower Platform West
+      exits:
+        - to: Switch Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Passage East
+          req: $hook
+          movement: fast_hover
+          jumps: 1
     - name: Right Platform West
       coord: [17.75, 12.05]
+      local:
+        - to: Right Platform East
+        - to: West Plains
+      exits:
+        - to: Switch Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Center Platform East
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Passage East
+          req: $hover
+          movement: base
     - name: Right Platform East
       coord: [17.95, 12.1]
+      local:
+        - to: Right Platform West
+          jumps: 1
+        - to: Ladder Ledge
+        - to: Lower Platform East
+      exits:
+        - to: Switch Ledge
+          req: $hook
+          movement: base
+          jumps: 2
     - name: Lower Platform West
       coord: [17.9, 13.0]
+      local:
+        - to: West Plains
+        - to: Lower Platform East
+          jumps: 1
+      exits:
+        - to: Ladder Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Steeper Hill
+          req: $hover
+          movement: base
     - name: Lower Platform East
       coord: [18.15, 13.0]
+      local:
+        - to: Lower Platform West
+          jumps: 1
+        - to: Door Left
+      exits:
+        - to: East Bricks
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: Ladder Ledge
+          req: $hook
+          movement: base
+          jumps: 3
     - name: Ladder Ledge
       coord: [18.15, 12.4]
+      local:
+        - to: Lower Platform West
+        - to: Lower Platform East
+        - to: Bluff by Door
+      exits:
+        - to: Door Left
+          req: $hover
+          movement: base
+        - to: Right Platform East
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Right Platform East
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Switch Ledge
       coord: [18.05, 11.6]
+      local:
+        - to: Switch Approach
+          jumps: 1
+        - to: Ladder Ledge
+        - to: Lower Platform East
+        - to: Right Platform East
+      exits:
+        - to: Center Platform East
+          req: $hover
+          movement: base
+        - to: Center Platform West
+          req: $hover
+          movement: base
     - name: Switch Approach
       coord: [18.3, 11.5]
+      local:
+        - to: Switch Ledge
+        - to: Switch
+      locations:
+        - name: Boomerang Switch
+          canon: Giguna_Wasteland_Switch
+          item: Giguna_Wasteland_Door
+          req: $boomerang
+          tags: [button]  # you can just leave immediately after throwing it, including fast travel
     - name: Switch
       coord: [18.5, 11.5]
+      local:
+        - to: Switch Approach
+      locations:
+        - name: Switch
+          canon: Giguna_Wasteland_Switch
+          item: Giguna_Wasteland_Door
+          req: $melee
+          tags: [button]
 
 - name: Giguna Base  # MARK: Giguna Base
   on_entry: $reset_old_area(^newpos)

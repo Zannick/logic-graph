@@ -240,7 +240,10 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_NORTHEAST_FLASK);
             }
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_WASTELAND_PASSAGE_H);
+                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
+            }
+            LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch | LocationId::Giguna__Wasteland__Switch__Switch => {
+                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_WASTELAND_SWITCH);
             }
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask | LocationId::Giguna__Ruins_Top__Flask__Flask => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_TOP_FLASK);
@@ -291,7 +294,7 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_ESCAPE);
             }
             LocationId::Glacier__Hammonds_End__Hammond__Note | LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_HAMMONDS_NOTE);
+                self.cbits5.insert(flags::ContextBits5::VISITED_HAMMONDS_NOTE);
             }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn | LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip | LocationId::Interior__Building_Interior__Corner__Urn => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_MELEE_CHARGE);
@@ -510,7 +513,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
             }
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM);
             }
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__HELIPAD__TABLET_LEDGE__TABLET);
@@ -711,7 +714,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_2);
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
@@ -1314,12 +1317,22 @@ impl Observer for FullObservation {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
+            AreaId::Giguna_Breach__Crab_Rave => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
             AreaId::Giguna_Breach__Cubby => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
             AreaId::Giguna_Breach__Fire_Room => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Giguna_Breach__Gate_and_Wall => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
@@ -2767,18 +2780,6 @@ impl FullObservation {
     pub fn clear_ebih_walled_off_wall(&mut self) {
         self.cbits2.remove(flags::ContextBits2::EBIH_WALLED_OFF_WALL);
     }
-    pub fn observe_ebih_wasteland_door(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
-    }
-    pub fn clear_ebih_wasteland_door(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::EBIH_WASTELAND_DOOR);
-    }
-    pub fn observe_ebih_wasteland_passage_h(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
-    }
-    pub fn clear_ebih_wasteland_passage_h(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
-    }
     pub fn observe_ebih_waterfall_block_left(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
     }
@@ -2844,16 +2845,16 @@ impl FullObservation {
         self.flask = IntegerObservation::Unknown;
     }
     pub fn observe_forbidden_knowledge(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::FORBIDDEN_KNOWLEDGE);
+        self.cbits2.insert(flags::ContextBits2::FORBIDDEN_KNOWLEDGE);
     }
     pub fn clear_forbidden_knowledge(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::FORBIDDEN_KNOWLEDGE);
+        self.cbits2.remove(flags::ContextBits2::FORBIDDEN_KNOWLEDGE);
     }
     pub fn observe_freedom_from_aansur(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::FREEDOM_FROM_AANSUR);
+        self.cbits2.insert(flags::ContextBits2::FREEDOM_FROM_AANSUR);
     }
     pub fn clear_freedom_from_aansur(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::FREEDOM_FROM_AANSUR);
+        self.cbits2.remove(flags::ContextBits2::FREEDOM_FROM_AANSUR);
     }
     pub fn observe_giguna_boulder(&mut self) {
         self.cbits3.insert(flags::ContextBits3::GIGUNA_BOULDER);
@@ -2908,6 +2909,18 @@ impl FullObservation {
     }
     pub fn clear_giguna_separator_bricks(&mut self) {
         self.cbits3.remove(flags::ContextBits3::GIGUNA_SEPARATOR_BRICKS);
+    }
+    pub fn observe_giguna_wasteland_door(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::GIGUNA_WASTELAND_DOOR);
+    }
+    pub fn clear_giguna_wasteland_door(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::GIGUNA_WASTELAND_DOOR);
+    }
+    pub fn observe_giguna_wasteland_passage_h(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::GIGUNA_WASTELAND_PASSAGE_H);
+    }
+    pub fn clear_giguna_wasteland_passage_h(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::GIGUNA_WASTELAND_PASSAGE_H);
     }
     pub fn observe_glacier_big_drop_rock(&mut self) {
         self.cbits3.insert(flags::ContextBits3::GLACIER_BIG_DROP_ROCK);

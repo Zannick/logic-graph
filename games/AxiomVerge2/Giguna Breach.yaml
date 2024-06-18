@@ -382,13 +382,18 @@ areas:
           jumps: 2
       exits:
         - to: West Plateau
-          req: $hook
-          time: 1.3
+          req: Slingshot_Hook
+          time: 1.3  # dodging projectiles required
     - name: Cuesta
       coord: [16.0, 10.45]
       local:
         - to: First Fire
         - to: South
+      exits:
+        - to: Northeast Lower Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
     - name: South
       coord: [16.5, 10.8]
       local:
@@ -398,7 +403,7 @@ areas:
           jumps: 1
       exits:
         - to: Cuesta
-          req: $hook
+          req: Slingshot_Hook
           time: 1.5
         - to: Antechamber > North
           tags: [ydoor]
@@ -416,14 +421,98 @@ areas:
         - to: Cuesta
       exits:
         - to: West 10
-          req: $hook
-          time: 0.7
+          req: Slingshot_Hook
+          time: 0.7  # dodging required
+        - to: Highest Fire West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
     - name: West 10
       coord: [15.1, 9.8]
       local:
         - to: West Plateau
       exits:
         - to: Grid 14,10-11 > East 10
+          tags: [xdoor]
+        - to: High Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+
+    - name: High Platform
+      coord: [15.4, 9.35]
+      local:
+        - to: West 10
+      exits:
+        - to: Highest Fire East
+          req: Drone_Hover
+          movement: base
+        - to: Northeast Upper Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Highest Fire West
+      coord: [15.5, 9.6]
+      local:
+        - to: West Plateau
+        - to: Highest Fire East
+      exits:
+        - to: West 10
+          req: Drone_Hover
+          movement: base
+    - name: Highest Fire East
+      coord: [15.9, 9.7]
+      local:
+        - to: Highest Fire West
+          jumps: 1
+        - to: Northeast Lower Ledge
+        - to: South
+      exits:
+        - to: Northeast Upper Ledge
+          req: Drone_Hover
+          movement: base
+        - to: High Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Northeast Lower Ledge
+      coord: [16.1, 9.9]
+      local:
+        - to: Northeast Upper Ledge
+          jumps: 1
+        - to: Highest Fire East
+          jumps: 1
+        - to: First Fire
+        - to: South
+          thru: [16.1, 10.1]
+      exits:
+        - to: East 10
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Highest Fire East
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: West 10
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Northeast Upper Ledge
+      coord: [16.3, 9.7]
+      local:
+        - to: Northeast Lower Ledge
+        - to: East 10
+      exits:
+        - to: Highest Fire East
+          req: Drone_Hover
+          movement: base
+    - name: East 10
+      coord: [16.9, 9.75]
+      local:
+        - to: Northeast Upper Ledge
+          jumps: 1
+      exits:
+        - to: Gate and Wall > West 10
           tags: [xdoor]
 
 - name: Slingshot  # MARK: Slingshot
@@ -463,10 +552,34 @@ areas:
   spots:
     - name: North
       coord: [16.5, 11.2]
+      local:
+        - to: Middle
+        - to: South
       exits:
         - to: Fire Room > South
           tags: [ydoor]
-    # TODO: Breach exit to Wasteland flask
+    - name: Middle
+      coord: [16.4, 11.5]
+      data:
+        flipside: Giguna > Wasteland > Upper Cache
+      local:
+        - to: North
+          jumps: 2
+        - to: South
+    - name: South
+      coord: [16.5, 11.8]
+      data:
+        flipside: Giguna > Wasteland > Cache Ledge
+      local:
+        - to: Middle
+          jumps: 2
+      exits:
+        - to: Crab Rave > North
+          tags: [ydoor]
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
 
 - name: Central  # MARK: Central
   on_entry: $reset_old_area(^newpos)
@@ -1060,3 +1173,15 @@ areas:
   spots:
     - name: West
       coord: [19.1, 18.75]
+
+- name: Gate and Wall  # MARK: Gate and Wall
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 10
+      coord: [17.1, 9.75]
+
+- name: Crab Rave  # MARK: Crab Rave
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [16.5, 12.2]

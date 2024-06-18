@@ -228,6 +228,8 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(ctx, world),
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
             LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
+            LocationId::Giguna__Wasteland__Switch__Switch => rules::access_invoke_melee(ctx, world),
+            LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch => rules::access_invoke_boomerang(ctx, world),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::access_invoke_more_refills(ctx, world),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
             LocationId::Giguna__West_Tower__Top__Tablet => true,
@@ -539,6 +541,8 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Switch__Switch => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
@@ -833,6 +837,8 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Switch__Switch => rules::explain_invoke_melee(ctx, world, edict),
+            LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::explain_invoke_more_refills(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
@@ -2369,8 +2375,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] = Location {
         id: LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually),
@@ -2378,8 +2384,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
@@ -2387,8 +2393,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage),
@@ -2396,8 +2402,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] = Location {
         id: LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually),
@@ -2405,8 +2411,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
@@ -2414,11 +2420,29 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage] = Location {
         id: LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage,
-        canonical: CanonId::Ebih_Wasteland_Passage_H,
-        item: Item::Ebih_Wasteland_Passage_H,
+        canonical: CanonId::Giguna_Wasteland_Passage_H,
+        item: Item::Giguna_Wasteland_Passage_H,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage),
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch] = Location {
+        id: LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch,
+        canonical: CanonId::Giguna_Wasteland_Switch,
+        item: Item::Giguna_Wasteland_Door,
+        price: Currency::Free,
+        time: 100,
+        exit_id: None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna__Wasteland__Switch__Switch] = Location {
+        id: LocationId::Giguna__Wasteland__Switch__Switch,
+        canonical: CanonId::Giguna_Wasteland_Switch,
+        item: Item::Giguna_Wasteland_Door,
+        price: Currency::Free,
+        time: 100,
+        exit_id: None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Base__Ruin__Item] = Location {
@@ -4433,6 +4457,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna__Wasteland__Door_Right__Health => SpotId::Giguna__Wasteland__Door_Right,
         LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_East,
         LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_Cache,
+        LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch => SpotId::Giguna__Wasteland__Switch_Approach,
+        LocationId::Giguna__Wasteland__Switch__Switch => SpotId::Giguna__Wasteland__Switch,
         LocationId::Giguna__Giguna_Base__Ruin__Item => SpotId::Giguna__Giguna_Base__Ruin,
         LocationId::Giguna__Giguna_Base__Table__News => SpotId::Giguna__Giguna_Base__Table,
         LocationId::Giguna__Ruins_East__Way_Up_High__Item => SpotId::Giguna__Ruins_East__Way_Up_High,

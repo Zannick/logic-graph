@@ -342,7 +342,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{26}, Big_Flask{11}]
+    [Flask{27}, Big_Flask{11}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >
@@ -468,6 +468,6 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Remote_Boomerang, Slingshot_Charge, Slingshot_Weapon, Ebih_Wasteland_Door]
+  unplaced_items: [Remote_Boomerang, Slingshot_Charge, Slingshot_Weapon]
   ignore_observations:
     - prev_area

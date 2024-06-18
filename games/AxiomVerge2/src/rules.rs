@@ -400,6 +400,10 @@ pub fn access_defeat_mus_a_m20(ctx: &Context, world: &World) -> bool {
     // Defeat_MUS_A_M20
     ctx.has(Item::Defeat_MUS_A_M20)
 }
+pub fn access_drone_hover(ctx: &Context, world: &World) -> bool {
+    // Drone_Hover
+    ctx.has(Item::Drone_Hover)
+}
 pub fn access_drone_melee_damage(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Damage
     ctx.has(Item::Drone_Melee_Damage)
@@ -745,10 +749,6 @@ pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_invoke_ho
 pub fn access_ebih_walled_off_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_Walled_Off_Wall
     ctx.has(Item::Ebih_Walled_Off_Wall)
-}
-pub fn access_ebih_wasteland_door(ctx: &Context, world: &World) -> bool {
-    // Ebih_Wasteland_Door
-    ctx.has(Item::Ebih_Wasteland_Door)
 }
 pub fn access_ebih_waterfall_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_Waterfall_Wall
@@ -1469,6 +1469,10 @@ pub fn access_giguna_separator_bricks(ctx: &Context, world: &World) -> bool {
 pub fn access_giguna_separator_bricks_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Giguna_Separator_Bricks and $hook
     (ctx.has(Item::Giguna_Separator_Bricks) && helper__hook!(ctx, world))
+}
+pub fn access_giguna_wasteland_door(ctx: &Context, world: &World) -> bool {
+    // Giguna_Wasteland_Door
+    ctx.has(Item::Giguna_Wasteland_Door)
 }
 pub fn access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
@@ -2398,10 +2402,6 @@ pub fn access_mode_eq_drone_and_apocalypse_seals_wall(ctx: &Context, world: &Wor
     // ^mode == 'drone' and Apocalypse_Seals_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Apocalypse_Seals_Wall))
 }
-pub fn access_mode_eq_drone_and_ebih_wasteland_passage_h(ctx: &Context, world: &World) -> bool {
-    // ^mode == 'drone' and Ebih_Wasteland_Passage_H
-    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Wasteland_Passage_H))
-}
 pub fn access_mode_eq_drone_and_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Left))
@@ -2413,6 +2413,10 @@ pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(ctx: &Context, world:
 pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
+}
+pub fn access_mode_eq_drone_and_giguna_wasteland_passage_h(ctx: &Context, world: &World) -> bool {
+    // ^mode == 'drone' and Giguna_Wasteland_Passage_H
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Wasteland_Passage_H))
 }
 pub fn access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
     ctx: &Context,
@@ -4839,6 +4843,18 @@ pub fn explain_defeat_mus_a_m20(
         (h, vec!["Defeat_MUS_A_M20"])
     }
 }
+pub fn explain_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Drone_Hover
+    {
+        let h = ctx.has(Item::Drone_Hover);
+        edict.insert("Drone_Hover", format!("{}", h));
+        (h, vec!["Drone_Hover"])
+    }
+}
 pub fn explain_drone_melee_damage(
     ctx: &Context,
     world: &World,
@@ -6073,18 +6089,6 @@ pub fn explain_ebih_walled_off_wall(
         let h = ctx.has(Item::Ebih_Walled_Off_Wall);
         edict.insert("Ebih_Walled_Off_Wall", format!("{}", h));
         (h, vec!["Ebih_Walled_Off_Wall"])
-    }
-}
-pub fn explain_ebih_wasteland_door(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Ebih_Wasteland_Door
-    {
-        let h = ctx.has(Item::Ebih_Wasteland_Door);
-        edict.insert("Ebih_Wasteland_Door", format!("{}", h));
-        (h, vec!["Ebih_Wasteland_Door"])
     }
 }
 pub fn explain_ebih_waterfall_wall(
@@ -8804,6 +8808,18 @@ pub fn explain_giguna_separator_bricks_and_invoke_hook(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_giguna_wasteland_door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Wasteland_Door
+    {
+        let h = ctx.has(Item::Giguna_Wasteland_Door);
+        edict.insert("Giguna_Wasteland_Door", format!("{}", h));
+        (h, vec!["Giguna_Wasteland_Door"])
     }
 }
 pub fn explain_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
@@ -12772,38 +12788,6 @@ pub fn explain_mode_eq_drone_and_apocalypse_seals_wall(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_ebih_wasteland_passage_h(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and Ebih_Wasteland_Passage_H
-    {
-        let mut left = {
-            let mut refs = vec!["^mode"];
-            let mut left = {
-                let r = ctx.mode();
-                edict.insert("^mode", format!("{:?}", r));
-                (r, vec!["^mode"])
-            };
-            let right = enums::Mode::Drone;
-            edict.insert("^mode", format!("{}", left.0));
-            refs.append(&mut left.1);
-            (left.0 == right, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Ebih_Wasteland_Passage_H);
-                edict.insert("Ebih_Wasteland_Passage_H", format!("{}", h));
-                (h, vec!["Ebih_Wasteland_Passage_H"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
     world: &World,
@@ -12894,6 +12878,38 @@ pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
                 let h = ctx.has(Item::Giguna_Dual_Path_Wall);
                 edict.insert("Giguna_Dual_Path_Wall", format!("{}", h));
                 (h, vec!["Giguna_Dual_Path_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_giguna_wasteland_passage_h(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Giguna_Wasteland_Passage_H
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Giguna_Wasteland_Passage_H);
+                edict.insert("Giguna_Wasteland_Passage_H", format!("{}", h));
+                (h, vec!["Giguna_Wasteland_Passage_H"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -15337,6 +15353,17 @@ pub fn observe_access_defeat_mus_a_m20(
         ctx.has(Item::Defeat_MUS_A_M20)
     }
 }
+pub fn observe_access_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Drone_Hover
+    {
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }
+}
 pub fn observe_access_drone_melee_damage(
     ctx: &Context,
     world: &World,
@@ -15990,17 +16017,6 @@ pub fn observe_access_ebih_walled_off_wall(
     {
         full_obs.observe_ebih_walled_off_wall();
         ctx.has(Item::Ebih_Walled_Off_Wall)
-    }
-}
-pub fn observe_access_ebih_wasteland_door(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Ebih_Wasteland_Door
-    {
-        full_obs.observe_ebih_wasteland_door();
-        ctx.has(Item::Ebih_Wasteland_Door)
     }
 }
 pub fn observe_access_ebih_waterfall_wall(
@@ -17391,6 +17407,17 @@ pub fn observe_access_giguna_separator_bricks_and_invoke_hook(
         full_obs.observe_giguna_separator_bricks();
         ctx.has(Item::Giguna_Separator_Bricks)
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_giguna_wasteland_door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Wasteland_Door
+    {
+        full_obs.observe_giguna_wasteland_door();
+        ctx.has(Item::Giguna_Wasteland_Door)
+    }
 }
 pub fn observe_access_glacier__hammonds_end__between_center_doors__ex__center_door_left_1__req(
     ctx: &Context,
@@ -19436,23 +19463,6 @@ pub fn observe_access_mode_eq_drone_and_apocalypse_seals_wall(
         ctx.has(Item::Apocalypse_Seals_Wall)
     }))
 }
-pub fn observe_access_mode_eq_drone_and_ebih_wasteland_passage_h(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^mode == 'drone' and Ebih_Wasteland_Passage_H
-    ({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
-    } && ({
-        full_obs.observe_ebih_wasteland_passage_h();
-        ctx.has(Item::Ebih_Wasteland_Passage_H)
-    }))
-}
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_left(
     ctx: &Context,
     world: &World,
@@ -19502,6 +19512,23 @@ pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
     } && ({
         full_obs.observe_giguna_dual_path_wall();
         ctx.has(Item::Giguna_Dual_Path_Wall)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_giguna_wasteland_passage_h(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Giguna_Wasteland_Passage_H
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_giguna_wasteland_passage_h();
+        ctx.has(Item::Giguna_Wasteland_Passage_H)
     }))
 }
 pub fn observe_access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
