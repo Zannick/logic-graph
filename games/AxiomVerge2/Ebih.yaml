@@ -1815,13 +1815,13 @@ areas:
       hybrid:
         - name: Flask Collection Skip
           canon: Ebih_West_Face_Flask
-          item: Flask
+          item: Big_Flask
           to: Menu > Warp Only > Kiengir
           req: $melee_cskip
           tags: [cskip]
         - name: Flask Fast Travel
           canon: Ebih_West_Face_Flask
-          item: Flask
+          item: Big_Flask
           to: ^map_spot
           req: $melee_cskip and Fast_Travel
           tags: [cskip]
@@ -2285,7 +2285,6 @@ areas:
       local:
         - to: Upper Mid-way
         - to: West 4
-
 
 - name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)

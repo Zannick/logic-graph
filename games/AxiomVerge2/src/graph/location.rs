@@ -2103,7 +2103,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip] = Location {
         id: LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip,
         canonical: CanonId::Ebih_West_Face_Flask,
-        item: Item::Flask,
+        item: Item::Big_Flask,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip),
@@ -2112,7 +2112,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel] = Location {
         id: LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel,
         canonical: CanonId::Ebih_West_Face_Flask,
-        item: Item::Flask,
+        item: Item::Big_Flask,
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel),
