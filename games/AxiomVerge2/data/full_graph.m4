@@ -1287,6 +1287,8 @@ digraph AxiomVerge2 {
     Giguna__Wasteland__Passage_Cache -> Giguna__Wasteland__Passage_East;
     Giguna__Wasteland__Passage_Cache -> Giguna__Wasteland__Passage_East;
     Giguna__Wasteland__Passage_Cache -> Giguna__Wasteland__Passage_East;
+    Giguna__Wasteland__Upper_Cache -> Giguna__Wasteland__Center_Plains;
+    Giguna__Wasteland__Upper_Cache -> Giguna__Wasteland__Left_Platform_West;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__Center_Plains;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__Lower_Platform_West;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__Upper_Cache;
@@ -4020,6 +4022,8 @@ digraph AxiomVerge2 {
     Giguna__Wasteland__Westward_Hill -> Giguna__Wasteland__Lower_Cliff;
     Giguna__Wasteland__Westward_Hill -> Giguna__Wasteland__West_Plains;
     Giguna__Wasteland__Westward_Hill -> Giguna__Wasteland__Passage_East;
+    Giguna__Wasteland__Upper_Cache -> Giguna__Wasteland__West_Plains;
+    Giguna__Wasteland__Upper_Cache -> Giguna__Wasteland__Cache_Ledge;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__West_Plains;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__Passage_East;
     Giguna__Wasteland__Cache_Ledge -> Giguna__Wasteland__Upper_Cache;

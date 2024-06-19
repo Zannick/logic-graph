@@ -251,8 +251,11 @@ impl Observer for FullObservation {
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
             }
+            LocationId::Giguna__Wasteland__Upper_Cache__Flask | LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => {
+                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_WASTELAND_FLASK);
+            }
             LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch | LocationId::Giguna__Wasteland__Switch__Switch => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_WASTELAND_SWITCH);
+                self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_WASTELAND_SWITCH);
             }
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask | LocationId::Giguna__Ruins_Top__Flask__Flask => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_TOP_FLASK);
@@ -492,7 +495,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA_BREACH__LABYRINTH__BUTTON__OPEN_GATE);
             }
             LocationId::Giguna__Carnelian__Vault__Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM);
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
@@ -708,7 +711,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1);
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2);
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_3);

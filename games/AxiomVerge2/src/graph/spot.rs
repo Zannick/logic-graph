@@ -12527,10 +12527,12 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     spots[SpotId::Giguna__Wasteland__Upper_Cache] = Spot {
         id: SpotId::Giguna__Wasteland__Upper_Cache,
         locations: Range {
-            start: 0, end: 0,
+            start: LocationId::Giguna__Wasteland__Upper_Cache__Flask.into_usize(),
+            end: LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask.into_usize() + 1,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1.into_usize(),
+            end: ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

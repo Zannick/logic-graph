@@ -892,40 +892,40 @@ areas:
       coord: [16.4, 11.5]
       data:
         flipside: Giguna Breach > Antechamber > Middle
-        local:
-          - to: Cache Ledge
-          - to: West Plains
-        locations:
-          - name: Flask
-            canon: Giguna_Wasteland_Flask
-            item: Flask
-            tags: [flask]
-          - name: Shockwave Flask
-            canon: Giguna_Wasteland_Flask
-            item: Flask
-            req: $shockwave
-            price: 100
-            tags: [shockwave]
-        exits:
-          - to: Left Platform West
-            req: $hover
-            movement: base
-          - to: Center Plains
-            req: $hover
-            movement: base
-        hybrid:
-          - name: Flask Collection Skip
-            canon: Giguna_Wasteland_Flask
-            item: Flask
-            to: Menu > Warp Only > Kiengir
-            req: $melee_cskip
-            tags: [cskip]
-          - name: Flask Fast Travel
-            canon: Giguna_Wasteland_Flask
-            item: Flask
-            to: ^map_spot
-            req: $melee_cskip and Fast_Travel
-            tags: [cskip]
+      local:
+        - to: Cache Ledge
+        - to: West Plains
+      locations:
+        - name: Flask
+          canon: Giguna_Wasteland_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Giguna_Wasteland_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Left Platform West
+          req: $hover
+          movement: base
+        - to: Center Plains
+          req: $hover
+          movement: base
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Giguna_Wasteland_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Wasteland_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: [cskip]
     - name: Cache Ledge
       coord: [16.5, 11.8]
       data:

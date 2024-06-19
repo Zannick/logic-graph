@@ -1378,6 +1378,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Switch_Ledge__ex__Center_Platform_West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Door_Left_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Lower_Platform_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Left_Platform_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -3421,6 +3425,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Switch_Ledge__ex__Center_Platform_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Door_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Lower_Platform_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Left_Platform_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -5392,6 +5400,10 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Switch_Ledge__ex__Center_Platform_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Door_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Wasteland__Tiny_Hill__ex__Lower_Platform_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Left_Platform_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -14593,6 +14605,34 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         dest: SpotId::Giguna__Wasteland__Passage_East,
         price: Currency::Energy(144),
         loc_id: Some(LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage),
+    };
+    exits[ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1] = Exit {
+        id: ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1,
+        time: 1228,
+        dest: SpotId::Giguna__Wasteland__Left_Platform_West,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1] = Exit {
+        id: ExitId::Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1,
+        time: 3508,
+        dest: SpotId::Giguna__Wasteland__Center_Plains,
+        price: Currency::Free,
+        loc_id: None,
+    };
+    exits[ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip] = Exit {
+        id: ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Kiengir,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip),
+    };
+    exits[ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel] = Exit {
+        id: ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel,
+        time: 200,
+        dest: SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
+        price: Currency::Free,
+        loc_id: Some(LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel),
     };
     exits[ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1] = Exit {
         id: ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1,
@@ -23820,6 +23860,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_East,
         ExitId::Giguna__Wasteland__Passage_Cache__ex__Passage_East_1 | ExitId:: Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1 | ExitId:: Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_2 => SpotId::Giguna__Wasteland__Passage_Cache,
         ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | ExitId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => SpotId::Giguna__Wasteland__Passage_Cache,
+        ExitId::Giguna__Wasteland__Upper_Cache__ex__Left_Platform_West_1 | ExitId:: Giguna__Wasteland__Upper_Cache__ex__Center_Plains_1 => SpotId::Giguna__Wasteland__Upper_Cache,
+        ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip | ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => SpotId::Giguna__Wasteland__Upper_Cache,
         ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 | ExitId:: Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_2 | ExitId:: Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1 | ExitId:: Giguna__Wasteland__Cache_Ledge__ex__Lower_Platform_West_1 => SpotId::Giguna__Wasteland__Cache_Ledge,
         ExitId::Giguna__Wasteland__Mid_air_Near_Cache__ex__Upper_Mid_air_Near_Cache_1 | ExitId:: Giguna__Wasteland__Mid_air_Near_Cache__ex__Upper_Mid_air_Near_Cache_2 | ExitId:: Giguna__Wasteland__Mid_air_Near_Cache__ex__Center_Platform_West_1 => SpotId::Giguna__Wasteland__Mid_air_Near_Cache,
         ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 | ExitId:: Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_2 | ExitId:: Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 | ExitId:: Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_2 | ExitId:: Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Left_Platform_West_1 => SpotId::Giguna__Wasteland__Upper_Mid_air_Near_Cache,
