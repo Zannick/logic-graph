@@ -900,6 +900,12 @@ areas:
             canon: Giguna_Wasteland_Flask
             item: Flask
             tags: [flask]
+          - name: Shockwave Flask
+            canon: Giguna_Wasteland_Flask
+            item: Flask
+            req: $shockwave
+            price: 100
+            tags: [shockwave]
         exits:
           - to: Left Platform West
             req: $hover

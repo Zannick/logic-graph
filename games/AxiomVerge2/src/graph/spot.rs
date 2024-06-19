@@ -8082,7 +8082,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1.into_usize(),
-            end: ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_2.into_usize() + 1,
+            end: ExitId::Ebih__Ebih_West__High_Platform__ex__Mid_air_near_Flask_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -8094,7 +8094,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Ebih__Ebih_West__High_Ledge__ex__Highest_Platform_1.into_usize(),
+            end: ExitId::Ebih__Ebih_West__High_Ledge__ex__Highest_Platform_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -8108,6 +8109,70 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         exits: Range {
             start: ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1.into_usize(),
             end: ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_West__Highest_Platform] = Spot {
+        id: SpotId::Ebih__Ebih_West__Highest_Platform,
+        locations: Range {
+            start: LocationId::Ebih__Ebih_West__Highest_Platform__Flask.into_usize(),
+            end: LocationId::Ebih__Ebih_West__Highest_Platform__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_West__Highest_Platform__ex__Giguna__Giguna_Northeast__Inner_Wall_1.into_usize(),
+            end: ExitId::Ebih__Ebih_West__Highest_Platform__ex__West_Face__Lower_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_West__Mid_air_near_Flask] = Spot {
+        id: SpotId::Ebih__Ebih_West__Mid_air_near_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_West__Mid_air_near_Flask__ex__Giguna__Giguna_Northeast__Inner_Wall_1.into_usize(),
+            end: ExitId::Ebih__Ebih_West__Mid_air_near_Flask__ex__Highest_Platform_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_West__High_Above_Flask] = Spot {
+        id: SpotId::Ebih__Ebih_West__High_Above_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_West__Above_the_Trees] = Spot {
+        id: SpotId::Ebih__Ebih_West__Above_the_Trees,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_West__Above_the_Trees__ex__High_Above_Flask_1.into_usize(),
+            end: ExitId::Ebih__Ebih_West__Above_the_Trees__ex__High_Above_Flask_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_West__Middle_North] = Spot {
+        id: SpotId::Ebih__Ebih_West__Middle_North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
         },
         actions: Range {
             start: 0, end: 0,
@@ -8599,6 +8664,83 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         exits: Range {
             start: ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1.into_usize(),
             end: ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Grid_21_2_6__West_3] = Spot {
+        id: SpotId::Ebih__Grid_21_2_6__West_3,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__West_Face__East] = Spot {
+        id: SpotId::Ebih__West_Face__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__West_Face__East__ex__Grid_21_2_6__West_3_1.into_usize(),
+            end: ExitId::Ebih__West_Face__East__ex__Grid_21_2_6__West_3_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__West_Face__Upper_Ledge] = Spot {
+        id: SpotId::Ebih__West_Face__Upper_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__West_Face__Lower_Ledge] = Spot {
+        id: SpotId::Ebih__West_Face__Lower_Ledge,
+        locations: Range {
+            start: LocationId::Ebih__West_Face__Lower_Ledge__Flask.into_usize(),
+            end: LocationId::Ebih__West_Face__Lower_Ledge__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__West_Face__Lower_Ledge__ex__Upper_Ledge_1.into_usize(),
+            end: ExitId::Ebih__West_Face__Lower_Ledge__ex__Upper_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__West_Face__Southwest] = Spot {
+        id: SpotId::Ebih__West_Face__Southwest,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__West_Face__Southwest__ex__Ebih_West__Middle_North_1.into_usize(),
+            end: ExitId::Ebih__West_Face__Southwest__ex__Ebih_West__Middle_North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__West_Face__South] = Spot {
+        id: SpotId::Ebih__West_Face__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__West_Face__South__ex__Ebih_West__Above_the_Trees_1.into_usize(),
+            end: ExitId::Ebih__West_Face__South__ex__Ebih_West__Above_the_Trees_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -24795,6 +24937,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1] = Spot {
         id: SpotId::Menu__Kiengir_Map__Terminal_Breakthrough_1,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_West_Face_Flask] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_West_Face_Flask,
         locations: Range {
             start: 0, end: 0,
         },

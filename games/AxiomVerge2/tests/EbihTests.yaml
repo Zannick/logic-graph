@@ -187,6 +187,5 @@ tests:
       indra: Ebih > Drone Room > Item
       save: Ebih > Ebih West > Upper Save
       portal: Ebih > Drone Room > Portal
+      mode: drone
     can_reach: Ebih > Drone Room > Portal Exit
-    expect:
-      prev_area: Ebih Breach > Portals 101

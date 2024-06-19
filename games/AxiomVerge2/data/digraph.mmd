@@ -765,6 +765,11 @@ subgraph Ebih
         Ebih__Ebih_West__High_Platform(High Platform);
         Ebih__Ebih_West__High_Ledge(High Ledge);
         Ebih__Ebih_West__East_6(East 6);
+        Ebih__Ebih_West__Highest_Platform(Highest Platform);
+        Ebih__Ebih_West__Mid_air_near_Flask(Mid-air near Flask);
+        Ebih__Ebih_West__High_Above_Flask(High Above Flask);
+        Ebih__Ebih_West__Above_the_Trees(Above the Trees);
+        Ebih__Ebih_West__Middle_North(Middle North);
         Ebih__Ebih_West__East_8(East 8);
         Ebih__Ebih_West__Middle_Middle(Middle Middle);
         Ebih__Ebih_West__Middle_Cliff(Middle Cliff);
@@ -807,6 +812,14 @@ subgraph Ebih
         Ebih__Grid_21_2_6__West_6(West 6);
         Ebih__Grid_21_2_6__Portal_Stand(Portal Stand);
         Ebih__Grid_21_2_6__East_6(East 6);
+        Ebih__Grid_21_2_6__West_3(West 3);
+    end
+    subgraph Ebih__West_Face[West Face]
+        Ebih__West_Face__East(East);
+        Ebih__West_Face__Upper_Ledge(Upper Ledge);
+        Ebih__West_Face__Lower_Ledge(Lower Ledge);
+        Ebih__West_Face__Southwest(Southwest);
+        Ebih__West_Face__South(South);
     end
     subgraph Ebih__Boss_Room[Boss Room]
         Ebih__Boss_Room__West_6(West 6);
@@ -2364,6 +2377,7 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Alu_Health(Ebih Alu Health);
         Menu__Kiengir_Map__Ebih_Drone_Pit_Flask(Ebih Drone Pit Flask);
         Menu__Kiengir_Map__Terminal_Breakthrough_1(Terminal Breakthrough 1);
+        Menu__Kiengir_Map__Ebih_West_Face_Flask(Ebih West Face Flask);
         Menu__Kiengir_Map__Weekly_Notes_2_27_2053(Weekly Notes 2/27/2053);
         Menu__Kiengir_Map__Compass(Compass);
         Menu__Kiengir_Map__Dr_Gloria(Dr. Gloria);
@@ -3084,6 +3098,7 @@ Ebih__Ebih_East__West_8 <--> Ebih__Waterfall__East_8
 Ebih__Ebih_West__Above_Door <--> Ebih__Ebih_West__Below_Door
 Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Refill_Station
 Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Small_Gap
+Ebih__Ebih_West__Above_the_Trees --> Ebih__Ebih_West__High_Above_Flask
 Ebih__Ebih_West__Alcove_Entrance --> Ebih__Ebih_West__Above_Alcove
 Ebih__Ebih_West__Below_Door --> Ebih__Ebih_West__Refill_Station
 Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Alcove_Entrance
@@ -3097,10 +3112,19 @@ Ebih__Ebih_West__East_7 <--> Ebih__Waterfall__West_7
 Ebih__Ebih_West__East_8 <--> Ebih__Waterfall__West_8
 Ebih__Ebih_West__East_9 <--> Ebih__Waterfall__West_9
 Ebih__Ebih_West__Giguna_Pillar --> Giguna__Giguna_Northeast__Inner_Wall
+Ebih__Ebih_West__High_Ledge <--> Ebih__Ebih_West__Highest_Platform
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__High_Ledge
+Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__Highest_Platform
+Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__Mid_air_near_Flask
+Ebih__Ebih_West__Highest_Platform --> Ebih__West_Face__Lower_Ledge
+Ebih__Ebih_West__Highest_Platform --> Giguna__Giguna_Northeast__Inner_Wall
+Ebih__Ebih_West__Highest_Platform --> Menu__Kiengir_Map__Ebih_West_Flask
+Ebih__Ebih_West__Highest_Platform --> Menu__Warp_Only__Kiengir
 Ebih__Ebih_West__Left_of_Gap <--> Ebih__Ebih_West__Small_Gap
 Ebih__Ebih_West__Lower_Hill --> Ebih__Ebih_West__Left_of_Gap
 Ebih__Ebih_West__Lower_Platform --> Ebih__Ebih_West__Lower_Cliff
+Ebih__Ebih_West__Mid_air_near_Flask --> Ebih__Ebih_West__Highest_Platform
+Ebih__Ebih_West__Mid_air_near_Flask --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
 Ebih__Ebih_West__West_11 <--> Giguna__Giguna_Northeast__East_11
@@ -3193,6 +3217,12 @@ Ebih__Waterfall__Wall_Right --> Ebih__Waterfall__Lower_West_Tree
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
+Ebih__West_Face__East --> Ebih__Grid_21_2_6__West_3
+Ebih__West_Face__Lower_Ledge --> Ebih__West_Face__Upper_Ledge
+Ebih__West_Face__Lower_Ledge --> Menu__Kiengir_Map__Ebih_West_Face_Flask
+Ebih__West_Face__Lower_Ledge --> Menu__Warp_Only__Kiengir
+Ebih__West_Face__South --> Ebih__Ebih_West__Above_the_Trees
+Ebih__West_Face__Southwest --> Ebih__Ebih_West__Middle_North
 Filter__Core__Bottom --> Filter__Core__Terminal_East
 Filter__Core__Catwalk_West --> Filter__Core__West
 Filter__Core__Terminal_East --> Filter__Core__Catwalk_West

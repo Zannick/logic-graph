@@ -173,6 +173,8 @@ time:  # MARK: time
   fast_hover.2: 0.50
   base.1: 0.35
   fall.2: 0.2
+  mist1.2: 0.8
+  mist2.2: 0.4
 
 warps:  # MARK: warps
   # initial savewarp pre-amashi
@@ -342,7 +344,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{27}, Big_Flask{11}]
+    [Flask{28}, Big_Flask{12}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >

@@ -1219,6 +1219,13 @@ areas:
           req: $hook
           movement: base
           jumps: 1
+        - to: Mid-air near Flask
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Highest Platform
+          req: $mist2
+          movement: mist2
     - name: High Ledge
       coord: [20.55, 5.8]
       local:
@@ -1226,6 +1233,13 @@ areas:
         - to: Upper Save
         - to: East 6
           jumps: 2
+        - to: Above Chute
+          thru: [20.5, 6.0]
+      exits:
+        - to: Highest Platform
+          req: $hover
+          movement: base
+          jumps: 1
     - name: East 6
       coord: [20.95, 5.6]
       local:
@@ -1233,6 +1247,105 @@ areas:
       exits:
         - to: Grid 21,2-6 > West 6
           tags: [xshift]
+
+    - name: Highest Platform
+      coord: [19.7, 5.55]
+      local:
+        - to: Block Left
+          thru: [20.0, 8.1]
+        - to: Lower Save
+          thru: [20.0, 8.1]
+        - to: Middle Middle
+        - to: Medium High Platform
+        - to: Alcove Entrance
+          jumps_down: 1
+      locations:
+        - name: Flask
+          canon: Ebih_West_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Ebih_West_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: High Ledge
+          req: $hover
+          movement: base
+        - to: Giguna > Giguna Northeast > Inner Wall
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: West Face > Lower Ledge
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [yshift, -mist1.2]
+        - to: West Face > Lower Ledge
+          req: $mist2
+          movement: mist2
+          penalty_tags: [yshift, -mist2.2]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_West_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_West_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: [cskip]
+    - name: Mid-air near Flask
+      coord: [19.9, 5.8]
+      local:
+        - to: Giguna Pillar
+      exits:
+        - to: Highest Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Platform
+          req: $mist2
+          movement: mist2
+        - to: Giguna > Giguna Northeast > Inner Wall
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: High Above Flask
+      coord: [19.9, 5.1]
+      local:
+        - to: Highest Platform
+    - name: Above the Trees
+      coord: [20.4, 5.1]
+      local:
+        - to: Mid-air near Flask
+        - to: Middle Middle
+          thru: [20.2, 7.0]
+        - to: Block Left
+          thru: [20.0, 8.1]
+        - to: Lower Save
+          thru: [20.0, 8.1]
+        - to: Alcove Entrance
+      exits:
+        - to: High Above Flask
+          req: $hover
+          movement: base
+        - to: High Above Flask
+          req: Nanite_Mist
+          movement: mist1
+        - to: High Above Flask
+          req: $mist2
+          movement: mist2
+    - name: Middle North
+      coord: [20.05, 5.1]
+      local:
+        - to: East 6
+        - to: Upper Save
+        - to: Above Chute
+          thru: [20.5, 6.0]
+
     # Middle-ish
     - name: East 8
       coord: [20.95, 7.95]
@@ -1652,6 +1765,77 @@ areas:
         - to: Boss Room > West 6
           tags: [xshift]
 
+    - name: West 3
+      coord: [21.05, 2.2]
+
+- name: West Face  # MARK: West Face
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [20, 4, 21, 5]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Ebih West Face Flask
+  spots:
+    - name: East
+      coord: [20.95, 2.2]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Grid 21,2-6 > West 3
+          tags: [xshift]
+    - name: Upper Ledge
+      coord: [20.85, 2.2]
+      local:
+        - to: East
+        - to: Lower Ledge
+    - name: Lower Ledge
+      coord: [20.3, 4.3]
+      local:
+        - to: Southwest
+        - to: South
+          thru: [20.3, 4.6]
+      locations:
+        - name: Flask
+          canon: Ebih_West_Face_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Ebih_West_Face_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_West_Face_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_West_Face_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: [cskip]
+    - name: Southwest
+      coord: [20.05, 4.9]
+      exits:
+        - to: Ebih West > Middle North
+          tags: [yshift]
+    - name: South
+      coord: [20.4, 4.9]
+      exits:
+        - to: Ebih West > Above the Trees
+          tags: [yshift]
+
 - name: Boss Room  # MARK: Boss Room
   on_entry: $reset_old_area(^newpos)
   map:
@@ -1818,6 +2002,8 @@ areas:
           tags: [xshift]
     - name: Pit Left
       coord: [24.2, 5.4]
+      data:
+        flipside: Ebih Breach > Portals 101 > West Lower Ledge
       local:
         - to: Portal
       exits:
@@ -1850,6 +2036,8 @@ areas:
           time: 1.4
     - name: Portal
       coord: [24.525, 5.6]
+      data:
+        flipside: Ebih Breach > Portals 101 > Save Point
       local:
         - to: Pit Left
           jumps: 2
@@ -2001,6 +2189,7 @@ areas:
           canon: Ebih_Drone_Pit_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
       exits:
         - to: First Rocks
@@ -2035,6 +2224,7 @@ areas:
           canon: Ebih_Drone_Pit_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
       exits:
         - to: First Rocks

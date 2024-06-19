@@ -42,6 +42,8 @@ areas:
 
     - name: West Lower Ledge
       coord: [24.2, 5.4]
+      data:
+        flipside: Ebih > Drone Room > Pit Left
       local:
         - to: Save Point
       exits:

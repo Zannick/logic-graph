@@ -752,6 +752,11 @@
             Ebih__Ebih_West__High_Platform [label = "", pos = "61.2,-9.958333!"];
             Ebih__Ebih_West__High_Ledge [label = "", pos = "61.65,-9.666667!"];
             Ebih__Ebih_West__East_6 [label = "", pos = "62.85,-9.333333!"];
+            Ebih__Ebih_West__Highest_Platform [label = "", pos = "59.1,-9.25!"];
+            Ebih__Ebih_West__Mid_air_near_Flask [label = "", pos = "59.7,-9.666667!"];
+            Ebih__Ebih_West__High_Above_Flask [label = "", pos = "59.7,-8.5!"];
+            Ebih__Ebih_West__Above_the_Trees [label = "", pos = "61.2,-8.5!"];
+            Ebih__Ebih_West__Middle_North [label = "", pos = "60.15,-8.5!"];
             Ebih__Ebih_West__East_8 [label = "", pos = "62.85,-13.25!"];
             Ebih__Ebih_West__Middle_Middle [label = "", pos = "61.95,-13.0!"];
             Ebih__Ebih_West__Middle_Cliff [label = "", pos = "60.15,-13.333333!"];
@@ -784,6 +789,7 @@
             Ebih__Grid_21_2_6__West_6 [label = "", pos = "63.15,-9.333333!"];
             Ebih__Grid_21_2_6__Portal_Stand [label = "", pos = "64.5,-9.5!"];
             Ebih__Grid_21_2_6__East_6 [label = "", pos = "65.85,-9.5!"];
+            Ebih__Grid_21_2_6__West_3 [label = "", pos = "63.15,-3.666667!"];
         }
         {
             Ebih__Grid_25_10_12__East_12 [label = "", pos = "77.85,-19.5!"];
@@ -918,6 +924,13 @@
             Ebih__Waterfall__East_7 [label = "", pos = "74.85,-11.25!"];
             Ebih__Waterfall__Top_Waterfall [label = "", pos = "68.25,-11.666667!"];
             Ebih__Waterfall__West_7 [label = "", pos = "63.15,-11.25!"];
+        }
+        {
+            Ebih__West_Face__East [label = "", pos = "62.85,-3.666667!"];
+            Ebih__West_Face__Upper_Ledge [label = "", pos = "62.55,-3.666667!"];
+            Ebih__West_Face__Lower_Ledge [label = "", pos = "60.9,-7.166667!"];
+            Ebih__West_Face__Southwest [label = "", pos = "60.15,-8.166667!"];
+            Ebih__West_Face__South [label = "", pos = "61.2,-8.166667!"];
         }
     }
     {
@@ -2423,6 +2436,7 @@
             Menu__Kiengir_Map__Ebih_Alu_Health [label = "", pos = "69.0,-8.333333!"];
             Menu__Kiengir_Map__Ebih_Drone_Pit_Flask [label = "", pos = "75.0,-10.0!"];
             Menu__Kiengir_Map__Terminal_Breakthrough_1 [label = "", pos = "78.0,-18.333333!"];
+            Menu__Kiengir_Map__Ebih_West_Face_Flask [label = "", pos = "60.0,-8.333333!"];
             Menu__Kiengir_Map__Weekly_Notes_2_27_2053 [label = "", pos = "126.0,-13.333333!"];
             Menu__Kiengir_Map__Compass [label = "", pos = "126.0,-18.333333!"];
             Menu__Kiengir_Map__Dr_Gloria [label = "", pos = "117.0,-23.333333!"];
