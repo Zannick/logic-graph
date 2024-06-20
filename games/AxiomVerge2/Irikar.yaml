@@ -689,6 +689,7 @@ areas:
       local:
         - to: Collapsed Column Debris
       # A location is necessary for the required_locations part of the search algorithm
+      # But it needs to prevent the action from being performed as well
       locations:
         - name: Shockwave to Get Item
           item: Flask
@@ -705,7 +706,7 @@ areas:
         # collects two items with two different canons at the same time
         # if the item is a flask or urn, this will collect it
         - name: Shockwave Wall
-          req: not Irikar_Royal_Storage_Wall and $shockwave
+          req: not Irikar_Royal_Storage_Wall and $shockwave and not $visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)
           do: >
             $collect(Irikar_Royal_Storage_Wall);
             $collect(Flask);

@@ -2514,6 +2514,14 @@ pub fn access_not_irikar_royal_storage_wall_and_invoke_shockwave(
     // not Irikar_Royal_Storage_Wall and $shockwave
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx, world))
 }
+pub fn access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not Irikar_Royal_Storage_Wall and $shockwave and not $visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)
+    ((!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__shockwave!(ctx, world))
+        && !ctx.visited(LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item))
+}
 pub fn access_not_irikar_royal_storage_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // not Irikar_Royal_Storage_Wall and Nanite_Mist
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && ctx.has(Item::Nanite_Mist))
@@ -13465,6 +13473,52 @@ pub fn explain_not_irikar_royal_storage_wall_and_invoke_shockwave(
         }
     }
 }
+pub fn explain_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Irikar_Royal_Storage_Wall and $shockwave and not $visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
+                edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
+                (!h, vec!["Irikar_Royal_Storage_Wall"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                    edict.insert("$shockwave", format!("{:?}", res));
+                    refs.push("$shockwave");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let res =
+                    ctx.visited(LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item);
+                edict.insert(
+                    "not$visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)",
+                    format!("{:?}", res),
+                );
+                (
+                    !res,
+                    vec!["not$visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)"],
+                )
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_not_irikar_royal_storage_wall_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -19873,6 +19927,18 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(
         full_obs.observe_irikar_royal_storage_wall();
         !ctx.has(Item::Irikar_Royal_Storage_Wall)
     } && (hobserve__shockwave!(ctx, world, full_obs)))
+}
+pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Irikar_Royal_Storage_Wall and $shockwave and not $visited(`Irikar > Hub > Collapsed Column > Shockwave to Get Item`)
+    (({
+        full_obs.observe_irikar_royal_storage_wall();
+        !ctx.has(Item::Irikar_Royal_Storage_Wall)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
+        && (ctx.visited(LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item)))
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_nanite_mist(
     ctx: &Context,

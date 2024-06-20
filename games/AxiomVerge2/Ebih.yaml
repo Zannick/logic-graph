@@ -1325,7 +1325,7 @@ areas:
           thru: [20.2, 7.0]
         - to: Block Left
           thru: [20.0, 8.1]
-        - to: Lower Save
+        - to: Mid Save
           thru: [20.0, 8.1]
         - to: Alcove Entrance
       exits:

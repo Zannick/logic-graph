@@ -1188,7 +1188,7 @@ class GameLogic(object):
             vs = sorted({v.attributes()['name'] for v in sg.vs} & spotids)
             if len(vs) > 1:
                 sglist.append(vs)
-        return sglist
+        return sorted(sglist, key=lambda x: x[0])
 
 
     def make_funcid(self, info, prkey:str='pr', field:str='req', extra_fields=None):

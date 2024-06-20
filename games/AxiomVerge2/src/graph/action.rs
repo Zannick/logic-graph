@@ -171,7 +171,7 @@ impl world::Accessible for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_invoke_activate(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
-            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
+            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
@@ -306,7 +306,7 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
-            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
+            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
@@ -1357,7 +1357,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
-                let (ret, mut tags) = rules::explain_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
