@@ -148,6 +148,289 @@ areas:
       exits:
         - to: Ebih > Waterfall > Cave Entrance
           tags: [exterior, cave]
+
+- name: Observatory  # MARK: Observatory
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [22.475, 2.55]
+      local:
+        - to: Staircase Bottom West
+      exits:
+        - to: Ebih > Peak > Observatory West
+          tags: [exterior]
+    - name: East
+      coord: [23.75, 2.55]
+      local:
+        - to: East Desk
+      exits:
+        - to: Ebih > Peak > Observatory East
+          tags: [exterior]
+    - name: East Desk
+      coord: [24.5, 2.55]
+      local:
+        - to: East
+        - to: Staircase Bottom East
+      locations:
+        - name: Notes
+          item: Submarine_Progress
+          tags: [standing]
+    - name: Staircase Bottom West
+      coord: [24.05, 2.55]
+      local:
+        - to: West
+        - to: Staircase Bottom East
+        - to: Lower Tier Center
+          jumps: 2
+        - to: Lower Tier East
+          jumps: 2
+      exits:
+        - to: Lower Tier East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Tier West Mid-air
+          req: $hook
+          movement: base
+          jumps: 1.5
+        - to: Second Tier West
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Staircase Bottom East
+      coord: [24.35, 2.55]
+      local:
+        - to: East Desk
+        - to: Staircase Bottom West
+        - to: Lower Tier Center
+          jumps: 2
+        - to: Lower Tier East
+          jumps: 2
+      exits:
+        - to: Lower Tier East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Tier West Mid-air
+          req: $hook
+          movement: base
+          jumps: 1.5
+        - to: Second Tier West
+          req: $hook
+          movement: base
+          jumps: 3
+
+    - name: Lower Tier Center
+      coord: [24.15, 2.2]
+      local:
+        - to: Second Tier West
+          jumps: 2
+        - to: Lower Tier East
+        - to: Staircase Bottom West
+          jumps_down: 1
+        - to: Staircase Bottom East
+          jumps_down: 2
+      exits:
+        - to: West Staircase Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Staircase Top
+          req: $mist2
+          movement: mist2
+        - to: East Staircase Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Staircase Top
+          req: $mist2
+          movement: mist2
+    - name: Lower Tier East
+      coord: [24.35, 2.2]
+      local:
+        - to: Lower Tier Center
+        - to: Staircase Bottom West
+          jumps_down: 1
+        - to: Staircase Bottom East
+          jumps_down: 1
+      exits:
+        - to: East Staircase Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Staircase Top
+          req: $mist2
+          movement: mist2
+    - name: Lower Tier West Mid-air
+      coord: [23.95, 2.1]
+      local:
+        - to: Second Tier West
+          jumps: 2
+        - to: Lower Tier Center
+        - to: Staircase Bottom West
+          jumps_down: 1
+      exits:
+        - to: West Staircase Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Staircase Top
+          req: $mist2
+          movement: mist2
+    - name: Second Tier West
+      coord: [23.8, 1.95]
+      local:
+        - to: Third Tier West
+          jumps: 2
+        - to: Staircase Bottom West
+          jumps_down: 2
+        - to: Lower Tier Center
+          jumps_down: 1
+    - name: Third Tier West
+      coord: [23.8, 1.7]
+      local:
+        - to: West Staircase Top
+          jumps: 3
+        - to: East Staircase Top
+          jumps: 1
+        - to: Lower Tier Center
+          jumps_down: 2
+        - to: Staircase Bottom West
+          jumps_down: 3
+    - name: West Staircase Top
+      coord: [24.0, 1.2]
+      local:
+        - to: Lower Tier Center
+          jumps_down: 3
+        - to: Staircase Bottom West
+          jumps_down: 4
+      exits:
+        - to: Atop Structure West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Atop Structure West
+          req: $mist2
+          movement: mist2
+        - to: Atop Structure West
+          req: $infinite_climb
+          movement: base
+          jumps: 3
+    - name: East Staircase Top
+      coord: [24.375, 1.5]
+      local:
+        - to: Third Tier West
+          jumps_down: 1
+        - to: Lower Tier Center
+          jumps_down: 3
+        - to: Lower Tier East
+          jumps_down: 3
+      exits:
+        - to: Catwalk
+          req: Nanite_Mist
+          movement: mist1
+        - to: Catwalk
+          req: $mist2
+          movement: mist2
+        - to: Catwalk
+          req: $infinite_climb
+          movement: base
+          jumps: 5
+        - to: Atop Structure East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Atop Structure East
+          req: $mist2
+          movement: mist2
+        - to: Atop Structure East
+          req: $infinite_climb
+          movement: base
+          jumps: 5
+        - to: Below Catwalk
+          req: ^mode != 'drone' and $infinite_climb
+          movement: base
+          jumps: 4
+        # TODO: how fast can indra Shockwave after coming out of Mist?
+      actions:
+        - name: Infinite Climb with Hook
+          to: Catwalk
+          req: $infinite_climb and Slingshot_Hook
+          do: ^mode = 'drone'  # so that we don't have to require being drone immediately before
+          movement: base
+          jumps: 4
+    - name: Atop Structure West
+      coord: [24.05, 0.6]
+      local:
+        - to: West Staircase Top
+        - to: Atop Structure Center
+          jumps: 1
+    - name: Atop Structure Center
+      coord: [24.2, 0.55]
+      local:
+        - to: Atop Structure West
+        - to: Atop Structure East
+        - to: Catwalk
+      locations:
+        - name: Remote Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $boomerang
+          tags: [nearby_flask]
+    - name: Atop Structure East
+      coord: [34.3, 0.6]
+      local:
+        - to: Atop Structure Center
+          jumps: 1
+        - to: Catwalk
+          jumps: 1
+        - to: East Staircase Top
+        - to: Below Catwalk
+      locations:
+        - name: Nearby Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $boomerang
+          tags: [nearby_flask]
+        - name: Shockwave Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+    - name: Catwalk
+      coord: [24.4, 0.55]
+      local:
+        - to: Atop Structure East
+        - to: Below Catwalk
+      locations:
+        - name: Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+    - name: Below Catwalk
+      coord: [24.4, 0.85]
+      local:
+        - to: East Staircase Top
+        - to: Lower Tier East
+          thru: [24.575, 1.7]
+          jumps_down: [0, 1]
+      locations:
+        - name: Shockwave Flask from Below
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+        - name: Boomerang Steer into Flask
+          canon: Ebih_Observatory_Flask
+          item: Flask
+          req: $bs
+          tags: [nearby_flask]  # partially accounting for falling
 #endregion
 
 #region Amagi

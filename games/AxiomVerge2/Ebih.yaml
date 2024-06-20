@@ -1245,7 +1245,7 @@ areas:
       local:
         - to: High Ledge
       exits:
-        - to: Grid 21,2-6 > West 6
+        - to: Hidden Portal > West 6
           tags: [xshift]
 
     - name: Highest Platform
@@ -1737,26 +1737,57 @@ areas:
           time: 2
         - to: Observation Tower Room > West 9
           tags: [xshift]
+    - name: East Mid-air
+      coord: [26.95, 7.4]
+      exits:
+        - to: Observation Tower Room > West Mid-air
+          tags: [xshift]
+    - name: North
+      coord: [26.2, 6.1]
+      local:
+        - to: Moving Platform
+        - to: Ledge End
+          jumps_down: 1
+        - to: East Ledge
+          jumps_down: 1
+        - to: Middle Platform
+        - to: Upper Ledge
+        - to: East Hill
+        - to: East 9
 
-- name: Grid 21,2-6  # MARK: Grid 21,2-6
+- name: Hidden Portal  # MARK: Hidden Portal
   on_entry: $reset_old_area(^newpos)
   data:
+    save_point: Save Point
     portal_start: Portal Stand
     portal_hidden: true
+  map:
+    save: [21, 2, 22, 3]
+    button: [21, 4, 22, 5]
+    portal: [21, 5, 22, 6]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Ebih Observatory
+      button: Menu > Kiengir Map > Ebih Hidden Portal Button
+      portal: Menu > Kiengir Map > Ebih Hidden Portal Portal
   spots:
     - name: West 6
       coord: [21.05, 5.6]
       local:
         - to: Portal Stand
+        - to: Lowest Stair
+          jumps: 1
       exits:
         - to: Ebih West > East 6
           tags: [xshift]
     - name: Portal Stand
-      coord: [21.5, 5.7]
+      coord: [21.475, 5.7]
       local:
         - to: West 6
           jumps: 1
         - to: East 6
+        - to: Lowest Stair
+          jumps: 1
     - name: East 6
       coord: [21.95, 5.7]
       local:
@@ -1765,8 +1796,231 @@ areas:
         - to: Boss Room > West 6
           tags: [xshift]
 
+    - name: Lowest Stair
+      coord: [21.4, 5.55]
+      local:
+        - to: West 6
+        - to: Portal Stand
+        - to: East 6
+        - to: Stair Below Gate
+          jumps: 6
+    - name: Stair Below Gate
+      coord: [21.45, 4.75]
+      local:
+        - to: West 6
+          jumps_down: 1
+        - to: East 6
+        - to: Portal Stand
+          jumps_down: 3
+      exits:
+        - to: Gate Ledge East
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
+          jumps: 3
+        - to: Gate Ledge West
+          req: $grab and Ebih_Hidden_Portal_Gate
+          movement: base
+          jumps: 4
+        - to: Gate Ledge West
+          req: $hook and Ebih_Hidden_Portal_Gate
+          movement: base
+          jumps: 2
+
+    - name: East 5
+      coord: [21.95, 4.3]
+      local:
+        - to: Button
+          jumps: 1
+      locations:
+        - name: Boomerang Button
+          req: $boomerang
+          canon: Ebih_Hidden_Portal_Gate
+          item: Ebih_Hidden_Portal_Gate
+          time: .25  # Can't leave the room until it hits, if you move toward the button you just hit it
+      exits:
+        - to: Boss Room > West 5
+          tags: [xshift]
+    - name: Button
+      coord: [21.75, 4.2]
+      local:
+        - to: East 5
+        - to: Gate Ledge East
+          jumps: 2
+      locations:
+        - name: Hit Button
+          req: $melee or $boomerang
+          canon: Ebih_Hidden_Portal_Gate
+          item: Ebih_Hidden_Portal_Gate
+          tags: [button]
+    - name: Gate Ledge East
+      coord: [21.45, 4.15]
+      local:
+        - to: Button
+          jumps: 1
+        - to: Gate Ledge West
+          jumps: 1
+      locations:
+        - name: Remote Button
+          req: $boomerang
+          canon: Ebih_Hidden_Portal_Gate
+          item: Ebih_Hidden_Portal_Gate
+          tags: [button]
+      exits:
+        - to: Stair Below Gate
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
+    - name: Gate Ledge West
+      coord: [21.3, 4.05]
+      local:
+        - to: Gate Ledge East
+        - to: Stair Above Gate
+          jumps: 3
+      exits:
+        - to: Stair Below Gate
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
+
+    - name: Stair Above Gate
+      coord: [21.2, 3.6]
+      local:
+        - to: Gate Ledge West
+        - to: Gate Ledge East
+        - to: Button
+        - to: Save Ledge
+          jumps: 6
+      exits:
+        - to: Stair Below Gate
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
+        - to: Save Ledge
+          req: $hook
+          movement: base
+          jumps: 5
+    - name: Save Ledge
+      coord: [21.35, 2.8]
+      local:
+        - to: Stair Above Gate
+        - to: Gate Ledge West
+        - to: Gate Ledge East
+        - to: Button
+          thru: [21.325, 3.05]
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Stair Below Gate
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
+        - to: High Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: High Ledge
+          req: $mist2
+          movement: mist2
+    - name: Save Point
+      coord: [21.5, 2.7]
+      local:
+        - to: Save Ledge
+        - to: Tunnel Entrance
+        - to: Upper Slope
+          jumps: 2
+      exits:
+        - to: High Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: High Ledge
+          req: $mist2
+          movement: mist2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Tunnel Entrance
+      coord: [21.7, 2.8]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Upper Slope
+          jumps: 2
+      exits:
+        - to: Peak > Tunnel Entrance
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Upper Slope
+      coord: [21.8, 2.55]
+      local:
+        - to: Save Point
+        - to: Tunnel Entrance
+        - to: East 3
+          jumps: 1
+      exits:
+        - to: High Ledge
+          req: $infinite_climb
+          movement: base
+          jumps: 3
+        - to: Peak > Observatory West
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: East 3
+      coord: [21.95, 2.4]
+      local:
+        - to: Upper Slope
+      exits:
+        - to: High Ledge
+          req: $hover
+          movement: base
+          jumps: 2
+        - to: High Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: High Ledge
+          req: $mist2
+          movement: mist2
+        - to: Peak > West 3
+          tags: [xshift]
+    - name: High Ledge
+      coord: [21.2, 2.1]
+      local:
+        - to: West 3
+        - to: Save Ledge
+        - to: Save Point
+        - to: Tunnel Entrance
+        - to: Gate Ledge East
+        - to: Button
+          thru: [21.325, 4.05]
+      exits:
+        - to: East 3
+          req: $hover
+          movement: base
+        - to: Upper Slope
+          req: $hover
+          movement: base
+        - to: Stair Below Gate
+          req: Ebih_Hidden_Portal_Gate
+          movement: base
     - name: West 3
       coord: [21.05, 2.2]
+      local:
+        - to: High Ledge
+          jumps: 1
+      exits:
+        - to: West Face > East
+          tags: [xshift]
+        - to: Save Point
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Tunnel Entrance
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Peak > Observatory West
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
 
 - name: West Face  # MARK: West Face
   on_entry: $reset_old_area(^newpos)
@@ -1781,7 +2035,7 @@ areas:
       local:
         - to: Upper Ledge
       exits:
-        - to: Grid 21,2-6 > West 3
+        - to: Hidden Portal > West 3
           tags: [xshift]
     - name: Upper Ledge
       coord: [20.85, 2.2]
@@ -1853,7 +2107,7 @@ areas:
           jumps: 4
         - to: Past Boss
       exits:
-        - to: Grid 21,2-6 > East 6
+        - to: Hidden Portal > East 6
           tags: [xshift]
     - name: Boss
       coord: [22.8, 4.9]
@@ -1965,6 +2219,9 @@ areas:
         - to: Boss
         - to: High Platform
           jumps: 2
+      exits:
+        - to: Hidden Portal > East 5
+          tags: [xshift]
 
 - name: Drone Room  # MARK: Drone Room
   on_entry: $reset_old_area(^newpos)
@@ -2157,17 +2414,159 @@ areas:
         - to: Portal Exit
         - to: Tree
       exits:
-        - to: Grid 25,2-6 > West 4
+        - to: Drone Pit > West 4
           req: ^mode == 'drone'
           tags: [xshift]
 
-- name: Grid 25,2-6  # MARK: Grid 25,2-6
+- name: Peak  # MARK: Peak
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    west: [22, 2, 23, 3]
+    center: [23, 2, 24, 3]
+    portal: [24, 2, 25, 3]
+  datamap:
+    map_spot:
+      west: Menu > Kiengir Map > Ebih Peak West
+      center: Menu > Kiengir Map > Ebih Peak Center
+      portal: Menu > Kiengir Map > Ebih Peak Portal
+  spots:
+    - name: West 3
+      coord: [22.05, 2.4]
+      local:
+        - to: Observatory West
+      exits:
+        - to: Hidden Portal > East 3
+          tags: [xshift]
+    - name: Observatory West
+      coord: [22.475, 2.55]
+      local:
+        - to: West 3
+          jumps: 1
+        - to: Observatory East
+          jumps: 1
+      exits:
+        - to: Interior > Observatory > West
+          tags: [interior]
+    - name: Observatory East
+      coord: [23.75, 2.55]
+      local:
+        - to: Observatory West
+      exits:
+        - to: Interior > Observatory > East
+          tags: [interior]
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Middle Ledge
+          req: $climb or ($grab and Anuman)
+          movement: base
+          jumps: 2
+    - name: Middle Ledge
+      coord: [23.95, 2.15]
+      local:
+        - to: Observatory West
+        - to: Observatory East
+        - to: Tunnel Ledge
+        - to: Portal Stand
+      exits:
+        - to: East 3
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Tunnel Ledge
+      coord: [24.15, 2.45]
+      local:
+        - to: Middle Ledge
+          jumps: 2
+        - to: Tunnel Entrance
+        - to: Portal Stand
+    - name: Tunnel Entrance
+      coord: [24.175, 2.85]
+      local:
+        - to: Tunnel Ledge
+          thru: [24.25, 2.7]
+          jumps: [1, 1]
+        - to: Portal Stand
+          thru: [24.25, 2.7]
+          jumps: [1, 1]
+      exits:
+        - to: Hidden Portal > Tunnel Entrance
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+        - to: Tunnel Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Tunnel Ledge
+          req: $climb or ($grab and Anuman)
+          movement: base
+          jumps: 2
+    - name: Portal Stand
+      coord: [24.525, 2.6]
+      local:
+        - to: Tunnel Ledge
+          thru: [24.25, 2.7]
+          jumps: [0, 1]
+        - to: Tunnel Entrance
+          thru: [24.25, 2.7]
+        - to: East Slope
+          jumps: 2
+      exits:
+        - to: Tunnel Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East Slope
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: East 3
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: East Slope
+      coord: [24.85, 2.5]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: East 3
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East 3
+          req: $climb or ($grab and Anuman)
+          movement: base
+          jumps: 2
+    - name: East 3
+      coord: [24.95, 2.05]
+      local:
+        - to: Portal Stand
+        - to: East Slope
+      exits:
+        - to: Middle Ledge
+          req: $hover
+          movement: base
+        - to: Drone Pit > West 3
+          tags: [xshift]
+
+- name: Drone Pit  # MARK: Drone Pit
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [25, 5, 26, 6]
+    high: [25, 1, 26, 2]
   datamap:
     map_spot:
       flask: Menu > Kiengir Map > Ebih Drone Pit Flask
+      high: Menu > Kiengir Map > Ebih High Flask
   spots:
     - name: West 4
       coord: [25.05, 3.75]
@@ -2266,7 +2665,7 @@ areas:
           movement: base
           jumps: 1.25
     - name: Upper Mid-way
-      coord: [24.4, 4.425]
+      coord: [25.4, 4.425]
       data:
         flipside: Ebih Breach > Drone Tutorial > Upper Mid-way
       local:
@@ -2279,12 +2678,93 @@ areas:
           movement: base
           jumps: 2
     - name: Top
-      coord: [24.3, 3.75]
+      coord: [25.3, 3.75]
       data:
         flipside: Ebih Breach > Drone Tutorial > Top
       local:
         - to: Upper Mid-way
         - to: West 4
+
+    # Exterior
+    - name: West 3
+      coord: [25.05, 2.05]
+      local:
+        - to: Mid-air
+          jumps: 1
+        - to: East
+          jumps: 1
+      exits:
+        - to: Highest Point
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Point
+          req: $mist2
+          movement: mist2
+        - to: Peak > East 3
+          tags: [xshift]
+    - name: Mid-air
+      # this is the optimal placement of this point horizontally to minimize time with fast_hover into mist2
+      coord: [25.25, 2.0]
+      local:
+        - to: West 3
+        - to: East
+      exits:
+        - to: Highest Point
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Point
+          req: $mist2
+          movement: mist2
+    - name: Highest Point
+      coord: [25.7, 1.2]
+      local:
+        - to: Mid-air
+        - to: East
+      locations:
+        - name: Flask
+          canon: Ebih_High_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Ebih_High_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_High_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_High_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: cskip
+    - name: East
+      coord: [25.95, 4.1]
+      exits:
+        - to: Open Air > Northeast
+          tags: [xshift]
+
+- name: Open Air
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Northeast
+      coord: [26.05, 4.1]
+      local:
+        - to: South
+      exits:
+        - to: Ebih East > East Mid-air
+          movement: base
+          penalty_tags: [yshift, -fall.2]
+    - name: South
+      coord: [26.2, 5.9]
+      exits:
+        - to: Ebih East > North
+          tags: [xshift]
 
 - name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)
@@ -2395,6 +2875,12 @@ areas:
 - name: Observation Tower Room  # MARK: Observation Tower Room
   on_entry: $reset_old_area(^newpos)
   spots:
+    - name: West Mid-air
+      coord: [27.05, 7.4]
+      local:
+        - to: Tower Top
+        - to: West 10
+          thru: [27.4, 9]
     - name: West 9
       coord: [27.05, 8.3]
       local:

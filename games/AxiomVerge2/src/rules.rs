@@ -706,6 +706,10 @@ pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
 }
+pub fn access_ebih_hidden_portal_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Hidden_Portal_Gate
+    ctx.has(Item::Ebih_Hidden_Portal_Gate)
+}
 pub fn access_ebih_interchange_block(ctx: &Context, world: &World) -> bool {
     // Ebih_Interchange_Block
     ctx.has(Item::Ebih_Interchange_Block)
@@ -1804,6 +1808,10 @@ pub fn access_invoke_climb_and_underwater_movement(ctx: &Context, world: &World)
     // $climb and Underwater_Movement
     (helper__climb!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_climb_or___invoke_grab_and_anuman(ctx: &Context, world: &World) -> bool {
+    // $climb or ($grab and Anuman)
+    (helper__climb!(ctx, world) || (helper__grab!(ctx, world) && ctx.has(Item::Anuman)))
+}
 pub fn access_invoke_climb_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $climb or $hook
     (helper__climb!(ctx, world) || helper__hook!(ctx, world))
@@ -1819,6 +1827,10 @@ pub fn access_invoke_grab_and_annuna_east_bridge_gate(ctx: &Context, world: &Wor
 pub fn access_invoke_grab_and_anuman(ctx: &Context, world: &World) -> bool {
     // $grab and Anuman
     (helper__grab!(ctx, world) && ctx.has(Item::Anuman))
+}
+pub fn access_invoke_grab_and_ebih_hidden_portal_gate(ctx: &Context, world: &World) -> bool {
+    // $grab and Ebih_Hidden_Portal_Gate
+    (helper__grab!(ctx, world) && ctx.has(Item::Ebih_Hidden_Portal_Gate))
 }
 pub fn access_invoke_grab_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $grab and Giguna_Gateway_Block
@@ -1867,6 +1879,10 @@ pub fn access_invoke_hook(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_hook_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // $hook and Annuna_East_Bridge_Gate
     (helper__hook!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
+}
+pub fn access_invoke_hook_and_ebih_hidden_portal_gate(ctx: &Context, world: &World) -> bool {
+    // $hook and Ebih_Hidden_Portal_Gate
+    (helper__hook!(ctx, world) && ctx.has(Item::Ebih_Hidden_Portal_Gate))
 }
 pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $hook and Giguna_Gateway_Block
@@ -2016,6 +2032,10 @@ pub fn access_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_melee_cskip_and_fast_travel(ctx: &Context, world: &World) -> bool {
     // $melee_cskip and Fast_Travel
     (helper__melee_cskip!(ctx, world) && ctx.has(Item::Fast_Travel))
+}
+pub fn access_invoke_melee_or_invoke_boomerang(ctx: &Context, world: &World) -> bool {
+    // $melee or $boomerang
+    (helper__melee!(ctx, world) || helper__boomerang!(ctx, world))
 }
 pub fn access_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $mist2
@@ -2290,6 +2310,10 @@ pub fn access_map__ebih__ebih_west__upper_save(ctx: &Context, world: &World) -> 
     // ^map__ebih__ebih_west__upper_save
     ctx.map__ebih__ebih_west__upper_save()
 }
+pub fn access_map__ebih__hidden_portal__save(ctx: &Context, world: &World) -> bool {
+    // ^map__ebih__hidden_portal__save
+    ctx.map__ebih__hidden_portal__save()
+}
 pub fn access_map__ebih_breach__portals_101__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih_breach__portals_101__save
     ctx.map__ebih_breach__portals_101__save()
@@ -2462,6 +2486,10 @@ pub fn access_mode_ne_drone(ctx: &Context, world: &World) -> bool {
 pub fn access_mode_ne_drone_and_ice_axe(ctx: &Context, world: &World) -> bool {
     // ^mode != 'drone' and Ice_Axe
     (ctx.mode() != enums::Mode::Drone && ctx.has(Item::Ice_Axe))
+}
+pub fn access_mode_ne_drone_and_invoke_infinite_climb(ctx: &Context, world: &World) -> bool {
+    // ^mode != 'drone' and $infinite_climb
+    (ctx.mode() != enums::Mode::Drone && helper__infinite_climb!(ctx, world))
 }
 pub fn access_nanite_mist(ctx: &Context, world: &World) -> bool {
     // Nanite_Mist
@@ -5913,6 +5941,18 @@ pub fn explain_ebih_alu(
         let h = ctx.has(Item::Ebih_Alu);
         edict.insert("Ebih_Alu", format!("{}", h));
         (h, vec!["Ebih_Alu"])
+    }
+}
+pub fn explain_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Hidden_Portal_Gate
+    {
+        let h = ctx.has(Item::Ebih_Hidden_Portal_Gate);
+        edict.insert("Ebih_Hidden_Portal_Gate", format!("{}", h));
+        (h, vec!["Ebih_Hidden_Portal_Gate"])
     }
 }
 pub fn explain_ebih_interchange_block(
@@ -10051,6 +10091,46 @@ pub fn explain_invoke_climb_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_climb_or___invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $climb or ($grab and Anuman)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+            edict.insert("$climb", format!("{:?}", res));
+            refs.push("$climb");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Anuman);
+                        edict.insert("Anuman", format!("{}", h));
+                        (h, vec!["Anuman"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_climb_or_invoke_hook(
     ctx: &Context,
     world: &World,
@@ -10137,6 +10217,32 @@ pub fn explain_invoke_grab_and_anuman(
                 let h = ctx.has(Item::Anuman);
                 edict.insert("Anuman", format!("{}", h));
                 (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_and_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab and Ebih_Hidden_Portal_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Hidden_Portal_Gate);
+                edict.insert("Ebih_Hidden_Portal_Gate", format!("{}", h));
+                (h, vec!["Ebih_Hidden_Portal_Gate"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -10455,6 +10561,32 @@ pub fn explain_invoke_hook_and_annuna_east_bridge_gate(
                 let h = ctx.has(Item::Annuna_East_Bridge_Gate);
                 edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
                 (h, vec!["Annuna_East_Bridge_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Ebih_Hidden_Portal_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Hidden_Portal_Gate);
+                edict.insert("Ebih_Hidden_Portal_Gate", format!("{}", h));
+                (h, vec!["Ebih_Hidden_Portal_Gate"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -11343,6 +11475,33 @@ pub fn explain_invoke_melee_cskip_and_fast_travel(
                 let h = ctx.has(Item::Fast_Travel);
                 edict.insert("Fast_Travel", format!("{}", h));
                 (h, vec!["Fast_Travel"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_melee_or_invoke_boomerang(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee or $boomerang
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+            edict.insert("$melee", format!("{:?}", res));
+            refs.push("$melee");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+                edict.insert("$boomerang", format!("{:?}", res));
+                refs.push("$boomerang");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12446,6 +12605,18 @@ pub fn explain_map__ebih__ebih_west__upper_save(
         (r, vec!["^map__ebih__ebih_west__upper_save"])
     }
 }
+pub fn explain_map__ebih__hidden_portal__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__ebih__hidden_portal__save
+    {
+        let r = ctx.map__ebih__hidden_portal__save();
+        edict.insert("^map__ebih__hidden_portal__save", format!("{:?}", r));
+        (r, vec!["^map__ebih__hidden_portal__save"])
+    }
+}
 pub fn explain_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -13248,6 +13419,39 @@ pub fn explain_mode_ne_drone_and_ice_axe(
                 let h = ctx.has(Item::Ice_Axe);
                 edict.insert("Ice_Axe", format!("{}", h));
                 (h, vec!["Ice_Axe"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_ne_drone_and_invoke_infinite_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode != 'drone' and $infinite_climb
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 != right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__infinite_climb!(ctx, world, edict);
+                edict.insert("$infinite_climb", format!("{:?}", res));
+                refs.push("$infinite_climb");
+                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16030,6 +16234,17 @@ pub fn observe_access_ebih_alu(
         ctx.has(Item::Ebih_Alu)
     }
 }
+pub fn observe_access_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Hidden_Portal_Gate
+    {
+        full_obs.observe_ebih_hidden_portal_gate();
+        ctx.has(Item::Ebih_Hidden_Portal_Gate)
+    }
+}
 pub fn observe_access_ebih_interchange_block(
     ctx: &Context,
     world: &World,
@@ -18187,6 +18402,19 @@ pub fn observe_access_invoke_climb_and_underwater_movement(
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access_invoke_climb_or___invoke_grab_and_anuman(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $climb or ($grab and Anuman)
+    (hobserve__climb!(ctx, world, full_obs)
+        || (hobserve__grab!(ctx, world, full_obs)
+            && ({
+                full_obs.observe_anuman();
+                ctx.has(Item::Anuman)
+            })))
+}
 pub fn observe_access_invoke_climb_or_invoke_hook(
     ctx: &Context,
     world: &World,
@@ -18225,6 +18453,18 @@ pub fn observe_access_invoke_grab_and_anuman(
         && ({
             full_obs.observe_anuman();
             ctx.has(Item::Anuman)
+        }))
+}
+pub fn observe_access_invoke_grab_and_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab and Ebih_Hidden_Portal_Gate
+    (hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_hidden_portal_gate();
+            ctx.has(Item::Ebih_Hidden_Portal_Gate)
         }))
 }
 pub fn observe_access_invoke_grab_and_giguna_gateway_block(
@@ -18344,6 +18584,18 @@ pub fn observe_access_invoke_hook_and_annuna_east_bridge_gate(
         && ({
             full_obs.observe_annuna_east_bridge_gate();
             ctx.has(Item::Annuna_East_Bridge_Gate)
+        }))
+}
+pub fn observe_access_invoke_hook_and_ebih_hidden_portal_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Ebih_Hidden_Portal_Gate
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ebih_hidden_portal_gate();
+            ctx.has(Item::Ebih_Hidden_Portal_Gate)
         }))
 }
 pub fn observe_access_invoke_hook_and_giguna_gateway_block(
@@ -18685,6 +18937,14 @@ pub fn observe_access_invoke_melee_cskip_and_fast_travel(
             full_obs.observe_fast_travel();
             ctx.has(Item::Fast_Travel)
         }))
+}
+pub fn observe_access_invoke_melee_or_invoke_boomerang(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee or $boomerang
+    (hobserve__melee!(ctx, world, full_obs) || hobserve__boomerang!(ctx, world, full_obs))
 }
 pub fn observe_access_invoke_mist2(
     ctx: &Context,
@@ -19247,6 +19507,17 @@ pub fn observe_access_map__ebih__ebih_west__upper_save(
         ctx.map__ebih__ebih_west__upper_save()
     }
 }
+pub fn observe_access_map__ebih__hidden_portal__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__ebih__hidden_portal__save
+    {
+        full_obs.observe_map__ebih__hidden_portal__save();
+        ctx.map__ebih__hidden_portal__save()
+    }
+}
 pub fn observe_access_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -19786,6 +20057,20 @@ pub fn observe_access_mode_ne_drone_and_ice_axe(
         full_obs.observe_ice_axe();
         ctx.has(Item::Ice_Axe)
     }))
+}
+pub fn observe_access_mode_ne_drone_and_invoke_infinite_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode != 'drone' and $infinite_climb
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v != enums::Mode::Drone
+    } && (hobserve__infinite_climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_nanite_mist(
     ctx: &Context,

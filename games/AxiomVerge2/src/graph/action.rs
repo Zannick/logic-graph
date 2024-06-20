@@ -77,6 +77,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih__Hidden_Portal__Save_Point__Save => true,
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::access_ebih__truck_gate__portal_stand__open_door__req(ctx, world),
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_ebih__truck_gate__switch__open_door__req(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_ebih__vertical_interchange__west_13__open_door__req(ctx, world),
@@ -169,6 +170,7 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world),
             ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::access_invoke_infinite_climb_and_slingshot_hook(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_invoke_activate(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world),
@@ -305,6 +307,7 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Drone => rules::observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world, full_obs),
             ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
@@ -1347,6 +1350,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => {
+                let (ret, mut tags) = rules::explain_invoke_infinite_climb_and_slingshot_hook(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Catwalk"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 let (ret, mut tags) = rules::explain_invoke_activate(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1533,6 +1545,7 @@ impl world::Action for Action {
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx, world),
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx, world),
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx, world),
+            ActionId::Ebih__Hidden_Portal__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx, world),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx, world),
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world),
@@ -1616,6 +1629,7 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::action_glacier__hammonds_end__switch_from_ledge__open_doors__do(ctx, world),
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
@@ -1702,6 +1716,7 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => SpotId::Glacier__Hammonds_End__Hammond,
             ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => SpotId::Glacier__Hammonds_End__Corner,
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__Catwalk,
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Top,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => SpotId::Irikar__Airy__Left_Hover_Throw_End,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Airy__Lower_Throw_End,
@@ -1897,6 +1912,9 @@ impl world::Action for Action {
             }
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
                 rules::observe_action_ebih__ebih_east__dispenser__activate_lift__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Hidden_Portal__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
                 rules::observe_action_ebih__drone_room__pit_left__activate_lift__do(ctx, world, full_obs);
@@ -2146,6 +2164,9 @@ impl world::Action for Action {
             }
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
                 rules::observe_action_glacier__hammonds_end__west_11__open_doors__do(ctx, world, full_obs);
+            }
+            ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => {
+                rules::observe_action_mode_set_drone(ctx, world, full_obs);
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
@@ -2505,6 +2526,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     actions[ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift] = Action {
         id: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift,
         time: 5000,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Hidden_Portal__Save_Point__Save] = Action {
+        id: ActionId::Ebih__Hidden_Portal__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
     };
     actions[ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift] = Action {
@@ -2922,6 +2948,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 500,
         price: Currency::Free,
     };
+    actions[ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook] = Action {
+        id: ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook,
+        time: 2400,
+        price: Currency::Free,
+    };
     actions[ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone] = Action {
         id: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
         time: 1100,
@@ -3076,6 +3107,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => SpotId::Ebih__Ebih_East__Moving_Platform,
         ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift | ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
         ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => SpotId::Ebih__Ebih_East__Dispenser,
+        ActionId::Ebih__Hidden_Portal__Save_Point__Save => SpotId::Ebih__Hidden_Portal__Save_Point,
         ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift | ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => SpotId::Ebih__Drone_Room__Pit_Left,
         ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => SpotId::Ebih__Drone_Room__Portal_Exit,
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => SpotId::Ebih__Drone_Room__Moving_Platform,
@@ -3143,6 +3175,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
         ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_Near,
         ActionId::Glacier__Hammonds_End__West_11__Open_Doors => SpotId::Glacier__Hammonds_End__West_11,
+        ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__East_Staircase_Top,
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Hub__West_Rim,
         ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Hub__East_Rim,

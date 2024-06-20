@@ -122,6 +122,8 @@ time:  # MARK: time
   # when grabbing the urn/flask with the boomerang over x distance
   # the upgraded boomerang has a longer reach but approximately the same speed as indra
   # so there's little difference
+  # TODO: should this be the same as urn but disallow savewarping for a second? to allow for arbitrary movement/fast travel?
+  # without having to encode every possibility as a hybrid
   remote_urn: 6.5
   remote_flask: 6.5
   # when grabbing the urn/flask with the boomerang while falling or otherwise closer
@@ -340,11 +342,11 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,
-     Bounty_List]
+     Bounty_List, Submarine_Progress]
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{28}, Big_Flask{12}]
+    [Flask{30}, Big_Flask{12}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >

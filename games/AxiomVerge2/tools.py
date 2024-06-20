@@ -12,6 +12,7 @@ import igraph as ig
 import leidenalg as la
 
 AV2 = GameLogic('AxiomVerge2')
+
 LOC_SPOTS = {spot['id'] for spot in AV2.spots()
              if ('locations' in spot and any('event' not in loc.get('tags', ()) for loc in spot['locations']))
              or ('hybrid' in spot and any('event' not in h.get('tags', ()) for h in spot['hybrid']))
@@ -128,6 +129,19 @@ def notable_breach_exits_without_flipside():
         for spot in spots
     ])
 
+def too_expensive():
+    expensive_exits = []
+    for exit in AV2.exits():
+        if 'price' not in exit or exit.get('costs') != 'energy':
+            continue
+        if exit['price'] > 450:
+            expensive_exits.append(exit)
+
+    pprint([
+        (exit['fullname'], exit['price'])
+        for exit in expensive_exits
+    ])
+
 def make_igraph():
     edges = [(x, y, w) for ((x, y), w) in AV2.basic_distances.items()]
     g = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
@@ -205,5 +219,8 @@ def many_partitions(g):
 
 if __name__ == '__main__':
     print('Loaded game logic in var AV2')
-    G = make_igraph()
-    print('igraph for AV2 made in var G')
+    if AV2.errors:
+        print('\n'.join(AV2.errors))
+    else:
+        G = make_igraph()
+        print('igraph for AV2 made in var G')

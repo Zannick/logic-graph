@@ -25,7 +25,7 @@ tests:
     context:
       mode: drone
       indra: Ebih > Drone Room > Tree
-    can_reach: Ebih > Grid 25,2-6 > Pit
+    can_reach: Ebih > Drone Pit > Pit
 
   - start: Ebih > Drone Room > West 6
     with:

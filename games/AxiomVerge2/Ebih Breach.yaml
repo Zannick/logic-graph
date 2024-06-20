@@ -135,7 +135,7 @@ areas:
     - name: Bottom
       coord: [25.2, 5.7]
       data:
-        flipside: Ebih > Grid 25,2-6 > Bush Left
+        flipside: Ebih > Drone Pit > Bush Left
       local:
         - to: West 6
           jumps: 1
@@ -149,7 +149,7 @@ areas:
     - name: First Rocks
       coord: [25.45, 5.2]
       data:
-        flipside: Ebih > Grid 25,2-6 > First Rocks
+        flipside: Ebih > Drone Pit > First Rocks
       local:
         - to: West 6
         - to: Bottom
@@ -158,7 +158,7 @@ areas:
     - name: Second Rocks
       coord: [25.6, 5.0]
       data:
-        flipside: Ebih > Grid 25,2-6 > Second Rocks
+        flipside: Ebih > Drone Pit > Second Rocks
       local:
         - to: First Rocks
           thru: [25.5, 5.0]
@@ -167,7 +167,7 @@ areas:
     - name: Above Rocks
       coord: [25.5, 4.8]
       data:
-        flipside: Ebih > Grid 25,2-6 > Above Rocks
+        flipside: Ebih > Drone Pit > Above Rocks
       local:
         - to: Second Rocks
           thru: [25.6, 4.8]
@@ -179,9 +179,9 @@ areas:
           movement: base
           jumps: 1.25
     - name: Upper Mid-way
-      coord: [24.4, 4.425]
+      coord: [25.4, 4.425]
       data:
-        flipside: Ebih > Grid 25,2-6 > Upper Mid-way
+        flipside: Ebih > Drone Pit > Upper Mid-way
       local:
         - to: Above Rocks
         - to: Top
@@ -192,9 +192,9 @@ areas:
           movement: base
           jumps: 2
     - name: Top
-      coord: [24.3, 3.75]
+      coord: [25.3, 3.75]
       data:
-        flipside: Ebih > Grid 25,2-6 > Top
+        flipside: Ebih > Drone Pit > Top
       local:
         - to: Upper Mid-way
         - to: West 4

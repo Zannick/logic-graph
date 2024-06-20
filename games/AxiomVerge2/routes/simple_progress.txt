@@ -23,7 +23,7 @@
 * Take hybrid exit Ebih > Drone Room > Middle Platform > Urn Quick Grab, collecting Remote_Drone
 ! Do Ebih > Drone Room > Pit Left > Activate Lift
 ! Do Ebih > Drone Room > Moving Platform > Throw Drone
-* Collect Flask from Ebih > Grid 25,2-6 > Pit > Item
+* Collect Flask from Ebih > Drone Pit > Pit > Item
 ! Do Recall Drone
 * Collect Health_Node from Ebih > Boss Room > East Ledge > Item
 * Collect Ebih_Alu from Ebih > Boss Room > Boss > Fight Alu

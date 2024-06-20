@@ -807,12 +807,27 @@ subgraph Ebih
         Ebih__Ebih_East__West_7(West 7);
         Ebih__Ebih_East__East_Hill(East Hill);
         Ebih__Ebih_East__East_9(East 9);
+        Ebih__Ebih_East__East_Mid_air(East Mid-air);
+        Ebih__Ebih_East__North(North);
     end
-    subgraph Ebih__Grid_21_2_6[Grid 21,2-6]
-        Ebih__Grid_21_2_6__West_6(West 6);
-        Ebih__Grid_21_2_6__Portal_Stand(Portal Stand);
-        Ebih__Grid_21_2_6__East_6(East 6);
-        Ebih__Grid_21_2_6__West_3(West 3);
+    subgraph Ebih__Hidden_Portal[Hidden Portal]
+        Ebih__Hidden_Portal__West_6(West 6);
+        Ebih__Hidden_Portal__Portal_Stand(Portal Stand);
+        Ebih__Hidden_Portal__East_6(East 6);
+        Ebih__Hidden_Portal__Lowest_Stair(Lowest Stair);
+        Ebih__Hidden_Portal__Stair_Below_Gate(Stair Below Gate);
+        Ebih__Hidden_Portal__East_5(East 5);
+        Ebih__Hidden_Portal__Button(Button);
+        Ebih__Hidden_Portal__Gate_Ledge_East(Gate Ledge East);
+        Ebih__Hidden_Portal__Gate_Ledge_West(Gate Ledge West);
+        Ebih__Hidden_Portal__Stair_Above_Gate(Stair Above Gate);
+        Ebih__Hidden_Portal__Save_Ledge(Save Ledge);
+        Ebih__Hidden_Portal__Save_Point(Save Point);
+        Ebih__Hidden_Portal__Tunnel_Entrance(Tunnel Entrance);
+        Ebih__Hidden_Portal__Upper_Slope(Upper Slope);
+        Ebih__Hidden_Portal__East_3(East 3);
+        Ebih__Hidden_Portal__High_Ledge(High Ledge);
+        Ebih__Hidden_Portal__West_3(West 3);
     end
     subgraph Ebih__West_Face[West Face]
         Ebih__West_Face__East(East);
@@ -847,15 +862,34 @@ subgraph Ebih
         Ebih__Drone_Room__Tree(Tree);
         Ebih__Drone_Room__East_4(East 4);
     end
-    subgraph Ebih__Grid_25_2_6[Grid 25,2-6]
-        Ebih__Grid_25_2_6__West_4(West 4);
-        Ebih__Grid_25_2_6__Pit(Pit);
-        Ebih__Grid_25_2_6__Bush_Left(Bush Left);
-        Ebih__Grid_25_2_6__First_Rocks(First Rocks);
-        Ebih__Grid_25_2_6__Second_Rocks(Second Rocks);
-        Ebih__Grid_25_2_6__Above_Rocks(Above Rocks);
-        Ebih__Grid_25_2_6__Upper_Mid_way(Upper Mid-way);
-        Ebih__Grid_25_2_6__Top(Top);
+    subgraph Ebih__Peak[Peak]
+        Ebih__Peak__West_3(West 3);
+        Ebih__Peak__Observatory_West(Observatory West);
+        Ebih__Peak__Observatory_East(Observatory East);
+        Ebih__Peak__Middle_Ledge(Middle Ledge);
+        Ebih__Peak__Tunnel_Ledge(Tunnel Ledge);
+        Ebih__Peak__Tunnel_Entrance(Tunnel Entrance);
+        Ebih__Peak__Portal_Stand(Portal Stand);
+        Ebih__Peak__East_Slope(East Slope);
+        Ebih__Peak__East_3(East 3);
+    end
+    subgraph Ebih__Drone_Pit[Drone Pit]
+        Ebih__Drone_Pit__West_4(West 4);
+        Ebih__Drone_Pit__Pit(Pit);
+        Ebih__Drone_Pit__Bush_Left(Bush Left);
+        Ebih__Drone_Pit__First_Rocks(First Rocks);
+        Ebih__Drone_Pit__Second_Rocks(Second Rocks);
+        Ebih__Drone_Pit__Above_Rocks(Above Rocks);
+        Ebih__Drone_Pit__Upper_Mid_way(Upper Mid-way);
+        Ebih__Drone_Pit__Top(Top);
+        Ebih__Drone_Pit__West_3(West 3);
+        Ebih__Drone_Pit__Mid_air(Mid-air);
+        Ebih__Drone_Pit__Highest_Point(Highest Point);
+        Ebih__Drone_Pit__East(East);
+    end
+    subgraph Ebih__Open_Air[Open Air]
+        Ebih__Open_Air__Northeast(Northeast);
+        Ebih__Open_Air__South(South);
     end
     subgraph Ebih__Grid_26_10_11[Grid 26,10-11]
         Ebih__Grid_26_10_11__West_11(West 11);
@@ -869,6 +903,7 @@ subgraph Ebih
         Ebih__Grid_26_10_11__East_10(East 10);
     end
     subgraph Ebih__Observation_Tower_Room[Observation Tower Room]
+        Ebih__Observation_Tower_Room__West_Mid_air(West Mid-air);
         Ebih__Observation_Tower_Room__West_9(West 9);
         Ebih__Observation_Tower_Room__Tower_Top(Tower Top);
         Ebih__Observation_Tower_Room__Tower_Bottom(Tower Bottom);
@@ -1955,6 +1990,25 @@ subgraph Interior
     subgraph Interior__Ebih_Cave[Ebih Cave]
         Interior__Ebih_Cave__Entry(Entry);
     end
+    subgraph Interior__Observatory[Observatory]
+        Interior__Observatory__West(West);
+        Interior__Observatory__East(East);
+        Interior__Observatory__East_Desk(East Desk);
+        Interior__Observatory__Staircase_Bottom_West(Staircase Bottom West);
+        Interior__Observatory__Staircase_Bottom_East(Staircase Bottom East);
+        Interior__Observatory__Lower_Tier_Center(Lower Tier Center);
+        Interior__Observatory__Lower_Tier_East(Lower Tier East);
+        Interior__Observatory__Lower_Tier_West_Mid_air(Lower Tier West Mid-air);
+        Interior__Observatory__Second_Tier_West(Second Tier West);
+        Interior__Observatory__Third_Tier_West(Third Tier West);
+        Interior__Observatory__West_Staircase_Top(West Staircase Top);
+        Interior__Observatory__East_Staircase_Top(East Staircase Top);
+        Interior__Observatory__Atop_Structure_West(Atop Structure West);
+        Interior__Observatory__Atop_Structure_Center(Atop Structure Center);
+        Interior__Observatory__Atop_Structure_East(Atop Structure East);
+        Interior__Observatory__Catwalk(Catwalk);
+        Interior__Observatory__Below_Catwalk(Below Catwalk);
+    end
     subgraph Interior__Cave_Behind_Waterfall[Cave Behind Waterfall]
         Interior__Cave_Behind_Waterfall__Bottom(Bottom);
         Interior__Cave_Behind_Waterfall__Middle(Middle);
@@ -2378,6 +2432,12 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Drone_Pit_Flask(Ebih Drone Pit Flask);
         Menu__Kiengir_Map__Terminal_Breakthrough_1(Terminal Breakthrough 1);
         Menu__Kiengir_Map__Ebih_West_Face_Flask(Ebih West Face Flask);
+        Menu__Kiengir_Map__Ebih_Hidden_Portal_Button(Ebih Hidden Portal Button);
+        Menu__Kiengir_Map__Ebih_Hidden_Portal_Portal(Ebih Hidden Portal Portal);
+        Menu__Kiengir_Map__Ebih_Peak_West(Ebih Peak West);
+        Menu__Kiengir_Map__Ebih_Peak_Center(Ebih Peak Center);
+        Menu__Kiengir_Map__Ebih_Peak_Portal(Ebih Peak Portal);
+        Menu__Kiengir_Map__Ebih_High_Flask(Ebih High Flask);
         Menu__Kiengir_Map__Weekly_Notes_2_27_2053(Weekly Notes 2/27/2053);
         Menu__Kiengir_Map__Compass(Compass);
         Menu__Kiengir_Map__Dr_Gloria(Dr. Gloria);
@@ -3071,7 +3131,8 @@ Ebih__Boss_Room__East_6 <--> Ebih__Drone_Room__West_6
 Ebih__Boss_Room__High_Platform --> Ebih__Boss_Room__East_4
 Ebih__Boss_Room__Lower_Ledge --> Ebih__Boss_Room__Upper_Tree
 Ebih__Boss_Room__Lower_Tree --> Ebih__Boss_Room__Lower_Ledge
-Ebih__Boss_Room__West_6 <--> Ebih__Grid_21_2_6__East_6
+Ebih__Boss_Room__West_5 <--> Ebih__Hidden_Portal__East_5
+Ebih__Boss_Room__West_6 <--> Ebih__Hidden_Portal__East_6
 Ebih__By_Garage__Crawlspace <--> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Outcropping
@@ -3080,7 +3141,20 @@ Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
 Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Ebih__By_Garage__West_12 <--> Ebih__Grid_25_10_12__East_12
 Ebih__By_Garage__West_13 <--> Ebih__Truck_Gate__East
-Ebih__Drone_Room__East_4 <--> Ebih__Grid_25_2_6__West_4
+Ebih__Drone_Pit__Above_Rocks --> Ebih__Drone_Pit__Upper_Mid_way
+Ebih__Drone_Pit__Bush_Left --> Ebih__Drone_Pit__First_Rocks
+Ebih__Drone_Pit__East --> Ebih__Open_Air__Northeast
+Ebih__Drone_Pit__Highest_Point --> Menu__Kiengir_Map__Ebih_High_Flask
+Ebih__Drone_Pit__Highest_Point --> Menu__Warp_Only__Kiengir
+Ebih__Drone_Pit__Mid_air --> Ebih__Drone_Pit__Highest_Point
+Ebih__Drone_Pit__Pit --> Ebih__Drone_Pit__First_Rocks
+Ebih__Drone_Pit__Pit --> Menu__Kiengir_Map__Ebih_Drone_Pit_Flask
+Ebih__Drone_Pit__Pit --> Menu__Warp_Only__Kiengir
+Ebih__Drone_Pit__Upper_Mid_way --> Ebih__Drone_Pit__Top
+Ebih__Drone_Pit__West_3 --> Ebih__Drone_Pit__Highest_Point
+Ebih__Drone_Pit__West_3 <--> Ebih__Peak__East_3
+Ebih__Drone_Pit__West_4 --> Ebih__Drone_Pit__Pit
+Ebih__Drone_Pit__West_4 <--> Ebih__Drone_Room__East_4
 Ebih__Drone_Room__Item --> Menu__Kiengir_Map__Remote_Drone
 Ebih__Drone_Room__Item --> Menu__Warp_Only__Kiengir
 Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal
@@ -3091,6 +3165,7 @@ Ebih__Drone_Room__Portal_Exit --> Ebih__Drone_Room__Moving_Platform
 Ebih__Ebih_East__Dispenser --> Ebih__Ebih_East__Lower_Moving_Platform
 Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
 Ebih__Ebih_East__East_9 <--> Ebih__Observation_Tower_Room__West_9
+Ebih__Ebih_East__East_Mid_air --> Ebih__Observation_Tower_Room__West_Mid_air
 Ebih__Ebih_East__Ledge_End --> Ebih__Ebih_East__East_Ledge
 Ebih__Ebih_East__Moving_Platform --> Ebih__Ebih_East__East_Ledge
 Ebih__Ebih_East__West_7 <--> Ebih__Waterfall__East_7
@@ -3107,7 +3182,7 @@ Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Mid_Save
 Ebih__Ebih_West__East_10 <--> Ebih__Waterfall__West_10
 Ebih__Ebih_West__East_11 <--> Ebih__Waterfall__West_11
 Ebih__Ebih_West__East_13 <--> Ebih__Vertical_Interchange__West_13
-Ebih__Ebih_West__East_6 <--> Ebih__Grid_21_2_6__West_6
+Ebih__Ebih_West__East_6 <--> Ebih__Hidden_Portal__West_6
 Ebih__Ebih_West__East_7 <--> Ebih__Waterfall__West_7
 Ebih__Ebih_West__East_8 <--> Ebih__Waterfall__West_8
 Ebih__Ebih_West__East_9 <--> Ebih__Waterfall__West_9
@@ -3147,13 +3222,6 @@ Ebih__Grid_25_10_12__Top_Platform --> Ebih__Grid_25_10_12__West_10
 Ebih__Grid_25_10_12__West_10 <--> Ebih__Waterfall__East_10
 Ebih__Grid_25_10_12__West_11 <--> Ebih__Waterfall__East_11
 Ebih__Grid_25_10_12__West_12 <--> Ebih__Walled_Off__East_12
-Ebih__Grid_25_2_6__Above_Rocks --> Ebih__Grid_25_2_6__Upper_Mid_way
-Ebih__Grid_25_2_6__Bush_Left --> Ebih__Grid_25_2_6__First_Rocks
-Ebih__Grid_25_2_6__Pit --> Ebih__Grid_25_2_6__First_Rocks
-Ebih__Grid_25_2_6__Pit --> Menu__Kiengir_Map__Ebih_Drone_Pit_Flask
-Ebih__Grid_25_2_6__Pit --> Menu__Warp_Only__Kiengir
-Ebih__Grid_25_2_6__Upper_Mid_way --> Ebih__Grid_25_2_6__Top
-Ebih__Grid_25_2_6__West_4 --> Ebih__Grid_25_2_6__Pit
 Ebih__Grid_26_10_11__East_10 <--> Ebih__Observation_Tower_Room__West_10
 Ebih__Grid_26_10_11__Ledge --> Ebih__Grid_26_10_11__Upper_Platform
 Ebih__Grid_26_10_11__Middle_Bottom --> Ebih__Grid_26_10_11__Middle_Platform
@@ -3165,8 +3233,37 @@ Ebih__Guarded_Health__East <--> Ebih__Walled_Off__West_12
 Ebih__Guarded_Health__East_Hills --> Ebih__Guarded_Health__East
 Ebih__Guarded_Health__East_Ruins --> Ebih__Guarded_Health__East
 Ebih__Guarded_Health__Small_Pond --> Ebih__Guarded_Health__East_Ruins
+Ebih__Hidden_Portal__East_3 <--> Ebih__Hidden_Portal__High_Ledge
+Ebih__Hidden_Portal__East_3 <--> Ebih__Peak__West_3
+Ebih__Hidden_Portal__Gate_Ledge_East <--> Ebih__Hidden_Portal__Stair_Below_Gate
+Ebih__Hidden_Portal__Gate_Ledge_West <--> Ebih__Hidden_Portal__Stair_Below_Gate
+Ebih__Hidden_Portal__High_Ledge --> Ebih__Hidden_Portal__Stair_Below_Gate
+Ebih__Hidden_Portal__High_Ledge <--> Ebih__Hidden_Portal__Upper_Slope
+Ebih__Hidden_Portal__Save_Ledge --> Ebih__Hidden_Portal__High_Ledge
+Ebih__Hidden_Portal__Save_Ledge --> Ebih__Hidden_Portal__Stair_Below_Gate
+Ebih__Hidden_Portal__Save_Point --> Ebih__Hidden_Portal__High_Ledge
+Ebih__Hidden_Portal__Stair_Above_Gate --> Ebih__Hidden_Portal__Save_Ledge
+Ebih__Hidden_Portal__Stair_Above_Gate --> Ebih__Hidden_Portal__Stair_Below_Gate
+Ebih__Hidden_Portal__Tunnel_Entrance <--> Ebih__Peak__Tunnel_Entrance
+Ebih__Hidden_Portal__Upper_Slope --> Ebih__Peak__Observatory_West
+Ebih__Hidden_Portal__West_3 --> Ebih__Hidden_Portal__Save_Point
+Ebih__Hidden_Portal__West_3 --> Ebih__Hidden_Portal__Tunnel_Entrance
+Ebih__Hidden_Portal__West_3 --> Ebih__Peak__Observatory_West
+Ebih__Hidden_Portal__West_3 <--> Ebih__West_Face__East
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Observation_Tower_Room__Cliff
 Ebih__Observation_Tower_Room__Tower_Top --> Ebih__Observation_Tower_Room__West_9
+Ebih__Open_Air__Northeast --> Ebih__Ebih_East__East_Mid_air
+Ebih__Open_Air__South --> Ebih__Ebih_East__North
+Ebih__Peak__East_3 <--> Ebih__Peak__Middle_Ledge
+Ebih__Peak__East_Slope --> Ebih__Peak__East_3
+Ebih__Peak__Observatory_East --> Ebih__Peak__Middle_Ledge
+Ebih__Peak__Observatory_East <--> Interior__Observatory__East
+Ebih__Peak__Observatory_West <--> Interior__Observatory__West
+Ebih__Peak__Portal_Stand --> Ebih__Peak__East_3
+Ebih__Peak__Portal_Stand --> Ebih__Peak__East_Slope
+Ebih__Peak__Portal_Stand --> Ebih__Peak__Tunnel_Ledge
+Ebih__Peak__Tunnel_Entrance --> Ebih__Peak__Portal_Stand
+Ebih__Peak__Tunnel_Entrance --> Ebih__Peak__Tunnel_Ledge
 Ebih__Truck_Gate__Door <--> Ebih__Truck_Gate__Portal_Stand
 Ebih__Truck_Gate__Door <--> Ebih__Truck_Gate__Switch
 Ebih__Truck_Gate__Portal_Stand <--> Ebih__Truck_Gate__Switch
@@ -3217,7 +3314,6 @@ Ebih__Waterfall__Wall_Right --> Ebih__Waterfall__Lower_West_Tree
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
-Ebih__West_Face__East --> Ebih__Grid_21_2_6__West_3
 Ebih__West_Face__Lower_Ledge --> Ebih__West_Face__Upper_Ledge
 Ebih__West_Face__Lower_Ledge --> Menu__Kiengir_Map__Ebih_West_Face_Flask
 Ebih__West_Face__Lower_Ledge --> Menu__Warp_Only__Kiengir
@@ -3802,6 +3898,21 @@ Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Mid
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top
 Interior__Dock_Elevator__Connector <--> Interior__Dock_Interior__Connector
+Interior__Observatory__Catwalk --> Menu__Warp_Only__Kiengir
+Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Atop_Structure_East
+Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Below_Catwalk
+Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Catwalk
+Interior__Observatory__Lower_Tier_Center --> Interior__Observatory__East_Staircase_Top
+Interior__Observatory__Lower_Tier_Center --> Interior__Observatory__West_Staircase_Top
+Interior__Observatory__Lower_Tier_East --> Interior__Observatory__East_Staircase_Top
+Interior__Observatory__Lower_Tier_West_Mid_air --> Interior__Observatory__West_Staircase_Top
+Interior__Observatory__Staircase_Bottom_East --> Interior__Observatory__Lower_Tier_East
+Interior__Observatory__Staircase_Bottom_East --> Interior__Observatory__Lower_Tier_West_Mid_air
+Interior__Observatory__Staircase_Bottom_East --> Interior__Observatory__Second_Tier_West
+Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Lower_Tier_East
+Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Lower_Tier_West_Mid_air
+Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Second_Tier_West
+Interior__Observatory__West_Staircase_Top --> Interior__Observatory__Atop_Structure_West
 Interior__Outpost_Interior__Entry --> Interior__Outpost_Interior__Bookshelf
 Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
@@ -3993,6 +4104,7 @@ Menu__Kiengir_Map__Annuna_Mirror_Match --> Annuna__Mirror_Match__Save_Point
 Menu__Kiengir_Map__Annuna_Upper --> Annuna__Upper_Save__Save_Point
 Menu__Kiengir_Map__Annuna_Vertical_Room --> Annuna__Vertical_Room__Save_Point
 Menu__Kiengir_Map__Ebih_Base_Camp --> Ebih__Base_Camp__Save_Point
+Menu__Kiengir_Map__Ebih_Observatory --> Ebih__Hidden_Portal__Save_Point
 Menu__Kiengir_Map__Ebih_West_Lower --> Ebih__Ebih_West__Lower_Save
 Menu__Kiengir_Map__Ebih_West_Mid --> Ebih__Ebih_West__Mid_Save
 Menu__Kiengir_Map__Ebih_West_Upper --> Ebih__Ebih_West__Upper_Save

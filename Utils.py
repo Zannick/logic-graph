@@ -41,7 +41,9 @@ OPS = {
     r'\+': 'add',
     r'\+=': 'incr',
     '-': 'sub',
+    r'\-': 'sub',
     '-=': 'decr',
+    r'\-=': 'decr',
     r'\*': 'mul',
     r'\$': 'invoke_',
 }

@@ -364,6 +364,14 @@ areas:
           tags: [warp]
     - name: Ebih Observatory
       coord: [21, 3]
+      exits:
+        - to: Ebih > Hidden Portal > Save Point
+          req: ^map__ebih__hidden_portal__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Ebih West Lower
       coord: [19, 13]
       exits:
@@ -686,6 +694,18 @@ areas:
       coord: [26, 11]
     - name: Ebih West Face Flask
       coord: [20, 5]
+    - name: Ebih Hidden Portal Button
+      coord: [21, 5]
+    - name: Ebih Hidden Portal Portal
+      coord: [21, 6]
+    - name: Ebih Peak West
+      coord: [22, 3]
+    - name: Ebih Peak Center
+      coord: [23, 3]
+    - name: Ebih Peak Portal
+      coord: [24, 3]
+    - name: Ebih High Flask
+      coord: [25, 2]
 
     - name: Weekly Notes 2/27/2053
       coord: [42, 8]
