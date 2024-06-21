@@ -20579,21 +20579,21 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1] = Exit {
         id: ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1,
-        time: 69649,
+        time: 3600,
         dest: SpotId::Interior__Observatory__Atop_Structure_East,
-        price: Currency::Energy(2304),
+        price: Currency::Energy(124),
         loc_id: None,
     };
     exits[ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2] = Exit {
         id: ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2,
-        time: 34824,
+        time: 1800,
         dest: SpotId::Interior__Observatory__Atop_Structure_East,
-        price: Currency::Energy(1155),
+        price: Currency::Energy(65),
         loc_id: None,
     };
     exits[ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_3] = Exit {
         id: ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_3,
-        time: 34824,
+        time: 3000,
         dest: SpotId::Interior__Observatory__Atop_Structure_East,
         price: Currency::Free,
         loc_id: None,

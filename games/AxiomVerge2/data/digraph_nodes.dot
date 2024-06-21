@@ -2008,21 +2008,21 @@
         {
             Interior__Observatory__West [label = "", pos = "67.425,-104.25!"];
             Interior__Observatory__East [label = "", pos = "71.25,-104.25!"];
-            Interior__Observatory__East_Desk [label = "", pos = "73.5,-104.25!"];
-            Interior__Observatory__Staircase_Bottom_West [label = "", pos = "72.15,-104.25!"];
-            Interior__Observatory__Staircase_Bottom_East [label = "", pos = "73.05,-104.25!"];
-            Interior__Observatory__Lower_Tier_Center [label = "", pos = "72.45,-103.666667!"];
-            Interior__Observatory__Lower_Tier_East [label = "", pos = "73.05,-103.666667!"];
-            Interior__Observatory__Lower_Tier_West_Mid_air [label = "", pos = "71.85,-103.5!"];
-            Interior__Observatory__Second_Tier_West [label = "", pos = "71.4,-103.25!"];
-            Interior__Observatory__Third_Tier_West [label = "", pos = "71.4,-102.833333!"];
-            Interior__Observatory__West_Staircase_Top [label = "", pos = "72.0,-102.0!"];
-            Interior__Observatory__East_Staircase_Top [label = "", pos = "73.125,-102.5!"];
-            Interior__Observatory__Atop_Structure_West [label = "", pos = "72.15,-101.0!"];
-            Interior__Observatory__Atop_Structure_Center [label = "", pos = "72.6,-100.916667!"];
-            Interior__Observatory__Atop_Structure_East [label = "", pos = "102.9,-101.0!"];
-            Interior__Observatory__Catwalk [label = "", pos = "73.2,-100.916667!"];
-            Interior__Observatory__Below_Catwalk [label = "", pos = "73.2,-101.416667!"];
+            Interior__Observatory__East_Desk [label = "", pos = "70.5,-104.25!"];
+            Interior__Observatory__Staircase_Bottom_West [label = "", pos = "69.15,-104.25!"];
+            Interior__Observatory__Staircase_Bottom_East [label = "", pos = "70.05,-104.25!"];
+            Interior__Observatory__Lower_Tier_Center [label = "", pos = "69.45,-103.666667!"];
+            Interior__Observatory__Lower_Tier_East [label = "", pos = "70.05,-103.666667!"];
+            Interior__Observatory__Lower_Tier_West_Mid_air [label = "", pos = "68.85,-103.5!"];
+            Interior__Observatory__Second_Tier_West [label = "", pos = "68.4,-103.25!"];
+            Interior__Observatory__Third_Tier_West [label = "", pos = "68.4,-102.833333!"];
+            Interior__Observatory__West_Staircase_Top [label = "", pos = "69.0,-102.0!"];
+            Interior__Observatory__East_Staircase_Top [label = "", pos = "70.125,-102.5!"];
+            Interior__Observatory__Atop_Structure_West [label = "", pos = "69.15,-101.0!"];
+            Interior__Observatory__Atop_Structure_Center [label = "", pos = "69.6,-100.916667!"];
+            Interior__Observatory__Atop_Structure_East [label = "", pos = "69.9,-101.0!"];
+            Interior__Observatory__Catwalk [label = "", pos = "70.2,-100.916667!"];
+            Interior__Observatory__Below_Catwalk [label = "", pos = "70.2,-101.416667!"];
         }
         {
             Interior__Outpost_Interior__Entry [label = "", pos = "42.3,-125.833333!"];

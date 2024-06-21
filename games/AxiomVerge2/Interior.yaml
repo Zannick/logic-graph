@@ -167,7 +167,7 @@ areas:
         - to: Ebih > Peak > Observatory East
           tags: [exterior]
     - name: East Desk
-      coord: [24.5, 2.55]
+      coord: [23.5, 2.55]
       local:
         - to: East
         - to: Staircase Bottom East
@@ -176,7 +176,7 @@ areas:
           item: Submarine_Progress
           tags: [standing]
     - name: Staircase Bottom West
-      coord: [24.05, 2.55]
+      coord: [23.05, 2.55]
       local:
         - to: West
         - to: Staircase Bottom East
@@ -198,7 +198,7 @@ areas:
           movement: base
           jumps: 3
     - name: Staircase Bottom East
-      coord: [24.35, 2.55]
+      coord: [23.35, 2.55]
       local:
         - to: East Desk
         - to: Staircase Bottom West
@@ -221,7 +221,7 @@ areas:
           jumps: 3
 
     - name: Lower Tier Center
-      coord: [24.15, 2.2]
+      coord: [23.15, 2.2]
       local:
         - to: Second Tier West
           jumps: 2
@@ -244,7 +244,7 @@ areas:
           req: $mist2
           movement: mist2
     - name: Lower Tier East
-      coord: [24.35, 2.2]
+      coord: [23.35, 2.2]
       local:
         - to: Lower Tier Center
         - to: Staircase Bottom West
@@ -259,7 +259,7 @@ areas:
           req: $mist2
           movement: mist2
     - name: Lower Tier West Mid-air
-      coord: [23.95, 2.1]
+      coord: [22.95, 2.1]
       local:
         - to: Second Tier West
           jumps: 2
@@ -274,7 +274,7 @@ areas:
           req: $mist2
           movement: mist2
     - name: Second Tier West
-      coord: [23.8, 1.95]
+      coord: [22.8, 1.95]
       local:
         - to: Third Tier West
           jumps: 2
@@ -283,7 +283,7 @@ areas:
         - to: Lower Tier Center
           jumps_down: 1
     - name: Third Tier West
-      coord: [23.8, 1.7]
+      coord: [22.8, 1.7]
       local:
         - to: West Staircase Top
           jumps: 3
@@ -294,7 +294,7 @@ areas:
         - to: Staircase Bottom West
           jumps_down: 3
     - name: West Staircase Top
-      coord: [24.0, 1.2]
+      coord: [23.0, 1.2]
       local:
         - to: Lower Tier Center
           jumps_down: 3
@@ -312,7 +312,7 @@ areas:
           movement: base
           jumps: 3
     - name: East Staircase Top
-      coord: [24.375, 1.5]
+      coord: [23.375, 1.5]
       local:
         - to: Third Tier West
           jumps_down: 1
@@ -354,13 +354,13 @@ areas:
           movement: base
           jumps: 4
     - name: Atop Structure West
-      coord: [24.05, 0.6]
+      coord: [23.05, 0.6]
       local:
         - to: West Staircase Top
         - to: Atop Structure Center
           jumps: 1
     - name: Atop Structure Center
-      coord: [24.2, 0.55]
+      coord: [23.2, 0.55]
       local:
         - to: Atop Structure West
         - to: Atop Structure East
@@ -372,7 +372,7 @@ areas:
           req: $boomerang
           tags: [nearby_flask]
     - name: Atop Structure East
-      coord: [34.3, 0.6]
+      coord: [23.3, 0.6]
       local:
         - to: Atop Structure Center
           jumps: 1
@@ -392,7 +392,7 @@ areas:
           req: $shockwave
           tags: [shockwave]
     - name: Catwalk
-      coord: [24.4, 0.55]
+      coord: [23.4, 0.55]
       local:
         - to: Atop Structure East
         - to: Below Catwalk
@@ -414,11 +414,11 @@ areas:
           req: $melee_cskip
           tags: [cskip]
     - name: Below Catwalk
-      coord: [24.4, 0.85]
+      coord: [23.4, 0.85]
       local:
         - to: East Staircase Top
         - to: Lower Tier East
-          thru: [24.575, 1.7]
+          thru: [23.575, 1.7]
           jumps_down: [0, 1]
       locations:
         - name: Shockwave Flask from Below
