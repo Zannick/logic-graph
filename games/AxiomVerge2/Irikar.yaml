@@ -396,12 +396,14 @@ areas:
         - name: Mist into Wall
           to: Royal Storage in Wall
           item: Irikar_Royal_Storage_Wall
+          canon: Irikar_Royal_Storage_Wall
           req: not Irikar_Royal_Storage_Wall and Nanite_Mist
           movement: mist1
           tags: [event]
         - name: Upgraded Mist into Wall
           to: Royal Storage in Wall
           item: Irikar_Royal_Storage_Wall
+          canon: Irikar_Royal_Storage_Wall
           req: not Irikar_Royal_Storage_Wall and $mist2
           movement: mist2
           tags: [event]

@@ -706,6 +706,10 @@ pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
 }
+pub fn access_ebih_gem_room_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Gem_Room_Gate
+    ctx.has(Item::Ebih_Gem_Room_Gate)
+}
 pub fn access_ebih_hidden_portal_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Hidden_Portal_Gate
     ctx.has(Item::Ebih_Hidden_Portal_Gate)
@@ -2032,10 +2036,6 @@ pub fn access_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_melee_cskip_and_fast_travel(ctx: &Context, world: &World) -> bool {
     // $melee_cskip and Fast_Travel
     (helper__melee_cskip!(ctx, world) && ctx.has(Item::Fast_Travel))
-}
-pub fn access_invoke_melee_or_invoke_boomerang(ctx: &Context, world: &World) -> bool {
-    // $melee or $boomerang
-    (helper__melee!(ctx, world) || helper__boomerang!(ctx, world))
 }
 pub fn access_invoke_mist2(ctx: &Context, world: &World) -> bool {
     // $mist2
@@ -5941,6 +5941,18 @@ pub fn explain_ebih_alu(
         let h = ctx.has(Item::Ebih_Alu);
         edict.insert("Ebih_Alu", format!("{}", h));
         (h, vec!["Ebih_Alu"])
+    }
+}
+pub fn explain_ebih_gem_room_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Gem_Room_Gate
+    {
+        let h = ctx.has(Item::Ebih_Gem_Room_Gate);
+        edict.insert("Ebih_Gem_Room_Gate", format!("{}", h));
+        (h, vec!["Ebih_Gem_Room_Gate"])
     }
 }
 pub fn explain_ebih_hidden_portal_gate(
@@ -11481,33 +11493,6 @@ pub fn explain_invoke_melee_cskip_and_fast_travel(
         }
     }
 }
-pub fn explain_invoke_melee_or_invoke_boomerang(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $melee or $boomerang
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__melee!(ctx, world, edict);
-            edict.insert("$melee", format!("{:?}", res));
-            refs.push("$melee");
-            (res, refs)
-        };
-        if left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
-                edict.insert("$boomerang", format!("{:?}", res));
-                refs.push("$boomerang");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_invoke_mist2(
     ctx: &Context,
     world: &World,
@@ -16234,6 +16219,17 @@ pub fn observe_access_ebih_alu(
         ctx.has(Item::Ebih_Alu)
     }
 }
+pub fn observe_access_ebih_gem_room_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Gem_Room_Gate
+    {
+        full_obs.observe_ebih_gem_room_gate();
+        ctx.has(Item::Ebih_Gem_Room_Gate)
+    }
+}
 pub fn observe_access_ebih_hidden_portal_gate(
     ctx: &Context,
     world: &World,
@@ -18937,14 +18933,6 @@ pub fn observe_access_invoke_melee_cskip_and_fast_travel(
             full_obs.observe_fast_travel();
             ctx.has(Item::Fast_Travel)
         }))
-}
-pub fn observe_access_invoke_melee_or_invoke_boomerang(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $melee or $boomerang
-    (hobserve__melee!(ctx, world, full_obs) || hobserve__boomerang!(ctx, world, full_obs))
 }
 pub fn observe_access_invoke_mist2(
     ctx: &Context,

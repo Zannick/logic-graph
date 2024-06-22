@@ -1848,7 +1848,7 @@ areas:
           jumps: 2
       locations:
         - name: Hit Button
-          req: $melee or $boomerang
+          req: $can_damage
           canon: Ebih_Hidden_Portal_Gate
           item: Ebih_Hidden_Portal_Gate
           tags: [button]
@@ -3448,14 +3448,315 @@ areas:
 
 - name: Gem Room  # MARK: Gem Room
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [22, 12, 23, 13]
+    button: [23, 12, 24, 13]
+    gem: [23, 13, 24, 14]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Ebih Gem Room Flask
+      button: Menu > Kiengir Map > Ebih Gem Room Button
+      gem: Menu > Kiengir Map > Diviner's Gem
   spots:
     - name: West 13
       coord: [22.05, 12.75]
+      local:
+        - to: West Side
+        - to: East Side
+        - to: Below East Gate
       exits:
         - to: Vertical Interchange > East 13
           tags: [xshift]
+        - to: West Gate
+          req: $hook or $hover
+          movement: base
+    - name: West Mid-air
+      coord: [22.5, 13.5]
+      local:
+        - to: West Side
+      exits:
+        - to: West 13
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: West Side
+      coord: [22.6, 13.6]
+      local:
+        - to: West Mid-air
+          jumps: 1
+        - to: East Side
+        - to: Below East Gate
+          jumps: 1
+      exits:
+        - to: West 13
+          req: $hook
+          movement: base
+          jumps: 4
+        - to: West 13
+          req: $grab
+          movement: base
+          jumps: 5
+        - to: Below East Gate
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: East 14
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: Below East Gate
+      coord: [23.2, 13.5]
+      local:
+        - to: East Side
+        - to: West Side
+      exits:
+        - to: East Gate
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Air Corner
+          req: Nanite_Mist
+          movement: mist1
+        - to: Air Corner
+          req: $mist2
+          movement: mist2
+    - name: East Side
+      coord: [23.5, 13.7]
+      local:
+        - to: East Slope
+        - to: Below East Gate
+          jumps: 1
+        - to: West Side
+          jumps: 1
+      exits:
+        - to: West Mid-air
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: East Gate
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+        - to: Air Corner
+          req: Nanite_Mist
+          movement: mist1
+        - to: Air Corner
+          req: $mist2
+          movement: mist2
+    - name: East Slope
+      coord: [23.7, 13.7]
+      local:
+        - to: East Side
+        - to: East 14
+      exits:
+        - to: Tunnel Entrance
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tunnel Entrance
+          req: $mist2
+          movement: mist2
     - name: East 14
       coord: [23.95, 13.8]
+      local:
+        - to: East Slope
+          jumps: 1
       exits:
         - to: Walled Off > West 14
           tags: [xshift]
+        - to: Tunnel Entrance
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tunnel Entrance
+          req: $mist2
+          movement: mist2
+
+    - name: West Gate
+      coord: [22.8, 13.1]
+      local:
+        - to: West Mid-air
+        - to: West Side
+      exits:
+        - to: West 13
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Between Gates
+          req: Ebih_Gem_Room_Gate
+          movement: base
+    - name: East Gate
+      coord: [23.2, 13.1]
+      local:
+        - to: Below East Gate
+        - to: East Side
+      exits:
+        - to: Air Corner
+          req: Nanite_Mist
+          movement: mist1
+        - to: Air Corner
+          req: $mist2
+          movement: mist2
+        - to: Between Gates
+          req: Ebih_Gem_Room_Gate
+          movement: base
+    - name: Air Corner
+      coord: [23.45, 12.9]
+      local:
+        - to: Below East Gate
+        - to: East Side
+      exits:
+        - to: Tunnel Entrance
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tunnel Entrance
+          req: $mist2
+          movement: mist2
+    - name: Tunnel Entrance
+      coord: [23.45, 12.5]
+      local:
+        - to: Air Corner
+        - to: East Slope
+        - to: East 14
+      exits:
+        - to: Tunnel Interior
+          req: ^mode == 'drone'
+          movement: base
+    - name: Tunnel Interior
+      coord: [23.3, 12.5]
+      local:
+        - to: Upper Tunnel East
+          jumps: 3
+      exits:
+        - to: Tunnel Entrance
+          req: ^mode == 'drone'
+          movement: base
+        - to: Upper Tunnel East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Tunnel East
+          req: $mist2
+          movement: mist2
+    - name: Upper Tunnel East
+      coord: [23.15, 12.15]
+      local:
+        - to: Upper Tunnel West
+        - to: Tunnel Interior
+    - name: Upper Tunnel West
+      coord: [22.925, 12.15]
+      local:
+        - to: Upper Tunnel East
+        - to: Button Corner
+    - name: Button Corner
+      coord: [22.9, 12.5]
+      local:
+        - to: Button Nearby
+      locations:
+        - name: Remote Button
+          canon: Ebih_Gem_Room_Gate
+          item: Ebih_Gem_Room_Gate
+          req: $boomerang
+          tags: [button]
+        - name: Shockwave Secret Flask
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Upper Tunnel West
+          req: $climb
+          movement: base
+          jumps: 2
+        - to: Upper Tunnel West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Tunnel West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Tunnel West
+          req: $mist2
+          movement: mist2
+    - name: Button Nearby
+      coord: [23.0, 12.5]
+      local:
+        - to: Button Corner
+      locations:
+        - name: Hit Button
+          canon: Ebih_Gem_Room_Gate
+          item: Ebih_Gem_Room_Gate
+          req: $can_damage
+          tags: [button]
+
+    - name: Between Gates
+      coord: [23.0, 13.1]
+      locations:
+        - name: Gem
+          item: Diviners_Gem
+          tags: [standing]
+      exits:
+        - to: West Gate
+          req: Ebih_Gem_Room_Gate
+          movement: base
+        - to: East Gate
+          req: Ebih_Gem_Room_Gate
+          movement: base
+        - to: Hidden Tunnel
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Hidden Tunnel
+          req: Nanite_Mist and ^mode == 'drone'  # TODO: is this drone-only?
+          movement: mist1
+        - to: Hidden Tunnel
+          req: $mist2 and ^mode == 'drone'
+          movement: mist2
+    - name: Hidden Tunnel
+      coord: [23.0, 12.7]
+      local:
+        - to: Between Gates
+      exits:
+        - to: Hidden Tunnel Corner
+          req: ^mode == 'drone'
+          movement: base
+    - name: Hidden Tunnel Corner
+      coord: [22.8, 12.7]
+      local:
+        - to: Hidden Cache
+          jumps: 1
+      locations:
+        - name: Shockwave Flask
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          req: $shockwave
+          tags: [shockwave]
+        - name: Boomerang Flask
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          req: $bs
+          tags: [nearby_flask]
+      exits:
+        - to: Hidden Tunnel
+          req: ^mode == 'drone'
+          movement: base
+    - name: Hidden Cache
+      coord: [22.75, 12.5]
+      local:
+        - to: Hidden Tunnel Corner
+      locations:
+        - name: Flask
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          tags: [flask]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Gem_Room_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]

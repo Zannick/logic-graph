@@ -799,7 +799,25 @@
         }
         {
             Ebih__Gem_Room__West_13 [label = "", pos = "66.15,-21.25!"];
+            Ebih__Gem_Room__West_Mid_air [label = "", pos = "67.5,-22.5!"];
+            Ebih__Gem_Room__West_Side [label = "", pos = "67.8,-22.666667!"];
+            Ebih__Gem_Room__Below_East_Gate [label = "", pos = "69.6,-22.5!"];
+            Ebih__Gem_Room__East_Side [label = "", pos = "70.5,-22.833333!"];
+            Ebih__Gem_Room__East_Slope [label = "", pos = "71.1,-22.833333!"];
             Ebih__Gem_Room__East_14 [label = "", pos = "71.85,-23.0!"];
+            Ebih__Gem_Room__West_Gate [label = "", pos = "68.4,-21.833333!"];
+            Ebih__Gem_Room__East_Gate [label = "", pos = "69.6,-21.833333!"];
+            Ebih__Gem_Room__Air_Corner [label = "", pos = "70.35,-21.5!"];
+            Ebih__Gem_Room__Tunnel_Entrance [label = "", pos = "70.35,-20.833333!"];
+            Ebih__Gem_Room__Tunnel_Interior [label = "", pos = "69.9,-20.833333!"];
+            Ebih__Gem_Room__Upper_Tunnel_East [label = "", pos = "69.45,-20.25!"];
+            Ebih__Gem_Room__Upper_Tunnel_West [label = "", pos = "68.775,-20.25!"];
+            Ebih__Gem_Room__Button_Corner [label = "", pos = "68.7,-20.833333!"];
+            Ebih__Gem_Room__Button_Nearby [label = "", pos = "69.0,-20.833333!"];
+            Ebih__Gem_Room__Between_Gates [label = "", pos = "69.0,-21.833333!"];
+            Ebih__Gem_Room__Hidden_Tunnel [label = "", pos = "69.0,-21.166667!"];
+            Ebih__Gem_Room__Hidden_Tunnel_Corner [label = "", pos = "68.4,-21.166667!"];
+            Ebih__Gem_Room__Hidden_Cache [label = "", pos = "68.25,-20.833333!"];
         }
         {
             Ebih__Grid_25_10_12__East_12 [label = "", pos = "77.85,-19.5!"];
@@ -2497,6 +2515,9 @@
             Menu__Kiengir_Map__Ebih_Peak_Center [label = "", pos = "69.0,-5.0!"];
             Menu__Kiengir_Map__Ebih_Peak_Portal [label = "", pos = "72.0,-5.0!"];
             Menu__Kiengir_Map__Ebih_High_Flask [label = "", pos = "75.0,-3.333333!"];
+            Menu__Kiengir_Map__Ebih_Gem_Room_Flask [label = "", pos = "66.0,-21.666667!"];
+            Menu__Kiengir_Map__Ebih_Gem_Room_Button [label = "", pos = "69.0,-21.666667!"];
+            Menu__Kiengir_Map__Diviners_Gem [label = "", pos = "69.0,-23.333333!"];
             Menu__Kiengir_Map__Weekly_Notes_2_27_2053 [label = "", pos = "126.0,-13.333333!"];
             Menu__Kiengir_Map__Compass [label = "", pos = "126.0,-18.333333!"];
             Menu__Kiengir_Map__Dr_Gloria [label = "", pos = "117.0,-23.333333!"];

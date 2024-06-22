@@ -10230,7 +10230,72 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize(),
-            end: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize() + 1,
+            end: ExitId::Ebih__Gem_Room__West_13__ex__West_Gate_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__West_Mid_air] = Spot {
+        id: SpotId::Ebih__Gem_Room__West_Mid_air,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__West_Mid_air__ex__West_13_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__West_Mid_air__ex__West_13_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__West_Side] = Spot {
+        id: SpotId::Ebih__Gem_Room__West_Side,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__West_Side__ex__Below_East_Gate_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__West_Side__ex__West_13_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Below_East_Gate] = Spot {
+        id: SpotId::Ebih__Gem_Room__Below_East_Gate,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Below_East_Gate__ex__Air_Corner_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Below_East_Gate__ex__East_Gate_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__East_Side] = Spot {
+        id: SpotId::Ebih__Gem_Room__East_Side,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__East_Side__ex__Air_Corner_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__East_Side__ex__West_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__East_Slope] = Spot {
+        id: SpotId::Ebih__Gem_Room__East_Slope,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__East_Slope__ex__Tunnel_Entrance_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__East_Slope__ex__Tunnel_Entrance_2.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -10242,8 +10307,178 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1.into_usize(),
+            start: ExitId::Ebih__Gem_Room__East_14__ex__Tunnel_Entrance_1.into_usize(),
             end: ExitId::Ebih__Gem_Room__East_14__ex__Walled_Off__West_14_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__West_Gate] = Spot {
+        id: SpotId::Ebih__Gem_Room__West_Gate,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__West_Gate__ex__Between_Gates_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__West_Gate__ex__West_13_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__East_Gate] = Spot {
+        id: SpotId::Ebih__Gem_Room__East_Gate,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__East_Gate__ex__Air_Corner_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__East_Gate__ex__Between_Gates_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Air_Corner] = Spot {
+        id: SpotId::Ebih__Gem_Room__Air_Corner,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Air_Corner__ex__Tunnel_Entrance_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Air_Corner__ex__Tunnel_Entrance_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Tunnel_Entrance] = Spot {
+        id: SpotId::Ebih__Gem_Room__Tunnel_Entrance,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Tunnel_Entrance__ex__Tunnel_Interior_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Tunnel_Entrance__ex__Tunnel_Interior_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Tunnel_Interior] = Spot {
+        id: SpotId::Ebih__Gem_Room__Tunnel_Interior,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Tunnel_Interior__ex__Tunnel_Entrance_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Tunnel_Interior__ex__Upper_Tunnel_East_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Upper_Tunnel_East] = Spot {
+        id: SpotId::Ebih__Gem_Room__Upper_Tunnel_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Upper_Tunnel_West] = Spot {
+        id: SpotId::Ebih__Gem_Room__Upper_Tunnel_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Button_Corner] = Spot {
+        id: SpotId::Ebih__Gem_Room__Button_Corner,
+        locations: Range {
+            start: LocationId::Ebih__Gem_Room__Button_Corner__Remote_Button.into_usize(),
+            end: LocationId::Ebih__Gem_Room__Button_Corner__Shockwave_Secret_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_4.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Button_Nearby] = Spot {
+        id: SpotId::Ebih__Gem_Room__Button_Nearby,
+        locations: Range {
+            start: LocationId::Ebih__Gem_Room__Button_Nearby__Hit_Button.into_usize(),
+            end: LocationId::Ebih__Gem_Room__Button_Nearby__Hit_Button.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Between_Gates] = Spot {
+        id: SpotId::Ebih__Gem_Room__Between_Gates,
+        locations: Range {
+            start: LocationId::Ebih__Gem_Room__Between_Gates__Gem.into_usize(),
+            end: LocationId::Ebih__Gem_Room__Between_Gates__Gem.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Between_Gates__ex__East_Gate_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Between_Gates__ex__West_Gate_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Hidden_Tunnel] = Spot {
+        id: SpotId::Ebih__Gem_Room__Hidden_Tunnel,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Hidden_Tunnel_Corner] = Spot {
+        id: SpotId::Ebih__Gem_Room__Hidden_Tunnel_Corner,
+        locations: Range {
+            start: LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask.into_usize(),
+            end: LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1.into_usize(),
+            end: ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Gem_Room__Hidden_Cache] = Spot {
+        id: SpotId::Ebih__Gem_Room__Hidden_Cache,
+        locations: Range {
+            start: LocationId::Ebih__Gem_Room__Hidden_Cache__Flask.into_usize(),
+            end: LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
         },
         actions: Range {
             start: 0, end: 0,
@@ -25647,6 +25882,42 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Kiengir_Map__Ebih_High_Flask] = Spot {
         id: SpotId::Menu__Kiengir_Map__Ebih_High_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_Gem_Room_Flask] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_Gem_Room_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_Gem_Room_Button] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_Gem_Room_Button,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Diviners_Gem] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Diviners_Gem,
         locations: Range {
             start: 0, end: 0,
         },

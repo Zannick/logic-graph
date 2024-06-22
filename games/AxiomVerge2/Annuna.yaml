@@ -423,6 +423,7 @@ areas:
       locations:
         - name: Switch from Below
           item: Annuna_East_Bridge_Gate
+          canon: Annuna_East_Bridge_Gate
           req: $boomerang
           time: 0.25  # ?
       exits:

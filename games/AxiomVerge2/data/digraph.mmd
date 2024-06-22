@@ -957,7 +957,25 @@ subgraph Ebih
     end
     subgraph Ebih__Gem_Room[Gem Room]
         Ebih__Gem_Room__West_13(West 13);
+        Ebih__Gem_Room__West_Mid_air(West Mid-air);
+        Ebih__Gem_Room__West_Side(West Side);
+        Ebih__Gem_Room__Below_East_Gate(Below East Gate);
+        Ebih__Gem_Room__East_Side(East Side);
+        Ebih__Gem_Room__East_Slope(East Slope);
         Ebih__Gem_Room__East_14(East 14);
+        Ebih__Gem_Room__West_Gate(West Gate);
+        Ebih__Gem_Room__East_Gate(East Gate);
+        Ebih__Gem_Room__Air_Corner(Air Corner);
+        Ebih__Gem_Room__Tunnel_Entrance(Tunnel Entrance);
+        Ebih__Gem_Room__Tunnel_Interior(Tunnel Interior);
+        Ebih__Gem_Room__Upper_Tunnel_East(Upper Tunnel East);
+        Ebih__Gem_Room__Upper_Tunnel_West(Upper Tunnel West);
+        Ebih__Gem_Room__Button_Corner(Button Corner);
+        Ebih__Gem_Room__Button_Nearby(Button Nearby);
+        Ebih__Gem_Room__Between_Gates(Between Gates);
+        Ebih__Gem_Room__Hidden_Tunnel(Hidden Tunnel);
+        Ebih__Gem_Room__Hidden_Tunnel_Corner(Hidden Tunnel Corner);
+        Ebih__Gem_Room__Hidden_Cache(Hidden Cache);
     end
 end
 subgraph Filter
@@ -2438,6 +2456,9 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Peak_Center(Ebih Peak Center);
         Menu__Kiengir_Map__Ebih_Peak_Portal(Ebih Peak Portal);
         Menu__Kiengir_Map__Ebih_High_Flask(Ebih High Flask);
+        Menu__Kiengir_Map__Ebih_Gem_Room_Flask(Ebih Gem Room Flask);
+        Menu__Kiengir_Map__Ebih_Gem_Room_Button(Ebih Gem Room Button);
+        Menu__Kiengir_Map__Diviners_Gem(Diviner's Gem);
         Menu__Kiengir_Map__Weekly_Notes_2_27_2053(Weekly Notes 2/27/2053);
         Menu__Kiengir_Map__Compass(Compass);
         Menu__Kiengir_Map__Dr_Gloria(Dr. Gloria);
@@ -3208,8 +3229,31 @@ Ebih__Ebih_West__West_12 <--> Giguna__Wasteland__East_12
 Ebih__Ebih_West__West_13 <--> Giguna__Wasteland__East_13
 Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
 Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
+Ebih__Gem_Room__Air_Corner --> Ebih__Gem_Room__Tunnel_Entrance
+Ebih__Gem_Room__Below_East_Gate --> Ebih__Gem_Room__Air_Corner
+Ebih__Gem_Room__Below_East_Gate --> Ebih__Gem_Room__East_Gate
+Ebih__Gem_Room__Between_Gates <--> Ebih__Gem_Room__East_Gate
+Ebih__Gem_Room__Between_Gates --> Ebih__Gem_Room__Hidden_Tunnel
+Ebih__Gem_Room__Between_Gates <--> Ebih__Gem_Room__West_Gate
+Ebih__Gem_Room__Button_Corner --> Ebih__Gem_Room__Upper_Tunnel_West
+Ebih__Gem_Room__East_14 --> Ebih__Gem_Room__Tunnel_Entrance
 Ebih__Gem_Room__East_14 <--> Ebih__Walled_Off__West_14
+Ebih__Gem_Room__East_Gate --> Ebih__Gem_Room__Air_Corner
+Ebih__Gem_Room__East_Side --> Ebih__Gem_Room__Air_Corner
+Ebih__Gem_Room__East_Side --> Ebih__Gem_Room__East_Gate
+Ebih__Gem_Room__East_Side --> Ebih__Gem_Room__West_Mid_air
+Ebih__Gem_Room__East_Slope --> Ebih__Gem_Room__Tunnel_Entrance
+Ebih__Gem_Room__Hidden_Cache --> Menu__Kiengir_Map__Ebih_Gem_Room_Flask
+Ebih__Gem_Room__Hidden_Cache --> Menu__Warp_Only__Kiengir
+Ebih__Gem_Room__Hidden_Tunnel <--> Ebih__Gem_Room__Hidden_Tunnel_Corner
+Ebih__Gem_Room__Tunnel_Entrance <--> Ebih__Gem_Room__Tunnel_Interior
+Ebih__Gem_Room__Tunnel_Interior --> Ebih__Gem_Room__Upper_Tunnel_East
+Ebih__Gem_Room__West_13 <--> Ebih__Gem_Room__West_Gate
 Ebih__Gem_Room__West_13 <--> Ebih__Vertical_Interchange__East_13
+Ebih__Gem_Room__West_Mid_air --> Ebih__Gem_Room__West_13
+Ebih__Gem_Room__West_Side --> Ebih__Gem_Room__Below_East_Gate
+Ebih__Gem_Room__West_Side --> Ebih__Gem_Room__East_14
+Ebih__Gem_Room__West_Side --> Ebih__Gem_Room__West_13
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
 Ebih__Grid_25_10_12__Bush --> Ebih__Grid_25_10_12__Mid_Ledge
 Ebih__Grid_25_10_12__Door <--> Ebih__Grid_25_10_12__Door_Left

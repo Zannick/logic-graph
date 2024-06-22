@@ -706,6 +706,12 @@ areas:
       coord: [24, 3]
     - name: Ebih High Flask
       coord: [25, 2]
+    - name: Ebih Gem Room Flask
+      coord: [22, 13]
+    - name: Ebih Gem Room Button
+      coord: [23, 13]
+    - name: Diviner's Gem
+      coord: [23, 14]
 
     - name: Weekly Notes 2/27/2053
       coord: [42, 8]

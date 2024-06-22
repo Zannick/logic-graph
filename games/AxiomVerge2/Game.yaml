@@ -275,7 +275,8 @@ actions:  # MARK: actions
       - calc: $spot_distance(^position, ^portal) * 2.0
 
 helpers:  # MARK: helpers
-  $melee: Ice_Axe or ^mode == 'drone'
+  $weapon: Ice_Axe  # this should be expanded for randomizers but probably isn't necessary for the vanilla search
+  $melee: $weapon or ^mode == 'drone'
   $boomerang: ^mode != 'drone' and (Boomerang or Boomerang_Upgrade)
   $boomerang2: ^mode != 'drone' and Boomerang_Upgrade
   $remote_boomerang: ^mode != 'drone' and Remote_Boomerang
@@ -324,13 +325,13 @@ helpers:  # MARK: helpers
 
   # glitches
   $bs: boomerang_steering and $boomerang
-  $offset: major_glitches and $melee
+  $offset: major_glitches and $weapon
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
 
   # tricks
   $infinite_climb: Anuman and Wall_Climb and Remote_Drone and Drone_Hover
-  $melee_cskip: (Ice_Axe and indra_cskip) or ^mode == 'drone'
+  $melee_cskip: ($weapon and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
   $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
@@ -346,13 +347,14 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{30}, Big_Flask{12}]
+    [Flask{31}, Big_Flask{12}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >
     [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
   $other_items:itemList: >
-    [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1]
+    [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,
+     Diviners_Gem]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge]

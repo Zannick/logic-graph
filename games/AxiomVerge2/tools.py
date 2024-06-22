@@ -142,6 +142,9 @@ def too_expensive():
         for exit in expensive_exits
     ])
 
+def repeated_items():
+    pprint({k: v for k, v in AV2.placed_item_counts.items() if v > 1})
+
 def make_igraph():
     edges = [(x, y, w) for ((x, y), w) in AV2.basic_distances.items()]
     g = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
