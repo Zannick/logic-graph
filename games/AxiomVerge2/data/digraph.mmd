@@ -746,9 +746,17 @@ subgraph Ebih
         Ebih__Waterfall__Below_Tree(Below Tree);
         Ebih__Waterfall__Platform(Platform);
         Ebih__Waterfall__East_8(East 8);
+        Ebih__Waterfall__Passage_Exit(Passage Exit);
         Ebih__Waterfall__East_7(East 7);
         Ebih__Waterfall__Top_Waterfall(Top Waterfall);
         Ebih__Waterfall__West_7(West 7);
+        Ebih__Waterfall__East_9(East 9);
+        Ebih__Waterfall__East_Door_Right(East Door Right);
+        Ebih__Waterfall__East_Door(East Door);
+        Ebih__Waterfall__East_Switch(East Switch);
+        Ebih__Waterfall__Platform_by_East_Door(Platform by East Door);
+        Ebih__Waterfall__East_Horizontal_Door(East Horizontal Door);
+        Ebih__Waterfall__Ledge_Below_East_Door(Ledge Below East Door);
     end
     subgraph Ebih__Ebih_West[Ebih West]
         Ebih__Ebih_West__East_10(East 10);
@@ -801,6 +809,10 @@ subgraph Ebih
         Ebih__Ebih_East__Lower_Moving_Platform(Lower Moving Platform);
         Ebih__Ebih_East__Corner(Corner);
         Ebih__Ebih_East__Dispenser(Dispenser);
+        Ebih__Ebih_East__Wall_East(Wall East);
+        Ebih__Ebih_East__Wall_West(Wall West);
+        Ebih__Ebih_East__West_9(West 9);
+        Ebih__Ebih_East__Lower_Center_Pillar(Lower Center Pillar);
         Ebih__Ebih_East__East_Ledge(East Ledge);
         Ebih__Ebih_East__Middle_Platform(Middle Platform);
         Ebih__Ebih_East__Upper_Ledge(Upper Ledge);
@@ -2441,6 +2453,7 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Garage(Ebih Garage);
         Menu__Kiengir_Map__Ebih_East_Waterfall_Flask(Ebih East Waterfall Flask);
         Menu__Kiengir_Map__Ebih_Waterfall_Cave(Ebih Waterfall Cave);
+        Menu__Kiengir_Map__Ebih_Waterfall_West_9(Ebih Waterfall West 9);
         Menu__Kiengir_Map__Heretics_Tablet(Heretic's Tablet);
         Menu__Kiengir_Map__Ebih_West_Flask(Ebih West Flask);
         Menu__Kiengir_Map__Ebih_East_Health(Ebih East Health);
@@ -3183,14 +3196,19 @@ Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__Middle_Platform
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__West_6
 Ebih__Drone_Room__Portal_Exit --> Ebih__Drone_Room__Moving_Platform
-Ebih__Ebih_East__Dispenser --> Ebih__Ebih_East__Lower_Moving_Platform
+Ebih__Ebih_East__Dispenser --> Ebih__Ebih_East__Lower_Center_Pillar
 Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
 Ebih__Ebih_East__East_9 <--> Ebih__Observation_Tower_Room__West_9
 Ebih__Ebih_East__East_Mid_air --> Ebih__Observation_Tower_Room__West_Mid_air
 Ebih__Ebih_East__Ledge_End --> Ebih__Ebih_East__East_Ledge
+Ebih__Ebih_East__Lower_Center_Pillar --> Ebih__Ebih_East__East_Ledge
+Ebih__Ebih_East__Lower_Center_Pillar --> Ebih__Ebih_East__Ledge_End
+Ebih__Ebih_East__Lower_Center_Pillar --> Ebih__Ebih_East__Lower_Moving_Platform
 Ebih__Ebih_East__Moving_Platform --> Ebih__Ebih_East__East_Ledge
+Ebih__Ebih_East__Wall_East <--> Ebih__Ebih_East__Wall_West
 Ebih__Ebih_East__West_7 <--> Ebih__Waterfall__East_7
 Ebih__Ebih_East__West_8 <--> Ebih__Waterfall__East_8
+Ebih__Ebih_East__West_9 <--> Ebih__Waterfall__East_9
 Ebih__Ebih_West__Above_Door <--> Ebih__Ebih_West__Below_Door
 Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Refill_Station
 Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Small_Gap
@@ -3345,12 +3363,19 @@ Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left
 Ebih__Waterfall__Alcove_Right --> Ebih__Waterfall__Waterfall_Center_Right
 Ebih__Waterfall__Below_Left_Switch <--> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__Below_Tree --> Ebih__Waterfall__Big_Tree
+Ebih__Waterfall__Below_Tree <--> Ebih__Waterfall__Passage_Exit
+Ebih__Waterfall__Cave_Entrance --> Ebih__Waterfall__Passage_Exit
 Ebih__Waterfall__Cave_Entrance <--> Interior__Ebih_Cave__Entry
+Ebih__Waterfall__East_Door <--> Ebih__Waterfall__East_Door_Right
+Ebih__Waterfall__East_Door <--> Ebih__Waterfall__East_Switch
+Ebih__Waterfall__East_Horizontal_Door <--> Ebih__Waterfall__Ledge_Below_East_Door
+Ebih__Waterfall__East_Ledge --> Ebih__Waterfall__Ledge_Below_East_Door
 Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__Middle_West_Tree
 Ebih__Waterfall__Ledge_Below_Hole --> Ebih__Waterfall__West_Door_Right
 Ebih__Waterfall__Lower_West_Tree --> Ebih__Waterfall__West_Lower_Path
 Ebih__Waterfall__Middle_West_Tree --> Ebih__Waterfall__West_Main_Path
 Ebih__Waterfall__Near_East_Tree --> Ebih__Waterfall__East_Ledge
+Ebih__Waterfall__Near_East_Tree --> Ebih__Waterfall__Ledge_Below_East_Door
 Ebih__Waterfall__Platform --> Ebih__Waterfall__Big_Tree
 Ebih__Waterfall__Under_Waterfall --> Ebih__Waterfall__Waterfall_Left
 Ebih__Waterfall__Wall_Left <--> Ebih__Waterfall__Wall_Right

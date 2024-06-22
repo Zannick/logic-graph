@@ -82,7 +82,12 @@ impl world::Accessible for Action {
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_ebih__truck_gate__switch__open_door__req(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_ebih__vertical_interchange__west_13__open_door__req(ctx, world),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => rules::access_invoke_open(ctx, world),
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => rules::access_invoke_open_and_invoke_range3(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_giguna__carnelian__lower_susar__caught__req(ctx, world),
@@ -236,7 +241,12 @@ impl world::Accessible for Action {
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::observe_access_ebih__truck_gate__switch__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::observe_access_ebih__vertical_interchange__west_13__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range3(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::observe_access_giguna__carnelian__lower_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::observe_access_giguna__carnelian__lower_susar__hack__req(ctx, world, full_obs),
@@ -711,11 +721,56 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_invoke_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_invoke_range3(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Waterfall > Below Left Switch"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_invoke_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -1535,6 +1590,11 @@ impl world::Action for Action {
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx, world),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::action_ebih__waterfall__west_8__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::action_ebih__waterfall__east_door_right__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => rules::action_ebih__waterfall__east_switch__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::action_ebih__waterfall__platform_by_east_door__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::action_ebih__waterfall__east_horizontal_door__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => rules::action_ebih__waterfall__ledge_below_east_door__open_door__do(ctx, world),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(ctx, world),
@@ -1882,6 +1942,21 @@ impl world::Action for Action {
             }
             ActionId::Ebih__Waterfall__West_8__Open_Door => {
                 rules::observe_action_ebih__waterfall__west_8__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => {
+                rules::observe_action_ebih__waterfall__east_door_right__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => {
+                rules::observe_action_ebih__waterfall__east_switch__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => {
+                rules::observe_action_ebih__waterfall__platform_by_east_door__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => {
+                rules::observe_action_ebih__waterfall__east_horizontal_door__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => {
+                rules::observe_action_ebih__waterfall__ledge_below_east_door__open_door__do(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_West__Mid_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2475,6 +2550,31 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     };
     actions[ActionId::Ebih__Waterfall__West_8__Open_Door] = Action {
         id: ActionId::Ebih__Waterfall__West_8__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Waterfall__East_Door_Right__Open_Door] = Action {
+        id: ActionId::Ebih__Waterfall__East_Door_Right__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Waterfall__East_Switch__Open_Door] = Action {
+        id: ActionId::Ebih__Waterfall__East_Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door] = Action {
+        id: ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door] = Action {
+        id: ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door] = Action {
+        id: ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door,
         time: 500,
         price: Currency::Free,
     };
@@ -3098,6 +3198,11 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => SpotId::Ebih__Waterfall__Ledge_Below_Hole,
         ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => SpotId::Ebih__Waterfall__Below_Left_Switch,
         ActionId::Ebih__Waterfall__West_8__Open_Door => SpotId::Ebih__Waterfall__West_8,
+        ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => SpotId::Ebih__Waterfall__East_Door_Right,
+        ActionId::Ebih__Waterfall__East_Switch__Open_Door => SpotId::Ebih__Waterfall__East_Switch,
+        ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => SpotId::Ebih__Waterfall__Platform_by_East_Door,
+        ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => SpotId::Ebih__Waterfall__East_Horizontal_Door,
+        ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => SpotId::Ebih__Waterfall__Ledge_Below_East_Door,
         ActionId::Ebih__Ebih_West__Mid_Save__Save => SpotId::Ebih__Ebih_West__Mid_Save,
         ActionId::Ebih__Ebih_West__Upper_Save__Save => SpotId::Ebih__Ebih_West__Upper_Save,
         ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => SpotId::Ebih__Ebih_West__Medium_High_Platform,

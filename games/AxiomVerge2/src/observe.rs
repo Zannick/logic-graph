@@ -74,6 +74,7 @@ pub enum OneObservation {
     CBits5{ mask: flags::ContextBits5, result: flags::ContextBits5 },
     CBits6{ mask: flags::ContextBits6, result: flags::ContextBits6 },
     CBits7{ mask: flags::ContextBits7, result: flags::ContextBits7 },
+    CBits8{ mask: flags::ContextBits8, result: flags::ContextBits8 },
 }
 
 
@@ -108,6 +109,7 @@ pub struct FullObservation {
     cbits5: flags::ContextBits5,
     cbits6: flags::ContextBits6,
     cbits7: flags::ContextBits7,
+    cbits8: flags::ContextBits8,
     pub strict: bool,
 }
 
@@ -221,6 +223,9 @@ impl Observer for FullObservation {
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn | LocationId::Ebih__Ebih_East__Corner__Urn => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_INFECT);
             }
+            LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster => {
+                self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_EAST_WALL);
+            }
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button | LocationId::Ebih__Hidden_Portal__Button__Hit_Button | LocationId::Ebih__Hidden_Portal__Gate_Ledge_East__Remote_Button => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_HIDDEN_PORTAL_GATE);
             }
@@ -273,13 +278,13 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_TOP_FLASK);
             }
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch | LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_DUAL_PATH_SWITCH);
+                self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_DUAL_PATH_SWITCH);
             }
             LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_DUAL_PATH_WALL);
             }
             LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_BOULDER);
+                self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_BOULDER);
             }
             LocationId::Giguna__Gateway__Block_Left__Shockwave | LocationId::Giguna__Gateway__Block_Right__Shockwave => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_GATEWAY_BLOCK);
@@ -288,7 +293,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_GUBI);
             }
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_GIGUNA_BREACHABLE_WALL_FLASK);
+                self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_BREACHABLE_WALL_FLASK);
             }
             LocationId::Giguna__Separator__Upper_Brick__Break_Bricks | LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_GIGUNA_SEPARATOR_BRICKS);
@@ -351,7 +356,7 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_FAST_TRAVEL);
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
+                self.cbits8.insert(flags::ContextBits8::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
@@ -480,16 +485,16 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__GRID_26_10_11__LEDGE__NOTE);
             }
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
             }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH);
             }
             LocationId::Ebih__Guarded_Health__West_Basin__Health => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH);
             }
             LocationId::Ebih__Guarded_Health__Far_West__Refill => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL);
             }
             LocationId::Ebih__Gem_Room__Between_Gates__Gem => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH__GEM_ROOM__BETWEEN_GATES__GEM);
@@ -648,13 +653,13 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM);
             }
             LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__SAT_TOWER_TOP_LEDGE__TABLET);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_IRIKAR__HUB__SAT_TOWER_TOP_LEDGE__TABLET);
             }
             LocationId::Irikar__Hub__Dagger_Altar__Weapon => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON);
             }
             LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__HUB__SW_BUILDING_TOP_PLATFORM__POWER_CORE);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_IRIKAR__HUB__SW_BUILDING_TOP_PLATFORM__POWER_CORE);
             }
             LocationId::Irikar__Abandoned_Room__Corner_Core__Core => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR__ABANDONED_ROOM__CORNER_CORE__CORE);
@@ -2010,6 +2015,9 @@ impl Observer for FullObservation {
             if !self.cbits7.is_empty() {
                 vec.push(OneObservation::CBits7{ mask: self.cbits7, result: self.cbits7 & ctx.cbits7 });
             }
+            if !self.cbits8.is_empty() {
+                vec.push(OneObservation::CBits8{ mask: self.cbits8, result: self.cbits8 & ctx.cbits8 });
+            }
         vec
     }
 }
@@ -2041,6 +2049,7 @@ impl FullObservation {
         if !self.cbits5.is_empty() { fields += 1; }
         if !self.cbits6.is_empty() { fields += 1; }
         if !self.cbits7.is_empty() { fields += 1; }
+        if !self.cbits8.is_empty() { fields += 1; }
         fields
     }
 
@@ -2418,6 +2427,12 @@ impl FullObservation {
     pub fn clear_ebih__waterfall__ctx__west_door_open(&mut self) {
         self.cbits1.remove(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
     }
+    pub fn observe_ebih__waterfall__ctx__east_door_open(&mut self) {
+        self.cbits1.insert(flags::ContextBits1::EBIH__WATERFALL__CTX__EAST_DOOR_OPEN);
+    }
+    pub fn clear_ebih__waterfall__ctx__east_door_open(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::EBIH__WATERFALL__CTX__EAST_DOOR_OPEN);
+    }
     pub fn observe_ebih__ebih_west__ctx__door_open(&mut self) {
         self.cbits1.insert(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
     }
@@ -2503,10 +2518,10 @@ impl FullObservation {
         self.cbits1.remove(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
     }
     pub fn observe_giguna__clouds__ctx__platform(&mut self) {
-        self.cbits1.insert(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM);
+        self.cbits2.insert(flags::ContextBits2::GIGUNA__CLOUDS__CTX__PLATFORM);
     }
     pub fn clear_giguna__clouds__ctx__platform(&mut self) {
-        self.cbits1.remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM);
+        self.cbits2.remove(flags::ContextBits2::GIGUNA__CLOUDS__CTX__PLATFORM);
     }
     pub fn observe_giguna__east_caverns__ctx__door_opened(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED);
@@ -2836,6 +2851,12 @@ impl FullObservation {
     pub fn clear_ebih_alu(&mut self) {
         self.cbits2.remove(flags::ContextBits2::EBIH_ALU);
     }
+    pub fn observe_ebih_east_wall(&mut self) {
+        self.cbits2.insert(flags::ContextBits2::EBIH_EAST_WALL);
+    }
+    pub fn clear_ebih_east_wall(&mut self) {
+        self.cbits2.remove(flags::ContextBits2::EBIH_EAST_WALL);
+    }
     pub fn observe_ebih_gem_room_gate(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH_GEM_ROOM_GATE);
     }
@@ -2891,16 +2912,16 @@ impl FullObservation {
         self.cbits2.remove(flags::ContextBits2::EBIH_WEST_BLOCK);
     }
     pub fn observe_escape(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::ESCAPE);
+        self.cbits3.insert(flags::ContextBits3::ESCAPE);
     }
     pub fn clear_escape(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::ESCAPE);
+        self.cbits3.remove(flags::ContextBits3::ESCAPE);
     }
     pub fn observe_exit_breach(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
+        self.cbits3.insert(flags::ContextBits3::EXIT_BREACH);
     }
     pub fn clear_exit_breach(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::EXIT_BREACH);
+        self.cbits3.remove(flags::ContextBits3::EXIT_BREACH);
     }
     pub fn observe_eye_ring(&mut self) {
         self.cbits3.insert(flags::ContextBits3::EYE_RING);
@@ -3315,16 +3336,16 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::SEPARATION);
     }
     pub fn observe_shockwave(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
+        self.cbits4.insert(flags::ContextBits4::SHOCKWAVE);
     }
     pub fn clear_shockwave(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::SHOCKWAVE);
+        self.cbits4.remove(flags::ContextBits4::SHOCKWAVE);
     }
     pub fn observe_siuna_storage_wall(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::SIUNA_STORAGE_WALL);
+        self.cbits4.insert(flags::ContextBits4::SIUNA_STORAGE_WALL);
     }
     pub fn clear_siuna_storage_wall(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::SIUNA_STORAGE_WALL);
+        self.cbits4.remove(flags::ContextBits4::SIUNA_STORAGE_WALL);
     }
     pub fn observe_slingshot_charge(&mut self) {
         self.cbits4.insert(flags::ContextBits4::SLINGSHOT_CHARGE);
@@ -3672,6 +3693,10 @@ pub enum ObservationMatcher {
         mask: flags::ContextBits7,
         matcher: LookupMatcher<Node<Self>, flags::ContextBits7, SolutionSuffix<Context>>,
     },
+    LookupCBits8 {
+        mask: flags::ContextBits8,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits8, SolutionSuffix<Context>>,
+    },
 }
 
 impl Default for ObservationMatcher {
@@ -3910,6 +3935,10 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits7 { mask, matcher })
             }
+            &OneObservation::CBits8{ mask, result } => {
+                let (node, matcher) = LookupMatcher::new_with(result);
+                (node, ObservationMatcher::LookupCBits8 { mask, matcher })
+            }
         }
     }
 
@@ -3971,6 +4000,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits5 { matcher, .. } => matcher.clear(),
             Self::LookupCBits6 { matcher, .. } => matcher.clear(),
             Self::LookupCBits7 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits8 { matcher, .. } => matcher.clear(),
         }
     }
 
@@ -4032,6 +4062,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits5 { mask, matcher } => matcher.lookup(val.cbits5 & *mask),
             Self::LookupCBits6 { mask, matcher } => matcher.lookup(val.cbits6 & *mask),
             Self::LookupCBits7 { mask, matcher } => matcher.lookup(val.cbits7 & *mask),
+            Self::LookupCBits8 { mask, matcher } => matcher.lookup(val.cbits8 & *mask),
         }
     }
 
@@ -4093,6 +4124,7 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::LookupCBits5 { mask, matcher }, OneObservation::CBits5 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             (Self::LookupCBits6 { mask, matcher }, OneObservation::CBits6 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             (Self::LookupCBits7 { mask, matcher }, OneObservation::CBits7 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
+            (Self::LookupCBits8 { mask, matcher }, OneObservation::CBits8 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             _ => None,
         }
     }
@@ -4155,6 +4187,7 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::LookupCBits5 { mask, matcher }, OneObservation::CBits5 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             (Self::LookupCBits6 { mask, matcher }, OneObservation::CBits6 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             (Self::LookupCBits7 { mask, matcher }, OneObservation::CBits7 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
+            (Self::LookupCBits8 { mask, matcher }, OneObservation::CBits8 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }
@@ -4217,6 +4250,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits5 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits6 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits7 { matcher, .. } => matcher.nodes(),
+            Self::LookupCBits8 { matcher, .. } => matcher.nodes(),
         }
     }
 
@@ -4278,6 +4312,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits5 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits6 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits7 { matcher, .. } => matcher.num_values(),
+            Self::LookupCBits8 { matcher, .. } => matcher.num_values(),
         }
     }
 }

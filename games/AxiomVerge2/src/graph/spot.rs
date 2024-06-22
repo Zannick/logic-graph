@@ -7460,7 +7460,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Ebih__Waterfall__East_Ledge__ex__Ledge_Below_East_Door_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_Ledge__ex__Ledge_Below_East_Door_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -7486,7 +7487,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1.into_usize(),
-            end: ExitId::Ebih__Waterfall__Near_East_Tree__ex__East_Ledge_1.into_usize() + 1,
+            end: ExitId::Ebih__Waterfall__Near_East_Tree__ex__Ledge_Below_East_Door_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -7826,7 +7827,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1.into_usize(),
-            end: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Interior__Ebih_Cave__Entry_1.into_usize() + 1,
+            end: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Passage_Exit_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -7863,7 +7864,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1.into_usize(),
-            end: ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_2.into_usize() + 1,
+            end: ExitId::Ebih__Waterfall__Below_Tree__ex__Passage_Exit_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -7890,6 +7891,19 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         exits: Range {
             start: ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1.into_usize(),
             end: ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__Passage_Exit] = Spot {
+        id: SpotId::Ebih__Waterfall__Passage_Exit,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__Passage_Exit__ex__Below_Tree_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__Passage_Exit__ex__Below_Tree_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -7931,6 +7945,101 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__East_9] = Spot {
+        id: SpotId::Ebih__Waterfall__East_9,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__East_9__ex__Ebih_East__West_9_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_9__ex__Ebih_East__West_9_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__East_Door_Right] = Spot {
+        id: SpotId::Ebih__Waterfall__East_Door_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__East_Door_Right__ex__East_Door_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_Door_Right__ex__East_Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Ebih__Waterfall__East_Door_Right__Open_Door.into_usize(),
+            end: ActionId::Ebih__Waterfall__East_Door_Right__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__East_Door] = Spot {
+        id: SpotId::Ebih__Waterfall__East_Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__East_Door__ex__East_Door_Right_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_Door__ex__East_Switch_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__East_Switch] = Spot {
+        id: SpotId::Ebih__Waterfall__East_Switch,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__East_Switch__ex__East_Door_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_Switch__ex__East_Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Ebih__Waterfall__East_Switch__Open_Door.into_usize(),
+            end: ActionId::Ebih__Waterfall__East_Switch__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__Platform_by_East_Door] = Spot {
+        id: SpotId::Ebih__Waterfall__Platform_by_East_Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door.into_usize(),
+            end: ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__East_Horizontal_Door] = Spot {
+        id: SpotId::Ebih__Waterfall__East_Horizontal_Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__East_Horizontal_Door__ex__Ledge_Below_East_Door_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__East_Horizontal_Door__ex__Ledge_Below_East_Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door.into_usize(),
+            end: ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih__Waterfall__Ledge_Below_East_Door] = Spot {
+        id: SpotId::Ebih__Waterfall__Ledge_Below_East_Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1.into_usize(),
+            end: ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door.into_usize(),
+            end: ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door.into_usize() + 1,
         },
     };
     spots[SpotId::Ebih__Ebih_West__East_10] = Spot {
@@ -8548,12 +8657,66 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             end: LocationId::Ebih__Ebih_East__Dispenser__Vend.into_usize() + 1,
         },
         exits: Range {
-            start: ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_1.into_usize(),
-            end: ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Moving_Platform_2.into_usize() + 1,
+            start: ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1.into_usize(),
+            end: ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_2.into_usize() + 1,
         },
         actions: Range {
             start: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize(),
             end: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_East__Wall_East] = Spot {
+        id: SpotId::Ebih__Ebih_East__Wall_East,
+        locations: Range {
+            start: LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall.into_usize(),
+            end: LocationId::Ebih__Ebih_East__Wall_East__Break_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_East__Wall_East__ex__Wall_West_1.into_usize(),
+            end: ExitId::Ebih__Ebih_East__Wall_East__ex__Wall_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_East__Wall_West] = Spot {
+        id: SpotId::Ebih__Ebih_East__Wall_West,
+        locations: Range {
+            start: LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall.into_usize(),
+            end: LocationId::Ebih__Ebih_East__Wall_West__Break_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_East__Wall_West__ex__Wall_East_1.into_usize(),
+            end: ExitId::Ebih__Ebih_East__Wall_West__ex__Wall_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_East__West_9] = Spot {
+        id: SpotId::Ebih__Ebih_East__West_9,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_East__West_9__ex__Waterfall__East_9_1.into_usize(),
+            end: ExitId::Ebih__Ebih_East__West_9__ex__Waterfall__East_9_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Ebih_East__Lower_Center_Pillar] = Spot {
+        id: SpotId::Ebih__Ebih_East__Lower_Center_Pillar,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih__Ebih_East__Lower_Center_Pillar__ex__East_Ledge_1.into_usize(),
+            end: ExitId::Ebih__Ebih_East__Lower_Center_Pillar__ex__Lower_Moving_Platform_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
         },
     };
     spots[SpotId::Ebih__Ebih_East__East_Ledge] = Spot {
@@ -25702,6 +25865,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave] = Spot {
         id: SpotId::Menu__Kiengir_Map__Ebih_Waterfall_Cave,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_Waterfall_West_9] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_Waterfall_West_9,
         locations: Range {
             start: 0, end: 0,
         },

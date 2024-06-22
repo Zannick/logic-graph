@@ -676,6 +676,8 @@ areas:
       coord: [25, 10]
     - name: Ebih Waterfall Cave
       coord: [22, 9]
+    - name: Ebih Waterfall West 9
+      coord: [21, 9]
     - name: Heretic's Tablet
       coord: [19, 10]
     - name: Ebih West Flask

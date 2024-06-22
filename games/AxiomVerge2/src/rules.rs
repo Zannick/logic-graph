@@ -500,19 +500,12 @@ pub fn access_ebih__ebih_east__dispenser__activate_lift__req(ctx: &Context, worl
     ((ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved())
         && (helper__grab!(ctx, world) || helper__hook!(ctx, world)))
 }
-pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
+pub fn access_ebih__ebih_east__lower_center_pillar__ex__lower_moving_platform_1__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // $grab and not ^_platform2_moved
-    (helper__grab!(ctx, world) && !ctx.ebih__ebih_east__ctx__platform2_moved())
-}
-pub fn access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // $hook and not ^_platform2_moved
-    (helper__hook!(ctx, world) && !ctx.ebih__ebih_east__ctx__platform2_moved())
+    // not ^_platform2_moved
+    !ctx.ebih__ebih_east__ctx__platform2_moved()
 }
 pub fn access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
@@ -674,6 +667,55 @@ pub fn access_ebih__vertical_interchange__west_13__open_door__req(
     // $open and not ^_door_open
     (helper__open!(ctx, world) && !ctx.ebih__vertical_interchange__ctx__door_open())
 }
+pub fn access_ebih__waterfall__east_door__ex__east_door_right_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__east_door__ex__east_switch_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__east_door_right__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__east_horizontal_door__ex__ledge_below_east_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__east_switch__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open
+    ctx.ebih__waterfall__ctx__east_door_open()
+}
+pub fn access_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_door_open and $hook
+    (ctx.ebih__waterfall__ctx__east_door_open() && helper__hook!(ctx, world))
+}
 pub fn access_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -705,6 +747,10 @@ pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(
 pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
+}
+pub fn access_ebih_east_wall(ctx: &Context, world: &World) -> bool {
+    // Ebih_East_Wall
+    ctx.has(Item::Ebih_East_Wall)
 }
 pub fn access_ebih_gem_room_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Gem_Room_Gate
@@ -2928,6 +2974,35 @@ pub fn action_ebih__vertical_interchange__west_13__open_door__do(ctx: &mut Conte
 pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
+}
+pub fn action_ebih__waterfall__east_door_right__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_east_door_open = true
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
+}
+pub fn action_ebih__waterfall__east_horizontal_door__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_door_open = true
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
+}
+pub fn action_ebih__waterfall__east_switch__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_east_door_open = true
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
+}
+pub fn action_ebih__waterfall__ledge_below_east_door__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_door_open = true
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
+}
+pub fn action_ebih__waterfall__platform_by_east_door__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_door_open = true
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
 }
 pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context, world: &World) {
     // ^_west_door_open = true
@@ -5321,62 +5396,19 @@ pub fn explain_ebih__ebih_east__dispenser__activate_lift__req(
         }
     }
 }
-pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
+pub fn explain_ebih__ebih_east__lower_center_pillar__ex__lower_moving_platform_1__req(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $grab and not ^_platform2_moved
+    // not ^_platform2_moved
     {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
+        let val = {
+            let r = ctx.ebih__ebih_east__ctx__platform2_moved();
+            edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
+            (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
         };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let val = {
-                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
-                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
-                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
-                };
-                (!val.0, val.1)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hook and not ^_platform2_moved
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-            edict.insert("$hook", format!("{:?}", res));
-            refs.push("$hook");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let val = {
-                    let r = ctx.ebih__ebih_east__ctx__platform2_moved();
-                    edict.insert("^ebih__ebih_east__ctx__platform2_moved", format!("{:?}", r));
-                    (r, vec!["^ebih__ebih_east__ctx__platform2_moved"])
-                };
-                (!val.0, val.1)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
+        (!val.0, val.1)
     }
 }
 pub fn explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(
@@ -5883,6 +5915,104 @@ pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
         }
     }
 }
+pub fn explain_ebih__waterfall__east_door__ex__east_door_right_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__east_door__ex__east_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__east_door_right__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__east_horizontal_door__ex__ledge_below_east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__east_switch__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open
+    {
+        let r = ctx.ebih__waterfall__ctx__east_door_open();
+        edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+        (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+    }
+}
+pub fn explain_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_door_open and $hook
+    {
+        let mut left = {
+            let r = ctx.ebih__waterfall__ctx__east_door_open();
+            edict.insert("^ebih__waterfall__ctx__east_door_open", format!("{:?}", r));
+            (r, vec!["^ebih__waterfall__ctx__east_door_open"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -5941,6 +6071,18 @@ pub fn explain_ebih_alu(
         let h = ctx.has(Item::Ebih_Alu);
         edict.insert("Ebih_Alu", format!("{}", h));
         (h, vec!["Ebih_Alu"])
+    }
+}
+pub fn explain_ebih_east_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_East_Wall
+    {
+        let h = ctx.has(Item::Ebih_East_Wall);
+        edict.insert("Ebih_East_Wall", format!("{}", h));
+        (h, vec!["Ebih_East_Wall"])
     }
 }
 pub fn explain_ebih_gem_room_gate(
@@ -15850,29 +15992,16 @@ pub fn observe_access_ebih__ebih_east__dispenser__activate_lift__req(
         ctx.ebih__ebih_east__ctx__platform2_moved()
     })) && (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_1__req(
+pub fn observe_access_ebih__ebih_east__lower_center_pillar__ex__lower_moving_platform_1__req(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $grab and not ^_platform2_moved
-    (hobserve__grab!(ctx, world, full_obs)
-        && (!({
-            full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
-            ctx.ebih__ebih_east__ctx__platform2_moved()
-        })))
-}
-pub fn observe_access_ebih__ebih_east__dispenser__ex__lower_moving_platform_2__req(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hook and not ^_platform2_moved
-    (hobserve__hook!(ctx, world, full_obs)
-        && (!({
-            full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
-            ctx.ebih__ebih_east__ctx__platform2_moved()
-        })))
+    // not ^_platform2_moved
+    !({
+        full_obs.observe_ebih__ebih_east__ctx__platform2_moved();
+        ctx.ebih__ebih_east__ctx__platform2_moved()
+    })
 }
 pub fn observe_access_ebih__ebih_east__lower_moving_platform__activate_lift__req(
     ctx: &Context,
@@ -16164,6 +16293,83 @@ pub fn observe_access_ebih__vertical_interchange__west_13__open_door__req(
             ctx.ebih__vertical_interchange__ctx__door_open()
         })))
 }
+pub fn observe_access_ebih__waterfall__east_door__ex__east_door_right_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__east_door__ex__east_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__east_door_right__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__east_horizontal_door__ex__ledge_below_east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__east_switch__ex__east_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open
+    {
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    }
+}
+pub fn observe_access_ebih__waterfall__ledge_below_east_door__ex__east_horizontal_door_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_door_open and $hook
+    ({
+        full_obs.observe_ebih__waterfall__ctx__east_door_open();
+        ctx.ebih__waterfall__ctx__east_door_open()
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
 pub fn observe_access_ebih__waterfall__west_door__ex__west_door_left_1__req(
     ctx: &Context,
     world: &World,
@@ -16217,6 +16423,17 @@ pub fn observe_access_ebih_alu(
     {
         full_obs.observe_ebih_alu();
         ctx.has(Item::Ebih_Alu)
+    }
+}
+pub fn observe_access_ebih_east_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_East_Wall
+    {
+        full_obs.observe_ebih_east_wall();
+        ctx.has(Item::Ebih_East_Wall)
     }
 }
 pub fn observe_access_ebih_gem_room_gate(
@@ -21101,6 +21318,61 @@ pub fn observe_action_ebih__waterfall__below_left_switch__open_door__do(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_ebih__waterfall__ctx__west_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_ebih__waterfall__east_door_right__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_ebih__waterfall__east_horizontal_door__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_ebih__waterfall__east_switch__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_ebih__waterfall__ledge_below_east_door__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_ebih__waterfall__platform_by_east_door__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__waterfall__west_8__open_door__do(

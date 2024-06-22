@@ -571,17 +571,22 @@ areas:
   map:
     axe: [22, 10, 23, 11]
     cave: [22, 8, 23, 9]
+    west9: [21, 8, 22, 9]
   datamap:
     map_spot:
       axe: Menu > Kiengir Map > Bronze Axe
       cave: Menu > Kiengir Map > Ebih Waterfall Cave
+      west9: Menu > Kiengir Map > Ebih Waterfall West 9
   start:
     _west_door_open: false
+    _east_door_open: false
   spots:
     - name: East 10
       coord: [24.95, 9.7]
       local: 
         - to: East Ledge
+        - to: Ledge Below East Door
+          jumps: 2
       exits:
         - to: Grid 25,10-12 > West 10
           tags: [xshift]
@@ -592,6 +597,11 @@ areas:
           jumps: 1
         - to: East 11
         - to: Near East Tree
+      exits:
+        - to: Ledge Below East Door
+          req: $hook
+          movement: base
+          jumps: 2
     - name: East 11
       coord: [24.95, 10.7]
       local:
@@ -610,6 +620,10 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Ledge Below East Door
+          req: $hook and $hover
+          movement: base
+          jumps: 3
     - name: Waterfall Right
       coord: [23.85, 10.6]
       local:
@@ -979,6 +993,9 @@ areas:
       exits:
         - to: Interior > Ebih Cave > Entry
           tags: [interior, cave]
+        - to: Passage Exit
+          req: $hook and $hover
+          movement: base
     - name: Center Main Path
       coord: [22.9, 7.75]
       local:
@@ -996,6 +1013,9 @@ areas:
       coord: [23.8, 8.3]
       local:
         - to: Platform
+        - to: Platform by East Door
+        - to: East Horizontal Door
+          jumps_down: 1
       exits:
         - to: Big Tree
           req: $grab
@@ -1004,12 +1024,20 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: Passage Exit
+          req: ^mode == 'drone'
+          movement: base
     - name: Platform
       coord: [24.0, 8.3]
       local:
         - to: Below Tree
         - to: East 8
           jumps: 4
+        - to: East Switch
+        - to: Platform by East Door
+          jumps_down: 1
+        - to: East Horizontal Door
+          jumps_down: 3
       exits:
         - to: Big Tree
           req: $grab
@@ -1021,6 +1049,20 @@ areas:
       exits:
         - to: Ebih East > West 8
           tags: [xshift]
+    - name: Passage Exit
+      coord: [23.55, 8.55]
+      local:
+        - to: Lower West Tree
+        - to: Alcove Right
+          thru: [23.45, 10.0]
+        - to: Waterfall Center Right
+          thru: [23.45, 10.0]
+      exits:
+        - to: Below Tree
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 2
+
     # Waterfall Upper
     - name: East 7
       coord: [24.95, 6.75]
@@ -1047,6 +1089,112 @@ areas:
       exits:
         - to: Ebih West > East 7
           tags: [xshift]
+
+    # East Doors
+    - name: East 9
+      coord: [24.95, 8.8]
+      local:
+        - to: East Door Right
+      exits:
+        - to: Ebih East > West 9
+          tags: [xshift]
+    - name: East Door Right
+      coord: [24.8, 8.8]
+      local:
+        - to: East 9
+      exits:
+        - to: East Door
+          req: ^_east_door_open
+          movement: base
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_east_door_open = true
+          tags: [hack]
+    - name: East Door
+      coord: [24.725, 8.8]
+      exits:
+        - to: East Door Right
+          req: ^_east_door_open
+          movement: base
+        - to: East Switch
+          req: ^_east_door_open
+          movement: base
+    - name: East Switch
+      coord: [24.65, 8.8]
+      local:
+        - to: Platform by East Door
+          jumps: 1
+        - to: East Horizontal Door
+          jumps_down: 1
+      exits:
+        - to: East Door
+          req: ^_east_door_open
+          movement: base
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_east_door_open = true
+          tags: [hack]
+    - name: Platform by East Door
+      coord: [24.4, 8.7]
+      local:
+        - to: East Switch
+        - to: East Horizontal Door
+          jumps_down: 2
+        - to: Platform
+          jumps: 3
+        - to: Below Tree
+          jumps: 3
+      actions:
+        - name: Open Door
+          req: $open and $range2
+          do: ^_east_door_open = true
+          tags: [hack]
+    - name: East Horizontal Door
+      coord: [24.425, 9.05]
+      local:
+        - to: East Switch
+          jumps: 2
+        - to: Platform by East Door
+          jumps: 2
+        - to: Platform
+          jumps: 5
+        - to: Below Tree
+          jumps: 5
+      exits:
+        - to: Ledge Below East Door
+          req: ^_east_door_open
+          movement: base
+      actions:
+        - name: Open Door
+          req: $open and $range2
+          do: ^_east_door_open = true
+          tags: [hack]
+    - name: Ledge Below East Door
+      coord: [24.6, 9.45]
+      local:
+        - to: East 10
+        - to: East Ledge
+        - to: East 11
+          thru: [24.65, 10.2]
+        - to: Near East Tree
+          thru: [24.65, 9.7]
+      exits:
+        - to: East Horizontal Door
+          req: ^_east_door_open
+          movement: base
+          jumps: 2
+        - to: East Horizontal Door
+          req: ^_east_door_open and $hook
+          movement: base
+          jumps: 1
+      actions:
+        - name: Open Door
+          req: $open and $range3
+          do: ^_east_door_open = true
+          tags: [hack]
+          time: 0.5  # need to jump
 
 - name: Ebih West  # MARK: Ebih West
   on_entry: $reset_old_area(^newpos)
@@ -1662,26 +1810,110 @@ areas:
           tags: [urn]
     - name: Dispenser
       coord: [25.5, 8.8]
+      local:
+        - to: Wall East
+          jumps: 1
       locations:
         - name: Vend
           item: Health_Fragment
           req: Infect
           time: 3.5
       exits:
-        - to: Lower Moving Platform
-          req: $grab and not ^_platform2_moved
-          movement: base
-          jumps: 3
-        - to: Lower Moving Platform
-          req: $hook and not ^_platform2_moved
+        - to: Lower Center Pillar
+          req: $hook
           movement: base
           jumps: 2
+        - to: Lower Center Pillar
+          req: $grab
+          movement: base
+          jumps: 3
       actions:
         - name: Activate Lift
           req: Infect and ^_platform2_moved and ($grab or $hook)
           do: ^_platform2_moved = false
           to: Ebih > Ebih East > Ledge End
           time: 5
+    - name: Wall East
+      coord: [25.4, 8.75]
+      local:
+        - to: Dispenser
+      locations:
+        - name: Break Wall
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Wall West
+          req: Ebih_East_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          to: Wall West
+          req: Nanite_Mist
+          movement: mist1
+        - name: Break Through Wall Faster
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          to: Wall West
+          req: $mist2
+          movement: mist2
+    - name: Wall West
+      coord: [25.225, 8.75]
+      local:
+        - to: West 9
+      locations:
+        - name: Break Wall
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Wall East
+          req: Ebih_East_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          to: Wall East
+          req: Nanite_Mist
+          movement: mist1
+        - name: Break Through Wall Faster
+          canon: Ebih_East_Wall
+          item: Ebih_East_Wall
+          to: Wall East
+          req: $mist2
+          movement: mist2
+    - name: West 9
+      coord: [25.05, 8.8]
+      local:
+        - to: Wall West
+          jumps: 1
+      exits:
+        - to: Waterfall > East 9
+          tags: [xshift]
+    - name: Lower Center Pillar
+      coord: [25.9, 8.4]
+      local:
+        - to: Dispenser
+      exits:
+        - to: Lower Moving Platform
+          req: not ^_platform2_moved
+          movement: base
+        - to: Ledge End
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+
     - name: East Ledge
       coord: [26.1, 7.6]
       local:
