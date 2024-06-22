@@ -2266,8 +2266,6 @@ areas:
 
     - name: Lower Brick Ledge
       coord: [38.65, 14.9]
-      data:
-        flipside: Glacier Breach > South Save > Brick Ledge
       local:
         - to: Ledge By Grate
         - to: Portal Stand

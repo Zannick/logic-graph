@@ -1210,7 +1210,6 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__East_Lake__Southwest_Column_East => SpotId::Amagi_Breach__East_Ruins__Small_Column_East,
         SpotId::Amagi__East_Lake__Southwest_Column_West => SpotId::Amagi_Breach__East_Ruins__Small_Column_West,
         SpotId::Annuna__Lamassu__East_14 => SpotId::Glacier_Breach__South_Save__East,
-        SpotId::Annuna__Lamassu__Lower_Brick_Ledge => SpotId::Glacier_Breach__South_Save__Brick_Ledge,
         SpotId::Annuna__Lamassu__Portal_Stand => SpotId::Glacier_Breach__South_Save__Save_Point,
         SpotId::Annuna__Lamassu__Upper_Brick_Ledge => SpotId::Glacier_Breach__South_Save__Brick_Ledge,
         SpotId::Annuna__Siuna_Storage__Portal_Entry => SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,

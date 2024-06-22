@@ -90,15 +90,14 @@ def confirm_flipsides():
             continue
         fl = spot['all_data']['flipside']
         if fl != 'SpotId::None':
-            sset = set()
-            while fl not in sset:
+            sset = {spot['fullname']}
+            while fl not in sset and fl != 'SpotId::None':
                 sset.add(fl)
-                if fl == 'SpotId::None':
-                    break
                 spot = AV2.id_lookup[construct_id(fl)]
                 fl = spot['all_data']['flipside']
-            unmatched.update(sset)
-            unmatched_sets.add(sset)
+            if len(sset) != 2:
+                unmatched.update(sset)
+                unmatched_sets.append(sset)
     pprint(unmatched_sets)
 
 # TODO: can we find nearby coordinates in the other realm to include in this?
