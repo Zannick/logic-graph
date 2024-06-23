@@ -296,6 +296,11 @@ class GameLogic(object):
                 with processcontext(rname, aname):
                     area['region'] = rname
                     area['id'] = construct_id(rname, aname)
+                    if other := self.id_lookup.get(area['id']):
+                        if other['fullname'] == area['fullname']:
+                            self._errors.append(f'Duplicate area name: {area["fullname"]}')
+                        else:
+                            self._errors.append(f'Area names cause id conflict: {other["fullname"]!r} and {area["fullname"]!r}')
                     self.id_lookup[area['id']] = area
                     area['spot_ids'] = []
                     area['loc_ids'] = []
@@ -329,6 +334,11 @@ class GameLogic(object):
                         spot['area'] = aname
                         spot['region'] = rname
                         spot['id'] = construct_id(rname, aname, sname)
+                        if other := self.id_lookup.get(spot['id']):
+                            if other['fullname'] == fullname:
+                                self._errors.append(f'Spot name is a duplicate: {fullname}')
+                            else:
+                                self._errors.append(f'Spot names cause id conflict: {other["fullname"]!r} and {fullname!r}')
                         self.id_lookup[spot['id']] = spot
                         spot['fullname'] = fullname
                         area['spot_ids'].append(spot['id'])
