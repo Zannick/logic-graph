@@ -189,3 +189,45 @@ tests:
       portal: Ebih > Drone Room > Portal
       mode: drone
     can_reach: Ebih > Drone Room > Portal Exit
+
+  - name: open_truck_gate
+    start: Ebih > Base Camp > Save Point
+    with:
+      - Remote_Drone
+      - Infect
+      - Slingshot_Hook
+      - Drone_Hover
+      - Anuman
+    context:
+      mode: drone
+      energy: 300
+    can_activate: Ebih > Truck Gate > Switch > Open Door
+
+  - name: in_n_out
+    start: Ebih > Base Camp > Save Point
+    with:
+      - Remote_Drone
+      - Infect
+      - Slingshot_Hook
+      - Drone_Hover
+      - Anuman
+    context:
+      ebih__truck_gate__ctx__door_open: true
+      mode: drone
+      energy: 300
+    can_access: Ebih Breach > In 'n Out > Gate East > Item
+
+  - name: party_flask
+    start: Ebih > Base Camp > Save Point
+    with:
+      - Remote_Drone
+      - Infect
+      - Slingshot_Hook
+      - Drone_Hover
+      - Exit_Breach
+      - Anuman
+    context:
+      ebih__truck_gate__ctx__door_open: true
+      mode: drone
+      energy: 300
+    can_access: Ebih > Party Central > East Trough > Flask

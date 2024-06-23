@@ -514,13 +514,13 @@ areas:
         - to: Corridor > South
           tags: [ydoor]
 
-- name: Corridor
+- name: Corridor  # MARK: Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: South
       coord: [25.5, 10.8]
 
-- name: Lake Gate
+- name: Lake Gate  # MARK: Lake Gate
   on_entry: $reset_old_area(^newpos)
   data:
     map_spot: Menu > Breach Map > MEB Lake Gate
