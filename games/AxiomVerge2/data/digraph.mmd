@@ -70,6 +70,13 @@ subgraph Amagi_Breach
     subgraph Amagi_Breach__Fishy_Secrets[Fishy Secrets]
         Amagi_Breach__Fishy_Secrets__North(North);
     end
+    subgraph Amagi_Breach__West_Entrance[West Entrance]
+        Amagi_Breach__West_Entrance__North(North);
+        Amagi_Breach__West_Entrance__South(South);
+    end
+    subgraph Amagi_Breach__West_Ruins[West Ruins]
+        Amagi_Breach__West_Ruins__North(North);
+    end
 end
 subgraph Amagi
     subgraph Amagi__Main_Area[Main Area]
@@ -653,6 +660,41 @@ subgraph Ebih_Breach
     subgraph Ebih_Breach__Snowy_Rocks[Snowy Rocks]
         Ebih_Breach__Snowy_Rocks__East_4(East 4);
     end
+    subgraph Ebih_Breach__In_n_Out[In 'n Out]
+        Ebih_Breach__In_n_Out__Save_Point(Save Point);
+        Ebih_Breach__In_n_Out__Southwest(Southwest);
+        Ebih_Breach__In_n_Out__Southwest_Plains(Southwest Plains);
+        Ebih_Breach__In_n_Out__Mesa_West(Mesa West);
+        Ebih_Breach__In_n_Out__Mesa_East(Mesa East);
+        Ebih_Breach__In_n_Out__South_Plains(South Plains);
+        Ebih_Breach__In_n_Out__Southeast_Plains(Southeast Plains);
+        Ebih_Breach__In_n_Out__Southeast_Ledge(Southeast Ledge);
+        Ebih_Breach__In_n_Out__Platform_1(Platform 1);
+        Ebih_Breach__In_n_Out__Platform_2(Platform 2);
+        Ebih_Breach__In_n_Out__Center_Rock_East(Center Rock East);
+        Ebih_Breach__In_n_Out__Center_Rock_Peak(Center Rock Peak);
+        Ebih_Breach__In_n_Out__Center_Rock_Center(Center Rock Center);
+        Ebih_Breach__In_n_Out__Portal_Stand(Portal Stand);
+        Ebih_Breach__In_n_Out__Center_Rock_West(Center Rock West);
+        Ebih_Breach__In_n_Out__Northwest_Ledge(Northwest Ledge);
+        Ebih_Breach__In_n_Out__Gate_East(Gate East);
+        Ebih_Breach__In_n_Out__Gate_West(Gate West);
+        Ebih_Breach__In_n_Out__Button(Button);
+        Ebih_Breach__In_n_Out__Northwest(Northwest);
+    end
+    subgraph Ebih_Breach__Corridor[Corridor]
+        Ebih_Breach__Corridor__South(South);
+    end
+    subgraph Ebih_Breach__Lake_Gate[Lake Gate]
+        Ebih_Breach__Lake_Gate__North(North);
+        Ebih_Breach__Lake_Gate__Outside_West(Outside West);
+        Ebih_Breach__Lake_Gate__Outside_Top(Outside Top);
+        Ebih_Breach__Lake_Gate__Outside_Corner(Outside Corner);
+        Ebih_Breach__Lake_Gate__Gate_East(Gate East);
+        Ebih_Breach__Lake_Gate__Button(Button);
+        Ebih_Breach__Lake_Gate__Interior(Interior);
+        Ebih_Breach__Lake_Gate__South(South);
+    end
 end
 subgraph Ebih
     subgraph Ebih__Base_Camp[Base Camp]
@@ -988,6 +1030,17 @@ subgraph Ebih
         Ebih__Gem_Room__Hidden_Tunnel(Hidden Tunnel);
         Ebih__Gem_Room__Hidden_Tunnel_Corner(Hidden Tunnel Corner);
         Ebih__Gem_Room__Hidden_Cache(Hidden Cache);
+    end
+    subgraph Ebih__Party_Central[Party Central]
+        Ebih__Party_Central__Portal_Stand(Portal Stand);
+        Ebih__Party_Central__Mid_air_Between_Waterfalls(Mid-air Between Waterfalls);
+        Ebih__Party_Central__Mid_air_East_of_Waterfall(Mid-air East of Waterfall);
+        Ebih__Party_Central__Waterfall_Platform(Waterfall Platform);
+        Ebih__Party_Central__Below_Waterfall(Below Waterfall);
+        Ebih__Party_Central__Below_Between_Waterfalls(Below Between Waterfalls);
+        Ebih__Party_Central__Bottom_Mid_east(Bottom Mid-east);
+        Ebih__Party_Central__Bottom_East(Bottom East);
+        Ebih__Party_Central__East_Trough(East Trough);
     end
 end
 subgraph Filter
@@ -2472,6 +2525,8 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Gem_Room_Flask(Ebih Gem Room Flask);
         Menu__Kiengir_Map__Ebih_Gem_Room_Button(Ebih Gem Room Button);
         Menu__Kiengir_Map__Diviners_Gem(Diviner's Gem);
+        Menu__Kiengir_Map__Ebih_Party_Central_Portal(Ebih Party Central Portal);
+        Menu__Kiengir_Map__Ebih_Party_Central_Flask(Ebih Party Central Flask);
         Menu__Kiengir_Map__Weekly_Notes_2_27_2053(Weekly Notes 2/27/2053);
         Menu__Kiengir_Map__Compass(Compass);
         Menu__Kiengir_Map__Dr_Gloria(Dr. Gloria);
@@ -2575,6 +2630,8 @@ subgraph Menu
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
         Menu__Breach_Map__LAB_Upper_Lake_Health(LAB Upper Lake Health);
+        Menu__Breach_Map__MEB_In_n_Out_Matrix(MEB In 'n Out Matrix);
+        Menu__Breach_Map__MEB_Lake_Gate(MEB Lake Gate);
     end
 end
 subgraph Uhrum
@@ -2741,6 +2798,8 @@ Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
 Amagi_Breach__Upper_Lake__Near_Column --> Amagi_Breach__Upper_Lake__Column
 Amagi_Breach__Upper_Lake__Portal_Stand --> Amagi_Breach__Upper_Lake__Near_Column
+Amagi_Breach__West_Entrance__North <--> Ebih_Breach__Lake_Gate__South
+Amagi_Breach__West_Entrance__South --> Amagi_Breach__West_Ruins__North
 Amagi__East_Lake__Arch_East --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__Arch_West <--> Amagi__East_Lake__Portal_Ledge
 Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Arch_West
@@ -3138,6 +3197,37 @@ Ebih_Breach__Drone_Tutorial__Bottom --> Ebih_Breach__Drone_Tutorial__First_Rocks
 Ebih_Breach__Drone_Tutorial__Upper_Mid_way --> Ebih_Breach__Drone_Tutorial__Top
 Ebih_Breach__Drone_Tutorial__West_4 <--> Ebih_Breach__Portals_101__East_4
 Ebih_Breach__Drone_Tutorial__West_6 <--> Ebih_Breach__Portals_101__East_6
+Ebih_Breach__In_n_Out__Center_Rock_Center --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Center_Rock_Center --> Ebih_Breach__In_n_Out__Portal_Stand
+Ebih_Breach__In_n_Out__Center_Rock_East --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Center_Rock_East --> Ebih_Breach__In_n_Out__Portal_Stand
+Ebih_Breach__In_n_Out__Center_Rock_West --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Center_Rock_West --> Ebih_Breach__In_n_Out__Northwest_Ledge
+Ebih_Breach__In_n_Out__Center_Rock_West --> Ebih_Breach__In_n_Out__Portal_Stand
+Ebih_Breach__In_n_Out__Gate_East <--> Ebih_Breach__In_n_Out__Gate_West
+Ebih_Breach__In_n_Out__Gate_West --> Ebih_Breach__In_n_Out__Button
+Ebih_Breach__In_n_Out__Gate_West <--> Ebih_Breach__In_n_Out__Northwest_Ledge
+Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Center_Rock_West
+Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Northwest_Ledge
+Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Save_Point
+Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Southwest
+Ebih_Breach__In_n_Out__Mesa_West --> Ebih_Breach__In_n_Out__Center_Rock_West
+Ebih_Breach__In_n_Out__Mesa_West --> Ebih_Breach__In_n_Out__Northwest_Ledge
+Ebih_Breach__In_n_Out__Northwest --> Ebih_Breach__Corridor__South
+Ebih_Breach__In_n_Out__Northwest_Ledge --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Platform_1 --> Ebih_Breach__In_n_Out__Center_Rock_East
+Ebih_Breach__In_n_Out__Platform_1 --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Platform_1 --> Ebih_Breach__In_n_Out__Portal_Stand
+Ebih_Breach__In_n_Out__Platform_2 --> Ebih_Breach__In_n_Out__Center_Rock_East
+Ebih_Breach__In_n_Out__Platform_2 --> Ebih_Breach__In_n_Out__Gate_East
+Ebih_Breach__In_n_Out__Platform_2 --> Ebih_Breach__In_n_Out__Portal_Stand
+Ebih_Breach__In_n_Out__Portal_Stand --> Ebih_Breach__In_n_Out__Northwest_Ledge
+Ebih_Breach__In_n_Out__South_Plains --> Ebih_Breach__In_n_Out__Mesa_West
+Ebih_Breach__In_n_Out__Southeast_Ledge --> Ebih_Breach__In_n_Out__Center_Rock_East
+Ebih_Breach__In_n_Out__Southeast_Plains --> Ebih_Breach__In_n_Out__Southeast_Ledge
+Ebih_Breach__In_n_Out__Southwest <--> Ebih_Breach__Lake_Gate__North
+Ebih_Breach__Lake_Gate__Button <--> Ebih_Breach__Lake_Gate__Gate_East
+Ebih_Breach__Lake_Gate__Interior --> Ebih_Breach__Lake_Gate__Gate_East
 Ebih_Breach__Portals_101__East_4 <--> Ebih_Breach__Portals_101__West_4
 Ebih_Breach__Portals_101__Portal_Stand --> Ebih_Breach__Portals_101__West_Slope
 Ebih_Breach__Portals_101__Save_Point --> Ebih_Breach__Portals_101__West_Lower_Ledge
@@ -3316,6 +3406,8 @@ Ebih__Observation_Tower_Room__East_11 --> Ebih__Observation_Tower_Room__Cliff
 Ebih__Observation_Tower_Room__Tower_Top --> Ebih__Observation_Tower_Room__West_9
 Ebih__Open_Air__Northeast --> Ebih__Ebih_East__East_Mid_air
 Ebih__Open_Air__South --> Ebih__Ebih_East__North
+Ebih__Party_Central__East_Trough --> Menu__Kiengir_Map__Ebih_Party_Central_Flask
+Ebih__Party_Central__East_Trough --> Menu__Warp_Only__Kiengir
 Ebih__Peak__East_3 <--> Ebih__Peak__Middle_Ledge
 Ebih__Peak__East_Slope --> Ebih__Peak__East_3
 Ebih__Peak__Observatory_East --> Ebih__Peak__Middle_Ledge
@@ -4165,6 +4257,7 @@ Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
+Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point

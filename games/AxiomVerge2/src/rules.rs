@@ -748,6 +748,14 @@ pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
 }
+pub fn access_ebih_breach_in_n_out_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Breach_In_n_Out_Gate
+    ctx.has(Item::Ebih_Breach_In_n_Out_Gate)
+}
+pub fn access_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Breach_Lake_Gate
+    ctx.has(Item::Ebih_Breach_Lake_Gate)
+}
 pub fn access_ebih_east_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_East_Wall
     ctx.has(Item::Ebih_East_Wall)
@@ -2360,6 +2368,10 @@ pub fn access_map__ebih__hidden_portal__save(ctx: &Context, world: &World) -> bo
     // ^map__ebih__hidden_portal__save
     ctx.map__ebih__hidden_portal__save()
 }
+pub fn access_map__ebih_breach__in_n_out__save(ctx: &Context, world: &World) -> bool {
+    // ^map__ebih_breach__in_n_out__save
+    ctx.map__ebih_breach__in_n_out__save()
+}
 pub fn access_map__ebih_breach__portals_101__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih_breach__portals_101__save
     ctx.map__ebih_breach__portals_101__save()
@@ -2730,6 +2742,18 @@ pub fn access_slingshot_hook(ctx: &Context, world: &World) -> bool {
 pub fn access_slingshot_hook_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Drone_Hover
     (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
+}
+pub fn access_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_gate(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
+    ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
+        && ctx.has(Item::Ebih_Breach_In_n_Out_Gate))
+}
+pub fn access_slingshot_hook_and_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
+    // Slingshot_Hook and Ebih_Breach_Lake_Gate
+    (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Ebih_Breach_Lake_Gate))
 }
 pub fn access_sniper_valley_rock_1(ctx: &Context, world: &World) -> bool {
     // Sniper_Valley_Rock_1
@@ -6071,6 +6095,30 @@ pub fn explain_ebih_alu(
         let h = ctx.has(Item::Ebih_Alu);
         edict.insert("Ebih_Alu", format!("{}", h));
         (h, vec!["Ebih_Alu"])
+    }
+}
+pub fn explain_ebih_breach_in_n_out_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_In_n_Out_Gate
+    {
+        let h = ctx.has(Item::Ebih_Breach_In_n_Out_Gate);
+        edict.insert("Ebih_Breach_In_n_Out_Gate", format!("{}", h));
+        (h, vec!["Ebih_Breach_In_n_Out_Gate"])
+    }
+}
+pub fn explain_ebih_breach_lake_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Lake_Gate
+    {
+        let h = ctx.has(Item::Ebih_Breach_Lake_Gate);
+        edict.insert("Ebih_Breach_Lake_Gate", format!("{}", h));
+        (h, vec!["Ebih_Breach_Lake_Gate"])
     }
 }
 pub fn explain_ebih_east_wall(
@@ -12744,6 +12792,18 @@ pub fn explain_map__ebih__hidden_portal__save(
         (r, vec!["^map__ebih__hidden_portal__save"])
     }
 }
+pub fn explain_map__ebih_breach__in_n_out__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__ebih_breach__in_n_out__save
+    {
+        let r = ctx.map__ebih_breach__in_n_out__save();
+        edict.insert("^map__ebih_breach__in_n_out__save", format!("{:?}", r));
+        (r, vec!["^map__ebih_breach__in_n_out__save"])
+    }
+}
 pub fn explain_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -14505,6 +14565,69 @@ pub fn explain_slingshot_hook_and_drone_hover(
                 let h = ctx.has(Item::Drone_Hover);
                 edict.insert("Drone_Hover", format!("{}", h));
                 (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Breach_In_n_Out_Gate);
+                edict.insert("Ebih_Breach_In_n_Out_Gate", format!("{}", h));
+                (h, vec!["Ebih_Breach_In_n_Out_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_ebih_breach_lake_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Ebih_Breach_Lake_Gate
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Breach_Lake_Gate);
+                edict.insert("Ebih_Breach_Lake_Gate", format!("{}", h));
+                (h, vec!["Ebih_Breach_Lake_Gate"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16423,6 +16546,28 @@ pub fn observe_access_ebih_alu(
     {
         full_obs.observe_ebih_alu();
         ctx.has(Item::Ebih_Alu)
+    }
+}
+pub fn observe_access_ebih_breach_in_n_out_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_In_n_Out_Gate
+    {
+        full_obs.observe_ebih_breach_in_n_out_gate();
+        ctx.has(Item::Ebih_Breach_In_n_Out_Gate)
+    }
+}
+pub fn observe_access_ebih_breach_lake_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Lake_Gate
+    {
+        full_obs.observe_ebih_breach_lake_gate();
+        ctx.has(Item::Ebih_Breach_Lake_Gate)
     }
 }
 pub fn observe_access_ebih_east_wall(
@@ -19723,6 +19868,17 @@ pub fn observe_access_map__ebih__hidden_portal__save(
         ctx.map__ebih__hidden_portal__save()
     }
 }
+pub fn observe_access_map__ebih_breach__in_n_out__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__ebih_breach__in_n_out__save
+    {
+        full_obs.observe_map__ebih_breach__in_n_out__save();
+        ctx.map__ebih_breach__in_n_out__save()
+    }
+}
 pub fn observe_access_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -20757,6 +20913,37 @@ pub fn observe_access_slingshot_hook_and_drone_hover(
     } && ({
         full_obs.observe_drone_hover();
         ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
+    (({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })) && ({
+        full_obs.observe_ebih_breach_in_n_out_gate();
+        ctx.has(Item::Ebih_Breach_In_n_Out_Gate)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_ebih_breach_lake_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Ebih_Breach_Lake_Gate
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_ebih_breach_lake_gate();
+        ctx.has(Item::Ebih_Breach_Lake_Gate)
     }))
 }
 pub fn observe_access_sniper_valley_rock_1(

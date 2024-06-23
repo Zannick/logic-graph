@@ -73,13 +73,27 @@ def same_coordinates_no_flipside():
                     continue
                 by_coord[tuple(spot['coord'])].append(spot)
     dups = [
-        [s['fullname'] for s in same] for same in by_coord.values()
+        same for same in by_coord.values()
         # Include all spots that don't have flipside set to default
         # explicitly setting it to default will exclude it so we can mark the passage deliberately one-way
         if len(same) > 1 and any(s['all_data']['flipside'] == 'SpotId::None'
                                  and 'flipside' not in s.get('data', {}) for s in same)
     ]
-    pprint(dups)
+    if not dups:
+        print('All set!')
+        return
+    print('      data:\n        flipside: SpotId::None')
+    to_print = {}
+    for duplist in dups:
+        first, second = duplist[:2]
+        if 'flipside' not in first.get('data', {}):
+            to_print[first['fullname']] = second['fullname']
+        if 'flipside' not in second.get('data', {}):
+            to_print[second['fullname']] = first['fullname']
+    for spot in AV2.spots():
+        name = spot['fullname']
+        if flipside := to_print.get(name):
+            print(f'{name}:\n      data:\n        flipside: {flipside}')
 
 
 def confirm_flipsides():

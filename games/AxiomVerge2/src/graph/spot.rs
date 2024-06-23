@@ -672,6 +672,44 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Amagi_Breach__West_Entrance__North] = Spot {
+        id: SpotId::Amagi_Breach__West_Entrance__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__West_Entrance__North__ex__Ebih_Breach__Lake_Gate__South_1.into_usize(),
+            end: ExitId::Amagi_Breach__West_Entrance__North__ex__Ebih_Breach__Lake_Gate__South_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__West_Entrance__South] = Spot {
+        id: SpotId::Amagi_Breach__West_Entrance__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Amagi_Breach__West_Entrance__South__ex__West_Ruins__North_1.into_usize(),
+            end: ExitId::Amagi_Breach__West_Entrance__South__ex__West_Ruins__North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Amagi_Breach__West_Ruins__North] = Spot {
+        id: SpotId::Amagi_Breach__West_Ruins__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Amagi__Main_Area__East_15] = Spot {
         id: SpotId::Amagi__Main_Area__East_15,
         locations: Range {
@@ -6827,6 +6865,380 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Ebih_Breach__In_n_Out__Save_Point] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Ebih_Breach__In_n_Out__Save_Point__Save.into_usize(),
+            end: ActionId::Ebih_Breach__In_n_Out__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Southwest] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Southwest,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Southwest__ex__Lake_Gate__North_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Southwest__ex__Lake_Gate__North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Southwest_Plains] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Southwest_Plains,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Mesa_West] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Mesa_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Mesa_West__ex__Center_Rock_West_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Mesa_West__ex__Northwest_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Mesa_East] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Mesa_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Mesa_East__ex__Center_Rock_West_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Mesa_East__ex__Southwest_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__South_Plains] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__South_Plains,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__South_Plains__ex__Mesa_West_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__South_Plains__ex__Mesa_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Southeast_Plains] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Southeast_Plains,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Southeast_Plains__ex__Southeast_Ledge_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Southeast_Plains__ex__Southeast_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Southeast_Ledge] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Southeast_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Southeast_Ledge__ex__Center_Rock_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Southeast_Ledge__ex__Center_Rock_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Platform_1] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Platform_1,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Platform_1__ex__Center_Rock_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Platform_1__ex__Portal_Stand_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Platform_2] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Platform_2,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Platform_2__ex__Center_Rock_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Platform_2__ex__Portal_Stand_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Center_Rock_East] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Center_Rock_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Center_Rock_East__ex__Center_Rock_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Center_Rock_East__ex__Portal_Stand_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Center_Rock_Peak] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Center_Rock_Peak,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Center_Rock_Center] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Center_Rock_Center,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Center_Rock_Center__ex__Gate_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Center_Rock_Center__ex__Portal_Stand_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Portal_Stand] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Portal_Stand,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Portal_Stand__ex__Northwest_Ledge_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Portal_Stand__ex__Northwest_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Center_Rock_West] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Center_Rock_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Center_Rock_West__ex__Gate_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Center_Rock_West__ex__Portal_Stand_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Northwest_Ledge] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Northwest_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Northwest_Ledge__ex__Gate_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Northwest_Ledge__ex__Gate_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Gate_East] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Gate_East,
+        locations: Range {
+            start: LocationId::Ebih_Breach__In_n_Out__Gate_East__Item.into_usize(),
+            end: LocationId::Ebih_Breach__In_n_Out__Gate_East__Item.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Gate_East__ex__Gate_West_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Gate_East__ex__Gate_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Gate_West] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Gate_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Gate_West__ex__Button_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Gate_West__ex__Northwest_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Button] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Button,
+        locations: Range {
+            start: LocationId::Ebih_Breach__In_n_Out__Button__Hit_Button.into_usize(),
+            end: LocationId::Ebih_Breach__In_n_Out__Button__Hit_Button.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__In_n_Out__Northwest] = Spot {
+        id: SpotId::Ebih_Breach__In_n_Out__Northwest,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__In_n_Out__Northwest__ex__Corridor__South_1.into_usize(),
+            end: ExitId::Ebih_Breach__In_n_Out__Northwest__ex__Corridor__South_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Corridor__South] = Spot {
+        id: SpotId::Ebih_Breach__Corridor__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__North] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Lake_Gate__North__ex__In_n_Out__Southwest_1.into_usize(),
+            end: ExitId::Ebih_Breach__Lake_Gate__North__ex__In_n_Out__Southwest_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Outside_West] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Outside_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Outside_Top] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Outside_Top,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Outside_Corner] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Outside_Corner,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Gate_East] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Gate_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Lake_Gate__Gate_East__ex__Button_1.into_usize(),
+            end: ExitId::Ebih_Breach__Lake_Gate__Gate_East__ex__Button_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Button] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Button,
+        locations: Range {
+            start: LocationId::Ebih_Breach__Lake_Gate__Button__Hit_Button.into_usize(),
+            end: LocationId::Ebih_Breach__Lake_Gate__Button__Hit_Button.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Lake_Gate__Button__ex__Gate_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__Lake_Gate__Button__ex__Gate_East_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__Interior] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__Interior,
+        locations: Range {
+            start: LocationId::Ebih_Breach__Lake_Gate__Interior__Hit_Button_From_Afar.into_usize(),
+            end: LocationId::Ebih_Breach__Lake_Gate__Interior__Hit_Button_From_Afar.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Lake_Gate__Interior__ex__Gate_East_1.into_usize(),
+            end: ExitId::Ebih_Breach__Lake_Gate__Interior__ex__Gate_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih_Breach__Lake_Gate__South] = Spot {
+        id: SpotId::Ebih_Breach__Lake_Gate__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Ebih_Breach__Lake_Gate__South__ex__Amagi_Breach__West_Entrance__North_1.into_usize(),
+            end: ExitId::Ebih_Breach__Lake_Gate__South__ex__Amagi_Breach__West_Entrance__North_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Ebih__Base_Camp__East_11] = Spot {
         id: SpotId::Ebih__Base_Camp__East_11,
         locations: Range {
@@ -10639,6 +11051,116 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         locations: Range {
             start: LocationId::Ebih__Gem_Room__Hidden_Cache__Flask.into_usize(),
             end: LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Portal_Stand] = Spot {
+        id: SpotId::Ebih__Party_Central__Portal_Stand,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Mid_air_Between_Waterfalls] = Spot {
+        id: SpotId::Ebih__Party_Central__Mid_air_Between_Waterfalls,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Mid_air_East_of_Waterfall] = Spot {
+        id: SpotId::Ebih__Party_Central__Mid_air_East_of_Waterfall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Waterfall_Platform] = Spot {
+        id: SpotId::Ebih__Party_Central__Waterfall_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Below_Waterfall] = Spot {
+        id: SpotId::Ebih__Party_Central__Below_Waterfall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Below_Between_Waterfalls] = Spot {
+        id: SpotId::Ebih__Party_Central__Below_Between_Waterfalls,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Bottom_Mid_east] = Spot {
+        id: SpotId::Ebih__Party_Central__Bottom_Mid_east,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__Bottom_East] = Spot {
+        id: SpotId::Ebih__Party_Central__Bottom_East,
+        locations: Range {
+            start: LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask.into_usize(),
+            end: LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Ebih__Party_Central__East_Trough] = Spot {
+        id: SpotId::Ebih__Party_Central__East_Trough,
+        locations: Range {
+            start: LocationId::Ebih__Party_Central__East_Trough__Flask.into_usize(),
+            end: LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel.into_usize() + 1,
         },
         exits: Range {
             start: 0, end: 0,
@@ -26103,6 +26625,30 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_Party_Central_Portal] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_Party_Central_Portal,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Ebih_Party_Central_Flask] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Ebih_Party_Central_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053] = Spot {
         id: SpotId::Menu__Kiengir_Map__Weekly_Notes_2_27_2053,
         locations: Range {
@@ -27095,7 +27641,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -27319,6 +27866,30 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Breach_Map__LAB_Upper_Lake_Health] = Spot {
         id: SpotId::Menu__Breach_Map__LAB_Upper_Lake_Health,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__MEB_In_n_Out_Matrix] = Spot {
+        id: SpotId::Menu__Breach_Map__MEB_In_n_Out_Matrix,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Breach_Map__MEB_Lake_Gate] = Spot {
+        id: SpotId::Menu__Breach_Map__MEB_Lake_Gate,
         locations: Range {
             start: 0, end: 0,
         },

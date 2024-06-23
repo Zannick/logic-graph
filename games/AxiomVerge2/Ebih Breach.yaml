@@ -211,3 +211,407 @@ areas:
   spots:
     - name: East 4
       coord: [23.9, 3.75]
+
+- name: In 'n Out  # MARK: In 'n Out
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Stand
+  map:
+    save: [25, 12, 26, 13]
+    matrix: [25, 11, 26, 12]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > MEB Southeast
+      matrix: Menu > Breach Map > MEB In 'n Out Matrix
+  spots:
+    - name: Save Point
+      coord: [25.325, 12.6]
+      data:
+        flipside: Ebih > Truck Gate > Portal Stand
+      local:
+        - to: Southwest
+        - to: Southwest Plains
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Southwest
+      coord: [25.5, 12.8]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Southwest Plains
+          jumps: 1
+      exits:
+        - to: Lake Gate > North
+          tags: [ydoor]
+    - name: Southwest Plains
+      coord: [25.7, 12.75]
+      data:
+        flipside: Ebih > Truck Gate > Switch
+      local:
+        - to: Southwest
+        - to: Save Point
+          jumps: 1
+        - to: Mesa West
+          jumps: 1
+    - name: Mesa West
+      coord: [26.1, 12.5]
+      local:
+        - to: Southwest Plains
+        - to: Mesa East
+      exits:
+        - to: Center Rock West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Northwest Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 3
+    - name: Mesa East
+      coord: [26.25, 12.5]
+      local:
+        - to: Mesa West
+        - to: South Plains
+      exits:
+        - to: Northwest Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Center Rock West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Southwest
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: South Plains
+      coord: [26.6, 12.8]
+      local:
+        - to: Mesa West
+          jumps: 2
+        - to: Southeast Plains
+      exits:
+        - to: Mesa West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Southeast Plains
+      coord: [27.15, 12.8]
+      data:
+        flipside: Ebih > By Garage > Garage Entry
+      local:
+        - to: South Plains
+        - to: Southeast Ledge
+          jumps: 3
+      exits:
+        - to: Southeast Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Southeast Ledge
+      coord: [27.5, 12.4]
+      local:
+        - to: Southeast Plains
+        - to: Platform 1
+          jumps: 1
+      exits:
+        - to: Center Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Platform 1
+      coord: [27.75, 12.2]
+      local:
+        - to: Platform 2
+          jumps: 1
+        - to: Southeast Ledge
+      exits:
+        - to: Center Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Platform 2
+      coord: [27.65, 12.0]
+      local:
+        - to: Platform 1
+        - to: Center Rock East
+          jumps: 1
+        - to: Southeast Plains
+      exits:
+        - to: Center Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Center Rock East
+      coord: [27.4, 11.9]
+      data:
+        flipside: Ebih > By Garage > Crawlspace Opening
+      local:
+        - to: Southeast Ledge
+        - to: Southeast Plains
+          thru: [27.45, 12.1]
+        - to: Center Rock Peak
+          jumps: 2
+      exits:
+        - to: Center Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 3
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 3
+    - name: Center Rock Peak
+      coord: [27.15, 11.55]
+      local:
+        - to: Center Rock East
+        - to: Platform 2
+        - to: Center Rock Center
+        - to: Portal Stand
+    - name: Center Rock Center
+      coord: [26.9, 11.95]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Center Rock Peak
+          jumps: 3
+      exits:
+        - to: Portal Stand
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Portal Stand
+      coord: [26.7, 11.8]
+      local:
+        - to: Center Rock Center
+        - to: Center Rock West
+      exits:
+        - to: Northwest Ledge
+          req: Drone_Hover
+          movement: base
+    - name: Center Rock West
+      coord: [26.5, 12.05]
+      local:
+        - to: Portal Stand
+          jumps: 2
+        - to: Northwest Ledge
+          jumps: 1
+        - to: Mesa East
+        - to: South Plains
+      exits:
+        - to: Portal Stand
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Northwest Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Northwest Ledge
+      coord: [26.35, 11.95]
+      data:
+        flipside: Ebih > By Garage > West Bush
+      local:
+        - to: Center Rock West
+        - to: Portal Stand
+          jumps: 2
+        - to: Mesa East
+        - to: South Plains
+        - to: Gate East
+          jumps: 2
+      exits:
+        - to: Gate East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Gate West
+          req: Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
+          movement: fast_hover
+          jumps: 1
+    - name: Gate East
+      coord: [25.95, 11.7]
+      data:
+        flipside: Ebih > Grid 25,10-12 > East 12
+      local:
+        - to: Northwest Ledge
+      locations:
+        - name: Item
+          item: Power_Matrix
+          tags: [standing]
+      exits:
+        - to: Gate West
+          req: Ebih_Breach_In_n_Out_Gate
+          movement: base
+          jumps: 1
+    - name: Gate West
+      coord: [25.7, 11.55]
+      local:
+        - to: Button
+          jumps: 2
+        - to: Northwest
+          jumps: 2
+      exits:
+        - to: Gate East
+          req: Ebih_Breach_In_n_Out_Gate
+          movement: base
+        - to: Northwest Ledge
+          req: Ebih_Breach_In_n_Out_Gate
+          movement: base
+        - to: Button
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Button
+      coord: [25.45, 11.3]
+      local:
+        - to: Northwest
+          jumps: 1
+        - to: Gate West
+      locations:
+        - name: Hit Button
+          item: Ebih_Breach_In_n_Out_Gate
+          tags: [button]
+    - name: Northwest
+      coord: [25.5, 11.2]
+      local:
+        - to: Button
+        - to: Gate West
+      exits:
+        - to: Corridor > South
+          tags: [ydoor]
+
+- name: Corridor
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: South
+      coord: [25.5, 10.8]
+
+- name: Lake Gate
+  on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > MEB Lake Gate
+  spots:
+    - name: North
+      coord: [25.5, 13.2]
+      local:
+        - to: Outside West
+        - to: Outside Top
+        - to: Outside Corner
+      exits:
+        - to: In 'n Out > Southwest
+          tags: [ydoor]
+    - name: Outside West
+      coord: [25.325, 13.7]
+      data:
+        flipside: Ebih > Party Central > Portal Stand
+      local:
+        - to: North
+          jumps: 3
+        - to: Outside Top
+          jumps: 2
+    - name: Outside Top
+      coord: [25.5, 13.35]
+      data:
+        flipside: Ebih > Party Central > Mid-air Between Waterfalls
+      local:
+        - to: North
+          jumps: 1
+        - to: Outside West
+        - to: Outside Corner
+    - name: Outside Corner
+      coord: [25.75, 13.35]
+      data:
+        flipside: Ebih > Party Central > Mid-air East of Waterfall
+      local:
+        - to: North
+          jumps: 1
+        - to: Outside Top
+        - to: Gate East
+    - name: Gate East
+      coord: [25.8, 13.75]
+      local:
+        - to: Outside Corner
+          jumps: 2
+      exits:
+        - to: Button
+          req: Ebih_Breach_Lake_Gate
+          movement: base
+    - name: Button
+      coord: [25.6, 13.75]
+      data:
+        flipside: Ebih > Party Central > Below Waterfall
+      local:
+        - to: Interior
+        - to: South
+      locations:
+        - name: Hit Button
+          canon: Ebih_Breach_Lake_Gate
+          item: Ebih_Breach_Lake_Gate
+          tags: [button]
+      exits:
+        - to: Gate East
+          req: Ebih_Breach_Lake_Gate
+          movement: base
+        - to: Gate East
+          req: Slingshot_Hook and Ebih_Breach_Lake_Gate
+          movement: fast_hover
+    - name: Interior
+      coord: [25.5, 13.75]
+      data:
+        flipside: Ebih > Party Central > Below Between Waterfalls
+      local:
+        - to: South
+        - to: Button
+      locations:
+        - name: Hit Button From Afar
+          canon: Ebih_Breach_Lake_Gate
+          item: Ebih_Breach_Lake_Gate
+          tags: [button]
+      exits:
+        - to: Gate East
+          req: Slingshot_Hook and Ebih_Breach_Lake_Gate
+          movement: fast_hover
+    - name: South
+      coord: [25.5, 13.8]
+      local:
+        - to: Interior
+          jumps: 1
+        - to: Button
+          jumps: 1
+      exits:
+        - to: Amagi Breach > West Entrance > North
+          tags: [ydoor]

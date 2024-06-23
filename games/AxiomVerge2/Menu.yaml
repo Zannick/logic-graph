@@ -714,6 +714,10 @@ areas:
       coord: [23, 13]
     - name: Diviner's Gem
       coord: [23, 14]
+    - name: Ebih Party Central Portal
+      coord: [25, 14]
+    - name: Ebih Party Central Flask
+      coord: [26, 14]
 
     - name: Weekly Notes 2/27/2053
       coord: [42, 8]
@@ -1000,6 +1004,11 @@ areas:
       coord: [24, 3]
     - name: MEB Southeast
       coord: [25, 13]
+      exits:
+        - to: Ebih Breach > In 'n Out > Save Point
+          req: ^map__ebih_breach__in_n_out__save
+          time: 12
+          tags: [warp]
     - name: MEB Southwest
       coord: [19, 13]
 
@@ -1045,4 +1054,9 @@ areas:
       coord: [34, 18]
     - name: LAB Upper Lake Health
       coord: [33, 15]
+
+    - name: MEB In 'n Out Matrix
+      coord: [25, 12]
+    - name: MEB Lake Gate
+      coord: [25, 14]
     #endregion

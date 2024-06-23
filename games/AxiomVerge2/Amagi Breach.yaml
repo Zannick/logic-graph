@@ -590,3 +590,29 @@ areas:
   spots:
     - name: North
       coord: [35.5, 18.2]
+
+- name: West Entrance  # MARK: West Entrance
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [25.5, 14.2]
+      local:
+        - to: South
+      exits:
+        - to: Ebih Breach > Lake Gate > South
+          tags: [ydoor]
+    - name: South
+      coord: [25.5, 15.8]
+      local:
+        - to: North
+          jumps: 3
+          jump_mvmt: water
+      exits:
+        - to: West Ruins > North
+          tags: [ydoor]
+
+- name: West Ruins  # MARK: West Ruins
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [25.5, 16.2]

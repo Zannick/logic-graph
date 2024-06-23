@@ -246,6 +246,8 @@ areas:
           jumps: 2
     - name: Crawlspace Opening
       coord: [27.4, 11.9]
+      data:
+        flipside: Ebih Breach > In 'n Out > Center Rock East
       local:
         - to: Outcropping
           jumps: 1
@@ -301,7 +303,9 @@ areas:
           movement: base
           jumps: 2
     - name: West Bush
-      coord: [26.3, 11.95]
+      coord: [26.35, 11.95]
+      data:
+        flipside: Ebih Breach > In 'n Out > Northwest Ledge
       local:
         - to: West 12
           jumps: 2
@@ -332,6 +336,8 @@ areas:
           jumps: 3
     - name: Garage Entry
       coord: [27.15, 12.8]
+      data:
+        flipside: Ebih Breach > In 'n Out > Southeast Plains
       local:
         - to: West Below Platforms
           jumps: 1
@@ -369,6 +375,8 @@ areas:
           tags: [xshift]
     - name: Switch
       coord: [25.7, 12.75]
+      data:
+        flipside: Ebih Breach > In 'n Out > Southwest Plains
       local:
         - to: East
       exits:
@@ -395,7 +403,9 @@ areas:
           req: ^_door_open
           movement: base
     - name: Portal Stand
-      coord: [25.35, 12.6]
+      coord: [25.325, 12.6]
+      data:
+        flipside: Ebih Breach > In 'n Out > Save Point
       exits:
         - to: Door
           req: ^_door_open
@@ -421,6 +431,8 @@ areas:
   spots:
     - name: East 12
       coord: [25.95, 11.7]
+      data:
+        flipside: Ebih Breach > In 'n Out > Gate East
       local:
         - to: Bush
           jumps: 1
@@ -3991,4 +4003,115 @@ areas:
           item: Flask
           req: $melee_cskip and Fast_Travel
           to: ^map_spot
+          tags: [cskip]
+
+- name: Party Central  # MARK: Party Central
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [25, 13, 26, 14]
+    flask: [26, 13, 27, 14]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Ebih Party Central Portal
+      flask: Menu > Kiengir Map > Ebih Party Central Flask
+  spots:
+    - name: Portal Stand
+      coord: [25.325, 13.7]
+      data:
+        flipside: Ebih Breach > Lake Gate > Outside West
+      local:
+        - to: Waterfall Platform
+          jumps: 1
+        - to: Below Between Waterfalls
+    - name: Mid-air Between Waterfalls
+      coord: [25.5, 13.35]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Portal Stand
+        - to: Waterfall Platform
+        - to: Below Between Waterfalls
+          jumps_down: 1
+        - to: Below Waterfall
+          jumps_down: 1
+    - name: Mid-air East of Waterfall
+      coord: [25.75, 13.35]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Waterfall Platform
+        - to: Below Waterfall
+          jumps_down: 1
+        - to: Bottom Mid-east
+    - name: Waterfall Platform
+      coord: [25.6, 13.55]
+      local:
+        - to: Portal Stand
+        - to: Below Between Waterfalls
+          jumps_down: 1
+        - to: Below Waterfall
+          jumps_down: 1
+        - to: Bottom Mid-east
+    - name: Below Waterfall
+      coord: [25.6, 13.75]
+      data:
+        flipside: Ebih Breach > Lake Gate > Button
+      local:
+        - to: Below Between Waterfalls
+        - to: Waterfall Platform
+          jumps: 1
+        - to: Bottom Mid-east
+    - name: Below Between Waterfalls
+      coord: [25.5, 13.75]
+      data:
+        flipside: Ebih Breach > Lake Gate > Interior
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Waterfall Platform
+          jumps: 1
+        - to: Below Waterfall
+    - name: Bottom Mid-east
+      coord: [26.2, 13.75]
+      local:
+        - to: Below Waterfall
+        - to: Waterfall Platform
+          jumps: 1
+        - to: Bottom East
+    - name: Bottom East
+      coord: [26.35, 13.75]
+      local:
+        - to: Bottom Mid-east
+        - to: East Trough
+      locations:
+        - name: Shockwave Flask
+          canon: Ebih_Party_Central_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: East Trough
+      coord: [26.5, 13.8]
+      local:
+        - to: Bottom East
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Ebih_Party_Central_Flask
+          item: Big_Flask
+          tags: [flask]
+      hybrid:
+        - name: Flask Collection Skip
+          canon: Ebih_Party_Central_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Party_Central_Flask
+          item: Big_Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
           tags: [cskip]

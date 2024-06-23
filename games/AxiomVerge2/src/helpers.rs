@@ -2477,11 +2477,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{31}, Big_Flask{12}]
+/// [Flask{31}, Big_Flask{13}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 31 && $ctx.count(Item::Big_Flask) >= 12
+        $ctx.count(Item::Flask) >= 31 && $ctx.count(Item::Big_Flask) >= 13
     }};
 }
 #[macro_export]
@@ -2501,7 +2501,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 12, vec!["Big_Flask count"])
+                (ct >= 13, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2515,8 +2515,8 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(31));
             $ctx.count(Item::Flask) >= 31
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(12));
-            $ctx.count(Item::Big_Flask) >= 12
+            $full_obs.observe_big_flask(IntegerObservation::Ge(13));
+            $ctx.count(Item::Big_Flask) >= 13
         })
     }};
 }
@@ -2652,12 +2652,12 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{2}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem]
+/// [Compass, Power_Matrix{3}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Compass)
-            && $ctx.count(Item::Power_Matrix) >= 2
+            && $ctx.count(Item::Power_Matrix) >= 3
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.has(Item::Eye_Ring)
             && $ctx.has(Item::Breach_Attractor)
@@ -2684,7 +2684,7 @@ macro_rules! hexplain__other_items {
             let mut h = {
                 let ct = $ctx.count(Item::Power_Matrix);
                 $edict.insert("Power_Matrix count", format!("{}", ct));
-                (ct >= 2, vec!["Power_Matrix count"])
+                (ct >= 3, vec!["Power_Matrix count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2761,8 +2761,8 @@ macro_rules! hobserve__other_items {
             $full_obs.observe_compass();
             $ctx.has(Item::Compass)
         }) && ({
-            $full_obs.observe_power_matrix(IntegerObservation::Ge(2));
-            $ctx.count(Item::Power_Matrix) >= 2
+            $full_obs.observe_power_matrix(IntegerObservation::Ge(3));
+            $ctx.count(Item::Power_Matrix) >= 3
         }) && ({
             $full_obs.observe_nano_lattice_2();
             $ctx.has(Item::Nano_Lattice_2)

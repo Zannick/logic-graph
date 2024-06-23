@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="7"];
+        node[fillcolor="2"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -72,6 +72,13 @@
             Amagi_Breach__Upper_Lake__Middle [label = "", pos = "102.45,-74.583333!"];
             Amagi_Breach__Upper_Lake__Near_Column [label = "", pos = "101.4,-74.583333!"];
             Amagi_Breach__Upper_Lake__Column [label = "", pos = "100.5,-74.166667!"];
+        }
+        {
+            Amagi_Breach__West_Entrance__North [label = "", pos = "76.5,-73.666667!"];
+            Amagi_Breach__West_Entrance__South [label = "", pos = "76.5,-76.333333!"];
+        }
+        {
+            Amagi_Breach__West_Ruins__North [label = "", pos = "76.5,-77.0!"];
         }
     }
     {
@@ -592,7 +599,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -634,7 +641,10 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="6"];
+        {
+            Ebih_Breach__Corridor__South [label = "", pos = "76.5,-68.0!"];
+        }
         {
             Ebih_Breach__Drone_Tutorial__West_6 [label = "", pos = "75.3,-59.333333!"];
             Ebih_Breach__Drone_Tutorial__Bottom [label = "", pos = "75.6,-59.5!"];
@@ -644,6 +654,38 @@
             Ebih_Breach__Drone_Tutorial__Upper_Mid_way [label = "", pos = "76.2,-57.375!"];
             Ebih_Breach__Drone_Tutorial__Top [label = "", pos = "75.9,-56.25!"];
             Ebih_Breach__Drone_Tutorial__West_4 [label = "", pos = "75.3,-56.25!"];
+        }
+        {
+            Ebih_Breach__In_n_Out__Save_Point [label = "", pos = "75.975,-71.0!"];
+            Ebih_Breach__In_n_Out__Southwest [label = "", pos = "76.5,-71.333333!"];
+            Ebih_Breach__In_n_Out__Southwest_Plains [label = "", pos = "77.1,-71.25!"];
+            Ebih_Breach__In_n_Out__Mesa_West [label = "", pos = "78.3,-70.833333!"];
+            Ebih_Breach__In_n_Out__Mesa_East [label = "", pos = "78.75,-70.833333!"];
+            Ebih_Breach__In_n_Out__South_Plains [label = "", pos = "79.8,-71.333333!"];
+            Ebih_Breach__In_n_Out__Southeast_Plains [label = "", pos = "81.45,-71.333333!"];
+            Ebih_Breach__In_n_Out__Southeast_Ledge [label = "", pos = "82.5,-70.666667!"];
+            Ebih_Breach__In_n_Out__Platform_1 [label = "", pos = "83.25,-70.333333!"];
+            Ebih_Breach__In_n_Out__Platform_2 [label = "", pos = "82.95,-70.0!"];
+            Ebih_Breach__In_n_Out__Center_Rock_East [label = "", pos = "82.2,-69.833333!"];
+            Ebih_Breach__In_n_Out__Center_Rock_Peak [label = "", pos = "81.45,-69.25!"];
+            Ebih_Breach__In_n_Out__Center_Rock_Center [label = "", pos = "80.7,-69.916667!"];
+            Ebih_Breach__In_n_Out__Portal_Stand [label = "", pos = "80.1,-69.666667!"];
+            Ebih_Breach__In_n_Out__Center_Rock_West [label = "", pos = "79.5,-70.083333!"];
+            Ebih_Breach__In_n_Out__Northwest_Ledge [label = "", pos = "79.05,-69.916667!"];
+            Ebih_Breach__In_n_Out__Gate_East [label = "", pos = "77.85,-69.5!"];
+            Ebih_Breach__In_n_Out__Gate_West [label = "", pos = "77.1,-69.25!"];
+            Ebih_Breach__In_n_Out__Button [label = "", pos = "76.35,-68.833333!"];
+            Ebih_Breach__In_n_Out__Northwest [label = "", pos = "76.5,-68.666667!"];
+        }
+        {
+            Ebih_Breach__Lake_Gate__North [label = "", pos = "76.5,-72.0!"];
+            Ebih_Breach__Lake_Gate__Outside_West [label = "", pos = "75.975,-72.833333!"];
+            Ebih_Breach__Lake_Gate__Outside_Top [label = "", pos = "76.5,-72.25!"];
+            Ebih_Breach__Lake_Gate__Outside_Corner [label = "", pos = "77.25,-72.25!"];
+            Ebih_Breach__Lake_Gate__Gate_East [label = "", pos = "77.4,-72.916667!"];
+            Ebih_Breach__Lake_Gate__Button [label = "", pos = "76.8,-72.916667!"];
+            Ebih_Breach__Lake_Gate__Interior [label = "", pos = "76.5,-72.916667!"];
+            Ebih_Breach__Lake_Gate__South [label = "", pos = "76.5,-73.0!"];
         }
         {
             Ebih_Breach__Portals_101__Save_Point [label = "", pos = "73.575,-59.333333!"];
@@ -702,7 +744,7 @@
             Ebih__By_Garage__Outcropping [label = "", pos = "82.05,-19.5!"];
             Ebih__By_Garage__East_Bush [label = "", pos = "80.4,-19.916667!"];
             Ebih__By_Garage__Lower_Platform [label = "", pos = "79.2,-20.583333!"];
-            Ebih__By_Garage__West_Bush [label = "", pos = "78.9,-19.916667!"];
+            Ebih__By_Garage__West_Bush [label = "", pos = "79.05,-19.916667!"];
             Ebih__By_Garage__West_12 [label = "", pos = "78.15,-19.5!"];
             Ebih__By_Garage__West_13 [label = "", pos = "78.15,-21.25!"];
             Ebih__By_Garage__West_Below_Platforms [label = "", pos = "78.9,-21.25!"];
@@ -891,6 +933,17 @@
             Ebih__Open_Air__South [label = "", pos = "78.6,-9.833333!"];
         }
         {
+            Ebih__Party_Central__Portal_Stand [label = "", pos = "75.975,-22.833333!"];
+            Ebih__Party_Central__Mid_air_Between_Waterfalls [label = "", pos = "76.5,-22.25!"];
+            Ebih__Party_Central__Mid_air_East_of_Waterfall [label = "", pos = "77.25,-22.25!"];
+            Ebih__Party_Central__Waterfall_Platform [label = "", pos = "76.8,-22.583333!"];
+            Ebih__Party_Central__Below_Waterfall [label = "", pos = "76.8,-22.916667!"];
+            Ebih__Party_Central__Below_Between_Waterfalls [label = "", pos = "76.5,-22.916667!"];
+            Ebih__Party_Central__Bottom_Mid_east [label = "", pos = "78.6,-22.916667!"];
+            Ebih__Party_Central__Bottom_East [label = "", pos = "79.05,-22.916667!"];
+            Ebih__Party_Central__East_Trough [label = "", pos = "79.5,-23.0!"];
+        }
+        {
             Ebih__Peak__West_3 [label = "", pos = "66.15,-4.0!"];
             Ebih__Peak__Observatory_West [label = "", pos = "67.425,-4.25!"];
             Ebih__Peak__Observatory_East [label = "", pos = "71.25,-4.25!"];
@@ -905,7 +958,7 @@
             Ebih__Truck_Gate__East [label = "", pos = "77.85,-21.25!"];
             Ebih__Truck_Gate__Switch [label = "", pos = "77.1,-21.25!"];
             Ebih__Truck_Gate__Door [label = "", pos = "76.5,-21.25!"];
-            Ebih__Truck_Gate__Portal_Stand [label = "", pos = "76.05,-21.0!"];
+            Ebih__Truck_Gate__Portal_Stand [label = "", pos = "75.975,-21.0!"];
         }
         {
             Ebih__Vertical_Interchange__West_13 [label = "", pos = "63.15,-21.25!"];
@@ -999,7 +1052,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Filter__Core__East [label = "", pos = "14.85,-26.25!"];
             Filter__Core__Bottom [label = "", pos = "13.05,-26.25!"];
@@ -1035,7 +1088,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Giguna_Breach__Antechamber__North [label = "", pos = "49.5,-68.666667!"];
             Giguna_Breach__Antechamber__Middle [label = "", pos = "49.2,-69.166667!"];
@@ -1638,7 +1691,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="5"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -2006,7 +2059,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -2064,7 +2117,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
         }
@@ -2362,7 +2415,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             node[shape=doublecircle, fillcolor="8"];
             Menu__Breach_Map__AGB_Bridge_Lower [label = "", pos = "105.0,-91.666667!"];
@@ -2413,6 +2466,8 @@
             Menu__Breach_Map__LAB_East_Ruins_Flask [label = "", pos = "102.0,-76.666667!"];
             Menu__Breach_Map__Exit_Breach [label = "", pos = "102.0,-80.0!"];
             Menu__Breach_Map__LAB_Upper_Lake_Health [label = "", pos = "99.0,-75.0!"];
+            Menu__Breach_Map__MEB_In_n_Out_Matrix [label = "", pos = "75.0,-70.0!"];
+            Menu__Breach_Map__MEB_Lake_Gate [label = "", pos = "75.0,-73.333333!"];
         }
         {
             node[shape=doublecircle, fillcolor="8"];
@@ -2531,6 +2586,8 @@
             Menu__Kiengir_Map__Ebih_Gem_Room_Flask [label = "", pos = "66.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Gem_Room_Button [label = "", pos = "69.0,-21.666667!"];
             Menu__Kiengir_Map__Diviners_Gem [label = "", pos = "69.0,-23.333333!"];
+            Menu__Kiengir_Map__Ebih_Party_Central_Portal [label = "", pos = "75.0,-23.333333!"];
+            Menu__Kiengir_Map__Ebih_Party_Central_Flask [label = "", pos = "78.0,-23.333333!"];
             Menu__Kiengir_Map__Weekly_Notes_2_27_2053 [label = "", pos = "126.0,-13.333333!"];
             Menu__Kiengir_Map__Compass [label = "", pos = "126.0,-18.333333!"];
             Menu__Kiengir_Map__Dr_Gloria [label = "", pos = "117.0,-23.333333!"];
