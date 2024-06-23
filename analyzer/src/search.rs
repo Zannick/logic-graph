@@ -1180,12 +1180,14 @@ where
         let solcount = sols.len();
         let best = sols.best();
         drop(sols);
-        if unique > 1_000 || iters > 10_000_000 {
-            self.queue.set_max_time(best);
-        } else if iters > 5_000_000 || unique > 100 {
-            self.queue.set_max_time(best + best / 1_000);
-        } else if iters > 2_000_000 && unique > 4 {
-            self.queue.set_max_time(best + best / 100);
+        if best > 0 {
+            if unique > 1_000 || iters > 10_000_000 {
+                self.queue.set_max_time(best);
+            } else if iters > 5_000_000 || unique > 100 {
+                self.queue.set_max_time(best + best / 1_000);
+            } else if iters > 2_000_000 && unique > 4 {
+                self.queue.set_max_time(best + best / 100);
+            }
         }
         if iters == 100_000 || iters % 1_000_000 == 0 {
             self.queue.print_queue_histogram();
