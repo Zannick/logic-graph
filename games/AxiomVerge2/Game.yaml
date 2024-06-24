@@ -216,7 +216,7 @@ warps:  # MARK: warps
     req: ^realm == 'breach' and Exit_Breach and ^flipside != $default
     to: ^flipside
     after: $clear_breach_save
-    # Instead of making this base movement, anywhere it's strictly required needs a real Exit
+    bulk_exit: true
     tags: [exit]
   # Fast travels are technically doable from the menu, but it costs time to switch tabs, so just model that
   # as exit menu time.
@@ -234,10 +234,11 @@ warps:  # MARK: warps
     to: ^flipside
     after: $post_portal_save_update
     time: 3.6
-    tags: [portal]
+    bulk_exit: true
     penalties:
       - when: ^portal_hidden
         add: 0.25
+    tags: [portal]
 
 actions:  # MARK: actions
   - name: Recall Drone

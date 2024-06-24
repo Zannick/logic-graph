@@ -217,6 +217,19 @@ impl world::Warp for Warp {
             WarpId::Portal => false,
         }
     }
+    fn is_bulk_exit(&self) -> bool {
+        match self.id {
+            WarpId::BreachSave => false,
+            WarpId::EarthSave => false,
+            WarpId::ExitBreach => true,
+            WarpId::ExitMenu => false,
+            WarpId::FastTravelBreach => false,
+            WarpId::FastTravelKiengir => false,
+            WarpId::MainSave => false,
+            WarpId::Menu => true,
+            WarpId::Portal => true,
+        }
+    }
     fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             WarpId::BreachSave => {

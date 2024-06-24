@@ -143,6 +143,7 @@ pub trait Warp: Accessible {
     fn prewarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn postwarp(&self, ctx: &mut Self::Context, world: &<Self::Context as Ctx>::World);
     fn should_reload(&self) -> bool;
+    fn is_bulk_exit(&self) -> bool;
     fn observe_effects(
         &self,
         ctx: &Self::Context,

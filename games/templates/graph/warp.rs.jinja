@@ -119,6 +119,13 @@ impl world::Warp for Warp {
 %% endfor
         }
     }
+    fn is_bulk_exit(&self) -> bool {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {{ 'true' if w.bulk_exit else 'false' }},
+%% endfor
+        }
+    }
     fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
