@@ -17,6 +17,8 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
+static MAX_STATES_FOR_ONE_LOC: usize = 16_384;
+
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
     Standard,
@@ -987,7 +989,7 @@ where
                             self.startctx.get(),
                             self.queue.max_time(),
                             4,
-                            4_096,
+                            MAX_STATES_FOR_ONE_LOC,
                             sol,
                             self.queue.db().scorer().get_algo(),
                         ) {
@@ -1059,7 +1061,7 @@ where
             } else {
                 4
             },
-            4_096,
+            MAX_STATES_FOR_ONE_LOC,
             self.queue.db().scorer().get_algo(),
         );
         let found = res.is_ok();
