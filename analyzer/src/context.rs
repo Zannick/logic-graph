@@ -150,7 +150,7 @@ pub trait Ctx:
                     false
                 }
             }
-            History::G(item, loc_id) => {
+            History::G(item, loc_id) | History::V(item, loc_id, ..) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
                 if spot_id == self.position()
@@ -249,6 +249,8 @@ pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
     W(WarpId, SpotId),
     // Get
     G(ItemId, LocId),
+    // Get and Move
+    V(ItemId, LocId, SpotId),
     // Exit
     E(ExitId),
     // GetExit
@@ -285,6 +287,9 @@ where
         match self {
             History::W(warp, dest) => write!(f, "  {}warp to {}", warp, dest),
             History::G(item, loc) => write!(f, "* Collect {} from {}", item, loc),
+            History::V(item, loc, dest) => {
+                write!(f, "* Collect {} from {} ==> {}", item, loc, dest)
+            }
             History::E(exit) => write!(f, "  Take exit {}", exit),
             History::H(item, exit) => {
                 write!(f, "* Take hybrid exit {}, collecting {}", exit, item)
@@ -314,6 +319,11 @@ where
             History::G(item, loc) => {
                 item.hash(state);
                 loc.hash(state);
+            }
+            History::V(item, loc, dest) => {
+                item.hash(state);
+                loc.hash(state);
+                dest.hash(state);
             }
             History::E(exit) => {
                 exit.hash(state);
@@ -364,7 +374,7 @@ where
             static ref GET: Regex = Regex::new(
                 // Get
                 // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
-                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>.*$)").unwrap();
+                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>[^=]*)(?: ==> (?P<dest>.*$))").unwrap();
             static ref MOVE: Regex = Regex::new(
                 // Move
                 //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)
@@ -396,6 +406,7 @@ where
         } else if let Some(cap) = GET.captures(s) {
             let item = extract_match(&cap, "item", s).unwrap_or_default();
             let loc = extract_match(&cap, "loc", s)?;
+            // don't care about the dest spot for now
             Ok(History::G(
                 <I as FromStr>::from_str(item).unwrap_or_default(),
                 <L as FromStr>::from_str(loc)?,
@@ -686,7 +697,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 (dest == Default::default() || warp.dest(&self.ctx, world) == dest)
                     && warp.can_access(&self.ctx, world)
             }
-            History::G(item, loc_id) => {
+            History::G(item, loc_id) | History::V(item, loc_id, ..) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
                 spot_id == self.ctx.position()
@@ -760,7 +771,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     );
                 }
             }
-            History::G(item, loc_id) => {
+            History::G(item, loc_id) | History::V(item, loc_id, ..) => {
                 let loc = world.get_location(loc_id);
                 // We assert that if a loc is skippable that its item is never checked in any rule in this world+settings.
                 if !loc.skippable() {
@@ -831,7 +842,9 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         match step {
             History::W(wp, _) => world.get_warp(wp).explain(self.get(), world),
-            History::G(_, loc_id) => world.get_location(loc_id).explain(self.get(), world),
+            History::G(_, loc_id) | History::V(_, loc_id, _) => {
+                world.get_location(loc_id).explain(self.get(), world)
+            }
             History::E(exit_id) | History::H(_, exit_id) => {
                 world.get_exit(exit_id).explain(self.get(), world)
             }
@@ -1033,7 +1046,7 @@ where
         })
         .into_iter()
         .map(|h| match h {
-            History::G(..) | History::H(..) | History::A(..) => h.to_string(),
+            History::G(..) | History::H(..) | History::A(..) | History::V(..) => h.to_string(),
             History::E(e) => format!("  Move... to {}", e),
             History::L(s) | History::C(s, ..) => {
                 format!("  Move... to {}", s)
