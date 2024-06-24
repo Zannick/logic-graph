@@ -97,12 +97,17 @@ pub trait Location: Accessible {
     type LocId: Id + enum_map::EnumArray<bool>;
     type CanonId: Id;
     type ExitId: Id;
+    type SpotId: Id + Default;
 
     fn id(&self) -> Self::LocId;
     fn item(&self) -> <Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> Self::CanonId;
     fn exit_id(&self) -> &Option<Self::ExitId>;
     fn skippable(&self) -> bool;
+
+    fn dest(&self) -> Self::SpotId {
+        Default::default()
+    }
 }
 
 pub trait Exit: Accessible {
@@ -154,6 +159,7 @@ pub trait World: Sync {
     type Location: Location;
     type Exit: Exit<
         ExitId = <Self::Location as Location>::ExitId,
+        SpotId = <Self::Location as Location>::SpotId,
         LocId = <Self::Location as Location>::LocId,
         Context = <Self::Location as Accessible>::Context,
         Currency = <Self::Location as Accessible>::Currency,

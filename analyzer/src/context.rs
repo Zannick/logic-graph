@@ -560,6 +560,9 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item(), world);
         self.ctx.spend(loc.price());
+        if loc.dest() != Default::default() {
+            self.ctx.set_position(loc.dest(), world);
+        }
         self.elapse(dur);
         self.time_since_visit = 0;
         self.append_history(History::G(loc.item(), loc.id()), dur);

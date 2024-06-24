@@ -24,6 +24,7 @@ pub struct Location {
     canonical: CanonId,
     time: u32,
     exit_id: Option<ExitId>,
+    dest: SpotId,
     price: Currency,
     skippable: bool,
 }
@@ -1094,12 +1095,14 @@ impl world::Location for Location {
     type LocId = LocationId;
     type CanonId = CanonId;
     type ExitId = ExitId;
+    type SpotId = SpotId;
 
     fn id(&self) -> LocationId { self.id }
     fn item(&self) -> Item { self.item }
     fn canon_id(&self) -> CanonId { self.canonical }
     fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
     fn skippable(&self) -> bool { self.skippable }
+    fn dest(&self) -> SpotId { self.dest }
 }
 
 impl Location {
@@ -1116,6 +1119,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item] = Location {
@@ -1125,6 +1129,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip] = Location {
@@ -1134,6 +1139,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Breach,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel] = Location {
@@ -1143,6 +1149,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel),
+        dest: SpotId::Menu__Breach_Map__LAB_East_Ruins_Flask,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn] = Location {
@@ -1152,6 +1159,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip] = Location {
@@ -1161,6 +1169,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Breach,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel] = Location {
@@ -1170,6 +1179,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel),
+        dest: SpotId::Menu__Breach_Map__Exit_Breach,
         skippable: false,
     };
     locations[LocationId::Amagi_Breach__Upper_Lake__Column__Health] = Location {
@@ -1179,6 +1189,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask] = Location {
@@ -1188,6 +1199,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Cache__Item] = Location {
@@ -1197,6 +1209,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip] = Location {
@@ -1206,6 +1219,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi__Main_Area__Cache__Item_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel] = Location {
@@ -1215,6 +1229,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi__Main_Area__Cache__Item_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask,
         skippable: false,
     };
     locations[LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item] = Location {
@@ -1224,6 +1239,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__Liru_Room__Shrine__Item] = Location {
@@ -1233,6 +1249,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall] = Location {
@@ -1242,6 +1259,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20] = Location {
@@ -1251,6 +1269,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
+        dest: SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask] = Location {
@@ -1260,6 +1279,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Cavern_Eye__Item] = Location {
@@ -1269,6 +1289,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward] = Location {
@@ -1278,6 +1299,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn] = Location {
@@ -1287,6 +1309,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: Some(ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
+        dest: SpotId::Amagi__West_Lake__Stronghold_Item,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Item__Item] = Location {
@@ -1296,6 +1319,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall] = Location {
@@ -1305,6 +1329,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall] = Location {
@@ -1314,6 +1339,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall] = Location {
@@ -1323,6 +1349,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder] = Location {
@@ -1332,6 +1359,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder] = Location {
@@ -1341,6 +1369,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall] = Location {
@@ -1350,6 +1379,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall] = Location {
@@ -1359,6 +1389,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall] = Location {
@@ -1368,6 +1399,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall] = Location {
@@ -1377,6 +1409,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Amagi__East_Lake__Foot__Tablet] = Location {
@@ -1386,6 +1419,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__Save_Point__Fight] = Location {
@@ -1395,6 +1429,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 30000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch] = Location {
@@ -1404,6 +1439,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__Plinth__Item] = Location {
@@ -1413,6 +1449,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask] = Location {
@@ -1422,6 +1459,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask] = Location {
@@ -1431,6 +1469,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask] = Location {
@@ -1440,6 +1479,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask),
+        dest: SpotId::Annuna__Mirror_Match__East_26_Lower,
         skippable: false,
     };
     locations[LocationId::Annuna__West_Bridge__Plinth__Item] = Location {
@@ -1449,6 +1489,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__East_Bridge__Gate_Button__Switch] = Location {
@@ -1458,6 +1499,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below] = Location {
@@ -1467,6 +1509,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 250,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__East_Bridge__Tower_Gate__Tablet] = Location {
@@ -1476,6 +1519,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__East_Bridge__Tower_Secret__Item] = Location {
@@ -1485,6 +1529,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup] = Location {
@@ -1494,6 +1539,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Table__Item] = Location {
@@ -1503,6 +1549,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall] = Location {
@@ -1512,6 +1559,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall] = Location {
@@ -1521,6 +1569,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall] = Location {
@@ -1530,6 +1579,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall] = Location {
@@ -1539,6 +1589,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall] = Location {
@@ -1548,6 +1599,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall] = Location {
@@ -1557,6 +1609,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall] = Location {
@@ -1566,6 +1619,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall] = Location {
@@ -1575,6 +1629,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall),
+        dest: SpotId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West,
         skippable: false,
     };
     locations[LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item] = Location {
@@ -1584,6 +1639,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Vertical_Room__Plinth__Item] = Location {
@@ -1593,6 +1649,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button] = Location {
@@ -1602,6 +1659,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet] = Location {
@@ -1611,6 +1669,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup] = Location {
@@ -1620,6 +1679,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask] = Location {
@@ -1629,6 +1689,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask] = Location {
@@ -1638,6 +1699,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet] = Location {
@@ -1647,6 +1709,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill] = Location {
@@ -1656,6 +1719,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Twisty_Passages__Top__Tablet] = Location {
@@ -1665,6 +1729,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill] = Location {
@@ -1674,6 +1739,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__West_Climb__Cache__Item] = Location {
@@ -1683,6 +1749,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask] = Location {
@@ -1692,6 +1759,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 10000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Egg_Room__Cache__Flask] = Location {
@@ -1701,6 +1769,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask] = Location {
@@ -1710,6 +1779,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside] = Location {
@@ -1719,6 +1789,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask] = Location {
@@ -1728,6 +1799,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 9500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra] = Location {
@@ -1737,6 +1809,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 900,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone] = Location {
@@ -1746,6 +1819,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist] = Location {
@@ -1755,6 +1829,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2] = Location {
@@ -1764,6 +1839,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra] = Location {
@@ -1773,6 +1849,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 900,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn] = Location {
@@ -1782,6 +1859,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone] = Location {
@@ -1791,6 +1869,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist] = Location {
@@ -1800,6 +1879,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2] = Location {
@@ -1809,6 +1889,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2),
+        dest: SpotId::Annuna__Siuna_Storage__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel] = Location {
@@ -1818,6 +1899,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn] = Location {
@@ -1827,6 +1909,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel] = Location {
@@ -1836,6 +1919,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Cache__Urn] = Location {
@@ -1845,6 +1929,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip] = Location {
@@ -1854,6 +1939,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel] = Location {
@@ -1863,6 +1949,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Nanite_Mist,
         skippable: false,
     };
     locations[LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall] = Location {
@@ -1872,6 +1959,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Break_Through_Wall),
+        dest: SpotId::Annuna__Seals__Inner_Wall,
         skippable: false,
     };
     locations[LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall] = Location {
@@ -1881,6 +1969,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall),
+        dest: SpotId::Annuna__Seals__Inner_Wall,
         skippable: false,
     };
     locations[LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall] = Location {
@@ -1890,6 +1979,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall),
+        dest: SpotId::Annuna__Seals__Inner_Wall,
         skippable: false,
     };
     locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight] = Location {
@@ -1899,6 +1989,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight),
+        dest: SpotId::Annuna__Apocalypse__Bomb_Northwest,
         skippable: false,
     };
     locations[LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up] = Location {
@@ -1908,6 +1999,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up),
+        dest: SpotId::Annuna__Apocalypse__Bomb_East,
         skippable: false,
     };
     locations[LocationId::Antarctica__Shed__Interior__Shelf] = Location {
@@ -1917,6 +2009,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Antarctica__Building_2__Behind_Boxes__Note] = Location {
@@ -1926,6 +2019,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Antarctica__Power_Room__Switch__Flip] = Location {
@@ -1935,6 +2029,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih_Breach__In_n_Out__Gate_East__Item] = Location {
@@ -1944,6 +2039,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih_Breach__In_n_Out__Button__Hit_Button] = Location {
@@ -1953,6 +2049,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih_Breach__Lake_Gate__Button__Hit_Button] = Location {
@@ -1962,6 +2059,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih_Breach__Lake_Gate__Interior__Hit_Button_From_Afar] = Location {
@@ -1971,6 +2069,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side] = Location {
@@ -1980,6 +2079,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Base_Camp__Top_Platform__Item] = Location {
@@ -1989,6 +2089,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__By_Garage__Crawlspace__Fragment] = Location {
@@ -1998,6 +2099,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush] = Location {
@@ -2007,6 +2109,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush] = Location {
@@ -2016,6 +2119,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Alcove_Right__Block_Right] = Location {
@@ -2025,6 +2129,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks] = Location {
@@ -2034,6 +2139,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Alcove_Left__Block_Left] = Location {
@@ -2043,6 +2149,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Alcove__Pedestal] = Location {
@@ -2052,6 +2159,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Alcove__Block_Right] = Location {
@@ -2061,6 +2169,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Alcove__Block_Left] = Location {
@@ -2070,6 +2179,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Wall] = Location {
@@ -2079,6 +2189,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall] = Location {
@@ -2088,6 +2199,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Right__Break_Through_Wall),
+        dest: SpotId::Ebih__Waterfall__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall] = Location {
@@ -2097,6 +2209,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall),
+        dest: SpotId::Ebih__Waterfall__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Wall] = Location {
@@ -2106,6 +2219,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall] = Location {
@@ -2115,6 +2229,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Left__Break_Through_Wall),
+        dest: SpotId::Ebih__Waterfall__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall] = Location {
@@ -2124,6 +2239,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall),
+        dest: SpotId::Ebih__Waterfall__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Alcove__Tablet] = Location {
@@ -2133,6 +2249,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Block_Left__Break_Block] = Location {
@@ -2142,6 +2259,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Highest_Platform__Flask] = Location {
@@ -2151,6 +2269,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Highest_Platform__Shockwave_Flask] = Location {
@@ -2160,6 +2279,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Highest_Platform__Flask_Collection_Skip] = Location {
@@ -2169,6 +2289,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_West__Highest_Platform__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Highest_Platform__Flask_Fast_Travel] = Location {
@@ -2178,6 +2299,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_West__Highest_Platform__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_West_Flask,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_West__Block_Right__Break_Block] = Location {
@@ -2187,6 +2309,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn] = Location {
@@ -2196,6 +2319,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Corner__Urn] = Location {
@@ -2205,6 +2329,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Dispenser__Vend] = Location {
@@ -2214,6 +2339,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_East__Break_Wall] = Location {
@@ -2223,6 +2349,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall] = Location {
@@ -2232,6 +2359,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_East__Wall_East__Break_Through_Wall),
+        dest: SpotId::Ebih__Ebih_East__Wall_West,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster] = Location {
@@ -2241,6 +2369,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster),
+        dest: SpotId::Ebih__Ebih_East__Wall_West,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_West__Break_Wall] = Location {
@@ -2250,6 +2379,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall] = Location {
@@ -2259,6 +2389,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_East__Wall_West__Break_Through_Wall),
+        dest: SpotId::Ebih__Ebih_East__Wall_East,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster] = Location {
@@ -2268,6 +2399,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster),
+        dest: SpotId::Ebih__Ebih_East__Wall_East,
         skippable: false,
     };
     locations[LocationId::Ebih__Ebih_East__East_Ledge__Note] = Location {
@@ -2277,6 +2409,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button] = Location {
@@ -2286,6 +2419,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 250,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Hidden_Portal__Button__Hit_Button] = Location {
@@ -2295,6 +2429,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Hidden_Portal__Gate_Ledge_East__Remote_Button] = Location {
@@ -2304,6 +2439,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Flask] = Location {
@@ -2313,6 +2449,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Shockwave_Flask] = Location {
@@ -2322,6 +2459,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip] = Location {
@@ -2331,6 +2469,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel] = Location {
@@ -2340,6 +2479,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_West_Face_Flask,
         skippable: false,
     };
     locations[LocationId::Ebih__Boss_Room__Boss__Hack_Alu] = Location {
@@ -2349,6 +2489,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(280),
         time: 25000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Boss_Room__Boss__Fight_Alu] = Location {
@@ -2358,6 +2499,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 50000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Boss_Room__Boss__Boss_Reward] = Location {
@@ -2367,6 +2509,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Boss_Room__East_Ledge__Item] = Location {
@@ -2376,6 +2519,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Room__Item__Urn] = Location {
@@ -2385,6 +2529,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip] = Location {
@@ -2394,6 +2539,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel] = Location {
@@ -2403,6 +2549,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Room__Item__Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Remote_Drone,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab] = Location {
@@ -2412,6 +2559,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: Some(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
+        dest: SpotId::Ebih__Drone_Room__Portal,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Pit__Item] = Location {
@@ -2421,6 +2569,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Pit__Shockwave_Flask] = Location {
@@ -2430,6 +2579,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Pit__Flask_Collection_Skip] = Location {
@@ -2439,6 +2589,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Pit__Pit__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Pit__Flask_Fast_Travel] = Location {
@@ -2448,6 +2599,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Pit__Pit__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Bush_Left__Item] = Location {
@@ -2457,6 +2609,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Bush_Left__Shockwave_Flask] = Location {
@@ -2466,6 +2619,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Highest_Point__Flask] = Location {
@@ -2475,6 +2629,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Highest_Point__Shockwave_Flask] = Location {
@@ -2484,6 +2639,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Collection_Skip] = Location {
@@ -2493,6 +2649,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Pit__Highest_Point__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Fast_Travel] = Location {
@@ -2502,6 +2659,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Drone_Pit__Highest_Point__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_High_Flask,
         skippable: false,
     };
     locations[LocationId::Ebih__Grid_26_10_11__Ledge__Note] = Location {
@@ -2511,6 +2669,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block] = Location {
@@ -2520,6 +2679,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch] = Location {
@@ -2529,6 +2689,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 250,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall] = Location {
@@ -2538,6 +2699,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall] = Location {
@@ -2547,6 +2709,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall),
+        dest: SpotId::Ebih__Walled_Off__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster] = Location {
@@ -2556,6 +2719,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster),
+        dest: SpotId::Ebih__Walled_Off__Wall_Left,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall] = Location {
@@ -2565,6 +2729,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall] = Location {
@@ -2574,6 +2739,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall),
+        dest: SpotId::Ebih__Walled_Off__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster] = Location {
@@ -2583,6 +2749,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster),
+        dest: SpotId::Ebih__Walled_Off__Wall_Right,
         skippable: false,
     };
     locations[LocationId::Ebih__Guarded_Health__West_Basin__Health] = Location {
@@ -2592,6 +2759,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Guarded_Health__Far_West__Refill] = Location {
@@ -2601,6 +2769,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Button_Corner__Remote_Button] = Location {
@@ -2610,6 +2779,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Button_Corner__Shockwave_Secret_Flask] = Location {
@@ -2619,6 +2789,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Button_Nearby__Hit_Button] = Location {
@@ -2628,6 +2799,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Between_Gates__Gem] = Location {
@@ -2637,6 +2809,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask] = Location {
@@ -2646,6 +2819,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask] = Location {
@@ -2655,6 +2829,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Hidden_Cache__Flask] = Location {
@@ -2664,6 +2839,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Collection_Skip] = Location {
@@ -2673,6 +2849,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Gem_Room__Hidden_Cache__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel] = Location {
@@ -2682,6 +2859,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_Gem_Room_Flask,
         skippable: false,
     };
     locations[LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask] = Location {
@@ -2691,6 +2869,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Party_Central__East_Trough__Flask] = Location {
@@ -2700,6 +2879,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip] = Location {
@@ -2709,6 +2889,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel] = Location {
@@ -2718,6 +2899,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Ebih_Party_Central_Flask,
         skippable: false,
     };
     locations[LocationId::Filter__Core__Terminal_East__Authorize_Hammond] = Location {
@@ -2727,6 +2909,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Chimney__Cache__Flask] = Location {
@@ -2736,6 +2919,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Cubby__Rocks__Health] = Location {
@@ -2745,6 +2929,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 600,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Slingshot__Ravine__Urn] = Location {
@@ -2754,6 +2939,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate] = Location {
@@ -2763,6 +2949,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask] = Location {
@@ -2772,6 +2959,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip] = Location {
@@ -2781,6 +2969,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Breach,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel] = Location {
@@ -2790,6 +2979,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel),
+        dest: SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn] = Location {
@@ -2799,6 +2989,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn] = Location {
@@ -2808,6 +2999,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip] = Location {
@@ -2817,6 +3009,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Breach,
         skippable: false,
     };
     locations[LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel] = Location {
@@ -2826,6 +3019,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel),
+        dest: SpotId::Menu__Breach_Map__Drone_Melee_Charge,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate] = Location {
@@ -2835,6 +3029,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button] = Location {
@@ -2844,6 +3039,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask] = Location {
@@ -2853,6 +3049,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Northeast__Vault__Item] = Location {
@@ -2862,6 +3059,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Carnelian__Vault__Item] = Location {
@@ -2871,6 +3069,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__West_Caverns__Cache__Item] = Location {
@@ -2880,6 +3079,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__West_Caverns__Bush__Item] = Location {
@@ -2889,6 +3089,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Door_Right__Health] = Location {
@@ -2898,6 +3099,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually] = Location {
@@ -2907,6 +3109,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually),
+        dest: SpotId::Giguna__Wasteland__Passage_Cache,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage] = Location {
@@ -2916,6 +3119,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage),
+        dest: SpotId::Giguna__Wasteland__Passage_Cache,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage] = Location {
@@ -2925,6 +3129,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage),
+        dest: SpotId::Giguna__Wasteland__Passage_Cache,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually] = Location {
@@ -2934,6 +3139,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually),
+        dest: SpotId::Giguna__Wasteland__Passage_East,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage] = Location {
@@ -2943,6 +3149,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage),
+        dest: SpotId::Giguna__Wasteland__Passage_East,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage] = Location {
@@ -2952,6 +3159,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage),
+        dest: SpotId::Giguna__Wasteland__Passage_East,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Upper_Cache__Flask] = Location {
@@ -2961,6 +3169,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask] = Location {
@@ -2970,6 +3179,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip] = Location {
@@ -2979,6 +3189,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel] = Location {
@@ -2988,6 +3199,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Giguna_Wasteland_Flask,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Switch_Approach__Boomerang_Switch] = Location {
@@ -2997,6 +3209,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Wasteland__Switch__Switch] = Location {
@@ -3006,6 +3219,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 100,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Base__Ruin__Item] = Location {
@@ -3015,6 +3229,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Giguna_Base__Table__News] = Location {
@@ -3024,6 +3239,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Ruins_East__Way_Up_High__Item] = Location {
@@ -3033,6 +3249,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Ruins_Center__Tablet__Item] = Location {
@@ -3042,6 +3259,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask] = Location {
@@ -3051,6 +3269,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 4000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Ruins_Top__Flask__Flask] = Location {
@@ -3060,6 +3279,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__West_Tower__Top__Tablet] = Location {
@@ -3069,6 +3289,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Far_Corner__Grass__Obscured_Item] = Location {
@@ -3078,6 +3299,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Helipad__Tablet_Ledge__Tablet] = Location {
@@ -3087,6 +3309,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Clouds__Cache__Item] = Location {
@@ -3096,6 +3319,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Lamassu__Deposit__Flask] = Location {
@@ -3105,6 +3329,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch] = Location {
@@ -3114,6 +3339,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch] = Location {
@@ -3123,6 +3349,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall] = Location {
@@ -3132,6 +3359,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall] = Location {
@@ -3141,6 +3369,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall),
+        dest: SpotId::Giguna__Dual_Path__Wall_Secret,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall] = Location {
@@ -3150,6 +3379,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall),
+        dest: SpotId::Giguna__Dual_Path__Wall_Secret,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Wall_Secret__Health] = Location {
@@ -3159,6 +3389,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch] = Location {
@@ -3168,6 +3399,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch] = Location {
@@ -3177,6 +3409,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder] = Location {
@@ -3186,6 +3419,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist] = Location {
@@ -3195,6 +3429,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
+        dest: SpotId::Giguna__Hard_Rock__Rock_Center,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist] = Location {
@@ -3204,6 +3439,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist),
+        dest: SpotId::Giguna__Hard_Rock__Rock_Center,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Center__Tablet] = Location {
@@ -3213,6 +3449,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder] = Location {
@@ -3222,6 +3459,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist] = Location {
@@ -3231,6 +3469,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
+        dest: SpotId::Giguna__Hard_Rock__Rock_Center,
         skippable: false,
     };
     locations[LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist] = Location {
@@ -3240,6 +3479,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist),
+        dest: SpotId::Giguna__Hard_Rock__Rock_Center,
         skippable: false,
     };
     locations[LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask] = Location {
@@ -3249,6 +3489,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gateway__Block_Left__Shockwave] = Location {
@@ -3258,6 +3499,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gateway__Block_Right__Shockwave] = Location {
@@ -3267,6 +3509,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gateway__Flask_Ledge__Item] = Location {
@@ -3276,6 +3519,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gateway__Button__Hit_Switch] = Location {
@@ -3285,6 +3529,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Labyrinth__Door_Ledge__Item] = Location {
@@ -3294,6 +3539,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Cache__Pit__Item] = Location {
@@ -3303,6 +3549,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Antechamber__Statue_Head__Tablet] = Location {
@@ -3312,6 +3559,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi] = Location {
@@ -3321,6 +3569,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(200),
         time: 9000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi] = Location {
@@ -3330,6 +3579,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 20000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward] = Location {
@@ -3339,6 +3589,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Gubi_Lair__Pedestal__Axe] = Location {
@@ -3348,6 +3599,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask] = Location {
@@ -3357,6 +3609,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask] = Location {
@@ -3366,6 +3619,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask] = Location {
@@ -3375,6 +3629,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Separator__Upper_Brick__Break_Bricks] = Location {
@@ -3384,6 +3639,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Separator__Upper_Brick__Break_Bricks),
+        dest: SpotId::Giguna__Separator__Lower_Brick,
         skippable: false,
     };
     locations[LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster] = Location {
@@ -3393,6 +3649,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster),
+        dest: SpotId::Giguna__Separator__Lower_Brick,
         skippable: false,
     };
     locations[LocationId::Giguna__Separator__Switch__Separation] = Location {
@@ -3402,6 +3659,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 10000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Giguna__Separator__Lower_Brick__Break_Bricks] = Location {
@@ -3411,6 +3669,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Separator__Lower_Brick__Break_Bricks),
+        dest: SpotId::Giguna__Separator__Upper_Brick,
         skippable: false,
     };
     locations[LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster] = Location {
@@ -3420,6 +3679,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster),
+        dest: SpotId::Giguna__Separator__Upper_Brick,
         skippable: false,
     };
     locations[LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item] = Location {
@@ -3429,6 +3689,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy] = Location {
@@ -3438,6 +3699,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(50),
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump] = Location {
@@ -3447,6 +3709,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: Some(ExitId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump),
+        dest: SpotId::Glacier_Breach__Control__Lower_Corner,
         skippable: false,
     };
     locations[LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note] = Location {
@@ -3456,6 +3719,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Item] = Location {
@@ -3465,6 +3729,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip] = Location {
@@ -3474,6 +3739,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel] = Location {
@@ -3483,6 +3749,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
         skippable: false,
     };
     locations[LocationId::Glacier__Revival__Pillar__Health] = Location {
@@ -3492,6 +3759,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab] = Location {
@@ -3501,6 +3769,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab),
+        dest: SpotId::Glacier__Dock_Outside__Ruins_Platform,
         skippable: false,
     };
     locations[LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab] = Location {
@@ -3510,6 +3779,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab),
+        dest: SpotId::Glacier__Dock_Outside__Ruins_Stairs,
         skippable: false,
     };
     locations[LocationId::Glacier__Compass_Room__Center__Table] = Location {
@@ -3519,6 +3789,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__West_14__Break_Rock] = Location {
@@ -3528,6 +3799,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 2000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through] = Location {
@@ -3537,6 +3809,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through),
+        dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster] = Location {
@@ -3546,6 +3819,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster),
+        dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock] = Location {
@@ -3555,6 +3829,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 2000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through] = Location {
@@ -3564,6 +3839,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through),
+        dest: SpotId::Glacier__The_Big_Drop__West_14,
         skippable: false,
     };
     locations[LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster] = Location {
@@ -3573,6 +3849,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster),
+        dest: SpotId::Glacier__The_Big_Drop__West_14,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown] = Location {
@@ -3582,6 +3859,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown),
+        dest: SpotId::Glacier__Revival__Save_Point,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Deep_Cache__Health] = Location {
@@ -3591,6 +3869,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock] = Location {
@@ -3600,6 +3879,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 2000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through] = Location {
@@ -3609,6 +3889,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through),
+        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster] = Location {
@@ -3618,6 +3899,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster),
+        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping] = Location {
@@ -3627,6 +3909,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 4000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through] = Location {
@@ -3636,6 +3919,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through),
+        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster] = Location {
@@ -3645,6 +3929,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster),
+        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         skippable: false,
     };
     locations[LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes] = Location {
@@ -3654,6 +3939,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress] = Location {
@@ -3663,6 +3949,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress),
+        dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
         skippable: false,
     };
     locations[LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress] = Location {
@@ -3672,6 +3959,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress),
+        dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
         skippable: false,
     };
     locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item] = Location {
@@ -3681,6 +3969,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip] = Location {
@@ -3690,6 +3979,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel] = Location {
@@ -3699,6 +3989,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
         skippable: false,
     };
     locations[LocationId::Glacier__Vertical_Room__Under_Switch__Switch] = Location {
@@ -3708,6 +3999,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Vertical_Room__Peak__Flask] = Location {
@@ -3717,6 +4009,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Boomerang_Room__Pedestal__Item] = Location {
@@ -3726,6 +4019,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Boomerang_Room__Pedestal__Switch] = Location {
@@ -3735,6 +4029,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab] = Location {
@@ -3744,6 +4039,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item] = Location {
@@ -3753,6 +4049,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Peak__Birds_Eye__Item] = Location {
@@ -3762,6 +4059,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape] = Location {
@@ -3771,6 +4069,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape),
+        dest: SpotId::Glacier__Apocalypse_Entry__Terminal,
         skippable: false,
     };
     locations[LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape] = Location {
@@ -3780,6 +4079,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape),
+        dest: SpotId::Glacier__Apocalypse_Entry__Terminal,
         skippable: false,
     };
     locations[LocationId::Glacier__Crystals__Top_Corner__Tablet] = Location {
@@ -3789,6 +4089,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Crystals__Lower_Corner__Item] = Location {
@@ -3798,6 +4099,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Hammonds_End__Hammond__Note] = Location {
@@ -3807,6 +4109,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Hammonds_End__Corner__Quick_Note] = Location {
@@ -3816,6 +4119,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Glacier__Hammonds_End__Between_Center_Doors__Health] = Location {
@@ -3825,6 +4129,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Bunker_Interior__Desk__Note] = Location {
@@ -3834,6 +4139,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Building_Interior__Entry__Remote_Urn] = Location {
@@ -3843,6 +4149,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip] = Location {
@@ -3852,6 +4159,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Interior__Building_Interior__Entry__Urn_Collection_Skip),
+        dest: SpotId::Ebih__Base_Camp__Building_Entry,
         skippable: false,
     };
     locations[LocationId::Interior__Building_Interior__Corner__Urn] = Location {
@@ -3861,6 +4169,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Tent_Interior__Desk__Note] = Location {
@@ -3870,6 +4179,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Garage__Boxes__Under_Boxes] = Location {
@@ -3879,6 +4189,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 2000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Ebih_Cave__Entry__Health] = Location {
@@ -3888,6 +4199,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__East_Desk__Notes] = Location {
@@ -3897,6 +4209,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Atop_Structure_Center__Remote_Flask] = Location {
@@ -3906,6 +4219,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Atop_Structure_East__Nearby_Flask] = Location {
@@ -3915,6 +4229,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Atop_Structure_East__Shockwave_Flask] = Location {
@@ -3924,6 +4239,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Catwalk__Flask] = Location {
@@ -3933,6 +4249,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Catwalk__Shockwave_Flask] = Location {
@@ -3942,6 +4259,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Catwalk__Flask_Collection_Skip] = Location {
@@ -3951,6 +4269,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Interior__Observatory__Catwalk__Flask_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Below_Catwalk__Shockwave_Flask_from_Below] = Location {
@@ -3960,6 +4279,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Observatory__Below_Catwalk__Boomerang_Steer_into_Flask] = Location {
@@ -3969,6 +4289,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Interior__Outpost_Interior__Bookshelf__Note] = Location {
@@ -3978,6 +4299,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item] = Location {
@@ -3987,6 +4309,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar_Breach__Hover_Room__Bottom__Item] = Location {
@@ -3996,6 +4319,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar_Breach__Worm_Rave__Corner__Item] = Location {
@@ -4005,6 +4329,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet] = Location {
@@ -4014,6 +4339,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Dagger_Altar__Weapon] = Location {
@@ -4023,6 +4349,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall] = Location {
@@ -4032,6 +4359,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall] = Location {
@@ -4041,6 +4369,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall),
+        dest: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall] = Location {
@@ -4050,6 +4379,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall),
+        dest: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item] = Location {
@@ -4059,6 +4389,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Ruined_Hallway_By_Well__Shockwave_Well] = Location {
@@ -4068,6 +4399,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Ruined_Hallway_Atop_Well__Well_Item] = Location {
@@ -4077,6 +4409,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__SW_Building_Top_Platform__Power_Core] = Location {
@@ -4086,6 +4419,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item] = Location {
@@ -4095,6 +4429,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Airy__Cavern_Side__Remote_Flask] = Location {
@@ -4104,6 +4439,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Airy__Cavern_Cache__Flask] = Location {
@@ -4113,6 +4449,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Airy__Cavern_Cache__Shockwave_Flask] = Location {
@@ -4122,6 +4459,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn] = Location {
@@ -4131,6 +4469,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip] = Location {
@@ -4140,6 +4479,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel] = Location {
@@ -4149,6 +4489,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Breach_Sight,
         skippable: false,
     };
     locations[LocationId::Irikar__Abandoned_Room__Corner_Core__Core] = Location {
@@ -4158,6 +4499,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup] = Location {
@@ -4167,6 +4509,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet] = Location {
@@ -4176,6 +4519,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam] = Location {
@@ -4185,6 +4529,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 20000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam] = Location {
@@ -4194,6 +4539,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(200),
         time: 10000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward] = Location {
@@ -4203,6 +4549,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health] = Location {
@@ -4212,6 +4559,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet] = Location {
@@ -4221,6 +4569,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask] = Location {
@@ -4230,6 +4579,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Midwest__Right_Platform_Start__Flask] = Location {
@@ -4239,6 +4589,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Midwest__Tablet_Platform__Tablet] = Location {
@@ -4248,6 +4599,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Lamassu__Desk__Item] = Location {
@@ -4257,6 +4609,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Beach_Save__Top_Platform__Urn] = Location {
@@ -4266,6 +4619,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Irikar__Beach__Cache__Item] = Location {
@@ -4275,6 +4629,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1] = Location {
@@ -4284,6 +4639,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2] = Location {
@@ -4293,6 +4649,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(2),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3] = Location {
@@ -4302,6 +4659,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4] = Location {
@@ -4311,6 +4669,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5] = Location {
@@ -4320,6 +4679,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(6),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade] = Location {
@@ -4329,6 +4689,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1] = Location {
@@ -4338,6 +4699,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2] = Location {
@@ -4347,6 +4709,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3] = Location {
@@ -4356,6 +4719,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(6),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1] = Location {
@@ -4365,6 +4729,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2] = Location {
@@ -4374,6 +4739,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3] = Location {
@@ -4383,6 +4749,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(6),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1] = Location {
@@ -4392,6 +4759,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2] = Location {
@@ -4401,6 +4769,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3] = Location {
@@ -4410,6 +4779,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(6),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1] = Location {
@@ -4419,6 +4789,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2] = Location {
@@ -4428,6 +4799,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3] = Location {
@@ -4437,6 +4809,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1] = Location {
@@ -4446,6 +4819,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2] = Location {
@@ -4455,6 +4829,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3] = Location {
@@ -4464,6 +4839,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(4),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1] = Location {
@@ -4473,6 +4849,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2] = Location {
@@ -4482,6 +4859,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3] = Location {
@@ -4491,6 +4869,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1] = Location {
@@ -4500,6 +4879,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(2),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2] = Location {
@@ -4509,6 +4889,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1] = Location {
@@ -4518,6 +4899,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2] = Location {
@@ -4527,6 +4909,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3] = Location {
@@ -4536,6 +4919,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1] = Location {
@@ -4545,6 +4929,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2] = Location {
@@ -4554,6 +4939,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3] = Location {
@@ -4563,6 +4949,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1] = Location {
@@ -4572,6 +4959,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(1),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2] = Location {
@@ -4581,6 +4969,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(3),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3] = Location {
@@ -4590,6 +4979,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Flasks(5),
         time: 1000,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Inner_Dais__Item] = Location {
@@ -4599,6 +4989,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate] = Location {
@@ -4608,6 +4999,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 250,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall] = Location {
@@ -4617,6 +5009,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall] = Location {
@@ -4626,6 +5019,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall] = Location {
@@ -4635,6 +5029,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall] = Location {
@@ -4644,6 +5039,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall] = Location {
@@ -4653,6 +5049,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall] = Location {
@@ -4662,6 +5059,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Upper_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall] = Location {
@@ -4671,6 +5069,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall] = Location {
@@ -4680,6 +5079,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall] = Location {
@@ -4689,6 +5089,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall] = Location {
@@ -4698,6 +5099,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall] = Location {
@@ -4707,6 +5109,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall] = Location {
@@ -4716,6 +5119,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall] = Location {
@@ -4725,6 +5129,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall] = Location {
@@ -4734,6 +5139,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__West_Entrance__Sand__Refill] = Location {
@@ -4743,6 +5149,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Siege_Corridor__Western_Cache__Core] = Location {
@@ -4752,6 +5159,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Siege_Corridor__Center_Box__Box] = Location {
@@ -4761,6 +5169,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 1500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn] = Location {
@@ -4770,6 +5179,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Siege_Corridor__Pond__Item] = Location {
@@ -4779,6 +5189,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask] = Location {
@@ -4788,6 +5199,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall] = Location {
@@ -4797,6 +5209,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall] = Location {
@@ -4806,6 +5219,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall] = Location {
@@ -4815,6 +5229,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall] = Location {
@@ -4824,6 +5239,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_East,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall] = Location {
@@ -4833,6 +5249,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall] = Location {
@@ -4842,6 +5259,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall] = Location {
@@ -4851,6 +5269,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall] = Location {
@@ -4860,6 +5279,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall),
+        dest: SpotId::Uhrum__Waterfalls__Barrier_West,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block] = Location {
@@ -4869,6 +5289,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__Above_Block__Block] = Location {
@@ -4878,6 +5299,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__East_26__Block] = Location {
@@ -4887,6 +5309,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet] = Location {
@@ -4896,6 +5319,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn] = Location {
@@ -4905,6 +5329,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 6500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn] = Location {
@@ -4914,6 +5339,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip] = Location {
@@ -4923,6 +5349,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip),
+        dest: SpotId::Menu__Warp_Only__Kiengir,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel] = Location {
@@ -4932,6 +5359,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: Some(ExitId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel),
+        dest: SpotId::Menu__Kiengir_Map__Anuman,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block] = Location {
@@ -4941,6 +5369,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block] = Location {
@@ -4950,6 +5379,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Energy(100),
         time: 3500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet] = Location {
@@ -4959,6 +5389,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 0,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
     locations[LocationId::Uhrum__Annuna_Corridor__Statue__Item] = Location {
@@ -4968,6 +5399,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         price: Currency::Free,
         time: 5500,
         exit_id: None,
+        dest: SpotId::None,
         skippable: false,
     };
 }

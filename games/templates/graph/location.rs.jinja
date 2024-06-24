@@ -28,6 +28,7 @@ pub struct Location {
     canonical: CanonId,
     time: u32,
     exit_id: Option<ExitId>,
+    dest: SpotId,
     price: Currency,
     skippable: bool,
 }
@@ -89,12 +90,14 @@ impl world::Location for Location {
     type LocId = LocationId;
     type CanonId = CanonId;
     type ExitId = ExitId;
+    type SpotId = SpotId;
 
     fn id(&self) -> LocationId { self.id }
     fn item(&self) -> Item { self.item }
     fn canon_id(&self) -> CanonId { self.canonical }
     fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
     fn skippable(&self) -> bool { self.skippable }
+    fn dest(&self) -> SpotId { self.dest }
 }
 
 impl Location {
@@ -112,6 +115,7 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         {% if loc.to is defined %}{{ price(loc.item_price, loc.item_costs or default_price_type) }}{% else %}{{ price(loc.price, loc.costs or default_price_type) }}{% endif %}
         time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
         exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
+        dest: SpotId::{% if loc.to is defined %}{{ loc|get_exit_target }}{% else %}None{% endif %},
         skippable: false,
     };
 %% endfor
