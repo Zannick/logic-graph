@@ -187,7 +187,7 @@ Warps are always defined globally in `Game.yaml` and are available from any **Sp
 * **before**: An optional effect that occurs before the player's position is changed (and can thus reference the old spot), as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **after**: An optional effect that occurs after the player's position is changed, as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **loads**: If true, after executing this Warp, all context **load** rules will be executed.
-* **base_movement**: If true, this Warp is treated as though it is always available for the purposes of time remaining estimation. Only recommended for Menu Warps that are the only method of accessing some locations.
+* **bulk_exit**: If true, this Warp is treated as though it is always available for the purposes of time remaining estimation. Only recommended for Menu Warps that are the only method of accessing some locations.
 * **penalties**: Additional time penalties in certain cases; see [Common attributes](#common-attributes).
 
 ### Local connections

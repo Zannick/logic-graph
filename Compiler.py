@@ -1140,7 +1140,7 @@ class GameLogic(object):
 
     @cached_property
     def base_distances(self):
-        """Fully-connected distances, including 'base_movement' warps"""
+        """Fully-connected distances, including 'bulk_exit' warps"""
         table = dict(self.basic_distances)
 
         def _update(key, val):
@@ -1149,12 +1149,12 @@ class GameLogic(object):
             else:
                 table[key] = val
 
-        # every warp with base_movement: true
+        # every warp with bulk_exit: true
         warp_dests = []
         examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
                                    self.data_types, self.data_defaults, self.data_values)
         for w in self.warps.values():
-            if w.get('base_movement') and w['to'][0] != '^':
+            if w.get('bulk_exit') and w['to'][0] != '^':
                 warp_dests.append((construct_id(w['to']), w['time']))
         for s in self.spots():
             for w, t in warp_dests:

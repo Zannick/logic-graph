@@ -205,7 +205,7 @@ warps:  # MARK: warps
     req: NOT WITHIN `Menu` and ^flasks > 0
     to: Menu > Upgrade Menu > Physiology
     before: ^last = ^position
-    base_movement: true
+    bulk_exit: true
   exit_menu:
     time: 0.2
     req: WITHIN `Menu > Upgrade Menu`
