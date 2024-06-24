@@ -18,7 +18,7 @@ The world of the game is represented by these main components.
     *   **Exit**: a graph edge detailing what a player needs to move from one **Spot** to another and how long it takes to move in that way.
     *   **Local connection**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
     *   **Warp**: a travel option that can be initiated from anywhere under certain conditions to a fixed or changeable **Spot**.
-*   **Hybrid**: describes both a **Location** and an **Exit**. Essentially an edge that can be traversed multiple times where the player collects an **Item** on the first traversal.
+*   **Hybrid**: describes a **Location** with a destination. As they are essentially **Locations**, they can only be visited once.
 *   **Action**: a thing the player can do that makes temporary changes to the player or the world, and can be done multiple times (resources and abilities permitting). Some of these can be done anywhere, but most will be defined inside a **Spot**.
 
 ### The State
@@ -92,7 +92,7 @@ The file is considered a dictionary, where these are the allowed keys:
 * **base_movements**: A list of [Movements](#movements). **Required** to have if you want to use movement calculations. Base movements beyond the first may have `data` restrictions based on Place features.
 * **movements**: A dictionary of named [Movements](#movements) that may have requirements. These may be used in movement calculations.
 * **exit_movements**: A dictionary of named [Movements](#movements). These are used in **Exits** to automatically calculate the time traversing the Exit would take, and not in local movement calculations.
-* **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag `default` represents the fallback if there is no tag and no time, and the tag `hybrid_item_default` represents the fallback for **item_time** in Hybrids.
+* **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to most anything that would have a time value (**Locations**, **Exits**, **Actions**, and **Hybrids**) and if it has no time value, the value defined here is used. The tag `default` represents the fallback if there is no tag and no time.
 * **warps**: A dictionary of [Warps](#warps).
 * **actions**: A list of the global [Actions](#actions).
 * **helpers**: A dictionary of logic helpers. The names of keys must start with `$`. If the helper is not meant to evaluate to a boolean, its type must be specified by adding a `:` followed by the Logic rule name. Helpers can accept arguments, which must be defined in parentheses after the type (if mentioned), with their own types included after a `:`. See the [Logic grammar reference](#logic-grammar-reference) below.
@@ -150,9 +150,9 @@ Spots are only defined within **Areas**. They may have the following fields:
 * **data**, **graph_offset**, **graph_attrs**: Same as in **Areas** but applying/overriding at this **Spot** instead. 
 * **coord**: A list of coordinates, relative to other Spots in the same **Area**. Only two dimensions are presently supported. Floats are allowed.
 * **local**: A list of [Local connections](#local-connections) from this Spot.
-* **locations**: A list of [Locations](#locations) accessible from this Spot.
+* **locations**: A list of [Locations](#locations) and [Hybrids](#hybrids) accessible from this Spot.
 * **exits**: A list of [Exits](#exits) from this Spot.
-* **hybrid**: A list of [Hybrid exit-locations](#hybrids) from this Spot.
+* **hybrid**: A list of [Locations](#locations) and [Hybrids](#hybrids) accessible from this Spot. Locations and Hybrids can go in either section.
 * **actions**: A list of [Actions](#actions) available at this Spot.
 
 ### Movements
@@ -173,7 +173,7 @@ Any field defined in that default movement is implicitly available for other mov
 
 The availability of non-base movements must be evaluated during the search, and thus having a large number of them can negatively affect analyzer performance.
 
-Lastly, *Exit movements* are movements that are only used explicitly by **Exits** and **Hybrids**; they do not define **req**. Here you can define movements that ignore default movement values by setting **ignore_base** to `true`.
+Lastly, *Exit movements* are movements that are only used explicitly by **Exits**, **Hybrids**, and **Actions**; they do not define **req**. Here you can define movements that ignore default movement values by setting **ignore_base** to `true`.
 
 ### Warps
 
@@ -218,7 +218,7 @@ Locations are always defined in a **Spot**. They may have the following fields:
 
 Exits are always defined in a **Spot**. They may have the following fields:
 
-* **to**: The destination **Spot**. If the Spot is in the same Region, the Region may be omitted, e.g. `to: Main Area > Save Point`. If the Spot is in the same Area, both the Region and Area may be omitted, e.g. `to: Ledge`.
+* **to**: The destination **Spot**. If the Spot is in the same Region, the Region may be omitted, e.g. `to: Main Area > Save Point`. If the Spot is in the same Area, both the Region and Area may be omitted, e.g. `to: Ledge`. The destination may also be a data field instead, e.g. `to: ^map_spot`.
 * **req**: The **requirements** to take the Exit, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **price**: The numerical value of the **Currency** required to be spent. If unset, taking the Exit is considered free.
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
@@ -232,13 +232,7 @@ Exits are always defined in a **Spot**. They may have the following fields:
 
 ### Hybrids
 
-Hybrids are always defined in a **Spot**. They have the same fields as both Locations and Exits with the following caveats:
-
-* **req** is used for both **Location** and **Exit**.
-* **price** and **costs** refer to the **Exit**, and as such will need to be paid whenever the Exit is used. To set a cost of taking the item separately, use **item_price** and **item_costs**. If those are left unset, the Location is considered free (other than the Location visit).
-* **time** refers to the **Exit**. To set a time for the **Location** access, use **item_time**.
-* **tags** sets a default for the Exit **time**, where the default is otherwise given by the `time` tag `default`.
-* **item_tags** sets a default for the Location **item_time**, where the default is otherwise given by the `time` tag `hybrid_item_default`.
+Hybrids are always defined in a **Spot**. They are Locations but can have the **to** field like an **Exit**.
 
 ### Actions
 
@@ -256,7 +250,7 @@ Actions are always defined either in a **Spot** or globally in `Game.yaml`. They
 
 If the action moves the player, it may have the following fields:
 
-* **to**: The destination must be set here rather than in the `do` effect.
+* **to**: The destination must be set here rather than in the `do` effect. This is the same as the **to** field in **Exits**.
 * **movement**: A single movement type (or `base`), which is used to calculate the time as though the action is a local movement between the two spots. Does not currently support **thru**. If **time** is set, this has no effect.
 * **jumps**: Similar to **jumps** for [local connections](#local-connections), a single number used to calculate as the number of jumps necessary to traverse the **y** distance. Only considered when using **movement** to set time.
 * **jumps_down**: Similar to **jumps_down** for [local connections](#local-connections), a single number used as a delay factor for falling down the **y** distance. Only considered when using **movement** to set time.

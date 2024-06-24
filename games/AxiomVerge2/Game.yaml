@@ -115,7 +115,6 @@ exit_movements:  # MARK: exit_movements
 
 time:  # MARK: time
   default: 1
-  hybrid_item_default: 0
   ## Pickups
   urn: 5.5
   flask: 5.5
