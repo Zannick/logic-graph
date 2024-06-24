@@ -374,7 +374,7 @@ where
             static ref GET: Regex = Regex::new(
                 // Get
                 // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
-                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>[^=]*)(?: ==> (?P<dest>.*$))").unwrap();
+                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>[^=]*)(?: ==> (?P<dest>.*$))?").unwrap();
             static ref MOVE: Regex = Regex::new(
                 // Move
                 //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)

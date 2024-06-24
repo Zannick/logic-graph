@@ -82,7 +82,7 @@ tests:
       ! Do Move Portal Here
         PortalWarp
         Move... to Amagi Breach > East Ruins > Plinth
-      * Collect Breach_Exit from Amagi Breach > East Ruins > Plinth > Urn
+      * Collect Exit_Breach from Amagi Breach > East Ruins > Plinth > Urn
         ExitBreachWarp
 
   - name: Upper Lake health
