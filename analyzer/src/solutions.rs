@@ -56,7 +56,7 @@ where
     let mut i = 0;
     for h in history.iter() {
         match h {
-            History::G(item, _) | History::H(item, _) => {
+            History::G(item, _) | History::V(item, ..) => {
                 if world.should_draw_spot(ctx.get().position()) {
                     recent.push(format!("{}", item));
                     spots.push((format!("{:?}", ctx.get().position()), i, recent.join("\\n")));
@@ -264,7 +264,7 @@ where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         let loc_history: Vec<HistoryAlias<T>> =
@@ -332,7 +332,7 @@ where
             .history
             .iter()
             .filter_map(|h| {
-                if matches!(h, History::G(_, _) | History::H(_, _)) {
+                if matches!(h, History::G(..) | History::V(..)) {
                     Some(*h)
                 } else {
                     None

@@ -22,7 +22,6 @@ pub struct Exit {
     time: u32,
     dest: SpotId,
     price: Currency,
-    loc_id: Option<LocationId>,
 }
 
 impl world::Accessible for Exit {
@@ -76,12 +75,10 @@ impl world::Accessible for Exit {
 impl world::Exit for Exit {
     type ExitId = ExitId;
     type SpotId = SpotId;
-    type LocId = LocationId;
 
     fn id(&self) -> ExitId { self.id }
     fn dest(&self) -> SpotId { self.dest }
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
-    fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
 
     fn always(id: ExitId) -> bool {
         match id {
@@ -113,7 +110,6 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         time: {{ (ex.time * 1000)|int }},
         dest: SpotId::{{ ex|get_exit_target }},
         {{ price(ex.price, ex.costs or default_price_type) }}
-        loc_id: None,
     };
 %% endfor
 }

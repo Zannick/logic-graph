@@ -71,18 +71,12 @@ pub fn expand_exits_astar<W, T, E, H, P>(
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {
     let ctx = el.ctx();
     for exit in world.get_spot_exits(ctx.get().position()) {
-        // Disallow unvisited hybrid exits to avoid violating the contract of not visiting locations
-        if let Some(loc_id) = exit.loc_id() {
-            if !ctx.get().visited(*loc_id) {
-                continue;
-            }
-        }
         if exit.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.exit(world, exit);
@@ -176,7 +170,7 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,

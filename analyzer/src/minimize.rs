@@ -21,7 +21,7 @@ pub fn pinpoint_minimize<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
@@ -38,7 +38,7 @@ fn get_spot_index_map<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut replay = ContextWrapper::new(startctx.clone());
@@ -92,7 +92,7 @@ pub fn mutate_spot_revisits<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut spot_map = get_spot_index_map(world, startctx, solution.clone());
@@ -189,15 +189,6 @@ where
                 max_states,
                 shortest_paths,
             ),
-            History::H(.., exit_id) => access_location_after_actions(
-                world,
-                rreplay,
-                world.get_exit(*exit_id).loc_id().unwrap(),
-                max_time,
-                max_depth,
-                max_states,
-                shortest_paths,
-            ),
             _ => return None,
         }
         .ok()?;
@@ -249,7 +240,7 @@ pub fn mutate_collection_steps<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     // [(history index, history step, community)]
@@ -261,8 +252,9 @@ where
                     r,
                     h,
                     match h {
-                        History::G(_, loc_id) => W::location_community(loc_id),
-                        History::H(_, exit_id) => W::exit_community(exit_id),
+                        History::G(_, loc_id) | History::V(_, loc_id, _) => {
+                            W::location_community(loc_id)
+                        }
                         History::A(act_id) => W::action_community(act_id),
                         _ => 0,
                     },
@@ -450,7 +442,7 @@ pub fn trie_minimize<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut replay = ContextWrapper::new(startctx.clone());
@@ -497,7 +489,7 @@ pub fn trie_search<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut queue = VecDeque::from(trie.lookup(ctx.get()));

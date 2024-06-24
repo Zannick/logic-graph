@@ -22,18 +22,13 @@ pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
+    L: Location<Context = T>,
     E: Exit<Context = T>,
 {
-    world.get_spot_locations(ctx.position()).iter().any(|loc| {
-        ctx.todo(loc)
-            && loc.can_access(ctx, world)
-            && if let Some(exit_id) = loc.exit_id() {
-                world.get_exit(*exit_id).can_access(ctx, world)
-            } else {
-                true
-            }
-    })
+    world
+        .get_spot_locations(ctx.position())
+        .iter()
+        .any(|loc| ctx.todo(loc) && loc.can_access(ctx, world))
 }
 
 /// Check whether there are available actions at this position, including global actions.
@@ -41,7 +36,7 @@ pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
+    L: Location<Context = T>,
     E: Exit<Context = T>,
 {
     world
@@ -223,7 +218,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
@@ -343,7 +338,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
@@ -471,7 +466,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Accessible<Context = T>,
@@ -594,8 +589,8 @@ pub fn access_location_after_actions<W, T, E, L>(
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency, LocId = L>,
-    W::Location: Location<Context = T, LocId = L, ExitId = E::ExitId>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T, LocId = L>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     L: Id,
@@ -612,7 +607,7 @@ where
         ctx,
         spot,
         loc,
-        ContextWrapper::visit_maybe_exit,
+        ContextWrapper::visit,
         max_time,
         max_depth,
         max_states,
@@ -633,7 +628,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = E::LocId>,
+    W::Location: Location<Context = T>,
     W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
@@ -662,7 +657,7 @@ pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
+    L: Location<Context = T>,
     E: Exit<Context = T>,
 {
     world
@@ -682,7 +677,7 @@ pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: u32) -> Result<(), Cont
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let res = greedy_search_from(world, ctx, max_time);
@@ -696,7 +691,7 @@ pub fn can_win_just_items<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<(T::
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();
@@ -717,7 +712,7 @@ pub fn can_win_just_locations<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();

@@ -58,7 +58,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
+    E: Exit<Context = T, Currency = L::Currency>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time, false);
@@ -73,7 +73,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
+    E: Exit<Context = T, Currency = L::Currency>,
 {
     let mut result = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
@@ -81,7 +81,7 @@ where
             // Get the item and mark the location visited.
             // If it's a hybrid, also move along the exit.
             let mut newctx = ctx.clone();
-            newctx.visit_maybe_exit(world, loc);
+            newctx.visit(world, loc);
             result.push(newctx);
         }
     }
@@ -92,7 +92,7 @@ pub fn activate_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Vec<C
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, Context = T>,
+    L: Location<Context = T>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut result = Vec::new();
@@ -255,7 +255,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
+    E: Exit<Context = T, Currency = L::Currency>,
 {
     pub fn new<P>(
         world: &'a W,

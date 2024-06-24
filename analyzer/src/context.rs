@@ -132,7 +132,7 @@ pub trait Ctx:
     where
         Self::World: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = Self>,
-        E: Exit<Context = Self, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = Self, Currency = <L as Accessible>::Currency>,
         Wp: Warp<
             SpotId = <E as Exit>::SpotId,
             Context = Self,
@@ -170,27 +170,6 @@ pub trait Ctx:
                 if spot_id == self.position() && exit.observe_access(self, world, observer) {
                     observer.observe_on_entry(self, exit.dest(), world);
                     true
-                } else {
-                    false
-                }
-            }
-            History::H(item, exit_id) => {
-                let spot_id = world.get_exit_spot(exit_id);
-                let exit = world.get_exit(exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    let loc = world.get_location(*loc_id);
-                    if spot_id == self.position()
-                        && exit.observe_access(self, world, observer)
-                        && loc.item() == item
-                        && loc.observe_access(self, world, observer)
-                    {
-                        observer.observe_visit(*loc_id);
-                        observer.observe_collect(self, item, world);
-                        observer.observe_on_entry(self, exit.dest(), world);
-                        true
-                    } else {
-                        false
-                    }
                 } else {
                     false
                 }
@@ -253,8 +232,6 @@ pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
     V(ItemId, LocId, SpotId),
     // Exit
     E(ExitId),
-    // GetExit
-    H(ItemId, ExitId),
     // Local movement
     L(SpotId),
     // Action
@@ -291,9 +268,6 @@ where
                 write!(f, "* Collect {} from {} ==> {}", item, loc, dest)
             }
             History::E(exit) => write!(f, "  Take exit {}", exit),
-            History::H(item, exit) => {
-                write!(f, "* Take hybrid exit {}, collecting {}", exit, item)
-            }
             History::L(spot) => write!(f, "  Move to {}", spot),
             History::A(action) => write!(f, "! Do {}", action),
             History::C(spot, ..) => write!(f, "  Move... to {}", spot),
@@ -326,10 +300,6 @@ where
                 dest.hash(state);
             }
             History::E(exit) => {
-                exit.hash(state);
-            }
-            History::H(item, exit) => {
-                item.hash(state);
                 exit.hash(state);
             }
             History::L(spot) => {
@@ -379,10 +349,11 @@ where
                 // Move
                 //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)
                 r"(?:[Mm]ove(?:\.\.\.)? to |Take exit )(?P<exit>.* ==> .*$)").unwrap();
+            // TODO: remove
             static ref MOVE_GET: Regex = Regex::new(
                 // MoveGet
                 // * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
-                r"(?:\* )?Take hybrid exit (?P<exit>.*?)(?:, collecting (?P<item>.*$))").unwrap();
+                r"(?:\* )?Take hybrid exit (?P<loc>[^=]*)(?:, collecting (?P<item>.*$))").unwrap();
             static ref MOVE_LOCAL: Regex = Regex::new(
                 // MoveLocal
                 //   Move... to Antarctica > Power Room > Switch
@@ -415,11 +386,11 @@ where
             let exit = extract_match(&cap, "exit", s)?;
             Ok(History::E(<E as FromStr>::from_str(exit)?))
         } else if let Some(cap) = MOVE_GET.captures(s) {
-            let exit = extract_match(&cap, "exit", s)?;
+            let loc = extract_match(&cap, "loc", s)?;
             let item = extract_match(&cap, "item", s).unwrap_or_default();
-            Ok(History::H(
+            Ok(History::G(
                 <I as FromStr>::from_str(item).unwrap_or_default(),
-                <E as FromStr>::from_str(exit)?,
+                <L as FromStr>::from_str(loc)?,
             ))
         } else if let Some(cap) = MOVE_LOCAL.captures(s) {
             let spot = extract_match(&cap, "spot", s)?;
@@ -562,10 +533,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(loc.price());
         if loc.dest() != Default::default() {
             self.ctx.set_position(loc.dest(), world);
+            self.append_history(History::V(loc.item(), loc.id(), loc.dest()), dur);
+        } else {
+            self.append_history(History::G(loc.item(), loc.id()), dur);
         }
         self.elapse(dur);
         self.time_since_visit = 0;
-        self.append_history(History::G(loc.item(), loc.id()), dur);
     }
 
     pub fn exit<W, E>(&mut self, world: &W, exit: &E)
@@ -637,42 +610,6 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::W(warp.id(), dest), dur);
     }
 
-    pub fn visit_maybe_exit<W, L, E>(&mut self, world: &W, loc: &L)
-    where
-        W: World<Exit = E, Location = L>,
-        T: Ctx<World = W>,
-        L: Location<Context = T>,
-        E: Exit<Context = T, Currency = L::Currency, ExitId = L::ExitId>,
-    {
-        if let Some(exit_id) = loc.exit_id() {
-            let exit = world.get_exit(*exit_id);
-            self.visit_exit(world, loc, exit);
-        } else {
-            self.visit(world, loc);
-        }
-    }
-
-    pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
-    where
-        W: World<Exit = E, Location = L>,
-        T: Ctx<World = W>,
-        L: Location<Context = T>,
-        E: Exit<Context = T, Currency = L::Currency>,
-    {
-        let loc_dur = loc.time(&self.ctx, world);
-        let exit_dur = exit.time(&self.ctx, world);
-        self.ctx.visit(loc.id());
-        self.ctx.spend(loc.price());
-        self.ctx.collect(loc.item(), world);
-        self.elapse(loc_dur);
-        self.ctx.spend(exit.price());
-        self.ctx.set_position(exit.dest(), world);
-        self.elapse(exit_dur);
-        self.time_since_visit = 0;
-
-        self.append_history(History::H(loc.item(), exit.id()), loc_dur + exit_dur);
-    }
-
     pub fn activate<W, A>(&mut self, world: &W, action: &A)
     where
         W: World<Action = A>,
@@ -691,7 +628,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         match step {
@@ -712,20 +649,6 @@ impl<T: Ctx> ContextWrapper<T> {
                 let spot_id = world.get_exit_spot(exit_id);
                 let exit = world.get_exit(exit_id);
                 spot_id == self.ctx.position() && exit.can_access(&self.ctx, world)
-            }
-            History::H(item, exit_id) => {
-                let spot_id = world.get_exit_spot(exit_id);
-                let exit = world.get_exit(exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    let loc = world.get_location(*loc_id);
-                    spot_id == self.ctx.position()
-                        && exit.can_access(&self.ctx, world)
-                        && loc.item() == item
-                        && !self.ctx.visited(loc.id())
-                        && loc.can_access(&self.ctx, world)
-                } else {
-                    false
-                }
             }
             History::L(spot_id) => {
                 let movement_state = self.ctx.get_movement_state(world);
@@ -758,7 +681,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         // We skip checking validity ahead of time, i.e. can_access.
@@ -785,22 +708,6 @@ impl<T: Ctx> ContextWrapper<T> {
             History::E(exit_id) => {
                 let exit = world.get_exit(exit_id);
                 self.exit(world, exit);
-            }
-            History::H(item, exit_id) => {
-                let exit = world.get_exit(exit_id);
-                let loc =
-                    world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
-                // We assert that if a loc is skippable that its item is never checked in any rule in this world+settings.
-                if loc.skippable() {
-                    self.exit(world, exit);
-                } else {
-                    self.visit_exit(world, loc, exit);
-                }
-                assert!(
-                    loc.item() == item,
-                    "Invalid replay: visit-exit {:?}",
-                    exit_id
-                )
             }
             History::L(spot) => {
                 let movement_state = self.ctx.get_movement_state(world);
@@ -840,7 +747,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         match step {
@@ -848,9 +755,7 @@ impl<T: Ctx> ContextWrapper<T> {
             History::G(_, loc_id) | History::V(_, loc_id, _) => {
                 world.get_location(loc_id).explain(self.get(), world)
             }
-            History::E(exit_id) | History::H(_, exit_id) => {
-                world.get_exit(exit_id).explain(self.get(), world)
-            }
+            History::E(exit_id) => world.get_exit(exit_id).explain(self.get(), world),
             History::L(spot) => {
                 let movement_state = self.ctx.get_movement_state(world);
                 let time = self.ctx.local_travel_time(movement_state, spot);
@@ -896,7 +801,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         assert!(
@@ -919,7 +824,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         if self.can_replay(world, step) {
@@ -940,7 +845,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         for &step in steps {
@@ -957,7 +862,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         if self.can_replay(world, step) {
@@ -975,7 +880,7 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         for &step in steps {
@@ -1020,7 +925,7 @@ where
 {
     let vec: Vec<String> = history
         .filter_map(|h| match h {
-            History::G(..) | History::H(..) => Some(h.to_string()),
+            History::G(..) | History::V(..) => Some(h.to_string()),
             _ => None,
         })
         .collect::<Vec<String>>();
@@ -1049,7 +954,7 @@ where
         })
         .into_iter()
         .map(|h| match h {
-            History::G(..) | History::H(..) | History::A(..) | History::V(..) => h.to_string(),
+            History::G(..) | History::A(..) | History::V(..) => h.to_string(),
             History::E(e) => format!("  Move... to {}", e),
             History::L(s) | History::C(s, ..) => {
                 format!("  Move... to {}", s)
@@ -1074,7 +979,7 @@ where
     I: Iterator<Item = HistoryAlias<T>>,
 {
     history.filter(|h| match h {
-        History::G(..) | History::H(..) => true,
+        History::G(..) | History::V(..) => true,
         History::A(act_id) => W::action_has_visit(*act_id),
         _ => false,
     })
@@ -1090,7 +995,7 @@ where
     I: Iterator<Item = HistoryAlias<T>>,
 {
     history.enumerate().filter(|h| match h.1 {
-        History::G(..) | History::H(..) => true,
+        History::G(..) | History::V(..) => true,
         History::A(act_id) => W::action_has_visit(act_id),
         _ => false,
     })
@@ -1109,7 +1014,7 @@ where
 {
     let mut previ = 0;
     history.enumerate().filter_map(move |(i, h)| match h {
-        History::G(..) | History::H(..) => {
+        History::G(..) | History::V(..) => {
             let r = previ..=i;
             previ = i + 1;
             Some((r, h))
@@ -1132,7 +1037,7 @@ where
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
     Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     I: Iterator<Item = HistoryAlias<T>>,
 {

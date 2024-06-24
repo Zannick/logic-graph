@@ -67,7 +67,7 @@ pub fn record_observations<W, T, L, E, Wp>(
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
     Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
@@ -83,7 +83,7 @@ pub fn record_observations<W, T, L, E, Wp>(
             .history
             .iter()
             .position(|h| match h {
-                History::G(..) | History::H(..) => {
+                History::G(..) | History::V(..) => {
                     pcount += 1;
                     pcount == min_relevant
                 }
@@ -94,7 +94,7 @@ pub fn record_observations<W, T, L, E, Wp>(
         solution
             .history
             .iter()
-            .position(|h| matches!(h, History::G(..) | History::H(..)))
+            .position(|h| matches!(h, History::G(..) | History::V(..)))
             .unwrap_or(1)
     };
 
@@ -130,7 +130,7 @@ pub fn debug_observations<W, T, L, E, Wp>(
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
     Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
@@ -146,7 +146,7 @@ pub fn debug_observations<W, T, L, E, Wp>(
             .history
             .iter()
             .position(|h| match h {
-                History::G(..) | History::H(..) => {
+                History::G(..) | History::V(..) => {
                     pcount += 1;
                     pcount == min_relevant
                 }
@@ -157,7 +157,7 @@ pub fn debug_observations<W, T, L, E, Wp>(
         solution
             .history
             .iter()
-            .position(|h| matches!(h, History::G(..) | History::H(..)))
+            .position(|h| matches!(h, History::G(..) | History::V(..)))
             .unwrap_or(1)
     };
 

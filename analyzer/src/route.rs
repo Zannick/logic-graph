@@ -112,33 +112,6 @@ where
                     .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
             }
         }
-        History::H(item, exit_id) => {
-            let spot_id = world.get_exit_spot(exit_id);
-            if pos != spot_id {
-                ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
-                    format!(
-                        "Could not complete route step {}: couldn't reach {} from {}\n{}",
-                        i, spot_id, pos, s
-                    )
-                })?;
-            }
-
-            if item == Default::default() {
-                let exit = world.get_exit(exit_id);
-                if let Some(loc_id) = exit.loc_id() {
-                    let item = world.get_location(*loc_id).item();
-                    ctx.try_replay(world, History::H(item, exit_id))
-                        .map_err(|s| {
-                            format!("Could not complete route step {} {}:\n{}", i, h, s)
-                        })?;
-                } else {
-                    return Err(format!("Not a hybrid exit: {}", exit_id));
-                }
-            } else {
-                ctx.try_replay(world, h)
-                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
-            }
-        }
         History::E(exit_id) => {
             let exit = world.get_exit(exit_id);
             ctx = move_to(world, ctx, exit.dest(), shortest_paths).map_err(|s| {

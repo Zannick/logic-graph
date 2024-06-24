@@ -32,7 +32,7 @@ pub struct ContextScorer<'w, W, S, LI, EI, A> {
 impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, EdgeId<W>, A>
 where
     W: World<Location = L, Exit = E>,
-    L: Location<ExitId = E::ExitId>,
+    L: Location,
     E: Exit<SpotId = S>,
     A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
     S: Id + Default,
@@ -254,7 +254,7 @@ impl<'w, W, S, L, E>
     ContextScorer<'w, W, S, L::LocId, EdgeId<W>, ShortestPaths<NodeId<W>, EdgeId<W>>>
 where
     W: World<Location = L, Exit = E>,
-    L: Location<ExitId = E::ExitId>,
+    L: Location,
     E: Exit<SpotId = S>,
     S: Id + Default,
 {

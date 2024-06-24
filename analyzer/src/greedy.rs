@@ -13,7 +13,7 @@ pub fn first_spot_with_locations_after_actions<W, T, L, E>(
 where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = L::Currency, ExitId = L::ExitId>,
+    E: Exit<Context = T, Currency = L::Currency>,
     L: Location<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
@@ -107,25 +107,25 @@ pub fn grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
 where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     let mut hybrids = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
         if ctx.get().todo(loc) && loc.can_access(ctx.get(), world) {
-            if let Some(e) = loc.exit_id() {
-                hybrids.push((loc, world.get_exit(*e)));
+            if loc.dest() != Default::default() {
+                hybrids.push(loc);
             } else {
                 ctx.visit(world, loc);
             }
         }
     }
 
-    if let Some((loc, exit)) = hybrids
+    if let Some(loc) = hybrids
         .into_iter()
-        .min_by_key(|(loc, exit)| loc.time(ctx.get(), world) + exit.time(ctx.get(), world))
+        .min_by_key(|loc| loc.time(ctx.get(), world))
     {
-        ctx.visit_exit(world, loc, exit);
+        ctx.visit(world, loc);
     }
 }
 
@@ -138,7 +138,7 @@ fn greedy_internal<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     while !world.won(ctx.get()) {
@@ -165,7 +165,7 @@ pub fn greedy_search<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     greedy_internal(world, ctx.clone(), max_time, max_depth)
@@ -179,7 +179,7 @@ pub fn greedy_search_from<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
     greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time, 2)
