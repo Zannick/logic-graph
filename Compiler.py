@@ -359,7 +359,7 @@ class GameLogic(object):
                                     spot['local'].extend(lcl)
                                 else:
                                     spot['local'] = list(lcl)
-                    # hybrid spots are exits but have names
+                    # hybrid spots are locations that have dests
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         if 'name' not in loc:
                             self._errors.append(f'Location in {spot["fullname"]} requires name')
@@ -390,12 +390,12 @@ class GameLogic(object):
                                 if dest.startswith('^'):
                                     if d := spot['all_data'].get(dest[1:]):
                                         if self.data_types[dest[1:]] != 'SpotId':
-                                            self._errors.append(f'Hybrid exit {eh["fullname"]} exits to non-spot data: {dest}')
+                                            self._errors.append(f'Hybrid location {eh["fullname"]} exits to non-spot data: {dest}')
                                         else:
                                             loc['raw_to'] = dest
                                             loc['to'] = d
                                     else:
-                                        self._errors.append(f'Hybrid exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
+                                        self._errors.append(f'Hybrid location {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
 
                     # We need a counter for exits in case of alternates
                     ec = Counter()
@@ -507,7 +507,7 @@ class GameLogic(object):
 
     def process_exit_movements(self):
         for spot in self.spots():
-            points = [('exit', e) for e in spot.get('exits', ())] + [('hybrid exit', h) for h in spot.get('hybrid', ())] + [('action', a) for a in spot.get('actions', ())]
+            points = [('exit', e) for e in spot.get('exits', ())] + [('hybrid loc', h) for h in spot.get('hybrid', ())] + [('action', a) for a in spot.get('actions', ())]
             for (ptype, exit) in points:
                 if 'time' not in exit and 'movement' in exit:
                     if 'to' not in exit:
@@ -562,10 +562,6 @@ class GameLogic(object):
                         default=self.time['default'])
             if point['time'] is None:
                 continue
-            if 'item' in point and 'to' in point and 'item_time' not in point:
-                point['item_time'] = max(
-                        (self.time[k] for k in point.get('item_tags', []) if k in self.time),
-                        default=self.time.get('hybrid_item_default', self.time['default']))
             if tags := point.get('penalty_tags'):
                 penalty = 0
                 for tag in tags:
@@ -1117,7 +1113,7 @@ class GameLogic(object):
                 data_dests.append((act['to'][1:], act))
         for s in self.spots():
             table[(s['id'], s['id'])] = 0
-            for ex in s.get('exits', []) + s.get('hybrid', []):
+            for ex in s.get('exits', []):
                 key = (s['id'], get_exit_target(ex))
                 if 'time' not in ex:
                     raise Exception(f'"time" not defined for exit {ex["fullname"]}')
@@ -1253,16 +1249,14 @@ class GameLogic(object):
                 or any(e['keep'] for e in s.get('exits', ())),
             self.spots())
 
-    # Hybrids are both locations and exits, so they have to be returned here
-    # for both in order to create the appropriate ids.
+    # Hybrids are locations
     def locations(self):
         return itertools.chain.from_iterable(s.get('locations', []) + s.get('hybrid', [])
                                              for s in self.spots())
 
 
     def exits(self):
-        return itertools.chain.from_iterable(s.get('exits', []) + s.get('hybrid', [])
-                                             for s in self.spots())
+        return itertools.chain.from_iterable(s.get('exits', []) for s in self.spots())
 
 
     def actions(self):
@@ -1312,8 +1306,6 @@ class GameLogic(object):
         for spot in self.spots():
             for ex in spot.get('exits', ()):
                 conns.add((spot['id'], get_exit_target(ex)))
-            for hybrid in spot.get('hybrid', ()):
-                conns.add((spot['id'], get_exit_target(hybrid)))
         return conns
     
 

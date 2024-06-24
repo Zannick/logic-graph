@@ -112,9 +112,9 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         id: LocationId::{{ loc.id }},
         canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
         item: Item::{{ loc.item or 'None' }},
-        {% if loc.to is defined %}{{ price(loc.item_price, loc.item_costs or default_price_type) }}{% else %}{{ price(loc.price, loc.costs or default_price_type) }}{% endif %}
-        time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
-        exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
+        {{ price(loc.price, loc.costs or default_price_type) }}
+        time: {{ (loc.time * 1000)|int }},
+        exit_id: None,
         dest: SpotId::{% if loc.to is defined %}{{ loc|get_exit_target }}{% else %}None{% endif %},
         skippable: false,
     };

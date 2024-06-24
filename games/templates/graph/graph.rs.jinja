@@ -325,9 +325,6 @@ impl world::World for World {
 %% for e in s.exits|reject('exclude_by_tag')|sort(attribute='id')
             ExitId::{{ e.id }} => true,
 %% endfor
-%% for h in s.hybrid|reject('exclude_by_tag')|sort(attribute='id')
-            ExitId::{{ h.id }} => true,
-%% endfor
 %% endfor
 %% endfor
 %% endfor

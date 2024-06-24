@@ -113,7 +113,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         time: {{ (ex.time * 1000)|int }},
         dest: SpotId::{{ ex|get_exit_target }},
         {{ price(ex.price, ex.costs or default_price_type) }}
-        loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
+        loc_id: None,
     };
 %% endfor
 }
@@ -123,9 +123,6 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
 %% for spot in gl.spots()
 %% if spot.exit_ids
         ExitId::{{ spot.exit_ids|join(' | ExitId:: ') }} => SpotId::{{ spot.id }},
-%% endif
-%% if spot.hybrid
-        ExitId::{{ spot.hybrid|map(attribute='id')|sort|join(' | ExitId::') }} => SpotId::{{ spot.id }},
 %% endif
 %% endfor
         _ => SpotId::None,
