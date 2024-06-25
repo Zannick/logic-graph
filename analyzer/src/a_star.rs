@@ -2,9 +2,8 @@ use crate::context::*;
 use crate::priority::LimitedPriorityQueue;
 use crate::world::*;
 use crate::CommonHasher;
-use std::collections::HashSet;
 
-pub trait CtxWrapper<T: Ctx>: Eq + std::hash::Hash {
+pub trait CtxWrapper<T: Ctx>: Clone + Eq + std::hash::Hash {
     fn ctx(&self) -> &ContextWrapper<T>;
     fn copy_update(&self, newctx: ContextWrapper<T>) -> Self;
     fn new_incr(&self, newctx: ContextWrapper<T>) -> Self;
@@ -25,7 +24,7 @@ impl<T: Ctx> CtxWrapper<T> for ContextWrapper<T> {
     }
 }
 
-#[derive(Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CtxWithActionCounter<T: Ctx> {
     pub(crate) el: ContextWrapper<T>,
     pub(crate) counter: usize,
@@ -63,9 +62,8 @@ where
 pub fn expand_exits_astar<W, T, E, H, P>(
     world: &W,
     el: &H,
-    states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<H, P, CommonHasher>,
+    spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E>,
@@ -81,9 +79,10 @@ pub fn expand_exits_astar<W, T, E, H, P>(
             let mut newctx = ctx.clone();
             newctx.exit(world, exit);
             let elapsed = newctx.elapsed();
-            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx), score);
+                    let unique_key = newctx.get().clone();
+                    spot_heap.push(el.copy_update(newctx), unique_key, score);
                 }
             }
         }
@@ -93,9 +92,8 @@ pub fn expand_exits_astar<W, T, E, H, P>(
 pub fn expand_actions_astar<W, T, E, H, P>(
     world: &W,
     el: &H,
-    states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<H, P, CommonHasher>,
+    spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E>,
@@ -115,9 +113,10 @@ pub fn expand_actions_astar<W, T, E, H, P>(
             let mut newctx = ctx.clone();
             newctx.activate(world, act);
             let elapsed = newctx.elapsed();
-            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.new_incr(newctx), score);
+                    let unique_key = newctx.get().clone();
+                    spot_heap.push(el.new_incr(newctx), unique_key, score);
                 }
             }
         }
@@ -129,9 +128,8 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
     world: &W,
     el: &H,
     movement_state: T::MovementState,
-    states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<H, P, CommonHasher>,
+    spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -149,9 +147,10 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
             let mut newctx = ctx.clone();
             newctx.move_local(world, dest, ltt);
             let elapsed = newctx.elapsed();
-            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx), score);
+                    let unique_key = newctx.get().clone();
+                    spot_heap.push(el.copy_update(newctx), unique_key, score);
                 }
             }
         }
@@ -161,9 +160,8 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
 pub fn expand_astar<W, T, E, Wp, H, P>(
     world: &W,
     el: &H,
-    states_seen: &HashSet<T, CommonHasher>,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<H, P, CommonHasher>,
+    spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
     allow_local: bool,
 ) where
@@ -184,9 +182,10 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
                 let mut newctx = ctx.clone();
                 newctx.move_condensed_edge(world, ce);
                 let elapsed = newctx.elapsed();
-                if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+                if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
-                        spot_heap.push(el.copy_update(newctx), score);
+                        let unique_key = newctx.get().clone();
+                        spot_heap.push(el.copy_update(newctx), unique_key, score);
                     }
                 }
             }
@@ -196,7 +195,6 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
                 world,
                 el,
                 movement_state,
-                states_seen,
                 max_time,
                 spot_heap,
                 score_func,
@@ -207,23 +205,23 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
             world,
             el,
             movement_state,
-            states_seen,
             max_time,
             spot_heap,
             score_func,
         );
     }
 
-    expand_exits_astar(world, el, states_seen, max_time, spot_heap, score_func);
+    expand_exits_astar(world, el, max_time, spot_heap, score_func);
 
     for warp in world.get_warps() {
         if warp.can_access(ctx.get(), world) {
             let mut newctx = ctx.clone();
             newctx.warp(world, warp);
             let elapsed = newctx.elapsed();
-            if !states_seen.contains(newctx.get()) && elapsed <= max_time {
+            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
-                    spot_heap.push(el.copy_update(newctx), score);
+                    let unique_key = newctx.get().clone();
+                    spot_heap.push(el.copy_update(newctx), unique_key, score);
                 }
             }
         }

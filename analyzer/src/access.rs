@@ -8,7 +8,7 @@ use crate::priority::LimitedPriorityQueue;
 use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use crate::world::*;
-use crate::{new_hashmap, new_hashset, CommonHasher};
+use crate::{new_hashmap, CommonHasher};
 use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
@@ -252,26 +252,21 @@ where
     };
 
     // Using A* and allowing backtracking
-    let mut states_seen = new_hashset();
     let mut spot_heap =
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_SPOTS);
 
     if let Some(score) = score_func(&ctx) {
-        spot_heap.push(ctx, score);
+        let unique_key = ctx.get().clone();
+        spot_heap.push(ctx, unique_key, score);
     }
 
     while let Some((ctx, _)) = spot_heap.pop() {
         if ctx.get().position() == spot {
             return Ok(ctx);
         }
-        if !states_seen.insert(ctx.get().clone()) {
-            spot_heap.increase_limit(1);
-            continue;
-        }
         expand_astar(
             world,
             &ctx,
-            &states_seen,
             u32::MAX,
             &mut spot_heap,
             &score_func,
@@ -279,7 +274,7 @@ where
         );
     }
 
-    Err(explain_unused_links(world, &states_seen))
+    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
 pub fn nearest_location_by_heuristic<'w, W, T, L, E, I>(
@@ -401,16 +396,17 @@ where
     };
 
     // Using A* and allowing backtracking
-    let mut states_seen = new_hashset();
     let mut spot_heap =
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_LOCS);
 
     if let Some(score) = score_func(&ctx) {
+        let unique_key = ctx.get().clone();
         spot_heap.push(
             CtxWithActionCounter {
                 el: ctx,
                 counter: 0,
             },
+            unique_key,
             score,
         );
     }
@@ -424,33 +420,14 @@ where
         {
             return Ok(el.el);
         }
-        if !states_seen.insert(ctx.get().clone()) {
-            spot_heap.increase_limit(1);
-            continue;
-        }
-        expand_astar(
-            world,
-            &el,
-            &mut states_seen,
-            max_time,
-            &mut spot_heap,
-            &score_func,
-            false,
-        );
+        expand_astar(world, &el, max_time, &mut spot_heap, &score_func, false);
 
         if el.can_continue(max_depth) {
-            expand_actions_astar(
-                world,
-                &el,
-                &mut states_seen,
-                max_time,
-                &mut spot_heap,
-                &score_func,
-            );
+            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func);
         }
     }
 
-    Err(explain_unused_links(world, &states_seen))
+    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
 fn access_check_after_actions<W, T, E, A, F>(
@@ -521,18 +498,19 @@ where
     };
 
     // Using A* and allowing backtracking
-    let mut states_seen = new_hashset();
     let mut spot_heap = LimitedPriorityQueue::with_capacity_and_limit(
         std::cmp::min(INITIAL_CAPACITY, max_states),
         max_states,
     );
 
     if let Some(score) = score_func(&ctx) {
+        let unique_key = ctx.get().clone();
         spot_heap.push(
             CtxWithActionCounter {
                 el: ctx,
                 counter: 0,
             },
+            unique_key,
             score,
         );
     }
@@ -544,14 +522,9 @@ where
             access(&mut newctx, world, check);
             return Ok(newctx);
         }
-        if !states_seen.insert(ctx.get().clone()) {
-            spot_heap.increase_limit(1);
-            continue;
-        }
         expand_astar(
             world,
             &el,
-            &mut states_seen,
             u32::MAX,
             &mut spot_heap,
             &score_func,
@@ -559,25 +532,18 @@ where
         );
 
         if el.can_continue(max_depth) {
-            expand_actions_astar(
-                world,
-                &el,
-                &mut states_seen,
-                max_time,
-                &mut spot_heap,
-                &score_func,
-            );
+            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func);
         }
 
         if spot_heap.is_expired() {
             return Err(format!(
                 "Excessive A* search stopping at {} states explored",
-                states_seen.len()
+                spot_heap.total_seen()
             ));
         }
     }
 
-    Err(explain_unused_links(world, &states_seen))
+    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
 pub fn access_location_after_actions<W, T, E, L>(
@@ -778,9 +744,9 @@ where
     vec.join("\n")
 }
 
-pub fn explain_unused_links<W, T, E, Wp>(
+fn explain_unused_links<W, T, E, Wp, P>(
     world: &W,
-    states_seen: &HashSet<T, CommonHasher>,
+    states_seen: HashMap<T, P, CommonHasher>,
 ) -> String
 where
     W: World<Exit = E, Warp = Wp>,
@@ -790,9 +756,9 @@ where
     W::Location: Location<Context = T>,
 {
     let known_spots: HashSet<E::SpotId, CommonHasher> =
-        states_seen.iter().map(|c| c.position()).collect();
+        states_seen.iter().map(|(c, _)| c.position()).collect();
     let mut vec = Vec::new();
-    for ctx in states_seen {
+    for (ctx, _) in states_seen {
         let movements = ctx.get_movement_state(world);
         for spot in world.get_area_spots(ctx.position()) {
             if !known_spots.contains(spot) {
@@ -802,7 +768,7 @@ where
                             "CE not available from {}: {:?}\n{}",
                             ctx.position(),
                             ce,
-                            ce.explain(world, ctx, movements)
+                            ce.explain(world, &ctx, movements)
                         ));
                     }
                 }
