@@ -35,6 +35,10 @@ impl<I: Eq + Hash, P: Clone + Ord> LimitedPriorityQueue<I, P, CommonHasher> {
             iters_left: limit,
         }
     }
+
+    pub fn increase_limit(&mut self, add: usize) {
+        self.iters_left += add;
+    }
 }
 
 impl<I: Eq + Hash, P: Clone + Ord, H: BuildHasher> LimitedPriorityQueue<I, P, H> {

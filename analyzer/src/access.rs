@@ -265,6 +265,7 @@ where
             return Ok(ctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
+            spot_heap.increase_limit(1);
             continue;
         }
         expand_astar(
@@ -424,6 +425,7 @@ where
             return Ok(el.el);
         }
         if !states_seen.insert(ctx.get().clone()) {
+            spot_heap.increase_limit(1);
             continue;
         }
         expand_astar(
@@ -543,6 +545,7 @@ where
             return Ok(newctx);
         }
         if !states_seen.insert(ctx.get().clone()) {
+            spot_heap.increase_limit(1);
             continue;
         }
         expand_astar(
