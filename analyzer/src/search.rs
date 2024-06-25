@@ -434,7 +434,12 @@ where
         }
     }
 
-    fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
+    fn handle_one_solution_and_minimize(
+        &self,
+        ctx: &mut ContextWrapper<T>,
+        prev: &Option<T>,
+        mode: SearchMode,
+    ) -> Option<ContextWrapper<T>> {
         // If prev is None we don't know the prev state
         // nor whether we have recent history in ctx--either we got this state from the queue and it has none
         // or it was recreated and stored in the db, in which case we can get it from the db as well.
@@ -488,6 +493,8 @@ where
             self.solution_cvar.notify_one();
         }
         drop(sols); // release before recording observations/minimizing
+
+        // Always perform a trie minimize, even for minimized solutions
         if res.accepted() {
             if res == SolutionResult::IsUnique {
                 log::debug!(
@@ -505,56 +512,22 @@ where
                 min_progress,
                 &self.solve_trie,
             );
-        }
-
-        let min_ctx = match mode {
-            SearchMode::Similar => {
-                pinpoint_minimize(self.world, self.startctx.get(), solution.clone())
-            }
-            SearchMode::Minimized => None,
-            _ => trie_minimize(
+            trie_minimize(
                 self.world,
                 self.startctx.get(),
                 solution.clone(),
                 &self.solve_trie,
-            ),
-        };
+            )
+        } else if res == SolutionResult::Duplicate {
+            return None;
+        } else {
+            pinpoint_minimize(self.world, self.startctx.get(), solution.clone())
+        }
+    }
 
-        let mut sols = self.solutions.lock().unwrap();
-        if let Some(ctx) = min_ctx {
-            if iters > 10_000_000 && sols.unique() > 4 {
-                self.queue.set_max_time(ctx.elapsed());
-            } else {
-                self.queue.set_lenient_max_time(ctx.elapsed());
-            }
-
-            if ctx.elapsed() < sols.best() {
-                log::info!(
-                    "{:?} minimized a better solution: estimated {}ms (heap max was: {}ms)",
-                    mode,
-                    ctx.elapsed(),
-                    old_time
-                );
-                log::info!("Max time to consider is now: {}ms", self.queue.max_time());
-            }
-
+    fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
+        if let Some(ctx) = self.handle_one_solution_and_minimize(ctx, prev, mode) {
             let solution = ctx.into_solution();
-            let res = sols.insert_solution(solution.clone(), self.world);
-            drop(sols);
-            if res.accepted() {
-                self.solves_since_clean.fetch_add(1, Ordering::Release);
-                self.last_solve
-                    .fetch_max(self.iters.load(Ordering::Acquire), Ordering::Release);
-                self.solution_cvar.notify_one();
-                record_observations(
-                    self.startctx.get(),
-                    self.world,
-                    solution.clone(),
-                    min_progress,
-                    &self.solve_trie,
-                );
-            }
-
             self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
                 .unwrap();
         }
@@ -972,6 +945,10 @@ where
                             continue;
                         }
                         drop(sols);
+                        log::debug!(
+                            "Solution mutator starting revisits for solution {}ms",
+                            sol.elapsed
+                        );
                         let revisits =
                             mutate_spot_revisits(self.world, self.startctx.get(), sol.clone());
                         for revisit in revisits {
@@ -984,6 +961,10 @@ where
                                 .unwrap();
                             }
                         }
+                        log::debug!(
+                            "Solution mutator starting reordering for solution {}ms",
+                            sol.elapsed
+                        );
                         if let Some(reordered) = mutate_collection_steps(
                             self.world,
                             self.startctx.get(),
