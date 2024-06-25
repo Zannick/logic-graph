@@ -32,6 +32,7 @@ enum SearchMode {
     Start,
     Minimized,
     Mode(usize),
+    MutateMinimize,
     MutateSpots,
     MutateCollections,
     Unknown,
@@ -494,7 +495,6 @@ where
         }
         drop(sols); // release before recording observations/minimizing
 
-        // Always perform a trie minimize, even for minimized solutions
         if res.accepted() {
             if res == SolutionResult::IsUnique {
                 log::debug!(
@@ -512,17 +512,11 @@ where
                 min_progress,
                 &self.solve_trie,
             );
-            trie_minimize(
-                self.world,
-                self.startctx.get(),
-                solution.clone(),
-                &self.solve_trie,
-            )
-        } else if res == SolutionResult::Duplicate {
-            return None;
-        } else {
-            pinpoint_minimize(self.world, self.startctx.get(), solution.clone())
+        } else if res != SolutionResult::Duplicate && mode != SearchMode::Minimized {
+            // Minimize against itself to see if it improves enough for inclusion
+            return pinpoint_minimize(self.world, self.startctx.get(), solution.clone());
         }
+        None
     }
 
     fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
@@ -945,6 +939,24 @@ where
                             continue;
                         }
                         drop(sols);
+
+                        log::debug!(
+                            "Solution mutator starting minimize for solution {}ms",
+                            sol.elapsed
+                        );
+                        if let Some(min_ctx) = trie_minimize(
+                            self.world,
+                            self.startctx.get(),
+                            sol.clone(),
+                            &self.solve_trie,
+                        ) {
+                            self.recreate_store(
+                                &self.startctx,
+                                min_ctx.recent_history(),
+                                SearchMode::MutateMinimize,
+                            )
+                            .unwrap();
+                        }
                         log::debug!(
                             "Solution mutator starting revisits for solution {}ms",
                             sol.elapsed
