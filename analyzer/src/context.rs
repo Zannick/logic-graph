@@ -318,7 +318,7 @@ where
 
 fn extract_match<'c, 's>(c: &'c Captures<'s>, g: &'s str, s: &'s str) -> Result<&'s str, String> {
     if let Some(m) = c.name(g) {
-        Ok(m.as_str())
+        Ok(m.as_str().trim_end())
     } else {
         Err(format!("Group '{}' not matched: {}", g, s))
     }
