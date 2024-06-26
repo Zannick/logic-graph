@@ -340,7 +340,7 @@ where
             static ref WARP: Regex = Regex::new(
                 // Warp
                 //   EarthSavewarp to Antarctica > West > Helipad
-                r"(?P<warp>[^:]+)[Ww]arp(?: to (?P<spot>.*$))?").unwrap();
+                r"(?P<warp>[^: ]+)[Ww]arp(?: to (?P<spot>.*$))?").unwrap();
             static ref GET: Regex = Regex::new(
                 // Get
                 // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
@@ -364,17 +364,7 @@ where
                 r"(?:! )? (?:[Dd]o|[Aa]ctivate) (?P<action>.*$)").unwrap();
             static ref SPOT: Regex = Regex::new(r"(?P<spot>.*$)").unwrap();
         }
-        if let Some(cap) = WARP.captures(s) {
-            let warp = extract_match(&cap, "warp", s)?;
-
-            Ok(History::W(
-                <Wp as FromStr>::from_str(warp)?,
-                match extract_match(&cap, "spot", s) {
-                    Ok(spot) => <S as FromStr>::from_str(spot)?,
-                    Err(_) => S::default(),
-                },
-            ))
-        } else if let Some(cap) = GET.captures(s) {
+        if let Some(cap) = GET.captures(s) {
             let item = extract_match(&cap, "item", s).unwrap_or_default();
             let loc = extract_match(&cap, "loc", s)?;
             // don't care about the dest spot for now
@@ -398,6 +388,16 @@ where
         } else if let Some(cap) = ACTIVATE.captures(s) {
             let action = extract_match(&cap, "action", s)?;
             Ok(History::A(<A as FromStr>::from_str(action)?))
+        } else if let Some(cap) = WARP.captures(s) {
+            let warp = extract_match(&cap, "warp", s)?;
+
+            Ok(History::W(
+                <Wp as FromStr>::from_str(warp)?,
+                match extract_match(&cap, "spot", s) {
+                    Ok(spot) => <S as FromStr>::from_str(spot)?,
+                    Err(_) => S::default(),
+                },
+            ))
         } else if let Ok(spot) = <S as FromStr>::from_str(s) {
             Ok(History::L(spot))
         } else {
