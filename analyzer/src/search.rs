@@ -963,6 +963,11 @@ where
                         );
                         let revisits =
                             mutate_spot_revisits(self.world, self.startctx.get(), sol.clone());
+                        log::debug!(
+                            "Solution mutator got {} revisits for solution {}ms",
+                            revisits.len(),
+                            sol.elapsed,
+                        );
                         for revisit in revisits {
                             if revisit.elapsed() < sol.elapsed {
                                 self.recreate_store(
@@ -977,6 +982,7 @@ where
                             "Solution mutator starting reordering for solution {}ms",
                             sol.elapsed
                         );
+                        let elapsed = sol.elapsed;
                         if let Some(reordered) = mutate_collection_steps(
                             self.world,
                             self.startctx.get(),
@@ -986,12 +992,21 @@ where
                             sol,
                             self.queue.db().scorer().get_algo(),
                         ) {
+                            log::debug!(
+                                "Solution mutator got a reordered solution for solution {}ms",
+                                elapsed
+                            );
                             self.recreate_store(
                                 &self.startctx,
                                 reordered.recent_history(),
                                 SearchMode::MutateCollections,
                             )
                             .unwrap();
+                        } else {
+                            log::debug!(
+                                "Solution mutator did not get a reordered solution for solution {}ms",
+                                elapsed
+                            );
                         }
                         self.mutated.fetch_add(1, Ordering::Release);
                         sols = self.solutions.lock().unwrap();
