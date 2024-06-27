@@ -512,9 +512,12 @@ where
                 min_progress,
                 &self.solve_trie,
             );
+            if mode != SearchMode::Minimized {
+                return pinpoint_minimize(self.world, self.startctx.get(), solution);
+            }
         } else if res != SolutionResult::Duplicate && mode != SearchMode::Minimized {
             // Minimize against itself to see if it improves enough for inclusion
-            return pinpoint_minimize(self.world, self.startctx.get(), solution.clone());
+            return pinpoint_minimize(self.world, self.startctx.get(), solution);
         }
         None
     }
