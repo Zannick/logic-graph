@@ -1789,7 +1789,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1.into_usize(),
+            end: ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -1801,7 +1802,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1.into_usize(),
+            end: ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

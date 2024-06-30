@@ -176,6 +176,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1 => true,
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::access_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
+            ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => rules::access_underwater_movement_and_invoke_hover(ctx, world),
+            ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1 => rules::access_underwater_movement_and_invoke_climb(ctx, world),
             ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => rules::access_amagi_dragon_eye_passage(ctx, world),
             ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => rules::access_amagi_dragon_eye_passage(ctx, world),
             ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1 => true,
@@ -2571,6 +2573,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => rules::observe_access_underwater_movement_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1 => rules::observe_access_underwater_movement_and_invoke_climb(ctx, world, full_obs),
             ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => rules::observe_access_amagi_dragon_eye_passage(ctx, world, full_obs),
             ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => rules::observe_access_amagi_dragon_eye_passage(ctx, world, full_obs),
             ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
@@ -4598,6 +4602,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::explain_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::explain_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => rules::explain_underwater_movement_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1 => rules::explain_underwater_movement_and_invoke_climb(ctx, world, edict),
             ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => rules::explain_amagi_dragon_eye_passage(ctx, world, edict),
             ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => rules::explain_amagi_dragon_eye_passage(ctx, world, edict),
             ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
@@ -7529,6 +7535,18 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1,
         time: 2800,
         dest: SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        price: Currency::Free,
+    };
+    exits[ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1] = Exit {
+        id: ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1,
+        time: 2105,
+        dest: SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        price: Currency::Free,
+    };
+    exits[ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1] = Exit {
+        id: ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1,
+        time: 2000,
+        dest: SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
         price: Currency::Free,
     };
     exits[ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1] = Exit {
@@ -21429,6 +21447,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => SpotId::Amagi__West_Lake__East_19,
         ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => SpotId::Amagi__West_Lake__Cavern_Refill_Station,
         ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1 => SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => SpotId::Amagi__West_Lake__Stronghold_Item,
         ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 | ExitId:: Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
         ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1 => SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,

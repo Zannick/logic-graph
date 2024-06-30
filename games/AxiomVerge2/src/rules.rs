@@ -2827,6 +2827,10 @@ pub fn access_underwater_movement_and_drone_hover_and_slingshot_hook(
     ((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Slingshot_Hook))
 }
+pub fn access_underwater_movement_and_invoke_climb(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and $climb
+    (ctx.has(Item::Underwater_Movement) && helper__climb!(ctx, world))
+}
 pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $grab
     (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
@@ -14922,6 +14926,32 @@ pub fn explain_underwater_movement_and_drone_hover_and_slingshot_hook(
         }
     }
 }
+pub fn explain_underwater_movement_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $climb
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_invoke_grab(
     ctx: &Context,
     world: &World,
@@ -21127,6 +21157,17 @@ pub fn observe_access_underwater_movement_and_drone_hover_and_slingshot_hook(
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
     }))
+}
+pub fn observe_access_underwater_movement_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $climb
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_underwater_movement_and_invoke_grab(
     ctx: &Context,

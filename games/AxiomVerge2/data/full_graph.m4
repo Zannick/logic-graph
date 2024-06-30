@@ -157,6 +157,8 @@ digraph AxiomVerge2 {
     Amagi__West_Lake__Cavern_Refill_Station -> Amagi__West_Lake__Cavern_Tear_Duct;
     Amagi__West_Lake__Cavern_Refill_Station -> Amagi__West_Lake__Cavern_Rear_Pillar;
     Amagi__West_Lake__Cavern_Tear_Duct -> Amagi__West_Lake__Cavern_Refill_Station;
+    Amagi__West_Lake__Cavern_Front_Pillar -> Amagi__West_Lake__Cavern_Rear_Pillar;
+    Amagi__West_Lake__Cavern_Middle_Pillar -> Amagi__West_Lake__Cavern_Rear_Pillar;
     Amagi__West_Lake__Stronghold_Top -> Amagi__West_Lake__Stronghold_Item;
     Amagi__West_Lake__Stronghold_Item -> Amagi__West_Lake__Stronghold_Middle_Column;
     Amagi__West_Lake__Stronghold_Middle_Column -> Amagi__West_Lake__Stronghold_Ceiling_Left;
@@ -2741,6 +2743,7 @@ digraph AxiomVerge2 {
     Amagi__West_Lake__Cavern_Middle_Pillar -> Amagi__West_Lake__Cavern_Front_Pillar;
     Amagi__West_Lake__Cavern_Middle_Pillar -> Amagi__West_Lake__Cavern_Lower_Trachea;
     Amagi__West_Lake__Cavern_Rear_Pillar -> Amagi__West_Lake__Cavern_Middle_Pillar;
+    Amagi__West_Lake__Cavern_Rear_Pillar -> Amagi__West_Lake__Cavern_Lower_Trachea;
     Amagi__West_Lake__Cavern_Lower_Trachea -> Amagi__West_Lake__Cavern_Middle_Pillar;
     Amagi__West_Lake__Cavern_Lower_Trachea -> Amagi__West_Lake__Stronghold_Top;
     Amagi__West_Lake__Stronghold_Top -> Amagi__West_Lake__Cavern_Lower_Trachea;

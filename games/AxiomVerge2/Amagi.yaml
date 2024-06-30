@@ -799,8 +799,6 @@ areas:
     - name: West
       coord: [34.05, 18.8]
 
-# TODO: most of this movement requires Underwater_Movement
-# but we can't (yet) restrict to that other than making exits
 - name: West Lake  # MARK: West Lake
   on_entry: $reset_old_area(^newpos)
   map:
@@ -1047,6 +1045,11 @@ areas:
           jumps: 1
         - to: Cavern Middle Pillar
         - to: Cavern Jaw
+      exits:
+        - to: Cavern Rear Pillar
+          req: Underwater_Movement and $hover
+          movement: water
+          jumps: 2
     - name: Cavern Middle Pillar
       coord: [23.05, 16.5]
       local:
@@ -1055,10 +1058,17 @@ areas:
         - to: Cavern Front Pillar
           jumps: 1
           jump_movement: water
+      exits:
+        - to: Cavern Rear Pillar
+          req: Underwater_Movement and $climb
+          movement: water
+          jumps: 2
     - name: Cavern Rear Pillar
       coord: [22.7, 15.9]
       local:
         - to: Cavern Middle Pillar
+        - to: Cavern Lower Trachea
+          thru: [22.225, 17.0]
       locations:
         - name: Boss Reward
           item: Flask

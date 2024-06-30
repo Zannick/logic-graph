@@ -5511,6 +5511,8 @@ impl world::World for World {
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => true,
             ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => true,
+            ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => true,
+            ExitId::Amagi__West_Lake__Cavern_Middle_Pillar__ex__Cavern_Rear_Pillar_1 => true,
             ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => true,
             ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => true,
             ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => true,
