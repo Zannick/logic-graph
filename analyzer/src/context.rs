@@ -340,29 +340,28 @@ where
             static ref WARP: Regex = Regex::new(
                 // Warp
                 //   EarthSavewarp to Antarctica > West > Helipad
-                r"(?P<warp>[^: ]+)[Ww]arp(?: to (?P<spot>.*$))?").unwrap();
+                r"(?P<warp>[^: ]+)[Ww]arp(?: to (?P<spot>[^=]*$))?").unwrap();
             static ref GET: Regex = Regex::new(
                 // Get
                 // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
-                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>[^=]*)(?: ==> (?P<dest>.*$))?").unwrap();
+                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>[^=]*)(?: ==> (?P<dest>[^=]*$))?").unwrap();
             static ref MOVE: Regex = Regex::new(
                 // Move
                 //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)
-                r"(?:[Mm]ove(?:\.\.\.)? to |Take exit )(?P<exit>.* ==> .*$)").unwrap();
+                r"(?:[Mm]ove(?:\.\.\.)? to |Take exit )(?P<exit>[^=]* ==> [^=]*$)").unwrap();
             // TODO: remove
             static ref MOVE_GET: Regex = Regex::new(
                 // MoveGet
                 // * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
-                r"(?:\* )?Take hybrid exit (?P<loc>[^=]*)(?:, collecting (?P<item>.*$))").unwrap();
+                r"(?:\* )?Take hybrid exit (?P<loc>[^=]*)(?:, collecting (?P<item>\w+$))").unwrap();
             static ref MOVE_LOCAL: Regex = Regex::new(
                 // MoveLocal
                 //   Move... to Antarctica > Power Room > Switch
-                r"[Mm]ove(?:\.\.\.)? to (?P<spot>.*$)").unwrap();
+                r"[Mm]ove(?:\.\.\.)? to (?P<spot>[^=]*$)").unwrap();
             static ref ACTIVATE: Regex = Regex::new(
                 // Activate
                 // ! Do Amagi > Main Area > Carving: Key Combo
                 r"(?:! )? (?:[Dd]o|[Aa]ctivate) (?P<action>.*$)").unwrap();
-            static ref SPOT: Regex = Regex::new(r"(?P<spot>.*$)").unwrap();
         }
         if let Some(cap) = GET.captures(s) {
             let item = extract_match(&cap, "item", s).unwrap_or_default();
