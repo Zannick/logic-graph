@@ -79,7 +79,7 @@ pub fn expand_exits_astar<W, T, E, H, P>(
             let mut newctx = ctx.clone();
             newctx.exit(world, exit);
             let elapsed = newctx.elapsed();
-            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
+            if elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     let unique_key = newctx.get().clone();
                     spot_heap.push(el.copy_update(newctx), unique_key, score);
@@ -113,7 +113,7 @@ pub fn expand_actions_astar<W, T, E, H, P>(
             let mut newctx = ctx.clone();
             newctx.activate(world, act);
             let elapsed = newctx.elapsed();
-            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
+            if elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     let unique_key = newctx.get().clone();
                     spot_heap.push(el.new_incr(newctx), unique_key, score);
@@ -147,7 +147,7 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
             let mut newctx = ctx.clone();
             newctx.move_local(world, dest, ltt);
             let elapsed = newctx.elapsed();
-            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
+            if elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     let unique_key = newctx.get().clone();
                     spot_heap.push(el.copy_update(newctx), unique_key, score);
@@ -182,7 +182,7 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
                 let mut newctx = ctx.clone();
                 newctx.move_condensed_edge(world, ce);
                 let elapsed = newctx.elapsed();
-                if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
+                if elapsed <= max_time {
                     if let Some(score) = score_func(&newctx) {
                         let unique_key = newctx.get().clone();
                         spot_heap.push(el.copy_update(newctx), unique_key, score);
@@ -218,7 +218,7 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
             let mut newctx = ctx.clone();
             newctx.warp(world, warp);
             let elapsed = newctx.elapsed();
-            if !spot_heap.seen(newctx.get()) && elapsed <= max_time {
+            if elapsed <= max_time {
                 if let Some(score) = score_func(&newctx) {
                     let unique_key = newctx.get().clone();
                     spot_heap.push(el.copy_update(newctx), unique_key, score);
