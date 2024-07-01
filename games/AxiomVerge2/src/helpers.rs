@@ -2067,7 +2067,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2101,6 +2101,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Heretics_Granddaughter)
             && $ctx.has(Item::Bounty_List)
             && $ctx.has(Item::Submarine_Progress)
+            && $ctx.has(Item::Becoming_An_Arm)
     }};
 }
 #[macro_export]
@@ -2375,6 +2376,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Submarine_Progress"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Becoming_An_Arm);
+                $edict.insert("Becoming_An_Arm", format!("{}", h));
+                (h, vec!["Becoming_An_Arm"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2472,6 +2482,9 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_submarine_progress();
             $ctx.has(Item::Submarine_Progress)
+        }) && ({
+            $full_obs.observe_becoming_an_arm();
+            $ctx.has(Item::Becoming_An_Arm)
         })
     }};
 }
@@ -2652,12 +2665,12 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{3}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem]
+/// [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Compass)
-            && $ctx.count(Item::Power_Matrix) >= 3
+            && $ctx.count(Item::Power_Matrix) >= 4
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.has(Item::Eye_Ring)
             && $ctx.has(Item::Breach_Attractor)
@@ -2684,7 +2697,7 @@ macro_rules! hexplain__other_items {
             let mut h = {
                 let ct = $ctx.count(Item::Power_Matrix);
                 $edict.insert("Power_Matrix count", format!("{}", ct));
-                (ct >= 3, vec!["Power_Matrix count"])
+                (ct >= 4, vec!["Power_Matrix count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2761,8 +2774,8 @@ macro_rules! hobserve__other_items {
             $full_obs.observe_compass();
             $ctx.has(Item::Compass)
         }) && ({
-            $full_obs.observe_power_matrix(IntegerObservation::Ge(3));
-            $ctx.count(Item::Power_Matrix) >= 3
+            $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
+            $ctx.count(Item::Power_Matrix) >= 4
         }) && ({
             $full_obs.observe_nano_lattice_2();
             $ctx.has(Item::Nano_Lattice_2)

@@ -2580,6 +2580,8 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Waterfalls_Flask(Uhrum Waterfalls Flask);
         Menu__Kiengir_Map__Uhrum_Annuna_Flask(Uhrum Annuna Flask);
         Menu__Kiengir_Map__Plague_of_Thoughts(Plague of Thoughts);
+        Menu__Kiengir_Map__Becoming_An_Arm(Becoming An Arm);
+        Menu__Kiengir_Map__Uhrum_Glen_Matrix(Uhrum Glen Matrix);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2770,6 +2772,36 @@ subgraph Uhrum
     end
     subgraph Uhrum__Artillery_Practice[Artillery Practice]
         Uhrum__Artillery_Practice__East_24(East 24);
+        Uhrum__Artillery_Practice__East_Trees(East Trees);
+        Uhrum__Artillery_Practice__East_Hill(East Hill);
+        Uhrum__Artillery_Practice__East_Outcrop_West(East Outcrop West);
+        Uhrum__Artillery_Practice__East_Outcrop_East(East Outcrop East);
+        Uhrum__Artillery_Practice__East_Lower_Platform_West(East Lower Platform West);
+        Uhrum__Artillery_Practice__East_Lower_Platform_East(East Lower Platform East);
+        Uhrum__Artillery_Practice__Column_Platform(Column Platform);
+        Uhrum__Artillery_Practice__Column_East(Column East);
+        Uhrum__Artillery_Practice__Far_East_Platform(Far East Platform);
+        Uhrum__Artillery_Practice__East_Knob(East Knob);
+        Uhrum__Artillery_Practice__East_23(East 23);
+        Uhrum__Artillery_Practice__Column_West(Column West);
+        Uhrum__Artillery_Practice__West_Right_Platform(West Right Platform);
+        Uhrum__Artillery_Practice__West_Top_Platform(West Top Platform);
+        Uhrum__Artillery_Practice__Tunnel_Entrance(Tunnel Entrance);
+        Uhrum__Artillery_Practice__West_Right_Ledge(West Right Ledge);
+        Uhrum__Artillery_Practice__West_Tree(West Tree);
+        Uhrum__Artillery_Practice__West_Middle_Ledge(West Middle Ledge);
+        Uhrum__Artillery_Practice__West_Left_Ledge(West Left Ledge);
+        Uhrum__Artillery_Practice__West_23(West 23);
+    end
+    subgraph Uhrum__Rocky_Gate[Rocky Gate]
+        Uhrum__Rocky_Gate__West(West);
+    end
+    subgraph Uhrum__Grassy_Guardpost[Grassy Guardpost]
+        Uhrum__Grassy_Guardpost__East_23(East 23);
+    end
+    subgraph Uhrum__Glen[Glen]
+        Uhrum__Glen__East(East);
+        Uhrum__Glen__Center(Center);
     end
 end
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
@@ -4255,6 +4287,26 @@ Uhrum__Annuna_Corridor__Statue <--> Uhrum__Annuna_Corridor__Upper_Platform
 Uhrum__Annuna_Corridor__Upper_Ledge <--> Uhrum__Annuna_Corridor__Upper_Platform
 Uhrum__Annuna_Corridor__West_25 <--> Uhrum__Waterfalls__East_25
 Uhrum__Annuna_Corridor__West_26 <--> Uhrum__Waterfalls__East_26
+Uhrum__Artillery_Practice__Column_East --> Uhrum__Artillery_Practice__West_Left_Ledge
+Uhrum__Artillery_Practice__Column_West --> Uhrum__Artillery_Practice__East_23
+Uhrum__Artillery_Practice__Column_West --> Uhrum__Artillery_Practice__West_Right_Ledge
+Uhrum__Artillery_Practice__Column_West <--> Uhrum__Artillery_Practice__West_Top_Platform
+Uhrum__Artillery_Practice__East_23 --> Uhrum__Rocky_Gate__West
+Uhrum__Artillery_Practice__East_24 --> Uhrum__Artillery_Practice__East_Outcrop_East
+Uhrum__Artillery_Practice__East_24 <--> Uhrum__Waterfalls__West_24
+Uhrum__Artillery_Practice__East_Hill --> Uhrum__Artillery_Practice__East_Lower_Platform_West
+Uhrum__Artillery_Practice__East_Hill --> Uhrum__Artillery_Practice__East_Outcrop_West
+Uhrum__Artillery_Practice__East_Lower_Platform_East --> Uhrum__Artillery_Practice__Column_West
+Uhrum__Artillery_Practice__East_Lower_Platform_East --> Uhrum__Artillery_Practice__East_Knob
+Uhrum__Artillery_Practice__East_Lower_Platform_West --> Uhrum__Artillery_Practice__Column_West
+Uhrum__Artillery_Practice__East_Trees --> Uhrum__Artillery_Practice__East_Lower_Platform_East
+Uhrum__Artillery_Practice__East_Trees --> Uhrum__Artillery_Practice__East_Outcrop_East
+Uhrum__Artillery_Practice__Tunnel_Entrance --> Uhrum__Artillery_Practice__West_Right_Ledge
+Uhrum__Artillery_Practice__Tunnel_Entrance <--> Uhrum__Glen__East
+Uhrum__Artillery_Practice__West_23 --> Uhrum__Grassy_Guardpost__East_23
+Uhrum__Artillery_Practice__West_Middle_Ledge --> Uhrum__Artillery_Practice__West_Left_Ledge
+Uhrum__Artillery_Practice__West_Right_Ledge --> Uhrum__Artillery_Practice__West_Middle_Ledge
+Uhrum__Artillery_Practice__West_Right_Platform --> Uhrum__Artillery_Practice__Column_West
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
@@ -4303,7 +4355,6 @@ Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__West_Wall
 Uhrum__Waterfalls__Northeast_Ledge --> Uhrum__Waterfalls__Ceiling_Opening
 Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__Center_Island_East
 Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__East_Waters_Edge
-Uhrum__Waterfalls__West_24 --> Uhrum__Artillery_Practice__East_24
 Uhrum__Waterfalls__West_24 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_25 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_27 --> Uhrum__Waterfalls__Large_Rock

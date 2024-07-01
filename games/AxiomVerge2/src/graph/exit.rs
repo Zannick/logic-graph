@@ -2300,6 +2300,30 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => true,
             ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => true,
+            ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1 => true,
+            ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 => true,
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1 => rules::access_mode_eq_drone(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1 => true,
+            ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::access_invoke_hover(ctx, world),
@@ -4157,6 +4181,27 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6186,6 +6231,27 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1 => rules::explain_mode_eq_drone(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::explain_invoke_hook(ctx, world, edict),
@@ -6874,6 +6940,9 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => true,
             ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => true,
             ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => true,
+            ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1 => true,
+            ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 => true,
+            ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
@@ -21379,6 +21448,150 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         dest: SpotId::Annuna__Mirror_Match__West_25,
         price: Currency::Free,
     };
+    exits[ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Waterfalls__West_24,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1,
+        time: 2280,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1,
+        time: 350,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3,
+        time: 600,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1,
+        time: 2631,
+        dest: SpotId::Uhrum__Artillery_Practice__Column_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1,
+        time: 2105,
+        dest: SpotId::Uhrum__Artillery_Practice__East_Knob,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1,
+        time: 2982,
+        dest: SpotId::Uhrum__Artillery_Practice__Column_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1,
+        time: 4375,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Left_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Rocky_Gate__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1,
+        time: 3875,
+        dest: SpotId::Uhrum__Artillery_Practice__East_23,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1,
+        time: 2631,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Top_Platform,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1,
+        time: 1754,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Right_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1,
+        time: 1052,
+        dest: SpotId::Uhrum__Artillery_Practice__Column_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1,
+        time: 2631,
+        dest: SpotId::Uhrum__Artillery_Practice__Column_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1,
+        time: 4333,
+        dest: SpotId::Uhrum__Glen__East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Right_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1,
+        time: 1499,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Middle_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Artillery_Practice__West_Left_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1] = Exit {
+        id: ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Grassy_Guardpost__East_23,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1] = Exit {
+        id: ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1,
+        time: 4333,
+        dest: SpotId::Uhrum__Artillery_Practice__Tunnel_Entrance,
+        price: Currency::Free,
+    };
 }
 
 pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
@@ -22821,6 +23034,21 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
         ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Statue,
         ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => SpotId::Uhrum__Annuna_Corridor__East_25,
+        ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 | ExitId:: Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => SpotId::Uhrum__Artillery_Practice__East_24,
+        ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1 | ExitId:: Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1 => SpotId::Uhrum__Artillery_Practice__East_Trees,
+        ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => SpotId::Uhrum__Artillery_Practice__East_Hill,
+        ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_West,
+        ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 | ExitId:: Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_East,
+        ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1 => SpotId::Uhrum__Artillery_Practice__Column_East,
+        ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1 => SpotId::Uhrum__Artillery_Practice__East_23,
+        ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1 | ExitId:: Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 | ExitId:: Uhrum__Artillery_Practice__Column_West__ex__West_Right_Ledge_1 => SpotId::Uhrum__Artillery_Practice__Column_West,
+        ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__West_Right_Platform,
+        ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__West_Top_Platform,
+        ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1 | ExitId:: Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1 => SpotId::Uhrum__Artillery_Practice__Tunnel_Entrance,
+        ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => SpotId::Uhrum__Artillery_Practice__West_Right_Ledge,
+        ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1 => SpotId::Uhrum__Artillery_Practice__West_Middle_Ledge,
+        ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1 => SpotId::Uhrum__Artillery_Practice__West_23,
+        ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => SpotId::Uhrum__Glen__East,
         _ => SpotId::None,
     }
 }

@@ -1656,6 +1656,304 @@ areas:
 
 - name: Artillery Practice  # MARK: Artillery Practice
   on_entry: $reset_old_area(^newpos)
+  map:
+    tablet: [23, 23, 24, 24]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Becoming An Arm
   spots:
     - name: East 24
       coord: [25.95, 23.75]
+      local:
+        - to: East Trees
+      exits:
+        - to: Waterfalls > West 24
+          tags: [xshift]
+        - to: East Outcrop East
+          req: $hook and $hover
+          movement: base
+          jumps: 1
+    - name: East Trees
+      coord: [25.55, 23.8]
+      local:
+        - to: East Hill
+          jumps: 1
+        - to: East 24
+          jumps: 1
+      exits:
+        - to: East Outcrop East
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Lower Platform East
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: East Hill
+      coord: [25.05, 23.6]
+      local:
+        - to: East Trees
+      exits:
+        - to: East Outcrop West
+          req: $hook
+          movement: base
+          jumps: 0.5
+        - to: East Outcrop West
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East Outcrop West
+          req: Anuman
+          movement: base
+          jumps: 1
+        - to: East Lower Platform West
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: East Outcrop West
+      coord: [25.15, 23.35]
+      local:
+        - to: East Hill
+        - to: East Outcrop East
+        - to: East Lower Platform East
+          jumps: 1
+        - to: East Lower Platform West
+          jumps: 1
+    - name: East Outcrop East
+      coord: [25.3, 23.35]
+      local:
+        - to: East 24
+        - to: East Trees
+        - to: East Outcrop West
+        - to: East Lower Platform East
+          jumps: 1
+        - to: East Lower Platform West
+          jumps: 1
+    - name: East Lower Platform West
+      coord: [25.15, 23.15]
+      local:
+        - to: East Lower Platform East
+        - to: Column Platform
+          jumps: 1
+        - to: East Hill
+          jumps_down: 1
+        - to: East Outcrop East
+          jumps_down: 1
+        - to: East Outcrop West
+          jumps_down: 1
+      exits:
+        - to: Column West
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: East Lower Platform East
+      coord: [25.25, 23.15]
+      local:
+        - to: East 24
+        - to: East Trees
+        - to: East Outcrop East
+          jumps_down: 1
+        - to: East Outcrop West
+          jumps_down: 1
+      exits:
+        - to: East Knob
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Column West
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Column Platform
+      coord: [24.95, 22.95]
+      local:
+        - to: East Lower Platform West
+        - to: East Hill
+          jumps_down: 1
+        - to: Column East
+          jumps: 1
+    - name: Column East
+      coord: [24.9, 22.75]
+      local:
+        - to: Column West
+        - to: Column Platform
+        - to: East Lower Platform West
+        - to: East Lower Platform East
+        - to: East Outcrop West
+        - to: Far East Platform
+      exits:
+        - to: West Left Ledge
+          req: $hook and $hover
+          movement: fast_hover
+
+    - name: Far East Platform
+      coord: [25.75, 22.8]
+      local:
+        - to: East 23
+          jumps: 1
+        - to: East Lower Platform West
+        - to: Column East
+          jumps: 3
+    - name: East Knob
+      coord: [25.85, 22.9]
+      local:
+        - to: East 23
+          jumps: 1
+        - to: East 24
+          thru: [25.85, 23.1]
+    - name: East 23
+      coord: [25.95, 22.75]
+      local:
+        - to: Far East Platform
+        - to: East Knob
+      exits:
+        - to: Rocky Gate > West
+          tags: [xshift]
+
+    - name: Column West
+      coord: [24.4, 22.75]
+      local:
+        - to: Column East
+        - to: West Right Platform
+        - to: Tunnel Entrance
+      exits:
+        - to: East 23
+          req: $hook and $hover
+          movement: fast_hover
+        - to: West Top Platform
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: West Right Ledge
+          req: $hover
+          movement: base
+    - name: West Right Platform
+      coord: [24.1, 23.0]
+      local:
+        - to: Tunnel Entrance
+          jumps_down: 1
+        - to: West Right Ledge
+          jumps_down: 1
+        - to: West Tree
+        - to: West Top Platform
+          jumps: 2
+      exits:
+        - to: Column West
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+    - name: West Top Platform
+      coord: [23.65, 22.6]
+      local:
+        - to: West Right Platform
+        - to: West 23
+        - to: West Left Ledge
+        - to: West Right Ledge
+          jumps_down: 2
+      exits:
+        - to: Column West
+          req: $hover
+          movement: base
+
+    - name: Tunnel Entrance
+      coord: [23.9, 23.8]
+      locations:
+        - name: Tablet
+          item: Becoming_An_Arm
+          tags: [standing]
+      exits:
+        - to: Glen > East
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: West Right Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West Right Ledge
+      coord: [23.9, 23.4]
+      local:
+        - to: Tunnel Entrance
+        - to: West Tree
+          jumps: 1
+        - to: West Right Platform
+          jumps: 2
+        - to: West Top Platform
+          jumps: 4
+      exits:
+        - to: West Middle Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: West Tree
+      coord: [23.6, 23.25]
+      local:
+        - to: West Right Ledge
+        - to: West Right Platform
+          jumps: 2
+        - to: West Middle Ledge
+          jumps: 1
+    - name: West Middle Ledge
+      coord: [23.3, 23.2]
+      local:
+        - to: West Tree
+        - to: West 23
+          jumps: 3
+      exits:
+        - to: West Left Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West Left Ledge
+      coord: [23.15, 22.8]
+      local:
+        - to: West 23
+          jumps: 1
+        - to: West Middle Ledge
+    - name: West 23
+      coord: [23.05, 22.75]
+      local:
+        - to: West Left Ledge
+        - to: West Top Platform
+          jumps: 2
+        - to: West Tree
+        - to: West Right Ledge
+      exits:
+        - to: Grassy Guardpost > East 23
+          tags: [xshift]
+
+- name: Rocky Gate  # MARK: Rocky Gate
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [26.05, 22.75]
+
+- name: Grassy Guardpost  # MARK: Grassy Guardpost
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 23
+      coord: [22.95, 22.75]
+
+- name: Glen  # MARK: Glen
+  on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Uhrum Glen Matrix
+  spots:
+    - name: East
+      coord: [22.95, 23.8]
+      local:
+        - to: Center
+          jumps: 1
+      exits:
+        - to: Artillery Practice > Tunnel Entrance
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Center
+      coord: [22.55, 23.7]
+      local:
+        - to: East
+      locations:
+        - name: Item
+          item: Power_Matrix
+          tags: [standing]

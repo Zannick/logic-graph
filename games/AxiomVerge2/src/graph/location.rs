@@ -429,6 +429,8 @@ impl world::Accessible for Location {
             LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Uhrum__Annuna_Corridor__Statue__Item => true,
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet => true,
+            LocationId::Uhrum__Glen__Center__Item => true,
             LocationId::Uhrum__Siege_Corridor__Center_Box__Box => rules::access_invoke_can_damage(ctx, world),
             LocationId::Uhrum__Siege_Corridor__Pond__Item => true,
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
@@ -4966,6 +4968,24 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         dest: SpotId::None,
         skippable: false,
     };
+    locations[LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet] = Location {
+        id: LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet,
+        canonical: CanonId::Loc_Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet,
+        item: Item::Becoming_An_Arm,
+        price: Currency::Free,
+        time: 0,
+        dest: SpotId::None,
+        skippable: false,
+    };
+    locations[LocationId::Uhrum__Glen__Center__Item] = Location {
+        id: LocationId::Uhrum__Glen__Center__Item,
+        canonical: CanonId::Loc_Uhrum__Glen__Center__Item,
+        item: Item::Power_Matrix,
+        price: Currency::Free,
+        time: 0,
+        dest: SpotId::None,
+        skippable: false,
+    };
 }
 
 pub fn get_location_spot(loc_id: LocationId) -> SpotId {
@@ -5273,5 +5293,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => SpotId::Uhrum__Annuna_Corridor__Block_East,
         LocationId::Uhrum__Annuna_Corridor__East_Cubby__Tablet => SpotId::Uhrum__Annuna_Corridor__East_Cubby,
         LocationId::Uhrum__Annuna_Corridor__Statue__Item => SpotId::Uhrum__Annuna_Corridor__Statue,
+        LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet => SpotId::Uhrum__Artillery_Practice__Tunnel_Entrance,
+        LocationId::Uhrum__Glen__Center__Item => SpotId::Uhrum__Glen__Center,
     }
 }

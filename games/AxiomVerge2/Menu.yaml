@@ -827,6 +827,10 @@ areas:
       coord: [31, 25]
     - name: Plague of Thoughts
       coord: [30, 25]
+    - name: Becoming An Arm
+      coord: [23, 24]
+    - name: Uhrum Glen Matrix
+      coord: [22, 24]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

@@ -27287,6 +27287,30 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Menu__Kiengir_Map__Becoming_An_Arm] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Becoming_An_Arm,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Uhrum_Glen_Matrix] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Glen_Matrix,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Menu__Breach_Map__AGB_Bridge_Lower] = Spot {
         id: SpotId::Menu__Breach_Map__AGB_Bridge_Lower,
         locations: Range {
@@ -29418,6 +29442,311 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         id: SpotId::Uhrum__Artillery_Practice__East_24,
         locations: Range {
             start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Trees] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Trees,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Hill] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Hill,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Outcrop_West] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Outcrop_East] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Outcrop_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_West] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_East] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__Column_Platform] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__Column_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__Column_East] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__Column_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__Far_East_Platform] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__Far_East_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_Knob] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_Knob,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__East_23] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__East_23,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__Column_West] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__Column_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__Column_West__ex__East_23_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Right_Platform] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Right_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Top_Platform] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Top_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__Tunnel_Entrance] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__Tunnel_Entrance,
+        locations: Range {
+            start: LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet.into_usize(),
+            end: LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__Glen__East_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__Tunnel_Entrance__ex__West_Right_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Right_Ledge] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Right_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Tree] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Tree,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Middle_Ledge] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Middle_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__West_Middle_Ledge__ex__West_Left_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_Left_Ledge] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_Left_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Artillery_Practice__West_23] = Spot {
+        id: SpotId::Uhrum__Artillery_Practice__West_23,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1.into_usize(),
+            end: ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Rocky_Gate__West] = Spot {
+        id: SpotId::Uhrum__Rocky_Gate__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__East_23] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__East_23,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Glen__East] = Spot {
+        id: SpotId::Uhrum__Glen__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1.into_usize(),
+            end: ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Glen__Center] = Spot {
+        id: SpotId::Uhrum__Glen__Center,
+        locations: Range {
+            start: LocationId::Uhrum__Glen__Center__Item.into_usize(),
+            end: LocationId::Uhrum__Glen__Center__Item.into_usize() + 1,
         },
         exits: Range {
             start: 0, end: 0,
