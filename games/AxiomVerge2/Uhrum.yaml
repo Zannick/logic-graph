@@ -1933,6 +1933,112 @@ areas:
   spots:
     - name: East 23
       coord: [22.95, 22.75]
+      local:
+        - to: Small Column East
+          jumps: 1
+      exits:
+        - to: Artillery Practice > West 23
+          tags: [xshift]
+        - to: Small Column East
+          req: $hook
+          movement: base
+          jumps: 0.5
+    - name: Small Column East
+      coord: [22.7, 22.55]
+      local:
+        - to: East 23
+      exits:
+        - to: Center Platform East
+          req: $grab or $hook
+          movement: base
+          jumps: 2
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 3
+    - name: Center Platform East
+      coord: [22.6, 22.2]
+      local:
+        - to: West Ledge
+          jumps: 1
+        - to: East 23
+        - to: Small Column East
+      exits:
+        - to: West Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West Ledge
+      coord: [22.4, 22.0]
+      local:
+        - to: West 22
+          jumps: 1
+        - to: Center Platform East
+      exits:
+        - to: East Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 1
+    - name: West 22
+      coord: [22.05, 21.8]
+      local:
+        - to: East Ledge
+          jumps: 4
+        - to: West Ledge
+      exits:
+        - to: East Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 3
+        - to: Emergence Save > Save Point
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Giguna > Vertical Interchange > East 22
+          tags: [xshift]
+    - name: East Ledge
+      coord: [21.85, 21.8]
+      local:
+        - to: East 22
+        - to: East 23
+          thru: [21.85, 22.1]
+        - to: West 22
+          jumps: 3
+        - to: Small Column East
+      exits:
+        - to: West 22
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 2
+        - to: West Ledge
+          req: $hover
+          movement: base
+        - to: West Ledge
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Emergence Save > Save Point
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Emergence Facility > West Approach
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, xshift, -fast_hover.1, -fast_hover.1]
+          maps: [Emergence Save > Save]
+    - name: East 22
+      coord: [21.95, 21.8]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Emergence Save > West
+          tags: [xshift]
 
 - name: Glen  # MARK: Glen
   on_entry: $reset_old_area(^newpos)
@@ -1957,3 +2063,49 @@ areas:
         - name: Item
           item: Power_Matrix
           tags: [standing]
+
+- name: Emergence Save  # MARK: Emergence Save
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Kiengir Map > Uhrum Emergence
+    save_point: Save Point
+  spots:
+    - name: West
+      coord: [23.05, 21.8]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Grassy Guardpost > East 22
+          tags: [xshift]
+    - name: Save Point
+      coord: [23.5, 21.7]
+      local:
+        - to: West
+        - to: East
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [23.95, 21.8]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Emergence Facility > West
+          tags: [xshift]
+
+- name: Emergence Facility  # MARK: Emergence Facility
+  on_entry: $reset_old_area(^newpos)
+  map:
+    door: [24, 21, 25, 22]
+  datamap:
+    map_spot:
+      door: Menu > Kiengir Map > Uhrum Emergence Facility Entrance
+  spots:
+    - name: West
+      coord: [24.05, 21.8]
+    - name: West Approach
+      coord: [24.7, 21.8]

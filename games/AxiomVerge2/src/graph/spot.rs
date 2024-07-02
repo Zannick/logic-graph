@@ -17280,6 +17280,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Giguna__Vertical_Interchange__East_22] = Spot {
+        id: SpotId::Giguna__Vertical_Interchange__East_22,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Giguna__Vertical_Interchange__South] = Spot {
         id: SpotId::Giguna__Vertical_Interchange__South,
         locations: Range {
@@ -25576,7 +25588,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Menu__Kiengir_Map__Uhrum_Emergence__ex__Uhrum__Emergence_Save__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Kiengir_Map__Uhrum_Emergence__ex__Uhrum__Emergence_Save__Save_Point_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -27301,6 +27314,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Kiengir_Map__Uhrum_Glen_Matrix] = Spot {
         id: SpotId::Menu__Kiengir_Map__Uhrum_Glen_Matrix,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance,
         locations: Range {
             start: 0, end: 0,
         },
@@ -29723,7 +29748,86 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Artillery_Practice__West_23_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1.into_usize() + 1,
+        },
+        actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__Small_Column_East] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__Small_Column_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__Center_Platform_East_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__West_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__Center_Platform_East] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__Center_Platform_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__West_Ledge] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__West_22] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__West_22,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Giguna__Vertical_Interchange__East_22_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__East_Ledge] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Grassy_Guardpost__East_22] = Spot {
+        id: SpotId::Uhrum__Grassy_Guardpost__East_22,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1.into_usize(),
+            end: ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -29747,6 +29851,69 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         locations: Range {
             start: LocationId::Uhrum__Glen__Center__Item.into_usize(),
             end: LocationId::Uhrum__Glen__Center__Item.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Save__West] = Spot {
+        id: SpotId::Uhrum__Emergence_Save__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Save__Save_Point] = Spot {
+        id: SpotId::Uhrum__Emergence_Save__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Uhrum__Emergence_Save__Save_Point__Save.into_usize(),
+            end: ActionId::Uhrum__Emergence_Save__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Save__East] = Spot {
+        id: SpotId::Uhrum__Emergence_Save__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__West] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__West_Approach] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__West_Approach,
+        locations: Range {
+            start: 0, end: 0,
         },
         exits: Range {
             start: 0, end: 0,

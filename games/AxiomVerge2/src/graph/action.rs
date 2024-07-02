@@ -193,6 +193,7 @@ impl world::Accessible for Action {
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
+            ActionId::Uhrum__Emergence_Save__Save_Point__Save => true,
             ActionId::Uhrum__Save_Room__Save_Point__Save => true,
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
@@ -1712,6 +1713,7 @@ impl world::Action for Action {
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Uhrum__Emergence_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
         };
         let dest = self.dest(ctx, world);
         if dest != SpotId::None {
@@ -2307,6 +2309,9 @@ impl world::Action for Action {
             }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Uhrum__Emergence_Save__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
         }
     }
@@ -3163,6 +3168,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 1000,
         price: Currency::Free,
     };
+    actions[ActionId::Uhrum__Emergence_Save__Save_Point__Save] = Action {
+        id: ActionId::Uhrum__Emergence_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    };
 }
 
 pub fn get_action_spot(act_id: ActionId) -> SpotId {
@@ -3308,6 +3318,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,
         ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => SpotId::Uhrum__Annuna_Corridor__Save_Point,
         ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High | ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ActionId::Uhrum__Emergence_Save__Save_Point__Save => SpotId::Uhrum__Emergence_Save__Save_Point,
         _ => SpotId::None,
     }
 }

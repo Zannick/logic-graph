@@ -2460,6 +2460,10 @@ pub fn access_map__uhrum__annuna_corridor__save(ctx: &Context, world: &World) ->
     // ^map__uhrum__annuna_corridor__save
     ctx.map__uhrum__annuna_corridor__save()
 }
+pub fn access_map__uhrum__emergence_save__save(ctx: &Context, world: &World) -> bool {
+    // ^map__uhrum__emergence_save__save
+    ctx.map__uhrum__emergence_save__save()
+}
 pub fn access_map__uhrum__save_room__save(ctx: &Context, world: &World) -> bool {
     // ^map__uhrum__save_room__save
     ctx.map__uhrum__save_room__save()
@@ -13081,6 +13085,18 @@ pub fn explain_map__uhrum__annuna_corridor__save(
         (r, vec!["^map__uhrum__annuna_corridor__save"])
     }
 }
+pub fn explain_map__uhrum__emergence_save__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__uhrum__emergence_save__save
+    {
+        let r = ctx.map__uhrum__emergence_save__save();
+        edict.insert("^map__uhrum__emergence_save__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum__emergence_save__save"])
+    }
+}
 pub fn explain_map__uhrum__save_room__save(
     ctx: &Context,
     world: &World,
@@ -20149,6 +20165,17 @@ pub fn observe_access_map__uhrum__annuna_corridor__save(
     {
         full_obs.observe_map__uhrum__annuna_corridor__save();
         ctx.map__uhrum__annuna_corridor__save()
+    }
+}
+pub fn observe_access_map__uhrum__emergence_save__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__uhrum__emergence_save__save
+    {
+        full_obs.observe_map__uhrum__emergence_save__save();
+        ctx.map__uhrum__emergence_save__save()
     }
 }
 pub fn observe_access_map__uhrum__save_room__save(

@@ -1621,6 +1621,7 @@ subgraph Giguna
         Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate(Middle Ledge Below Gate);
         Giguna__Vertical_Interchange__Middle_Hill_By_Switch(Middle Hill By Switch);
         Giguna__Vertical_Interchange__Switch(Switch);
+        Giguna__Vertical_Interchange__East_22(East 22);
         Giguna__Vertical_Interchange__South(South);
     end
     subgraph Giguna__Antechamber[Antechamber]
@@ -2582,6 +2583,7 @@ subgraph Menu
         Menu__Kiengir_Map__Plague_of_Thoughts(Plague of Thoughts);
         Menu__Kiengir_Map__Becoming_An_Arm(Becoming An Arm);
         Menu__Kiengir_Map__Uhrum_Glen_Matrix(Uhrum Glen Matrix);
+        Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance(Uhrum Emergence Facility Entrance);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2798,10 +2800,25 @@ subgraph Uhrum
     end
     subgraph Uhrum__Grassy_Guardpost[Grassy Guardpost]
         Uhrum__Grassy_Guardpost__East_23(East 23);
+        Uhrum__Grassy_Guardpost__Small_Column_East(Small Column East);
+        Uhrum__Grassy_Guardpost__Center_Platform_East(Center Platform East);
+        Uhrum__Grassy_Guardpost__West_Ledge(West Ledge);
+        Uhrum__Grassy_Guardpost__West_22(West 22);
+        Uhrum__Grassy_Guardpost__East_Ledge(East Ledge);
+        Uhrum__Grassy_Guardpost__East_22(East 22);
     end
     subgraph Uhrum__Glen[Glen]
         Uhrum__Glen__East(East);
         Uhrum__Glen__Center(Center);
+    end
+    subgraph Uhrum__Emergence_Save[Emergence Save]
+        Uhrum__Emergence_Save__West(West);
+        Uhrum__Emergence_Save__Save_Point(Save Point);
+        Uhrum__Emergence_Save__East(East);
+    end
+    subgraph Uhrum__Emergence_Facility[Emergence Facility]
+        Uhrum__Emergence_Facility__West(West);
+        Uhrum__Emergence_Facility__West_Approach(West Approach);
     end
 end
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
@@ -4271,6 +4288,7 @@ Menu__Kiengir_Map__Irikar_Hub --> Irikar__Hub__Save_Point
 Menu__Kiengir_Map__Irikar_Midwest --> Irikar__Midwest__Save_Point
 Menu__Kiengir_Map__Uhrum_Center --> Uhrum__Save_Room__Save_Point
 Menu__Kiengir_Map__Uhrum_East --> Uhrum__Annuna_Corridor__Save_Point
+Menu__Kiengir_Map__Uhrum_Emergence --> Uhrum__Emergence_Save__Save_Point
 Menu__Kiengir_Map__Uhrum_West --> Uhrum__West_Entrance__Save_Point
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
@@ -4303,10 +4321,23 @@ Uhrum__Artillery_Practice__East_Trees --> Uhrum__Artillery_Practice__East_Lower_
 Uhrum__Artillery_Practice__East_Trees --> Uhrum__Artillery_Practice__East_Outcrop_East
 Uhrum__Artillery_Practice__Tunnel_Entrance --> Uhrum__Artillery_Practice__West_Right_Ledge
 Uhrum__Artillery_Practice__Tunnel_Entrance <--> Uhrum__Glen__East
-Uhrum__Artillery_Practice__West_23 --> Uhrum__Grassy_Guardpost__East_23
+Uhrum__Artillery_Practice__West_23 <--> Uhrum__Grassy_Guardpost__East_23
 Uhrum__Artillery_Practice__West_Middle_Ledge --> Uhrum__Artillery_Practice__West_Left_Ledge
 Uhrum__Artillery_Practice__West_Right_Ledge --> Uhrum__Artillery_Practice__West_Middle_Ledge
 Uhrum__Artillery_Practice__West_Right_Platform --> Uhrum__Artillery_Practice__Column_West
+Uhrum__Emergence_Save__East --> Uhrum__Emergence_Facility__West
+Uhrum__Emergence_Save__West <--> Uhrum__Grassy_Guardpost__East_22
+Uhrum__Grassy_Guardpost__Center_Platform_East --> Uhrum__Grassy_Guardpost__West_Ledge
+Uhrum__Grassy_Guardpost__East_23 --> Uhrum__Grassy_Guardpost__Small_Column_East
+Uhrum__Grassy_Guardpost__East_Ledge --> Uhrum__Emergence_Facility__West_Approach
+Uhrum__Grassy_Guardpost__East_Ledge --> Uhrum__Emergence_Save__Save_Point
+Uhrum__Grassy_Guardpost__East_Ledge <--> Uhrum__Grassy_Guardpost__West_22
+Uhrum__Grassy_Guardpost__East_Ledge <--> Uhrum__Grassy_Guardpost__West_Ledge
+Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__Center_Platform_East
+Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__East_Ledge
+Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__West_Ledge
+Uhrum__Grassy_Guardpost__West_22 --> Giguna__Vertical_Interchange__East_22
+Uhrum__Grassy_Guardpost__West_22 --> Uhrum__Emergence_Save__Save_Point
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West

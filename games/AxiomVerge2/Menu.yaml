@@ -524,6 +524,14 @@ areas:
           tags: [warp]
     - name: Uhrum Emergence
       coord: [23, 22]
+      exits:
+        - to: Uhrum > Emergence Save > Save Point
+          req: ^map__uhrum__emergence_save__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
     - name: Uhrum West
       coord: [19, 28]
       exits:
@@ -831,6 +839,8 @@ areas:
       coord: [23, 24]
     - name: Uhrum Glen Matrix
       coord: [22, 24]
+    - name: Uhrum Emergence Facility Entrance
+      coord: [24, 22]
     #endregion
 
 - name: Breach Map  # MARK: Breach Map

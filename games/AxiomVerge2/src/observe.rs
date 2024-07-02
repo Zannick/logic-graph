@@ -233,13 +233,13 @@ impl Observer for FullObservation {
                 self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_HIDDEN_PORTAL_GATE);
             }
             LocationId::Ebih__West_Face__Lower_Ledge__Flask | LocationId::Ebih__West_Face__Lower_Ledge__Shockwave_Flask | LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip | LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_WEST_FACE_FLASK);
+                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_WEST_FACE_FLASK);
             }
             LocationId::Ebih__Boss_Room__Boss__Hack_Alu | LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_ALU);
             }
             LocationId::Ebih__Drone_Room__Item__Urn | LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip | LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel | LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_REMOTE_DRONE);
+                self.cbits8.insert(flags::ContextBits8::VISITED_REMOTE_DRONE);
             }
             LocationId::Ebih__Drone_Pit__Pit__Item | LocationId::Ebih__Drone_Pit__Pit__Shockwave_Flask | LocationId::Ebih__Drone_Pit__Pit__Flask_Collection_Skip | LocationId::Ebih__Drone_Pit__Pit__Flask_Fast_Travel | LocationId::Ebih__Drone_Pit__Bush_Left__Item | LocationId::Ebih__Drone_Pit__Bush_Left__Shockwave_Flask => {
                 self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_DRONE_PIT_FLASK);
@@ -464,7 +464,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANTARCTICA__POWER_ROOM__SWITCH__FLIP);
             }
             LocationId::Ebih_Breach__In_n_Out__Gate_East__Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH_BREACH__IN_N_OUT__GATE_EAST__ITEM);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_EBIH_BREACH__IN_N_OUT__GATE_EAST__ITEM);
             }
             LocationId::Ebih_Breach__In_n_Out__Button__Hit_Button => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_LOC_EBIH_BREACH__IN_N_OUT__BUTTON__HIT_BUTTON);
@@ -659,7 +659,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR_BREACH__GAUNTLET__HIDDEN_PATH_REWARD__ITEM);
             }
             LocationId::Irikar_Breach__Hover_Room__Bottom__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM);
             }
             LocationId::Irikar_Breach__Worm_Rave__Corner__Item => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM);
@@ -1881,6 +1881,16 @@ impl Observer for FullObservation {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
             }
+            AreaId::Uhrum__Emergence_Facility => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Uhrum__Emergence_Save => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
             AreaId::Uhrum__Glen => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
@@ -2436,6 +2446,12 @@ impl FullObservation {
     pub fn clear_map__uhrum__annuna_corridor__save(&mut self) {
         self.cbits1.remove(flags::ContextBits1::MAP__UHRUM__ANNUNA_CORRIDOR__SAVE);
     }
+    pub fn observe_map__uhrum__emergence_save__save(&mut self) {
+        self.cbits1.insert(flags::ContextBits1::MAP__UHRUM__EMERGENCE_SAVE__SAVE);
+    }
+    pub fn clear_map__uhrum__emergence_save__save(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::MAP__UHRUM__EMERGENCE_SAVE__SAVE);
+    }
     pub fn observe_glacier__ctx__hammonds_doors(&mut self) {
         self.cbits1.insert(flags::ContextBits1::GLACIER__CTX__HAMMONDS_DOORS);
     }
@@ -2575,10 +2591,10 @@ impl FullObservation {
         self.cbits1.remove(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
     }
     pub fn observe_giguna__ruins_west__ctx__kishib_handled(&mut self) {
-        self.cbits1.insert(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+        self.cbits2.insert(flags::ContextBits2::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
     }
     pub fn clear_giguna__ruins_west__ctx__kishib_handled(&mut self) {
-        self.cbits1.remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+        self.cbits2.remove(flags::ContextBits2::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
     }
     pub fn observe_giguna__ruins_top__ctx__doors_open(&mut self) {
         self.cbits2.insert(flags::ContextBits2::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
@@ -2969,10 +2985,10 @@ impl FullObservation {
         self.cbits2.remove(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
     }
     pub fn observe_ebih_walled_off_wall(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::EBIH_WALLED_OFF_WALL);
+        self.cbits3.insert(flags::ContextBits3::EBIH_WALLED_OFF_WALL);
     }
     pub fn clear_ebih_walled_off_wall(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::EBIH_WALLED_OFF_WALL);
+        self.cbits3.remove(flags::ContextBits3::EBIH_WALLED_OFF_WALL);
     }
     pub fn observe_ebih_waterfall_block_left(&mut self) {
         self.cbits3.insert(flags::ContextBits3::EBIH_WATERFALL_BLOCK_LEFT);
@@ -3393,10 +3409,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::RECORD_LOSSES);
     }
     pub fn observe_remote_boomerang(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::REMOTE_BOOMERANG);
+        self.cbits4.insert(flags::ContextBits4::REMOTE_BOOMERANG);
     }
     pub fn clear_remote_boomerang(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::REMOTE_BOOMERANG);
+        self.cbits4.remove(flags::ContextBits4::REMOTE_BOOMERANG);
     }
     pub fn observe_remote_drone(&mut self) {
         self.cbits4.insert(flags::ContextBits4::REMOTE_DRONE);

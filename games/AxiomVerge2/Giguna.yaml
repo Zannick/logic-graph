@@ -3940,6 +3940,8 @@ areas:
     #endregion
 
     #region Lower
+    - name: East 22
+      coord: [21.95, 21.8]
     - name: South
       coord: [21.5, 23.8]
     #endregion

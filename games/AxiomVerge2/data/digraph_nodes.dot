@@ -1617,6 +1617,7 @@
             Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate [label = "", pos = "64.35,-33.833333!"];
             Giguna__Vertical_Interchange__Middle_Hill_By_Switch [label = "", pos = "64.95,-34.5!"];
             Giguna__Vertical_Interchange__Switch [label = "", pos = "65.4,-34.666667!"];
+            Giguna__Vertical_Interchange__East_22 [label = "", pos = "65.85,-36.333333!"];
             Giguna__Vertical_Interchange__South [label = "", pos = "64.5,-39.666667!"];
         }
         {
@@ -2643,6 +2644,7 @@
             Menu__Kiengir_Map__Plague_of_Thoughts [label = "", pos = "90.0,-41.666667!"];
             Menu__Kiengir_Map__Becoming_An_Arm [label = "", pos = "69.0,-40.0!"];
             Menu__Kiengir_Map__Uhrum_Glen_Matrix [label = "", pos = "66.0,-40.0!"];
+            Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance [label = "", pos = "72.0,-36.666667!"];
         }
     }
     {
@@ -2694,6 +2696,15 @@
             Uhrum__East_Lake__West_28 [label = "", pos = "84.15,-46.25!"];
         }
         {
+            Uhrum__Emergence_Facility__West [label = "", pos = "72.15,-36.333333!"];
+            Uhrum__Emergence_Facility__West_Approach [label = "", pos = "74.1,-36.333333!"];
+        }
+        {
+            Uhrum__Emergence_Save__West [label = "", pos = "69.15,-36.333333!"];
+            Uhrum__Emergence_Save__Save_Point [label = "", pos = "70.5,-36.166667!"];
+            Uhrum__Emergence_Save__East [label = "", pos = "71.85,-36.333333!"];
+        }
+        {
             Uhrum__Glen__East [label = "", pos = "68.85,-39.666667!"];
             Uhrum__Glen__Center [label = "", pos = "67.65,-39.5!"];
         }
@@ -2704,6 +2715,12 @@
         }
         {
             Uhrum__Grassy_Guardpost__East_23 [label = "", pos = "68.85,-37.916667!"];
+            Uhrum__Grassy_Guardpost__Small_Column_East [label = "", pos = "68.1,-37.583333!"];
+            Uhrum__Grassy_Guardpost__Center_Platform_East [label = "", pos = "67.8,-37.0!"];
+            Uhrum__Grassy_Guardpost__West_Ledge [label = "", pos = "67.2,-36.666667!"];
+            Uhrum__Grassy_Guardpost__West_22 [label = "", pos = "66.15,-36.333333!"];
+            Uhrum__Grassy_Guardpost__East_Ledge [label = "", pos = "65.55,-36.333333!"];
+            Uhrum__Grassy_Guardpost__East_22 [label = "", pos = "65.85,-36.333333!"];
         }
         {
             Uhrum__Rocky_Gate__West [label = "", pos = "78.15,-37.916667!"];
