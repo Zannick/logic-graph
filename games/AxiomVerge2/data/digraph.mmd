@@ -1043,6 +1043,16 @@ subgraph Ebih
         Ebih__Party_Central__East_Trough(East Trough);
     end
 end
+subgraph Emergence
+    subgraph Emergence__Camp_Exterior[Camp Exterior]
+        Emergence__Camp_Exterior__Door(Door);
+        Emergence__Camp_Exterior__Save_Point(Save Point);
+        Emergence__Camp_Exterior__East(East);
+    end
+    subgraph Emergence__Drop_off[Drop-off]
+        Emergence__Drop_off__West(West);
+    end
+end
 subgraph Filter
     subgraph Filter__Entrance[Entrance]
         Filter__Entrance__Egg(Egg);
@@ -2102,6 +2112,20 @@ subgraph Interior
         Interior__Outpost_Interior__Entry(Entry);
         Interior__Outpost_Interior__Bookshelf(Bookshelf);
     end
+    subgraph Interior__Facility_Interior[Facility Interior]
+        Interior__Facility_Interior__Door(Door);
+        Interior__Facility_Interior__West_Stairs(West Stairs);
+        Interior__Facility_Interior__Top_Middle(Top Middle);
+        Interior__Facility_Interior__Top_Right(Top Right);
+        Interior__Facility_Interior__Middle_Tier_Left(Middle Tier Left);
+        Interior__Facility_Interior__Middle_Tier_Right(Middle Tier Right);
+        Interior__Facility_Interior__Bottom_Middle(Bottom Middle);
+        Interior__Facility_Interior__Freight_Elevator(Freight Elevator);
+    end
+    subgraph Interior__Emergence_Hangar[Emergence Hangar]
+        Interior__Emergence_Hangar__Freight_Elevator(Freight Elevator);
+        Interior__Emergence_Hangar__Door(Door);
+    end
 end
 subgraph Irikar_Breach
     subgraph Irikar_Breach__Save_Room[Save Room]
@@ -2584,6 +2608,16 @@ subgraph Menu
         Menu__Kiengir_Map__Becoming_An_Arm(Becoming An Arm);
         Menu__Kiengir_Map__Uhrum_Glen_Matrix(Uhrum Glen Matrix);
         Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance(Uhrum Emergence Facility Entrance);
+        Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask(Uhrum Emergence Facility Flask);
+        Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall(Uhrum Emergence Facility Wall);
+        Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask(Uhrum Rocky Guardpost Flask);
+    end
+    subgraph Menu__Emergence_Map[Emergence Map]
+        Menu__Emergence_Map__Camp(Camp);
+        Menu__Emergence_Map__Drop_off_Flask(Drop-off Flask);
+        Menu__Emergence_Map__Slingshot_Charge(Slingshot Charge);
+        Menu__Emergence_Map__Audience_Chamber_Flask(Audience Chamber Flask);
+        Menu__Emergence_Map__Storage_Portal(Storage Portal);
     end
     subgraph Menu__Breach_Map[Breach Map]
         Menu__Breach_Map__AGB_Bridge_Lower(AGB Bridge Lower);
@@ -2819,6 +2853,28 @@ subgraph Uhrum
     subgraph Uhrum__Emergence_Facility[Emergence Facility]
         Uhrum__Emergence_Facility__West(West);
         Uhrum__Emergence_Facility__West_Approach(West Approach);
+        Uhrum__Emergence_Facility__East_Approach(East Approach);
+        Uhrum__Emergence_Facility__Door(Door);
+        Uhrum__Emergence_Facility__Middle_Level_Mid_air(Middle Level Mid-air);
+        Uhrum__Emergence_Facility__East_Stair_Left(East Stair Left);
+        Uhrum__Emergence_Facility__East_Stair_Right(East Stair Right);
+        Uhrum__Emergence_Facility__East_Stair_Middle(East Stair Middle);
+        Uhrum__Emergence_Facility__Upper_Level_Middle(Upper Level Middle);
+        Uhrum__Emergence_Facility__East_Stair_Roof(East Stair Roof);
+        Uhrum__Emergence_Facility__Reservoir(Reservoir);
+        Uhrum__Emergence_Facility__Balcony(Balcony);
+        Uhrum__Emergence_Facility__Roof_Middle(Roof Middle);
+        Uhrum__Emergence_Facility__Bush(Bush);
+        Uhrum__Emergence_Facility__Wall_West_Ledge(Wall West Ledge);
+        Uhrum__Emergence_Facility__Wall_West_Mid_air(Wall West Mid-air);
+        Uhrum__Emergence_Facility__Above_Wall_West(Above Wall West);
+        Uhrum__Emergence_Facility__Wall_East_Mid_air(Wall East Mid-air);
+        Uhrum__Emergence_Facility__Wall_East_Ledge(Wall East Ledge);
+        Uhrum__Emergence_Facility__East(East);
+    end
+    subgraph Uhrum__Rocky_Guardpost[Rocky Guardpost]
+        Uhrum__Rocky_Guardpost__West_22(West 22);
+        Uhrum__Rocky_Guardpost__West_23(West 23);
     end
 end
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
@@ -3501,6 +3557,8 @@ Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
 Ebih__West_Face__Lower_Ledge --> Ebih__West_Face__Upper_Ledge
 Ebih__West_Face__South --> Ebih__Ebih_West__Above_the_Trees
 Ebih__West_Face__Southwest --> Ebih__Ebih_West__Middle_North
+Emergence__Camp_Exterior__Door <--> Interior__Emergence_Hangar__Door
+Emergence__Camp_Exterior__East --> Emergence__Drop_off__West
 Filter__Core__Bottom --> Filter__Core__Terminal_East
 Filter__Core__Catwalk_West --> Filter__Core__West
 Filter__Core__Terminal_East --> Filter__Core__Catwalk_West
@@ -4068,6 +4126,12 @@ Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Mid
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top
 Interior__Dock_Elevator__Connector <--> Interior__Dock_Interior__Connector
+Interior__Facility_Interior__Bottom_Middle --> Interior__Facility_Interior__Middle_Tier_Left
+Interior__Facility_Interior__Door <--> Uhrum__Emergence_Facility__Door
+Interior__Facility_Interior__Middle_Tier_Left --> Interior__Facility_Interior__Top_Right
+Interior__Facility_Interior__Middle_Tier_Right --> Interior__Facility_Interior__Top_Right
+Interior__Facility_Interior__West_Stairs --> Interior__Facility_Interior__Top_Middle
+Interior__Facility_Interior__West_Stairs --> Interior__Facility_Interior__Top_Right
 Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Atop_Structure_East
 Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Below_Catwalk
 Interior__Observatory__East_Staircase_Top --> Interior__Observatory__Catwalk
@@ -4264,6 +4328,7 @@ Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
+Menu__Emergence_Map__Camp --> Emergence__Camp_Exterior__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
 Menu__Kiengir_Map__Annuna_Center_Save --> Annuna__Center_Save__Save_Point
@@ -4325,7 +4390,19 @@ Uhrum__Artillery_Practice__West_23 <--> Uhrum__Grassy_Guardpost__East_23
 Uhrum__Artillery_Practice__West_Middle_Ledge --> Uhrum__Artillery_Practice__West_Left_Ledge
 Uhrum__Artillery_Practice__West_Right_Ledge --> Uhrum__Artillery_Practice__West_Middle_Ledge
 Uhrum__Artillery_Practice__West_Right_Platform --> Uhrum__Artillery_Practice__Column_West
-Uhrum__Emergence_Save__East --> Uhrum__Emergence_Facility__West
+Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__East_Stair_Right
+Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__Wall_East_Mid_air
+Uhrum__Emergence_Facility__Door --> Uhrum__Emergence_Facility__Upper_Level_Middle
+Uhrum__Emergence_Facility__East --> Uhrum__Rocky_Guardpost__West_22
+Uhrum__Emergence_Facility__East_Approach --> Uhrum__Emergence_Facility__Upper_Level_Middle
+Uhrum__Emergence_Facility__Upper_Level_Middle --> Uhrum__Emergence_Facility__Roof_Middle
+Uhrum__Emergence_Facility__Wall_East_Mid_air --> Uhrum__Emergence_Facility__East_Approach
+Uhrum__Emergence_Facility__Wall_East_Mid_air --> Uhrum__Emergence_Facility__East_Stair_Right
+Uhrum__Emergence_Facility__Wall_East_Mid_air <--> Uhrum__Emergence_Facility__Wall_West_Mid_air
+Uhrum__Emergence_Facility__Wall_West_Ledge --> Uhrum__Emergence_Facility__Wall_East_Mid_air
+Uhrum__Emergence_Facility__Wall_West_Mid_air --> Uhrum__Emergence_Facility__East_Stair_Right
+Uhrum__Emergence_Facility__West <--> Uhrum__Emergence_Save__East
+Uhrum__Emergence_Facility__West_Approach --> Uhrum__Emergence_Facility__Upper_Level_Middle
 Uhrum__Emergence_Save__West <--> Uhrum__Grassy_Guardpost__East_22
 Uhrum__Grassy_Guardpost__Center_Platform_East --> Uhrum__Grassy_Guardpost__West_Ledge
 Uhrum__Grassy_Guardpost__East_23 --> Uhrum__Grassy_Guardpost__Small_Column_East

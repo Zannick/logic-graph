@@ -503,3 +503,120 @@ areas:
           item: Letter_from_Trace
           tags: [standing]
 #endregion
+
+#region Uhrum
+- name: Facility Interior  # MARK: Facility Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Door
+      coord: [24.925, 21.15]
+      local:
+        - to: West Stairs
+          jumps: 1
+      exits:
+        - to: Uhrum > Emergence Facility > Door
+          tags: [exterior]
+    - name: West Stairs
+      coord: [25.15, 20.95]
+      local:
+        - to: Door
+        - to: Top Middle
+          jumps: 1
+      exits:
+        - to: Top Middle
+          req: $hook
+          movement: fast_hover
+          jumps: 0.6
+        - to: Top Right
+          req: $spin
+          movement: fast_hover
+          jumps: 0.5
+    - name: Top Middle
+      coord: [25.35, 20.85]
+      local:
+        - to: West Stairs
+          jumps_down: 1
+        - to: Top Right
+    - name: Top Right
+      coord: [25.45, 20.85]
+      local:
+        - to: Top Middle
+        - to: Middle Tier Left
+          jumps_down: 3
+        - to: Middle Tier Right
+          jumps_down: 4
+    - name: Middle Tier Left
+      coord: [25.6, 21.3]
+      local:
+        - to: Middle Tier Right
+        - to: Bottom Middle
+          thru: [25.55, 21.65]
+          jumps_down: [1, 0]
+        - to: Top Right
+          jumps: 3
+      exits:
+        - to: Top Right
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Top Right
+          req: $spin
+          movement: base
+          jumps: 1
+    - name: Middle Tier Right
+      coord: [25.85, 21.3]
+      local:
+        - to: Middle Tier Left
+        - to: Top Right
+          jumps: 3
+      exits:
+        - to: Top Right
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Bottom Middle
+      coord: [25.5, 21.8]
+      local:
+        - to: Freight Elevator
+        - to: Middle Tier Right
+          thru: [25.85, 21.6]
+          jumps: [2, 2]
+      exits:
+        - to: Middle Tier Left
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Freight Elevator
+      coord: [25.125, 21.8]
+      local:
+        - to: Bottom Middle
+      actions:
+        - name: Enter Emergence
+          to: Emergence Hangar > Freight Elevator
+          do: $save = `Emergence > Camp Exterior > Save Point`
+          time: 11.5
+          tags: [warp]
+#endregion
+
+#region Emergence
+- name: Emergence Hangar  # MARK: Emergence Hangar
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Freight Elevator
+      coord: [4.825, 7.8]
+      local:
+        - to: Door
+      actions:
+        - name: Exit Emergence
+          to: Facility Interior > Freight Elevator
+          do: $save = `Uhrum > Emergence Save > Save Point`
+          time: 13.5  # door is all the way up
+          tags: [warp]
+    - name: Door
+      coord: [4.4, 7.8]
+      local:
+        - to: Freight Elevator
+      exits:
+        - to: Emergence > Camp Exterior > Door
+          tags: [exterior]
+#endregion

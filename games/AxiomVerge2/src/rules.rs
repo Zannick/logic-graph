@@ -2376,6 +2376,10 @@ pub fn access_map__ebih_breach__portals_101__save(ctx: &Context, world: &World) 
     // ^map__ebih_breach__portals_101__save
     ctx.map__ebih_breach__portals_101__save()
 }
+pub fn access_map__emergence__camp_exterior__save(ctx: &Context, world: &World) -> bool {
+    // ^map__emergence__camp_exterior__save
+    ctx.map__emergence__camp_exterior__save()
+}
 pub fn access_map__giguna__giguna_base__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__giguna_base__save
     ctx.map__giguna__giguna_base__save()
@@ -2778,6 +2782,22 @@ pub fn access_switch_40_12(ctx: &Context, world: &World) -> bool {
 pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+}
+pub fn access_uhrum_emergence_wall(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Emergence_Wall
+    ctx.has(Item::Uhrum_Emergence_Wall)
+}
+pub fn access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Emergence_Wall and $hook and $hover
+    ((ctx.has(Item::Uhrum_Emergence_Wall) && helper__hook!(ctx, world))
+        && helper__hover!(ctx, world))
+}
+pub fn access_uhrum_emergence_wall_and_invoke_hover(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Emergence_Wall and $hover
+    (ctx.has(Item::Uhrum_Emergence_Wall) && helper__hover!(ctx, world))
 }
 pub fn access_uhrum_waterfall_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfall_Wall
@@ -3398,6 +3418,20 @@ pub fn action_invoke_save_last_invoke_refill_energy(
     // $save_last; $refill_energy
     helper__save_last!(ctx, world);
     helper__refill_energy!(ctx, world);
+}
+pub fn action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $save = `Emergence > Camp Exterior > Save Point`
+    helper__save!(ctx, world);
+}
+pub fn action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $save = `Uhrum > Emergence Save > Save Point`
+    helper__save!(ctx, world);
 }
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
@@ -12824,6 +12858,18 @@ pub fn explain_map__ebih_breach__portals_101__save(
         (r, vec!["^map__ebih_breach__portals_101__save"])
     }
 }
+pub fn explain_map__emergence__camp_exterior__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__emergence__camp_exterior__save
+    {
+        let r = ctx.map__emergence__camp_exterior__save();
+        edict.insert("^map__emergence__camp_exterior__save", format!("{:?}", r));
+        (r, vec!["^map__emergence__camp_exterior__save"])
+    }
+}
 pub fn explain_map__giguna__giguna_base__save(
     ctx: &Context,
     world: &World,
@@ -14712,6 +14758,84 @@ pub fn explain_uhrum_annuna_corridor_block(
         let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
         edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
         (h, vec!["Uhrum_Annuna_Corridor_Block"])
+    }
+}
+pub fn explain_uhrum_emergence_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Emergence_Wall
+    {
+        let h = ctx.has(Item::Uhrum_Emergence_Wall);
+        edict.insert("Uhrum_Emergence_Wall", format!("{}", h));
+        (h, vec!["Uhrum_Emergence_Wall"])
+    }
+}
+pub fn explain_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Emergence_Wall and $hook and $hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Uhrum_Emergence_Wall);
+                edict.insert("Uhrum_Emergence_Wall", format!("{}", h));
+                (h, vec!["Uhrum_Emergence_Wall"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_emergence_wall_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Emergence_Wall and $hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Emergence_Wall);
+            edict.insert("Uhrum_Emergence_Wall", format!("{}", h));
+            (h, vec!["Uhrum_Emergence_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_uhrum_waterfall_wall(
@@ -19936,6 +20060,17 @@ pub fn observe_access_map__ebih_breach__portals_101__save(
         ctx.map__ebih_breach__portals_101__save()
     }
 }
+pub fn observe_access_map__emergence__camp_exterior__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__emergence__camp_exterior__save
+    {
+        full_obs.observe_map__emergence__camp_exterior__save();
+        ctx.map__emergence__camp_exterior__save()
+    }
+}
 pub fn observe_access_map__giguna__giguna_base__save(
     ctx: &Context,
     world: &World,
@@ -21057,6 +21192,40 @@ pub fn observe_access_uhrum_annuna_corridor_block(
         full_obs.observe_uhrum_annuna_corridor_block();
         ctx.has(Item::Uhrum_Annuna_Corridor_Block)
     }
+}
+pub fn observe_access_uhrum_emergence_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Emergence_Wall
+    {
+        full_obs.observe_uhrum_emergence_wall();
+        ctx.has(Item::Uhrum_Emergence_Wall)
+    }
+}
+pub fn observe_access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Emergence_Wall and $hook and $hover
+    (({
+        full_obs.observe_uhrum_emergence_wall();
+        ctx.has(Item::Uhrum_Emergence_Wall)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+        && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_uhrum_emergence_wall_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Emergence_Wall and $hover
+    ({
+        full_obs.observe_uhrum_emergence_wall();
+        ctx.has(Item::Uhrum_Emergence_Wall)
+    } && (hobserve__hover!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_waterfall_wall(
     ctx: &Context,
@@ -22381,6 +22550,28 @@ pub fn observe_action_invoke_save_last_invoke_refill_energy(
     full_obs.strict = true;
     hobserve__save_last!(ctx, world, full_obs);
     hobserve__refill_energy!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $save = `Emergence > Camp Exterior > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__save!(ctx, world, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $save = `Uhrum > Emergence Save > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__save!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(

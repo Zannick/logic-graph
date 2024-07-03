@@ -2002,7 +2002,7 @@ areas:
         - to: Giguna > Vertical Interchange > East 22
           tags: [xshift]
     - name: East Ledge
-      coord: [21.85, 21.8]
+      coord: [22.85, 21.8]
       local:
         - to: East 22
         - to: East 23
@@ -2033,7 +2033,7 @@ areas:
           penalty_tags: [xshift, xshift, -fast_hover.1, -fast_hover.1]
           maps: [Emergence Save > Save]
     - name: East 22
-      coord: [21.95, 21.8]
+      coord: [22.95, 21.8]
       local:
         - to: East Ledge
       exits:
@@ -2101,11 +2101,380 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     door: [24, 21, 25, 22]
+    flask: [25, 20, 26, 21]
+    wall: [26, 21, 27, 22]
   datamap:
     map_spot:
       door: Menu > Kiengir Map > Uhrum Emergence Facility Entrance
+      flask: Menu > Kiengir Map > Uhrum Emergence Facility Flask
+      wall: Menu > Kiengir Map > Uhrum Emergence Facility Wall
   spots:
     - name: West
       coord: [24.05, 21.8]
+      local:
+        - to: West Approach
+      exits:
+        - to: Emergence Save > East
+          tags: [xshift]
     - name: West Approach
       coord: [24.7, 21.8]
+      local:
+        - to: West
+        - to: Door
+          jumps: 4
+        - to: Middle Level Mid-air
+          jumps: 5
+        - to: East Stair Left
+          jumps: 4
+        - to: East Approach
+      exits:
+        - to: Upper Level Middle
+          req: $hover
+          movement: base
+          jumps: 7
+        - to: Upper Level Middle
+          req: Anuman
+          movement: base
+          jumps: 5
+    - name: East Approach
+      coord: [24.7, 21.8]
+      local:
+        - to: West Approach
+        - to: Door
+          jumps: 4
+        - to: Middle Level Mid-air
+          jumps: 5
+        - to: East Stair Left
+          jumps: 4
+        - to: Bush
+      exits:
+        - to: Upper Level Middle
+          req: $hover
+          movement: base
+          jumps: 7
+        - to: Upper Level Middle
+          req: Anuman
+          movement: base
+          jumps: 5
+    - name: Door
+      coord: [24.925, 21.15]
+      local:
+        - to: West
+        - to: Middle Level Mid-air
+          jumps: 1
+        - to: East Stair Left
+        - to: Bush
+          jumps_down: 1
+      exits:
+        - to: Upper Level Middle
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: Upper Level Middle
+          req: Anuman
+          movement: base
+          jumps: 1
+        - to: Interior > Facility Interior > Door
+          tags: [interior]
+    - name: Middle Level Mid-air
+      coord: [25.25, 21.0]
+      local:
+        - to: Door
+        - to: East Stair Left
+        - to: Bush
+          jumps_down: 1
+      locations:
+        - name: Remote Flask
+          req: $boomerang
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          tags: [remote_flask]
+        - name: Throw Up and Go Left
+          req: $boomerang
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          to: Door
+          movement: base
+          penalty_tags: [throw, flask]
+        - name: Throw Up and Go Right
+          req: $boomerang
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          to: East Stair Left
+          movement: base
+          penalty_tags: [throw, flask]
+        - name: Throw Up and Fast Travel
+          req: $boomerang
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          to: ^map_spot
+          tags: [cskip]
+    - name: East Stair Left
+      coord: [25.8, 21.15]
+      local:
+        - to: Door
+        - to: East Approach
+          jumps_down: 1
+        - to: Middle Level Mid-air
+          jumps: 1
+        - to: East Stair Right
+        - to: Bush
+          jumps_down: 1
+        - to: East Stair Middle
+          jumps: 2
+    - name: East Stair Right
+      coord: [26.1, 21.15]
+      local:
+        - to: East Stair Left
+        - to: East Stair Middle
+          jumps: 2
+        - to: Bush
+          jumps_down: 1
+        - to: East Approach
+          jumps_down: 1
+        - to: Wall West Ledge
+        - to: Wall West Mid-air
+          jumps: 1
+    - name: East Stair Middle
+      coord: [25.8, 20.8]
+      local:
+        - to: East Stair Right
+        - to: East Stair Left
+          jumps_down: 1
+        - to: Upper Level Middle
+        - to: East Stair Roof
+          jumps: 2
+    - name: Upper Level Middle
+      coord: [25.25, 20.8]
+      local:
+        - to: Door
+          jumps_down: 1
+        - to: West
+        - to: East Stair Middle
+        - to: East Stair Left
+          jumps_down: 1
+      exits:
+        - to: Roof Middle
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: Roof Middle
+          req: Anuman
+          movement: base
+          jumps: 1
+    - name: East Stair Roof
+      coord: [25.6, 20.5]
+      local:
+        - to: Reservoir
+        - to: East Stair Middle
+          jumps_down: 2
+        - to: East Stair Right
+        - to: Upper Level Middle
+          jumps_down: 1
+    - name: Reservoir
+      coord: [25.45, 20.5]
+      local:
+        - to: Balcony
+          jumps: 1
+        - to: Roof Middle
+        - to: East Stair Roof
+    - name: Balcony
+      coord: [25.25, 20.4]
+      local:
+        - to: West
+        - to: Door
+          jumps_down: 3
+        - to: Reservoir
+      locations:
+        - name: Flask
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Roof Middle
+      coord: [25.25, 20.5]
+      local:
+        - to: Reservoir
+        - to: Upper Level Middle
+          jumps_down: 1
+        - to: East Stair Middle
+          jumps_down: 1
+        - to: West
+        - to: Door
+          jumps_down: 2
+        - to: Balcony
+          jumps: 1
+      locations:
+        - name: Flask from Below
+          canon: Uhrum_Emergence_Flask
+          item: Flask
+          req: $melee
+          tags: [flask]
+
+    - name: Bush
+      coord: [26.2, 21.8]
+      local:
+        - to: East Approach
+        - to: Wall West Ledge
+          jumps: 1
+    - name: Wall West Ledge
+      coord: [26.4, 21.6]
+      local:
+        - to: Bush
+        - to: Wall West Mid-air
+          jumps: 2
+      locations:
+        - name: Charge Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $charge
+          to: Wall East Ledge
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # can't get it in one
+        - name: Spin Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $spin
+          to: Wall East Ledge
+          movement: base  # slower than fling/fast hover would be
+          # re-time?
+      exits:
+        - to: Wall East Mid-air
+          req: Uhrum_Emergence_Wall
+          movement: base
+          jumps: 2
+    - name: Wall West Mid-air
+      coord: [26.45, 21.35]
+      local:
+        - to: Wall West Ledge
+        - to: Bush
+      locations:
+        - name: Break Wall With Mist
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: Nanite_Mist
+          to: Wall East Mid-air
+          movement: mist1
+        - name: Break Wall With Mist Upgrade
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $mist2
+          to: Wall East Mid-air
+          movement: mist2
+      exits:
+        - to: Wall East Mid-air
+          req: Uhrum_Emergence_Wall
+          movement: base
+        - to: East Stair Right
+          req: Uhrum_Emergence_Wall and $hover
+          movement: base
+          jumps: 1
+        # TODO: fast_hovers into Rocky Guardpost
+    - name: Above Wall West
+      coord: [26.4, 21.15]
+      local:
+        - to: Bush
+        - to: East Approach
+        - to: Wall West Mid-air
+      exits:
+        - to: Wall East Mid-air
+          req: Uhrum_Emergence_Wall
+          movement: base
+        - to: East Stair Right
+          req: $hover
+          movement: base
+    - name: Wall East Mid-air
+      coord: [26.6, 21.35]
+      local:
+        - to: East
+        - to: Wall East Ledge
+      locations:
+        - name: Break Wall With Mist
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: Nanite_Mist
+          to: Wall West Mid-air
+          movement: mist1
+        - name: Break Wall With Mist Upgrade
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $mist2
+          to: Wall West Mid-air
+          movement: mist2
+        - name: Break Wall Upward With Mist
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: Nanite_Mist
+          to: Above Wall West
+          movement: mist1
+        - name: Break Wall Upward With Mist Upgrade
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $mist2
+          to: Above Wall West
+          movement: mist2
+      exits:
+        - to: Wall West Mid-air
+          req: Uhrum_Emergence_Wall
+          movement: base
+        - to: East Stair Right
+          req: Uhrum_Emergence_Wall and $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: East Approach
+          req: Uhrum_Emergence_Wall and $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: Wall East Ledge
+      coord: [26.7, 21.6]
+      local:
+        - to: Wall East Mid-air
+          jumps: 1
+        - to: East
+      locations:
+        - name: Charge Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $charge
+          to: Wall West Mid-air
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # can't get it in one
+        - name: Spin Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $spin
+          to: Wall West Mid-air
+          movement: base  # slower than fling/fast hover would be
+          # re-time?
+    - name: East
+      coord: [26.95, 21.8]
+      local:
+        - to: Wall East Ledge
+          jumps: 1
+      exits:
+        - to: Rocky Guardpost > West 22
+          tags: [xshift]
+
+- name: Rocky Guardpost
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [27, 22, 28, 23]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Uhrum Rocky Guardpost Flask
+  spots:
+    - name: West 22
+      coord: [27.05, 21.8]
+    - name: West 23
+      coord: [27.05, 22.75]

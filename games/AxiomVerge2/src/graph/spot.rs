@@ -11171,6 +11171,57 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Emergence__Camp_Exterior__Door] = Spot {
+        id: SpotId::Emergence__Camp_Exterior__Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1.into_usize(),
+            end: ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Camp_Exterior__Save_Point] = Spot {
+        id: SpotId::Emergence__Camp_Exterior__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Emergence__Camp_Exterior__Save_Point__Save.into_usize(),
+            end: ActionId::Emergence__Camp_Exterior__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Emergence__Camp_Exterior__East] = Spot {
+        id: SpotId::Emergence__Camp_Exterior__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1.into_usize(),
+            end: ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__West] = Spot {
+        id: SpotId::Emergence__Drop_off__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Filter__Entrance__Egg] = Spot {
         id: SpotId::Filter__Entrance__Egg,
         locations: Range {
@@ -22043,6 +22094,134 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Interior__Facility_Interior__Door] = Spot {
+        id: SpotId::Interior__Facility_Interior__Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1.into_usize(),
+            end: ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__West_Stairs] = Spot {
+        id: SpotId::Interior__Facility_Interior__West_Stairs,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1.into_usize(),
+            end: ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Top_Middle] = Spot {
+        id: SpotId::Interior__Facility_Interior__Top_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Top_Right] = Spot {
+        id: SpotId::Interior__Facility_Interior__Top_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Middle_Tier_Left] = Spot {
+        id: SpotId::Interior__Facility_Interior__Middle_Tier_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1.into_usize(),
+            end: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Middle_Tier_Right] = Spot {
+        id: SpotId::Interior__Facility_Interior__Middle_Tier_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1.into_usize(),
+            end: ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Bottom_Middle] = Spot {
+        id: SpotId::Interior__Facility_Interior__Bottom_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1.into_usize(),
+            end: ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Interior__Facility_Interior__Freight_Elevator] = Spot {
+        id: SpotId::Interior__Facility_Interior__Freight_Elevator,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence.into_usize(),
+            end: ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Interior__Emergence_Hangar__Freight_Elevator] = Spot {
+        id: SpotId::Interior__Emergence_Hangar__Freight_Elevator,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence.into_usize(),
+            end: ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Interior__Emergence_Hangar__Door] = Spot {
+        id: SpotId::Interior__Emergence_Hangar__Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1.into_usize(),
+            end: ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Irikar_Breach__Save_Room__Save_Point] = Spot {
         id: SpotId::Irikar_Breach__Save_Room__Save_Point,
         locations: Range {
@@ -27336,6 +27515,103 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask] = Spot {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Camp] = Spot {
+        id: SpotId::Menu__Emergence_Map__Camp,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1.into_usize(),
+            end: ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Drop_off_Flask] = Spot {
+        id: SpotId::Menu__Emergence_Map__Drop_off_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Slingshot_Charge] = Spot {
+        id: SpotId::Menu__Emergence_Map__Slingshot_Charge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Audience_Chamber_Flask] = Spot {
+        id: SpotId::Menu__Emergence_Map__Audience_Chamber_Flask,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Storage_Portal] = Spot {
+        id: SpotId::Menu__Emergence_Map__Storage_Portal,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Menu__Breach_Map__AGB_Bridge_Lower] = Spot {
         id: SpotId::Menu__Breach_Map__AGB_Bridge_Lower,
         locations: Range {
@@ -29904,7 +30180,8 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
-            start: 0, end: 0,
+            start: ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -29912,6 +30189,262 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Uhrum__Emergence_Facility__West_Approach] = Spot {
         id: SpotId::Uhrum__Emergence_Facility__West_Approach,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East_Approach] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East_Approach,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Door] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Middle_Level_Mid_air] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Middle_Level_Mid_air,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Remote_Flask.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Go_Right.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East_Stair_Left] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East_Stair_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East_Stair_Right] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East_Stair_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East_Stair_Middle] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East_Stair_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East_Stair_Roof] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East_Stair_Roof,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Reservoir] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Reservoir,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Balcony] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Balcony,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Balcony__Flask.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Balcony__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Roof_Middle] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Roof_Middle,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Roof_Middle__Flask_from_Below.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Roof_Middle__Flask_from_Below.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Bush] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Bush,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Wall_West_Ledge] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Wall_West_Ledge,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Wall_West_Mid_air] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Wall_West_Mid_air,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Above_Wall_West] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Above_Wall_West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__Wall_East_Ledge] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__Wall_East_Ledge,
+        locations: Range {
+            start: LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Emergence_Facility__East] = Spot {
+        id: SpotId::Uhrum__Emergence_Facility__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1.into_usize(),
+            end: ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Rocky_Guardpost__West_22] = Spot {
+        id: SpotId::Uhrum__Rocky_Guardpost__West_22,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Uhrum__Rocky_Guardpost__West_23] = Spot {
+        id: SpotId::Uhrum__Rocky_Guardpost__West_23,
         locations: Range {
             start: 0, end: 0,
         },

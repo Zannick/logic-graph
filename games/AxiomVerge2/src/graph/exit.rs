@@ -1053,6 +1053,8 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => true,
+            ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => true,
             ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::access_hammond_auth(ctx, world),
             ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -1954,6 +1956,14 @@ impl world::Accessible for Exit {
             ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => true,
             ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => true,
+            ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => true,
+            ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::access_invoke_spin(ctx, world),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::access_invoke_spin(ctx, world),
             ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
             ExitId::Interior__Observatory__East__ex__Ebih__Peak__Observatory_East_1 => true,
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => rules::access_nanite_mist(ctx, world),
@@ -2246,6 +2256,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::access_map__amagi_breach__upper_lake__save(ctx, world),
             ExitId::Menu__Breach_Map__MEB_Drone__ex__Ebih_Breach__Portals_101__Save_Point_1 => rules::access_map__ebih_breach__portals_101__save(ctx, world),
             ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1 => rules::access_map__ebih_breach__in_n_out__save(ctx, world),
+            ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => rules::access_map__emergence__camp_exterior__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::access_map__amagi__east_lake__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::access_map__amagi__main_area__save(ctx, world),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::access_map__annuna__center_save__save(ctx, world),
@@ -2324,6 +2335,25 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => true,
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1 => true,
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::access_uhrum_emergence_wall_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => true,
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
             ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => true,
             ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => true,
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::access_mode_eq_drone(ctx, world),
@@ -3940,6 +3970,12 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::observe_access_invoke_spin(ctx, world, full_obs),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_3 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
@@ -4155,6 +4191,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::observe_access_map__amagi_breach__upper_lake__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__MEB_Drone__ex__Ebih_Breach__Portals_101__Save_Point_1 => rules::observe_access_map__ebih_breach__portals_101__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1 => rules::observe_access_map__ebih_breach__in_n_out__save(ctx, world, full_obs),
+            ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => rules::observe_access_map__emergence__camp_exterior__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::observe_access_map__amagi__east_lake__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::observe_access_map__amagi__main_area__save(ctx, world, full_obs),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::observe_access_map__annuna__center_save__save(ctx, world, full_obs),
@@ -4221,6 +4258,22 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -4362,6 +4415,13 @@ impl world::Accessible for Exit {
                 ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
                     if rules::access_not_slingshot_hook(ctx, world) {
                         100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        2500
                     } else {
                         0
                     }
@@ -6011,6 +6071,12 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::explain_invoke_spin(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::explain_invoke_spin(ctx, world, edict),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_3 => rules::explain_invoke_infinite_climb(ctx, world, edict),
@@ -6226,6 +6292,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Breach_Map__LAB_Enclosed__ex__Amagi_Breach__Upper_Lake__Save_Point_1 => rules::explain_map__amagi_breach__upper_lake__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__MEB_Drone__ex__Ebih_Breach__Portals_101__Save_Point_1 => rules::explain_map__ebih_breach__portals_101__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1 => rules::explain_map__ebih_breach__in_n_out__save(ctx, world, edict),
+            ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => rules::explain_map__emergence__camp_exterior__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => rules::explain_map__amagi__east_lake__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => rules::explain_map__amagi__main_area__save(ctx, world, edict),
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => rules::explain_map__annuna__center_save__save(ctx, world, edict),
@@ -6292,6 +6359,22 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::explain_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::explain_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::explain_uhrum_emergence_wall_and_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -6667,6 +6750,8 @@ impl world::Exit for Exit {
             ExitId::Ebih_Breach__Portals_101__East_4__ex__Drone_Tutorial__West_4_1 => true,
             ExitId::Ebih_Breach__Portals_101__East_6__ex__Drone_Tutorial__West_6_1 => true,
             ExitId::Ebih_Breach__Portals_101__West_4__ex__Snowy_Rocks__East_4_1 => true,
+            ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => true,
+            ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => true,
             ExitId::Filter__Core__West__ex__Exit__East_1 => true,
             ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => true,
             ExitId::Filter__Exit__East__ex__Core__West_1 => true,
@@ -6908,6 +6993,8 @@ impl world::Exit for Exit {
             ExitId::Interior__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
             ExitId::Interior__Dock_Interior__Entry__ex__Glacier__Dock_Outside__Entry_1 => true,
             ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => true,
+            ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => true,
+            ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => true,
             ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
             ExitId::Interior__Observatory__East__ex__Ebih__Peak__Observatory_East_1 => true,
             ExitId::Interior__Observatory__West__ex__Ebih__Peak__Observatory_West_1 => true,
@@ -6997,6 +7084,9 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1 => true,
             ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 => true,
             ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1 => true,
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => true,
+            ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1 => true,
+            ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => true,
             ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => true,
             ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1 => true,
@@ -7027,6 +7117,7 @@ impl world::Exit for Exit {
     fn has_penalties(id: ExitId) -> bool {
         match id {
             ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => true,
+            ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => true,
@@ -13210,6 +13301,18 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         dest: SpotId::Ebih__Gem_Room__Hidden_Tunnel,
         price: Currency::Free,
     };
+    exits[ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1] = Exit {
+        id: ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1,
+        time: 750,
+        dest: SpotId::Interior__Emergence_Hangar__Door,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1] = Exit {
+        id: ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1,
+        time: 1600,
+        dest: SpotId::Emergence__Drop_off__West,
+        price: Currency::Free,
+    };
     exits[ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1] = Exit {
         id: ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1,
         time: 1350,
@@ -18802,6 +18905,54 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         dest: SpotId::Giguna__Giguna_Base__Building_Entry,
         price: Currency::Free,
     };
+    exits[ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1,
+        time: 750,
+        dest: SpotId::Uhrum__Emergence_Facility__Door,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1,
+        time: 500,
+        dest: SpotId::Interior__Facility_Interior__Top_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1,
+        time: 750,
+        dest: SpotId::Interior__Facility_Interior__Top_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1,
+        time: 1200,
+        dest: SpotId::Interior__Facility_Interior__Top_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2] = Exit {
+        id: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2,
+        time: 600,
+        dest: SpotId::Interior__Facility_Interior__Top_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1,
+        time: 1403,
+        dest: SpotId::Interior__Facility_Interior__Top_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1] = Exit {
+        id: ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1,
+        time: 1200,
+        dest: SpotId::Interior__Facility_Interior__Middle_Tier_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1] = Exit {
+        id: ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1,
+        time: 750,
+        dest: SpotId::Emergence__Camp_Exterior__Door,
+        price: Currency::Free,
+    };
     exits[ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1] = Exit {
         id: ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1,
         time: 1600,
@@ -20506,6 +20657,12 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         dest: SpotId::Uhrum__West_Entrance__Save_Point,
         price: Currency::Free,
     };
+    exits[ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1] = Exit {
+        id: ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1,
+        time: 12000,
+        dest: SpotId::Emergence__Camp_Exterior__Save_Point,
+        price: Currency::Free,
+    };
     exits[ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1] = Exit {
         id: ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1,
         time: 12000,
@@ -21678,7 +21835,7 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__East_Ledge_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__East_Ledge_1,
-        time: 2982,
+        time: 1799,
         dest: SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
         price: Currency::Free,
     };
@@ -21690,13 +21847,13 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1,
-        time: 1929,
+        time: 1578,
         dest: SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
         price: Currency::Free,
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1,
-        time: 499,
+        time: 2000,
         dest: SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
         price: Currency::Free,
     };
@@ -21714,31 +21871,31 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1,
-        time: 499,
+        time: 2000,
         dest: SpotId::Uhrum__Grassy_Guardpost__West_22,
         price: Currency::Free,
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1,
-        time: 1929,
+        time: 1578,
         dest: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
         price: Currency::Free,
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2,
-        time: 1374,
+        time: 1125,
         dest: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
         price: Currency::Free,
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1,
-        time: 5224,
+        time: 2724,
         dest: SpotId::Uhrum__Emergence_Save__Save_Point,
         price: Currency::Free,
     };
     exits[ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1] = Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1,
-        time: 9324,
+        time: 6824,
         dest: SpotId::Uhrum__Emergence_Facility__West_Approach,
         price: Currency::Free,
     };
@@ -21764,6 +21921,120 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1,
         time: 1350,
         dest: SpotId::Uhrum__Emergence_Facility__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Emergence_Save__East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1,
+        time: 4200,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2,
+        time: 3000,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1,
+        time: 4200,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2,
+        time: 3000,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1,
+        time: 1799,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2,
+        time: 1140,
+        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1,
+        time: 750,
+        dest: SpotId::Interior__Facility_Interior__Door,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1,
+        time: 1799,
+        dest: SpotId::Uhrum__Emergence_Facility__Roof_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2,
+        time: 600,
+        dest: SpotId::Uhrum__Emergence_Facility__Roof_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1,
+        time: 1200,
+        dest: SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1,
+        time: 526,
+        dest: SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1,
+        time: 1228,
+        dest: SpotId::Uhrum__Emergence_Facility__East_Stair_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1,
+        time: 701,
+        dest: SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1,
+        time: 1052,
+        dest: SpotId::Uhrum__Emergence_Facility__East_Stair_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1,
+        time: 526,
+        dest: SpotId::Uhrum__Emergence_Facility__Wall_West_Mid_air,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1,
+        time: 1250,
+        dest: SpotId::Uhrum__Emergence_Facility__East_Stair_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1,
+        time: 4750,
+        dest: SpotId::Uhrum__Emergence_Facility__East_Approach,
+        price: Currency::Free,
+    };
+    exits[ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1] = Exit {
+        id: ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Rocky_Guardpost__West_22,
         price: Currency::Free,
     };
 }
@@ -22355,6 +22626,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Ebih__Gem_Room__Between_Gates__ex__West_Gate_1 | ExitId:: Ebih__Gem_Room__Between_Gates__ex__East_Gate_1 | ExitId:: Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_1 | ExitId:: Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_2 | ExitId:: Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_3 => SpotId::Ebih__Gem_Room__Between_Gates,
         ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1 => SpotId::Ebih__Gem_Room__Hidden_Tunnel,
         ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1 => SpotId::Ebih__Gem_Room__Hidden_Tunnel_Corner,
+        ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => SpotId::Emergence__Camp_Exterior__Door,
+        ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => SpotId::Emergence__Camp_Exterior__East,
         ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => SpotId::Filter__Entrance__East,
         ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 | ExitId:: Filter__Lower_Hallway__West__ex__East_1 => SpotId::Filter__Lower_Hallway__West,
         ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => SpotId::Filter__Lower_Hallway__East,
@@ -22938,6 +23211,12 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => SpotId::Interior__Cave_Behind_Waterfall__Top,
         ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 | ExitId:: Interior__Outpost_Interior__Entry__ex__Bookshelf_2 | ExitId:: Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => SpotId::Interior__Outpost_Interior__Entry,
+        ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => SpotId::Interior__Facility_Interior__Door,
+        ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 | ExitId:: Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => SpotId::Interior__Facility_Interior__West_Stairs,
+        ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 | ExitId:: Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => SpotId::Interior__Facility_Interior__Middle_Tier_Left,
+        ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => SpotId::Interior__Facility_Interior__Middle_Tier_Right,
+        ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => SpotId::Interior__Facility_Interior__Bottom_Middle,
+        ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => SpotId::Interior__Emergence_Hangar__Door,
         ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => SpotId::Irikar_Breach__Save_Room__West,
         ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 | ExitId:: Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
         ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => SpotId::Irikar_Breach__Gauntlet__East_22,
@@ -23115,6 +23394,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_East,
         ExitId::Menu__Kiengir_Map__Uhrum_Emergence__ex__Uhrum__Emergence_Save__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_Emergence,
         ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => SpotId::Menu__Kiengir_Map__Uhrum_West,
+        ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => SpotId::Menu__Emergence_Map__Camp,
         ExitId::Menu__Breach_Map__GlB_Arena__ex__Glacier_Breach__Save_and_Exit__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Arena,
         ExitId::Menu__Breach_Map__GlB_Center__ex__Glacier_Breach__Guarded_Corridor__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_Center,
         ExitId::Menu__Breach_Map__GlB_East__ex__Glacier_Breach__Hammonds_Breach__Save_Point_1 => SpotId::Menu__Breach_Map__GlB_East,
@@ -23233,6 +23513,16 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => SpotId::Uhrum__Glen__East,
         ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => SpotId::Uhrum__Emergence_Save__West,
         ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => SpotId::Uhrum__Emergence_Save__East,
+        ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => SpotId::Uhrum__Emergence_Facility__West,
+        ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => SpotId::Uhrum__Emergence_Facility__West_Approach,
+        ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => SpotId::Uhrum__Emergence_Facility__East_Approach,
+        ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 | ExitId:: Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => SpotId::Uhrum__Emergence_Facility__Door,
+        ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 | ExitId:: Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => SpotId::Uhrum__Emergence_Facility__Wall_West_Ledge,
+        ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 | ExitId:: Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => SpotId::Uhrum__Emergence_Facility__Wall_West_Mid_air,
+        ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 | ExitId:: Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => SpotId::Uhrum__Emergence_Facility__Above_Wall_West,
+        ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 | ExitId:: Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 | ExitId:: Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => SpotId::Uhrum__Emergence_Facility__Wall_East_Mid_air,
+        ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1 => SpotId::Uhrum__Emergence_Facility__East,
         _ => SpotId::None,
     }
 }

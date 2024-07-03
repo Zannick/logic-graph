@@ -1,0 +1,44 @@
+name: Emergence
+
+areas:
+- name: Camp Exterior  # MARK: Camp Exterior
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [5, 7, 6, 8]
+  data:
+    save_point: Save Point
+  datamap:
+    save:
+      map_spot: Menu > Emergence Map > Camp
+  spots:
+    - name: Door
+      coord: [4.4, 7.8]
+      local:
+        - to: Save Point
+          jumps: 3
+      exits:
+        - to: Interior > Emergence Hangar > Door
+          tags: [interior]
+    - name: Save Point
+      coord: [5.5, 7.5]
+      local:
+        - to: Door
+        - to: East
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [5.9, 7.75]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Drop-off > West
+          tags: [xdoor]
+
+- name: Drop-off  # MARK: Drop-off
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [6.1, 7.75]

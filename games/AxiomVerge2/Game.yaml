@@ -60,6 +60,8 @@ base_movements:  # MARK: base_movements
     x: .285  # about 3.5s per grid x-unit
     jump: .6  # can vary with jump height, so take a rough estimate of usual
     # max jump height is around .2, with Anuman it reaches .3... TODO: real measurement
+    # hover can reach a height of .3 in about 100-110 frames, so 3 "jumps"
+    # Anuman jump plus shift into hover could get even higher
     # other speeds apply
   - data:
       realm: map
@@ -128,6 +130,7 @@ time:  # MARK: time
   # when grabbing the urn/flask with the boomerang while falling or otherwise closer
   nearby_urn: 6
   nearby_flask: 6
+  throw: 0.5
   # The remote boomerang has a slower speed but can go a more variable amount of distance
   # so we need a speed reference to estimate or time each one
 
@@ -334,6 +337,7 @@ helpers:  # MARK: helpers
   $melee_cskip: ($weapon and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
+  # TODO: to be tested: does indra affect drone portal attraction when she's inside? or between Kiengir/Emergence?
   $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
 
   $all_notes:itemList: >

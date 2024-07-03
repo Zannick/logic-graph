@@ -841,7 +841,44 @@ areas:
       coord: [22, 24]
     - name: Uhrum Emergence Facility Entrance
       coord: [24, 22]
+    - name: Uhrum Emergence Facility Flask
+      coord: [25, 21]
+    - name: Uhrum Emergence Facility Wall
+      coord: [26, 22]
+    - name: Uhrum Rocky Guardpost Flask
+      coord: [27, 23]
     #endregion
+
+- name: Emergence Map  # MARK: Emergence Map
+  on_entry: $save_last; $refill_energy
+  data:
+    realm: map
+  tags: [map]
+  graph_attrs: "shape=doublecircle, fillcolor=\"8\""
+  graph_exclude_local_edges: true
+  all:
+    local:
+      - to: Camp
+  spots:
+    - name: Camp
+      coord: [5, 8]
+      exits:
+        - to: Emergence > Camp Exterior > Save Point
+          req: ^map__emergence__camp_exterior__save
+          time: 12
+          penalties:
+            - when: ^mode != 'drone'
+              add: 2.5
+          tags: [warp]
+    # Item spots
+    - name: Drop-off Flask
+      coord: [6, 8]
+    - name: Slingshot Charge
+      coord: [8, 9]
+    - name: Audience Chamber Flask
+      coord: [8, 10]
+    - name: Storage Portal
+      coord: [10, 9]
 
 - name: Breach Map  # MARK: Breach Map
   on_entry: $save_last; $refill_energy

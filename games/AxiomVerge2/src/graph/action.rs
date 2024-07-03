@@ -91,6 +91,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => true,
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
+            ActionId::Emergence__Camp_Exterior__Save_Point__Save => true,
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_giguna__carnelian__lower_susar__caught__req(ctx, world),
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::access_giguna__carnelian__lower_susar__hack__req(ctx, world),
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_giguna__carnelian__switch__open_door__req(ctx, world),
@@ -176,6 +177,8 @@ impl world::Accessible for Action {
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world),
             ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
+            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => true,
+            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => true,
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::access_invoke_infinite_climb_and_slingshot_hook(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_invoke_activate(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
@@ -1614,6 +1617,7 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
+            ActionId::Emergence__Camp_Exterior__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx, world),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1694,6 +1698,8 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
+            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => rules::action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::action_invoke_deploy_drone(ctx, world),
@@ -1782,6 +1788,8 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => SpotId::Glacier__Hammonds_End__Corner,
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__Catwalk,
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Top,
+            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => SpotId::Interior__Emergence_Hangar__Freight_Elevator,
+            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => SpotId::Interior__Facility_Interior__Freight_Elevator,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => SpotId::Irikar__Airy__Left_Hover_Throw_End,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Airy__Lower_Throw_End,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Airy__South_Center,
@@ -2012,6 +2020,9 @@ impl world::Action for Action {
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
                 rules::observe_action_ebih__vertical_interchange__west_13__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Emergence__Camp_Exterior__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2252,6 +2263,12 @@ impl world::Action for Action {
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => {
+                rules::observe_action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world, full_obs);
+            }
+            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => {
+                rules::observe_action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
@@ -2673,6 +2690,11 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 500,
         price: Currency::Free,
     };
+    actions[ActionId::Emergence__Camp_Exterior__Save_Point__Save] = Action {
+        id: ActionId::Emergence__Camp_Exterior__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    };
     actions[ActionId::Giguna_Breach__Peak__Save_Point__Save] = Action {
         id: ActionId::Giguna_Breach__Peak__Save_Point__Save,
         time: 1300,
@@ -3073,6 +3095,16 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 1100,
         price: Currency::Free,
     };
+    actions[ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence] = Action {
+        id: ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence,
+        time: 11500,
+        price: Currency::Free,
+    };
+    actions[ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence] = Action {
+        id: ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence,
+        time: 13500,
+        price: Currency::Free,
+    };
     actions[ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High] = Action {
         id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High,
         time: 6600,
@@ -3238,6 +3270,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => SpotId::Ebih__Drone_Room__Portal_Exit,
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => SpotId::Ebih__Drone_Room__Moving_Platform,
         ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => SpotId::Ebih__Vertical_Interchange__West_13,
+        ActionId::Emergence__Camp_Exterior__Save_Point__Save => SpotId::Emergence__Camp_Exterior__Save_Point,
         ActionId::Giguna_Breach__Peak__Save_Point__Save => SpotId::Giguna_Breach__Peak__Save_Point,
         ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => SpotId::Giguna_Breach__SW_Save__West_11,
         ActionId::Giguna_Breach__SW_Save__Save_Point__Save => SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -3303,6 +3336,8 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Glacier__Hammonds_End__West_11__Open_Doors => SpotId::Glacier__Hammonds_End__West_11,
         ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__East_Staircase_Top,
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
+        ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => SpotId::Interior__Facility_Interior__Freight_Elevator,
+        ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => SpotId::Interior__Emergence_Hangar__Freight_Elevator,
         ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Hub__West_Rim,
         ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Hub__East_Rim,
         ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
