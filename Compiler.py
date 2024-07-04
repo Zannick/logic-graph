@@ -390,12 +390,14 @@ class GameLogic(object):
                                 if dest.startswith('^'):
                                     if d := spot['all_data'].get(dest[1:]):
                                         if self.data_types[dest[1:]] != 'SpotId':
-                                            self._errors.append(f'Hybrid location {eh["fullname"]} exits to non-spot data: {dest}')
+                                            self._errors.append(f'Hybrid location {loc["fullname"]} exits to non-spot data: {dest}')
                                         else:
                                             loc['raw_to'] = dest
                                             loc['to'] = d
                                     else:
-                                        self._errors.append(f'Hybrid location {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
+                                        self._errors.append(f'Hybrid location {loc["fullname"]} attempts exit to ctx but only data is supported: {dest}')
+                            elif m := loc.get('movement'):
+                                self._errors.append(f'Hybrid location {loc["fullname"]} has movement {m!r} but no dest')
 
                     # We need a counter for exits in case of alternates
                     ec = Counter()
@@ -1416,21 +1418,24 @@ class GameLogic(object):
                     self._errors.append(f'{pr.name}: Unrecognized function {t.text}')
         # Check exits
         spot_ids = {sp['id'] for sp in self.spots()}
-        for ex in self.exits():
-            if 'to' not in ex:
-                self._errors.append(f'No destination defined for {ex["fullname"]}')
-            elif get_exit_target(ex) not in spot_ids:
-                dest = f'{ex["to"]}'
-                if 'raw_to' in ex:
-                    dest += f' (from {ex["raw_to"]})'
-                self._errors.append(f'Unrecognized destination in exit {ex["fullname"]}: {dest}')
+        def report_error(ptype, info):
+            dest = f'{info["to"]}'
+            if 'raw_to' in info:
+                dest += f' (from {info["raw_to"]})'
+            self._errors.append(f'Unrecognized destination in {ptype} {info["fullname"]}: {dest}')
+
         for spot in self.spots():
+            for ex in spot.get('exits', []):
+                if 'to' not in ex:
+                    self._errors.append(f'No destination defined for {ex["fullname"]}')
+                elif get_exit_target(ex) not in spot_ids:
+                    report_error('exit', ex)
+            for loc in spot.get('locations', []):
+                if 'to' in loc and get_exit_target(loc) not in spot_ids:
+                    report_error('location', loc)
             for act in spot.get('actions', []):
                 if 'to' in act and get_exit_target(act) not in spot_ids:
-                    dest = f'{act["to"]}'
-                    if 'raw_to' in act:
-                        dest += f' (from {act["raw_to"]})'
-                    self._errors.append(f'Unrecognized destination in action {act["fullname"]}: {dest}')
+                    report_error('action', act)
         for item in self.collect:
             if item != construct_id(item):
                 self._errors.append(f'Invalid item name {item!r} as collect rule; '
@@ -1527,7 +1532,7 @@ class GameLogic(object):
             if 'item' not in loc:
                 self._errors.append(f'Expected item at location {loc["fullname"]}')
                 continue
-            self.item_locations[loc['item']].append(loc['id'])
+            self.item_locations[loc['item']].append(loc.get('id'))
 
 
     @cached_property
