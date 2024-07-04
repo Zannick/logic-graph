@@ -2618,7 +2618,6 @@ areas:
           movement: base
           jumps: 2
         # It might be possible to get to the East 4 spot as drone with mist float
-        # TODO: Can Indra-mist fit in drone spaces? Can drone-mist?
     - name: Moving Platform
       coord: [24.5, 4.0]
       local:

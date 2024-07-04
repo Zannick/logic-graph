@@ -43,6 +43,10 @@ pub fn access___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_all
         && helper__all_health!(ctx, world)
         && helper__all_flasks!(ctx, world)
 }
+pub fn access___invoke_grab_and_anuman_or_invoke_climb(ctx: &Context, world: &World) -> bool {
+    // ($grab and Anuman) or $climb
+    ((helper__grab!(ctx, world) && ctx.has(Item::Anuman)) || helper__climb!(ctx, world))
+}
 pub fn access___invoke_grab_or_invoke_climb_and_underwater_movement(
     ctx: &Context,
     world: &World,
@@ -819,6 +823,83 @@ pub fn access_ebih_waterfall_wall(ctx: &Context, world: &World) -> bool {
 pub fn access_ebih_west_block(ctx: &Context, world: &World) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
+}
+pub fn access_emergence__storage__at_door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_open
+    ctx.emergence__storage__ctx__door_open()
+}
+pub fn access_emergence__storage__at_door__ex__portal_stand_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_open and $hook
+    (ctx.emergence__storage__ctx__door_open() && helper__hook!(ctx, world))
+}
+pub fn access_emergence__storage__at_door__open_door__req(ctx: &Context, world: &World) -> bool {
+    // $unlock4 and $range2 and not ^_door_open
+    ((helper__unlock4!(ctx, world) && helper__range2!(ctx, world))
+        && !ctx.emergence__storage__ctx__door_open())
+}
+pub fn access_emergence__storage__portal_stand__ex__at_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_open
+    ctx.emergence__storage__ctx__door_open()
+}
+pub fn access_emergence__storage__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $unlock4 and not ^_door_open
+    (helper__unlock4!(ctx, world) && !ctx.emergence__storage__ctx__door_open())
+}
+pub fn access_emergence_dropoff_wall(ctx: &Context, world: &World) -> bool {
+    // Emergence_Dropoff_Wall
+    ctx.has(Item::Emergence_Dropoff_Wall)
+}
+pub fn access_emergence_dropoff_wall_and_anuman(ctx: &Context, world: &World) -> bool {
+    // Emergence_Dropoff_Wall and Anuman
+    (ctx.has(Item::Emergence_Dropoff_Wall) && ctx.has(Item::Anuman))
+}
+pub fn access_emergence_dropoff_wall_and_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // Emergence_Dropoff_Wall and $hook
+    (ctx.has(Item::Emergence_Dropoff_Wall) && helper__hook!(ctx, world))
+}
+pub fn access_emergence_dropoff_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
+    // Emergence_Dropoff_Wall and $mist2
+    (ctx.has(Item::Emergence_Dropoff_Wall) && helper__mist2!(ctx, world))
+}
+pub fn access_emergence_dropoff_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
+    // Emergence_Dropoff_Wall and Nanite_Mist
+    (ctx.has(Item::Emergence_Dropoff_Wall) && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_emergence_rocks_fall_rock_1(ctx: &Context, world: &World) -> bool {
+    // Emergence_Rocks_Fall_Rock_1
+    ctx.has(Item::Emergence_Rocks_Fall_Rock_1)
+}
+pub fn access_emergence_rocks_fall_rock_2(ctx: &Context, world: &World) -> bool {
+    // Emergence_Rocks_Fall_Rock_2
+    ctx.has(Item::Emergence_Rocks_Fall_Rock_2)
+}
+pub fn access_emergence_rocks_fall_rock_3(ctx: &Context, world: &World) -> bool {
+    // Emergence_Rocks_Fall_Rock_3
+    ctx.has(Item::Emergence_Rocks_Fall_Rock_3)
+}
+pub fn access_emergence_rocks_fall_rock_4(ctx: &Context, world: &World) -> bool {
+    // Emergence_Rocks_Fall_Rock_4
+    ctx.has(Item::Emergence_Rocks_Fall_Rock_4)
+}
+pub fn access_emergence_storage_rock(ctx: &Context, world: &World) -> bool {
+    // Emergence_Storage_Rock
+    ctx.has(Item::Emergence_Storage_Rock)
+}
+pub fn access_emergence_storage_tunnel(ctx: &Context, world: &World) -> bool {
+    // Emergence_Storage_Tunnel
+    ctx.has(Item::Emergence_Storage_Tunnel)
 }
 pub fn access_fast_travel(ctx: &Context, world: &World) -> bool {
     // Fast_Travel
@@ -1785,6 +1866,10 @@ pub fn access_invoke_boomerang2(ctx: &Context, world: &World) -> bool {
     // $boomerang2
     helper__boomerang2!(ctx, world)
 }
+pub fn access_invoke_boomerang_and_fast_travel(ctx: &Context, world: &World) -> bool {
+    // $boomerang and Fast_Travel
+    (helper__boomerang!(ctx, world) && ctx.has(Item::Fast_Travel))
+}
 pub fn access_invoke_bs(ctx: &Context, world: &World) -> bool {
     // $bs
     helper__bs!(ctx, world)
@@ -1942,6 +2027,18 @@ pub fn access_invoke_hook_and_ebih_hidden_portal_gate(ctx: &Context, world: &Wor
     // $hook and Ebih_Hidden_Portal_Gate
     (helper__hook!(ctx, world) && ctx.has(Item::Ebih_Hidden_Portal_Gate))
 }
+pub fn access_invoke_hook_and_emergence_rocks_fall_rock_2(ctx: &Context, world: &World) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_2
+    (helper__hook!(ctx, world) && ctx.has(Item::Emergence_Rocks_Fall_Rock_2))
+}
+pub fn access_invoke_hook_and_emergence_rocks_fall_rock_3(ctx: &Context, world: &World) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_3
+    (helper__hook!(ctx, world) && ctx.has(Item::Emergence_Rocks_Fall_Rock_3))
+}
+pub fn access_invoke_hook_and_emergence_rocks_fall_rock_4(ctx: &Context, world: &World) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_4
+    (helper__hook!(ctx, world) && ctx.has(Item::Emergence_Rocks_Fall_Rock_4))
+}
 pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &World) -> bool {
     // $hook and Giguna_Gateway_Block
     (helper__hook!(ctx, world) && ctx.has(Item::Giguna_Gateway_Block))
@@ -1949,6 +2046,14 @@ pub fn access_invoke_hook_and_giguna_gateway_block(ctx: &Context, world: &World)
 pub fn access_invoke_hook_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hook and $hover
     (helper__hook!(ctx, world) && helper__hover!(ctx, world))
+}
+pub fn access_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hook and $hover and Emergence_Rocks_Fall_Rock_4
+    ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
+        && ctx.has(Item::Emergence_Rocks_Fall_Rock_4))
 }
 pub fn access_invoke_hook_and_invoke_hover_and_slingshot_charge(
     ctx: &Context,
@@ -1995,9 +2100,17 @@ pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &World) 
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_hook_or_anuman(ctx: &Context, world: &World) -> bool {
+    // $hook or Anuman
+    (helper__hook!(ctx, world) || ctx.has(Item::Anuman))
+}
 pub fn access_invoke_hook_or_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hook or $hover
     (helper__hook!(ctx, world) || helper__hover!(ctx, world))
+}
+pub fn access_invoke_hookhover_or_invoke_spin(ctx: &Context, world: &World) -> bool {
+    // $hookhover or $spin
+    (helper__hookhover!(ctx, world) || helper__spin!(ctx, world))
 }
 pub fn access_invoke_hover(ctx: &Context, world: &World) -> bool {
     // $hover
@@ -2157,6 +2270,10 @@ pub fn access_invoke_slow(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_spin(ctx: &Context, world: &World) -> bool {
     // $spin
     helper__spin!(ctx, world)
+}
+pub fn access_invoke_spinhover(ctx: &Context, world: &World) -> bool {
+    // $spinhover
+    helper__spinhover!(ctx, world)
 }
 pub fn access_invoke_sync(ctx: &Context, world: &World) -> bool {
     // $sync
@@ -2863,14 +2980,6 @@ pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &World) 
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
 }
-pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // Underwater_Movement and $hook and $hover
-    ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
-        && helper__hover!(ctx, world))
-}
 pub fn access_underwater_movement_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hover
     (ctx.has(Item::Underwater_Movement) && helper__hover!(ctx, world))
@@ -3059,6 +3168,14 @@ pub fn action_ebih__waterfall__platform_by_east_door__open_door__do(
 pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context, world: &World) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
+}
+pub fn action_emergence__storage__at_door__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_door_open = true
+    ctx.set_emergence__storage__ctx__door_open(true);
+}
+pub fn action_emergence__storage__portal_stand__open_door__do(ctx: &mut Context, world: &World) {
+    // ^_door_open = true
+    ctx.set_emergence__storage__ctx__door_open(true);
 }
 pub fn action_flasks_incr_1(ctx: &mut Context, world: &World) {
     // ^flasks += 1
@@ -3688,6 +3805,46 @@ pub fn explain___invoke_all_urns_invoke_all_weapons_invoke_other_items_invoke_al
         let mut h = hexplain__all_flasks!(ctx, world, edict);
         refs.append(&mut h.1);
         (h.0, refs)
+    }
+}
+pub fn explain___invoke_grab_and_anuman_or_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($grab and Anuman) or $climb
+    {
+        let mut left = ({
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain___invoke_grab_or_invoke_climb_and_underwater_movement(
@@ -6413,6 +6570,314 @@ pub fn explain_ebih_west_block(
         let h = ctx.has(Item::Ebih_West_Block);
         edict.insert("Ebih_West_Block", format!("{}", h));
         (h, vec!["Ebih_West_Block"])
+    }
+}
+pub fn explain_emergence__storage__at_door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.emergence__storage__ctx__door_open();
+        edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^emergence__storage__ctx__door_open"])
+    }
+}
+pub fn explain_emergence__storage__at_door__ex__portal_stand_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open and $hook
+    {
+        let mut left = {
+            let r = ctx.emergence__storage__ctx__door_open();
+            edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
+            (r, vec!["^emergence__storage__ctx__door_open"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence__storage__at_door__open_door__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock4 and $range2 and not ^_door_open
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+                edict.insert("$unlock4", format!("{:?}", res));
+                refs.push("$unlock4");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                    edict.insert("$range2", format!("{:?}", res));
+                    refs.push("$range2");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.emergence__storage__ctx__door_open();
+                    edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
+                    (r, vec!["^emergence__storage__ctx__door_open"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence__storage__portal_stand__ex__at_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_open
+    {
+        let r = ctx.emergence__storage__ctx__door_open();
+        edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
+        (r, vec!["^emergence__storage__ctx__door_open"])
+    }
+}
+pub fn explain_emergence__storage__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock4 and not ^_door_open
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+            edict.insert("$unlock4", format!("{:?}", res));
+            refs.push("$unlock4");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.emergence__storage__ctx__door_open();
+                    edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
+                    (r, vec!["^emergence__storage__ctx__door_open"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence_dropoff_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Dropoff_Wall
+    {
+        let h = ctx.has(Item::Emergence_Dropoff_Wall);
+        edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
+        (h, vec!["Emergence_Dropoff_Wall"])
+    }
+}
+pub fn explain_emergence_dropoff_wall_and_anuman(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Dropoff_Wall and Anuman
+    {
+        let mut left = {
+            let h = ctx.has(Item::Emergence_Dropoff_Wall);
+            edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
+            (h, vec!["Emergence_Dropoff_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence_dropoff_wall_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Dropoff_Wall and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Emergence_Dropoff_Wall);
+            edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
+            (h, vec!["Emergence_Dropoff_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence_dropoff_wall_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Dropoff_Wall and $mist2
+    {
+        let mut left = {
+            let h = ctx.has(Item::Emergence_Dropoff_Wall);
+            edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
+            (h, vec!["Emergence_Dropoff_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence_dropoff_wall_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Dropoff_Wall and Nanite_Mist
+    {
+        let mut left = {
+            let h = ctx.has(Item::Emergence_Dropoff_Wall);
+            edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
+            (h, vec!["Emergence_Dropoff_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_emergence_rocks_fall_rock_1(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Rocks_Fall_Rock_1
+    {
+        let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_1);
+        edict.insert("Emergence_Rocks_Fall_Rock_1", format!("{}", h));
+        (h, vec!["Emergence_Rocks_Fall_Rock_1"])
+    }
+}
+pub fn explain_emergence_rocks_fall_rock_2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Rocks_Fall_Rock_2
+    {
+        let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_2);
+        edict.insert("Emergence_Rocks_Fall_Rock_2", format!("{}", h));
+        (h, vec!["Emergence_Rocks_Fall_Rock_2"])
+    }
+}
+pub fn explain_emergence_rocks_fall_rock_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Rocks_Fall_Rock_3
+    {
+        let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_3);
+        edict.insert("Emergence_Rocks_Fall_Rock_3", format!("{}", h));
+        (h, vec!["Emergence_Rocks_Fall_Rock_3"])
+    }
+}
+pub fn explain_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Rocks_Fall_Rock_4
+    {
+        let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_4);
+        edict.insert("Emergence_Rocks_Fall_Rock_4", format!("{}", h));
+        (h, vec!["Emergence_Rocks_Fall_Rock_4"])
+    }
+}
+pub fn explain_emergence_storage_rock(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Storage_Rock
+    {
+        let h = ctx.has(Item::Emergence_Storage_Rock);
+        edict.insert("Emergence_Storage_Rock", format!("{}", h));
+        (h, vec!["Emergence_Storage_Rock"])
+    }
+}
+pub fn explain_emergence_storage_tunnel(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Emergence_Storage_Tunnel
+    {
+        let h = ctx.has(Item::Emergence_Storage_Tunnel);
+        edict.insert("Emergence_Storage_Tunnel", format!("{}", h));
+        (h, vec!["Emergence_Storage_Tunnel"])
     }
 }
 pub fn explain_fast_travel(
@@ -9902,6 +10367,32 @@ pub fn explain_invoke_boomerang2(
         (res, refs)
     }
 }
+pub fn explain_invoke_boomerang_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $boomerang and Fast_Travel
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+            edict.insert("$boomerang", format!("{:?}", res));
+            refs.push("$boomerang");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Fast_Travel);
+                edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_bs(
     ctx: &Context,
     world: &World,
@@ -10837,6 +11328,84 @@ pub fn explain_invoke_hook_and_ebih_hidden_portal_gate(
         }
     }
 }
+pub fn explain_invoke_hook_and_emergence_rocks_fall_rock_2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Emergence_Rocks_Fall_Rock_2
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_2);
+                edict.insert("Emergence_Rocks_Fall_Rock_2", format!("{}", h));
+                (h, vec!["Emergence_Rocks_Fall_Rock_2"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_emergence_rocks_fall_rock_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Emergence_Rocks_Fall_Rock_3
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_3);
+                edict.insert("Emergence_Rocks_Fall_Rock_3", format!("{}", h));
+                (h, vec!["Emergence_Rocks_Fall_Rock_3"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and Emergence_Rocks_Fall_Rock_4
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_4);
+                edict.insert("Emergence_Rocks_Fall_Rock_4", format!("{}", h));
+                (h, vec!["Emergence_Rocks_Fall_Rock_4"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_and_giguna_gateway_block(
     ctx: &Context,
     world: &World,
@@ -10884,6 +11453,46 @@ pub fn explain_invoke_hook_and_invoke_hover(
                 edict.insert("$hover", format!("{:?}", res));
                 refs.push("$hover");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook and $hover and Emergence_Rocks_Fall_Rock_4
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Emergence_Rocks_Fall_Rock_4);
+                edict.insert("Emergence_Rocks_Fall_Rock_4", format!("{}", h));
+                (h, vec!["Emergence_Rocks_Fall_Rock_4"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -11176,6 +11785,32 @@ pub fn explain_invoke_hook_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_hook_or_anuman(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook or Anuman
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_or_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -11196,6 +11831,33 @@ pub fn explain_invoke_hook_or_invoke_hover(
                 let (res, mut refs) = hexplain__hover!(ctx, world, edict);
                 edict.insert("$hover", format!("{:?}", res));
                 refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hookhover_or_invoke_spin(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover or $spin
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+            edict.insert("$hookhover", format!("{:?}", res));
+            refs.push("$hookhover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__spin!(ctx, world, edict);
+                edict.insert("$spin", format!("{:?}", res));
+                refs.push("$spin");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -12047,6 +12709,19 @@ pub fn explain_invoke_spin(
         let (res, mut refs) = hexplain__spin!(ctx, world, edict);
         edict.insert("$spin", format!("{:?}", res));
         refs.push("$spin");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_spinhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $spinhover
+    {
+        let (res, mut refs) = hexplain__spinhover!(ctx, world, edict);
+        edict.insert("$spinhover", format!("{:?}", res));
+        refs.push("$spinhover");
         (res, refs)
     }
 }
@@ -15144,46 +15819,6 @@ pub fn explain_underwater_movement_and_invoke_hook(
         }
     }
 }
-pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Underwater_Movement and $hook and $hover
-    {
-        let mut left = {
-            let mut left = {
-                let h = ctx.has(Item::Underwater_Movement);
-                edict.insert("Underwater_Movement", format!("{}", h));
-                (h, vec!["Underwater_Movement"])
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
-                    edict.insert("$hook", format!("{:?}", res));
-                    refs.push("$hook");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_underwater_movement_and_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -15390,6 +16025,19 @@ pub fn observe_access___invoke_all_urns_invoke_all_weapons_invoke_other_items_in
         && hobserve__all_notes!(ctx, world, full_obs)
         && hobserve__all_health!(ctx, world, full_obs)
         && hobserve__all_flasks!(ctx, world, full_obs)
+}
+pub fn observe_access___invoke_grab_and_anuman_or_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($grab and Anuman) or $climb
+    ((hobserve__grab!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        || hobserve__climb!(ctx, world, full_obs))
 }
 pub fn observe_access___invoke_grab_or_invoke_climb_and_underwater_movement(
     ctx: &Context,
@@ -16882,6 +17530,190 @@ pub fn observe_access_ebih_west_block(
     {
         full_obs.observe_ebih_west_block();
         ctx.has(Item::Ebih_West_Block)
+    }
+}
+pub fn observe_access_emergence__storage__at_door__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_emergence__storage__ctx__door_open();
+        ctx.emergence__storage__ctx__door_open()
+    }
+}
+pub fn observe_access_emergence__storage__at_door__ex__portal_stand_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open and $hook
+    ({
+        full_obs.observe_emergence__storage__ctx__door_open();
+        ctx.emergence__storage__ctx__door_open()
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_emergence__storage__at_door__open_door__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock4 and $range2 and not ^_door_open
+    ((hobserve__unlock4!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
+        && (!({
+            full_obs.observe_emergence__storage__ctx__door_open();
+            ctx.emergence__storage__ctx__door_open()
+        })))
+}
+pub fn observe_access_emergence__storage__portal_stand__ex__at_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_open
+    {
+        full_obs.observe_emergence__storage__ctx__door_open();
+        ctx.emergence__storage__ctx__door_open()
+    }
+}
+pub fn observe_access_emergence__storage__portal_stand__open_door__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock4 and not ^_door_open
+    (hobserve__unlock4!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_emergence__storage__ctx__door_open();
+            ctx.emergence__storage__ctx__door_open()
+        })))
+}
+pub fn observe_access_emergence_dropoff_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Dropoff_Wall
+    {
+        full_obs.observe_emergence_dropoff_wall();
+        ctx.has(Item::Emergence_Dropoff_Wall)
+    }
+}
+pub fn observe_access_emergence_dropoff_wall_and_anuman(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Dropoff_Wall and Anuman
+    ({
+        full_obs.observe_emergence_dropoff_wall();
+        ctx.has(Item::Emergence_Dropoff_Wall)
+    } && ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }))
+}
+pub fn observe_access_emergence_dropoff_wall_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Dropoff_Wall and $hook
+    ({
+        full_obs.observe_emergence_dropoff_wall();
+        ctx.has(Item::Emergence_Dropoff_Wall)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_emergence_dropoff_wall_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Dropoff_Wall and $mist2
+    ({
+        full_obs.observe_emergence_dropoff_wall();
+        ctx.has(Item::Emergence_Dropoff_Wall)
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_emergence_dropoff_wall_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Dropoff_Wall and Nanite_Mist
+    ({
+        full_obs.observe_emergence_dropoff_wall();
+        ctx.has(Item::Emergence_Dropoff_Wall)
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_emergence_rocks_fall_rock_1(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Rocks_Fall_Rock_1
+    {
+        full_obs.observe_emergence_rocks_fall_rock_1();
+        ctx.has(Item::Emergence_Rocks_Fall_Rock_1)
+    }
+}
+pub fn observe_access_emergence_rocks_fall_rock_2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Rocks_Fall_Rock_2
+    {
+        full_obs.observe_emergence_rocks_fall_rock_2();
+        ctx.has(Item::Emergence_Rocks_Fall_Rock_2)
+    }
+}
+pub fn observe_access_emergence_rocks_fall_rock_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Rocks_Fall_Rock_3
+    {
+        full_obs.observe_emergence_rocks_fall_rock_3();
+        ctx.has(Item::Emergence_Rocks_Fall_Rock_3)
+    }
+}
+pub fn observe_access_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Rocks_Fall_Rock_4
+    {
+        full_obs.observe_emergence_rocks_fall_rock_4();
+        ctx.has(Item::Emergence_Rocks_Fall_Rock_4)
+    }
+}
+pub fn observe_access_emergence_storage_rock(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Storage_Rock
+    {
+        full_obs.observe_emergence_storage_rock();
+        ctx.has(Item::Emergence_Storage_Rock)
+    }
+}
+pub fn observe_access_emergence_storage_tunnel(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Emergence_Storage_Tunnel
+    {
+        full_obs.observe_emergence_storage_tunnel();
+        ctx.has(Item::Emergence_Storage_Tunnel)
     }
 }
 pub fn observe_access_fast_travel(
@@ -18751,6 +19583,18 @@ pub fn observe_access_invoke_boomerang2(
     // $boomerang2
     hobserve__boomerang2!(ctx, world, full_obs)
 }
+pub fn observe_access_invoke_boomerang_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $boomerang and Fast_Travel
+    (hobserve__boomerang!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_fast_travel();
+            ctx.has(Item::Fast_Travel)
+        }))
+}
 pub fn observe_access_invoke_bs(
     ctx: &Context,
     world: &World,
@@ -19126,6 +19970,42 @@ pub fn observe_access_invoke_hook_and_ebih_hidden_portal_gate(
             ctx.has(Item::Ebih_Hidden_Portal_Gate)
         }))
 }
+pub fn observe_access_invoke_hook_and_emergence_rocks_fall_rock_2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_2
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_emergence_rocks_fall_rock_2();
+            ctx.has(Item::Emergence_Rocks_Fall_Rock_2)
+        }))
+}
+pub fn observe_access_invoke_hook_and_emergence_rocks_fall_rock_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_3
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_emergence_rocks_fall_rock_3();
+            ctx.has(Item::Emergence_Rocks_Fall_Rock_3)
+        }))
+}
+pub fn observe_access_invoke_hook_and_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and Emergence_Rocks_Fall_Rock_4
+    (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_emergence_rocks_fall_rock_4();
+            ctx.has(Item::Emergence_Rocks_Fall_Rock_4)
+        }))
+}
 pub fn observe_access_invoke_hook_and_giguna_gateway_block(
     ctx: &Context,
     world: &World,
@@ -19145,6 +20025,18 @@ pub fn observe_access_invoke_hook_and_invoke_hover(
 ) -> bool {
     // $hook and $hover
     (hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook and $hover and Emergence_Rocks_Fall_Rock_4
+    ((hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_emergence_rocks_fall_rock_4();
+            ctx.has(Item::Emergence_Rocks_Fall_Rock_4)
+        }))
 }
 pub fn observe_access_invoke_hook_and_invoke_hover_and_slingshot_charge(
     ctx: &Context,
@@ -19246,6 +20138,17 @@ pub fn observe_access_invoke_hook_and_underwater_movement(
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access_invoke_hook_or_anuman(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook or Anuman
+    (hobserve__hook!(ctx, world, full_obs) || {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    })
+}
 pub fn observe_access_invoke_hook_or_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -19253,6 +20156,14 @@ pub fn observe_access_invoke_hook_or_invoke_hover(
 ) -> bool {
     // $hook or $hover
     (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_hookhover_or_invoke_spin(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover or $spin
+    (hobserve__hookhover!(ctx, world, full_obs) || hobserve__spin!(ctx, world, full_obs))
 }
 pub fn observe_access_invoke_hover(
     ctx: &Context,
@@ -19605,6 +20516,14 @@ pub fn observe_access_invoke_spin(
 ) -> bool {
     // $spin
     hobserve__spin!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_spinhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $spinhover
+    hobserve__spinhover!(ctx, world, full_obs)
 }
 pub fn observe_access_invoke_sync(
     ctx: &Context,
@@ -21387,18 +22306,6 @@ pub fn observe_access_underwater_movement_and_invoke_hook(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Underwater_Movement and $hook and $hover
-    (({
-        full_obs.observe_underwater_movement();
-        ctx.has(Item::Underwater_Movement)
-    } && (hobserve__hook!(ctx, world, full_obs)))
-        && (hobserve__hover!(ctx, world, full_obs)))
-}
 pub fn observe_access_underwater_movement_and_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -21808,6 +22715,28 @@ pub fn observe_action_ebih__waterfall__west_8__open_door__do(
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_ebih__waterfall__ctx__west_door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_emergence__storage__at_door__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_emergence__storage__ctx__door_open();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_emergence__storage__portal_stand__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_emergence__storage__ctx__door_open();
     full_obs.strict = old_strict;
 }
 pub fn observe_action_flasks_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {

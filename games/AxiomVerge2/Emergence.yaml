@@ -39,6 +39,1526 @@ areas:
 
 - name: Drop-off  # MARK: Drop-off
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [6, 7, 7, 8]
+  datamap:
+    map_spot:
+      flask: Menu > Emergence Map > Drop-off Flask
   spots:
     - name: West
       coord: [6.1, 7.75]
+      local:
+        - to: East 10
+      exits:
+        - to: Camp Exterior > East
+          tags: [xdoor]
+        - to: Wall Left
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Wall Left
+          req: $hook
+          movement: base
+          jumps: 1.5
+    - name: East 10
+      coord: [6.9, 9.75]
+      exits:
+        - to: Audience Chamber > West
+          tags: [xdoor]
+
+    - name: Wall Left
+      coord: [6.35, 7.35]
+      local:
+        - to: West
+        - to: East 10
+          thru: [6.3, 7.6]
+      locations:
+        - name: Charge Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $charge
+          to: Wall Right
+          movement: fling
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $spin
+          to: Wall Right
+          movement: fast_hover
+        - name: Mist Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: Nanite_Mist
+          to: Wall Right
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $mist2
+          to: Wall Right
+          movement: mist2
+        - name: Mist Upwards Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: Nanite_Mist
+          to: Above Wall
+          movement: mist1
+        - name: Upgraded Mist Upwards Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $mist2
+          to: Above Wall
+          movement: mist2
+        - name: Mist On Through
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: Nanite_Mist
+          to: Upper Right
+          movement: mist1
+        - name: Upgraded Mist On Through
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $mist2
+          to: Upper Right
+          movement: mist2
+      exits:
+        - to: Wall Right
+          req: Emergence_Dropoff_Wall
+          movement: base
+        - to: Above Wall
+          req: Emergence_Dropoff_Wall and Anuman
+          movement: base
+          jumps: 1
+        - to: Above Wall
+          req: Emergence_Dropoff_Wall and Nanite_Mist
+          movement: mist1
+        - to: Above Wall
+          req: Emergence_Dropoff_Wall and $mist2
+          movement: mist2
+        - to: Upper Right
+          req: Emergence_Dropoff_Wall and Nanite_Mist
+          movement: mist1
+        - to: Upper Right
+          req: Emergence_Dropoff_Wall and $mist2
+          movement: mist2
+        - to: Upper Ledge
+          req: Emergence_Dropoff_Wall and $hook
+          movement: base
+          jumps: 3
+
+    - name: Wall Right
+      coord: [6.55, 7.35]
+      local:
+        - to: Basin
+      locations:
+        - name: Charge Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $charge
+          to: Wall Left
+          movement: fling
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $spin
+          to: Wall Left
+          movement: fast_hover
+        - name: Mist Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: Nanite_Mist
+          to: Wall Left
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Dropoff_Wall
+          item: Emergence_Dropoff_Wall
+          req: $mist2
+          to: Wall Left
+          movement: mist2
+        - name: Shockwave Flask
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Remote Flask
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $boomerang
+          tags: [remote_flask]
+      exits:
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        # If the upper-right tile of the wall is still there, it's possible to hook it and then upward to the Upper Right
+        # but in practice this is trickier to make consistent. And the fast_hover might be faster
+    - name: Basin
+      coord: [6.65, 7.6]
+      local:
+        - to: Wall Right
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Wall Right
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Above Wall
+      coord: [6.5, 7.1]
+      local:
+        - to: Wall Right
+        - to: Basin
+      exits:
+        - to: Wall Left
+          req: Emergence_Dropoff_Wall
+          movement: base
+        - to: Upper Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 1
+        - to: Upper Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 1
+    - name: Upper Ledge
+      coord: [6.5, 6.85]
+      local:
+        - to: Above Wall
+        - to: Wall Right
+        - to: Basin
+        - to: Upper Right
+          jumps: 1
+      locations:
+        - name: Nearby Flask
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $boomerang
+          to: Wall Right
+          tags: [nearby_flask]
+      exits:
+        - to: East 7
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Right
+      coord: [6.65, 6.75]
+      local:
+        - to: Upper Ledge
+        - to: Above Wall
+        - to: Wall Right
+        - to: Basin
+          thru: [6.6, 7.0]
+        - to: East 7
+      locations:
+        - name: Nearby Flask
+          canon: Emergence_Dropoff_Flask
+          item: Big_Flask
+          req: $boomerang
+          to: Wall Right
+          tags: [nearby_flask]
+    - name: East 7
+      coord: [6.9, 6.75]
+      local:
+        - to: Upper Right
+      exits:
+        - to: Rocks Fall > West
+          tags: [xdoor]
+
+- name: Audience Chamber  # MARK: Audience Chamber
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [8, 9, 9, 10]
+  datamap:
+    map_spot:
+      flask: Menu > Emergence Map > Audience Chamber Flask
+  spots:
+    - name: West
+      coord: [7.1, 9.75]
+      local:
+        - to: Upper Ledge
+          jumps: 1
+      exits:
+        - to: Drop-off > East 10
+          tags: [xdoor]
+    - name: Upper Ledge
+      coord: [7.5, 9.55]
+      local:
+        - to: West
+        - to: Lower Mid-air
+        - to: Left Column Wall
+    - name: Lower Mid-air
+      coord: [7.6, 10.6]
+      exits:
+        - to: Left Column
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Left Column Wall
+      coord: [7.7, 10.6]
+      exits:
+        - to: Left Column
+          req: $grab or $climb
+          movement: base
+          jumps: 1
+        - to: Aquarium > West Hook Point
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Left Column
+      coord: [7.75, 10.5]
+      local:
+        - to: Bottom Middle
+      exits:
+        - to: Right Column
+          req: $hover
+          movement: base
+    - name: Bottom Middle
+      coord: [8.2, 10.75]
+      exits:
+        - to: Left Column
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Left Column
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Right Column
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Right Column
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Right Column
+      coord: [8.6, 10.5]
+      local:
+        - to: Bottom Middle
+        - to: East 11
+      exits:
+        - to: Left Column
+          req: $hover
+          movement: base
+        - to: Left Column
+          req: $hook and $hover
+          movement: fast_hover
+    - name: East 11
+      coord: [8.9, 10.65]
+      exits:
+        - to: Right Column
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Right Column
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Aquarium > West 11
+          tags: [xdoor]
+
+    - name: East 10
+      coord: [8.9, 9.55]
+      local:
+        - to: Cache
+      locations:
+        - name: Shockwave Flask
+          canon: Emergence_Audience_Chamber_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Boomerang Flask
+          canon: Emergence_Audience_Chamber_Flask
+          item: Flask
+          req: $boomerang
+          tags: [nearby_flask]
+      exits:
+        - to: Aquarium > West 10
+          tags: [xdoor]
+    - name: Cache
+      coord: [8.75, 9.6]
+      local:
+        - to: East 10
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Emergence_Audience_Chamber_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Emergence_Audience_Chamber_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Emergence_Audience_Chamber_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Aquarium > West Ledge
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: Aquarium > Under the Lip
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+
+- name: Aquarium  # MARK: Aquarium
+  on_entry: $reset_old_area(^newpos)
+  map:
+    water: [9, 10.1, 10, 11]
+  datamap:
+    water:
+      water: true
+  spots:
+    - name: West 11
+      coord: [9.1, 10.65]
+      local:
+        - to: West Hook Point
+          jumps: 0.5
+        - to: Bottom Middle
+          jumps: 2
+        - to: Mid-water
+          jumps: 2
+      exits:
+        - to: Audience Chamber > East 11
+          tags: [xdoor]
+        - to: Column
+          req: $hover and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Under the Lip
+          req: Nanite_Mist
+          movement: mist1
+        - to: Under the Lip
+          req: $mist2
+          movement: mist2
+    - name: West Hook Point
+      coord: [9.2, 10.6]
+      local:
+        - to: West 11
+        - to: Bottom Middle
+          jumps: 2
+        - to: Mid-water
+          jumps: 2
+      exits:
+        - to: Mid-water
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Mid-water
+          req: $hover and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Column
+          req: $hook and $hover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: Column
+          req: $hover and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Under the Lip
+          req: Nanite_Mist
+          movement: mist1
+        - to: Under the Lip
+          req: $mist2
+          movement: mist2
+    - name: Mid-water
+      coord: [9.6, 10.4]
+      local:
+        - to: West 11
+        - to: Bottom Middle
+      exits:
+        - to: Under the Lip
+          req: Nanite_Mist
+          movement: mist1
+        - to: Under the Lip
+          req: $mist2
+          movement: mist2
+    - name: Bottom Middle
+      coord: [10.0, 10.8]
+      local:
+        - to: West 11
+          jumps: 3
+        - to: Column
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Column
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Column
+      coord: [10.225, 10.55]
+      local:
+        - to: Bottom Middle
+        - to: Platform 2
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: West 11
+          req: $hover and Underwater_Movement
+          movement: water
+    - name: Platform 2
+      coord: [10.5, 10.0]
+      local:
+        # TODO: Going back into the water in general should require adding new spots in water
+        - to: Bottom Middle
+        - to: Platform 3 Left
+          jumps: 1
+        - to: Platform 3 Right
+          jumps: 1
+      exits:
+        - to: West Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Platform 3 Left
+      coord: [10.5, 9.8]
+      local:
+        - to: Platform 3 Right
+        - to: Platform 2
+      exits:
+        - to: North Catch
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+    - name: Platform 3 Right
+      coord: [10.6, 9.8]
+      local:
+        - to: Platform 3 Left
+        - to: Platform 2
+          jumps_down: 1
+      exits:
+        - to: Platform 4 Right
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Platform 4 Right
+      coord: [10.65, 9.4]
+      local:
+        - to: Platform 3 Right
+        - to: Platform 4 Left
+    - name: Platform 4 Left
+      coord: [10.55, 9.4]
+      local:
+        - to: Platform 4 Right
+      exits:
+        - to: North Catch
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: North Catch
+          req: $spin
+          movement: fast_hover
+          jumps: 1
+        - to: North Catch
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: North Catch
+      coord: [9.6, 9.35]
+      local:
+        - to: Under the Lip
+        - to: North
+          jumps: 1
+      exits:
+        - to: North
+          req: $mist2
+          movement: mist2
+        # These are likely all unnecessary
+        - to: Platform 4 Left
+          req: $hook and $hover
+          movement: fast_hover
+          jumps: 1
+        - to: Platform 4 Left
+          req: $spin
+          movement: fast_hover
+          jumps: 1
+        - to: Platform 4 Left
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Platform 3 Left
+          req: $hover
+          movement: base
+    - name: North
+      coord: [9.5, 9.2]
+      local:
+        - to: North Catch
+      exits:
+        - to: Storage > South
+          tags: [ydoor]
+    - name: Under the Lip
+      coord: [9.6, 9.6]
+      local:
+        - to: West 11
+      exits:
+        - to: North Catch
+          req: $hook and $hover
+          movement: base
+          jumps: 2
+        - to: North Catch
+          req: Nanite_Mist
+          movement: mist1
+        - to: North Catch
+          req: $mist2
+          movement: mist2
+        - to: West Ledge
+          req: $hook and $hover
+          movement: base
+          jumps: 1
+        - to: West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Ledge
+          req: $mist2
+          movement: mist2
+    - name: West Ledge
+      coord: [9.25, 9.55]
+      local:
+        - to: West 11
+        - to: West Mid-air
+        - to: West 10
+      exits:
+        - to: Under the Lip
+          req: $hover
+          movement: base
+        - to: Audience Chamber > Cache
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: West Mid-air
+      coord: [9.4, 9.7]
+      exits:
+        - to: Under the Lip
+          req: Nanite_Mist
+          movement: mist1
+        - to: Under the Lip
+          req: $mist2
+          movement: mist2
+    - name: West 10
+      coord: [9.1, 9.55]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Audience Chamber > East 10
+          tags: [xdoor]
+
+- name: Storage  # MARK: Storage
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    portal_hidden: true
+  map:
+    urn: [8, 8, 9, 9]
+    middle: [9, 8, 10, 9]
+    portal: [10, 8, 11, 9]
+  datamap:
+    map_spot:
+      urn: Menu > Emergence Map > Slingshot Charge
+      middle: Menu > Emergence Map > Slingshot Charge East
+      portal: Menu > Emergence Map > Storage Portal
+  start:
+    _door_open: false
+  spots:
+    - name: South
+      coord: [9.5, 8.8]
+      local:
+        - to: Dais Right
+          jumps: 2
+      exits:
+        - to: Aquarium > North
+          tags: [ydoor]
+        - to: Tunnel Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Tunnel Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tunnel Ledge
+          req: $mist2
+          movement: mist2
+    - name: Dais Right
+      coord: [9.05, 8.55]
+      local:
+        - to: Dais Middle
+      locations:
+        - name: Shockwave Urn
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Remote Urn
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $boomerang
+          tags: [remote_urn]
+        - name: Remote Urn Fast Travel
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Dais Middle
+          req: $hook
+          movement: fast_hover
+        - to: Tunnel Ledge
+          req: $hover
+          movement: base
+          jumps: 2
+    - name: Dais Middle
+      coord: [8.9, 8.55]
+      local:
+        - to: Dais Right
+        - to: Dais Left
+      locations:
+        - name: Urn
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          tags: [urn]
+        - name: Urn Collection Skip
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Urn Fast Travel
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Dais Left
+      coord: [8.8, 8.55]
+      local:
+        - to: Dais Middle
+        - to: Wall Right Ledge
+          jumps: 1
+      locations:
+        - name: Shockwave Urn
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Wall Right Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+        - to: Wall Right
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Wall Right Ledge
+      coord: [8.7, 8.4]
+      local:
+        - to: Wall Right
+          jumps: 1
+        - to: Dais Left
+        - to: Dais Middle
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $spin
+          to: West Hook Point
+          movement: fast_hover
+        - name: Charge Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $charge
+          to: West Hook Point
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: West Hook Point
+          req: $hookhover or $spin
+          movement: fast_hover
+          jumps: 1
+    - name: Wall Right
+      coord: [8.6, 8.25]
+      local:
+        - to: Wall Right Ledge
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: Nanite_Mist
+          to: Wall Left
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $mist2
+          to: Wall Left
+          movement: mist2
+      exits:
+        - to: Wall Left
+          req: Emergence_Storage_Rock
+          movement: base
+    - name: Wall Left
+      coord: [8.4, 8.25]
+      local:
+        - to: Wall Left Ledge
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: Nanite_Mist
+          to: Wall Right
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $mist2
+          to: Wall Right
+          movement: mist2
+      exits:
+        - to: Wall Right
+          req: Emergence_Storage_Rock
+          movement: base
+    - name: Wall Left Ledge
+      coord: [8.4, 8.4]
+      local:
+        - to: West
+        - to: Wall Left
+          jumps: 1
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $spin
+          to: Dais Left
+          movement: fast_hover
+        - name: Charge Through Wall
+          canon: Emergence_Storage_Rock
+          item: Emergence_Storage_Rock
+          req: $charge
+          to: Dais Left
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: Dais Left
+          req: $hookhover or $spin
+          movement: fast_hover
+          jumps: 1
+    - name: West Hook Point
+      coord: [8.2, 8.65]
+      exits:
+        - to: West
+          movement: fast_hover
+        - to: Wall Left Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+        - to: Wall Left
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Rocks Fall > Fling Point
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: West
+      coord: [8.1, 8.75]
+      exits:
+        - to: Wall Left Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Wall Left Ledge
+          req: ($grab and Anuman) or $climb
+          movement: base
+          jumps: 2
+        - to: Rocks Fall > East
+          tags: [xdoor]
+
+    - name: Tunnel Ledge
+      coord: [9.55, 8.4]
+      local:
+        - to: South
+        - to: Dais Right
+          jumps: 2
+        - to: Tunnel Entrance
+          jumps: 1
+      locations:
+        - name: Spin Into Tunnel
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: $spin
+          to: Behind Facade
+          movement: fast_hover
+          jumps: 1
+        - name: Charge Into Tunnel
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: $charge
+          to: Behind Facade
+          movement: fling
+          jumps: 1
+          penalty_tags: [charge_time]
+      exits:
+        - to: Tunnel Entrance
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+        - to: Behind Facade
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Tunnel Entrance
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tunnel Entrance
+          req: $mist2
+          movement: mist2
+        - to: Dais Right
+          req: $hover
+          movement: base
+    - name: Tunnel Entrance
+      coord: [9.65, 8.3]
+      local:
+        - to: Tunnel Ledge
+      locations:
+        - name: Mist Through Rock
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: Nanite_Mist
+          to: Behind Facade
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: $mist2
+          to: Behind Facade
+          movement: mist2
+      exits:
+        - to: Behind Facade
+          req: Emergence_Storage_Tunnel
+          movement: base
+    - name: Behind Facade
+      coord: [9.75, 8.3]
+      local:
+        - to: Secret Corner
+      locations:
+        - name: Mist Through Rock
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: Nanite_Mist
+          to: Tunnel Entrance
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: $mist2
+          to: Tunnel Entrance
+          movement: mist2
+      exits:
+        - to: Tunnel Entrance
+          req: Emergence_Storage_Tunnel
+          movement: base
+    - name: Secret Corner
+      coord: [10.1, 8.3]
+      local:
+        - to: Behind Facade
+        - to: At Door
+    - name: At Door
+      coord: [10.35, 8.75]
+      local:
+        - to: Secret Corner
+          jumps: 3
+      exits:
+        - to: Secret Corner
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Portal Stand
+          req: ^_door_open
+          movement: base
+          jumps: 1
+        - to: Portal Stand
+          req: ^_door_open and $hook
+          movement: fast_hover
+          jumps: 1
+      actions:
+        - name: Open Door
+          req: $unlock4 and $range2 and not ^_door_open
+          do: ^_door_open = true
+          tags: [open]
+    - name: Portal Stand
+      coord: [10.525, 8.6]
+      exits:
+        - to: At Door
+          req: ^_door_open
+          movement: base
+      actions:
+        - name: Open Door
+          req: $unlock4 and not ^_door_open
+          do: ^_door_open = true
+          tags: [open]
+
+- name: Rocks Fall  # MARK: Rocks Fall
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [7.1, 6.75]
+      local:
+        - to: Topmost Hook Point
+          jumps: 2
+      exits:
+        - to: Drop-off > East 7
+          tags: [xdoor]
+    - name: Topmost Hook Point
+      coord: [7.3, 6.5]
+      local:
+        - to: West
+        - to: Northeast Ledge
+          jumps: 1
+      exits:
+        - to: Northeast Ledge
+          req: $hook and $hover
+          movement: fast_hover
+        - to: Northeast Ledge
+          req: $spin
+          movement: fast_hover
+    - name: Northeast Ledge
+      coord: [7.7, 6.55]
+      local:
+        - to: Topmost Hook Point
+          jumps: 1
+        - to: Wall 1 Northeast
+      exits:
+        - to: Drop-off > Upper Right
+          req: $hook and $hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Wall 1 Northeast
+      coord: [7.7, 6.7]
+      local:
+        - to: Wall 1 East
+      locations:
+        - name: Mist Through Rock
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: Nanite_Mist
+          to: Wall 1 West
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $mist2
+          to: Wall 1 West
+          movement: mist2
+      exits:
+        - to: Wall 1 West
+          req: Emergence_Rocks_Fall_Rock_1
+          movement: base
+        - to: Northeast Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Northeast Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Northeast Ledge
+          req: $mist2
+          movement: mist2
+    - name: Wall 1 East
+      coord: [7.7, 6.85]
+      local:
+        - to: Northeast Ledge
+          jumps: 2
+      locations:
+        - name: Mist Through Rock
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: Nanite_Mist
+          to: Wall 1 West
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $mist2
+          to: Wall 1 West
+          movement: mist2
+      exits:
+        - to: Wall 1 West
+          req: Emergence_Rocks_Fall_Rock_1
+          movement: base
+        - to: Northeast Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Northeast Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 1
+    - name: Wall 1 West
+      coord: [7.525, 6.85]
+      local:  
+        - to: Wall 2 Northwest
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: Nanite_Mist
+          to: Wall 1 East
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $mist2
+          to: Wall 1 East
+          movement: mist2
+        - name: Mist Upward Through Wall
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: Nanite_Mist
+          to: Wall 1 Northeast
+          movement: mist1
+        - name: Upgraded Mist Upward Through Wall
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $mist2
+          to: Wall 1 Northeast
+          movement: mist2
+        - name: Charge Through Wall
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $charge
+          to: Wall 1 East
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: Wall 1 East
+          req: Emergence_Rocks_Fall_Rock_1
+          movement: base
+        - to: Wall 1 Northeast
+          req: Emergence_Rocks_Fall_Rock_1
+          movement: base
+          jumps: 1
+    - name: Wall 2 Northwest
+      coord: [7.4, 7.15]
+      local:
+        - to: Wall 2 West
+      locations:
+        - name: Spin Through Wall 1
+          canon: Emergence_Rocks_Fall_Rock_1
+          item: Emergence_Rocks_Fall_Rock_1
+          req: $spin
+          to: Wall 1 East
+          movement: fast_hover
+          jumps: 2
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: Nanite_Mist
+          to: Wall 2 East
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $mist2
+          to: Wall 2 East
+          movement: mist2
+        - name: Spin Through Wall 2
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $spin
+          to: Wall 2 East
+          movement: base
+          penalties:
+            - add: 0.5
+      exits:
+        - to: Wall 1 West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Wall 1 West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Wall 1 West
+          req: $mist2
+          movement: mist2
+    - name: Wall 2 West
+      coord: [7.35, 7.25]
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $spin
+          to: Middle Ledge
+          movement: fast_hover
+        - name: Charge Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $charge
+          to: Middle Ledge
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: Wall 2 East
+          req: Emergence_Rocks_Fall_Rock_2
+          movement: base
+        - to: Wall 1 West
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Wall 2 East
+      coord: [7.55, 7.35]
+      local:
+        - to: Middle Ledge
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: Nanite_Mist
+          to: Wall 2 West
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $mist2
+          to: Wall 2 West
+          movement: mist2
+        - name: Mist Upward Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: Nanite_Mist
+          to: Wall 2 Northwest
+          movement: mist1
+        - name: Upgraded Mist Upward Through Wall
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $mist2
+          to: Wall 2 Northwest
+          movement: mist2
+      exits:
+        - to: Wall 2 Northwest
+          req: Emergence_Rocks_Fall_Rock_2
+          movement: base
+          jumps: 1
+        - to: Wall 2 West
+          req: Emergence_Rocks_Fall_Rock_2
+          movement: base
+          jumps: 1
+        - to: Wall 2 Northwest
+          req: $hook and Emergence_Rocks_Fall_Rock_2
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Ledge
+      coord: [7.7, 7.5]
+      local:
+        - to: Wall 2 East
+          jumps: 1
+        - to: Wall 3 Northeast
+        - to: Wall 3 East
+      locations:
+        - name: Spin Through Wall 2
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $spin
+          to: Wall 2 Northwest
+          movement: fast_hover
+          jumps: 1
+        - name: Charge Through Wall 2
+          canon: Emergence_Rocks_Fall_Rock_2
+          item: Emergence_Rocks_Fall_Rock_2
+          req: $charge
+          to: Wall 2 Northwest
+          movement: fling
+          jumps: 1
+          penalty_tags: [charge_time]
+      exits:
+        - to: Wall 2 East
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Wall 3 Northeast
+      coord: [7.65, 7.7]
+      local:
+        - to: Wall 3 East
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: Nanite_Mist
+          to: Wall 3 West
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: $mist2
+          to: Wall 3 West
+          movement: mist2
+        # TODO: Spin/charge aren't guaranteed to get through but may still be possible at the right angle
+      exits:
+        - to: Middle Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Middle Ledge
+          req: $mist2
+          movement: mist2
+        - to: Wall 3 West
+          req: Emergence_Rocks_Fall_Rock_3
+          movement: base
+    - name: Wall 3 East
+      coord: [7.65, 7.85]
+      local:
+        - to: Middle Ledge
+          jumps: 2
+      exits:
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Wall 3 West
+          req: Emergence_Rocks_Fall_Rock_3
+          movement: base
+    - name: Wall 3 West
+      coord: [7.45, 7.85]
+      local:
+        - to: Lower Ledge
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: Nanite_Mist
+          to: Wall 3 East
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: $mist2
+          to: Wall 3 East
+          movement: mist2
+        - name: Mist Upwards Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: Nanite_Mist
+          to: Wall 3 Northeast
+          movement: mist1
+        - name: Upgraded Mist Upwards Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: $mist2
+          to: Wall 3 Northeast
+          movement: mist2
+      exits:
+        - to: Wall 3 East
+          req: Emergence_Rocks_Fall_Rock_3
+          movement: base
+        - to: Wall 3 Northeast
+          req: Emergence_Rocks_Fall_Rock_3
+          movement: base
+          jumps: 1
+    - name: Lower Ledge
+      coord: [7.4, 8.0]
+      local:
+        - to: Wall 3 West
+          jumps: 1
+        - to: Wall 4 West
+        - to: Wall 4 West Ledge
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: $spin
+          to: Wall 3 Northeast
+          movement: fast_hover
+          jumps: 1
+        - name: Charge Through Wall
+          canon: Emergence_Rocks_Fall_Rock_3
+          item: Emergence_Rocks_Fall_Rock_3
+          req: $charge
+          to: Wall 3 Northeast
+          movement: fling
+          jumps: 1
+      exits:
+        - to: Wall 3 Northeast
+          req: $hook and Emergence_Rocks_Fall_Rock_3
+          movement: fast_hover
+          jumps: 1
+    - name: Wall 4 West Ledge
+      coord: [7.35, 8.55]
+      local:
+        - to: Wall 4 West
+          jumps: 1
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $spin
+          to: Wall 4 East Ledge
+          movement: fast_hover
+        - name: Spin Through Wall and Hover
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $spinhover
+          to: Storage > West Hook Point
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+        - name: Charge Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $charge
+          to: Fling Point
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: Storage > West Hook Point
+          req: $hook and $hover and Emergence_Rocks_Fall_Rock_4
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Wall 4 West
+      coord: [7.45, 8.4]
+      local:
+        - to: Wall 4 West Ledge
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: Nanite_Mist
+          to: Wall 4 East
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $mist2
+          to: Wall 4 East
+          movement: mist2
+      exits:
+        - to: Lower Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Lower Ledge
+          req: $mist2
+          movement: mist2
+        - to: Wall 4 East
+          req: Emergence_Rocks_Fall_Rock_4
+          movement: base
+    - name: Wall 4 East
+      coord: [7.65, 8.4]
+      local:
+        - to: Wall 4 East Ledge
+        - to: East
+      locations:
+        - name: Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: Nanite_Mist
+          to: Wall 4 West
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $mist2
+          to: Wall 4 West
+          movement: mist2
+      exits:
+        - to: Wall 4 East
+          req: Emergence_Rocks_Fall_Rock_4
+          movement: base
+    - name: Wall 4 East Ledge
+      coord: [7.7, 8.55]
+      local:
+        - to: Wall 4 East
+          jumps: 1
+        - to: East
+      locations:
+        - name: Spin Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $spin
+          to: Wall 4 West
+          movement: fast_hover
+          jumps: 1
+        - name: Charge Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $charge
+          to: Wall 4 West
+          movement: fling
+          jumps: 1
+      exits:
+        - to: Wall 4 West
+          req: $hook and Emergence_Rocks_Fall_Rock_4
+          movement: fast_hover
+          jumps: 1
+    - name: Fling Point
+      coord: [7.8, 8.65]
+      local:
+        - to: East
+        - to: Wall 4 East Ledge
+          jumps: 1
+      exits:
+        - to: East
+          movement: fast_hover
+        - to: Storage > West Hook Point
+          req: $hover
+          movement: fast_hover
+        - to: Wall 4 East Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+    - name: East
+      coord: [7.9, 8.75]
+      local:
+        - to: Wall 4 East Ledge
+          jumps: 1
+      exits:
+        - to: Wall 4 East Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Storage > West
+          tags: [xdoor]

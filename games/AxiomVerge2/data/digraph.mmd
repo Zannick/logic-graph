@@ -1051,6 +1051,84 @@ subgraph Emergence
     end
     subgraph Emergence__Drop_off[Drop-off]
         Emergence__Drop_off__West(West);
+        Emergence__Drop_off__East_10(East 10);
+        Emergence__Drop_off__Wall_Left(Wall Left);
+        Emergence__Drop_off__Wall_Right(Wall Right);
+        Emergence__Drop_off__Basin(Basin);
+        Emergence__Drop_off__Above_Wall(Above Wall);
+        Emergence__Drop_off__Upper_Ledge(Upper Ledge);
+        Emergence__Drop_off__Upper_Right(Upper Right);
+        Emergence__Drop_off__East_7(East 7);
+    end
+    subgraph Emergence__Audience_Chamber[Audience Chamber]
+        Emergence__Audience_Chamber__West(West);
+        Emergence__Audience_Chamber__Upper_Ledge(Upper Ledge);
+        Emergence__Audience_Chamber__Lower_Mid_air(Lower Mid-air);
+        Emergence__Audience_Chamber__Left_Column_Wall(Left Column Wall);
+        Emergence__Audience_Chamber__Left_Column(Left Column);
+        Emergence__Audience_Chamber__Bottom_Middle(Bottom Middle);
+        Emergence__Audience_Chamber__Right_Column(Right Column);
+        Emergence__Audience_Chamber__East_11(East 11);
+        Emergence__Audience_Chamber__East_10(East 10);
+        Emergence__Audience_Chamber__Cache(Cache);
+    end
+    subgraph Emergence__Aquarium[Aquarium]
+        Emergence__Aquarium__West_11(West 11);
+        Emergence__Aquarium__West_Hook_Point(West Hook Point);
+        Emergence__Aquarium__Mid_water(Mid-water);
+        Emergence__Aquarium__Bottom_Middle(Bottom Middle);
+        Emergence__Aquarium__Column(Column);
+        Emergence__Aquarium__Platform_2(Platform 2);
+        Emergence__Aquarium__Platform_3_Left(Platform 3 Left);
+        Emergence__Aquarium__Platform_3_Right(Platform 3 Right);
+        Emergence__Aquarium__Platform_4_Right(Platform 4 Right);
+        Emergence__Aquarium__Platform_4_Left(Platform 4 Left);
+        Emergence__Aquarium__North_Catch(North Catch);
+        Emergence__Aquarium__North(North);
+        Emergence__Aquarium__Under_the_Lip(Under the Lip);
+        Emergence__Aquarium__West_Ledge(West Ledge);
+        Emergence__Aquarium__West_Mid_air(West Mid-air);
+        Emergence__Aquarium__West_10(West 10);
+    end
+    subgraph Emergence__Storage[Storage]
+        Emergence__Storage__South(South);
+        Emergence__Storage__Dais_Right(Dais Right);
+        Emergence__Storage__Dais_Middle(Dais Middle);
+        Emergence__Storage__Dais_Left(Dais Left);
+        Emergence__Storage__Wall_Right_Ledge(Wall Right Ledge);
+        Emergence__Storage__Wall_Right(Wall Right);
+        Emergence__Storage__Wall_Left(Wall Left);
+        Emergence__Storage__Wall_Left_Ledge(Wall Left Ledge);
+        Emergence__Storage__West_Hook_Point(West Hook Point);
+        Emergence__Storage__West(West);
+        Emergence__Storage__Tunnel_Ledge(Tunnel Ledge);
+        Emergence__Storage__Tunnel_Entrance(Tunnel Entrance);
+        Emergence__Storage__Behind_Facade(Behind Facade);
+        Emergence__Storage__Secret_Corner(Secret Corner);
+        Emergence__Storage__At_Door(At Door);
+        Emergence__Storage__Portal_Stand(Portal Stand);
+    end
+    subgraph Emergence__Rocks_Fall[Rocks Fall]
+        Emergence__Rocks_Fall__West(West);
+        Emergence__Rocks_Fall__Topmost_Hook_Point(Topmost Hook Point);
+        Emergence__Rocks_Fall__Northeast_Ledge(Northeast Ledge);
+        Emergence__Rocks_Fall__Wall_1_Northeast(Wall 1 Northeast);
+        Emergence__Rocks_Fall__Wall_1_East(Wall 1 East);
+        Emergence__Rocks_Fall__Wall_1_West(Wall 1 West);
+        Emergence__Rocks_Fall__Wall_2_Northwest(Wall 2 Northwest);
+        Emergence__Rocks_Fall__Wall_2_West(Wall 2 West);
+        Emergence__Rocks_Fall__Wall_2_East(Wall 2 East);
+        Emergence__Rocks_Fall__Middle_Ledge(Middle Ledge);
+        Emergence__Rocks_Fall__Wall_3_Northeast(Wall 3 Northeast);
+        Emergence__Rocks_Fall__Wall_3_East(Wall 3 East);
+        Emergence__Rocks_Fall__Wall_3_West(Wall 3 West);
+        Emergence__Rocks_Fall__Lower_Ledge(Lower Ledge);
+        Emergence__Rocks_Fall__Wall_4_West_Ledge(Wall 4 West Ledge);
+        Emergence__Rocks_Fall__Wall_4_West(Wall 4 West);
+        Emergence__Rocks_Fall__Wall_4_East(Wall 4 East);
+        Emergence__Rocks_Fall__Wall_4_East_Ledge(Wall 4 East Ledge);
+        Emergence__Rocks_Fall__Fling_Point(Fling Point);
+        Emergence__Rocks_Fall__East(East);
     end
 end
 subgraph Filter
@@ -2616,6 +2694,7 @@ subgraph Menu
         Menu__Emergence_Map__Camp(Camp);
         Menu__Emergence_Map__Drop_off_Flask(Drop-off Flask);
         Menu__Emergence_Map__Slingshot_Charge(Slingshot Charge);
+        Menu__Emergence_Map__Slingshot_Charge_East(Slingshot Charge East);
         Menu__Emergence_Map__Audience_Chamber_Flask(Audience Chamber Flask);
         Menu__Emergence_Map__Storage_Portal(Storage Portal);
     end
@@ -3557,8 +3636,90 @@ Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
 Ebih__West_Face__Lower_Ledge --> Ebih__West_Face__Upper_Ledge
 Ebih__West_Face__South --> Ebih__Ebih_West__Above_the_Trees
 Ebih__West_Face__Southwest --> Ebih__Ebih_West__Middle_North
+Emergence__Aquarium__Bottom_Middle --> Emergence__Aquarium__Column
+Emergence__Aquarium__Column <--> Emergence__Aquarium__West_11
+Emergence__Aquarium__Mid_water --> Emergence__Aquarium__Under_the_Lip
+Emergence__Aquarium__North <--> Emergence__Storage__South
+Emergence__Aquarium__North_Catch --> Emergence__Aquarium__North
+Emergence__Aquarium__North_Catch <--> Emergence__Aquarium__Platform_3_Left
+Emergence__Aquarium__North_Catch <--> Emergence__Aquarium__Platform_4_Left
+Emergence__Aquarium__Platform_2 --> Emergence__Aquarium__West_Ledge
+Emergence__Aquarium__Platform_3_Right --> Emergence__Aquarium__Platform_4_Right
+Emergence__Aquarium__Under_the_Lip --> Emergence__Aquarium__North_Catch
+Emergence__Aquarium__Under_the_Lip <--> Emergence__Aquarium__West_Ledge
+Emergence__Aquarium__West_10 <--> Emergence__Audience_Chamber__East_10
+Emergence__Aquarium__West_11 --> Emergence__Aquarium__Under_the_Lip
+Emergence__Aquarium__West_11 --> Emergence__Aquarium__West_Ledge
+Emergence__Aquarium__West_11 <--> Emergence__Audience_Chamber__East_11
+Emergence__Aquarium__West_Hook_Point --> Emergence__Aquarium__Column
+Emergence__Aquarium__West_Hook_Point --> Emergence__Aquarium__Mid_water
+Emergence__Aquarium__West_Hook_Point --> Emergence__Aquarium__Under_the_Lip
+Emergence__Aquarium__West_Hook_Point --> Emergence__Aquarium__West_Ledge
+Emergence__Aquarium__West_Ledge <--> Emergence__Audience_Chamber__Cache
+Emergence__Aquarium__West_Mid_air --> Emergence__Aquarium__Under_the_Lip
+Emergence__Audience_Chamber__Bottom_Middle --> Emergence__Audience_Chamber__Left_Column
+Emergence__Audience_Chamber__Bottom_Middle --> Emergence__Audience_Chamber__Right_Column
+Emergence__Audience_Chamber__Cache --> Emergence__Aquarium__Under_the_Lip
+Emergence__Audience_Chamber__East_11 --> Emergence__Audience_Chamber__Right_Column
+Emergence__Audience_Chamber__Left_Column <--> Emergence__Audience_Chamber__Right_Column
+Emergence__Audience_Chamber__Left_Column_Wall --> Emergence__Aquarium__West_Hook_Point
+Emergence__Audience_Chamber__Left_Column_Wall --> Emergence__Audience_Chamber__Left_Column
+Emergence__Audience_Chamber__Lower_Mid_air --> Emergence__Audience_Chamber__Left_Column
+Emergence__Audience_Chamber__West <--> Emergence__Drop_off__East_10
 Emergence__Camp_Exterior__Door <--> Interior__Emergence_Hangar__Door
-Emergence__Camp_Exterior__East --> Emergence__Drop_off__West
+Emergence__Camp_Exterior__East <--> Emergence__Drop_off__West
+Emergence__Drop_off__Above_Wall --> Emergence__Drop_off__Upper_Ledge
+Emergence__Drop_off__Above_Wall <--> Emergence__Drop_off__Wall_Left
+Emergence__Drop_off__Basin --> Emergence__Drop_off__Wall_Right
+Emergence__Drop_off__East_7 <--> Emergence__Rocks_Fall__West
+Emergence__Drop_off__Upper_Ledge --> Emergence__Drop_off__East_7
+Emergence__Drop_off__Wall_Left --> Emergence__Drop_off__Upper_Ledge
+Emergence__Drop_off__Wall_Left --> Emergence__Drop_off__Upper_Right
+Emergence__Drop_off__Wall_Left --> Emergence__Drop_off__Wall_Right
+Emergence__Drop_off__Wall_Right --> Emergence__Drop_off__Upper_Ledge
+Emergence__Drop_off__West --> Emergence__Drop_off__Wall_Left
+Emergence__Rocks_Fall__East --> Emergence__Rocks_Fall__Wall_4_East_Ledge
+Emergence__Rocks_Fall__East <--> Emergence__Storage__West
+Emergence__Rocks_Fall__Fling_Point --> Emergence__Rocks_Fall__East
+Emergence__Rocks_Fall__Fling_Point --> Emergence__Rocks_Fall__Wall_4_East_Ledge
+Emergence__Rocks_Fall__Fling_Point <--> Emergence__Storage__West_Hook_Point
+Emergence__Rocks_Fall__Lower_Ledge --> Emergence__Rocks_Fall__Wall_3_Northeast
+Emergence__Rocks_Fall__Middle_Ledge --> Emergence__Rocks_Fall__Wall_2_East
+Emergence__Rocks_Fall__Northeast_Ledge --> Emergence__Drop_off__Upper_Right
+Emergence__Rocks_Fall__Topmost_Hook_Point --> Emergence__Rocks_Fall__Northeast_Ledge
+Emergence__Rocks_Fall__Wall_1_East --> Emergence__Rocks_Fall__Northeast_Ledge
+Emergence__Rocks_Fall__Wall_1_East <--> Emergence__Rocks_Fall__Wall_1_West
+Emergence__Rocks_Fall__Wall_1_Northeast --> Emergence__Rocks_Fall__Northeast_Ledge
+Emergence__Rocks_Fall__Wall_1_Northeast <--> Emergence__Rocks_Fall__Wall_1_West
+Emergence__Rocks_Fall__Wall_2_East --> Emergence__Rocks_Fall__Wall_2_Northwest
+Emergence__Rocks_Fall__Wall_2_East <--> Emergence__Rocks_Fall__Wall_2_West
+Emergence__Rocks_Fall__Wall_2_Northwest --> Emergence__Rocks_Fall__Wall_1_West
+Emergence__Rocks_Fall__Wall_2_West --> Emergence__Rocks_Fall__Wall_1_West
+Emergence__Rocks_Fall__Wall_3_East --> Emergence__Rocks_Fall__Middle_Ledge
+Emergence__Rocks_Fall__Wall_3_East <--> Emergence__Rocks_Fall__Wall_3_West
+Emergence__Rocks_Fall__Wall_3_Northeast --> Emergence__Rocks_Fall__Middle_Ledge
+Emergence__Rocks_Fall__Wall_3_Northeast <--> Emergence__Rocks_Fall__Wall_3_West
+Emergence__Rocks_Fall__Wall_4_East_Ledge --> Emergence__Rocks_Fall__Wall_4_West
+Emergence__Rocks_Fall__Wall_4_West --> Emergence__Rocks_Fall__Lower_Ledge
+Emergence__Rocks_Fall__Wall_4_West --> Emergence__Rocks_Fall__Wall_4_East
+Emergence__Rocks_Fall__Wall_4_West_Ledge --> Emergence__Storage__West_Hook_Point
+Emergence__Storage__At_Door <--> Emergence__Storage__Portal_Stand
+Emergence__Storage__At_Door --> Emergence__Storage__Secret_Corner
+Emergence__Storage__Behind_Facade <--> Emergence__Storage__Tunnel_Entrance
+Emergence__Storage__Dais_Left --> Emergence__Storage__Wall_Right
+Emergence__Storage__Dais_Left --> Emergence__Storage__Wall_Right_Ledge
+Emergence__Storage__Dais_Right --> Emergence__Storage__Dais_Middle
+Emergence__Storage__Dais_Right <--> Emergence__Storage__Tunnel_Ledge
+Emergence__Storage__South --> Emergence__Storage__Tunnel_Ledge
+Emergence__Storage__Tunnel_Ledge --> Emergence__Storage__Behind_Facade
+Emergence__Storage__Tunnel_Ledge --> Emergence__Storage__Tunnel_Entrance
+Emergence__Storage__Wall_Left <--> Emergence__Storage__Wall_Right
+Emergence__Storage__Wall_Left_Ledge --> Emergence__Storage__Dais_Left
+Emergence__Storage__Wall_Right_Ledge --> Emergence__Storage__West_Hook_Point
+Emergence__Storage__West --> Emergence__Storage__Wall_Left_Ledge
+Emergence__Storage__West_Hook_Point --> Emergence__Storage__Wall_Left
+Emergence__Storage__West_Hook_Point --> Emergence__Storage__Wall_Left_Ledge
+Emergence__Storage__West_Hook_Point --> Emergence__Storage__West
 Filter__Core__Bottom --> Filter__Core__Terminal_East
 Filter__Core__Catwalk_West --> Filter__Core__West
 Filter__Core__Terminal_East --> Filter__Core__Catwalk_West

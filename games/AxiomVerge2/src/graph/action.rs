@@ -92,6 +92,8 @@ impl world::Accessible for Action {
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => true,
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => true,
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::access_emergence__storage__at_door__open_door__req(ctx, world),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::access_emergence__storage__portal_stand__open_door__req(ctx, world),
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_giguna__carnelian__lower_susar__caught__req(ctx, world),
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::access_giguna__carnelian__lower_susar__hack__req(ctx, world),
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_giguna__carnelian__switch__open_door__req(ctx, world),
@@ -253,6 +255,8 @@ impl world::Accessible for Action {
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::observe_access_emergence__storage__at_door__open_door__req(ctx, world, full_obs),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::observe_access_emergence__storage__portal_stand__open_door__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::observe_access_giguna__carnelian__lower_susar__caught__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::observe_access_giguna__carnelian__lower_susar__hack__req(ctx, world, full_obs),
             ActionId::Giguna__Carnelian__Switch__Open_Door => rules::observe_access_giguna__carnelian__switch__open_door__req(ctx, world, full_obs),
@@ -782,6 +786,24 @@ impl world::Accessible for Action {
             }
             ActionId::Ebih__Waterfall__West_8__Open_Door => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Emergence__Storage__At_Door__Open_Door => {
+                let (ret, mut tags) = rules::explain_emergence__storage__at_door__open_door__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => {
+                let (ret, mut tags) = rules::explain_emergence__storage__portal_stand__open_door__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1618,6 +1640,8 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::action_emergence__storage__at_door__open_door__do(ctx, world),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::action_emergence__storage__portal_stand__open_door__do(ctx, world),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx, world),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2023,6 +2047,12 @@ impl world::Action for Action {
             }
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Emergence__Storage__At_Door__Open_Door => {
+                rules::observe_action_emergence__storage__at_door__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => {
+                rules::observe_action_emergence__storage__portal_stand__open_door__do(ctx, world, full_obs);
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2695,6 +2725,16 @@ pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
         time: 1300,
         price: Currency::Free,
     };
+    actions[ActionId::Emergence__Storage__At_Door__Open_Door] = Action {
+        id: ActionId::Emergence__Storage__At_Door__Open_Door,
+        time: 1000,
+        price: Currency::Free,
+    };
+    actions[ActionId::Emergence__Storage__Portal_Stand__Open_Door] = Action {
+        id: ActionId::Emergence__Storage__Portal_Stand__Open_Door,
+        time: 1000,
+        price: Currency::Free,
+    };
     actions[ActionId::Giguna_Breach__Peak__Save_Point__Save] = Action {
         id: ActionId::Giguna_Breach__Peak__Save_Point__Save,
         time: 1300,
@@ -3271,6 +3311,8 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => SpotId::Ebih__Drone_Room__Moving_Platform,
         ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => SpotId::Ebih__Vertical_Interchange__West_13,
         ActionId::Emergence__Camp_Exterior__Save_Point__Save => SpotId::Emergence__Camp_Exterior__Save_Point,
+        ActionId::Emergence__Storage__At_Door__Open_Door => SpotId::Emergence__Storage__At_Door,
+        ActionId::Emergence__Storage__Portal_Stand__Open_Door => SpotId::Emergence__Storage__Portal_Stand,
         ActionId::Giguna_Breach__Peak__Save_Point__Save => SpotId::Giguna_Breach__Peak__Save_Point,
         ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => SpotId::Giguna_Breach__SW_Save__West_11,
         ActionId::Giguna_Breach__SW_Save__Save_Point__Save => SpotId::Giguna_Breach__SW_Save__Save_Point,

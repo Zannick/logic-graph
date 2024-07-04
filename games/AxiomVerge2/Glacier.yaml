@@ -1411,7 +1411,7 @@ areas:
         - to: East 17
       exits:
         - to: Lower Switch
-          req: Underwater_Movement and $hook and $hover
+          req: $hook and $hover and Underwater_Movement
           movement: fast_hover
           jumps: 1
         - to: Lower Switch

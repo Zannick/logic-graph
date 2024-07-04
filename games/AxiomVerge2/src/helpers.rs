@@ -676,6 +676,253 @@ macro_rules! hobserve__spin {
     }};
 }
 
+/// $hookhover (  )
+/// ^mode == 'drone' and Slingshot_Hook and Drone_Hover
+#[macro_export]
+macro_rules! helper__hookhover {
+    ($ctx:expr, $world:expr) => {{
+        (($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+            && $ctx.has(Item::Drone_Hover))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__hookhover {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut left = {
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = $ctx.mode();
+                        $edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    $edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Slingshot_Hook);
+                        $edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Drone_Hover);
+                    $edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__hookhover {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })) && ({
+            $full_obs.observe_drone_hover();
+            $ctx.has(Item::Drone_Hover)
+        }))
+    }};
+}
+
+/// $chargehover (  )
+/// ^mode == 'drone' and Slingshot_Hook and Slingshot_Charge and Drone_Hover
+#[macro_export]
+macro_rules! helper__chargehover {
+    ($ctx:expr, $world:expr) => {{
+        ((($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+            && $ctx.has(Item::Slingshot_Charge))
+            && $ctx.has(Item::Drone_Hover))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__chargehover {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let mut refs = vec!["^mode"];
+                        let mut left = {
+                            let r = $ctx.mode();
+                            $edict.insert("^mode", format!("{:?}", r));
+                            (r, vec!["^mode"])
+                        };
+                        let right = enums::Mode::Drone;
+                        $edict.insert("^mode", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 == right, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Slingshot_Hook);
+                            $edict.insert("Slingshot_Hook", format!("{}", h));
+                            (h, vec!["Slingshot_Hook"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Slingshot_Charge);
+                        $edict.insert("Slingshot_Charge", format!("{}", h));
+                        (h, vec!["Slingshot_Charge"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Drone_Hover);
+                    $edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__chargehover {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ((({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })) && ({
+            $full_obs.observe_slingshot_charge();
+            $ctx.has(Item::Slingshot_Charge)
+        })) && ({
+            $full_obs.observe_drone_hover();
+            $ctx.has(Item::Drone_Hover)
+        }))
+    }};
+}
+
+/// $spinhover (  )
+/// ^mode == 'drone' and Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+#[macro_export]
+macro_rules! helper__spinhover {
+    ($ctx:expr, $world:expr) => {{
+        ((($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+            && $ctx.has(Item::Slingshot_Weapon))
+            && $ctx.has(Item::Drone_Hover))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__spinhover {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let mut refs = vec!["^mode"];
+                        let mut left = {
+                            let r = $ctx.mode();
+                            $edict.insert("^mode", format!("{:?}", r));
+                            (r, vec!["^mode"])
+                        };
+                        let right = enums::Mode::Drone;
+                        $edict.insert("^mode", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 == right, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = $ctx.has(Item::Slingshot_Hook);
+                            $edict.insert("Slingshot_Hook", format!("{}", h));
+                            (h, vec!["Slingshot_Hook"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = $ctx.has(Item::Slingshot_Weapon);
+                        $edict.insert("Slingshot_Weapon", format!("{}", h));
+                        (h, vec!["Slingshot_Weapon"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Drone_Hover);
+                    $edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__spinhover {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ((({
+            let v = {
+                $full_obs.observe_mode();
+                $ctx.mode()
+            };
+            v == enums::Mode::Drone
+        } && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        })) && ({
+            $full_obs.observe_slingshot_weapon();
+            $ctx.has(Item::Slingshot_Weapon)
+        })) && ({
+            $full_obs.observe_drone_hover();
+            $ctx.has(Item::Drone_Hover)
+        }))
+    }};
+}
+
 /// $can_deploy (  )
 /// Remote_Drone and ^mode != 'drone' and not Anuman
 #[macro_export]
@@ -2490,11 +2737,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{31}, Big_Flask{13}]
+/// [Flask{32}, Big_Flask{14}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 31 && $ctx.count(Item::Big_Flask) >= 13
+        $ctx.count(Item::Flask) >= 32 && $ctx.count(Item::Big_Flask) >= 14
     }};
 }
 #[macro_export]
@@ -2505,7 +2752,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 31, vec!["Flask count"])
+                (ct >= 32, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2514,7 +2761,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 13, vec!["Big_Flask count"])
+                (ct >= 14, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2525,11 +2772,11 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(31));
-            $ctx.count(Item::Flask) >= 31
+            $full_obs.observe_flask(IntegerObservation::Ge(32));
+            $ctx.count(Item::Flask) >= 32
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(13));
-            $ctx.count(Item::Big_Flask) >= 13
+            $full_obs.observe_big_flask(IntegerObservation::Ge(14));
+            $ctx.count(Item::Big_Flask) >= 14
         })
     }};
 }
@@ -2802,7 +3049,7 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge]
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -2820,6 +3067,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Nanite_Mist)
             && $ctx.has(Item::Exit_Breach)
             && $ctx.has(Item::Drone_Melee_Charge)
+            && $ctx.has(Item::Slingshot_Charge)
     }};
 }
 #[macro_export]
@@ -2950,6 +3198,15 @@ macro_rules! hexplain__all_urns {
                 (h, vec!["Drone_Melee_Charge"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Slingshot_Charge);
+                $edict.insert("Slingshot_Charge", format!("{}", h));
+                (h, vec!["Slingshot_Charge"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2999,6 +3256,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_drone_melee_charge();
             $ctx.has(Item::Drone_Melee_Charge)
+        }) && ({
+            $full_obs.observe_slingshot_charge();
+            $ctx.has(Item::Slingshot_Charge)
         })
     }};
 }

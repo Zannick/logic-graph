@@ -875,6 +875,8 @@ areas:
       coord: [6, 8]
     - name: Slingshot Charge
       coord: [8, 9]
+    - name: Slingshot Charge East
+      coord: [9, 9]
     - name: Audience Chamber Flask
       coord: [8, 10]
     - name: Storage Portal

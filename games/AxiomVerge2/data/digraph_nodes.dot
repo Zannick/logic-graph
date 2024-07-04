@@ -1054,12 +1054,90 @@
     {
         node[fillcolor="1"];
         {
+            Emergence__Aquarium__West_11 [label = "", pos = "27.3,-17.75!"];
+            Emergence__Aquarium__West_Hook_Point [label = "", pos = "27.6,-17.666667!"];
+            Emergence__Aquarium__Mid_water [label = "", pos = "28.8,-17.333333!"];
+            Emergence__Aquarium__Bottom_Middle [label = "", pos = "30.0,-18.0!"];
+            Emergence__Aquarium__Column [label = "", pos = "30.675,-17.583333!"];
+            Emergence__Aquarium__Platform_2 [label = "", pos = "31.5,-16.666667!"];
+            Emergence__Aquarium__Platform_3_Left [label = "", pos = "31.5,-16.333333!"];
+            Emergence__Aquarium__Platform_3_Right [label = "", pos = "31.8,-16.333333!"];
+            Emergence__Aquarium__Platform_4_Right [label = "", pos = "31.95,-15.666667!"];
+            Emergence__Aquarium__Platform_4_Left [label = "", pos = "31.65,-15.666667!"];
+            Emergence__Aquarium__North_Catch [label = "", pos = "28.8,-15.583333!"];
+            Emergence__Aquarium__North [label = "", pos = "28.5,-15.333333!"];
+            Emergence__Aquarium__Under_the_Lip [label = "", pos = "28.8,-16.0!"];
+            Emergence__Aquarium__West_Ledge [label = "", pos = "27.75,-15.916667!"];
+            Emergence__Aquarium__West_Mid_air [label = "", pos = "28.2,-16.166667!"];
+            Emergence__Aquarium__West_10 [label = "", pos = "27.3,-15.916667!"];
+        }
+        {
+            Emergence__Audience_Chamber__West [label = "", pos = "21.3,-16.25!"];
+            Emergence__Audience_Chamber__Upper_Ledge [label = "", pos = "22.5,-15.916667!"];
+            Emergence__Audience_Chamber__Lower_Mid_air [label = "", pos = "22.8,-17.666667!"];
+            Emergence__Audience_Chamber__Left_Column_Wall [label = "", pos = "23.1,-17.666667!"];
+            Emergence__Audience_Chamber__Left_Column [label = "", pos = "23.25,-17.5!"];
+            Emergence__Audience_Chamber__Bottom_Middle [label = "", pos = "24.6,-17.916667!"];
+            Emergence__Audience_Chamber__Right_Column [label = "", pos = "25.8,-17.5!"];
+            Emergence__Audience_Chamber__East_11 [label = "", pos = "26.7,-17.75!"];
+            Emergence__Audience_Chamber__East_10 [label = "", pos = "26.7,-15.916667!"];
+            Emergence__Audience_Chamber__Cache [label = "", pos = "26.25,-16.0!"];
+        }
+        {
             Emergence__Camp_Exterior__Door [label = "", pos = "13.2,-13.0!"];
             Emergence__Camp_Exterior__Save_Point [label = "", pos = "16.5,-12.5!"];
             Emergence__Camp_Exterior__East [label = "", pos = "17.7,-12.916667!"];
         }
         {
             Emergence__Drop_off__West [label = "", pos = "18.3,-12.916667!"];
+            Emergence__Drop_off__East_10 [label = "", pos = "20.7,-16.25!"];
+            Emergence__Drop_off__Wall_Left [label = "", pos = "19.05,-12.25!"];
+            Emergence__Drop_off__Wall_Right [label = "", pos = "19.65,-12.25!"];
+            Emergence__Drop_off__Basin [label = "", pos = "19.95,-12.666667!"];
+            Emergence__Drop_off__Above_Wall [label = "", pos = "19.5,-11.833333!"];
+            Emergence__Drop_off__Upper_Ledge [label = "", pos = "19.5,-11.416667!"];
+            Emergence__Drop_off__Upper_Right [label = "", pos = "19.95,-11.25!"];
+            Emergence__Drop_off__East_7 [label = "", pos = "20.7,-11.25!"];
+        }
+        {
+            Emergence__Rocks_Fall__West [label = "", pos = "21.3,-11.25!"];
+            Emergence__Rocks_Fall__Topmost_Hook_Point [label = "", pos = "21.9,-10.833333!"];
+            Emergence__Rocks_Fall__Northeast_Ledge [label = "", pos = "23.1,-10.916667!"];
+            Emergence__Rocks_Fall__Wall_1_Northeast [label = "", pos = "23.1,-11.166667!"];
+            Emergence__Rocks_Fall__Wall_1_East [label = "", pos = "23.1,-11.416667!"];
+            Emergence__Rocks_Fall__Wall_1_West [label = "", pos = "22.575,-11.416667!"];
+            Emergence__Rocks_Fall__Wall_2_Northwest [label = "", pos = "22.2,-11.916667!"];
+            Emergence__Rocks_Fall__Wall_2_West [label = "", pos = "22.05,-12.083333!"];
+            Emergence__Rocks_Fall__Wall_2_East [label = "", pos = "22.65,-12.25!"];
+            Emergence__Rocks_Fall__Middle_Ledge [label = "", pos = "23.1,-12.5!"];
+            Emergence__Rocks_Fall__Wall_3_Northeast [label = "", pos = "22.95,-12.833333!"];
+            Emergence__Rocks_Fall__Wall_3_East [label = "", pos = "22.95,-13.083333!"];
+            Emergence__Rocks_Fall__Wall_3_West [label = "", pos = "22.35,-13.083333!"];
+            Emergence__Rocks_Fall__Lower_Ledge [label = "", pos = "22.2,-13.333333!"];
+            Emergence__Rocks_Fall__Wall_4_West_Ledge [label = "", pos = "22.05,-14.25!"];
+            Emergence__Rocks_Fall__Wall_4_West [label = "", pos = "22.35,-14.0!"];
+            Emergence__Rocks_Fall__Wall_4_East [label = "", pos = "22.95,-14.0!"];
+            Emergence__Rocks_Fall__Wall_4_East_Ledge [label = "", pos = "23.1,-14.25!"];
+            Emergence__Rocks_Fall__Fling_Point [label = "", pos = "23.4,-14.416667!"];
+            Emergence__Rocks_Fall__East [label = "", pos = "23.7,-14.583333!"];
+        }
+        {
+            Emergence__Storage__South [label = "", pos = "28.5,-14.666667!"];
+            Emergence__Storage__Dais_Right [label = "", pos = "27.15,-14.25!"];
+            Emergence__Storage__Dais_Middle [label = "", pos = "26.7,-14.25!"];
+            Emergence__Storage__Dais_Left [label = "", pos = "26.4,-14.25!"];
+            Emergence__Storage__Wall_Right_Ledge [label = "", pos = "26.1,-14.0!"];
+            Emergence__Storage__Wall_Right [label = "", pos = "25.8,-13.75!"];
+            Emergence__Storage__Wall_Left [label = "", pos = "25.2,-13.75!"];
+            Emergence__Storage__Wall_Left_Ledge [label = "", pos = "25.2,-14.0!"];
+            Emergence__Storage__West_Hook_Point [label = "", pos = "24.6,-14.416667!"];
+            Emergence__Storage__West [label = "", pos = "24.3,-14.583333!"];
+            Emergence__Storage__Tunnel_Ledge [label = "", pos = "28.65,-14.0!"];
+            Emergence__Storage__Tunnel_Entrance [label = "", pos = "28.95,-13.833333!"];
+            Emergence__Storage__Behind_Facade [label = "", pos = "29.25,-13.833333!"];
+            Emergence__Storage__Secret_Corner [label = "", pos = "30.3,-13.833333!"];
+            Emergence__Storage__At_Door [label = "", pos = "31.05,-14.583333!"];
+            Emergence__Storage__Portal_Stand [label = "", pos = "31.575,-14.333333!"];
         }
     }
     {
@@ -2500,6 +2578,7 @@
             Menu__Emergence_Map__Camp [label = "", pos = "15.0,-13.333333!"];
             Menu__Emergence_Map__Drop_off_Flask [label = "", pos = "18.0,-13.333333!"];
             Menu__Emergence_Map__Slingshot_Charge [label = "", pos = "24.0,-15.0!"];
+            Menu__Emergence_Map__Slingshot_Charge_East [label = "", pos = "27.0,-15.0!"];
             Menu__Emergence_Map__Audience_Chamber_Flask [label = "", pos = "24.0,-16.666667!"];
             Menu__Emergence_Map__Storage_Portal [label = "", pos = "30.0,-15.0!"];
         }

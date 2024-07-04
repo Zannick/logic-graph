@@ -477,15 +477,15 @@ areas:
         - to: Flat Ruin
       exits:
         - to: West Lake > West Platform
-          req: Underwater_Movement and $hook and $hover
+          req: $hook and $hover and Underwater_Movement
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
         - to: West Lake > Some Rock
-          req: Underwater_Movement and $hook and $hover
+          req: $hook and $hover and Underwater_Movement
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
         - to: West Lake > Tentacle Gap
-          req: Underwater_Movement and $hook and $hover
+          req: $hook and $hover and Underwater_Movement
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
     - name: West 19

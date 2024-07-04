@@ -11216,7 +11216,946 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
         exits: Range {
+            start: ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__West__ex__Wall_Left_2.into_usize() + 1,
+        },
+        actions: Range {
             start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__East_10] = Spot {
+        id: SpotId::Emergence__Drop_off__East_10,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Wall_Left] = Spot {
+        id: SpotId::Emergence__Drop_off__Wall_Left,
+        locations: Range {
+            start: LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Upwards_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Wall_Right] = Spot {
+        id: SpotId::Emergence__Drop_off__Wall_Right,
+        locations: Range {
+            start: LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Drop_off__Wall_Right__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Basin] = Spot {
+        id: SpotId::Emergence__Drop_off__Basin,
+        locations: Range {
+            start: LocationId::Emergence__Drop_off__Basin__Flask.into_usize(),
+            end: LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Above_Wall] = Spot {
+        id: SpotId::Emergence__Drop_off__Above_Wall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Upper_Ledge] = Spot {
+        id: SpotId::Emergence__Drop_off__Upper_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask.into_usize(),
+            end: LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__Upper_Right] = Spot {
+        id: SpotId::Emergence__Drop_off__Upper_Right,
+        locations: Range {
+            start: LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask.into_usize(),
+            end: LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Drop_off__East_7] = Spot {
+        id: SpotId::Emergence__Drop_off__East_7,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1.into_usize(),
+            end: ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__West] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Upper_Ledge] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Upper_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Lower_Mid_air] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Lower_Mid_air,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Left_Column_Wall] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Left_Column_Wall,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Left_Column] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Left_Column,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Bottom_Middle] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Bottom_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Right_Column] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Right_Column,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__East_11] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__East_11,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__East_10] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__East_10,
+        locations: Range {
+            start: LocationId::Emergence__Audience_Chamber__East_10__Boomerang_Flask.into_usize(),
+            end: LocationId::Emergence__Audience_Chamber__East_10__Shockwave_Flask.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Audience_Chamber__Cache] = Spot {
+        id: SpotId::Emergence__Audience_Chamber__Cache,
+        locations: Range {
+            start: LocationId::Emergence__Audience_Chamber__Cache__Flask.into_usize(),
+            end: LocationId::Emergence__Audience_Chamber__Cache__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1.into_usize(),
+            end: ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__West_11] = Spot {
+        id: SpotId::Emergence__Aquarium__West_11,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__West_Hook_Point] = Spot {
+        id: SpotId::Emergence__Aquarium__West_Hook_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Mid_water] = Spot {
+        id: SpotId::Emergence__Aquarium__Mid_water,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Bottom_Middle] = Spot {
+        id: SpotId::Emergence__Aquarium__Bottom_Middle,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Column] = Spot {
+        id: SpotId::Emergence__Aquarium__Column,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Column__ex__West_11_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Column__ex__West_11_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Platform_2] = Spot {
+        id: SpotId::Emergence__Aquarium__Platform_2,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Platform_3_Left] = Spot {
+        id: SpotId::Emergence__Aquarium__Platform_3_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Platform_3_Right] = Spot {
+        id: SpotId::Emergence__Aquarium__Platform_3_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Platform_4_Right] = Spot {
+        id: SpotId::Emergence__Aquarium__Platform_4_Right,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Platform_4_Left] = Spot {
+        id: SpotId::Emergence__Aquarium__Platform_4_Left,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__North_Catch] = Spot {
+        id: SpotId::Emergence__Aquarium__North_Catch,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__North_Catch__ex__North_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__North] = Spot {
+        id: SpotId::Emergence__Aquarium__North,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__North__ex__Storage__South_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__North__ex__Storage__South_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__Under_the_Lip] = Spot {
+        id: SpotId::Emergence__Aquarium__Under_the_Lip,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__West_Ledge] = Spot {
+        id: SpotId::Emergence__Aquarium__West_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__West_Mid_air] = Spot {
+        id: SpotId::Emergence__Aquarium__West_Mid_air,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Aquarium__West_10] = Spot {
+        id: SpotId::Emergence__Aquarium__West_10,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1.into_usize(),
+            end: ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__South] = Spot {
+        id: SpotId::Emergence__Storage__South,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__South__ex__Aquarium__North_1.into_usize(),
+            end: ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Dais_Right] = Spot {
+        id: SpotId::Emergence__Storage__Dais_Right,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Dais_Right__Remote_Urn.into_usize(),
+            end: LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1.into_usize(),
+            end: ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Dais_Middle] = Spot {
+        id: SpotId::Emergence__Storage__Dais_Middle,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Dais_Middle__Urn.into_usize(),
+            end: LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Dais_Left] = Spot {
+        id: SpotId::Emergence__Storage__Dais_Left,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn.into_usize(),
+            end: LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1.into_usize(),
+            end: ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Wall_Right_Ledge] = Spot {
+        id: SpotId::Emergence__Storage__Wall_Right_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1.into_usize(),
+            end: ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Wall_Right] = Spot {
+        id: SpotId::Emergence__Storage__Wall_Right,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Storage__Wall_Right__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1.into_usize(),
+            end: ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Wall_Left] = Spot {
+        id: SpotId::Emergence__Storage__Wall_Left,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Storage__Wall_Left__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1.into_usize(),
+            end: ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Wall_Left_Ledge] = Spot {
+        id: SpotId::Emergence__Storage__Wall_Left_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1.into_usize(),
+            end: ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__West_Hook_Point] = Spot {
+        id: SpotId::Emergence__Storage__West_Hook_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1.into_usize(),
+            end: ExitId::Emergence__Storage__West_Hook_Point__ex__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__West] = Spot {
+        id: SpotId::Emergence__Storage__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1.into_usize(),
+            end: ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Tunnel_Ledge] = Spot {
+        id: SpotId::Emergence__Storage__Tunnel_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel.into_usize(),
+            end: LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1.into_usize(),
+            end: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Tunnel_Entrance] = Spot {
+        id: SpotId::Emergence__Storage__Tunnel_Entrance,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock.into_usize(),
+            end: LocationId::Emergence__Storage__Tunnel_Entrance__Upgraded_Mist_Through_Rock.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1.into_usize(),
+            end: ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Behind_Facade] = Spot {
+        id: SpotId::Emergence__Storage__Behind_Facade,
+        locations: Range {
+            start: LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock.into_usize(),
+            end: LocationId::Emergence__Storage__Behind_Facade__Upgraded_Mist_Through_Rock.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1.into_usize(),
+            end: ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Secret_Corner] = Spot {
+        id: SpotId::Emergence__Storage__Secret_Corner,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Storage__At_Door] = Spot {
+        id: SpotId::Emergence__Storage__At_Door,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1.into_usize(),
+            end: ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Emergence__Storage__At_Door__Open_Door.into_usize(),
+            end: ActionId::Emergence__Storage__At_Door__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Emergence__Storage__Portal_Stand] = Spot {
+        id: SpotId::Emergence__Storage__Portal_Stand,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1.into_usize(),
+            end: ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Emergence__Storage__Portal_Stand__Open_Door.into_usize(),
+            end: ActionId::Emergence__Storage__Portal_Stand__Open_Door.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__West] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Topmost_Hook_Point] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Topmost_Hook_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Northeast_Ledge] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_1_Northeast] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_1_Northeast,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Upgraded_Mist_Through_Rock.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_1_East] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_1_East,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_1_East__Upgraded_Mist_Through_Rock.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_1_West] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Upward_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_2_Northwest] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_2_West] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_2_West,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_2_East] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_2_East,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Upward_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Middle_Ledge] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_3_Northeast] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_3_East] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_3_East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_3_West] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_3_West,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Upwards_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Lower_Ledge] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_4_West] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_4_West,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_4_West__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_4_East] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_4_East,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_4_East__Upgraded_Mist_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
+        locations: Range {
+            start: LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall.into_usize(),
+            end: LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall.into_usize() + 1,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__Fling_Point] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__Fling_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Emergence__Rocks_Fall__East] = Spot {
+        id: SpotId::Emergence__Rocks_Fall__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Emergence__Rocks_Fall__East__ex__Storage__West_1.into_usize(),
+            end: ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,
@@ -27578,6 +28517,18 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     };
     spots[SpotId::Menu__Emergence_Map__Slingshot_Charge] = Spot {
         id: SpotId::Menu__Emergence_Map__Slingshot_Charge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Menu__Emergence_Map__Slingshot_Charge_East] = Spot {
+        id: SpotId::Menu__Emergence_Map__Slingshot_Charge_East,
         locations: Range {
             start: 0, end: 0,
         },

@@ -170,9 +170,9 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_2 => rules::access_underwater_movement_and_nanite_mist(ctx, world),
             ExitId::Amagi__Main_Area__West_15__ex__West_Lake__East_15_1 => true,
             ExitId::Amagi__Main_Area__West_18__ex__West_Lake__East_18_1 => true,
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1 => true,
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::access_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
@@ -1053,8 +1053,156 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__North__ex__Storage__South_1 => true,
+            ExitId::Emergence__Aquarium__North_Catch__ex__North_1 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2 => rules::access_invoke_spin(ctx, world),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2 => rules::access_invoke_spin(ctx, world),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1 => true,
+            ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1 => true,
+            ExitId::Emergence__Aquarium__West_11__ex__Column_1 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1 => rules::access_invoke_hook_or_anuman(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1 => rules::access_invoke_hook_or_anuman(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1 => true,
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1 => true,
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1 => rules::access_invoke_hook_or_anuman(ctx, world),
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1 => true,
             ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => true,
             ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => true,
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1 => rules::access_emergence_dropoff_wall(ctx, world),
+            ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1 => true,
+            ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1 => true,
+            ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1 => rules::access_emergence_dropoff_wall_and_anuman(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 => rules::access_emergence_dropoff_wall_and_nanite_mist(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_3 => rules::access_emergence_dropoff_wall_and_invoke_mist2(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1 => rules::access_emergence_dropoff_wall_and_invoke_hook(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 => rules::access_emergence_dropoff_wall_and_nanite_mist(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::access_emergence_dropoff_wall_and_invoke_mist2(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::access_emergence_dropoff_wall(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1 => true,
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__East__ex__Storage__West_1 => true,
+            ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1 => true,
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1 => rules::access_invoke_hook_and_emergence_rocks_fall_rock_3(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2 => rules::access_invoke_spin(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2 => rules::access_invoke_grab_and_anuman(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1 => rules::access_emergence_rocks_fall_rock_1(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1 => rules::access_emergence_rocks_fall_rock_1(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1 => rules::access_emergence_rocks_fall_rock_1(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1 => rules::access_emergence_rocks_fall_rock_1(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1 => rules::access_emergence_rocks_fall_rock_2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2 => rules::access_invoke_hook_and_emergence_rocks_fall_rock_2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1 => rules::access_emergence_rocks_fall_rock_2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1 => rules::access_emergence_rocks_fall_rock_2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1 => rules::access_emergence_rocks_fall_rock_3(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1 => rules::access_emergence_rocks_fall_rock_3(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1 => rules::access_emergence_rocks_fall_rock_3(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1 => rules::access_emergence_rocks_fall_rock_3(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1 => rules::access_emergence_rocks_fall_rock_4(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1 => rules::access_invoke_hook_and_emergence_rocks_fall_rock_4(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1 => rules::access_emergence_rocks_fall_rock_4(ctx, world),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1 => rules::access_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(ctx, world),
+            ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1 => true,
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1 => rules::access_emergence__storage__at_door__ex__portal_stand_1__req(ctx, world),
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_2 => rules::access_emergence__storage__at_door__ex__portal_stand_2__req(ctx, world),
+            ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1 => rules::access_emergence_storage_tunnel(ctx, world),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1 => rules::access_emergence__storage__portal_stand__ex__at_door_1__req(ctx, world),
+            ExitId::Emergence__Storage__South__ex__Aquarium__North_1 => true,
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1 => rules::access_emergence_storage_tunnel(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1 => rules::access_emergence_storage_rock(ctx, world),
+            ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1 => rules::access_invoke_hookhover_or_invoke_spin(ctx, world),
+            ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1 => rules::access_emergence_storage_rock(ctx, world),
+            ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1 => rules::access_invoke_hookhover_or_invoke_spin(ctx, world),
+            ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1 => true,
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2 => rules::access___invoke_grab_and_anuman_or_invoke_climb(ctx, world),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__West_1 => true,
             ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::access_hammond_auth(ctx, world),
             ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -1821,7 +1969,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => true,
             ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => true,
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::access_underwater_movement(ctx, world),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::access_invoke_grab(ctx, world),
@@ -2641,9 +2789,9 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::observe_access_invoke_grab_or_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_1 => rules::observe_access_underwater_movement_and_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_2 => rules::observe_access_underwater_movement_and_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
             ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => rules::observe_access_underwater_movement_and_invoke_hover(ctx, world, full_obs),
@@ -3310,6 +3458,139 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__North_Catch__ex__North_1 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_11__ex__Column_1 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1 => rules::observe_access_emergence_dropoff_wall(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1 => rules::observe_access_emergence_dropoff_wall_and_anuman(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 => rules::observe_access_emergence_dropoff_wall_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_3 => rules::observe_access_emergence_dropoff_wall_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1 => rules::observe_access_emergence_dropoff_wall_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 => rules::observe_access_emergence_dropoff_wall_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::observe_access_emergence_dropoff_wall_and_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::observe_access_emergence_dropoff_wall(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1 => rules::observe_access_invoke_hook_and_emergence_rocks_fall_rock_3(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2 => rules::observe_access_invoke_grab_and_anuman(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1 => rules::observe_access_emergence_rocks_fall_rock_1(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1 => rules::observe_access_emergence_rocks_fall_rock_1(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1 => rules::observe_access_emergence_rocks_fall_rock_1(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1 => rules::observe_access_emergence_rocks_fall_rock_1(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1 => rules::observe_access_emergence_rocks_fall_rock_2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2 => rules::observe_access_invoke_hook_and_emergence_rocks_fall_rock_2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1 => rules::observe_access_emergence_rocks_fall_rock_2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1 => rules::observe_access_emergence_rocks_fall_rock_2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1 => rules::observe_access_emergence_rocks_fall_rock_3(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1 => rules::observe_access_emergence_rocks_fall_rock_3(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1 => rules::observe_access_emergence_rocks_fall_rock_3(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1 => rules::observe_access_emergence_rocks_fall_rock_3(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1 => rules::observe_access_emergence_rocks_fall_rock_4(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1 => rules::observe_access_invoke_hook_and_emergence_rocks_fall_rock_4(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1 => rules::observe_access_emergence_rocks_fall_rock_4(ctx, world, full_obs),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(ctx, world, full_obs),
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1 => rules::observe_access_emergence__storage__at_door__ex__portal_stand_1__req(ctx, world, full_obs),
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_2 => rules::observe_access_emergence__storage__at_door__ex__portal_stand_2__req(ctx, world, full_obs),
+            ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1 => rules::observe_access_emergence_storage_tunnel(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1 => rules::observe_access_emergence__storage__portal_stand__ex__at_door_1__req(ctx, world, full_obs),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1 => rules::observe_access_emergence_storage_tunnel(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1 => rules::observe_access_emergence_storage_rock(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1 => rules::observe_access_invoke_hookhover_or_invoke_spin(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1 => rules::observe_access_emergence_storage_rock(ctx, world, full_obs),
+            ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1 => rules::observe_access_invoke_hookhover_or_invoke_spin(ctx, world, full_obs),
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2 => rules::observe_access___invoke_grab_and_anuman_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::observe_access_hammond_auth(ctx, world, full_obs),
             ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -3880,7 +4161,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::observe_access_underwater_movement(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -4742,9 +5023,9 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::explain_invoke_grab_or_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_1 => rules::explain_underwater_movement_and_invoke_mist2(ctx, world, edict),
             ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_2 => rules::explain_underwater_movement_and_nanite_mist(ctx, world, edict),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::explain_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::explain_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::explain_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Some_Rock_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__Tentacle_Gap_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Amagi__Main_Area__West_18_Hook_Point__ex__West_Lake__West_Platform_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::explain_underwater_movement_and___invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
             ExitId::Amagi__West_Lake__Cavern_Front_Pillar__ex__Cavern_Rear_Pillar_1 => rules::explain_underwater_movement_and_invoke_hover(ctx, world, edict),
@@ -5411,6 +5692,139 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__North_Catch__ex__North_1 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2 => rules::explain_invoke_spin(ctx, world, edict),
+            ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2 => rules::explain_invoke_spin(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_11__ex__Column_1 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1 => rules::explain_emergence_dropoff_wall(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1 => rules::explain_emergence_dropoff_wall_and_anuman(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 => rules::explain_emergence_dropoff_wall_and_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_3 => rules::explain_emergence_dropoff_wall_and_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1 => rules::explain_emergence_dropoff_wall_and_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 => rules::explain_emergence_dropoff_wall_and_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::explain_emergence_dropoff_wall_and_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::explain_emergence_dropoff_wall(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1 => rules::explain_invoke_hook_and_emergence_rocks_fall_rock_3(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2 => rules::explain_invoke_spin(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2 => rules::explain_invoke_grab_and_anuman(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1 => rules::explain_emergence_rocks_fall_rock_1(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1 => rules::explain_emergence_rocks_fall_rock_1(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1 => rules::explain_emergence_rocks_fall_rock_1(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1 => rules::explain_emergence_rocks_fall_rock_1(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1 => rules::explain_emergence_rocks_fall_rock_2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2 => rules::explain_invoke_hook_and_emergence_rocks_fall_rock_2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1 => rules::explain_emergence_rocks_fall_rock_2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1 => rules::explain_emergence_rocks_fall_rock_2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1 => rules::explain_emergence_rocks_fall_rock_3(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1 => rules::explain_emergence_rocks_fall_rock_3(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1 => rules::explain_emergence_rocks_fall_rock_3(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1 => rules::explain_emergence_rocks_fall_rock_3(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1 => rules::explain_emergence_rocks_fall_rock_4(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1 => rules::explain_invoke_hook_and_emergence_rocks_fall_rock_4(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1 => rules::explain_emergence_rocks_fall_rock_4(ctx, world, edict),
+            ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1 => rules::explain_invoke_hook_and_invoke_hover_and_emergence_rocks_fall_rock_4(ctx, world, edict),
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1 => rules::explain_emergence__storage__at_door__ex__portal_stand_1__req(ctx, world, edict),
+            ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_2 => rules::explain_emergence__storage__at_door__ex__portal_stand_2__req(ctx, world, edict),
+            ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1 => rules::explain_emergence_storage_tunnel(ctx, world, edict),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1 => rules::explain_emergence__storage__portal_stand__ex__at_door_1__req(ctx, world, edict),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1 => rules::explain_emergence_storage_tunnel(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1 => rules::explain_emergence_storage_rock(ctx, world, edict),
+            ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1 => rules::explain_invoke_hookhover_or_invoke_spin(ctx, world, edict),
+            ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1 => rules::explain_emergence_storage_rock(ctx, world, edict),
+            ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1 => rules::explain_invoke_hookhover_or_invoke_spin(ctx, world, edict),
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2 => rules::explain___invoke_grab_and_anuman_or_invoke_climb(ctx, world, edict),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Filter__Core__Bottom__ex__Terminal_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Filter__Core__Catwalk_West__ex__West_1 => rules::explain_hammond_auth(ctx, world, edict),
             ExitId::Filter__Core__Terminal_East__ex__Catwalk_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -5981,7 +6395,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::explain_underwater_movement(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::explain_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::explain_invoke_hook(ctx, world, edict),
@@ -6750,8 +7164,23 @@ impl world::Exit for Exit {
             ExitId::Ebih_Breach__Portals_101__East_4__ex__Drone_Tutorial__West_4_1 => true,
             ExitId::Ebih_Breach__Portals_101__East_6__ex__Drone_Tutorial__West_6_1 => true,
             ExitId::Ebih_Breach__Portals_101__West_4__ex__Snowy_Rocks__East_4_1 => true,
+            ExitId::Emergence__Aquarium__North__ex__Storage__South_1 => true,
+            ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1 => true,
+            ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1 => true,
+            ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1 => true,
+            ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1 => true,
+            ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1 => true,
             ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => true,
             ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => true,
+            ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1 => true,
+            ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1 => true,
+            ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1 => true,
+            ExitId::Emergence__Rocks_Fall__East__ex__Storage__West_1 => true,
+            ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1 => true,
+            ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1 => true,
+            ExitId::Emergence__Storage__South__ex__Aquarium__North_1 => true,
+            ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1 => true,
+            ExitId::Emergence__Storage__West_Hook_Point__ex__West_1 => true,
             ExitId::Filter__Core__West__ex__Exit__East_1 => true,
             ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => true,
             ExitId::Filter__Exit__East__ex__Core__West_1 => true,
@@ -13311,6 +13740,894 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1,
         time: 1600,
         dest: SpotId::Emergence__Drop_off__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1] = Exit {
+        id: ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1,
+        time: 1600,
+        dest: SpotId::Emergence__Camp_Exterior__East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__West__ex__Wall_Left_1] = Exit {
+        id: ExitId::Emergence__Drop_off__West__ex__Wall_Left_1,
+        time: 1200,
+        dest: SpotId::Emergence__Drop_off__Wall_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__West__ex__Wall_Left_2] = Exit {
+        id: ExitId::Emergence__Drop_off__West__ex__Wall_Left_2,
+        time: 899,
+        dest: SpotId::Emergence__Drop_off__Wall_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1] = Exit {
+        id: ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1,
+        time: 1600,
+        dest: SpotId::Emergence__Audience_Chamber__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1,
+        time: 701,
+        dest: SpotId::Emergence__Drop_off__Wall_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1,
+        time: 600,
+        dest: SpotId::Emergence__Drop_off__Above_Wall,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2,
+        time: 1052,
+        dest: SpotId::Emergence__Drop_off__Above_Wall,
+        price: Currency::Energy(40),
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_3] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_3,
+        time: 526,
+        dest: SpotId::Emergence__Drop_off__Above_Wall,
+        price: Currency::Energy(23),
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1,
+        time: 2399,
+        dest: SpotId::Emergence__Drop_off__Upper_Right,
+        price: Currency::Energy(85),
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2,
+        time: 1199,
+        dest: SpotId::Emergence__Drop_off__Upper_Right,
+        price: Currency::Energy(45),
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1,
+        time: 1799,
+        dest: SpotId::Emergence__Drop_off__Upper_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1,
+        time: 1200,
+        dest: SpotId::Emergence__Drop_off__Upper_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1,
+        time: 600,
+        dest: SpotId::Emergence__Drop_off__Wall_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1,
+        time: 526,
+        dest: SpotId::Emergence__Drop_off__Wall_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1,
+        time: 600,
+        dest: SpotId::Emergence__Drop_off__Upper_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2] = Exit {
+        id: ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2,
+        time: 600,
+        dest: SpotId::Emergence__Drop_off__Upper_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1,
+        time: 1000,
+        dest: SpotId::Emergence__Drop_off__East_7,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1] = Exit {
+        id: ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1,
+        time: 1600,
+        dest: SpotId::Emergence__Rocks_Fall__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1,
+        time: 1600,
+        dest: SpotId::Emergence__Drop_off__East_10,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1,
+        time: 600,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1,
+        time: 600,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1,
+        time: 4849,
+        dest: SpotId::Emergence__Aquarium__West_Hook_Point,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1,
+        time: 2982,
+        dest: SpotId::Emergence__Audience_Chamber__Right_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1,
+        time: 1578,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2,
+        time: 1578,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1,
+        time: 1403,
+        dest: SpotId::Emergence__Audience_Chamber__Right_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2,
+        time: 1403,
+        dest: SpotId::Emergence__Audience_Chamber__Right_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1,
+        time: 2982,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2,
+        time: 2124,
+        dest: SpotId::Emergence__Audience_Chamber__Left_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1,
+        time: 1052,
+        dest: SpotId::Emergence__Audience_Chamber__Right_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2,
+        time: 1200,
+        dest: SpotId::Emergence__Audience_Chamber__Right_Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1,
+        time: 1600,
+        dest: SpotId::Emergence__Aquarium__West_11,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1,
+        time: 1600,
+        dest: SpotId::Emergence__Aquarium__West_10,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1,
+        time: 2350,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1,
+        time: 3224,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1,
+        time: 1600,
+        dest: SpotId::Emergence__Audience_Chamber__East_11,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__Column_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__Column_1,
+        time: 3947,
+        dest: SpotId::Emergence__Aquarium__Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1,
+        time: 4399,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(151),
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_2,
+        time: 2199,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(78),
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1,
+        time: 4200,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(144),
+    };
+    exits[ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_2,
+        time: 2100,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(75),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1,
+        time: 1000,
+        dest: SpotId::Emergence__Aquarium__Mid_water,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2,
+        time: 1403,
+        dest: SpotId::Emergence__Aquarium__Mid_water,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1,
+        time: 2562,
+        dest: SpotId::Emergence__Aquarium__Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_2,
+        time: 3596,
+        dest: SpotId::Emergence__Aquarium__Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1,
+        time: 4199,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(144),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2,
+        time: 2099,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(75),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1,
+        time: 4000,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(137),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2,
+        time: 2000,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(71),
+    };
+    exits[ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1,
+        time: 3200,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(111),
+    };
+    exits[ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2] = Exit {
+        id: ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2,
+        time: 1600,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(58),
+    };
+    exits[ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1,
+        time: 1000,
+        dest: SpotId::Emergence__Aquarium__Column,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Column__ex__West_11_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Column__ex__West_11_1,
+        time: 3947,
+        dest: SpotId::Emergence__Aquarium__West_11,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1,
+        time: 4385,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1,
+        time: 3157,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1,
+        time: 1200,
+        dest: SpotId::Emergence__Aquarium__Platform_4_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1,
+        time: 2375,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2,
+        time: 2375,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3] = Exit {
+        id: ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3,
+        time: 3333,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__North_Catch__ex__North_1] = Exit {
+        id: ExitId::Emergence__Aquarium__North_Catch__ex__North_1,
+        time: 350,
+        dest: SpotId::Emergence__Aquarium__North,
+        price: Currency::Energy(17),
+    };
+    exits[ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1] = Exit {
+        id: ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1,
+        time: 2375,
+        dest: SpotId::Emergence__Aquarium__Platform_4_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2] = Exit {
+        id: ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2,
+        time: 2375,
+        dest: SpotId::Emergence__Aquarium__Platform_4_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3] = Exit {
+        id: ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3,
+        time: 3333,
+        dest: SpotId::Emergence__Aquarium__Platform_4_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1] = Exit {
+        id: ExitId::Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1,
+        time: 3157,
+        dest: SpotId::Emergence__Aquarium__Platform_3_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__North__ex__Storage__South_1] = Exit {
+        id: ExitId::Emergence__Aquarium__North__ex__Storage__South_1,
+        time: 1600,
+        dest: SpotId::Emergence__Storage__South,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1,
+        time: 1200,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2,
+        time: 1000,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Energy(38),
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3,
+        time: 500,
+        dest: SpotId::Emergence__Aquarium__North_Catch,
+        price: Currency::Energy(22),
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1,
+        time: 1228,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2,
+        time: 2456,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(87),
+    };
+    exits[ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3] = Exit {
+        id: ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3,
+        time: 1228,
+        dest: SpotId::Emergence__Aquarium__West_Ledge,
+        price: Currency::Energy(46),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1,
+        time: 1228,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1,
+        time: 2350,
+        dest: SpotId::Emergence__Audience_Chamber__Cache,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1,
+        time: 1403,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(52),
+    };
+    exits[ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2] = Exit {
+        id: ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2,
+        time: 701,
+        dest: SpotId::Emergence__Aquarium__Under_the_Lip,
+        price: Currency::Energy(29),
+    };
+    exits[ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1] = Exit {
+        id: ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1,
+        time: 1600,
+        dest: SpotId::Emergence__Audience_Chamber__East_10,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__South__ex__Aquarium__North_1] = Exit {
+        id: ExitId::Emergence__Storage__South__ex__Aquarium__North_1,
+        time: 1600,
+        dest: SpotId::Emergence__Aquarium__North,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_1] = Exit {
+        id: ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_1,
+        time: 1200,
+        dest: SpotId::Emergence__Storage__Tunnel_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2] = Exit {
+        id: ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2,
+        time: 1600,
+        dest: SpotId::Emergence__Storage__Tunnel_Ledge,
+        price: Currency::Energy(58),
+    };
+    exits[ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3] = Exit {
+        id: ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_3,
+        time: 800,
+        dest: SpotId::Emergence__Storage__Tunnel_Ledge,
+        price: Currency::Energy(32),
+    };
+    exits[ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1] = Exit {
+        id: ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1,
+        time: 375,
+        dest: SpotId::Emergence__Storage__Dais_Middle,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1] = Exit {
+        id: ExitId::Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1,
+        time: 1754,
+        dest: SpotId::Emergence__Storage__Tunnel_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1] = Exit {
+        id: ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1,
+        time: 300,
+        dest: SpotId::Emergence__Storage__Wall_Right_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1] = Exit {
+        id: ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_1,
+        time: 600,
+        dest: SpotId::Emergence__Storage__Wall_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1] = Exit {
+        id: ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1,
+        time: 1250,
+        dest: SpotId::Emergence__Storage__West_Hook_Point,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1] = Exit {
+        id: ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1,
+        time: 701,
+        dest: SpotId::Emergence__Storage__Wall_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1] = Exit {
+        id: ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1,
+        time: 701,
+        dest: SpotId::Emergence__Storage__Wall_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1] = Exit {
+        id: ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1,
+        time: 1000,
+        dest: SpotId::Emergence__Storage__Dais_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West_Hook_Point__ex__West_1] = Exit {
+        id: ExitId::Emergence__Storage__West_Hook_Point__ex__West_1,
+        time: 249,
+        dest: SpotId::Emergence__Storage__West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1] = Exit {
+        id: ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1,
+        time: 500,
+        dest: SpotId::Emergence__Storage__Wall_Left_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_1] = Exit {
+        id: ExitId::Emergence__Storage__West_Hook_Point__ex__Wall_Left_1,
+        time: 600,
+        dest: SpotId::Emergence__Storage__Wall_Left,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1] = Exit {
+        id: ExitId::Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1,
+        time: 2099,
+        dest: SpotId::Emergence__Rocks_Fall__Fling_Point,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1] = Exit {
+        id: ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1,
+        time: 1052,
+        dest: SpotId::Emergence__Storage__Wall_Left_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2] = Exit {
+        id: ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2,
+        time: 1200,
+        dest: SpotId::Emergence__Storage__Wall_Left_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1] = Exit {
+        id: ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1,
+        time: 1600,
+        dest: SpotId::Emergence__Rocks_Fall__East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1,
+        time: 300,
+        dest: SpotId::Emergence__Storage__Tunnel_Entrance,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1,
+        time: 600,
+        dest: SpotId::Emergence__Storage__Behind_Facade,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2,
+        time: 701,
+        dest: SpotId::Emergence__Storage__Tunnel_Entrance,
+        price: Currency::Energy(29),
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3,
+        time: 350,
+        dest: SpotId::Emergence__Storage__Tunnel_Entrance,
+        price: Currency::Energy(17),
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1,
+        time: 1754,
+        dest: SpotId::Emergence__Storage__Dais_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1] = Exit {
+        id: ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1,
+        time: 350,
+        dest: SpotId::Emergence__Storage__Behind_Facade,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1] = Exit {
+        id: ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1,
+        time: 350,
+        dest: SpotId::Emergence__Storage__Tunnel_Entrance,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1] = Exit {
+        id: ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1,
+        time: 1200,
+        dest: SpotId::Emergence__Storage__Secret_Corner,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1] = Exit {
+        id: ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1,
+        time: 614,
+        dest: SpotId::Emergence__Storage__Portal_Stand,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_2] = Exit {
+        id: ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_2,
+        time: 600,
+        dest: SpotId::Emergence__Storage__Portal_Stand,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1] = Exit {
+        id: ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1,
+        time: 614,
+        dest: SpotId::Emergence__Storage__At_Door,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1,
+        time: 1600,
+        dest: SpotId::Emergence__Drop_off__East_7,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1,
+        time: 1000,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2,
+        time: 1000,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1,
+        time: 3724,
+        dest: SpotId::Emergence__Drop_off__Upper_Right,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1,
+        time: 614,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Energy(25),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3,
+        time: 300,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Energy(15),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1,
+        time: 614,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1,
+        time: 614,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1,
+        time: 614,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_Northeast,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2,
+        time: 1200,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Energy(45),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Energy(25),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_2_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1,
+        time: 614,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_2_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_2_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1,
+        time: 800,
+        dest: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        price: Currency::Energy(32),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2,
+        time: 400,
+        dest: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        price: Currency::Energy(19),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_3_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_3_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_3_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1,
+        time: 625,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1,
+        time: 3224,
+        dest: SpotId::Emergence__Storage__West_Hook_Point,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1,
+        time: 1200,
+        dest: SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2,
+        time: 1600,
+        dest: SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        price: Currency::Energy(58),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3,
+        time: 800,
+        dest: SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        price: Currency::Energy(32),
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1,
+        time: 701,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_4_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1,
+        time: 0,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_4_East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1,
+        time: 625,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_4_West,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1,
+        time: 250,
+        dest: SpotId::Emergence__Rocks_Fall__East,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1,
+        time: 999,
+        dest: SpotId::Emergence__Storage__West_Hook_Point,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1,
+        time: 300,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1,
+        time: 600,
+        dest: SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Rocks_Fall__East__ex__Storage__West_1] = Exit {
+        id: ExitId::Emergence__Rocks_Fall__East__ex__Storage__West_1,
+        time: 1600,
+        dest: SpotId::Emergence__Storage__West,
         price: Currency::Free,
     };
     exits[ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1] = Exit {
@@ -22628,6 +23945,72 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1 => SpotId::Ebih__Gem_Room__Hidden_Tunnel_Corner,
         ExitId::Emergence__Camp_Exterior__Door__ex__Interior__Emergence_Hangar__Door_1 => SpotId::Emergence__Camp_Exterior__Door,
         ExitId::Emergence__Camp_Exterior__East__ex__Drop_off__West_1 => SpotId::Emergence__Camp_Exterior__East,
+        ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1 | ExitId:: Emergence__Drop_off__West__ex__Wall_Left_1 | ExitId:: Emergence__Drop_off__West__ex__Wall_Left_2 => SpotId::Emergence__Drop_off__West,
+        ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1 => SpotId::Emergence__Drop_off__East_10,
+        ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_3 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1 => SpotId::Emergence__Drop_off__Wall_Left,
+        ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => SpotId::Emergence__Drop_off__Wall_Right,
+        ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => SpotId::Emergence__Drop_off__Basin,
+        ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1 | ExitId:: Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 | ExitId:: Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => SpotId::Emergence__Drop_off__Above_Wall,
+        ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1 => SpotId::Emergence__Drop_off__Upper_Ledge,
+        ExitId::Emergence__Drop_off__East_7__ex__Rocks_Fall__West_1 => SpotId::Emergence__Drop_off__East_7,
+        ExitId::Emergence__Audience_Chamber__West__ex__Drop_off__East_10_1 => SpotId::Emergence__Audience_Chamber__West,
+        ExitId::Emergence__Audience_Chamber__Lower_Mid_air__ex__Left_Column_1 => SpotId::Emergence__Audience_Chamber__Lower_Mid_air,
+        ExitId::Emergence__Audience_Chamber__Left_Column_Wall__ex__Left_Column_1 | ExitId:: Emergence__Audience_Chamber__Left_Column_Wall__ex__Aquarium__West_Hook_Point_1 => SpotId::Emergence__Audience_Chamber__Left_Column_Wall,
+        ExitId::Emergence__Audience_Chamber__Left_Column__ex__Right_Column_1 => SpotId::Emergence__Audience_Chamber__Left_Column,
+        ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1 | ExitId:: Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_2 | ExitId:: Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1 | ExitId:: Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2 => SpotId::Emergence__Audience_Chamber__Bottom_Middle,
+        ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1 | ExitId:: Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2 => SpotId::Emergence__Audience_Chamber__Right_Column,
+        ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1 | ExitId:: Emergence__Audience_Chamber__East_11__ex__Right_Column_2 | ExitId:: Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1 => SpotId::Emergence__Audience_Chamber__East_11,
+        ExitId::Emergence__Audience_Chamber__East_10__ex__Aquarium__West_10_1 => SpotId::Emergence__Audience_Chamber__East_10,
+        ExitId::Emergence__Audience_Chamber__Cache__ex__Aquarium__West_Ledge_1 | ExitId:: Emergence__Audience_Chamber__Cache__ex__Aquarium__Under_the_Lip_1 => SpotId::Emergence__Audience_Chamber__Cache,
+        ExitId::Emergence__Aquarium__West_11__ex__Audience_Chamber__East_11_1 | ExitId:: Emergence__Aquarium__West_11__ex__Column_1 | ExitId:: Emergence__Aquarium__West_11__ex__West_Ledge_1 | ExitId:: Emergence__Aquarium__West_11__ex__West_Ledge_2 | ExitId:: Emergence__Aquarium__West_11__ex__Under_the_Lip_1 | ExitId:: Emergence__Aquarium__West_11__ex__Under_the_Lip_2 => SpotId::Emergence__Aquarium__West_11,
+        ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__Mid_water_2 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__Column_1 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__Column_2 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_2 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1 | ExitId:: Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_2 => SpotId::Emergence__Aquarium__West_Hook_Point,
+        ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 | ExitId:: Emergence__Aquarium__Mid_water__ex__Under_the_Lip_2 => SpotId::Emergence__Aquarium__Mid_water,
+        ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => SpotId::Emergence__Aquarium__Bottom_Middle,
+        ExitId::Emergence__Aquarium__Column__ex__West_11_1 => SpotId::Emergence__Aquarium__Column,
+        ExitId::Emergence__Aquarium__Platform_2__ex__West_Ledge_1 => SpotId::Emergence__Aquarium__Platform_2,
+        ExitId::Emergence__Aquarium__Platform_3_Left__ex__North_Catch_1 => SpotId::Emergence__Aquarium__Platform_3_Left,
+        ExitId::Emergence__Aquarium__Platform_3_Right__ex__Platform_4_Right_1 => SpotId::Emergence__Aquarium__Platform_3_Right,
+        ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1 | ExitId:: Emergence__Aquarium__Platform_4_Left__ex__North_Catch_2 | ExitId:: Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3 => SpotId::Emergence__Aquarium__Platform_4_Left,
+        ExitId::Emergence__Aquarium__North_Catch__ex__North_1 | ExitId:: Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1 | ExitId:: Emergence__Aquarium__North_Catch__ex__Platform_4_Left_2 | ExitId:: Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3 | ExitId:: Emergence__Aquarium__North_Catch__ex__Platform_3_Left_1 => SpotId::Emergence__Aquarium__North_Catch,
+        ExitId::Emergence__Aquarium__North__ex__Storage__South_1 => SpotId::Emergence__Aquarium__North,
+        ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_1 | ExitId:: Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2 | ExitId:: Emergence__Aquarium__Under_the_Lip__ex__North_Catch_3 | ExitId:: Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_1 | ExitId:: Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2 | ExitId:: Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_3 => SpotId::Emergence__Aquarium__Under_the_Lip,
+        ExitId::Emergence__Aquarium__West_Ledge__ex__Under_the_Lip_1 | ExitId:: Emergence__Aquarium__West_Ledge__ex__Audience_Chamber__Cache_1 => SpotId::Emergence__Aquarium__West_Ledge,
+        ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1 | ExitId:: Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_2 => SpotId::Emergence__Aquarium__West_Mid_air,
+        ExitId::Emergence__Aquarium__West_10__ex__Audience_Chamber__East_10_1 => SpotId::Emergence__Aquarium__West_10,
+        ExitId::Emergence__Storage__South__ex__Aquarium__North_1 | ExitId:: Emergence__Storage__South__ex__Tunnel_Ledge_1 | ExitId:: Emergence__Storage__South__ex__Tunnel_Ledge_2 | ExitId:: Emergence__Storage__South__ex__Tunnel_Ledge_3 => SpotId::Emergence__Storage__South,
+        ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1 | ExitId:: Emergence__Storage__Dais_Right__ex__Tunnel_Ledge_1 => SpotId::Emergence__Storage__Dais_Right,
+        ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1 | ExitId:: Emergence__Storage__Dais_Left__ex__Wall_Right_1 => SpotId::Emergence__Storage__Dais_Left,
+        ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1 => SpotId::Emergence__Storage__Wall_Right_Ledge,
+        ExitId::Emergence__Storage__Wall_Right__ex__Wall_Left_1 => SpotId::Emergence__Storage__Wall_Right,
+        ExitId::Emergence__Storage__Wall_Left__ex__Wall_Right_1 => SpotId::Emergence__Storage__Wall_Left,
+        ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1 => SpotId::Emergence__Storage__Wall_Left_Ledge,
+        ExitId::Emergence__Storage__West_Hook_Point__ex__West_1 | ExitId:: Emergence__Storage__West_Hook_Point__ex__Wall_Left_Ledge_1 | ExitId:: Emergence__Storage__West_Hook_Point__ex__Wall_Left_1 | ExitId:: Emergence__Storage__West_Hook_Point__ex__Rocks_Fall__Fling_Point_1 => SpotId::Emergence__Storage__West_Hook_Point,
+        ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1 | ExitId:: Emergence__Storage__West__ex__Wall_Left_Ledge_2 | ExitId:: Emergence__Storage__West__ex__Rocks_Fall__East_1 => SpotId::Emergence__Storage__West,
+        ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1 | ExitId:: Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1 | ExitId:: Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2 | ExitId:: Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_3 | ExitId:: Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1 => SpotId::Emergence__Storage__Tunnel_Ledge,
+        ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1 => SpotId::Emergence__Storage__Tunnel_Entrance,
+        ExitId::Emergence__Storage__Behind_Facade__ex__Tunnel_Entrance_1 => SpotId::Emergence__Storage__Behind_Facade,
+        ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1 | ExitId:: Emergence__Storage__At_Door__ex__Portal_Stand_1 | ExitId:: Emergence__Storage__At_Door__ex__Portal_Stand_2 => SpotId::Emergence__Storage__At_Door,
+        ExitId::Emergence__Storage__Portal_Stand__ex__At_Door_1 => SpotId::Emergence__Storage__Portal_Stand,
+        ExitId::Emergence__Rocks_Fall__West__ex__Drop_off__East_7_1 => SpotId::Emergence__Rocks_Fall__West,
+        ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2 => SpotId::Emergence__Rocks_Fall__Topmost_Hook_Point,
+        ExitId::Emergence__Rocks_Fall__Northeast_Ledge__ex__Drop_off__Upper_Right_1 => SpotId::Emergence__Rocks_Fall__Northeast_Ledge,
+        ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Wall_1_West_1 | ExitId:: Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2 | ExitId:: Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_3 => SpotId::Emergence__Rocks_Fall__Wall_1_Northeast,
+        ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Wall_1_West_1 | ExitId:: Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_2 => SpotId::Emergence__Rocks_Fall__Wall_1_East,
+        ExitId::Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_East_1 | ExitId:: Emergence__Rocks_Fall__Wall_1_West__ex__Wall_1_Northeast_1 => SpotId::Emergence__Rocks_Fall__Wall_1_West,
+        ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_1 | ExitId:: Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2 | ExitId:: Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_3 => SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
+        ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1 | ExitId:: Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1 => SpotId::Emergence__Rocks_Fall__Wall_2_West,
+        ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1 | ExitId:: Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_West_1 | ExitId:: Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_2 => SpotId::Emergence__Rocks_Fall__Wall_2_East,
+        ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1 => SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_2 | ExitId:: Emergence__Rocks_Fall__Wall_3_Northeast__ex__Wall_3_West_1 => SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
+        ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Wall_3_East__ex__Wall_3_West_1 => SpotId::Emergence__Rocks_Fall__Wall_3_East,
+        ExitId::Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_East_1 | ExitId:: Emergence__Rocks_Fall__Wall_3_West__ex__Wall_3_Northeast_1 => SpotId::Emergence__Rocks_Fall__Wall_3_West,
+        ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1 => SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1 => SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
+        ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_1 | ExitId:: Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2 | ExitId:: Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_3 | ExitId:: Emergence__Rocks_Fall__Wall_4_West__ex__Wall_4_East_1 => SpotId::Emergence__Rocks_Fall__Wall_4_West,
+        ExitId::Emergence__Rocks_Fall__Wall_4_East__ex__Wall_4_East_1 => SpotId::Emergence__Rocks_Fall__Wall_4_East,
+        ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1 => SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
+        ExitId::Emergence__Rocks_Fall__Fling_Point__ex__East_1 | ExitId:: Emergence__Rocks_Fall__Fling_Point__ex__Storage__West_Hook_Point_1 | ExitId:: Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1 => SpotId::Emergence__Rocks_Fall__Fling_Point,
+        ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 | ExitId:: Emergence__Rocks_Fall__East__ex__Storage__West_1 => SpotId::Emergence__Rocks_Fall__East,
         ExitId::Filter__Entrance__East__ex__Lower_Hallway__West_1 => SpotId::Filter__Entrance__East,
         ExitId::Filter__Lower_Hallway__West__ex__Entrance__East_1 | ExitId:: Filter__Lower_Hallway__West__ex__East_1 => SpotId::Filter__Lower_Hallway__West,
         ExitId::Filter__Lower_Hallway__East__ex__Scaffolding__Lower_West_1 => SpotId::Filter__Lower_Hallway__East,
