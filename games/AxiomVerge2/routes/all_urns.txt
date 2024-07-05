@@ -7,7 +7,7 @@
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
-* Collect Melee_Charge from Interior > Building Interior > Urn Collection Skip ==> Ebih > Base Camp > Building Entry
+* Collect Melee_Charge from Interior > Building Interior > Entry > Urn Collection Skip ==> Ebih > Base Camp > Building Entry
 * Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
 ! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
 ! Do Ebih > Ebih East > Moving Platform > Activate Ride
