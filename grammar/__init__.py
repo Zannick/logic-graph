@@ -24,6 +24,14 @@ class CollectErrorListener(ErrorListener):
             err += f' ({offendingSymbol} in rule stack {stack.reverse()})'
         self.errors.append(err)
 
+    def handleRemainingText(self, text, parser):
+        final = parser.getCurrentToken()
+        # State might not be consistent enough to report unused text if there was another error.
+        if self.errors:
+            return
+        if final.start < len(text):
+            self.errors.append(f'{self.name}: unused text starting at {final.start}: {text[final.start:]!r}')
+
 
 ParseResult = namedtuple('ParseResult', ['name', 'text', 'tree', 'parser', 'errors'])
 
@@ -40,6 +48,7 @@ def parseBoolExpr(text, name='', verbose=False) -> ParseResult:
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.boolExpr()
+    errl.handleRemainingText(text, p)
     return ParseResult(name, text, tree, p, errl.errors)
 
 
@@ -49,6 +58,7 @@ def parseNum(text, name='', verbose=False) -> ParseResult:
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.num()
+    errl.handleRemainingText(text, p)
     return ParseResult(name, text, tree, p, errl.errors)
 
 
@@ -58,6 +68,7 @@ def parseAction(text, name='', verbose=False) -> ParseResult:
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.actions()
+    errl.handleRemainingText(text, p)
     return ParseResult(name, text, tree, p, errl.errors)
 
 def parseItemList(text, name='', verbose=False) -> ParseResult:
@@ -66,6 +77,7 @@ def parseItemList(text, name='', verbose=False) -> ParseResult:
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.itemList()
+    errl.handleRemainingText(text, p)
     return ParseResult(name, text, tree, p, errl.errors)
 
 
