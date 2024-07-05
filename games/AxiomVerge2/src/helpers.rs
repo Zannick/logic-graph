@@ -3049,12 +3049,13 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
+/// [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Amashilama)
             && $ctx.has(Item::Ledge_Grab)
+            && $ctx.has(Item::Melee_Charge)
             && $ctx.has(Item::Infect)
             && $ctx.has(Item::Remote_Drone)
             && $ctx.has(Item::Shockwave)
@@ -3088,6 +3089,15 @@ macro_rules! hexplain__all_urns {
                 let h = $ctx.has(Item::Ledge_Grab);
                 $edict.insert("Ledge_Grab", format!("{}", h));
                 (h, vec!["Ledge_Grab"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Melee_Charge);
+                $edict.insert("Melee_Charge", format!("{}", h));
+                (h, vec!["Melee_Charge"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3220,6 +3230,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_ledge_grab();
             $ctx.has(Item::Ledge_Grab)
+        }) && ({
+            $full_obs.observe_melee_charge();
+            $ctx.has(Item::Melee_Charge)
         }) && ({
             $full_obs.observe_infect();
             $ctx.has(Item::Infect)

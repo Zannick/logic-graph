@@ -4451,6 +4451,11 @@ impl world::World for World {
                                 map.insert(Item::Letter_from_Trace, 1);
                             }
                         }
+                        if !ctx.has(Item::Melee_Charge) {
+                            if !map.contains_key(&Item::Melee_Charge) {
+                                map.insert(Item::Melee_Charge, 1);
+                            }
+                        }
                         if !ctx.has(Item::Nanite_Mist) {
                             if !map.contains_key(&Item::Nanite_Mist) {
                                 map.insert(Item::Nanite_Mist, 1);
@@ -4618,6 +4623,11 @@ impl world::World for World {
                         if !ctx.has(Item::Ledge_Grab) {
                             if !map.contains_key(&Item::Ledge_Grab) {
                                 map.insert(Item::Ledge_Grab, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Melee_Charge) {
+                            if !map.contains_key(&Item::Melee_Charge) {
+                                map.insert(Item::Melee_Charge, 1);
                             }
                         }
                         if !ctx.has(Item::Nanite_Mist) {
@@ -4876,6 +4886,11 @@ impl world::World for World {
                                 map.insert(Item::Letter_from_Trace, 1);
                             }
                         }
+                        if !ctx.has(Item::Melee_Charge) {
+                            if !map.contains_key(&Item::Melee_Charge) {
+                                map.insert(Item::Melee_Charge, 1);
+                            }
+                        }
                         if !ctx.has(Item::Nanite_Mist) {
                             if !map.contains_key(&Item::Nanite_Mist) {
                                 map.insert(Item::Nanite_Mist, 1);
@@ -5043,6 +5058,11 @@ impl world::World for World {
                         if !ctx.has(Item::Ledge_Grab) {
                             if !map.contains_key(&Item::Ledge_Grab) {
                                 map.insert(Item::Ledge_Grab, 1);
+                            }
+                        }
+                        if !ctx.has(Item::Melee_Charge) {
+                            if !map.contains_key(&Item::Melee_Charge) {
+                                map.insert(Item::Melee_Charge, 1);
                             }
                         }
                         if !ctx.has(Item::Nanite_Mist) {
@@ -5236,6 +5256,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Letter_from_Trace) {
                             map.insert(Item::Letter_from_Trace, 1);
                         }
+                        if !map.contains_key(&Item::Melee_Charge) {
+                            map.insert(Item::Melee_Charge, 1);
+                        }
                         if !map.contains_key(&Item::Nanite_Mist) {
                             map.insert(Item::Nanite_Mist, 1);
                         }
@@ -5338,6 +5361,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Ledge_Grab) {
                             map.insert(Item::Ledge_Grab, 1);
+                        }
+                        if !map.contains_key(&Item::Melee_Charge) {
+                            map.insert(Item::Melee_Charge, 1);
                         }
                         if !map.contains_key(&Item::Nanite_Mist) {
                             map.insert(Item::Nanite_Mist, 1);
@@ -5499,6 +5525,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Letter_from_Trace) {
                             map.insert(Item::Letter_from_Trace, 1);
                         }
+                        if !map.contains_key(&Item::Melee_Charge) {
+                            map.insert(Item::Melee_Charge, 1);
+                        }
                         if !map.contains_key(&Item::Nanite_Mist) {
                             map.insert(Item::Nanite_Mist, 1);
                         }
@@ -5601,6 +5630,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Ledge_Grab) {
                             map.insert(Item::Ledge_Grab, 1);
+                        }
+                        if !map.contains_key(&Item::Melee_Charge) {
+                            map.insert(Item::Melee_Charge, 1);
                         }
                         if !map.contains_key(&Item::Nanite_Mist) {
                             map.insert(Item::Nanite_Mist, 1);
@@ -10734,10 +10766,10 @@ impl World {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                 }
             }
@@ -10747,10 +10779,10 @@ impl World {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                 }
             }
@@ -10833,7 +10865,6 @@ impl World {
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Infection_Speed_2);
                         iset.insert(Item::Journal_2049_10_29);
-                        iset.insert(Item::Melee_Charge);
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Points_3);
@@ -10875,7 +10906,6 @@ impl World {
                         iset.insert(Item::Journal_2049_10_29);
                         iset.insert(Item::Lament_for_Fools);
                         iset.insert(Item::Letter_from_Trace);
-                        iset.insert(Item::Melee_Charge);
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Lattice_1);
@@ -10977,7 +11007,6 @@ impl World {
                         iset.insert(Item::Health_Upgrade_5);
                         iset.insert(Item::Infection_Speed_2);
                         iset.insert(Item::Journal_2049_10_29);
-                        iset.insert(Item::Melee_Charge);
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Points_3);
@@ -11020,7 +11049,6 @@ impl World {
                         iset.insert(Item::Journal_2049_10_29);
                         iset.insert(Item::Lament_for_Fools);
                         iset.insert(Item::Letter_from_Trace);
-                        iset.insert(Item::Melee_Charge);
                         iset.insert(Item::Melee_Damage_3);
                         iset.insert(Item::Melee_Speed_3);
                         iset.insert(Item::Nano_Lattice_1);

@@ -363,7 +363,7 @@ helpers:  # MARK: helpers
     [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,
      Diviners_Gem]
   $all_urns:itemList: >
-    [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
+    [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
      Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?

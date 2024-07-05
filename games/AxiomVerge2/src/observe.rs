@@ -254,7 +254,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_GEM_ROOM_GATE);
             }
             LocationId::Ebih__Gem_Room__Button_Corner__Shockwave_Secret_Flask | LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask | LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Collection_Skip | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel => {
-                self.cbits4.insert(flags::ContextBits4::VISITED_EBIH_GEM_ROOM_FLASK);
+                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_GEM_ROOM_FLASK);
             }
             LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask | LocationId::Ebih__Party_Central__East_Trough__Flask | LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip | LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_PARTY_CENTRAL_FLASK);
@@ -452,7 +452,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
             }
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
+                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
             }
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
@@ -635,7 +635,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
             }
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_GLACIER_BREACH__GRATE_WORK__GRATE_INTERIOR__ITEM);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GLACIER_BREACH__GRATE_WORK__GRATE_INTERIOR__ITEM);
             }
             LocationId::Glacier__Compass_Room__Center__Table => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GLACIER__COMPASS_ROOM__CENTER__TABLE);
@@ -740,7 +740,7 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3);
@@ -3436,6 +3436,12 @@ impl FullObservation {
     pub fn clear_letter_from_trace(&mut self) {
         self.cbits3.remove(flags::ContextBits3::LETTER_FROM_TRACE);
     }
+    pub fn observe_melee_charge(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::MELEE_CHARGE);
+    }
+    pub fn clear_melee_charge(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::MELEE_CHARGE);
+    }
     pub fn observe_melee_damage(&mut self) {
         self.cbits3.insert(flags::ContextBits3::MELEE_DAMAGE);
     }
@@ -3479,10 +3485,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::NANO_LATTICE_1);
     }
     pub fn observe_nano_lattice_2(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::NANO_LATTICE_2);
+        self.cbits4.insert(flags::ContextBits4::NANO_LATTICE_2);
     }
     pub fn clear_nano_lattice_2(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::NANO_LATTICE_2);
+        self.cbits4.remove(flags::ContextBits4::NANO_LATTICE_2);
     }
     pub fn observe_nano_points(&mut self) {
         self.cbits4.insert(flags::ContextBits4::NANO_POINTS);
