@@ -3,7 +3,7 @@
 * Collect Station_Power from Antarctica > Power Room > Switch > Flip
   EarthSavewarp to Antarctica > East > Save Point
 * Collect Compass from Glacier > Compass Room > Center > Table
-* Take hybrid exit Glacier > Sea Burial > Collapsing Ceiling > Drown, collecting Amashilama
+* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown ==> Glacier > Revival > Save Point
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
@@ -20,7 +20,7 @@
 * Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
 ! Do Ebih > Ebih West > Upper Save > Save
 ! Do Ebih > Drone Room > Portal Exit > Activate Platform
-* Take hybrid exit Ebih > Drone Room > Middle Platform > Urn Quick Grab, collecting Remote_Drone
+* Collect Remote_Drone from Ebih > Drone Room > Middle Platform > Urn Quick Grab ==> Ebih > Drone Room > Portal
 ! Do Ebih > Drone Room > Pit Left > Activate Lift
 ! Do Ebih > Drone Room > Moving Platform > Throw Drone
 * Collect Flask from Ebih > Drone Pit > Pit > Item
@@ -42,7 +42,7 @@
 ! Do Deploy Drone
 * Collect Shockwave from Amagi > West Lake > Stronghold Item > Item
 ! Do Recall Drone
-* Take hybrid exit Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20, collecting Defeat_MUS_A_M20
+* Collect Defeat_MUS_A_M20 from Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20 ==> Amagi > West Lake > Cavern Rear Pillar
 * Collect Flask from Amagi > West Lake > Cavern Rear Pillar > Boss Reward
 * Collect Flask from Amagi > West Lake > Cavern Tear Duct > Remote Flask
 
@@ -88,7 +88,7 @@
 
 ! Do Irikar > Hub > Save Point > Save
 * Collect Commemorative_Speech from Irikar > Hub > Sat Tower Top Ledge > Tablet
-* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
+* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn Collection Skip ==> Menu > Warp Only > Kiengir
 
   MainSavewarp to Irikar > Hub > Save Point
   Move... to Irikar > Hub > Portal Stand
@@ -181,4 +181,4 @@
   Move... to Annuna > Siuna Storage > Wall Right
 ! Do Become Indra
 * Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Wall as Indra
-* Take hybrid exit Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel, collecting Nanite_Mist
+* Collect Nanite_Mist from Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel ==> Menu > Kiengir Map > Nanite Mist

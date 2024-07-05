@@ -3247,8 +3247,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Emergence__Storage__Dais_Right__Remote_Urn] = Location {
         id: LocationId::Emergence__Storage__Dais_Right__Remote_Urn,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
+        canonical: CanonId::Slingshot_Charge,
+        item: Item::Slingshot_Charge,
         price: Currency::Free,
         time: 6500,
         dest: SpotId::None,
@@ -3256,8 +3256,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel] = Location {
         id: LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
+        canonical: CanonId::Slingshot_Charge,
+        item: Item::Slingshot_Charge,
         price: Currency::Free,
         time: 200,
         dest: SpotId::Menu__Emergence_Map__Slingshot_Charge_East,
@@ -3265,8 +3265,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Emergence__Storage__Dais_Middle__Urn] = Location {
         id: LocationId::Emergence__Storage__Dais_Middle__Urn,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
+        canonical: CanonId::Slingshot_Charge,
+        item: Item::Slingshot_Charge,
         price: Currency::Free,
         time: 5500,
         dest: SpotId::None,
@@ -3274,8 +3274,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Emergence__Storage__Dais_Middle__Urn_Collection_Skip] = Location {
         id: LocationId::Emergence__Storage__Dais_Middle__Urn_Collection_Skip,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
+        canonical: CanonId::Slingshot_Charge,
+        item: Item::Slingshot_Charge,
         price: Currency::Free,
         time: 200,
         dest: SpotId::Menu__Warp_Only__Kiengir,
@@ -3283,8 +3283,8 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     };
     locations[LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel] = Location {
         id: LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
+        canonical: CanonId::Slingshot_Charge,
+        item: Item::Slingshot_Charge,
         price: Currency::Free,
         time: 200,
         dest: SpotId::Menu__Emergence_Map__Slingshot_Charge,

@@ -3,7 +3,7 @@
 * Collect Station_Power from Antarctica > Power Room > Switch > Flip
   EarthSavewarp to Antarctica > East > Save Point
 * Collect Compass from Glacier > Compass Room > Center > Table
-* Take hybrid exit Glacier > Sea Burial > Collapsing Ceiling > Drown, collecting Amashilama
+* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown ==> Glacier > Revival > Save Point
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
@@ -12,7 +12,7 @@
 ! Do Ebih > Ebih East > Moving Platform > Activate Ride
 ! Do Ebih > Ebih West > Upper Save > Save
 
-* Take hybrid exit Ebih > Drone Room > Item > Urn Collection Skip, collecting Remote_Drone
+* Collect Remote_Drone from Ebih > Drone Room > Middle Platform > Urn Quick Grab ==> Ebih > Drone Room > Portal
 MainSavewarp to Ebih > Ebih West > Upper Save
 
 ! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
@@ -39,7 +39,7 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 
 ! Do Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower
 ! Do Irikar > Hub > Save Point > Save
-* Take hybrid exit Irikar > Sight Room > Item Pedestal > Urn Collection Skip, collecting Breach_Sight
+* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn Collection Skip ==> Menu > Warp Only > Kiengir
   MainSavewarp to Irikar > Hub > Save Point
   Move... to Irikar > Hub > Portal Stand
   Portalwarp to Irikar Breach > Gauntlet > Save Point
@@ -47,8 +47,7 @@ MainSavewarp to Ebih > Ebih West > Upper Save
   Move... to Irikar Breach > Exit Corridor > Portal Stand
   Portalwarp to Irikar > Abandoned Room > Empty Pedestal
 
-# TODO: This is where we would peek the separator save point
-  Move... to Uhrum > West Entrance > West 25
+  Move... to Giguna > Separator > East 25
 * Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
   Move... to Uhrum > Save Room > East
 
@@ -64,18 +63,51 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 ! Do Recall Fast Travel
   Move... to Menu > Kiengir Map > Uhrum Center ==> Uhrum > Save Room > Save Point (1)
 
-# TODO: This is where we'd go to the Emergence
+  Move... to Uhrum > Waterfalls > West 27
+! Do Deploy Drone
+  Move... to Uhrum > Artillery Practice > Column East
+! Do Interior > Facility Interior > Freight Elevator > Enter Emergence
+* Collect Slingshot_Charge from Emergence > Storage > Dais Middle > Urn
+
+! Do Recall Drone
 * Collect Uhrum_Waterfalls_Block from Uhrum > Waterfalls > Below Block > Shockwave Block
 ! Do Deploy Drone
   Move... to Uhrum > Annuna Corridor > West 26
-* Take hybrid exit Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel, collecting Anuman
+* Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel ==> Menu > Kiengir Map > Anuman
   Move... to Menu > Kiengir Map > Uhrum East ==> Uhrum > Annuna Corridor > Save Point (1)
 ! Do Become Indra
 * Collect Uhrum_Annuna_Corridor_Block from Uhrum > Annuna Corridor > Block West > Dislodge Block
 ! Do Become Drone
 * Collect Nano_Lattice_2 from Annuna > West Bridge > Plinth > Item
-
-# TODO: rest of route
-* Collect Destruction_Pogrom from Annuna > Twisty Passages > Top > Tablet
-* Collect The_Eternal_Arm from Annuna > Filter Teleporter > Northeast Cubby > Tablet
+  Move... to Annuna > West Bridge > Tunnel Wall
+! Do Become Indra
+  Move... to Annuna > West Climb > South
+! Do Become Drone
 * Collect Hammond_Auth from Filter > Core > Terminal East > Authorize Hammond
+! Do Glacier > Vertical Room > Lower Switch > Open Lower Gatestones
+* Collect Breach_Attractor from Glacier > Crystals > Lower Corner > Item
+! Do Amagi > East Lake > East 15 Lower > Attract Portal to Arch
+  Portalwarp
+* Collect Exit_Breach from Amagi Breach > East Ruins > Plinth > Urn
+  ExitBreachwarp
+
+  Move... to Annuna > Lamassu > Portal Stand
+  Portalwarp to Glacier Breach > South Save > Save Point
+  Move... to Glacier Breach > West Save > Save Point
+  Move... to Glacier Breach > Save and Exit > Portal Stand
+  Portalwarp to Glacier > Hammond's End > Upper Right Pedestal
+! Do Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West
+  Move... to Glacier Breach > Angry Lions > Top Platform
+  ExitBreachwarp
+  Move... to Annuna > Siuna Storage > Wall Right
+! Do Become Indra
+* Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Wall as Indra
+* Collect Nanite_Mist from Annuna > Siuna Storage > Within Range > Remote Urn Fast Travel ==> Menu > Kiengir Map > Nanite Mist
+
+  Move... to Giguna > Separator > Save Point
+! Do Become Drone
+* Collect Giguna_Separator_Bricks from Giguna > Separator > Lower Brick > Break Bricks ==> Giguna > Separator > Upper Brick
+! Do Giguna > Labyrinth > Switch Ledge > Open Door
+  Move... to Giguna > Labyrinth > Portal Stand
+  Portalwarp
+* Collect Drone_Melee_Charge from Giguna Breach > Labyrinth > Plinth > Urn Fast Travel ==> Menu > Breach Map > Drone Melee Charge

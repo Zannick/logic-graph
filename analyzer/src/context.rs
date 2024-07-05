@@ -751,8 +751,14 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         match step {
             History::W(wp, _) => world.get_warp(wp).explain(self.get(), world),
-            History::G(_, loc_id) | History::V(_, loc_id, _) => {
-                world.get_location(loc_id).explain(self.get(), world)
+            History::G(item_id, loc_id) | History::V(item_id, loc_id, _) => {
+                let loc = world.get_location(loc_id);
+                let e = loc.explain(self.get(), world);
+                if item_id != loc.item() {
+                    format!("{}\nItem does not match: {}", e, loc.item())
+                } else {
+                    e
+                }
             }
             History::E(exit_id) => world.get_exit(exit_id).explain(self.get(), world),
             History::L(spot) => {

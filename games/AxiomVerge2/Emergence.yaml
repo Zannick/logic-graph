@@ -734,13 +734,13 @@ areas:
           price: 100
           tags: [shockwave]
         - name: Remote Urn
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
           req: $boomerang
           tags: [remote_urn]
         - name: Remote Urn Fast Travel
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
           req: $boomerang and Fast_Travel
           to: ^map_spot
           tags: [cskip]
@@ -759,18 +759,18 @@ areas:
         - to: Dais Left
       locations:
         - name: Urn
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
           tags: [urn]
         - name: Urn Collection Skip
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
           req: $melee_cskip
           to: Menu > Warp Only > Kiengir
           tags: [cskip]
         - name: Urn Fast Travel
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
+          canon: Slingshot_Charge
+          item: Slingshot_Charge
           req: $melee_cskip and Fast_Travel
           to: ^map_spot
           tags: [cskip]
