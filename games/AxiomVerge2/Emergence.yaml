@@ -193,6 +193,9 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: Wall Left
+          req: Emergence_Dropoff_Wall
+          movement: base
         # If the upper-right tile of the wall is still there, it's possible to hook it and then upward to the Upper Right
         # but in practice this is trickier to make consistent. And the fast_hover might be faster
     - name: Basin

@@ -11258,7 +11258,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1.into_usize(),
-            end: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1.into_usize() + 1,
+            end: ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

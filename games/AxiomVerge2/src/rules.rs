@@ -3536,20 +3536,6 @@ pub fn action_invoke_save_last_invoke_refill_energy(
     helper__save_last!(ctx, world);
     helper__refill_energy!(ctx, world);
 }
-pub fn action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(
-    ctx: &mut Context,
-    world: &World,
-) {
-    // $save = `Emergence > Camp Exterior > Save Point`
-    helper__save!(ctx, world);
-}
-pub fn action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(
-    ctx: &mut Context,
-    world: &World,
-) {
-    // $save = `Uhrum > Emergence Save > Save Point`
-    helper__save!(ctx, world);
-}
 pub fn action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
     world: &World,
@@ -3695,9 +3681,17 @@ pub fn action_refills_incr_1(ctx: &mut Context, world: &World) {
     // ^refills += 1
     ctx.refills += 1;
 }
+pub fn action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx: &mut Context, world: &World) {
+    // ^save = `Emergence > Camp Exterior > Save Point`
+    ctx.set_save(SpotId::Emergence__Camp_Exterior__Save_Point);
+}
 pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world: &World) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
+}
+pub fn action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx: &mut Context, world: &World) {
+    // ^save = `Uhrum > Emergence Save > Save Point`
+    ctx.set_save(SpotId::Uhrum__Emergence_Save__Save_Point);
 }
 pub fn explain___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
@@ -23481,28 +23475,6 @@ pub fn observe_action_invoke_save_last_invoke_refill_energy(
     hobserve__refill_energy!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // $save = `Emergence > Camp Exterior > Save Point`
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__save!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
-pub fn observe_action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // $save = `Uhrum > Emergence Save > Save Point`
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__save!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
     ctx: &Context,
     world: &World,
@@ -23743,12 +23715,34 @@ pub fn observe_action_portal_set_position(
 pub fn observe_action_refills_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^refills += 1
 }
+pub fn observe_action_save_set_emergence_gt_camp_exterior_gt_save_point(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^save = `Emergence > Camp Exterior > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    full_obs.strict = old_strict;
+}
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^save = `Uhrum > Emergence Save > Save Point`
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_save();

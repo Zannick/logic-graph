@@ -1128,6 +1128,7 @@ impl world::Accessible for Exit {
             ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::access_emergence_dropoff_wall_and_invoke_mist2(ctx, world),
             ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::access_emergence_dropoff_wall(ctx, world),
             ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1 => rules::access_emergence_dropoff_wall(ctx, world),
             ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1 => true,
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::access_invoke_hook(ctx, world),
@@ -3523,6 +3524,7 @@ impl world::Accessible for Exit {
             ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::observe_access_emergence_dropoff_wall_and_invoke_mist2(ctx, world, full_obs),
             ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::observe_access_emergence_dropoff_wall(ctx, world, full_obs),
             ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1 => rules::observe_access_emergence_dropoff_wall(ctx, world, full_obs),
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -5757,6 +5759,7 @@ impl world::Accessible for Exit {
             ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => rules::explain_emergence_dropoff_wall_and_invoke_mist2(ctx, world, edict),
             ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => rules::explain_emergence_dropoff_wall(ctx, world, edict),
             ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1 => rules::explain_emergence_dropoff_wall(ctx, world, edict),
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Emergence__Drop_off__West__ex__Wall_Left_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -13812,6 +13815,12 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
         id: ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1,
         time: 1200,
         dest: SpotId::Emergence__Drop_off__Upper_Ledge,
+        price: Currency::Free,
+    };
+    exits[ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1] = Exit {
+        id: ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1,
+        time: 701,
+        dest: SpotId::Emergence__Drop_off__Wall_Left,
         price: Currency::Free,
     };
     exits[ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1] = Exit {
@@ -23948,7 +23957,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1 | ExitId:: Emergence__Drop_off__West__ex__Wall_Left_1 | ExitId:: Emergence__Drop_off__West__ex__Wall_Left_2 => SpotId::Emergence__Drop_off__West,
         ExitId::Emergence__Drop_off__East_10__ex__Audience_Chamber__West_1 => SpotId::Emergence__Drop_off__East_10,
         ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Above_Wall_3 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 | ExitId:: Emergence__Drop_off__Wall_Left__ex__Upper_Ledge_1 => SpotId::Emergence__Drop_off__Wall_Left,
-        ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => SpotId::Emergence__Drop_off__Wall_Right,
+        ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 | ExitId:: Emergence__Drop_off__Wall_Right__ex__Wall_Left_1 => SpotId::Emergence__Drop_off__Wall_Right,
         ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => SpotId::Emergence__Drop_off__Basin,
         ExitId::Emergence__Drop_off__Above_Wall__ex__Wall_Left_1 | ExitId:: Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 | ExitId:: Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => SpotId::Emergence__Drop_off__Above_Wall,
         ExitId::Emergence__Drop_off__Upper_Ledge__ex__East_7_1 => SpotId::Emergence__Drop_off__Upper_Ledge,

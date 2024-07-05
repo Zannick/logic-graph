@@ -593,7 +593,7 @@ areas:
       actions:
         - name: Enter Emergence
           to: Emergence Hangar > Freight Elevator
-          do: $save = `Emergence > Camp Exterior > Save Point`
+          do: ^save = `Emergence > Camp Exterior > Save Point`
           time: 11.5
           tags: [warp]
 #endregion
@@ -609,7 +609,7 @@ areas:
       actions:
         - name: Exit Emergence
           to: Facility Interior > Freight Elevator
-          do: $save = `Uhrum > Emergence Save > Save Point`
+          do: ^save = `Uhrum > Emergence Save > Save Point`
           time: 13.5  # door is all the way up
           tags: [warp]
     - name: Door

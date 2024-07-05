@@ -1722,8 +1722,8 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
-            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => rules::action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world),
+            ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
+            ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => rules::action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::action_invoke_deploy_drone(ctx, world),
@@ -2295,10 +2295,10 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => {
-                rules::observe_action_invoke_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world, full_obs);
+                rules::observe_action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world, full_obs);
             }
             ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => {
-                rules::observe_action_invoke_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world, full_obs);
+                rules::observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);

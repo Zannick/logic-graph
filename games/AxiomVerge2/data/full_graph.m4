@@ -1114,6 +1114,7 @@ digraph AxiomVerge2 {
     Emergence__Drop_off__Wall_Left -> Emergence__Drop_off__Upper_Right;
     Emergence__Drop_off__Wall_Left -> Emergence__Drop_off__Wall_Right;
     Emergence__Drop_off__Wall_Right -> Emergence__Drop_off__Upper_Ledge;
+    Emergence__Drop_off__Wall_Right -> Emergence__Drop_off__Wall_Left;
     Emergence__Drop_off__Basin -> Emergence__Drop_off__Wall_Right;
     Emergence__Drop_off__Above_Wall -> Emergence__Drop_off__Upper_Ledge;
     Emergence__Drop_off__Above_Wall -> Emergence__Drop_off__Upper_Ledge;

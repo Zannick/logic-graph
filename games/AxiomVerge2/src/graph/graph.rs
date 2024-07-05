@@ -6733,6 +6733,7 @@ impl world::World for World {
             ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_2 => true,
             ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1 => true,
             ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1 => true,
+            ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1 => true,
             ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => true,
             ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_1 => true,
             ExitId::Emergence__Drop_off__Above_Wall__ex__Upper_Ledge_2 => true,
