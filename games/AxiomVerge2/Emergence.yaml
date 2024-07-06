@@ -1006,6 +1006,8 @@ areas:
           movement: base
     - name: Secret Corner
       coord: [10.1, 8.3]
+      data:
+        flipside: Giguna Breach > Emergence > Corner
       local:
         - to: Behind Facade
         - to: At Door
@@ -1034,6 +1036,8 @@ areas:
           tags: [open]
     - name: Portal Stand
       coord: [10.525, 8.6]
+      data:
+        flipside: Giguna Breach > Emergence > Save Point
       exits:
         - to: At Door
           req: ^_door_open

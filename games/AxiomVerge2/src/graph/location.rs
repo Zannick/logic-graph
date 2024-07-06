@@ -365,6 +365,10 @@ impl world::Accessible for Location {
             LocationId::Giguna__West_Tower__Top__Tablet => true,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
+            LocationId::Giguna_Breach__Emergence__Corner__Flask => true,
+            LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip => true,
+            LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => true,
             LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate => true,
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask => true,
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip => true,
@@ -814,6 +818,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
@@ -1256,6 +1261,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Giguna__West_Caverns__Bush__Item => rules::explain_invoke_more_refills(ctx, world, edict),
+            LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
@@ -3875,6 +3881,42 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         dest: SpotId::Menu__Breach_Map__Drone_Melee_Charge,
         skippable: false,
     };
+    locations[LocationId::Giguna_Breach__Emergence__Corner__Flask] = Location {
+        id: LocationId::Giguna_Breach__Emergence__Corner__Flask,
+        canonical: CanonId::Emergence_Breach_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip] = Location {
+        id: LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip,
+        canonical: CanonId::Emergence_Breach_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel] = Location {
+        id: LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel,
+        canonical: CanonId::Emergence_Breach_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__GSB_Emergence,
+        skippable: false,
+    };
+    locations[LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below] = Location {
+        id: LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below,
+        canonical: CanonId::Emergence_Breach_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    };
     locations[LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate] = Location {
         id: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
         canonical: CanonId::Giguna_Northeast_Gate,
@@ -6377,6 +6419,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna_Breach__Labyrinth__Plinth_Approach__Mid_air_Urn => SpotId::Giguna_Breach__Labyrinth__Plinth_Approach,
         LocationId::Giguna_Breach__Labyrinth__Plinth__Urn => SpotId::Giguna_Breach__Labyrinth__Plinth,
         LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip | LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => SpotId::Giguna_Breach__Labyrinth__Plinth,
+        LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => SpotId::Giguna_Breach__Emergence__Corner,
+        LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => SpotId::Giguna_Breach__Emergence__Left_Side,
         LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => SpotId::Giguna__Giguna_Northeast__Gate_Button,
         LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => SpotId::Giguna__Giguna_Northeast__Gate_Right,
         LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => SpotId::Giguna__Giguna_Northeast__Door,

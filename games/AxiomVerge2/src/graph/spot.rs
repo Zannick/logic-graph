@@ -13871,6 +13871,189 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
             start: 0, end: 0,
         },
     };
+    spots[SpotId::Giguna_Breach__Emergence__Corner] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__Corner,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Emergence__Corner__Flask.into_usize(),
+            end: LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Emergence__Left_Side] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__Left_Side,
+        locations: Range {
+            start: LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below.into_usize(),
+            end: LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below.into_usize() + 1,
+        },
+        exits: Range {
+            start: 0, end: 0,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Emergence__Left_Mid_air] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__Left_Mid_air,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Emergence__Left_Mid_air__ex__Corner_1.into_usize(),
+            end: ExitId::Giguna_Breach__Emergence__Left_Mid_air__ex__Deadly_Flora__Upper_Left_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Emergence__Save_Point] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__Save_Point,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Emergence__Save_Point__ex__Left_Side_1.into_usize(),
+            end: ExitId::Giguna_Breach__Emergence__Save_Point__ex__Left_Side_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: ActionId::Giguna_Breach__Emergence__Save_Point__Save.into_usize(),
+            end: ActionId::Giguna_Breach__Emergence__Save_Point__Save.into_usize() + 1,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Emergence__Right_Mid_air] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__Right_Mid_air,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Emergence__Right_Mid_air__ex__Left_Side_1.into_usize(),
+            end: ExitId::Giguna_Breach__Emergence__Right_Mid_air__ex__Left_Side_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Emergence__East] = Spot {
+        id: SpotId::Giguna_Breach__Emergence__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Emergence__East__ex__Deadly_Flora__West_1.into_usize(),
+            end: ExitId::Giguna_Breach__Emergence__East__ex__Deadly_Flora__West_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__West] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__West,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__West__ex__Emergence__East_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__West__ex__Emergence__East_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Upper_Left_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Upper_Left_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Upper_Left_Ledge__ex__Emergence__Right_Mid_air_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Upper_Left_Ledge__ex__Emergence__Right_Mid_air_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Upper_Right_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Upper_Right_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Upper_Right_Ledge__ex__Upper_Left_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Upper_Right_Ledge__ex__Upper_Left_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Middle_Platform] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Middle_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Middle_Platform__ex__Upper_Right_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Middle_Platform__ex__Upper_Right_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge__ex__Middle_Platform_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge__ex__Upper_Right_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge__ex__Middle_Left_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge__ex__Upper_Right_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__Lowest_Platform] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__Lowest_Platform,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__Lowest_Platform__ex__Lower_Right_Ledge_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__Lowest_Platform__ex__Middle_Left_Ledge_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
+    spots[SpotId::Giguna_Breach__Deadly_Flora__East] = Spot {
+        id: SpotId::Giguna_Breach__Deadly_Flora__East,
+        locations: Range {
+            start: 0, end: 0,
+        },
+        exits: Range {
+            start: ExitId::Giguna_Breach__Deadly_Flora__East__ex__Lowest_Platform_1.into_usize(),
+            end: ExitId::Giguna_Breach__Deadly_Flora__East__ex__SW_Save__West_11_1.into_usize() + 1,
+        },
+        actions: Range {
+            start: 0, end: 0,
+        },
+    };
     spots[SpotId::Giguna__Giguna_Northeast__Portal_Hole] = Spot {
         id: SpotId::Giguna__Giguna_Northeast__Portal_Hole,
         locations: Range {
@@ -22144,7 +22327,7 @@ pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
         },
         exits: Range {
             start: ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1.into_usize(),
-            end: ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1.into_usize() + 1,
+            end: ExitId::Glacier__Crystals__West__ex__Vertical_Room__East_14_1.into_usize() + 1,
         },
         actions: Range {
             start: 0, end: 0,

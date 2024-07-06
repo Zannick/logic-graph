@@ -1227,6 +1227,24 @@
             Giguna_Breach__Cubby__Rocks [label = "", pos = "39.9,-67.666667!"];
         }
         {
+            Giguna_Breach__Deadly_Flora__West [label = "", pos = "33.3,-64.583333!"];
+            Giguna_Breach__Deadly_Flora__Upper_Left_Ledge [label = "", pos = "34.05,-64.583333!"];
+            Giguna_Breach__Deadly_Flora__Upper_Right_Ledge [label = "", pos = "34.95,-65.25!"];
+            Giguna_Breach__Deadly_Flora__Middle_Platform [label = "", pos = "34.35,-65.916667!"];
+            Giguna_Breach__Deadly_Flora__Middle_Left_Ledge [label = "", pos = "33.75,-66.25!"];
+            Giguna_Breach__Deadly_Flora__Lower_Right_Ledge [label = "", pos = "35.4,-66.666667!"];
+            Giguna_Breach__Deadly_Flora__Lowest_Platform [label = "", pos = "34.95,-67.416667!"];
+            Giguna_Breach__Deadly_Flora__East [label = "", pos = "35.7,-67.916667!"];
+        }
+        {
+            Giguna_Breach__Emergence__Corner [label = "", pos = "30.3,-63.833333!"];
+            Giguna_Breach__Emergence__Left_Side [label = "", pos = "30.45,-64.166667!"];
+            Giguna_Breach__Emergence__Left_Mid_air [label = "", pos = "30.9,-64.5!"];
+            Giguna_Breach__Emergence__Save_Point [label = "", pos = "31.575,-64.333333!"];
+            Giguna_Breach__Emergence__Right_Mid_air [label = "", pos = "32.1,-64.5!"];
+            Giguna_Breach__Emergence__East [label = "", pos = "32.7,-64.583333!"];
+        }
+        {
             Giguna_Breach__Fire_Room__West_11 [label = "", pos = "45.3,-68.0!"];
             Giguna_Breach__Fire_Room__First_Fire [label = "", pos = "46.8,-67.666667!"];
             Giguna_Breach__Fire_Room__Cuesta [label = "", pos = "48.0,-67.416667!"];
@@ -2813,7 +2831,7 @@
         {
             Uhrum__Emergence_Facility__West [label = "", pos = "72.15,-36.333333!"];
             Uhrum__Emergence_Facility__West_Approach [label = "", pos = "74.1,-36.333333!"];
-            Uhrum__Emergence_Facility__East_Approach [label = "", pos = "74.1,-36.333333!"];
+            Uhrum__Emergence_Facility__East_Approach [label = "", pos = "75.3,-36.333333!"];
             Uhrum__Emergence_Facility__Door [label = "", pos = "74.775,-35.25!"];
             Uhrum__Emergence_Facility__Middle_Level_Mid_air [label = "", pos = "75.75,-35.0!"];
             Uhrum__Emergence_Facility__East_Stair_Left [label = "", pos = "77.4,-35.25!"];

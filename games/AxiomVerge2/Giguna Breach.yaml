@@ -49,7 +49,7 @@ areas:
           jumps: 2
       exits:
         - to: Upper East
-          req: $hook
+          req: Slingshot_Hook
           time: 0.7
         - to: Ascent > West 6
           tags: [xdoor]
@@ -72,7 +72,7 @@ areas:
           jumps: 3
       exits:
         - to: Upper West
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
 
 - name: Chimney  # MARK: Chimney
@@ -250,7 +250,7 @@ areas:
         - to: East 12
       exits:
         - to: Side Door
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
     - name: Side Door
       coord: [12.35, 10.75]
@@ -281,7 +281,7 @@ areas:
           jumps: 1
       exits:
         - to: Lower Platform
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
       actions:
         - name: Save
@@ -293,7 +293,7 @@ areas:
         - to: Save Point
       exits:
         - to: Lower Platform
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
         - to: Robopede > West
           tags: [xdoor]
@@ -343,7 +343,7 @@ areas:
       coord: [14.9, 9.8]
       exits:
         - to: High Ledge
-          req: $hook
+          req: Slingshot_Hook
           time: 1.3
         - to: Fire Room > West 10
           tags: [xdoor]
@@ -545,7 +545,7 @@ areas:
           tags: [urn]
       exits:
         - to: Column
-          req: $hook
+          req: Slingshot_Hook
 
 - name: Antechamber  # MARK: Antechamber
   on_entry: $reset_old_area(^newpos)
@@ -590,7 +590,7 @@ areas:
         - to: Chimney > East 9
           tags: [xdoor]
         - to: Wall
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
     - name: Wall
       coord: [14.3, 8.4]
@@ -599,7 +599,7 @@ areas:
         - to: South
       exits:
         - to: Upper Floating Brick
-          req: $hook
+          req: Slingshot_Hook
           time: 2  # ?
     - name: South
       coord: [14.5, 8.8]
@@ -607,7 +607,7 @@ areas:
         - to: Grid 14,10-11 > North
           tags: [ydoor]
         - to: Upper Floating Brick
-          req: $hook
+          req: Slingshot_Hook
           time: 1.6
     - name: Upper Floating Brick
       coord: [14.85, 8.0]
@@ -617,7 +617,7 @@ areas:
           jumps: 2
       exits:
         - to: West Statue
-          req: $hook
+          req: Slingshot_Hook
           time: 1
     - name: West Statue
       coord: [14.85, 7.7]
@@ -656,13 +656,13 @@ areas:
         - to: East 9
       exits:
         - to: Middle Statue
-          req: $hook
+          req: Slingshot_Hook
           time: 1  # ?
     - name: East 9
       coord: [15.9, 8.5]
       exits:
         - to: East Brick
-          req: $hook
+          req: Slingshot_Hook
           time: 2  # ?
         - to: Ascent > West 9
           tags: [xdoor]
@@ -685,7 +685,7 @@ areas:
         - to: West 9
       exits:
         - to: Top
-          req: $hook
+          req: Slingshot_Hook
           time: 9
     - name: Top
       coord: [16.5, 5.55]
@@ -713,7 +713,7 @@ areas:
           jumps: 3
       exits:
         - to: Corner
-          req: $hover
+          req: Drone_Hover
           movement: base
           jumps: 2
     - name: Quick Entry
@@ -1102,7 +1102,7 @@ areas:
           jumps: 1
       exits:
         - to: East Upper Ledge
-          req: $hook
+          req: Slingshot_Hook
           movement: base
           jumps: 2
         - to: East Upper Ledge
@@ -1148,11 +1148,11 @@ areas:
         flipside: Giguna > Labyrinth > Save Point
       exits:
         - to: East Upper Ledge
-          req: $hook
+          req: Slingshot_Hook
           movement: base
           jumps: 2
         - to: North
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: base
           jumps: 2
 
@@ -1187,3 +1187,198 @@ areas:
       coord: [16.5, 12.2]
       data:
         flipside: Giguna > Wasteland > Mid-air Near Cache
+
+- name: Emergence  # MARK: Emergence
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Breach Map > GSB Emergence
+    save_point: Save Point
+  spots:
+    - name: Corner
+      coord: [10.1, 8.3]
+      data:
+        flipside: Emergence > Storage > Secret Corner
+      local:
+        - to: Left Side
+        - to: Left Mid-air
+      locations:
+        - name: Flask
+          canon: Emergence_Breach_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Emergence_Breach_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Emergence_Breach_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Left Side
+      coord: [10.15, 8.5]
+      local:
+        - to: Corner
+          jumps: 1
+        - to: Left Mid-air
+      locations:
+        - name: Flask from Below
+          canon: Emergence_Breach_Flask
+          item: Flask
+          tags: [flask]
+    - name: Left Mid-air
+      coord: [10.3, 8.7]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Left Side
+          jumps: 2
+      exits:
+        - to: Corner
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Deadly Flora > Upper Left Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Save Point
+      coord: [10.525, 8.6]
+      data:
+        flipside: Emergence > Storage > Portal Stand
+      local:
+        - to: Left Mid-air
+        - to: East
+      exits:
+        - to: Left Side
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Right Mid-air
+      coord: [10.7, 8.7]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: East
+      exits:
+        - to: Left Side
+          req: Slingshot_Hook and Drone_Hover
+          jumps: 1
+    - name: East
+      coord: [10.9, 8.75]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Right Mid-air
+          jumps: 0.5
+      exits:
+        - to: Deadly Flora > West
+          tags: [xdoor]
+
+- name: Deadly Flora  # MARK: Deadly Flora
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [11.1, 8.75]
+      local:
+        - to: Upper Left Ledge
+      exits:
+        - to: Emergence > East
+          tags: [xdoor]
+    - name: Upper Left Ledge
+      coord: [11.35, 8.75]
+      local:
+        - to: Upper Right Ledge
+          thru: [11.6, 8.9]
+        - to: Middle Platform
+        - to: Lowest Platform
+      exits:
+        - to: Emergence > Right Mid-air
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Right Ledge
+      coord: [11.65, 9.15]
+      local:
+        - to: Middle Platform
+        - to: Lower Right Ledge
+        - to: Lowest Platform
+          thru: [11.65, 10.0]
+      exits:
+        - to: Upper Left Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Middle Platform
+      coord: [11.45, 9.55]
+      local:
+        - to: Middle Left Ledge
+        - to: Lower Right Ledge
+        - to: Lowest Platform
+      exits:
+        - to: Upper Right Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Middle Left Ledge
+      coord: [11.25, 9.75]
+      local:
+        - to: Middle Platform
+          jumps: 1
+        - to: Lowest Platform
+      exits:
+        - to: Upper Right Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Middle Platform
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Lower Right Ledge
+      coord: [11.8, 10.0]
+      local:
+        - to: Lowest Platform
+        - to: East
+          thru: [11.75, 10.3]
+      exits:
+        - to: Middle Left Ledge
+          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Middle Platform
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: base
+          jumps: 2
+        - to: Upper Right Ledge
+          req: $mist2
+          movement: mist2
+    - name: Lowest Platform
+      coord: [11.65, 10.45]
+      local:
+        - to: East
+      exits:
+        - to: Lower Right Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Middle Left Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: East
+      coord: [11.9, 10.75]
+      exits:
+        - to: Lowest Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: SW Save > West 11
+          tags: [xdoor]

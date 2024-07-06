@@ -2137,7 +2137,7 @@ areas:
           movement: base
           jumps: 5
     - name: East Approach
-      coord: [24.7, 21.8]
+      coord: [25.1, 21.8]
       local:
         - to: West Approach
         - to: Door

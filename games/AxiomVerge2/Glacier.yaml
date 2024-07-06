@@ -2378,6 +2378,8 @@ areas:
           req: $hover or $hook
           movement: base
           jumps: 1
+        - to: Vertical Room > East 14
+          tags: [xshift]
     - name: Upper Ledge
       coord: [37.5, 13.7]
       local:
