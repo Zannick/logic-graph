@@ -834,8 +834,7 @@ where
         .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
     let mut prefix = filename
         .file_stem()
-        .map(|f| f.to_str())
-        .flatten()
+        .and_then(|f| f.to_str())
         .unwrap_or_else(|| panic!("Filename error in \"{:?}\"", filename));
     let mut settings = String::new();
     file.read_to_string(&mut settings)
@@ -903,8 +902,7 @@ where
         .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
     let mut prefix = filename
         .file_stem()
-        .map(|f| f.to_str())
-        .flatten()
+        .and_then(|f| f.to_str())
         .unwrap_or_else(|| panic!("Filename error in \"{:?}\"", filename));
     let mut route_str = String::new();
     file.read_to_string(&mut route_str)
@@ -961,7 +959,7 @@ where
 
     for entry in std::fs::read_dir(dirname).unwrap() {
         let path = entry.unwrap().path();
-        let ext = path.extension().map(|s| s.to_str()).flatten();
+        let ext = path.extension().and_then(|s| s.to_str());
         if matches!(ext, Some("yaml")) {
             tests.extend(parse_test_file::<W, T>(
                 wp.clone(),
@@ -974,7 +972,7 @@ where
     if let Some(routedirname) = route_dir {
         for entry in std::fs::read_dir(routedirname).unwrap() {
             let path = entry.unwrap().path();
-            let ext = path.extension().map(|s| s.to_str()).flatten();
+            let ext = path.extension().and_then(|s| s.to_str());
             if matches!(ext, Some("txt")) {
                 tests.push(parse_route_file::<W, T>(
                     wp.clone(),

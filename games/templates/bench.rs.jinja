@@ -42,7 +42,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let mut routes = Vec::new();
     for entry in std::fs::read_dir(dir).unwrap() {
         let path = entry.unwrap().path();
-        let ext = path.extension().map(|s| s.to_str()).flatten();
+        let ext = path.extension().and_then(|s| s.to_str());
         if matches!(ext, Some("txt")) {
             routes.push(read_from_file(&path));
         }
