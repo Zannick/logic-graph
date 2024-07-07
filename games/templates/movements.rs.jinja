@@ -71,14 +71,16 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     }
 }
 
-pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
-    vec![
-%% for (s, t), dist in base_distances.items()|sort
-%% if s != t
-        (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
-%% endif
+%# rust feature generic_arg_infer would allow _ for the length param. -
+%% set distinctpairs = base_distances|select('distinctpair')|sort
+static BASE_EDGES: [(SpotId, SpotId, u32); {{ distinctpairs|length }}] = [
+%% for (s, t) in distinctpairs
+    (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
 %% endfor
-    ]
+];
+
+pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
+    BASE_EDGES.to_vec()
 }
 
 pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {

@@ -1937,6 +1937,7 @@ class GameLogic(object):
         env.tests.update({
             'exclude_by_tag': self.exclude_by_tag,
             'exclude_local': self.exclude_local,
+            'distinctpair': lambda x: x[0] != x[1],
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items
