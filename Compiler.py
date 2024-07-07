@@ -1951,6 +1951,7 @@ class GameLogic(object):
         self.context_position_watchers
         self.all_connections
         self.region_colors
+        self.sorted_spots = sorted(self.spots(), key=lambda s: s['id'])
         files = {
             '.': ['Cargo.toml'],
             'data': ['digraph.mmd', 'graph_map.sh', 'digraph_nodes.dot', 'full_graph.m4'],

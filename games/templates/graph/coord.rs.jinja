@@ -5,15 +5,24 @@
 #![allow(unused)]
 
 use crate::graph::enums::*;
+use enum_map::Enum;
+
+static COORDS: [(f32, f32); {{ sorted_spots|count }}] = [
+%% for sp in sorted_spots
+%% if sp.coord
+    ({{ sp.coord[0]|float }}, {{ sp.coord[1]|float }}),
+%% else
+    (f32::NAN, f32::NAN),
+%% endif
+%% endfor
+];
 
 pub fn coordinate(spot: SpotId) -> Result<(f32, f32), String> {
-    match spot {
-%% for area in gl.areas()
-%% for sp in area.spots|selectattr('coord', 'defined')
-        SpotId::{{ sp.id }} => Ok(({{ sp.coord[0]|float }}, {{ sp.coord[1]|float }})),
-%% endfor
-%% endfor
-        _ => Err(format!("Spot has no coordinate: {}", spot)),
+    let coord = COORDS[spot.into_usize()];
+    if coord.0.is_nan() {
+        Err(format!("Spot has no coordinate: {}", spot))
+    } else {
+        Ok(coord)
     }
 }
 
