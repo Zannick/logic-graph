@@ -7,7 +7,8 @@
 use crate::graph::enums::*;
 use enum_map::Enum;
 
-static COORDS: [(f32, f32); {{ sorted_spots|count }}] = [
+static COORDS: [(f32, f32); {{ (sorted_spots|count) + 1 }}] = [
+    (f32::NAN, f32::NAN),
 %% for sp in sorted_spots
 %% if sp.coord
     ({{ sp.coord[0]|float }}, {{ sp.coord[1]|float }}),

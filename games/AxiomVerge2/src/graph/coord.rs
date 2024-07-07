@@ -7,7 +7,8 @@
 use crate::graph::enums::*;
 use enum_map::Enum;
 
-static COORDS: [(f32, f32); 2463] = [
+static COORDS: [(f32, f32); 2464] = [
+    (f32::NAN, f32::NAN),
     (30.9, 17.75),
     (35.9, 15.75),
     (35.35, 17.35),
