@@ -9,6 +9,8 @@ use crate::graph::*;
 use crate::observe::FullObservation;
 use crate::rules;
 use analyzer::context::Ctx;
+use enum_map::Enum;
+use phf::phf_map;
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -45,14 +47,34 @@ pub fn observe_movement_state(ctx: &Context, world: &World, full_obs: &mut FullO
     ]
 }
 
-pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
-    match (movement_state, src, dest) {
-%% for k, table in movement_tables.items()|sort
-%% for (s, d), f in table.items()|sort
-    {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
-    {% endif -%}
-    ([{{ k|map('lower')|join(', ') }}], SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
+type TravelTimeFromSpotMap = phf::Map<u64, u32>;
+type TravelTimeMap = phf::Map<u64, &'static TravelTimeFromSpotMap>;
+
+%% for k, table in movement_tables_stratified.items()|sort
+%% set mname = k|movement_set_name
+%% for src, dtable in table.items()|sort
+static TIMES_{{ mname }}__{{ src|upper }}: TravelTimeFromSpotMap = phf_map!{
+%% for dest, times in dtable.items()
+    {{ dest|spot_id_index }}u64 /* SpotId::{{ dest }} */ => {{ ((times|sum)*1000)|int }},{% if times|count > 1 %} // {{ times|map('round', 6)|list }}{% endif %}
 %% endfor
+};
+%% endfor
+
+static MVMT_{{ mname }}: TravelTimeMap = phf_map!{
+%% for src in table
+    {{ src|spot_id_index }}u64 /* SpotId::{{ src }} */ => &TIMES_{{ mname }}__{{ src|upper }},
+%% endfor
+};
+
+%% endfor
+
+pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
+    match movement_state {
+%% for k in movement_tables|sort
+    ([{{ k|map('lower')|join(', ') }}]) => MVMT_{{ k|movement_set_name }}
+        .get(&(src.into_usize() as u64))
+        .and_then(|table| table.get(&(dest.into_usize() as u64)))
+        .copied().unwrap_or(u32::MAX),
 %% endfor
         _ => u32::MAX,
     }

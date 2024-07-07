@@ -829,6 +829,15 @@ class GameLogic(object):
         return f'SpotId::{spot_id}'
 
     @cached_property
+    def spot_id_list(self):
+        return sorted(s['id'] for s in self.spots())
+    
+    @cache
+    def spot_id_index(self, spot_id):
+        return self.spot_id_list.index(spot_id) + 1
+    
+
+    @cached_property
     def movements_by_type(self):
         """Returns a mapping of movement type to movement names (excluding exit-movements)."""
         d = defaultdict(list)
@@ -915,9 +924,9 @@ class GameLogic(object):
         # - obviously the fastest free is faster than other frees, etc.
         # - if s_free > s_xy then free is always faster than xy. This should also be true
         #   at lower s_free but it becomes dependent on (a,b); so the answer is no overall.
-        s = {(m['name'],) for m in self.movements}
+        s = {(m,) for m in self.movements}
         for xm in self.movements_by_type.get('x', []):
-            for ym in self.movement_by_type.get('y', []):
+            for ym in self.movements_by_type.get('y', []):
                 s.add((xm, ym))
         return s
 
@@ -925,6 +934,11 @@ class GameLogic(object):
     @cached_property
     def non_default_movements(self):
         return sorted(m for m in self.movements)
+
+    @cache
+    def movement_set_name(self, mset):
+        names = [m for m, keep in zip(self.movements, mset) if keep] or ['BASE']
+        return '_'.join(names).upper()
 
 
     def spot_distance(self, sp1, sp2):
@@ -1044,6 +1058,7 @@ class GameLogic(object):
         #  but we can't guarantee which is best for all situations.
         #  It might be simplest to determine which movements we have available in
         #  the area we're in, and then look up the travel time from that.)
+        # [bool...] -> Spot -> Spot -> [int...]
         table = {}
         impossible = Counter()
         for mset in itertools.chain.from_iterable(
@@ -1062,6 +1077,15 @@ class GameLogic(object):
             if val == 2 ** len(self.non_default_movements):
                 self._errors.append(f'Base movement is not possible: {self.id_lookup[k[0]]["fullname"]}'
                                     f' --> {self.id_lookup[k[1]]["name"]}')
+        return table
+    
+    @cached_property
+    def movement_tables_stratified(self):
+        table = {}
+        for mset, tb in self.movement_tables.items():
+            table[mset] = local_times = defaultdict(dict)
+            for (s, d), val in tb.items():
+                local_times[s][d] = val
         return table
 
     def iter_movement_set_keys(self):
@@ -1451,7 +1475,7 @@ class GameLogic(object):
         self.local_distances
         self.context_resetters
         self.context_trigger_rules
-        self.movement_tables
+        self.movement_tables_stratified
 
         return self._errors
 
@@ -1924,10 +1948,12 @@ class GameLogic(object):
             'get_int_type_for_max': get_int_type_for_max,
             'get_spot_reference': get_spot_reference,
             'hex': hex,
+            'movement_set_name': self.movement_set_name,
             'prToRust': self.prToRust,
             'prToRustExplain': self.prToRustExplain,
             'prToRustObserve': self.prToRustObserve,
             'region_id_from_id': self.region_id_from_id,
+            'spot_id_index': self.spot_id_index,
             'str_to_rusttype': str_to_rusttype,
             'target_id_from_id': self.target_id_from_id,
             'translate_ctx': self.translate_ctx,
