@@ -70,7 +70,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         _ => false,
     }
 }
-
 %# rust feature generic_arg_infer would allow _ for the length param. -
 %% set distinctpairs = base_distances|select('distinctpair')|sort
 static BASE_EDGES: [(SpotId, SpotId, u32); {{ distinctpairs|length }}] = [
@@ -96,13 +95,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
 pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (sp1, sp2) {
 %% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
-        (SpotId::{{ s }}, SpotId::{{ t }}) => (
-            {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
-            vec![
+        (SpotId::{{ s }}, SpotId::{{ t }}) => {
+            static MVMTS: [(MovementState, u32); {{ mvmts|count }}] = [
 %% for m, mt in mvmts
                 ([{{ m|map('lower')|join(', ') }}], {{ (mt*1000)|int }}),
 %% endfor
-            ]),
+            ];
+            ({% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %}, MVMTS.to_vec())
+        }
 %% endfor
         _ => (None, Vec::new()),
     }
