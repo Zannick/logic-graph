@@ -159,7 +159,7 @@ def repeated_items():
     pprint({k: v for k, v in AV2.placed_item_counts.items() if v > 1})
 
 def make_igraph():
-    edges = [(x, y, w) for ((x, y), w) in AV2.basic_distances.items()]
+    edges = [(x, y, w) for (x, table) in AV2.basic_distances.items() for y, w in table.items()]
     g = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
     for v in g.vs:
         name = v.attributes()['name']

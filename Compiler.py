@@ -1065,27 +1065,18 @@ class GameLogic(object):
                 itertools.combinations(self.non_default_movements, r)
                 for r in range(0, len(self.non_default_movements) + 1)):
             key = tuple(m in mset for m in self.non_default_movements)
-            table[key] = local_time = {}
-            for k, dlist in self.local_distances.items():
-                base = self.id_lookup[k[0]]['base_movement']
+            table[key] = local_time = defaultdict(dict)
+            for (s, d), dlist in self.local_distances.items():
+                base = self.id_lookup[s]['base_movement']
                 times = [self.movement_time(mset, base, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
                 if all(t is not None for t in times):
-                    local_time[k] = times
+                    local_time[s][d] = times
                 else:
-                    impossible[k] += 1
+                    impossible[(s, d)] += 1
         for k, val in impossible.items():
             if val == 2 ** len(self.non_default_movements):
                 self._errors.append(f'Base movement is not possible: {self.id_lookup[k[0]]["fullname"]}'
                                     f' --> {self.id_lookup[k[1]]["name"]}')
-        return table
-    
-    @cached_property
-    def movement_tables_stratified(self):
-        table = {}
-        for mset, tb in self.movement_tables.items():
-            table[mset] = local_times = defaultdict(dict)
-            for (s, d), val in tb.items():
-                local_times[s][d] = val
         return table
 
     def iter_movement_set_keys(self):
@@ -1099,31 +1090,35 @@ class GameLogic(object):
         # Precalculating which movement types we need available for what movement times
         # so this will look like (sp1, sp2) -> (base movement time, [(mkey, time)])
         base, *mkeys = list(self.iter_movement_set_keys())
-        table = {k: (sum(times), []) for k, times in self.movement_tables[base].items()}
+        table = {s: {d: (sum(times), []) for d, times in stable.items()}
+                 for s, stable in self.movement_tables[base].items()}
         def is_subset(x, y):
             return all(b or not a for a, b in zip(x, y))
         for mkey in mkeys:
-            for k, times in self.movement_tables[mkey].items():
-                t = sum(times)
-                if k not in table:
-                    table[k] = (-1, [])
-                if table[k][0] < 0 or (t < table[k][0] and not any(st < t for v, st in table[k][1] if is_subset(v, mkey))):
-                    table[k][1].append((mkey, t))
+            for s, stable in self.movement_tables[mkey].items():
+                for d, times in stable.items():
+                    t = sum(times)
+                    if s not in table:
+                        table[s] = {}
+                    if d not in table[s]:
+                        table[s][d] = (-1, [])
+                    if table[s][d][0] < 0 or (t < table[s][d][0] and not any(st < t for v, st in table[s][d][1] if is_subset(v, mkey))):
+                        table[s][d][1].append((mkey, t))
         return table
 
 
     @cached_property
     def basic_distances(self):
         """Fixed distances from movements, exits, and exit-like warps and actions."""
-        # initial conditions: (x,y) -> t according to the best movement
-        table = {k: sum(t)
-                 for k, t in self.movement_tables[tuple(True for _ in self.non_default_movements)].items()}
+        # initial conditions: x -> y -> t according to the best movement
+        table = defaultdict(dict, {s: {d: sum(t) for d, t in table.items()}
+                                   for s, table in self.movement_tables[tuple(True for _ in self.non_default_movements)].items()})
 
-        def _update(key, val):
-            if key in table:
-                table[key] = min(table[key], val)
+        def _update(tbl, key, val):
+            if key in tbl:
+                tbl[key] = min(tbl[key], val)
             else:
-                table[key] = val
+                tbl[key] = val
 
         # every exit
         # every action with a "to" field
@@ -1138,28 +1133,25 @@ class GameLogic(object):
             if 'to' in act and act['to'][0] == '^' and act['to'][1:] in self.data_values:
                 data_dests.append((act['to'][1:], act))
         for s in self.spots():
-            table[(s['id'], s['id'])] = 0
+            table[s['id']][s['id']] = 0
             for ex in s.get('exits', []):
-                key = (s['id'], get_exit_target(ex))
                 if 'time' not in ex:
                     raise Exception(f'"time" not defined for exit {ex["fullname"]}')
-                _update(key, float(ex['time']))
+                _update(table[s['id']], get_exit_target(ex), float(ex['time']))
             for act in s.get('actions', []):
                 if 'to' in act:
                     if not act['to'].startswith('^'):
-                        key = (s['id'], get_exit_target(act))
-                        _update(key, act['time'])
+                        _update(table[s['id']], get_exit_target(act), act['time'])
                     elif act['to'][1:] in self.data_values:
                         if dest := self.data_values[act['to'][1:]].get(s['id']):
                             if dest != 'SpotId::None' and dest != s['fullname']:
-                                key = (s['id'], construct_id(dest))
-                                _update(key, act['time'])
+                                _update(table[s['id']], construct_id(dest), act['time'])
             for d, info in data_dests:
                 if dest := self.data_values[d].get(s['id']):
                     if (dest != 'SpotId::None' and dest != s['fullname'] and
                             ('pr' not in info or examiner.examine(info['pr'].tree, s['id'], info['name']))):
-                        key = (s['id'], construct_id(dest))
-                        _update(key, info['time'])
+                        _update(table[s['id']], construct_id(dest), info['time'])
+            del table[s['id']][s['id']]
 
         return table
 
@@ -1169,11 +1161,11 @@ class GameLogic(object):
         """Fully-connected distances, including 'bulk_exit' warps"""
         table = dict(self.basic_distances)
 
-        def _update(key, val):
-            if key in table:
-                table[key] = min(table[key], val)
+        def _update(tbl, key, val):
+            if key in tbl:
+                tbl[key] = min(tbl[key], val)
             else:
-                table[key] = val
+                tbl[key] = val
 
         # every warp with bulk_exit: true
         warp_dests = []
@@ -1187,8 +1179,7 @@ class GameLogic(object):
                 if s['id'] == w:
                     continue
                 if 'pr' not in w or examiner.examine(w['pr'].tree, s['id'], w['name']):
-                    key = (s['id'], w)
-                    _update(key, t)
+                    _update(table[s['id']], w, t)
 
         return table
 
@@ -1202,7 +1193,7 @@ class GameLogic(object):
 
     @cached_property
     def notable_spot_communities(self):
-        edges = [(x, y, w) for ((x, y), w) in self.basic_distances.items()]
+        edges = [(x, y, w) for x, table in sorted(self.basic_distances.items()) for y, w in sorted(table.items())]
         G = ig.Graph.TupleList(edges, directed=True, edge_attrs=['weight'])
         part = la.find_partition(G, la.RBERVertexPartition, n_iterations=-1, seed=1, resolution_parameter=0.5)
         part2 = la.SurpriseVertexPartition.FromPartition(part)
@@ -1475,7 +1466,7 @@ class GameLogic(object):
         self.local_distances
         self.context_resetters
         self.context_trigger_rules
-        self.movement_tables_stratified
+        self.movement_tables
 
         return self._errors
 

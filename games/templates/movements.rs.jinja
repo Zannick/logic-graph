@@ -50,7 +50,7 @@ pub fn observe_movement_state(ctx: &Context, world: &World, full_obs: &mut FullO
 type TravelTimeFromSpotMap = phf::Map<u64, u32>;
 type TravelTimeMap = phf::Map<u64, &'static TravelTimeFromSpotMap>;
 
-%% for k, table in movement_tables_stratified.items()|sort
+%% for k, table in movement_tables.items()|sort
 %% set mname = k|movement_set_name
 %% for src, dtable in table.items()|sort
 static TIMES_{{ mname }}__{{ src|upper }}: TravelTimeFromSpotMap = phf_map!{
@@ -92,11 +92,12 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         _ => false,
     }
 }
-%# rust feature generic_arg_infer would allow _ for the length param. -
-%% set distinctpairs = base_distances|select('distinctpair')|sort
-static BASE_EDGES: [(SpotId, SpotId, u32); {{ distinctpairs|length }}] = [
-%% for (s, t) in distinctpairs
-    (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
+
+static BASE_EDGES: [(SpotId, SpotId, u32); {{ base_distances.values()|map('count')|sum }}] = [
+%% for s, table in base_distances.items()|sort
+%% for t, time in table.items()|sort
+    (SpotId::{{ s }}, SpotId::{{ t }}, {{ (time * 1000)|int }}),
+%% endfor
 %% endfor
 ];
 
@@ -106,9 +107,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 
 pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
     match (sp1, sp2) {
-%% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
+%% for s, stable in movements_rev_lookup.items()|sort
+%% for t, (time, mvmts) in stable.items()|sort
         (SpotId::{{ s }}, SpotId::{{ t }}) =>
             {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+%% endfor
 %% endfor
         _ => None,
     }
@@ -116,7 +119,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
 
 pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
     match (sp1, sp2) {
-%% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
+%% for s, stable in movements_rev_lookup.items()|sort
+%% for t, (time, mvmts) in stable.items()|sort
         (SpotId::{{ s }}, SpotId::{{ t }}) => {
             static MVMTS: [(MovementState, u32); {{ mvmts|count }}] = [
 %% for m, mt in mvmts
@@ -125,6 +129,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             ];
             ({% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %}, MVMTS.to_vec())
         }
+%% endfor
 %% endfor
         _ => (None, Vec::new()),
     }
