@@ -11,7 +11,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{EnumMap, Enum};
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -261,59 +261,68 @@ impl world::Warp for Warp {
     }
 }
 
-pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
-    warps[WarpId::BreachSave] = Warp {
+static WARP_DEFS: [Warp; 9] = [
+    Warp {
         id: WarpId::BreachSave,
         dest: SpotId::None,
         time: 10500,
         price: Currency::Free,
-    };
-    warps[WarpId::EarthSave] = Warp {
+    },
+    Warp {
         id: WarpId::EarthSave,
         dest: SpotId::None,
         time: 3000,
         price: Currency::Free,
-    };
-    warps[WarpId::ExitBreach] = Warp {
+    },
+    Warp {
         id: WarpId::ExitBreach,
         dest: SpotId::None,
         time: 3000,
         price: Currency::Free,
-    };
-    warps[WarpId::ExitMenu] = Warp {
+    },
+    Warp {
         id: WarpId::ExitMenu,
         dest: SpotId::None,
         time: 200,
         price: Currency::Free,
-    };
-    warps[WarpId::FastTravelBreach] = Warp {
+    },
+    Warp {
         id: WarpId::FastTravelBreach,
         dest: SpotId::None,
         time: 100,
         price: Currency::Free,
-    };
-    warps[WarpId::FastTravelKiengir] = Warp {
+    },
+    Warp {
         id: WarpId::FastTravelKiengir,
         dest: SpotId::None,
         time: 100,
         price: Currency::Free,
-    };
-    warps[WarpId::MainSave] = Warp {
+    },
+    Warp {
         id: WarpId::MainSave,
         dest: SpotId::None,
         time: 10500,
         price: Currency::Free,
-    };
-    warps[WarpId::Menu] = Warp {
+    },
+    Warp {
         id: WarpId::Menu,
         dest: SpotId::None,
         time: 1000,
         price: Currency::Free,
-    };
-    warps[WarpId::Portal] = Warp {
+    },
+    Warp {
         id: WarpId::Portal,
         dest: SpotId::None,
         time: 3600,
         price: Currency::Free,
-    };
+    },
+];
+
+pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
+    for (k, warp) in WARP_DEFS.iter().enumerate() {
+        assert!(k as usize == warp.id.into_usize(),
+                "Order of warp ids does not match: {} defined as {} but expected to be {}",
+                warp.id, warp.id.into_usize(), k);
+        warps[warp.id] = *warp;
+    }
 }

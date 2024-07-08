@@ -12,7 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{EnumMap, Enum};
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -142,13 +142,22 @@ impl world::Warp for Warp {
     }
 }
 
-pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
-%% for w in warps.values()|sort(attribute='id')
-    warps[WarpId::{{ w.id }}] = Warp {
+static WARP_DEFS: [Warp; {{ warps|count }}] = [
+%% for w in warps.values()|sort(attribute='id', case_sensitive=True)
+    Warp {
         id: WarpId::{{ w.id }},
         dest: SpotId::None,
         time: {{ (w.time * 1000)|int }},
         {{ price(w.price, w.costs or default_price_type) }}
-    };
+    },
 %% endfor
+];
+
+pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
+    for (k, warp) in WARP_DEFS.iter().enumerate() {
+        assert!(k as usize == warp.id.into_usize(),
+                "Order of warp ids does not match: {} defined as {} but expected to be {}",
+                warp.id, warp.id.into_usize(), k);
+        warps[warp.id] = *warp;
+    }
 }
