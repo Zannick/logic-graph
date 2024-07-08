@@ -9,6 +9,7 @@ use crate::graph::*;
 use crate::observe::FullObservation;
 use crate::rules;
 use analyzer::context::Ctx;
+use bitflags::bitflags;
 use enum_map::Enum;
 use phf::phf_map;
 
@@ -29,22 +30,33 @@ fn has_movement(ctx: &Context, world: &World, m: Movement) -> bool {
     }
 }
 
-pub type MovementState = [bool; {{ non_default_movements|count }}];
+bitflags!{
+    #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+    pub struct MovementState: u8 {
+%% for mtype in non_default_movements
+        const {{ mtype|upper }} = {{ (2 ** loop.index0) | hex }};
+%% endfor
+    }
+}
 
 pub fn get_movement_state(ctx: &Context, world: &World) -> MovementState {
-    [
+    let mut m = MovementState::default();
 %% for mtype in non_default_movements
-        rules::access_{{ movements[mtype].access_id }}(ctx, world),
+    if rules::access_{{ movements[mtype].access_id }}(ctx, world) {
+        m.insert(MovementState::{{ mtype|upper }});
+    }
 %% endfor
-    ]
+    m
 }
 
 pub fn observe_movement_state(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> MovementState {
-    [
+    let mut m = MovementState::default();
 %% for mtype in non_default_movements
-        rules::observe_access_{{ movements[mtype].access_id }}(ctx, world, full_obs),
+    if rules::observe_access_{{ movements[mtype].access_id }}(ctx, world, full_obs) {
+        m.insert(MovementState::{{ mtype|upper }});
+    }
 %% endfor
-    ]
+    m
 }
 
 type TravelTimeFromSpotMap = phf::Map<u64, u32>;
@@ -68,16 +80,17 @@ static MVMT_{{ mname }}: TravelTimeMap = phf_map!{
 
 %% endfor
 
-pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
-    match movement_state {
+static MOVEMENT_TABLE: phf::Map<u8, &TravelTimeMap> = phf_map!{
 %% for k in movement_tables|sort
-    ([{{ k|map('lower')|join(', ') }}]) => MVMT_{{ k|movement_set_name }}
-        .get(&(src.into_usize() as u64))
-        .and_then(|table| table.get(&(dest.into_usize() as u64)))
-        .copied().unwrap_or(u32::MAX),
+    {{ k|bool_list_to_bitflags }}u8 => &MVMT_{{ k|movement_set_name }},
 %% endfor
-        _ => u32::MAX,
-    }
+};
+
+pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
+    MOVEMENT_TABLE.get(&movement_state.bits())
+        .and_then(|table| table.get(&(src.into_usize() as u64)))
+        .and_then(|table| table.get(&(dest.into_usize() as u64)))
+        .copied().unwrap_or(u32::MAX)
 }
 
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
@@ -124,7 +137,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::{{ s }}, SpotId::{{ t }}) => {
             static MVMTS: [(MovementState, u32); {{ mvmts|count }}] = [
 %% for m, mt in mvmts
-                ([{{ m|map('lower')|join(', ') }}], {{ (mt*1000)|int }}),
+                (MovementState::from_bits_retain({{ m|bool_list_to_bitflags }}u8), {{ (mt*1000)|int }}),
 %% endfor
             ];
             ({% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %}, MVMTS.to_vec())

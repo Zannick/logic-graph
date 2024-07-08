@@ -2,7 +2,7 @@ use crate::condense::CondensedEdge;
 use crate::observer::Observer;
 use crate::solutions::Solution;
 use crate::world::*;
-use as_slice::{AsMutSlice, AsSlice};
+use bitflags::Flags;
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
@@ -34,24 +34,17 @@ pub trait Ctx:
         + Eq
         + Debug
         + Hash
-        + AsSlice<Element = bool>
-        + AsMutSlice<Element = bool>;
+        + Flags;
     type Observer: Observer<Ctx = Self>;
     type Expectation: Copy + Clone + Debug + Eq + Send;
     const NUM_ITEMS: u32;
 
     fn is_subset(sub: Self::MovementState, sup: Self::MovementState) -> bool {
-        let s1 = AsSlice::as_slice(&sub);
-        let s2 = AsSlice::as_slice(&sup);
-        // sub <= sup if for all (a,b), a is false or b is true
-        s1.len() == s2.len() && s1.iter().zip(s2.iter()).all(|(a, b)| *b || !*a)
+        sup.contains(sub)
     }
 
-    fn combine(mut ms1: Self::MovementState, ms2: Self::MovementState) -> Self::MovementState {
-        for (m, m2) in ms1.as_mut_slice().iter_mut().zip(ms2.as_slice().iter()) {
-            *m = *m || *m2;
-        }
-        ms1
+    fn combine(ms1: Self::MovementState, ms2: Self::MovementState) -> Self::MovementState {
+        ms1.union(ms2)
     }
 
     fn has(&self, item: Self::ItemId) -> bool;

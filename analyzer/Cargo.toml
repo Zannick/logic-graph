@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 anyhow = { version = "*", features = ["backtrace"] }
 as-slice = "*"
+bitflags = "2.6"
 bucket_queue = "*"
 clap = { version = "4.*", features = ["derive"] }
 disjoint-hash-set = "*"

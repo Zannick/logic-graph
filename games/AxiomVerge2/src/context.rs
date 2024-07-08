@@ -3463,7 +3463,7 @@ use serde::{self, Serialize, Deserialize};
 
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits1 : u64 {
+    pub struct ContextBits1: u64 {
         const MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE = 0x1;
         const MAP__AMAGI_BREACH__EAST_RUINS__SAVE = 0x2;
         const MAP__AMAGI_BREACH__UPPER_LAKE__SAVE = 0x4;
@@ -3532,7 +3532,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits2 : u64 {
+    pub struct ContextBits2: u64 {
         const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 0x1;
         const GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN = 0x2;
         const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 0x4;
@@ -3601,7 +3601,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits3 : u64 {
+    pub struct ContextBits3: u64 {
         const EBIH_INTERCHANGE_BLOCK = 0x1;
         const EBIH_INTERCHANGE_GATE = 0x2;
         const EBIH_WALLED_OFF_WALL = 0x4;
@@ -3670,7 +3670,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits4 : u64 {
+    pub struct ContextBits4: u64 {
         const NANO_LATTICE_2 = 0x1;
         const NANO_POINTS = 0x2;
         const NANO_POINTS_2 = 0x4;
@@ -3740,7 +3740,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits5 : u64 {
+    pub struct ContextBits5: u64 {
         const VISITED_EBIH_GEM_ROOM_FLASK = 0x1;
         const VISITED_EBIH_GEM_ROOM_GATE = 0x2;
         const VISITED_EBIH_HIDDEN_PORTAL_GATE = 0x4;
@@ -3810,7 +3810,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits6 : u64 {
+    pub struct ContextBits6: u64 {
         const VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER = 0x1;
         const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET = 0x2;
         const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM = 0x4;
@@ -3880,7 +3880,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits7 : u64 {
+    pub struct ContextBits7: u64 {
         const VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET = 0x1;
         const VISITED_LOC_GLACIER_BREACH__GRATE_WORK__GRATE_INTERIOR__ITEM = 0x2;
         const VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__ITEM = 0x4;
@@ -3950,7 +3950,7 @@ bitflags!{
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits8 : u64 {
+    pub struct ContextBits8: u64 {
         const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1 = 0x1;
         const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2 = 0x2;
         const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3 = 0x4;

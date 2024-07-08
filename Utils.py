@@ -164,6 +164,8 @@ def fits_in_expected_int(t, expected):
         return int_types.index(t) <= int_types.index(expected)
     return False
 
-
 def field_size(max_value: int):
     return max(8, (max_value.bit_length() / 8) * 8)
+
+def bool_list_to_bitflags(boollist):
+    return sum(b * 2 ** a for a, b in zip(range(len(boollist)), boollist))

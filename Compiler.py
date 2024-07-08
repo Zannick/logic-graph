@@ -223,6 +223,8 @@ class GameLogic(object):
         # these are {name: {...}} dicts
         self.base_movements = self._info['base_movements']
         self.movements = self._info.get('movements', {})
+        if len(self.movements) > 8:
+            self._errors.append(f'Max 8 non-base non-exit movements supported; move rest to exit_movements and use in exits only')
         self.exit_movements = self._info.get('exit_movements', {})
         for md in self.base_movements[1:]:
             if 'data' not in md:
@@ -1927,6 +1929,7 @@ class GameLogic(object):
                                  line_statement_prefix='%%',
                                  line_comment_prefix='%#')
         env.filters.update({
+            'bool_list_to_bitflags': bool_list_to_bitflags,
             'camelize': inflection.camelize,
             'construct_id': construct_id,
             'construct_place_id': construct_place_id,
