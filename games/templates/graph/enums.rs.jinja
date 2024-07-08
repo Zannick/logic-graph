@@ -9,7 +9,7 @@ use std::fmt;
 %% from 'enum.rs.jinja' import enum
 {{ enum('RegionId', regions|sort(attribute='id'), id=True) }}
 {{ enum('AreaId', gl.areas()|list|sort(attribute='id'), id=True) }}
-{{ enum('SpotId', gl.spots()|list|sort(attribute='id'), default=True, id=True) }}
+{{ enum('SpotId', gl.spots()|list|sort(attribute='id', case_sensitive=True), default=True, id=True) }} %# Must match sorted!
 {{ enum('LocationId', gl.locations()|list|sort(attribute='id'), id=True) }}
 {{ enum('ExitId', gl.exits()|list|sort(attribute='id'), id=True) }}
 {{ enum('ActionId', gl.actions()|list|sort(attribute='id'), id=True) }}

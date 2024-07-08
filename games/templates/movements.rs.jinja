@@ -11,7 +11,7 @@ use crate::rules;
 use analyzer::context::Ctx;
 use bitflags::bitflags;
 use enum_map::Enum;
-use phf::{phf_map, phf_ordered_map};
+use phf::{phf_map, phf_ordered_map, phf_set};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -64,7 +64,7 @@ type TravelTimeMap = phf::Map<u64, &'static TravelTimeFromSpotMap>;
 
 %% for k, table in movement_tables.items()|sort
 %% set mname = k|movement_set_name
-%% for src, dtable in table.items()|sort
+%% for src, dtable in table.items()|sort(case_sensitive=True)
 static TIMES_{{ mname }}__{{ src|upper }}: TravelTimeFromSpotMap = phf_map!{
 %% for dest, times in dtable.items()
     {{ dest|spot_id_index }}u64 /* SpotId::{{ dest }} */ => {{ ((times|sum)*1000)|int }},{% if times|count > 1 %} // {{ times|map('round', 6)|list }}{% endif %}
@@ -73,7 +73,7 @@ static TIMES_{{ mname }}__{{ src|upper }}: TravelTimeFromSpotMap = phf_map!{
 %% endfor
 
 static MVMT_{{ mname }}: TravelTimeMap = phf_map!{
-%% for src in table
+%% for src in table|sort(case_sensitive=True)
     {{ src|spot_id_index }}u64 /* SpotId::{{ src }} */ => &TIMES_{{ mname }}__{{ src|upper }},
 %% endfor
 };
@@ -93,22 +93,34 @@ pub fn local_travel_time(movement_state: MovementState, src: SpotId, dest: SpotI
         .copied().unwrap_or(u32::MAX)
 }
 
-pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
-    match (src, dest) {
+type SpotConnections = phf::Set<u64>;
+
 %% for s in gl.spots()
-%% for t in (s.local or ())
-%% if s != t
-        (SpotId::{{ s.id }}, SpotId::{{ t.to|get_spot_reference(s) }}) => true,
+%% if s.local
+static NBRS_{{ s.id|upper }}: SpotConnections = phf_set! {
+%% for dest in s.local|map(attribute='to')|map('get_spot_reference', s)|unique|sort(case_sensitive=True)
+    {{ dest|spot_id_index }}u64 /* SpotId::{{ dest }} */,
+%% endfor
+};
 %% endif
 %% endfor
+
+static CONNECTIONS: phf::Map<u64, &'static SpotConnections> = phf_map! {
+%% for s in gl.spots()|sort(attribute='id', case_sensitive=True)
+%% if s.local
+    {{ s.id|spot_id_index }}u64 /* SpotId::{{ s.id|upper }} */ => &NBRS_{{ s.id|upper }},
+%% endif
 %% endfor
-        _ => false,
-    }
+};
+
+pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
+    CONNECTIONS.get(&(src.into_usize() as u64))
+        .map_or(false, |set| set.contains(&(dest.into_usize() as u64)))
 }
 
 static BASE_EDGES: [(SpotId, SpotId, u32); {{ base_distances.values()|map('count')|sum }}] = [
-%% for s, table in base_distances.items()|sort
-%% for t, time in table.items()|sort
+%% for s, table in base_distances.items()|sort(case_sensitive=True)
+%% for t, time in table.items()|sort(case_sensitive=True)
     (SpotId::{{ s }}, SpotId::{{ t }}, {{ (time * 1000)|int }}),
 %% endfor
 %% endfor
@@ -122,8 +134,8 @@ type ImprovementsTable = phf::OrderedMap<u8, u32>;
 type BestMovementsFromSpotTable = phf::Map<u64, (Option<u32>, Option<&'static ImprovementsTable>)>;
 type BestMovementsTable = phf::Map<u64, &'static BestMovementsFromSpotTable>;
 
-%% for src, stable in movements_rev_lookup.items()|sort
-%% for dest, (time, mvmts) in stable.items()|sort
+%% for src, stable in movements_rev_lookup.items()|sort(case_sensitive=True)
+%% for dest, (time, mvmts) in stable.items()|sort(case_sensitive=True)
 %%- if mvmts
 static IMPR__{{ src|upper }}___{{ dest|upper }}: ImprovementsTable = phf_ordered_map! {
 %% for m, mt in mvmts
@@ -135,9 +147,9 @@ static IMPR__{{ src|upper }}___{{ dest|upper }}: ImprovementsTable = phf_ordered
 %% endfor
 %% endfor
 
-%% for src, stable in movements_rev_lookup.items()|sort
+%% for src, stable in movements_rev_lookup.items()|sort(case_sensitive=True)
 static BEST__{{ src|upper }}: BestMovementsFromSpotTable = phf_map! {
-%% for dest, (time, mvmts) in stable.items()|sort
+%% for dest, (time, mvmts) in stable.items()|sort(case_sensitive=True)
     {{ dest|spot_id_index }}u64 /* SpotId::{{ dest }} */ => (
         {%- if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
         {%- if mvmts %} Some(&IMPR__{{ src|upper }}___{{ dest|upper }}){% else %} None{% endif -%}
@@ -147,7 +159,7 @@ static BEST__{{ src|upper }}: BestMovementsFromSpotTable = phf_map! {
 %% endfor
 
 static BEST_MOVEMENTS: BestMovementsTable = phf_map! {
-%% for src in movements_rev_lookup|sort
+%% for src in movements_rev_lookup|sort(case_sensitive=True)
     {{ src|spot_id_index }}u64 /* SpotId::{{ src }} */ => &BEST__{{ src|upper }},
 %% endfor
 };
