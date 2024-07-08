@@ -11,7 +11,7 @@ use crate::rules;
 use analyzer::context::Ctx;
 use bitflags::bitflags;
 use enum_map::Enum;
-use phf::phf_map;
+use phf::{phf_map, phf_ordered_map};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -118,32 +118,55 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     BASE_EDGES.to_vec()
 }
 
+type ImprovementsTable = phf::OrderedMap<u8, u32>;
+type BestMovementsFromSpotTable = phf::Map<u64, (Option<u32>, Option<&'static ImprovementsTable>)>;
+type BestMovementsTable = phf::Map<u64, &'static BestMovementsFromSpotTable>;
+
+%% for src, stable in movements_rev_lookup.items()|sort
+%% for dest, (time, mvmts) in stable.items()|sort
+%%- if mvmts
+static IMPR__{{ src|upper }}___{{ dest|upper }}: ImprovementsTable = phf_ordered_map! {
+%% for m, mt in mvmts
+    {{ m|bool_list_to_bitflags }}u8 => {{ (mt*1000)|int }},
+%% endfor
+};
+
+%% endif
+%% endfor
+%% endfor
+
+%% for src, stable in movements_rev_lookup.items()|sort
+static BEST__{{ src|upper }}: BestMovementsFromSpotTable = phf_map! {
+%% for dest, (time, mvmts) in stable.items()|sort
+    {{ dest|spot_id_index }}u64 /* SpotId::{{ dest }} */ => (
+        {%- if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+        {%- if mvmts %} Some(&IMPR__{{ src|upper }}___{{ dest|upper }}){% else %} None{% endif -%}
+    ),
+%% endfor
+};
+%% endfor
+
+static BEST_MOVEMENTS: BestMovementsTable = phf_map! {
+%% for src in movements_rev_lookup|sort
+    {{ src|spot_id_index }}u64 /* SpotId::{{ src }} */ => &BEST__{{ src|upper }},
+%% endfor
+};
+
 pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
-    match (sp1, sp2) {
-%% for s, stable in movements_rev_lookup.items()|sort
-%% for t, (time, mvmts) in stable.items()|sort
-        (SpotId::{{ s }}, SpotId::{{ t }}) =>
-            {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
-%% endfor
-%% endfor
-        _ => None,
-    }
+    BEST_MOVEMENTS.get(&(sp1.into_usize() as u64))
+        .and_then(|table| table.get(&(sp2.into_usize() as u64)))
+        .and_then(|res| res.0)
 }
 
 pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
-    match (sp1, sp2) {
-%% for s, stable in movements_rev_lookup.items()|sort
-%% for t, (time, mvmts) in stable.items()|sort
-        (SpotId::{{ s }}, SpotId::{{ t }}) => {
-            static MVMTS: [(MovementState, u32); {{ mvmts|count }}] = [
-%% for m, mt in mvmts
-                (MovementState::from_bits_retain({{ m|bool_list_to_bitflags }}u8), {{ (mt*1000)|int }}),
-%% endfor
-            ];
-            ({% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %}, MVMTS.to_vec())
-        }
-%% endfor
-%% endfor
-        _ => (None, Vec::new()),
+    match BEST_MOVEMENTS.get(&(sp1.into_usize() as u64)).and_then(|table| table.get(&(sp2.into_usize() as u64))) {
+        None => (None, Vec::new()),
+        Some(res) => (
+            res.0,
+            res.1.map_or_else(
+                Default::default,
+                |table| table.entries().map(|(a, b)| (MovementState::from_bits_retain(*a), *b)).collect()
+            )
+        )
     }
 }
