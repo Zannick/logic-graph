@@ -16,31 +16,47 @@ pub struct Spot {
     pub actions: Range<usize>,
 }
 
-pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
-    spots[SpotId::None] = Spot::default();
-%% for area in gl.areas()
-%% for sp in area.spots
-    spots[SpotId::{{ sp.id }}] = Spot {
+struct SpotDef {
+    id: SpotId,
+    loc_range: Option<(LocationId, LocationId)>,
+    exit_range: Option<(ExitId, ExitId)>,
+    action_range: Option<(ActionId, ActionId)>,
+}
+
+static SPOT_DEFS: [SpotDef; {{ gl.spot_id_list|count + 1}}] = [
+    SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
+%% for sp in gl.spots()|sort(attribute='id', case_sensitive=True)
+    SpotDef {
         id: SpotId::{{ sp.id }},
-        locations: Range {
-            {% if sp.loc_ids -%}
-            start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
-            end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
-            {%- else %}start: 0, end: 0,{% endif %}
-        },
-        exits: Range {
-            {% if sp.exit_ids -%}
-            start: ExitId::{{ sp.exit_ids|min }}.into_usize(),
-            end: ExitId::{{ sp.exit_ids|max }}.into_usize() + 1,
-            {%- else %}start: 0, end: 0,{% endif %}
-        },
-        actions: Range {
-            {% if sp.action_ids -%}
-            start: ActionId::{{ sp.action_ids|min }}.into_usize(),
-            end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
-            {%- else %}start: 0, end: 0,{% endif %}
-        },
-    };
+        loc_range: {% if sp.loc_ids %}Some((LocationId::{{ sp.loc_ids|min }}, LocationId::{{ sp.loc_ids|max }})){% else %}None{% endif %},
+        exit_range: {% if sp.exit_ids %}Some((ExitId::{{ sp.exit_ids|min }}, ExitId::{{ sp.exit_ids|max }})){% else %}None{% endif %},
+        action_range: {% if sp.action_ids %}Some((ActionId::{{ sp.action_ids|min }}, ActionId::{{ sp.action_ids|max }})){% else %}None{% endif %},
+    },
 %% endfor
-%% endfor
+];
+
+pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
+    for (k, spot_def) in SPOT_DEFS.iter().enumerate() {
+        assert!(k as usize == spot_def.id.into_usize(),
+                "Order of spot_def ids does not match: {} defined as {} but expected to be {}",
+                spot_def.id, spot_def.id.into_usize(), k);
+        spots[spot_def.id] = Spot {
+            id: spot_def.id,
+            locations: if let Some((min, max)) = spot_def.loc_range {
+                Range { start: min.into_usize(), end: max.into_usize() + 1 }
+            } else {
+                Range { start: 0, end: 0}
+            },
+            exits: if let Some((min, max)) = spot_def.exit_range {
+                Range { start: min.into_usize(), end: max.into_usize() + 1 }
+            } else {
+                Range { start: 0, end: 0}
+            },
+            actions: if let Some((min, max)) = spot_def.action_range {
+                Range { start: min.into_usize(), end: max.into_usize() + 1 }
+            } else {
+                Range { start: 0, end: 0}
+            },
+        };
+    }
 }
