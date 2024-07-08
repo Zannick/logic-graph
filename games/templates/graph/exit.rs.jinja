@@ -12,7 +12,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{Enum, EnumMap};
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -103,15 +103,24 @@ impl world::Exit for Exit {
     }
 }
 
-pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
-%% for ex in gl.exits()
-    exits[ExitId::{{ ex.id }}] = Exit {
+static EXIT_DEFS: [Exit; {{ num_exits }}] = [
+%% for ex in gl.exits()|sort(attribute='id', case_sensitive=True)
+    Exit {
         id: ExitId::{{ ex.id }},
         time: {{ (ex.time * 1000)|int }},
         dest: SpotId::{{ ex|get_exit_target }},
         {{ price(ex.price, ex.costs or default_price_type) }}
-    };
+    },
 %% endfor
+];
+
+pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
+    for (k, exit) in EXIT_DEFS.iter().enumerate() {
+        assert!(k as usize == exit.id.into_usize(),
+                "Order of exit ids does not match: {} defined as {} but expected to be {}",
+                exit.id, exit.id.into_usize(), k);
+        exits[exit.id] = *exit;
+    }
 }
 
 pub fn get_exit_spot(exit_id: ExitId) -> SpotId {

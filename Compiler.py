@@ -1273,15 +1273,27 @@ class GameLogic(object):
         return itertools.chain.from_iterable(s.get('locations', []) + s.get('hybrid', [])
                                              for s in self.spots())
 
+    @cached_property
+    def num_locations(self):
+        return sum(1 for _ in self.locations())
+
 
     def exits(self):
         return itertools.chain.from_iterable(s.get('exits', []) for s in self.spots())
+
+    @cached_property
+    def num_exits(self):
+        return sum(1 for _ in self.exits())
 
 
     def actions(self):
         return itertools.chain(
             self.global_actions,
             itertools.chain.from_iterable(s.get('actions', []) for s in self.spots()))
+
+    @cached_property
+    def num_actions(self):
+        return sum(1 for _ in self.actions())
 
 
     def all_points(self):
@@ -1971,6 +1983,9 @@ class GameLogic(object):
         self.context_position_watchers
         self.all_connections
         self.region_colors
+        self.num_actions
+        self.num_exits
+        self.num_locations
         self.sorted_spots = sorted(self.spots(), key=lambda s: s['id'])
         files = {
             '.': ['Cargo.toml'],

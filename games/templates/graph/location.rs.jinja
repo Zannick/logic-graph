@@ -14,7 +14,7 @@ use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
 use analyzer::world::World as _;
-use enum_map::EnumMap;
+use enum_map::{Enum, EnumMap};
 use rustc_hash::FxHashMap;
 use std::option::Option;
 
@@ -99,9 +99,9 @@ impl Location {
     }
 }
 
-pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
-%% for loc in gl.locations()
-    locations[LocationId::{{ loc.id }}] = Location {
+static LOC_DEFS: [Location; {{ num_locations }}] = [
+%% for loc in gl.locations()|sort(attribute='id', case_sensitive=True)
+    Location {
         id: LocationId::{{ loc.id }},
         canonical: CanonId::{% if loc.canon %}{{ loc.canon|construct_id }}{% else %}Loc_{{ loc.id }}{% endif %},
         item: Item::{{ loc.item or 'None' }},
@@ -109,8 +109,17 @@ pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
         time: {{ (loc.time * 1000)|int }},
         dest: SpotId::{% if loc.to is defined %}{{ loc|get_exit_target }}{% else %}None{% endif %},
         skippable: false,
-    };
+    },
 %% endfor
+];
+
+pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
+    for (k, loc) in LOC_DEFS.iter().enumerate() {
+        assert!(k as usize == loc.id.into_usize(),
+                "Order of location ids does not match: {} defined as {} but expected to be {}",
+                loc.id, loc.id.into_usize(), k);
+        locations[loc.id] = *loc;
+    }
 }
 
 pub fn get_location_spot(loc_id: LocationId) -> SpotId {

@@ -11,7 +11,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{Enum, EnumMap};
 use rustc_hash::FxHashMap;
 
 #[derive(Copy, Clone, Debug)]
@@ -2369,892 +2369,901 @@ impl world::Action for Action {
     }
 }
 
-pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
-    actions[ActionId::Global__Recall_Drone] = Action {
-        id: ActionId::Global__Recall_Drone,
-        time: 3000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Global__Recall_Fast_Travel] = Action {
-        id: ActionId::Global__Recall_Fast_Travel,
-        time: 2000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Global__Deploy_Drone] = Action {
-        id: ActionId::Global__Deploy_Drone,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Global__Become_Drone] = Action {
-        id: ActionId::Global__Become_Drone,
-        time: 100,
-        price: Currency::Free,
-    };
-    actions[ActionId::Global__Become_Indra] = Action {
-        id: ActionId::Global__Become_Indra,
-        time: 100,
-        price: Currency::Free,
-    };
-    actions[ActionId::Global__Move_Portal_Here] = Action {
-        id: ActionId::Global__Move_Portal_Here,
-        time: 100,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi_Breach__East_Entrance__Save_Point__Save] = Action {
+static ACT_DEFS: [Action; 177] = [
+    Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Amagi_Breach__East_Ruins__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Amagi_Breach__East_Ruins__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Carving__Key_Combo] = Action {
-        id: ActionId::Amagi__Main_Area__Carving__Key_Combo,
-        time: 1750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West] = Action {
-        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West,
-        time: 2000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East] = Action {
-        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East,
-        time: 9724,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West] = Action {
-        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West,
-        time: 2750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East] = Action {
-        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East,
-        time: 8974,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Save_Point__Save] = Action {
-        id: ActionId::Amagi__Main_Area__Save_Point__Save,
-        time: 1200,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West] = Action {
-        id: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West,
-        time: 3062,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West] = Action {
-        id: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West,
-        time: 2999,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch] = Action {
+    },
+    Action {
         id: ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch,
         time: 6000,
         price: Currency::Free,
-    };
-    actions[ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch] = Action {
-        id: ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch,
-        time: 6000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch] = Action {
-        id: ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch,
-        time: 5500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch] = Action {
+    },
+    Action {
         id: ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch,
         time: 5500,
         price: Currency::Free,
-    };
-    actions[ActionId::Amagi__East_Lake__Save_Point__Save] = Action {
+    },
+    Action {
+        id: ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch,
+        time: 6000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch,
+        time: 5500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Amagi__East_Lake__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Mirror_Match__Save_Point__Save] = Action {
-        id: ActionId::Annuna__Mirror_Match__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West,
+        time: 3062,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower] = Action {
-        id: ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
-        time: 2500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower] = Action {
-        id: ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower,
-        time: 3000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone] = Action {
-        id: ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone,
-        time: 4000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo] = Action {
-        id: ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Carving__Key_Combo,
         time: 1750,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo] = Action {
-        id: ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo,
-        time: 1750,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East,
+        time: 8974,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo] = Action {
-        id: ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo,
-        time: 1750,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West,
+        time: 2750,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Vertical_Room__Save_Point__Save] = Action {
-        id: ActionId::Annuna__Vertical_Room__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East,
+        time: 9724,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door] = Action {
-        id: ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Factory_Entrance__Save_Point__Save] = Action {
-        id: ActionId::Annuna__Factory_Entrance__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone] = Action {
-        id: ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up] = Action {
-        id: ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West,
         time: 2000,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Upper_Save__Save_Point__Save] = Action {
-        id: ActionId::Annuna__Upper_Save__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Save_Point__Save,
+        time: 1200,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Center_Save__Save_Point__Save] = Action {
+    },
+    Action {
+        id: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West,
+        time: 2999,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Annuna__Center_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door] = Action {
-        id: ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower,
+        time: 2500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone,
+        time: 4000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Factory_Entrance__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up,
+        time: 2000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Annuna__Final_Save__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Annuna__Final_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih_Breach__Portals_101__Save_Point__Save] = Action {
-        id: ActionId::Ebih_Breach__Portals_101__Save_Point__Save,
+    },
+    Action {
+        id: ActionId::Annuna__Mirror_Match__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih_Breach__In_n_Out__Save_Point__Save] = Action {
+    },
+    Action {
+        id: ActionId::Annuna__Upper_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Vertical_Room__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Ebih_Breach__In_n_Out__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Base_Camp__Save_Point__Save] = Action {
-        id: ActionId::Ebih__Base_Camp__Save_Point__Save,
+    },
+    Action {
+        id: ActionId::Ebih_Breach__Portals_101__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform] = Action {
-        id: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform] = Action {
+    },
+    Action {
         id: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Truck_Gate__Switch__Open_Door] = Action {
-        id: ActionId::Ebih__Truck_Gate__Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door] = Action {
-        id: ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door] = Action {
-        id: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door,
+    },
+    Action {
+        id: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Grid_25_10_12__East_11__Open_Door] = Action {
-        id: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone] = Action {
-        id: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,
-        time: 2000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__West_8__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__West_8__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__East_Door_Right__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__East_Door_Right__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__East_Switch__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__East_Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door] = Action {
-        id: ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Mid_Save__Save] = Action {
-        id: ActionId::Ebih__Ebih_West__Mid_Save__Save,
+    },
+    Action {
+        id: ActionId::Ebih__Base_Camp__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Upper_Save__Save] = Action {
-        id: ActionId::Ebih__Ebih_West__Upper_Save__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long] = Action {
-        id: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long,
-        time: 5300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Below_Door__Open_Door] = Action {
-        id: ActionId::Ebih__Ebih_West__Below_Door__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door] = Action {
-        id: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_West__Lower_Save__Save] = Action {
-        id: ActionId::Ebih__Ebih_West__Lower_Save__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride] = Action {
-        id: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride,
-        time: 3700,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride] = Action {
-        id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,
-        time: 4500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift] = Action {
-        id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift] = Action {
-        id: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift,
-        time: 5000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Hidden_Portal__Save_Point__Save] = Action {
-        id: ActionId::Ebih__Hidden_Portal__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift] = Action {
-        id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift,
-        time: 7000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early] = Action {
-        id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early,
-        time: 1400,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform] = Action {
-        id: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform,
-        time: 4000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone] = Action {
+    },
+    Action {
         id: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone,
         time: 1500,
         price: Currency::Free,
-    };
-    actions[ActionId::Ebih__Vertical_Interchange__West_13__Open_Door] = Action {
+    },
+    Action {
+        id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift,
+        time: 7000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early,
+        time: 1400,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform,
+        time: 4000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift,
+        time: 5000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,
+        time: 4500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride,
+        time: 3700,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Below_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Lower_Save__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long,
+        time: 5300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Mid_Save__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Ebih_West__Upper_Save__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Hidden_Portal__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Truck_Gate__Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Ebih__Vertical_Interchange__West_13__Open_Door,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Emergence__Camp_Exterior__Save_Point__Save] = Action {
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__East_Door_Right__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__East_Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,
+        time: 2000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Waterfall__West_8__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Emergence__Camp_Exterior__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Emergence__Storage__At_Door__Open_Door] = Action {
+    },
+    Action {
         id: ActionId::Emergence__Storage__At_Door__Open_Door,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Emergence__Storage__Portal_Stand__Open_Door] = Action {
+    },
+    Action {
         id: ActionId::Emergence__Storage__Portal_Stand__Open_Door,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna_Breach__Peak__Save_Point__Save] = Action {
-        id: ActionId::Giguna_Breach__Peak__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna_Breach__SW_Save__West_11__Open_Door] = Action {
-        id: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door,
-        time: 250,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna_Breach__SW_Save__Save_Point__Save] = Action {
-        id: ActionId::Giguna_Breach__SW_Save__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna_Breach__Labyrinth__Save_Point__Save] = Action {
-        id: ActionId::Giguna_Breach__Labyrinth__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna_Breach__Emergence__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Giguna_Breach__Emergence__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Northeast__Save_Point__Save] = Action {
-        id: ActionId::Giguna__Giguna_Northeast__Save_Point__Save,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__Labyrinth__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone] = Action {
-        id: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,
-        time: 1250,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__Peak__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar] = Action {
-        id: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
-        time: 500,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__SW_Save__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Northeast__Switch__Open_Door] = Action {
-        id: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door,
-        time: 1000,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door,
+        time: 250,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Carnelian__Upper_Susar__Caught] = Action {
-        id: ActionId::Giguna__Carnelian__Upper_Susar__Caught,
-        time: 3000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Carnelian__Upper_Susar__Hack] = Action {
-        id: ActionId::Giguna__Carnelian__Upper_Susar__Hack,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__Carnelian__Switch__Open_Door] = Action {
-        id: ActionId::Giguna__Carnelian__Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Carnelian__Lower_Susar__Caught] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Carnelian__Lower_Susar__Caught,
         time: 3000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Carnelian__Lower_Susar__Hack] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Carnelian__Lower_Susar__Hack,
         time: 500,
         price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up] = Action {
-        id: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
-        time: 1500,
+    },
+    Action {
+        id: ActionId::Giguna__Carnelian__Switch__Open_Door,
+        time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__West_Caverns__East_Susar__Caught] = Action {
-        id: ActionId::Giguna__West_Caverns__East_Susar__Caught,
+    },
+    Action {
+        id: ActionId::Giguna__Carnelian__Upper_Susar__Caught,
         time: 3000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__West_Caverns__East_Susar__Hack] = Action {
-        id: ActionId::Giguna__West_Caverns__East_Susar__Hack,
+    },
+    Action {
+        id: ActionId::Giguna__Carnelian__Upper_Susar__Hack,
         time: 500,
         price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone] = Action {
-        id: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone,
-        time: 3500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone] = Action {
-        id: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Save_Point__Save] = Action {
-        id: ActionId::Giguna__Giguna_Base__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door] = Action {
-        id: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door] = Action {
-        id: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door] = Action {
-        id: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door] = Action {
-        id: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Ruins_West__Save_Point__Save] = Action {
-        id: ActionId::Giguna__Ruins_West__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib] = Action {
-        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib] = Action {
-        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,
-        time: 3500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__Ruins_Top__Save_Point__Save] = Action {
-        id: ActionId::Giguna__Ruins_Top__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Ruins_Top__Switch__Open_Doors] = Action {
-        id: ActionId::Giguna__Ruins_Top__Switch__Open_Doors,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower] = Action {
-        id: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
-        time: 3800,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal] = Action {
-        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
-        time: 12000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal] = Action {
-        id: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
-        time: 12000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early] = Action {
-        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early,
-        time: 8695,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal,
         time: 2708,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal,
         time: 2708,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__West_14__Enter_Combo] = Action {
-        id: ActionId::Giguna__East_Caverns__West_14__Enter_Combo,
-        time: 1750,
+    },
+    Action {
+        id: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
+        time: 12000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Upper_Susar__Caught] = Action {
-        id: ActionId::Giguna__East_Caverns__Upper_Susar__Caught,
-        time: 3000,
+    },
+    Action {
+        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early,
+        time: 8695,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack] = Action {
-        id: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack] = Action {
-        id: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught] = Action {
-        id: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught,
-        time: 3000,
+    },
+    Action {
+        id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
+        time: 12000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Carving__Enter_Combo] = Action {
-        id: ActionId::Giguna__East_Caverns__Carving__Enter_Combo,
-        time: 1750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Mid_Susar__Hack] = Action {
-        id: ActionId::Giguna__East_Caverns__Mid_Susar__Hack,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__East_Caverns__Mid_Susar__Caught] = Action {
-        id: ActionId::Giguna__East_Caverns__Mid_Susar__Caught,
-        time: 3000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door] = Action {
-        id: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo] = Action {
-        id: ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo,
-        time: 1750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Switch__Open_Door] = Action {
-        id: ActionId::Giguna__East_Caverns__Switch__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__West_16__Open_Door] = Action {
-        id: ActionId::Giguna__East_Caverns__West_16__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo] = Action {
+    },
+    Action {
         id: ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo,
         time: 1750,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__East_Caverns__Lower_Susar__Hack] = Action {
-        id: ActionId::Giguna__East_Caverns__Lower_Susar__Hack,
-        time: 500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Giguna__East_Caverns__Lower_Susar__Caught] = Action {
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Carving__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Giguna__East_Caverns__Lower_Susar__Caught,
         time: 3000,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Gateway__One_Jump__Open_Door] = Action {
-        id: ActionId::Giguna__Gateway__One_Jump__Open_Door,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Lower_Susar__Hack,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Mid_Susar__Caught,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Mid_Susar__Hack,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Gateway__Flask_Ledge__Open_Door] = Action {
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__Upper_Susar__Caught,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__West_14__Enter_Combo,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__East_Caverns__West_16__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door] = Action {
+    },
+    Action {
+        id: ActionId::Giguna__Gateway__One_Jump__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,
+        time: 1250,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Northeast__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door] = Action {
-        id: ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Labyrinth__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Labyrinth__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Separator__Platform__Deploy_to_Switch] = Action {
+    },
+    Action {
+        id: ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_Top__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_Top__Switch__Open_Doors,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
+        time: 3800,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,
+        time: 3500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__Ruins_West__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Giguna__Separator__Platform__Deploy_to_Switch,
         time: 1312,
         price: Currency::Free,
-    };
-    actions[ActionId::Giguna__Separator__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Giguna__Separator__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__South_Save__Save_Point__Save] = Action {
-        id: ActionId::Glacier_Breach__South_Save__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone,
+        time: 3500,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__West_Save__Save_Point__Save] = Action {
-        id: ActionId::Glacier_Breach__West_Save__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Giguna__West_Caverns__East_Susar__Caught,
+        time: 3000,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save] = Action {
-        id: ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save,
-        time: 1300,
+    },
+    Action {
+        id: ActionId::Giguna__West_Caverns__East_Susar__Hack,
+        time: 500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
+        time: 1500,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save] = Action {
-        id: ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save] = Action {
-        id: ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform] = Action {
-        id: ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform,
-        time: 2250,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform] = Action {
+    },
+    Action {
         id: ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform,
         time: 1500,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone] = Action {
+    },
+    Action {
+        id: ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform,
+        time: 2250,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier_Breach__South_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier_Breach__West_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone,
         time: 1500,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up] = Action {
+    },
+    Action {
         id: ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Revival__Save_Point__Save] = Action {
-        id: ActionId::Glacier__Revival__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Revival__Save_Point__Throw_Drone_West] = Action {
-        id: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West,
-        time: 750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break] = Action {
-        id: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate] = Action {
-        id: ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones] = Action {
-        id: ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
-        time: 1000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West] = Action {
-        id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
-        time: 3000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note] = Action {
-        id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note,
-        time: 5500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West] = Action {
-        id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
-        time: 2500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note] = Action {
-        id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
-        time: 5000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner] = Action {
-        id: ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner,
-        time: 4000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors] = Action {
-        id: ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors,
-        time: 500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors] = Action {
+    },
+    Action {
         id: ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Glacier__Hammonds_End__West_11__Open_Doors] = Action {
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note,
+        time: 5500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner,
+        time: 4000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West,
+        time: 2500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note,
+        time: 5000,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Glacier__Hammonds_End__West_11__Open_Doors,
         time: 500,
         price: Currency::Free,
-    };
-    actions[ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook] = Action {
-        id: ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook,
-        time: 2400,
+    },
+    Action {
+        id: ActionId::Glacier__Revival__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone] = Action {
+    },
+    Action {
+        id: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West,
+        time: 750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Become_Drone,
+        time: 100,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Become_Indra,
+        time: 100,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Deploy_Drone,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Move_Portal_Here,
+        time: 100,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Recall_Drone,
+        time: 3000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Global__Recall_Fast_Travel,
+        time: 2000,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone,
         time: 1100,
         price: Currency::Free,
-    };
-    actions[ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence] = Action {
-        id: ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence,
-        time: 11500,
-        price: Currency::Free,
-    };
-    actions[ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence] = Action {
+    },
+    Action {
         id: ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence,
         time: 13500,
         price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High] = Action {
-        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High,
-        time: 6600,
+    },
+    Action {
+        id: ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence,
+        time: 11500,
         price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low] = Action {
-        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low,
-        time: 6600,
+    },
+    Action {
+        id: ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook,
+        time: 2400,
         price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low] = Action {
-        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low,
-        time: 8100,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High] = Action {
-        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High,
-        time: 6725,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low] = Action {
-        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
-        time: 6599,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__Save_Point__Save] = Action {
-        id: ActionId::Irikar__Hub__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall] = Action {
-        id: ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
-        time: 3500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall] = Action {
-        id: ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall,
-        time: 3500,
-        price: Currency::Energy(100),
-    };
-    actions[ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform] = Action {
+    },
+    Action {
         id: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
         time: 8000,
         price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride] = Action {
-        id: ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride,
-        time: 13000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform] = Action {
-        id: ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform,
-        time: 20000,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Midwest__Save_Point__Save] = Action {
-        id: ActionId::Irikar__Midwest__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Irikar__Beach_Save__Save_Point__Save] = Action {
+    },
+    Action {
         id: ActionId::Irikar__Beach_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__West_Entrance__Save_Point__Save] = Action {
-        id: ActionId::Uhrum__West_Entrance__Save_Point__Save,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall,
+        time: 3500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High,
+        time: 6725,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
+        time: 6599,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall,
+        time: 3500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Irikar__Hub__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up] = Action {
-        id: ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up,
-        time: 2000,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High,
+        time: 6600,
         price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Save_Room__Save_Point__Save] = Action {
-        id: ActionId::Uhrum__Save_Room__Save_Point__Save,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low,
+        time: 6600,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low,
+        time: 8100,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride,
+        time: 13000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform,
+        time: 20000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Midwest__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Annuna_Corridor__Save_Point__Save] = Action {
-        id: ActionId::Uhrum__Annuna_Corridor__Save_Point__Save,
-        time: 1300,
-        price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up] = Action {
-        id: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
-        time: 1750,
-        price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High] = Action {
+    },
+    Action {
         id: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High,
         time: 1000,
         price: Currency::Free,
-    };
-    actions[ActionId::Uhrum__Emergence_Save__Save_Point__Save] = Action {
+    },
+    Action {
+        id: ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up,
+        time: 1750,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Uhrum__Annuna_Corridor__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Uhrum__Emergence_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
-    };
+    },
+    Action {
+        id: ActionId::Uhrum__Save_Room__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up,
+        time: 2000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Uhrum__West_Entrance__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+];
+
+pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
+    for (k, act) in ACT_DEFS.iter().enumerate() {
+        assert!(k as usize == act.id.into_usize(),
+                "Order of location ids does not match: {} defined as {} but expected to be {}",
+                act.id, act.id.into_usize(), k);
+        actions[act.id] = *act;
+    }
 }
 
 pub fn get_action_spot(act_id: ActionId) -> SpotId {
