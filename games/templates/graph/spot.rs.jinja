@@ -37,7 +37,7 @@ static SPOT_DEFS: [SpotDef; {{ spot_id_list|count + 1}}] = [
 
 pub(super) fn build_spots(spots: &mut EnumMap<SpotId, Spot>) {
     for (k, spot_def) in SPOT_DEFS.iter().enumerate() {
-        assert!(k as usize == spot_def.id.into_usize(),
+        assert!(k == spot_def.id.into_usize(),
                 "Order of spot_def ids does not match: {} defined as {} but expected to be {}",
                 spot_def.id, spot_def.id.into_usize(), k);
         spots[spot_def.id] = Spot {

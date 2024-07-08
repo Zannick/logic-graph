@@ -115,7 +115,7 @@ static LOC_DEFS: [Location; {{ num_locations }}] = [
 
 pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     for (k, loc) in LOC_DEFS.iter().enumerate() {
-        assert!(k as usize == loc.id.into_usize(),
+        assert!(k == loc.id.into_usize(),
                 "Order of location ids does not match: {} defined as {} but expected to be {}",
                 loc.id, loc.id.into_usize(), k);
         locations[loc.id] = *loc;

@@ -3259,7 +3259,7 @@ static ACT_DEFS: [Action; 177] = [
 
 pub(super) fn build_actions(actions: &mut EnumMap<ActionId, Action>) {
     for (k, act) in ACT_DEFS.iter().enumerate() {
-        assert!(k as usize == act.id.into_usize(),
+        assert!(k == act.id.into_usize(),
                 "Order of location ids does not match: {} defined as {} but expected to be {}",
                 act.id, act.id.into_usize(), k);
         actions[act.id] = *act;

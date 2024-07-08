@@ -3427,13 +3427,13 @@ lazy_static! {
             start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
             end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
         },
-        AreaId::Giguna_Breach__Slingshot => Range {
-            start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
-            end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
-        },
         AreaId::Giguna_Breach__SW_Save => Range {
             start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
             end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+        },
+        AreaId::Giguna_Breach__Slingshot => Range {
+            start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+            end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
         },
         AreaId::Giguna_Breach__Upper_Machinery => Range {
             start: SpotId::Giguna_Breach__Upper_Machinery__West.into_usize(),

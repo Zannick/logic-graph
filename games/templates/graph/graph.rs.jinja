@@ -48,7 +48,7 @@ lazy_static! {
     // Using get_area, we can get the nearby spots by indexing into the spot lists
     static ref RAW_AREA_SPOT_RANGES: EnumMap<AreaId, Range<usize>> = enum_map! {
     %% for r in regions
-    %% for area in r.areas|sort(attribute='id')
+    %% for area in r.areas|sort(attribute='id', case_sensitive=True)
         AreaId::{{ area.id }} => Range {
             start: SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
             end: SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,

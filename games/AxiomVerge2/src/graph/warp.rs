@@ -320,7 +320,7 @@ static WARP_DEFS: [Warp; 9] = [
 
 pub(super) fn build_warps(warps: &mut EnumMap<WarpId, Warp>) {
     for (k, warp) in WARP_DEFS.iter().enumerate() {
-        assert!(k as usize == warp.id.into_usize(),
+        assert!(k == warp.id.into_usize(),
                 "Order of warp ids does not match: {} defined as {} but expected to be {}",
                 warp.id, warp.id.into_usize(), k);
         warps[warp.id] = *warp;

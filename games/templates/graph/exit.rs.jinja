@@ -116,7 +116,7 @@ static EXIT_DEFS: [Exit; {{ num_exits }}] = [
 
 pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
     for (k, exit) in EXIT_DEFS.iter().enumerate() {
-        assert!(k as usize == exit.id.into_usize(),
+        assert!(k == exit.id.into_usize(),
                 "Order of exit ids does not match: {} defined as {} but expected to be {}",
                 exit.id, exit.id.into_usize(), k);
         exits[exit.id] = *exit;
