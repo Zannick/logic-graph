@@ -15,7 +15,6 @@ extern crate yaml_rust;
 
 mod a_star;
 pub mod access;
-pub mod search;
 pub mod bucket;
 pub mod cli;
 pub mod condense;
@@ -29,6 +28,7 @@ pub mod minimize;
 pub mod observer;
 pub mod priority;
 pub mod route;
+pub mod search;
 pub mod settings;
 pub mod solutions;
 pub mod steiner;
@@ -385,6 +385,11 @@ pub mod testlib {
                         ));
                     } else if $world.are_spots_connected($ctx.position(), next_spot) {
                         errors.push(String::from("local travel not available"));
+                    } else {
+                        errors.push(format!(
+                            "Spot isn't connected from current position: {}",
+                            next_spot
+                        ));
                     }
                 }
                 for exit in $world.get_spot_exits($ctx.position()) {
@@ -420,6 +425,13 @@ pub mod testlib {
                             ));
                         }
                     }
+                }
+                if errors.is_empty() {
+                    errors.push(format!(
+                        "No exits or warps to {}. Current area spots: {:?}",
+                        next_spot,
+                        $world.get_area_spots($ctx.position())
+                    ));
                 }
                 panic!(
                     "Path breaks at {}: cannot get to {}:\n{}\n",

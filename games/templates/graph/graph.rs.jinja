@@ -37,9 +37,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
     }
 }
 
-static RAW_SPOTS: [SpotId; {{ gl.spots()|list|length + 1 }}] = [ %# +1 as long as we have a default
+static RAW_SPOTS: [SpotId; {{ spot_id_list|count + 1 }}] = [ %# +1 as long as we have a default
     SpotId::None,
-%% for spot_id in gl.spots()|map(attribute='id')|sort
+%% for spot_id in gl.spots()|map(attribute='id')|sort(case_sensitive=True)
     SpotId::{{ spot_id }},
 %% endfor
 ];

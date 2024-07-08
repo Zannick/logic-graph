@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; {{ gl.spot_id_list|count + 1}}] = [
+static SPOT_DEFS: [SpotDef; {{ spot_id_list|count + 1}}] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
 %% for sp in gl.spots()|sort(attribute='id', case_sensitive=True)
     SpotDef {
