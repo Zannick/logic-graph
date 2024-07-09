@@ -29,12 +29,7 @@ pub trait Ctx:
     type ItemId: Id + Default;
     type AreaId: Id;
     type RegionId: Id;
-    type MovementState: Copy
-        + Clone
-        + Eq
-        + Debug
-        + Hash
-        + Flags;
+    type MovementState: Copy + Clone + Eq + Debug + Hash + Flags;
     type Observer: Observer<Ctx = Self>;
     type Expectation: Copy + Clone + Debug + Eq + Send;
     const NUM_ITEMS: u32;

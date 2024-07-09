@@ -93,7 +93,7 @@ where
     let pos = Wrapper::get(&ctx).position();
     let start = Instant::now();
     match h {
-        History::G(item, loc_id) | History::V(item, loc_id, ..)=> {
+        History::G(item, loc_id) | History::V(item, loc_id, ..) => {
             let spot_id = world.get_location_spot(loc_id);
             if pos != spot_id {
                 ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {

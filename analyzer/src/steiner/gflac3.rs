@@ -1,13 +1,12 @@
 #![allow(unused)]
 
-
 use pheap::PairingHeap;
 
 use super::approx::*;
 use super::graph::*;
-use crate::{new_hashset, new_hashmap, CommonHasher};
+use crate::{new_hashmap, new_hashset, CommonHasher};
+use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
-use std::collections::{HashSet, HashMap};
 
 // Based on mouton5000's GFLAC3 algorithm
 

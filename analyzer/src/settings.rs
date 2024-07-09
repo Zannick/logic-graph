@@ -19,7 +19,10 @@ where
 {
     match val {
         Yaml::Integer(i) => T::try_from(*i).map_err(|e| format!("{:?}", e)),
-        _ => Err(format!("Value for '{:?}' is not integer or doesn't fit: {:?}", key, val)),
+        _ => Err(format!(
+            "Value for '{:?}' is not integer or doesn't fit: {:?}",
+            key, val
+        )),
     }
 }
 

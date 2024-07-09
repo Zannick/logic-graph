@@ -18,7 +18,9 @@ pub struct LimitedPriorityQueue<I: Eq + Hash, J: Clone + Eq + Hash, P: Ord, H = 
     iters_left: usize,
 }
 
-impl<I: Eq + Hash, J: Clone + Eq + Hash, P: Clone + Ord> LimitedPriorityQueue<I, J, P, CommonHasher> {
+impl<I: Eq + Hash, J: Clone + Eq + Hash, P: Clone + Ord>
+    LimitedPriorityQueue<I, J, P, CommonHasher>
+{
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
             min_pmap: HashMap::with_capacity_and_hasher(capacity, CommonHasher::default()),
@@ -56,7 +58,9 @@ impl<I: Eq + Hash, J: Clone + Eq + Hash, P: Clone + Ord> LimitedPriorityQueue<I,
     }
 }
 
-impl<I: Eq + Hash, J: Clone + Eq + Hash, P: Clone + Ord, H: BuildHasher + Clone> LimitedPriorityQueue<I, J, P, H> {
+impl<I: Eq + Hash, J: Clone + Eq + Hash, P: Clone + Ord, H: BuildHasher + Clone>
+    LimitedPriorityQueue<I, J, P, H>
+{
     pub fn with_limit_and_hasher(limit: usize, hasher: H) -> Self {
         Self {
             min_pmap: HashMap::with_hasher(hasher.clone()),

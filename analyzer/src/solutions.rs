@@ -289,7 +289,8 @@ where
             if set.contains(&solution) {
                 SolutionResult::Duplicate
             } else {
-                self.processing_queue.push(solution.clone(), Reverse(solution.elapsed));
+                self.processing_queue
+                    .push(solution.clone(), Reverse(solution.elapsed));
                 set.insert(solution);
                 if best {
                     self.write_previews().unwrap();
@@ -301,7 +302,8 @@ where
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
-            self.processing_queue.push(solution.clone(), Reverse(solution.elapsed));
+            self.processing_queue
+                .push(solution.clone(), Reverse(solution.elapsed));
             self.map.insert(loc_history, new_hashset_with(solution));
             if best {
                 self.write_previews().unwrap();

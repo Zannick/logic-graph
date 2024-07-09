@@ -191,24 +191,10 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
             }
         }
         if allow_local {
-            expand_local_astar(
-                world,
-                el,
-                movement_state,
-                max_time,
-                spot_heap,
-                score_func,
-            );
+            expand_local_astar(world, el, movement_state, max_time, spot_heap, score_func);
         }
     } else {
-        expand_local_astar(
-            world,
-            el,
-            movement_state,
-            max_time,
-            spot_heap,
-            score_func,
-        );
+        expand_local_astar(world, el, movement_state, max_time, spot_heap, score_func);
     }
 
     expand_exits_astar(world, el, max_time, spot_heap, score_func);

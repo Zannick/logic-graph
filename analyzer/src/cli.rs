@@ -1,4 +1,3 @@
-use crate::search::Search;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
@@ -7,6 +6,7 @@ use crate::matchertrie::MatcherTrie;
 use crate::minimize::{mutate_collection_steps, mutate_spot_revisits, trie_minimize};
 use crate::observer::{debug_observations, record_observations, Observer};
 use crate::route::*;
+use crate::search::Search;
 use crate::solutions::write_graph;
 use crate::world::*;
 use clap::{Parser, Subcommand};
