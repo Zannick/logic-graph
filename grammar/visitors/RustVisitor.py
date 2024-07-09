@@ -1,5 +1,5 @@
 from collections import defaultdict
-from itertools import chain
+from itertools import chain, zip_longest
 import logging
 import re
 
@@ -138,7 +138,7 @@ class RustVisitor(RustBaseVisitor):
             args.append('world')
         return f'{"!" if ctx.NOT() else ""}{func}({", ".join(args)})'
 
-    def _visitConditional(self, *args, else_case=True):
+    def _visitConditional(self, *args, else_case='false'):
         ret = []
         while len(args) > 1:
             cond, then, *args = args
@@ -146,7 +146,7 @@ class RustVisitor(RustBaseVisitor):
         if args:
             ret.append(f'{{ {self.visit(args[0])} }}')
         elif else_case:
-            ret.append('{ false }')
+            ret.append(f'{{ {else_case} }}')
         return ' else '.join(ret)
 
     def visitIfThenElse(self, ctx):
@@ -258,6 +258,12 @@ class RustVisitor(RustBaseVisitor):
         return (f'match ctx.count(Item::{ctx.ITEM()}) {{ '
                 + ', '.join(f'{i} => {r}' for i, r in zip(cases, results))
                 + '}')
+
+    def visitCondNum(self, ctx):
+        return self._visitConditional(*[child for child in chain(*zip_longest(ctx.boolExpr(), ctx.num())) if child])
+    
+    def visitCondStr(self, ctx):
+        return self._visitConditional(*[child for child in chain(*zip_longest(ctx.boolExpr(), ctx.str_())) if child])
 
     def visitRefInList(self, ctx):
         getter = self.visit(ctx.ref())
@@ -411,10 +417,10 @@ class RustVisitor(RustBaseVisitor):
         
     def visitCondAction(self, ctx):
         if len(ctx.boolExpr()) == len(ctx.actions()):
-            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=None)
         else:
             # explicit else case
-            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=False)
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=None)
 
 
 
@@ -1030,7 +1036,7 @@ class RustObservationVisitor(RustBaseVisitor):
         else:
             return f'{func}({", ".join(args)})'
 
-    def _visitConditional(self, *args, else_case=True):
+    def _visitConditional(self, *args, else_case='false'):
         lines = []
         while len(args) > 1:
             cond, then, *args = args
@@ -1038,7 +1044,7 @@ class RustObservationVisitor(RustBaseVisitor):
         if args:
             lines.append(f'{{ {self.visit(args[0])} }}')
         elif else_case:
-            lines.append('{ false }')
+            lines.append(f'{{ {else_case} }}')
         return ' else '.join(lines)
     
     def visitIfThenElse(self, ctx):
@@ -1261,7 +1267,7 @@ class RustObservationVisitor(RustBaseVisitor):
         
     def visitCondAction(self, ctx):
         if len(ctx.boolExpr()) == len(ctx.actions()):
-            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=None)
         else:
             # explicit else case
-            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=False)
+            return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions()[:-1]), ctx.actions()[-1:]), else_case=None)

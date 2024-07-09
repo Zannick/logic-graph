@@ -1,4 +1,4 @@
-# Generated from c:/Users/bswolf/Documents/GitHub/logic-graph/grammar/Rules.g4 by ANTLR 4.13.1
+# Generated from Rules.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RulesParser import RulesParser

@@ -59,11 +59,11 @@ cond    : IF '(' boolExpr ')' '{' boolExpr '}'
 
 condNum : IF '(' boolExpr ')' '{' num '}'
           ( ELSE IF '(' boolExpr ')' '{' num '}' )*
-          ( ELSE '{' num '}' )?
+          ELSE '{' num '}' 
         ;
 condStr : IF '(' boolExpr ')' '{' str '}'
           ( ELSE IF '(' boolExpr ')' '{' str '}' )*
-          ( ELSE '{' str '}' )?
+          ELSE '{' str '}' 
         ;
 
 
