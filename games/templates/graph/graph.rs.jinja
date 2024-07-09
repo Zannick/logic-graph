@@ -50,8 +50,8 @@ lazy_static! {
     %% for r in regions
     %% for area in r.areas|sort(attribute='id', case_sensitive=True)
         AreaId::{{ area.id }} => Range {
-            start: SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
-            end: SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,
+            start: SpotId::{{ area.spots|map(attribute='id')|min(case_sensitive=True) }}.into_usize(),
+            end: SpotId::{{ area.spots|map(attribute='id')|max(case_sensitive=True) }}.into_usize() + 1,
         },
     %% endfor
     %% endfor
@@ -104,8 +104,8 @@ impl world::World for World {
 
         world.global_actions = Range {
             {% if global_actions -%}
-            start: ActionId::{{ global_actions|map(attribute='id')|min }}.into_usize(),
-            end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
+            start: ActionId::{{ global_actions|map(attribute='id')|min(case_sensitive=True) }}.into_usize(),
+            end: ActionId::{{ global_actions|map(attribute='id')|max(case_sensitive=True) }}.into_usize() + 1,
             {%- else %}start: 0, end: 0,{% endif %}
         };
         world.min_warp_time = {% if warps.values()|selectattr('bulk_exit', 'false')|first -%}

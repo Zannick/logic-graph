@@ -3046,7 +3046,7 @@ static SPOT_DEFS: [SpotDef; 2464] = [
     SpotDef {
         id: SpotId::Antarctica__East__Building_2_Entry,
         loc_range: None,
-        exit_range: Some((ExitId::Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1, ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_2)),
+        exit_range: Some((ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1, ExitId::Antarctica__East__Building_2_Entry__ex__Building_2__Entry_1)),
         action_range: None,
     },
     SpotDef {
@@ -4132,7 +4132,7 @@ static SPOT_DEFS: [SpotDef; 2464] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__West_9,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1, ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1)),
+        exit_range: Some((ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1, ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -6821,7 +6821,7 @@ static SPOT_DEFS: [SpotDef; 2464] = [
         id: SpotId::Giguna__Clouds__Platform_Start,
         loc_range: None,
         exit_range: None,
-        action_range: Some((ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early, ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal)),
+        action_range: Some((ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal, ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal)),
     },
     SpotDef {
         id: SpotId::Giguna__Clouds__Platform_Stop,

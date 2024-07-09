@@ -28,9 +28,9 @@ static SPOT_DEFS: [SpotDef; {{ spot_id_list|count + 1}}] = [
 %% for sp in gl.spots()|sort(attribute='id', case_sensitive=True)
     SpotDef {
         id: SpotId::{{ sp.id }},
-        loc_range: {% if sp.loc_ids %}Some((LocationId::{{ sp.loc_ids|min }}, LocationId::{{ sp.loc_ids|max }})){% else %}None{% endif %},
-        exit_range: {% if sp.exit_ids %}Some((ExitId::{{ sp.exit_ids|min }}, ExitId::{{ sp.exit_ids|max }})){% else %}None{% endif %},
-        action_range: {% if sp.action_ids %}Some((ActionId::{{ sp.action_ids|min }}, ActionId::{{ sp.action_ids|max }})){% else %}None{% endif %},
+        loc_range: {% if sp.loc_ids %}Some((LocationId::{{ sp.loc_ids|min(case_sensitive=True) }}, LocationId::{{ sp.loc_ids|max(case_sensitive=True) }})){% else %}None{% endif %},
+        exit_range: {% if sp.exit_ids %}Some((ExitId::{{ sp.exit_ids|min(case_sensitive=True) }}, ExitId::{{ sp.exit_ids|max(case_sensitive=True) }})){% else %}None{% endif %},
+        action_range: {% if sp.action_ids %}Some((ActionId::{{ sp.action_ids|min(case_sensitive=True) }}, ActionId::{{ sp.action_ids|max(case_sensitive=True) }})){% else %}None{% endif %},
     },
 %% endfor
 ];

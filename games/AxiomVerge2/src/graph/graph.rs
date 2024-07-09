@@ -3628,7 +3628,7 @@ lazy_static! {
             end: SpotId::Glacier__Boomerang_Antechamber__West_13.into_usize() + 1,
         },
         AreaId::Glacier__Boomerang_Room => Range {
-            start: SpotId::Glacier__Boomerang_Room__Center_ish.into_usize(),
+            start: SpotId::Glacier__Boomerang_Room__Center_Ledge.into_usize(),
             end: SpotId::Glacier__Boomerang_Room__West.into_usize() + 1,
         },
         AreaId::Glacier__Compass_Room => Range {
