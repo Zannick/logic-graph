@@ -274,8 +274,10 @@ actions:  # MARK: actions
     do: ^portal = ^position
     time: 0.1
     penalties:
-      # TODO: measure portal speed
-      - calc: $spot_distance(^position, ^portal) * 2.0
+      # portal speed: y=3 units in 6s, 2y=3 units in 3s. for .5 and 1.0 units/s
+      # x=~1.25 units in 4.75s, 2x=~1.25 units in 2.4s, so around .26 and .52 units/s
+      # 1y translates to .55x (15/27)
+      - calc: $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * IF (^indra == ^position) { 0.5 } ELSE { 1.0 }
 
 helpers:  # MARK: helpers
   $weapon: Ice_Axe  # this should be expanded for randomizers but probably isn't necessary for the vanilla search
@@ -340,8 +342,9 @@ helpers:  # MARK: helpers
   $melee_cskip: ($weapon and indra_cskip) or ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
-  # TODO: to be tested: does indra affect drone portal attraction when she's inside? or between Kiengir/Emergence?
-  $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
+  # Only allow attract when there's only one target: both at the same place, or Indra doesn't affect it.
+  # Indra doesn't affect attraction when in interior, but does affect it across Kiengir/Emergence
+  $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach' or @^indra^realm == 'interior')
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,

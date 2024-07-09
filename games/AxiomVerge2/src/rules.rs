@@ -23854,7 +23854,15 @@ pub fn observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(
     full_obs.clear_save();
     full_obs.strict = old_strict;
 }
-pub fn num_invoke_spot_distance__position_portal_mul_2_0(ctx: &Context, world: &World) -> f32 {
-    // $spot_distance(^position, ^portal) * 2.0
-    spot_distance(ctx.position(), ctx.portal()) * 2.0
+pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(
+    ctx: &Context,
+    world: &World,
+) -> f32 {
+    // $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * IF (^indra == ^position) { 0.5 } ELSE { 1.0 }
+    diagonal_speed_spots(ctx.position(), ctx.portal(), 0.55, 1.0)
+        * if ctx.indra() == ctx.position() {
+            0.5
+        } else {
+            1.0
+        }
 }

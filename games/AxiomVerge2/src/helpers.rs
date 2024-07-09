@@ -2169,15 +2169,16 @@ macro_rules! hobserve__melee_cskip {
 }
 
 /// $attract (  )
-/// Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach')
+/// Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach' or @^indra^realm == 'interior')
 #[macro_export]
 macro_rules! helper__attract {
     ($ctx:expr, $world:expr) => {{
         ($ctx.has(Item::Breach_Attractor)
-            && (((($ctx.has(Item::Anuman) || $ctx.has(Item::Separation))
+            && ((((($ctx.has(Item::Anuman) || $ctx.has(Item::Separation))
                 || $ctx.mode() != enums::Mode::Drone)
                 || $ctx.indra() == $ctx.position())
-                || data::realm($ctx.position()) == enums::Realm::Breach))
+                || data::realm($ctx.position()) == enums::Realm::Breach)
+                || data::realm($ctx.indra()) == enums::Realm::Interior))
     }};
 }
 #[macro_export]
@@ -2197,17 +2198,37 @@ macro_rules! hexplain__attract {
                         let mut left = {
                             let mut left = {
                                 let mut left = {
-                                    let h = $ctx.has(Item::Anuman);
-                                    $edict.insert("Anuman", format!("{}", h));
-                                    (h, vec!["Anuman"])
+                                    let mut left = {
+                                        let h = $ctx.has(Item::Anuman);
+                                        $edict.insert("Anuman", format!("{}", h));
+                                        (h, vec!["Anuman"])
+                                    };
+                                    if left.0 {
+                                        left
+                                    } else {
+                                        let mut right = {
+                                            let h = $ctx.has(Item::Separation);
+                                            $edict.insert("Separation", format!("{}", h));
+                                            (h, vec!["Separation"])
+                                        };
+                                        left.1.append(&mut right.1);
+                                        (right.0, left.1)
+                                    }
                                 };
                                 if left.0 {
                                     left
                                 } else {
                                     let mut right = {
-                                        let h = $ctx.has(Item::Separation);
-                                        $edict.insert("Separation", format!("{}", h));
-                                        (h, vec!["Separation"])
+                                        let mut refs = vec!["^mode"];
+                                        let mut left = {
+                                            let r = $ctx.mode();
+                                            $edict.insert("^mode", format!("{:?}", r));
+                                            (r, vec!["^mode"])
+                                        };
+                                        let right = enums::Mode::Drone;
+                                        $edict.insert("^mode", format!("{}", left.0));
+                                        refs.append(&mut left.1);
+                                        (left.0 != right, refs)
                                     };
                                     left.1.append(&mut right.1);
                                     (right.0, left.1)
@@ -2217,16 +2238,18 @@ macro_rules! hexplain__attract {
                                 left
                             } else {
                                 let mut right = {
-                                    let mut refs = vec!["^mode"];
                                     let mut left = {
-                                        let r = $ctx.mode();
-                                        $edict.insert("^mode", format!("{:?}", r));
-                                        (r, vec!["^mode"])
+                                        let r = $ctx.indra();
+                                        $edict.insert("^indra", format!("{:?}", r));
+                                        (r, vec!["^indra"])
                                     };
-                                    let right = enums::Mode::Drone;
-                                    $edict.insert("^mode", format!("{}", left.0));
-                                    refs.append(&mut left.1);
-                                    (left.0 != right, refs)
+                                    let mut right = {
+                                        let r = $ctx.position();
+                                        $edict.insert("^position", format!("{:?}", r));
+                                        (r, vec!["^position"])
+                                    };
+                                    left.1.append(&mut right.1);
+                                    (left.0 == right.0, left.1)
                                 };
                                 left.1.append(&mut right.1);
                                 (right.0, left.1)
@@ -2236,18 +2259,16 @@ macro_rules! hexplain__attract {
                             left
                         } else {
                             let mut right = {
+                                let mut refs = vec!["^realm"];
                                 let mut left = {
-                                    let r = $ctx.indra();
-                                    $edict.insert("^indra", format!("{:?}", r));
-                                    (r, vec!["^indra"])
+                                    let r = data::realm($ctx.position());
+                                    $edict.insert("^realm", format!("{:?}", r));
+                                    (r, vec!["^realm"])
                                 };
-                                let mut right = {
-                                    let r = $ctx.position();
-                                    $edict.insert("^position", format!("{:?}", r));
-                                    (r, vec!["^position"])
-                                };
-                                left.1.append(&mut right.1);
-                                (left.0 == right.0, left.1)
+                                let right = enums::Realm::Breach;
+                                $edict.insert("^realm", format!("{}", left.0));
+                                refs.append(&mut left.1);
+                                (left.0 == right, refs)
                             };
                             left.1.append(&mut right.1);
                             (right.0, left.1)
@@ -2257,14 +2278,16 @@ macro_rules! hexplain__attract {
                         left
                     } else {
                         let mut right = {
-                            let mut refs = vec!["^realm"];
+                            let mut refs = vec!["@^indra^realm"];
                             let mut left = {
-                                let r = data::realm($ctx.position());
-                                $edict.insert("^realm", format!("{:?}", r));
-                                (r, vec!["^realm"])
+                                let r = $ctx.indra();
+                                let d = data::realm(r);
+                                $edict.insert("^indra", format!("{:?}", r));
+                                $edict.insert("@^indra^realm", format!("{}", d));
+                                (d, vec!["^indra", "@^indra^realm"])
                             };
-                            let right = enums::Realm::Breach;
-                            $edict.insert("^realm", format!("{}", left.0));
+                            let right = enums::Realm::Interior;
+                            $edict.insert("@^indra^realm", format!("{}", left.0));
                             refs.append(&mut left.1);
                             (left.0 == right, refs)
                         };
@@ -2284,7 +2307,7 @@ macro_rules! hobserve__attract {
         ({
             $full_obs.observe_breach_attractor();
             $ctx.has(Item::Breach_Attractor)
-        } && (((({
+        } && ((((({
             $full_obs.observe_anuman();
             $ctx.has(Item::Anuman)
         } || {
@@ -2309,6 +2332,12 @@ macro_rules! hobserve__attract {
         }) || {
             let v = data::realm($ctx.position());
             v == enums::Realm::Breach
+        }) || {
+            let v = {
+                $full_obs.observe_indra();
+                data::realm($ctx.indra())
+            };
+            v == enums::Realm::Interior
         }))
     }};
 }

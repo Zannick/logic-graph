@@ -350,7 +350,7 @@ impl world::Accessible for Action {
             + match self.id {
                 ActionId::Global__Move_Portal_Here => {
                     if true {
-                        (rules::num_invoke_spot_distance__position_portal_mul_2_0(ctx, world) * 1000.0).ceil() as u32
+                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(ctx, world) * 1000.0).ceil() as u32
                     } else {
                         0
                     }
