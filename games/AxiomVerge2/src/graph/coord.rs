@@ -2497,3 +2497,15 @@ pub fn spot_distance_or_inf(a: SpotId, b: SpotId) -> f32 {
         _ => f32::INFINITY,
     }
 }
+
+pub fn diagonal_speed(a: (f32, f32), b: (f32, f32), x_speed: f32, y_speed: f32) -> f32 {
+    let dx = a.0 - b.0;
+    let dy = a.1 - b.1;
+    let tx = dx / x_speed;
+    let ty = dy / y_speed;
+    (tx.powi(2) + ty.powi(2)).sqrt()
+}
+
+pub fn diagonal_speed_spots(a: SpotId, b: SpotId, x_speed: f32, y_speed: f32) -> f32 {
+    diagonal_speed(coordinate(a).unwrap(), coordinate(b).unwrap(), x_speed, y_speed)
+}

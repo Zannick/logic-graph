@@ -374,17 +374,25 @@ If you simply want to check whether a **reference** is one of several options, a
 
 #### Function invocations
 
-Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** and **rules** defined in `Game.yaml`, and the following built-in functions:
+Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** and **rules** defined in `Game.yaml`, and the following built-in functions (organized by rough category):
 
-* **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
-* **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
-* **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to or comparing against `SpotId::None` which is not otherwise recognized in this grammar.
+* General
+    * **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to or comparing against `SpotId::None` which is not otherwise recognized in this grammar.
+    * **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
+* Items
+    * **add_item**: Type **action**. Adds one of the given **Item** to the context without triggering **collect** rules.
+    * **collect**: Type **action**. Adds one of the given **Item** to the context *and* triggers **collect** rules for that item. *Be careful not to create an infinite loop!*
+    * **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
+* Areas/Regions
+    * **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
+    * **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
+* Locations
+    * **visit**: Type **action**. Accepts one **Location** argument and visits it (without collecting the item). Note that all Locations with the same canonical name are marked visited this way.
+    * **visited**: Type **boolExpr**. Accepts one **Location** argument and returns whether that Location is marked visited. This returns true if any Location with the same canonical name was marked visited.
 <!-- * **all_spot_checks**, **all_area_checks**, **all_region_checks**: Type **boolExpr**. Accepts one **Place** argument that must be a **Spot**, **Area**, or **Region**, respectively, and returns whether all **Locations** in that **Place** have been visited. -->
-* **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
-* **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
-* **visit**: Type **action**. Accepts one **Location** argument and visits it (without collecting the item). Note that all Locations with the same canonical name are marked visited this way.
-* **add_item**: Type **action**. Adds one of the given **Item** to the context without triggering **collect** rules.
-* **collect**: Type **action**. Adds one of the given **Item** to the context *and* triggers **collect** rules for that item. *Be careful not to create an infinite loop!*
+* Coordinates/Distances
+    * **diagonal_speed_spots**: Type **num**. Accepts four arguments: **Spot**, Spot, `x_speed`, `y_speed`, with the latter two being floats in grid units per second. Returns the amount of time it would take to travel between the two spots with the given orthogonal speeds.
+    * **spot_distance**: Type **num**. Accepts two **Spot** arguments and returns the distance between their Cartesian coordinates.
 
 Functions of type **boolExpr**, **action**, or **Place** may accept any one of these argument sets (no mixing and matching):
 * Any number of **Item**s.

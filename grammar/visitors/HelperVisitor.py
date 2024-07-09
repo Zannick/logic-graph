@@ -104,6 +104,8 @@ class HelperVisitor(RulesVisitor):
                 for i, a in enumerate(args):
                     args[i] = a._replace(type=t)
 
+    visitFuncNum = visitInvoke
+
     def visitItemList(self, ctx):
         for func in ctx.FUNC():
             func = str(func)

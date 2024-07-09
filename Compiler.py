@@ -703,21 +703,26 @@ class GameLogic(object):
     def process_parsed_code(self):
         # Check settings
         def _visit(visitor, reverse=False):
-            if not reverse:
+            def _do_non_points():
                 for info in self.helpers.values():
                     visitor.visit(info['pr'].tree, info['pr'].name, self.get_default_ctx(), dict(info['args']))
                 for pr in self.nonpoint_parse_results():
                     visitor.visit(pr.tree, pr.name, self.get_default_ctx())
+            if not reverse:
+                _do_non_points()
             for pt in self.all_points():
                 if 'pr' in pt:
                     visitor.visit(pt['pr'].tree, pt['pr'].name, self.get_local_ctx(pt))
                 if 'act' in pt:
                     visitor.visit(pt['act'].tree, pt['act'].name, self.get_local_ctx(pt))
+                if penalties := pt.get('penalties'):
+                    for pen in penalties:
+                        if 'pr' in pen:
+                            visitor.visit(pen['pr'].tree, pen['pr'].name, self.get_local_ctx(pt))
+                        if 'cpr' in pen:
+                            visitor.visit(pen['cpr'].tree, pen['cpr'].name, self.get_local_ctx(pt))
             if reverse:
-                for info in self.helpers.values():
-                    visitor.visit(info['pr'].tree, info['pr'].name, self.get_default_ctx(), dict(info['args']))
-                for pr in self.nonpoint_parse_results():
-                    visitor.visit(pr.tree, pr.name, self.get_default_ctx())
+                _do_non_points()
             self._errors.extend(visitor.errors)
 
         sv = SettingVisitor(self.context_types, self.settings)
@@ -1314,8 +1319,15 @@ class GameLogic(object):
         yield from (info['pr'] for rule in self.rules.values() for info in rule.variants.values())
         yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
-        yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
-        yield from (info['pr'] for info in self.global_actions if 'pr' in info)
+        for info in itertools.chain(self.warps.values(), self.global_actions):
+            if 'pr' in info:
+                yield info['pr']
+            if penalties := info.get('penalties'):
+                for pen in penalties:
+                    if 'pr' in pen:
+                        yield pen['pr']
+                    if 'cpr' in pen:
+                        yield pen['cpr']
         yield from (info['act'] for info in self.global_actions)
         yield from (info['act_pre'] for info in self.warps.values() if 'act_pre' in info)
         yield from (info['act_post'] for info in self.warps.values() if 'act_post' in info)
@@ -1329,6 +1341,13 @@ class GameLogic(object):
                 yield pt['pr']
             if 'act' in pt:
                 yield pt['act']
+
+            if penalties := pt.get('penalties'):
+                for pen in penalties:
+                    if 'pr' in pen:
+                        yield pen['pr']
+                    if 'cpr' in pen:
+                        yield pen['cpr']
 
 
     @cached_property
