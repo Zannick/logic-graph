@@ -4216,7 +4216,7 @@ impl world::World for World {
             Item::Becoming_An_Arm => vec![LocationId::Uhrum__Artillery_Practice__Tunnel_Entrance__Tablet],
             Item::Uhrum_Rocky_Gate_Rock => vec![LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall],
             Item::Uhrum_Emergence_Wall => vec![LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall, LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall, LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall, LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist, LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade, LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist, LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade, LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist, LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade, LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall, LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall],
-            Item::Re__Does_Technology => vec![LocationId::Uhrum__Rocky_Gate__East_Ledge__Note],
+            Item::Re_Does_Technology => vec![LocationId::Uhrum__Rocky_Gate__East_Ledge__Note],
             _ => Vec::new(),
         }
     }
@@ -4534,9 +4534,9 @@ impl world::World for World {
                                 map.insert(Item::Power_Matrix, 4 - ctx.count(Item::Power_Matrix));
                             }
                         }
-                        if !ctx.has(Item::Re__Does_Technology) {
-                            if !map.contains_key(&Item::Re__Does_Technology) {
-                                map.insert(Item::Re__Does_Technology, 1);
+                        if !ctx.has(Item::Re_Does_Technology) {
+                            if !map.contains_key(&Item::Re_Does_Technology) {
+                                map.insert(Item::Re_Does_Technology, 1);
                             }
                         }
                         if !ctx.has(Item::Record_Losses) {
@@ -4974,9 +4974,9 @@ impl world::World for World {
                                 map.insert(Item::Power_Matrix, 4 - ctx.count(Item::Power_Matrix));
                             }
                         }
-                        if !ctx.has(Item::Re__Does_Technology) {
-                            if !map.contains_key(&Item::Re__Does_Technology) {
-                                map.insert(Item::Re__Does_Technology, 1);
+                        if !ctx.has(Item::Re_Does_Technology) {
+                            if !map.contains_key(&Item::Re_Does_Technology) {
+                                map.insert(Item::Re_Does_Technology, 1);
                             }
                         }
                         if !ctx.has(Item::Record_Losses) {
@@ -5335,8 +5335,8 @@ impl world::World for World {
                         } else {
                             map.insert(Item::Power_Matrix, 4);
                         }
-                        if !map.contains_key(&Item::Re__Does_Technology) {
-                            map.insert(Item::Re__Does_Technology, 1);
+                        if !map.contains_key(&Item::Re_Does_Technology) {
+                            map.insert(Item::Re_Does_Technology, 1);
                         }
                         if !map.contains_key(&Item::Record_Losses) {
                             map.insert(Item::Record_Losses, 1);
@@ -5607,8 +5607,8 @@ impl world::World for World {
                         } else {
                             map.insert(Item::Power_Matrix, 4);
                         }
-                        if !map.contains_key(&Item::Re__Does_Technology) {
-                            map.insert(Item::Re__Does_Technology, 1);
+                        if !map.contains_key(&Item::Re_Does_Technology) {
+                            map.insert(Item::Re_Does_Technology, 1);
                         }
                         if !map.contains_key(&Item::Record_Losses) {
                             map.insert(Item::Record_Losses, 1);
@@ -10910,31 +10910,31 @@ impl World {
             RuleVictory::Default => {
                 match self.rule_objective {
                     RuleObjective::Any => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re__Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re__Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                 }
             }
             RuleVictory::JustObjective => {
                 match self.rule_objective {
                     RuleObjective::Any => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re__Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
                         matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
                     }
                     RuleObjective::AllUrns => {
-                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re__Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                        matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                 }
             }
             RuleVictory::Bench => {
-                matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re__Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
+                matches!(item, Item::Aansur | Item::Amagi_Stronghold_Left_Wall | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
             }
         }
     }
@@ -10987,7 +10987,7 @@ impl World {
                         iset.insert(Item::Plague_of_Thoughts);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Re__Does_Technology);
+                        iset.insert(Item::Re_Does_Technology);
                         iset.insert(Item::Record_Losses);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
@@ -11063,7 +11063,7 @@ impl World {
                         iset.insert(Item::Plague_of_Thoughts);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Re__Does_Technology);
+                        iset.insert(Item::Re_Does_Technology);
                         iset.insert(Item::Record_Losses);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
@@ -11130,7 +11130,7 @@ impl World {
                         iset.insert(Item::Plague_of_Thoughts);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Re__Does_Technology);
+                        iset.insert(Item::Re_Does_Technology);
                         iset.insert(Item::Record_Losses);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
@@ -11208,7 +11208,7 @@ impl World {
                         iset.insert(Item::Plague_of_Thoughts);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Re__Does_Technology);
+                        iset.insert(Item::Re_Does_Technology);
                         iset.insert(Item::Record_Losses);
                         iset.insert(Item::Researchers_Missing);
                         iset.insert(Item::Royal_Dagger);
@@ -11273,7 +11273,7 @@ impl World {
                 set.insert(Item::Plague_of_Thoughts);
                 set.insert(Item::Ranged_Damage_3);
                 set.insert(Item::Ranged_Speed_3);
-                set.insert(Item::Re__Does_Technology);
+                set.insert(Item::Re_Does_Technology);
                 set.insert(Item::Record_Losses);
                 set.insert(Item::Researchers_Missing);
                 set.insert(Item::Royal_Dagger);

@@ -312,7 +312,7 @@ pub enum Expectation {
     RangedDamage2(bool),
     RangedSpeed(bool),
     RangedSpeed2(bool),
-    Re_DoesTechnology(bool),
+    ReDoesTechnology(bool),
     RecordLosses(bool),
     RemoteBoomerang(bool),
     RemoteDrone(bool),
@@ -3696,7 +3696,7 @@ bitflags!{
         const RANGED_DAMAGE_2 = 0x40;
         const RANGED_SPEED = 0x80;
         const RANGED_SPEED_2 = 0x100;
-        const RE__DOES_TECHNOLOGY = 0x200;
+        const RE_DOES_TECHNOLOGY = 0x200;
         const RECORD_LOSSES = 0x400;
         const REMOTE_BOOMERANG = 0x800;
         const REMOTE_DRONE = 0x1000;
@@ -4221,7 +4221,7 @@ impl context::Ctx for Context {
             Item::Ranged_Damage_2 => self.cbits4.contains(flags::ContextBits4::RANGED_DAMAGE_2),
             Item::Ranged_Speed => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED),
             Item::Ranged_Speed_2 => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED_2),
-            Item::Re__Does_Technology => self.cbits4.contains(flags::ContextBits4::RE__DOES_TECHNOLOGY),
+            Item::Re_Does_Technology => self.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY),
             Item::Record_Losses => self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES),
             Item::Remote_Boomerang => self.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG),
             Item::Remote_Drone => self.cbits4.contains(flags::ContextBits4::REMOTE_DRONE),
@@ -4387,7 +4387,7 @@ impl context::Ctx for Context {
             Item::Ranged_Damage_2 => self.cbits4.contains(flags::ContextBits4::RANGED_DAMAGE_2).into(),
             Item::Ranged_Speed => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED).into(),
             Item::Ranged_Speed_2 => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED_2).into(),
-            Item::Re__Does_Technology => self.cbits4.contains(flags::ContextBits4::RE__DOES_TECHNOLOGY).into(),
+            Item::Re_Does_Technology => self.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY).into(),
             Item::Record_Losses => self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES).into(),
             Item::Remote_Boomerang => self.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG).into(),
             Item::Remote_Drone => self.cbits4.contains(flags::ContextBits4::REMOTE_DRONE).into(),
@@ -4809,8 +4809,8 @@ impl context::Ctx for Context {
             Item::Ranged_Speed_2 => {
                 self.cbits4.insert(flags::ContextBits4::RANGED_SPEED_2);
             }
-            Item::Re__Does_Technology => {
-                self.cbits4.insert(flags::ContextBits4::RE__DOES_TECHNOLOGY);
+            Item::Re_Does_Technology => {
+                self.cbits4.insert(flags::ContextBits4::RE_DOES_TECHNOLOGY);
             }
             Item::Record_Losses => {
                 self.cbits4.insert(flags::ContextBits4::RECORD_LOSSES);
@@ -5305,8 +5305,8 @@ impl context::Ctx for Context {
             Item::Ranged_Speed_2 => {
                 self.cbits4.insert(flags::ContextBits4::RANGED_SPEED_2);
             }
-            Item::Re__Does_Technology => {
-                self.cbits4.insert(flags::ContextBits4::RE__DOES_TECHNOLOGY);
+            Item::Re_Does_Technology => {
+                self.cbits4.insert(flags::ContextBits4::RE_DOES_TECHNOLOGY);
             }
             Item::Record_Losses => {
                 self.cbits4.insert(flags::ContextBits4::RECORD_LOSSES);
@@ -6173,9 +6173,9 @@ impl context::Ctx for Context {
             ("Ranged_Speed_2", Yaml::Boolean(b)) => Expectation::RangedSpeed2(*b),
             ("Ranged_Speed_2", Yaml::Integer(i)) => Expectation::RangedSpeed2(*i > 0),
             ("Ranged_Speed_2", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
-            ("Re__Does_Technology", Yaml::Boolean(b)) => Expectation::Re_DoesTechnology(*b),
-            ("Re__Does_Technology", Yaml::Integer(i)) => Expectation::Re_DoesTechnology(*i > 0),
-            ("Re__Does_Technology", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("Re_Does_Technology", Yaml::Boolean(b)) => Expectation::ReDoesTechnology(*b),
+            ("Re_Does_Technology", Yaml::Integer(i)) => Expectation::ReDoesTechnology(*i > 0),
+            ("Re_Does_Technology", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("Record_Losses", Yaml::Boolean(b)) => Expectation::RecordLosses(*b),
             ("Record_Losses", Yaml::Integer(i)) => Expectation::RecordLosses(*i > 0),
             ("Record_Losses", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
@@ -7600,10 +7600,10 @@ impl context::Ctx for Context {
                     errs.push(format!("Expected {} = {}, got: {}", "Ranged_Speed_2", e, v));
                 }
             }
-            Expectation::Re_DoesTechnology(e) => {
-                let v = self.has(Item::Re__Does_Technology);
+            Expectation::ReDoesTechnology(e) => {
+                let v = self.has(Item::Re_Does_Technology);
                 if v != *e {
-                    errs.push(format!("Expected {} = {}, got: {}", "Re__Does_Technology", e, v));
+                    errs.push(format!("Expected {} = {}, got: {}", "Re_Does_Technology", e, v));
                 }
             }
             Expectation::RecordLosses(e) => {
@@ -15627,10 +15627,10 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}RANGED_SPEED_2", if n { "+" } else { "-" }));
         }
-        let n = self.cbits4.contains(flags::ContextBits4::RE__DOES_TECHNOLOGY);
-        let p = old.cbits4.contains(flags::ContextBits4::RE__DOES_TECHNOLOGY);
+        let n = self.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY);
+        let p = old.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY);
         if n != p {
-            list.push(format!("{}RE__DOES_TECHNOLOGY", if n { "+" } else { "-" }));
+            list.push(format!("{}RE_DOES_TECHNOLOGY", if n { "+" } else { "-" }));
         }
         let n = self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES);
         let p = old.cbits4.contains(flags::ContextBits4::RECORD_LOSSES);

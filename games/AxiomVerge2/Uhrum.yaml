@@ -2065,7 +2065,7 @@ areas:
         - to: East
       locations:
         - name: Note
-          item: Re__Does_Technology
+          item: Re_Does_Technology
           tags: [standing]
       exits:
         - to: Rocky Guardpost > Lower Step

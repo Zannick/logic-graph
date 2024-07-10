@@ -353,7 +353,7 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,
-     Bounty_List, Submarine_Progress, Becoming_An_Arm, Re__Does_Technology]
+     Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology]
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >

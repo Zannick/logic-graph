@@ -5973,7 +5973,7 @@ static LOC_DEFS: [Location; 549] = [
     Location {
         id: LocationId::Uhrum__Rocky_Gate__East_Ledge__Note,
         canonical: CanonId::Loc_Uhrum__Rocky_Gate__East_Ledge__Note,
-        item: Item::Re__Does_Technology,
+        item: Item::Re_Does_Technology,
         price: Currency::Free,
         time: 0,
         dest: SpotId::None,

@@ -3570,11 +3570,11 @@ impl FullObservation {
     pub fn clear_ranged_speed_2(&mut self) {
         self.cbits4.remove(flags::ContextBits4::RANGED_SPEED_2);
     }
-    pub fn observe_re__does_technology(&mut self) {
-        self.cbits4.insert(flags::ContextBits4::RE__DOES_TECHNOLOGY);
+    pub fn observe_re_does_technology(&mut self) {
+        self.cbits4.insert(flags::ContextBits4::RE_DOES_TECHNOLOGY);
     }
-    pub fn clear_re__does_technology(&mut self) {
-        self.cbits4.remove(flags::ContextBits4::RE__DOES_TECHNOLOGY);
+    pub fn clear_re_does_technology(&mut self) {
+        self.cbits4.remove(flags::ContextBits4::RE_DOES_TECHNOLOGY);
     }
     pub fn observe_record_losses(&mut self) {
         self.cbits4.insert(flags::ContextBits4::RECORD_LOSSES);

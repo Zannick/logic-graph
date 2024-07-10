@@ -2343,7 +2343,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re__Does_Technology]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2378,7 +2378,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Bounty_List)
             && $ctx.has(Item::Submarine_Progress)
             && $ctx.has(Item::Becoming_An_Arm)
-            && $ctx.has(Item::Re__Does_Technology)
+            && $ctx.has(Item::Re_Does_Technology)
     }};
 }
 #[macro_export]
@@ -2666,9 +2666,9 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Re__Does_Technology);
-                $edict.insert("Re__Does_Technology", format!("{}", h));
-                (h, vec!["Re__Does_Technology"])
+                let h = $ctx.has(Item::Re_Does_Technology);
+                $edict.insert("Re_Does_Technology", format!("{}", h));
+                (h, vec!["Re_Does_Technology"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2772,8 +2772,8 @@ macro_rules! hobserve__all_notes {
             $full_obs.observe_becoming_an_arm();
             $ctx.has(Item::Becoming_An_Arm)
         }) && ({
-            $full_obs.observe_re__does_technology();
-            $ctx.has(Item::Re__Does_Technology)
+            $full_obs.observe_re_does_technology();
+            $ctx.has(Item::Re_Does_Technology)
         })
     }};
 }
