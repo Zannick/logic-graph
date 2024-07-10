@@ -1761,11 +1761,13 @@ areas:
     save: [14, 5, 15, 6]
     flask: [15, 5, 16, 6]
     portal: [15, 6, 16, 7]
+    sw: [14, 6, 15, 7]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Giguna Ruins Top
       flask: Menu > Kiengir Map > Giguna Ruins Top Flask
       portal: Menu > Kiengir Map > Giguna Ruins Top Portal
+      sw: Menu > Kiengir Map > Giguna Ruins Top SW
   start:
     _doors_open: false
   spots:
@@ -2248,8 +2250,27 @@ areas:
         flipside: Giguna Breach > Pink Clouds > Corner
       locations:
         - name: Item
+          canon: Giguna_Clouds_Flask
           item: Big_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Clouds_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Clouds_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+        - name: Shockwave Flask
+          canon: Giguna_Clouds_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
     - name: Platform Early Portal
       coord: [12.5, 18.85]
       data:
@@ -3027,13 +3048,31 @@ areas:
           movement: base
     - name: Hidden Passage Center
       coord: [20.0, 15.05]
-      local:
-        - to: Hidden Passage West
-        - to: Hidden Passage East
       locations:
         - name: Hidden Flask
+          canon: Giguna_East_Ruins_Flask
           item: Flask
+          req: ^mode == 'drone'
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_East_Ruins_Flask
+          item: Flask
+          req: ^mode == 'drone'
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_East_Ruins_Flask
+          item: Flask
+          req: ^mode == 'drone' and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Hidden Passage West
+          req: ^mode == 'drone'
+          movement: base
+        - to: Hidden Passage East
+          req: ^mode == 'drone'
+          movement: base
     - name: Hidden Passage West
       coord: [19.75, 15.05]
       local:

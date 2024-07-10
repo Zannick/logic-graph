@@ -2698,7 +2698,10 @@
             Menu__Kiengir_Map__Ebih_Base_Camp_Health [label = "", pos = "87.0,-18.333333!"];
             Menu__Kiengir_Map__Ebih_By_Garage_Health [label = "", pos = "81.0,-20.0!"];
             Menu__Kiengir_Map__Ebih_Garage [label = "", pos = "81.0,-21.666667!"];
+            Menu__Kiengir_Map__Ebih_By_Garage_NW [label = "", pos = "78.0,-20.0!"];
             Menu__Kiengir_Map__Ebih_East_Waterfall_Flask [label = "", pos = "75.0,-16.666667!"];
+            Menu__Kiengir_Map__Ebih_East_Waterfall_Door [label = "", pos = "75.0,-18.333333!"];
+            Menu__Kiengir_Map__Ebih_East_Waterfall_Bottom [label = "", pos = "75.0,-20.0!"];
             Menu__Kiengir_Map__Ebih_Waterfall_Cave [label = "", pos = "66.0,-15.0!"];
             Menu__Kiengir_Map__Ebih_Waterfall_West_9 [label = "", pos = "63.0,-15.0!"];
             Menu__Kiengir_Map__Heretics_Tablet [label = "", pos = "57.0,-16.666667!"];
@@ -2746,6 +2749,7 @@
             Menu__Kiengir_Map__Aansur [label = "", pos = "45.0,-13.333333!"];
             Menu__Kiengir_Map__Giguna_Ruins_Top_Flask [label = "", pos = "45.0,-10.0!"];
             Menu__Kiengir_Map__Giguna_Ruins_Top_Portal [label = "", pos = "45.0,-11.666667!"];
+            Menu__Kiengir_Map__Giguna_Ruins_Top_SW [label = "", pos = "42.0,-11.666667!"];
             Menu__Kiengir_Map__The_Ideal_Kiengir [label = "", pos = "36.0,-13.333333!"];
             Menu__Kiengir_Map__Giguna_Far_Corner [label = "", pos = "33.0,-21.666667!"];
             Menu__Kiengir_Map__Journal_10_29_2049 [label = "", pos = "33.0,-28.333333!"];
@@ -2782,6 +2786,7 @@
             Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall [label = "", pos = "78.0,-36.666667!"];
             Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask [label = "", pos = "81.0,-38.333333!"];
             Menu__Kiengir_Map__Does_Technology [label = "", pos = "78.0,-38.333333!"];
+            Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs [label = "", pos = "90.0,-43.333333!"];
         }
     }
     {

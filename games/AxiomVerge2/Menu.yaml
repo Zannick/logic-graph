@@ -680,8 +680,14 @@ areas:
       coord: [27, 12]
     - name: Ebih Garage
       coord: [27, 13]
+    - name: Ebih By Garage NW
+      coord: [26, 12]
     - name: Ebih East Waterfall Flask
       coord: [25, 10]
+    - name: Ebih East Waterfall Door
+      coord: [25, 11]
+    - name: Ebih East Waterfall Bottom
+      coord: [25, 12]
     - name: Ebih Waterfall Cave
       coord: [22, 9]
     - name: Ebih Waterfall West 9
@@ -778,6 +784,8 @@ areas:
       coord: [15, 6]
     - name: Giguna Ruins Top Portal
       coord: [15, 7]
+    - name: Giguna Ruins Top SW
+      coord: [14, 7]
     - name: The Ideal Kiengir
       coord: [12, 8]
     - name: Giguna Far Corner
@@ -851,6 +859,8 @@ areas:
       coord: [27, 23]
     - name: Does Technology
       coord: [26, 23]
+    - name: Uhrum Annuna Corridor Udugs
+      coord: [30, 26]
     #endregion
 
 - name: Emergence Map  # MARK: Emergence Map

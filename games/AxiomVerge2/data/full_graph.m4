@@ -692,10 +692,14 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Mid_Save;
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Mid_Save;
     Ebih__Ebih_West__East_7 -> Ebih__Waterfall__West_7;
+    Ebih__Ebih_West__Upper_Save -> Ebih__West_Face__Lower_Ledge;
+    Ebih__Ebih_West__Medium_High_Platform -> Ebih__West_Face__Lower_Ledge;
     Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__High_Ledge;
     Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__High_Ledge;
     Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__Highest_Platform;
     Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__Mid_air_near_Flask;
+    Ebih__Ebih_West__High_Platform -> Ebih__West_Face__Lower_Ledge;
+    Ebih__Ebih_West__High_Platform -> Ebih__West_Face__Lower_Ledge;
     Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__Highest_Platform;
     Ebih__Ebih_West__East_6 -> Ebih__Hidden_Portal__West_6;
     Ebih__Ebih_West__Highest_Platform -> Giguna__Giguna_Northeast__Inner_Wall;
@@ -1324,6 +1328,8 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__Mid_Susar -> Giguna__East_Caverns__Middle_Rock;
     Giguna__East_Caverns__Middle_Rock -> Giguna__East_Caverns__Hidden_Passage_East;
     Giguna__East_Caverns__Hidden_Passage_East -> Giguna__East_Caverns__Hidden_Passage_Center;
+    Giguna__East_Caverns__Hidden_Passage_Center -> Giguna__East_Caverns__Hidden_Passage_East;
+    Giguna__East_Caverns__Hidden_Passage_Center -> Giguna__East_Caverns__Hidden_Passage_West;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Hidden_Passage_Center;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Statues_Ledge;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Statues_Ledge;
@@ -5149,8 +5155,6 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__Middle_Rock -> Giguna__East_Caverns__Arc_Passage;
     Giguna__East_Caverns__Hidden_Passage_East -> Giguna__East_Caverns__Carving;
     Giguna__East_Caverns__Hidden_Passage_East -> Giguna__East_Caverns__Arc_Passage;
-    Giguna__East_Caverns__Hidden_Passage_Center -> Giguna__East_Caverns__Hidden_Passage_East;
-    Giguna__East_Caverns__Hidden_Passage_Center -> Giguna__East_Caverns__Hidden_Passage_West;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Arc_Ledge;
     Giguna__East_Caverns__Hidden_Passage_West -> Giguna__East_Caverns__Lower_Ledge;
     Giguna__East_Caverns__Midwest_Ledge -> Giguna__East_Caverns__Middle_Ledge;

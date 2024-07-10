@@ -98,8 +98,20 @@ areas:
       coord: [10.05, 22.2]
       locations:
         - name: Item
+          canon: IB_Gauntlet_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: IB_Gauntlet_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: IB_Gauntlet_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: Hidden Path Top Ledge
           req: $hook

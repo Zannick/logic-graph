@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2485] = [
+static SPOT_DEFS: [SpotDef; 2490] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -4012,7 +4012,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__High_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1, ExitId::Ebih__Ebih_West__High_Platform__ex__Mid_air_near_Flask_1)),
+        exit_range: Some((ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1, ExitId::Ebih__Ebih_West__High_Platform__ex__West_Face__Lower_Ledge_2)),
         action_range: None,
     },
     SpotDef {
@@ -4060,7 +4060,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Medium_High_Platform,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih__Ebih_West__Medium_High_Platform__ex__West_Face__Lower_Ledge_1, ExitId::Ebih__Ebih_West__Medium_High_Platform__ex__West_Face__Lower_Ledge_1)),
         action_range: Some((ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long, ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long)),
     },
     SpotDef {
@@ -4108,7 +4108,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Upper_Save,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih__Ebih_West__Upper_Save__ex__West_Face__Lower_Ledge_1, ExitId::Ebih__Ebih_West__Upper_Save__ex__West_Face__Lower_Ledge_1)),
         action_range: Some((ActionId::Ebih__Ebih_West__Upper_Save__Save, ActionId::Ebih__Ebih_West__Upper_Save__Save)),
     },
     SpotDef {
@@ -6783,7 +6783,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Giguna__Clouds__Cache,
-        loc_range: Some((LocationId::Giguna__Clouds__Cache__Item, LocationId::Giguna__Clouds__Cache__Item)),
+        loc_range: Some((LocationId::Giguna__Clouds__Cache__Flask_Collection_Skip, LocationId::Giguna__Clouds__Cache__Shockwave_Flask)),
         exit_range: None,
         action_range: None,
     },
@@ -7035,8 +7035,8 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-        loc_range: Some((LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask, LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask)),
-        exit_range: None,
+        loc_range: Some((LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Flask_Collection_Skip, LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Hidden_Passage_Center__ex__Hidden_Passage_East_1, ExitId::Giguna__East_Caverns__Hidden_Passage_Center__ex__Hidden_Passage_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -11049,7 +11049,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
-        loc_range: Some((LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item, LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)),
+        loc_range: Some((LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip, LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)),
         exit_range: Some((ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1, ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1)),
         action_range: None,
     },
@@ -12992,6 +12992,12 @@ static SPOT_DEFS: [SpotDef; 2485] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Ebih_By_Garage_NW,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Ebih_Drone_Pit_Flask,
         loc_range: None,
         exit_range: None,
@@ -12999,6 +13005,18 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Ebih_East_Health,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Bottom,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Door,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -13305,6 +13323,12 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_SW,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -13623,6 +13647,12 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Udusan,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14559,7 +14589,7 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     },
     SpotDef {
         id: SpotId::Uhrum__Waterfalls__Ceiling_Cache,
-        loc_range: Some((LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask, LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask)),
+        loc_range: Some((LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask, LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel)),
         exit_range: Some((ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1, ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1)),
         action_range: None,
     },

@@ -2627,7 +2627,10 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
         Menu__Kiengir_Map__Ebih_By_Garage_Health(Ebih By Garage Health);
         Menu__Kiengir_Map__Ebih_Garage(Ebih Garage);
+        Menu__Kiengir_Map__Ebih_By_Garage_NW(Ebih By Garage NW);
         Menu__Kiengir_Map__Ebih_East_Waterfall_Flask(Ebih East Waterfall Flask);
+        Menu__Kiengir_Map__Ebih_East_Waterfall_Door(Ebih East Waterfall Door);
+        Menu__Kiengir_Map__Ebih_East_Waterfall_Bottom(Ebih East Waterfall Bottom);
         Menu__Kiengir_Map__Ebih_Waterfall_Cave(Ebih Waterfall Cave);
         Menu__Kiengir_Map__Ebih_Waterfall_West_9(Ebih Waterfall West 9);
         Menu__Kiengir_Map__Heretics_Tablet(Heretic's Tablet);
@@ -2675,6 +2678,7 @@ subgraph Menu
         Menu__Kiengir_Map__Aansur(A'ansur);
         Menu__Kiengir_Map__Giguna_Ruins_Top_Flask(Giguna Ruins Top Flask);
         Menu__Kiengir_Map__Giguna_Ruins_Top_Portal(Giguna Ruins Top Portal);
+        Menu__Kiengir_Map__Giguna_Ruins_Top_SW(Giguna Ruins Top SW);
         Menu__Kiengir_Map__The_Ideal_Kiengir(The Ideal Kiengir);
         Menu__Kiengir_Map__Giguna_Far_Corner(Giguna Far Corner);
         Menu__Kiengir_Map__Journal_10_29_2049(Journal 10/29/2049);
@@ -2711,6 +2715,7 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall(Uhrum Emergence Facility Wall);
         Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask(Uhrum Rocky Guardpost Flask);
         Menu__Kiengir_Map__Does_Technology(Does Technology);
+        Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs(Uhrum Annuna Corridor Udugs);
     end
     subgraph Menu__Emergence_Map[Emergence Map]
         Menu__Emergence_Map__Camp(Camp);
@@ -3523,15 +3528,18 @@ Ebih__Ebih_West__High_Ledge <--> Ebih__Ebih_West__Highest_Platform
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__High_Ledge
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__Highest_Platform
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__Mid_air_near_Flask
+Ebih__Ebih_West__High_Platform --> Ebih__West_Face__Lower_Ledge
 Ebih__Ebih_West__Highest_Platform --> Ebih__West_Face__Lower_Ledge
 Ebih__Ebih_West__Highest_Platform --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__Left_of_Gap <--> Ebih__Ebih_West__Small_Gap
 Ebih__Ebih_West__Lower_Hill --> Ebih__Ebih_West__Left_of_Gap
 Ebih__Ebih_West__Lower_Platform --> Ebih__Ebih_West__Lower_Cliff
+Ebih__Ebih_West__Medium_High_Platform --> Ebih__West_Face__Lower_Ledge
 Ebih__Ebih_West__Mid_air_near_Flask --> Ebih__Ebih_West__Highest_Platform
 Ebih__Ebih_West__Mid_air_near_Flask --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
+Ebih__Ebih_West__Upper_Save --> Ebih__West_Face__Lower_Ledge
 Ebih__Ebih_West__West_11 <--> Giguna__Giguna_Northeast__East_11
 Ebih__Ebih_West__West_12 --> Ebih__Ebih_West__West_Fork
 Ebih__Ebih_West__West_12 <--> Giguna__Wasteland__East_12
@@ -3929,8 +3937,8 @@ Giguna__East_Caverns__East_17 --> Giguna__Vertical_Interchange__West_17
 Giguna__East_Caverns__East_Grass --> Giguna__East_Caverns__East_17
 Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__East_Shaft
 Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__Middle_Rock
-Giguna__East_Caverns__Hidden_Passage_East --> Giguna__East_Caverns__Hidden_Passage_Center
-Giguna__East_Caverns__Hidden_Passage_West --> Giguna__East_Caverns__Hidden_Passage_Center
+Giguna__East_Caverns__Hidden_Passage_Center <--> Giguna__East_Caverns__Hidden_Passage_East
+Giguna__East_Caverns__Hidden_Passage_Center <--> Giguna__East_Caverns__Hidden_Passage_West
 Giguna__East_Caverns__Hidden_Passage_West <--> Giguna__East_Caverns__Statues_Ledge
 Giguna__East_Caverns__Lower_Ledge --> Giguna__East_Caverns__Arc_Ledge
 Giguna__East_Caverns__Lower_Susar --> Giguna__East_Caverns__East_Grass

@@ -894,11 +894,26 @@ areas:
       coord: [26.8, 23.15]
       locations:
         - name: Flask
+          canon: Uhrum_Waterfalls_Flask
           item: Flask
+          req: ^mode == 'drone'
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Waterfalls_Flask
+          item: Flask
+          req: ^mode == 'drone'
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Waterfalls_Flask
+          item: Flask
+          req: ^mode == 'drone' and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: Ceiling Opening
           req: ^mode == 'drone'
+          movement: base
     - name: Northeast Ledge
       coord: [27.4, 23.7]
       local:
@@ -1443,6 +1458,7 @@ areas:
     urn: [29, 24, 30, 25]
     tablet: [30, 24, 31, 25]
     flask: [31, 24, 32, 25]
+    throw: [30, 25, 31, 26]
   data:
     save_point: Save Point
   datamap:
@@ -1451,6 +1467,7 @@ areas:
       urn: Menu > Kiengir Map > Anuman
       tablet: Menu > Kiengir Map > Plague of Thoughts
       flask: Menu > Kiengir Map > Uhrum Annuna Flask
+      throw: Menu > Kiengir Map > Uhrum Annuna Corridor Udugs
   spots:
     - name: West 25
       coord: [28.05, 24.75]

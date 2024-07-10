@@ -210,10 +210,12 @@ areas:
   map:
     health: [27, 11, 28, 12]
     garage: [27, 12, 28, 13]
+    wbush: [26, 11, 27, 12]
   datamap:
     map_spot:
       health: Menu > Kiengir Map > Ebih By Garage Health
       garage: Menu > Kiengir Map > Ebih Garage
+      wbush: Menu > Kiengir Map > Ebih By Garage NW
   spots:
     - name: East 13
       coord: [27.95, 12.55]
@@ -423,9 +425,13 @@ areas:
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [25, 9, 26, 10]
+    door: [25, 10, 26, 11]
+    bottom: [25, 11, 26, 12]
   datamap:
     map_spot:
       flask: Menu > Kiengir Map > Ebih East Waterfall Flask
+      door: Menu > Kiengir Map > Ebih East Waterfall Door
+      bottom: Menu > Kiengir Map > Ebih East Waterfall Bottom
   start:
     _door_open: false
   spots:
@@ -1343,6 +1349,11 @@ areas:
         - to: Middle Cliff
         - to: Alcove Entrance
         - to: Above Alcove
+      exits:
+        - to: West Face > Lower Ledge
+          req: $mist2
+          movement: mist2
+          penalty_tags: [yshift, -mist2.2]
       actions:
         - name: Save
           do: $save
@@ -1356,6 +1367,11 @@ areas:
           jumps: 2
         - to: Alcove Entrance
         - to: Above Alcove
+      exits:
+        - to: West Face > Lower Ledge
+          req: $mist2
+          movement: mist2
+          penalty_tags: [yshift, -mist2.2]
       actions:
         - name: Throw Drone Long
           req: $can_deploy
@@ -1386,6 +1402,14 @@ areas:
         - to: Highest Platform
           req: $mist2
           movement: mist2
+        - to: West Face > Lower Ledge
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [yshift, -mist1.2]
+        - to: West Face > Lower Ledge
+          req: $mist2
+          movement: mist2
+          penalty_tags: [yshift, -mist2.2]
     - name: High Ledge
       coord: [20.55, 5.8]
       local:
@@ -1430,6 +1454,18 @@ areas:
           req: $shockwave
           price: 100
           tags: [shockwave]
+        - name: Flask Collection Skip
+          canon: Ebih_West_Flask
+          item: Flask
+          to: Menu > Warp Only > Kiengir
+          req: $melee_cskip
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_West_Flask
+          item: Flask
+          to: ^map_spot
+          req: $melee_cskip and Fast_Travel
+          tags: [cskip]
       exits:
         - to: High Ledge
           req: $hover
@@ -1445,19 +1481,6 @@ areas:
           req: $mist2
           movement: mist2
           penalty_tags: [yshift, -mist2.2]
-      hybrid:
-        - name: Flask Collection Skip
-          canon: Ebih_West_Flask
-          item: Flask
-          to: Menu > Warp Only > Kiengir
-          req: $melee_cskip
-          tags: [cskip]
-        - name: Flask Fast Travel
-          canon: Ebih_West_Flask
-          item: Flask
-          to: ^map_spot
-          req: $melee_cskip and Fast_Travel
-          tags: [cskip]
     - name: Mid-air near Flask
       coord: [19.9, 5.8]
       local:

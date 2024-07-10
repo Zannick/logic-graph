@@ -1005,6 +1005,18 @@ areas:
           canon: Irikar_Airy_Flask
           req: $shockwave
           tags: [shockwave]
+        - name: Flask Collection Skip
+          item: Big_Flask
+          canon: Irikar_Airy_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          item: Big_Flask
+          canon: Irikar_Airy_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
     - name: South Center
       coord: [15.0, 22.9]
       exits:

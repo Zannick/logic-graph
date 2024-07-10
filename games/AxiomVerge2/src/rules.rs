@@ -2629,6 +2629,10 @@ pub fn access_mode_eq_drone_and_ebih_waterfall_block_right(ctx: &Context, world:
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
+pub fn access_mode_eq_drone_and_fast_travel(ctx: &Context, world: &World) -> bool {
+    // ^mode == 'drone' and Fast_Travel
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Fast_Travel))
+}
 pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Giguna_Dual_Path_Wall))
@@ -14036,6 +14040,38 @@ pub fn explain_mode_eq_drone_and_ebih_waterfall_block_right(
         }
     }
 }
+pub fn explain_mode_eq_drone_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Fast_Travel
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Fast_Travel);
+                edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_mode_eq_drone_and_giguna_dual_path_wall(
     ctx: &Context,
     world: &World,
@@ -21501,6 +21537,23 @@ pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_right(
     } && ({
         full_obs.observe_ebih_waterfall_block_right();
         ctx.has(Item::Ebih_Waterfall_Block_Right)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Fast_Travel
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_fast_travel();
+        ctx.has(Item::Fast_Travel)
     }))
 }
 pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(
