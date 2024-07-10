@@ -2343,7 +2343,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re__Does_Technology]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2378,6 +2378,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Bounty_List)
             && $ctx.has(Item::Submarine_Progress)
             && $ctx.has(Item::Becoming_An_Arm)
+            && $ctx.has(Item::Re__Does_Technology)
     }};
 }
 #[macro_export]
@@ -2661,6 +2662,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Becoming_An_Arm"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Re__Does_Technology);
+                $edict.insert("Re__Does_Technology", format!("{}", h));
+                (h, vec!["Re__Does_Technology"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2761,16 +2771,19 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_becoming_an_arm();
             $ctx.has(Item::Becoming_An_Arm)
+        }) && ({
+            $full_obs.observe_re__does_technology();
+            $ctx.has(Item::Re__Does_Technology)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{34}, Big_Flask{14}]
+/// [Flask{35}, Big_Flask{14}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 34 && $ctx.count(Item::Big_Flask) >= 14
+        $ctx.count(Item::Flask) >= 35 && $ctx.count(Item::Big_Flask) >= 14
     }};
 }
 #[macro_export]
@@ -2781,7 +2794,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 34, vec!["Flask count"])
+                (ct >= 35, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2801,8 +2814,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(34));
-            $ctx.count(Item::Flask) >= 34
+            $full_obs.observe_flask(IntegerObservation::Ge(35));
+            $ctx.count(Item::Flask) >= 35
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(14));
             $ctx.count(Item::Big_Flask) >= 14

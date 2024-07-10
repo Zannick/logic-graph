@@ -1429,6 +1429,13 @@ areas:
     - name: West 24 in Mid-air
       coord: [28.05, 23.4]
 
+    - name: West 22
+      coord: [28.05, 21.8]
+    - name: North
+      coord: [28.5, 21.2]
+    - name: East 23
+      coord: [28.95, 22.8]
+
 - name: Annuna Corridor  # MARK: Annuna Corridor
   on_entry: $reset_old_area(^newpos)
   map:
@@ -1924,9 +1931,165 @@ areas:
 
 - name: Rocky Gate  # MARK: Rocky Gate
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Does Technology
   spots:
     - name: West
       coord: [26.05, 22.75]
+      local:
+        - to: Wall West Ledge
+          jumps: 1
+      exits:
+        - to: Artillery Practice > East 23
+          tags: [xshift]
+    - name: Wall West
+      coord: [26.425, 22.35]
+      local:
+        - to: Wall West Ledge
+        - to: West
+      locations:
+        - name: Mist Through Wall
+          canon: Uhrum_Rocky_Gate_Rock
+          item: Uhrum_Rocky_Gate_Rock
+          req: Nanite_Mist
+          to: Wall East
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Rocky_Gate_Rock
+          item: Uhrum_Rocky_Gate_Rock
+          req: $mist2
+          to: Wall East
+          movement: mist2
+      exits:
+        - to: Wall East
+          req: Uhrum_Rocky_Gate_Rock
+          movement: base
+        - to: Rocky Guardpost > Lower Step
+          req: Uhrum_Rocky_Gate_Rock and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Rocky Guardpost > Mid-air
+          req: Uhrum_Rocky_Gate_Rock and $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Rocky Guardpost > Middle Step
+          req: Uhrum_Rocky_Gate_Rock and $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Rocky Guardpost > Upper Step
+          req: Uhrum_Rocky_Gate_Rock and $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Wall West Ledge
+      coord: [26.375, 22.6]
+      local:
+        - to: West
+        - to: Wall West
+          jumps: 2
+      locations:
+        - name: Charge Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $charge
+          to: East Ledge
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # can't get it in one
+        - name: Spin Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $spin
+          to: East Ledge
+          movement: base  # slower than fling/fast hover would be
+          # re-time?
+    - name: Wall East
+      coord: [26.575, 22.35]
+      local:
+        - to: Wall East Ledge
+        - to: East Ledge
+        - to: East
+      locations:
+        - name: Mist Through Wall
+          canon: Uhrum_Rocky_Gate_Rock
+          item: Uhrum_Rocky_Gate_Rock
+          req: Nanite_Mist
+          to: Wall West
+          movement: mist1
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Rocky_Gate_Rock
+          item: Uhrum_Rocky_Gate_Rock
+          req: $mist2
+          to: Wall West
+          movement: mist2
+      exits:
+        - to: Wall West
+          req: Uhrum_Rocky_Gate_Rock
+          movement: base
+        - to: Artillery Practice > Column East
+          req: Uhrum_Rocky_Gate_Rock and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Rocky Guardpost > Mid-air
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+    - name: Wall East Ledge
+      coord: [26.625, 22.6]
+      local:
+        - to: Wall East
+          jumps: 2
+        - to: East Ledge
+      locations:
+        - name: Charge Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $charge
+          to: Wall West Ledge
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # can't get it in one
+        - name: Spin Through Wall
+          canon: Uhrum_Emergence_Wall
+          item: Uhrum_Emergence_Wall
+          req: $spin
+          to: Wall West Ledge
+          movement: base  # slower than fling/fast hover would be
+          # re-time?
+    - name: East Ledge
+      coord: [26.7, 22.6]
+      local:
+        - to: Wall East
+          jumps: 2
+        - to: East
+      locations:
+        - name: Note
+          item: Re__Does_Technology
+          tags: [standing]
+      exits:
+        - to: Rocky Guardpost > Lower Step
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+        - to: Rocky Guardpost > Lower Mid-air
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+    - name: East
+      coord: [26.95, 22.75]
+      local:
+        - to: East Ledge
+          jumps: 1
+      exits:
+        - to: East Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 0.5
+        - to: Rocky Guardpost > West 23
+          tags: [xshift]
 
 - name: Grassy Guardpost  # MARK: Grassy Guardpost
   on_entry: $reset_old_area(^newpos)
@@ -2466,7 +2629,7 @@ areas:
         - to: Rocky Guardpost > West 22
           tags: [xshift]
 
-- name: Rocky Guardpost
+- name: Rocky Guardpost  # MARK: Rocky Guardpost
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [27, 22, 28, 23]
@@ -2476,5 +2639,164 @@ areas:
   spots:
     - name: West 22
       coord: [27.05, 21.8]
+      local:
+        - to: Upper Ledge
+          jumps: 1
+      exits:
+        - to: East 22
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Emergence Facility > East
+          tags: [xshift]
+    - name: Upper Ledge
+      coord: [27.3, 21.65]
+      local:
+        - to: West 22
+        - to: Mid-air
+        - to: Middle Step
+        - to: Lower Step
+        - to: Under The Ledge
+      exits:
+        - to: East 22
+          req: $hover
+          movement: base
+    - name: Mid-air
+      coord: [27.3, 22.2]
+      local:
+        - to: West 23
+      exits:
+        - to: Upper Step
+          req: $hookhover
+          movement: base
+          jumps: 1
+        - to: Middle Step
+          req: $hover
+          movement: base
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: Lower Mid-air
+      coord: [27.3, 22.3]
+      local:
+        - to: West 23
+      exits:
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+
     - name: West 23
       coord: [27.05, 22.75]
+      local:
+        - to: Under The Ledge
+      exits:
+        - to: Rocky Gate > East
+          tags: [xshift]
+        - to: Lower Step
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Step
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Under The Ledge
+      coord: [27.525, 22.75]
+      local:
+        - to: West 23
+      locations:
+        - name: Shockwave Block
+          canon: Uhrum_Rocky_Guardpost_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+    - name: Lower Step
+      coord: [27.5, 22.4]
+      local:
+        - to: West 23
+        - to: Middle Step
+          jumps: 1
+      locations:
+        - name: Shockwave Block
+          canon: Uhrum_Rocky_Guardpost_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+      exits:
+        - to: Upper Step
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: Middle Step
+      coord: [27.6, 22.2]
+      local:
+        - to: Lower Step
+        - to: West 23
+        - to: Upper Step
+          jumps: 1
+      locations:
+        - name: Shockwave Block
+          canon: Uhrum_Rocky_Guardpost_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+      exits:
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: Upper Step
+      coord: [27.7, 22.0]
+      local:
+        - to: Middle Step
+        - to: West 23
+        - to: East 22
+          jumps: 1
+      locations:
+        - name: Shockwave Block
+          canon: Uhrum_Rocky_Guardpost_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+      exits:
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: East 22
+      coord: [27.95, 21.8]
+      local:
+        - to: Upper Step
+        - to: Middle Step
+        - to: West 23
+      exits:
+        - to: Upper Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Tulip Tower > West 22
+          tags: [xshift]

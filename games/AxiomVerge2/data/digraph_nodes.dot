@@ -2778,6 +2778,7 @@
             Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask [label = "", pos = "75.0,-35.0!"];
             Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall [label = "", pos = "78.0,-36.666667!"];
             Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask [label = "", pos = "81.0,-38.333333!"];
+            Menu__Kiengir_Map__Does_Technology [label = "", pos = "78.0,-38.333333!"];
         }
     }
     {
@@ -2875,10 +2876,24 @@
         }
         {
             Uhrum__Rocky_Gate__West [label = "", pos = "78.15,-37.916667!"];
+            Uhrum__Rocky_Gate__Wall_West [label = "", pos = "79.275,-37.25!"];
+            Uhrum__Rocky_Gate__Wall_West_Ledge [label = "", pos = "79.125,-37.666667!"];
+            Uhrum__Rocky_Gate__Wall_East [label = "", pos = "79.725,-37.25!"];
+            Uhrum__Rocky_Gate__Wall_East_Ledge [label = "", pos = "79.875,-37.666667!"];
+            Uhrum__Rocky_Gate__East_Ledge [label = "", pos = "80.1,-37.666667!"];
+            Uhrum__Rocky_Gate__East [label = "", pos = "80.85,-37.916667!"];
         }
         {
             Uhrum__Rocky_Guardpost__West_22 [label = "", pos = "81.15,-36.333333!"];
+            Uhrum__Rocky_Guardpost__Upper_Ledge [label = "", pos = "81.9,-36.083333!"];
+            Uhrum__Rocky_Guardpost__Mid_air [label = "", pos = "81.9,-37.0!"];
+            Uhrum__Rocky_Guardpost__Lower_Mid_air [label = "", pos = "81.9,-37.166667!"];
             Uhrum__Rocky_Guardpost__West_23 [label = "", pos = "81.15,-37.916667!"];
+            Uhrum__Rocky_Guardpost__Under_The_Ledge [label = "", pos = "82.575,-37.916667!"];
+            Uhrum__Rocky_Guardpost__Lower_Step [label = "", pos = "82.5,-37.333333!"];
+            Uhrum__Rocky_Guardpost__Middle_Step [label = "", pos = "82.8,-37.0!"];
+            Uhrum__Rocky_Guardpost__Upper_Step [label = "", pos = "83.1,-36.666667!"];
+            Uhrum__Rocky_Guardpost__East_22 [label = "", pos = "83.85,-36.333333!"];
         }
         {
             Uhrum__Save_Room__East [label = "", pos = "77.85,-44.583333!"];
@@ -2914,6 +2929,9 @@
         {
             Uhrum__Tulip_Tower__West_24 [label = "", pos = "84.15,-39.666667!"];
             Uhrum__Tulip_Tower__West_24_in_Mid_air [label = "", pos = "84.15,-39.0!"];
+            Uhrum__Tulip_Tower__West_22 [label = "", pos = "84.15,-36.333333!"];
+            Uhrum__Tulip_Tower__North [label = "", pos = "85.5,-35.333333!"];
+            Uhrum__Tulip_Tower__East_23 [label = "", pos = "86.85,-38.0!"];
         }
         {
             Uhrum__Waterfalls__West_25 [label = "", pos = "78.15,-41.25!"];

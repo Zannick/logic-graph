@@ -2707,6 +2707,7 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask(Uhrum Emergence Facility Flask);
         Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall(Uhrum Emergence Facility Wall);
         Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask(Uhrum Rocky Guardpost Flask);
+        Menu__Kiengir_Map__Does_Technology(Does Technology);
     end
     subgraph Menu__Emergence_Map[Emergence Map]
         Menu__Emergence_Map__Camp(Camp);
@@ -2883,6 +2884,9 @@ subgraph Uhrum
     subgraph Uhrum__Tulip_Tower[Tulip Tower]
         Uhrum__Tulip_Tower__West_24(West 24);
         Uhrum__Tulip_Tower__West_24_in_Mid_air(West 24 in Mid-air);
+        Uhrum__Tulip_Tower__West_22(West 22);
+        Uhrum__Tulip_Tower__North(North);
+        Uhrum__Tulip_Tower__East_23(East 23);
     end
     subgraph Uhrum__Annuna_Corridor[Annuna Corridor]
         Uhrum__Annuna_Corridor__West_25(West 25);
@@ -2928,6 +2932,12 @@ subgraph Uhrum
     end
     subgraph Uhrum__Rocky_Gate[Rocky Gate]
         Uhrum__Rocky_Gate__West(West);
+        Uhrum__Rocky_Gate__Wall_West(Wall West);
+        Uhrum__Rocky_Gate__Wall_West_Ledge(Wall West Ledge);
+        Uhrum__Rocky_Gate__Wall_East(Wall East);
+        Uhrum__Rocky_Gate__Wall_East_Ledge(Wall East Ledge);
+        Uhrum__Rocky_Gate__East_Ledge(East Ledge);
+        Uhrum__Rocky_Gate__East(East);
     end
     subgraph Uhrum__Grassy_Guardpost[Grassy Guardpost]
         Uhrum__Grassy_Guardpost__East_23(East 23);
@@ -2971,7 +2981,15 @@ subgraph Uhrum
     end
     subgraph Uhrum__Rocky_Guardpost[Rocky Guardpost]
         Uhrum__Rocky_Guardpost__West_22(West 22);
+        Uhrum__Rocky_Guardpost__Upper_Ledge(Upper Ledge);
+        Uhrum__Rocky_Guardpost__Mid_air(Mid-air);
+        Uhrum__Rocky_Guardpost__Lower_Mid_air(Lower Mid-air);
         Uhrum__Rocky_Guardpost__West_23(West 23);
+        Uhrum__Rocky_Guardpost__Under_The_Ledge(Under The Ledge);
+        Uhrum__Rocky_Guardpost__Lower_Step(Lower Step);
+        Uhrum__Rocky_Guardpost__Middle_Step(Middle Step);
+        Uhrum__Rocky_Guardpost__Upper_Step(Upper Step);
+        Uhrum__Rocky_Guardpost__East_22(East 22);
     end
 end
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
@@ -4570,7 +4588,7 @@ Uhrum__Artillery_Practice__Column_East --> Uhrum__Artillery_Practice__West_Left_
 Uhrum__Artillery_Practice__Column_West --> Uhrum__Artillery_Practice__East_23
 Uhrum__Artillery_Practice__Column_West --> Uhrum__Artillery_Practice__West_Right_Ledge
 Uhrum__Artillery_Practice__Column_West <--> Uhrum__Artillery_Practice__West_Top_Platform
-Uhrum__Artillery_Practice__East_23 --> Uhrum__Rocky_Gate__West
+Uhrum__Artillery_Practice__East_23 <--> Uhrum__Rocky_Gate__West
 Uhrum__Artillery_Practice__East_24 --> Uhrum__Artillery_Practice__East_Outcrop_East
 Uhrum__Artillery_Practice__East_24 <--> Uhrum__Waterfalls__West_24
 Uhrum__Artillery_Practice__East_Hill --> Uhrum__Artillery_Practice__East_Lower_Platform_West
@@ -4589,7 +4607,7 @@ Uhrum__Artillery_Practice__West_Right_Platform --> Uhrum__Artillery_Practice__Co
 Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__East_Stair_Right
 Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__Wall_East_Mid_air
 Uhrum__Emergence_Facility__Door --> Uhrum__Emergence_Facility__Upper_Level_Middle
-Uhrum__Emergence_Facility__East --> Uhrum__Rocky_Guardpost__West_22
+Uhrum__Emergence_Facility__East <--> Uhrum__Rocky_Guardpost__West_22
 Uhrum__Emergence_Facility__East_Approach --> Uhrum__Emergence_Facility__Upper_Level_Middle
 Uhrum__Emergence_Facility__Upper_Level_Middle --> Uhrum__Emergence_Facility__Roof_Middle
 Uhrum__Emergence_Facility__Wall_East_Mid_air --> Uhrum__Emergence_Facility__East_Approach
@@ -4611,6 +4629,29 @@ Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__East_Led
 Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__West_Ledge
 Uhrum__Grassy_Guardpost__West_22 --> Giguna__Vertical_Interchange__East_22
 Uhrum__Grassy_Guardpost__West_22 --> Uhrum__Emergence_Save__Save_Point
+Uhrum__Rocky_Gate__East --> Uhrum__Rocky_Gate__East_Ledge
+Uhrum__Rocky_Gate__East <--> Uhrum__Rocky_Guardpost__West_23
+Uhrum__Rocky_Gate__East_Ledge --> Uhrum__Rocky_Guardpost__Lower_Mid_air
+Uhrum__Rocky_Gate__East_Ledge --> Uhrum__Rocky_Guardpost__Lower_Step
+Uhrum__Rocky_Gate__Wall_East --> Uhrum__Artillery_Practice__Column_East
+Uhrum__Rocky_Gate__Wall_East <--> Uhrum__Rocky_Gate__Wall_West
+Uhrum__Rocky_Gate__Wall_East --> Uhrum__Rocky_Guardpost__Mid_air
+Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Lower_Step
+Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Mid_air
+Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Middle_Step
+Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Upper_Step
+Uhrum__Rocky_Guardpost__East_22 <--> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__East_22 --> Uhrum__Tulip_Tower__West_22
+Uhrum__Rocky_Guardpost__Lower_Mid_air --> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__Lower_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__Lower_Step --> Uhrum__Rocky_Guardpost__Upper_Step
+Uhrum__Rocky_Guardpost__Mid_air --> Uhrum__Rocky_Guardpost__Middle_Step
+Uhrum__Rocky_Guardpost__Mid_air --> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__Mid_air --> Uhrum__Rocky_Guardpost__Upper_Step
+Uhrum__Rocky_Guardpost__Middle_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__Upper_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
+Uhrum__Rocky_Guardpost__West_22 --> Uhrum__Rocky_Guardpost__East_22
+Uhrum__Rocky_Guardpost__West_23 --> Uhrum__Rocky_Guardpost__Lower_Step
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West

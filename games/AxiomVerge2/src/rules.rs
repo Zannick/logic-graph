@@ -2108,6 +2108,10 @@ pub fn access_invoke_hook_or_invoke_hover(ctx: &Context, world: &World) -> bool 
     // $hook or $hover
     (helper__hook!(ctx, world) || helper__hover!(ctx, world))
 }
+pub fn access_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // $hookhover
+    helper__hookhover!(ctx, world)
+}
 pub fn access_invoke_hookhover_or_invoke_spin(ctx: &Context, world: &World) -> bool {
     // $hookhover or $spin
     (helper__hookhover!(ctx, world) || helper__spin!(ctx, world))
@@ -2927,6 +2931,14 @@ pub fn access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(
 pub fn access_uhrum_emergence_wall_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Uhrum_Emergence_Wall and $hover
     (ctx.has(Item::Uhrum_Emergence_Wall) && helper__hover!(ctx, world))
+}
+pub fn access_uhrum_rocky_gate_rock(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Rocky_Gate_Rock
+    ctx.has(Item::Uhrum_Rocky_Gate_Rock)
+}
+pub fn access_uhrum_rocky_gate_rock_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Rocky_Gate_Rock and $hookhover
+    (ctx.has(Item::Uhrum_Rocky_Gate_Rock) && helper__hookhover!(ctx, world))
 }
 pub fn access_uhrum_waterfall_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_Waterfall_Wall
@@ -11844,6 +11856,19 @@ pub fn explain_invoke_hook_or_invoke_hover(
         }
     }
 }
+pub fn explain_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover
+    {
+        let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+        edict.insert("$hookhover", format!("{:?}", res));
+        refs.push("$hookhover");
+        (res, refs)
+    }
+}
 pub fn explain_invoke_hookhover_or_invoke_spin(
     ctx: &Context,
     world: &World,
@@ -15575,6 +15600,44 @@ pub fn explain_uhrum_emergence_wall_and_invoke_hover(
                 let (res, mut refs) = hexplain__hover!(ctx, world, edict);
                 edict.insert("$hover", format!("{:?}", res));
                 refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_rocky_gate_rock(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Rocky_Gate_Rock
+    {
+        let h = ctx.has(Item::Uhrum_Rocky_Gate_Rock);
+        edict.insert("Uhrum_Rocky_Gate_Rock", format!("{}", h));
+        (h, vec!["Uhrum_Rocky_Gate_Rock"])
+    }
+}
+pub fn explain_uhrum_rocky_gate_rock_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Rocky_Gate_Rock and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Rocky_Gate_Rock);
+            edict.insert("Uhrum_Rocky_Gate_Rock", format!("{}", h));
+            (h, vec!["Uhrum_Rocky_Gate_Rock"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -20226,6 +20289,14 @@ pub fn observe_access_invoke_hook_or_invoke_hover(
     // $hook or $hover
     (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
 }
+pub fn observe_access_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover
+    hobserve__hookhover!(ctx, world, full_obs)
+}
 pub fn observe_access_invoke_hookhover_or_invoke_spin(
     ctx: &Context,
     world: &World,
@@ -22245,6 +22316,28 @@ pub fn observe_access_uhrum_emergence_wall_and_invoke_hover(
         full_obs.observe_uhrum_emergence_wall();
         ctx.has(Item::Uhrum_Emergence_Wall)
     } && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_uhrum_rocky_gate_rock(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Rocky_Gate_Rock
+    {
+        full_obs.observe_uhrum_rocky_gate_rock();
+        ctx.has(Item::Uhrum_Rocky_Gate_Rock)
+    }
+}
+pub fn observe_access_uhrum_rocky_gate_rock_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Rocky_Gate_Rock and $hookhover
+    ({
+        full_obs.observe_uhrum_rocky_gate_rock();
+        ctx.has(Item::Uhrum_Rocky_Gate_Rock)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_waterfall_wall(
     ctx: &Context,

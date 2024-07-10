@@ -847,6 +847,8 @@ areas:
       coord: [26, 22]
     - name: Uhrum Rocky Guardpost Flask
       coord: [27, 23]
+    - name: Does Technology
+      coord: [26, 23]
     #endregion
 
 - name: Emergence Map  # MARK: Emergence Map

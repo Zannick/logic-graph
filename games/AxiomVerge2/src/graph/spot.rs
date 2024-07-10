@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2464] = [
+static SPOT_DEFS: [SpotDef; 2482] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -12920,6 +12920,12 @@ static SPOT_DEFS: [SpotDef; 2464] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Does_Technology,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Double_Axe,
         loc_range: None,
         exit_range: None,
@@ -14216,21 +14222,105 @@ static SPOT_DEFS: [SpotDef; 2464] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1, ExitId::Uhrum__Rocky_Gate__East__ex__Rocky_Guardpost__West_23_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__East_Ledge,
+        loc_range: Some((LocationId::Uhrum__Rocky_Gate__East_Ledge__Note, LocationId::Uhrum__Rocky_Gate__East_Ledge__Note)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Mid_air_1, ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Step_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__Wall_East,
+        loc_range: Some((LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Gate__Wall_East__ex__Artillery_Practice__Column_East_1, ExitId::Uhrum__Rocky_Gate__Wall_East__ex__Wall_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__Wall_East_Ledge,
+        loc_range: Some((LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__Wall_West,
+        loc_range: Some((LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Gate__Wall_West__ex__Rocky_Guardpost__Lower_Step_1, ExitId::Uhrum__Rocky_Gate__Wall_West__ex__Wall_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Gate__Wall_West_Ledge,
+        loc_range: Some((LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall, LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Uhrum__Rocky_Gate__West,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Gate__West__ex__Artillery_Practice__East_23_1, ExitId::Uhrum__Rocky_Gate__West__ex__Artillery_Practice__East_23_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__East_22,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__East_22__ex__Tulip_Tower__West_22_1, ExitId::Uhrum__Rocky_Guardpost__East_22__ex__Upper_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Lower_Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_1, ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Lower_Step,
+        loc_range: Some((LocationId::Uhrum__Rocky_Guardpost__Lower_Step__Shockwave_Block, LocationId::Uhrum__Rocky_Guardpost__Lower_Step__Shockwave_Block)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Ledge_1, ExitId::Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Step_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Mid_air__ex__Middle_Step_1, ExitId::Uhrum__Rocky_Guardpost__Mid_air__ex__Upper_Step_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Middle_Step,
+        loc_range: Some((LocationId::Uhrum__Rocky_Guardpost__Middle_Step__Shockwave_Block, LocationId::Uhrum__Rocky_Guardpost__Middle_Step__Shockwave_Block)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Middle_Step__ex__Upper_Ledge_1, ExitId::Uhrum__Rocky_Guardpost__Middle_Step__ex__Upper_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Under_The_Ledge,
+        loc_range: Some((LocationId::Uhrum__Rocky_Guardpost__Under_The_Ledge__Shockwave_Block, LocationId::Uhrum__Rocky_Guardpost__Under_The_Ledge__Shockwave_Block)),
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Upper_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Upper_Ledge__ex__East_22_1, ExitId::Uhrum__Rocky_Guardpost__Upper_Ledge__ex__East_22_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Rocky_Guardpost__Upper_Step,
+        loc_range: Some((LocationId::Uhrum__Rocky_Guardpost__Upper_Step__Shockwave_Block, LocationId::Uhrum__Rocky_Guardpost__Upper_Step__Shockwave_Block)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1, ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Rocky_Guardpost__West_22,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1, ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Emergence_Facility__East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Rocky_Guardpost__West_23,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1, ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -14393,6 +14483,24 @@ static SPOT_DEFS: [SpotDef; 2464] = [
         id: SpotId::Uhrum__Siege_Corridor__Western_Rock,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1, ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__East_23,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__North,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__West_22,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
