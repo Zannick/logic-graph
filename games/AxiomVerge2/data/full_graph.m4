@@ -771,8 +771,6 @@ digraph AxiomVerge2 {
     Ebih__Gem_Room__Between_Gates -> Ebih__Gem_Room__Hidden_Tunnel;
     Ebih__Gem_Room__Between_Gates -> Ebih__Gem_Room__Hidden_Tunnel;
     Ebih__Gem_Room__Between_Gates -> Ebih__Gem_Room__West_Gate;
-    Ebih__Gem_Room__Hidden_Tunnel -> Ebih__Gem_Room__Hidden_Tunnel_Corner;
-    Ebih__Gem_Room__Hidden_Tunnel_Corner -> Ebih__Gem_Room__Hidden_Tunnel;
     Ebih__Grid_25_10_12__East_12 -> Ebih__By_Garage__West_12;
     Ebih__Grid_25_10_12__Bush -> Ebih__Grid_25_10_12__Mid_Ledge;
     Ebih__Grid_25_10_12__West_12 -> Ebih__Walled_Off__East_12;
@@ -4349,6 +4347,8 @@ digraph AxiomVerge2 {
     Ebih__Gem_Room__Button_Corner -> Ebih__Gem_Room__Button_Nearby;
     Ebih__Gem_Room__Button_Nearby -> Ebih__Gem_Room__Button_Corner;
     Ebih__Gem_Room__Hidden_Tunnel -> Ebih__Gem_Room__Between_Gates;
+    Ebih__Gem_Room__Hidden_Tunnel -> Ebih__Gem_Room__Hidden_Tunnel_Corner;
+    Ebih__Gem_Room__Hidden_Tunnel_Corner -> Ebih__Gem_Room__Hidden_Tunnel;
     Ebih__Gem_Room__Hidden_Tunnel_Corner -> Ebih__Gem_Room__Hidden_Cache;
     Ebih__Gem_Room__Hidden_Cache -> Ebih__Gem_Room__Hidden_Tunnel_Corner;
     Ebih__Party_Central__Portal_Stand -> Ebih__Party_Central__Waterfall_Platform;

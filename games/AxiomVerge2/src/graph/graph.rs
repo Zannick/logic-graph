@@ -6495,8 +6495,6 @@ impl world::World for World {
             ExitId::Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_2 => true,
             ExitId::Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_3 => true,
             ExitId::Ebih__Gem_Room__Between_Gates__ex__West_Gate_1 => true,
-            ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1 => true,
-            ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1 => true,
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => true,
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => true,
             ExitId::Ebih__Grid_25_10_12__West_12__ex__Walled_Off__East_12_1 => true,

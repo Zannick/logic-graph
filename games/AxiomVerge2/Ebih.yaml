@@ -3948,24 +3948,22 @@ areas:
           movement: base
           jumps: 1
         - to: Hidden Tunnel
-          req: Nanite_Mist and ^mode == 'drone'  # TODO: is this drone-only?
+          req: Nanite_Mist
           movement: mist1
         - to: Hidden Tunnel
-          req: $mist2 and ^mode == 'drone'
+          req: $mist2
           movement: mist2
     - name: Hidden Tunnel
       coord: [23.0, 12.7]
       local:
         - to: Between Gates
-      exits:
         - to: Hidden Tunnel Corner
-          req: ^mode == 'drone'
-          movement: base
     - name: Hidden Tunnel Corner
       coord: [22.8, 12.7]
       local:
         - to: Hidden Cache
           jumps: 1
+        - to: Hidden Tunnel
       locations:
         - name: Shockwave Flask
           canon: Ebih_Gem_Room_Flask
@@ -3977,10 +3975,6 @@ areas:
           item: Flask
           req: $bs
           tags: [nearby_flask]
-      exits:
-        - to: Hidden Tunnel
-          req: ^mode == 'drone'
-          movement: base
     - name: Hidden Cache
       coord: [22.75, 12.5]
       local:

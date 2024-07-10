@@ -4210,13 +4210,13 @@ static SPOT_DEFS: [SpotDef; 2485] = [
     SpotDef {
         id: SpotId::Ebih__Gem_Room__Hidden_Tunnel,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1, ExitId::Ebih__Gem_Room__Hidden_Tunnel__ex__Hidden_Tunnel_Corner_1)),
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Gem_Room__Hidden_Tunnel_Corner,
         loc_range: Some((LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask, LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask)),
-        exit_range: Some((ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1, ExitId::Ebih__Gem_Room__Hidden_Tunnel_Corner__ex__Hidden_Tunnel_1)),
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
