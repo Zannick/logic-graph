@@ -3474,6 +3474,11 @@ areas:
 
 - name: Labyrinth East  # MARK: Labyrinth East
   on_entry: $reset_old_area(^newpos)
+  map:
+    bottom: [18, 20, 19, 21]
+  datamap:
+    map_spot:
+      bottom: Menu > Kiengir Map > Giguna Labyrinth Hole
   spots:
     - name: East 19
       coord: [18.95, 18.8]
@@ -3558,6 +3563,11 @@ areas:
       exits:
         - to: Labyrinth > Lower East
           tags: [xshift]
+
+    - name: Hole
+      coord: [18.8, 20.85]
+      data:
+        flipside: Giguna Breach > Labyrinth > Pipe Corner
 
 - name: Labyrinth  # MARK: Labyrinth
   on_entry: $reset_old_area(^newpos)

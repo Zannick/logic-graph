@@ -560,6 +560,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Middle => enums::Realm::Breach,
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper => enums::Realm::Breach,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Cache => enums::Realm::Breach,
+        SpotId::Giguna_Breach__Labyrinth__Pipe_Corner => enums::Realm::Breach,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance => enums::Realm::Breach,
         SpotId::Giguna_Breach__Labyrinth__Plinth => enums::Realm::Breach,
         SpotId::Giguna_Breach__Labyrinth__Plinth_Approach => enums::Realm::Breach,
@@ -927,6 +928,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Giguna_Highest_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Labyrinth => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Empty_Plinth => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Lamassu_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Northeast => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Giguna_Northeast_Flask => enums::Realm::Map,
@@ -1373,6 +1375,7 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge => SpotId::Giguna__Labyrinth_East__Middle_Drop,
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East => SpotId::Giguna__Labyrinth_East__Middle_Tree,
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper => SpotId::Giguna__Labyrinth__Second_Tier_Upper,
+        SpotId::Giguna_Breach__Labyrinth__Pipe_Corner => SpotId::Giguna__Labyrinth_East__Hole,
         SpotId::Giguna_Breach__Labyrinth__Plinth => SpotId::Giguna__Labyrinth__Empty_Plinth,
         SpotId::Giguna_Breach__Labyrinth__Save_Point => SpotId::Giguna__Labyrinth__Portal_Stand,
         SpotId::Giguna_Breach__Labyrinth__Upper_Tier_West => SpotId::Giguna__Labyrinth__Upper_Level_Ledge,
@@ -1404,6 +1407,7 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Clouds__Platform_Stop => SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
         SpotId::Giguna__Giguna_Northeast__Door => SpotId::Giguna_Breach__Slingshot__Column,
         SpotId::Giguna__Giguna_Northeast__Switch => SpotId::Giguna_Breach__Slingshot__Ravine,
+        SpotId::Giguna__Labyrinth_East__Hole => SpotId::Giguna_Breach__Labyrinth__Pipe_Corner,
         SpotId::Giguna__Labyrinth_East__Lower_Middle => SpotId::Giguna_Breach__Labyrinth__Lower_Tier_East,
         SpotId::Giguna__Labyrinth_East__Middle_Drop => SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge,
         SpotId::Giguna__Labyrinth_East__Middle_Tree => SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East,
@@ -2376,6 +2380,7 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Middle => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Cache => SpotId::Giguna_Breach__Labyrinth__Save_Point,
+        SpotId::Giguna_Breach__Labyrinth__Pipe_Corner => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         SpotId::Giguna_Breach__Labyrinth__Plinth => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         SpotId::Giguna_Breach__Labyrinth__Plinth_Approach => SpotId::Giguna_Breach__Labyrinth__Save_Point,
@@ -3068,6 +3073,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Labyrinth__Middle_Brick => SpotId::Menu__Breach_Map__GSB_Labyrinth,
         SpotId::Giguna_Breach__Labyrinth__Middle_Tier_Upper => SpotId::Menu__Breach_Map__Drone_Melee_Charge,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Cache => SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
+        SpotId::Giguna_Breach__Labyrinth__Pipe_Corner => SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
         SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance => SpotId::Menu__Breach_Map__GSB_Labyrinth_Flask,
         SpotId::Giguna_Breach__Labyrinth__Plinth => SpotId::Menu__Breach_Map__Drone_Melee_Charge,
         SpotId::Giguna_Breach__Labyrinth__Plinth_Approach => SpotId::Menu__Breach_Map__Drone_Melee_Charge,
@@ -3155,6 +3161,10 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Helipad__So_Close => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
         SpotId::Giguna__Helipad__Tablet_Ledge => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
         SpotId::Giguna__Helipad__Wall_Bottom => SpotId::Menu__Kiengir_Map__Journal_10_29_2049,
+        SpotId::Giguna__Labyrinth_East__East_20 => SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole,
+        SpotId::Giguna__Labyrinth_East__Hole => SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole,
+        SpotId::Giguna__Labyrinth_East__Lower_Middle => SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole,
+        SpotId::Giguna__Labyrinth_East__Lower_West => SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole,
         SpotId::Giguna__Labyrinth__Door => SpotId::Menu__Kiengir_Map__Nano_Lattice_1,
         SpotId::Giguna__Labyrinth__Door_Ledge => SpotId::Menu__Kiengir_Map__Nano_Lattice_1,
         SpotId::Giguna__Labyrinth__East_22 => SpotId::Menu__Kiengir_Map__Giguna_Labyrinth,
@@ -10297,6 +10307,18 @@ impl context::Ctx for Context {
                 SpotId::Giguna__Labyrinth__Second_Tier_Upper => {
 
                 }
+                SpotId::Giguna__Labyrinth_East__East_20 => {
+
+                }
+                SpotId::Giguna__Labyrinth_East__Hole => {
+
+                }
+                SpotId::Giguna__Labyrinth_East__Lower_Middle => {
+
+                }
+                SpotId::Giguna__Labyrinth_East__Lower_West => {
+
+                }
                 SpotId::Giguna__Lamassu__Deposit => {
 
                 }
@@ -10515,6 +10537,9 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Giguna_Breach__Labyrinth__Pipe_Cache => {
+
+                }
+                SpotId::Giguna_Breach__Labyrinth__Pipe_Corner => {
 
                 }
                 SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance => {

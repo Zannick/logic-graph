@@ -1342,7 +1342,6 @@ areas:
           req: $mist2
           to: Wall 3 West
           movement: mist2
-        # TODO: Spin/charge aren't guaranteed to get through but may still be possible at the right angle
       exits:
         - to: Middle Ledge
           req: Nanite_Mist

@@ -812,6 +812,8 @@ areas:
       coord: [18, 22]
     - name: Giguna Separator
       coord: [18, 23]
+    - name: Giguna Labyrinth Hole
+      coord: [18, 21]
 
     - name: Uhrum West Portal Entrance
       coord: [19, 26]

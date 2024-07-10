@@ -4646,8 +4646,10 @@ digraph AxiomVerge2 {
     Giguna_Breach__Labyrinth__Lower_Tier_East -> Giguna_Breach__Labyrinth__Lower_Tier_West;
     Giguna_Breach__Labyrinth__Lower_Tier_East -> Giguna_Breach__Labyrinth__Pipe_Entrance;
     Giguna_Breach__Labyrinth__Pipe_Entrance -> Giguna_Breach__Labyrinth__Lower_Tier_East;
-    Giguna_Breach__Labyrinth__Pipe_Entrance -> Giguna_Breach__Labyrinth__Pipe_Cache;
-    Giguna_Breach__Labyrinth__Pipe_Cache -> Giguna_Breach__Labyrinth__Pipe_Entrance;
+    Giguna_Breach__Labyrinth__Pipe_Entrance -> Giguna_Breach__Labyrinth__Pipe_Corner;
+    Giguna_Breach__Labyrinth__Pipe_Corner -> Giguna_Breach__Labyrinth__Pipe_Entrance;
+    Giguna_Breach__Labyrinth__Pipe_Corner -> Giguna_Breach__Labyrinth__Pipe_Cache;
+    Giguna_Breach__Labyrinth__Pipe_Cache -> Giguna_Breach__Labyrinth__Pipe_Corner;
     Giguna_Breach__Labyrinth__Middle_Tier_Ledge -> Giguna_Breach__Labyrinth__Lower_Tier_East;
     Giguna_Breach__Labyrinth__Middle_Tier_Ledge -> Giguna_Breach__Labyrinth__Pipe_Entrance;
     Giguna_Breach__Labyrinth__Middle_Tier_Ledge -> Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East;

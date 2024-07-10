@@ -1278,6 +1278,7 @@
             Giguna_Breach__Labyrinth__Lower_Tier_Middle [label = "", pos = "51.9,-83.333333!"];
             Giguna_Breach__Labyrinth__Lower_Tier_East [label = "", pos = "55.2,-83.5!"];
             Giguna_Breach__Labyrinth__Pipe_Entrance [label = "", pos = "55.65,-83.333333!"];
+            Giguna_Breach__Labyrinth__Pipe_Corner [label = "", pos = "56.4,-84.75!"];
             Giguna_Breach__Labyrinth__Pipe_Cache [label = "", pos = "54.6,-84.833333!"];
             Giguna_Breach__Labyrinth__Middle_Tier_Ledge [label = "", pos = "55.5,-82.833333!"];
             Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East [label = "", pos = "55.8,-82.833333!"];
@@ -1617,6 +1618,7 @@
             Giguna__Labyrinth_East__East_20 [label = "", pos = "56.85,-33.333333!"];
             Giguna__Labyrinth_East__Lower_Middle [label = "", pos = "55.2,-33.5!"];
             Giguna__Labyrinth_East__Lower_West [label = "", pos = "54.15,-33.5!"];
+            Giguna__Labyrinth_East__Hole [label = "", pos = "56.4,-34.75!"];
         }
         {
             Giguna__Lamassu__West_18 [label = "", pos = "39.15,-29.0!"];
@@ -2761,6 +2763,7 @@
             Menu__Kiengir_Map__Nano_Lattice_1 [label = "", pos = "48.0,-35.0!"];
             Menu__Kiengir_Map__Giguna_Cache [label = "", pos = "54.0,-36.666667!"];
             Menu__Kiengir_Map__Giguna_Separator [label = "", pos = "54.0,-38.333333!"];
+            Menu__Kiengir_Map__Giguna_Labyrinth_Hole [label = "", pos = "54.0,-35.0!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Entrance [label = "", pos = "57.0,-43.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Exit [label = "", pos = "60.0,-41.666667!"];
             Menu__Kiengir_Map__Udusan [label = "", pos = "57.0,-41.666667!"];

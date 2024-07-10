@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2482] = [
+static SPOT_DEFS: [SpotDef; 2485] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -6266,6 +6266,12 @@ static SPOT_DEFS: [SpotDef; 2482] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Giguna_Breach__Labyrinth__Pipe_Corner,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Giguna_Breach__Labyrinth__Pipe_Entrance,
         loc_range: None,
         exit_range: Some((ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_1, ExitId::Giguna_Breach__Labyrinth__Pipe_Entrance__ex__Middle_Tier_Ledge_East_1)),
@@ -7757,6 +7763,12 @@ static SPOT_DEFS: [SpotDef; 2482] = [
         id: SpotId::Giguna__Labyrinth_East__East_20,
         loc_range: None,
         exit_range: Some((ExitId::Giguna__Labyrinth_East__East_20__ex__Mural__West_20_1, ExitId::Giguna__Labyrinth_East__East_20__ex__Mural__West_20_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__Labyrinth_East__Hole,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -13245,6 +13257,12 @@ static SPOT_DEFS: [SpotDef; 2482] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Empty_Plinth,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Giguna_Labyrinth_Hole,
         loc_range: None,
         exit_range: None,
         action_range: None,

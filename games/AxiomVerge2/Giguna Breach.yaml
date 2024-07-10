@@ -887,7 +887,7 @@ areas:
       coord: [18.55, 20.0]
       local:
         - to: Lower Tier East
-        - to: Pipe Cache
+        - to: Pipe Corner
           thru: [[18.85, 20.05], [18.85, 20.25], [18.95, 20.25], [18.95, 20.45], [18.85, 20.45],
                  [18.85, 20.65], [18.95, 20.65], [18.95, 20.85]]
       exits:
@@ -899,14 +899,21 @@ areas:
           req: Slingshot_Hook
           movement: base
           jumps: 1
-    # TODO: Can you Exit from the lower corner of the pipe?
-    - name: Pipe Cache
-      coord: [18.2, 20.9]
+    - name: Pipe Corner
+      coord: [18.8, 20.85]
+      data:
+        flipside: Giguna > Labyrinth East > Hole
       local:
+        - to: Pipe Cache
         - to: Pipe Entrance
           thru: [[18.95, 20.85], [18.95, 20.65], [18.85, 20.65], [18.85, 20.45], [18.95, 20.45],
                  [18.95, 20.25], [18.85, 20.25], [18.85, 20.05]]
-          jumps: [1, 1, 0, 1, 0, 1, 0, 1, 1]
+          jumps: [0, 1, 0, 1, 0, 1, 0, 1, 1]
+    - name: Pipe Cache
+      coord: [18.2, 20.9]
+      local:
+        - to: Pipe Corner
+          jumps: 1
       locations:
         - name: Flask
           canon: Giguna_Labyrinth_Flask
