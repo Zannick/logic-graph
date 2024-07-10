@@ -20,9 +20,5 @@ fn main() -> Result<(), std::io::Error> {
         panic!("Available items not enough to complete ruleset {}: missing {:?}",
                world.ruleset(), items);
     }
-    if let Err(items) = can_win_just_locations(world.as_ref(), &context) {
-        panic!("Unable to complete ruleset {} with only location checks: missing {:?}",
-               world.ruleset(), items);
-    }
     run(world.as_ref(), context, routes, &args)
 }
