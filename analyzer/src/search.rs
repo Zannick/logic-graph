@@ -464,9 +464,9 @@ where
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 || sols.unique() > 1_000 {
-            self.queue.set_max_time(elapsed);
+            self.queue.set_max_time(elapsed + elapsed / 8_192);
         } else if iters > 5_000_000 || sols.unique() > 100 {
-            self.queue.set_max_time(elapsed + elapsed / 1000);
+            self.queue.set_max_time(elapsed + elapsed / 1_000);
         } else if iters > 2_000_000 && sols.unique() > 4 {
             self.queue.set_max_time(elapsed + elapsed / 100);
         } else {
@@ -1195,7 +1195,7 @@ where
         drop(sols);
         if best > 0 {
             if unique > 1_000 || iters > 10_000_000 {
-                self.queue.set_max_time(best);
+                self.queue.set_max_time(best + best / 8_192);
             } else if iters > 5_000_000 || unique > 100 {
                 self.queue.set_max_time(best + best / 1_000);
             } else if iters > 2_000_000 && unique > 4 {
