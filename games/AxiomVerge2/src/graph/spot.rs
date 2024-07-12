@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2528] = [
+static SPOT_DEFS: [SpotDef; 2532] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -6464,9 +6464,33 @@ static SPOT_DEFS: [SpotDef; 2528] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Giguna_Breach__Portal_Exchange__Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Portal_Exchange__Bottom__ex__Middle_Gap_1, ExitId::Giguna_Breach__Portal_Exchange__Bottom__ex__Middle_Gap_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Portal_Exchange__Middle_Gap,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Portal_Exchange__Middle_Gap__ex__Middle_Ledge_1, ExitId::Giguna_Breach__Portal_Exchange__Middle_Gap__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Portal_Exchange__Middle_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Portal_Exchange__Middle_Ledge__ex__West_1, ExitId::Giguna_Breach__Portal_Exchange__Middle_Ledge__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Portal_Exchange__Upper_Side,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Portal_Exchange__Upper_Side__ex__West_1, ExitId::Giguna_Breach__Portal_Exchange__Upper_Side__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Giguna_Breach__Portal_Exchange__West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Portal_Exchange__West__ex__Labyrinth__East_20_1, ExitId::Giguna_Breach__Portal_Exchange__West__ex__Upper_Side_1)),
         action_range: None,
     },
     SpotDef {

@@ -4930,6 +4930,8 @@ areas:
           tags: [xshift]
     - name: NW Cache
       coord: [19.5, 19.7]
+      data:
+        flipside: Giguna Breach > Portal Exchange > Upper Side
       local:
         - to: West 20
         - to: NW Ledge
@@ -4940,6 +4942,8 @@ areas:
           tags: [standing]
     - name: NW Bottom
       coord: [19.3, 20.1]
+      data:
+        flipside: Giguna Breach > Portal Exchange > Middle Gap
       local:
         - to: West 20
           jumps: 1
@@ -4947,6 +4951,8 @@ areas:
           jumps: 1
     - name: NW Ledge
       coord: [19.35, 19.95]
+      data:
+        flipside: Giguna Breach > Portal Exchange > Middle Ledge
       local:
         - to: West 20
           jumps: 1
@@ -4956,6 +4962,8 @@ areas:
 
     - name: Enclosed Portal
       coord: [19.5, 20.8]
+      data:
+        flipside: Giguna Breach > Portal Exchange > Bottom
       local:
         - to: Shocking Distance
     - name: Shocking Distance

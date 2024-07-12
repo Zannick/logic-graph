@@ -1176,6 +1176,64 @@ areas:
   spots:
     - name: West
       coord: [19.1, 19.75]
+      local:
+        - to: Middle Ledge
+        - to: Middle Gap
+      exits:
+        - to: Upper Side
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Labyrinth > East 20
+          tags: [xdoor]
+    - name: Upper Side
+      coord: [19.5, 19.7]
+      data:
+        flipside: Giguna > Mural > NW Cache
+      local:
+        - to: Middle Ledge
+      exits:
+        - to: West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: Middle Ledge
+      coord: [19.35, 19.95]
+      data:
+        flipside: Giguna > Mural > NW Ledge
+      local:
+        - to: Upper Side
+          jumps: 1
+        - to: Middle Gap
+      exits:
+        - to: West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Middle Gap
+      coord: [19.3, 20.1]
+      data:
+        flipside: Giguna > Mural > NW Bottom
+      local:
+        - to: Bottom
+          thru: [19.3, 20.4]
+      exits:
+        - to: Middle Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: West
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+    - name: Bottom
+      coord: [19.5, 20.8]
+      data:
+        flipside: Giguna > Mural > Enclosed Portal
+      exits:
+        - to: Middle Gap
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
 
 - name: Upper Machinery  # MARK: Upper Machinery
   on_entry: $reset_old_area(^newpos)

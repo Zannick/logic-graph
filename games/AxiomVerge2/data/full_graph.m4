@@ -1864,6 +1864,13 @@ digraph AxiomVerge2 {
     Giguna_Breach__Peak__East_6 -> Giguna_Breach__Peak__Upper_East;
     Giguna_Breach__Peak__Portal -> Giguna_Breach__Peak__Upper_West;
     Giguna_Breach__Pink_Clouds__Normal_Entry -> Giguna_Breach__Pink_Clouds__Corner;
+    Giguna_Breach__Portal_Exchange__West -> Giguna_Breach__Labyrinth__East_20;
+    Giguna_Breach__Portal_Exchange__West -> Giguna_Breach__Portal_Exchange__Upper_Side;
+    Giguna_Breach__Portal_Exchange__Upper_Side -> Giguna_Breach__Portal_Exchange__West;
+    Giguna_Breach__Portal_Exchange__Middle_Ledge -> Giguna_Breach__Portal_Exchange__West;
+    Giguna_Breach__Portal_Exchange__Middle_Gap -> Giguna_Breach__Portal_Exchange__Middle_Ledge;
+    Giguna_Breach__Portal_Exchange__Middle_Gap -> Giguna_Breach__Portal_Exchange__West;
+    Giguna_Breach__Portal_Exchange__Bottom -> Giguna_Breach__Portal_Exchange__Middle_Gap;
     Giguna_Breach__Robopede__West -> Giguna_Breach__SW_Save__East_12;
     Giguna_Breach__Robopede__North -> Giguna_Breach__Grid_14_10_11__South;
     Giguna_Breach__Slingshot__West -> Giguna_Breach__Fire_Room__East_11;
@@ -4814,6 +4821,12 @@ digraph AxiomVerge2 {
     Giguna_Breach__Lower_Portal__West_Ledge -> Giguna_Breach__Lower_Portal__Portal_Dais;
     Giguna_Breach__Lower_Portal__North -> Giguna_Breach__Lower_Portal__East_Upper_Ledge;
     Giguna_Breach__Lower_Portal__North -> Giguna_Breach__Lower_Portal__Portal_Dais;
+    Giguna_Breach__Portal_Exchange__West -> Giguna_Breach__Portal_Exchange__Middle_Ledge;
+    Giguna_Breach__Portal_Exchange__West -> Giguna_Breach__Portal_Exchange__Middle_Gap;
+    Giguna_Breach__Portal_Exchange__Upper_Side -> Giguna_Breach__Portal_Exchange__Middle_Ledge;
+    Giguna_Breach__Portal_Exchange__Middle_Ledge -> Giguna_Breach__Portal_Exchange__Upper_Side;
+    Giguna_Breach__Portal_Exchange__Middle_Ledge -> Giguna_Breach__Portal_Exchange__Middle_Gap;
+    Giguna_Breach__Portal_Exchange__Middle_Gap -> Giguna_Breach__Portal_Exchange__Bottom;
     Giguna_Breach__Emergence__Corner -> Giguna_Breach__Emergence__Left_Side;
     Giguna_Breach__Emergence__Corner -> Giguna_Breach__Emergence__Left_Mid_air;
     Giguna_Breach__Emergence__Left_Side -> Giguna_Breach__Emergence__Corner;

@@ -1326,6 +1326,10 @@
         }
         {
             Giguna_Breach__Portal_Exchange__West [label = "", pos = "57.3,-82.916667!"];
+            Giguna_Breach__Portal_Exchange__Upper_Side [label = "", pos = "58.5,-82.833333!"];
+            Giguna_Breach__Portal_Exchange__Middle_Ledge [label = "", pos = "58.05,-83.25!"];
+            Giguna_Breach__Portal_Exchange__Middle_Gap [label = "", pos = "57.9,-83.5!"];
+            Giguna_Breach__Portal_Exchange__Bottom [label = "", pos = "58.5,-84.666667!"];
         }
         {
             Giguna_Breach__Robopede__West [label = "", pos = "39.3,-69.25!"];
