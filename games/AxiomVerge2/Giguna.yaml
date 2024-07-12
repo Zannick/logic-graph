@@ -3944,55 +3944,699 @@ areas:
 
 - name: Vertical Interchange  # MARK: Vertical Interchange
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [21, 19, 22, 20]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Giguna Vertical Interchange Flask
   spots:
     #region Upper
     - name: West 17
       coord: [21.05, 16.3]
-    - name: West 19
-      coord: [21.05, 18.8]
+      local:
+        - to: Top Left Ledge
+      exits:
+        - to: East Caverns > East 17
+          tags: [xshift]
     - name: North
       coord: [21.5, 16.2]
+      local:
+        - to: Top Right Ledge
+        - to: Top Middle Ledge
+      exits:
+        - to: Ebih > Vertical Interchange > South
+          tags: [ydoor]
     - name: Top Left Ledge
       coord: [21.25, 16.45]
+      local:
+        - to: Top Rocky Ledge
+        - to: Top Middle Ledge
+      exits:
+        - to: Top Right Ledge
+          req: $hook
+          movement: fast_hover
+        - to: Top Right Ledge
+          req: $hover
+          movement: base
     - name: Top Right Ledge
       coord: [21.45, 16.45]
+      local:
+        - to: Top Middle Ledge
+      exits:
+        - to: North
+          req: $hover
+          jumps: 3
+        - to: North
+          req: Anuman and ^mode != 'drone'
+          jumps: 1
+        - to: North
+          req: $climb
+          jumps: 2
+        - to: Top Left Ledge
+          req: $hook
+          movement: fast_hover
+        - to: East Caverns > East Grass
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Top Middle Ledge
+      coord: [21.35, 16.75]
+      local:
+        - to: Top Rocky Ledge
+      exits:
+        - to: Top Left Ledge
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Top Right Ledge
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Top Left Ledge
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: Top Right Ledge
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: North
+          req: $hookhover
+          movement: base
+          jumps: 2
+        - to: Ebih > Vertical Interchange > South
+          req: $mist2
+          movement: mist2
+          penalty_tags: [ydoor, -mist2.4]
+        - to: East Caverns > East Grass
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Top Rocky Ledge
       coord: [21.3, 17.6]
+      local:
+        - to: Top Rocky Outcrop
+      exits:
+        - to: Top Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Top Left Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Top Middle Ledge
+          req: $grab and Anuman
+          movement: base
+          jumps: 4
     - name: Top Rocky Outcrop
       coord: [21.4, 18.0]
+      local:
+        - to: Top Passage Bottom
+      exits:
+        - to: Top Rocky Ledge
+          req: $hook or ($grab and Anuman)
+          movement: base
+          jumps: 2
     - name: Top Passage Bottom
       coord: [21.35, 18.25]
-    - name: Ledge 19
-      coord: [21.65, 18.7]
-    - name: East 20
-      coord: [21.9, 19.8]
+      local:
+        - to: Top Rocky Outcrop
+          jumps: 2
+        - to: West 19
+          thru: [21.375, 18.5]
+        - to: Middle Below Top
+        - to: Middle Plateau
+      exits:
+        - to: Top Rocky Outcrop
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Ledge 19
+          req: $hover
+          movement: base
     #endregion
 
     #region Middle
+    - name: Ledge 19
+      coord: [21.65, 18.7]
+      local:
+        - to: West 19
+        - to: Middle Below Top
+        - to: Middle Plateau
+          thru: [21.625, 19.0]
+        - to: East 20
+          thru: [21.625, 19.0]
+          jumps_down: [0, 1]
+      exits:
+        - to: Top Passage Bottom
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West 19
+      coord: [21.05, 18.8]
+      local:
+        - to: Middle Below Top
+      exits:
+        - to: Gateway > East 19
+          tags: [xshift]
+        - to: Ledge 19
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Top Passage Bottom
+          req: $hookhover
+          movement: base
+          jumps: 3
     - name: Middle Below Top
       coord: [21.4, 19.1]
+      local:
+        - to: West 19
+          jumps: 3
+        - to: Middle Plateau
+      exits:
+        - to: Ledge 19
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Top Passage Bottom
+          req: Nanite_Mist
+          movement: mist1
+        - to: Top Passage Bottom
+          req: $mist2
+          movement: mist2
     - name: Middle Plateau
       coord: [21.75, 19.6]
+      local:
+        - to: Middle Below Top
+          jumps: 3
+        - to: East 20
+          jumps_down: 1
+      exits:
+        - to: Gate
+          req: Giguna_Vertical_Interchange_Gate
+          movement: base
+        - to: Middle Below Top
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Ledge 19
+          req: $hookhover
+          movement: fast_hover
+          jumps: 4
+    - name: East 20
+      coord: [21.9, 19.8]
+      local:
+        - to: Middle Plateau
+          jumps: 1
+      exits:
+        - to: Amagi > West Lake > West 20
+          tags: [xdoor]
+        - to: Gate
+          req: Giguna_Vertical_Interchange_Gate
+          movement: base
     - name: Gate
       coord: [21.55, 19.85]
-    - name: Dead-end
-      coord: [21.2, 19.5]
+      local:
+        - to: Middle Ledge Below Gate
+        - to: Middle Hill By Switch
+          thru: [21.5, 20.1]
+        - to: Switch
+          thru: [21.5, 20.1]
+      locations:
+        - name: Jump Boomerang Flask
+          canon: Giguna_Vertical_Interchange_Flask
+          item: Big_Flask
+          req: $boomerang
+          to: Middle Ledge Below Gate
+          tags: [remote_flask]
+      exits:
+        - to: Middle Plateau
+          req: Giguna_Vertical_Interchange_Gate and ($hook or Anuman)
+          movement: base
+          jumps: 1
+        - to: East 20
+          req: Giguna_Vertical_Interchange_Gate
+          movement: base
+          jumps: 1
+        - to: Dead-end Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Dead-end
+          req: $hook
+          movement: fast_hover
+          jumps: 1
     - name: Dead-end Ledge
       coord: [21.3, 19.65]
+      local:
+        - to: Dead-end
+          jumps: 1
+        - to: Middle Ledge Below Gate
+      locations:
+        - name: Shockwave Flask
+          canon: Giguna_Vertical_Interchange_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Gate
+          req: $hover
+          movement: base
+    - name: Dead-end
+      coord: [21.2, 19.5]
+      local:
+        - to: Dead-end Ledge
+      locations:
+        - name: Flask
+          canon: Giguna_Vertical_Interchange_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Vertical_Interchange_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Vertical_Interchange_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
     - name: Middle Ledge Below Gate
       coord: [21.45, 20.3]
-
+      local:
+        - to: Middle Hill By Switch
+        - to: Ledge Above Rock
+          thru: [21.5, 20.5]
+        - to: Above Rock
+      exits:
+        - to: Gate
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Gate
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Dead-end Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Dead-end Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Dead-end Ledge
+          req: $mist2
+          movement: mist2
     - name: Middle Hill By Switch
       coord: [21.65, 20.7]
+      local:
+        - to: Switch
+        - to: Ledge Above Rock
+        - to: Above Rock
+      locations:
+        - name: Remote Button
+          canon: Giguna_Vertical_Interchange_Gate
+          item: Giguna_Vertical_Interchange_Gate
+          req: $boomerang
+          tags: [throw, event]
+      exits:
+        - to: Middle Ledge Below Gate
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West 21
+          req: $hover
+          movement: base
+          jumps: 1
     - name: Switch
       coord: [21.8, 20.8]
+      local:
+        - to: Middle Hill By Switch
+          jumps: 1
+      locations:
+        - name: Button
+          canon: Giguna_Vertical_Interchange_Gate
+          item: Giguna_Vertical_Interchange_Gate
+          req: $can_damage
+          tags: [button, event]
     #endregion
 
     #region Lower
+    - name: Ledge Above Rock
+      coord: [21.4, 21.0]
+      local:
+        - to: Above Rock
+        - to: Middle Hill By Switch
+          jumps: 2
+      exits:
+        - to: West 21
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: West 21
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: West 21
+      coord: [21.05, 20.65]
+      local:
+        - to: Ledge Above Rock
+      exits:
+        - to: Mural > East 21
+          tags: [xshift]
+        - to: Middle Hill By Switch
+          req: $hover
+          movement: base
+    - name: Above Rock
+      coord: [21.5, 21.3]
+      local:
+        - to: Ledge Above Rock
+          jumps: 2
+        - to: Middle Hill By Switch
+          jumps: 4
+      locations:
+        - name: Charge Downwards
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $charge
+          to: Rock
+          time: 2
+          penalty_tags: [charge_time]
+        - name: Spin Downwards
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $spin
+          to: Rock
+          time: 2
+        - name: Mist Downwards
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: Nanite_Mist
+          to: Rock
+          movement: mist1
+        - name: Upgraded Mist Downwards
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $mist2
+          to: Rock
+          movement: mist2
+      exits:
+        - to: Rock
+          req: Giguna_Vertical_Interchange_Rock
+          movement: base
+        - to: Ledge Above Rock
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Middle Hill By Switch
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Ledge Above Rock
+          req: Nanite_Mist
+          movement: mist1
+        - to: Ledge Above Rock
+          req: $mist2
+          movement: mist2
+    - name: Rock
+      coord: [21.5, 21.45]
+      exits:
+        - to: Ledge Above Rock
+          req: Giguna_Vertical_Interchange_Rock and $hook
+          movement: base
+          jumps: 2
+        - to: Ledge Above Rock
+          req: Giguna_Vertical_Interchange_Rock and $grab
+          movement: base
+          jumps: 3
+        - to: Middle Hill By Switch
+          req: Giguna_Vertical_Interchange_Rock and $hook
+          movement: fast_hover
+          jumps: 2.5
+        - to: Middle Hill By Switch
+          req: Giguna_Vertical_Interchange_Rock and $grab
+          movement: base
+          jumps: 5
+        - to: Rock East
+          req: Giguna_Vertical_Interchange_Rock
+          movement: base
+        - to: Rock West
+          req: Giguna_Vertical_Interchange_Rock
+          movement: base
+    - name: Rock East
+      coord: [21.65, 21.6]
+      local:
+        - to: East 22
+      locations:
+        - name: Charge Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $charge
+          to: Rock West
+          movement: fling
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Spin Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $spin
+          to: Rock West
+          movement: fast_hover
+          tags: [event]
+        - name: Mist Into Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: Nanite_Mist
+          to: Rock
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Into Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          to: Rock
+          req: $mist2
+          movement: mist2
+          tags: [event]
+        - name: Charge Upward Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $charge
+          to: Above Rock
+          movement: fling
+          jumps: 1
+          tags: [event]
+        - name: Spin Upward Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $spin
+          to: Above Rock
+          movement: fast_hover
+          jumps: 1
+          tags: [event]
+        - name: Mist Upwards Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: Nanite_Mist
+          to: Above Rock
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Upwards Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $mist2
+          to: Above Rock
+          movement: mist2
+          tags: [event]
+    - name: Rock West
+      coord: [21.35, 21.6]
+      local:
+        - to: Lower West Slope
+        - to: Lower Middle Corner
+        - to: Lower Ledge 2
+          thru: [[21.325, 21.8], [21.55, 22.2]]
+      locations:
+        - name: Charge Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $charge
+          to: Rock East
+          movement: fling
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Charge All The Way Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $charge
+          to: East 22
+          movement: fling
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Spin Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $spin
+          to: Rock East
+          movement: fast_hover
+          tags: [event]
+        - name: Spin Through Rock and Hover
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $spinhover
+          to: East 22
+          movement: fast_hover
+          tags: [event]
+        - name: Mist Into Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: Nanite_Mist
+          to: Rock
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Into Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $mist2
+          to: Rock
+          movement: mist2
+          tags: [event]
+        - name: Mist Upwards Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: Nanite_Mist
+          to: Above Rock
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Upwards Through Rock
+          canon: Giguna_Vertical_Interchange_Rock
+          item: Giguna_Vertical_Interchange_Rock
+          req: $mist2
+          to: Above Rock
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Rock
+          req: Giguna_Vertical_Interchange_Rock
+          movement: base
+          jumps: 1
+        - to: East 22
+          req: Giguna_Vertical_Interchange_Rock and $hookhover
+          movement: fast_hover
+          jumps: 1
     - name: East 22
       coord: [21.95, 21.8]
+      local:
+        - to: Rock East
+          jumps: 2
+      exits:
+        - to: Uhrum > Grassy Guardpost > West 22
+          tags: [xshift]
+    - name: Lower West Slope
+      coord: [21.15, 21.95]
+      local:
+        - to: Lower Middle Corner
+        - to: Lower Ledge 2
+          thru: [21.55, 22.2]
+      exits:
+        - to: Rock West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Rock West
+          req: $grab and Anuman
+          movement: base
+          jumps: 2
+        - to: Rock West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Rock West
+          req: $mist2
+          movement: mist2
+    - name: Lower Middle Corner
+      coord: [21.25, 22.5]
+      local:
+        - to: Lower West Slope
+          jumps: 3
+        - to: Lower Ledge 1
+    - name: Lower Ledge 1
+      coord: [21.6, 22.7]
+      local:
+        - to: Lower Middle Corner
+          jumps: 2
+        - to: Lower Ledge 2
+      exits:
+        - to: Lower Middle Corner
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Lower Ledge 2
+      coord: [21.65, 22.9]
+      local:
+        - to: Lower Ledge 1
+          jumps: 1
+        - to: Lower Plateau Ledge
+    - name: Lower Plateau Ledge
+      coord: [21.6, 23.3]
+      local:
+        - to: South
+        - to: Lower Platform
+      exits:
+        - to: Lower Ledge 2
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Lower Ledge 2
+          req: Nanite_Mist
+          movement: mist1
+        - to: Lower Ledge 2
+          req: $mist2
+          movement: mist2
+    - name: Lower Platform
+      coord: [21.45, 23.4]
+      local:
+        - to: Lower Plateau Ledge
+          jumps: 1
+        - to: South
+        - to: Southeast Corner
+    - name: Southeast Corner
+      coord: [21.15, 23.6]
+      local:
+        - to: South
+      exits:
+        - to: Lower Platform
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Lower Platform
+          req: $grab
+          movement: base
+          jumps: 2
     - name: South
       coord: [21.5, 23.8]
+      local:
+        - to: Southeast Corner
+          jumps: 2
+      exits:
+        - to: Lower Plateau Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Platform
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Plateau Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Lower Plateau Ledge
+          req: $mist2
+          movement: mist2
+        - to: Uhrum > Siege Corridor > Northwest Door
+          tags: [ydoor]
     #endregion
 
 - name: Antechamber  # MARK: Antechamber
@@ -4258,11 +4902,260 @@ areas:
 
 - name: Mural  # MARK: Mural
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Enclosed Portal
+    portal_hidden: true
+  map:
+    sword: [19, 19, 20, 20]
+    portal: [19, 20, 20, 21]
+    mural: [20, 19, 21, 20]
+    flask: [19, 21, 20, 22]
+  datamap:
+    map_spot:
+      sword: Menu > Kiengir Map > Assault Sword
+      portal: Menu > Kiengir Map > Giguna Mural Portal
+      mural: Menu > Kiengir Map > Giguna Mural NE
+      flask: Menu > Kiengir Map > Giguna Mural Flask
   spots:
     - name: West 20
       coord: [19.05, 20.0]
-    - name: Northwest Item
+      local:
+        - to: NW Cache
+          jumps: 2
+        - to: NW Ledge
+          jumps: 1
+        - to: NW Bottom
+      exits:
+        - to: Labyrinth East > East 20
+          tags: [xshift]
+    - name: NW Cache
       coord: [19.5, 19.7]
+      local:
+        - to: West 20
+        - to: NW Ledge
+        - to: NW Bottom
+      locations:
+        - name: Note
+          item: Kazakh_Assault
+          tags: [standing]
+    - name: NW Bottom
+      coord: [19.3, 20.1]
+      local:
+        - to: West 20
+          jumps: 1
+        - to: NW Ledge
+          jumps: 1
+    - name: NW Ledge
+      coord: [19.35, 19.95]
+      local:
+        - to: West 20
+          jumps: 1
+        - to: NW Bottom
+        - to: NW Cache
+          jumps: 2
+
+    - name: Enclosed Portal
+      coord: [19.5, 20.8]
+      local:
+        - to: Shocking Distance
+    - name: Shocking Distance
+      coord: [19.7, 21.0]
+      local:
+        - to: Enclosed Portal
+          jumps: 1
+        - to: Enclosed Cache
+      locations:
+        - name: Shockwave Flask
+          canon: Giguna_Mural_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: Enclosed Cache
+      coord: [19.85, 21.15]
+      local:
+        - to: Shocking Distance
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Giguna_Mural_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Mural_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Mural_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+
+    - name: Pedestal
+      coord: [19.875, 19.3]
+      local:
+        - to: Pedestal Ledge
+        - to: Grass Gap
+      locations:
+        - name: Item
+          item: Sickle_Sword
+          tags: [standing]
+      exits:
+        - to: East Platform
+          req: $hover
+          movement: base
+        - to: NE Ledge
+          req: $hover
+          movement: base
+    - name: Pedestal Ledge
+      coord: [20.0, 19.5]
+      local:
+        - to: Below Pedestal
+        - to: Grass and Tree
+        - to: Grass Gap
+        - to: East Grass Ledge
+        - to: Pedestal
+          jumps: 1
+      exits:
+        - to: East Platform
+          req: $hover
+          movement: base
+        - to: NE Ledge
+          req: $hover
+          movement: base
+    - name: NE Ledge
+      coord: [20.825, 19.5]
+      local:
+        - to: East 21
+          thru: [20.8, 20.3]
+        - to: East Platform
+        - to: East Grass Ledge
+          jumps_down: 1
+        - to: Grass Gap
+          jumps_down: 1
+        - to: Grass and Tree
+      exits:
+        - to: Pedestal Ledge
+          req: $hover
+          movement: base
+        - to: Pedestal
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Below Pedestal
+      coord: [20.0, 20.1]
+      local:
+        - to: Grass and Tree
+        - to: Grass Gap
+      exits:
+        - to: East Platform
+          req: $hover
+          movement: base
+        - to: NE Ledge
+          req: $hookhover
+          movement: base
+          jumps: 4
+        - to: Pedestal Ledge
+          req: $hookhover
+          movement: base
+          jumps: 4
+        - to: Pedestal Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Pedestal Ledge
+          req: $mist2
+          movement: mist2
+        - to: NE Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: NE Ledge
+          req: $mist2
+          movement: mist2
+    - name: East Platform
+      coord: [20.75, 20.3]
+      local:
+        - to: East 21
+        - to: East Grass Ledge
+          jumps_down: 1
+        - to: Grass Gap
+          jumps_down: 1
+        - to: Grass and Tree
+      exits:
+        - to: NE Ledge
+          req: $infinite_climb
+          movement: base
+          jumps: 3
+        - to: NE Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: NE Ledge
+          req: $mist2
+          movement: mist2
+        - to: Pedestal Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Pedestal Ledge
+          req: $mist2
+          movement: mist2
+    - name: East 21
+      coord: [20.95, 20.65]
+      local:
+        - to: East Platform
+          jumps: 3
+        - to: East Grass Ledge
+          jumps: 1
+      exits:
+        - to: East Platform
+          req: Anuman
+          movement: base
+          jumps: 2
+        - to: Vertical Interchange > West 21
+          tags: [xshift]
+    - name: East Grass Ledge
+      coord: [20.65, 20.65]
+      local:
+        - to: East Platform
+          jumps: 2
+        - to: East 21
+          jumps: 1
+        - to: Grass Gap
+        - to: Grass and Tree
+          jumps: 2
+    - name: Grass and Tree
+      coord: [20.2, 20.55]
+      local:
+        - to: Grass Gap
+        - to: Below Pedestal
+          thru: [18.8, 20.3]
+          jumps: [2, 1]
+        - to: East Grass Ledge
+          jumps: 2
+    - name: Grass Gap
+      coord: [20.5, 20.85]
+      local:
+        - to: East Grass Ledge
+          jumps: 1
+        - to: Grass and Tree
+          jumps: 2
+        - to: Rock Upper Ledge
+    - name: Rock Upper Ledge
+      coord: [20.6, 21.3]
+      exits:
+        - to: Grass Gap
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Grass Gap
+          req: Nanite_Mist
+          movement: mist1
+        - to: Grass Gap
+          req: $mist2
+          movement: mist2
+
+    # TODO: Lower half
 
 - name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)

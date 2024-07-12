@@ -1124,11 +1124,40 @@ areas:
         - to: Stronghold Item
       locations:
         - name: Break Left Wall
-          item: Amagi_Stronghold_Left_Wall
           canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
           req: $shockwave
           price: 100
           tags: [shockwave, event]
+        - name: Mist Through Wall
+          canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          req: Nanite_Mist
+          to: West Stronghold Wall
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          req: $mist2
+          to: West Stronghold Wall
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: West Stronghold Wall
+          req: Amagi_Stronghold_Left_Wall
+          movement: base
+          jumps: 1
+        - to: West Stronghold Wall
+          req: Amagi_Stronghold_Left_Wall
+          movement: water
+          jumps: 1
+        - to: Stronghold Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: Stronghold Top
+          req: $mist2
+          movement: mist2
     - name: Stronghold Middle Column
       coord: [23.7, 19.7]
       locations:
@@ -1333,6 +1362,85 @@ areas:
       exits:
         - to: Ebih > Vertical Interchange > East 15
           tags: [xshift]
+
+    # West Stronghold
+    - name: West 20
+      coord: [22.1, 19.75]
+      local:
+        - to: West Stronghold Button
+          jumps: 1
+        - to: West Stronghold Gate
+      locations:
+        - name: Remote Button
+          canon: Amagi_West_Lake_Gate
+          item: Amagi_West_Lake_Gate
+          req: $boomerang
+          tags: [throw, event]
+      exits:
+        - to: Giguna > Vertical Interchange > East 20
+          tags: [xdoor]
+    - name: West Stronghold Button
+      coord: [22.15, 19.5]
+      local:
+        - to: West Stronghold Gate
+        - to: West 20
+      locations:
+        - name: Button
+          canon: Amagi_West_Lake_Gate
+          item: Amagi_West_Lake_Gate
+          req: $can_damage
+          tags: [button, event]
+    - name: West Stronghold Gate
+      coord: [22.45, 19.75]
+      local:
+        - to: West 20
+        - to: West Stronghold Button
+          jumps: 1
+      exits:
+        - to: West Stronghold Wall
+          req: Amagi_West_Lake_Gate
+          movement: base
+          jumps: 1
+        - to: West Stronghold Wall
+          req: Amagi_West_Lake_Gate and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: West Stronghold Wall
+      coord: [22.85, 19.55]
+      locations:
+        - name: Break Wall
+          canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+        - name: Mist Through Wall
+          canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          req: Nanite_Mist
+          to: Stronghold Rear Wall
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Amagi Stronghold Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          req: $mist2
+          to: Stronghold Rear Wall
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Stronghold Rear Wall
+          req: Amagi_Stronghold_Left_Wall
+          movement: base
+        - to: Stronghold Rear Wall
+          req: Amagi_Stronghold_Left_Wall and Underwater_Movement
+          movement: water
+        - to: West Stronghold Gate
+          req: Amagi_West_Lake_Gate
+          movement: base
+        - to: West Stronghold Gate
+          req: Amagi_West_Lake_Gate and Underwater_Movement
+          movement: water
 
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between

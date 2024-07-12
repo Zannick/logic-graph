@@ -82,7 +82,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="7"];
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -251,10 +251,14 @@
             Amagi__West_Lake__Surface_Wall_Right [label = "", pos = "69.15,-24.416667!"];
             Amagi__West_Lake__Surface_Wall_Left [label = "", pos = "68.7,-24.416667!"];
             Amagi__West_Lake__West_15 [label = "", pos = "66.15,-24.583333!"];
+            Amagi__West_Lake__West_20 [label = "", pos = "66.3,-32.916667!"];
+            Amagi__West_Lake__West_Stronghold_Button [label = "", pos = "66.45,-32.5!"];
+            Amagi__West_Lake__West_Stronghold_Gate [label = "", pos = "67.35,-32.916667!"];
+            Amagi__West_Lake__West_Stronghold_Wall [label = "", pos = "68.55,-32.583333!"];
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             Annuna__Apocalypse__West [label = "", pos = "129.15,-27.916667!"];
             Annuna__Apocalypse__Northwest_Mid_air [label = "", pos = "130.05,-27.083333!"];
@@ -1638,7 +1642,22 @@
         }
         {
             Giguna__Mural__West_20 [label = "", pos = "57.15,-33.333333!"];
-            Giguna__Mural__Northwest_Item [label = "", pos = "58.5,-32.833333!"];
+            Giguna__Mural__NW_Cache [label = "", pos = "58.5,-32.833333!"];
+            Giguna__Mural__NW_Bottom [label = "", pos = "57.9,-33.5!"];
+            Giguna__Mural__NW_Ledge [label = "", pos = "58.05,-33.25!"];
+            Giguna__Mural__Enclosed_Portal [label = "", pos = "58.5,-34.666667!"];
+            Giguna__Mural__Shocking_Distance [label = "", pos = "59.1,-35.0!"];
+            Giguna__Mural__Enclosed_Cache [label = "", pos = "59.55,-35.25!"];
+            Giguna__Mural__Pedestal [label = "", pos = "59.625,-32.166667!"];
+            Giguna__Mural__Pedestal_Ledge [label = "", pos = "60.0,-32.5!"];
+            Giguna__Mural__NE_Ledge [label = "", pos = "62.475,-32.5!"];
+            Giguna__Mural__Below_Pedestal [label = "", pos = "60.0,-33.5!"];
+            Giguna__Mural__East_Platform [label = "", pos = "62.25,-33.833333!"];
+            Giguna__Mural__East_21 [label = "", pos = "62.85,-34.416667!"];
+            Giguna__Mural__East_Grass_Ledge [label = "", pos = "61.95,-34.416667!"];
+            Giguna__Mural__Grass_and_Tree [label = "", pos = "60.6,-34.25!"];
+            Giguna__Mural__Grass_Gap [label = "", pos = "61.5,-34.75!"];
+            Giguna__Mural__Rock_Upper_Ledge [label = "", pos = "61.8,-35.5!"];
         }
         {
             Giguna__Ruins_Center__East_8 [label = "", pos = "47.85,-12.5!"];
@@ -1709,24 +1728,38 @@
         }
         {
             Giguna__Vertical_Interchange__West_17 [label = "", pos = "63.15,-27.166667!"];
-            Giguna__Vertical_Interchange__West_19 [label = "", pos = "63.15,-31.333333!"];
             Giguna__Vertical_Interchange__North [label = "", pos = "64.5,-27.0!"];
             Giguna__Vertical_Interchange__Top_Left_Ledge [label = "", pos = "63.75,-27.416667!"];
             Giguna__Vertical_Interchange__Top_Right_Ledge [label = "", pos = "64.35,-27.416667!"];
+            Giguna__Vertical_Interchange__Top_Middle_Ledge [label = "", pos = "64.05,-27.916667!"];
             Giguna__Vertical_Interchange__Top_Rocky_Ledge [label = "", pos = "63.9,-29.333333!"];
             Giguna__Vertical_Interchange__Top_Rocky_Outcrop [label = "", pos = "64.2,-30.0!"];
             Giguna__Vertical_Interchange__Top_Passage_Bottom [label = "", pos = "64.05,-30.416667!"];
             Giguna__Vertical_Interchange__Ledge_19 [label = "", pos = "64.95,-31.166667!"];
-            Giguna__Vertical_Interchange__East_20 [label = "", pos = "65.7,-33.0!"];
+            Giguna__Vertical_Interchange__West_19 [label = "", pos = "63.15,-31.333333!"];
             Giguna__Vertical_Interchange__Middle_Below_Top [label = "", pos = "64.2,-31.833333!"];
             Giguna__Vertical_Interchange__Middle_Plateau [label = "", pos = "65.25,-32.666667!"];
+            Giguna__Vertical_Interchange__East_20 [label = "", pos = "65.7,-33.0!"];
             Giguna__Vertical_Interchange__Gate [label = "", pos = "64.65,-33.083333!"];
-            Giguna__Vertical_Interchange__Dead_end [label = "", pos = "63.6,-32.5!"];
             Giguna__Vertical_Interchange__Dead_end_Ledge [label = "", pos = "63.9,-32.75!"];
+            Giguna__Vertical_Interchange__Dead_end [label = "", pos = "63.6,-32.5!"];
             Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate [label = "", pos = "64.35,-33.833333!"];
             Giguna__Vertical_Interchange__Middle_Hill_By_Switch [label = "", pos = "64.95,-34.5!"];
             Giguna__Vertical_Interchange__Switch [label = "", pos = "65.4,-34.666667!"];
+            Giguna__Vertical_Interchange__Ledge_Above_Rock [label = "", pos = "64.2,-35.0!"];
+            Giguna__Vertical_Interchange__West_21 [label = "", pos = "63.15,-34.416667!"];
+            Giguna__Vertical_Interchange__Above_Rock [label = "", pos = "64.5,-35.5!"];
+            Giguna__Vertical_Interchange__Rock [label = "", pos = "64.5,-35.75!"];
+            Giguna__Vertical_Interchange__Rock_East [label = "", pos = "64.95,-36.0!"];
+            Giguna__Vertical_Interchange__Rock_West [label = "", pos = "64.05,-36.0!"];
             Giguna__Vertical_Interchange__East_22 [label = "", pos = "65.85,-36.333333!"];
+            Giguna__Vertical_Interchange__Lower_West_Slope [label = "", pos = "63.45,-36.583333!"];
+            Giguna__Vertical_Interchange__Lower_Middle_Corner [label = "", pos = "63.75,-37.5!"];
+            Giguna__Vertical_Interchange__Lower_Ledge_1 [label = "", pos = "64.8,-37.833333!"];
+            Giguna__Vertical_Interchange__Lower_Ledge_2 [label = "", pos = "64.95,-38.166667!"];
+            Giguna__Vertical_Interchange__Lower_Plateau_Ledge [label = "", pos = "64.8,-38.833333!"];
+            Giguna__Vertical_Interchange__Lower_Platform [label = "", pos = "64.35,-39.0!"];
+            Giguna__Vertical_Interchange__Southeast_Corner [label = "", pos = "63.45,-39.333333!"];
             Giguna__Vertical_Interchange__South [label = "", pos = "64.5,-39.666667!"];
         }
         {
@@ -1911,7 +1944,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="6"];
         {
             Glacier__Apocalypse_Entry__West_10 [label = "", pos = "132.15,-16.666667!"];
             Glacier__Apocalypse_Entry__Terminal [label = "", pos = "133.8,-16.666667!"];
@@ -2315,7 +2348,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="5"];
         {
             Irikar__Abandoned_Room__Empty_Pedestal [label = "", pos = "43.575,-44.5!"];
             Irikar__Abandoned_Room__Corner_Core [label = "", pos = "44.4,-44.5!"];
@@ -2768,6 +2801,11 @@
             Menu__Kiengir_Map__Giguna_Cache [label = "", pos = "54.0,-36.666667!"];
             Menu__Kiengir_Map__Giguna_Separator [label = "", pos = "54.0,-38.333333!"];
             Menu__Kiengir_Map__Giguna_Labyrinth_Hole [label = "", pos = "54.0,-35.0!"];
+            Menu__Kiengir_Map__Assault_Sword [label = "", pos = "57.0,-33.333333!"];
+            Menu__Kiengir_Map__Giguna_Mural_Portal [label = "", pos = "57.0,-35.0!"];
+            Menu__Kiengir_Map__Giguna_Mural_Flask [label = "", pos = "57.0,-36.666667!"];
+            Menu__Kiengir_Map__Giguna_Mural_NE [label = "", pos = "60.0,-33.333333!"];
+            Menu__Kiengir_Map__Giguna_Vertical_Interchange_Flask [label = "", pos = "63.0,-33.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Entrance [label = "", pos = "57.0,-43.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Exit [label = "", pos = "60.0,-41.666667!"];
             Menu__Kiengir_Map__Udusan [label = "", pos = "57.0,-41.666667!"];

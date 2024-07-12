@@ -197,6 +197,10 @@ subgraph Amagi
         Amagi__West_Lake__Surface_Wall_Right(Surface Wall Right);
         Amagi__West_Lake__Surface_Wall_Left(Surface Wall Left);
         Amagi__West_Lake__West_15(West 15);
+        Amagi__West_Lake__West_20(West 20);
+        Amagi__West_Lake__West_Stronghold_Button(West Stronghold Button);
+        Amagi__West_Lake__West_Stronghold_Gate(West Stronghold Gate);
+        Amagi__West_Lake__West_Stronghold_Wall(West Stronghold Wall);
     end
     subgraph Amagi__East_Lake[East Lake]
         Amagi__East_Lake__East_15_Flat(East 15 Flat);
@@ -1712,24 +1716,38 @@ subgraph Giguna
     end
     subgraph Giguna__Vertical_Interchange[Vertical Interchange]
         Giguna__Vertical_Interchange__West_17(West 17);
-        Giguna__Vertical_Interchange__West_19(West 19);
         Giguna__Vertical_Interchange__North(North);
         Giguna__Vertical_Interchange__Top_Left_Ledge(Top Left Ledge);
         Giguna__Vertical_Interchange__Top_Right_Ledge(Top Right Ledge);
+        Giguna__Vertical_Interchange__Top_Middle_Ledge(Top Middle Ledge);
         Giguna__Vertical_Interchange__Top_Rocky_Ledge(Top Rocky Ledge);
         Giguna__Vertical_Interchange__Top_Rocky_Outcrop(Top Rocky Outcrop);
         Giguna__Vertical_Interchange__Top_Passage_Bottom(Top Passage Bottom);
         Giguna__Vertical_Interchange__Ledge_19(Ledge 19);
-        Giguna__Vertical_Interchange__East_20(East 20);
+        Giguna__Vertical_Interchange__West_19(West 19);
         Giguna__Vertical_Interchange__Middle_Below_Top(Middle Below Top);
         Giguna__Vertical_Interchange__Middle_Plateau(Middle Plateau);
+        Giguna__Vertical_Interchange__East_20(East 20);
         Giguna__Vertical_Interchange__Gate(Gate);
-        Giguna__Vertical_Interchange__Dead_end(Dead-end);
         Giguna__Vertical_Interchange__Dead_end_Ledge(Dead-end Ledge);
+        Giguna__Vertical_Interchange__Dead_end(Dead-end);
         Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate(Middle Ledge Below Gate);
         Giguna__Vertical_Interchange__Middle_Hill_By_Switch(Middle Hill By Switch);
         Giguna__Vertical_Interchange__Switch(Switch);
+        Giguna__Vertical_Interchange__Ledge_Above_Rock(Ledge Above Rock);
+        Giguna__Vertical_Interchange__West_21(West 21);
+        Giguna__Vertical_Interchange__Above_Rock(Above Rock);
+        Giguna__Vertical_Interchange__Rock(Rock);
+        Giguna__Vertical_Interchange__Rock_East(Rock East);
+        Giguna__Vertical_Interchange__Rock_West(Rock West);
         Giguna__Vertical_Interchange__East_22(East 22);
+        Giguna__Vertical_Interchange__Lower_West_Slope(Lower West Slope);
+        Giguna__Vertical_Interchange__Lower_Middle_Corner(Lower Middle Corner);
+        Giguna__Vertical_Interchange__Lower_Ledge_1(Lower Ledge 1);
+        Giguna__Vertical_Interchange__Lower_Ledge_2(Lower Ledge 2);
+        Giguna__Vertical_Interchange__Lower_Plateau_Ledge(Lower Plateau Ledge);
+        Giguna__Vertical_Interchange__Lower_Platform(Lower Platform);
+        Giguna__Vertical_Interchange__Southeast_Corner(Southeast Corner);
         Giguna__Vertical_Interchange__South(South);
     end
     subgraph Giguna__Antechamber[Antechamber]
@@ -1760,7 +1778,22 @@ subgraph Giguna
     end
     subgraph Giguna__Mural[Mural]
         Giguna__Mural__West_20(West 20);
-        Giguna__Mural__Northwest_Item(Northwest Item);
+        Giguna__Mural__NW_Cache(NW Cache);
+        Giguna__Mural__NW_Bottom(NW Bottom);
+        Giguna__Mural__NW_Ledge(NW Ledge);
+        Giguna__Mural__Enclosed_Portal(Enclosed Portal);
+        Giguna__Mural__Shocking_Distance(Shocking Distance);
+        Giguna__Mural__Enclosed_Cache(Enclosed Cache);
+        Giguna__Mural__Pedestal(Pedestal);
+        Giguna__Mural__Pedestal_Ledge(Pedestal Ledge);
+        Giguna__Mural__NE_Ledge(NE Ledge);
+        Giguna__Mural__Below_Pedestal(Below Pedestal);
+        Giguna__Mural__East_Platform(East Platform);
+        Giguna__Mural__East_21(East 21);
+        Giguna__Mural__East_Grass_Ledge(East Grass Ledge);
+        Giguna__Mural__Grass_and_Tree(Grass and Tree);
+        Giguna__Mural__Grass_Gap(Grass Gap);
+        Giguna__Mural__Rock_Upper_Ledge(Rock Upper Ledge);
     end
     subgraph Giguna__Breachable_Wall[Breachable Wall]
         Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
@@ -2697,6 +2730,11 @@ subgraph Menu
         Menu__Kiengir_Map__Giguna_Cache(Giguna Cache);
         Menu__Kiengir_Map__Giguna_Separator(Giguna Separator);
         Menu__Kiengir_Map__Giguna_Labyrinth_Hole(Giguna Labyrinth Hole);
+        Menu__Kiengir_Map__Assault_Sword(Assault Sword);
+        Menu__Kiengir_Map__Giguna_Mural_Portal(Giguna Mural Portal);
+        Menu__Kiengir_Map__Giguna_Mural_Flask(Giguna Mural Flask);
+        Menu__Kiengir_Map__Giguna_Mural_NE(Giguna Mural NE);
+        Menu__Kiengir_Map__Giguna_Vertical_Interchange_Flask(Giguna Vertical Interchange Flask);
         Menu__Kiengir_Map__Uhrum_West_Portal_Entrance(Uhrum West Portal Entrance);
         Menu__Kiengir_Map__Uhrum_West_Portal_Exit(Uhrum West Portal Exit);
         Menu__Kiengir_Map__Udusan(Udusan);
@@ -3144,9 +3182,13 @@ Amagi__West_Lake__Stronghold_Ceiling_Left <--> Amagi__West_Lake__Stronghold_Midd
 Amagi__West_Lake__Stronghold_Ceiling_Right <--> Amagi__West_Lake__Stronghold_Front_Room
 Amagi__West_Lake__Stronghold_Front_Door <--> Amagi__West_Lake__Stronghold_Front_Room
 Amagi__West_Lake__Stronghold_Item <--> Amagi__West_Lake__Stronghold_Middle_Column
+Amagi__West_Lake__Stronghold_Rear_Wall --> Amagi__West_Lake__Stronghold_Top
+Amagi__West_Lake__Stronghold_Rear_Wall <--> Amagi__West_Lake__West_Stronghold_Wall
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
+Amagi__West_Lake__West_20 <--> Giguna__Vertical_Interchange__East_20
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Amagi__West_Lake__West_Stronghold_Gate <--> Amagi__West_Lake__West_Stronghold_Wall
 Annuna__Apocalypse_Hallway__Center_Pillar <--> Annuna__Apocalypse_Hallway__West
 Annuna__Apocalypse_Hallway__East_Pillar --> Annuna__Apocalypse_Hallway__Center_Pillar
 Annuna__Apocalypse_Hallway__Lower_East <--> Glacier__Apocalypse_Entry__West_15_Lower
@@ -3933,7 +3975,7 @@ Giguna__East_Caverns__Arc_Passage --> Giguna__East_Caverns__Hidden_Passage_West
 Giguna__East_Caverns__Carving --> Giguna__East_Caverns__East_Side
 Giguna__East_Caverns__Carving --> Giguna__East_Caverns__Hidden_Passage_East
 Giguna__East_Caverns__Carving --> Giguna__East_Caverns__Middle_Rock
-Giguna__East_Caverns__East_17 --> Giguna__Vertical_Interchange__West_17
+Giguna__East_Caverns__East_17 <--> Giguna__Vertical_Interchange__West_17
 Giguna__East_Caverns__East_Grass --> Giguna__East_Caverns__East_17
 Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__East_Shaft
 Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__Middle_Rock
@@ -3974,7 +4016,7 @@ Giguna__Gateway__Button <--> Giguna__Gateway__East_19
 Giguna__Gateway__Door --> Giguna__Gateway__Block_Left
 Giguna__Gateway__Door --> Giguna__Gateway__Left_Platform
 Giguna__Gateway__Door <--> Giguna__Gateway__Passage_Entry
-Giguna__Gateway__East_19 --> Giguna__Vertical_Interchange__West_19
+Giguna__Gateway__East_19 <--> Giguna__Vertical_Interchange__West_19
 Giguna__Gateway__Far_Ledge --> Giguna__Gateway__Flask_Ledge
 Giguna__Gateway__Far_Ledge <--> Giguna__Gateway__Right_Platform
 Giguna__Gateway__Left_Platform --> Giguna__Gateway__Block_Lowered
@@ -4024,7 +4066,7 @@ Giguna__Helipad__So_Close --> Giguna__Helipad__Tablet_Ledge
 Giguna__Helipad__South_Left --> Giguna__Clouds__North_Left
 Giguna__Helipad__South_Middle --> Giguna__Clouds__North_Middle
 Giguna__Helipad__South_Right --> Giguna__Clouds__North_Right
-Giguna__Labyrinth_East__East_20 --> Giguna__Mural__West_20
+Giguna__Labyrinth_East__East_20 <--> Giguna__Mural__West_20
 Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Drop
 Giguna__Labyrinth_East__Lower_Middle --> Giguna__Labyrinth_East__Middle_Tree
 Giguna__Labyrinth_East__Lower_West <--> Giguna__Labyrinth__Lower_East
@@ -4049,6 +4091,17 @@ Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
 Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
 Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
 Giguna__Lamassu__Rear_Gap --> Giguna__Lamassu__East_18
+Giguna__Mural__Below_Pedestal --> Giguna__Mural__East_Platform
+Giguna__Mural__Below_Pedestal --> Giguna__Mural__NE_Ledge
+Giguna__Mural__Below_Pedestal --> Giguna__Mural__Pedestal_Ledge
+Giguna__Mural__East_21 --> Giguna__Mural__East_Platform
+Giguna__Mural__East_21 <--> Giguna__Vertical_Interchange__West_21
+Giguna__Mural__East_Platform --> Giguna__Mural__NE_Ledge
+Giguna__Mural__East_Platform <--> Giguna__Mural__Pedestal_Ledge
+Giguna__Mural__NE_Ledge <--> Giguna__Mural__Pedestal
+Giguna__Mural__NE_Ledge <--> Giguna__Mural__Pedestal_Ledge
+Giguna__Mural__Pedestal --> Giguna__Mural__East_Platform
+Giguna__Mural__Rock_Upper_Ledge --> Giguna__Mural__Grass_Gap
 Giguna__Ruins_Center__East_8 <--> Giguna__Ruins_East__West_8
 Giguna__Ruins_Center__East_9 <--> Giguna__Ruins_East__West_9
 Giguna__Ruins_Center__Wall_Bottom --> Giguna__Ruins_Center__Wall_Top
@@ -4084,6 +4137,51 @@ Giguna__Ruins_West__West_7 --> Giguna__West_Tower__East_7
 Giguna__Separator__East_25 <--> Uhrum__West_Entrance__West_25
 Giguna__Separator__Lower_Brick <--> Giguna__Separator__Upper_Brick
 Giguna__Separator__Platform <--> Giguna__Separator__Switch
+Giguna__Vertical_Interchange__Above_Rock --> Giguna__Vertical_Interchange__Ledge_Above_Rock
+Giguna__Vertical_Interchange__Above_Rock --> Giguna__Vertical_Interchange__Middle_Hill_By_Switch
+Giguna__Vertical_Interchange__Above_Rock --> Giguna__Vertical_Interchange__Rock
+Giguna__Vertical_Interchange__Dead_end_Ledge <--> Giguna__Vertical_Interchange__Gate
+Giguna__Vertical_Interchange__East_20 <--> Giguna__Vertical_Interchange__Gate
+Giguna__Vertical_Interchange__East_22 <--> Uhrum__Grassy_Guardpost__West_22
+Giguna__Vertical_Interchange__Gate --> Giguna__Vertical_Interchange__Dead_end
+Giguna__Vertical_Interchange__Gate <--> Giguna__Vertical_Interchange__Middle_Plateau
+Giguna__Vertical_Interchange__Ledge_19 <--> Giguna__Vertical_Interchange__Top_Passage_Bottom
+Giguna__Vertical_Interchange__Ledge_Above_Rock --> Giguna__Vertical_Interchange__West_21
+Giguna__Vertical_Interchange__Lower_Ledge_1 --> Giguna__Vertical_Interchange__Lower_Middle_Corner
+Giguna__Vertical_Interchange__Lower_Plateau_Ledge --> Giguna__Vertical_Interchange__Lower_Ledge_2
+Giguna__Vertical_Interchange__Lower_West_Slope --> Giguna__Vertical_Interchange__Rock_West
+Giguna__Vertical_Interchange__Middle_Below_Top --> Giguna__Vertical_Interchange__Ledge_19
+Giguna__Vertical_Interchange__Middle_Below_Top --> Giguna__Vertical_Interchange__Top_Passage_Bottom
+Giguna__Vertical_Interchange__Middle_Hill_By_Switch --> Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate
+Giguna__Vertical_Interchange__Middle_Hill_By_Switch <--> Giguna__Vertical_Interchange__West_21
+Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate --> Giguna__Vertical_Interchange__Dead_end_Ledge
+Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate --> Giguna__Vertical_Interchange__Gate
+Giguna__Vertical_Interchange__Middle_Plateau --> Giguna__Vertical_Interchange__Ledge_19
+Giguna__Vertical_Interchange__Middle_Plateau --> Giguna__Vertical_Interchange__Middle_Below_Top
+Giguna__Vertical_Interchange__North --> Ebih__Vertical_Interchange__South
+Giguna__Vertical_Interchange__Rock --> Giguna__Vertical_Interchange__Ledge_Above_Rock
+Giguna__Vertical_Interchange__Rock --> Giguna__Vertical_Interchange__Middle_Hill_By_Switch
+Giguna__Vertical_Interchange__Rock --> Giguna__Vertical_Interchange__Rock_East
+Giguna__Vertical_Interchange__Rock <--> Giguna__Vertical_Interchange__Rock_West
+Giguna__Vertical_Interchange__Rock_West --> Giguna__Vertical_Interchange__East_22
+Giguna__Vertical_Interchange__South --> Giguna__Vertical_Interchange__Lower_Plateau_Ledge
+Giguna__Vertical_Interchange__South --> Giguna__Vertical_Interchange__Lower_Platform
+Giguna__Vertical_Interchange__South <--> Uhrum__Siege_Corridor__Northwest_Door
+Giguna__Vertical_Interchange__Southeast_Corner --> Giguna__Vertical_Interchange__Lower_Platform
+Giguna__Vertical_Interchange__Top_Left_Ledge <--> Giguna__Vertical_Interchange__Top_Right_Ledge
+Giguna__Vertical_Interchange__Top_Middle_Ledge --> Ebih__Vertical_Interchange__South
+Giguna__Vertical_Interchange__Top_Middle_Ledge --> Giguna__East_Caverns__East_Grass
+Giguna__Vertical_Interchange__Top_Middle_Ledge --> Giguna__Vertical_Interchange__North
+Giguna__Vertical_Interchange__Top_Middle_Ledge --> Giguna__Vertical_Interchange__Top_Left_Ledge
+Giguna__Vertical_Interchange__Top_Middle_Ledge --> Giguna__Vertical_Interchange__Top_Right_Ledge
+Giguna__Vertical_Interchange__Top_Passage_Bottom --> Giguna__Vertical_Interchange__Top_Rocky_Outcrop
+Giguna__Vertical_Interchange__Top_Right_Ledge --> Giguna__East_Caverns__East_Grass
+Giguna__Vertical_Interchange__Top_Right_Ledge --> Giguna__Vertical_Interchange__North
+Giguna__Vertical_Interchange__Top_Rocky_Ledge --> Giguna__Vertical_Interchange__Top_Left_Ledge
+Giguna__Vertical_Interchange__Top_Rocky_Ledge --> Giguna__Vertical_Interchange__Top_Middle_Ledge
+Giguna__Vertical_Interchange__Top_Rocky_Outcrop --> Giguna__Vertical_Interchange__Top_Rocky_Ledge
+Giguna__Vertical_Interchange__West_19 --> Giguna__Vertical_Interchange__Ledge_19
+Giguna__Vertical_Interchange__West_19 --> Giguna__Vertical_Interchange__Top_Passage_Bottom
 Giguna__Wasteland__Bluff_by_Door --> Giguna__Wasteland__Door_Left
 Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Center_Plains
 Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Lower_Platform_West
@@ -4637,7 +4735,6 @@ Uhrum__Grassy_Guardpost__East_Ledge <--> Uhrum__Grassy_Guardpost__West_Ledge
 Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__Center_Platform_East
 Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__East_Ledge
 Uhrum__Grassy_Guardpost__Small_Column_East --> Uhrum__Grassy_Guardpost__West_Ledge
-Uhrum__Grassy_Guardpost__West_22 --> Giguna__Vertical_Interchange__East_22
 Uhrum__Grassy_Guardpost__West_22 --> Uhrum__Emergence_Save__Save_Point
 Uhrum__Rocky_Gate__East --> Uhrum__Rocky_Gate__East_Ledge
 Uhrum__Rocky_Gate__East <--> Uhrum__Rocky_Guardpost__West_23
@@ -4670,7 +4767,6 @@ Uhrum__Siege_Corridor__East_25 <--> Uhrum__Waterfalls__West_25
 Uhrum__Siege_Corridor__East_Hill <--> Uhrum__Siege_Corridor__Mideast_Tree
 Uhrum__Siege_Corridor__East_Hill --> Uhrum__Siege_Corridor__Upper_Rock_East
 Uhrum__Siege_Corridor__Mideast_Tree --> Uhrum__Siege_Corridor__Upper_Rock_West
-Uhrum__Siege_Corridor__Northwest_Door --> Giguna__Vertical_Interchange__South
 Uhrum__Siege_Corridor__Northwest_Door <--> Uhrum__Siege_Corridor__Western_Cache
 Uhrum__Siege_Corridor__Northwest_Platform --> Uhrum__Siege_Corridor__Northwest_Door
 Uhrum__Siege_Corridor__Northwest_Platform <--> Uhrum__Siege_Corridor__Western_Cache

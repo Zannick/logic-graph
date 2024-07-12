@@ -822,6 +822,16 @@ areas:
       coord: [18, 23]
     - name: Giguna Labyrinth Hole
       coord: [18, 21]
+    - name: Assault Sword  # Kazakh Assault and Sickle Sword
+      coord: [19, 20]
+    - name: Giguna Mural Portal
+      coord: [19, 21]
+    - name: Giguna Mural Flask
+      coord: [19, 22]
+    - name: Giguna Mural NE
+      coord: [20, 20]
+    - name: Giguna Vertical Interchange Flask
+      coord: [21, 20]
 
     - name: Uhrum West Portal Entrance
       coord: [19, 26]

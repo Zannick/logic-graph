@@ -31,6 +31,7 @@ pub enum Item {
     Amagi_Stronghold_Wall_1,
     Amagi_Stronghold_Wall_2,
     Amagi_Stronghold_Wall_And_Boulder_1,
+    Amagi_West_Lake_Gate,
     Amagi_West_Lake_Surface_Wall,
     Amashilama,
     Annuna_East_Bridge_Gate,
@@ -107,6 +108,8 @@ pub enum Item {
     Giguna_Labyrinth_Gate,
     Giguna_Northeast_Gate,
     Giguna_Separator_Bricks,
+    Giguna_Vertical_Interchange_Gate,
+    Giguna_Vertical_Interchange_Rock,
     Giguna_Wasteland_Door,
     Giguna_Wasteland_Passage_H,
     Glacier_Big_Drop_Rock,
@@ -135,6 +138,7 @@ pub enum Item {
     Irikar_Gudam,
     Irikar_Royal_Storage_Wall,
     Journal_2049_10_29,
+    Kazakh_Assault,
     Lament_for_Fools,
     Ledge_Grab,
     Letter_from_Trace,
@@ -171,6 +175,7 @@ pub enum Item {
     Royal_Ring,
     Separation,
     Shockwave,
+    Sickle_Sword,
     Siuna_Storage_Wall,
     Slingshot_Charge,
     Slingshot_Hook,
@@ -218,6 +223,7 @@ impl fmt::Display for Item {
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
                 write!(f, "{}", "Amagi_Stronghold_Wall_And_Boulder_1")
             }
+            Item::Amagi_West_Lake_Gate => write!(f, "{}", "Amagi_West_Lake_Gate"),
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
@@ -294,6 +300,12 @@ impl fmt::Display for Item {
             Item::Giguna_Labyrinth_Gate => write!(f, "{}", "Giguna_Labyrinth_Gate"),
             Item::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
             Item::Giguna_Separator_Bricks => write!(f, "{}", "Giguna_Separator_Bricks"),
+            Item::Giguna_Vertical_Interchange_Gate => {
+                write!(f, "{}", "Giguna_Vertical_Interchange_Gate")
+            }
+            Item::Giguna_Vertical_Interchange_Rock => {
+                write!(f, "{}", "Giguna_Vertical_Interchange_Rock")
+            }
             Item::Giguna_Wasteland_Door => write!(f, "{}", "Giguna_Wasteland_Door"),
             Item::Giguna_Wasteland_Passage_H => write!(f, "{}", "Giguna_Wasteland_Passage_H"),
             Item::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
@@ -322,6 +334,7 @@ impl fmt::Display for Item {
             Item::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             Item::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
+            Item::Kazakh_Assault => write!(f, "{}", "Kazakh_Assault"),
             Item::Lament_for_Fools => write!(f, "{}", "Lament_for_Fools"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             Item::Letter_from_Trace => write!(f, "{}", "Letter_from_Trace"),
@@ -358,6 +371,7 @@ impl fmt::Display for Item {
             Item::Royal_Ring => write!(f, "{}", "Royal_Ring"),
             Item::Separation => write!(f, "{}", "Separation"),
             Item::Shockwave => write!(f, "{}", "Shockwave"),
+            Item::Sickle_Sword => write!(f, "{}", "Sickle_Sword"),
             Item::Siuna_Storage_Wall => write!(f, "{}", "Siuna_Storage_Wall"),
             Item::Slingshot_Charge => write!(f, "{}", "Slingshot_Charge"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
@@ -409,6 +423,7 @@ impl std::str::FromStr for Item {
             "Amagi_Stronghold_Wall_1" => Ok(Item::Amagi_Stronghold_Wall_1),
             "Amagi_Stronghold_Wall_2" => Ok(Item::Amagi_Stronghold_Wall_2),
             "Amagi_Stronghold_Wall_And_Boulder_1" => Ok(Item::Amagi_Stronghold_Wall_And_Boulder_1),
+            "Amagi_West_Lake_Gate" => Ok(Item::Amagi_West_Lake_Gate),
             "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
             "Amashilama" => Ok(Item::Amashilama),
             "Annuna_East_Bridge_Gate" => Ok(Item::Annuna_East_Bridge_Gate),
@@ -485,6 +500,8 @@ impl std::str::FromStr for Item {
             "Giguna_Labyrinth_Gate" => Ok(Item::Giguna_Labyrinth_Gate),
             "Giguna_Northeast_Gate" => Ok(Item::Giguna_Northeast_Gate),
             "Giguna_Separator_Bricks" => Ok(Item::Giguna_Separator_Bricks),
+            "Giguna_Vertical_Interchange_Gate" => Ok(Item::Giguna_Vertical_Interchange_Gate),
+            "Giguna_Vertical_Interchange_Rock" => Ok(Item::Giguna_Vertical_Interchange_Rock),
             "Giguna_Wasteland_Door" => Ok(Item::Giguna_Wasteland_Door),
             "Giguna_Wasteland_Passage_H" => Ok(Item::Giguna_Wasteland_Passage_H),
             "Glacier_Big_Drop_Rock" => Ok(Item::Glacier_Big_Drop_Rock),
@@ -513,6 +530,7 @@ impl std::str::FromStr for Item {
             "Irikar_Gudam" => Ok(Item::Irikar_Gudam),
             "Irikar_Royal_Storage_Wall" => Ok(Item::Irikar_Royal_Storage_Wall),
             "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),
+            "Kazakh_Assault" => Ok(Item::Kazakh_Assault),
             "Lament_for_Fools" => Ok(Item::Lament_for_Fools),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
             "Letter_from_Trace" => Ok(Item::Letter_from_Trace),
@@ -549,6 +567,7 @@ impl std::str::FromStr for Item {
             "Royal_Ring" => Ok(Item::Royal_Ring),
             "Separation" => Ok(Item::Separation),
             "Shockwave" => Ok(Item::Shockwave),
+            "Sickle_Sword" => Ok(Item::Sickle_Sword),
             "Siuna_Storage_Wall" => Ok(Item::Siuna_Storage_Wall),
             "Slingshot_Charge" => Ok(Item::Slingshot_Charge),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
@@ -588,7 +607,6 @@ pub fn unused_item(id: Item) -> bool {
         id,
         Item::None
             | Item::Aansur
-            | Item::Amagi_Stronghold_Left_Wall
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5

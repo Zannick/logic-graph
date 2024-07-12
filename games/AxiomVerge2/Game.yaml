@@ -176,9 +176,11 @@ time:  # MARK: time
   fast_hover.1: 0.25
   fast_hover.2: 0.50
   base.1: 0.35
+  # These are specifically y-dir?
   fall.2: 0.2
   mist1.2: 0.8
   mist2.2: 0.4
+  mist2.4: 0.8
 
 warps:  # MARK: warps
   # initial savewarp pre-amashi
@@ -353,15 +355,15 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
      Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
      Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,
-     Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology]
+     Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology, Kazakh_Assault]
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{35}, Big_Flask{14}]
+    [Flask{36}, Big_Flask{15}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >
-    [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
+    [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe, Sickle_Sword, Boomerang_Upgrade]
   $other_items:itemList: >
     [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,
      Diviners_Gem]
@@ -484,6 +486,6 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Remote_Boomerang, Slingshot_Charge, Slingshot_Weapon]
+  unplaced_items: [Remote_Boomerang, Slingshot_Weapon]
   ignore_observations:
     - prev_area

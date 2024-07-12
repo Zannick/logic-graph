@@ -2343,7 +2343,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology, Kazakh_Assault]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2379,6 +2379,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Submarine_Progress)
             && $ctx.has(Item::Becoming_An_Arm)
             && $ctx.has(Item::Re_Does_Technology)
+            && $ctx.has(Item::Kazakh_Assault)
     }};
 }
 #[macro_export]
@@ -2671,6 +2672,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Re_Does_Technology"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Kazakh_Assault);
+                $edict.insert("Kazakh_Assault", format!("{}", h));
+                (h, vec!["Kazakh_Assault"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2774,16 +2784,19 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_re_does_technology();
             $ctx.has(Item::Re_Does_Technology)
+        }) && ({
+            $full_obs.observe_kazakh_assault();
+            $ctx.has(Item::Kazakh_Assault)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{35}, Big_Flask{14}]
+/// [Flask{36}, Big_Flask{15}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 35 && $ctx.count(Item::Big_Flask) >= 14
+        $ctx.count(Item::Flask) >= 36 && $ctx.count(Item::Big_Flask) >= 15
     }};
 }
 #[macro_export]
@@ -2794,7 +2807,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 35, vec!["Flask count"])
+                (ct >= 36, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2803,7 +2816,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 14, vec!["Big_Flask count"])
+                (ct >= 15, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2814,11 +2827,11 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(35));
-            $ctx.count(Item::Flask) >= 35
+            $full_obs.observe_flask(IntegerObservation::Ge(36));
+            $ctx.count(Item::Flask) >= 36
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(14));
-            $ctx.count(Item::Big_Flask) >= 14
+            $full_obs.observe_big_flask(IntegerObservation::Ge(15));
+            $ctx.count(Item::Big_Flask) >= 15
         })
     }};
 }
@@ -2869,7 +2882,7 @@ macro_rules! hobserve__all_health {
 }
 
 /// $all_weapons (  )
-/// [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe]
+/// [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe, Sickle_Sword, Boomerang_Upgrade]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
@@ -2878,6 +2891,8 @@ macro_rules! helper__all_weapons {
             && $ctx.has(Item::Bronze_Axe)
             && $ctx.has(Item::Royal_Dagger)
             && $ctx.has(Item::Double_Axe)
+            && $ctx.has(Item::Sickle_Sword)
+            && $ctx.has(Item::Boomerang_Upgrade)
     }};
 }
 #[macro_export]
@@ -2927,6 +2942,24 @@ macro_rules! hexplain__all_weapons {
                 (h, vec!["Double_Axe"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Sickle_Sword);
+                $edict.insert("Sickle_Sword", format!("{}", h));
+                (h, vec!["Sickle_Sword"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Boomerang_Upgrade);
+                $edict.insert("Boomerang_Upgrade", format!("{}", h));
+                (h, vec!["Boomerang_Upgrade"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2949,6 +2982,12 @@ macro_rules! hobserve__all_weapons {
         }) && ({
             $full_obs.observe_double_axe();
             $ctx.has(Item::Double_Axe)
+        }) && ({
+            $full_obs.observe_sickle_sword();
+            $ctx.has(Item::Sickle_Sword)
+        }) && ({
+            $full_obs.observe_boomerang_upgrade();
+            $ctx.has(Item::Boomerang_Upgrade)
         })
     }};
 }
