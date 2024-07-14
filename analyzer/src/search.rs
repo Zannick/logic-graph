@@ -446,7 +446,7 @@ where
         let mut confirm = self.startctx.clone();
         confirm = confirm.try_replay_all(self.world, &history).unwrap();
         if confirm.elapsed() == elapsed {
-            return Arc::new(Solution { elapsed, history });
+            return confirm.into_solution();
         }
         if confirm.elapsed() < elapsed {
             log::debug!(
@@ -454,10 +454,7 @@ where
                 elapsed,
                 confirm.elapsed()
             );
-            return Arc::new(Solution {
-                elapsed: confirm.elapsed(),
-                history,
-            });
+            return confirm.into_solution();
         }
         log::error!(
             "Elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
@@ -497,15 +494,44 @@ where
                 !self.world.won(replay.get()),
                 "Replay finished without finding a discrepancy"
             );
-            let db_elapsed = self.queue.db().get_best_times(replay.get()).unwrap().0;
-            assert!(
-                replay.elapsed() == db_elapsed,
-                "Replay differs from db at step {}. {}\n{}ms replayed vs {}ms in db",
-                i,
-                step,
-                replay.elapsed(),
-                db_elapsed
-            );
+            let (db_hist, db_elapsed) = self.queue.db().get_history(replay.get()).unwrap();
+            if replay.elapsed() != db_elapsed {
+                log::error!(
+                    "Replay differs from db at step {}. {}\n{}ms replayed vs {}ms in db",
+                    i,
+                    step,
+                    replay.elapsed(),
+                    db_elapsed
+                );
+                let mut partial = self.startctx.clone();
+                partial = partial.try_replay_all(self.world, &db_hist).unwrap();
+                if partial.elapsed() != db_elapsed {
+                    log::error!(
+                        "Replaying partial still does not match: {}ms vs {}ms",
+                        partial.elapsed(),
+                        db_elapsed
+                    );
+                    assert!(
+                        partial.recent_history() != replay.recent_history(),
+                        "History was the same despite discrepancy."
+                    );
+                }
+
+                let (history, new_elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
+
+                let retry = self.startctx.clone();
+                let solution = retry
+                    .try_replay_all(self.world, &history)
+                    .unwrap()
+                    .into_solution();
+                log::error!(
+                    "Replacing solution with history from second read: {}ms (previously: {}ms, {}ms)",
+                    new_elapsed,
+                    elapsed,
+                    confirm.elapsed(),
+                );
+                return solution;
+            }
         }
         panic!("Replay finished without winning or finding discrepancy");
     }
