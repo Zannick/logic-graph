@@ -448,7 +448,7 @@ where
             return Arc::new(Solution { elapsed, history });
         }
         if confirm.elapsed() < elapsed {
-            log::warn!(
+            log::debug!(
                 "Elapsed time from db {}ms but history was better: {}ms",
                 elapsed,
                 confirm.elapsed()
