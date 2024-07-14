@@ -442,6 +442,7 @@ where
         ctx: &ContextWrapper<T>,
         history: Vec<HistoryAlias<T>>,
         elapsed: u32,
+        mode: SearchMode,
     ) -> Arc<Solution<T>> {
         let mut confirm = self.startctx.clone();
         confirm = confirm.try_replay_all(self.world, &history).unwrap();
@@ -450,14 +451,16 @@ where
         }
         if confirm.elapsed() < elapsed {
             log::debug!(
-                "Elapsed time from db {}ms but history was better: {}ms",
+                "Solution({:?}) elapsed time from db is {}ms but history was better: {}ms",
+                mode,
                 elapsed,
                 confirm.elapsed()
             );
             return confirm.into_solution();
         }
         log::error!(
-            "Elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
+            "Solution({:?}) elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
+            mode,
             elapsed,
             confirm.elapsed()
         );
@@ -511,10 +514,9 @@ where
                         partial.elapsed(),
                         db_elapsed
                     );
-                    assert!(
-                        partial.recent_history() != replay.recent_history(),
-                        "History was the same despite discrepancy."
-                    );
+                    if partial.recent_history() == replay.recent_history() {
+                        log::error!("History was the same despite discrepancy.");
+                    };
                 }
 
                 let (history, new_elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
@@ -525,7 +527,8 @@ where
                     .unwrap()
                     .into_solution();
                 log::error!(
-                    "Replacing solution with history from second read: {}ms (previously: {}ms, {}ms)",
+                    "Replacing solution({:?}) with history from second read: {}ms (previously: {}ms, {}ms)",
+                    mode,
                     new_elapsed,
                     elapsed,
                     confirm.elapsed(),
@@ -561,7 +564,7 @@ where
 
         let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
 
-        let solution = self.confirm_solution_time(ctx, history, elapsed);
+        let solution = self.confirm_solution_time(ctx, history, elapsed, mode);
         let elapsed = solution.elapsed;
 
         let mut sols = self.solutions.lock().unwrap();
