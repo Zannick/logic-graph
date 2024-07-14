@@ -944,7 +944,8 @@ areas:
           canon: Uhrum_Waterfall_Wall
           req: $charge
           to: Barrier East
-          time: 1  # ?
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # will take two or more times
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
@@ -971,16 +972,18 @@ areas:
         - to: Barrier West
           req: Uhrum_Waterfall_Wall
           movement: base
-        - to: East 24 in Mid-air
+        - to: Tulip Tower > Lower Column
           req: $hover
           movement: base
+          penalty_tags: [xshift, -base.1]
       hybrid:
         - name: Charge through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
           req: $charge
           to: Barrier West
-          time: 1  # ?
+          movement: base
+          penalty_tags: [charge_time, charge_time]
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
@@ -1006,14 +1009,6 @@ areas:
           jumps: 3
       exits:
         - to: Tulip Tower > West 24
-          tags: [xshift]
-    - name: East 24 in Mid-air
-      coord: [27.95, 23.4]
-      exits:
-        - to: Barrier East
-          req: $hover
-          movement: base
-        - to: Tulip Tower > West 24 in Mid-air
           tags: [xshift]
     #endregion
 
@@ -1441,15 +1436,247 @@ areas:
   spots:
     - name: West 24
       coord: [28.05, 23.8]
-    - name: West 24 in Mid-air
-      coord: [28.05, 23.4]
+      exits:
+        - to: Waterfalls > East 24
+          tags: [xshift]
+        - to: Lower Column
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Platform 1 West
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+        - to: Lower Column
+          req: $grab
+          jumps: 3
+        - to: Lower Column
+          req: Anuman
+          jumps: 2
+    - name: Lower Column
+      coord: [28.25, 23.4]
+      local:
+        - to: West 24
+      exits:
+        - to: Waterfalls > Barrier East
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Platform 1 West
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: Platform 1 West
+      coord: [28.5, 23.0]
+      local:
+        - to: Platform 1 East
+        - to: Lower Column
+      exits:
+        - to: Middle Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Platform 2 West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Right Ledge
+          req: $hookhover
+          movement: base
+          jumps: 4
+    - name: Platform 1 East
+      coord: [28.65, 23.0]
+      local:
+        - to: Platform 1 West
+      exits:
+        - to: East 23
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: East 23
+          req: $grab
+          movement: base
+          jumps: 3
+    - name: Middle Ledge
+      coord: [28.35, 22.7]
+      local:
+        - to: Middle Plateau
+        - to: Platform 1 West
+        - to: Platform 2 West
+          jumps: 1
+        - to: Lower Column
+      exits:
+        - to: Platform 2 West
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Plateau
+      coord: [28.25, 22.7]
+      local:
+        - to: Middle Ledge
+      locations:
+        - name: Refill
+          item: Power_Core
+          tags: [standing]
+    - name: Platform 2 West
+      coord: [28.55, 22.5]
+      local:
+        - to: Middle Ledge
+        - to: Platform 1 West
+        - to: Platform 2 East
+        - to: Lower Column
+      exits:
+        - to: Upper Middle Ledge
+          req: $hookhover
+          movement: base
+          jumps: 4
+        - to: Upper Right Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Middle Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Middle Ledge
+          req: $mist2
+          movement: mist2
+    - name: Platform 2 East
+      coord: [28.8, 22.5]
+      local:
+        - to: Platform 2 West
+        - to: East 23
+      exits:
+        - to: Upper Middle Ledge
+          req: $hookhover
+          movement: base
+          jumps: 4
+        - to: Upper Right Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Middle Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Middle Ledge
+          req: $mist2
+          movement: mist2
+    - name: East 23
+      coord: [28.95, 22.8]
+      local:
+        - to: Platform 1 East
+          thru: [28.85, 23.05]
+          jumps: [0, 1]
+      exits:
+        - to: Annuna > Invisible Enemies > West 23
+          tags: [xshift]
+        - to: Platform 1 East
+          req: $hook or $hover
+          movement: base
+        - to: Platform 2 East
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
 
     - name: West 22
       coord: [28.05, 21.8]
+      exits:
+        - to: Rocky Guardpost > East 22
+          tags: [xshift]
+        - to: Upper Column West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Column West
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Upper Column West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Column West
+          req: $mist2
+          movement: mist2
+    - name: NW Mid-air
+      coord: [28.2, 21.65]
+      exits:
+        - to: Upper Column West
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Column West
+      coord: [28.35, 21.4]
+      local:
+        - to: Upper Column East
+        - to: West 22
+        - to: North
+          jumps: 1
+    - name: Upper Column East
+      coord: [28.5, 21.45]
+      local:
+        - to: Upper Column West
+          jumps: 1
+        - to: North
+          jumps: 2
+        - to: Upper Middle Ledge
+        - to: West 22
+          jumps: 1
+      exits:
+        - to: North
+          req: Anuman
+          movement: base
+          jumps: 1
+    - name: Upper Middle Ledge
+      coord: [28.65, 21.8]
+      local:
+        - to: Upper Right Ledge
+        - to: Platform 2 West
+        - to: Platform 2 East
+        - to: East 23
+      exits:
+        - to: Upper Column East
+          req: $hover
+          movement: base
+          jumps: 4
+        - to: Upper Column East
+          req: $climb
+          movement: base
+          jumps: 2
+        - to: Upper Column East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Column East
+          req: $mist2
+          movement: mist2
+        - to: Amagi > Wiggly Room > South
+          req: $mist2
+          movement: mist2
+          penalty_tags: [ydoor, -mist2.4]
+        
+    - name: Upper Right Ledge
+      coord: [28.8, 22.0]
+      local:
+        - to: Upper Middle Ledge
+          jumps: 1
+        - to: Platform 2 West
+        - to: Platform 2 East
+        - to: East 23
+          thru: [28.8, 22.3]
+      exits:
+        - to: Upper Column East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Column East
+          req: $mist2
+          movement: mist2
     - name: North
       coord: [28.5, 21.2]
-    - name: East 23
-      coord: [28.95, 22.8]
+      local:
+        - to: Upper Column West
+        - to: Upper Column East
+        - to: Upper Middle Ledge
+      exits:
+        - to: Amagi > Wiggly Room > South
+          tags: [ydoor]
 
 - name: Annuna Corridor  # MARK: Annuna Corridor
   on_entry: $reset_old_area(^newpos)
@@ -2666,6 +2893,11 @@ areas:
           jumps: 1
         - to: Emergence Facility > East
           tags: [xshift]
+        - to: Tulip Tower > NW Mid-air
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Upper Ledge
       coord: [27.3, 21.65]
       local:

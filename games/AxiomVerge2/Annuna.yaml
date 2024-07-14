@@ -176,15 +176,32 @@ areas:
     #region Lamassu
     #endregion
 
+- name: Invisible Enemies  # MARK: Invisible Enemies
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _door_opened: false
+  data:
+    portal_start: Portal Stand
+    portal_hidden: true
+  spots:
+    - name: West 23
+      coord: [29.05, 22.8]
+    - name: Portal Stand
+      coord: [30.475, 22.15]
+    - name: East 22
+      coord: [31.95, 21.65]
+    - name: East 23
+      coord: [31.95, 22.75]
+
 - name: West Bridge  # MARK: West Bridge
   on_entry: $reset_old_area(^newpos)
   start:
     _doors_opened: false
+  data:
+    save_point: Save Point
   map:
     save: [36, 26, 37, 27]
     lattice: [35, 24, 36, 25]
-  data:
-    save_point: Save Point
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna West Bridge

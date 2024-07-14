@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2532] = [
+static SPOT_DEFS: [SpotDef; 2548] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -1108,7 +1108,7 @@ static SPOT_DEFS: [SpotDef; 2532] = [
     SpotDef {
         id: SpotId::Amagi__West_Lake__East_20,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi__West_Lake__East_20__ex__Wiggly_Room__West_1, ExitId::Amagi__West_Lake__East_20__ex__Wiggly_Room__West_1)),
         action_range: None,
     },
     SpotDef {
@@ -1307,6 +1307,18 @@ static SPOT_DEFS: [SpotDef; 2532] = [
         id: SpotId::Amagi__West_Lake__West_Stronghold_Wall,
         loc_range: Some((LocationId::Amagi__West_Lake__West_Stronghold_Wall__Break_Wall, LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall)),
         exit_range: Some((ExitId::Amagi__West_Lake__West_Stronghold_Wall__ex__Stronghold_Rear_Wall_1, ExitId::Amagi__West_Lake__West_Stronghold_Wall__ex__West_Stronghold_Gate_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Wiggly_Room__South,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Wiggly_Room__West,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -2039,6 +2051,30 @@ static SPOT_DEFS: [SpotDef; 2532] = [
         id: SpotId::Annuna__Hidden_Portal__West,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__Hidden_Portal__West__ex__Glacier__Vertical_Room__East_17_1, ExitId::Annuna__Hidden_Portal__West__ex__Glacier__Vertical_Room__East_17_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__East_22,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__East_23,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Portal_Stand,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__West_23,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -14614,7 +14650,7 @@ static SPOT_DEFS: [SpotDef; 2532] = [
     SpotDef {
         id: SpotId::Uhrum__Rocky_Guardpost__West_22,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1, ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Emergence_Facility__East_1)),
+        exit_range: Some((ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1, ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Tulip_Tower__NW_Mid_air_1)),
         action_range: None,
     },
     SpotDef {
@@ -14788,31 +14824,97 @@ static SPOT_DEFS: [SpotDef; 2532] = [
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__East_23,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__East_23__ex__Annuna__Invisible_Enemies__West_23_1, ExitId::Uhrum__Tulip_Tower__East_23__ex__Platform_2_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Lower_Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Platform_1_West_1, ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Waterfalls__Barrier_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Middle_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1, ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Middle_Plateau,
+        loc_range: Some((LocationId::Uhrum__Tulip_Tower__Middle_Plateau__Refill, LocationId::Uhrum__Tulip_Tower__Middle_Plateau__Refill)),
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__NW_Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1, ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__North,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__North__ex__Amagi__Wiggly_Room__South_1, ExitId::Uhrum__Tulip_Tower__North__ex__Amagi__Wiggly_Room__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Platform_1_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1, ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Platform_1_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1, ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Upper_Right_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Platform_2_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_1, ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Right_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Platform_2_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_1, ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Upper_Column_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1, ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Upper_Column_West,
+        loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Upper_Middle_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1, ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_4)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Upper_Right_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1, ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__West_22,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__West_22__ex__Rocky_Guardpost__East_22_1, ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_4)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__West_24,
         loc_range: None,
-        exit_range: None,
-        action_range: None,
-    },
-    SpotDef {
-        id: SpotId::Uhrum__Tulip_Tower__West_24_in_Mid_air,
-        loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1, ExitId::Uhrum__Tulip_Tower__West_24__ex__Waterfalls__East_24_1)),
         action_range: None,
     },
     SpotDef {
@@ -14824,7 +14926,7 @@ static SPOT_DEFS: [SpotDef; 2532] = [
     SpotDef {
         id: SpotId::Uhrum__Waterfalls__Barrier_East,
         loc_range: Some((LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall, LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall)),
-        exit_range: Some((ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1, ExitId::Uhrum__Waterfalls__Barrier_East__ex__East_24_in_Mid_air_1)),
+        exit_range: Some((ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1, ExitId::Uhrum__Waterfalls__Barrier_East__ex__Tulip_Tower__Lower_Column_1)),
         action_range: None,
     },
     SpotDef {
@@ -14873,12 +14975,6 @@ static SPOT_DEFS: [SpotDef; 2532] = [
         id: SpotId::Uhrum__Waterfalls__East_24,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1, ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1)),
-        action_range: None,
-    },
-    SpotDef {
-        id: SpotId::Uhrum__Waterfalls__East_24_in_Mid_air,
-        loc_range: None,
-        exit_range: Some((ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Barrier_East_1, ExitId::Uhrum__Waterfalls__East_24_in_Mid_air__ex__Tulip_Tower__West_24_in_Mid_air_1)),
         action_range: None,
     },
     SpotDef {

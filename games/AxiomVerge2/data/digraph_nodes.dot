@@ -82,7 +82,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="1"];
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -256,6 +256,10 @@
             Amagi__West_Lake__West_Stronghold_Gate [label = "", pos = "67.35,-32.916667!"];
             Amagi__West_Lake__West_Stronghold_Wall [label = "", pos = "68.55,-32.583333!"];
         }
+        {
+            Amagi__Wiggly_Room__West [label = "", pos = "81.15,-32.916667!"];
+            Amagi__Wiggly_Room__South [label = "", pos = "85.5,-34.666667!"];
+        }
     }
     {
         node[fillcolor="4"];
@@ -408,6 +412,12 @@
             Annuna__Hidden_Portal__Plinth_Right [label = "", pos = "112.65,-27.833333!"];
             Annuna__Hidden_Portal__Plinth_Left [label = "", pos = "112.2,-27.833333!"];
             Annuna__Hidden_Portal__West [label = "", pos = "111.3,-27.916667!"];
+        }
+        {
+            Annuna__Invisible_Enemies__West_23 [label = "", pos = "87.15,-38.0!"];
+            Annuna__Invisible_Enemies__Portal_Stand [label = "", pos = "91.425,-36.916667!"];
+            Annuna__Invisible_Enemies__East_22 [label = "", pos = "95.85,-36.083333!"];
+            Annuna__Invisible_Enemies__East_23 [label = "", pos = "95.85,-37.916667!"];
         }
         {
             Annuna__Lamassu__East_17 [label = "", pos = "116.85,-27.916667!"];
@@ -708,7 +718,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Ebih__Base_Camp__East_11 [label = "", pos = "92.85,-17.25!"];
             Ebih__Base_Camp__East_12 [label = "", pos = "92.85,-19.5!"];
@@ -1362,7 +1372,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -2832,7 +2842,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="3"];
         {
             Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
             Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];
@@ -2978,10 +2988,21 @@
         }
         {
             Uhrum__Tulip_Tower__West_24 [label = "", pos = "84.15,-39.666667!"];
-            Uhrum__Tulip_Tower__West_24_in_Mid_air [label = "", pos = "84.15,-39.0!"];
-            Uhrum__Tulip_Tower__West_22 [label = "", pos = "84.15,-36.333333!"];
-            Uhrum__Tulip_Tower__North [label = "", pos = "85.5,-35.333333!"];
+            Uhrum__Tulip_Tower__Lower_Column [label = "", pos = "84.75,-39.0!"];
+            Uhrum__Tulip_Tower__Platform_1_West [label = "", pos = "85.5,-38.333333!"];
+            Uhrum__Tulip_Tower__Platform_1_East [label = "", pos = "85.95,-38.333333!"];
+            Uhrum__Tulip_Tower__Middle_Ledge [label = "", pos = "85.05,-37.833333!"];
+            Uhrum__Tulip_Tower__Middle_Plateau [label = "", pos = "84.75,-37.833333!"];
+            Uhrum__Tulip_Tower__Platform_2_West [label = "", pos = "85.65,-37.5!"];
+            Uhrum__Tulip_Tower__Platform_2_East [label = "", pos = "86.4,-37.5!"];
             Uhrum__Tulip_Tower__East_23 [label = "", pos = "86.85,-38.0!"];
+            Uhrum__Tulip_Tower__West_22 [label = "", pos = "84.15,-36.333333!"];
+            Uhrum__Tulip_Tower__NW_Mid_air [label = "", pos = "84.6,-36.083333!"];
+            Uhrum__Tulip_Tower__Upper_Column_West [label = "", pos = "85.05,-35.666667!"];
+            Uhrum__Tulip_Tower__Upper_Column_East [label = "", pos = "85.5,-35.75!"];
+            Uhrum__Tulip_Tower__Upper_Middle_Ledge [label = "", pos = "85.95,-36.333333!"];
+            Uhrum__Tulip_Tower__Upper_Right_Ledge [label = "", pos = "86.4,-36.666667!"];
+            Uhrum__Tulip_Tower__North [label = "", pos = "85.5,-35.333333!"];
         }
         {
             Uhrum__Waterfalls__West_25 [label = "", pos = "78.15,-41.25!"];
@@ -2995,7 +3016,6 @@
             Uhrum__Waterfalls__Barrier_West [label = "", pos = "82.8,-39.0!"];
             Uhrum__Waterfalls__Barrier_East [label = "", pos = "83.1,-39.0!"];
             Uhrum__Waterfalls__East_24 [label = "", pos = "83.85,-39.666667!"];
-            Uhrum__Waterfalls__East_24_in_Mid_air [label = "", pos = "83.85,-39.0!"];
             Uhrum__Waterfalls__West_Wall [label = "", pos = "78.75,-43.166667!"];
             Uhrum__Waterfalls__West_Platform [label = "", pos = "79.5,-43.0!"];
             Uhrum__Waterfalls__Large_Rock [label = "", pos = "79.65,-44.0!"];

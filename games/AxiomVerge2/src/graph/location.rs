@@ -602,6 +602,7 @@ impl world::Accessible for Location {
             LocationId::Uhrum__Siege_Corridor__Pond__Item => true,
             LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => true,
             LocationId::Uhrum__Siege_Corridor__Western_Cache__Core => rules::access_invoke_more_refills(ctx, world),
+            LocationId::Uhrum__Tulip_Tower__Middle_Plateau__Refill => true,
             LocationId::Uhrum__Waterfalls__Above_Block__Block => rules::access_invoke_shockwave(ctx, world),
             LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => rules::access_invoke_charge(ctx, world),
             LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => rules::access_nanite_mist(ctx, world),
@@ -1598,7 +1599,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 600] = [
+static LOC_DEFS: [Location; 601] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -6712,6 +6713,15 @@ static LOC_DEFS: [Location; 600] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Uhrum__Tulip_Tower__Middle_Plateau__Refill,
+        canonical: CanonId::Loc_Uhrum__Tulip_Tower__Middle_Plateau__Refill,
+        item: Item::Power_Core,
+        price: Currency::Free,
+        time: 0,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Uhrum__Waterfalls__Above_Block__Block,
         canonical: CanonId::Uhrum_Waterfalls_Block,
         item: Item::Uhrum_Waterfalls_Block,
@@ -6725,7 +6735,7 @@ static LOC_DEFS: [Location; 600] = [
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
         price: Currency::Free,
-        time: 1000,
+        time: 2350,
         dest: SpotId::Uhrum__Waterfalls__Barrier_West,
         skippable: false,
     },
@@ -6761,7 +6771,7 @@ static LOC_DEFS: [Location; 600] = [
         canonical: CanonId::Uhrum_Waterfall_Wall,
         item: Item::Uhrum_Waterfall_Wall,
         price: Currency::Free,
-        time: 1000,
+        time: 2350,
         dest: SpotId::Uhrum__Waterfalls__Barrier_East,
         skippable: false,
     },
@@ -7355,6 +7365,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Uhrum__Waterfalls__Above_Block__Block => SpotId::Uhrum__Waterfalls__Above_Block,
         LocationId::Uhrum__Waterfalls__East_26__Block => SpotId::Uhrum__Waterfalls__East_26,
         LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        LocationId::Uhrum__Tulip_Tower__Middle_Plateau__Refill => SpotId::Uhrum__Tulip_Tower__Middle_Plateau,
         LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn => SpotId::Uhrum__Annuna_Corridor__Upper_Trees,
         LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn => SpotId::Uhrum__Annuna_Corridor__Pedestal,
         LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => SpotId::Uhrum__Annuna_Corridor__Pedestal,

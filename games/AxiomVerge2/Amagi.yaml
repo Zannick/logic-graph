@@ -1279,7 +1279,9 @@ areas:
       coord: [26.95, 19.75]
       local:
         - to: Left of Enemy
-      # TODO: exits
+      exits:
+        - to: Wiggly Room > West
+          tags: [xshift]
 
     - name: West Cliff
       coord: [25.6, 15.8]
@@ -2180,7 +2182,7 @@ areas:
           item: Forbidden_Knowledge
           tags: [standing]
 
-- name: Gated Community
+- name: Gated Community  # MARK: Gated Community
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 17
@@ -2195,3 +2197,11 @@ areas:
 
     - name: Platform 2 West
       coord: [31.1, 16.7]
+
+- name: Wiggly Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [27.05, 19.75]
+    - name: South
+      coord: [28.5, 20.8]

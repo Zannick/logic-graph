@@ -172,7 +172,7 @@ time:  # MARK: time
   # (measured as .1 for open-air, and .2 for doors and vertical open-air, and .4 for vertical doors).
   # The movement time to subtract is dependent on the exit.
   # e.g. a movement speed of .4 means that .1 distance is traversed in 0.25 seconds
-  # Note that vertical transitions have to use the fall speed to determine time
+  # Note that downward transitions usually have to use the fall speed to determine time
   fast_hover.1: 0.25
   fast_hover.2: 0.50
   base.1: 0.35

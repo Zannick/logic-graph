@@ -252,6 +252,10 @@ subgraph Amagi
         Amagi__Gated_Community__West_16(West 16);
         Amagi__Gated_Community__Platform_2_West(Platform 2 West);
     end
+    subgraph Amagi__Wiggly_Room[Wiggly Room]
+        Amagi__Wiggly_Room__West(West);
+        Amagi__Wiggly_Room__South(South);
+    end
 end
 subgraph Annuna
     subgraph Annuna__Mirror_Match[Mirror Match]
@@ -268,6 +272,12 @@ subgraph Annuna
         Annuna__Mirror_Match__Waving_Distance(Waving Distance);
         Annuna__Mirror_Match__East_26_Lower(East 26 Lower);
         Annuna__Mirror_Match__East_26_Upper(East 26 Upper);
+    end
+    subgraph Annuna__Invisible_Enemies[Invisible Enemies]
+        Annuna__Invisible_Enemies__West_23(West 23);
+        Annuna__Invisible_Enemies__Portal_Stand(Portal Stand);
+        Annuna__Invisible_Enemies__East_22(East 22);
+        Annuna__Invisible_Enemies__East_23(East 23);
     end
     subgraph Annuna__West_Bridge[West Bridge]
         Annuna__West_Bridge__West_25_Lower(West 25 Lower);
@@ -2893,7 +2903,6 @@ subgraph Uhrum
         Uhrum__Waterfalls__Barrier_West(Barrier West);
         Uhrum__Waterfalls__Barrier_East(Barrier East);
         Uhrum__Waterfalls__East_24(East 24);
-        Uhrum__Waterfalls__East_24_in_Mid_air(East 24 in Mid-air);
         Uhrum__Waterfalls__West_Wall(West Wall);
         Uhrum__Waterfalls__West_Platform(West Platform);
         Uhrum__Waterfalls__Large_Rock(Large Rock);
@@ -2933,10 +2942,21 @@ subgraph Uhrum
     end
     subgraph Uhrum__Tulip_Tower[Tulip Tower]
         Uhrum__Tulip_Tower__West_24(West 24);
-        Uhrum__Tulip_Tower__West_24_in_Mid_air(West 24 in Mid-air);
-        Uhrum__Tulip_Tower__West_22(West 22);
-        Uhrum__Tulip_Tower__North(North);
+        Uhrum__Tulip_Tower__Lower_Column(Lower Column);
+        Uhrum__Tulip_Tower__Platform_1_West(Platform 1 West);
+        Uhrum__Tulip_Tower__Platform_1_East(Platform 1 East);
+        Uhrum__Tulip_Tower__Middle_Ledge(Middle Ledge);
+        Uhrum__Tulip_Tower__Middle_Plateau(Middle Plateau);
+        Uhrum__Tulip_Tower__Platform_2_West(Platform 2 West);
+        Uhrum__Tulip_Tower__Platform_2_East(Platform 2 East);
         Uhrum__Tulip_Tower__East_23(East 23);
+        Uhrum__Tulip_Tower__West_22(West 22);
+        Uhrum__Tulip_Tower__NW_Mid_air(NW Mid-air);
+        Uhrum__Tulip_Tower__Upper_Column_West(Upper Column West);
+        Uhrum__Tulip_Tower__Upper_Column_East(Upper Column East);
+        Uhrum__Tulip_Tower__Upper_Middle_Ledge(Upper Middle Ledge);
+        Uhrum__Tulip_Tower__Upper_Right_Ledge(Upper Right Ledge);
+        Uhrum__Tulip_Tower__North(North);
     end
     subgraph Uhrum__Annuna_Corridor[Annuna Corridor]
         Uhrum__Annuna_Corridor__West_25(West 25);
@@ -3181,6 +3201,7 @@ Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
 Amagi__West_Lake__Cavern_Front_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Middle_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Refill_Station <--> Amagi__West_Lake__Cavern_Tear_Duct
+Amagi__West_Lake__East_20 --> Amagi__Wiggly_Room__West
 Amagi__West_Lake__Northwest_Platform --> Amagi__West_Lake__West_Cliff
 Amagi__West_Lake__Stronghold_Ceiling_Left <--> Amagi__West_Lake__Stronghold_Middle_Column
 Amagi__West_Lake__Stronghold_Ceiling_Right <--> Amagi__West_Lake__Stronghold_Front_Room
@@ -4757,7 +4778,7 @@ Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Mid_air
 Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Middle_Step
 Uhrum__Rocky_Gate__Wall_West --> Uhrum__Rocky_Guardpost__Upper_Step
 Uhrum__Rocky_Guardpost__East_22 <--> Uhrum__Rocky_Guardpost__Upper_Ledge
-Uhrum__Rocky_Guardpost__East_22 --> Uhrum__Tulip_Tower__West_22
+Uhrum__Rocky_Guardpost__East_22 <--> Uhrum__Tulip_Tower__West_22
 Uhrum__Rocky_Guardpost__Lower_Mid_air --> Uhrum__Rocky_Guardpost__Upper_Ledge
 Uhrum__Rocky_Guardpost__Lower_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
 Uhrum__Rocky_Guardpost__Lower_Step --> Uhrum__Rocky_Guardpost__Upper_Step
@@ -4767,6 +4788,7 @@ Uhrum__Rocky_Guardpost__Mid_air --> Uhrum__Rocky_Guardpost__Upper_Step
 Uhrum__Rocky_Guardpost__Middle_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
 Uhrum__Rocky_Guardpost__Upper_Step --> Uhrum__Rocky_Guardpost__Upper_Ledge
 Uhrum__Rocky_Guardpost__West_22 --> Uhrum__Rocky_Guardpost__East_22
+Uhrum__Rocky_Guardpost__West_22 --> Uhrum__Tulip_Tower__NW_Mid_air
 Uhrum__Rocky_Guardpost__West_23 --> Uhrum__Rocky_Guardpost__Lower_Step
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
@@ -4784,10 +4806,32 @@ Uhrum__Siege_Corridor__Upper_Rock_Item <--> Uhrum__Siege_Corridor__Upper_Rock_We
 Uhrum__Siege_Corridor__West_26 <--> Uhrum__West_Entrance__East_26
 Uhrum__Siege_Corridor__West_Greenery --> Uhrum__Siege_Corridor__West_Grassy_Ledge
 Uhrum__Siege_Corridor__Western_Rock --> Uhrum__Siege_Corridor__Northwest_Platform
+Uhrum__Tulip_Tower__East_23 --> Annuna__Invisible_Enemies__West_23
+Uhrum__Tulip_Tower__East_23 <--> Uhrum__Tulip_Tower__Platform_1_East
+Uhrum__Tulip_Tower__East_23 --> Uhrum__Tulip_Tower__Platform_2_East
+Uhrum__Tulip_Tower__Lower_Column --> Uhrum__Tulip_Tower__Platform_1_West
+Uhrum__Tulip_Tower__Lower_Column <--> Uhrum__Waterfalls__Barrier_East
+Uhrum__Tulip_Tower__Middle_Ledge --> Uhrum__Tulip_Tower__Platform_2_West
+Uhrum__Tulip_Tower__NW_Mid_air --> Uhrum__Tulip_Tower__Upper_Column_West
+Uhrum__Tulip_Tower__North --> Amagi__Wiggly_Room__South
+Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Middle_Ledge
+Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Platform_2_West
+Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Upper_Right_Ledge
+Uhrum__Tulip_Tower__Platform_2_East --> Uhrum__Tulip_Tower__Upper_Middle_Ledge
+Uhrum__Tulip_Tower__Platform_2_East --> Uhrum__Tulip_Tower__Upper_Right_Ledge
+Uhrum__Tulip_Tower__Platform_2_West --> Uhrum__Tulip_Tower__Upper_Middle_Ledge
+Uhrum__Tulip_Tower__Platform_2_West --> Uhrum__Tulip_Tower__Upper_Right_Ledge
+Uhrum__Tulip_Tower__Upper_Column_East --> Uhrum__Tulip_Tower__North
+Uhrum__Tulip_Tower__Upper_Middle_Ledge --> Amagi__Wiggly_Room__South
+Uhrum__Tulip_Tower__Upper_Middle_Ledge --> Uhrum__Tulip_Tower__Upper_Column_East
+Uhrum__Tulip_Tower__Upper_Right_Ledge --> Uhrum__Tulip_Tower__Upper_Column_East
+Uhrum__Tulip_Tower__West_22 --> Uhrum__Tulip_Tower__Upper_Column_West
+Uhrum__Tulip_Tower__West_24 --> Uhrum__Tulip_Tower__Lower_Column
+Uhrum__Tulip_Tower__West_24 --> Uhrum__Tulip_Tower__Platform_1_West
+Uhrum__Tulip_Tower__West_24 <--> Uhrum__Waterfalls__East_24
 Uhrum__Waterfalls__Above_Block <--> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__Above_Block --> Uhrum__Waterfalls__East_25
 Uhrum__Waterfalls__Barrier_East <--> Uhrum__Waterfalls__Barrier_West
-Uhrum__Waterfalls__Barrier_East <--> Uhrum__Waterfalls__East_24_in_Mid_air
 Uhrum__Waterfalls__Barrier_West <--> Uhrum__Waterfalls__Ceiling_Opening
 Uhrum__Waterfalls__Below_Block <--> Uhrum__Waterfalls__East_26
 Uhrum__Waterfalls__Below_Block --> Uhrum__Waterfalls__Small_Rock
@@ -4796,8 +4840,6 @@ Uhrum__Waterfalls__Ceiling_Opening --> Uhrum__Waterfalls__West_24
 Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__East_Waters_Edge
 Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__Lower_East_Platform
 Uhrum__Waterfalls__Center_Island_West <--> Uhrum__Waterfalls__West_27
-Uhrum__Waterfalls__East_24 --> Uhrum__Tulip_Tower__West_24
-Uhrum__Waterfalls__East_24_in_Mid_air --> Uhrum__Tulip_Tower__West_24_in_Mid_air
 Uhrum__Waterfalls__East_27 --> Uhrum__East_Lake__West_27
 Uhrum__Waterfalls__East_28 --> Uhrum__East_Lake__West_28
 Uhrum__Waterfalls__East_Palm_Tree --> Uhrum__Waterfalls__Ledge_Above_Palm
