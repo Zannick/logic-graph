@@ -536,6 +536,7 @@ where
         let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
 
         let solution = self.confirm_solution_time(ctx, history, elapsed);
+        let elapsed = solution.elapsed;
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 || sols.unique() > 1_000 {
