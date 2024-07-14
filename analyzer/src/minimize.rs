@@ -307,11 +307,15 @@ where
         .iter()
         .enumerate()
     {
+        let mut reorder_just_a = Some(replay.clone());
+        // Collect A on the replay *after* we've checkpointed for the reordering attempts.
         assert!(
             replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
             "Could not replay base solution history range {:?}",
             range_a,
         );
+
+        // Skip trying to reorder if this step doesn't have a community.
         if *comm == 0 {
             continue;
         }
@@ -319,14 +323,14 @@ where
             .iter()
             .position(|(.., bcomm)| bcomm != comm)
         else {
-            // ignore if we don't find anything outside the community
+            // also skip if we don't find anything outside the community
             continue;
         };
+
+        let mut reorder_full = reorder_just_a.clone();
         // index is 0-based from slice start
         coll_bi += coll_ai + 1;
 
-        let mut reorder_just_a = Some(replay.clone());
-        let mut reorder_full = Some(replay.clone());
         let mut cprev_justa = coll_ai + 1;
         let mut cprev_full = coll_bi;
 
