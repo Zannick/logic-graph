@@ -3,7 +3,7 @@ use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
-use crate::minimize::{mutate_collection_steps, mutate_spot_revisits, trie_minimize};
+use crate::minimize::*;
 use crate::observer::{debug_observations, record_observations, Observer};
 use crate::route::*;
 use crate::search::Search;
@@ -204,6 +204,24 @@ where
                 ctx = better;
                 println!(
                     "Improved route via trie from {}ms to {}ms",
+                    solution.elapsed,
+                    ctx.elapsed()
+                );
+                improvements.push(ctx.clone());
+                solution = ctx.to_solution();
+            }
+            if let Some(better) = mutate_greedy_collections(
+                world,
+                &startctx,
+                solution.elapsed,
+                4,
+                8_192,
+                solution.clone(),
+                scorer.get_algo(),
+            ) {
+                ctx = better;
+                println!(
+                    "Improved route via greedy single-collection-steps from {}ms to {}ms",
                     solution.elapsed,
                     ctx.elapsed()
                 );

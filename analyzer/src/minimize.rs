@@ -147,7 +147,30 @@ where
     vec
 }
 
-fn rediscover_routes<'a, W, T, L, I>(
+trait RangeAndStepTuple<T: Ctx> {
+    fn range(&self) -> &RangeInclusive<usize>;
+    fn step(&self) -> &HistoryAlias<T>;
+}
+
+impl<T: Ctx> RangeAndStepTuple<T> for (RangeInclusive<usize>, HistoryAlias<T>) {
+    fn range(&self) -> &RangeInclusive<usize> {
+        &self.0
+    }
+    fn step(&self) -> &HistoryAlias<T> {
+        &self.1
+    }
+}
+
+impl<T: Ctx> RangeAndStepTuple<T> for (RangeInclusive<usize>, HistoryAlias<T>, usize) {
+    fn range(&self) -> &RangeInclusive<usize> {
+        &self.0
+    }
+    fn step(&self) -> &HistoryAlias<T> {
+        &self.1
+    }
+}
+
+fn rediscover_routes<'a, W, T, L, I, RT>(
     world: &W,
     mut rreplay: ContextWrapper<T>,
     iter: I,
@@ -161,9 +184,12 @@ where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a (RangeInclusive<usize>, HistoryAlias<T>, usize)>,
+    I: Iterator<Item = &'a RT>,
+    RT: 'a + RangeAndStepTuple<T>,
 {
-    for (range, step, _) in iter {
+    for tuple in iter {
+        let range = tuple.range();
+        let step = tuple.step();
         // Attempt to reuse the same direct path if possible.
         let mut ctx = rreplay.clone();
         if ctx.maybe_replay_all(world, &history[range.clone()]) {
@@ -196,7 +222,7 @@ where
     Some(rreplay)
 }
 
-fn rediscover_wrapped<'a, W, T, L, I>(
+fn rediscover_wrapped<'a, W, T, L, I, RT>(
     world: &W,
     rreplay: Option<ContextWrapper<T>>,
     iter: I,
@@ -210,7 +236,8 @@ where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a (RangeInclusive<usize>, HistoryAlias<T>, usize)>,
+    I: Iterator<Item = &'a RT>,
+    RT: 'a + RangeAndStepTuple<T>,
 {
     if let Some(rreplay) = rreplay {
         rediscover_routes(
@@ -243,7 +270,7 @@ where
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    // [(history index, history step, community)]
+    // [(history range inclusive of the collection step, history step, community)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
         collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
@@ -430,6 +457,106 @@ where
     }
 
     None
+}
+
+/// Mutate routes between collections by finding a greedy path to the next
+pub fn mutate_greedy_collections<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    max_time: u32,
+    max_depth: usize,
+    max_states: usize,
+    solution: Arc<Solution<T>>,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
+    record_observations(startctx, world, solution.clone(), 0, &mut trie);
+
+    // [(history index, history step)]
+    // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
+    let collection_hist: Vec<_> =
+        collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
+            .collect();
+    let mut replay = ContextWrapper::new(startctx.clone());
+
+    for (coll_ai, (range_a, step)) in collection_hist.iter().enumerate() {
+        let attempt = replay.clone();
+        assert!(
+            replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
+            "Could not replay base solution history range {:?}",
+            range_a,
+        );
+        let Ok(attempt) = (match step {
+            History::A(act_id) => access_action_after_actions(
+                world,
+                attempt,
+                *act_id,
+                max_time,
+                max_depth,
+                max_states,
+                shortest_paths,
+            ),
+            History::G(.., loc_id) => access_location_after_actions(
+                world,
+                attempt,
+                *loc_id,
+                max_time,
+                max_depth,
+                max_states,
+                shortest_paths,
+            ),
+            _ => continue,
+        }) else {
+            continue;
+        };
+        // If the attempt isn't faster, we don't care. Usually it should find the same route and be equal.
+        if attempt.elapsed() >= replay.elapsed() {
+            continue;
+        }
+
+        // 1. If the attempt state is the same as the replay, then we've improved the result already,
+        // so we continue with the new result.
+        if attempt.get() == replay.get() {
+            replay = attempt;
+            continue;
+        }
+        // If the attempt isn't the same, we have to check whether we can finish.
+        // 2. Check the trie to see if we can finish the same way.
+        if let Some(best) = trie_search(world, &attempt, max_time, &trie) {
+            if best.elapsed() < solution.elapsed && world.won(best.get()) {
+                return Some(best);
+            }
+        }
+
+        // 3. Otherwise, try finding better routes for this.
+        if let Some(best) = rediscover_routes(
+            world,
+            attempt,
+            collection_hist[coll_ai + 1..].iter(),
+            max_time,
+            max_depth,
+            max_states,
+            &solution.history,
+            shortest_paths,
+        ) {
+            if best.elapsed() < solution.elapsed && world.won(best.get()) {
+                return Some(best);
+            }
+        }
+    }
+    // If we didn't find a better route that has a state deviation (i.e. 2 or 3), we can use the replay if it's an improvement
+    // (i.e. from 1).
+    if replay.elapsed() < solution.elapsed {
+        Some(replay)
+    } else {
+        None
+    }
 }
 
 /// Use a matcher trie to minimize a solution

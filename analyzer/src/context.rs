@@ -994,8 +994,8 @@ where
     })
 }
 
-// Produces an iterator of collection steps paired with the index range of all the steps
-// since the last collection.
+/// Produces an iterator of collection steps paired with the index range (inclusive) of all the steps
+/// since the last collection.
 pub fn collection_history_with_range_info<T, W, L, I>(
     history: I,
 ) -> impl Iterator<Item = (RangeInclusive<usize>, HistoryAlias<T>)>
