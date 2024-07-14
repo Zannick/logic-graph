@@ -10,6 +10,7 @@ use crate::world::*;
 use anyhow::Result;
 use log;
 use rayon::prelude::*;
+use similar::TextDiff;
 use std::fmt::Debug;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
@@ -435,6 +436,79 @@ where
         }
     }
 
+    fn confirm_solution_time(
+        &self,
+        ctx: &ContextWrapper<T>,
+        history: Vec<HistoryAlias<T>>,
+        elapsed: u32,
+    ) -> Arc<Solution<T>> {
+        let mut confirm = self.startctx.clone();
+        confirm = confirm.try_replay_all(self.world, &history).unwrap();
+        if confirm.elapsed() == elapsed {
+            return Arc::new(Solution { elapsed, history });
+        }
+        if confirm.elapsed() < elapsed {
+            log::warn!(
+                "Elapsed time from db {}ms but history was better: {}ms",
+                elapsed,
+                confirm.elapsed()
+            );
+            return Arc::new(Solution {
+                elapsed: confirm.elapsed(),
+                history,
+            });
+        }
+        log::error!(
+            "Elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
+            elapsed,
+            confirm.elapsed()
+        );
+        if confirm.get() != ctx.get() {
+            log::error!(
+                "Internal states differ: -db +recreated\n{}",
+                confirm.get().diff(ctx.get())
+            );
+        }
+        let (new_history, new_elapsed) = self.queue.db().get_history(confirm.get()).unwrap();
+        if new_elapsed != elapsed {
+            log::error!(
+                "Db read of recreated got new time: orig={}ms recreated={}ms",
+                elapsed,
+                new_elapsed
+            );
+        }
+        if new_history != history {
+            let old_hist = history_str::<T, _>(history.iter().copied());
+            let new_hist = history_str::<T, _>(new_history.iter().copied());
+            let text_diff = TextDiff::from_lines(&old_hist, &new_hist);
+            log::error!(
+                "Route diff:\n{}",
+                text_diff
+                    .unified_diff()
+                    .context_radius(3)
+                    .header("db read orig", "db read recreated")
+            );
+        }
+        let mut replay = self.startctx.clone();
+        for (i, step) in new_history.into_iter().enumerate() {
+            replay.assert_and_replay(self.world, step);
+            assert!(
+                !self.world.won(replay.get()),
+                "Replay finished without finding a discrepancy"
+            );
+            let db_elapsed = self.queue.db().get_best_times(replay.get()).unwrap().0;
+            assert!(
+                replay.elapsed() == db_elapsed,
+                "Replay differs from db at step {}. {}\n{}ms replayed vs {}ms in db",
+                i,
+                step,
+                replay.elapsed(),
+                db_elapsed
+            );
+        }
+        panic!("Replay finished without winning or finding discrepancy");
+    }
+
     fn handle_one_solution_and_minimize(
         &self,
         ctx: &mut ContextWrapper<T>,
@@ -460,7 +534,7 @@ where
 
         let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
 
-        let solution = Arc::new(Solution { elapsed, history });
+        let solution = self.confirm_solution_time(ctx, history, elapsed);
 
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 || sols.unique() > 1_000 {
