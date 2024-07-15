@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2572] = [
+static SPOT_DEFS: [SpotDef; 2574] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -13436,6 +13436,12 @@ static SPOT_DEFS: [SpotDef; 2572] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Ensis_Bracelet,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Eye_Ring,
         loc_range: None,
         exit_range: None,
@@ -13979,6 +13985,12 @@ static SPOT_DEFS: [SpotDef; 2572] = [
         id: SpotId::Menu__Kiengir_Map__Uhrum_East,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1, ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {

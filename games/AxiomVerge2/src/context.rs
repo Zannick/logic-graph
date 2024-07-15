@@ -928,6 +928,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Ebih_West_Lower => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_West_Mid => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Ebih_West_Upper => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Ensis_Bracelet => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Eye_Ring => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Family_Tragedy => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Filter_Flask => enums::Realm::Map,
@@ -1019,6 +1020,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Uhrum_Annuna_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Center => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_East => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Emergence => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Entrance => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask => enums::Realm::Map,
@@ -3536,6 +3538,15 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Uhrum__Artillery_Practice__West_Middle_Ledge => SpotId::Menu__Kiengir_Map__Becoming_An_Arm,
         SpotId::Uhrum__Artillery_Practice__West_Right_Ledge => SpotId::Menu__Kiengir_Map__Becoming_An_Arm,
         SpotId::Uhrum__Artillery_Practice__West_Tree => SpotId::Menu__Kiengir_Map__Becoming_An_Arm,
+        SpotId::Uhrum__Cavern__Pedestal => SpotId::Menu__Kiengir_Map__Ensis_Bracelet,
+        SpotId::Uhrum__Cavern__Wall_Left => SpotId::Menu__Kiengir_Map__Ensis_Bracelet,
+        SpotId::Uhrum__Cavern__Wall_Right => SpotId::Menu__Kiengir_Map__Ensis_Bracelet,
+        SpotId::Uhrum__East_Lake__East_Block => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        SpotId::Uhrum__East_Lake__Waterfall => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        SpotId::Uhrum__East_Lake__West_27 => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        SpotId::Uhrum__East_Lake__West_Block => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        SpotId::Uhrum__East_Lake__West_Wall => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
+        SpotId::Uhrum__East_Lake__West_Waters_Edge => SpotId::Menu__Kiengir_Map__Uhrum_East_Lake_Cave,
         SpotId::Uhrum__Emergence_Facility__Above_Wall_West => SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall,
         SpotId::Uhrum__Emergence_Facility__Balcony => SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Flask,
         SpotId::Uhrum__Emergence_Facility__Bush => SpotId::Menu__Kiengir_Map__Uhrum_Emergence_Facility_Wall,
@@ -11542,6 +11553,15 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Uhrum__Artillery_Practice__West_Tree => {
+
+                }
+                SpotId::Uhrum__Cavern__Pedestal => {
+
+                }
+                SpotId::Uhrum__Cavern__Wall_Left => {
+
+                }
+                SpotId::Uhrum__Cavern__Wall_Right => {
 
                 }
                 SpotId::Uhrum__East_Lake__East_Block => {

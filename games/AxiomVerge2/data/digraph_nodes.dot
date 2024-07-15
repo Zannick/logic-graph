@@ -2844,6 +2844,8 @@
             Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask [label = "", pos = "81.0,-38.333333!"];
             Menu__Kiengir_Map__Does_Technology [label = "", pos = "78.0,-38.333333!"];
             Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs [label = "", pos = "90.0,-43.333333!"];
+            Menu__Kiengir_Map__Uhrum_East_Lake_Cave [label = "", pos = "84.0,-45.0!"];
+            Menu__Kiengir_Map__Ensis_Bracelet [label = "", pos = "93.0,-45.0!"];
         }
     }
     {

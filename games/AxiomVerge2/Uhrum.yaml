@@ -1417,6 +1417,8 @@ areas:
     water:
       sw: true
       se: true
+    map_spot:
+      cave: Menu > Kiengir Map > Uhrum East Lake Cave
   spots:
     - name: West 27
       coord: [28.05, 26.9]
@@ -1621,6 +1623,11 @@ areas:
   on_entry: $reset_old_area(^newpos)
   data:
     portal_start: Portal Hole
+  map:
+    bracelet: [31, 26, 32, 27]
+  datamap:
+    map_spot:
+      bracelet: Menu > Kiengir Map > Ensi's Bracelet
   spots:
     - name: West
       coord: [30.05, 26.75]

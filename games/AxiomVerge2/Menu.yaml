@@ -871,6 +871,10 @@ areas:
       coord: [26, 23]
     - name: Uhrum Annuna Corridor Udugs
       coord: [30, 26]
+    - name: Uhrum East Lake Cave
+      coord: [28, 27]
+    - name: Ensi's Bracelet
+      coord: [31, 27]
     #endregion
 
 - name: Emergence Map  # MARK: Emergence Map
