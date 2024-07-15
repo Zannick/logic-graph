@@ -430,12 +430,13 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-fn access_check_after_actions<W, T, E, A, F>(
+fn access_check_after_actions<W, T, E, A, F, G>(
     world: &W,
     ctx: ContextWrapper<T>,
     spot: E::SpotId,
     check: &A,
     access: F,
+    is_eligible: G,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
@@ -450,6 +451,7 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Accessible<Context = T>,
     F: FnOnce(&mut ContextWrapper<T>, &W, &A),
+    G: Fn(&T) -> bool,
 {
     let goal = ExternalNodeId::Spot(spot);
 
@@ -517,7 +519,7 @@ where
 
     while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
-        if ctx.get().position() == spot && check.can_access(ctx.get(), world) {
+        if is_eligible(ctx.get()) {
             let mut newctx = ctx.clone();
             access(&mut newctx, world, check);
             return Ok(newctx);
@@ -577,6 +579,7 @@ where
         spot,
         loc,
         ContextWrapper::visit,
+        |c| c.position() == spot && loc.can_access(c, world),
         max_time,
         max_depth,
         max_states,
@@ -608,13 +611,15 @@ where
         spot != Default::default(),
         "access_after_actions not suitable for global actions"
     );
+    let act = world.get_action(act_id);
 
     access_check_after_actions(
         world,
         ctx,
         spot,
-        world.get_action(act_id),
+        act,
         ContextWrapper::activate,
+        |c| c.position() == spot && act.can_access(c, world),
         max_time,
         max_depth,
         max_states,
