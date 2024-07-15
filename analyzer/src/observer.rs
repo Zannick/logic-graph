@@ -1,4 +1,4 @@
-use crate::context::{history_to_full_series, Ctx, History};
+use crate::context::{history_to_full_series, Ctx, History, HistoryAlias};
 use crate::matchertrie::*;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::world::*;
@@ -118,6 +118,53 @@ pub fn record_observations<W, T, L, E, Wp>(
 
         prev = state;
     }
+}
+
+/// Returns a route's observation sets for the item acquisition steps.
+///
+/// These are in the same order as collection_history functions, but will need to be zipped separately.
+pub fn collection_observations<W, T, L, E, Wp>(
+    startctx: &T,
+    world: &W,
+    history: &[HistoryAlias<T>],
+) -> Vec<Vec<T::PropertyObservation>>
+where
+    W: World<Location = L, Exit = E, Warp = Wp>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
+    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+{
+    let full_history = history_to_full_series(startctx, world, history.iter().copied());
+    // The history entries are the steps "in between" the states in full_history, so we should have
+    // one more state than history steps.
+    assert!(full_history.len() == history.len() + 1);
+    let mut prev = full_history.last().unwrap();
+    let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
+
+    let mut obs_list = Vec::new();
+
+    for (step, state) in history.iter().zip(full_history.iter()).rev() {
+        // Basic process of iterating backwards:
+        // 1. Update the existing observations for changes.
+        solve.update(prev, state);
+
+        // 2. Observe the history step requirements/effects itself.
+        state.observe_replay(world, *step, &mut solve);
+
+        // 3. Insert the new observation list.
+        match step {
+            History::G(..) | History::V(..) => obs_list.push(solve.to_vec(state)),
+            History::A(act_id) if W::action_has_visit(*act_id) => {
+                obs_list.push(solve.to_vec(state))
+            }
+            _ => (),
+        }
+
+        prev = state;
+    }
+    obs_list.reverse();
+    obs_list
 }
 
 /// Outputs (in reverse order) a route's steps and observations.
