@@ -44,6 +44,38 @@ pub enum OneObservation {
 %% endfor
 }
 
+impl OneObservation {
+    pub fn matches(&self, ctx: &Context) -> bool {
+        match *self {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            OneObservation::{{ c }}Exact(v) => ctx.{{ ctx }} == v,
+            OneObservation::{{ c }}Eq(v, res) => (ctx.{{ ctx }} == v) == res,
+            OneObservation::{{ c }}Ge(v, res) => (ctx.{{ ctx }} >= v) == res,
+            OneObservation::{{ c }}Le(v, res) => (ctx.{{ ctx }} <= v) == res,
+            OneObservation::{{ c }}Range(lo, hi, res) => (ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi) == res,
+%% else
+            OneObservation::{{ c }}(v) => ctx.{{ ctx }} == v,
+%% endif
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
+%% set t = ct|get_int_type_for_max
+%% set c = item|camelize
+%% set ctx = item|lower
+            OneObservation::{{ c }}Exact(v) => ctx.{{ ctx }} == v,
+            OneObservation::{{ c }}Eq(v, res) => (ctx.{{ ctx }} == v) == res,
+            OneObservation::{{ c }}Ge(v, res) => (ctx.{{ ctx }} >= v) == res,
+            OneObservation::{{ c }}Le(v, res) => (ctx.{{ ctx }} <= v) == res,
+            OneObservation::{{ c }}Range(lo, hi, res) => (ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi) == res,
+%% endfor
+%% for group in bfp.flag_groups
+            OneObservation::CBits{{ loop.index }}{ mask, result } => (ctx.cbits{{ loop.index }} & mask) == result,
+%% endfor
+        }
+    }
+}
+
 
 #[derive(Debug, Default)]
 pub struct FullObservation {

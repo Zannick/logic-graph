@@ -264,6 +264,14 @@ mod test {
 
     impl Observable for Ctx {
         type PropertyObservation = OneObservedThing;
+        fn matches(&self, obs: &OneObservedThing) -> bool {
+            match *obs {
+                OneObservedThing::Pos(p) => self.pos == p,
+                OneObservedThing::Flasks(f) => self.flasks == f,
+                OneObservedThing::FlasksGe(f, res) => (self.flasks >= f) == res,
+                OneObservedThing::Flag { mask, result } => (self.flag & mask) == result,
+            }
+        }
     }
     // That enum needs to have impls of the dispatch trait.
     impl MatcherDispatch for MatcherMulti {

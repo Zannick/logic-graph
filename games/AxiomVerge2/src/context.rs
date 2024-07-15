@@ -4257,6 +4257,13 @@ impl Default for Context {
 
 impl analyzer::matchertrie::Observable for Context {
     type PropertyObservation = OneObservation;
+
+    fn matches(&self, obs: &OneObservation) -> bool {
+        obs.matches(self)
+    }
+    fn matches_all(&self, observations: &[OneObservation]) -> bool {
+        observations.into_iter().all(|obs| obs.matches(self))
+    }
 }
 
 impl context::Ctx for Context {

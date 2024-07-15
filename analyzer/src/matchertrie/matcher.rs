@@ -24,6 +24,11 @@ use std::sync::{Arc, Mutex};
 /// Trait that marks the associated property-and-value type for observations.
 pub trait Observable {
     type PropertyObservation: Debug;
+
+    fn matches(&self, obs: &Self::PropertyObservation) -> bool;
+    fn matches_all(&self, observations: &[Self::PropertyObservation]) -> bool {
+        observations.into_iter().all(|obs| self.matches(obs))
+    }
 }
 
 /// This is a trait to be implemented on enums with individual matcher types
