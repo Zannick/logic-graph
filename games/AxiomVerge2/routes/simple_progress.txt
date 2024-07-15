@@ -141,8 +141,8 @@
 ! Do Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up
 * Collect Plague_of_Thoughts from Uhrum > Annuna Corridor > East Cubby > Tablet
 * Collect Flask from Uhrum > Annuna Corridor > Statue > Item
-  Move... to Annuna > Mirror Match > Save Point
-! Do Recall Drone
+  Move... to Annuna > Mirror Match > West Gap
+! Do Recall Fast Travel
 
 * Collect Nano_Lattice_2 from Annuna > West Bridge > Plinth > Item
 ! Do Annuna > East Bridge > Center Gap East > Throw Drone into Tower

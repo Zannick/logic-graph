@@ -178,7 +178,7 @@ impl world::Accessible for Action {
             ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_invoke_can_deploy(ctx, world),
             ActionId::Global__Move_Portal_Here => rules::access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(ctx, world),
             ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world),
-            ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world),
+            ActionId::Global__Recall_Fast_Travel => rules::access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => true,
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => true,
@@ -325,7 +325,7 @@ impl world::Accessible for Action {
             ActionId::Global__Deploy_Drone => rules::observe_access_not_within_menu_and_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Global__Move_Portal_Here => rules::observe_access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(ctx, world, full_obs),
             ActionId::Global__Recall_Drone => rules::observe_access_not_within_menu_and_realm_ne_breach_and_invoke_can_recall(ctx, world, full_obs),
-            ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world, full_obs),
+            ActionId::Global__Recall_Fast_Travel => rules::observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world, full_obs),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
@@ -1416,7 +1416,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Global__Recall_Fast_Travel => {
-                let (ret, mut tags) = rules::explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "^map_spot"));

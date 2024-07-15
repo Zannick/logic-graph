@@ -254,7 +254,7 @@ actions:  # MARK: actions
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
   - name: Recall Fast Travel
-    req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
+    req: allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
     do: ^mode = 'Indra'; ^last = ^indra
     to: ^map_spot  # Starts map movement in a different place
     after: ^indra = $default

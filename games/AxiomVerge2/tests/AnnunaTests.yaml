@@ -31,3 +31,15 @@ tests:
       mode: drone
       indra: Glacier > Apocalypse Entry > Terminal
     can_obtain: Apocalypse_Bomb
+
+  - name: Warp to Mirror Match
+    start: Annuna > Mirror Match > West 25
+    with:
+      - Fast_Travel
+    context:
+      mode: drone
+      indra: Uhrum > Annuna Corridor > Between Two Flowers
+    route: |
+      Move to Annuna > Mirror Match > West Gap
+      ! Do Recall Fast Travel
+        Take exit Menu > Kiengir Map > Annuna Mirror Match ==> Annuna > Mirror Match > Save Point (1)

@@ -91,19 +91,21 @@ pub fn access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kieng
             && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
         && !ctx.has(Item::Apocalypse_Bomb))
 }
-pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
+pub fn access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
-    ((((world.allow_warps
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
+    (((((world.allow_warps
         && (match get_region(ctx.position()) {
             RegionId::Menu => false,
             _ => true,
         }))
         && helper__ft_main!(ctx, world))
         && helper__can_recall!(ctx, world))
-        && data::map_spot(ctx.position()) != Default::default())
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
+        && !ctx.has(Item::Apocalypse_Bomb))
 }
 pub fn access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(
     ctx: &Context,
@@ -4214,34 +4216,48 @@ pub fn explain_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_gt_kien
         }
     }
 }
-pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
+pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
     {
         let mut left = {
             let mut left = {
                 let mut left = {
                     let mut left = {
-                        let s = world.allow_warps;
-                        edict.insert("allow_warps", format!("{}", s));
-                        (s, vec!["allow_warps"])
+                        let mut left = {
+                            let s = world.allow_warps;
+                            edict.insert("allow_warps", format!("{}", s));
+                            (s, vec!["allow_warps"])
+                        };
+                        if !left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let r = ctx.position();
+                                edict.insert("^position", format!("{:?}", r));
+                                (
+                                    match get_region(r) {
+                                        RegionId::Menu => false,
+                                        _ => true,
+                                    },
+                                    vec!["^position"],
+                                )
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
                     };
                     if !left.0 {
                         left
                     } else {
                         let mut right = {
-                            let r = ctx.position();
-                            edict.insert("^position", format!("{:?}", r));
-                            (
-                                match get_region(r) {
-                                    RegionId::Menu => false,
-                                    _ => true,
-                                },
-                                vec!["^position"],
-                            )
+                            let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
+                            edict.insert("$ft_main", format!("{:?}", res));
+                            refs.push("$ft_main");
+                            (res, refs)
                         };
                         left.1.append(&mut right.1);
                         (right.0, left.1)
@@ -4251,9 +4267,9 @@ pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can
                     left
                 } else {
                     let mut right = {
-                        let (res, mut refs) = hexplain__ft_main!(ctx, world, edict);
-                        edict.insert("$ft_main", format!("{:?}", res));
-                        refs.push("$ft_main");
+                        let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
+                        edict.insert("$can_recall", format!("{:?}", res));
+                        refs.push("$can_recall");
                         (res, refs)
                     };
                     left.1.append(&mut right.1);
@@ -4263,12 +4279,17 @@ pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can
             if !left.0 {
                 left
             } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__can_recall!(ctx, world, edict);
-                    edict.insert("$can_recall", format!("{:?}", res));
-                    refs.push("$can_recall");
-                    (res, refs)
-                };
+                let mut right = ({
+                    let r = {
+                        let r = data::map_spot(ctx.position());
+                        edict.insert("^map_spot", format!("{:?}", r));
+                        (r, vec!["^map_spot"])
+                    };
+                    (
+                        r.0 != SpotId::None && get_area(r.0) == AreaId::Menu__Kiengir_Map,
+                        r.1,
+                    )
+                });
                 left.1.append(&mut right.1);
                 (right.0, left.1)
             }
@@ -4277,14 +4298,9 @@ pub fn explain_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can
             left
         } else {
             let mut right = {
-                let mut left = {
-                    let r = data::map_spot(ctx.position());
-                    edict.insert("^map_spot", format!("{:?}", r));
-                    (r, vec!["^map_spot"])
-                };
-                let mut right = (Default::default(), vec![]);
-                left.1.append(&mut right.1);
-                (left.0 != right.0, left.1)
+                let h = ctx.has(Item::Apocalypse_Bomb);
+                edict.insert("Apocalypse_Bomb", format!("{}", h));
+                (!h, vec!["Apocalypse_Bomb"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16818,23 +16834,24 @@ pub fn observe_access_allow_warps_and_invoke_ft_main_and___map_spot_within_menu_
             !ctx.has(Item::Apocalypse_Bomb)
         }))
 }
-pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and_map_spot_ne_invoke_default(
+pub fn observe_access_allow_warps_and_not_within_menu_and_invoke_ft_main_and_invoke_can_recall_and___map_spot_within_menu_gt_kiengir_map_and_not_apocalypse_bomb(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and ^map_spot != $default
-    ((((world.allow_warps
+    // allow_warps and NOT WITHIN `Menu` and $ft_main and $can_recall and (^map_spot WITHIN `Menu > Kiengir Map`) and not Apocalypse_Bomb
+    (((((world.allow_warps
         && (match get_region(ctx.position()) {
             RegionId::Menu => false,
             _ => true,
         }))
         && (hobserve__ft_main!(ctx, world, full_obs)))
         && (hobserve__can_recall!(ctx, world, full_obs)))
+        && (data::map_spot(ctx.position()) != SpotId::None
+            && get_area(data::map_spot(ctx.position())) == AreaId::Menu__Kiengir_Map))
         && ({
-            let left = data::map_spot(ctx.position());
-            let right = Default::default();
-            left != right
+            full_obs.observe_apocalypse_bomb();
+            !ctx.has(Item::Apocalypse_Bomb)
         }))
 }
 pub fn observe_access_allow_warps_and_realm_eq_breach_and_breach_save_ne_invoke_default_and_not_apocalypse_bomb(
