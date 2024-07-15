@@ -791,10 +791,14 @@ areas:
   map:
     tablet: [26, 27, 27, 28]
     flask: [26, 23, 27, 24]
+    se: [27, 27, 28, 28]
   datamap:
     map_spot:
       tablet: Menu > Kiengir Map > Suspension Bridge
       flask: Menu > Kiengir Map > Uhrum Waterfalls Flask
+    water:
+      tablet: true
+      se: true
   spots:
     - name: West 25
       coord: [26.05, 24.75]
@@ -1217,8 +1221,6 @@ areas:
         - to: West Water Surface
     - name: West Water Surface
       coord: [26.35, 27.0]
-      data:
-        water: true
       local:
         - to: West Water's Edge
           jumps: 1
@@ -1226,8 +1228,6 @@ areas:
         - to: West Shallow End
     - name: West Shallow End
       coord: [26.4, 27.3]
-      data:
-        water: true
       local:
         - to: West Water Surface
           jumps: 2
@@ -1280,14 +1280,10 @@ areas:
           movement: base
     - name: Island Water West
       coord: [26.65, 27.0]
-      data:
-        water: true
       local:
         - to: West Water Ledge
     - name: West Water Ledge
       coord: [26.65, 27.4]
-      data:
-        water: true
       local:
         - to: West Water's Edge
           jumps: 3
@@ -1300,8 +1296,6 @@ areas:
           jumps: 1
     - name: West Water Nook
       coord: [26.15, 27.75]
-      data:
-        water: true
       local:
         - to: Water Slope
           jumps: 1
@@ -1320,8 +1314,6 @@ areas:
           jumps: 2
     - name: Water Slope
       coord: [26.9, 27.7]
-      data:
-        water: true
       local:
         - to: Water Pillar
           jumps: 2
@@ -1332,8 +1324,6 @@ areas:
         - to: West Water Nook
     - name: Water Pillar
       coord: [27.1, 27.15]
-      data:
-        water: true
       local:
         - to: West Water Nook
         - to: Water Slope
@@ -1359,15 +1349,11 @@ areas:
           jumps: 1
     - name: East Water Surface
       coord: [27.4, 27.0]
-      data:
-        water: true
       local:
         - to: Water Pillar
         - to: East 28
     - name: East 28
       coord: [27.95, 27.75]
-      data:
-        water: true
       exits:
         - to: East Lake > West 28
           tags: [xshift]
@@ -1423,13 +1409,393 @@ areas:
 
 - name: East Lake  # MARK: East Lake
   on_entry: $reset_old_area(^newpos)
+  map:
+    cave: [28, 26, 29, 27]
+    sw: [28, 27, 29, 28]
+    se: [29, 27, 30, 28]
+  datamap:
+    water:
+      sw: true
+      se: true
   spots:
     - name: West 27
       coord: [28.05, 26.9]
+      local:
+        - to: West Water's Edge
+      exits:
+        - to: Waterfall
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: Waterfalls > East 27
+          tags: [xshift]
+    - name: West Water's Edge
+      coord: [28.2, 26.9]
+      local:
+        - to: West 27
+        - to: West Underwater Ledge
+      exits:
+        - to: Waterfall
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: West Block
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Waterfall
+      coord: [28.4, 26.6]
+      local:
+        - to: West 27
+        - to: West Water's Edge
+        - to: West Block
+        - to: West Underwater Ledge
+          jumps_down: 1
+      exits:
+        - to: Interior > Uhrum Waterfall Cave > Entrance
+          tags: [cave]
+    - name: West Underwater Ledge
+      coord: [28.45, 27.2]
+      local:
+        - to: West Underwater Hill
+        - to: West 28
+          thru: [28.45, 27.5]
+        - to: West Water's Edge
+          jumps: 1
+        - to: West Wall
+          jumps: 1
+    - name: West Underwater Hill
+      coord: [28.6, 27.55]
+      local:
+        - to: West 28
+        - to: West Underwater Ledge
+          jumps: 1
+          jump_mvmt: water
     - name: West 28
       coord: [28.05, 27.75]
-      data:
-        water: true
+      local:
+        - to: West Underwater Hill
+          jumps: 2
+      exits:
+        - to: Waterfalls > East 28
+          tags: [xshift]
+
+    - name: West Wall
+      coord: [28.675, 26.95]
+      local:
+        - to: West Underwater Hill
+      exits:
+        - to: West Block
+          req: $grab and $climb
+          movement: base
+          jumps: 2
+        - to: West Block
+          req: $hook
+          movement: base
+          jumps: 1
+    - name: West Block
+      coord: [28.7, 26.7]
+      local:
+        - to: Waterfall
+          jumps: 1
+        - to: West Underwater Ledge
+      locations:
+        - name: Dislodge Block
+          canon: Uhrum_East_Lake_Block
+          item: Uhrum_East_Lake_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: East Block
+          req: Uhrum_East_Lake_Block
+          movement: base
+        - to: East Ledge
+          req: Uhrum_East_Lake_Block and $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: East Block
+          req: $block_clip and Slingshot_Hook and not Uhrum_East_Lake_Block
+          movement: base
+          penalties:
+            - add: 1  # ?
+    - name: East Block
+      coord: [29.0, 26.7]
+      local:
+        - to: Island West
+        - to: Island West Hook Point
+      locations:
+        - name: Dislodge Block
+          canon: Uhrum_East_Lake_Block
+          item: Uhrum_East_Lake_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: West Block
+          req: Uhrum_East_Lake_Block
+          movement: base
+        - to: Waterfall
+          req: Uhrum_East_Lake_Block and $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Waterfalls > East Water's Edge
+          req: Uhrum_East_Lake_Block and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Island West
+      coord: [29.25, 26.9]
+      local:
+        - to: Island West Hook Point
+        - to: Island East
+      exits:
+        - to: East Block
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+        - to: East Block
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Island East
+      coord: [29.55, 26.9]
+      local:
+        - to: Island West
+        - to: East Underwater Ledge
+      exits:
+        - to: East Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Block
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Island West Hook Point
+      coord: [29.15, 26.95]
+      exits:
+        - to: East Ledge
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: East Underwater Ledge
+      coord: [29.75, 27.1]
+      local:
+        - to: Island East
+          jumps: 1
+      exits:
+        - to: East Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Ledge
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: East Ledge
+          req: $grab and Underwater_Movement
+          movement: water
+          jumps: 2
+    - name: East Ledge
+      coord: [29.85, 26.75]
+      local:
+        - to: East
+        - to: East Underwater Ledge
+      exits:
+        - to: Island East
+          req: $hover
+          movement: base
+        - to: Cavern > Wall Left
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: East
+      coord: [29.95, 26.75]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Cavern > West
+          tags: [xshift]
+
+- name: Cavern  # MARK: Cavern
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Hole
+  spots:
+    - name: West
+      coord: [30.05, 26.75]
+      local:
+        - to: West Ledge
+      exits:
+        - to: East Lake > East
+          tags: [xshift]
+    - name: West Ledge
+      coord: [30.2, 26.8]
+      local:
+        - to: West
+          jumps: 1
+        - to: West Slope
+        - to: Bottom
+      exits:
+        - to: East Lake > East Block
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Wall Left
+          req: $hover
+          movement: base
+    - name: West Slope
+      coord: [30.25, 27.0]
+      local:
+        - to: West Ledge
+          jumps: 1
+        - to: Bottom
+      exits:
+        - to: Wall Left
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Bottom
+      coord: [30.6, 27.5]
+      local:
+        - to: West Slope
+          jumps: 3
+        - to: Wall Left
+          jumps: 6
+      exits:
+        - to: Wall Left
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Wall Left
+          req: $hover
+          movement: base
+          jumps: 4
+        - to: Wall Left
+          req: $grab
+          movement: base
+          jumps: 5
+    - name: Wall Left
+      coord: [31.15, 26.8]
+      local:
+        - to: Bottom
+      locations:
+        - name: Mist Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: Nanite_Mist
+          to: Wall Right
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $mist2
+          to: Wall Right
+          movement: mist2
+          tags: [event]
+        - name: Charge Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $charge
+          to: Pedestal
+          movement: fling
+          jumps: 1
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $spin
+          to: Wall Right
+          movement: fast_hover
+          tags: [event]
+        - name: Spin Through Wall and Hover
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $spinhover
+          to: Pedestal
+          movement: fast_hover
+          jumps: 1
+          tags: [event]
+      exits:
+        - to: Wall Right
+          req: Uhrum_Cavern_Wall
+          movement: base
+        - to: Pedestal
+          req: Uhrum_Cavern_Wall and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Wall Right
+      coord: [31.25, 26.8]
+      local:
+        - to: Pedestal
+          jumps: 1
+      locations:
+        - name: Mist Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: Nanite_Mist
+          to: Wall Left
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $mist2
+          to: Wall Left
+          movement: mist2
+          tags: [event]
+        - name: Charge Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $charge
+          to: Bottom
+          movement: fling
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Charge Through Wall and Hover
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $chargehover
+          to: West Ledge
+          movement: fling
+          tags: [event]
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $spin
+          to: Wall Left
+          movement: fast_hover
+          tags: [event]
+        - name: Spin Through Wall and Hover
+          canon: Uhrum_Cavern_Wall
+          item: Uhrum_Cavern_Wall
+          req: $spinhover
+          to: West Ledge
+          movement: fast_hover
+          tags: [event]
+      exits:
+        - to: Wall Left
+          req: Uhrum_Cavern_Wall
+          movement: base
+        - to: West Ledge
+          req: Uhrum_Cavern_Wall and $hookhover
+          movement: fast_hover
+    - name: Pedestal
+      coord: [31.5, 26.75]
+      local:
+        - to: Wall Right
+      locations:
+        - name: Item
+          item: Ensis_Bracelet
+          tags: [standing]
+    
+    # inaccessible
+    - name: Portal Hole
+      coord: [31.475, 27.5]
 
 - name: Tulip Tower  # MARK: Tulip Tower
   on_entry: $reset_old_area(^newpos)

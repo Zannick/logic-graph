@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -82,7 +82,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="2"];
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -262,7 +262,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             Annuna__Apocalypse__West [label = "", pos = "129.15,-27.916667!"];
             Annuna__Apocalypse__Northwest_Mid_air [label = "", pos = "130.05,-27.083333!"];
@@ -613,7 +613,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -718,7 +718,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="6"];
         {
             Ebih__Base_Camp__East_11 [label = "", pos = "92.85,-17.25!"];
             Ebih__Base_Camp__East_12 [label = "", pos = "92.85,-19.5!"];
@@ -1372,7 +1372,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -1958,7 +1958,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="5"];
         {
             Glacier__Apocalypse_Entry__West_10 [label = "", pos = "132.15,-16.666667!"];
             Glacier__Apocalypse_Entry__Terminal [label = "", pos = "133.8,-16.666667!"];
@@ -2216,7 +2216,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -2285,6 +2285,11 @@
         {
             Interior__Tent_Interior__Entry [label = "", pos = "85.275,-121.166667!"];
             Interior__Tent_Interior__Desk [label = "", pos = "85.5,-121.166667!"];
+        }
+        {
+            Interior__Uhrum_Waterfall_Cave__Entrance [label = "", pos = "85.2,-144.333333!"];
+            Interior__Uhrum_Waterfall_Cave__Slope [label = "", pos = "86.025,-144.333333!"];
+            Interior__Uhrum_Waterfall_Cave__Cache [label = "", pos = "86.4,-144.583333!"];
         }
     }
     {
@@ -2362,7 +2367,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             Irikar__Abandoned_Room__Empty_Pedestal [label = "", pos = "43.575,-44.5!"];
             Irikar__Abandoned_Room__Corner_Core [label = "", pos = "44.4,-44.5!"];
@@ -2842,7 +2847,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="5"];
         {
             Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
             Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];
@@ -2886,8 +2891,31 @@
             Uhrum__Artillery_Practice__West_23 [label = "", pos = "69.15,-37.916667!"];
         }
         {
+            Uhrum__Cavern__West [label = "", pos = "90.15,-44.583333!"];
+            Uhrum__Cavern__West_Ledge [label = "", pos = "90.6,-44.666667!"];
+            Uhrum__Cavern__West_Slope [label = "", pos = "90.75,-45.0!"];
+            Uhrum__Cavern__Bottom [label = "", pos = "91.8,-45.833333!"];
+            Uhrum__Cavern__Wall_Left [label = "", pos = "93.45,-44.666667!"];
+            Uhrum__Cavern__Wall_Right [label = "", pos = "93.75,-44.666667!"];
+            Uhrum__Cavern__Pedestal [label = "", pos = "94.5,-44.583333!"];
+            Uhrum__Cavern__Portal_Hole [label = "", pos = "94.425,-45.833333!"];
+        }
+        {
             Uhrum__East_Lake__West_27 [label = "", pos = "84.15,-44.833333!"];
+            Uhrum__East_Lake__West_Waters_Edge [label = "", pos = "84.6,-44.833333!"];
+            Uhrum__East_Lake__Waterfall [label = "", pos = "85.2,-44.333333!"];
+            Uhrum__East_Lake__West_Underwater_Ledge [label = "", pos = "85.35,-45.333333!"];
+            Uhrum__East_Lake__West_Underwater_Hill [label = "", pos = "85.8,-45.916667!"];
             Uhrum__East_Lake__West_28 [label = "", pos = "84.15,-46.25!"];
+            Uhrum__East_Lake__West_Wall [label = "", pos = "86.025,-44.916667!"];
+            Uhrum__East_Lake__West_Block [label = "", pos = "86.1,-44.5!"];
+            Uhrum__East_Lake__East_Block [label = "", pos = "87.0,-44.5!"];
+            Uhrum__East_Lake__Island_West [label = "", pos = "87.75,-44.833333!"];
+            Uhrum__East_Lake__Island_East [label = "", pos = "88.65,-44.833333!"];
+            Uhrum__East_Lake__Island_West_Hook_Point [label = "", pos = "87.45,-44.916667!"];
+            Uhrum__East_Lake__East_Underwater_Ledge [label = "", pos = "89.25,-45.166667!"];
+            Uhrum__East_Lake__East_Ledge [label = "", pos = "89.55,-44.583333!"];
+            Uhrum__East_Lake__East [label = "", pos = "89.85,-44.583333!"];
         }
         {
             Uhrum__Emergence_Facility__West [label = "", pos = "72.15,-36.333333!"];

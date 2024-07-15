@@ -2267,6 +2267,11 @@ subgraph Interior
         Interior__Facility_Interior__Bottom_Middle(Bottom Middle);
         Interior__Facility_Interior__Freight_Elevator(Freight Elevator);
     end
+    subgraph Interior__Uhrum_Waterfall_Cave[Uhrum Waterfall Cave]
+        Interior__Uhrum_Waterfall_Cave__Entrance(Entrance);
+        Interior__Uhrum_Waterfall_Cave__Slope(Slope);
+        Interior__Uhrum_Waterfall_Cave__Cache(Cache);
+    end
     subgraph Interior__Emergence_Hangar[Emergence Hangar]
         Interior__Emergence_Hangar__Freight_Elevator(Freight Elevator);
         Interior__Emergence_Hangar__Door(Door);
@@ -2938,7 +2943,30 @@ subgraph Uhrum
     end
     subgraph Uhrum__East_Lake[East Lake]
         Uhrum__East_Lake__West_27(West 27);
+        Uhrum__East_Lake__West_Waters_Edge(West Water's Edge);
+        Uhrum__East_Lake__Waterfall(Waterfall);
+        Uhrum__East_Lake__West_Underwater_Ledge(West Underwater Ledge);
+        Uhrum__East_Lake__West_Underwater_Hill(West Underwater Hill);
         Uhrum__East_Lake__West_28(West 28);
+        Uhrum__East_Lake__West_Wall(West Wall);
+        Uhrum__East_Lake__West_Block(West Block);
+        Uhrum__East_Lake__East_Block(East Block);
+        Uhrum__East_Lake__Island_West(Island West);
+        Uhrum__East_Lake__Island_East(Island East);
+        Uhrum__East_Lake__Island_West_Hook_Point(Island West Hook Point);
+        Uhrum__East_Lake__East_Underwater_Ledge(East Underwater Ledge);
+        Uhrum__East_Lake__East_Ledge(East Ledge);
+        Uhrum__East_Lake__East(East);
+    end
+    subgraph Uhrum__Cavern[Cavern]
+        Uhrum__Cavern__West(West);
+        Uhrum__Cavern__West_Ledge(West Ledge);
+        Uhrum__Cavern__West_Slope(West Slope);
+        Uhrum__Cavern__Bottom(Bottom);
+        Uhrum__Cavern__Wall_Left(Wall Left);
+        Uhrum__Cavern__Wall_Right(Wall Right);
+        Uhrum__Cavern__Pedestal(Pedestal);
+        Uhrum__Cavern__Portal_Hole(Portal Hole);
     end
     subgraph Uhrum__Tulip_Tower[Tulip Tower]
         Uhrum__Tulip_Tower__West_24(West 24);
@@ -4499,6 +4527,7 @@ Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Lower_Ti
 Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Second_Tier_West
 Interior__Observatory__West_Staircase_Top --> Interior__Observatory__Atop_Structure_West
 Interior__Outpost_Interior__Entry --> Interior__Outpost_Interior__Bookshelf
+Interior__Uhrum_Waterfall_Cave__Entrance <--> Uhrum__East_Lake__Waterfall
 Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South
@@ -4742,6 +4771,30 @@ Uhrum__Artillery_Practice__West_23 <--> Uhrum__Grassy_Guardpost__East_23
 Uhrum__Artillery_Practice__West_Middle_Ledge --> Uhrum__Artillery_Practice__West_Left_Ledge
 Uhrum__Artillery_Practice__West_Right_Ledge --> Uhrum__Artillery_Practice__West_Middle_Ledge
 Uhrum__Artillery_Practice__West_Right_Platform --> Uhrum__Artillery_Practice__Column_West
+Uhrum__Cavern__Bottom --> Uhrum__Cavern__Wall_Left
+Uhrum__Cavern__Wall_Left --> Uhrum__Cavern__Pedestal
+Uhrum__Cavern__Wall_Left <--> Uhrum__Cavern__Wall_Right
+Uhrum__Cavern__Wall_Right --> Uhrum__Cavern__West_Ledge
+Uhrum__Cavern__West <--> Uhrum__East_Lake__East
+Uhrum__Cavern__West_Ledge --> Uhrum__Cavern__Wall_Left
+Uhrum__Cavern__West_Ledge --> Uhrum__East_Lake__East_Block
+Uhrum__Cavern__West_Slope --> Uhrum__Cavern__Wall_Left
+Uhrum__East_Lake__East_Block --> Uhrum__East_Lake__Waterfall
+Uhrum__East_Lake__East_Block <--> Uhrum__East_Lake__West_Block
+Uhrum__East_Lake__East_Block --> Uhrum__Waterfalls__East_Waters_Edge
+Uhrum__East_Lake__East_Ledge --> Uhrum__Cavern__Wall_Left
+Uhrum__East_Lake__East_Ledge <--> Uhrum__East_Lake__Island_East
+Uhrum__East_Lake__East_Underwater_Ledge --> Uhrum__East_Lake__East_Ledge
+Uhrum__East_Lake__Island_East --> Uhrum__East_Lake__East_Block
+Uhrum__East_Lake__Island_West --> Uhrum__East_Lake__East_Block
+Uhrum__East_Lake__Island_West_Hook_Point --> Uhrum__East_Lake__East_Ledge
+Uhrum__East_Lake__West_27 --> Uhrum__East_Lake__Waterfall
+Uhrum__East_Lake__West_27 <--> Uhrum__Waterfalls__East_27
+Uhrum__East_Lake__West_28 <--> Uhrum__Waterfalls__East_28
+Uhrum__East_Lake__West_Block --> Uhrum__East_Lake__East_Ledge
+Uhrum__East_Lake__West_Wall --> Uhrum__East_Lake__West_Block
+Uhrum__East_Lake__West_Waters_Edge --> Uhrum__East_Lake__Waterfall
+Uhrum__East_Lake__West_Waters_Edge --> Uhrum__East_Lake__West_Block
 Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__East_Stair_Right
 Uhrum__Emergence_Facility__Above_Wall_West --> Uhrum__Emergence_Facility__Wall_East_Mid_air
 Uhrum__Emergence_Facility__Door --> Uhrum__Emergence_Facility__Upper_Level_Middle
@@ -4840,8 +4893,6 @@ Uhrum__Waterfalls__Ceiling_Opening --> Uhrum__Waterfalls__West_24
 Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__East_Waters_Edge
 Uhrum__Waterfalls__Center_Island_East --> Uhrum__Waterfalls__Lower_East_Platform
 Uhrum__Waterfalls__Center_Island_West <--> Uhrum__Waterfalls__West_27
-Uhrum__Waterfalls__East_27 --> Uhrum__East_Lake__West_27
-Uhrum__Waterfalls__East_28 --> Uhrum__East_Lake__West_28
 Uhrum__Waterfalls__East_Palm_Tree --> Uhrum__Waterfalls__Ledge_Above_Palm
 Uhrum__Waterfalls__Green_Middle_Ledge --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__High_Platform --> Uhrum__Waterfalls__Northeast_Ledge

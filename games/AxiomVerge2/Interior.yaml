@@ -443,7 +443,7 @@ areas:
       coord: [27.55, 14.15]
       exits:
         - to: Amagi > Main Area > Secret Outcropping
-          tags: [exterior]
+          tags: [cave]
         - to: Middle
           req: $grab or $climb
           time: 2
@@ -472,7 +472,7 @@ areas:
           thru: [27.6, 13.8]
       exits:
         - to: Amagi > Main Area > Secret Waterfall
-          tags: [exterior]
+          tags: [cave]
 #endregion
 
 #region Giguna
@@ -596,6 +596,50 @@ areas:
           do: ^save = `Emergence > Camp Exterior > Save Point`
           time: 11.5
           tags: [warp]
+
+- name: Uhrum Waterfall Cave
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entrance
+      coord: [28.4, 26.6]
+      local:
+        - to: Slope
+      exits:
+        - to: Uhrum > East Lake > Waterfall
+          tags: [cave]
+    - name: Slope
+      coord: [28.675, 26.6]
+      local:
+        - to: Entrance
+        - to: Cache
+      locations:
+        - name: Shockwave Flask
+          canon: Uhrum_Waterfall_Cave_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Remote Flask
+          canon: Uhrum_Waterfall_Cave_Flask
+          item: Flask
+          req: $boomerang
+          tags: [remote_flask]
+    - name: Cache
+      coord: [28.8, 26.75]
+      local:
+        - to: Slope
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Uhrum_Waterfall_Cave_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Waterfall_Cave_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
 #endregion
 
 #region Emergence

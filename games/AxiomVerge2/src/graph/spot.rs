@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2548] = [
+static SPOT_DEFS: [SpotDef; 2572] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -11144,6 +11144,24 @@ static SPOT_DEFS: [SpotDef; 2548] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Interior__Uhrum_Waterfall_Cave__Cache,
+        loc_range: Some((LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask, LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask_Collection_Skip)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Interior__Uhrum_Waterfall_Cave__Entrance,
+        loc_range: None,
+        exit_range: Some((ExitId::Interior__Uhrum_Waterfall_Cave__Entrance__ex__Uhrum__East_Lake__Waterfall_1, ExitId::Interior__Uhrum_Waterfall_Cave__Entrance__ex__Uhrum__East_Lake__Waterfall_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Interior__Uhrum_Waterfall_Cave__Slope,
+        loc_range: Some((LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Remote_Flask, LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Irikar_Breach__Basement_Save__Save_Point,
         loc_range: None,
         exit_range: None,
@@ -14336,15 +14354,141 @@ static SPOT_DEFS: [SpotDef; 2548] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Uhrum__East_Lake__West_27,
+        id: SpotId::Uhrum__Cavern__Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1, ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__Pedestal,
+        loc_range: Some((LocationId::Uhrum__Cavern__Pedestal__Item, LocationId::Uhrum__Cavern__Pedestal__Item)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__Portal_Hole,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Uhrum__Cavern__Wall_Left,
+        loc_range: Some((LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall, LocationId::Uhrum__Cavern__Wall_Left__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Cavern__Wall_Left__ex__Pedestal_1, ExitId::Uhrum__Cavern__Wall_Left__ex__Wall_Right_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__Wall_Right,
+        loc_range: Some((LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall, LocationId::Uhrum__Cavern__Wall_Right__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1, ExitId::Uhrum__Cavern__Wall_Right__ex__West_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Cavern__West__ex__East_Lake__East_1, ExitId::Uhrum__Cavern__West__ex__East_Lake__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Cavern__West_Ledge__ex__East_Lake__East_Block_1, ExitId::Uhrum__Cavern__West_Ledge__ex__Wall_Left_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Cavern__West_Slope,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Cavern__West_Slope__ex__Wall_Left_1, ExitId::Uhrum__Cavern__West_Slope__ex__Wall_Left_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__East__ex__Cavern__West_1, ExitId::Uhrum__East_Lake__East__ex__Cavern__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__East_Block,
+        loc_range: Some((LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block, LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block)),
+        exit_range: Some((ExitId::Uhrum__East_Lake__East_Block__ex__Waterfall_1, ExitId::Uhrum__East_Lake__East_Block__ex__West_Block_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__East_Ledge__ex__Cavern__Wall_Left_1, ExitId::Uhrum__East_Lake__East_Ledge__ex__Island_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__East_Underwater_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1, ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__Island_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__Island_East__ex__East_Block_1, ExitId::Uhrum__East_Lake__Island_East__ex__East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__Island_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1, ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__Island_West_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1, ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__Waterfall,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__Waterfall__ex__Interior__Uhrum_Waterfall_Cave__Entrance_1, ExitId::Uhrum__East_Lake__Waterfall__ex__Interior__Uhrum_Waterfall_Cave__Entrance_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_27,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__West_27__ex__Waterfall_1, ExitId::Uhrum__East_Lake__West_27__ex__Waterfalls__East_27_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Uhrum__East_Lake__West_28,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__West_28__ex__Waterfalls__East_28_1, ExitId::Uhrum__East_Lake__West_28__ex__Waterfalls__East_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_Block,
+        loc_range: Some((LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block, LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block)),
+        exit_range: Some((ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1, ExitId::Uhrum__East_Lake__West_Block__ex__East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_Underwater_Hill,
+        loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_Underwater_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_Wall,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1, ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__East_Lake__West_Waters_Edge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__Waterfall_1, ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__West_Block_1)),
         action_range: None,
     },
     SpotDef {

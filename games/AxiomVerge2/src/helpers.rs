@@ -2792,11 +2792,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{36}, Big_Flask{15}]
+/// [Flask{37}, Big_Flask{15}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 36 && $ctx.count(Item::Big_Flask) >= 15
+        $ctx.count(Item::Flask) >= 37 && $ctx.count(Item::Big_Flask) >= 15
     }};
 }
 #[macro_export]
@@ -2807,7 +2807,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 36, vec!["Flask count"])
+                (ct >= 37, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2827,8 +2827,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(36));
-            $ctx.count(Item::Flask) >= 36
+            $full_obs.observe_flask(IntegerObservation::Ge(37));
+            $ctx.count(Item::Flask) >= 37
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(15));
             $ctx.count(Item::Big_Flask) >= 15
@@ -2993,7 +2993,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem]
+/// [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem, Ensis_Bracelet]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -3006,6 +3006,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Carnelian_Ring)
             && $ctx.has(Item::Nano_Lattice_1)
             && $ctx.has(Item::Diviners_Gem)
+            && $ctx.has(Item::Ensis_Bracelet)
     }};
 }
 #[macro_export]
@@ -3091,6 +3092,15 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Diviners_Gem"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Ensis_Bracelet);
+                $edict.insert("Ensis_Bracelet", format!("{}", h));
+                (h, vec!["Ensis_Bracelet"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -3125,6 +3135,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_diviners_gem();
             $ctx.has(Item::Diviners_Gem)
+        }) && ({
+            $full_obs.observe_ensis_bracelet();
+            $ctx.has(Item::Ensis_Bracelet)
         })
     }};
 }

@@ -1911,6 +1911,14 @@ pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_right(
     // $block_clip and not Ebih_Waterfall_Block_Right
     (helper__block_clip!(ctx, world) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
+pub fn access_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $block_clip and Slingshot_Hook and not Uhrum_East_Lake_Block
+    ((helper__block_clip!(ctx, world) && ctx.has(Item::Slingshot_Hook))
+        && !ctx.has(Item::Uhrum_East_Lake_Block))
+}
 pub fn access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &World,
@@ -1981,6 +1989,10 @@ pub fn access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(
 pub fn access_invoke_charge(ctx: &Context, world: &World) -> bool {
     // $charge
     helper__charge!(ctx, world)
+}
+pub fn access_invoke_chargehover(ctx: &Context, world: &World) -> bool {
+    // $chargehover
+    helper__chargehover!(ctx, world)
 }
 pub fn access_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $climb
@@ -2987,6 +2999,22 @@ pub fn access_switch_40_12(ctx: &Context, world: &World) -> bool {
 pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+}
+pub fn access_uhrum_cavern_wall(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Cavern_Wall
+    ctx.has(Item::Uhrum_Cavern_Wall)
+}
+pub fn access_uhrum_cavern_wall_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Cavern_Wall and $hookhover
+    (ctx.has(Item::Uhrum_Cavern_Wall) && helper__hookhover!(ctx, world))
+}
+pub fn access_uhrum_east_lake_block(ctx: &Context, world: &World) -> bool {
+    // Uhrum_East_Lake_Block
+    ctx.has(Item::Uhrum_East_Lake_Block)
+}
+pub fn access_uhrum_east_lake_block_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // Uhrum_East_Lake_Block and $hookhover
+    (ctx.has(Item::Uhrum_East_Lake_Block) && helper__hookhover!(ctx, world))
 }
 pub fn access_uhrum_emergence_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_Emergence_Wall
@@ -10652,6 +10680,45 @@ pub fn explain_invoke_block_clip_and_not_ebih_waterfall_block_right(
         }
     }
 }
+pub fn explain_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $block_clip and Slingshot_Hook and not Uhrum_East_Lake_Block
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__block_clip!(ctx, world, edict);
+                edict.insert("$block_clip", format!("{:?}", res));
+                refs.push("$block_clip");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Uhrum_East_Lake_Block);
+                edict.insert("Uhrum_East_Lake_Block", format!("{}", h));
+                (!h, vec!["Uhrum_East_Lake_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &World,
@@ -10975,6 +11042,19 @@ pub fn explain_invoke_charge(
         let (res, mut refs) = hexplain__charge!(ctx, world, edict);
         edict.insert("$charge", format!("{:?}", res));
         refs.push("$charge");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_chargehover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $chargehover
+    {
+        let (res, mut refs) = hexplain__chargehover!(ctx, world, edict);
+        edict.insert("$chargehover", format!("{:?}", res));
+        refs.push("$chargehover");
         (res, refs)
     }
 }
@@ -15945,6 +16025,82 @@ pub fn explain_uhrum_annuna_corridor_block(
         (h, vec!["Uhrum_Annuna_Corridor_Block"])
     }
 }
+pub fn explain_uhrum_cavern_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Cavern_Wall
+    {
+        let h = ctx.has(Item::Uhrum_Cavern_Wall);
+        edict.insert("Uhrum_Cavern_Wall", format!("{}", h));
+        (h, vec!["Uhrum_Cavern_Wall"])
+    }
+}
+pub fn explain_uhrum_cavern_wall_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Cavern_Wall and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Cavern_Wall);
+            edict.insert("Uhrum_Cavern_Wall", format!("{}", h));
+            (h, vec!["Uhrum_Cavern_Wall"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_east_lake_block(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_East_Lake_Block
+    {
+        let h = ctx.has(Item::Uhrum_East_Lake_Block);
+        edict.insert("Uhrum_East_Lake_Block", format!("{}", h));
+        (h, vec!["Uhrum_East_Lake_Block"])
+    }
+}
+pub fn explain_uhrum_east_lake_block_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_East_Lake_Block and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_East_Lake_Block);
+            edict.insert("Uhrum_East_Lake_Block", format!("{}", h));
+            (h, vec!["Uhrum_East_Lake_Block"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_uhrum_emergence_wall(
     ctx: &Context,
     world: &World,
@@ -20239,6 +20395,22 @@ pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_right(
             !ctx.has(Item::Ebih_Waterfall_Block_Right)
         }))
 }
+pub fn observe_access_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $block_clip and Slingshot_Hook and not Uhrum_East_Lake_Block
+    ((hobserve__block_clip!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_slingshot_hook();
+            ctx.has(Item::Slingshot_Hook)
+        }))
+        && ({
+            full_obs.observe_uhrum_east_lake_block();
+            !ctx.has(Item::Uhrum_East_Lake_Block)
+        }))
+}
 pub fn observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
     ctx: &Context,
     world: &World,
@@ -20389,6 +20561,14 @@ pub fn observe_access_invoke_charge(
 ) -> bool {
     // $charge
     hobserve__charge!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_chargehover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $chargehover
+    hobserve__chargehover!(ctx, world, full_obs)
 }
 pub fn observe_access_invoke_climb(
     ctx: &Context,
@@ -22878,6 +23058,50 @@ pub fn observe_access_uhrum_annuna_corridor_block(
         full_obs.observe_uhrum_annuna_corridor_block();
         ctx.has(Item::Uhrum_Annuna_Corridor_Block)
     }
+}
+pub fn observe_access_uhrum_cavern_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Cavern_Wall
+    {
+        full_obs.observe_uhrum_cavern_wall();
+        ctx.has(Item::Uhrum_Cavern_Wall)
+    }
+}
+pub fn observe_access_uhrum_cavern_wall_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Cavern_Wall and $hookhover
+    ({
+        full_obs.observe_uhrum_cavern_wall();
+        ctx.has(Item::Uhrum_Cavern_Wall)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_uhrum_east_lake_block(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_East_Lake_Block
+    {
+        full_obs.observe_uhrum_east_lake_block();
+        ctx.has(Item::Uhrum_East_Lake_Block)
+    }
+}
+pub fn observe_access_uhrum_east_lake_block_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_East_Lake_Block and $hookhover
+    ({
+        full_obs.observe_uhrum_east_lake_block();
+        ctx.has(Item::Uhrum_East_Lake_Block)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_emergence_wall(
     ctx: &Context,
