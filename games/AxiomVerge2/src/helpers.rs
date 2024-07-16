@@ -3390,9 +3390,7 @@ macro_rules! hobserve__save {
             let v = data::realm($ctx.position());
             v == enums::Realm::Breach
         } {
-            $full_obs.clear_breach_save();
         } else {
-            $full_obs.clear_save();
         }
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
@@ -3410,7 +3408,6 @@ macro_rules! helper__breach_save {
 #[macro_export]
 macro_rules! hobserve__breach_save {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        $full_obs.clear_breach_save();
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
 }
@@ -3425,9 +3422,7 @@ macro_rules! helper__refill_energy {
 }
 #[macro_export]
 macro_rules! hobserve__refill_energy {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        $full_obs.clear_energy();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $deploy_drone (  )
@@ -3441,10 +3436,7 @@ macro_rules! helper__deploy_drone {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        $full_obs.clear_mode();
-        $full_obs.clear_indra();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
@@ -3458,10 +3450,7 @@ macro_rules! helper__deploy_drone_and_move {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone_and_move {
-    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{
-        $full_obs.clear_mode();
-        $full_obs.clear_indra();
-    }};
+    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{}};
 }
 
 /// $save_last (  )
@@ -3484,9 +3473,7 @@ macro_rules! hobserve__save_last {
             };
             let right = Default::default();
             left == right
-        } {
-            $full_obs.clear_last();
-        }
+        } {}
     }};
 }
 
@@ -3559,19 +3546,13 @@ macro_rules! hobserve__reset_old_area {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
-                $full_obs.clear_prev_portal();
-                $full_obs.clear_portal();
             } else {
                 $full_obs.swap_portal__prev_portal();
             }
-            {
-                $full_obs.clear_prev_area();
-                let _set = get_area({
-                    $full_obs.observe_position();
-                    $ctx.position()
-                });
-            }
-            $full_obs.clear_last();
+            let _set = get_area({
+                $full_obs.observe_position();
+                $ctx.position()
+            });
         } else if (({
             $full_obs.observe_position();
             $ctx.position()
@@ -3600,19 +3581,13 @@ macro_rules! hobserve__reset_old_area {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
-                $full_obs.clear_prev_portal();
-                $full_obs.clear_portal();
             } else {
                 $full_obs.swap_portal__prev_portal();
             }
-            {
-                $full_obs.clear_prev_area();
-                let _set = get_area({
-                    $full_obs.observe_last();
-                    $ctx.last()
-                });
-            }
-            $full_obs.clear_last();
+            let _set = get_area({
+                $full_obs.observe_last();
+                $ctx.last()
+            });
         }
     }};
 }
@@ -3643,9 +3618,7 @@ macro_rules! hobserve__post_portal_save_update {
                 let v = data::realm($ctx.position());
                 v == enums::Realm::Breach
             } {
-                $full_obs.clear_breach_save();
             } else {
-                $full_obs.clear_save();
             }
         }
     }};
@@ -3661,9 +3634,7 @@ macro_rules! helper__clear_breach_save {
 }
 #[macro_export]
 macro_rules! hobserve__clear_breach_save {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        $full_obs.clear_breach_save();
-    }};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
 }
 
 /// $reload (  )
@@ -3680,15 +3651,10 @@ macro_rules! helper__reload {
 #[macro_export]
 macro_rules! hobserve__reload {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            $full_obs.clear_prev_area();
-            let _set = get_area({
-                $full_obs.observe_position();
-                $ctx.position()
-            });
-        }
-        $full_obs.clear_portal();
-        $full_obs.clear_prev_portal();
+        let _set = get_area({
+            $full_obs.observe_position();
+            $ctx.position()
+        });
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
 }

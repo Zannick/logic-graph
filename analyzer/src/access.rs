@@ -430,13 +430,13 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-fn access_check_after_actions<W, T, E, A, F, G>(
+fn access_check_after_actions<W, T, E, A, AccFn, ReqFn>(
     world: &W,
     ctx: ContextWrapper<T>,
     spot: E::SpotId,
     check: &A,
-    access: F,
-    is_eligible: G,
+    access: AccFn,
+    is_eligible: ReqFn,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
@@ -450,8 +450,8 @@ where
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Accessible<Context = T>,
-    F: FnOnce(&mut ContextWrapper<T>, &W, &A),
-    G: Fn(&T) -> bool,
+    AccFn: FnOnce(&mut ContextWrapper<T>, &W, &A),
+    ReqFn: Fn(&T) -> bool,
 {
     let goal = ExternalNodeId::Spot(spot);
 
@@ -626,6 +626,92 @@ where
         shortest_paths,
     )
 }
+
+/// Same as access_location_after_actions but allows the caller to specify their own check_access function.
+pub fn access_location_after_actions_with_req<W, T, E, L, ReqFn>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    loc_id: L,
+    max_time: u32,
+    max_depth: usize,
+    max_states: usize,
+    req: ReqFn,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, String>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T, LocId = L>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    L: Id,
+    ReqFn: Fn(&T) -> bool,
+{
+    if ctx.get().visited(loc_id) {
+        return Ok(ctx);
+    }
+
+    let spot = world.get_location_spot(loc_id);
+    let loc = world.get_location(loc_id);
+
+    access_check_after_actions(
+        world,
+        ctx,
+        spot,
+        loc,
+        ContextWrapper::visit,
+        req,
+        max_time,
+        max_depth,
+        max_states,
+        shortest_paths,
+    )
+}
+
+/// Same as access_action_after_actions but allows the caller to specify their own check_access function.
+pub fn access_action_after_actions_with_req<W, T, E, A, ReqFn>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    act_id: A,
+    max_time: u32,
+    max_depth: usize,
+    max_states: usize,
+    req: ReqFn,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Result<ContextWrapper<T>, String>
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    A: Id,
+    ReqFn: Fn(&T) -> bool,
+{
+    let spot = world.get_action_spot(act_id);
+    assert!(
+        spot != Default::default(),
+        "access_after_actions_with_req not suitable for global actions"
+    );
+    let act = world.get_action(act_id);
+
+    access_check_after_actions(
+        world,
+        ctx,
+        spot,
+        act,
+        ContextWrapper::activate,
+        req,
+        max_time,
+        max_depth,
+        max_states,
+        shortest_paths,
+    )
+}
+
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
 where

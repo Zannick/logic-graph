@@ -26,6 +26,7 @@ areas:
       coord: [32.2, 25.0]
       local:
         - to: Save Point
+      keep: true
     - name: Save Point
       coord: [32.5, 25.4]
       local:

@@ -937,6 +937,13 @@ class RustObservationVisitor(RustBaseVisitor):
         self.item_max_counts = item_max_counts
         self.collect_funcs = collect_funcs
         self.code_writer = RustVisitor(*args, **kwargs)
+        self.resets = []
+
+    def visit(self, tree, rettype=None):
+        v = super().visit(tree, rettype=rettype)
+        # if self.resets:
+        #     return f'{{ {' '.join(self.resets) } {v} }}'
+        return v
 
     def _getItemType(self, item):
         return get_int_type_for_max(self.item_max_counts[item])
@@ -1236,18 +1243,17 @@ class RustObservationVisitor(RustBaseVisitor):
     def visitSet(self, ctx):
         var = str(ctx.REF())[1:]
         # Setting to a specific value means it does not matter what the value was before.
-        reset = f'full_obs.clear_{self.ctxdict[var]}();'
+        # But we have to apply this before any checks or evaluations... even in conditionals
+        self.resets.append(f'full_obs.clear_{self.ctxdict[var]}();')
         if ctx.num():
             val = self.visit(ctx.num())
         elif ctx.str_():
             val = self.visit(ctx.str_(), self._getRefEnum(var))
         else:
-            return reset
+            return ''
         if 'full_obs' not in val:
-            return reset
-        # Since the set value could depend on other things, reset the observed ref first,
-        # then apply the other observations.
-        return f'{{ {reset} let _set = {val}; }}'
+            return ''
+        return f'let _set = {val};'
 
     def visitAlter(self, ctx):
         val = self.visit(ctx.num())

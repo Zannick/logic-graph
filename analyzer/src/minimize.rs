@@ -1,8 +1,11 @@
-use crate::access::{access_action_after_actions, access_location_after_actions};
+use crate::access::{
+    access_action_after_actions, access_action_after_actions_with_req,
+    access_location_after_actions, access_location_after_actions_with_req,
+};
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
-use crate::observer::{record_observations, Observer};
+use crate::observer::{collection_observations, record_observations, Observer};
 use crate::solutions::Solution;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
@@ -467,7 +470,7 @@ where
 pub fn mutate_greedy_collections<W, T, L, E>(
     world: &W,
     startctx: &T,
-    max_time: u32,
+    _max_time: u32,
     max_depth: usize,
     max_states: usize,
     solution: Arc<Solution<T>>,
@@ -479,17 +482,16 @@ where
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
-    record_observations(startctx, world, solution.clone(), 0, &mut trie);
-
     // [(history index, history step)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
         collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
             .collect();
+    let obs_list = collection_observations(startctx, world, &solution.history);
     let mut replay = ContextWrapper::new(startctx.clone());
 
-    for (coll_ai, (range_a, step)) in collection_hist.iter().enumerate() {
+    for ((range_a, step), observations) in collection_hist.iter().zip(obs_list.iter()) {
+        // Clone first, then advance the replay and the attempt.
         let attempt = replay.clone();
         assert!(
             replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
@@ -497,24 +499,32 @@ where
             range_a,
         );
         let Ok(attempt) = (match step {
-            History::A(act_id) => access_action_after_actions(
+            History::A(act_id) => access_action_after_actions_with_req(
                 world,
                 attempt,
                 *act_id,
-                max_time,
+                replay.elapsed(),
                 max_depth,
                 max_states,
+                |c| c.matches_all(observations),
                 shortest_paths,
             ),
-            History::G(.., loc_id) => access_location_after_actions(
-                world,
-                attempt,
-                *loc_id,
-                max_time,
-                max_depth,
-                max_states,
-                shortest_paths,
-            ),
+            History::G(.., loc_id) | History::V(_, loc_id, _) => {
+                access_location_after_actions_with_req(
+                    world,
+                    attempt,
+                    *loc_id,
+                    replay.elapsed(),
+                    max_depth,
+                    max_states,
+                    |c| {
+                        c.position() == world.get_location_spot(*loc_id)
+                            && world.get_location(*loc_id).can_access(c, world)
+                            && c.matches_all(observations)
+                    },
+                    shortest_paths,
+                )
+            }
             _ => continue,
         }) else {
             continue;
@@ -524,31 +534,16 @@ where
             continue;
         }
 
-        // 1. If the attempt state is the same as the replay, then we've improved the result already,
+        // If the attempt state is the same as the replay, then we've improved the result already,
         // so we continue with the new result.
         if attempt.get() == replay.get() {
             replay = attempt;
             continue;
         }
-        // If the attempt isn't the same, we have to check whether we can finish.
-        // 2. Check the trie to see if we can finish the same way.
-        if let Some(best) = trie_search(world, &attempt, max_time, &trie) {
-            if best.elapsed() < solution.elapsed && world.won(best.get()) {
-                return Some(best);
-            }
-        }
 
-        // 3. Otherwise, try finding better routes for this.
-        if let Some(best) = rediscover_routes(
-            world,
-            attempt,
-            collection_hist[coll_ai + 1..].iter(),
-            max_time,
-            max_depth,
-            max_states,
-            &solution.history,
-            shortest_paths,
-        ) {
+        // Even if it's not the same, we matched the observations just before the collection, and performed
+        // the same collection, so we should be able to replay the rest.
+        if let Ok(best) = attempt.try_replay_all(world, &solution.history[range_a.end() + 1..]) {
             if best.elapsed() < solution.elapsed && world.won(best.get()) {
                 return Some(best);
             }

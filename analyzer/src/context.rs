@@ -111,6 +111,7 @@ pub trait Ctx:
     fn diff(&self, old: &Self) -> String;
 
     /// Observes the access checks and, if they pass, any side effects of the step.
+    /// The effects will be observed first, then the access requirements.
     fn observe_replay<L, E, Wp>(
         &self,
         world: &Self::World,
@@ -133,12 +134,13 @@ pub trait Ctx:
                 if warp.dest(self, world) == dest && warp.observe_access(self, world, observer) {
                     warp.observe_effects(self, world, observer);
                     observer.observe_on_entry(self, dest, world);
+                    warp.observe_access(self, world, observer);
                     true
                 } else {
                     false
                 }
             }
-            History::G(item, loc_id) | History::V(item, loc_id, ..) => {
+            History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
                 if spot_id == self.position()
@@ -147,6 +149,23 @@ pub trait Ctx:
                 {
                     observer.observe_visit(loc_id);
                     observer.observe_collect(self, item, world);
+                    loc.observe_access(self, world, observer);
+                    true
+                } else {
+                    false
+                }
+            }
+            History::V(item, loc_id, dest) => {
+                let spot_id = world.get_location_spot(loc_id);
+                let loc = world.get_location(loc_id);
+                if spot_id == self.position()
+                    && loc.item() == item
+                    && loc.observe_access(self, world, observer)
+                {
+                    observer.observe_visit(loc_id);
+                    observer.observe_collect(self, item, world);
+                    observer.observe_on_entry(self, dest, world);
+                    loc.observe_access(self, world, observer);
                     true
                 } else {
                     false
@@ -157,6 +176,7 @@ pub trait Ctx:
                 let exit = world.get_exit(exit_id);
                 if spot_id == self.position() && exit.observe_access(self, world, observer) {
                     observer.observe_on_entry(self, exit.dest(), world);
+                    exit.observe_access(self, world, observer);
                     true
                 } else {
                     false
@@ -173,6 +193,7 @@ pub trait Ctx:
                             .any(|(m, _)| Self::is_subset(m, movement_state)))
                 {
                     observer.observe_on_entry(self, spot_id, world);
+                    self.observe_movement_state(world, observer);
                     true
                 } else {
                     false
@@ -189,6 +210,7 @@ pub trait Ctx:
                     if dest != spot_id && dest != <E as Exit>::SpotId::default() {
                         observer.observe_on_entry(self, dest, world);
                     }
+                    action.observe_access(self, world, observer);
                     true
                 } else {
                     false
@@ -201,6 +223,7 @@ pub trait Ctx:
                 if edge.dst == spot_id && edge.observe_access(world, self, movement_state, observer)
                 {
                     observer.observe_on_entry(self, spot_id, world);
+                    self.observe_movement_state(world, observer);
                     true
                 } else {
                     false
