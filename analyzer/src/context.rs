@@ -131,7 +131,7 @@ pub trait Ctx:
         match step {
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
-                if warp.dest(self, world) == dest && warp.observe_access(self, world, observer) {
+                if warp.dest(self, world) == dest && warp.can_access(self, world) {
                     warp.observe_effects(self, world, observer);
                     observer.observe_on_entry(self, dest, world);
                     warp.observe_access(self, world, observer);
@@ -145,7 +145,7 @@ pub trait Ctx:
                 let loc = world.get_location(loc_id);
                 if spot_id == self.position()
                     && loc.item() == item
-                    && loc.observe_access(self, world, observer)
+                    && loc.can_access(self, world)
                 {
                     observer.observe_visit(loc_id);
                     observer.observe_collect(self, item, world);
@@ -160,7 +160,7 @@ pub trait Ctx:
                 let loc = world.get_location(loc_id);
                 if spot_id == self.position()
                     && loc.item() == item
-                    && loc.observe_access(self, world, observer)
+                    && loc.can_access(self, world)
                 {
                     observer.observe_visit(loc_id);
                     observer.observe_collect(self, item, world);
@@ -174,7 +174,7 @@ pub trait Ctx:
             History::E(exit_id) => {
                 let spot_id = world.get_exit_spot(exit_id);
                 let exit = world.get_exit(exit_id);
-                if spot_id == self.position() && exit.observe_access(self, world, observer) {
+                if spot_id == self.position() && exit.can_access(self, world) {
                     observer.observe_on_entry(self, exit.dest(), world);
                     exit.observe_access(self, world, observer);
                     true
@@ -183,7 +183,7 @@ pub trait Ctx:
                 }
             }
             History::L(spot_id) => {
-                let movement_state = self.observe_movement_state(world, observer);
+                let movement_state = self.get_movement_state(world);
                 let (best_free, best_mvmts) = Self::World::best_movements(self.position(), spot_id);
                 if self.position() != spot_id
                     && Self::World::same_area(self.position(), spot_id)
@@ -203,7 +203,7 @@ pub trait Ctx:
                 let spot_id = world.get_action_spot(act_id);
                 let action = world.get_action(act_id);
                 if (world.is_global_action(act_id) || self.position() == spot_id)
-                    && action.observe_access(self, world, observer)
+                    && action.can_access(self, world)
                 {
                     action.observe_effects(self, world, observer);
                     let dest = action.dest(self, world);
@@ -217,12 +217,13 @@ pub trait Ctx:
                 }
             }
             History::C(spot_id, idx) => {
-                let movement_state = self.observe_movement_state(world, observer);
+                let movement_state = self.get_movement_state(world);
                 let edges = world.get_condensed_edges_from(self.position());
                 let edge = &edges[idx];
-                if edge.dst == spot_id && edge.observe_access(world, self, movement_state, observer)
+                if edge.dst == spot_id && edge.can_access(world, self, movement_state)
                 {
                     observer.observe_on_entry(self, spot_id, world);
+                    edge.observe_access(world, self, movement_state, observer);
                     self.observe_movement_state(world, observer);
                     true
                 } else {
