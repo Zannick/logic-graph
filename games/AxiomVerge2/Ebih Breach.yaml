@@ -517,8 +517,47 @@ areas:
 - name: Corridor  # MARK: Corridor
   on_entry: $reset_old_area(^newpos)
   spots:
+    - name: West
+      coord: [25.1, 10.7]
+      local:
+        - to: South
+      exits:
+        - to: Rocky Cages > East
+          tags: [xdoor]
     - name: South
       coord: [25.5, 10.8]
+      local:
+        - to: West
+          jumps: 1
+        - to: East Tree
+          jumps: 3
+      exits:
+        - to: In 'n Out > Northwest
+          tags: [ydoor]
+    - name: East Tree
+      coord: [26.5, 10.6]
+      local:
+        - to: South
+        - to: Northeast Ledge
+          jumps: 2
+      exits:
+        - to: Northeast
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Northeast Ledge
+      coord: [26.55, 10.3]
+      local:
+        - to: Northeast
+          jumps: 1
+        - to: East Tree
+    - name: Northeast
+      coord: [26.5, 10.2]
+      local:
+        - to: Northeast Ledge
+      exits:
+        - to: Corner > South
+          tags: [ydoor]
 
 - name: Lake Gate  # MARK: Lake Gate
   on_entry: $reset_old_area(^newpos)
@@ -615,3 +654,115 @@ areas:
       exits:
         - to: Amagi Breach > West Entrance > North
           tags: [ydoor]
+
+- name: Bubble Bobble  # MARK: Bubble Bobble
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 11
+      coord: [27.9, 10.55]
+      local:
+        - to: Tree
+          jumps: 5
+      exits:
+        - to: Tree
+          req: Slingshot_Hook
+          jumps: 2
+        - to: Glacier Breach > Spidery Connector > West
+          tags: [xdoor]
+    - name: Tree
+      coord: [27.6, 9.8]
+      local:
+        - to: East 11
+        - to: West 10
+          jumps: 2
+        - to: Lower Row Right
+          jumps: 2
+      exits:
+        - to: Lower Row Right
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: West 10
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: West 10
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: West 10
+      coord: [27.1, 9.75]
+      local:
+        - to: Tree
+          jumps: 1
+      exits:
+        - to: Corner > East
+          tags: [xdoor]
+    - name: Lower Row Right
+      coord: [27.85, 9.45]
+      local:
+        - to: Tree
+        - to: Lower Row Left
+          jumps: 2
+    - name: Lower Row Left
+      coord: [27.4, 9.025]
+      local:
+        - to: West 10
+        - to: Tree
+          thru: [27.4, 9.3]
+        - to: Lower Row Right
+        - to: Upper Ledge
+          thru: [[27.35, 8.85], [27.675, 8.45], [27.325, 8.05], [27.675, 7.65], [27.325, 7.25], [27.45, 7.05]]
+          jumps: [1, 2, 2, 2, 2, 1, 1]
+    - name: Upper Ledge
+      coord: [27.35, 6.8]
+      local:
+        - to: West 7
+          jumps: 1
+        - to: Lower Row Left
+      exits:
+        - to: Spider Guards > East Spider
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.1]
+    - name: West 7
+      coord: [27.1, 6.75]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Spider Guards > East
+          tags: [xdoor]
+
+- name: Corner  # MARK: Corner
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [26.9, 9.75]
+      local:
+        - to: South
+      exits:
+        - to: Bubble Bobble > West 10
+          tags: [xdoor]
+    - name: South
+      coord: [26.5, 9.8]
+      local:
+        - to: East
+          jumps: 1
+      exits:
+        - to: Corridor > Northeast
+          tags: [ydoor]
+
+- name: Spider Guards  # MARK: Spider Guards
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [26.9, 6.75]
+    - name: East Spider
+      coord: [26.5, 6.75]
+
+- name: Rocky Cages  # MARK: Rocky Cages
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [24.9, 10.7]

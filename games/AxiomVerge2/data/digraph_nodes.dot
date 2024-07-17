@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -613,7 +613,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="6"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -655,9 +655,26 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="2"];
         {
+            Ebih_Breach__Bubble_Bobble__East_11 [label = "", pos = "83.7,-67.583333!"];
+            Ebih_Breach__Bubble_Bobble__Tree [label = "", pos = "82.8,-66.333333!"];
+            Ebih_Breach__Bubble_Bobble__West_10 [label = "", pos = "81.3,-66.25!"];
+            Ebih_Breach__Bubble_Bobble__Lower_Row_Right [label = "", pos = "83.55,-65.75!"];
+            Ebih_Breach__Bubble_Bobble__Lower_Row_Left [label = "", pos = "82.2,-65.041667!"];
+            Ebih_Breach__Bubble_Bobble__Upper_Ledge [label = "", pos = "82.05,-61.333333!"];
+            Ebih_Breach__Bubble_Bobble__West_7 [label = "", pos = "81.3,-61.25!"];
+        }
+        {
+            Ebih_Breach__Corner__East [label = "", pos = "80.7,-66.25!"];
+            Ebih_Breach__Corner__South [label = "", pos = "79.5,-66.333333!"];
+        }
+        {
+            Ebih_Breach__Corridor__West [label = "", pos = "75.3,-67.833333!"];
             Ebih_Breach__Corridor__South [label = "", pos = "76.5,-68.0!"];
+            Ebih_Breach__Corridor__East_Tree [label = "", pos = "79.5,-67.666667!"];
+            Ebih_Breach__Corridor__Northeast_Ledge [label = "", pos = "79.65,-67.166667!"];
+            Ebih_Breach__Corridor__Northeast [label = "", pos = "79.5,-67.0!"];
         }
         {
             Ebih_Breach__Drone_Tutorial__West_6 [label = "", pos = "75.3,-59.333333!"];
@@ -714,7 +731,14 @@
             Ebih_Breach__Portals_101__West_4 [label = "", pos = "72.3,-56.25!"];
         }
         {
+            Ebih_Breach__Rocky_Cages__East [label = "", pos = "74.7,-67.833333!"];
+        }
+        {
             Ebih_Breach__Snowy_Rocks__East_4 [label = "", pos = "71.7,-56.25!"];
+        }
+        {
+            Ebih_Breach__Spider_Guards__East [label = "", pos = "80.7,-61.25!"];
+            Ebih_Breach__Spider_Guards__East_Spider [label = "", pos = "79.5,-61.25!"];
         }
     }
     {
@@ -1848,7 +1872,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="7"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -1932,6 +1956,15 @@
         }
         {
             Glacier_Breach__Spidery_Connector__East [label = "", pos = "95.7,-67.916667!"];
+            Glacier_Breach__Spidery_Connector__Button [label = "", pos = "94.95,-67.916667!"];
+            Glacier_Breach__Spidery_Connector__East_Gate [label = "", pos = "93.15,-67.833333!"];
+            Glacier_Breach__Spidery_Connector__East_Mid_air_Lower [label = "", pos = "92.1,-67.5!"];
+            Glacier_Breach__Spidery_Connector__East_Mid_air_Upper [label = "", pos = "91.8,-67.166667!"];
+            Glacier_Breach__Spidery_Connector__West_Mid_air_Lower [label = "", pos = "90.6,-67.333333!"];
+            Glacier_Breach__Spidery_Connector__West_Mid_air_Upper [label = "", pos = "90.3,-67.166667!"];
+            Glacier_Breach__Spidery_Connector__Midway [label = "", pos = "88.65,-67.916667!"];
+            Glacier_Breach__Spidery_Connector__West_Gate [label = "", pos = "86.85,-67.666667!"];
+            Glacier_Breach__Spidery_Connector__West [label = "", pos = "84.3,-67.583333!"];
         }
         {
             Glacier_Breach__Stable_Floor__West [label = "", pos = "123.3,-67.916667!"];
@@ -2635,6 +2668,7 @@
             Menu__Breach_Map__GSB_Labyrinth_Flask [label = "", pos = "54.0,-85.0!"];
             Menu__Breach_Map__GlB_Grate_Flask [label = "", pos = "117.0,-71.666667!"];
             Menu__Breach_Map__GlB_Control_Flask [label = "", pos = "108.0,-71.666667!"];
+            Menu__Breach_Map__GlB_Spidery_Connector_Flask [label = "", pos = "87.0,-68.333333!"];
             Menu__Breach_Map__IB_Gauntlet_Flask [label = "", pos = "30.0,-88.333333!"];
             Menu__Breach_Map__Drone_Hover [label = "", pos = "36.0,-88.333333!"];
             Menu__Breach_Map__IB_Worm_Rave_Flask [label = "", pos = "36.0,-93.333333!"];

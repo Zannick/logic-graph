@@ -1119,6 +1119,8 @@ areas:
       coord: [39, 13]
     - name: GlB Control Flask
       coord: [36, 13]
+    - name: GlB Spidery Connector Flask
+      coord: [29, 11]
 
     - name: IB Gauntlet Flask
       coord: [10, 23]

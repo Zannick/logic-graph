@@ -114,6 +114,7 @@ pub enum Item {
     Giguna_Wasteland_Door,
     Giguna_Wasteland_Passage_H,
     Glacier_Big_Drop_Rock,
+    Glacier_Breach_Spidery_Connector_Gate,
     Glacier_Sea_Burial_Rock,
     Goodbye,
     Hammond_Auth,
@@ -313,6 +314,9 @@ impl fmt::Display for Item {
             Item::Giguna_Wasteland_Door => write!(f, "{}", "Giguna_Wasteland_Door"),
             Item::Giguna_Wasteland_Passage_H => write!(f, "{}", "Giguna_Wasteland_Passage_H"),
             Item::Glacier_Big_Drop_Rock => write!(f, "{}", "Glacier_Big_Drop_Rock"),
+            Item::Glacier_Breach_Spidery_Connector_Gate => {
+                write!(f, "{}", "Glacier_Breach_Spidery_Connector_Gate")
+            }
             Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Goodbye => write!(f, "{}", "Goodbye"),
             Item::Hammond_Auth => write!(f, "{}", "Hammond_Auth"),
@@ -512,6 +516,9 @@ impl std::str::FromStr for Item {
             "Giguna_Wasteland_Door" => Ok(Item::Giguna_Wasteland_Door),
             "Giguna_Wasteland_Passage_H" => Ok(Item::Giguna_Wasteland_Passage_H),
             "Glacier_Big_Drop_Rock" => Ok(Item::Glacier_Big_Drop_Rock),
+            "Glacier_Breach_Spidery_Connector_Gate" => {
+                Ok(Item::Glacier_Breach_Spidery_Connector_Gate)
+            }
             "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Goodbye" => Ok(Item::Goodbye),
             "Hammond_Auth" => Ok(Item::Hammond_Auth),

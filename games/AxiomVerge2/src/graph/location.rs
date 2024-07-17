@@ -468,6 +468,10 @@ impl world::Accessible for Location {
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::access_invoke_sync(ctx, world),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::access_invoke_sync(ctx, world),
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => true,
+            LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button => true,
+            LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask => true,
+            LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Collection_Skip => true,
+            LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Interior__Building_Interior__Corner__Urn => true,
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::access_invoke_boomerang(ctx, world),
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::access_invoke_boomerang(ctx, world),
@@ -975,6 +979,7 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::observe_access_invoke_sync(ctx, world, full_obs),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_invoke_sync(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Interior__Garage__Boxes__Under_Boxes => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
@@ -1494,6 +1499,7 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::explain_boomerang(ctx, world, edict),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::explain_invoke_sync(ctx, world, edict),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_invoke_sync(ctx, world, edict),
+            LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Interior__Garage__Boxes__Under_Boxes => rules::explain_invoke_can_damage(ctx, world, edict),
@@ -1649,7 +1655,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 619] = [
+static LOC_DEFS: [Location; 623] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -5179,6 +5185,42 @@ static LOC_DEFS: [Location; 619] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button,
+        canonical: CanonId::Loc_Glacier_Breach__Spidery_Connector__Button__Hit_Button,
+        item: Item::Glacier_Breach_Spidery_Connector_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask,
+        canonical: CanonId::Glacier_Breach_Spidery_Connector_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Collection_Skip,
+        canonical: CanonId::Glacier_Breach_Spidery_Connector_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel,
+        canonical: CanonId::Glacier_Breach_Spidery_Connector_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__GlB_Spidery_Connector_Flask,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
         canonical: CanonId::Escape,
         item: Item::Escape,
@@ -7481,6 +7523,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
         LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
         LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => SpotId::Glacier_Breach__Control__Upper_Corner,
+        LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button => SpotId::Glacier_Breach__Spidery_Connector__Button,
+        LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask | LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Collection_Skip | LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => SpotId::Glacier_Breach__Spidery_Connector__Midway,
         LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => SpotId::Glacier__Dock_Outside__Ruins_Stairs,
         LocationId::Glacier__Dock_Outside__Cave_Treasure__Item => SpotId::Glacier__Dock_Outside__Cave_Treasure,
         LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip | LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Fast_Travel => SpotId::Glacier__Dock_Outside__Cave_Treasure,

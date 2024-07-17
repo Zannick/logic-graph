@@ -1839,6 +1839,25 @@ pub fn access_glacier_big_drop_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Big_Drop_Rock
     ctx.has(Item::Glacier_Big_Drop_Rock)
 }
+pub fn access_glacier_breach_spidery_connector_gate(ctx: &Context, world: &World) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate
+    ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate)
+}
+pub fn access_glacier_breach_spidery_connector_gate_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate and Drone_Hover
+    (ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate) && ctx.has(Item::Drone_Hover))
+}
+pub fn access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
 pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Sea_Burial_Rock
     ctx.has(Item::Glacier_Sea_Burial_Rock)
@@ -10407,6 +10426,81 @@ pub fn explain_glacier_big_drop_rock(
         let h = ctx.has(Item::Glacier_Big_Drop_Rock);
         edict.insert("Glacier_Big_Drop_Rock", format!("{}", h));
         (h, vec!["Glacier_Big_Drop_Rock"])
+    }
+}
+pub fn explain_glacier_breach_spidery_connector_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Breach_Spidery_Connector_Gate
+    {
+        let h = ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate);
+        edict.insert("Glacier_Breach_Spidery_Connector_Gate", format!("{}", h));
+        (h, vec!["Glacier_Breach_Spidery_Connector_Gate"])
+    }
+}
+pub fn explain_glacier_breach_spidery_connector_gate_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Breach_Spidery_Connector_Gate and Drone_Hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate);
+            edict.insert("Glacier_Breach_Spidery_Connector_Gate", format!("{}", h));
+            (h, vec!["Glacier_Breach_Spidery_Connector_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate);
+                edict.insert("Glacier_Breach_Spidery_Connector_Gate", format!("{}", h));
+                (h, vec!["Glacier_Breach_Spidery_Connector_Gate"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_glacier_sea_burial_rock(
@@ -20223,6 +20317,48 @@ pub fn observe_access_glacier_big_drop_rock(
         full_obs.observe_glacier_big_drop_rock();
         ctx.has(Item::Glacier_Big_Drop_Rock)
     }
+}
+pub fn observe_access_glacier_breach_spidery_connector_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate
+    {
+        full_obs.observe_glacier_breach_spidery_connector_gate();
+        ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate)
+    }
+}
+pub fn observe_access_glacier_breach_spidery_connector_gate_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate and Drone_Hover
+    ({
+        full_obs.observe_glacier_breach_spidery_connector_gate();
+        ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_glacier_breach_spidery_connector_gate();
+        ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_glacier_sea_burial_rock(
     ctx: &Context,

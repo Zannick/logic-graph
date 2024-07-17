@@ -697,7 +697,11 @@ subgraph Ebih_Breach
         Ebih_Breach__In_n_Out__Northwest(Northwest);
     end
     subgraph Ebih_Breach__Corridor[Corridor]
+        Ebih_Breach__Corridor__West(West);
         Ebih_Breach__Corridor__South(South);
+        Ebih_Breach__Corridor__East_Tree(East Tree);
+        Ebih_Breach__Corridor__Northeast_Ledge(Northeast Ledge);
+        Ebih_Breach__Corridor__Northeast(Northeast);
     end
     subgraph Ebih_Breach__Lake_Gate[Lake Gate]
         Ebih_Breach__Lake_Gate__North(North);
@@ -708,6 +712,26 @@ subgraph Ebih_Breach
         Ebih_Breach__Lake_Gate__Button(Button);
         Ebih_Breach__Lake_Gate__Interior(Interior);
         Ebih_Breach__Lake_Gate__South(South);
+    end
+    subgraph Ebih_Breach__Bubble_Bobble[Bubble Bobble]
+        Ebih_Breach__Bubble_Bobble__East_11(East 11);
+        Ebih_Breach__Bubble_Bobble__Tree(Tree);
+        Ebih_Breach__Bubble_Bobble__West_10(West 10);
+        Ebih_Breach__Bubble_Bobble__Lower_Row_Right(Lower Row Right);
+        Ebih_Breach__Bubble_Bobble__Lower_Row_Left(Lower Row Left);
+        Ebih_Breach__Bubble_Bobble__Upper_Ledge(Upper Ledge);
+        Ebih_Breach__Bubble_Bobble__West_7(West 7);
+    end
+    subgraph Ebih_Breach__Corner[Corner]
+        Ebih_Breach__Corner__East(East);
+        Ebih_Breach__Corner__South(South);
+    end
+    subgraph Ebih_Breach__Spider_Guards[Spider Guards]
+        Ebih_Breach__Spider_Guards__East(East);
+        Ebih_Breach__Spider_Guards__East_Spider(East Spider);
+    end
+    subgraph Ebih_Breach__Rocky_Cages[Rocky Cages]
+        Ebih_Breach__Rocky_Cages__East(East);
     end
 end
 subgraph Ebih
@@ -1942,6 +1966,15 @@ subgraph Glacier_Breach
     end
     subgraph Glacier_Breach__Spidery_Connector[Spidery Connector]
         Glacier_Breach__Spidery_Connector__East(East);
+        Glacier_Breach__Spidery_Connector__Button(Button);
+        Glacier_Breach__Spidery_Connector__East_Gate(East Gate);
+        Glacier_Breach__Spidery_Connector__East_Mid_air_Lower(East Mid-air Lower);
+        Glacier_Breach__Spidery_Connector__East_Mid_air_Upper(East Mid-air Upper);
+        Glacier_Breach__Spidery_Connector__West_Mid_air_Lower(West Mid-air Lower);
+        Glacier_Breach__Spidery_Connector__West_Mid_air_Upper(West Mid-air Upper);
+        Glacier_Breach__Spidery_Connector__Midway(Midway);
+        Glacier_Breach__Spidery_Connector__West_Gate(West Gate);
+        Glacier_Breach__Spidery_Connector__West(West);
     end
 end
 subgraph Glacier
@@ -2826,6 +2859,7 @@ subgraph Menu
         Menu__Breach_Map__GSB_Labyrinth_Flask(GSB Labyrinth Flask);
         Menu__Breach_Map__GlB_Grate_Flask(GlB Grate Flask);
         Menu__Breach_Map__GlB_Control_Flask(GlB Control Flask);
+        Menu__Breach_Map__GlB_Spidery_Connector_Flask(GlB Spidery Connector Flask);
         Menu__Breach_Map__IB_Gauntlet_Flask(IB Gauntlet Flask);
         Menu__Breach_Map__Drone_Hover(Drone Hover);
         Menu__Breach_Map__IB_Worm_Rave_Flask(IB Worm Rave Flask);
@@ -3504,6 +3538,17 @@ Antarctica__Freight_Elevator__Controls --> Interior__Dock_Elevator__Elevator
 Antarctica__Power_Room__Entry <--> Antarctica__Top__Power_Entry
 Antarctica__Shed__Interior <--> Antarctica__West__Shed_Entry
 Antarctica__West__Shed_Entry --> Antarctica__West__Helipad
+Ebih_Breach__Bubble_Bobble__East_11 --> Ebih_Breach__Bubble_Bobble__Tree
+Ebih_Breach__Bubble_Bobble__East_11 <--> Glacier_Breach__Spidery_Connector__West
+Ebih_Breach__Bubble_Bobble__Tree --> Ebih_Breach__Bubble_Bobble__Lower_Row_Right
+Ebih_Breach__Bubble_Bobble__Tree --> Ebih_Breach__Bubble_Bobble__West_10
+Ebih_Breach__Bubble_Bobble__Upper_Ledge --> Ebih_Breach__Spider_Guards__East_Spider
+Ebih_Breach__Bubble_Bobble__West_10 <--> Ebih_Breach__Corner__East
+Ebih_Breach__Bubble_Bobble__West_7 --> Ebih_Breach__Spider_Guards__East
+Ebih_Breach__Corner__South <--> Ebih_Breach__Corridor__Northeast
+Ebih_Breach__Corridor__East_Tree --> Ebih_Breach__Corridor__Northeast
+Ebih_Breach__Corridor__South <--> Ebih_Breach__In_n_Out__Northwest
+Ebih_Breach__Corridor__West --> Ebih_Breach__Rocky_Cages__East
 Ebih_Breach__Drone_Tutorial__Above_Rocks --> Ebih_Breach__Drone_Tutorial__Upper_Mid_way
 Ebih_Breach__Drone_Tutorial__Bottom --> Ebih_Breach__Drone_Tutorial__First_Rocks
 Ebih_Breach__Drone_Tutorial__Upper_Mid_way --> Ebih_Breach__Drone_Tutorial__Top
@@ -3525,7 +3570,6 @@ Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Save_Point
 Ebih_Breach__In_n_Out__Mesa_East --> Ebih_Breach__In_n_Out__Southwest
 Ebih_Breach__In_n_Out__Mesa_West --> Ebih_Breach__In_n_Out__Center_Rock_West
 Ebih_Breach__In_n_Out__Mesa_West --> Ebih_Breach__In_n_Out__Northwest_Ledge
-Ebih_Breach__In_n_Out__Northwest --> Ebih_Breach__Corridor__South
 Ebih_Breach__In_n_Out__Northwest_Ledge --> Ebih_Breach__In_n_Out__Gate_East
 Ebih_Breach__In_n_Out__Platform_1 --> Ebih_Breach__In_n_Out__Center_Rock_East
 Ebih_Breach__In_n_Out__Platform_1 --> Ebih_Breach__In_n_Out__Gate_East
@@ -4340,9 +4384,20 @@ Glacier_Breach__Piano_Roll__Lower_Ledge --> Glacier_Breach__Piano_Roll__Middle_L
 Glacier_Breach__Piano_Roll__Middle_Ledge --> Glacier_Breach__Piano_Roll__Upper_Ledge
 Glacier_Breach__South_Save__Brick_Ledge --> Glacier_Breach__South_Save__East
 Glacier_Breach__South_Save__Save_Point --> Glacier_Breach__South_Save__Brick_Ledge
+Glacier_Breach__Spidery_Connector__Button --> Glacier_Breach__Spidery_Connector__East_Gate
+Glacier_Breach__Spidery_Connector__Button --> Glacier_Breach__Spidery_Connector__East_Mid_air_Lower
+Glacier_Breach__Spidery_Connector__East <--> Glacier_Breach__West_Save__West_11
+Glacier_Breach__Spidery_Connector__East_Gate --> Glacier_Breach__Spidery_Connector__West_Mid_air_Lower
+Glacier_Breach__Spidery_Connector__East_Mid_air_Lower --> Glacier_Breach__Spidery_Connector__East_Mid_air_Upper
+Glacier_Breach__Spidery_Connector__East_Mid_air_Upper --> Glacier_Breach__Spidery_Connector__Midway
+Glacier_Breach__Spidery_Connector__Midway --> Glacier_Breach__Spidery_Connector__West_Gate
+Glacier_Breach__Spidery_Connector__West <--> Glacier_Breach__Spidery_Connector__West_Gate
+Glacier_Breach__Spidery_Connector__West_Mid_air_Lower --> Glacier_Breach__Spidery_Connector__West_Mid_air_Upper
+Glacier_Breach__Spidery_Connector__West_Mid_air_Upper --> Glacier_Breach__Spidery_Connector__Midway
+Glacier_Breach__Spidery_Connector__West_Mid_air_Upper --> Glacier_Breach__Spidery_Connector__West_Gate
 Glacier_Breach__Stable_Floor__South --> Glacier_Breach__Empty_Space__North
 Glacier_Breach__West_Save__East_11 <--> Glacier_Breach__West_Save__West_Ledge
-Glacier_Breach__West_Save__West_11 --> Glacier_Breach__Spidery_Connector__East
+Glacier_Breach__West_Save__West_Ledge --> Glacier_Breach__Spidery_Connector__Button
 Glacier_Breach__West_Save__West_Ledge --> Glacier_Breach__West_Save__West_11
 Glacier_Breach__West_Save__West_Nub --> Glacier_Breach__West_Save__East_11
 Glacier_Breach__West_Save__West_Nub --> Glacier_Breach__West_Save__West_Ledge

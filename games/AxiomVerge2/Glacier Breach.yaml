@@ -445,6 +445,11 @@ areas:
           req: $hook or $hover
           movement: base
           jumps: 2
+        - to: Spidery Connector > Button
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xdoor, -fast_hover.2]
     - name: East 11
       coord: [32.9, 10.75]
       local:
@@ -846,6 +851,120 @@ areas:
 
 - name: Spidery Connector  # MARK: Spidery Connector
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [29, 10, 30, 11]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GlB Spidery Connector Flask
+  # This room has high-level enemies so only the current strategies for getting past are implemented
+  # Maybe if we later use health requirements we can add damage boost options
   spots:
     - name: East
       coord: [31.9, 10.75]
+      local:
+        - to: Button
+      exits:
+        - to: West Save > West 11
+          tags: [xdoor]
+    - name: Button
+      coord: [31.65, 10.75]
+      local:
+        - to: East
+      locations:
+        - name: Hit Button
+          item: Glacier_Breach_Spidery_Connector_Gate
+          tags: [button]
+      exits:
+        - to: East Gate
+          req: Glacier_Breach_Spidery_Connector_Gate
+          movement: base
+          jumps: 1
+        - to: East Gate
+          req: Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: East Mid-air Lower
+          req: Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: East Gate
+      coord: [31.05, 10.7]
+      local:
+        - to: Button
+      exits:
+        - to: West Mid-air Lower
+          req: Drone_Hover
+          jumps: 1
+    - name: East Mid-air Lower
+      coord: [30.7, 10.5]
+      exits:
+        - to: East Mid-air Upper
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Mid-air Upper
+          req: $mist2
+          movement: mist2
+    - name: East Mid-air Upper
+      coord: [30.6, 10.3]
+      exits:
+        - to: Midway
+          req: Drone_Hover
+          movement: base
+    - name: West Mid-air Lower
+      coord: [30.2, 10.4]
+      exits:
+        - to: West Mid-air Upper
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Mid-air Upper
+          req: $mist2
+          movement: mist2
+    - name: West Mid-air Upper
+      coord: [30.1, 10.3]
+      exits:
+        - to: Midway
+          req: Drone_Hover
+          movement: base
+        - to: West Gate
+          req: Drone_Hover
+          movement: base
+    - name: Midway
+      coord: [29.55, 10.75]
+      locations:
+        - name: Flask
+          canon: Glacier_Breach_Spidery_Connector_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Glacier_Breach_Spidery_Connector_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Glacier_Breach_Spidery_Connector_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: West Gate
+          req: Glacier_Breach_Spidery_Connector_Gate
+          movement: base
+          jumps: 2
+    - name: West Gate
+      coord: [28.95, 10.6]
+      local:
+        - to: Midway
+      exits:
+        - to: West
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: West
+      coord: [28.1, 10.55]
+      exits:
+        - to: West Gate
+          req: Glacier_Breach_Spidery_Connector_Gate and Drone_Hover
+          movement: base
+        - to: Ebih Breach > Bubble Bobble > East 11
+          tags: [xdoor]

@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2574] = [
+static SPOT_DEFS: [SpotDef; 2600] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -3176,9 +3176,87 @@ static SPOT_DEFS: [SpotDef; 2574] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Ebih_Breach__Corridor__South,
+        id: SpotId::Ebih_Breach__Bubble_Bobble__East_11,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Bubble_Bobble__East_11__ex__Glacier_Breach__Spidery_Connector__West_1, ExitId::Ebih_Breach__Bubble_Bobble__East_11__ex__Tree_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__Lower_Row_Left,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__Lower_Row_Right,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__Tree,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Bubble_Bobble__Tree__ex__Lower_Row_Right_1, ExitId::Ebih_Breach__Bubble_Bobble__Tree__ex__West_10_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__Upper_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Bubble_Bobble__Upper_Ledge__ex__Spider_Guards__East_Spider_1, ExitId::Ebih_Breach__Bubble_Bobble__Upper_Ledge__ex__Spider_Guards__East_Spider_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__West_10,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Bubble_Bobble__West_10__ex__Corner__East_1, ExitId::Ebih_Breach__Bubble_Bobble__West_10__ex__Corner__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Bubble_Bobble__West_7,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Bubble_Bobble__West_7__ex__Spider_Guards__East_1, ExitId::Ebih_Breach__Bubble_Bobble__West_7__ex__Spider_Guards__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corner__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corner__East__ex__Bubble_Bobble__West_10_1, ExitId::Ebih_Breach__Corner__East__ex__Bubble_Bobble__West_10_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corner__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corner__South__ex__Corridor__Northeast_1, ExitId::Ebih_Breach__Corner__South__ex__Corridor__Northeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corridor__East_Tree,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corridor__East_Tree__ex__Northeast_1, ExitId::Ebih_Breach__Corridor__East_Tree__ex__Northeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corridor__Northeast,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corridor__Northeast__ex__Corner__South_1, ExitId::Ebih_Breach__Corridor__Northeast__ex__Corner__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corridor__Northeast_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corridor__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corridor__South__ex__In_n_Out__Northwest_1, ExitId::Ebih_Breach__Corridor__South__ex__In_n_Out__Northwest_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Corridor__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Corridor__West__ex__Rocky_Cages__East_1, ExitId::Ebih_Breach__Corridor__West__ex__Rocky_Cages__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -3458,7 +3536,25 @@ static SPOT_DEFS: [SpotDef; 2574] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih_Breach__Rocky_Cages__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih_Breach__Snowy_Rocks__East_4,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East_Spider,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -9500,9 +9596,63 @@ static SPOT_DEFS: [SpotDef; 2574] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__Button,
+        loc_range: Some((LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button, LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button)),
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1, ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier_Breach__Spidery_Connector__East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__East__ex__West_Save__West_11_1, ExitId::Glacier_Breach__Spidery_Connector__East__ex__West_Save__West_11_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__East_Gate,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1, ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1, ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__East_Mid_air_Upper,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Upper__ex__Midway_1, ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Upper__ex__Midway_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__Midway,
+        loc_range: Some((LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask, LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__Midway__ex__West_Gate_1, ExitId::Glacier_Breach__Spidery_Connector__Midway__ex__West_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__West__ex__Ebih_Breach__Bubble_Bobble__East_11_1, ExitId::Glacier_Breach__Spidery_Connector__West__ex__West_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__West_Gate,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__West_Gate__ex__West_1, ExitId::Glacier_Breach__Spidery_Connector__West_Gate__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__West_Mid_air_Lower,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Lower__ex__West_Mid_air_Upper_1, ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Lower__ex__West_Mid_air_Upper_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Spidery_Connector__West_Mid_air_Upper,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Upper__ex__Midway_1, ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Upper__ex__West_Gate_1)),
         action_range: None,
     },
     SpotDef {
@@ -12767,6 +12917,12 @@ static SPOT_DEFS: [SpotDef; 2574] = [
         id: SpotId::Menu__Breach_Map__GlB_South,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1, ExitId::Menu__Breach_Map__GlB_South__ex__Glacier_Breach__South_Save__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__GlB_Spidery_Connector_Flask,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
