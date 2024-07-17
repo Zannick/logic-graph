@@ -1182,3 +1182,7 @@ areas:
           item: Flask
           req: Fast_Travel
           to: ^map_spot
+      exits:
+        - to: Cage North
+          req: Slingshot_Hook
+          jumps: 2
