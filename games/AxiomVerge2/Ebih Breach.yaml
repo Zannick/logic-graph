@@ -1082,7 +1082,7 @@ areas:
       local:
         - to: Dais East
       exits:
-        - to: Pipe Gap East
+        - to: Pipe Gap West
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
     - name: Dais East

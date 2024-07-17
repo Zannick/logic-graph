@@ -1096,6 +1096,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Ebih_Breach__Rocky_Cages__Cage_North__ex__The_Vault__South_1 => true,
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_1 => rules::access_ebih_breach_spider_guards_gate(ctx, world),
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_2 => rules::access_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(ctx, world),
@@ -1119,7 +1120,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_West_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Ebih_Breach__The_Vault__South__ex__Rocky_Cages__Cage_North_1 => true,
             ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::access_invoke_hover_and_underwater_movement(ctx, world),
             ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::access_nanite_mist(ctx, world),
@@ -3813,6 +3814,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_1 => rules::observe_access_ebih_breach_spider_guards_gate(ctx, world, full_obs),
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_2 => rules::observe_access_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Ebih_Breach__Spider_Guards__Center_Above_Door__ex__Button_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
@@ -3830,7 +3832,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
+            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::observe_access_invoke_hover_and_underwater_movement(ctx, world, full_obs),
             ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -6344,6 +6346,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Ebih_Breach__Portals_101__West_Nook__ex__Middle_Gap_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Ebih_Breach__Portals_101__West_Slope__ex__West_4_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_1 => rules::explain_ebih_breach_spider_guards_gate(ctx, world, edict),
             ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_2 => rules::explain_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Ebih_Breach__Spider_Guards__Center_Above_Door__ex__Button_1 => rules::explain_drone_hover(ctx, world, edict),
@@ -6361,7 +6364,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
+            ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Emergence__Aquarium__Column__ex__West_11_1 => rules::explain_invoke_hover_and_underwater_movement(ctx, world, edict),
             ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -8529,7 +8532,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 2954] = [
+static EXIT_DEFS: [Exit; 2955] = [
     Exit {
         id: ExitId::Amagi_Breach__East_Column__East__ex__East_Connector__West_1,
         time: 1600,
@@ -12647,6 +12650,12 @@ static EXIT_DEFS: [Exit; 2954] = [
         price: Currency::Free,
     },
     Exit {
+        id: ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rocky_Cages__Cage_North,
+        price: Currency::Free,
+    },
+    Exit {
         id: ExitId::Ebih_Breach__Rocky_Cages__Cage_North__ex__The_Vault__South_1,
         time: 1600,
         dest: SpotId::Ebih_Breach__The_Vault__South,
@@ -12785,9 +12794,9 @@ static EXIT_DEFS: [Exit; 2954] = [
         price: Currency::Free,
     },
     Exit {
-        id: ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1,
-        time: 2125,
-        dest: SpotId::Ebih_Breach__The_Vault__Pipe_Gap_East,
+        id: ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1,
+        time: 1937,
+        dest: SpotId::Ebih_Breach__The_Vault__Pipe_Gap_West,
         price: Currency::Free,
     },
     Exit {
@@ -26669,11 +26678,12 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Ebih_Breach__Double_Gate__Below_Gate__ex__Button_Right_1 => SpotId::Ebih_Breach__Double_Gate__Below_Gate,
         ExitId::Ebih_Breach__Double_Gate__South__ex__Below_Gate_1 | ExitId:: Ebih_Breach__Double_Gate__South__ex__Rocky_Cages__Northeast_1 => SpotId::Ebih_Breach__Double_Gate__South,
         ExitId::Ebih_Breach__The_Vault__East__ex__Center_Hill_1 | ExitId:: Ebih_Breach__The_Vault__East__ex__Double_Gate__West_1 => SpotId::Ebih_Breach__The_Vault__East,
-        ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1 => SpotId::Ebih_Breach__The_Vault__West_Hill_Hook_Point,
+        ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1 => SpotId::Ebih_Breach__The_Vault__West_Hill_Hook_Point,
         ExitId::Ebih_Breach__The_Vault__Dais_East__ex__West_Hill_Hook_Point_1 => SpotId::Ebih_Breach__The_Vault__Dais_East,
         ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1 => SpotId::Ebih_Breach__The_Vault__Southwest_Corner,
         ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_East_1 | ExitId:: Ebih_Breach__The_Vault__South__ex__Pipe_Gap_West_1 | ExitId:: Ebih_Breach__The_Vault__South__ex__Rocky_Cages__Cage_North_1 => SpotId::Ebih_Breach__The_Vault__South,
         ExitId::Ebih_Breach__Rocky_Cages__Cage_North__ex__The_Vault__South_1 => SpotId::Ebih_Breach__Rocky_Cages__Cage_North,
+        ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1 => SpotId::Ebih_Breach__Rocky_Cages__Cage_Bottom,
         ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 | ExitId:: Ebih__Base_Camp__East_11__ex__Top_Platform_1 => SpotId::Ebih__Base_Camp__East_11,
         ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => SpotId::Ebih__Base_Camp__East_12,
         ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 | ExitId:: Ebih__Base_Camp__Save_Point__ex__Top_Platform_2 => SpotId::Ebih__Base_Camp__Save_Point,

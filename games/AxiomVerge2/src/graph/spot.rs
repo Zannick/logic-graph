@@ -3598,7 +3598,7 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef {
         id: SpotId::Ebih_Breach__Rocky_Cages__Cage_Bottom,
         loc_range: Some((LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask, LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel)),
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1, ExitId::Ebih_Breach__Rocky_Cages__Cage_Bottom__ex__Cage_North_1)),
         action_range: None,
     },
     SpotDef {
@@ -3760,7 +3760,7 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef {
         id: SpotId::Ebih_Breach__The_Vault__West_Hill_Hook_Point,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1, ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1)),
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1, ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1)),
         action_range: None,
     },
     SpotDef {

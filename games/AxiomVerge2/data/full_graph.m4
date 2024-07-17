@@ -1087,6 +1087,7 @@ digraph AxiomVerge2 {
     Ebih_Breach__Portals_101__West_4 -> Ebih_Breach__Portals_101__East_4;
     Ebih_Breach__Portals_101__West_4 -> Ebih_Breach__Snowy_Rocks__East_4;
     Ebih_Breach__Rocky_Cages__Cage_North -> Ebih_Breach__The_Vault__South;
+    Ebih_Breach__Rocky_Cages__Cage_Bottom -> Ebih_Breach__Rocky_Cages__Cage_North;
     Ebih_Breach__Spider_Guards__East -> Ebih_Breach__Bubble_Bobble__West_7;
     Ebih_Breach__Spider_Guards__East_Sand_Pit_East -> Ebih_Breach__Spider_Guards__East_Sand_Pit;
     Ebih_Breach__Spider_Guards__East_Sand_Pit_East -> Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air;
@@ -1104,7 +1105,7 @@ digraph AxiomVerge2 {
     Ebih_Breach__Spider_Guards__Northwest -> Ebih_Breach__Snowy_Rocks__South;
     Ebih_Breach__The_Vault__East -> Ebih_Breach__The_Vault__Center_Hill;
     Ebih_Breach__The_Vault__East -> Ebih_Breach__Double_Gate__West;
-    Ebih_Breach__The_Vault__West_Hill_Hook_Point -> Ebih_Breach__The_Vault__Pipe_Gap_East;
+    Ebih_Breach__The_Vault__West_Hill_Hook_Point -> Ebih_Breach__The_Vault__Pipe_Gap_West;
     Ebih_Breach__The_Vault__Dais_East -> Ebih_Breach__The_Vault__West_Hill_Hook_Point;
     Ebih_Breach__The_Vault__Southwest_Corner -> Ebih_Breach__The_Vault__Dais_Center;
     Ebih_Breach__The_Vault__South -> Ebih_Breach__The_Vault__Pipe_Gap_East;
