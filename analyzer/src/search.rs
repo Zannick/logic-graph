@@ -458,21 +458,21 @@ where
             );
             return confirm.into_solution();
         }
-        log::error!(
+        log::warn!(
             "Solution({:?}) elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
             mode,
             elapsed,
             confirm.elapsed()
         );
         if confirm.get() != ctx.get() {
-            log::error!(
+            log::warn!(
                 "Internal states differ: -db +recreated\n{}",
                 confirm.get().diff(ctx.get())
             );
         }
         let (new_history, new_elapsed) = self.queue.db().get_history(confirm.get()).unwrap();
         if new_elapsed != elapsed {
-            log::error!(
+            log::warn!(
                 "Db read of recreated got new time: orig={}ms recreated={}ms",
                 elapsed,
                 new_elapsed
@@ -482,7 +482,7 @@ where
             let old_hist = history_str::<T, _>(history.iter().copied());
             let new_hist = history_str::<T, _>(new_history.iter().copied());
             let text_diff = TextDiff::from_lines(&old_hist, &new_hist);
-            log::error!(
+            log::warn!(
                 "Route diff:\n{}",
                 text_diff
                     .unified_diff()
@@ -499,7 +499,7 @@ where
             );
             let (db_hist, db_elapsed) = self.queue.db().get_history(replay.get()).unwrap();
             if replay.elapsed() != db_elapsed {
-                log::error!(
+                log::warn!(
                     "Replay differs from db at step {}. {}\n{}ms replayed vs {}ms in db",
                     i,
                     step,
@@ -509,13 +509,13 @@ where
                 let mut partial = self.startctx.clone();
                 partial = partial.try_replay_all(self.world, &db_hist).unwrap();
                 if partial.elapsed() != db_elapsed {
-                    log::error!(
+                    log::warn!(
                         "Replaying partial still does not match: {}ms vs {}ms",
                         partial.elapsed(),
                         db_elapsed
                     );
                     if partial.recent_history() == replay.recent_history() {
-                        log::error!("History was the same despite discrepancy.");
+                        log::warn!("History was the same despite discrepancy.");
                     };
                 }
 
@@ -526,7 +526,7 @@ where
                     .try_replay_all(self.world, &history)
                     .unwrap()
                     .into_solution();
-                log::error!(
+                log::warn!(
                     "Replacing solution({:?}) with history from second read: {}ms (previously: {}ms, {}ms)",
                     mode,
                     new_elapsed,
