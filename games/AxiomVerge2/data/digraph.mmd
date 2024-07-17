@@ -673,6 +673,7 @@ subgraph Ebih_Breach
     end
     subgraph Ebih_Breach__Snowy_Rocks[Snowy Rocks]
         Ebih_Breach__Snowy_Rocks__East_4(East 4);
+        Ebih_Breach__Snowy_Rocks__South(South);
     end
     subgraph Ebih_Breach__In_n_Out[In 'n Out]
         Ebih_Breach__In_n_Out__Save_Point(Save Point);
@@ -729,9 +730,46 @@ subgraph Ebih_Breach
     subgraph Ebih_Breach__Spider_Guards[Spider Guards]
         Ebih_Breach__Spider_Guards__East(East);
         Ebih_Breach__Spider_Guards__East_Spider(East Spider);
+        Ebih_Breach__Spider_Guards__East_Sand_Pit_East(East Sand Pit East);
+        Ebih_Breach__Spider_Guards__East_Sand_Pit(East Sand Pit);
+        Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air(East Sand Pit Mid-air);
+        Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform(East Sand Pit West Platform);
+        Ebih_Breach__Spider_Guards__Center_Hover_End(Center Hover End);
+        Ebih_Breach__Spider_Guards__Center_Re_hover_Start(Center Re-hover Start);
+        Ebih_Breach__Spider_Guards__Center_Above_Door(Center Above Door);
+        Ebih_Breach__Spider_Guards__South(South);
+        Ebih_Breach__Spider_Guards__Button(Button);
+        Ebih_Breach__Spider_Guards__Northwest(Northwest);
+    end
+    subgraph Ebih_Breach__Double_Gate[Double Gate]
+        Ebih_Breach__Double_Gate__North(North);
+        Ebih_Breach__Double_Gate__Portal_Stand(Portal Stand);
+        Ebih_Breach__Double_Gate__Grate_East(Grate East);
+        Ebih_Breach__Double_Gate__Grate_West(Grate West);
+        Ebih_Breach__Double_Gate__West(West);
+        Ebih_Breach__Double_Gate__Upper_Right_Corner(Upper Right Corner);
+        Ebih_Breach__Double_Gate__Button_Left(Button Left);
+        Ebih_Breach__Double_Gate__Button_Right(Button Right);
+        Ebih_Breach__Double_Gate__Below_Gate(Below Gate);
+        Ebih_Breach__Double_Gate__South(South);
+    end
+    subgraph Ebih_Breach__The_Vault[The Vault]
+        Ebih_Breach__The_Vault__East(East);
+        Ebih_Breach__The_Vault__Pipe_Gap_East(Pipe Gap East);
+        Ebih_Breach__The_Vault__Pipe_Gap_West(Pipe Gap West);
+        Ebih_Breach__The_Vault__Center_Hill(Center Hill);
+        Ebih_Breach__The_Vault__Northwest_Mid_air(Northwest Mid-air);
+        Ebih_Breach__The_Vault__West_Hill_Hook_Point(West Hill Hook Point);
+        Ebih_Breach__The_Vault__Dais_East(Dais East);
+        Ebih_Breach__The_Vault__Dais_Center(Dais Center);
+        Ebih_Breach__The_Vault__Southwest_Corner(Southwest Corner);
+        Ebih_Breach__The_Vault__South(South);
     end
     subgraph Ebih_Breach__Rocky_Cages[Rocky Cages]
         Ebih_Breach__Rocky_Cages__East(East);
+        Ebih_Breach__Rocky_Cages__Northeast(Northeast);
+        Ebih_Breach__Rocky_Cages__Cage_North(Cage North);
+        Ebih_Breach__Rocky_Cages__Cage_Bottom(Cage Bottom);
     end
 end
 subgraph Ebih
@@ -810,7 +848,10 @@ subgraph Ebih
         Ebih__Waterfall__Lower_West_Tree(Lower West Tree);
         Ebih__Waterfall__West_Lower_Path(West Lower Path);
         Ebih__Waterfall__West_10(West 10);
+        Ebih__Waterfall__West_Waterfall_Mid_air_Tier_2(West Waterfall Mid-air Tier 2);
         Ebih__Waterfall__West_9(West 9);
+        Ebih__Waterfall__West_Grassy_Plains(West Grassy Plains);
+        Ebih__Waterfall__West_Mid_air_Between_Trees(West Mid-air Between Trees);
         Ebih__Waterfall__West_Climb(West Climb);
         Ebih__Waterfall__Ledge_Below_Hole(Ledge Below Hole);
         Ebih__Waterfall__Below_Left_Switch(Below Left Switch);
@@ -2663,8 +2704,6 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_Dock_Flask(Glacier Dock Flask);
         Menu__Kiengir_Map__Glacier_Peak_Birds_Eye(Glacier Peak Bird's Eye);
         Menu__Kiengir_Map__Forbidden_Knowledge(Forbidden Knowledge);
-        Menu__Kiengir_Map__Ebih_Truck_Gate(Ebih Truck Gate);
-        Menu__Kiengir_Map__Ebih_Guarded_Health(Ebih Guarded Health);
         Menu__Kiengir_Map__Irikar_Well(Irikar Well);
         Menu__Kiengir_Map__Irikar_10_25(Irikar 10,25);
         Menu__Kiengir_Map__Irikar_Royal_Storage(Irikar Royal Storage);
@@ -2713,6 +2752,8 @@ subgraph Menu
         Menu__Kiengir_Map__Ebih_By_Garage_Health(Ebih By Garage Health);
         Menu__Kiengir_Map__Ebih_Garage(Ebih Garage);
         Menu__Kiengir_Map__Ebih_By_Garage_NW(Ebih By Garage NW);
+        Menu__Kiengir_Map__Ebih_Truck_Gate(Ebih Truck Gate);
+        Menu__Kiengir_Map__Ebih_Guarded_Health(Ebih Guarded Health);
         Menu__Kiengir_Map__Ebih_East_Waterfall_Flask(Ebih East Waterfall Flask);
         Menu__Kiengir_Map__Ebih_East_Waterfall_Door(Ebih East Waterfall Door);
         Menu__Kiengir_Map__Ebih_East_Waterfall_Bottom(Ebih East Waterfall Bottom);
@@ -2869,6 +2910,10 @@ subgraph Menu
         Menu__Breach_Map__LAB_Upper_Lake_Health(LAB Upper Lake Health);
         Menu__Breach_Map__MEB_In_n_Out_Matrix(MEB In 'n Out Matrix);
         Menu__Breach_Map__MEB_Lake_Gate(MEB Lake Gate);
+        Menu__Breach_Map__MEB_Spider_Guards_Flask(MEB Spider Guards Flask);
+        Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
+        Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
+        Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
     end
 end
 subgraph Uhrum
@@ -3544,11 +3589,22 @@ Ebih_Breach__Bubble_Bobble__Tree --> Ebih_Breach__Bubble_Bobble__Lower_Row_Right
 Ebih_Breach__Bubble_Bobble__Tree --> Ebih_Breach__Bubble_Bobble__West_10
 Ebih_Breach__Bubble_Bobble__Upper_Ledge --> Ebih_Breach__Spider_Guards__East_Spider
 Ebih_Breach__Bubble_Bobble__West_10 <--> Ebih_Breach__Corner__East
-Ebih_Breach__Bubble_Bobble__West_7 --> Ebih_Breach__Spider_Guards__East
+Ebih_Breach__Bubble_Bobble__West_7 <--> Ebih_Breach__Spider_Guards__East
 Ebih_Breach__Corner__South <--> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__East_Tree --> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__South <--> Ebih_Breach__In_n_Out__Northwest
 Ebih_Breach__Corridor__West --> Ebih_Breach__Rocky_Cages__East
+Ebih_Breach__Double_Gate__Below_Gate <--> Ebih_Breach__Double_Gate__Button_Right
+Ebih_Breach__Double_Gate__Grate_East <--> Ebih_Breach__Double_Gate__Grate_West
+Ebih_Breach__Double_Gate__Grate_West --> Ebih_Breach__The_Vault__Northwest_Mid_air
+Ebih_Breach__Double_Gate__Grate_West --> Ebih_Breach__The_Vault__Pipe_Gap_East
+Ebih_Breach__Double_Gate__North <--> Ebih_Breach__Spider_Guards__South
+Ebih_Breach__Double_Gate__Portal_Stand --> Ebih_Breach__Double_Gate__North
+Ebih_Breach__Double_Gate__Portal_Stand --> Ebih_Breach__Double_Gate__Upper_Right_Corner
+Ebih_Breach__Double_Gate__South --> Ebih_Breach__Double_Gate__Below_Gate
+Ebih_Breach__Double_Gate__South --> Ebih_Breach__Rocky_Cages__Northeast
+Ebih_Breach__Double_Gate__Upper_Right_Corner --> Ebih_Breach__Double_Gate__Below_Gate
+Ebih_Breach__Double_Gate__West <--> Ebih_Breach__The_Vault__East
 Ebih_Breach__Drone_Tutorial__Above_Rocks --> Ebih_Breach__Drone_Tutorial__Upper_Mid_way
 Ebih_Breach__Drone_Tutorial__Bottom --> Ebih_Breach__Drone_Tutorial__First_Rocks
 Ebih_Breach__Drone_Tutorial__Upper_Mid_way --> Ebih_Breach__Drone_Tutorial__Top
@@ -3592,6 +3648,23 @@ Ebih_Breach__Portals_101__West_Lower_Ledge --> Ebih_Breach__Portals_101__West_No
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_East
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_West
 Ebih_Breach__Portals_101__West_Slope --> Ebih_Breach__Portals_101__West_4
+Ebih_Breach__Rocky_Cages__Cage_North <--> Ebih_Breach__The_Vault__South
+Ebih_Breach__Spider_Guards__Button <--> Ebih_Breach__Spider_Guards__Northwest
+Ebih_Breach__Spider_Guards__Center_Above_Door --> Ebih_Breach__Spider_Guards__Button
+Ebih_Breach__Spider_Guards__Center_Hover_End --> Ebih_Breach__Spider_Guards__Center_Re_hover_Start
+Ebih_Breach__Spider_Guards__Center_Re_hover_Start --> Ebih_Breach__Spider_Guards__Center_Above_Door
+Ebih_Breach__Spider_Guards__Center_Re_hover_Start --> Ebih_Breach__Spider_Guards__South
+Ebih_Breach__Spider_Guards__East_Sand_Pit_East --> Ebih_Breach__Spider_Guards__East_Sand_Pit
+Ebih_Breach__Spider_Guards__East_Sand_Pit_East --> Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air
+Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air --> Ebih_Breach__Spider_Guards__Center_Hover_End
+Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform --> Ebih_Breach__Spider_Guards__Center_Hover_End
+Ebih_Breach__Spider_Guards__Northwest --> Ebih_Breach__Snowy_Rocks__South
+Ebih_Breach__The_Vault__Dais_East --> Ebih_Breach__The_Vault__West_Hill_Hook_Point
+Ebih_Breach__The_Vault__East --> Ebih_Breach__The_Vault__Center_Hill
+Ebih_Breach__The_Vault__South --> Ebih_Breach__The_Vault__Pipe_Gap_East
+Ebih_Breach__The_Vault__South --> Ebih_Breach__The_Vault__Pipe_Gap_West
+Ebih_Breach__The_Vault__Southwest_Corner --> Ebih_Breach__The_Vault__Dais_Center
+Ebih_Breach__The_Vault__West_Hill_Hook_Point --> Ebih_Breach__The_Vault__Pipe_Gap_East
 Ebih__Base_Camp__Building_Entry <--> Interior__Building_Interior__Entry
 Ebih__Base_Camp__Bunker_Entry <--> Interior__Bunker_Interior__Entry
 Ebih__Base_Camp__East_11 --> Ebih__Base_Camp__Top_Platform

@@ -877,17 +877,41 @@ areas:
         - to: Ebih West > East 10
           tags: [xshift]
 
+    - name: West Waterfall Mid-air Tier 2
+      coord: [22.425, 9.75]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Lower West Tree
+        - to: Waterfall Center Left
+        - to: Wall Right
+        - to: Near East Tree  # goes over the middle island
+
     - name: West 9
       coord: [21.05, 8.8]
       local:
-        - to: West Climb
+        - to: West Grassy Plains
       exits:
         - to: Ebih West > East 9
           tags: [xshift]
+    - name: West Grassy Plains
+      coord: [21.2, 8.8]
+      data:
+        flipside: Ebih Breach > The Vault > Southwest Corner
+      local:
+        - to: West 9
+        - to: West Climb
+    - name: West Mid-air Between Trees
+      coord: [21.45, 8.7]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: West Grassy Plains
+        - to: West Climb
     - name: West Climb
       coord: [21.7, 8.8]
       local:
-        - to: West 9
+        - to: West Climb
       exits:
         - to: Ledge Below Hole
           req: $grab
@@ -1016,6 +1040,8 @@ areas:
           movement: base
     - name: Center Main Path
       coord: [22.9, 7.75]
+      data:
+        flipside: Ebih Breach > The Vault > East
       local:
         - to: West Main Path
         - to: Cave Entrance

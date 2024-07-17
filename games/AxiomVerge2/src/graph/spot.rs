@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2600] = [
+static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -3260,6 +3260,66 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Below_Gate,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Below_Gate__ex__Button_Right_1, ExitId::Ebih_Breach__Double_Gate__Below_Gate__ex__Button_Right_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Button_Left,
+        loc_range: Some((LocationId::Ebih_Breach__Double_Gate__Button_Left__Open_Gate, LocationId::Ebih_Breach__Double_Gate__Button_Left__Open_Gate)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Button_Right,
+        loc_range: Some((LocationId::Ebih_Breach__Double_Gate__Button_Right__Open_Gate, LocationId::Ebih_Breach__Double_Gate__Button_Right__Open_Gate)),
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Button_Right__ex__Below_Gate_1, ExitId::Ebih_Breach__Double_Gate__Button_Right__ex__Below_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Grate_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Grate_East__ex__Grate_West_1, ExitId::Ebih_Breach__Double_Gate__Grate_East__ex__Grate_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Grate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Grate_West__ex__Grate_East_1, ExitId::Ebih_Breach__Double_Gate__Grate_West__ex__The_Vault__Pipe_Gap_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__North__ex__Spider_Guards__South_1, ExitId::Ebih_Breach__Double_Gate__North__ex__Spider_Guards__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Portal_Stand__ex__North_1, ExitId::Ebih_Breach__Double_Gate__Portal_Stand__ex__Upper_Right_Corner_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__South__ex__Below_Gate_1, ExitId::Ebih_Breach__Double_Gate__South__ex__Rocky_Cages__Northeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__Upper_Right_Corner,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__Upper_Right_Corner__ex__Below_Gate_1, ExitId::Ebih_Breach__Double_Gate__Upper_Right_Corner__ex__Below_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Double_Gate__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Double_Gate__West__ex__The_Vault__East_1, ExitId::Ebih_Breach__Double_Gate__West__ex__The_Vault__East_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih_Breach__Drone_Tutorial__Above_Rocks,
         loc_range: None,
         exit_range: Some((ExitId::Ebih_Breach__Drone_Tutorial__Above_Rocks__ex__Upper_Mid_way_1, ExitId::Ebih_Breach__Drone_Tutorial__Above_Rocks__ex__Upper_Mid_way_1)),
@@ -3536,7 +3596,25 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih_Breach__Rocky_Cages__Cage_Bottom,
+        loc_range: Some((LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask, LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Rocky_Cages__Cage_North,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Rocky_Cages__Cage_North__ex__The_Vault__South_1, ExitId::Ebih_Breach__Rocky_Cages__Cage_North__ex__The_Vault__South_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih_Breach__Rocky_Cages__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Rocky_Cages__Northeast,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -3548,15 +3626,141 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Ebih_Breach__Spider_Guards__East,
+        id: SpotId::Ebih_Breach__Snowy_Rocks__South,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__Button,
+        loc_range: Some((LocationId::Ebih_Breach__Spider_Guards__Button__Open_Gate, LocationId::Ebih_Breach__Spider_Guards__Button__Open_Gate)),
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_1, ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__Center_Above_Door,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__Center_Above_Door__ex__Button_1, ExitId::Ebih_Breach__Spider_Guards__Center_Above_Door__ex__Button_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__Center_Hover_End,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__Center_Hover_End__ex__Center_Re_hover_Start_1, ExitId::Ebih_Breach__Spider_Guards__Center_Hover_End__ex__Center_Re_hover_Start_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__Center_Re_hover_Start,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__Center_Re_hover_Start__ex__Center_Above_Door_1, ExitId::Ebih_Breach__Spider_Guards__Center_Re_hover_Start__ex__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__East__ex__Bubble_Bobble__West_7_1, ExitId::Ebih_Breach__Spider_Guards__East__ex__Bubble_Bobble__West_7_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East_Sand_Pit,
+        loc_range: Some((LocationId::Ebih_Breach__Spider_Guards__East_Sand_Pit__Flask, LocationId::Ebih_Breach__Spider_Guards__East_Sand_Pit__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East_Sand_Pit_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_East__ex__East_Sand_Pit_1, ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_East__ex__East_Sand_Pit_Mid_air_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air__ex__Center_Hover_End_1, ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air__ex__Center_Hover_End_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform__ex__Center_Hover_End_1, ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform__ex__Center_Hover_End_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih_Breach__Spider_Guards__East_Spider,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__Northwest,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__Northwest__ex__Button_1, ExitId::Ebih_Breach__Spider_Guards__Northwest__ex__Snowy_Rocks__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Spider_Guards__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Spider_Guards__South__ex__Double_Gate__North_1, ExitId::Ebih_Breach__Spider_Guards__South__ex__Double_Gate__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Center_Hill,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Dais_Center,
+        loc_range: Some((LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn, LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Dais_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__Dais_East__ex__West_Hill_Hook_Point_1, ExitId::Ebih_Breach__The_Vault__Dais_East__ex__West_Hill_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__East__ex__Center_Hill_1, ExitId::Ebih_Breach__The_Vault__East__ex__Double_Gate__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Northwest_Mid_air,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Pipe_Gap_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Pipe_Gap_West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__South__ex__Pipe_Gap_East_1, ExitId::Ebih_Breach__The_Vault__South__ex__Rocky_Cages__Cage_North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__Southwest_Corner,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1, ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__The_Vault__West_Hill_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1, ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_East_1)),
         action_range: None,
     },
     SpotDef {
@@ -5336,6 +5540,12 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih__Waterfall__West_Grassy_Plains,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih__Waterfall__West_Lower_Path,
         loc_range: None,
         exit_range: None,
@@ -5343,6 +5553,18 @@ static SPOT_DEFS: [SpotDef; 2600] = [
     },
     SpotDef {
         id: SpotId::Ebih__Waterfall__West_Main_Path,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih__Waterfall__West_Mid_air_Between_Trees,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih__Waterfall__West_Waterfall_Mid_air_Tier_2,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -13040,6 +13262,12 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Rocky_Cages_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Southeast,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1, ExitId::Menu__Breach_Map__MEB_Southeast__ex__Ebih_Breach__In_n_Out__Save_Point_1)),
@@ -13052,7 +13280,25 @@ static SPOT_DEFS: [SpotDef; 2600] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Spider_Guards_Button,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Spider_Guards_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__Slingshot_Hook,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__Slingshot_Weapon,
         loc_range: None,
         exit_range: None,
         action_range: None,

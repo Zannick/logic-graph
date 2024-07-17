@@ -2792,11 +2792,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{37}, Big_Flask{16}]
+/// [Flask{39}, Big_Flask{16}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 37 && $ctx.count(Item::Big_Flask) >= 16
+        $ctx.count(Item::Flask) >= 39 && $ctx.count(Item::Big_Flask) >= 16
     }};
 }
 #[macro_export]
@@ -2807,7 +2807,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 37, vec!["Flask count"])
+                (ct >= 39, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2827,8 +2827,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(37));
-            $ctx.count(Item::Flask) >= 37
+            $full_obs.observe_flask(IntegerObservation::Ge(39));
+            $ctx.count(Item::Flask) >= 39
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(16));
             $ctx.count(Item::Big_Flask) >= 16
@@ -3143,7 +3143,7 @@ macro_rules! hobserve__other_items {
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
+/// [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge, Slingshot_Weapon]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
@@ -3163,6 +3163,7 @@ macro_rules! helper__all_urns {
             && $ctx.has(Item::Exit_Breach)
             && $ctx.has(Item::Drone_Melee_Charge)
             && $ctx.has(Item::Slingshot_Charge)
+            && $ctx.has(Item::Slingshot_Weapon)
     }};
 }
 #[macro_export]
@@ -3311,6 +3312,15 @@ macro_rules! hexplain__all_urns {
                 (h, vec!["Slingshot_Charge"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Slingshot_Weapon);
+                $edict.insert("Slingshot_Weapon", format!("{}", h));
+                (h, vec!["Slingshot_Weapon"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -3366,6 +3376,9 @@ macro_rules! hobserve__all_urns {
         }) && ({
             $full_obs.observe_slingshot_charge();
             $ctx.has(Item::Slingshot_Charge)
+        }) && ({
+            $full_obs.observe_slingshot_weapon();
+            $ctx.has(Item::Slingshot_Weapon)
         })
     }};
 }

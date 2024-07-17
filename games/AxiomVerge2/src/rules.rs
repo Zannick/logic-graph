@@ -433,6 +433,10 @@ pub fn access_drone_hover(ctx: &Context, world: &World) -> bool {
     // Drone_Hover
     ctx.has(Item::Drone_Hover)
 }
+pub fn access_drone_hover_and_nanite_mist(ctx: &Context, world: &World) -> bool {
+    // Drone_Hover and Nanite_Mist
+    (ctx.has(Item::Drone_Hover) && ctx.has(Item::Nanite_Mist))
+}
 pub fn access_drone_melee_damage(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Damage
     ctx.has(Item::Drone_Melee_Damage)
@@ -777,6 +781,17 @@ pub fn access_ebih_alu(ctx: &Context, world: &World) -> bool {
     // Ebih_Alu
     ctx.has(Item::Ebih_Alu)
 }
+pub fn access_ebih_breach_double_gate_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Breach_Double_Gate_Gate
+    ctx.has(Item::Ebih_Breach_Double_Gate_Gate)
+}
+pub fn access_ebih_breach_double_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Ebih_Breach_Double_Gate_Gate and Slingshot_Hook
+    (ctx.has(Item::Ebih_Breach_Double_Gate_Gate) && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_ebih_breach_in_n_out_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Breach_In_n_Out_Gate
     ctx.has(Item::Ebih_Breach_In_n_Out_Gate)
@@ -784,6 +799,18 @@ pub fn access_ebih_breach_in_n_out_gate(ctx: &Context, world: &World) -> bool {
 pub fn access_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Breach_Lake_Gate
     ctx.has(Item::Ebih_Breach_Lake_Gate)
+}
+pub fn access_ebih_breach_spider_guards_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Breach_Spider_Guards_Gate
+    ctx.has(Item::Ebih_Breach_Spider_Guards_Gate)
+}
+pub fn access_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Ebih_Breach_Spider_Guards_Gate and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Ebih_Breach_Spider_Guards_Gate) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
 }
 pub fn access_ebih_east_wall(ctx: &Context, world: &World) -> bool {
     // Ebih_East_Wall
@@ -5456,6 +5483,31 @@ pub fn explain_drone_hover(
         (h, vec!["Drone_Hover"])
     }
 }
+pub fn explain_drone_hover_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Drone_Hover and Nanite_Mist
+    {
+        let mut left = {
+            let h = ctx.has(Item::Drone_Hover);
+            edict.insert("Drone_Hover", format!("{}", h));
+            (h, vec!["Drone_Hover"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_drone_melee_damage(
     ctx: &Context,
     world: &World,
@@ -6555,6 +6607,43 @@ pub fn explain_ebih_alu(
         (h, vec!["Ebih_Alu"])
     }
 }
+pub fn explain_ebih_breach_double_gate_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Double_Gate_Gate
+    {
+        let h = ctx.has(Item::Ebih_Breach_Double_Gate_Gate);
+        edict.insert("Ebih_Breach_Double_Gate_Gate", format!("{}", h));
+        (h, vec!["Ebih_Breach_Double_Gate_Gate"])
+    }
+}
+pub fn explain_ebih_breach_double_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Double_Gate_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Ebih_Breach_Double_Gate_Gate);
+            edict.insert("Ebih_Breach_Double_Gate_Gate", format!("{}", h));
+            (h, vec!["Ebih_Breach_Double_Gate_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_ebih_breach_in_n_out_gate(
     ctx: &Context,
     world: &World,
@@ -6577,6 +6666,56 @@ pub fn explain_ebih_breach_lake_gate(
         let h = ctx.has(Item::Ebih_Breach_Lake_Gate);
         edict.insert("Ebih_Breach_Lake_Gate", format!("{}", h));
         (h, vec!["Ebih_Breach_Lake_Gate"])
+    }
+}
+pub fn explain_ebih_breach_spider_guards_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Spider_Guards_Gate
+    {
+        let h = ctx.has(Item::Ebih_Breach_Spider_Guards_Gate);
+        edict.insert("Ebih_Breach_Spider_Guards_Gate", format!("{}", h));
+        (h, vec!["Ebih_Breach_Spider_Guards_Gate"])
+    }
+}
+pub fn explain_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Spider_Guards_Gate and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Ebih_Breach_Spider_Guards_Gate);
+                edict.insert("Ebih_Breach_Spider_Guards_Gate", format!("{}", h));
+                (h, vec!["Ebih_Breach_Spider_Guards_Gate"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_ebih_east_wall(
@@ -17618,6 +17757,20 @@ pub fn observe_access_drone_hover(
         ctx.has(Item::Drone_Hover)
     }
 }
+pub fn observe_access_drone_hover_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Drone_Hover and Nanite_Mist
+    ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
 pub fn observe_access_drone_melee_damage(
     ctx: &Context,
     world: &World,
@@ -18248,6 +18401,31 @@ pub fn observe_access_ebih_alu(
         ctx.has(Item::Ebih_Alu)
     }
 }
+pub fn observe_access_ebih_breach_double_gate_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Double_Gate_Gate
+    {
+        full_obs.observe_ebih_breach_double_gate_gate();
+        ctx.has(Item::Ebih_Breach_Double_Gate_Gate)
+    }
+}
+pub fn observe_access_ebih_breach_double_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Double_Gate_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_ebih_breach_double_gate_gate();
+        ctx.has(Item::Ebih_Breach_Double_Gate_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
 pub fn observe_access_ebih_breach_in_n_out_gate(
     ctx: &Context,
     world: &World,
@@ -18269,6 +18447,34 @@ pub fn observe_access_ebih_breach_lake_gate(
         full_obs.observe_ebih_breach_lake_gate();
         ctx.has(Item::Ebih_Breach_Lake_Gate)
     }
+}
+pub fn observe_access_ebih_breach_spider_guards_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Spider_Guards_Gate
+    {
+        full_obs.observe_ebih_breach_spider_guards_gate();
+        ctx.has(Item::Ebih_Breach_Spider_Guards_Gate)
+    }
+}
+pub fn observe_access_ebih_breach_spider_guards_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Spider_Guards_Gate and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_ebih_breach_spider_guards_gate();
+        ctx.has(Item::Ebih_Breach_Spider_Guards_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_ebih_east_wall(
     ctx: &Context,

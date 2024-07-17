@@ -211,6 +211,8 @@ areas:
   spots:
     - name: East 4
       coord: [23.9, 3.75]
+    - name: South
+      coord: [22.55, 5.8]
 
 - name: In 'n Out  # MARK: In 'n Out
   on_entry: $reset_old_area(^newpos)
@@ -755,14 +757,428 @@ areas:
 
 - name: Spider Guards  # MARK: Spider Guards
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [25, 6, 26, 7]
+    button: [23, 6, 24, 7]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > MEB Spider Guards Flask
+      button: Menu > Breach Map > MEB Spider Guards Button
   spots:
     - name: East
       coord: [26.9, 6.75]
+      local:
+        - to: East Spider
+      exits:
+        - to: Bubble Bobble > West 7
+          tags: [xdoor]
     - name: East Spider
       coord: [26.5, 6.75]
+      local:
+        - to: East
+        - to: East Sand Pit East
+    - name: East Sand Pit East
+      coord: [25.8, 6.75]
+      local:
+        - to: East Spider
+        - to: East Sand Pit
+      exits:
+        - to: East Sand Pit
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: East Sand Pit Mid-air
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: East Sand Pit
+      coord: [25.525, 6.75]
+      local:
+        - to: East Sand Pit East
+        - to: East Sand Pit Mid-air
+          jumps: 1
+        - to: East Sand Pit West Platform
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Ebih_Breach_Spider_Guards_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Ebih_Breach_Spider_Guards_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Breach_Spider_Guards_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: East Sand Pit Mid-air
+      coord: [25.45, 6.6]
+      local:
+        - to: East Sand Pit
+      exits:
+        - to: Center Hover End
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: East Sand Pit West Platform
+      coord: [25.2, 6.5]
+      local:
+        - to: East Sand Pit
+      exits:
+        - to: Center Hover End
+          req: Drone_Hover and Nanite_Mist
+          movement: base
+          price: 20  # restart
+          jumps: 1
+          penalties:
+            - add: 0.5
+    - name: Center Hover End
+      coord: [24.2, 6.35]
+      exits:
+        - to: Center Re-hover Start
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Re-hover Start
+          req: $mist2
+          movement: mist2
+    - name: Center Re-hover Start
+      coord: [24.15, 6.3]
+      exits:
+        - to: Center Above Door
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: South
+          req: Drone_Hover
+          movement: base
+          penalties:
+            - add: 2  # evading or damage-boosting through a spider
+    - name: Center Above Door
+      coord: [23.55, 6.25]
+      local:
+        - to: South
+      exits:
+        - to: Button
+          req: Drone_Hover
+          movement: base
+    - name: South
+      coord: [23.5, 6.8]
+      local:
+        - to: Button
+          jumps: 1
+      exits:
+        - to: Double Gate > North
+          tags: [ydoor]
+    - name: Button
+      coord: [23.025, 6.7]
+      local:
+        - to: South
+      locations:
+        - name: Open Gate
+          item: Ebih_Breach_Spider_Guards_Gate
+          tags: [button]
+      exits:
+        - to: Northwest
+          req: Ebih_Breach_Spider_Guards_Gate
+          movement: base
+          jumps: 3
+        - to: Northwest
+          req: Ebih_Breach_Spider_Guards_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 3
+    - name: Northwest
+      coord: [22.55, 6.2]
+      exits:
+        - to: Button
+          req: Ebih_Breach_Spider_Guards_Gate
+          movement: base
+        - to: Snowy Rocks > South
+          tags: [ydoor]
+
+- name: Double Gate  # MARK: Double Gate
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  spots:
+    - name: North
+      coord: [23.5, 7.2]
+      local:
+        - to: Portal Stand
+        - to: Grate East
+          thru: [23.5, 7.5]
+        - to: Upper Right Corner
+      exits:
+        - to: Spider Guards > South
+          tags: [ydoor]
+    - name: Portal Stand
+      coord: [23.5, 7.75]
+      local:
+        - to: Grate East
+        - to: Button Left
+        - to: Upper Right Corner
+          jumps: 2
+        - to: North
+          jumps: 3
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Upper Right Corner
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Grate East
+      coord: [23.325, 7.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Grate West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Grate West
+          req: $mist2
+          movement: mist2
+    - name: Grate West
+      coord: [23.225, 7.8]
+      local:
+        - to: West
+          jumps: 1
+      exits:
+        - to: The Vault > Pipe Gap East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: The Vault > Northwest Mid-air
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: Grate East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Grate East
+          req: $mist2
+          movement: mist2
+    - name: West
+      coord: [23.1, 7.75]
+      local:
+        - to: Grate West
+      exits:
+        - to: The Vault > East
+          tags: [xdoor]
+
+    - name: Upper Right Corner
+      coord: [23.8, 7.4]
+      local:
+        - to: Portal Stand
+        - to: Button Right
+        - to: North
+          jumps: 2
+      exits:
+        - to: Below Gate
+          req: Ebih_Breach_Double_Gate_Gate
+          movement: base
+    - name: Button Left
+      coord: [23.625, 7.9]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Button Right
+      locations:
+        - name: Open Gate
+          canon: Ebih_Breach_Double_Gate_Gate
+          item: Ebih_Breach_Double_Gate_Gate
+          tags: [button]
+    - name: Button Right
+      coord: [23.75, 7.9]
+      local:
+        - to: Button Left
+      locations:
+        - name: Open Gate
+          canon: Ebih_Breach_Double_Gate_Gate
+          item: Ebih_Breach_Double_Gate_Gate
+          tags: [button]
+      exits:
+        - to: Below Gate
+          req: Ebih_Breach_Double_Gate_Gate
+          movement: base
+    - name: Below Gate
+      coord: [23.9, 8.3]
+      local:
+        - to: South
+          thru: [23.7, 8.4]
+      exits:
+        - to: Button Right
+          req: Ebih_Breach_Double_Gate_Gate and Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: South
+      coord: [23.5, 8.8]
+      local:
+        - to: Below Gate
+          thru: [23.7, 8.4]
+          jumps: [2, 1]
+      exits:
+        - to: Below Gate
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Rocky Cages > Northeast
+          tags: [ydoor]
+
+- name: The Vault  # MARK: The Vault
+  on_entry: $reset_old_area(^newpos)
+  map:
+    urn: [21, 8, 22, 9]
+  datamap:
+    map_spot:
+      urn: Menu > Breach Map > Slingshot Weapon
+  spots:
+    - name: East
+      coord: [22.9, 7.75]
+      data:
+        flipside: Ebih > Waterfall > Center Main Path
+      local:
+        - to: Pipe Gap East
+      exits:
+        - to: Center Hill
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Double Gate > West
+          tags: [xdoor]
+    - name: Pipe Gap East
+      coord: [22.6, 7.95]
+      local:
+        - to: Pipe Gap West
+        - to: East
+          jumps: 1
+        - to: South
+          thru: [22.45, 8.4]
+    - name: Pipe Gap West
+      coord: [22.525, 7.95]
+      local:
+        - to: Center Hill
+          jumps: 1
+        - to: Pipe Gap East
+        - to: South
+          thru: [22.45, 8.4]
+    - name: Center Hill
+      coord: [22.35, 7.7]
+      local:
+        - to: West Hill Hook Point  # TODO: The enemy makes this difficult
+        - to: Pipe Gap West
+    - name: Northwest Mid-air
+      coord: [21.8, 7.65]
+      local:
+        - to: West Hill Hook Point
+    - name: West Hill Hook Point
+      coord: [21.75, 7.9]
+      local:
+        - to: Dais East
+      exits:
+        - to: Pipe Gap East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Dais East
+      coord: [21.65, 8.7]
+      local:
+        - to: Dais Center
+      exits:
+        - to: West Hill Hook Point
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Dais Center
+      coord: [21.45, 8.7]
+      data:
+        flipside: Ebih > Waterfall > West Mid-air Between Trees
+      local:
+        - to: Southwest Corner
+        - to: Dais East
+      locations:
+        - name: Urn
+          canon: Slingshot_Weapon
+          item: Slingshot_Weapon
+          tags: [urn]
+        - name: Urn Collection Skip
+          canon: Slingshot_Weapon
+          item: Slingshot_Weapon
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Urn Fast Travel
+          canon: Slingshot_Weapon
+          item: Slingshot_Weapon
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Southwest Corner
+      coord: [21.2, 8.8]
+      data:
+        flipside: Ebih > Waterfall > West Grassy Plains
+      local:
+        - to: Dais Center
+          jumps: 1
+      exits:
+        - to: Dais Center
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+
+    - name: South
+      coord: [22.5, 8.8]
+      exits:
+        - to: Pipe Gap East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Pipe Gap West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Rocky Cages > Cage North
+          tags: [ydoor]
 
 - name: Rocky Cages  # MARK: Rocky Cages
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [22, 9, 23, 10]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > MEB Rocky Cages Flask
   spots:
     - name: East
       coord: [24.9, 10.7]
+    - name: Northeast
+      coord: [23.5, 9.2]
+    - name: Cage North
+      coord: [22.5, 9.2]
+      local:
+        - to: Cage Bottom
+      exits:
+        - to: The Vault > South
+          tags: [ydoor]
+    - name: Cage Bottom
+      coord: [22.425, 9.75]
+      data:
+        flipside: Ebih > Waterfall > West Waterfall Mid-air Tier 2
+      locations:
+        - name: Flask
+          canon: Ebih_Breach_Rocky_Cages_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Ebih_Breach_Rocky_Cages_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Breach_Rocky_Cages_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot

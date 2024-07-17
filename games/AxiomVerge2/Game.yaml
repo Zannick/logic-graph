@@ -359,7 +359,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{37}, Big_Flask{16}]
+    [Flask{39}, Big_Flask{16}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{16}]
   $all_weapons:itemList: >
@@ -369,7 +369,7 @@ helpers:  # MARK: helpers
      Diviners_Gem, Ensis_Bracelet]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
-     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge]
+     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge, Slingshot_Weapon]
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
