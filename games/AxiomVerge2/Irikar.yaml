@@ -382,7 +382,7 @@ areas:
         - to: Dagger Altar
           jumps: 1
       locations:
-        - name: Shockwave Wall
+        - name: Shockwave Just The Wall
           item: Irikar_Royal_Storage_Wall
           canon: Irikar_Royal_Storage_Wall
           req: $shockwave
@@ -429,6 +429,18 @@ areas:
           item: Flask
           canon: Irikar_Royal_Storage_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Irikar_Royal_Storage_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Irikar_Royal_Storage_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
     #endregion
 
     #region SW Ruined Buildings
@@ -2091,6 +2103,8 @@ areas:
           jumps: 3
     - name: Lower Rock West
       coord: [7.6, 26.6]
+      data:
+        flipside: Irikar Breach > Rocky Dunes > Center Rock West
       local:
         - to: Lower Rock East
           jumps: 3
@@ -2315,6 +2329,16 @@ areas:
       exits:
         - to: Beach > East
           tags: [xshift]
+    - name: West Mid-air
+      coord: [4.1, 25.8]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: West Slope
+      exits:
+        - to: Beach > Ivan
+          movement: base
+          penalty_tags: [xshift, -base.1]
 
 - name: Beach  # MARK: Beach
   on_entry: $reset_old_area(^newpos)

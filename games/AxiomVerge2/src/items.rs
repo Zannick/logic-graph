@@ -139,6 +139,7 @@ pub enum Item {
     Infection_Range_3,
     Infection_Speed,
     Infection_Speed_2,
+    Irikar_Breach_Buried_Treasure_Pillar,
     Irikar_Gudam,
     Irikar_Royal_Storage_Wall,
     Journal_2049_10_29,
@@ -345,6 +346,9 @@ impl fmt::Display for Item {
             Item::Infection_Range_3 => write!(f, "{}", "Infection_Range_3"),
             Item::Infection_Speed => write!(f, "{}", "Infection_Speed"),
             Item::Infection_Speed_2 => write!(f, "{}", "Infection_Speed_2"),
+            Item::Irikar_Breach_Buried_Treasure_Pillar => {
+                write!(f, "{}", "Irikar_Breach_Buried_Treasure_Pillar")
+            }
             Item::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             Item::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
@@ -549,6 +553,9 @@ impl std::str::FromStr for Item {
             "Infection_Range_3" => Ok(Item::Infection_Range_3),
             "Infection_Speed" => Ok(Item::Infection_Speed),
             "Infection_Speed_2" => Ok(Item::Infection_Speed_2),
+            "Irikar_Breach_Buried_Treasure_Pillar" => {
+                Ok(Item::Irikar_Breach_Buried_Treasure_Pillar)
+            }
             "Irikar_Gudam" => Ok(Item::Irikar_Gudam),
             "Irikar_Royal_Storage_Wall" => Ok(Item::Irikar_Royal_Storage_Wall),
             "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),
@@ -630,12 +637,10 @@ pub fn unused_item(id: Item) -> bool {
     matches!(
         id,
         Item::None
-            | Item::Aansur
             | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5
             | Item::Infection_Speed_2
-            | Item::Journal_2049_10_29
             | Item::Melee_Damage_3
             | Item::Melee_Speed_3
             | Item::Nano_Points_3

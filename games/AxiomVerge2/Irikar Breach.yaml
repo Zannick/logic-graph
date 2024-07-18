@@ -122,6 +122,9 @@ areas:
     - name: Hidden Path Lower Entry
       coord: [10.25, 24.55]
 
+    - name: West 26
+      coord: [10.1, 25.75]
+
 - name: Hover Room  # MARK: Hover Room
   on_entry: $reset_old_area(^newpos)
   map:
@@ -454,23 +457,8 @@ areas:
       local:
         - to: West Basin
       exits:
-        - to: Sandy Lair > East 27
+        - to: Rocky Dunes > East 27
           tags: [xdoor]
-
-- name: Sandy Lair  # MARK: Sandy Lair
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: East 27
-      coord: [9.9, 26.35]
-
-    - name: East 28
-      coord: [9.9, 27.6]
-
-- name: Uhrum Connector  # MARK: Uhrum Connector
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: West
-      coord: [15.1, 26.3]
 
 - name: Basement Save  # MARK: Basement Save
   on_entry: $reset_old_area(^newpos)
@@ -478,8 +466,570 @@ areas:
     save: [12, 27, 13, 28]
   data:
     save_point: Save Point
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > IB Basement
   spots:
     - name: Save Point
       coord: [12.525, 27.5]
       data:
         flipside: Irikar > Basement Portal > Portal Stand
+      local:
+        - to: Save West
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Save West
+      coord: [12.4, 27.6]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: West
+          jumps: 3
+      exits:
+        - to: West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Buried Treasure > Pillar Right
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: Buried Treasure > West
+          req: Slingshot_Hook and Drone_Hover and not Irikar_Breach_Buried_Treasure_Pillar
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: West
+      coord: [11.1, 27.35]
+      local:
+        - to: Save West
+      exits:
+        - to: Buried Treasure > East
+          tags: [xdoor]
+
+- name: Buried Treasure  # MARK: Buried Treasure
+  on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > IB Buried Treasure
+  spots:
+    - name: East
+      coord: [10.9, 27.35]
+      local:
+        - to: Pillar Right
+        - to: West
+      exits:
+        - to: Basement Save > West
+          tags: [xdoor]
+    - name: Pillar Right
+      coord: [10.5, 27.5]
+      local:
+        - to: East
+          jumps: 3
+      locations:
+        - name: Break Pillar
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          time: 1
+          tags: [event]
+        - name: Mist Into Pillar
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          req: Nanite_Mist
+          to: Pillar Middle
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Into Pillar
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          req: $mist2
+          to: Pillar Middle
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Pillar Middle
+          req: Irikar_Breach_Buried_Treasure_Pillar
+          movement: base
+    - name: Pillar Middle
+      coord: [10.45, 27.5]
+      local:
+        - to: Pillar Left
+        - to: Pillar Right
+        - to: Pillar Bottom
+      exits:
+        - to: Pillar Bottom
+          req: $mist2
+          movement: mist2
+    - name: Pillar Left
+      coord: [10.4, 27.5]
+      local:
+        - to: West
+        - to: East
+          jumps: 4
+      locations:
+        - name: Break Pillar  # can be done with drone attack? or charge/screw/mist only?
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          time: 1
+          tags: [event]
+        - name: Mist Into Pillar
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          req: Nanite_Mist
+          to: Pillar Middle
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Into Pillar
+          canon: Irikar_Breach_Buried_Treasure_Pillar
+          item: Irikar_Breach_Buried_Treasure_Pillar
+          req: $mist2
+          to: Pillar Middle
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Pillar Middle
+          req: Irikar_Breach_Buried_Treasure_Pillar
+          movement: base
+    - name: Pillar Bottom
+      coord: [10.45, 27.8]
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Pillar Middle
+          req: Nanite_Mist
+          movement: mist1
+        - to: Pillar Middle
+          req: $mist2
+          movement: mist2
+        - to: Pillar Middle
+          req: Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Pillar Middle
+          req: Slingshot_Hook
+          jumps: 2
+    - name: West
+      coord: [10.1, 27.6]
+      local:
+        - to: Pillar Left
+          jumps: 2
+      exits:
+        - to: Rocky Dunes > East 28
+          tags: [xdoor]
+
+- name: Rocky Dunes  # MARK: Rocky Dunes
+  on_entry: $reset_old_area(^newpos)
+  map:
+    health: [9, 26, 10, 27]
+  datamap:
+    map_spot:
+      health: Menu > Breach Map > IB Rocky Dunes Health
+  spots:
+    - name: East 27
+      coord: [9.9, 26.35]
+      local:
+        - to: East Hilltop
+      exits:
+        - to: Neon Corridor > West
+          tags: [xdoor]
+    - name: East Hilltop
+      coord: [9.55, 26.35]
+      local:
+        - to: East 27
+        - to: Ditch
+        - to: Upper East Passage
+          jumps: 2
+    - name: Ditch
+      coord: [9.35, 26.7]
+      local:
+        - to: East Hilltop
+          jumps: 2
+        - to: Upper East Passage
+          jumps: 2
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Upper East Passage
+      coord: [9.0, 26.4]
+      local:
+        - to: Ditch
+        - to: East Rock
+        - to: East Sandtrap
+          thru: [8.95, 27.1]
+      exits:
+        - to: East Hilltop
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Center Rock East
+          req: Drone_Hover
+          movement: base
+
+    - name: East Rock
+      coord: [8.6, 27.0]
+      local:
+        - to: East Tank
+      exits:
+        - to: Center Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Upper East Passage
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper East Passage
+          req: $mist2
+          movement: mist2
+    - name: East Tank
+      coord: [8.9, 27.4]
+      local:
+        - to: East Sandtrap
+      exits:
+        - to: East Rock
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Upper East Passage
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper East Passage
+          req: $mist2
+          movement: mist2
+    - name: East Sandtrap
+      coord: [9.1, 27.6]
+      local:
+        - to: East 28
+        - to: East Tank
+          jumps: 1
+      exits:
+        - to: East Tank
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: East 28
+      coord: [9.9, 27.6]
+      local:
+        - to: East Sandtrap
+      exits:
+        - to: Buried Treasure > West
+          tags: [xdoor]
+
+    - name: Center Rock East
+      coord: [8.35, 26.5]
+      local:
+        - to: East Rock
+        - to: Center Rock West
+      exits:
+        - to: Upper East Passage
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Center Rock West
+      coord: [7.6, 26.6]
+      data:
+        flipside: Irikar > Midwest > Lower Rock West
+      local:
+        - to: Center Rock East
+          jumps: 3
+        - to: West Rock East
+      exits:
+        - to: West Rock West
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Center Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: West Rock East
+      coord: [7.3, 26.9]
+      local:
+        - to: West Rock West
+          jumps: 2
+      exits:
+        - to: Center Rock West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center Rock West
+          req: Drone_Hover
+          movement: base
+          jumps: 3
+    - name: West Rock West
+      coord: [6.6, 26.55]
+      local:
+        - to: West Rock East
+        - to: West Ledge
+        - to: West Sand
+        - to: West 28
+          thru: [6.4, 27.3]
+      exits:
+        - to: Center Rock West
+          req: Drone_Hover
+          movement: base
+        - to: Center Rock West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: West Ledge
+      coord: [6.4, 27.0]
+      local:
+        - to: West Sand
+          thru: [6.4, 27.3]
+        - to: West 28
+          thru: [6.4, 27.3]
+      exits:
+        - to: West Rock West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Rock West
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Rock West
+          req: $mist2
+          movement: mist2
+    - name: West Sand
+      coord: [6.35, 27.55]
+      local:
+        - to: West 28
+      exits:
+        - to: West Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+    - name: West 28
+      coord: [6.1, 27.55]
+      local:
+        - to: West Sand
+      exits:
+        - to: Beach > East 28
+          tags: [xdoor]
+
+- name: Beach  # MARK: Beach
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [4, 25, 5, 26]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > IB Beach Flask
+  spots:
+    - name: East 28
+      coord: [5.9, 27.55]
+      exits:
+        - to: Crescent Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Rocky Dunes > West 28
+          tags: [xdoor]
+    - name: Crescent Rock East
+      coord: [5.65, 26.95]
+      local:
+        - to: Crescent Rock Top
+          jumps: 2
+        - to: East 28
+      exits:
+        - to: Center Rock East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Rock East
+          req: $mist2
+          movement: mist2
+        - to: East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Ledge
+          req: $mist2
+          movement: mist2
+    - name: Crescent Rock Top
+      coord: [5.4, 26.7]
+      local:
+        - to: Crescent Rock West
+        - to: Crescent Rock East
+      exits:
+        - to: Center Rock East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Rock East
+          req: $mist2
+          movement: mist2
+        - to: East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Ledge
+          req: $mist2
+          movement: mist2
+    - name: Crescent Rock West
+      coord: [5.05, 26.95]
+      local:
+        - to: Sand Trap
+          jumps: 3
+      exits:
+        - to: Crescent Rock Top
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Sand Trap
+      coord: [4.5, 26.75]
+      exits:
+        - to: Center Rock West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Crescent Rock West
+          req: Slingshot_Hook
+          movement: base
+    - name: Center Rock West
+      coord: [4.7, 26.2]
+      local:
+        - to: Center Rock East
+          jumps: 3
+        - to: Sand Trap
+      exits:
+        - to: West Outcropping
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 4
+    - name: Center Rock East
+      coord: [5.35, 25.75]
+      local:
+        - to: Center Rock West
+        - to: Crescent Rock East
+        - to: East 28
+        - to: East Ledge
+          jumps: 1
+      exits:
+        - to: East 26
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: West Outcropping
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: West Outcropping
+      coord: [4.5, 25.5]
+      local:
+        - to: Center Rock West
+        - to: Center Rock East
+        - to: Cache
+    - name: Cache
+      coord: [4.1, 25.8]
+      data:
+        flipside: Irikar > Beach Save > West Mid-air
+      local:
+        - to: West Outcropping
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Irikar_Breach_Beach_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Irikar_Breach_Beach_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Irikar_Breach_Beach_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: East Ledge
+      coord: [5.6, 25.6]
+      local:
+        - to: East 26
+        - to: Center Rock East
+        - to: Crescent Rock Top
+        - to: Crescent Rock East
+        - to: East 28
+      exits:
+        - to: West Outcropping
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: East 26
+      coord: [5.9, 25.75]
+      local:
+        - to: East Ledge
+          jumps: 1
+      exits:
+        - to: West Outcropping
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Corridor > West
+          tags: [xdoor]
+
+- name: Corridor  # MARK: Corridor
+  on_entry: $reset_old_area(^newpos)
+  map:
+    save: [9, 25, 10, 26]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > IB West
+  spots:
+    - name: West
+      coord: [6.1, 25.75]
+      local:
+        - to: West Rock Peak
+          jumps: 2
+      exits:
+        - to: Beach > East 26
+          tags: [xdoor]
+    - name: West Rock Peak
+      coord: [7.0, 25.4]
+      local:
+        - to: Center
+        - to: West
+    - name: Center
+      coord: [8.0, 25.4]
+      local:
+        - to: West Rock Peak
+          jumps: 3
+        - to: Passage West
+      exits:
+        - to: Passage West
+          req: Slingshot_Hook
+          movement: fast_hover
+    - name: Passage West
+      coord: [8.65, 25.7]
+      local:
+        - to: Center
+          jumps: 3
+        - to: Passage East
+    - name: Passage East
+      coord: [8.9, 25.7]
+      local:
+        - to: Passage West
+        - to: Save Point
+          jumps: 1
+
+    - name: Save Point
+      coord: [9.5, 25.6]
+      local:
+        - to: Passage East
+        - to: East
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [9.9, 25.75]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Gauntlet > West 26
+          tags: [xshift]
+
+- name: Uhrum Connector  # MARK: Uhrum Connector
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [15.1, 26.3]

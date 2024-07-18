@@ -2367,6 +2367,7 @@ subgraph Irikar_Breach
         Irikar_Breach__Gauntlet__Hidden_Path_Reward(Hidden Path Reward);
         Irikar_Breach__Gauntlet__Hidden_Path_Bottom(Hidden Path Bottom);
         Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry(Hidden Path Lower Entry);
+        Irikar_Breach__Gauntlet__West_26(West 26);
     end
     subgraph Irikar_Breach__Hover_Room[Hover Room]
         Irikar_Breach__Hover_Room__West(West);
@@ -2413,15 +2414,60 @@ subgraph Irikar_Breach
         Irikar_Breach__Neon_Corridor__West_Basin(West Basin);
         Irikar_Breach__Neon_Corridor__West(West);
     end
-    subgraph Irikar_Breach__Sandy_Lair[Sandy Lair]
-        Irikar_Breach__Sandy_Lair__East_27(East 27);
-        Irikar_Breach__Sandy_Lair__East_28(East 28);
+    subgraph Irikar_Breach__Basement_Save[Basement Save]
+        Irikar_Breach__Basement_Save__Save_Point(Save Point);
+        Irikar_Breach__Basement_Save__Save_West(Save West);
+        Irikar_Breach__Basement_Save__West(West);
+    end
+    subgraph Irikar_Breach__Buried_Treasure[Buried Treasure]
+        Irikar_Breach__Buried_Treasure__East(East);
+        Irikar_Breach__Buried_Treasure__Pillar_Right(Pillar Right);
+        Irikar_Breach__Buried_Treasure__Pillar_Middle(Pillar Middle);
+        Irikar_Breach__Buried_Treasure__Pillar_Left(Pillar Left);
+        Irikar_Breach__Buried_Treasure__Pillar_Bottom(Pillar Bottom);
+        Irikar_Breach__Buried_Treasure__West(West);
+    end
+    subgraph Irikar_Breach__Rocky_Dunes[Rocky Dunes]
+        Irikar_Breach__Rocky_Dunes__East_27(East 27);
+        Irikar_Breach__Rocky_Dunes__East_Hilltop(East Hilltop);
+        Irikar_Breach__Rocky_Dunes__Ditch(Ditch);
+        Irikar_Breach__Rocky_Dunes__Upper_East_Passage(Upper East Passage);
+        Irikar_Breach__Rocky_Dunes__East_Rock(East Rock);
+        Irikar_Breach__Rocky_Dunes__East_Tank(East Tank);
+        Irikar_Breach__Rocky_Dunes__East_Sandtrap(East Sandtrap);
+        Irikar_Breach__Rocky_Dunes__East_28(East 28);
+        Irikar_Breach__Rocky_Dunes__Center_Rock_East(Center Rock East);
+        Irikar_Breach__Rocky_Dunes__Center_Rock_West(Center Rock West);
+        Irikar_Breach__Rocky_Dunes__West_Rock_East(West Rock East);
+        Irikar_Breach__Rocky_Dunes__West_Rock_West(West Rock West);
+        Irikar_Breach__Rocky_Dunes__West_Ledge(West Ledge);
+        Irikar_Breach__Rocky_Dunes__West_Sand(West Sand);
+        Irikar_Breach__Rocky_Dunes__West_28(West 28);
+    end
+    subgraph Irikar_Breach__Beach[Beach]
+        Irikar_Breach__Beach__East_28(East 28);
+        Irikar_Breach__Beach__Crescent_Rock_East(Crescent Rock East);
+        Irikar_Breach__Beach__Crescent_Rock_Top(Crescent Rock Top);
+        Irikar_Breach__Beach__Crescent_Rock_West(Crescent Rock West);
+        Irikar_Breach__Beach__Sand_Trap(Sand Trap);
+        Irikar_Breach__Beach__Center_Rock_West(Center Rock West);
+        Irikar_Breach__Beach__Center_Rock_East(Center Rock East);
+        Irikar_Breach__Beach__West_Outcropping(West Outcropping);
+        Irikar_Breach__Beach__Cache(Cache);
+        Irikar_Breach__Beach__East_Ledge(East Ledge);
+        Irikar_Breach__Beach__East_26(East 26);
+    end
+    subgraph Irikar_Breach__Corridor[Corridor]
+        Irikar_Breach__Corridor__West(West);
+        Irikar_Breach__Corridor__West_Rock_Peak(West Rock Peak);
+        Irikar_Breach__Corridor__Center(Center);
+        Irikar_Breach__Corridor__Passage_West(Passage West);
+        Irikar_Breach__Corridor__Passage_East(Passage East);
+        Irikar_Breach__Corridor__Save_Point(Save Point);
+        Irikar_Breach__Corridor__East(East);
     end
     subgraph Irikar_Breach__Uhrum_Connector[Uhrum Connector]
         Irikar_Breach__Uhrum_Connector__West(West);
-    end
-    subgraph Irikar_Breach__Basement_Save[Basement Save]
-        Irikar_Breach__Basement_Save__Save_Point(Save Point);
     end
 end
 subgraph Irikar
@@ -2636,6 +2682,7 @@ subgraph Irikar
         Irikar__Beach_Save__Partway_Up(Partway Up);
         Irikar__Beach_Save__Top_Platform(Top Platform);
         Irikar__Beach_Save__West(West);
+        Irikar__Beach_Save__West_Mid_air(West Mid-air);
     end
     subgraph Irikar__Beach[Beach]
         Irikar__Beach__East(East);
@@ -2904,6 +2951,9 @@ subgraph Menu
         Menu__Breach_Map__IB_Gauntlet_Flask(IB Gauntlet Flask);
         Menu__Breach_Map__Drone_Hover(Drone Hover);
         Menu__Breach_Map__IB_Worm_Rave_Flask(IB Worm Rave Flask);
+        Menu__Breach_Map__IB_Buried_Treasure(IB Buried Treasure);
+        Menu__Breach_Map__IB_Rocky_Dunes_Health(IB Rocky Dunes Health);
+        Menu__Breach_Map__IB_Beach_Flask(IB Beach Flask);
         Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
@@ -4659,6 +4709,31 @@ Interior__Observatory__Staircase_Bottom_West --> Interior__Observatory__Second_T
 Interior__Observatory__West_Staircase_Top --> Interior__Observatory__Atop_Structure_West
 Interior__Outpost_Interior__Entry --> Interior__Outpost_Interior__Bookshelf
 Interior__Uhrum_Waterfall_Cave__Entrance <--> Uhrum__East_Lake__Waterfall
+Irikar_Breach__Basement_Save__Save_West --> Irikar_Breach__Basement_Save__West
+Irikar_Breach__Basement_Save__Save_West --> Irikar_Breach__Buried_Treasure__Pillar_Right
+Irikar_Breach__Basement_Save__Save_West --> Irikar_Breach__Buried_Treasure__West
+Irikar_Breach__Basement_Save__West <--> Irikar_Breach__Buried_Treasure__East
+Irikar_Breach__Beach__Center_Rock_East --> Irikar_Breach__Beach__East_26
+Irikar_Breach__Beach__Center_Rock_East --> Irikar_Breach__Beach__West_Outcropping
+Irikar_Breach__Beach__Center_Rock_West --> Irikar_Breach__Beach__West_Outcropping
+Irikar_Breach__Beach__Crescent_Rock_East --> Irikar_Breach__Beach__Center_Rock_East
+Irikar_Breach__Beach__Crescent_Rock_East --> Irikar_Breach__Beach__East_Ledge
+Irikar_Breach__Beach__Crescent_Rock_Top --> Irikar_Breach__Beach__Center_Rock_East
+Irikar_Breach__Beach__Crescent_Rock_Top --> Irikar_Breach__Beach__East_Ledge
+Irikar_Breach__Beach__Crescent_Rock_West --> Irikar_Breach__Beach__Crescent_Rock_Top
+Irikar_Breach__Beach__East_26 --> Irikar_Breach__Beach__West_Outcropping
+Irikar_Breach__Beach__East_26 <--> Irikar_Breach__Corridor__West
+Irikar_Breach__Beach__East_28 --> Irikar_Breach__Beach__Crescent_Rock_East
+Irikar_Breach__Beach__East_28 <--> Irikar_Breach__Rocky_Dunes__West_28
+Irikar_Breach__Beach__East_Ledge --> Irikar_Breach__Beach__West_Outcropping
+Irikar_Breach__Beach__Sand_Trap --> Irikar_Breach__Beach__Center_Rock_West
+Irikar_Breach__Beach__Sand_Trap --> Irikar_Breach__Beach__Crescent_Rock_West
+Irikar_Breach__Buried_Treasure__Pillar_Bottom <--> Irikar_Breach__Buried_Treasure__Pillar_Middle
+Irikar_Breach__Buried_Treasure__Pillar_Left --> Irikar_Breach__Buried_Treasure__Pillar_Middle
+Irikar_Breach__Buried_Treasure__Pillar_Right --> Irikar_Breach__Buried_Treasure__Pillar_Middle
+Irikar_Breach__Buried_Treasure__West <--> Irikar_Breach__Rocky_Dunes__East_28
+Irikar_Breach__Corridor__Center --> Irikar_Breach__Corridor__Passage_West
+Irikar_Breach__Corridor__East --> Irikar_Breach__Gauntlet__West_26
 Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South
@@ -4684,9 +4759,21 @@ Irikar_Breach__Gauntlet__Save_Point --> Irikar_Breach__Gauntlet__Hidden_Path_Upp
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__East
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__West
 Irikar_Breach__Hover_Room__East <--> Irikar_Breach__Hover_Room__West
-Irikar_Breach__Neon_Corridor__West --> Irikar_Breach__Sandy_Lair__East_27
+Irikar_Breach__Neon_Corridor__West <--> Irikar_Breach__Rocky_Dunes__East_27
 Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__Center
 Irikar_Breach__Neon_Corridor__West_Basin --> Irikar_Breach__Neon_Corridor__West
+Irikar_Breach__Rocky_Dunes__Center_Rock_East <--> Irikar_Breach__Rocky_Dunes__Upper_East_Passage
+Irikar_Breach__Rocky_Dunes__Center_Rock_West --> Irikar_Breach__Rocky_Dunes__Center_Rock_East
+Irikar_Breach__Rocky_Dunes__Center_Rock_West <--> Irikar_Breach__Rocky_Dunes__West_Rock_West
+Irikar_Breach__Rocky_Dunes__East_Rock --> Irikar_Breach__Rocky_Dunes__Center_Rock_East
+Irikar_Breach__Rocky_Dunes__East_Rock --> Irikar_Breach__Rocky_Dunes__Upper_East_Passage
+Irikar_Breach__Rocky_Dunes__East_Sandtrap --> Irikar_Breach__Rocky_Dunes__East_Tank
+Irikar_Breach__Rocky_Dunes__East_Tank --> Irikar_Breach__Rocky_Dunes__East_Rock
+Irikar_Breach__Rocky_Dunes__East_Tank --> Irikar_Breach__Rocky_Dunes__Upper_East_Passage
+Irikar_Breach__Rocky_Dunes__Upper_East_Passage --> Irikar_Breach__Rocky_Dunes__East_Hilltop
+Irikar_Breach__Rocky_Dunes__West_Ledge --> Irikar_Breach__Rocky_Dunes__West_Rock_West
+Irikar_Breach__Rocky_Dunes__West_Rock_East --> Irikar_Breach__Rocky_Dunes__Center_Rock_West
+Irikar_Breach__Rocky_Dunes__West_Sand --> Irikar_Breach__Rocky_Dunes__West_Ledge
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
 Irikar__Abandoned_Room__West <--> Irikar__Basement_Portal__East_27
@@ -4727,6 +4814,7 @@ Irikar__Beach_Save__East_28_Ground <--> Irikar__Midwest__West_28_Ground
 Irikar__Beach_Save__East_28_Platform --> Irikar__Beach_Save__Top_Platform
 Irikar__Beach_Save__East_28_Platform <--> Irikar__Midwest__West_28_Platform
 Irikar__Beach_Save__West <--> Irikar__Beach__East
+Irikar__Beach_Save__West_Mid_air --> Irikar__Beach__Ivan
 Irikar__Beach__Above_Tunnel --> Irikar__Beach__Tunnel_Entrance
 Irikar__Beach__Cache <--> Irikar__Beach__Tunnel_Entrance
 Irikar__Boss_Room__Catwalk_East <--> Irikar__Lamassu__Catwalk_West
@@ -4833,8 +4921,10 @@ Menu__Breach_Map__GlB_Center --> Glacier_Breach__Guarded_Corridor__Save_Point
 Menu__Breach_Map__GlB_East --> Glacier_Breach__Hammonds_Breach__Save_Point
 Menu__Breach_Map__GlB_South --> Glacier_Breach__South_Save__Save_Point
 Menu__Breach_Map__GlB_West --> Glacier_Breach__West_Save__Save_Point
+Menu__Breach_Map__IB_Basement --> Irikar_Breach__Basement_Save__Save_Point
 Menu__Breach_Map__IB_Gauntlet --> Irikar_Breach__Gauntlet__Save_Point
 Menu__Breach_Map__IB_Save_Room --> Irikar_Breach__Save_Room__Save_Point
+Menu__Breach_Map__IB_West --> Irikar_Breach__Corridor__Save_Point
 Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point

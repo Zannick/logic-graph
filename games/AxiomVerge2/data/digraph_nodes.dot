@@ -2370,6 +2370,38 @@
         node[fillcolor="4"];
         {
             Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
+            Irikar_Breach__Basement_Save__Save_West [label = "", pos = "37.2,-96.0!"];
+            Irikar_Breach__Basement_Save__West [label = "", pos = "33.3,-95.583333!"];
+        }
+        {
+            Irikar_Breach__Beach__East_28 [label = "", pos = "17.7,-95.916667!"];
+            Irikar_Breach__Beach__Crescent_Rock_East [label = "", pos = "16.95,-94.916667!"];
+            Irikar_Breach__Beach__Crescent_Rock_Top [label = "", pos = "16.2,-94.5!"];
+            Irikar_Breach__Beach__Crescent_Rock_West [label = "", pos = "15.15,-94.916667!"];
+            Irikar_Breach__Beach__Sand_Trap [label = "", pos = "13.5,-94.583333!"];
+            Irikar_Breach__Beach__Center_Rock_West [label = "", pos = "14.1,-93.666667!"];
+            Irikar_Breach__Beach__Center_Rock_East [label = "", pos = "16.05,-92.916667!"];
+            Irikar_Breach__Beach__West_Outcropping [label = "", pos = "13.5,-92.5!"];
+            Irikar_Breach__Beach__Cache [label = "", pos = "12.3,-93.0!"];
+            Irikar_Breach__Beach__East_Ledge [label = "", pos = "16.8,-92.666667!"];
+            Irikar_Breach__Beach__East_26 [label = "", pos = "17.7,-92.916667!"];
+        }
+        {
+            Irikar_Breach__Buried_Treasure__East [label = "", pos = "32.7,-95.583333!"];
+            Irikar_Breach__Buried_Treasure__Pillar_Right [label = "", pos = "31.5,-95.833333!"];
+            Irikar_Breach__Buried_Treasure__Pillar_Middle [label = "", pos = "31.35,-95.833333!"];
+            Irikar_Breach__Buried_Treasure__Pillar_Left [label = "", pos = "31.2,-95.833333!"];
+            Irikar_Breach__Buried_Treasure__Pillar_Bottom [label = "", pos = "31.35,-96.333333!"];
+            Irikar_Breach__Buried_Treasure__West [label = "", pos = "30.3,-96.0!"];
+        }
+        {
+            Irikar_Breach__Corridor__West [label = "", pos = "18.3,-92.916667!"];
+            Irikar_Breach__Corridor__West_Rock_Peak [label = "", pos = "21.0,-92.333333!"];
+            Irikar_Breach__Corridor__Center [label = "", pos = "24.0,-92.333333!"];
+            Irikar_Breach__Corridor__Passage_West [label = "", pos = "25.95,-92.833333!"];
+            Irikar_Breach__Corridor__Passage_East [label = "", pos = "26.7,-92.833333!"];
+            Irikar_Breach__Corridor__Save_Point [label = "", pos = "28.5,-92.666667!"];
+            Irikar_Breach__Corridor__East [label = "", pos = "29.7,-92.916667!"];
         }
         {
             Irikar_Breach__Exit_Corridor__North_12 [label = "", pos = "37.5,-93.666667!"];
@@ -2410,6 +2442,7 @@
             Irikar_Breach__Gauntlet__Hidden_Path_Reward [label = "", pos = "30.15,-87.0!"];
             Irikar_Breach__Gauntlet__Hidden_Path_Bottom [label = "", pos = "30.45,-90.916667!"];
             Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry [label = "", pos = "30.75,-90.916667!"];
+            Irikar_Breach__Gauntlet__West_26 [label = "", pos = "30.3,-92.916667!"];
         }
         {
             Irikar_Breach__Hover_Room__West [label = "", pos = "36.3,-86.333333!"];
@@ -2423,8 +2456,21 @@
             Irikar_Breach__Neon_Corridor__West [label = "", pos = "30.3,-93.916667!"];
         }
         {
-            Irikar_Breach__Sandy_Lair__East_27 [label = "", pos = "29.7,-93.916667!"];
-            Irikar_Breach__Sandy_Lair__East_28 [label = "", pos = "29.7,-96.0!"];
+            Irikar_Breach__Rocky_Dunes__East_27 [label = "", pos = "29.7,-93.916667!"];
+            Irikar_Breach__Rocky_Dunes__East_Hilltop [label = "", pos = "28.65,-93.916667!"];
+            Irikar_Breach__Rocky_Dunes__Ditch [label = "", pos = "28.05,-94.5!"];
+            Irikar_Breach__Rocky_Dunes__Upper_East_Passage [label = "", pos = "27.0,-94.0!"];
+            Irikar_Breach__Rocky_Dunes__East_Rock [label = "", pos = "25.8,-95.0!"];
+            Irikar_Breach__Rocky_Dunes__East_Tank [label = "", pos = "26.7,-95.666667!"];
+            Irikar_Breach__Rocky_Dunes__East_Sandtrap [label = "", pos = "27.3,-96.0!"];
+            Irikar_Breach__Rocky_Dunes__East_28 [label = "", pos = "29.7,-96.0!"];
+            Irikar_Breach__Rocky_Dunes__Center_Rock_East [label = "", pos = "25.05,-94.166667!"];
+            Irikar_Breach__Rocky_Dunes__Center_Rock_West [label = "", pos = "22.8,-94.333333!"];
+            Irikar_Breach__Rocky_Dunes__West_Rock_East [label = "", pos = "21.9,-94.833333!"];
+            Irikar_Breach__Rocky_Dunes__West_Rock_West [label = "", pos = "19.8,-94.25!"];
+            Irikar_Breach__Rocky_Dunes__West_Ledge [label = "", pos = "19.2,-95.0!"];
+            Irikar_Breach__Rocky_Dunes__West_Sand [label = "", pos = "19.05,-95.916667!"];
+            Irikar_Breach__Rocky_Dunes__West_28 [label = "", pos = "18.3,-95.916667!"];
         }
         {
             Irikar_Breach__Save_Room__Save_Point [label = "", pos = "43.575,-92.25!"];
@@ -2504,6 +2550,7 @@
             Irikar__Beach_Save__Partway_Up [label = "", pos = "17.25,-44.0!"];
             Irikar__Beach_Save__Top_Platform [label = "", pos = "16.95,-42.666667!"];
             Irikar__Beach_Save__West [label = "", pos = "12.15,-44.25!"];
+            Irikar__Beach_Save__West_Mid_air [label = "", pos = "12.3,-43.0!"];
         }
         {
             Irikar__Boss_Room__West_28 [label = "", pos = "45.15,-46.166667!"];
@@ -2713,6 +2760,9 @@
             Menu__Breach_Map__IB_Gauntlet_Flask [label = "", pos = "30.0,-88.333333!"];
             Menu__Breach_Map__Drone_Hover [label = "", pos = "36.0,-88.333333!"];
             Menu__Breach_Map__IB_Worm_Rave_Flask [label = "", pos = "36.0,-93.333333!"];
+            Menu__Breach_Map__IB_Buried_Treasure [label = "", pos = "30.0,-96.666667!"];
+            Menu__Breach_Map__IB_Rocky_Dunes_Health [label = "", pos = "27.0,-95.0!"];
+            Menu__Breach_Map__IB_Beach_Flask [label = "", pos = "12.0,-93.333333!"];
             Menu__Breach_Map__LAB_East_Health [label = "", pos = "111.0,-75.0!"];
             Menu__Breach_Map__LAB_East_Ruins_Flask [label = "", pos = "102.0,-76.666667!"];
             Menu__Breach_Map__Exit_Breach [label = "", pos = "102.0,-80.0!"];

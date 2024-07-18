@@ -2545,6 +2545,10 @@ pub fn access_irikar__midwest__tablet_platform__ex__right_platform_start_2__req(
     // not ^_right_platform and $mist2
     (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
 }
+pub fn access_irikar_breach_buried_treasure_pillar(ctx: &Context, world: &World) -> bool {
+    // Irikar_Breach_Buried_Treasure_Pillar
+    ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
+}
 pub fn access_irikar_gudam(ctx: &Context, world: &World) -> bool {
     // Irikar_Gudam
     ctx.has(Item::Irikar_Gudam)
@@ -2696,6 +2700,14 @@ pub fn access_map__irikar__hub__save(ctx: &Context, world: &World) -> bool {
 pub fn access_map__irikar__midwest__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar__midwest__save
     ctx.map__irikar__midwest__save()
+}
+pub fn access_map__irikar_breach__basement_save__save(ctx: &Context, world: &World) -> bool {
+    // ^map__irikar_breach__basement_save__save
+    ctx.map__irikar_breach__basement_save__save()
+}
+pub fn access_map__irikar_breach__corridor__save(ctx: &Context, world: &World) -> bool {
+    // ^map__irikar_breach__corridor__save
+    ctx.map__irikar_breach__corridor__save()
 }
 pub fn access_map__irikar_breach__gauntlet__save(ctx: &Context, world: &World) -> bool {
     // ^map__irikar_breach__gauntlet__save
@@ -3007,6 +3019,14 @@ pub fn access_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_gate(
     // Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
     ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Ebih_Breach_In_n_Out_Gate))
+}
+pub fn access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and not Irikar_Breach_Buried_Treasure_Pillar
+    ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
+        && !ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar))
 }
 pub fn access_slingshot_hook_and_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Ebih_Breach_Lake_Gate
@@ -14021,6 +14041,18 @@ pub fn explain_irikar__midwest__tablet_platform__ex__right_platform_start_2__req
         }
     }
 }
+pub fn explain_irikar_breach_buried_treasure_pillar(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Irikar_Breach_Buried_Treasure_Pillar
+    {
+        let h = ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar);
+        edict.insert("Irikar_Breach_Buried_Treasure_Pillar", format!("{}", h));
+        (h, vec!["Irikar_Breach_Buried_Treasure_Pillar"])
+    }
+}
 pub fn explain_irikar_gudam(
     ctx: &Context,
     world: &World,
@@ -14487,6 +14519,33 @@ pub fn explain_map__irikar__midwest__save(
         let r = ctx.map__irikar__midwest__save();
         edict.insert("^map__irikar__midwest__save", format!("{:?}", r));
         (r, vec!["^map__irikar__midwest__save"])
+    }
+}
+pub fn explain_map__irikar_breach__basement_save__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__irikar_breach__basement_save__save
+    {
+        let r = ctx.map__irikar_breach__basement_save__save();
+        edict.insert(
+            "^map__irikar_breach__basement_save__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__irikar_breach__basement_save__save"])
+    }
+}
+pub fn explain_map__irikar_breach__corridor__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__irikar_breach__corridor__save
+    {
+        let r = ctx.map__irikar_breach__corridor__save();
+        edict.insert("^map__irikar_breach__corridor__save", format!("{:?}", r));
+        (r, vec!["^map__irikar_breach__corridor__save"])
     }
 }
 pub fn explain_map__irikar_breach__gauntlet__save(
@@ -16095,6 +16154,44 @@ pub fn explain_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_gate(
                 let h = ctx.has(Item::Ebih_Breach_In_n_Out_Gate);
                 edict.insert("Ebih_Breach_In_n_Out_Gate", format!("{}", h));
                 (h, vec!["Ebih_Breach_In_n_Out_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Hover and not Irikar_Breach_Buried_Treasure_Pillar
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar);
+                edict.insert("Irikar_Breach_Buried_Treasure_Pillar", format!("{}", h));
+                (!h, vec!["Irikar_Breach_Buried_Treasure_Pillar"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -22014,6 +22111,17 @@ pub fn observe_access_irikar__midwest__tablet_platform__ex__right_platform_start
         ctx.irikar__midwest__ctx__right_platform()
     }) && (hobserve__mist2!(ctx, world, full_obs)))
 }
+pub fn observe_access_irikar_breach_buried_treasure_pillar(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Irikar_Breach_Buried_Treasure_Pillar
+    {
+        full_obs.observe_irikar_breach_buried_treasure_pillar();
+        ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
+    }
+}
 pub fn observe_access_irikar_gudam(
     ctx: &Context,
     world: &World,
@@ -22430,6 +22538,28 @@ pub fn observe_access_map__irikar__midwest__save(
     {
         full_obs.observe_map__irikar__midwest__save();
         ctx.map__irikar__midwest__save()
+    }
+}
+pub fn observe_access_map__irikar_breach__basement_save__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__irikar_breach__basement_save__save
+    {
+        full_obs.observe_map__irikar_breach__basement_save__save();
+        ctx.map__irikar_breach__basement_save__save()
+    }
+}
+pub fn observe_access_map__irikar_breach__corridor__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__irikar_breach__corridor__save
+    {
+        full_obs.observe_map__irikar_breach__corridor__save();
+        ctx.map__irikar_breach__corridor__save()
     }
 }
 pub fn observe_access_map__irikar_breach__gauntlet__save(
@@ -23302,6 +23432,23 @@ pub fn observe_access_slingshot_hook_and_drone_hover_and_ebih_breach_in_n_out_ga
     })) && ({
         full_obs.observe_ebih_breach_in_n_out_gate();
         ctx.has(Item::Ebih_Breach_In_n_Out_Gate)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and not Irikar_Breach_Buried_Treasure_Pillar
+    (({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })) && ({
+        full_obs.observe_irikar_breach_buried_treasure_pillar();
+        !ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
     }))
 }
 pub fn observe_access_slingshot_hook_and_ebih_breach_lake_gate(

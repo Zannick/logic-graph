@@ -1032,6 +1032,11 @@ areas:
           tags: [warp]
     - name: IB Basement
       coord: [12, 28]
+      exits:
+        - to: Irikar Breach > Basement Save > Save Point
+          req: ^map__irikar_breach__basement_save__save
+          time: 12
+          tags: [warp]
     - name: IB Gauntlet
       coord: [11, 22]
       exits:
@@ -1048,6 +1053,11 @@ areas:
           tags: [warp]
     - name: IB West
       coord: [9, 26]
+      exits:
+        - to: Irikar Breach > Corridor > Save Point
+          req: ^map__irikar_breach__corridor__save
+          time: 12
+          tags: [warp]
     - name: LAB Center
       coord: [33, 17]
       exits:
@@ -1128,6 +1138,12 @@ areas:
       coord: [12, 23]
     - name: IB Worm Rave Flask
       coord: [12, 26]
+    - name: IB Buried Treasure
+      coord: [10, 28]
+    - name: IB Rocky Dunes Health
+      coord: [9, 27]
+    - name: IB Beach Flask
+      coord: [4, 26]
 
     - name: LAB East Health
       coord: [37, 15]

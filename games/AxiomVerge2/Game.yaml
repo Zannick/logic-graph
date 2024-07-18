@@ -349,27 +349,26 @@ helpers:  # MARK: helpers
   $attract: Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach' or @^indra^realm == 'interior')
 
   $all_notes:itemList: >
-    [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
-     Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
-     Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,
-     Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,
-     Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,
-     Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,
-     Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology, Kazakh_Assault]
+    [Aansur, Becoming_An_Arm, Beware_the_Patternmind, Bounty_List, Building_of_the_School, Commemorative_Speech,
+     Companies_Layoff, Dangerous_Ideas, Dear_Ernest, Destruction_Pogrom, Dr_Gloria, Family_Tragedy, Forbidden_Knowledge,
+     Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,
+     Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,
+     Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
+     Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege]
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{39}, Big_Flask{16}]
+    [Flask{39}, Big_Flask{17}]
   $all_health:itemList: >
-    [Health_Node{2}, Health_Fragment{16}]
+    [Health_Node{2}, Health_Fragment{18}]
   $all_weapons:itemList: >
-    [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe, Sickle_Sword, Boomerang_Upgrade]
+    [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
-    [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,
-     Diviners_Gem, Ensis_Bracelet]
+    [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring,
+     Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Udusan]
   $all_urns:itemList: >
-    [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,
-     Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge, Slingshot_Weapon]
+    [Amashilama, Anuman, Breach_Sight, Drone_Hover, Drone_Melee_Charge, Exit_Breach, Fast_Travel, Infect, Ledge_Grab,
+     Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, Wall_Climb]
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy
@@ -486,6 +485,6 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Remote_Boomerang, Slingshot_Weapon]
+  unplaced_items: [Remote_Boomerang]
   ignore_observations:
     - prev_area

@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2641] = [
+static SPOT_DEFS: [SpotDef; 2685] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -11537,6 +11537,162 @@ static SPOT_DEFS: [SpotDef; 2641] = [
         id: SpotId::Irikar_Breach__Basement_Save__Save_Point,
         loc_range: None,
         exit_range: None,
+        action_range: Some((ActionId::Irikar_Breach__Basement_Save__Save_Point__Save, ActionId::Irikar_Breach__Basement_Save__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Basement_Save__Save_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__Pillar_Right_1, ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Basement_Save__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Basement_Save__West__ex__Buried_Treasure__East_1, ExitId::Irikar_Breach__Basement_Save__West__ex__Buried_Treasure__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Cache,
+        loc_range: Some((LocationId::Irikar_Breach__Beach__Cache__Flask, LocationId::Irikar_Breach__Beach__Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Center_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__East_26_1, ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__West_Outcropping_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Center_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Center_Rock_West__ex__West_Outcropping_1, ExitId::Irikar_Breach__Beach__Center_Rock_West__ex__West_Outcropping_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Crescent_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__Center_Rock_East_1, ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__East_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Crescent_Rock_Top,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__Center_Rock_East_1, ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__East_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Crescent_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Crescent_Rock_West__ex__Crescent_Rock_Top_1, ExitId::Irikar_Breach__Beach__Crescent_Rock_West__ex__Crescent_Rock_Top_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__East_26,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__East_26__ex__Corridor__West_1, ExitId::Irikar_Breach__Beach__East_26__ex__West_Outcropping_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__East_28,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__East_28__ex__Crescent_Rock_East_1, ExitId::Irikar_Breach__Beach__East_28__ex__Rocky_Dunes__West_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__East_Ledge__ex__West_Outcropping_1, ExitId::Irikar_Breach__Beach__East_Ledge__ex__West_Outcropping_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__Sand_Trap,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Center_Rock_West_1, ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Crescent_Rock_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Beach__West_Outcropping,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__East__ex__Basement_Save__West_1, ExitId::Irikar_Breach__Buried_Treasure__East__ex__Basement_Save__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Bottom,
+        loc_range: Some((LocationId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__Health, LocationId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__Health)),
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1, ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_4)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Left,
+        loc_range: Some((LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar, LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Upgraded_Mist_Into_Pillar)),
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1, ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Middle,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1, ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Right,
+        loc_range: Some((LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar, LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Upgraded_Mist_Into_Pillar)),
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1, ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Buried_Treasure__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Buried_Treasure__West__ex__Rocky_Dunes__East_28_1, ExitId::Irikar_Breach__Buried_Treasure__West__ex__Rocky_Dunes__East_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__Center,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1, ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Corridor__East__ex__Gauntlet__West_26_1, ExitId::Irikar_Breach__Corridor__East__ex__Gauntlet__West_26_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__Passage_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__Passage_West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Irikar_Breach__Corridor__Save_Point__Save, ActionId::Irikar_Breach__Corridor__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Corridor__West__ex__Beach__East_26_1, ExitId::Irikar_Breach__Corridor__West__ex__Beach__East_26_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Corridor__West_Rock_Peak,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -11732,6 +11888,12 @@ static SPOT_DEFS: [SpotDef; 2641] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Irikar_Breach__Gauntlet__West_26,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Irikar_Breach__Hover_Room__Bottom,
         loc_range: Some((LocationId::Irikar_Breach__Hover_Room__Bottom__Item, LocationId::Irikar_Breach__Hover_Room__Bottom__Item)),
         exit_range: Some((ExitId::Irikar_Breach__Hover_Room__Bottom__ex__East_1, ExitId::Irikar_Breach__Hover_Room__Bottom__ex__West_1)),
@@ -11764,7 +11926,7 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef {
         id: SpotId::Irikar_Breach__Neon_Corridor__West,
         loc_range: None,
-        exit_range: Some((ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1, ExitId::Irikar_Breach__Neon_Corridor__West__ex__Sandy_Lair__East_27_1)),
+        exit_range: Some((ExitId::Irikar_Breach__Neon_Corridor__West__ex__Rocky_Dunes__East_27_1, ExitId::Irikar_Breach__Neon_Corridor__West__ex__Rocky_Dunes__East_27_1)),
         action_range: None,
     },
     SpotDef {
@@ -11774,15 +11936,93 @@ static SPOT_DEFS: [SpotDef; 2641] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Irikar_Breach__Sandy_Lair__East_27,
+        id: SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1, ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1, ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__West_Rock_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__Ditch,
+        loc_range: Some((LocationId::Irikar_Breach__Rocky_Dunes__Ditch__Health, LocationId::Irikar_Breach__Rocky_Dunes__Ditch__Health)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_27,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__East_27__ex__Neon_Corridor__West_1, ExitId::Irikar_Breach__Rocky_Dunes__East_27__ex__Neon_Corridor__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_28,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__East_28__ex__Buried_Treasure__West_1, ExitId::Irikar_Breach__Rocky_Dunes__East_28__ex__Buried_Treasure__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_Hilltop,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Irikar_Breach__Sandy_Lair__East_28,
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_Rock,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Center_Rock_East_1, ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_Sandtrap,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1, ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__East_Tank,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__East_Rock_1, ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__Center_Rock_East_1, ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__East_Hilltop_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__West_28,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__West_28__ex__Beach__East_28_1, ExitId::Irikar_Breach__Rocky_Dunes__West_28__ex__Beach__East_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_1, ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1, ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1, ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Rocky_Dunes__West_Sand,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1, ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -12083,6 +12323,12 @@ static SPOT_DEFS: [SpotDef; 2641] = [
         id: SpotId::Irikar__Beach_Save__West,
         loc_range: None,
         exit_range: Some((ExitId::Irikar__Beach_Save__West__ex__Beach__East_1, ExitId::Irikar__Beach_Save__West__ex__Beach__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar__Beach_Save__West_Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar__Beach_Save__West_Mid_air__ex__Beach__Ivan_1, ExitId::Irikar__Beach_Save__West_Mid_air__ex__Beach__Ivan_1)),
         action_range: None,
     },
     SpotDef {
@@ -12435,7 +12681,7 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     },
     SpotDef {
         id: SpotId::Irikar__Hub__Royal_Storage_in_Wall,
-        loc_range: Some((LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item, LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item)),
+        loc_range: Some((LocationId::Irikar__Hub__Royal_Storage_in_Wall__Flask_Collection_Skip, LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item)),
         exit_range: None,
         action_range: None,
     },
@@ -13156,6 +13402,18 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__IB_Basement,
         loc_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__IB_Basement__ex__Irikar_Breach__Basement_Save__Save_Point_1, ExitId::Menu__Breach_Map__IB_Basement__ex__Irikar_Breach__Basement_Save__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__IB_Beach_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__IB_Buried_Treasure,
+        loc_range: None,
         exit_range: None,
         action_range: None,
     },
@@ -13172,6 +13430,12 @@ static SPOT_DEFS: [SpotDef; 2641] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__IB_Rocky_Dunes_Health,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__IB_Save_Room,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1, ExitId::Menu__Breach_Map__IB_Save_Room__ex__Irikar_Breach__Save_Room__Save_Point_1)),
@@ -13180,7 +13444,7 @@ static SPOT_DEFS: [SpotDef; 2641] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__IB_West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__IB_West__ex__Irikar_Breach__Corridor__Save_Point_1, ExitId::Menu__Breach_Map__IB_West__ex__Irikar_Breach__Corridor__Save_Point_1)),
         action_range: None,
     },
     SpotDef {

@@ -2343,43 +2343,45 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School, Commemorative_Speech,  Terminal_Breakthrough_2, Dangerous_Ideas, Storm_Bomb, Suspension_Bridge, Plague_of_Thoughts,  Lament_for_Fools, Family_Tragedy, Destruction_Pogrom, The_Eternal_Arm, Beware_the_Patternmind, Dr_Gloria,  Goodbye, Notes_2053_02_27, Forbidden_Knowledge, The_Student, Freedom_from_Aansur, Heretics_Granddaughter,  Bounty_List, Submarine_Progress, Becoming_An_Arm, Re_Does_Technology, Kazakh_Assault]
+/// [Aansur, Becoming_An_Arm, Beware_the_Patternmind, Bounty_List, Building_of_the_School, Commemorative_Speech,  Companies_Layoff, Dangerous_Ideas, Dear_Ernest, Destruction_Pogrom, Dr_Gloria, Family_Tragedy, Forbidden_Knowledge,  Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,  Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,  Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,  Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
-        $ctx.has(Item::Dear_Ernest)
-            && $ctx.has(Item::Researchers_Missing)
-            && $ctx.has(Item::Letter_from_Trace)
-            && $ctx.has(Item::Heretics_Tablet)
-            && $ctx.has(Item::Terminal_Breakthrough_1)
-            && $ctx.has(Item::Companies_Layoff)
-            && $ctx.has(Item::Record_Losses)
-            && $ctx.has(Item::Under_Siege)
-            && $ctx.has(Item::The_Ideal_Kiengir)
+        $ctx.has(Item::Aansur)
+            && $ctx.has(Item::Becoming_An_Arm)
+            && $ctx.has(Item::Beware_the_Patternmind)
+            && $ctx.has(Item::Bounty_List)
             && $ctx.has(Item::Building_of_the_School)
             && $ctx.has(Item::Commemorative_Speech)
-            && $ctx.has(Item::Terminal_Breakthrough_2)
+            && $ctx.has(Item::Companies_Layoff)
             && $ctx.has(Item::Dangerous_Ideas)
-            && $ctx.has(Item::Storm_Bomb)
-            && $ctx.has(Item::Suspension_Bridge)
-            && $ctx.has(Item::Plague_of_Thoughts)
-            && $ctx.has(Item::Lament_for_Fools)
-            && $ctx.has(Item::Family_Tragedy)
+            && $ctx.has(Item::Dear_Ernest)
             && $ctx.has(Item::Destruction_Pogrom)
-            && $ctx.has(Item::The_Eternal_Arm)
-            && $ctx.has(Item::Beware_the_Patternmind)
             && $ctx.has(Item::Dr_Gloria)
-            && $ctx.has(Item::Goodbye)
-            && $ctx.has(Item::Notes_2053_02_27)
+            && $ctx.has(Item::Family_Tragedy)
             && $ctx.has(Item::Forbidden_Knowledge)
-            && $ctx.has(Item::The_Student)
             && $ctx.has(Item::Freedom_from_Aansur)
+            && $ctx.has(Item::Goodbye)
             && $ctx.has(Item::Heretics_Granddaughter)
-            && $ctx.has(Item::Bounty_List)
-            && $ctx.has(Item::Submarine_Progress)
-            && $ctx.has(Item::Becoming_An_Arm)
-            && $ctx.has(Item::Re_Does_Technology)
+            && $ctx.has(Item::Heretics_Tablet)
+            && $ctx.has(Item::Journal_2049_10_29)
             && $ctx.has(Item::Kazakh_Assault)
+            && $ctx.has(Item::Lament_for_Fools)
+            && $ctx.has(Item::Letter_from_Trace)
+            && $ctx.has(Item::Notes_2053_02_27)
+            && $ctx.has(Item::Plague_of_Thoughts)
+            && $ctx.has(Item::Re_Does_Technology)
+            && $ctx.has(Item::Record_Losses)
+            && $ctx.has(Item::Researchers_Missing)
+            && $ctx.has(Item::Storm_Bomb)
+            && $ctx.has(Item::Submarine_Progress)
+            && $ctx.has(Item::Suspension_Bridge)
+            && $ctx.has(Item::Terminal_Breakthrough_1)
+            && $ctx.has(Item::Terminal_Breakthrough_2)
+            && $ctx.has(Item::The_Eternal_Arm)
+            && $ctx.has(Item::The_Ideal_Kiengir)
+            && $ctx.has(Item::The_Student)
+            && $ctx.has(Item::Under_Siege)
     }};
 }
 #[macro_export]
@@ -2388,81 +2390,36 @@ macro_rules! hexplain__all_notes {
         {
             let mut refs = Vec::new();
             let mut h = {
-                let h = $ctx.has(Item::Dear_Ernest);
-                $edict.insert("Dear_Ernest", format!("{}", h));
-                (h, vec!["Dear_Ernest"])
+                let h = $ctx.has(Item::Aansur);
+                $edict.insert("Aansur", format!("{}", h));
+                (h, vec!["Aansur"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Researchers_Missing);
-                $edict.insert("Researchers_Missing", format!("{}", h));
-                (h, vec!["Researchers_Missing"])
+                let h = $ctx.has(Item::Becoming_An_Arm);
+                $edict.insert("Becoming_An_Arm", format!("{}", h));
+                (h, vec!["Becoming_An_Arm"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Letter_from_Trace);
-                $edict.insert("Letter_from_Trace", format!("{}", h));
-                (h, vec!["Letter_from_Trace"])
+                let h = $ctx.has(Item::Beware_the_Patternmind);
+                $edict.insert("Beware_the_Patternmind", format!("{}", h));
+                (h, vec!["Beware_the_Patternmind"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Heretics_Tablet);
-                $edict.insert("Heretics_Tablet", format!("{}", h));
-                (h, vec!["Heretics_Tablet"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Terminal_Breakthrough_1);
-                $edict.insert("Terminal_Breakthrough_1", format!("{}", h));
-                (h, vec!["Terminal_Breakthrough_1"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Companies_Layoff);
-                $edict.insert("Companies_Layoff", format!("{}", h));
-                (h, vec!["Companies_Layoff"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Record_Losses);
-                $edict.insert("Record_Losses", format!("{}", h));
-                (h, vec!["Record_Losses"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Under_Siege);
-                $edict.insert("Under_Siege", format!("{}", h));
-                (h, vec!["Under_Siege"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::The_Ideal_Kiengir);
-                $edict.insert("The_Ideal_Kiengir", format!("{}", h));
-                (h, vec!["The_Ideal_Kiengir"])
+                let h = $ctx.has(Item::Bounty_List);
+                $edict.insert("Bounty_List", format!("{}", h));
+                (h, vec!["Bounty_List"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2487,9 +2444,9 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Terminal_Breakthrough_2);
-                $edict.insert("Terminal_Breakthrough_2", format!("{}", h));
-                (h, vec!["Terminal_Breakthrough_2"])
+                let h = $ctx.has(Item::Companies_Layoff);
+                $edict.insert("Companies_Layoff", format!("{}", h));
+                (h, vec!["Companies_Layoff"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2505,45 +2462,9 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Storm_Bomb);
-                $edict.insert("Storm_Bomb", format!("{}", h));
-                (h, vec!["Storm_Bomb"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Suspension_Bridge);
-                $edict.insert("Suspension_Bridge", format!("{}", h));
-                (h, vec!["Suspension_Bridge"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Plague_of_Thoughts);
-                $edict.insert("Plague_of_Thoughts", format!("{}", h));
-                (h, vec!["Plague_of_Thoughts"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Lament_for_Fools);
-                $edict.insert("Lament_for_Fools", format!("{}", h));
-                (h, vec!["Lament_for_Fools"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Family_Tragedy);
-                $edict.insert("Family_Tragedy", format!("{}", h));
-                (h, vec!["Family_Tragedy"])
+                let h = $ctx.has(Item::Dear_Ernest);
+                $edict.insert("Dear_Ernest", format!("{}", h));
+                (h, vec!["Dear_Ernest"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2559,24 +2480,6 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::The_Eternal_Arm);
-                $edict.insert("The_Eternal_Arm", format!("{}", h));
-                (h, vec!["The_Eternal_Arm"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Beware_the_Patternmind);
-                $edict.insert("Beware_the_Patternmind", format!("{}", h));
-                (h, vec!["Beware_the_Patternmind"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
                 let h = $ctx.has(Item::Dr_Gloria);
                 $edict.insert("Dr_Gloria", format!("{}", h));
                 (h, vec!["Dr_Gloria"])
@@ -2586,18 +2489,9 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Goodbye);
-                $edict.insert("Goodbye", format!("{}", h));
-                (h, vec!["Goodbye"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Notes_2053_02_27);
-                $edict.insert("Notes_2053_02_27", format!("{}", h));
-                (h, vec!["Notes_2053_02_27"])
+                let h = $ctx.has(Item::Family_Tragedy);
+                $edict.insert("Family_Tragedy", format!("{}", h));
+                (h, vec!["Family_Tragedy"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2613,18 +2507,18 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::The_Student);
-                $edict.insert("The_Student", format!("{}", h));
-                (h, vec!["The_Student"])
+                let h = $ctx.has(Item::Freedom_from_Aansur);
+                $edict.insert("Freedom_from_Aansur", format!("{}", h));
+                (h, vec!["Freedom_from_Aansur"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Freedom_from_Aansur);
-                $edict.insert("Freedom_from_Aansur", format!("{}", h));
-                (h, vec!["Freedom_from_Aansur"])
+                let h = $ctx.has(Item::Goodbye);
+                $edict.insert("Goodbye", format!("{}", h));
+                (h, vec!["Goodbye"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2640,27 +2534,63 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Bounty_List);
-                $edict.insert("Bounty_List", format!("{}", h));
-                (h, vec!["Bounty_List"])
+                let h = $ctx.has(Item::Heretics_Tablet);
+                $edict.insert("Heretics_Tablet", format!("{}", h));
+                (h, vec!["Heretics_Tablet"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Submarine_Progress);
-                $edict.insert("Submarine_Progress", format!("{}", h));
-                (h, vec!["Submarine_Progress"])
+                let h = $ctx.has(Item::Journal_2049_10_29);
+                $edict.insert("Journal_2049_10_29", format!("{}", h));
+                (h, vec!["Journal_2049_10_29"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Becoming_An_Arm);
-                $edict.insert("Becoming_An_Arm", format!("{}", h));
-                (h, vec!["Becoming_An_Arm"])
+                let h = $ctx.has(Item::Kazakh_Assault);
+                $edict.insert("Kazakh_Assault", format!("{}", h));
+                (h, vec!["Kazakh_Assault"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Lament_for_Fools);
+                $edict.insert("Lament_for_Fools", format!("{}", h));
+                (h, vec!["Lament_for_Fools"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Letter_from_Trace);
+                $edict.insert("Letter_from_Trace", format!("{}", h));
+                (h, vec!["Letter_from_Trace"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Notes_2053_02_27);
+                $edict.insert("Notes_2053_02_27", format!("{}", h));
+                (h, vec!["Notes_2053_02_27"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Plague_of_Thoughts);
+                $edict.insert("Plague_of_Thoughts", format!("{}", h));
+                (h, vec!["Plague_of_Thoughts"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2676,9 +2606,99 @@ macro_rules! hexplain__all_notes {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Kazakh_Assault);
-                $edict.insert("Kazakh_Assault", format!("{}", h));
-                (h, vec!["Kazakh_Assault"])
+                let h = $ctx.has(Item::Record_Losses);
+                $edict.insert("Record_Losses", format!("{}", h));
+                (h, vec!["Record_Losses"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Researchers_Missing);
+                $edict.insert("Researchers_Missing", format!("{}", h));
+                (h, vec!["Researchers_Missing"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Storm_Bomb);
+                $edict.insert("Storm_Bomb", format!("{}", h));
+                (h, vec!["Storm_Bomb"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Submarine_Progress);
+                $edict.insert("Submarine_Progress", format!("{}", h));
+                (h, vec!["Submarine_Progress"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Suspension_Bridge);
+                $edict.insert("Suspension_Bridge", format!("{}", h));
+                (h, vec!["Suspension_Bridge"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Terminal_Breakthrough_1);
+                $edict.insert("Terminal_Breakthrough_1", format!("{}", h));
+                (h, vec!["Terminal_Breakthrough_1"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Terminal_Breakthrough_2);
+                $edict.insert("Terminal_Breakthrough_2", format!("{}", h));
+                (h, vec!["Terminal_Breakthrough_2"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::The_Eternal_Arm);
+                $edict.insert("The_Eternal_Arm", format!("{}", h));
+                (h, vec!["The_Eternal_Arm"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::The_Ideal_Kiengir);
+                $edict.insert("The_Ideal_Kiengir", format!("{}", h));
+                (h, vec!["The_Ideal_Kiengir"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::The_Student);
+                $edict.insert("The_Student", format!("{}", h));
+                (h, vec!["The_Student"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Under_Siege);
+                $edict.insert("Under_Siege", format!("{}", h));
+                (h, vec!["Under_Siege"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2689,32 +2709,17 @@ macro_rules! hexplain__all_notes {
 macro_rules! hobserve__all_notes {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_dear_ernest();
-            $ctx.has(Item::Dear_Ernest)
+            $full_obs.observe_aansur();
+            $ctx.has(Item::Aansur)
         }) && ({
-            $full_obs.observe_researchers_missing();
-            $ctx.has(Item::Researchers_Missing)
+            $full_obs.observe_becoming_an_arm();
+            $ctx.has(Item::Becoming_An_Arm)
         }) && ({
-            $full_obs.observe_letter_from_trace();
-            $ctx.has(Item::Letter_from_Trace)
+            $full_obs.observe_beware_the_patternmind();
+            $ctx.has(Item::Beware_the_Patternmind)
         }) && ({
-            $full_obs.observe_heretics_tablet();
-            $ctx.has(Item::Heretics_Tablet)
-        }) && ({
-            $full_obs.observe_terminal_breakthrough_1();
-            $ctx.has(Item::Terminal_Breakthrough_1)
-        }) && ({
-            $full_obs.observe_companies_layoff();
-            $ctx.has(Item::Companies_Layoff)
-        }) && ({
-            $full_obs.observe_record_losses();
-            $ctx.has(Item::Record_Losses)
-        }) && ({
-            $full_obs.observe_under_siege();
-            $ctx.has(Item::Under_Siege)
-        }) && ({
-            $full_obs.observe_the_ideal_kiengir();
-            $ctx.has(Item::The_Ideal_Kiengir)
+            $full_obs.observe_bounty_list();
+            $ctx.has(Item::Bounty_List)
         }) && ({
             $full_obs.observe_building_of_the_school();
             $ctx.has(Item::Building_of_the_School)
@@ -2722,81 +2727,102 @@ macro_rules! hobserve__all_notes {
             $full_obs.observe_commemorative_speech();
             $ctx.has(Item::Commemorative_Speech)
         }) && ({
-            $full_obs.observe_terminal_breakthrough_2();
-            $ctx.has(Item::Terminal_Breakthrough_2)
+            $full_obs.observe_companies_layoff();
+            $ctx.has(Item::Companies_Layoff)
         }) && ({
             $full_obs.observe_dangerous_ideas();
             $ctx.has(Item::Dangerous_Ideas)
         }) && ({
-            $full_obs.observe_storm_bomb();
-            $ctx.has(Item::Storm_Bomb)
-        }) && ({
-            $full_obs.observe_suspension_bridge();
-            $ctx.has(Item::Suspension_Bridge)
-        }) && ({
-            $full_obs.observe_plague_of_thoughts();
-            $ctx.has(Item::Plague_of_Thoughts)
-        }) && ({
-            $full_obs.observe_lament_for_fools();
-            $ctx.has(Item::Lament_for_Fools)
-        }) && ({
-            $full_obs.observe_family_tragedy();
-            $ctx.has(Item::Family_Tragedy)
+            $full_obs.observe_dear_ernest();
+            $ctx.has(Item::Dear_Ernest)
         }) && ({
             $full_obs.observe_destruction_pogrom();
             $ctx.has(Item::Destruction_Pogrom)
         }) && ({
-            $full_obs.observe_the_eternal_arm();
-            $ctx.has(Item::The_Eternal_Arm)
-        }) && ({
-            $full_obs.observe_beware_the_patternmind();
-            $ctx.has(Item::Beware_the_Patternmind)
-        }) && ({
             $full_obs.observe_dr_gloria();
             $ctx.has(Item::Dr_Gloria)
         }) && ({
-            $full_obs.observe_goodbye();
-            $ctx.has(Item::Goodbye)
-        }) && ({
-            $full_obs.observe_notes_2053_02_27();
-            $ctx.has(Item::Notes_2053_02_27)
+            $full_obs.observe_family_tragedy();
+            $ctx.has(Item::Family_Tragedy)
         }) && ({
             $full_obs.observe_forbidden_knowledge();
             $ctx.has(Item::Forbidden_Knowledge)
         }) && ({
-            $full_obs.observe_the_student();
-            $ctx.has(Item::The_Student)
-        }) && ({
             $full_obs.observe_freedom_from_aansur();
             $ctx.has(Item::Freedom_from_Aansur)
+        }) && ({
+            $full_obs.observe_goodbye();
+            $ctx.has(Item::Goodbye)
         }) && ({
             $full_obs.observe_heretics_granddaughter();
             $ctx.has(Item::Heretics_Granddaughter)
         }) && ({
-            $full_obs.observe_bounty_list();
-            $ctx.has(Item::Bounty_List)
+            $full_obs.observe_heretics_tablet();
+            $ctx.has(Item::Heretics_Tablet)
         }) && ({
-            $full_obs.observe_submarine_progress();
-            $ctx.has(Item::Submarine_Progress)
+            $full_obs.observe_journal_2049_10_29();
+            $ctx.has(Item::Journal_2049_10_29)
         }) && ({
-            $full_obs.observe_becoming_an_arm();
-            $ctx.has(Item::Becoming_An_Arm)
+            $full_obs.observe_kazakh_assault();
+            $ctx.has(Item::Kazakh_Assault)
+        }) && ({
+            $full_obs.observe_lament_for_fools();
+            $ctx.has(Item::Lament_for_Fools)
+        }) && ({
+            $full_obs.observe_letter_from_trace();
+            $ctx.has(Item::Letter_from_Trace)
+        }) && ({
+            $full_obs.observe_notes_2053_02_27();
+            $ctx.has(Item::Notes_2053_02_27)
+        }) && ({
+            $full_obs.observe_plague_of_thoughts();
+            $ctx.has(Item::Plague_of_Thoughts)
         }) && ({
             $full_obs.observe_re_does_technology();
             $ctx.has(Item::Re_Does_Technology)
         }) && ({
-            $full_obs.observe_kazakh_assault();
-            $ctx.has(Item::Kazakh_Assault)
+            $full_obs.observe_record_losses();
+            $ctx.has(Item::Record_Losses)
+        }) && ({
+            $full_obs.observe_researchers_missing();
+            $ctx.has(Item::Researchers_Missing)
+        }) && ({
+            $full_obs.observe_storm_bomb();
+            $ctx.has(Item::Storm_Bomb)
+        }) && ({
+            $full_obs.observe_submarine_progress();
+            $ctx.has(Item::Submarine_Progress)
+        }) && ({
+            $full_obs.observe_suspension_bridge();
+            $ctx.has(Item::Suspension_Bridge)
+        }) && ({
+            $full_obs.observe_terminal_breakthrough_1();
+            $ctx.has(Item::Terminal_Breakthrough_1)
+        }) && ({
+            $full_obs.observe_terminal_breakthrough_2();
+            $ctx.has(Item::Terminal_Breakthrough_2)
+        }) && ({
+            $full_obs.observe_the_eternal_arm();
+            $ctx.has(Item::The_Eternal_Arm)
+        }) && ({
+            $full_obs.observe_the_ideal_kiengir();
+            $ctx.has(Item::The_Ideal_Kiengir)
+        }) && ({
+            $full_obs.observe_the_student();
+            $ctx.has(Item::The_Student)
+        }) && ({
+            $full_obs.observe_under_siege();
+            $ctx.has(Item::Under_Siege)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{39}, Big_Flask{16}]
+/// [Flask{39}, Big_Flask{17}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 39 && $ctx.count(Item::Big_Flask) >= 16
+        $ctx.count(Item::Flask) >= 39 && $ctx.count(Item::Big_Flask) >= 17
     }};
 }
 #[macro_export]
@@ -2816,7 +2842,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 16, vec!["Big_Flask count"])
+                (ct >= 17, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2830,18 +2856,18 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(39));
             $ctx.count(Item::Flask) >= 39
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(16));
-            $ctx.count(Item::Big_Flask) >= 16
+            $full_obs.observe_big_flask(IntegerObservation::Ge(17));
+            $ctx.count(Item::Big_Flask) >= 17
         })
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node{2}, Health_Fragment{16}]
+/// [Health_Node{2}, Health_Fragment{18}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 16
+        $ctx.count(Item::Health_Node) >= 2 && $ctx.count(Item::Health_Fragment) >= 18
     }};
 }
 #[macro_export]
@@ -2861,7 +2887,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Fragment);
                 $edict.insert("Health_Fragment count", format!("{}", ct));
-                (ct >= 16, vec!["Health_Fragment count"])
+                (ct >= 18, vec!["Health_Fragment count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2875,24 +2901,24 @@ macro_rules! hobserve__all_health {
             $full_obs.observe_health_node(IntegerObservation::Ge(2));
             $ctx.count(Item::Health_Node) >= 2
         }) && ({
-            $full_obs.observe_health_fragment(IntegerObservation::Ge(16));
-            $ctx.count(Item::Health_Fragment) >= 16
+            $full_obs.observe_health_fragment(IntegerObservation::Ge(18));
+            $ctx.count(Item::Health_Fragment) >= 18
         })
     }};
 }
 
 /// $all_weapons (  )
-/// [Boomerang, Ice_Axe, Bronze_Axe, Royal_Dagger, Double_Axe, Sickle_Sword, Boomerang_Upgrade]
+/// [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
 #[macro_export]
 macro_rules! helper__all_weapons {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Boomerang)
-            && $ctx.has(Item::Ice_Axe)
-            && $ctx.has(Item::Bronze_Axe)
-            && $ctx.has(Item::Royal_Dagger)
-            && $ctx.has(Item::Double_Axe)
-            && $ctx.has(Item::Sickle_Sword)
             && $ctx.has(Item::Boomerang_Upgrade)
+            && $ctx.has(Item::Bronze_Axe)
+            && $ctx.has(Item::Double_Axe)
+            && $ctx.has(Item::Ice_Axe)
+            && $ctx.has(Item::Royal_Dagger)
+            && $ctx.has(Item::Sickle_Sword)
     }};
 }
 #[macro_export]
@@ -2910,9 +2936,9 @@ macro_rules! hexplain__all_weapons {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Ice_Axe);
-                $edict.insert("Ice_Axe", format!("{}", h));
-                (h, vec!["Ice_Axe"])
+                let h = $ctx.has(Item::Boomerang_Upgrade);
+                $edict.insert("Boomerang_Upgrade", format!("{}", h));
+                (h, vec!["Boomerang_Upgrade"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2928,15 +2954,6 @@ macro_rules! hexplain__all_weapons {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Royal_Dagger);
-                $edict.insert("Royal_Dagger", format!("{}", h));
-                (h, vec!["Royal_Dagger"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
                 let h = $ctx.has(Item::Double_Axe);
                 $edict.insert("Double_Axe", format!("{}", h));
                 (h, vec!["Double_Axe"])
@@ -2946,18 +2963,27 @@ macro_rules! hexplain__all_weapons {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Sickle_Sword);
-                $edict.insert("Sickle_Sword", format!("{}", h));
-                (h, vec!["Sickle_Sword"])
+                let h = $ctx.has(Item::Ice_Axe);
+                $edict.insert("Ice_Axe", format!("{}", h));
+                (h, vec!["Ice_Axe"])
             };
             refs.append(&mut h.1);
             if !h.0 {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Boomerang_Upgrade);
-                $edict.insert("Boomerang_Upgrade", format!("{}", h));
-                (h, vec!["Boomerang_Upgrade"])
+                let h = $ctx.has(Item::Royal_Dagger);
+                $edict.insert("Royal_Dagger", format!("{}", h));
+                (h, vec!["Royal_Dagger"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Sickle_Sword);
+                $edict.insert("Sickle_Sword", format!("{}", h));
+                (h, vec!["Sickle_Sword"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2971,42 +2997,42 @@ macro_rules! hobserve__all_weapons {
             $full_obs.observe_boomerang();
             $ctx.has(Item::Boomerang)
         }) && ({
-            $full_obs.observe_ice_axe();
-            $ctx.has(Item::Ice_Axe)
+            $full_obs.observe_boomerang_upgrade();
+            $ctx.has(Item::Boomerang_Upgrade)
         }) && ({
             $full_obs.observe_bronze_axe();
             $ctx.has(Item::Bronze_Axe)
         }) && ({
-            $full_obs.observe_royal_dagger();
-            $ctx.has(Item::Royal_Dagger)
-        }) && ({
             $full_obs.observe_double_axe();
             $ctx.has(Item::Double_Axe)
         }) && ({
+            $full_obs.observe_ice_axe();
+            $ctx.has(Item::Ice_Axe)
+        }) && ({
+            $full_obs.observe_royal_dagger();
+            $ctx.has(Item::Royal_Dagger)
+        }) && ({
             $full_obs.observe_sickle_sword();
             $ctx.has(Item::Sickle_Sword)
-        }) && ({
-            $full_obs.observe_boomerang_upgrade();
-            $ctx.has(Item::Boomerang_Upgrade)
         })
     }};
 }
 
 /// $other_items (  )
-/// [Compass, Power_Matrix{4}, Nano_Lattice_2, Eye_Ring, Breach_Attractor, Udusan, Carnelian_Ring, Nano_Lattice_1,  Diviners_Gem, Ensis_Bracelet]
+/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Udusan]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
-        $ctx.has(Item::Compass)
-            && $ctx.count(Item::Power_Matrix) >= 4
-            && $ctx.has(Item::Nano_Lattice_2)
-            && $ctx.has(Item::Eye_Ring)
-            && $ctx.has(Item::Breach_Attractor)
-            && $ctx.has(Item::Udusan)
+        $ctx.has(Item::Breach_Attractor)
             && $ctx.has(Item::Carnelian_Ring)
-            && $ctx.has(Item::Nano_Lattice_1)
+            && $ctx.has(Item::Compass)
             && $ctx.has(Item::Diviners_Gem)
             && $ctx.has(Item::Ensis_Bracelet)
+            && $ctx.has(Item::Eye_Ring)
+            && $ctx.has(Item::Nano_Lattice_1)
+            && $ctx.has(Item::Nano_Lattice_2)
+            && $ctx.count(Item::Power_Matrix) >= 4
+            && $ctx.has(Item::Udusan)
     }};
 }
 #[macro_export]
@@ -3015,54 +3041,9 @@ macro_rules! hexplain__other_items {
         {
             let mut refs = Vec::new();
             let mut h = {
-                let h = $ctx.has(Item::Compass);
-                $edict.insert("Compass", format!("{}", h));
-                (h, vec!["Compass"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let ct = $ctx.count(Item::Power_Matrix);
-                $edict.insert("Power_Matrix count", format!("{}", ct));
-                (ct >= 4, vec!["Power_Matrix count"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Nano_Lattice_2);
-                $edict.insert("Nano_Lattice_2", format!("{}", h));
-                (h, vec!["Nano_Lattice_2"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Eye_Ring);
-                $edict.insert("Eye_Ring", format!("{}", h));
-                (h, vec!["Eye_Ring"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
                 let h = $ctx.has(Item::Breach_Attractor);
                 $edict.insert("Breach_Attractor", format!("{}", h));
                 (h, vec!["Breach_Attractor"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Udusan);
-                $edict.insert("Udusan", format!("{}", h));
-                (h, vec!["Udusan"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3078,9 +3059,9 @@ macro_rules! hexplain__other_items {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Nano_Lattice_1);
-                $edict.insert("Nano_Lattice_1", format!("{}", h));
-                (h, vec!["Nano_Lattice_1"])
+                let h = $ctx.has(Item::Compass);
+                $edict.insert("Compass", format!("{}", h));
+                (h, vec!["Compass"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3101,6 +3082,51 @@ macro_rules! hexplain__other_items {
                 (h, vec!["Ensis_Bracelet"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Eye_Ring);
+                $edict.insert("Eye_Ring", format!("{}", h));
+                (h, vec!["Eye_Ring"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nano_Lattice_1);
+                $edict.insert("Nano_Lattice_1", format!("{}", h));
+                (h, vec!["Nano_Lattice_1"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nano_Lattice_2);
+                $edict.insert("Nano_Lattice_2", format!("{}", h));
+                (h, vec!["Nano_Lattice_2"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let ct = $ctx.count(Item::Power_Matrix);
+                $edict.insert("Power_Matrix count", format!("{}", ct));
+                (ct >= 4, vec!["Power_Matrix count"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Udusan);
+                $edict.insert("Udusan", format!("{}", h));
+                (h, vec!["Udusan"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -3109,61 +3135,61 @@ macro_rules! hexplain__other_items {
 macro_rules! hobserve__other_items {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_compass();
-            $ctx.has(Item::Compass)
-        }) && ({
-            $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
-            $ctx.count(Item::Power_Matrix) >= 4
-        }) && ({
-            $full_obs.observe_nano_lattice_2();
-            $ctx.has(Item::Nano_Lattice_2)
-        }) && ({
-            $full_obs.observe_eye_ring();
-            $ctx.has(Item::Eye_Ring)
-        }) && ({
             $full_obs.observe_breach_attractor();
             $ctx.has(Item::Breach_Attractor)
-        }) && ({
-            $full_obs.observe_udusan();
-            $ctx.has(Item::Udusan)
         }) && ({
             $full_obs.observe_carnelian_ring();
             $ctx.has(Item::Carnelian_Ring)
         }) && ({
-            $full_obs.observe_nano_lattice_1();
-            $ctx.has(Item::Nano_Lattice_1)
+            $full_obs.observe_compass();
+            $ctx.has(Item::Compass)
         }) && ({
             $full_obs.observe_diviners_gem();
             $ctx.has(Item::Diviners_Gem)
         }) && ({
             $full_obs.observe_ensis_bracelet();
             $ctx.has(Item::Ensis_Bracelet)
+        }) && ({
+            $full_obs.observe_eye_ring();
+            $ctx.has(Item::Eye_Ring)
+        }) && ({
+            $full_obs.observe_nano_lattice_1();
+            $ctx.has(Item::Nano_Lattice_1)
+        }) && ({
+            $full_obs.observe_nano_lattice_2();
+            $ctx.has(Item::Nano_Lattice_2)
+        }) && ({
+            $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
+            $ctx.count(Item::Power_Matrix) >= 4
+        }) && ({
+            $full_obs.observe_udusan();
+            $ctx.has(Item::Udusan)
         })
     }};
 }
 
 /// $all_urns (  )
-/// [Amashilama, Ledge_Grab, Melee_Charge, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook, Breach_Sight,  Drone_Hover, Fast_Travel, Anuman, Nanite_Mist, Exit_Breach, Drone_Melee_Charge, Slingshot_Charge, Slingshot_Weapon]
+/// [Amashilama, Anuman, Breach_Sight, Drone_Hover, Drone_Melee_Charge, Exit_Breach, Fast_Travel, Infect, Ledge_Grab,  Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, Wall_Climb]
 #[macro_export]
 macro_rules! helper__all_urns {
     ($ctx:expr, $world:expr) => {{
         $ctx.has(Item::Amashilama)
-            && $ctx.has(Item::Ledge_Grab)
-            && $ctx.has(Item::Melee_Charge)
-            && $ctx.has(Item::Infect)
-            && $ctx.has(Item::Remote_Drone)
-            && $ctx.has(Item::Shockwave)
-            && $ctx.has(Item::Wall_Climb)
-            && $ctx.has(Item::Slingshot_Hook)
+            && $ctx.has(Item::Anuman)
             && $ctx.has(Item::Breach_Sight)
             && $ctx.has(Item::Drone_Hover)
-            && $ctx.has(Item::Fast_Travel)
-            && $ctx.has(Item::Anuman)
-            && $ctx.has(Item::Nanite_Mist)
-            && $ctx.has(Item::Exit_Breach)
             && $ctx.has(Item::Drone_Melee_Charge)
+            && $ctx.has(Item::Exit_Breach)
+            && $ctx.has(Item::Fast_Travel)
+            && $ctx.has(Item::Infect)
+            && $ctx.has(Item::Ledge_Grab)
+            && $ctx.has(Item::Melee_Charge)
+            && $ctx.has(Item::Nanite_Mist)
+            && $ctx.has(Item::Remote_Drone)
+            && $ctx.has(Item::Shockwave)
             && $ctx.has(Item::Slingshot_Charge)
+            && $ctx.has(Item::Slingshot_Hook)
             && $ctx.has(Item::Slingshot_Weapon)
+            && $ctx.has(Item::Wall_Climb)
     }};
 }
 #[macro_export]
@@ -3181,63 +3207,9 @@ macro_rules! hexplain__all_urns {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Ledge_Grab);
-                $edict.insert("Ledge_Grab", format!("{}", h));
-                (h, vec!["Ledge_Grab"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Melee_Charge);
-                $edict.insert("Melee_Charge", format!("{}", h));
-                (h, vec!["Melee_Charge"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Infect);
-                $edict.insert("Infect", format!("{}", h));
-                (h, vec!["Infect"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Remote_Drone);
-                $edict.insert("Remote_Drone", format!("{}", h));
-                (h, vec!["Remote_Drone"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Shockwave);
-                $edict.insert("Shockwave", format!("{}", h));
-                (h, vec!["Shockwave"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Wall_Climb);
-                $edict.insert("Wall_Climb", format!("{}", h));
-                (h, vec!["Wall_Climb"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Slingshot_Hook);
-                $edict.insert("Slingshot_Hook", format!("{}", h));
-                (h, vec!["Slingshot_Hook"])
+                let h = $ctx.has(Item::Anuman);
+                $edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3262,27 +3234,9 @@ macro_rules! hexplain__all_urns {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Fast_Travel);
-                $edict.insert("Fast_Travel", format!("{}", h));
-                (h, vec!["Fast_Travel"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Anuman);
-                $edict.insert("Anuman", format!("{}", h));
-                (h, vec!["Anuman"])
-            };
-            refs.append(&mut h.1);
-            if !h.0 {
-                return (false, refs);
-            };
-            let mut h = {
-                let h = $ctx.has(Item::Nanite_Mist);
-                $edict.insert("Nanite_Mist", format!("{}", h));
-                (h, vec!["Nanite_Mist"])
+                let h = $ctx.has(Item::Drone_Melee_Charge);
+                $edict.insert("Drone_Melee_Charge", format!("{}", h));
+                (h, vec!["Drone_Melee_Charge"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3298,9 +3252,63 @@ macro_rules! hexplain__all_urns {
                 return (false, refs);
             };
             let mut h = {
-                let h = $ctx.has(Item::Drone_Melee_Charge);
-                $edict.insert("Drone_Melee_Charge", format!("{}", h));
-                (h, vec!["Drone_Melee_Charge"])
+                let h = $ctx.has(Item::Fast_Travel);
+                $edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Infect);
+                $edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Ledge_Grab);
+                $edict.insert("Ledge_Grab", format!("{}", h));
+                (h, vec!["Ledge_Grab"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Melee_Charge);
+                $edict.insert("Melee_Charge", format!("{}", h));
+                (h, vec!["Melee_Charge"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Nanite_Mist);
+                $edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Remote_Drone);
+                $edict.insert("Remote_Drone", format!("{}", h));
+                (h, vec!["Remote_Drone"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Shockwave);
+                $edict.insert("Shockwave", format!("{}", h));
+                (h, vec!["Shockwave"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -3316,9 +3324,27 @@ macro_rules! hexplain__all_urns {
                 return (false, refs);
             };
             let mut h = {
+                let h = $ctx.has(Item::Slingshot_Hook);
+                $edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
                 let h = $ctx.has(Item::Slingshot_Weapon);
                 $edict.insert("Slingshot_Weapon", format!("{}", h));
                 (h, vec!["Slingshot_Weapon"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Wall_Climb);
+                $edict.insert("Wall_Climb", format!("{}", h));
+                (h, vec!["Wall_Climb"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -3332,26 +3358,8 @@ macro_rules! hobserve__all_urns {
             $full_obs.observe_amashilama();
             $ctx.has(Item::Amashilama)
         }) && ({
-            $full_obs.observe_ledge_grab();
-            $ctx.has(Item::Ledge_Grab)
-        }) && ({
-            $full_obs.observe_melee_charge();
-            $ctx.has(Item::Melee_Charge)
-        }) && ({
-            $full_obs.observe_infect();
-            $ctx.has(Item::Infect)
-        }) && ({
-            $full_obs.observe_remote_drone();
-            $ctx.has(Item::Remote_Drone)
-        }) && ({
-            $full_obs.observe_shockwave();
-            $ctx.has(Item::Shockwave)
-        }) && ({
-            $full_obs.observe_wall_climb();
-            $ctx.has(Item::Wall_Climb)
-        }) && ({
-            $full_obs.observe_slingshot_hook();
-            $ctx.has(Item::Slingshot_Hook)
+            $full_obs.observe_anuman();
+            $ctx.has(Item::Anuman)
         }) && ({
             $full_obs.observe_breach_sight();
             $ctx.has(Item::Breach_Sight)
@@ -3359,26 +3367,44 @@ macro_rules! hobserve__all_urns {
             $full_obs.observe_drone_hover();
             $ctx.has(Item::Drone_Hover)
         }) && ({
-            $full_obs.observe_fast_travel();
-            $ctx.has(Item::Fast_Travel)
-        }) && ({
-            $full_obs.observe_anuman();
-            $ctx.has(Item::Anuman)
-        }) && ({
-            $full_obs.observe_nanite_mist();
-            $ctx.has(Item::Nanite_Mist)
+            $full_obs.observe_drone_melee_charge();
+            $ctx.has(Item::Drone_Melee_Charge)
         }) && ({
             $full_obs.observe_exit_breach();
             $ctx.has(Item::Exit_Breach)
         }) && ({
-            $full_obs.observe_drone_melee_charge();
-            $ctx.has(Item::Drone_Melee_Charge)
+            $full_obs.observe_fast_travel();
+            $ctx.has(Item::Fast_Travel)
+        }) && ({
+            $full_obs.observe_infect();
+            $ctx.has(Item::Infect)
+        }) && ({
+            $full_obs.observe_ledge_grab();
+            $ctx.has(Item::Ledge_Grab)
+        }) && ({
+            $full_obs.observe_melee_charge();
+            $ctx.has(Item::Melee_Charge)
+        }) && ({
+            $full_obs.observe_nanite_mist();
+            $ctx.has(Item::Nanite_Mist)
+        }) && ({
+            $full_obs.observe_remote_drone();
+            $ctx.has(Item::Remote_Drone)
+        }) && ({
+            $full_obs.observe_shockwave();
+            $ctx.has(Item::Shockwave)
         }) && ({
             $full_obs.observe_slingshot_charge();
             $ctx.has(Item::Slingshot_Charge)
         }) && ({
+            $full_obs.observe_slingshot_hook();
+            $ctx.has(Item::Slingshot_Hook)
+        }) && ({
             $full_obs.observe_slingshot_weapon();
             $ctx.has(Item::Slingshot_Weapon)
+        }) && ({
+            $full_obs.observe_wall_climb();
+            $ctx.has(Item::Wall_Climb)
         })
     }};
 }

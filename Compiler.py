@@ -373,6 +373,9 @@ class GameLogic(object):
                             loc['region'] = rname
                             loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
                             loc['id'] = construct_id(rname, aname, sname, loc['name'])
+                            if loc['id'] in self.id_lookup:
+                                self._errors.append(f'Duplicate id: Location {loc["fullname"]} conflicts with {self.id_lookup[loc["id"]]["fullname"]}')
+
                             self.id_lookup[loc['id']] = loc
                             spot['loc_ids'].append(loc['id'])
                             area['loc_ids'].append(loc['id'])
@@ -450,9 +453,12 @@ class GameLogic(object):
                             act['area'] = aname
                             act['region'] = rname
                             act['id'] = construct_id(rname, aname, sname, act['name'])
+                            act['fullname'] = f'{spot["fullname"]} > {act["name"]}'
+                            if act['id'] in self.id_lookup:
+                                self._errors.append(f'Duplicate id: Action {act["fullname"]} conflicts with {self.id_lookup[act["id"]]["fullname"]}')
+
                             self.id_lookup[act['id']] = act
                             spot['action_ids'].append(act['id'])
-                            act['fullname'] = f'{spot["fullname"]} > {act["name"]}'
                             if 'req' in act:
                                 act['pr'] = _parseExpression(
                                         act['req'], act['name'] + ' req', spot['fullname'], ': ')

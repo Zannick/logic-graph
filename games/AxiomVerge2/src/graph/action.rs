@@ -196,6 +196,8 @@ impl world::Accessible for Action {
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world),
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world),
             ActionId::Irikar__Midwest__Save_Point__Save => true,
+            ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => true,
+            ActionId::Irikar_Breach__Corridor__Save_Point__Save => true,
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => true,
@@ -1726,6 +1728,8 @@ impl world::Action for Action {
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
             ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => rules::action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world),
+            ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Irikar_Breach__Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::action_invoke_deploy_drone(ctx, world),
@@ -2305,6 +2309,12 @@ impl world::Action for Action {
             ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => {
                 rules::observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world, full_obs);
             }
+            ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Irikar_Breach__Corridor__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
@@ -2369,7 +2379,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 177] = [
+static ACT_DEFS: [Action; 179] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -3156,6 +3166,16 @@ static ACT_DEFS: [Action; 177] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Irikar_Breach__Basement_Save__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar_Breach__Corridor__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform,
         time: 8000,
         price: Currency::Free,
@@ -3400,6 +3420,8 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => SpotId::Interior__Facility_Interior__Freight_Elevator,
         ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => SpotId::Interior__Emergence_Hangar__Freight_Elevator,
+        ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => SpotId::Irikar_Breach__Basement_Save__Save_Point,
+        ActionId::Irikar_Breach__Corridor__Save_Point__Save => SpotId::Irikar_Breach__Corridor__Save_Point,
         ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Hub__West_Rim,
         ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Hub__East_Rim,
         ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
