@@ -3632,15 +3632,15 @@ pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &World) {
     // $clear_breach_save
     helper__clear_breach_save!(ctx, world);
 }
-pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
+pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
     ctx: &mut Context,
     world: &World,
 ) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Just The Wall`);
     ctx.collect(Item::Irikar_Royal_Storage_Wall, world);
     ctx.collect(Item::Flask, world);
     ctx.visit(LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item);
-    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall);
+    ctx.visit(LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall);
 }
 pub fn action_invoke_deploy_drone(ctx: &mut Context, world: &World) {
     // $deploy_drone
@@ -24506,12 +24506,12 @@ pub fn observe_action_invoke_clear_breach_save(
     hobserve__clear_breach_save!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(
+pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
-    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
+    // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Just The Wall`);
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     rules::observe_action_flasks_incr_1(ctx, world, full_obs);

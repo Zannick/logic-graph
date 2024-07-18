@@ -417,7 +417,7 @@ areas:
             $collect(Irikar_Royal_Storage_Wall);
             $collect(Flask);
             $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-            $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
+            $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Just The Wall`);
           price: 100
           tags: [shockwave, event]
     - name: Royal Storage in Wall
@@ -725,7 +725,7 @@ areas:
             $collect(Irikar_Royal_Storage_Wall);
             $collect(Flask);
             $visit(`Irikar > Hub > Royal Storage in Wall > Item`);
-            $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Wall`);
+            $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Just The Wall`);
           price: 100
           tags: [shockwave, event]
 

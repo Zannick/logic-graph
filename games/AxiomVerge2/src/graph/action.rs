@@ -1736,8 +1736,8 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
-            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world),
+            ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
+            ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::action_irikar__midwest__left_platform_start__hack_and_ride__do(ctx, world),
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world),
@@ -2334,10 +2334,10 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
-                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world, full_obs);
+                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world, full_obs);
             }
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
-                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_wall(ctx, world, full_obs);
+                rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world, full_obs);
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
