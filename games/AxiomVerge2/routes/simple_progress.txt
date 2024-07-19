@@ -182,3 +182,9 @@
 ! Do Become Indra
 * Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Wall as Indra
 * Collect Nanite_Mist from Annuna > Siuna Storage > Wall Left > Distant Urn Fast Travel ==> Menu > Kiengir Map > Nanite Mist
+
+  Move... to Annuna > Lamassu > Portal Stand
+! Do Become Drone
+  Portalwarp to Glacier Breach > South Save > Save Point
+* Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
+* Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn

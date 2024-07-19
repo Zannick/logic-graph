@@ -1,0 +1,15 @@
+name: Uhrum Breach
+graph_offset: [0, 30]
+data:
+  realm: breach
+
+areas:
+- name: Rock and Gate  # MARK: Rock and Gate
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 26.75]
+    - name: Button
+      coord: [19.3, 26.8]
+    - name: Gate West
+      coord: [19.45, 26.8]

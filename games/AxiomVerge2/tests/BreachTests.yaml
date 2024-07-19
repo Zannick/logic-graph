@@ -80,3 +80,18 @@ tests:
       - Slingshot_Hook
       - Drone_Hover
     can_reach: Glacier Breach > Save and Exit > Save Point
+
+  - name: Zal Tu
+    start: Glacier Breach > West Save > Save Point
+    with:
+      - Nanite_Mist
+      - Slingshot_Hook
+      - Drone_Hover
+      - Fast_Travel
+    route: |
+      * Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
+        Move... to Ebih Breach > Bubble Bobble > East 11
+        Move... to Ebih Breach > Spider Guards > East
+        Move... to Ebih Breach > Double Gate > North
+        Move... to Ebih Breach > The Vault > East
+      * Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn

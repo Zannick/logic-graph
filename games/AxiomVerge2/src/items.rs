@@ -140,6 +140,7 @@ pub enum Item {
     Infection_Speed,
     Infection_Speed_2,
     Irikar_Breach_Buried_Treasure_Pillar,
+    Irikar_Breach_Uhrum_Connector_Wall,
     Irikar_Gudam,
     Irikar_Royal_Storage_Wall,
     Journal_2049_10_29,
@@ -349,6 +350,9 @@ impl fmt::Display for Item {
             Item::Irikar_Breach_Buried_Treasure_Pillar => {
                 write!(f, "{}", "Irikar_Breach_Buried_Treasure_Pillar")
             }
+            Item::Irikar_Breach_Uhrum_Connector_Wall => {
+                write!(f, "{}", "Irikar_Breach_Uhrum_Connector_Wall")
+            }
             Item::Irikar_Gudam => write!(f, "{}", "Irikar_Gudam"),
             Item::Irikar_Royal_Storage_Wall => write!(f, "{}", "Irikar_Royal_Storage_Wall"),
             Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
@@ -556,6 +560,7 @@ impl std::str::FromStr for Item {
             "Irikar_Breach_Buried_Treasure_Pillar" => {
                 Ok(Item::Irikar_Breach_Buried_Treasure_Pillar)
             }
+            "Irikar_Breach_Uhrum_Connector_Wall" => Ok(Item::Irikar_Breach_Uhrum_Connector_Wall),
             "Irikar_Gudam" => Ok(Item::Irikar_Gudam),
             "Irikar_Royal_Storage_Wall" => Ok(Item::Irikar_Royal_Storage_Wall),
             "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),

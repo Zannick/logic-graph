@@ -1030,6 +1030,207 @@ areas:
 
 - name: Uhrum Connector  # MARK: Uhrum Connector
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [17, 26, 18, 27]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > IB Uhrum Connector Flask
   spots:
     - name: West
       coord: [15.1, 26.3]
+      exits:
+        - to: Exit Corridor > East
+          tags: [xdoor]
+        - to: V Rock West
+          req: Drone_Hover
+          movement: base
+    - name: V Rock West
+      coord: [15.75, 26.3]
+      local:
+        - to: V Rock East
+      exits:
+        - to: West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+        - to: West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Exit Corridor > Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: V Rock East
+      coord: [15.9, 26.3]
+      local:
+        - to: V Rock West
+        - to: Rock West Ledge
+      exits:
+        - to: Rock West
+          req: Drone_Hover
+          movement: base
+        - to: Rock West Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Rock West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Rock West Ledge
+      coord: [16.4, 26.4]
+      local:
+        - to: Rock West
+          jumps: 1
+      locations:
+        - name: Charge Through Wall
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock East Ledge
+          movement: fling
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock East Ledge
+          movement: fast_hover
+          tags: [event]
+        - name: Spin Through Wall and Hover
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+          to: Sand Swarm
+          movement: fast_hover
+          tags: [event]
+        - name: Charge Through Wall and Hover
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Charge and Drone_Hover
+          to: Sand Swarm
+          movement: fast_hover  # technically fling for an initial part, plus the charge time
+          tags: [event]
+      exits:
+        - to: V Rock East
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Rock West
+      coord: [16.5, 26.3]
+      local:
+        - to: Rock West Ledge
+      locations:
+        - name: Mist Through Rock
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Nanite_Mist
+          to: Rock East
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Rock
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: $mist2
+          to: Rock East
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: V Rock East
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Sand Swarm
+          req: Irikar_Breach_Uhrum_Connector_Wall and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Rock East
+      coord: [16.7, 26.3]
+      local:
+        - to: Rock East Ledge
+      locations:
+        - name: Mist Through Rock
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Nanite_Mist
+          to: Rock West
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Rock
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: $mist2
+          to: Rock West
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: V Rock West
+          req: Irikar_Breach_Uhrum_Connector_Wall and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Rock East Ledge
+      coord: [16.8, 26.5]
+      locations:
+        - name: Charge Through Wall
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock West Ledge
+          movement: fling
+          penalty_tags: [charge_time]
+        - name: Spin Through Wall
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock West Ledge
+          movement: fast_hover
+          tags: [event]
+        - name: Spin Through Wall and Hover
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+          to: V Rock West
+          movement: fast_hover
+          tags: [event]
+        - name: Charge Through Wall and Hover
+          canon: Irikar_Breach_Uhrum_Connector_Wall
+          item: Irikar_Breach_Uhrum_Connector_Wall
+          req: Slingshot_Hook and Slingshot_Charge and Drone_Hover
+          to: V Rock West
+          movement: fast_hover  # technically fling for an initial part, plus the charge time
+          tags: [event]
+    - name: Sand Swarm
+      coord: [17.95, 26.8]
+      local:
+        - to: Rock East Ledge
+          jumps: 3
+        - to: Sand East
+      locations:
+        - name: Flask
+          canon: Irikar_Breach_Uhrum_Connector_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Irikar_Breach_Uhrum_Connector_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Irikar_Breach_Uhrum_Connector_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Sand East
+      coord: [18.5, 26.8]
+      local:
+        - to: Sand Swarm
+        - to: East
+          jumps: 1
+      exits:
+        - to: Uhrum Breach > Rock and Gate > Button
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: East
+      coord: [18.9, 26.75]
+      local:
+        - to: Sand East
+      exits:
+        - to: Uhrum Breach > Rock and Gate > West
+          tags: [xdoor]

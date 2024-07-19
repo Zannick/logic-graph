@@ -2468,6 +2468,15 @@ subgraph Irikar_Breach
     end
     subgraph Irikar_Breach__Uhrum_Connector[Uhrum Connector]
         Irikar_Breach__Uhrum_Connector__West(West);
+        Irikar_Breach__Uhrum_Connector__V_Rock_West(V Rock West);
+        Irikar_Breach__Uhrum_Connector__V_Rock_East(V Rock East);
+        Irikar_Breach__Uhrum_Connector__Rock_West_Ledge(Rock West Ledge);
+        Irikar_Breach__Uhrum_Connector__Rock_West(Rock West);
+        Irikar_Breach__Uhrum_Connector__Rock_East(Rock East);
+        Irikar_Breach__Uhrum_Connector__Rock_East_Ledge(Rock East Ledge);
+        Irikar_Breach__Uhrum_Connector__Sand_Swarm(Sand Swarm);
+        Irikar_Breach__Uhrum_Connector__Sand_East(Sand East);
+        Irikar_Breach__Uhrum_Connector__East(East);
     end
 end
 subgraph Irikar
@@ -2954,6 +2963,7 @@ subgraph Menu
         Menu__Breach_Map__IB_Buried_Treasure(IB Buried Treasure);
         Menu__Breach_Map__IB_Rocky_Dunes_Health(IB Rocky Dunes Health);
         Menu__Breach_Map__IB_Beach_Flask(IB Beach Flask);
+        Menu__Breach_Map__IB_Uhrum_Connector_Flask(IB Uhrum Connector Flask);
         Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
@@ -2964,6 +2974,13 @@ subgraph Menu
         Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
         Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
         Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
+    end
+end
+subgraph Uhrum_Breach
+    subgraph Uhrum_Breach__Rock_and_Gate[Rock and Gate]
+        Uhrum_Breach__Rock_and_Gate__West(West);
+        Uhrum_Breach__Rock_and_Gate__Button(Button);
+        Uhrum_Breach__Rock_and_Gate__Gate_West(Gate West);
     end
 end
 subgraph Uhrum
@@ -4734,7 +4751,7 @@ Irikar_Breach__Buried_Treasure__Pillar_Right --> Irikar_Breach__Buried_Treasure_
 Irikar_Breach__Buried_Treasure__West <--> Irikar_Breach__Rocky_Dunes__East_28
 Irikar_Breach__Corridor__Center --> Irikar_Breach__Corridor__Passage_West
 Irikar_Breach__Corridor__East --> Irikar_Breach__Gauntlet__West_26
-Irikar_Breach__Exit_Corridor__East --> Irikar_Breach__Uhrum_Connector__West
+Irikar_Breach__Exit_Corridor__East <--> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South
 Irikar_Breach__Exit_Corridor__North_13 --> Irikar_Breach__Exit_Corridor__Pillar
@@ -4774,6 +4791,14 @@ Irikar_Breach__Rocky_Dunes__Upper_East_Passage --> Irikar_Breach__Rocky_Dunes__E
 Irikar_Breach__Rocky_Dunes__West_Ledge --> Irikar_Breach__Rocky_Dunes__West_Rock_West
 Irikar_Breach__Rocky_Dunes__West_Rock_East --> Irikar_Breach__Rocky_Dunes__Center_Rock_West
 Irikar_Breach__Rocky_Dunes__West_Sand --> Irikar_Breach__Rocky_Dunes__West_Ledge
+Irikar_Breach__Uhrum_Connector__East --> Uhrum_Breach__Rock_and_Gate__West
+Irikar_Breach__Uhrum_Connector__Rock_East --> Irikar_Breach__Uhrum_Connector__V_Rock_West
+Irikar_Breach__Uhrum_Connector__Rock_West --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
+Irikar_Breach__Uhrum_Connector__Rock_West <--> Irikar_Breach__Uhrum_Connector__V_Rock_East
+Irikar_Breach__Uhrum_Connector__Rock_West_Ledge <--> Irikar_Breach__Uhrum_Connector__V_Rock_East
+Irikar_Breach__Uhrum_Connector__Sand_East --> Uhrum_Breach__Rock_and_Gate__Button
+Irikar_Breach__Uhrum_Connector__V_Rock_West --> Irikar_Breach__Exit_Corridor__Portal_Stand
+Irikar_Breach__Uhrum_Connector__V_Rock_West <--> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__Corner
 Irikar_Breach__Worm_Rave__South --> Irikar_Breach__Worm_Rave__East
 Irikar__Abandoned_Room__West <--> Irikar__Basement_Portal__East_27

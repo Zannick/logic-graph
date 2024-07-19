@@ -1144,6 +1144,8 @@ areas:
       coord: [9, 27]
     - name: IB Beach Flask
       coord: [4, 26]
+    - name: IB Uhrum Connector Flask
+      coord: [17, 27]
 
     - name: LAB East Health
       coord: [37, 15]

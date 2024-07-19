@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2685] = [
+static SPOT_DEFS: [SpotDef; 2698] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -12044,9 +12044,63 @@ static SPOT_DEFS: [SpotDef; 2685] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__East__ex__Uhrum_Breach__Rock_and_Gate__West_1, ExitId::Irikar_Breach__Uhrum_Connector__East__ex__Uhrum_Breach__Rock_and_Gate__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Rock_East,
+        loc_range: Some((LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock, LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Upgraded_Mist_Through_Rock)),
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__Rock_East__ex__V_Rock_West_1, ExitId::Irikar_Breach__Uhrum_Connector__Rock_East__ex__V_Rock_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge,
+        loc_range: Some((LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall, LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Rock_West,
+        loc_range: Some((LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock, LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Upgraded_Mist_Through_Rock)),
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__Rock_West__ex__Sand_Swarm_1, ExitId::Irikar_Breach__Uhrum_Connector__Rock_West__ex__V_Rock_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge,
+        loc_range: Some((LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall, LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover)),
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1, ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Sand_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__Sand_East__ex__Uhrum_Breach__Rock_and_Gate__Button_1, ExitId::Irikar_Breach__Uhrum_Connector__Sand_East__ex__Uhrum_Breach__Rock_and_Gate__Button_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__Sand_Swarm,
+        loc_range: Some((LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask, LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1, ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1, ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Irikar_Breach__Uhrum_Connector__West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Irikar_Breach__Uhrum_Connector__West__ex__Exit_Corridor__East_1, ExitId::Irikar_Breach__Uhrum_Connector__West__ex__V_Rock_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -13442,6 +13496,12 @@ static SPOT_DEFS: [SpotDef; 2685] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__IB_Uhrum_Connector_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__IB_West,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Breach_Map__IB_West__ex__Irikar_Breach__Corridor__Save_Point_1, ExitId::Menu__Breach_Map__IB_West__ex__Irikar_Breach__Corridor__Save_Point_1)),
@@ -14799,6 +14859,24 @@ static SPOT_DEFS: [SpotDef; 2685] = [
     },
     SpotDef {
         id: SpotId::Menu__Warp_Only__Kiengir,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Rock_and_Gate__Button,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Rock_and_Gate__Gate_West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Rock_and_Gate__West,
         loc_range: None,
         exit_range: None,
         action_range: None,

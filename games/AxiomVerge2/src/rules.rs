@@ -2549,6 +2549,14 @@ pub fn access_irikar_breach_buried_treasure_pillar(ctx: &Context, world: &World)
     // Irikar_Breach_Buried_Treasure_Pillar
     ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
 }
+pub fn access_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Irikar_Breach_Uhrum_Connector_Wall and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Irikar_Breach_Uhrum_Connector_Wall) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
 pub fn access_irikar_gudam(ctx: &Context, world: &World) -> bool {
     // Irikar_Gudam
     ctx.has(Item::Irikar_Gudam)
@@ -3031,6 +3039,18 @@ pub fn access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasu
 pub fn access_slingshot_hook_and_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Ebih_Breach_Lake_Gate
     (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Ebih_Breach_Lake_Gate))
+}
+pub fn access_slingshot_hook_and_slingshot_charge(ctx: &Context, world: &World) -> bool {
+    // Slingshot_Hook and Slingshot_Charge
+    (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Slingshot_Charge))
+}
+pub fn access_slingshot_hook_and_slingshot_charge_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and Slingshot_Charge and Drone_Hover
+    ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Slingshot_Charge))
+        && ctx.has(Item::Drone_Hover))
 }
 pub fn access_slingshot_hook_and_slingshot_weapon(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Slingshot_Weapon
@@ -14053,6 +14073,44 @@ pub fn explain_irikar_breach_buried_treasure_pillar(
         (h, vec!["Irikar_Breach_Buried_Treasure_Pillar"])
     }
 }
+pub fn explain_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Irikar_Breach_Uhrum_Connector_Wall and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Irikar_Breach_Uhrum_Connector_Wall);
+                edict.insert("Irikar_Breach_Uhrum_Connector_Wall", format!("{}", h));
+                (h, vec!["Irikar_Breach_Uhrum_Connector_Wall"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_irikar_gudam(
     ctx: &Context,
     world: &World,
@@ -16217,6 +16275,69 @@ pub fn explain_slingshot_hook_and_ebih_breach_lake_gate(
                 let h = ctx.has(Item::Ebih_Breach_Lake_Gate);
                 edict.insert("Ebih_Breach_Lake_Gate", format!("{}", h));
                 (h, vec!["Ebih_Breach_Lake_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_slingshot_charge(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Slingshot_Charge
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Charge);
+                edict.insert("Slingshot_Charge", format!("{}", h));
+                (h, vec!["Slingshot_Charge"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_slingshot_charge_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Slingshot_Charge and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Charge);
+                    edict.insert("Slingshot_Charge", format!("{}", h));
+                    (h, vec!["Slingshot_Charge"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -22122,6 +22243,23 @@ pub fn observe_access_irikar_breach_buried_treasure_pillar(
         ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
     }
 }
+pub fn observe_access_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Irikar_Breach_Uhrum_Connector_Wall and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_irikar_breach_uhrum_connector_wall();
+        ctx.has(Item::Irikar_Breach_Uhrum_Connector_Wall)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
 pub fn observe_access_irikar_gudam(
     ctx: &Context,
     world: &World,
@@ -23463,6 +23601,37 @@ pub fn observe_access_slingshot_hook_and_ebih_breach_lake_gate(
     } && ({
         full_obs.observe_ebih_breach_lake_gate();
         ctx.has(Item::Ebih_Breach_Lake_Gate)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_slingshot_charge(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Slingshot_Charge
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_slingshot_charge();
+        ctx.has(Item::Slingshot_Charge)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_slingshot_charge_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Slingshot_Charge and Drone_Hover
+    (({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_slingshot_charge();
+        ctx.has(Item::Slingshot_Charge)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
     }))
 }
 pub fn observe_access_slingshot_hook_and_slingshot_weapon(
