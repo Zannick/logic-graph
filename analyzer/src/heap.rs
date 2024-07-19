@@ -355,51 +355,63 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
+        queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
     ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
-            let start = Instant::now();
-            let num_buckets = queue.approx_num_buckets();
-            // Get a decent amount to refill
-            let num_to_restore = std::cmp::max(
-                min_to_restore,
-                std::cmp::min(
-                    max_to_restore,
-                    (self.capacity - queue.len()) / (num_buckets + 1),
-                ),
-            );
-            let len = queue.len();
-            let score_limit =
-                if let Some((lower, upper)) = queue.peek_segment_priority_range(progress) {
-                    (lower.0 + upper.0) / 2
-                } else {
-                    self.max_time()
-                };
-            if score_limit < self.db.db_best(progress) {
-                self.retrieving.store(false, Ordering::Release);
-                return Ok(queue);
-            }
-            if self.capacity - len < num_to_restore {
-                // evict at least twice that much.
-                let evicted = Self::evict_internal(
-                    &mut queue,
-                    std::cmp::max(self.min_evictions, 2 * num_to_restore),
-                );
-                log::trace!("reshuffle:evict took {:?}", start.elapsed());
-                drop(queue);
-                self.evict_to_db(evicted, "reshuffle")?;
-            } else {
-                drop(queue);
-            }
-            let res = self.retrieve(progress, num_to_restore, score_limit)?;
-            self.retrievals.fetch_add(1, Ordering::Release);
-            queue = self.queue.lock().unwrap();
-            if !res.is_empty() {
-                queue.extend(res);
-                log::debug!("Reshuffle took total {:?}", start.elapsed());
-                assert!(!queue.is_empty(), "Queue should have data after retrieve");
-            }
+            let r = self.maybe_reshuffle_locked(progress, min_to_restore, max_to_restore, queue);
             self.retrieving.store(false, Ordering::Release);
+            r
+        } else {
+            Ok(queue)
+        }
+    }
+
+    fn maybe_reshuffle_locked<'a>(
+        &'a self,
+        progress: usize,
+        min_to_restore: usize,
+        max_to_restore: usize,
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
+        let start = Instant::now();
+        let num_buckets = queue.approx_num_buckets();
+        // Get a decent amount to refill
+        let num_to_restore = std::cmp::max(
+            min_to_restore,
+            std::cmp::min(
+                max_to_restore,
+                (self.capacity - queue.len()) / (num_buckets + 1),
+            ),
+        );
+        let len = queue.len();
+        let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress)
+        {
+            (lower.0 + upper.0) / 2
+        } else {
+            self.max_time()
+        };
+        if score_limit < self.db.db_best(progress) {
+            return Ok(queue);
+        }
+        if self.capacity - len < num_to_restore {
+            // evict at least twice that much.
+            let evicted = Self::evict_internal(
+                &mut queue,
+                std::cmp::max(self.min_evictions, 2 * num_to_restore),
+            );
+            log::trace!("reshuffle:evict took {:?}", start.elapsed());
+            drop(queue);
+            self.evict_to_db(evicted, "reshuffle")?;
+        } else {
+            drop(queue);
+        }
+        let res = self.retrieve(progress, num_to_restore, score_limit)?;
+        self.retrievals.fetch_add(1, Ordering::Release);
+        queue = self.queue.lock().unwrap();
+        if !res.is_empty() {
+            queue.extend(res);
+            log::debug!("Reshuffle took total {:?}", start.elapsed());
+            assert!(!queue.is_empty(), "Queue should have data after retrieve");
         }
         Ok(queue)
     }
