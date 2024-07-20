@@ -450,12 +450,6 @@ where
             return confirm.into_solution();
         }
         if confirm.elapsed() < elapsed {
-            log::debug!(
-                "Solution({:?}) elapsed time from db is {}ms but history was better: {}ms",
-                mode,
-                elapsed,
-                confirm.elapsed()
-            );
             return confirm.into_solution();
         }
         log::warn!(
