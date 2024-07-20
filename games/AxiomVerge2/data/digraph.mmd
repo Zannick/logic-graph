@@ -1389,6 +1389,7 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Lower_Machinery[Lower Machinery]
         Giguna_Breach__Lower_Machinery__West(West);
+        Giguna_Breach__Lower_Machinery__South(South);
     end
     subgraph Giguna_Breach__Portal_Exchange[Portal Exchange]
         Giguna_Breach__Portal_Exchange__West(West);
@@ -1423,6 +1424,11 @@ subgraph Giguna_Breach
         Giguna_Breach__Deadly_Flora__Lower_Right_Ledge(Lower Right Ledge);
         Giguna_Breach__Deadly_Flora__Lowest_Platform(Lowest Platform);
         Giguna_Breach__Deadly_Flora__East(East);
+    end
+    subgraph Giguna_Breach__South[South]
+        Giguna_Breach__South__North(North);
+        Giguna_Breach__South__Save_Point(Save Point);
+        Giguna_Breach__South__South(South);
     end
 end
 subgraph Giguna
@@ -1898,6 +1904,13 @@ subgraph Giguna
         Giguna__Separator__West_25(West 25);
         Giguna__Separator__Save_Point(Save Point);
         Giguna__Separator__East_25(East 25);
+    end
+    subgraph Giguna__Secrecy[Secrecy]
+        Giguna__Secrecy__Portal_Stand(Portal Stand);
+        Giguna__Secrecy__West_Column_West(West Column West);
+        Giguna__Secrecy__West_Column_East(West Column East);
+        Giguna__Secrecy__Near_East_Column(Near East Column);
+        Giguna__Secrecy__East_Column(East Column);
     end
 end
 subgraph Glacier_Breach
@@ -2884,6 +2897,8 @@ subgraph Menu
         Menu__Kiengir_Map__Giguna_Mural_Flask(Giguna Mural Flask);
         Menu__Kiengir_Map__Giguna_Mural_NE(Giguna Mural NE);
         Menu__Kiengir_Map__Giguna_Vertical_Interchange_Flask(Giguna Vertical Interchange Flask);
+        Menu__Kiengir_Map__Giguna_Secrecy_Flask(Giguna Secrecy Flask);
+        Menu__Kiengir_Map__Giguna_Secrecy_Portal(Giguna Secrecy Portal);
         Menu__Kiengir_Map__Uhrum_West_Portal_Entrance(Uhrum West Portal Entrance);
         Menu__Kiengir_Map__Uhrum_West_Portal_Exit(Uhrum West Portal Exit);
         Menu__Kiengir_Map__Udusan(Udusan);
@@ -2974,6 +2989,10 @@ subgraph Menu
         Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
         Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
         Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
+        Menu__Breach_Map__UVB_West_Glitches(UVB West Glitches);
+        Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
+        Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
+        Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
     end
 end
 subgraph Uhrum_Breach
@@ -2981,6 +3000,41 @@ subgraph Uhrum_Breach
         Uhrum_Breach__Rock_and_Gate__West(West);
         Uhrum_Breach__Rock_and_Gate__Button(Button);
         Uhrum_Breach__Rock_and_Gate__Gate_West(Gate West);
+        Uhrum_Breach__Rock_and_Gate__Gate_East(Gate East);
+        Uhrum_Breach__Rock_and_Gate__Center_Area_West(Center Area West);
+        Uhrum_Breach__Rock_and_Gate__North(North);
+        Uhrum_Breach__Rock_and_Gate__South(South);
+        Uhrum_Breach__Rock_and_Gate__Rock_West(Rock West);
+        Uhrum_Breach__Rock_and_Gate__Rock_East(Rock East);
+        Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge(Rock East Ledge);
+        Uhrum_Breach__Rock_and_Gate__East_Ledge(East Ledge);
+        Uhrum_Breach__Rock_and_Gate__East(East);
+    end
+    subgraph Uhrum_Breach__Save_and_Go[Save and Go]
+        Uhrum_Breach__Save_and_Go__South(South);
+        Uhrum_Breach__Save_and_Go__Lower_East_Ledge(Lower East Ledge);
+        Uhrum_Breach__Save_and_Go__Mild_Slope(Mild Slope);
+        Uhrum_Breach__Save_and_Go__Portal_Stand(Portal Stand);
+        Uhrum_Breach__Save_and_Go__Stone_Mouth(Stone Mouth);
+        Uhrum_Breach__Save_and_Go__Save_Point(Save Point);
+        Uhrum_Breach__Save_and_Go__West_Stone_Ledge(West Stone Ledge);
+        Uhrum_Breach__Save_and_Go__West_Rock_Ledge(West Rock Ledge);
+        Uhrum_Breach__Save_and_Go__West_Platform(West Platform);
+        Uhrum_Breach__Save_and_Go__North(North);
+    end
+    subgraph Uhrum_Breach__West_Glitch[West Glitch]
+        Uhrum_Breach__West_Glitch__North(North);
+        Uhrum_Breach__West_Glitch__Pillar_West(Pillar West);
+        Uhrum_Breach__West_Glitch__Pillar_East(Pillar East);
+        Uhrum_Breach__West_Glitch__Middle(Middle);
+        Uhrum_Breach__West_Glitch__Narrow_Glitch(Narrow Glitch);
+        Uhrum_Breach__West_Glitch__Past_Glitch(Past Glitch);
+    end
+    subgraph Uhrum_Breach__East_Glitch[East Glitch]
+        Uhrum_Breach__East_Glitch__West(West);
+        Uhrum_Breach__East_Glitch__Save_Point(Save Point);
+        Uhrum_Breach__East_Glitch__West_Flower(West Flower);
+        Uhrum_Breach__East_Glitch__Above_West_Flower(Above West Flower);
     end
 end
 subgraph Uhrum
@@ -4155,6 +4209,10 @@ Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door
 Giguna_Breach__SW_Save__Save_Point --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Side_Door <--> Giguna_Breach__SW_Save__West_11
 Giguna_Breach__Slingshot__Ravine --> Giguna_Breach__Slingshot__Column
+Giguna_Breach__South__North --> Giguna_Breach__Lower_Machinery__South
+Giguna_Breach__South__Save_Point --> Giguna_Breach__South__North
+Giguna_Breach__South__South --> Giguna_Breach__South__North
+Giguna_Breach__South__South <--> Uhrum_Breach__Save_and_Go__North
 Giguna_Breach__White_Clouds__Bottom --> Giguna_Breach__White_Clouds__Exit
 Giguna_Breach__White_Clouds__Entry --> Giguna_Breach__White_Clouds__East_Ledge
 Giguna__Antechamber__Bottom --> Giguna__Antechamber__Left_Wall_Lower
@@ -4379,6 +4437,11 @@ Giguna__Ruins_West__East_7 --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Lower_Ledge --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Nook --> Giguna__Ruins_West__Lower_Ledge
 Giguna__Ruins_West__West_7 --> Giguna__West_Tower__East_7
+Giguna__Secrecy__East_Column <--> Giguna__Secrecy__West_Column_West
+Giguna__Secrecy__Near_East_Column --> Giguna__Secrecy__East_Column
+Giguna__Secrecy__Near_East_Column --> Giguna__Secrecy__West_Column_West
+Giguna__Secrecy__Portal_Stand --> Giguna__Secrecy__West_Column_West
+Giguna__Secrecy__West_Column_West --> Giguna__Secrecy__West_Column_East
 Giguna__Separator__East_25 <--> Uhrum__West_Entrance__West_25
 Giguna__Separator__Lower_Brick <--> Giguna__Separator__Upper_Brick
 Giguna__Separator__Platform <--> Giguna__Separator__Switch
@@ -4791,7 +4854,7 @@ Irikar_Breach__Rocky_Dunes__Upper_East_Passage --> Irikar_Breach__Rocky_Dunes__E
 Irikar_Breach__Rocky_Dunes__West_Ledge --> Irikar_Breach__Rocky_Dunes__West_Rock_West
 Irikar_Breach__Rocky_Dunes__West_Rock_East --> Irikar_Breach__Rocky_Dunes__Center_Rock_West
 Irikar_Breach__Rocky_Dunes__West_Sand --> Irikar_Breach__Rocky_Dunes__West_Ledge
-Irikar_Breach__Uhrum_Connector__East --> Uhrum_Breach__Rock_and_Gate__West
+Irikar_Breach__Uhrum_Connector__East <--> Uhrum_Breach__Rock_and_Gate__West
 Irikar_Breach__Uhrum_Connector__Rock_East --> Irikar_Breach__Uhrum_Connector__V_Rock_West
 Irikar_Breach__Uhrum_Connector__Rock_West --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
 Irikar_Breach__Uhrum_Connector__Rock_West <--> Irikar_Breach__Uhrum_Connector__V_Rock_East
@@ -4988,6 +5051,36 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum_Breach__Rock_and_Gate__Button --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
+Uhrum_Breach__Rock_and_Gate__Center_Area_West --> Uhrum_Breach__Rock_and_Gate__North
+Uhrum_Breach__Rock_and_Gate__Center_Area_West <--> Uhrum_Breach__Rock_and_Gate__Rock_West
+Uhrum_Breach__Rock_and_Gate__East --> Uhrum_Breach__East_Glitch__West
+Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__Above_West_Flower
+Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__Save_Point
+Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__West_Flower
+Uhrum_Breach__Rock_and_Gate__East_Ledge <--> Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge
+Uhrum_Breach__Rock_and_Gate__Gate_East --> Uhrum_Breach__Rock_and_Gate__Button
+Uhrum_Breach__Rock_and_Gate__Gate_West --> Uhrum_Breach__Rock_and_Gate__Center_Area_West
+Uhrum_Breach__Rock_and_Gate__Gate_West --> Uhrum_Breach__Rock_and_Gate__Gate_East
+Uhrum_Breach__Rock_and_Gate__North <--> Uhrum_Breach__Save_and_Go__South
+Uhrum_Breach__Rock_and_Gate__Rock_East <--> Uhrum_Breach__Rock_and_Gate__Rock_West
+Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge --> Uhrum_Breach__Rock_and_Gate__Rock_East
+Uhrum_Breach__Rock_and_Gate__Rock_West --> Uhrum_Breach__Rock_and_Gate__North
+Uhrum_Breach__Rock_and_Gate__South --> Uhrum_Breach__Rock_and_Gate__Center_Area_West
+Uhrum_Breach__Rock_and_Gate__South --> Uhrum_Breach__Rock_and_Gate__Rock_West
+Uhrum_Breach__Rock_and_Gate__South <--> Uhrum_Breach__West_Glitch__North
+Uhrum_Breach__Save_and_Go__Lower_East_Ledge --> Uhrum_Breach__Save_and_Go__Mild_Slope
+Uhrum_Breach__Save_and_Go__Save_Point --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
+Uhrum_Breach__Save_and_Go__Save_Point --> Uhrum_Breach__Save_and_Go__West_Stone_Ledge
+Uhrum_Breach__Save_and_Go__South --> Uhrum_Breach__Save_and_Go__Lower_East_Ledge
+Uhrum_Breach__Save_and_Go__West_Platform --> Uhrum_Breach__Save_and_Go__North
+Uhrum_Breach__Save_and_Go__West_Rock_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
+Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
+Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
+Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Narrow_Glitch
+Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Pillar_East
+Uhrum_Breach__West_Glitch__Narrow_Glitch <--> Uhrum_Breach__West_Glitch__Past_Glitch
+Uhrum_Breach__West_Glitch__Narrow_Glitch <--> Uhrum_Breach__West_Glitch__Pillar_East
 Uhrum__Annuna_Corridor__Between_Two_Flowers --> Uhrum__Annuna_Corridor__Lower_Platform
 Uhrum__Annuna_Corridor__Block_East <--> Uhrum__Annuna_Corridor__Block_West
 Uhrum__Annuna_Corridor__Lower_Platform --> Uhrum__Annuna_Corridor__Middle_Platform

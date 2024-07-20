@@ -3088,6 +3088,29 @@ pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &World) -> bool 
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
 }
+pub fn access_uhrum_breach_rock_and_gate_gate(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Gate
+    ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate)
+}
+pub fn access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Gate and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
+pub fn access_uhrum_breach_rock_and_gate_rock(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Rock
+    ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock)
+}
+pub fn access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
+    (ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock) && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_uhrum_cavern_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_Cavern_Wall
     ctx.has(Item::Uhrum_Cavern_Wall)
@@ -3159,6 +3182,10 @@ pub fn access_uhrum_west_entrance_lower_wall(ctx: &Context, world: &World) -> bo
 pub fn access_uhrum_west_entrance_upper_wall(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Upper_Wall
     ctx.has(Item::Uhrum_West_Entrance_Upper_Wall)
+}
+pub fn access_uhrum_west_glitch(ctx: &Context, world: &World) -> bool {
+    // Uhrum_West_Glitch
+    ctx.has(Item::Uhrum_West_Glitch)
 }
 pub fn access_underwater_movement(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement
@@ -16492,6 +16519,93 @@ pub fn explain_uhrum_annuna_corridor_block(
         (h, vec!["Uhrum_Annuna_Corridor_Block"])
     }
 }
+pub fn explain_uhrum_breach_rock_and_gate_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Rock_and_Gate_Gate
+    {
+        let h = ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate);
+        edict.insert("Uhrum_Breach_Rock_and_Gate_Gate", format!("{}", h));
+        (h, vec!["Uhrum_Breach_Rock_and_Gate_Gate"])
+    }
+}
+pub fn explain_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Rock_and_Gate_Gate and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate);
+                edict.insert("Uhrum_Breach_Rock_and_Gate_Gate", format!("{}", h));
+                (h, vec!["Uhrum_Breach_Rock_and_Gate_Gate"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_breach_rock_and_gate_rock(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Rock_and_Gate_Rock
+    {
+        let h = ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock);
+        edict.insert("Uhrum_Breach_Rock_and_Gate_Rock", format!("{}", h));
+        (h, vec!["Uhrum_Breach_Rock_and_Gate_Rock"])
+    }
+}
+pub fn explain_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock);
+            edict.insert("Uhrum_Breach_Rock_and_Gate_Rock", format!("{}", h));
+            (h, vec!["Uhrum_Breach_Rock_and_Gate_Rock"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_uhrum_cavern_wall(
     ctx: &Context,
     world: &World,
@@ -16820,6 +16934,18 @@ pub fn explain_uhrum_west_entrance_upper_wall(
         let h = ctx.has(Item::Uhrum_West_Entrance_Upper_Wall);
         edict.insert("Uhrum_West_Entrance_Upper_Wall", format!("{}", h));
         (h, vec!["Uhrum_West_Entrance_Upper_Wall"])
+    }
+}
+pub fn explain_uhrum_west_glitch(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_West_Glitch
+    {
+        let h = ctx.has(Item::Uhrum_West_Glitch);
+        edict.insert("Uhrum_West_Glitch", format!("{}", h));
+        (h, vec!["Uhrum_West_Glitch"])
     }
 }
 pub fn explain_underwater_movement(
@@ -23734,6 +23860,59 @@ pub fn observe_access_uhrum_annuna_corridor_block(
         ctx.has(Item::Uhrum_Annuna_Corridor_Block)
     }
 }
+pub fn observe_access_uhrum_breach_rock_and_gate_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Gate
+    {
+        full_obs.observe_uhrum_breach_rock_and_gate_gate();
+        ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate)
+    }
+}
+pub fn observe_access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Gate and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_uhrum_breach_rock_and_gate_gate();
+        ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_uhrum_breach_rock_and_gate_rock(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Rock
+    {
+        full_obs.observe_uhrum_breach_rock_and_gate_rock();
+        ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock)
+    }
+}
+pub fn observe_access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
+    ({
+        full_obs.observe_uhrum_breach_rock_and_gate_rock();
+        ctx.has(Item::Uhrum_Breach_Rock_and_Gate_Rock)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
 pub fn observe_access_uhrum_cavern_wall(
     ctx: &Context,
     world: &World,
@@ -23920,6 +24099,17 @@ pub fn observe_access_uhrum_west_entrance_upper_wall(
     {
         full_obs.observe_uhrum_west_entrance_upper_wall();
         ctx.has(Item::Uhrum_West_Entrance_Upper_Wall)
+    }
+}
+pub fn observe_access_uhrum_west_glitch(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_West_Glitch
+    {
+        full_obs.observe_uhrum_west_glitch();
+        ctx.has(Item::Uhrum_West_Glitch)
     }
 }
 pub fn observe_access_underwater_movement(

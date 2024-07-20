@@ -1170,6 +1170,8 @@ areas:
   spots:
     - name: West
       coord: [19.1, 21.75]
+    - name: South
+      coord: [19.5, 22.8]
 
 - name: Portal Exchange  # MARK: Portal Exchange
   on_entry: $reset_old_area(^newpos)
@@ -1449,3 +1451,52 @@ areas:
           jumps: 1
         - to: SW Save > West 11
           tags: [xdoor]
+
+- name: South  # MARK: South
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    save_point: Save Point
+    map_spot: Menu > Breach Map > GSB South
+  spots:
+    - name: North
+      coord: [19.5, 23.2]
+      data:
+        flipside: Giguna > Secrecy > West Column West
+      local:
+        - to: Save Point
+        - to: South
+          thru: [19.425, 23.45]
+      exits:
+        - to: Lower Machinery > South
+          tags: [ydoor]
+    - name: Save Point
+      coord: [19.325, 23.6]
+      data:
+        flipside: Giguna > Secrecy > Portal Stand
+      local:
+        - to: North
+          thru: [19.25, 23.4]
+          jumps: [1, 2]
+        - to: South
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: South
+      coord: [19.5, 23.8]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Uhrum Breach > Save and Go > North
+          tags: [ydoor]

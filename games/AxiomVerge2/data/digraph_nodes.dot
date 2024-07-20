@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
         }
@@ -262,7 +262,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             Annuna__Apocalypse__West [label = "", pos = "129.15,-27.916667!"];
             Annuna__Apocalypse__Northwest_Mid_air [label = "", pos = "130.05,-27.083333!"];
@@ -613,7 +613,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -655,7 +655,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Ebih_Breach__Bubble_Bobble__East_11 [label = "", pos = "83.7,-67.583333!"];
             Ebih_Breach__Bubble_Bobble__Tree [label = "", pos = "82.8,-66.333333!"];
@@ -1256,7 +1256,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="5"];
         {
             Giguna_Breach__Antechamber__North [label = "", pos = "49.5,-68.666667!"];
             Giguna_Breach__Antechamber__Middle [label = "", pos = "49.2,-69.166667!"];
@@ -1375,6 +1375,7 @@
         }
         {
             Giguna_Breach__Lower_Machinery__West [label = "", pos = "57.3,-86.25!"];
+            Giguna_Breach__Lower_Machinery__South [label = "", pos = "58.5,-88.0!"];
         }
         {
             Giguna_Breach__Lower_Portal__East [label = "", pos = "56.7,-86.25!"];
@@ -1415,6 +1416,11 @@
             Giguna_Breach__Slingshot__West [label = "", pos = "51.3,-67.75!"];
             Giguna_Breach__Slingshot__Column [label = "", pos = "52.5,-67.5!"];
             Giguna_Breach__Slingshot__Ravine [label = "", pos = "53.1,-68.0!"];
+        }
+        {
+            Giguna_Breach__South__North [label = "", pos = "58.5,-88.666667!"];
+            Giguna_Breach__South__Save_Point [label = "", pos = "57.975,-89.333333!"];
+            Giguna_Breach__South__South [label = "", pos = "58.5,-89.666667!"];
         }
         {
             Giguna_Breach__SW_Save__North [label = "", pos = "37.5,-67.0!"];
@@ -1795,6 +1801,13 @@
             Giguna__Ruins_West__West_7 [label = "", pos = "39.15,-10.5!"];
         }
         {
+            Giguna__Secrecy__Portal_Stand [label = "", pos = "57.975,-39.333333!"];
+            Giguna__Secrecy__West_Column_West [label = "", pos = "58.5,-38.666667!"];
+            Giguna__Secrecy__West_Column_East [label = "", pos = "59.4,-38.833333!"];
+            Giguna__Secrecy__Near_East_Column [label = "", pos = "60.15,-39.0!"];
+            Giguna__Secrecy__East_Column [label = "", pos = "60.75,-38.666667!"];
+        }
+        {
             Giguna__Separator__West_23 [label = "", pos = "54.15,-38.0!"];
             Giguna__Separator__Platform [label = "", pos = "54.675,-37.333333!"];
             Giguna__Separator__Upper_Brick [label = "", pos = "55.35,-38.0!"];
@@ -1913,7 +1926,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -2367,7 +2380,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="6"];
         {
             Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
             Irikar_Breach__Basement_Save__Save_West [label = "", pos = "37.2,-96.0!"];
@@ -2721,7 +2734,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             node[shape=doublecircle, fillcolor="8"];
             Menu__Breach_Map__AGB_Bridge_Lower [label = "", pos = "105.0,-91.666667!"];
@@ -2783,6 +2796,10 @@
             Menu__Breach_Map__MEB_Spider_Guards_Button [label = "", pos = "69.0,-61.666667!"];
             Menu__Breach_Map__Slingshot_Weapon [label = "", pos = "63.0,-65.0!"];
             Menu__Breach_Map__MEB_Rocky_Cages_Flask [label = "", pos = "66.0,-66.666667!"];
+            Menu__Breach_Map__UVB_West_Glitches [label = "", pos = "63.0,-96.666667!"];
+            Menu__Breach_Map__UVB_Save_and_Go_Portal [label = "", pos = "60.0,-91.666667!"];
+            Menu__Breach_Map__UVB_East_Glitches [label = "", pos = "72.0,-96.666667!"];
+            Menu__Breach_Map__UVB_East_Glitch_Health [label = "", pos = "72.0,-95.0!"];
         }
         {
             node[shape=doublecircle, fillcolor="8"];
@@ -2964,6 +2981,8 @@
             Menu__Kiengir_Map__Giguna_Mural_Flask [label = "", pos = "57.0,-36.666667!"];
             Menu__Kiengir_Map__Giguna_Mural_NE [label = "", pos = "60.0,-33.333333!"];
             Menu__Kiengir_Map__Giguna_Vertical_Interchange_Flask [label = "", pos = "63.0,-33.333333!"];
+            Menu__Kiengir_Map__Giguna_Secrecy_Flask [label = "", pos = "60.0,-40.0!"];
+            Menu__Kiengir_Map__Giguna_Secrecy_Portal [label = "", pos = "57.0,-40.0!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Entrance [label = "", pos = "57.0,-43.333333!"];
             Menu__Kiengir_Map__Uhrum_West_Portal_Exit [label = "", pos = "60.0,-41.666667!"];
             Menu__Kiengir_Map__Udusan [label = "", pos = "57.0,-41.666667!"];
@@ -2988,15 +3007,50 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="4"];
+        {
+            Uhrum_Breach__East_Glitch__West [label = "", pos = "66.3,-94.583333!"];
+            Uhrum_Breach__East_Glitch__Save_Point [label = "", pos = "67.425,-95.333333!"];
+            Uhrum_Breach__East_Glitch__West_Flower [label = "", pos = "68.4,-95.5!"];
+            Uhrum_Breach__East_Glitch__Above_West_Flower [label = "", pos = "69.3,-94.833333!"];
+        }
         {
             Uhrum_Breach__Rock_and_Gate__West [label = "", pos = "57.3,-94.583333!"];
             Uhrum_Breach__Rock_and_Gate__Button [label = "", pos = "57.9,-94.666667!"];
             Uhrum_Breach__Rock_and_Gate__Gate_West [label = "", pos = "58.35,-94.666667!"];
+            Uhrum_Breach__Rock_and_Gate__Gate_East [label = "", pos = "59.4,-94.666667!"];
+            Uhrum_Breach__Rock_and_Gate__Center_Area_West [label = "", pos = "60.6,-94.333333!"];
+            Uhrum_Breach__Rock_and_Gate__North [label = "", pos = "61.5,-93.666667!"];
+            Uhrum_Breach__Rock_and_Gate__South [label = "", pos = "61.5,-94.666667!"];
+            Uhrum_Breach__Rock_and_Gate__Rock_West [label = "", pos = "61.8,-94.333333!"];
+            Uhrum_Breach__Rock_and_Gate__Rock_East [label = "", pos = "62.4,-94.333333!"];
+            Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge [label = "", pos = "62.85,-94.666667!"];
+            Uhrum_Breach__Rock_and_Gate__East_Ledge [label = "", pos = "64.95,-94.583333!"];
+            Uhrum_Breach__Rock_and_Gate__East [label = "", pos = "65.7,-94.583333!"];
+        }
+        {
+            Uhrum_Breach__Save_and_Go__South [label = "", pos = "61.5,-93.0!"];
+            Uhrum_Breach__Save_and_Go__Lower_East_Ledge [label = "", pos = "61.5,-92.5!"];
+            Uhrum_Breach__Save_and_Go__Mild_Slope [label = "", pos = "60.9,-92.0!"];
+            Uhrum_Breach__Save_and_Go__Portal_Stand [label = "", pos = "61.575,-91.0!"];
+            Uhrum_Breach__Save_and_Go__Stone_Mouth [label = "", pos = "59.85,-91.333333!"];
+            Uhrum_Breach__Save_and_Go__Save_Point [label = "", pos = "58.575,-92.5!"];
+            Uhrum_Breach__Save_and_Go__West_Stone_Ledge [label = "", pos = "58.8,-91.833333!"];
+            Uhrum_Breach__Save_and_Go__West_Rock_Ledge [label = "", pos = "57.6,-91.5!"];
+            Uhrum_Breach__Save_and_Go__West_Platform [label = "", pos = "57.9,-91.0!"];
+            Uhrum_Breach__Save_and_Go__North [label = "", pos = "58.5,-90.333333!"];
+        }
+        {
+            Uhrum_Breach__West_Glitch__North [label = "", pos = "61.5,-95.333333!"];
+            Uhrum_Breach__West_Glitch__Pillar_West [label = "", pos = "61.65,-95.5!"];
+            Uhrum_Breach__West_Glitch__Pillar_East [label = "", pos = "62.4,-95.583333!"];
+            Uhrum_Breach__West_Glitch__Middle [label = "", pos = "63.0,-96.083333!"];
+            Uhrum_Breach__West_Glitch__Narrow_Glitch [label = "", pos = "64.35,-95.916667!"];
+            Uhrum_Breach__West_Glitch__Past_Glitch [label = "", pos = "65.4,-96.25!"];
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="4"];
         {
             Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
             Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];

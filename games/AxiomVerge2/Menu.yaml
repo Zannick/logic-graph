@@ -832,6 +832,10 @@ areas:
       coord: [20, 20]
     - name: Giguna Vertical Interchange Flask
       coord: [21, 20]
+    - name: Giguna Secrecy Flask
+      coord: [20, 24]
+    - name: Giguna Secrecy Portal
+      coord: [19, 24]
 
     - name: Uhrum West Portal Entrance
       coord: [19, 26]
@@ -1168,4 +1172,13 @@ areas:
       coord: [21, 9]
     - name: MEB Rocky Cages Flask
       coord: [22, 10]
+
+    - name: UVB West Glitches
+      coord: [21, 28]
+    - name: UVB Save and Go Portal
+      coord: [20, 25]
+    - name: UVB East Glitches
+      coord: [24, 28]
+    - name: UVB East Glitch Health
+      coord: [24, 27]
     #endregion

@@ -358,7 +358,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{39}, Big_Flask{17}]
+    [Flask{39}, Big_Flask{19}]
   $all_health:itemList: >
     [Health_Node{2}, Health_Fragment{18}]
   $all_weapons:itemList: >

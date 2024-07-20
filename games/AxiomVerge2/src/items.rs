@@ -201,6 +201,8 @@ pub enum Item {
     The_Student,
     Udusan,
     Uhrum_Annuna_Corridor_Block,
+    Uhrum_Breach_Rock_and_Gate_Gate,
+    Uhrum_Breach_Rock_and_Gate_Rock,
     Uhrum_Cavern_Wall,
     Uhrum_East_Lake_Block,
     Uhrum_Emergence_Wall,
@@ -210,6 +212,7 @@ pub enum Item {
     Uhrum_West_Entrance_Gate,
     Uhrum_West_Entrance_Lower_Wall,
     Uhrum_West_Entrance_Upper_Wall,
+    Uhrum_West_Glitch,
     Under_Siege,
     Underwater_Movement,
     Wall_Climb,
@@ -413,6 +416,12 @@ impl fmt::Display for Item {
             Item::The_Student => write!(f, "{}", "The_Student"),
             Item::Udusan => write!(f, "{}", "Udusan"),
             Item::Uhrum_Annuna_Corridor_Block => write!(f, "{}", "Uhrum_Annuna_Corridor_Block"),
+            Item::Uhrum_Breach_Rock_and_Gate_Gate => {
+                write!(f, "{}", "Uhrum_Breach_Rock_and_Gate_Gate")
+            }
+            Item::Uhrum_Breach_Rock_and_Gate_Rock => {
+                write!(f, "{}", "Uhrum_Breach_Rock_and_Gate_Rock")
+            }
             Item::Uhrum_Cavern_Wall => write!(f, "{}", "Uhrum_Cavern_Wall"),
             Item::Uhrum_East_Lake_Block => write!(f, "{}", "Uhrum_East_Lake_Block"),
             Item::Uhrum_Emergence_Wall => write!(f, "{}", "Uhrum_Emergence_Wall"),
@@ -426,6 +435,7 @@ impl fmt::Display for Item {
             Item::Uhrum_West_Entrance_Upper_Wall => {
                 write!(f, "{}", "Uhrum_West_Entrance_Upper_Wall")
             }
+            Item::Uhrum_West_Glitch => write!(f, "{}", "Uhrum_West_Glitch"),
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
@@ -621,6 +631,8 @@ impl std::str::FromStr for Item {
             "The_Student" => Ok(Item::The_Student),
             "Udusan" => Ok(Item::Udusan),
             "Uhrum_Annuna_Corridor_Block" => Ok(Item::Uhrum_Annuna_Corridor_Block),
+            "Uhrum_Breach_Rock_and_Gate_Gate" => Ok(Item::Uhrum_Breach_Rock_and_Gate_Gate),
+            "Uhrum_Breach_Rock_and_Gate_Rock" => Ok(Item::Uhrum_Breach_Rock_and_Gate_Rock),
             "Uhrum_Cavern_Wall" => Ok(Item::Uhrum_Cavern_Wall),
             "Uhrum_East_Lake_Block" => Ok(Item::Uhrum_East_Lake_Block),
             "Uhrum_Emergence_Wall" => Ok(Item::Uhrum_Emergence_Wall),
@@ -630,6 +642,7 @@ impl std::str::FromStr for Item {
             "Uhrum_West_Entrance_Gate" => Ok(Item::Uhrum_West_Entrance_Gate),
             "Uhrum_West_Entrance_Lower_Wall" => Ok(Item::Uhrum_West_Entrance_Lower_Wall),
             "Uhrum_West_Entrance_Upper_Wall" => Ok(Item::Uhrum_West_Entrance_Upper_Wall),
+            "Uhrum_West_Glitch" => Ok(Item::Uhrum_West_Glitch),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
             "Wall_Climb" => Ok(Item::Wall_Climb),

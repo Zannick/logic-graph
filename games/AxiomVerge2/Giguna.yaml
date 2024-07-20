@@ -5461,3 +5461,107 @@ areas:
       exits:
         - to: Uhrum > West Entrance > West 25
           tags: [xshift]
+
+- name: Secrecy  # MARK: Secrecy
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [19, 23, 20, 24]
+    flask: [20, 23, 21, 24]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Giguna Secrecy Portal
+      flask: Menu > Kiengir Map > Giguna Secrecy Flask
+  spots:
+    - name: Portal Stand
+      coord: [19.325, 23.6]
+      data:
+        flipside: Giguna Breach > South > Save Point
+      exits:
+        - to: West Column West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West Column West
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Column West
+          req: $mist2
+          movement: mist2
+    - name: West Column West
+      coord: [19.5, 23.2]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Portal Stand
+        - to: Near East Column
+      exits:
+        - to: West Column East
+          req: $grab
+          movement: base
+        - to: East Column
+          req: $hover
+          movement: base
+    - name: West Column East
+      coord: [19.8, 23.3]
+      local:
+        - to: West Column West
+          jumps: 1
+      locations:
+        - name: Boomerang Flask
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          req: $boomerang
+          tags: [remote_flask]
+        - name: Boomerang Flask Fast Travel
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          time: 1  # ?
+    - name: Near East Column
+      coord: [20.05, 23.4]
+      locations:
+        - name: Shockwave Flask
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: West Column West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Column
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Column
+          req: $mist2
+          movement: mist2
+    - name: East Column
+      coord: [20.25, 23.2]
+      local:
+        - to: Near East Column
+      locations:
+        - name: Flask
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Secrecy_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: West Column West
+          req: $hook or $hover
+          movement: base

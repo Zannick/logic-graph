@@ -149,6 +149,7 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => true,
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => true,
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
+            ActionId::Giguna_Breach__South__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
@@ -1650,6 +1651,7 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Giguna_Breach__South__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx, world),
@@ -2075,6 +2077,9 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Giguna_Breach__South__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2379,7 +2384,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 179] = [
+static ACT_DEFS: [Action; 180] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2743,6 +2748,11 @@ static ACT_DEFS: [Action; 179] = [
     Action {
         id: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door,
         time: 250,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__South__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
     },
     Action {
@@ -3357,6 +3367,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Giguna_Breach__SW_Save__Save_Point__Save => SpotId::Giguna_Breach__SW_Save__Save_Point,
         ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => SpotId::Giguna_Breach__Labyrinth__Save_Point,
         ActionId::Giguna_Breach__Emergence__Save_Point__Save => SpotId::Giguna_Breach__Emergence__Save_Point,
+        ActionId::Giguna_Breach__South__Save_Point__Save => SpotId::Giguna_Breach__South__Save_Point,
         ActionId::Giguna__Giguna_Northeast__Save_Point__Save => SpotId::Giguna__Giguna_Northeast__Save_Point,
         ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => SpotId::Giguna__Giguna_Northeast__Gate_Left,
         ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => SpotId::Giguna__Giguna_Northeast__Right_Column,

@@ -73,6 +73,8 @@ areas:
           tags: [xshift]
     - name: Top West Ledge
       coord: [19.2, 24.9]
+      data:
+        flipside: Uhrum Breach > Save and Go > West Rock Ledge
       local:
         - to: Portal Stand
         - to: Middle West Ledge
@@ -114,6 +116,8 @@ areas:
           jumps: 1
     - name: South Platform
       coord: [19.45, 26.8]
+      data:
+        flipside: Uhrum Breach > Rock and Gate > Gate West
       local:
         - to: Southeast Tree
         - to: Save Point
@@ -151,6 +155,8 @@ areas:
           tags: [save]
     - name: Portal Stand
       coord: [19.525, 25.5]
+      data:
+        flipside: Uhrum Breach > Save and Go > Save Point
       local:
         - to: West 26
         - to: Middle West Ledge
@@ -203,6 +209,8 @@ areas:
           jumps: 2
     - name: Inner Dais
       coord: [19.95, 24.8]
+      data:
+        flipside: Uhrum Breach > Save and Go > Stone Mouth
       local:
         - to: Upper Wall West
         - to: Portal Exit
@@ -220,6 +228,8 @@ areas:
           movement: base
     - name: Portal Exit
       coord: [20.525, 24.6]
+      data:
+        flipside: Uhrum Breach > Save and Go > Portal Stand
       local:
         - to: Inner Dais
         - to: Gate Switch
@@ -238,6 +248,8 @@ areas:
 
     - name: Upper Wall West
       coord: [20.3, 25.2]
+      data:
+        flipside: Uhrum Breach > Save and Go > Mild Slope
       local:
         - to: Inner Dais
           jumps: 2
@@ -452,6 +464,8 @@ areas:
           jumps: 3
     - name: Lower Path Tree Ledge
       coord: [20.55, 27.3]
+      data:
+        flipside: Uhrum Breach > West Glitch > Pillar West
       local:
         - to: Sand
         - to: Lower Path Rock

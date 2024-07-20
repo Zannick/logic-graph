@@ -9,7 +9,473 @@ areas:
   spots:
     - name: West
       coord: [19.1, 26.75]
+      local:
+        - to: Button
+      exits:
+        - to: Irikar Breach > Uhrum Connector > East
+          tags: [xdoor]
     - name: Button
       coord: [19.3, 26.8]
+      local:
+        - to: West
+          jumps: 1
+        - to: Gate West
+      locations:
+        - name: Hit Button
+          canon: Uhrum_Breach_Rock_and_Gate_Gate
+          item: Uhrum_Breach_Rock_and_Gate_Gate
+          tags: [button]
+      exits:
+        - to: Irikar Breach > Uhrum Connector > Sand Swarm
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
     - name: Gate West
       coord: [19.45, 26.8]
+      data:
+        flipside: Uhrum > West Entrance > South Platform
+      local:
+        - to: Button
+      locations:
+        - name: Hit Button
+          canon: Uhrum_Breach_Rock_and_Gate_Gate
+          item: Uhrum_Breach_Rock_and_Gate_Gate
+          tags: [button]
+      exits:
+        - to: Gate East
+          req: Uhrum_Breach_Rock_and_Gate_Gate
+          movement: base
+        - to: Center Area West
+          req: Uhrum_Breach_Rock_and_Gate_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Gate East
+      coord: [19.8, 26.8]
+      local:
+        - to: Center Area West
+          jumps: 2
+      exits:
+        - to: Button
+          req: Uhrum_Breach_Rock_and_Gate_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Center Area West
+      coord: [20.2, 26.6]
+      local:
+        - to: Gate East
+        - to: South
+        - to: North
+          jumps: 3
+        - to: Rock West
+      locations:
+        - name: Charge Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: $charge
+          to: Rock East
+          movement: fling
+          penalty_tags: [charge_time]
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Rock West
+          req: Slingshot_Hook
+          movement: fast_hover
+    - name: North
+      coord: [20.5, 26.2]
+      local:
+        - to: Center Area West
+        - to: South
+        - to: Rock West
+      exits:
+        - to: Save and Go > South
+          tags: [ydoor]
+    - name: South
+      coord: [20.5, 26.8]
+      local:
+        - to: Rock West
+          jumps: 1
+        - to: Center Area West
+          jumps: 2
+      locations:
+        - name: Charge Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock East
+          movement: fling
+          penalty_tags: [charge_time]
+          jumps: 1
+        - name: Spin Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock East
+          movement: fast_hover
+          jumps: 1
+        - name: Spin Through Rock and Hover
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: East
+          movement: fast_hover
+          jumps: 1
+      exits:
+        - to: Center Area West
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Rock West
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: West Glitch > North
+          tags: [ydoor]
+    - name: Rock West
+      coord: [20.6, 26.6]
+      local:
+        - to: South
+        - to: Center Area West
+      locations:
+        - name: Mist Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Nanite_Mist
+          to: Rock East
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: $mist2
+          to: Rock East
+          movement: mist2
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
+        - to: North
+          req: $mist2
+          movement: mist2
+        - to: Center Area West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Rock East
+          req: Uhrum_Breach_Rock_and_Gate_Rock
+          movement: base
+        - to: Rock East
+          req: Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
+          movement: fast_hover
+    - name: Rock East
+      coord: [20.8, 26.6]
+      local:
+        - to: Rock East Ledge
+        - to: East
+      locations:
+        - name: Mist Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Nanite_Mist
+          to: Rock West
+          movement: mist1
+        - name: Upgraded Mist Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: $mist2
+          to: Rock West
+          movement: mist2
+      exits:
+        - to: Rock West
+          req: Uhrum_Breach_Rock_and_Gate_Rock
+          movement: base
+        - to: Rock West
+          req: Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
+          movement: fast_hover
+    - name: Rock East Ledge
+      coord: [20.95, 26.8]
+      local:
+        - to: Rock East
+          jumps: 1
+        - to: East Ledge
+          jumps: 1
+      locations:
+        - name: Charge Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock East
+          movement: fling
+          penalty_tags: [charge_time]
+          jumps: 1
+        - name: Spin Through Rock
+          canon: Uhrum_Breach_Rock_and_Gate_Rock
+          item: Uhrum_Breach_Rock_and_Gate_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock East
+          movement: fast_hover
+          jumps: 1
+      exits:
+        - to: Rock East
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: East Ledge
+      coord: [21.65, 26.75]
+      local:
+        - to: Rock East Ledge
+          jumps: 1
+        - to: East
+          jumps: 1
+      exits:
+        - to: Rock East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: East Glitch > Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: East Glitch > West Flower
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: East Glitch > Above West Flower
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: East
+      coord: [21.9, 26.75]
+      local:
+        - to: East Ledge
+      exits:
+        - to: East Glitch > West
+          tags: [xdoor]
+
+- name: Save and Go  # MARK: Save and Go
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Stand
+  map:
+    save: [19, 25, 20, 26]
+    portal: [20, 24, 21, 25]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > UVB West
+      portal: Menu > Breach Map > UVB Save and Go Portal
+  spots:
+    - name: South
+      coord: [20.5, 25.8]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Lower East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Rock and Gate > North
+          tags: [ydoor]
+    - name: Lower East Ledge
+      coord: [20.5, 25.5]
+      local:
+        - to: South
+        - to: Mild Slope
+          jumps: 1
+      exits:
+        - to: Mild Slope
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Mild Slope
+      coord: [20.3, 25.2]
+      data:
+        flipside: Uhrum > West Entrance > Upper Wall West
+      local:
+        - to: Lower East Ledge
+        - to: Stone Mouth
+          jumps: 3
+        - to: Portal Stand
+          thru: [20.275, 24.95]
+          jumps: [1, 3]
+    - name: Portal Stand
+      coord: [20.525, 24.6]
+      data:
+        flipside: Uhrum > West Entrance > Portal Exit
+      local:
+        - to: Stone Mouth
+        - to: Lower East Ledge
+          thru: [20.375, 25.0]
+    - name: Stone Mouth
+      coord: [19.95, 24.8]
+      data:
+        flipside: Uhrum > West Entrance > Inner Dais
+      local:
+        - to: Portal Stand
+          jumps: 3
+        - to: Mild Slope
+    - name: Save Point
+      coord: [19.525, 25.5]
+      data:
+        flipside: Uhrum > West Entrance > Portal Stand
+      local:
+        - to: South
+      exits:
+        - to: West Stone Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: West Rock Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 4
+    - name: West Stone Ledge
+      coord: [19.6, 25.1]
+      local:
+        - to: Save Point
+      exits:
+        - to: West Rock Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: West Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+    - name: West Rock Ledge
+      coord: [19.2, 24.9]
+      data:
+        flipside: Uhrum > West Entrance > Top West Ledge
+      local:
+        - to: Save Point
+      exits:
+        - to: West Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West Platform
+      coord: [19.3, 24.6]
+      local:
+        - to: Save Point
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: North
+      coord: [19.5, 24.2]
+      local:
+        - to: Save Point
+      exits:
+        - to: Giguna Breach > South > South
+          tags: [ydoor]
+
+- name: West Glitch  # MARK: West Glitch
+  on_entry: $reset_old_area(^newpos)
+  map:
+    glitch: [21, 27, 22, 28]
+  datamap:
+    map_spot:
+      glitch: Menu > Breach Map > UVB West Glitches
+  spots:
+    - name: North
+      coord: [20.5, 27.2]
+      local:
+        - to: Pillar West
+      exits:
+        - to: Rock and Gate > South
+          tags: [ydoor]
+    - name: Pillar West
+      coord: [20.55, 27.3]
+      data:
+        flipside: Uhrum > West Entrance > Lower Path Tree Ledge
+      local:
+        - to: North
+          jumps: 1
+        - to: Pillar East
+    - name: Pillar East
+      coord: [20.8, 27.35]
+      local:
+        - to: Pillar West
+          jumps: 1
+        - to: Middle
+      exits:
+        - to: Narrow Glitch
+          req: Drone_Hover
+          movement: base
+    - name: Middle
+      coord: [21.0, 27.65]
+      local:
+        - to: Narrow Glitch
+          jumps: 1
+      exits:
+        - to: Pillar East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Narrow Glitch
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Narrow Glitch
+      coord: [21.45, 27.55]
+      local:
+        - to: Middle
+      locations:
+        - name: Break Through Glitch
+          canon: Uhrum_West_Glitch
+          item: Uhrum_West_Glitch
+          to: Past Glitch
+          movement: base
+      exits:
+        - to: Pillar East
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Past Glitch
+          req: Uhrum_West_Glitch
+          movement: base
+    - name: Past Glitch
+      coord: [21.8, 27.75]
+      locations:
+        - name: Break Through Glitch
+          canon: Uhrum_West_Glitch
+          item: Uhrum_West_Glitch
+          to: Narrow Glitch
+          movement: base
+          jumps: 2
+      exits:
+        - to: Narrow Glitch
+          req: Uhrum_West_Glitch
+          movement: base
+          jumps: 2
+
+- name: East Glitch  # MARK: East Glitch
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [22, 27, 23, 28]
+    glitch: [24, 27, 25, 28]
+    health: [24, 26, 25, 27]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > UVB Center
+      glitch: Menu > Breach Map > UVB East Glitches
+      health: Menu > Breach Map > UVB East Glitch Health
+  spots:
+    - name: West
+      coord: [22.1, 26.75]
+    - name: Save Point
+      coord: [22.475, 27.2]
+    - name: West Flower
+      coord: [22.8, 27.3]
+    - name: Above West Flower
+      coord: [23.1, 26.9]
