@@ -3004,6 +3004,11 @@
             Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs [label = "", pos = "90.0,-43.333333!"];
             Menu__Kiengir_Map__Uhrum_East_Lake_Cave [label = "", pos = "84.0,-45.0!"];
             Menu__Kiengir_Map__Ensis_Bracelet [label = "", pos = "93.0,-45.0!"];
+            Menu__Kiengir_Map__Uhrum_Spring_Health [label = "", pos = "75.0,-46.666667!"];
+            Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Flask [label = "", pos = "63.0,-46.666667!"];
+            Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Portal [label = "", pos = "66.0,-46.666667!"];
+            Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Rock [label = "", pos = "72.0,-45.0!"];
+            Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_East_Glitch [label = "", pos = "72.0,-46.666667!"];
         }
     }
     {
@@ -3013,6 +3018,25 @@
             Uhrum_Breach__East_Glitch__Save_Point [label = "", pos = "67.425,-95.333333!"];
             Uhrum_Breach__East_Glitch__West_Flower [label = "", pos = "68.4,-95.5!"];
             Uhrum_Breach__East_Glitch__Above_West_Flower [label = "", pos = "69.3,-94.833333!"];
+            Uhrum_Breach__East_Glitch__Middle_Platform_East [label = "", pos = "70.8,-94.833333!"];
+            Uhrum_Breach__East_Glitch__Middle_Ledge [label = "", pos = "70.8,-95.333333!"];
+            Uhrum_Breach__East_Glitch__Middle_Lower [label = "", pos = "70.8,-95.666667!"];
+            Uhrum_Breach__East_Glitch__East_Flower_West [label = "", pos = "72.3,-95.166667!"];
+            Uhrum_Breach__East_Glitch__East_Flower_East [label = "", pos = "72.9,-95.166667!"];
+            Uhrum_Breach__East_Glitch__Glitch_West [label = "", pos = "73.2,-95.666667!"];
+            Uhrum_Breach__East_Glitch__Glitch_East [label = "", pos = "74.1,-96.166667!"];
+            Uhrum_Breach__East_Glitch__East_28 [label = "", pos = "74.7,-96.25!"];
+            Uhrum_Breach__East_Glitch__Wall_West_Platform [label = "", pos = "72.9,-94.333333!"];
+            Uhrum_Breach__East_Glitch__Wall_West_Air [label = "", pos = "73.2,-94.166667!"];
+            Uhrum_Breach__East_Glitch__Northeast_Flower [label = "", pos = "74.025,-93.916667!"];
+            Uhrum_Breach__East_Glitch__Wall_East_Platform [label = "", pos = "74.025,-94.333333!"];
+            Uhrum_Breach__East_Glitch__East_Hookable [label = "", pos = "74.325,-94.666667!"];
+            Uhrum_Breach__East_Glitch__East_27 [label = "", pos = "74.7,-94.583333!"];
+        }
+        {
+            Uhrum_Breach__North_Slime__West [label = "", pos = "75.3,-94.583333!"];
+            Uhrum_Breach__North_Slime__Center [label = "", pos = "76.5,-94.583333!"];
+            Uhrum_Breach__North_Slime__East [label = "", pos = "77.7,-94.583333!"];
         }
         {
             Uhrum_Breach__Rock_and_Gate__West [label = "", pos = "57.3,-94.583333!"];
@@ -3039,6 +3063,15 @@
             Uhrum_Breach__Save_and_Go__West_Rock_Ledge [label = "", pos = "57.6,-91.5!"];
             Uhrum_Breach__Save_and_Go__West_Platform [label = "", pos = "57.9,-91.0!"];
             Uhrum_Breach__Save_and_Go__North [label = "", pos = "58.5,-90.333333!"];
+        }
+        {
+            Uhrum_Breach__South_Slime__West [label = "", pos = "75.3,-96.25!"];
+            Uhrum_Breach__South_Slime__Center [label = "", pos = "76.5,-96.5!"];
+            Uhrum_Breach__South_Slime__East [label = "", pos = "77.7,-96.25!"];
+        }
+        {
+            Uhrum_Breach__West_Copse__West_27 [label = "", pos = "78.3,-94.583333!"];
+            Uhrum_Breach__West_Copse__West_28 [label = "", pos = "78.45,-96.25!"];
         }
         {
             Uhrum_Breach__West_Glitch__North [label = "", pos = "61.5,-95.333333!"];
@@ -3153,7 +3186,26 @@
         }
         {
             Uhrum__Glitchy_Corridor__West_28 [label = "", pos = "63.15,-46.166667!"];
+            Uhrum__Glitchy_Corridor__West_Glitch_West [label = "", pos = "64.35,-45.916667!"];
+            Uhrum__Glitchy_Corridor__Behind_West_Glitch [label = "", pos = "65.4,-46.25!"];
+            Uhrum__Glitchy_Corridor__West_Glitch_Ledge [label = "", pos = "64.35,-45.5!"];
+            Uhrum__Glitchy_Corridor__Northwest_Platform [label = "", pos = "63.9,-44.5!"];
+            Uhrum__Glitchy_Corridor__West_Pillar_West [label = "", pos = "65.4,-44.833333!"];
+            Uhrum__Glitchy_Corridor__West_Pillar_East [label = "", pos = "66.3,-45.0!"];
+            Uhrum__Glitchy_Corridor__Portal_Stand [label = "", pos = "67.425,-45.333333!"];
+            Uhrum__Glitchy_Corridor__Center_Platform_West [label = "", pos = "69.3,-44.833333!"];
+            Uhrum__Glitchy_Corridor__Center_Platform_East [label = "", pos = "70.8,-44.833333!"];
+            Uhrum__Glitchy_Corridor__Middle_Lower [label = "", pos = "70.8,-45.666667!"];
+            Uhrum__Glitchy_Corridor__East_Ledge [label = "", pos = "71.25,-45.166667!"];
+            Uhrum__Glitchy_Corridor__East_Platform [label = "", pos = "72.3,-44.833333!"];
+            Uhrum__Glitchy_Corridor__Wall_West_Platform [label = "", pos = "72.9,-44.333333!"];
+            Uhrum__Glitchy_Corridor__Wall_West [label = "", pos = "73.2,-44.166667!"];
+            Uhrum__Glitchy_Corridor__Wall_East [label = "", pos = "73.8,-44.166667!"];
+            Uhrum__Glitchy_Corridor__Wall_East_Platform [label = "", pos = "74.025,-44.333333!"];
+            Uhrum__Glitchy_Corridor__East_Hookable [label = "", pos = "74.325,-44.666667!"];
             Uhrum__Glitchy_Corridor__East_27 [label = "", pos = "74.85,-44.583333!"];
+            Uhrum__Glitchy_Corridor__East_Glitch_West [label = "", pos = "73.2,-45.666667!"];
+            Uhrum__Glitchy_Corridor__East_Glitch_East [label = "", pos = "74.1,-46.166667!"];
             Uhrum__Glitchy_Corridor__East_28 [label = "", pos = "74.85,-46.25!"];
         }
         {
@@ -3216,6 +3268,10 @@
             Uhrum__Siege_Corridor__Pond [label = "", pos = "76.2,-42.5!"];
             Uhrum__Siege_Corridor__East_Hill [label = "", pos = "77.1,-41.166667!"];
             Uhrum__Siege_Corridor__East_25 [label = "", pos = "77.85,-41.25!"];
+        }
+        {
+            Uhrum__Spring__West [label = "", pos = "75.15,-46.25!"];
+            Uhrum__Spring__Center [label = "", pos = "76.5,-46.5!"];
         }
         {
             Uhrum__Tulip_Tower__West_24 [label = "", pos = "84.15,-39.666667!"];

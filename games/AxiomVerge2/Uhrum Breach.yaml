@@ -426,6 +426,8 @@ areas:
           jumps: 1
     - name: Narrow Glitch
       coord: [21.45, 27.55]
+      data:
+        flipside: Uhrum > Glitchy Corridor > West Glitch West
       local:
         - to: Middle
       locations:
@@ -444,6 +446,8 @@ areas:
           movement: base
     - name: Past Glitch
       coord: [21.8, 27.75]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Behind West Glitch
       locations:
         - name: Break Through Glitch
           canon: Uhrum_West_Glitch
@@ -473,9 +477,311 @@ areas:
   spots:
     - name: West
       coord: [22.1, 26.75]
+      local:
+        - to: Save Point
+      exits:
+        - to: Rock and Gate > East
+          tags: [xdoor]
     - name: Save Point
       coord: [22.475, 27.2]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Portal Stand
+      local:
+        - to: West Flower
+      exits:
+        - to: West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: West Flower
       coord: [22.8, 27.3]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Middle Lower
+      exits:
+        - to: Middle Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
     - name: Above West Flower
       coord: [23.1, 26.9]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Center Platform West
+      exits:
+        - to: East Flower West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Wall West Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Platform East
+      coord: [23.6, 26.9]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Center Platform East
+      exits:
+        - to: West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Middle Ledge
+      coord: [23.6, 27.2]
+      exits:
+        - to: East Flower West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Wall West Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Middle Lower
+      coord: [23.6, 27.4]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Middle Lower
+      local:
+        - to: Save Point
+          jumps: 2
+        - to: East Flower West
+          thru: [23.75, 27.1]
+          jumps: [2, 1]
+        - to: Glitch West
+          thru: [23.75, 27.1]
+          jumps: [2, 0]
+    - name: East Flower West
+      coord: [24.1, 27.1]
+      local:
+        - to: Middle Lower
+          thru: [23.75, 27.1]
+          jumps: [2, 0]
+        - to: East Flower East
+      exits:
+        - to: Middle Platform East
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Wall West Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: East Flower East
+      coord: [24.3, 27.1]
+      local:
+        - to: East Flower West
+        - to: Glitch West
+      exits:
+        - to: Wall West Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Middle Platform East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Glitch West
+      coord: [24.4, 27.4]
+      data:
+        flipside: Uhrum > Glitchy Corridor > East Glitch West
+      local:
+        - to: East Flower East
+          jumps: 2  # if you don't clear all the glitch
+      locations:
+        - name: Break Through Glitch
+          canon: Uhrum_East_Glitch
+          item: Uhrum_East_Glitch
+          to: Glitch East
+          movement: base
+          tags: [event]
+      exits:
+        - to: Glitch East
+          req: Uhrum_East_Glitch
+          movement: base
+        - to: East Flower East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Glitch East
+      coord: [24.7, 27.7]
+      data:
+        flipside: Uhrum > Glitchy Corridor > East Glitch East
+      local:
+        - to: East 28
+      locations:
+        - name: Break Through Glitch
+          canon: Uhrum_East_Glitch
+          item: Uhrum_East_Glitch
+          to: Glitch West
+          movement: base
+          jumps: 1
+          tags: [event]
+      exits:
+        - to: Glitch West
+          req: Uhrum_East_Glitch
+          movement: base
+          jumps: 1
+    - name: East 28
+      coord: [24.9, 27.75]
+      local:
+        - to: Glitch East
+          jumps: 1
+      exits:
+        - to: South Slime > West
+          tags: [xdoor]
+
+    - name: Wall West Platform
+      coord: [24.3, 26.6]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Wall West Platform
+      local:
+        - to: Wall West Air
+          jumps: 1
+        - to: East Flower East
+        - to: East Flower West
+        - to: Middle Lower
+          thru: [23.75, 27.1]
+      exits:
+        - to: Middle Platform East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Wall West Air
+      coord: [24.4, 26.5]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Wall West
+      local:
+        - to: Wall West Platform
+    - name: Northeast Flower
+      coord: [24.675, 26.35]
+      local:
+        - to: East 27
+        - to: East Hookable
+        - to: Wall East Platform
+          thru: [24.65, 26.35]
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Wall East Platform
+      coord: [24.675, 26.6]
+      data:
+        flipside: Uhrum > Glitchy Corridor > Wall East Platform
+      local:
+        - to: East Hookable
+        - to: East 27
+      exits:
+        - to: Northeast Flower
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Northeast Flower
+          req: Drone_Hover
+          movement: base
+          jumps: 3
+    - name: East Hookable
+      coord: [24.775, 26.8]
+      data:
+        flipside: Uhrum > Glitchy Corridor > East Hookable
+      local:
+        - to: East 27
+          jumps: 1
+        - to: Wall East Platform
+          jumps: 1
+      exits:
+        - to: Northeast Flower
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: North Slime > East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: East 27
+      coord: [24.9, 26.75]
+      local:
+        - to: Wall East Platform
+          jumps: 1
+        - to: East Hookable
+      exits:
+        - to: Northeast Flower
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: North Slime > West
+          tags: [xdoor]
+
+- name: North Slime  # MARK: North Slime
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [25.1, 26.75]
+      local:
+        - to: Center
+      exits:
+        - to: East Glitch > East 27
+          tags: [xdoor]
+    - name: Center
+      coord: [25.5, 26.75]
+      data:
+        flipside: Uhrum > Save Room > Save Point
+      local:
+        - to: West
+        - to: East
+    - name: East
+      coord: [25.9, 26.75]
+      local:
+        - to: Center
+      exits:
+        - to: West Copse > West 27
+          tags: [xdoor]
+
+- name: South Slime  # MARK: South Slime
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [25.1, 27.75]
+      local:
+        - to: Center
+      exits:
+        - to: East Glitch > East 28
+          tags: [xdoor]
+    - name: Center
+      coord: [25.5, 27.9]
+      data:
+        flipside: Uhrum > Spring > Center
+      local:
+        - to: West
+          jumps: 1
+        - to: East
+          jumps: 1
+      exits:
+        - to: East Glitch > Glitch East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: East
+      coord: [25.9, 27.75]
+      local:
+        - to: Center
+      exits:
+        - to: West Copse > West 28
+          movement: base
+          penalty_tags: [xdoor, -base.2]
+
+- name: West Copse  # MARK: West Copse
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 27
+      coord: [26.1, 26.75]
+    - name: West 28
+      coord: [26.15, 27.75]  # Shifted over to match a flipside
+      data:
+        flipside: Uhrum > Waterfalls > West Water Nook

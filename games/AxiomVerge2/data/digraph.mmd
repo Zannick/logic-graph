@@ -2920,6 +2920,11 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Annuna_Corridor_Udugs(Uhrum Annuna Corridor Udugs);
         Menu__Kiengir_Map__Uhrum_East_Lake_Cave(Uhrum East Lake Cave);
         Menu__Kiengir_Map__Ensis_Bracelet(Ensi's Bracelet);
+        Menu__Kiengir_Map__Uhrum_Spring_Health(Uhrum Spring Health);
+        Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Flask(Uhrum Glitchy Corridor Flask);
+        Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Portal(Uhrum Glitchy Corridor Portal);
+        Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Rock(Uhrum Glitchy Corridor Rock);
+        Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_East_Glitch(Uhrum Glitchy Corridor East Glitch);
     end
     subgraph Menu__Emergence_Map[Emergence Map]
         Menu__Emergence_Map__Camp(Camp);
@@ -3035,6 +3040,34 @@ subgraph Uhrum_Breach
         Uhrum_Breach__East_Glitch__Save_Point(Save Point);
         Uhrum_Breach__East_Glitch__West_Flower(West Flower);
         Uhrum_Breach__East_Glitch__Above_West_Flower(Above West Flower);
+        Uhrum_Breach__East_Glitch__Middle_Platform_East(Middle Platform East);
+        Uhrum_Breach__East_Glitch__Middle_Ledge(Middle Ledge);
+        Uhrum_Breach__East_Glitch__Middle_Lower(Middle Lower);
+        Uhrum_Breach__East_Glitch__East_Flower_West(East Flower West);
+        Uhrum_Breach__East_Glitch__East_Flower_East(East Flower East);
+        Uhrum_Breach__East_Glitch__Glitch_West(Glitch West);
+        Uhrum_Breach__East_Glitch__Glitch_East(Glitch East);
+        Uhrum_Breach__East_Glitch__East_28(East 28);
+        Uhrum_Breach__East_Glitch__Wall_West_Platform(Wall West Platform);
+        Uhrum_Breach__East_Glitch__Wall_West_Air(Wall West Air);
+        Uhrum_Breach__East_Glitch__Northeast_Flower(Northeast Flower);
+        Uhrum_Breach__East_Glitch__Wall_East_Platform(Wall East Platform);
+        Uhrum_Breach__East_Glitch__East_Hookable(East Hookable);
+        Uhrum_Breach__East_Glitch__East_27(East 27);
+    end
+    subgraph Uhrum_Breach__North_Slime[North Slime]
+        Uhrum_Breach__North_Slime__West(West);
+        Uhrum_Breach__North_Slime__Center(Center);
+        Uhrum_Breach__North_Slime__East(East);
+    end
+    subgraph Uhrum_Breach__South_Slime[South Slime]
+        Uhrum_Breach__South_Slime__West(West);
+        Uhrum_Breach__South_Slime__Center(Center);
+        Uhrum_Breach__South_Slime__East(East);
+    end
+    subgraph Uhrum_Breach__West_Copse[West Copse]
+        Uhrum_Breach__West_Copse__West_27(West 27);
+        Uhrum_Breach__West_Copse__West_28(West 28);
     end
 end
 subgraph Uhrum
@@ -3095,8 +3128,31 @@ subgraph Uhrum
     end
     subgraph Uhrum__Glitchy_Corridor[Glitchy Corridor]
         Uhrum__Glitchy_Corridor__West_28(West 28);
+        Uhrum__Glitchy_Corridor__West_Glitch_West(West Glitch West);
+        Uhrum__Glitchy_Corridor__Behind_West_Glitch(Behind West Glitch);
+        Uhrum__Glitchy_Corridor__West_Glitch_Ledge(West Glitch Ledge);
+        Uhrum__Glitchy_Corridor__Northwest_Platform(Northwest Platform);
+        Uhrum__Glitchy_Corridor__West_Pillar_West(West Pillar West);
+        Uhrum__Glitchy_Corridor__West_Pillar_East(West Pillar East);
+        Uhrum__Glitchy_Corridor__Portal_Stand(Portal Stand);
+        Uhrum__Glitchy_Corridor__Center_Platform_West(Center Platform West);
+        Uhrum__Glitchy_Corridor__Center_Platform_East(Center Platform East);
+        Uhrum__Glitchy_Corridor__Middle_Lower(Middle Lower);
+        Uhrum__Glitchy_Corridor__East_Ledge(East Ledge);
+        Uhrum__Glitchy_Corridor__East_Platform(East Platform);
+        Uhrum__Glitchy_Corridor__Wall_West_Platform(Wall West Platform);
+        Uhrum__Glitchy_Corridor__Wall_West(Wall West);
+        Uhrum__Glitchy_Corridor__Wall_East(Wall East);
+        Uhrum__Glitchy_Corridor__Wall_East_Platform(Wall East Platform);
+        Uhrum__Glitchy_Corridor__East_Hookable(East Hookable);
         Uhrum__Glitchy_Corridor__East_27(East 27);
+        Uhrum__Glitchy_Corridor__East_Glitch_West(East Glitch West);
+        Uhrum__Glitchy_Corridor__East_Glitch_East(East Glitch East);
         Uhrum__Glitchy_Corridor__East_28(East 28);
+    end
+    subgraph Uhrum__Spring[Spring]
+        Uhrum__Spring__West(West);
+        Uhrum__Spring__Center(Center);
     end
     subgraph Uhrum__Waterfalls[Waterfalls]
         Uhrum__Waterfalls__West_25(West 25);
@@ -5018,6 +5074,7 @@ Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
+Menu__Breach_Map__UVB_Center --> Uhrum_Breach__East_Glitch__Save_Point
 Menu__Emergence_Map__Camp --> Emergence__Camp_Exterior__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
@@ -5051,10 +5108,32 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__East_Flower_West
+Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__Wall_West_Platform
+Uhrum_Breach__East_Glitch__East_27 --> Uhrum_Breach__East_Glitch__Northeast_Flower
+Uhrum_Breach__East_Glitch__East_27 <--> Uhrum_Breach__North_Slime__West
+Uhrum_Breach__East_Glitch__East_28 <--> Uhrum_Breach__South_Slime__West
+Uhrum_Breach__East_Glitch__East_Flower_East --> Uhrum_Breach__East_Glitch__Middle_Platform_East
+Uhrum_Breach__East_Glitch__East_Flower_East --> Uhrum_Breach__East_Glitch__Wall_West_Platform
+Uhrum_Breach__East_Glitch__East_Flower_West --> Uhrum_Breach__East_Glitch__Middle_Platform_East
+Uhrum_Breach__East_Glitch__East_Flower_West --> Uhrum_Breach__East_Glitch__Wall_West_Platform
+Uhrum_Breach__East_Glitch__East_Hookable --> Uhrum_Breach__East_Glitch__Northeast_Flower
+Uhrum_Breach__East_Glitch__East_Hookable --> Uhrum_Breach__North_Slime__East
+Uhrum_Breach__East_Glitch__Glitch_East <--> Uhrum_Breach__East_Glitch__Glitch_West
+Uhrum_Breach__East_Glitch__Glitch_West --> Uhrum_Breach__East_Glitch__East_Flower_East
+Uhrum_Breach__East_Glitch__Middle_Ledge --> Uhrum_Breach__East_Glitch__East_Flower_West
+Uhrum_Breach__East_Glitch__Middle_Ledge --> Uhrum_Breach__East_Glitch__Wall_West_Platform
+Uhrum_Breach__East_Glitch__Middle_Platform_East --> Uhrum_Breach__East_Glitch__Save_Point
+Uhrum_Breach__East_Glitch__Middle_Platform_East --> Uhrum_Breach__East_Glitch__West
+Uhrum_Breach__East_Glitch__Save_Point --> Uhrum_Breach__East_Glitch__West
+Uhrum_Breach__East_Glitch__Wall_East_Platform --> Uhrum_Breach__East_Glitch__Northeast_Flower
+Uhrum_Breach__East_Glitch__Wall_West_Platform --> Uhrum_Breach__East_Glitch__Middle_Platform_East
+Uhrum_Breach__East_Glitch__West <--> Uhrum_Breach__Rock_and_Gate__East
+Uhrum_Breach__East_Glitch__West_Flower --> Uhrum_Breach__East_Glitch__Middle_Ledge
+Uhrum_Breach__North_Slime__East --> Uhrum_Breach__West_Copse__West_27
 Uhrum_Breach__Rock_and_Gate__Button --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
 Uhrum_Breach__Rock_and_Gate__Center_Area_West --> Uhrum_Breach__Rock_and_Gate__North
 Uhrum_Breach__Rock_and_Gate__Center_Area_West <--> Uhrum_Breach__Rock_and_Gate__Rock_West
-Uhrum_Breach__Rock_and_Gate__East --> Uhrum_Breach__East_Glitch__West
 Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__Above_West_Flower
 Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__Save_Point
 Uhrum_Breach__Rock_and_Gate__East_Ledge --> Uhrum_Breach__East_Glitch__West_Flower
@@ -5077,6 +5156,8 @@ Uhrum_Breach__Save_and_Go__West_Platform --> Uhrum_Breach__Save_and_Go__North
 Uhrum_Breach__Save_and_Go__West_Rock_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
+Uhrum_Breach__South_Slime__Center --> Uhrum_Breach__East_Glitch__Glitch_East
+Uhrum_Breach__South_Slime__East --> Uhrum_Breach__West_Copse__West_28
 Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Narrow_Glitch
 Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Pillar_East
 Uhrum_Breach__West_Glitch__Narrow_Glitch <--> Uhrum_Breach__West_Glitch__Past_Glitch
@@ -5148,6 +5229,41 @@ Uhrum__Emergence_Facility__Wall_West_Mid_air --> Uhrum__Emergence_Facility__East
 Uhrum__Emergence_Facility__West <--> Uhrum__Emergence_Save__East
 Uhrum__Emergence_Facility__West_Approach --> Uhrum__Emergence_Facility__Upper_Level_Middle
 Uhrum__Emergence_Save__West <--> Uhrum__Grassy_Guardpost__East_22
+Uhrum__Glitchy_Corridor__Center_Platform_East --> Uhrum__Glitchy_Corridor__Portal_Stand
+Uhrum__Glitchy_Corridor__Center_Platform_East --> Uhrum__Glitchy_Corridor__West_Pillar_East
+Uhrum__Glitchy_Corridor__Center_Platform_West --> Uhrum__Glitchy_Corridor__East_Glitch_West
+Uhrum__Glitchy_Corridor__Center_Platform_West --> Uhrum__Glitchy_Corridor__Wall_West_Platform
+Uhrum__Glitchy_Corridor__East_28 <--> Uhrum__Spring__West
+Uhrum__Glitchy_Corridor__East_Glitch_East <--> Uhrum__Glitchy_Corridor__East_Glitch_West
+Uhrum__Glitchy_Corridor__East_Glitch_West --> Uhrum__Glitchy_Corridor__East_Platform
+Uhrum__Glitchy_Corridor__East_Glitch_West --> Uhrum__Glitchy_Corridor__Wall_East_Platform
+Uhrum__Glitchy_Corridor__East_Hookable --> Uhrum__Save_Room__East
+Uhrum__Glitchy_Corridor__East_Hookable --> Uhrum__Save_Room__Save_Point
+Uhrum__Glitchy_Corridor__East_Ledge --> Uhrum__Glitchy_Corridor__East_Platform
+Uhrum__Glitchy_Corridor__East_Platform --> Uhrum__Glitchy_Corridor__Center_Platform_East
+Uhrum__Glitchy_Corridor__East_Platform --> Uhrum__Glitchy_Corridor__Wall_West_Platform
+Uhrum__Glitchy_Corridor__Middle_Lower --> Uhrum__Glitchy_Corridor__East_Ledge
+Uhrum__Glitchy_Corridor__Northwest_Platform <--> Uhrum__Glitchy_Corridor__West_Pillar_West
+Uhrum__Glitchy_Corridor__Northwest_Platform <--> Uhrum__West_Entrance__Lower_Path_Rock
+Uhrum__Glitchy_Corridor__Northwest_Platform --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__Glitchy_Corridor__Portal_Stand --> Uhrum__Glitchy_Corridor__Center_Platform_West
+Uhrum__Glitchy_Corridor__Portal_Stand --> Uhrum__Glitchy_Corridor__West_Pillar_East
+Uhrum__Glitchy_Corridor__Wall_East <--> Uhrum__Glitchy_Corridor__Wall_West
+Uhrum__Glitchy_Corridor__Wall_East_Platform --> Uhrum__Glitchy_Corridor__Center_Platform_East
+Uhrum__Glitchy_Corridor__Wall_East_Platform <--> Uhrum__Glitchy_Corridor__Wall_West_Platform
+Uhrum__Glitchy_Corridor__Wall_West_Platform --> Uhrum__Save_Room__Save_Point
+Uhrum__Glitchy_Corridor__West_28 --> Uhrum__Glitchy_Corridor__West_Glitch_Ledge
+Uhrum__Glitchy_Corridor__West_28 <--> Uhrum__West_Entrance__East_28
+Uhrum__Glitchy_Corridor__West_Glitch_Ledge --> Uhrum__Glitchy_Corridor__West_Pillar_West
+Uhrum__Glitchy_Corridor__West_Glitch_Ledge <--> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__Glitchy_Corridor__West_Glitch_West --> Uhrum__Glitchy_Corridor__Behind_West_Glitch
+Uhrum__Glitchy_Corridor__West_Glitch_West --> Uhrum__Glitchy_Corridor__West_Glitch_Ledge
+Uhrum__Glitchy_Corridor__West_Glitch_West <--> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__Glitchy_Corridor__West_Pillar_East --> Uhrum__Glitchy_Corridor__West_Glitch_West
+Uhrum__Glitchy_Corridor__West_Pillar_East --> Uhrum__West_Entrance__Lower_Path_Rock
+Uhrum__Glitchy_Corridor__West_Pillar_East --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__Glitchy_Corridor__West_Pillar_West --> Uhrum__Glitchy_Corridor__Center_Platform_West
+Uhrum__Glitchy_Corridor__West_Pillar_West --> Uhrum__Glitchy_Corridor__Portal_Stand
 Uhrum__Grassy_Guardpost__Center_Platform_East --> Uhrum__Grassy_Guardpost__West_Ledge
 Uhrum__Grassy_Guardpost__East_23 --> Uhrum__Grassy_Guardpost__Small_Column_East
 Uhrum__Grassy_Guardpost__East_Ledge --> Uhrum__Emergence_Facility__West_Approach
@@ -5198,6 +5314,7 @@ Uhrum__Siege_Corridor__Upper_Rock_Item <--> Uhrum__Siege_Corridor__Upper_Rock_We
 Uhrum__Siege_Corridor__West_26 <--> Uhrum__West_Entrance__East_26
 Uhrum__Siege_Corridor__West_Greenery --> Uhrum__Siege_Corridor__West_Grassy_Ledge
 Uhrum__Siege_Corridor__Western_Rock --> Uhrum__Siege_Corridor__Northwest_Platform
+Uhrum__Spring__Center --> Uhrum__Glitchy_Corridor__East_Glitch_East
 Uhrum__Tulip_Tower__East_23 --> Annuna__Invisible_Enemies__West_23
 Uhrum__Tulip_Tower__East_23 <--> Uhrum__Tulip_Tower__Platform_1_East
 Uhrum__Tulip_Tower__East_23 --> Uhrum__Tulip_Tower__Platform_2_East
@@ -5255,7 +5372,6 @@ Uhrum__Waterfalls__West_Shallow_End --> Uhrum__Waterfalls__Center_Island_West
 Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
 Uhrum__Waterfalls__West_Water_Nook --> Uhrum__Waterfalls__West_Water_Ledge
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
-Uhrum__West_Entrance__East_28 --> Uhrum__Glitchy_Corridor__West_28
 Uhrum__West_Entrance__East_28 --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Inner_Dais --> Uhrum__West_Entrance__Top_West_Ledge
 Uhrum__West_Entrance__Inner_Dais <--> Uhrum__West_Entrance__West_of_Gate

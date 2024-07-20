@@ -879,6 +879,16 @@ areas:
       coord: [28, 27]
     - name: Ensi's Bracelet
       coord: [31, 27]
+    - name: Uhrum Spring Health
+      coord: [25, 28]
+    - name: Uhrum Glitchy Corridor Flask
+      coord: [21, 28]
+    - name: Uhrum Glitchy Corridor Portal
+      coord: [22, 28]
+    - name: Uhrum Glitchy Corridor Rock
+      coord: [24, 27]
+    - name: Uhrum Glitchy Corridor East Glitch
+      coord: [24, 28]
     #endregion
 
 - name: Emergence Map  # MARK: Emergence Map
@@ -1109,6 +1119,11 @@ areas:
 
     - name: UVB Center
       coord: [22, 28]
+      exits:
+        - to: Uhrum Breach > East Glitch > Save Point
+          req: ^map__uhrum_breach__east_glitch__save
+          time: 12
+          tags: [warp]
     - name: UVB Dead-end
       coord: [31, 26]
     - name: UVB East

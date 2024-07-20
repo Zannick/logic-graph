@@ -2282,6 +2282,10 @@ pub fn access_invoke_hover_or_anuman(ctx: &Context, world: &World) -> bool {
     // $hover or Anuman
     (helper__hover!(ctx, world) || ctx.has(Item::Anuman))
 }
+pub fn access_invoke_hover_or_invoke_grab(ctx: &Context, world: &World) -> bool {
+    // $hover or $grab
+    (helper__hover!(ctx, world) || helper__grab!(ctx, world))
+}
 pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hover or $hook
     (helper__hover!(ctx, world) || helper__hook!(ctx, world))
@@ -2741,6 +2745,10 @@ pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &World) -> b
     // ^map__uhrum__west_entrance__save
     ctx.map__uhrum__west_entrance__save()
 }
+pub fn access_map__uhrum_breach__east_glitch__save(ctx: &Context, world: &World) -> bool {
+    // ^map__uhrum_breach__east_glitch__save
+    ctx.map__uhrum_breach__east_glitch__save()
+}
 pub fn access_melee_damage(ctx: &Context, world: &World) -> bool {
     // Melee_Damage
     ctx.has(Item::Melee_Damage)
@@ -2813,6 +2821,10 @@ pub fn access_mode_eq_drone_and_portal_eq_position_and_flipside_ne_invoke_defaul
 pub fn access_mode_eq_drone_and_sniper_valley_rock_2(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Sniper_Valley_Rock_2
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Sniper_Valley_Rock_2))
+}
+pub fn access_mode_eq_drone_and_uhrum_west_glitch(ctx: &Context, world: &World) -> bool {
+    // ^mode == 'drone' and Uhrum_West_Glitch
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Uhrum_West_Glitch))
 }
 pub fn access_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // ^mode != 'drone'
@@ -3119,6 +3131,10 @@ pub fn access_uhrum_cavern_wall_and_invoke_hookhover(ctx: &Context, world: &Worl
     // Uhrum_Cavern_Wall and $hookhover
     (ctx.has(Item::Uhrum_Cavern_Wall) && helper__hookhover!(ctx, world))
 }
+pub fn access_uhrum_east_glitch(ctx: &Context, world: &World) -> bool {
+    // Uhrum_East_Glitch
+    ctx.has(Item::Uhrum_East_Glitch)
+}
 pub fn access_uhrum_east_lake_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_East_Lake_Block
     ctx.has(Item::Uhrum_East_Lake_Block)
@@ -3142,6 +3158,21 @@ pub fn access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(
 pub fn access_uhrum_emergence_wall_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Uhrum_Emergence_Wall and $hover
     (ctx.has(Item::Uhrum_Emergence_Wall) && helper__hover!(ctx, world))
+}
+pub fn access_uhrum_glitchy_corridor_rock(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock
+    ctx.has(Item::Uhrum_Glitchy_Corridor_Rock)
+}
+pub fn access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock and $hook
+    (ctx.has(Item::Uhrum_Glitchy_Corridor_Rock) && helper__hook!(ctx, world))
+}
+pub fn access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock and $hookhover
+    (ctx.has(Item::Uhrum_Glitchy_Corridor_Rock) && helper__hookhover!(ctx, world))
 }
 pub fn access_uhrum_rocky_gate_rock(ctx: &Context, world: &World) -> bool {
     // Uhrum_Rocky_Gate_Rock
@@ -12937,6 +12968,33 @@ pub fn explain_invoke_hover_or_anuman(
         }
     }
 }
+pub fn explain_invoke_hover_or_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover or $grab
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+            edict.insert("$hover", format!("{:?}", res));
+            refs.push("$hover");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hover_or_invoke_hook(
     ctx: &Context,
     world: &World,
@@ -14705,6 +14763,18 @@ pub fn explain_map__uhrum__west_entrance__save(
         (r, vec!["^map__uhrum__west_entrance__save"])
     }
 }
+pub fn explain_map__uhrum_breach__east_glitch__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__uhrum_breach__east_glitch__save
+    {
+        let r = ctx.map__uhrum_breach__east_glitch__save();
+        edict.insert("^map__uhrum_breach__east_glitch__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum_breach__east_glitch__save"])
+    }
+}
 pub fn explain_melee_damage(
     ctx: &Context,
     world: &World,
@@ -15191,6 +15261,38 @@ pub fn explain_mode_eq_drone_and_sniper_valley_rock_2(
                 let h = ctx.has(Item::Sniper_Valley_Rock_2);
                 edict.insert("Sniper_Valley_Rock_2", format!("{}", h));
                 (h, vec!["Sniper_Valley_Rock_2"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_uhrum_west_glitch(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Uhrum_West_Glitch
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Uhrum_West_Glitch);
+                edict.insert("Uhrum_West_Glitch", format!("{}", h));
+                (h, vec!["Uhrum_West_Glitch"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -16644,6 +16746,18 @@ pub fn explain_uhrum_cavern_wall_and_invoke_hookhover(
         }
     }
 }
+pub fn explain_uhrum_east_glitch(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_East_Glitch
+    {
+        let h = ctx.has(Item::Uhrum_East_Glitch);
+        edict.insert("Uhrum_East_Glitch", format!("{}", h));
+        (h, vec!["Uhrum_East_Glitch"])
+    }
+}
 pub fn explain_uhrum_east_lake_block(
     ctx: &Context,
     world: &World,
@@ -16753,6 +16867,70 @@ pub fn explain_uhrum_emergence_wall_and_invoke_hover(
                 let (res, mut refs) = hexplain__hover!(ctx, world, edict);
                 edict.insert("$hover", format!("{:?}", res));
                 refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_glitchy_corridor_rock(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Glitchy_Corridor_Rock
+    {
+        let h = ctx.has(Item::Uhrum_Glitchy_Corridor_Rock);
+        edict.insert("Uhrum_Glitchy_Corridor_Rock", format!("{}", h));
+        (h, vec!["Uhrum_Glitchy_Corridor_Rock"])
+    }
+}
+pub fn explain_uhrum_glitchy_corridor_rock_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Glitchy_Corridor_Rock and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Glitchy_Corridor_Rock);
+            edict.insert("Uhrum_Glitchy_Corridor_Rock", format!("{}", h));
+            (h, vec!["Uhrum_Glitchy_Corridor_Rock"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_glitchy_corridor_rock_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Glitchy_Corridor_Rock and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Glitchy_Corridor_Rock);
+            edict.insert("Uhrum_Glitchy_Corridor_Rock", format!("{}", h));
+            (h, vec!["Uhrum_Glitchy_Corridor_Rock"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -21861,6 +22039,14 @@ pub fn observe_access_invoke_hover_or_anuman(
         ctx.has(Item::Anuman)
     })
 }
+pub fn observe_access_invoke_hover_or_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover or $grab
+    (hobserve__hover!(ctx, world, full_obs) || hobserve__grab!(ctx, world, full_obs))
+}
 pub fn observe_access_invoke_hover_or_invoke_hook(
     ctx: &Context,
     world: &World,
@@ -22892,6 +23078,17 @@ pub fn observe_access_map__uhrum__west_entrance__save(
         ctx.map__uhrum__west_entrance__save()
     }
 }
+pub fn observe_access_map__uhrum_breach__east_glitch__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__uhrum_breach__east_glitch__save
+    {
+        full_obs.observe_map__uhrum_breach__east_glitch__save();
+        ctx.map__uhrum_breach__east_glitch__save()
+    }
+}
 pub fn observe_access_melee_damage(
     ctx: &Context,
     world: &World,
@@ -23152,6 +23349,23 @@ pub fn observe_access_mode_eq_drone_and_sniper_valley_rock_2(
     } && ({
         full_obs.observe_sniper_valley_rock_2();
         ctx.has(Item::Sniper_Valley_Rock_2)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_uhrum_west_glitch(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Uhrum_West_Glitch
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_uhrum_west_glitch();
+        ctx.has(Item::Uhrum_West_Glitch)
     }))
 }
 pub fn observe_access_mode_ne_drone(
@@ -23935,6 +24149,17 @@ pub fn observe_access_uhrum_cavern_wall_and_invoke_hookhover(
         ctx.has(Item::Uhrum_Cavern_Wall)
     } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
+pub fn observe_access_uhrum_east_glitch(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_East_Glitch
+    {
+        full_obs.observe_uhrum_east_glitch();
+        ctx.has(Item::Uhrum_East_Glitch)
+    }
+}
 pub fn observe_access_uhrum_east_lake_block(
     ctx: &Context,
     world: &World,
@@ -23990,6 +24215,39 @@ pub fn observe_access_uhrum_emergence_wall_and_invoke_hover(
         full_obs.observe_uhrum_emergence_wall();
         ctx.has(Item::Uhrum_Emergence_Wall)
     } && (hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_uhrum_glitchy_corridor_rock(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock
+    {
+        full_obs.observe_uhrum_glitchy_corridor_rock();
+        ctx.has(Item::Uhrum_Glitchy_Corridor_Rock)
+    }
+}
+pub fn observe_access_uhrum_glitchy_corridor_rock_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock and $hook
+    ({
+        full_obs.observe_uhrum_glitchy_corridor_rock();
+        ctx.has(Item::Uhrum_Glitchy_Corridor_Rock)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Glitchy_Corridor_Rock and $hookhover
+    ({
+        full_obs.observe_uhrum_glitchy_corridor_rock();
+        ctx.has(Item::Uhrum_Glitchy_Corridor_Rock)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_rocky_gate_rock(
     ctx: &Context,

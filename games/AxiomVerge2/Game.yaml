@@ -83,7 +83,8 @@ exit_movements:  # MARK: exit_movements
   fast_hover:
     x: .4
   fling:
-    x: .75
+    x: .75  # With a charge_time of 1s and limited distance on flings, you need to travel
+            # ~.857 *in fling* before it's more efficient than just fast_hover
   # TODO: does water affect this?
   mist1:
     ignore_base: true
@@ -176,6 +177,7 @@ time:  # MARK: time
   fast_hover.1: 0.25
   fast_hover.2: 0.50
   base.1: 0.35
+  base.2: 0.7
   # These are specifically y-dir?
   fall.2: 0.2
   mist1.2: 0.8
@@ -358,9 +360,9 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{39}, Big_Flask{19}]
+    [Flask{39}, Big_Flask{20}]
   $all_health:itemList: >
-    [Health_Node{2}, Health_Fragment{18}]
+    [Health_Node{3}, Health_Fragment{19}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >

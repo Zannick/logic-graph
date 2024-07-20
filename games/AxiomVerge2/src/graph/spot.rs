@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2742] = [
+static SPOT_DEFS: [SpotDef; 2790] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -13684,7 +13684,7 @@ static SPOT_DEFS: [SpotDef; 2742] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_Center,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__UVB_Center__ex__Uhrum_Breach__East_Glitch__Save_Point_1, ExitId::Menu__Breach_Map__UVB_Center__ex__Uhrum_Breach__East_Glitch__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -14846,6 +14846,30 @@ static SPOT_DEFS: [SpotDef; 2742] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_East_Glitch,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Rock,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Uhrum_Rocky_Guardpost_Flask,
         loc_range: None,
         exit_range: None,
@@ -14859,6 +14883,12 @@ static SPOT_DEFS: [SpotDef; 2742] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Uhrum_Siege_Corridor_Health,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Uhrum_Spring_Health,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14956,25 +14986,127 @@ static SPOT_DEFS: [SpotDef; 2742] = [
     SpotDef {
         id: SpotId::Uhrum_Breach__East_Glitch__Above_West_Flower,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Above_West_Flower__ex__East_Flower_West_1, ExitId::Uhrum_Breach__East_Glitch__Above_West_Flower__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__East_27,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__East_27__ex__North_Slime__West_1, ExitId::Uhrum_Breach__East_Glitch__East_27__ex__Northeast_Flower_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__East_28,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__East_28__ex__South_Slime__West_1, ExitId::Uhrum_Breach__East_Glitch__East_28__ex__South_Slime__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__East_Flower_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__East_Flower_East__ex__Middle_Platform_East_1, ExitId::Uhrum_Breach__East_Glitch__East_Flower_East__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__East_Flower_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__East_Flower_West__ex__Middle_Platform_East_1, ExitId::Uhrum_Breach__East_Glitch__East_Flower_West__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__East_Hookable,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__North_Slime__East_1, ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__Northeast_Flower_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Glitch_East,
+        loc_range: Some((LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch, LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch)),
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1, ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Glitch_West,
+        loc_range: Some((LocationId::Uhrum_Breach__East_Glitch__Glitch_West__Break_Through_Glitch, LocationId::Uhrum_Breach__East_Glitch__Glitch_West__Break_Through_Glitch)),
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1, ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__Glitch_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Middle_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__East_Flower_West_1, ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Middle_Lower,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Middle_Platform_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__Save_Point_1, ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Northeast_Flower,
+        loc_range: Some((LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health, LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health)),
         exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum_Breach__East_Glitch__Save_Point,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Save_Point__ex__West_1, ExitId::Uhrum_Breach__East_Glitch__Save_Point__ex__West_1)),
+        action_range: Some((ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save, ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Wall_East_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1, ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Wall_West_Air,
+        loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Glitch__Wall_West_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1, ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum_Breach__East_Glitch__West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__West__ex__Rock_and_Gate__East_1, ExitId::Uhrum_Breach__East_Glitch__West__ex__Rock_and_Gate__East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum_Breach__East_Glitch__West_Flower,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1, ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__North_Slime__Center,
+        loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__North_Slime__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__North_Slime__East__ex__West_Copse__West_27_1, ExitId::Uhrum_Breach__North_Slime__East__ex__West_Copse__West_27_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__North_Slime__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1, ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1)),
         action_range: None,
     },
     SpotDef {
@@ -15107,6 +15239,36 @@ static SPOT_DEFS: [SpotDef; 2742] = [
         id: SpotId::Uhrum_Breach__Save_and_Go__West_Stone_Ledge,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Ledge__ex__West_Platform_1, ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Ledge__ex__West_Rock_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__South_Slime__Center,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__South_Slime__Center__ex__East_Glitch__Glitch_East_1, ExitId::Uhrum_Breach__South_Slime__Center__ex__East_Glitch__Glitch_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__South_Slime__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__South_Slime__East__ex__West_Copse__West_28_1, ExitId::Uhrum_Breach__South_Slime__East__ex__West_Copse__West_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__South_Slime__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__South_Slime__West__ex__East_Glitch__East_28_1, ExitId::Uhrum_Breach__South_Slime__West__ex__East_Glitch__East_28_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__West_27,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__West_28,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -15662,21 +15824,135 @@ static SPOT_DEFS: [SpotDef; 2742] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Uhrum__Glitchy_Corridor__East_27,
+        id: SpotId::Uhrum__Glitchy_Corridor__Behind_West_Glitch,
+        loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask, LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Center_Platform_East,
         loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__Portal_Stand_1, ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__West_Pillar_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Center_Platform_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Center_Platform_West__ex__East_Glitch_West_1, ExitId::Uhrum__Glitchy_Corridor__Center_Platform_West__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_27,
+        loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall, LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover)),
         exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Glitchy_Corridor__East_28,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1, ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_Glitch_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1, ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1, ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_Hookable,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1, ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1, ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__East_Platform,
+        loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall, LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall_and_Hover)),
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1, ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Middle_Lower,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1, ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Northwest_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Rock_1, ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Pillar_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Portal_Stand__ex__Center_Platform_West_1, ExitId::Uhrum__Glitchy_Corridor__Portal_Stand__ex__West_Pillar_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Wall_East,
+        loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall, LocationId::Uhrum__Glitchy_Corridor__Wall_East__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Wall_East__ex__Wall_West_1, ExitId::Uhrum__Glitchy_Corridor__Wall_East__ex__Wall_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Center_Platform_East_1, ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Wall_West,
+        loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall, LocationId::Uhrum__Glitchy_Corridor__Wall_West__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1, ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1, ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Glitchy_Corridor__West_28,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1, ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1, ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__West_Glitch_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1, ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__West_Pillar_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Rock_1, ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Glitch_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Glitchy_Corridor__West_Pillar_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Center_Platform_West_1, ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Portal_Stand_1)),
         action_range: None,
     },
     SpotDef {
@@ -15983,6 +16259,18 @@ static SPOT_DEFS: [SpotDef; 2742] = [
         id: SpotId::Uhrum__Siege_Corridor__Western_Rock,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1, ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Spring__Center,
+        loc_range: Some((LocationId::Uhrum__Spring__Center__Health, LocationId::Uhrum__Spring__Center__Health)),
+        exit_range: Some((ExitId::Uhrum__Spring__Center__ex__Glitchy_Corridor__East_Glitch_East_1, ExitId::Uhrum__Spring__Center__ex__Glitchy_Corridor__East_Glitch_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Spring__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Spring__West__ex__Glitchy_Corridor__East_28_1, ExitId::Uhrum__Spring__West__ex__Glitchy_Corridor__East_28_1)),
         action_range: None,
     },
     SpotDef {
@@ -16360,13 +16648,13 @@ static SPOT_DEFS: [SpotDef; 2742] = [
     SpotDef {
         id: SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__West_Entrance__Lower_Path_Rock__ex__Glitchy_Corridor__Northwest_Platform_1, ExitId::Uhrum__West_Entrance__Lower_Path_Rock__ex__Glitchy_Corridor__Northwest_Platform_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_Ledge_1, ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_West_1)),
         action_range: None,
     },
     SpotDef {
