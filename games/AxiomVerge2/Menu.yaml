@@ -889,6 +889,10 @@ areas:
       coord: [24, 27]
     - name: Uhrum Glitchy Corridor East Glitch
       coord: [24, 28]
+    - name: Uhrum Seclusion Portal
+      coord: [22, 21]
+    - name: Uhrum Seclusion Flask
+      coord: [23, 21]
     #endregion
 
 - name: Emergence Map  # MARK: Emergence Map
@@ -1019,6 +1023,11 @@ areas:
           tags: [warp]
     - name: GSB East
       coord: [20, 20]
+      exits:
+        - to: Giguna Breach > East > Save Point
+          req: ^map__giguna_breach__east__save
+          time: 12
+          tags: [warp]
     - name: GSB Emergence
       coord: [10, 9]
     - name: GSB Labyrinth
@@ -1143,6 +1152,8 @@ areas:
       coord: [16, 20]
     - name: GSB Labyrinth Flask
       coord: [18, 21]
+    - name: GSB Lower Machinery Flask
+      coord: [19, 23]
 
     - name: GlB Grate Flask
       coord: [39, 13]
@@ -1196,4 +1207,6 @@ areas:
       coord: [24, 28]
     - name: UVB East Glitch Health
       coord: [24, 27]
+    - name: UVB Blob
+      coord: [22, 21]
     #endregion

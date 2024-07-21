@@ -1316,6 +1316,15 @@
             Giguna_Breach__Deadly_Flora__East [label = "", pos = "35.7,-67.916667!"];
         }
         {
+            Giguna_Breach__East__South [label = "", pos = "61.5,-84.666667!"];
+            Giguna_Breach__East__Lower_Tunnel_Entrance [label = "", pos = "62.1,-84.166667!"];
+            Giguna_Breach__East__East_Tunnel [label = "", pos = "62.85,-84.166667!"];
+            Giguna_Breach__East__Upper_Tunnel_Entrance [label = "", pos = "62.7,-82.416667!"];
+            Giguna_Breach__East__Upper_Ledge [label = "", pos = "62.475,-82.5!"];
+            Giguna_Breach__East__Save_Point [label = "", pos = "61.425,-82.666667!"];
+            Giguna_Breach__East__North [label = "", pos = "61.5,-82.0!"];
+        }
+        {
             Giguna_Breach__Emergence__Corner [label = "", pos = "30.3,-63.833333!"];
             Giguna_Breach__Emergence__Left_Side [label = "", pos = "30.45,-64.166667!"];
             Giguna_Breach__Emergence__Left_Mid_air [label = "", pos = "30.9,-64.5!"];
@@ -1374,8 +1383,21 @@
             Giguna_Breach__Labyrinth__East_19 [label = "", pos = "56.7,-81.25!"];
         }
         {
-            Giguna_Breach__Lower_Machinery__West [label = "", pos = "57.3,-86.25!"];
             Giguna_Breach__Lower_Machinery__South [label = "", pos = "58.5,-88.0!"];
+            Giguna_Breach__Lower_Machinery__Bottom [label = "", pos = "58.05,-88.0!"];
+            Giguna_Breach__Lower_Machinery__Button [label = "", pos = "57.9,-87.166667!"];
+            Giguna_Breach__Lower_Machinery__West_Piston_Middle [label = "", pos = "59.1,-87.166667!"];
+            Giguna_Breach__Lower_Machinery__West_Piston_Upper [label = "", pos = "59.1,-86.833333!"];
+            Giguna_Breach__Lower_Machinery__West_Piston_Entrance [label = "", pos = "59.1,-86.666667!"];
+            Giguna_Breach__Lower_Machinery__West [label = "", pos = "57.3,-86.25!"];
+            Giguna_Breach__Lower_Machinery__Center_Pillar_West [label = "", pos = "59.4,-86.333333!"];
+            Giguna_Breach__Lower_Machinery__Piston_2_Upper [label = "", pos = "60.9,-86.833333!"];
+            Giguna_Breach__Lower_Machinery__East_Between_Pistons [label = "", pos = "61.5,-87.166667!"];
+            Giguna_Breach__Lower_Machinery__Piston_3_Upper [label = "", pos = "61.95,-86.833333!"];
+            Giguna_Breach__Lower_Machinery__East_Mid_air [label = "", pos = "61.95,-86.166667!"];
+            Giguna_Breach__Lower_Machinery__East_Ledge [label = "", pos = "62.25,-86.25!"];
+            Giguna_Breach__Lower_Machinery__Upper_Ledge [label = "", pos = "61.95,-85.583333!"];
+            Giguna_Breach__Lower_Machinery__North [label = "", pos = "61.5,-85.333333!"];
         }
         {
             Giguna_Breach__Lower_Portal__East [label = "", pos = "56.7,-86.25!"];
@@ -1413,6 +1435,12 @@
             Giguna_Breach__Robopede__North [label = "", pos = "43.5,-68.666667!"];
         }
         {
+            Giguna_Breach__Secret_Tunnel__West [label = "", pos = "63.15,-84.166667!"];
+            Giguna_Breach__Secret_Tunnel__Narrow_Point [label = "", pos = "65.25,-84.5!"];
+            Giguna_Breach__Secret_Tunnel__Button_Obverse [label = "", pos = "65.4,-84.666667!"];
+            Giguna_Breach__Secret_Tunnel__East [label = "", pos = "65.7,-84.666667!"];
+        }
+        {
             Giguna_Breach__Slingshot__West [label = "", pos = "51.3,-67.75!"];
             Giguna_Breach__Slingshot__Column [label = "", pos = "52.5,-67.5!"];
             Giguna_Breach__Slingshot__Ravine [label = "", pos = "53.1,-68.0!"];
@@ -1432,6 +1460,8 @@
         }
         {
             Giguna_Breach__Upper_Machinery__West [label = "", pos = "57.3,-81.25!"];
+            Giguna_Breach__Upper_Machinery__North [label = "", pos = "58.5,-78.666667!"];
+            Giguna_Breach__Upper_Machinery__South [label = "", pos = "61.5,-98.0!"];
         }
         {
             Giguna_Breach__White_Clouds__Entry [label = "", pos = "52.5,-89.583333!"];
@@ -2776,6 +2806,7 @@
             Menu__Breach_Map__Slingshot_Hook [label = "", pos = "51.0,-68.333333!"];
             Menu__Breach_Map__Drone_Melee_Charge [label = "", pos = "48.0,-83.333333!"];
             Menu__Breach_Map__GSB_Labyrinth_Flask [label = "", pos = "54.0,-85.0!"];
+            Menu__Breach_Map__GSB_Lower_Machinery_Flask [label = "", pos = "57.0,-88.333333!"];
             Menu__Breach_Map__GlB_Grate_Flask [label = "", pos = "117.0,-71.666667!"];
             Menu__Breach_Map__GlB_Control_Flask [label = "", pos = "108.0,-71.666667!"];
             Menu__Breach_Map__GlB_Spidery_Connector_Flask [label = "", pos = "87.0,-68.333333!"];
@@ -2800,6 +2831,7 @@
             Menu__Breach_Map__UVB_Save_and_Go_Portal [label = "", pos = "60.0,-91.666667!"];
             Menu__Breach_Map__UVB_East_Glitches [label = "", pos = "72.0,-96.666667!"];
             Menu__Breach_Map__UVB_East_Glitch_Health [label = "", pos = "72.0,-95.0!"];
+            Menu__Breach_Map__UVB_Blob [label = "", pos = "66.0,-85.0!"];
         }
         {
             node[shape=doublecircle, fillcolor="8"];
@@ -3009,10 +3041,17 @@
             Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Portal [label = "", pos = "66.0,-46.666667!"];
             Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Rock [label = "", pos = "72.0,-45.0!"];
             Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_East_Glitch [label = "", pos = "72.0,-46.666667!"];
+            Menu__Kiengir_Map__Uhrum_Seclusion_Portal [label = "", pos = "66.0,-35.0!"];
+            Menu__Kiengir_Map__Uhrum_Seclusion_Flask [label = "", pos = "69.0,-35.0!"];
         }
     }
     {
         node[fillcolor="4"];
+        {
+            Uhrum_Breach__Blob__West_Side [label = "", pos = "66.9,-84.666667!"];
+            Uhrum_Breach__Blob__Plinth [label = "", pos = "67.575,-84.5!"];
+            Uhrum_Breach__Blob__East_Side [label = "", pos = "68.1,-84.666667!"];
+        }
         {
             Uhrum_Breach__East_Glitch__West [label = "", pos = "66.3,-94.583333!"];
             Uhrum_Breach__East_Glitch__Save_Point [label = "", pos = "67.425,-95.333333!"];
@@ -3242,6 +3281,14 @@
             Uhrum__Save_Room__East [label = "", pos = "77.85,-44.583333!"];
             Uhrum__Save_Room__Save_Point [label = "", pos = "76.5,-44.583333!"];
             Uhrum__Save_Room__West [label = "", pos = "75.15,-44.583333!"];
+        }
+        {
+            Uhrum__Seclusion__Portal_West [label = "", pos = "66.9,-34.666667!"];
+            Uhrum__Seclusion__Portal_Stand [label = "", pos = "67.575,-34.5!"];
+            Uhrum__Seclusion__Portal_East [label = "", pos = "68.1,-34.666667!"];
+            Uhrum__Seclusion__Boome_Range [label = "", pos = "69.9,-34.666667!"];
+            Uhrum__Seclusion__Shock_Range [label = "", pos = "70.2,-34.666667!"];
+            Uhrum__Seclusion__Close_Range [label = "", pos = "70.8,-34.666667!"];
         }
         {
             Uhrum__Siege_Corridor__West_26 [label = "", pos = "63.15,-43.0!"];

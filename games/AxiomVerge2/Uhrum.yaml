@@ -3896,3 +3896,104 @@ areas:
           jumps: 1
         - to: Tulip Tower > West 22
           tags: [xshift]
+
+- name: Seclusion  # MARK: Seclusion
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+    portal_hidden: true
+  map:
+    portal: [22, 20, 23, 21]
+    flask: [23, 20, 24, 21]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Uhrum Seclusion Portal
+      flask: Menu > Kiengir Map > Uhrum Seclusion Flask
+  spots:
+    - name: Portal West
+      coord: [22.3, 20.8]
+      data:
+        flipside: Uhrum Breach > Blob > West Side
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Boome Range
+          req: $hookhover
+          movement: fast_hover
+        - to: Shock Range
+          req: $hookhover
+          movement: fast_hover
+    - name: Portal Stand
+      coord: [22.525, 20.7]
+      data:
+        flipside: Uhrum Breach > Blob > Plinth
+      local:
+        - to: Portal West
+        - to: Portal East
+    - name: Portal East
+      coord: [22.7, 20.8]
+      data:
+        flipside: Uhrum Breach > Blob > East Side
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Boome Range
+      coord: [23.3, 20.8]
+      local:
+        - to: Portal East
+        - to: Shock Range
+      locations:
+        - name: Remote Flask
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          req: $boomerang
+          tags: [remote_flask]
+        - name: Remote Flask Fast Travel
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+    - name: Shock Range
+      coord: [23.4, 20.8]
+      local:
+        - to: Boome Range
+        - to: Close Range
+      locations:
+        - name: Shockwave Flask
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: Close Range
+      coord: [23.6, 20.8]
+      local:
+        - to: Shock Range
+      locations:
+        - name: Flask
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Seclusion_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: ^map_spot
+          tags: [cskip]

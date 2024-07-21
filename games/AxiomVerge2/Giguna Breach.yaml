@@ -1167,11 +1167,191 @@ areas:
 
 - name: Lower Machinery  # MARK: Lower Machinery
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [19, 22, 20, 23]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GSB Lower Machinery Flask
   spots:
-    - name: West
-      coord: [19.1, 21.75]
     - name: South
       coord: [19.5, 22.8]
+      local:
+        - to: Bottom
+      exits:
+        - to: South > North
+          tags: [ydoor]
+    - name: Bottom
+      coord: [19.35, 22.8]
+      local:
+        - to: South
+        - to: Button
+          jumps: 4
+      locations:
+        - name: Flask
+          canon: Giguna_Breach_Lower_Machinery_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Breach_Lower_Machinery_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Breach_Lower_Machinery_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Button
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Button
+      coord: [19.3, 22.3]
+      local:
+        - to: Bottom
+      locations:
+        - name: Hit Button
+          item: Giguna_Breach_Lower_Machinery_Gate
+          tags: [button, event]
+      exits:
+        - to: West Piston Middle
+          req: Giguna_Breach_Lower_Machinery_Gate
+          movement: base
+    - name: West Piston Middle
+      coord: [19.7, 22.3]
+      exits:
+        - to: Button
+          req: Giguna_Breach_Lower_Machinery_Gate
+          movement: base
+        - to: West Piston Upper
+          time: 2  # piston movement
+        - to: Center Pillar West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+        - to: West Piston Entrance
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Piston Entrance
+          req: $mist2
+          movement: mist2
+    - name: West Piston Upper
+      coord: [19.7, 22.1]
+      local:
+        - to: West Piston Entrance
+          jumps: 1
+        - to: West Piston Middle
+    - name: West Piston Entrance
+      coord: [19.7, 22.0]
+      local:
+        - to: West Piston Upper
+        - to: Center Pillar West
+          jumps: 1
+        - to: West
+          jumps: 2
+    - name: West
+      coord: [19.1, 21.75]
+      local:
+        - to: West Piston Entrance
+        - to: Center Pillar West
+      exits:
+        - to: Lower Portal > East
+          tags: [xdoor]
+    - name: Center Pillar West
+      coord: [19.8, 21.8]
+      local:
+        - to: West Piston Middle
+        - to: West
+          jumps: 2
+        - to: Piston 2 Upper
+      exits:
+        - to: East Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: East Mid-air
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Piston 2 Upper
+      coord: [20.3, 22.1]
+      local:
+        - to: Center Pillar West
+          jumps: 2
+        - to: East Between Pistons
+    - name: East Between Pistons
+      coord: [20.5, 22.3]
+      local:
+        - to: Piston 2 Upper
+          jumps: 1
+        - to: Piston 3 Upper
+          jumps: 1
+    - name: Piston 3 Upper
+      coord: [20.65, 22.1]
+      local:
+        - to: East Between Pistons
+      exits:
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: East Mid-air
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Mid-air
+          req: $mist2
+          movement: mist2
+    - name: East Mid-air
+      coord: [20.65, 21.7]
+      local:
+        - to: East Between Pistons
+      exits:
+        - to: Center Pillar West
+          req: Drone_Hover
+          movement: base
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: East Ledge
+      coord: [20.75, 21.75]
+      local:
+        - to: East Between Pistons
+      exits:
+        - to: Center Pillar West
+          req: Drone_Hover
+          movement: base
+        - to: Upper Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: Upper Ledge
+      coord: [20.65, 21.35]
+      local:
+        - to: East Mid-air
+        - to: North
+          jumps: 1
+    - name: North
+      coord: [20.5, 21.2]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: East > South
+          tags: [ydoor]
 
 - name: Portal Exchange  # MARK: Portal Exchange
   on_entry: $reset_old_area(^newpos)
@@ -1242,6 +1422,10 @@ areas:
   spots:
     - name: West
       coord: [19.1, 18.75]
+    - name: North
+      coord: [19.5, 17.2]
+    - name: South
+      coord: [20.5, 28.8]
 
 - name: Gate and Wall  # MARK: Gate and Wall
   on_entry: $reset_old_area(^newpos)
@@ -1256,6 +1440,136 @@ areas:
       coord: [16.5, 12.2]
       data:
         flipside: Giguna > Wasteland > Mid-air Near Cache
+
+- name: East  # MARK: East
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [20, 19, 21, 20]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > GSB East
+  spots:
+    - name: South
+      coord: [20.5, 20.8]
+      local:
+        - to: Lower Tunnel Entrance
+          jumps: 2
+      exits:
+        - to: Lower Machinery > North
+          tags: [ydoor]
+    - name: Lower Tunnel Entrance
+      coord: [20.7, 20.5]
+      local:
+        - to: South
+        - to: East Tunnel
+    - name: East Tunnel
+      coord: [20.95, 20.5]
+      local:
+        - to: Lower Tunnel Entrance
+      exits:
+        - to: Secret Tunnel > West
+          tags: [xshift]
+        - to: Upper Tunnel Entrance
+          req: Nanite_Mist
+          movement: mist1
+          penalties:
+            - add: 0.7  # additional to navigate turns
+        - to: Upper Tunnel Entrance
+          req: $mist2
+          movement: mist2
+          penalties:
+            - add: 0.35  # additional to navigate turns
+    - name: Upper Tunnel Entrance
+      coord: [20.9, 19.45]
+      local:
+        - to: Upper Ledge
+        - to: East Tunnel
+          thru: [[20.95, 19.45], [20.95, 19.65], [20.85, 19.65], [20.85, 20.1], [20.95, 20.1]]
+        - to: Save Point
+    - name: Upper Ledge
+      coord: [20.825, 19.5]
+      data:
+        flipside: Giguna > Mural > NE Ledge
+      local:
+        - to: Upper Tunnel Entrance
+          jumps: 1
+        - to: Save Point
+    - name: Save Point
+      coord: [20.475, 19.6]
+      local:
+        - to: Upper Ledge
+          jumps: 2
+        - to: Upper Tunnel Entrance
+          jumps: 2
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: North
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: North
+      coord: [20.5, 19.2]
+      local:
+        - to: Save Point
+        - to: Upper Ledge
+          thru: [20.55, 19.5]
+        - to: Upper Tunnel Entrance
+          thru: [20.55, 19.5]
+          jumps: [0, 1]
+      exits:
+        - to: Upper Machinery > South
+          tags: [ydoor]
+
+- name: Secret Tunnel  # MARK: Secret Tunnel
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [21.05, 20.5]
+      local:
+        - to: Narrow Point
+          thru: [[21.125, 20.5], [21.125, 20.7]]
+      exits:
+        - to: East > East Tunnel
+          tags: [xshift]
+    - name: Narrow Point
+      coord: [21.75, 20.7]
+      local:
+        - to: West
+          thru: [[21.125, 20.7], [21.125, 20.5]]
+          jumps: [0, 1, 0]
+        - to: East
+        - to: Button Obverse
+    - name: Button Obverse
+      coord: [21.8, 20.8]
+      data:
+        flipside: Giguna > Vertical Interchange > Switch
+      local:
+        - to: East
+        - to: Narrow Point
+          jumps: 1
+    - name: East
+      coord: [21.9, 20.8]
+      local:
+        - to: Narrow Point
+          jumps: 1
+        - to: Button Obverse
+      exits:
+        - to: Narrow Point
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Uhrum Breach > Blob > West Side
+          movement: base
+          penalty_tags: [xdoor, -base.2]
 
 - name: Emergence  # MARK: Emergence
   on_entry: $reset_old_area(^newpos)

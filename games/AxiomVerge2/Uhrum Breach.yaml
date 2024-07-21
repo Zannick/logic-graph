@@ -785,3 +785,52 @@ areas:
       coord: [26.15, 27.75]  # Shifted over to match a flipside
       data:
         flipside: Uhrum > Waterfalls > West Water Nook
+
+- name: Blob  # MARK: Blob
+  on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > UVB Blob
+  spots:
+    - name: West Side
+      coord: [22.3, 20.8]
+      data:
+        flipside: Uhrum > Seclusion > Portal West
+      local:
+        - to: Plinth
+          jumps: 1
+      exits:
+        - to: Giguna Breach > Secret Tunnel > East
+          movement: base
+          penalty_tags: [xdoor, -base.2]
+        - to: Plinth
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Plinth
+      coord: [22.525, 20.7]
+      data:
+        flipside: Uhrum > Seclusion > Portal Stand
+      local:
+        - to: West Side
+        - to: East Side
+    - name: East Side
+      coord: [22.7, 20.8]
+      data:
+        flipside: Uhrum > Seclusion > Portal East
+      local:
+        - to: Plinth
+          jumps: 1
+      exits:
+        - to: Plinth
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Giguna Breach > Secret Tunnel > Narrow Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: Giguna Breach > Secret Tunnel > Button Obverse
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]

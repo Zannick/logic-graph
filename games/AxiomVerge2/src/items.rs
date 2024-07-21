@@ -103,6 +103,7 @@ pub enum Item {
     Forbidden_Knowledge,
     Freedom_from_Aansur,
     Giguna_Boulder,
+    Giguna_Breach_Lower_Machinery_Gate,
     Giguna_Dual_Path_Switch,
     Giguna_Dual_Path_Wall,
     Giguna_Gateway_Block,
@@ -310,6 +311,9 @@ impl fmt::Display for Item {
             Item::Forbidden_Knowledge => write!(f, "{}", "Forbidden_Knowledge"),
             Item::Freedom_from_Aansur => write!(f, "{}", "Freedom_from_Aansur"),
             Item::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
+            Item::Giguna_Breach_Lower_Machinery_Gate => {
+                write!(f, "{}", "Giguna_Breach_Lower_Machinery_Gate")
+            }
             Item::Giguna_Dual_Path_Switch => write!(f, "{}", "Giguna_Dual_Path_Switch"),
             Item::Giguna_Dual_Path_Wall => write!(f, "{}", "Giguna_Dual_Path_Wall"),
             Item::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
@@ -533,6 +537,7 @@ impl std::str::FromStr for Item {
             "Forbidden_Knowledge" => Ok(Item::Forbidden_Knowledge),
             "Freedom_from_Aansur" => Ok(Item::Freedom_from_Aansur),
             "Giguna_Boulder" => Ok(Item::Giguna_Boulder),
+            "Giguna_Breach_Lower_Machinery_Gate" => Ok(Item::Giguna_Breach_Lower_Machinery_Gate),
             "Giguna_Dual_Path_Switch" => Ok(Item::Giguna_Dual_Path_Switch),
             "Giguna_Dual_Path_Wall" => Ok(Item::Giguna_Dual_Path_Wall),
             "Giguna_Gateway_Block" => Ok(Item::Giguna_Gateway_Block),

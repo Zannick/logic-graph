@@ -597,7 +597,7 @@ areas:
           time: 11.5
           tags: [warp]
 
-- name: Uhrum Waterfall Cave
+- name: Uhrum Waterfall Cave  # MARK: Uhrum Waterfall Cave
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entrance

@@ -4275,6 +4275,8 @@ areas:
           jumps: 1
     - name: Switch
       coord: [21.8, 20.8]
+      data:
+        flipside: Giguna Breach > Secret Tunnel > Button Obverse
       local:
         - to: Middle Hill By Switch
           jumps: 1
@@ -5036,6 +5038,8 @@ areas:
           movement: base
     - name: NE Ledge
       coord: [20.825, 19.5]
+      data:
+        flipside: Giguna Breach > East > Upper Ledge
       local:
         - to: East 21
           thru: [20.8, 20.3]

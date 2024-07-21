@@ -1388,8 +1388,21 @@ subgraph Giguna_Breach
         Giguna_Breach__Lower_Portal__Portal_Dais(Portal Dais);
     end
     subgraph Giguna_Breach__Lower_Machinery[Lower Machinery]
-        Giguna_Breach__Lower_Machinery__West(West);
         Giguna_Breach__Lower_Machinery__South(South);
+        Giguna_Breach__Lower_Machinery__Bottom(Bottom);
+        Giguna_Breach__Lower_Machinery__Button(Button);
+        Giguna_Breach__Lower_Machinery__West_Piston_Middle(West Piston Middle);
+        Giguna_Breach__Lower_Machinery__West_Piston_Upper(West Piston Upper);
+        Giguna_Breach__Lower_Machinery__West_Piston_Entrance(West Piston Entrance);
+        Giguna_Breach__Lower_Machinery__West(West);
+        Giguna_Breach__Lower_Machinery__Center_Pillar_West(Center Pillar West);
+        Giguna_Breach__Lower_Machinery__Piston_2_Upper(Piston 2 Upper);
+        Giguna_Breach__Lower_Machinery__East_Between_Pistons(East Between Pistons);
+        Giguna_Breach__Lower_Machinery__Piston_3_Upper(Piston 3 Upper);
+        Giguna_Breach__Lower_Machinery__East_Mid_air(East Mid-air);
+        Giguna_Breach__Lower_Machinery__East_Ledge(East Ledge);
+        Giguna_Breach__Lower_Machinery__Upper_Ledge(Upper Ledge);
+        Giguna_Breach__Lower_Machinery__North(North);
     end
     subgraph Giguna_Breach__Portal_Exchange[Portal Exchange]
         Giguna_Breach__Portal_Exchange__West(West);
@@ -1400,12 +1413,29 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Upper_Machinery[Upper Machinery]
         Giguna_Breach__Upper_Machinery__West(West);
+        Giguna_Breach__Upper_Machinery__North(North);
+        Giguna_Breach__Upper_Machinery__South(South);
     end
     subgraph Giguna_Breach__Gate_and_Wall[Gate and Wall]
         Giguna_Breach__Gate_and_Wall__West_10(West 10);
     end
     subgraph Giguna_Breach__Crab_Rave[Crab Rave]
         Giguna_Breach__Crab_Rave__North(North);
+    end
+    subgraph Giguna_Breach__East[East]
+        Giguna_Breach__East__South(South);
+        Giguna_Breach__East__Lower_Tunnel_Entrance(Lower Tunnel Entrance);
+        Giguna_Breach__East__East_Tunnel(East Tunnel);
+        Giguna_Breach__East__Upper_Tunnel_Entrance(Upper Tunnel Entrance);
+        Giguna_Breach__East__Upper_Ledge(Upper Ledge);
+        Giguna_Breach__East__Save_Point(Save Point);
+        Giguna_Breach__East__North(North);
+    end
+    subgraph Giguna_Breach__Secret_Tunnel[Secret Tunnel]
+        Giguna_Breach__Secret_Tunnel__West(West);
+        Giguna_Breach__Secret_Tunnel__Narrow_Point(Narrow Point);
+        Giguna_Breach__Secret_Tunnel__Button_Obverse(Button Obverse);
+        Giguna_Breach__Secret_Tunnel__East(East);
     end
     subgraph Giguna_Breach__Emergence[Emergence]
         Giguna_Breach__Emergence__Corner(Corner);
@@ -2925,6 +2955,8 @@ subgraph Menu
         Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Portal(Uhrum Glitchy Corridor Portal);
         Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_Rock(Uhrum Glitchy Corridor Rock);
         Menu__Kiengir_Map__Uhrum_Glitchy_Corridor_East_Glitch(Uhrum Glitchy Corridor East Glitch);
+        Menu__Kiengir_Map__Uhrum_Seclusion_Portal(Uhrum Seclusion Portal);
+        Menu__Kiengir_Map__Uhrum_Seclusion_Flask(Uhrum Seclusion Flask);
     end
     subgraph Menu__Emergence_Map[Emergence Map]
         Menu__Emergence_Map__Camp(Camp);
@@ -2974,6 +3006,7 @@ subgraph Menu
         Menu__Breach_Map__Slingshot_Hook(Slingshot Hook);
         Menu__Breach_Map__Drone_Melee_Charge(Drone Melee Charge);
         Menu__Breach_Map__GSB_Labyrinth_Flask(GSB Labyrinth Flask);
+        Menu__Breach_Map__GSB_Lower_Machinery_Flask(GSB Lower Machinery Flask);
         Menu__Breach_Map__GlB_Grate_Flask(GlB Grate Flask);
         Menu__Breach_Map__GlB_Control_Flask(GlB Control Flask);
         Menu__Breach_Map__GlB_Spidery_Connector_Flask(GlB Spidery Connector Flask);
@@ -2998,6 +3031,7 @@ subgraph Menu
         Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
         Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
         Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
+        Menu__Breach_Map__UVB_Blob(UVB Blob);
     end
 end
 subgraph Uhrum_Breach
@@ -3068,6 +3102,11 @@ subgraph Uhrum_Breach
     subgraph Uhrum_Breach__West_Copse[West Copse]
         Uhrum_Breach__West_Copse__West_27(West 27);
         Uhrum_Breach__West_Copse__West_28(West 28);
+    end
+    subgraph Uhrum_Breach__Blob[Blob]
+        Uhrum_Breach__Blob__West_Side(West Side);
+        Uhrum_Breach__Blob__Plinth(Plinth);
+        Uhrum_Breach__Blob__East_Side(East Side);
     end
 end
 subgraph Uhrum
@@ -3346,6 +3385,14 @@ subgraph Uhrum
         Uhrum__Rocky_Guardpost__Middle_Step(Middle Step);
         Uhrum__Rocky_Guardpost__Upper_Step(Upper Step);
         Uhrum__Rocky_Guardpost__East_22(East 22);
+    end
+    subgraph Uhrum__Seclusion[Seclusion]
+        Uhrum__Seclusion__Portal_West(Portal West);
+        Uhrum__Seclusion__Portal_Stand(Portal Stand);
+        Uhrum__Seclusion__Portal_East(Portal East);
+        Uhrum__Seclusion__Boome_Range(Boome Range);
+        Uhrum__Seclusion__Shock_Range(Shock Range);
+        Uhrum__Seclusion__Close_Range(Close Range);
     end
 end
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
@@ -4204,6 +4251,11 @@ Giguna_Breach__Deadly_Flora__Middle_Platform --> Giguna_Breach__Deadly_Flora__Up
 Giguna_Breach__Deadly_Flora__Upper_Left_Ledge --> Giguna_Breach__Emergence__Right_Mid_air
 Giguna_Breach__Deadly_Flora__Upper_Right_Ledge --> Giguna_Breach__Deadly_Flora__Upper_Left_Ledge
 Giguna_Breach__Deadly_Flora__West <--> Giguna_Breach__Emergence__East
+Giguna_Breach__East__East_Tunnel --> Giguna_Breach__East__Upper_Tunnel_Entrance
+Giguna_Breach__East__East_Tunnel <--> Giguna_Breach__Secret_Tunnel__West
+Giguna_Breach__East__North --> Giguna_Breach__Upper_Machinery__South
+Giguna_Breach__East__Save_Point --> Giguna_Breach__East__North
+Giguna_Breach__East__South <--> Giguna_Breach__Lower_Machinery__North
 Giguna_Breach__Emergence__Left_Mid_air --> Giguna_Breach__Deadly_Flora__Upper_Left_Ledge
 Giguna_Breach__Emergence__Left_Mid_air --> Giguna_Breach__Emergence__Corner
 Giguna_Breach__Emergence__Right_Mid_air --> Giguna_Breach__Emergence__Left_Side
@@ -4247,8 +4299,20 @@ Giguna_Breach__Labyrinth__Save_Point --> Giguna_Breach__Labyrinth__Middle_Brick
 Giguna_Breach__Labyrinth__South <--> Giguna_Breach__Lower_Portal__North
 Giguna_Breach__Labyrinth__Upper_Box --> Giguna_Breach__Labyrinth__Rooftop_East
 Giguna_Breach__Labyrinth__Upper_Column_1 --> Giguna_Breach__Labyrinth__Rooftop_East
+Giguna_Breach__Lower_Machinery__Bottom --> Giguna_Breach__Lower_Machinery__Button
+Giguna_Breach__Lower_Machinery__Button <--> Giguna_Breach__Lower_Machinery__West_Piston_Middle
+Giguna_Breach__Lower_Machinery__Center_Pillar_West <--> Giguna_Breach__Lower_Machinery__East_Ledge
+Giguna_Breach__Lower_Machinery__Center_Pillar_West <--> Giguna_Breach__Lower_Machinery__East_Mid_air
+Giguna_Breach__Lower_Machinery__East_Ledge --> Giguna_Breach__Lower_Machinery__Upper_Ledge
+Giguna_Breach__Lower_Machinery__East_Mid_air --> Giguna_Breach__Lower_Machinery__Upper_Ledge
+Giguna_Breach__Lower_Machinery__Piston_3_Upper --> Giguna_Breach__Lower_Machinery__East_Ledge
+Giguna_Breach__Lower_Machinery__Piston_3_Upper --> Giguna_Breach__Lower_Machinery__East_Mid_air
+Giguna_Breach__Lower_Machinery__South <--> Giguna_Breach__South__North
+Giguna_Breach__Lower_Machinery__West <--> Giguna_Breach__Lower_Portal__East
+Giguna_Breach__Lower_Machinery__West_Piston_Middle --> Giguna_Breach__Lower_Machinery__Center_Pillar_West
+Giguna_Breach__Lower_Machinery__West_Piston_Middle --> Giguna_Breach__Lower_Machinery__West_Piston_Entrance
+Giguna_Breach__Lower_Machinery__West_Piston_Middle --> Giguna_Breach__Lower_Machinery__West_Piston_Upper
 Giguna_Breach__Lower_Portal__Bottom --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
-Giguna_Breach__Lower_Portal__East --> Giguna_Breach__Lower_Machinery__West
 Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__East_Upper_Ledge
 Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
@@ -4264,8 +4328,9 @@ Giguna_Breach__SW_Save__East_12 --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door
 Giguna_Breach__SW_Save__Save_Point --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Side_Door <--> Giguna_Breach__SW_Save__West_11
+Giguna_Breach__Secret_Tunnel__East --> Giguna_Breach__Secret_Tunnel__Narrow_Point
+Giguna_Breach__Secret_Tunnel__East <--> Uhrum_Breach__Blob__West_Side
 Giguna_Breach__Slingshot__Ravine --> Giguna_Breach__Slingshot__Column
-Giguna_Breach__South__North --> Giguna_Breach__Lower_Machinery__South
 Giguna_Breach__South__Save_Point --> Giguna_Breach__South__North
 Giguna_Breach__South__South --> Giguna_Breach__South__North
 Giguna_Breach__South__South <--> Uhrum_Breach__Save_and_Go__North
@@ -5057,6 +5122,7 @@ Irikar__Midwest__The_Long_Rock_East --> Irikar__Midwest__East_Rock_2
 Irikar__Midwest__West_Platform --> Irikar__Midwest__The_Long_Rock_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Northwest --> Irikar__Sight_Room__Above_Room_East
+Menu__Breach_Map__GSB_East --> Giguna_Breach__East__Save_Point
 Menu__Breach_Map__GSB_Labyrinth --> Giguna_Breach__Labyrinth__Save_Point
 Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GSB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
@@ -5108,6 +5174,10 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum_Breach__Blob__East_Side --> Giguna_Breach__Secret_Tunnel__Button_Obverse
+Uhrum_Breach__Blob__East_Side --> Giguna_Breach__Secret_Tunnel__Narrow_Point
+Uhrum_Breach__Blob__East_Side --> Uhrum_Breach__Blob__Plinth
+Uhrum_Breach__Blob__West_Side --> Uhrum_Breach__Blob__Plinth
 Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__East_Flower_West
 Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__Wall_West_Platform
 Uhrum_Breach__East_Glitch__East_27 --> Uhrum_Breach__East_Glitch__Northeast_Flower
@@ -5300,6 +5370,10 @@ Uhrum__Rocky_Guardpost__West_22 --> Uhrum__Tulip_Tower__NW_Mid_air
 Uhrum__Rocky_Guardpost__West_23 --> Uhrum__Rocky_Guardpost__Lower_Step
 Uhrum__Save_Room__East <--> Uhrum__Waterfalls__West_27
 Uhrum__Save_Room__West --> Uhrum__Glitchy_Corridor__East_27
+Uhrum__Seclusion__Portal_East --> Uhrum__Seclusion__Portal_Stand
+Uhrum__Seclusion__Portal_West --> Uhrum__Seclusion__Boome_Range
+Uhrum__Seclusion__Portal_West --> Uhrum__Seclusion__Portal_Stand
+Uhrum__Seclusion__Portal_West --> Uhrum__Seclusion__Shock_Range
 Uhrum__Siege_Corridor__Center_Platform_3 --> Uhrum__Siege_Corridor__Upper_Rock_West
 Uhrum__Siege_Corridor__Center_Valley --> Uhrum__Siege_Corridor__Center_East
 Uhrum__Siege_Corridor__East_25 <--> Uhrum__Waterfalls__West_25

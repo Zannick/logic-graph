@@ -1617,6 +1617,10 @@ pub fn access_giguna_breach__sw_save__west_11__open_door__req(
     // not ^_door_opened
     !ctx.giguna_breach__sw_save__ctx__door_opened()
 }
+pub fn access_giguna_breach_lower_machinery_gate(ctx: &Context, world: &World) -> bool {
+    // Giguna_Breach_Lower_Machinery_Gate
+    ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate)
+}
 pub fn access_giguna_dual_path_switch(ctx: &Context, world: &World) -> bool {
     // Giguna_Dual_Path_Switch
     ctx.has(Item::Giguna_Dual_Path_Switch)
@@ -2664,6 +2668,10 @@ pub fn access_map__giguna__ruins_west__save(ctx: &Context, world: &World) -> boo
 pub fn access_map__giguna__separator__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna__separator__save
     ctx.map__giguna__separator__save()
+}
+pub fn access_map__giguna_breach__east__save(ctx: &Context, world: &World) -> bool {
+    // ^map__giguna_breach__east__save
+    ctx.map__giguna_breach__east__save()
 }
 pub fn access_map__giguna_breach__labyrinth__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__labyrinth__save
@@ -9869,6 +9877,18 @@ pub fn explain_giguna_breach__sw_save__west_11__open_door__req(
         (!val.0, val.1)
     }
 }
+pub fn explain_giguna_breach_lower_machinery_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Breach_Lower_Machinery_Gate
+    {
+        let h = ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate);
+        edict.insert("Giguna_Breach_Lower_Machinery_Gate", format!("{}", h));
+        (h, vec!["Giguna_Breach_Lower_Machinery_Gate"])
+    }
+}
 pub fn explain_giguna_dual_path_switch(
     ctx: &Context,
     world: &World,
@@ -14509,6 +14529,18 @@ pub fn explain_map__giguna__separator__save(
         let r = ctx.map__giguna__separator__save();
         edict.insert("^map__giguna__separator__save", format!("{:?}", r));
         (r, vec!["^map__giguna__separator__save"])
+    }
+}
+pub fn explain_map__giguna_breach__east__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__giguna_breach__east__save
+    {
+        let r = ctx.map__giguna_breach__east__save();
+        edict.insert("^map__giguna_breach__east__save", format!("{:?}", r));
+        (r, vec!["^map__giguna_breach__east__save"])
     }
 }
 pub fn explain_map__giguna_breach__labyrinth__save(
@@ -20572,6 +20604,17 @@ pub fn observe_access_giguna_breach__sw_save__west_11__open_door__req(
         ctx.giguna_breach__sw_save__ctx__door_opened()
     })
 }
+pub fn observe_access_giguna_breach_lower_machinery_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Breach_Lower_Machinery_Gate
+    {
+        full_obs.observe_giguna_breach_lower_machinery_gate();
+        ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate)
+    }
+}
 pub fn observe_access_giguna_dual_path_switch(
     ctx: &Context,
     world: &World,
@@ -22856,6 +22899,17 @@ pub fn observe_access_map__giguna__separator__save(
     {
         full_obs.observe_map__giguna__separator__save();
         ctx.map__giguna__separator__save()
+    }
+}
+pub fn observe_access_map__giguna_breach__east__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__giguna_breach__east__save
+    {
+        full_obs.observe_map__giguna_breach__east__save();
+        ctx.map__giguna_breach__east__save()
     }
 }
 pub fn observe_access_map__giguna_breach__labyrinth__save(

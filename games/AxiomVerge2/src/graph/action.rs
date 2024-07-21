@@ -146,6 +146,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::access_giguna__west_caverns__east_susar__caught__req(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::access_giguna__west_caverns__east_susar__hack__req(ctx, world),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::access_invoke_can_deploy(ctx, world),
+            ActionId::Giguna_Breach__East__Save_Point__Save => true,
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => true,
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => true,
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
@@ -1651,6 +1652,7 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx, world),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Giguna_Breach__East__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__South__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2076,6 +2078,9 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Giguna_Breach__East__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2389,7 +2394,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 181] = [
+static ACT_DEFS: [Action; 182] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2728,6 +2733,11 @@ static ACT_DEFS: [Action; 181] = [
     Action {
         id: ActionId::Emergence__Storage__Portal_Stand__Open_Door,
         time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Giguna_Breach__East__Save_Point__Save,
+        time: 1300,
         price: Currency::Free,
     },
     Action {
@@ -3376,6 +3386,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => SpotId::Giguna_Breach__SW_Save__West_11,
         ActionId::Giguna_Breach__SW_Save__Save_Point__Save => SpotId::Giguna_Breach__SW_Save__Save_Point,
         ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => SpotId::Giguna_Breach__Labyrinth__Save_Point,
+        ActionId::Giguna_Breach__East__Save_Point__Save => SpotId::Giguna_Breach__East__Save_Point,
         ActionId::Giguna_Breach__Emergence__Save_Point__Save => SpotId::Giguna_Breach__Emergence__Save_Point,
         ActionId::Giguna_Breach__South__Save_Point__Save => SpotId::Giguna_Breach__South__Save_Point,
         ActionId::Giguna__Giguna_Northeast__Save_Point__Save => SpotId::Giguna__Giguna_Northeast__Save_Point,
