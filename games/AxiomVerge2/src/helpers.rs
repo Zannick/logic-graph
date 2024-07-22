@@ -2818,11 +2818,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{40}, Big_Flask{21}]
+/// [Flask{42}, Big_Flask{21}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 40 && $ctx.count(Item::Big_Flask) >= 21
+        $ctx.count(Item::Flask) >= 42 && $ctx.count(Item::Big_Flask) >= 21
     }};
 }
 #[macro_export]
@@ -2833,7 +2833,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 40, vec!["Flask count"])
+                (ct >= 42, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2853,8 +2853,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(40));
-            $ctx.count(Item::Flask) >= 40
+            $full_obs.observe_flask(IntegerObservation::Ge(42));
+            $ctx.count(Item::Flask) >= 42
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(21));
             $ctx.count(Item::Big_Flask) >= 21
@@ -2863,11 +2863,11 @@ macro_rules! hobserve__all_flasks {
 }
 
 /// $all_health (  )
-/// [Health_Node{3}, Health_Fragment{19}]
+/// [Health_Node{4}, Health_Fragment{19}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 3 && $ctx.count(Item::Health_Fragment) >= 19
+        $ctx.count(Item::Health_Node) >= 4 && $ctx.count(Item::Health_Fragment) >= 19
     }};
 }
 #[macro_export]
@@ -2878,7 +2878,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Node);
                 $edict.insert("Health_Node count", format!("{}", ct));
-                (ct >= 3, vec!["Health_Node count"])
+                (ct >= 4, vec!["Health_Node count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2898,8 +2898,8 @@ macro_rules! hexplain__all_health {
 macro_rules! hobserve__all_health {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_health_node(IntegerObservation::Ge(3));
-            $ctx.count(Item::Health_Node) >= 3
+            $full_obs.observe_health_node(IntegerObservation::Ge(4));
+            $ctx.count(Item::Health_Node) >= 4
         }) && ({
             $full_obs.observe_health_fragment(IntegerObservation::Ge(19));
             $ctx.count(Item::Health_Fragment) >= 19

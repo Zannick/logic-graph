@@ -222,6 +222,19 @@ impl world::Accessible for Location {
             LocationId::Ebih_Breach__In_n_Out__Gate_East__Item => true,
             LocationId::Ebih_Breach__Lake_Gate__Button__Hit_Button => true,
             LocationId::Ebih_Breach__Lake_Gate__Interior__Hit_Button_From_Afar => true,
+            LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask => true,
+            LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip => true,
+            LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => rules::access_nanite_mist(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up => rules::access_invoke_mist2(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up => rules::access_nanite_mist(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up => rules::access_invoke_mist2(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => rules::access_nanite_mist(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down => rules::access_invoke_mist2(ctx, world),
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask => true,
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip => true,
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
@@ -427,11 +440,18 @@ impl world::Accessible for Location {
             LocationId::Giguna__West_Caverns__Cache__Item => true,
             LocationId::Giguna__West_Tower__Top__Tablet => true,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
+            LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask => true,
+            LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Collection_Skip => true,
+            LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Fast_Travel => true,
+            LocationId::Giguna_Breach__Crab_Rave__Button__Hit_Button => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
             LocationId::Giguna_Breach__Emergence__Corner__Flask => true,
             LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip => true,
             LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => true,
+            LocationId::Giguna_Breach__Gate_and_Wall__Button_Left__Hit_Button => true,
+            LocationId::Giguna_Breach__Gate_and_Wall__Button_Right__Hit_Button => true,
+            LocationId::Giguna_Breach__Gate_and_Wall__Walled_Off__Health => true,
             LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate => true,
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask => true,
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Collection_Skip => true,
@@ -878,6 +898,17 @@ impl world::Accessible for Location {
             LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Ebih__West_Face__Lower_Ledge__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Ebih_Breach__Spider_Guards__East_Sand_Pit__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
@@ -1309,6 +1340,34 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
+                    if true {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+                    if true {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
+                    if true {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
+                    if true {
+                        2000
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => {
                     if true {
                         500
@@ -1453,6 +1512,17 @@ impl world::Accessible for Location {
             LocationId::Ebih__West_Face__Lower_Ledge__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
             LocationId::Ebih__West_Face__Lower_Ledge__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Ebih__West_Face__Lower_Ledge__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Ebih_Breach__Spider_Guards__East_Sand_Pit__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
@@ -1851,7 +1921,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 709] = [
+static LOC_DEFS: [Location; 729] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -2795,6 +2865,123 @@ static LOC_DEFS: [Location; 709] = [
         price: Currency::Free,
         time: 100,
         dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__MEB_Rock_Block_Flask,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 2000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 3000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down,
+        canonical: CanonId::Ebih_Breach_Rock_Block_Rock,
+        item: Item::Ebih_Breach_Rock_Block_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
         skippable: false,
     },
     Location {
@@ -4400,6 +4587,42 @@ static LOC_DEFS: [Location; 709] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask,
+        canonical: CanonId::Giguna_Breach_Crab_Rave_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Collection_Skip,
+        canonical: CanonId::Giguna_Breach_Crab_Rave_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Fast_Travel,
+        canonical: CanonId::Giguna_Breach_Crab_Rave_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__GSB_Crab_Rave_Flask,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Crab_Rave__Button__Hit_Button,
+        canonical: CanonId::Loc_Giguna_Breach__Crab_Rave__Button__Hit_Button,
+        item: Item::Giguna_Breach_Crab_Rave_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Giguna_Breach__Cubby__Rocks__Health,
         canonical: CanonId::Loc_Giguna_Breach__Cubby__Rocks__Health,
         item: Item::Health_Fragment,
@@ -4441,6 +4664,33 @@ static LOC_DEFS: [Location; 709] = [
         item: Item::Flask,
         price: Currency::Free,
         time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Gate_and_Wall__Button_Left__Hit_Button,
+        canonical: CanonId::Giguna_Breach_Gate_and_Wall_Gate,
+        item: Item::Giguna_Breach_Gate_and_Wall_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Gate_and_Wall__Button_Right__Hit_Button,
+        canonical: CanonId::Giguna_Breach_Gate_and_Wall_Gate,
+        item: Item::Giguna_Breach_Gate_and_Wall_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Gate_and_Wall__Walled_Off__Health,
+        canonical: CanonId::Loc_Giguna_Breach__Gate_and_Wall__Walled_Off__Health,
+        item: Item::Health_Node,
+        price: Currency::Free,
+        time: 0,
         dest: SpotId::None,
         skippable: false,
     },
@@ -8331,6 +8581,10 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Ebih_Breach__Double_Gate__Button_Right__Open_Gate => SpotId::Ebih_Breach__Double_Gate__Button_Right,
         LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn | LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn_Collection_Skip | LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn_Fast_Travel => SpotId::Ebih_Breach__The_Vault__Dais_Center,
         LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => SpotId::Ebih_Breach__Rocky_Cages__Cage_Bottom,
+        LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down => SpotId::Ebih_Breach__Rock_Block__Rock_Top,
+        LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up => SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
+        LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up => SpotId::Ebih_Breach__Rock_Block__Rock_East,
+        LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => SpotId::Ebih_Breach__Rock_Block__East_Tunnel,
         LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
         LocationId::Ebih__Base_Camp__Top_Platform__Item => SpotId::Ebih__Base_Camp__Top_Platform,
         LocationId::Ebih__By_Garage__Crawlspace__Fragment => SpotId::Ebih__By_Garage__Crawlspace,
@@ -8432,6 +8686,11 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Collection_Skip | LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => SpotId::Giguna_Breach__Labyrinth__Plinth,
         LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask | LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Collection_Skip | LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => SpotId::Giguna_Breach__Lower_Machinery__Bottom,
         LocationId::Giguna_Breach__Lower_Machinery__Button__Hit_Button => SpotId::Giguna_Breach__Lower_Machinery__Button,
+        LocationId::Giguna_Breach__Gate_and_Wall__Button_Right__Hit_Button => SpotId::Giguna_Breach__Gate_and_Wall__Button_Right,
+        LocationId::Giguna_Breach__Gate_and_Wall__Button_Left__Hit_Button => SpotId::Giguna_Breach__Gate_and_Wall__Button_Left,
+        LocationId::Giguna_Breach__Gate_and_Wall__Walled_Off__Health => SpotId::Giguna_Breach__Gate_and_Wall__Walled_Off,
+        LocationId::Giguna_Breach__Crab_Rave__Button__Hit_Button => SpotId::Giguna_Breach__Crab_Rave__Button,
+        LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Collection_Skip | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Fast_Travel => SpotId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure,
         LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => SpotId::Giguna_Breach__Emergence__Corner,
         LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => SpotId::Giguna_Breach__Emergence__Left_Side,
         LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => SpotId::Giguna__Giguna_Northeast__Gate_Button,

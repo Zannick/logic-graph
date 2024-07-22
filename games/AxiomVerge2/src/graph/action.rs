@@ -91,6 +91,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => true,
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
+            ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => true,
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => true,
             ActionId::Emergence__Storage__At_Door__Open_Door => rules::access_emergence__storage__at_door__open_door__req(ctx, world),
             ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::access_emergence__storage__portal_stand__open_door__req(ctx, world),
@@ -1614,6 +1615,7 @@ impl world::Action for Action {
             ActionId::Annuna__Final_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
@@ -1962,6 +1964,9 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
@@ -2394,7 +2399,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 182] = [
+static ACT_DEFS: [Action; 183] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2562,6 +2567,11 @@ static ACT_DEFS: [Action; 182] = [
     },
     Action {
         id: ActionId::Ebih_Breach__Portals_101__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih_Breach__Rock_Block__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     },
@@ -3350,6 +3360,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Annuna__Final_Save__Save_Point__Save => SpotId::Annuna__Final_Save__Save_Point,
         ActionId::Ebih_Breach__Portals_101__Save_Point__Save => SpotId::Ebih_Breach__Portals_101__Save_Point,
         ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => SpotId::Ebih_Breach__In_n_Out__Save_Point,
+        ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => SpotId::Ebih_Breach__Rock_Block__Save_Point,
         ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
         ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
         ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,

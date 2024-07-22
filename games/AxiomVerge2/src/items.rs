@@ -74,6 +74,7 @@ pub enum Item {
     Ebih_Breach_Double_Gate_Gate,
     Ebih_Breach_In_n_Out_Gate,
     Ebih_Breach_Lake_Gate,
+    Ebih_Breach_Rock_Block_Rock,
     Ebih_Breach_Spider_Guards_Gate,
     Ebih_East_Wall,
     Ebih_Gem_Room_Gate,
@@ -103,6 +104,8 @@ pub enum Item {
     Forbidden_Knowledge,
     Freedom_from_Aansur,
     Giguna_Boulder,
+    Giguna_Breach_Crab_Rave_Gate,
+    Giguna_Breach_Gate_and_Wall_Gate,
     Giguna_Breach_Lower_Machinery_Gate,
     Giguna_Dual_Path_Switch,
     Giguna_Dual_Path_Wall,
@@ -280,6 +283,7 @@ impl fmt::Display for Item {
             Item::Ebih_Breach_Double_Gate_Gate => write!(f, "{}", "Ebih_Breach_Double_Gate_Gate"),
             Item::Ebih_Breach_In_n_Out_Gate => write!(f, "{}", "Ebih_Breach_In_n_Out_Gate"),
             Item::Ebih_Breach_Lake_Gate => write!(f, "{}", "Ebih_Breach_Lake_Gate"),
+            Item::Ebih_Breach_Rock_Block_Rock => write!(f, "{}", "Ebih_Breach_Rock_Block_Rock"),
             Item::Ebih_Breach_Spider_Guards_Gate => {
                 write!(f, "{}", "Ebih_Breach_Spider_Guards_Gate")
             }
@@ -311,6 +315,10 @@ impl fmt::Display for Item {
             Item::Forbidden_Knowledge => write!(f, "{}", "Forbidden_Knowledge"),
             Item::Freedom_from_Aansur => write!(f, "{}", "Freedom_from_Aansur"),
             Item::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
+            Item::Giguna_Breach_Crab_Rave_Gate => write!(f, "{}", "Giguna_Breach_Crab_Rave_Gate"),
+            Item::Giguna_Breach_Gate_and_Wall_Gate => {
+                write!(f, "{}", "Giguna_Breach_Gate_and_Wall_Gate")
+            }
             Item::Giguna_Breach_Lower_Machinery_Gate => {
                 write!(f, "{}", "Giguna_Breach_Lower_Machinery_Gate")
             }
@@ -508,6 +516,7 @@ impl std::str::FromStr for Item {
             "Ebih_Breach_Double_Gate_Gate" => Ok(Item::Ebih_Breach_Double_Gate_Gate),
             "Ebih_Breach_In_n_Out_Gate" => Ok(Item::Ebih_Breach_In_n_Out_Gate),
             "Ebih_Breach_Lake_Gate" => Ok(Item::Ebih_Breach_Lake_Gate),
+            "Ebih_Breach_Rock_Block_Rock" => Ok(Item::Ebih_Breach_Rock_Block_Rock),
             "Ebih_Breach_Spider_Guards_Gate" => Ok(Item::Ebih_Breach_Spider_Guards_Gate),
             "Ebih_East_Wall" => Ok(Item::Ebih_East_Wall),
             "Ebih_Gem_Room_Gate" => Ok(Item::Ebih_Gem_Room_Gate),
@@ -537,6 +546,8 @@ impl std::str::FromStr for Item {
             "Forbidden_Knowledge" => Ok(Item::Forbidden_Knowledge),
             "Freedom_from_Aansur" => Ok(Item::Freedom_from_Aansur),
             "Giguna_Boulder" => Ok(Item::Giguna_Boulder),
+            "Giguna_Breach_Crab_Rave_Gate" => Ok(Item::Giguna_Breach_Crab_Rave_Gate),
+            "Giguna_Breach_Gate_and_Wall_Gate" => Ok(Item::Giguna_Breach_Gate_and_Wall_Gate),
             "Giguna_Breach_Lower_Machinery_Gate" => Ok(Item::Giguna_Breach_Lower_Machinery_Gate),
             "Giguna_Dual_Path_Switch" => Ok(Item::Giguna_Dual_Path_Switch),
             "Giguna_Dual_Path_Wall" => Ok(Item::Giguna_Dual_Path_Wall),

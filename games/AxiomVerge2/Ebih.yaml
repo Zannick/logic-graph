@@ -1594,18 +1594,15 @@ areas:
 
     - name: Giguna Pillar
       coord: [19.3, 8.4]
+      data:
+        flipside: Ebih Breach > Connector > Column
       local:
         - to: Above Alcove
       exits:
         - to: Giguna > Giguna Northeast > Inner Wall
-          time: 3.3
-    - name: West 9
-      coord: [19.05, 8.75]
-      exits:
-        - to: Giguna > Giguna Northeast > East 9
-          tags: [xshift]
-        - to: Giguna Pillar
-          req: $grab or $climb
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
 
     # Below block
     - name: Block Right

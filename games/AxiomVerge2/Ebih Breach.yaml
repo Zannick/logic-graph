@@ -1186,3 +1186,391 @@ areas:
         - to: Cage North
           req: Slingshot_Hook
           jumps: 2
+
+    - name: West 10
+      coord: [21.1, 9.7]
+    - name: West 11
+      coord: [21.1, 10.75]
+
+- name: Connector  # MARK: Connector
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 8.75]
+      local:
+        - to: Column
+          jumps: 2
+      exits:
+        - to: Giguna Breach > Gate and Wall > East 9
+          tags: [xdoor]
+        - to: Column
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Column
+      coord: [19.3, 8.4]
+      data:
+        flipside: Ebih > Ebih West > Giguna Pillar
+      local:
+        - to: West
+        - to: East
+    - name: East
+      coord: [19.9, 8.75]
+      exits:
+        - to: Column
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Switchback > West
+          tags: [xdoor]
+
+- name: Switchback  # MARK: Switchback
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [20.1, 8.75]
+      local:
+        - to: East Turn
+      exits:
+        - to: Connector > East
+          tags: [xdoor]
+    - name: East Turn
+      coord: [20.9, 8.9]
+      local:
+        - to: West
+          jumps: 1
+        - to: West Turn
+      exits:
+        - to: West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: West Turn
+      coord: [20.25, 9.3]
+      local:
+        - to: East Turn
+          jumps: 3
+        - to: East
+          jumps: 1
+      exits:
+        - to: East Turn
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: East
+      coord: [20.9, 9.7]
+      exits:
+        - to: West Turn
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Turn
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Rocky Cages > West 10
+          tags: [xdoor]
+
+- name: Giguna Corner  # MARK: Giguna Corner
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: South
+      coord: [19.5, 9.8]
+      exits:
+        - to: Giguna Breach > Gate and Wall > Walled Off
+          movement: base
+          jumps: 1
+          penalty_tags: [xdoor, -base.1]
+        - to: Rock Block > North
+          tags: [ydoor]
+
+- name: Rock Block  # MARK: Rock Block
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [19, 12, 20, 13]
+    flask: [20, 12, 21, 13]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > MEB Southwest
+      flask: Menu > Breach Map > MEB Rock Block Flask
+  spots:
+    - name: North
+      coord: [19.5, 10.2]
+      local:
+        - to: Northwest Ledge
+      exits:
+        - to: Giguna Corner > South
+          tags: [ydoor]
+    - name: Northwest Ledge
+      coord: [19.4, 10.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: West Shaft West Ledge
+    - name: West Shaft West Ledge
+      coord: [19.6, 10.8]
+      local:
+        - to: Rock Top
+        - to: West Shaft Upper Hill
+      exits:
+        - to: West Shaft East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Northwest Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West Shaft East Ledge
+      coord: [20.1, 10.75]
+      local:
+        - to: West Shaft Upper Hill
+        - to: East Shaft Top
+    - name: West Shaft Midway
+      coord: [19.7, 11.55]
+      local:
+        - to: Rock Top
+        - to: West Shaft Upper Hill
+          jumps: 2
+    - name: West Shaft Upper Hill
+      coord: [20.0, 11.1]
+      local:
+        - to: West Shaft Midway
+      exits:
+        - to: West Shaft West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Shaft East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: West Shaft East Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+        - to: West Shaft West Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+    - name: Rock Top
+      coord: [19.625, 12.15]
+      local:
+        - to: West Shaft Midway
+          jumps: 4
+      locations:
+        - name: Mist Down
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Nanite_Mist
+          to: Rock Southwest
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Down
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: $mist2
+          to: Rock Southwest
+          movement: mist2
+          tags: [event]
+        - name: Charge and Down
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock Southwest
+          movement: base
+          penalty_tags: [charge_time, charge_time]  # May take multiple attempts to clear it all
+          penalties:
+            - add: 2.0  # airtime
+          tags: [event]
+        - name: Spin and Down
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock Southwest
+          penalties:
+            - add: 2.0  # airtime
+          tags: [event]
+      exits:
+        - to: West Shaft Midway
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Rock Southwest
+          req: Ebih_Breach_Rock_Block_Rock
+          movement: base
+        - to: Rock East
+          req: Ebih_Breach_Rock_Block_Rock
+          movement: base
+    - name: Rock Southwest
+      coord: [19.6, 12.35]
+      local:
+        - to: Save Point
+        - to: West 13
+      locations:
+        - name: Mist Up
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Nanite_Mist
+          to: Rock Top
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Up
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: $mist2
+          to: Rock Top
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Rock East
+          req: Ebih_Breach_Rock_Block_Rock
+          movement: base
+        - to: Rock Top
+          req: Slingshot_Hook and Ebih_Breach_Rock_Block_Rock
+          movement: base
+          jumps: 1
+    - name: Rock East
+      coord: [19.75, 12.35]
+      local:
+        - to: Bottom Middle
+        - to: East Tunnel
+      locations:
+        - name: Mist Up
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Nanite_Mist
+          to: Rock Top
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Up
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: $mist2
+          to: Rock Top
+          movement: mist2
+          tags: [event]
+        - name: Charge and Break All
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock Southwest
+          movement: base
+          penalty_tags: [charge_time]
+          penalties:
+            - add: 0.5  # airtime
+          tags: [event]
+        - name: Spin and Break All
+          canon: Ebih_Breach_Rock_Block_Rock
+          item: Ebih_Breach_Rock_Block_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock Southwest
+          movement: base
+          penalties:
+            - add: 0.5  # airtime
+      exits:
+        - to: Rock Southwest
+          req: Ebih_Breach_Rock_Block_Rock
+          movement: base
+        - to: Save Point
+          req: Slingshot_Hook and Ebih_Breach_Rock_Block_Rock
+          movement: fast_hover
+        - to: West 13
+          req: Slingshot_Hook and Drone_Hover and Ebih_Breach_Rock_Block_Rock
+          movement: fast_hover
+        - to: Rock Top
+          req: Ebih_Breach_Rock_Block_Rock
+          movement: base
+          jumps: 1
+
+    - name: Bottom Middle
+      coord: [20.0, 12.75]
+      local:
+        - to: Rock East
+          jumps: 2
+        - to: Save Point
+          jumps: 1
+        - to: East Tunnel
+          jumps: 1
+      exits:
+        - to: Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Save Point
+      coord: [19.5, 12.6]
+      local:
+        - to: West 13
+        - to: Bottom Middle
+        - to: Rock Southwest
+          jumps: 1
+      exits:
+        - to: East Tunnel
+          req: Slingshot_Hook and Drone_Hover and Ebih_Breach_Rock_Block_Rock
+          movement: fast_hover
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: West 13
+      coord: [19.1, 12.7]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Giguna Breach > Fork > East 13
+          tags: [xdoor]
+
+    - name: East Tunnel
+      coord: [20.5, 12.55]
+      local:
+        - to: Bottom Middle
+        - to: Rock East
+          jumps: 2
+        - to: East Shaft Bottom
+          jumps: 0.5
+      locations:
+        - name: Flask
+          canon: Ebih_Breach_Rock_Block_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Ebih_Breach_Rock_Block_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Breach_Rock_Block_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: East Shaft Bottom
+      coord: [20.65, 12.5]
+      local:
+        - to: East Tunnel
+      exits:
+        - to: East Shaft Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Shaft Top
+          req: $mist2
+          movement: mist2
+    - name: East Shaft Top
+      coord: [20.65, 10.8]
+      local:
+        - to: West Shaft East Ledge
+          jumps: 1
+        - to: East Shaft Bottom
+        - to: East 11
+          jumps: 1
+    - name: East 11
+      coord: [20.9, 10.75]
+      local:
+        - to: East Shaft Top
+      exits:
+        - to: Rocky Cages > West 11
+          tags: [xdoor]

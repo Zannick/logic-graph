@@ -21,18 +21,63 @@ areas:
   spots:
     - name: Portal Hole
       coord: [18.475, 10.4]
-    - name: East 9
-      coord: [18.95, 8.75]
+    - name: Northeast Wall
+      coord: [18.8, 8.75]
+      data:
+        flipside: Giguna Breach > Gate and Wall > Button Right
+      local:
+        - to: Inner Wall
       exits:
-        - to: Ebih > Ebih West > West 9
-          tags: [xshift]
+        - to: Portal Exit
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Upper Column
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Crow Eating
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Save Point
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Ebih > Ebih West > Giguna Pillar
+          req: $grab or $climb
+          movement: base
+          jumps: 3
+          penalty_tags: [xshift, -base.1]
+        - to: Ebih > Ebih West > Giguna Pillar
+          req: $hook
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
     - name: Inner Wall
       coord: [18.65, 8.95]
       local:
-        - to: East 9
+        - to: Northeast Wall
+          jumps: 1
+        - to: Portal Exit
           jumps: 2
+    - name: Portal Exit
+      coord: [18.475, 8.6]
+      data:
+        flipside: Giguna Breach > Gate and Wall > Portal Stand
+      local:
+        - to: Upper Column
+          jumps: 2
+        - to: Inner Wall
+        - to: Northeast Wall
+    - name: Upper Column
+      coord: [18.15, 8.5]
+      data:
+        flipside: Giguna Breach > Gate and Wall > Brick Column
+      local:
         - to: Crow Eating
-          jumps: 4
+        - to: Portal Exit
+          jumps: 1
     - name: Crow Eating
       coord: [17.85, 8.9]
       local:
@@ -126,7 +171,9 @@ areas:
           req: Giguna_Northeast_Gate
           time: 2.5
     - name: Gate Right
-      coord: [18.75, 9.6]
+      coord: [18.775, 9.6]
+      data:
+        flipside: Giguna Breach > Gate and Wall > Walled Off
       local:
         - to: Gate Button
         - to: Shaft Bottom
@@ -966,7 +1013,7 @@ areas:
         - to: Upper Mid-air Near Cache
           req: $mist2
           movement: mist2
-        - to: Center Platform West
+        - to: Center Platform West  # If we don't go up, we go to the right
           req: $hook and $hover
           movement: base
           jumps: 2
@@ -1024,6 +1071,24 @@ areas:
         - to: Lower Platform West
           req: $hover
           movement: base
+    - name: Below Platforms Center
+      coord: [17.15, 12.35]
+      data:
+        flipside: SpotId::None
+      exits:
+        - to: Left Platform East
+          req: $hookhover
+          movement: base
+          jumps: 3
+        - to: Left Platform East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Left Platform East
+          req: $mist2
+          movement: mist2
+        - to: Cache Ledge
+          req: $mist2
+          movement: mist2
     - name: Center Platform West
       coord: [17.25, 11.7]
       local:

@@ -1125,6 +1125,11 @@ areas:
           tags: [warp]
     - name: MEB Southwest
       coord: [19, 13]
+      exits:
+        - to: Ebih Breach > Rock Block > Save Point
+          req: ^map__ebih_breach__rock_block__save
+          time: 12
+          tags: [warp]
 
     - name: UVB Center
       coord: [22, 28]
@@ -1144,12 +1149,18 @@ areas:
     #region Breach other entry points
     - name: GSB Chimney Flask
       coord: [13, 8]
+    - name: GSB Crab Rave Flask
+      coord: [17, 13]
     - name: GSB Cubby Health
       coord: [13, 11]
     - name: Slingshot Hook
       coord: [17, 11]
     - name: Drone Melee Charge
       coord: [16, 20]
+    - name: GSB Gate and Wall Health
+      coord: [18, 10]
+    - name: GSB Gate and Wall Portal
+      coord: [18, 9]
     - name: GSB Labyrinth Flask
       coord: [18, 21]
     - name: GSB Lower Machinery Flask
@@ -1190,14 +1201,16 @@ areas:
       coord: [25, 12]
     - name: MEB Lake Gate
       coord: [25, 14]
+    - name: MEB Rock Block Flask
+      coord: [20, 13]
+    - name: MEB Rocky Cages Flask
+      coord: [22, 10]
     - name: MEB Spider Guards Flask
       coord: [25, 7]
     - name: MEB Spider Guards Button
       coord: [23, 7]
     - name: Slingshot Weapon
       coord: [21, 9]
-    - name: MEB Rocky Cages Flask
-      coord: [22, 10]
 
     - name: UVB West Glitches
       coord: [21, 28]

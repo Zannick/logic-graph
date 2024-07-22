@@ -770,6 +770,40 @@ subgraph Ebih_Breach
         Ebih_Breach__Rocky_Cages__Northeast(Northeast);
         Ebih_Breach__Rocky_Cages__Cage_North(Cage North);
         Ebih_Breach__Rocky_Cages__Cage_Bottom(Cage Bottom);
+        Ebih_Breach__Rocky_Cages__West_10(West 10);
+        Ebih_Breach__Rocky_Cages__West_11(West 11);
+    end
+    subgraph Ebih_Breach__Connector[Connector]
+        Ebih_Breach__Connector__West(West);
+        Ebih_Breach__Connector__Column(Column);
+        Ebih_Breach__Connector__East(East);
+    end
+    subgraph Ebih_Breach__Switchback[Switchback]
+        Ebih_Breach__Switchback__West(West);
+        Ebih_Breach__Switchback__East_Turn(East Turn);
+        Ebih_Breach__Switchback__West_Turn(West Turn);
+        Ebih_Breach__Switchback__East(East);
+    end
+    subgraph Ebih_Breach__Giguna_Corner[Giguna Corner]
+        Ebih_Breach__Giguna_Corner__South(South);
+    end
+    subgraph Ebih_Breach__Rock_Block[Rock Block]
+        Ebih_Breach__Rock_Block__North(North);
+        Ebih_Breach__Rock_Block__Northwest_Ledge(Northwest Ledge);
+        Ebih_Breach__Rock_Block__West_Shaft_West_Ledge(West Shaft West Ledge);
+        Ebih_Breach__Rock_Block__West_Shaft_East_Ledge(West Shaft East Ledge);
+        Ebih_Breach__Rock_Block__West_Shaft_Midway(West Shaft Midway);
+        Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill(West Shaft Upper Hill);
+        Ebih_Breach__Rock_Block__Rock_Top(Rock Top);
+        Ebih_Breach__Rock_Block__Rock_Southwest(Rock Southwest);
+        Ebih_Breach__Rock_Block__Rock_East(Rock East);
+        Ebih_Breach__Rock_Block__Bottom_Middle(Bottom Middle);
+        Ebih_Breach__Rock_Block__Save_Point(Save Point);
+        Ebih_Breach__Rock_Block__West_13(West 13);
+        Ebih_Breach__Rock_Block__East_Tunnel(East Tunnel);
+        Ebih_Breach__Rock_Block__East_Shaft_Bottom(East Shaft Bottom);
+        Ebih_Breach__Rock_Block__East_Shaft_Top(East Shaft Top);
+        Ebih_Breach__Rock_Block__East_11(East 11);
     end
 end
 subgraph Ebih
@@ -903,7 +937,6 @@ subgraph Ebih
         Ebih__Ebih_West__Middle_Middle(Middle Middle);
         Ebih__Ebih_West__Middle_Cliff(Middle Cliff);
         Ebih__Ebih_West__Giguna_Pillar(Giguna Pillar);
-        Ebih__Ebih_West__West_9(West 9);
         Ebih__Ebih_West__Block_Right(Block Right);
         Ebih__Ebih_West__Refill_Station(Refill Station);
         Ebih__Ebih_West__East_11(East 11);
@@ -1417,9 +1450,25 @@ subgraph Giguna_Breach
         Giguna_Breach__Upper_Machinery__South(South);
     end
     subgraph Giguna_Breach__Gate_and_Wall[Gate and Wall]
+        Giguna_Breach__Gate_and_Wall__East_9(East 9);
+        Giguna_Breach__Gate_and_Wall__Button_Right(Button Right);
+        Giguna_Breach__Gate_and_Wall__Button_Left(Button Left);
+        Giguna_Breach__Gate_and_Wall__Portal_Stand(Portal Stand);
+        Giguna_Breach__Gate_and_Wall__Brick_Column(Brick Column);
+        Giguna_Breach__Gate_and_Wall__Gate_West(Gate West);
+        Giguna_Breach__Gate_and_Wall__West_Rock_Ledge(West Rock Ledge);
         Giguna_Breach__Gate_and_Wall__West_10(West 10);
+        Giguna_Breach__Gate_and_Wall__Walled_Off(Walled Off);
     end
     subgraph Giguna_Breach__Crab_Rave[Crab Rave]
+        Giguna_Breach__Crab_Rave__East(East);
+        Giguna_Breach__Crab_Rave__Button(Button);
+        Giguna_Breach__Crab_Rave__A_Crabs_Treasure(A Crab's Treasure);
+        Giguna_Breach__Crab_Rave__Gate_East(Gate East);
+        Giguna_Breach__Crab_Rave__Gate_East_Mid_air(Gate East Mid-air);
+        Giguna_Breach__Crab_Rave__Gate_West(Gate West);
+        Giguna_Breach__Crab_Rave__West_Ledge(West Ledge);
+        Giguna_Breach__Crab_Rave__West_Cloud(West Cloud);
         Giguna_Breach__Crab_Rave__North(North);
     end
     subgraph Giguna_Breach__East[East]
@@ -1460,12 +1509,25 @@ subgraph Giguna_Breach
         Giguna_Breach__South__Save_Point(Save Point);
         Giguna_Breach__South__South(South);
     end
+    subgraph Giguna_Breach__Fork[Fork]
+        Giguna_Breach__Fork__East_13(East 13);
+        Giguna_Breach__Fork__Center_Ledge_Upper(Center Ledge Upper);
+        Giguna_Breach__Fork__Center_Ledge_Lower(Center Ledge Lower);
+        Giguna_Breach__Fork__West_13(West 13);
+        Giguna_Breach__Fork__East_14(East 14);
+    end
+    subgraph Giguna_Breach__Pinkness[Pinkness]
+        Giguna_Breach__Pinkness__West(West);
+        Giguna_Breach__Pinkness__South(South);
+    end
 end
 subgraph Giguna
     subgraph Giguna__Giguna_Northeast[Giguna Northeast]
         Giguna__Giguna_Northeast__Portal_Hole(Portal Hole);
-        Giguna__Giguna_Northeast__East_9(East 9);
+        Giguna__Giguna_Northeast__Northeast_Wall(Northeast Wall);
         Giguna__Giguna_Northeast__Inner_Wall(Inner Wall);
+        Giguna__Giguna_Northeast__Portal_Exit(Portal Exit);
+        Giguna__Giguna_Northeast__Upper_Column(Upper Column);
         Giguna__Giguna_Northeast__Crow_Eating(Crow Eating);
         Giguna__Giguna_Northeast__Save_Point(Save Point);
         Giguna__Giguna_Northeast__Step(Step);
@@ -1550,6 +1612,7 @@ subgraph Giguna
         Giguna__Wasteland__Upper_Mid_air_Near_Cache(Upper Mid-air Near Cache);
         Giguna__Wasteland__Left_Platform_West(Left Platform West);
         Giguna__Wasteland__Left_Platform_East(Left Platform East);
+        Giguna__Wasteland__Below_Platforms_Center(Below Platforms Center);
         Giguna__Wasteland__Center_Platform_West(Center Platform West);
         Giguna__Wasteland__Center_Platform_East(Center Platform East);
         Giguna__Wasteland__Right_Platform_West(Right Platform West);
@@ -3002,9 +3065,12 @@ subgraph Menu
         Menu__Breach_Map__UVB_East(UVB East);
         Menu__Breach_Map__UVB_West(UVB West);
         Menu__Breach_Map__GSB_Chimney_Flask(GSB Chimney Flask);
+        Menu__Breach_Map__GSB_Crab_Rave_Flask(GSB Crab Rave Flask);
         Menu__Breach_Map__GSB_Cubby_Health(GSB Cubby Health);
         Menu__Breach_Map__Slingshot_Hook(Slingshot Hook);
         Menu__Breach_Map__Drone_Melee_Charge(Drone Melee Charge);
+        Menu__Breach_Map__GSB_Gate_and_Wall_Health(GSB Gate and Wall Health);
+        Menu__Breach_Map__GSB_Gate_and_Wall_Portal(GSB Gate and Wall Portal);
         Menu__Breach_Map__GSB_Labyrinth_Flask(GSB Labyrinth Flask);
         Menu__Breach_Map__GSB_Lower_Machinery_Flask(GSB Lower Machinery Flask);
         Menu__Breach_Map__GlB_Grate_Flask(GlB Grate Flask);
@@ -3023,10 +3089,11 @@ subgraph Menu
         Menu__Breach_Map__LAB_Upper_Lake_Health(LAB Upper Lake Health);
         Menu__Breach_Map__MEB_In_n_Out_Matrix(MEB In 'n Out Matrix);
         Menu__Breach_Map__MEB_Lake_Gate(MEB Lake Gate);
+        Menu__Breach_Map__MEB_Rock_Block_Flask(MEB Rock Block Flask);
+        Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
         Menu__Breach_Map__MEB_Spider_Guards_Flask(MEB Spider Guards Flask);
         Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
         Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
-        Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
         Menu__Breach_Map__UVB_West_Glitches(UVB West Glitches);
         Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
         Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
@@ -3814,6 +3881,10 @@ Ebih_Breach__Bubble_Bobble__Tree --> Ebih_Breach__Bubble_Bobble__West_10
 Ebih_Breach__Bubble_Bobble__Upper_Ledge --> Ebih_Breach__Spider_Guards__East_Spider
 Ebih_Breach__Bubble_Bobble__West_10 <--> Ebih_Breach__Corner__East
 Ebih_Breach__Bubble_Bobble__West_7 <--> Ebih_Breach__Spider_Guards__East
+Ebih_Breach__Connector__East --> Ebih_Breach__Connector__Column
+Ebih_Breach__Connector__East <--> Ebih_Breach__Switchback__West
+Ebih_Breach__Connector__West --> Ebih_Breach__Connector__Column
+Ebih_Breach__Connector__West <--> Giguna_Breach__Gate_and_Wall__East_9
 Ebih_Breach__Corner__South <--> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__East_Tree --> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__South <--> Ebih_Breach__In_n_Out__Northwest
@@ -3834,6 +3905,8 @@ Ebih_Breach__Drone_Tutorial__Bottom --> Ebih_Breach__Drone_Tutorial__First_Rocks
 Ebih_Breach__Drone_Tutorial__Upper_Mid_way --> Ebih_Breach__Drone_Tutorial__Top
 Ebih_Breach__Drone_Tutorial__West_4 <--> Ebih_Breach__Portals_101__East_4
 Ebih_Breach__Drone_Tutorial__West_6 <--> Ebih_Breach__Portals_101__East_6
+Ebih_Breach__Giguna_Corner__South <--> Ebih_Breach__Rock_Block__North
+Ebih_Breach__Giguna_Corner__South <--> Giguna_Breach__Gate_and_Wall__Walled_Off
 Ebih_Breach__In_n_Out__Center_Rock_Center --> Ebih_Breach__In_n_Out__Gate_East
 Ebih_Breach__In_n_Out__Center_Rock_Center --> Ebih_Breach__In_n_Out__Portal_Stand
 Ebih_Breach__In_n_Out__Center_Rock_East --> Ebih_Breach__In_n_Out__Gate_East
@@ -3872,6 +3945,21 @@ Ebih_Breach__Portals_101__West_Lower_Ledge --> Ebih_Breach__Portals_101__West_No
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_East
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_West
 Ebih_Breach__Portals_101__West_Slope --> Ebih_Breach__Portals_101__West_4
+Ebih_Breach__Rock_Block__Bottom_Middle --> Ebih_Breach__Rock_Block__Rock_East
+Ebih_Breach__Rock_Block__East_11 --> Ebih_Breach__Rocky_Cages__West_11
+Ebih_Breach__Rock_Block__East_Shaft_Bottom --> Ebih_Breach__Rock_Block__East_Shaft_Top
+Ebih_Breach__Rock_Block__Rock_East <--> Ebih_Breach__Rock_Block__Rock_Southwest
+Ebih_Breach__Rock_Block__Rock_East <--> Ebih_Breach__Rock_Block__Rock_Top
+Ebih_Breach__Rock_Block__Rock_East --> Ebih_Breach__Rock_Block__Save_Point
+Ebih_Breach__Rock_Block__Rock_East --> Ebih_Breach__Rock_Block__West_13
+Ebih_Breach__Rock_Block__Rock_Southwest <--> Ebih_Breach__Rock_Block__Rock_Top
+Ebih_Breach__Rock_Block__Rock_Top --> Ebih_Breach__Rock_Block__West_Shaft_Midway
+Ebih_Breach__Rock_Block__Save_Point --> Ebih_Breach__Rock_Block__East_Tunnel
+Ebih_Breach__Rock_Block__West_13 <--> Giguna_Breach__Fork__East_13
+Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill --> Ebih_Breach__Rock_Block__West_Shaft_East_Ledge
+Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill --> Ebih_Breach__Rock_Block__West_Shaft_West_Ledge
+Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__Northwest_Ledge
+Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__West_Shaft_East_Ledge
 Ebih_Breach__Rocky_Cages__Cage_Bottom --> Ebih_Breach__Rocky_Cages__Cage_North
 Ebih_Breach__Rocky_Cages__Cage_North <--> Ebih_Breach__The_Vault__South
 Ebih_Breach__Spider_Guards__Button <--> Ebih_Breach__Spider_Guards__Northwest
@@ -3884,6 +3972,10 @@ Ebih_Breach__Spider_Guards__East_Sand_Pit_East --> Ebih_Breach__Spider_Guards__E
 Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air --> Ebih_Breach__Spider_Guards__Center_Hover_End
 Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform --> Ebih_Breach__Spider_Guards__Center_Hover_End
 Ebih_Breach__Spider_Guards__Northwest --> Ebih_Breach__Snowy_Rocks__South
+Ebih_Breach__Switchback__East --> Ebih_Breach__Rocky_Cages__West_10
+Ebih_Breach__Switchback__East --> Ebih_Breach__Switchback__West_Turn
+Ebih_Breach__Switchback__East_Turn --> Ebih_Breach__Switchback__West
+Ebih_Breach__Switchback__West_Turn --> Ebih_Breach__Switchback__East_Turn
 Ebih_Breach__The_Vault__Dais_East --> Ebih_Breach__The_Vault__West_Hill_Hook_Point
 Ebih_Breach__The_Vault__East --> Ebih_Breach__The_Vault__Center_Hill
 Ebih_Breach__The_Vault__South --> Ebih_Breach__The_Vault__Pipe_Gap_East
@@ -3983,8 +4075,6 @@ Ebih__Ebih_West__West_11 <--> Giguna__Giguna_Northeast__East_11
 Ebih__Ebih_West__West_12 --> Ebih__Ebih_West__West_Fork
 Ebih__Ebih_West__West_12 <--> Giguna__Wasteland__East_12
 Ebih__Ebih_West__West_13 <--> Giguna__Wasteland__East_13
-Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
-Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
 Ebih__Gem_Room__Air_Corner --> Ebih__Gem_Room__Tunnel_Entrance
 Ebih__Gem_Room__Below_East_Gate --> Ebih__Gem_Room__Air_Corner
 Ebih__Gem_Room__Below_East_Gate --> Ebih__Gem_Room__East_Gate
@@ -4220,7 +4310,7 @@ Filter__Upper_Hallway__Corner --> Filter__Core__Bottom
 Filter__Upper_Hallway__West --> Filter__Core__East
 Giguna_Breach__Antechamber__North <--> Giguna_Breach__Fire_Room__South
 Giguna_Breach__Antechamber__South --> Giguna_Breach__Antechamber__North
-Giguna_Breach__Antechamber__South --> Giguna_Breach__Crab_Rave__North
+Giguna_Breach__Antechamber__South <--> Giguna_Breach__Crab_Rave__North
 Giguna_Breach__Ascent__Bottom --> Giguna_Breach__Ascent__Top
 Giguna_Breach__Ascent__West_6 <--> Giguna_Breach__Peak__East_6
 Giguna_Breach__Ascent__West_9 <--> Giguna_Breach__Central__East_9
@@ -4238,6 +4328,14 @@ Giguna_Breach__Central__West_8 <--> Giguna_Breach__Chimney__East_8
 Giguna_Breach__Central__West_9 --> Giguna_Breach__Central__Wall
 Giguna_Breach__Central__West_9 <--> Giguna_Breach__Chimney__East_9
 Giguna_Breach__Chimney__East_7 <--> Giguna_Breach__Peak__West_7
+Giguna_Breach__Crab_Rave__A_Crabs_Treasure --> Giguna_Breach__Crab_Rave__Gate_West
+Giguna_Breach__Crab_Rave__A_Crabs_Treasure --> Giguna_Breach__Crab_Rave__West_Cloud
+Giguna_Breach__Crab_Rave__A_Crabs_Treasure --> Giguna_Breach__Crab_Rave__West_Ledge
+Giguna_Breach__Crab_Rave__East --> Giguna_Breach__Crab_Rave__Button
+Giguna_Breach__Crab_Rave__East <--> Giguna_Breach__Fork__West_13
+Giguna_Breach__Crab_Rave__Gate_East <--> Giguna_Breach__Crab_Rave__Gate_West
+Giguna_Breach__Crab_Rave__Gate_West --> Giguna_Breach__Crab_Rave__Gate_East_Mid_air
+Giguna_Breach__Crab_Rave__West_Ledge --> Giguna_Breach__Crab_Rave__North
 Giguna_Breach__Deadly_Flora__East --> Giguna_Breach__Deadly_Flora__Lowest_Platform
 Giguna_Breach__Deadly_Flora__East --> Giguna_Breach__SW_Save__West_11
 Giguna_Breach__Deadly_Flora__Lower_Right_Ledge --> Giguna_Breach__Deadly_Flora__Middle_Left_Ledge
@@ -4261,7 +4359,7 @@ Giguna_Breach__Emergence__Left_Mid_air --> Giguna_Breach__Emergence__Corner
 Giguna_Breach__Emergence__Right_Mid_air --> Giguna_Breach__Emergence__Left_Side
 Giguna_Breach__Emergence__Save_Point --> Giguna_Breach__Emergence__Left_Side
 Giguna_Breach__Fire_Room__Cuesta --> Giguna_Breach__Fire_Room__Northeast_Lower_Ledge
-Giguna_Breach__Fire_Room__East_10 --> Giguna_Breach__Gate_and_Wall__West_10
+Giguna_Breach__Fire_Room__East_10 <--> Giguna_Breach__Gate_and_Wall__West_10
 Giguna_Breach__Fire_Room__East_11 <--> Giguna_Breach__Slingshot__West
 Giguna_Breach__Fire_Room__First_Fire --> Giguna_Breach__Fire_Room__West_Plateau
 Giguna_Breach__Fire_Room__High_Platform <--> Giguna_Breach__Fire_Room__Highest_Fire_East
@@ -4277,6 +4375,17 @@ Giguna_Breach__Fire_Room__West_10 <--> Giguna_Breach__Grid_14_10_11__East_10
 Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__Highest_Fire_West
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__West_10
+Giguna_Breach__Fork__Center_Ledge_Lower --> Giguna_Breach__Fork__Center_Ledge_Upper
+Giguna_Breach__Fork__Center_Ledge_Lower --> Giguna_Breach__Fork__West_13
+Giguna_Breach__Fork__Center_Ledge_Upper <--> Giguna_Breach__Fork__West_13
+Giguna_Breach__Fork__East_14 --> Giguna_Breach__Fork__Center_Ledge_Lower
+Giguna_Breach__Fork__East_14 --> Giguna_Breach__Pinkness__West
+Giguna_Breach__Gate_and_Wall__Brick_Column <--> Giguna_Breach__Gate_and_Wall__Gate_West
+Giguna_Breach__Gate_and_Wall__Button_Right --> Giguna_Breach__Gate_and_Wall__Brick_Column
+Giguna_Breach__Gate_and_Wall__Button_Right <--> Giguna_Breach__Gate_and_Wall__Portal_Stand
+Giguna_Breach__Gate_and_Wall__Gate_West <--> Giguna_Breach__Gate_and_Wall__West_Rock_Ledge
+Giguna_Breach__Gate_and_Wall__Portal_Stand --> Giguna_Breach__Gate_and_Wall__Brick_Column
+Giguna_Breach__Gate_and_Wall__West_10 --> Giguna_Breach__Gate_and_Wall__West_Rock_Ledge
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
 Giguna_Breach__Labyrinth__Button <--> Giguna_Breach__Labyrinth__Save_Point
@@ -4466,6 +4575,11 @@ Giguna__Giguna_Base__West_15 <--> Giguna__Helipad__East_15
 Giguna__Giguna_Base__West_16 <--> Giguna__Helipad__East_16
 Giguna__Giguna_Northeast__Crow_Eating --> Giguna__Giguna_Northeast__Gate_Vent
 Giguna__Giguna_Northeast__Gate_Button <--> Giguna__Giguna_Northeast__Gate_Left
+Giguna__Giguna_Northeast__Northeast_Wall --> Ebih__Ebih_West__Giguna_Pillar
+Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Crow_Eating
+Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Portal_Exit
+Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Save_Point
+Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Upper_Column
 Giguna__Giguna_Northeast__Right_Column --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Save_Point --> Giguna__Giguna_Northeast__Gate_Vent
 Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__Gate_Vent
@@ -4611,6 +4725,8 @@ Giguna__Vertical_Interchange__Top_Rocky_Ledge --> Giguna__Vertical_Interchange__
 Giguna__Vertical_Interchange__Top_Rocky_Outcrop --> Giguna__Vertical_Interchange__Top_Rocky_Ledge
 Giguna__Vertical_Interchange__West_19 --> Giguna__Vertical_Interchange__Ledge_19
 Giguna__Vertical_Interchange__West_19 --> Giguna__Vertical_Interchange__Top_Passage_Bottom
+Giguna__Wasteland__Below_Platforms_Center --> Giguna__Wasteland__Cache_Ledge
+Giguna__Wasteland__Below_Platforms_Center --> Giguna__Wasteland__Left_Platform_East
 Giguna__Wasteland__Bluff_by_Door --> Giguna__Wasteland__Door_Left
 Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Center_Plains
 Giguna__Wasteland__Cache_Ledge --> Giguna__Wasteland__Lower_Platform_West
@@ -5140,6 +5256,7 @@ Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
+Menu__Breach_Map__MEB_Southwest --> Ebih_Breach__Rock_Block__Save_Point
 Menu__Breach_Map__UVB_Center --> Uhrum_Breach__East_Glitch__Save_Point
 Menu__Emergence_Map__Camp --> Emergence__Camp_Exterior__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point

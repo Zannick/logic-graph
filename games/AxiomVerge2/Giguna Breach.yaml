@@ -1429,17 +1429,252 @@ areas:
 
 - name: Gate and Wall  # MARK: Gate and Wall
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [18, 8, 19, 9]
+    health: [18, 9, 19, 10]
+  datamap:
+    map_spot:
+      portal: Menu > Breach Map > GSB Gate and Wall Portal
+      health: Menu > Breach Map > GSB Gate and Wall Health
   spots:
+    - name: East 9
+      coord: [18.9, 8.75]
+      local:
+        - to: Button Right
+      exits:
+        - to: Ebih Breach > Connector > West
+          tags: [xdoor]
+    - name: Button Right
+      coord: [18.8, 8.75]
+      data:
+        flipside: Giguna > Giguna Northeast > Northeast Wall
+      local:
+        - to: Button Left
+        - to: East 9
+      locations:
+        - name: Hit Button
+          canon: Giguna_Breach_Gate_and_Wall_Gate
+          item: Giguna_Breach_Gate_and_Wall_Gate
+          tags: [button]
+      exits:
+        - to: Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Brick Column
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Button Left
+      coord: [18.7, 8.8]
+      local:
+        - to: Button Right
+          jumps: 1
+        - to: Portal Stand
+          jumps: 2
+      locations:
+        - name: Hit Button
+          canon: Giguna_Breach_Gate_and_Wall_Gate
+          item: Giguna_Breach_Gate_and_Wall_Gate
+          tags: [button]
+    - name: Portal Stand
+      coord: [18.475, 8.6]
+      data:
+        flipside: Giguna > Giguna Northeast > Portal Exit
+      local:
+        - to: Button Left
+      exits:
+        - to: Brick Column
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Brick Column
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Button Right
+          req: Drone_Hover
+          movement: base
+        - to: Button Right
+          req: Slingshot_Hook
+          movement: fast_hover
+    - name: Brick Column
+      coord: [18.15, 8.5]
+      data:
+        flipside: Giguna > Giguna Northeast > Upper Column
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Gate West
+          req: Giguna_Breach_Gate_and_Wall_Gate
+          movement: base
+    - name: Gate West
+      coord: [17.9, 8.75]
+      local:
+        - to: West Rock Ledge
+      exits:
+        - to: West Rock Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: Brick Column
+          req: Slingshot_Hook and Giguna_Breach_Gate_and_Wall_Gate
+          movement: base
+          jumps: 1
+    - name: West Rock Ledge
+      coord: [17.3, 9.35]
+      local:
+        - to: West 10
+      exits:
+        - to: Gate West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Gate West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
     - name: West 10
       coord: [17.1, 9.75]
+      local:
+        - to: West Rock Ledge
+          jumps: 2
+      exits:
+        - to: West Rock Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Fire Room > East 10
+          tags: [xdoor]
+
+    - name: Walled Off
+      coord: [18.775, 9.6]
+      data:
+        flipside: Giguna > Giguna Northeast > Gate Right
+      locations:
+        - name: Health
+          item: Health_Node
+          tags: [standing]
+      exits:
+        - to: Ebih Breach > Giguna Corner > South
+          movement: base
+          penalty_tags: [xdoor, -base.2]
 
 - name: Crab Rave  # MARK: Crab Rave
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [17, 12, 18, 13]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > GSB Crab Rave Flask
   spots:
+    - name: East
+      coord: [17.9, 12.75]
+      local:
+        - to: Button
+          jumps: 2
+      exits:
+        - to: Button
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: fast_hover
+          jumps: 1
+        - to: Fork > West 13
+          tags: [xdoor]
+    - name: Button
+      coord: [17.4, 12.6]
+      local:
+        - to: East
+        - to: A Crab's Treasure
+      locations:
+        - name: Hit Button
+          item: Giguna_Breach_Crab_Rave_Gate
+          tags: [button]
+    - name: A Crab's Treasure
+      coord: [17.3, 12.6]
+      local:
+        - to: Button
+        - to: Gate East
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Giguna_Breach_Crab_Rave_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Breach_Crab_Rave_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Breach_Crab_Rave_Flask
+          item: Flask
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Gate West
+          req: Slingshot_Hook and Giguna_Breach_Crab_Rave_Gate
+          movement: fast_hover
+          jumps: 1
+        - to: West Cloud
+          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover and Giguna_Breach_Crab_Rave_Gate
+          movement: fast_hover
+          jumps: 2
+        - to: West Ledge
+          req: Slingshot_Hook and Drone_Hover and Giguna_Breach_Crab_Rave_Gate
+          movement: fast_hover
+          jumps: 1
+    - name: Gate East
+      coord: [17.2, 12.55]
+      local:
+        - to: Gate East Mid-air
+          jumps: 1
+      exits:
+        - to: Gate West
+          req: Giguna_Breach_Crab_Rave_Gate
+          movement: base
+    - name: Gate East Mid-air
+      coord: [17.15, 12.35]
+      data:
+        flipside: Giguna > Wasteland > Below Platforms Center
+    - name: Gate West
+      coord: [17.05, 12.55]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Gate East
+          req: Giguna_Breach_Crab_Rave_Gate
+          movement: base
+        - to: Gate East Mid-air
+          jumps: 1
+    - name: West Ledge
+      coord: [16.6, 12.55]
+      local:
+        - to: Gate West
+        - to: West Cloud
+          jumps: 1
+      exits:
+        - to: North
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 1
+    - name: West Cloud
+      coord: [16.5, 12.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: West Ledge
     - name: North
       coord: [16.5, 12.2]
       data:
         flipside: Giguna > Wasteland > Mid-air Near Cache
+      local:
+        - to: West Cloud
+        - to: West Ledge
+      exits:
+        - to: Antechamber > South
+          tags: [ydoor]
 
 - name: East  # MARK: East
   on_entry: $reset_old_area(^newpos)
@@ -1814,3 +2049,72 @@ areas:
           jumps: 3
         - to: Uhrum Breach > Save and Go > North
           tags: [ydoor]
+
+- name: Fork  # MARK: Fork
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 13
+      coord: [18.9, 12.7]
+      local:
+        - to: Center Ledge Upper
+      exits:
+        - to: Ebih Breach > Rock Block > West 13
+          tags: [xdoor]
+    - name: Center Ledge Upper
+      coord: [18.5, 12.7]
+      local:
+        - to: East 13
+        - to: Center Ledge Lower
+      exits:
+        - to: West 13
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: Center Ledge Lower
+      coord: [18.45, 13.15]
+      local:
+        - to: East 14
+      exits:
+        - to: West 13
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Center Ledge Upper
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Center Ledge Upper
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+
+    - name: West 13
+      coord: [18.1, 12.75]
+      local:
+        - to: Center Ledge Lower
+      exits:
+        - to: Crab Rave > East
+          tags: [xdoor]
+        - to: Center Ledge Upper
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: East 14
+      coord: [18.9, 13.55]
+      local:
+        - to: Center Ledge Lower
+          jumps: 2
+      exits:
+        - to: Pinkness > West
+          tags: [xdoor]
+        - to: Center Ledge Lower
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+
+- name: Pinkness  # MARK: Pinkness
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [19.1, 13.55]
+    - name: South
+      coord: [19.5, 16.8]
