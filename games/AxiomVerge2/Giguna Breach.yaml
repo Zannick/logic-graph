@@ -1422,10 +1422,88 @@ areas:
   spots:
     - name: West
       coord: [19.1, 18.75]
+      local:
+        - to: Lower Path
+          jumps: 1
+      exits:
+        - to: Labyrinth > East 19
+          tags: [xdoor]
+    - name: Lower Path
+      coord: [19.9, 18.7]
+      local:
+        - to: West
+      exits:
+        - to: Lower Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Lower Ledge
+      coord: [19.9, 18.1]
+      local:
+        - to: Lower Path
+        - to: Passage Entrance
+          thru: [[19.45, 18.0], [19.45, 17.75]]
+          jumps: [1, 1, 0]
+    - name: Passage Entrance
+      coord: [19.35, 17.75]
+      local:
+        - to: Lower Ledge
+          thru: [[19.45, 17.75], [19.45, 18.0]]
+        - to: North
+          jumps: 3
+        - to: Center Ledge
+          jumps: 2
+      exits:
+        - to: North
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Center Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
     - name: North
       coord: [19.5, 17.2]
+      local:
+        - to: Passage Entrance
+        - to: Center Ledge
+      exits:
+        - to: Pinkness > South
+          tags: [ydoor]
+    - name: Center Ledge
+      coord: [19.7, 17.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: Passage Entrance
+        - to: West Tower
+      exits:
+        - to: Top Scaffold
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: West Tower
+      coord: [20.25, 17.55]
+      local:
+        - to: Center Ledge
+          jumps: 2
+        - to: Top Scaffold
+    - name: Top Scaffold
+      coord: [20.4, 17.75]
+      local:
+        - to: West Tower
+          jumps: 1
+        - to: South
     - name: South
-      coord: [20.5, 28.8]
+      coord: [20.5, 18.75]
+      data:
+        flipside: Giguna > Gateway > Near Button
+      exits:
+        - to: Top Scaffold
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: East > North
+          tags: [ydoor]
 
 - name: Gate and Wall  # MARK: Gate and Wall
   on_entry: $reset_old_area(^newpos)
@@ -2116,5 +2194,142 @@ areas:
   spots:
     - name: West
       coord: [19.1, 13.55]
+      local:
+        - to: Top Ledge
+      exits:
+        - to: Fork > East 14
+          tags: [xdoor]
+    - name: Top Ledge
+      coord: [19.7, 13.95]
+      local:
+        - to: Rock Top
+          thru: [19.6, 15.0]
+        - to: Upper East Ledge
+        - to: Middle West Ledge
+      exits:
+        - to: West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+    - name: Upper East Ledge
+      coord: [19.8, 14.5]
+      local:
+        - to: Middle West Ledge
+        - to: Rock Top
+          thru: [19.6, 15.0]
+      exits:
+        - to: Top Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Top Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Top Ledge
+          req: $mist2
+          movement: mist2
+    - name: Middle West Ledge
+      coord: [19.55, 15.15]
+      local:
+        - to: Rock Top
+      exits:
+        - to: Upper East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Rock Top
+      coord: [19.7, 15.9]
+      locations:
+        - name: Mist Down
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Nanite_Mist
+          to: Rock Bottom
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Down
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: $mist2
+          to: Rock Bottom
+          movement: mist2
+          tags: [event]
+        - name: Charge Down
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock Bottom
+          movement: base
+          penalty_tags: [charge_time]
+          penalties:
+            - add: 1  # airtime
+          tags: [event]
+        - name: Spin Down
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock Bottom
+          movement: base
+          penalties:
+            - add: 1  # airtime
+          tags: [event]
+      exits:
+        - to: Rock Bottom
+          req: Giguna_Breach_Pinkness_Rock
+          movement: base
+        - to: Middle West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Rock Bottom
+      coord: [19.6, 16.1]
+      local:
+        - to: South
+      locations:
+        - name: Mist Up
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Nanite_Mist
+          to: Rock Top
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Up
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: $mist2
+          to: Rock Top
+          movement: mist2
+          tags: [event]
+        - name: Charge Up
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Slingshot_Hook and Slingshot_Charge
+          to: Rock Top
+          movement: fling
+          penalty_tags: [charge_time]
+          tags: [event]
+        - name: Spin Up
+          canon: Giguna_Breach_Pinkness_Rock
+          item: Giguna_Breach_Pinkness_Rock
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Rock Top
+          movement: base
+          tags: [event]
+      exits:
+        - to: Rock Top
+          req: Giguna_Breach_Pinkness_Rock
+          movement: base
+          jumps: 1
     - name: South
       coord: [19.5, 16.8]
+      exits:
+        - to: Rock Bottom
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: Upper Machinery > North
+          tags: [ydoor]

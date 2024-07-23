@@ -107,6 +107,7 @@ pub enum Item {
     Giguna_Breach_Crab_Rave_Gate,
     Giguna_Breach_Gate_and_Wall_Gate,
     Giguna_Breach_Lower_Machinery_Gate,
+    Giguna_Breach_Pinkness_Rock,
     Giguna_Dual_Path_Switch,
     Giguna_Dual_Path_Wall,
     Giguna_Gateway_Block,
@@ -322,6 +323,7 @@ impl fmt::Display for Item {
             Item::Giguna_Breach_Lower_Machinery_Gate => {
                 write!(f, "{}", "Giguna_Breach_Lower_Machinery_Gate")
             }
+            Item::Giguna_Breach_Pinkness_Rock => write!(f, "{}", "Giguna_Breach_Pinkness_Rock"),
             Item::Giguna_Dual_Path_Switch => write!(f, "{}", "Giguna_Dual_Path_Switch"),
             Item::Giguna_Dual_Path_Wall => write!(f, "{}", "Giguna_Dual_Path_Wall"),
             Item::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
@@ -549,6 +551,7 @@ impl std::str::FromStr for Item {
             "Giguna_Breach_Crab_Rave_Gate" => Ok(Item::Giguna_Breach_Crab_Rave_Gate),
             "Giguna_Breach_Gate_and_Wall_Gate" => Ok(Item::Giguna_Breach_Gate_and_Wall_Gate),
             "Giguna_Breach_Lower_Machinery_Gate" => Ok(Item::Giguna_Breach_Lower_Machinery_Gate),
+            "Giguna_Breach_Pinkness_Rock" => Ok(Item::Giguna_Breach_Pinkness_Rock),
             "Giguna_Dual_Path_Switch" => Ok(Item::Giguna_Dual_Path_Switch),
             "Giguna_Dual_Path_Wall" => Ok(Item::Giguna_Dual_Path_Wall),
             "Giguna_Gateway_Block" => Ok(Item::Giguna_Gateway_Block),

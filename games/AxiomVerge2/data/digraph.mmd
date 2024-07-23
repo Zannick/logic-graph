@@ -1446,7 +1446,13 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Upper_Machinery[Upper Machinery]
         Giguna_Breach__Upper_Machinery__West(West);
+        Giguna_Breach__Upper_Machinery__Lower_Path(Lower Path);
+        Giguna_Breach__Upper_Machinery__Lower_Ledge(Lower Ledge);
+        Giguna_Breach__Upper_Machinery__Passage_Entrance(Passage Entrance);
         Giguna_Breach__Upper_Machinery__North(North);
+        Giguna_Breach__Upper_Machinery__Center_Ledge(Center Ledge);
+        Giguna_Breach__Upper_Machinery__West_Tower(West Tower);
+        Giguna_Breach__Upper_Machinery__Top_Scaffold(Top Scaffold);
         Giguna_Breach__Upper_Machinery__South(South);
     end
     subgraph Giguna_Breach__Gate_and_Wall[Gate and Wall]
@@ -1518,6 +1524,11 @@ subgraph Giguna_Breach
     end
     subgraph Giguna_Breach__Pinkness[Pinkness]
         Giguna_Breach__Pinkness__West(West);
+        Giguna_Breach__Pinkness__Top_Ledge(Top Ledge);
+        Giguna_Breach__Pinkness__Upper_East_Ledge(Upper East Ledge);
+        Giguna_Breach__Pinkness__Middle_West_Ledge(Middle West Ledge);
+        Giguna_Breach__Pinkness__Rock_Top(Rock Top);
+        Giguna_Breach__Pinkness__Rock_Bottom(Rock Bottom);
         Giguna_Breach__Pinkness__South(South);
     end
 end
@@ -1846,6 +1857,7 @@ subgraph Giguna
         Giguna__Gateway__Flask_Ledge(Flask Ledge);
         Giguna__Gateway__Block_Lowered(Block Lowered);
         Giguna__Gateway__West_19(West 19);
+        Giguna__Gateway__Near_Button(Near Button);
         Giguna__Gateway__Button(Button);
         Giguna__Gateway__East_19(East 19);
     end
@@ -4351,7 +4363,7 @@ Giguna_Breach__Deadly_Flora__Upper_Right_Ledge --> Giguna_Breach__Deadly_Flora__
 Giguna_Breach__Deadly_Flora__West <--> Giguna_Breach__Emergence__East
 Giguna_Breach__East__East_Tunnel --> Giguna_Breach__East__Upper_Tunnel_Entrance
 Giguna_Breach__East__East_Tunnel <--> Giguna_Breach__Secret_Tunnel__West
-Giguna_Breach__East__North --> Giguna_Breach__Upper_Machinery__South
+Giguna_Breach__East__North <--> Giguna_Breach__Upper_Machinery__South
 Giguna_Breach__East__Save_Point --> Giguna_Breach__East__North
 Giguna_Breach__East__South <--> Giguna_Breach__Lower_Machinery__North
 Giguna_Breach__Emergence__Left_Mid_air --> Giguna_Breach__Deadly_Flora__Upper_Left_Ledge
@@ -4379,7 +4391,7 @@ Giguna_Breach__Fork__Center_Ledge_Lower --> Giguna_Breach__Fork__Center_Ledge_Up
 Giguna_Breach__Fork__Center_Ledge_Lower --> Giguna_Breach__Fork__West_13
 Giguna_Breach__Fork__Center_Ledge_Upper <--> Giguna_Breach__Fork__West_13
 Giguna_Breach__Fork__East_14 --> Giguna_Breach__Fork__Center_Ledge_Lower
-Giguna_Breach__Fork__East_14 --> Giguna_Breach__Pinkness__West
+Giguna_Breach__Fork__East_14 <--> Giguna_Breach__Pinkness__West
 Giguna_Breach__Gate_and_Wall__Brick_Column <--> Giguna_Breach__Gate_and_Wall__Gate_West
 Giguna_Breach__Gate_and_Wall__Button_Right --> Giguna_Breach__Gate_and_Wall__Brick_Column
 Giguna_Breach__Gate_and_Wall__Button_Right <--> Giguna_Breach__Gate_and_Wall__Portal_Stand
@@ -4389,7 +4401,7 @@ Giguna_Breach__Gate_and_Wall__West_10 --> Giguna_Breach__Gate_and_Wall__West_Roc
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
 Giguna_Breach__Labyrinth__Button <--> Giguna_Breach__Labyrinth__Save_Point
-Giguna_Breach__Labyrinth__East_19 --> Giguna_Breach__Upper_Machinery__West
+Giguna_Breach__Labyrinth__East_19 <--> Giguna_Breach__Upper_Machinery__West
 Giguna_Breach__Labyrinth__East_20 <--> Giguna_Breach__Portal_Exchange__West
 Giguna_Breach__Labyrinth__Lower_Tier_East --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge
 Giguna_Breach__Labyrinth__Lower_Tier_East --> Giguna_Breach__Labyrinth__Middle_Tier_Ledge_East
@@ -4427,6 +4439,13 @@ Giguna_Breach__Lower_Portal__Portal_Dais --> Giguna_Breach__Lower_Portal__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
 Giguna_Breach__Peak__Portal --> Giguna_Breach__Peak__Upper_West
 Giguna_Breach__Pink_Clouds__Normal_Entry --> Giguna_Breach__Pink_Clouds__Corner
+Giguna_Breach__Pinkness__Middle_West_Ledge --> Giguna_Breach__Pinkness__Upper_East_Ledge
+Giguna_Breach__Pinkness__Rock_Bottom <--> Giguna_Breach__Pinkness__Rock_Top
+Giguna_Breach__Pinkness__Rock_Top --> Giguna_Breach__Pinkness__Middle_West_Ledge
+Giguna_Breach__Pinkness__South --> Giguna_Breach__Pinkness__Rock_Bottom
+Giguna_Breach__Pinkness__South <--> Giguna_Breach__Upper_Machinery__North
+Giguna_Breach__Pinkness__Top_Ledge --> Giguna_Breach__Pinkness__West
+Giguna_Breach__Pinkness__Upper_East_Ledge --> Giguna_Breach__Pinkness__Top_Ledge
 Giguna_Breach__Portal_Exchange__Bottom --> Giguna_Breach__Portal_Exchange__Middle_Gap
 Giguna_Breach__Portal_Exchange__Middle_Gap --> Giguna_Breach__Portal_Exchange__Middle_Ledge
 Giguna_Breach__Portal_Exchange__Middle_Gap --> Giguna_Breach__Portal_Exchange__West
@@ -4443,6 +4462,11 @@ Giguna_Breach__Slingshot__Ravine --> Giguna_Breach__Slingshot__Column
 Giguna_Breach__South__Save_Point --> Giguna_Breach__South__North
 Giguna_Breach__South__South --> Giguna_Breach__South__North
 Giguna_Breach__South__South <--> Uhrum_Breach__Save_and_Go__North
+Giguna_Breach__Upper_Machinery__Center_Ledge --> Giguna_Breach__Upper_Machinery__Top_Scaffold
+Giguna_Breach__Upper_Machinery__Lower_Path --> Giguna_Breach__Upper_Machinery__Lower_Ledge
+Giguna_Breach__Upper_Machinery__Passage_Entrance --> Giguna_Breach__Upper_Machinery__Center_Ledge
+Giguna_Breach__Upper_Machinery__Passage_Entrance --> Giguna_Breach__Upper_Machinery__North
+Giguna_Breach__Upper_Machinery__South --> Giguna_Breach__Upper_Machinery__Top_Scaffold
 Giguna_Breach__White_Clouds__Bottom --> Giguna_Breach__White_Clouds__Exit
 Giguna_Breach__White_Clouds__Entry --> Giguna_Breach__White_Clouds__East_Ledge
 Giguna__Antechamber__Bottom --> Giguna__Antechamber__Left_Wall_Lower
@@ -4553,6 +4577,7 @@ Giguna__Gateway__East_19 <--> Giguna__Vertical_Interchange__West_19
 Giguna__Gateway__Far_Ledge --> Giguna__Gateway__Flask_Ledge
 Giguna__Gateway__Far_Ledge <--> Giguna__Gateway__Right_Platform
 Giguna__Gateway__Left_Platform --> Giguna__Gateway__Block_Lowered
+Giguna__Gateway__Near_Button --> Giguna__Gateway__West_19
 Giguna__Gateway__Passage_Entry <--> Giguna__Gateway__Passage_Exit
 Giguna__Gateway__Passage_Exit --> Giguna__Gateway__Left_Platform
 Giguna__Gateway__Refill_Station --> Giguna__Gateway__Far_Ledge

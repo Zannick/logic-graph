@@ -1480,6 +1480,11 @@
         }
         {
             Giguna_Breach__Pinkness__West [label = "", pos = "57.3,-72.583333!"];
+            Giguna_Breach__Pinkness__Top_Ledge [label = "", pos = "59.1,-73.25!"];
+            Giguna_Breach__Pinkness__Upper_East_Ledge [label = "", pos = "59.4,-74.166667!"];
+            Giguna_Breach__Pinkness__Middle_West_Ledge [label = "", pos = "58.65,-75.25!"];
+            Giguna_Breach__Pinkness__Rock_Top [label = "", pos = "59.1,-76.5!"];
+            Giguna_Breach__Pinkness__Rock_Bottom [label = "", pos = "58.8,-76.833333!"];
             Giguna_Breach__Pinkness__South [label = "", pos = "58.5,-78.0!"];
         }
         {
@@ -1520,8 +1525,14 @@
         }
         {
             Giguna_Breach__Upper_Machinery__West [label = "", pos = "57.3,-81.25!"];
+            Giguna_Breach__Upper_Machinery__Lower_Path [label = "", pos = "59.7,-81.166667!"];
+            Giguna_Breach__Upper_Machinery__Lower_Ledge [label = "", pos = "59.7,-80.166667!"];
+            Giguna_Breach__Upper_Machinery__Passage_Entrance [label = "", pos = "58.05,-79.583333!"];
             Giguna_Breach__Upper_Machinery__North [label = "", pos = "58.5,-78.666667!"];
-            Giguna_Breach__Upper_Machinery__South [label = "", pos = "61.5,-98.0!"];
+            Giguna_Breach__Upper_Machinery__Center_Ledge [label = "", pos = "59.1,-78.916667!"];
+            Giguna_Breach__Upper_Machinery__West_Tower [label = "", pos = "60.75,-79.25!"];
+            Giguna_Breach__Upper_Machinery__Top_Scaffold [label = "", pos = "61.2,-79.583333!"];
+            Giguna_Breach__Upper_Machinery__South [label = "", pos = "61.5,-81.25!"];
         }
         {
             Giguna_Breach__White_Clouds__Entry [label = "", pos = "52.5,-89.583333!"];
@@ -1673,9 +1684,10 @@
             Giguna__Gateway__One_Jump [label = "", pos = "61.95,-29.5!"];
             Giguna__Gateway__Flask_Ledge [label = "", pos = "62.1,-29.083333!"];
             Giguna__Gateway__Block_Lowered [label = "", pos = "60.0,-30.833333!"];
-            Giguna__Gateway__West_19 [label = "", pos = "57.15,-31.333333!"];
-            Giguna__Gateway__Button [label = "", pos = "61.65,-31.083333!"];
-            Giguna__Gateway__East_19 [label = "", pos = "62.85,-31.333333!"];
+            Giguna__Gateway__West_19 [label = "", pos = "57.15,-31.25!"];
+            Giguna__Gateway__Near_Button [label = "", pos = "61.5,-31.25!"];
+            Giguna__Gateway__Button [label = "", pos = "61.95,-31.083333!"];
+            Giguna__Gateway__East_19 [label = "", pos = "62.85,-31.25!"];
         }
         {
             Giguna__Giguna_Base__East_14 [label = "", pos = "44.85,-22.833333!"];
@@ -1790,7 +1802,7 @@
             Giguna__Labyrinth__East_23 [label = "", pos = "53.85,-38.0!"];
         }
         {
-            Giguna__Labyrinth_East__East_19 [label = "", pos = "56.85,-31.333333!"];
+            Giguna__Labyrinth_East__East_19 [label = "", pos = "56.85,-31.25!"];
             Giguna__Labyrinth_East__Top_Middle [label = "", pos = "55.2,-31.833333!"];
             Giguna__Labyrinth_East__Top_West [label = "", pos = "54.15,-31.833333!"];
             Giguna__Labyrinth_East__Middle_West [label = "", pos = "54.15,-32.833333!"];
@@ -1920,7 +1932,7 @@
             Giguna__Vertical_Interchange__Top_Rocky_Outcrop [label = "", pos = "64.2,-30.0!"];
             Giguna__Vertical_Interchange__Top_Passage_Bottom [label = "", pos = "64.05,-30.416667!"];
             Giguna__Vertical_Interchange__Ledge_19 [label = "", pos = "64.95,-31.166667!"];
-            Giguna__Vertical_Interchange__West_19 [label = "", pos = "63.15,-31.333333!"];
+            Giguna__Vertical_Interchange__West_19 [label = "", pos = "63.15,-31.25!"];
             Giguna__Vertical_Interchange__Middle_Below_Top [label = "", pos = "64.2,-31.833333!"];
             Giguna__Vertical_Interchange__Middle_Plateau [label = "", pos = "65.25,-32.666667!"];
             Giguna__Vertical_Interchange__East_20 [label = "", pos = "65.7,-33.0!"];

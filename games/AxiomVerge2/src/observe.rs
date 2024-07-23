@@ -395,6 +395,9 @@ impl Observer for FullObservation {
             LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel | LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EMERGENCE_BREACH_FLASK);
             }
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
+                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
+            }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate | LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_NORTHEAST_GATE);
             }
@@ -480,7 +483,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LEDGE_GRAB);
             }
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape | LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ESCAPE);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ESCAPE);
             }
             LocationId::Glacier__Hammonds_End__Hammond__Note | LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_HAMMONDS_NOTE);
@@ -639,10 +642,10 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP);
             }
             LocationId::Annuna__Sniper_Valley__Table__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__SNIPER_VALLEY__TABLE__ITEM);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__SNIPER_VALLEY__TABLE__ITEM);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_ANNUNA__SNIPER_VALLEY__CAVERN_CACHE__ITEM);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__SNIPER_VALLEY__CAVERN_CACHE__ITEM);
             }
             LocationId::Annuna__Vertical_Room__Plinth__Item => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__VERTICAL_ROOM__PLINTH__ITEM);
@@ -849,10 +852,10 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__VERTICAL_ROOM__PEAK__FLASK);
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__ITEM);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__ITEM);
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__SWITCH);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__SWITCH);
             }
             LocationId::Glacier__Peak__Birds_Eye__Item => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__PEAK__BIRDS_EYE__ITEM);
@@ -936,10 +939,10 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_4);
@@ -3695,6 +3698,12 @@ impl FullObservation {
     pub fn clear_giguna_breach_lower_machinery_gate(&mut self) {
         self.cbits3.remove(flags::ContextBits3::GIGUNA_BREACH_LOWER_MACHINERY_GATE);
     }
+    pub fn observe_giguna_breach_pinkness_rock(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
+    }
+    pub fn clear_giguna_breach_pinkness_rock(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
+    }
     pub fn observe_giguna_dual_path_switch(&mut self) {
         self.cbits3.insert(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
     }
@@ -3866,10 +3875,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::INFECT);
     }
     pub fn observe_infect_l1(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::INFECT_L1);
+        self.cbits4.insert(flags::ContextBits4::INFECT_L1);
     }
     pub fn clear_infect_l1(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::INFECT_L1);
+        self.cbits4.remove(flags::ContextBits4::INFECT_L1);
     }
     pub fn observe_infect_l2(&mut self) {
         self.cbits4.insert(flags::ContextBits4::INFECT_L2);
@@ -4260,10 +4269,10 @@ impl FullObservation {
         self.cbits4.remove(flags::ContextBits4::UHRUM_CAVERN_WALL);
     }
     pub fn observe_uhrum_east_glitch(&mut self) {
-        self.cbits4.insert(flags::ContextBits4::UHRUM_EAST_GLITCH);
+        self.cbits5.insert(flags::ContextBits5::UHRUM_EAST_GLITCH);
     }
     pub fn clear_uhrum_east_glitch(&mut self) {
-        self.cbits4.remove(flags::ContextBits4::UHRUM_EAST_GLITCH);
+        self.cbits5.remove(flags::ContextBits5::UHRUM_EAST_GLITCH);
     }
     pub fn observe_uhrum_east_lake_block(&mut self) {
         self.cbits5.insert(flags::ContextBits5::UHRUM_EAST_LAKE_BLOCK);

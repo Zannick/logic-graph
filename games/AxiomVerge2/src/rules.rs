@@ -1633,6 +1633,10 @@ pub fn access_giguna_breach_lower_machinery_gate(ctx: &Context, world: &World) -
     // Giguna_Breach_Lower_Machinery_Gate
     ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate)
 }
+pub fn access_giguna_breach_pinkness_rock(ctx: &Context, world: &World) -> bool {
+    // Giguna_Breach_Pinkness_Rock
+    ctx.has(Item::Giguna_Breach_Pinkness_Rock)
+}
 pub fn access_giguna_dual_path_switch(ctx: &Context, world: &World) -> bool {
     // Giguna_Dual_Path_Switch
     ctx.has(Item::Giguna_Dual_Path_Switch)
@@ -9982,6 +9986,18 @@ pub fn explain_giguna_breach_lower_machinery_gate(
         let h = ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate);
         edict.insert("Giguna_Breach_Lower_Machinery_Gate", format!("{}", h));
         (h, vec!["Giguna_Breach_Lower_Machinery_Gate"])
+    }
+}
+pub fn explain_giguna_breach_pinkness_rock(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Breach_Pinkness_Rock
+    {
+        let h = ctx.has(Item::Giguna_Breach_Pinkness_Rock);
+        edict.insert("Giguna_Breach_Pinkness_Rock", format!("{}", h));
+        (h, vec!["Giguna_Breach_Pinkness_Rock"])
     }
 }
 pub fn explain_giguna_dual_path_switch(
@@ -20955,6 +20971,17 @@ pub fn observe_access_giguna_breach_lower_machinery_gate(
     {
         full_obs.observe_giguna_breach_lower_machinery_gate();
         ctx.has(Item::Giguna_Breach_Lower_Machinery_Gate)
+    }
+}
+pub fn observe_access_giguna_breach_pinkness_rock(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Breach_Pinkness_Rock
+    {
+        full_obs.observe_giguna_breach_pinkness_rock();
+        ctx.has(Item::Giguna_Breach_Pinkness_Rock)
     }
 }
 pub fn observe_access_giguna_dual_path_switch(

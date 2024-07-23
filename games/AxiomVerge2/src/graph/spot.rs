@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2884] = [
+static SPOT_DEFS: [SpotDef; 2896] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -7220,15 +7220,45 @@ static SPOT_DEFS: [SpotDef; 2884] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Giguna_Breach__Pinkness__Middle_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Middle_West_Ledge__ex__Upper_East_Ledge_1, ExitId::Giguna_Breach__Pinkness__Middle_West_Ledge__ex__Upper_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
+        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up, LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up)),
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Rock_Bottom__ex__Rock_Top_1, ExitId::Giguna_Breach__Pinkness__Rock_Bottom__ex__Rock_Top_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down, LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down)),
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Rock_Top__ex__Middle_West_Ledge_1, ExitId::Giguna_Breach__Pinkness__Rock_Top__ex__Rock_Bottom_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Giguna_Breach__Pinkness__South,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__South__ex__Rock_Bottom_1, ExitId::Giguna_Breach__Pinkness__South__ex__Upper_Machinery__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Pinkness__Top_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_1, ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Pinkness__Upper_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Upper_East_Ledge__ex__Top_Ledge_1, ExitId::Giguna_Breach__Pinkness__Upper_East_Ledge__ex__Top_Ledge_3)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Pinkness__West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__West__ex__Fork__East_14_1, ExitId::Giguna_Breach__Pinkness__West__ex__Fork__East_14_1)),
         action_range: None,
     },
     SpotDef {
@@ -7376,19 +7406,55 @@ static SPOT_DEFS: [SpotDef; 2884] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Giguna_Breach__Upper_Machinery__North,
+        id: SpotId::Giguna_Breach__Upper_Machinery__Center_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__Center_Ledge__ex__Top_Scaffold_1, ExitId::Giguna_Breach__Upper_Machinery__Center_Ledge__ex__Top_Scaffold_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__Lower_Ledge,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__Lower_Path,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__Lower_Path__ex__Lower_Ledge_1, ExitId::Giguna_Breach__Upper_Machinery__Lower_Path__ex__Lower_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__North__ex__Pinkness__South_1, ExitId::Giguna_Breach__Upper_Machinery__North__ex__Pinkness__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__Passage_Entrance,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__Passage_Entrance__ex__Center_Ledge_1, ExitId::Giguna_Breach__Upper_Machinery__Passage_Entrance__ex__North_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Giguna_Breach__Upper_Machinery__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__South__ex__East__North_1, ExitId::Giguna_Breach__Upper_Machinery__South__ex__Top_Scaffold_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__Top_Scaffold,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Upper_Machinery__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna_Breach__Upper_Machinery__West__ex__Labyrinth__East_19_1, ExitId::Giguna_Breach__Upper_Machinery__West__ex__Labyrinth__East_19_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__Upper_Machinery__West_Tower,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -8135,6 +8201,12 @@ static SPOT_DEFS: [SpotDef; 2884] = [
         id: SpotId::Giguna__Gateway__Left_Platform,
         loc_range: None,
         exit_range: Some((ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1, ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__Gateway__Near_Button,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna__Gateway__Near_Button__ex__West_19_1, ExitId::Giguna__Gateway__Near_Button__ex__West_19_1)),
         action_range: None,
     },
     SpotDef {

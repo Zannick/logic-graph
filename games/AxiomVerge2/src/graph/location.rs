@@ -464,6 +464,14 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Collection_Skip => true,
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Giguna_Breach__Lower_Machinery__Button__Hit_Button => true,
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::access_nanite_mist(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up => rules::access_invoke_mist2(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::access_nanite_mist(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::access_invoke_mist2(ctx, world),
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
@@ -1076,6 +1084,14 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
@@ -1371,6 +1387,20 @@ impl world::Accessible for Location {
                 LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => {
                     if true {
                         500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => {
+                    if true {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => {
+                    if true {
+                        1000
                     } else {
                         0
                     }
@@ -1690,6 +1720,14 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::explain_boomerang(ctx, world, edict),
@@ -1921,7 +1959,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 729] = [
+static LOC_DEFS: [Location; 737] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -4800,6 +4838,78 @@ static LOC_DEFS: [Location; 729] = [
         price: Currency::Free,
         time: 100,
         dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 2000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 2000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down,
+        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
+        item: Item::Giguna_Breach_Pinkness_Rock,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         skippable: false,
     },
     Location {
@@ -8693,6 +8803,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Collection_Skip | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Fast_Travel => SpotId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure,
         LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => SpotId::Giguna_Breach__Emergence__Corner,
         LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => SpotId::Giguna_Breach__Emergence__Left_Side,
+        LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up => SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => SpotId::Giguna__Giguna_Northeast__Gate_Button,
         LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => SpotId::Giguna__Giguna_Northeast__Gate_Right,
         LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => SpotId::Giguna__Giguna_Northeast__Door,
