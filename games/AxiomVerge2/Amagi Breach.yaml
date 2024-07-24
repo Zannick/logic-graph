@@ -471,6 +471,7 @@ areas:
         - name: Urn Fast Travel
           canon: Exit_Breach
           item: Exit_Breach
+          req: Fast_Travel
           to: ^map_spot
           tags: [cskip]
     - name: Small Column East

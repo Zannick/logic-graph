@@ -217,3 +217,19 @@
 # This is technically free since the portal follows us
 ! Do Move Portal Here
   Portalwarp
+* Collect Amagi_Gated_Community_Gate from Amagi > Gated Community > Button > Hit Button
+! Do Amagi > Gated Community > Dur-Esla > Kill Dur-Esla
+* Collect Flask from Amagi > Main Area > Cache > Item
+* Collect Flask from Amagi > Gated Community > Upper East Ledge > Flask
+* Collect Big_Flask from Amagi Breach > East Ruins > Northeast Bubbles Corner Access > Item
+* Collect Exit_Breach from Amagi Breach > East Ruins > Plinth > Urn Fast Travel ==> Menu > Breach Map > Exit Breach
+
+# Zal Tu / Slingshot Weapon
+* Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
+* Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
+* Collect Big_Flask from Glacier Breach > Spidery Connector > Midway > Flask
+* Collect Flask from Ebih Breach > Spider Guards > East Sand Pit > Flask
+* Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
+* Collect Flask from Ebih Breach > Rocky Cages > Cage Bottom > Flask Fast Travel ==> Menu > Breach Map > MEB Rocky Cages Flask
+
+# Next: Glacier Breach hidden flask
