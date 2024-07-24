@@ -413,6 +413,21 @@ pub fn access_breach_attractor_and_anuman(ctx: &Context, world: &World) -> bool 
     // Breach_Attractor and Anuman
     (ctx.has(Item::Breach_Attractor) && ctx.has(Item::Anuman))
 }
+pub fn access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN (`Glacier > Grid 39-40,7-9`, `Glacier > Revival`, `Glacier > Dock Outside`) and ^portal == ^portal_start
+    (((ctx.has(Item::Breach_Attractor) && ctx.mode() == enums::Mode::Drone)
+        && ctx.indra() != SpotId::None
+        && matches!(
+            get_area(ctx.indra()),
+            AreaId::Glacier__Grid_39_40_7_9
+                | AreaId::Glacier__Revival
+                | AreaId::Glacier__Dock_Outside
+        ))
+        && ctx.portal() == data::portal_start(ctx.position()))
+}
 pub fn access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
     ctx: &Context,
     world: &World,
@@ -5558,6 +5573,85 @@ pub fn explain_breach_attractor_and_anuman(
                 let h = ctx.has(Item::Anuman);
                 edict.insert("Anuman", format!("{}", h));
                 (h, vec!["Anuman"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN (`Glacier > Grid 39-40,7-9`, `Glacier > Revival`, `Glacier > Dock Outside`) and ^portal == ^portal_start
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let h = ctx.has(Item::Breach_Attractor);
+                    edict.insert("Breach_Attractor", format!("{}", h));
+                    (h, vec!["Breach_Attractor"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let mut refs = vec!["^mode"];
+                        let mut left = {
+                            let r = ctx.mode();
+                            edict.insert("^mode", format!("{:?}", r));
+                            (r, vec!["^mode"])
+                        };
+                        let right = enums::Mode::Drone;
+                        edict.insert("^mode", format!("{}", left.0));
+                        refs.append(&mut left.1);
+                        (left.0 == right, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let r = {
+                        let r = ctx.indra();
+                        edict.insert("^indra", format!("{:?}", r));
+                        (r, vec!["^indra"])
+                    };
+                    (
+                        r.0 != SpotId::None
+                            && matches!(
+                                get_area(r.0),
+                                AreaId::Glacier__Grid_39_40_7_9
+                                    | AreaId::Glacier__Revival
+                                    | AreaId::Glacier__Dock_Outside
+                            ),
+                        r.1,
+                    )
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let mut left = {
+                    let r = ctx.portal();
+                    edict.insert("^portal", format!("{:?}", r));
+                    (r, vec!["^portal"])
+                };
+                let mut right = {
+                    let r = data::portal_start(ctx.position());
+                    edict.insert("^portal_start", format!("{:?}", r));
+                    (r, vec!["^portal_start"])
+                };
+                left.1.append(&mut right.1);
+                (left.0 == right.0, left.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -18552,6 +18646,43 @@ pub fn observe_access_breach_attractor_and_anuman(
         ctx.has(Item::Anuman)
     }))
 }
+pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Breach_Attractor and ^mode == 'drone' and ^indra WITHIN (`Glacier > Grid 39-40,7-9`, `Glacier > Revival`, `Glacier > Dock Outside`) and ^portal == ^portal_start
+    ((({
+        full_obs.observe_breach_attractor();
+        ctx.has(Item::Breach_Attractor)
+    } && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    })) && ({
+        full_obs.observe_indra();
+        ctx.indra()
+    } != SpotId::None
+        && matches!(
+            get_area({
+                full_obs.observe_indra();
+                ctx.indra()
+            }),
+            AreaId::Glacier__Grid_39_40_7_9
+                | AreaId::Glacier__Revival
+                | AreaId::Glacier__Dock_Outside
+        )))
+        && ({
+            let left = {
+                full_obs.observe_portal();
+                ctx.portal()
+            };
+            let right = data::portal_start(ctx.position());
+            left == right
+        }))
+}
 pub fn observe_access_breach_attractor_and_mode_eq_drone_and_indra_within_annuna_gt_filter_teleporter_gt_shaft_top(
     ctx: &Context,
     world: &World,
@@ -25986,6 +26117,13 @@ pub fn observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Uhrum > Emergence Save > Save Point`
+}
+pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(
+    ctx: &Context,
+    world: &World,
+) -> f32 {
+    // $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * 0.5
+    diagonal_speed_spots(ctx.position(), ctx.portal(), 0.55, 1.0) * 0.5
 }
 pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(
     ctx: &Context,

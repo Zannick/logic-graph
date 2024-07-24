@@ -211,4 +211,9 @@
 
 # Breach Exit
 * Collect Forbidden_Knowledge from Amagi > East Lake > Foot > Tablet
-# Moving the portal is not something we can do yet!
+! Do Amagi > East Lake > Center Upper Platform > Move Portal Here
+  Portalwarp
+* Collect Health_Fragment from Amagi Breach > Upper Lake > Column > Health
+# This is technically free since the portal follows us
+! Do Move Portal Here
+  Portalwarp

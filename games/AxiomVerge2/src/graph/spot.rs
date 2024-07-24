@@ -401,7 +401,7 @@ static SPOT_DEFS: [SpotDef; 2896] = [
         id: SpotId::Amagi__East_Lake__Center_Upper_Platform,
         loc_range: None,
         exit_range: None,
-        action_range: None,
+        action_range: Some((ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here, ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here)),
     },
     SpotDef {
         id: SpotId::Amagi__East_Lake__Center_Water_Below_Platform_East,

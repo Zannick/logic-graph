@@ -26,6 +26,7 @@ impl world::Accessible for Action {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
@@ -214,6 +215,7 @@ impl world::Accessible for Action {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
+            ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::observe_access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
@@ -354,6 +356,13 @@ impl world::Accessible for Action {
     fn time(&self, ctx: &Context, world: &World) -> u32 { 
         self.time
             + match self.id {
+                ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
+                    if true {
+                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+                    } else {
+                        0
+                    }
+                }
                 ActionId::Global__Move_Portal_Here => {
                     if true {
                         (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(ctx, world) * 1000.0).ceil() as u32
@@ -368,6 +377,15 @@ impl world::Accessible for Action {
 
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
+            ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
                 let (ret, mut tags) = rules::explain_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1596,6 +1614,7 @@ impl world::Action for Action {
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
+            ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
@@ -1908,6 +1927,9 @@ impl world::Action for Action {
             }
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world, full_obs);
+            }
+            ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
+                rules::observe_action_portal_set_position(ctx, world, full_obs);
             }
             ActionId::Amagi__East_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2399,7 +2421,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 183] = [
+static ACT_DEFS: [Action; 184] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2413,6 +2435,11 @@ static ACT_DEFS: [Action; 183] = [
     Action {
         id: ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save,
         time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here,
+        time: 100,
         price: Currency::Free,
     },
     Action {
@@ -3341,6 +3368,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower,
         ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Upper_Hover,
         ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower_Hover,
+        ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => SpotId::Amagi__East_Lake__Center_Upper_Platform,
         ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
         ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
         ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_West,

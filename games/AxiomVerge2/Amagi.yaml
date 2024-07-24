@@ -1735,6 +1735,13 @@ areas:
         - to: Center Northeast Platform
         - to: Center Lower Platform East
           jumps_down: 1
+      actions:
+        - name: Move Portal Here
+          req: Breach_Attractor and ^mode == 'drone' and ^indra WITHIN (`Glacier > Grid 39-40,7-9`, `Glacier > Revival`, `Glacier > Dock Outside`) and ^portal == ^portal_start
+          do: ^portal = ^position
+          time: 0.1
+          penalties:
+            - calc: $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * 0.5
     - name: Center West Platform
       coord: [34.15, 14.75]
       data:
